@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BComponentEvent" name="BComponentEvent" packageName="javax.baja.sys" public="true" final="true">
+<description>
+BComponentEvent encapsulates the information associated&#xa; with a modification to a BComponent.
+</description>
+<tag name="@author">Brian Frank&#xa; creation  21 Apr 01</tag>
+<tag name="@version">$Revision: 17$ $Date: 5/5/11 11:17:51 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<!-- javax.baja.sys.BComponentEvent(int, javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.BValue) -->
+<constructor name="BComponentEvent" public="true">
+<parameter name="id">
+<type class="int"/>
+</parameter>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<description>
+Constructor for a local event.
+</description>
+</constructor>
+
+<!-- javax.baja.sys.BComponentEvent(int, javax.baja.sys.BComponent, javax.baja.sys.Knob) -->
+<constructor name="BComponentEvent" public="true">
+<parameter name="id">
+<type class="int"/>
+</parameter>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="knob">
+<type class="javax.baja.sys.Knob"/>
+</parameter>
+<description>
+Constructor for a knob event.
+</description>
+</constructor>
+
+<!-- javax.baja.sys.BComponentEvent(int, javax.baja.sys.BComponent, javax.baja.sys.RelationKnob) -->
+<constructor name="BComponentEvent" public="true">
+<parameter name="id">
+<type class="int"/>
+</parameter>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="rknob">
+<type class="javax.baja.sys.RelationKnob"/>
+</parameter>
+<description>
+Constructor for a relation knob event.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+</constructor>
+
+<!-- javax.baja.sys.BComponentEvent() -->
+<constructor name="BComponentEvent" public="true">
+<description>
+Public no arg constructor.  Framework use only!
+</description>
+</constructor>
+
+<!-- javax.baja.sys.BComponentEvent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getIdStrings() -->
+<method name="getIdStrings"  public="true" static="true">
+<description>
+Returns the array of ID Strings.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+The array of ID strings.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getDisplayStrings() -->
+<method name="getDisplayStrings"  public="true" static="true">
+<description>
+Returns the array of display Strings.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+The array of display strings.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getId() -->
+<method name="getId"  public="true">
+<description>
+Get the event id constant.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getSlotName() -->
+<method name="getSlotName"  public="true">
+<description>
+Get the name of the slot for the event or&#xa; null if not applicable.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getSlotFlags() -->
+<method name="getSlotFlags"  public="true">
+<description>
+Get the flags of the slot for the event or&#xa; -1 if not applicable.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getValue() -->
+<method name="getValue"  public="true">
+<description>
+Get the BValue value of the event, or null if not&#xa; applicable.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getSourceComponent() -->
+<method name="getSourceComponent"  public="true">
+<description>
+Get the source component of the event.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getSlot() -->
+<method name="getSlot"  public="true">
+<description>
+Get the slot of the event.
+</description>
+<return>
+<type class="javax.baja.sys.Slot"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getRelationKnob() -->
+<method name="getRelationKnob"  public="true">
+<description>
+If the event id is KNOB_ADDED or KNOB_REMOVED, then&#xa; this returns the knob instance.
+</description>
+<return>
+<type class="javax.baja.sys.RelationKnob"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.getKnob() -->
+<method name="getKnob"  public="true">
+<description>
+If the event id is KNOB_ADDED or KNOB_REMOVED, then&#xa; this returns the knob instance.
+</description>
+<return>
+<type class="javax.baja.sys.Knob"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To debug string.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.clone() -->
+<method name="clone"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEvent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.PROPERTY_CHANGED -->
+<field name="PROPERTY_CHANGED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; property&#x27;s value has been modified.  The value&#xa; contains the new value of the property.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.PROPERTY_ADDED -->
+<field name="PROPERTY_ADDED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that a new property&#xa; has been added to the component.  The value&#xa; contains the value of the new property.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.PROPERTY_REMOVED -->
+<field name="PROPERTY_REMOVED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that an existing&#xa; property was removed.  The value contains the old&#xa; object (in network proxies the old object is&#xa; not guaranteed to be fully loaded).
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.PROPERTY_RENAMED -->
+<field name="PROPERTY_RENAMED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that an existing&#xa; property was renamed.  The value is a BString&#xa; containing the old name.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.PROPERTIES_REORDERED -->
+<field name="PROPERTIES_REORDERED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the properties&#xa; have been reordered.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.TOPIC_FIRED -->
+<field name="TOPIC_FIRED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that a topic was fired.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.FLAGS_CHANGED -->
+<field name="FLAGS_CHANGED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that a slot&#x27;s flags were changed.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.FACETS_CHANGED -->
+<field name="FACETS_CHANGED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that a slot&#x27;s facets were changed.&#xa; The value is the old BFacets value.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.KNOB_ADDED -->
+<field name="KNOB_ADDED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that the a link knob has been&#xa; activated on the source component.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.KNOB_REMOVED -->
+<field name="KNOB_REMOVED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that the a link knob has been&#xa; deactivated on the source component.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.RECATEGORIZED -->
+<field name="RECATEGORIZED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that the category mask has been changed.&#xa; The value contains the old BCategoryMask.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_PARENTED -->
+<field name="COMPONENT_PARENTED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that a component has been parented to&#xa; to a component running the station
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_UNPARENTED -->
+<field name="COMPONENT_UNPARENTED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that a component has been unparented from&#xa; a component running in the station
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_RENAMED -->
+<field name="COMPONENT_RENAMED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the component&#xa; was renamed in its parent.  The value is a BString&#xa; containing the old name.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_REORDERED -->
+<field name="COMPONENT_REORDERED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the component has&#xa; been reordered in its parent.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_FLAGS_CHANGED -->
+<field name="COMPONENT_FLAGS_CHANGED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that a components&#x27;s flags were changed&#xa; in its parent.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_FACETS_CHANGED -->
+<field name="COMPONENT_FACETS_CHANGED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that a component&#x27;s facets were changed&#xa; in its parent.  The value is the old BFacets value.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.RELATION_KNOB_ADDED -->
+<field name="RELATION_KNOB_ADDED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that the a relation knob has been&#xa; activated on the endpoint component.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.RELATION_KNOB_REMOVED -->
+<field name="RELATION_KNOB_REMOVED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that the a relation knob has been&#xa; deactivated on the endpoint component.
+</description>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_STARTED -->
+<field name="COMPONENT_STARTED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that the component has been&#xa; started.  Note: It is only fired in the master space,&#xa; proxy spaces will not receive this component event.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+<!-- javax.baja.sys.BComponentEvent.COMPONENT_STOPPED -->
+<field name="COMPONENT_STOPPED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event indicates that the component has been&#xa; stopped.  Note: It is only fired in the master space,&#xa; proxy spaces will not receive this component event.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+</field>
+
+</class>
+</bajadoc>

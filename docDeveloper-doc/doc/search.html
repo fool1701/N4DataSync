@@ -1,0 +1,118 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/neql.html" class="navbar">Prev</a> |  <a href="/doc/driverFramework.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="search-api">Search API</h1>
+<p>Starting in Niagara 4, a new <code>SearchService</code> has been added which allows searching for <a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/Entity.bajadoc">Entities</a> within selectable scopes (ie. spaces) of a station.  The Search API is a simple layer on top of Niagara&rsquo;s query APIs.</p>
+<p>SearchService Properties -</p>
+<p>In order to invoke a search, the <code>SearchService</code> must be installed on a station.  Here is a complete list and description of all of the properties and actions on the <code>SearchService</code>:</p>
+<p><strong>Properties</strong>:</p>
+<ul>
+  <li>
+    <p><strong>defaultScheme</strong> (default value: &ldquo;neql&rdquo;): This is the default query scheme (Ord Scheme) that is assumed when the scheme is omitted from the search query in a search request.</p>
+  </li>
+  <li>
+    <p><strong>defaultScopes</strong> (default value: <code>BVector</code> containing the &ldquo;station:&rdquo; and &ldquo;sys:&rdquo; spaces as the default scopes):  The list of scopes designated as suggested defaults. These scopes will be marked as defaults in the list returned by the <code>getSearchScopes()</code> action (used to supply default scope selections for clients). Each element in the list is expected to be either a <code>BSearchScope</code> or a <code>BOrd</code>.</p>
+  </li>
+  <li>
+    <p><strong>maxConcurrentSearches</strong> (default value: 50): This size determines the maximum number of concurrent (active) searches that are allowed at one time. Active search tasks are those that are in a subscribed state.</p>
+  </li>
+  <li>
+    <p><strong>maxResultsPerSearch</strong> (default value: 500): For each search request submitted, this size determines the maximum number of results that will be cached in memory for the duration of the search task.</p>
+  </li>
+  <li>
+    <p><strong>searchTaskTimeToLive</strong> (default value: 2 minutes): For each Search Task child created in the <code>activeSearchContainer</code> as the result of a search invocation, this time to live value determines how long the Search Task will linger in the station before it is automatically removed if it has not been used during this time. If the Search Task is subscribed or accessed in any way, it will reset the expiration such that the Search Task will remain until it is no longer used and this time to live has expired since it was last in a subscription state or otherwise accessed.</p>
+  </li>
+  <li>
+    <p><strong>activeSearchContainer</strong> (hidden <code>BVector</code> frozen property): A container for the active search tasks. We need this container because the active search tasks will linger in memory as long as they are subscribed, so we don&rsquo;t want views on the <code>SearchService</code> (such as the property sheet) causing the active search tasks to remain subscribed even if a user isn&rsquo;t actively viewing the search results for a given search task.</p>
+  </li>
+</ul>
+<p><strong>Actions</strong></p>
+<ul>
+  <li>
+    <p><strong>search</strong> (available to operator users, parameter is a <code>BSearchParams</code>, result is a <code>BOrd</code> to the <code>BSearchTask</code> created): Performs an asynchronous search for data based on user specified search parameters. Search results are returned via an <code>Ord</code> that maps to a <code>BSearchTask</code> which you can subsequently use when forming the parameter for the <code>retrieveResults</code> action to read back search results from the task.</p>
+  </li>
+  <li>
+    <p><strong>retrieveResults</strong> (available to operator users, parameter is a <code>BResultsRequest</code>, result is a <code>BSearchResultSet</code>): Used to retrieve search results from a previously submitted search.  When forming the <code>BResultRequest</code> argument, you should use the <code>BOrd</code> of the search task you received from the search action, and then you can also define the starting index for search results to retrieve, as well as how many (max results) to retrieve.</p>
+  </li>
+  <li>
+    <p><strong>getSearchScopes</strong> (available to operator users, result is a <code>BVector</code> of <code>BSearchScopes</code>): Used to retrieve the available search scopes based on which scopes have registered <code>QueryHandlers</code> and/or <code>SearchProviders</code>.</p>
+  </li>
+  <li>
+    <p><strong>updateDefaultScopeInfo</strong> (async action, no args): Updates the default name and lexicon info for any blank values in the default scopes.</p>
+  </li>
+</ul>
+<p><strong>Invoking a search from the SearchService</strong></p>
+<p>Invoking a search and retrieving results is handled through actions on the <code>SearchService</code>.  Here is a simple example:</p>
+<p><strong>Simple Search Example</strong></p>
+<pre><code class="sunlight-highlight-java">BSearchService searchService = BSearchService.getService(); // Only works on station side, otherwise use service ord scheme to lookup search service
+BOrd searchRequest = BOrd.make(&quot;neql:n:point&quot;); // the query
+BSearchParams searchParams = new BSearchParams(searchRequest, /*scopes*/Sys.getStation());
+BOrd searchTaskOrd = searchService.search(searchParams); // Invokes a search and gives you back an ORD to the BSearchTask
+ 
+// Retrieve all results
+BSearchResultSet results = null;
+while (results == null || !results.getResultsComplete())
+{
+  Thread.sleep(100); // Give the search some time to complete
+ 
+  // This code asks for all available results at this time, but you could ask for
+  // chunks of results by adjusting the startIndex and maxResults arguments
+  BResultsRequest resultsRequest = BResultsRequest.make(searchTaskOrd, /*startIndex*/0, /*maxResults*/-1);
+  results = searchService.retrieveResults(resultsRequest);
+}
+ 
+// Now that we have all of the results, we can do something with them
+results.streamResults().forEach(result -&gt; System.out.println(&quot;Found a search result: &quot; + ((BSearchResult)result).getOrd()));
+</code></pre>
+<p><strong>Implementing a SearchProvider</strong></p>
+<p>By default, the <code>SearchService</code> is intended to work with <code>QuerySchemes</code> that have registered <code>QueryHandlers</code>.  This covers common cases for search providers, such as neql.  However, there may be other OrdSchemes that can provide search results, such as BQL.  In those cases, you can create a <code>BISearchProvider</code> implemention.  Here is an excerpt from the <code>BISearchProvider</code> interface.</p>
+<p><strong>BISearchProvider</strong></p>
+<pre><code class="sunlight-highlight-java">/**
+ * A search provider can be used as an alternative to a query scheme to
+ * allow for searching spaces in Niagara.  A search provider must be
+ * registered as an agent on any BOrdSchemes that it supports AND it
+ * must also register as an agent on any scopes (ie. spaces) that it
+ * supports searching.
+ */
+public interface BISearchProvider extends BIAgent
+{
+  /**
+   * Search the specified scope with the given query ORD.
+   * When called by a search task via the SearchService, this method
+   * is called on an async executor, so you can do the work on the
+   * calling thread.
+   *
+   * @param queryOrd The query ORD to resolve against the given scope
+   * @param scope The scope to resolve the query ORD against
+   * @param context The context associated with this search request.  Implementers
+   *                should extract any user information from this context in order
+   *                to filter results to only those permitted to the user.
+   */
+  Stream&lt;Entity&gt; search(BOrd queryOrd, BIObject scope, Context context);
+}
+</code></pre>
+<p>So to create your own search provider, you simply need to be able to stream Entities back in response to a query Ord for a scope.  The context is also important for enforcing user permissions on results.  For an example implementation of <code>BISearchProvider</code>, see <code>BBqlSearchProvider</code>.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/neql.html" class="navbar">Prev</a> |  <a href="/doc/driverFramework.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm" name="BEnumChangeOfStateAlgorithm" packageName="javax.baja.alarm.ext.offnormal" public="true">
+<description>
+BEnumChangeOfStateAlgorithm implements a change of state&#xa; alarm detection algorithm for multistate objects as described&#xa; in BACnet Clause 13.3.2.&#xa; &lt;p&gt;&#xa; Each algorithm instance defines a set of enumerated values&#xa; that should be considered &#x22;offnormal&#x22; conditions and&#xa; therefore generate an alarm.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">03 May 01</tag>
+<tag name="@version">$Revision: 27$ $Date: 10/5/07 1:31:44 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.alarm.ext.offnormal.BTwoStateAlgorithm"/>
+</extends>
+<property name="alarmValues" flags="">
+<type class="javax.baja.sys.BEnumRange"/>
+<description>
+Slot for the &lt;code&gt;alarmValues&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#getAlarmValues</tag>
+<tag name="@see">#setAlarmValues</tag>
+</property>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm() -->
+<constructor name="BEnumChangeOfStateAlgorithm" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.getAlarmValues() -->
+<method name="getAlarmValues"  public="true">
+<description>
+Get the &lt;code&gt;alarmValues&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#alarmValues</tag>
+<return>
+<type class="javax.baja.sys.BEnumRange"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.setAlarmValues(javax.baja.sys.BEnumRange) -->
+<method name="setAlarmValues"  public="true">
+<description>
+Set the &lt;code&gt;alarmValues&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#alarmValues</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BEnumRange"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.isGrandparentLegal(javax.baja.sys.BComponent) -->
+<method name="isGrandparentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+A BEnumChangeOfStateAlgorithm&#x27;s grandparent must be an EnumPoint.
+</description>
+<parameter name="grandparent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.isNormal(javax.baja.status.BStatusValue) -->
+<method name="isNormal"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the present value is normal
+</description>
+<parameter name="o">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.writeAlarmData(javax.baja.status.BStatusValue, java.util.Map) -->
+<method name="writeAlarmData"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Write the key-value pairs defining alarm data for the&#xa;  alarm algorithm and state to the given Facets.&#xa; &lt;p&gt;&#xa;  The alarm data for a Change Of State alarm is given by&#xa;  BACnet table 13-3, Standard Object Property Values&#xa;  returned in notifications.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The relevant control point status value
+</description>
+</parameter>
+<parameter name="map">
+<parameterizedType class="java.util.Map">
+<args>
+</args>
+</parameterizedType>
+<description>
+The map.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.alarmValues -->
+<field name="alarmValues"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmValues&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#getAlarmValues</tag>
+<tag name="@see">#setAlarmValues</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BEnumChangeOfStateAlgorithm.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

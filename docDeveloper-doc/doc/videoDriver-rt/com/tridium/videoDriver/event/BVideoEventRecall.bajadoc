@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.event.BVideoEventRecall" name="BVideoEventRecall" packageName="com.tridium.videoDriver.event" public="true">
+<description>
+This component resides under a camera device and permits the video driver&#xa; framework to ask the video driver for a list of native events. The list&#xa; of native events is displayed to the user on the graphical user interface&#xa; for the live playback view that is intended to be placed on all camera&#xa; devices.&#xa; &#xa; This extends BVector in order to make it not appear in the Nav Tree.&#xa; &#xa; Although not mandatory, drivers are encouraged to extend from devVideoDriver&#xa; which features more comprehensive support for this function.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.sys.BVector"/>
+</extends>
+<action name="retrieveEvents" flags="a">
+<parameter name="parameter">
+<type class="com.tridium.videoDriver.event.BRetrieveActionParam"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;retrieveEvents&lt;/code&gt; action.&#xa; The video driver framework calls this method to request a list of video&#xa; events from the video driver. The implementation of this action should&#xa; arrange for driver communications to occur in the background to retrieve&#xa; the video events requested in the given parameter. When the list of&#xa; events is completely retrieved, the same background process should fire&#xa; the &#x27;retrieveOk&#x27; topic with a BRetrieveTopicEvent that contains the same&#xa; parameter that was passed to this action along with the list of video&#xa; events that were retrieved. Or if the background process detects a timeout&#xa; or experiences a driver error then it should fire the &#x27;retrieveFailed&#x27;&#xa; topic with the same BRetrieveActionParam but with the &#x27;faultCause&#x27; filled&#xa; in.
+</description>
+<tag name="@see">#retrieveEvents(BRetrieveActionParam parameter)</tag>
+</action>
+
+<topic name="retrieveOk" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.event.BRetrieveTopicEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;retrieveOk&lt;/code&gt; topic.&#xa; This topic is fired when the event list is finished&#xa; being refreshed, as a result of calling the &#x27;retrieveEvents&#x27;&#xa; action. Its event includes a clientSessionId that identifies&#xa; the Workbench/client to which these events apply. That same&#xa; Workbench/client would have been responsible for invoking&#xa; the &#x27;retrieveEvents&#x27; action. This topic is fired to contain&#xa; the results of the &#x27;retrieveEvents&#x27; action in an asynchronous&#xa; manner.
+</description>
+<tag name="@see">#fireRetrieveOk</tag>
+</topic>
+
+<topic name="retrieveFailed" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.event.BRetrieveActionParam"/>
+</eventType><description>
+Slot for the &lt;code&gt;retrieveFailed&lt;/code&gt; topic.&#xa; This topic is fired if the event list fails to refresh&#xa; after the &#x27;retrieveEvents&#x27; action is called. Just like&#xa; the &#x27;retrieveOk&#x27; topic, this topic event includes a&#xa; clientSessionId that identifies the Workbench/client to&#xa; which this failure applies. That same Workbench/client&#xa; would have been responsible for invoking the &#x27;retrieveEvents&#x27;&#xa; action. This topic is fired to report back the failure of&#xa; the &#x27;retrieveEvents&#x27; action in an asynchronous manner.
+</description>
+<tag name="@see">#fireRetrieveFailed</tag>
+</topic>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall() -->
+<constructor name="BVideoEventRecall" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.retrieveEvents(com.tridium.videoDriver.event.BRetrieveActionParam) -->
+<method name="retrieveEvents"  public="true">
+<description>
+Invoke the &lt;code&gt;retrieveEvents&lt;/code&gt; action.&#xa; The video driver framework calls this method to request a list of video&#xa; events from the video driver. The implementation of this action should&#xa; arrange for driver communications to occur in the background to retrieve&#xa; the video events requested in the given parameter. When the list of&#xa; events is completely retrieved, the same background process should fire&#xa; the &#x27;retrieveOk&#x27; topic with a BRetrieveTopicEvent that contains the same&#xa; parameter that was passed to this action along with the list of video&#xa; events that were retrieved. Or if the background process detects a timeout&#xa; or experiences a driver error then it should fire the &#x27;retrieveFailed&#x27;&#xa; topic with the same BRetrieveActionParam but with the &#x27;faultCause&#x27; filled&#xa; in.
+</description>
+<tag name="@see">#retrieveEvents</tag>
+<parameter name="parameter">
+<type class="com.tridium.videoDriver.event.BRetrieveActionParam"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.fireRetrieveOk(com.tridium.videoDriver.event.BRetrieveTopicEvent) -->
+<method name="fireRetrieveOk"  public="true">
+<description>
+Fire an event for the &lt;code&gt;retrieveOk&lt;/code&gt; topic.&#xa; This topic is fired when the event list is finished&#xa; being refreshed, as a result of calling the &#x27;retrieveEvents&#x27;&#xa; action. Its event includes a clientSessionId that identifies&#xa; the Workbench/client to which these events apply. That same&#xa; Workbench/client would have been responsible for invoking&#xa; the &#x27;retrieveEvents&#x27; action. This topic is fired to contain&#xa; the results of the &#x27;retrieveEvents&#x27; action in an asynchronous&#xa; manner.
+</description>
+<tag name="@see">#retrieveOk</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.event.BRetrieveTopicEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.fireRetrieveFailed(com.tridium.videoDriver.event.BRetrieveActionParam) -->
+<method name="fireRetrieveFailed"  public="true">
+<description>
+Fire an event for the &lt;code&gt;retrieveFailed&lt;/code&gt; topic.&#xa; This topic is fired if the event list fails to refresh&#xa; after the &#x27;retrieveEvents&#x27; action is called. Just like&#xa; the &#x27;retrieveOk&#x27; topic, this topic event includes a&#xa; clientSessionId that identifies the Workbench/client to&#xa; which this failure applies. That same Workbench/client&#xa; would have been responsible for invoking the &#x27;retrieveEvents&#x27;&#xa; action. This topic is fired to report back the failure of&#xa; the &#x27;retrieveEvents&#x27; action in an asynchronous manner.
+</description>
+<tag name="@see">#retrieveFailed</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.event.BRetrieveActionParam"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.doRetrieveEvents(com.tridium.videoDriver.event.BRetrieveActionParam) -->
+<method name="doRetrieveEvents"  public="true">
+<description>
+The driver must override this and perform some work in the background&#xa; to retrieve a list of events. If the background thread detects a driver&#xa; error condition that prevents the retrieval of the list then the driver&#xa; should fire the &#x27;retrieveFailed&#x27; action and pass along the same instance&#xa; of BRetrieveActionparam that is passed to this method. In addition, the&#xa; driver should set the &#x27;faultCause&#x27; text (plain text wrapped in a BFormat&#xa; or to include BFormat rules, if desired, to allow for client-side&#xa; localization of the fault cause), which will appear on the graphical&#xa; user interface for the video playback view.
+</description>
+<parameter name="param">
+<type class="com.tridium.videoDriver.event.BRetrieveActionParam"/>
+<description>
+an instance BRetrieveActionParam that requests a certain number&#xa; of events from a certain timestamp. This param also includes a client&#xa; session id. This is very important. This parameter must be retained&#xa; with the back ground process that implements this action. This same parameter&#xa; must be sent back to the client side when the background process fires&#xa; the retrieveOk and/or the retrieveFailed event. This is so important in case&#xa; multiple Workbench instances or Web browser instances are reviewing events&#xa; for the camera. The session id in the parameter allows the particular Workbench&#xa; instance or web browser to filter out any topics that are not for itself.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.eventListRetrieved(com.tridium.videoDriver.event.BVideoEvent[], com.tridium.videoDriver.event.BRetrieveActionParam) -->
+<method name="eventListRetrieved"  public="true">
+<description>
+The driver should call this method to update the event list&#xa; as a result of its implementation of the doRetrieveEvents&#xa; method.
+</description>
+<parameter name="eventList">
+<type class="com.tridium.videoDriver.event.BVideoEvent" dimension="1"/>
+<description>
+an array of unmounted BVideoEvents (or any&#xa; subclass thereof)
+</description>
+</parameter>
+<parameter name="retrieveActionParam">
+<type class="com.tridium.videoDriver.event.BRetrieveActionParam"/>
+<description>
+the driver must pass back the instance&#xa; of BRetrieveActionParam that was passed to the retrieveEvents&#xa; action.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.retrieveEvents -->
+<field name="retrieveEvents"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;retrieveEvents&lt;/code&gt; action.&#xa; The video driver framework calls this method to request a list of video&#xa; events from the video driver. The implementation of this action should&#xa; arrange for driver communications to occur in the background to retrieve&#xa; the video events requested in the given parameter. When the list of&#xa; events is completely retrieved, the same background process should fire&#xa; the &#x27;retrieveOk&#x27; topic with a BRetrieveTopicEvent that contains the same&#xa; parameter that was passed to this action along with the list of video&#xa; events that were retrieved. Or if the background process detects a timeout&#xa; or experiences a driver error then it should fire the &#x27;retrieveFailed&#x27;&#xa; topic with the same BRetrieveActionParam but with the &#x27;faultCause&#x27; filled&#xa; in.
+</description>
+<tag name="@see">#retrieveEvents(BRetrieveActionParam parameter)</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.retrieveOk -->
+<field name="retrieveOk"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;retrieveOk&lt;/code&gt; topic.&#xa; This topic is fired when the event list is finished&#xa; being refreshed, as a result of calling the &#x27;retrieveEvents&#x27;&#xa; action. Its event includes a clientSessionId that identifies&#xa; the Workbench/client to which these events apply. That same&#xa; Workbench/client would have been responsible for invoking&#xa; the &#x27;retrieveEvents&#x27; action. This topic is fired to contain&#xa; the results of the &#x27;retrieveEvents&#x27; action in an asynchronous&#xa; manner.
+</description>
+<tag name="@see">#fireRetrieveOk</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.retrieveFailed -->
+<field name="retrieveFailed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;retrieveFailed&lt;/code&gt; topic.&#xa; This topic is fired if the event list fails to refresh&#xa; after the &#x27;retrieveEvents&#x27; action is called. Just like&#xa; the &#x27;retrieveOk&#x27; topic, this topic event includes a&#xa; clientSessionId that identifies the Workbench/client to&#xa; which this failure applies. That same Workbench/client&#xa; would have been responsible for invoking the &#x27;retrieveEvents&#x27;&#xa; action. This topic is fired to report back the failure of&#xa; the &#x27;retrieveEvents&#x27; action in an asynchronous manner.
+</description>
+<tag name="@see">#fireRetrieveFailed</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEventRecall.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

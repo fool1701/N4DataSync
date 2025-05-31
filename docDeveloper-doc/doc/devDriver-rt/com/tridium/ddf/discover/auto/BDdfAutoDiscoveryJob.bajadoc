@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob" name="BDdfAutoDiscoveryJob" packageName="com.tridium.ddf.discover.auto" public="true">
+<description>
+This is a &#x22;one-size-fits-all&#x22; discovery job that takes full&#xa; advantage of the structure of developer driver to automatically&#xa; discover the devices under a network or the points under a&#xa; device. This will be automatically used in most drivers, unless&#xa; the driver developer takes special steps to customize the&#xa; implementation of the discovery.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.ddf.discover.BDdfDiscoveryJob"/>
+</extends>
+<property name="discoveryPreferences" flags="">
+<type class="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; These are the discovery preferences, passed in automatically by&#xa; the ddf device manager or ddf point manager.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</property>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob() -->
+<constructor name="BDdfAutoDiscoveryJob" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob(com.tridium.ddf.discover.BIDdfDiscoveryHost) -->
+<constructor name="BDdfAutoDiscoveryJob" public="true">
+<parameter name="databaseParent">
+<type class="com.tridium.ddf.discover.BIDdfDiscoveryHost"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.getDiscoveryPreferences() -->
+<method name="getDiscoveryPreferences"  public="true">
+<description>
+Get the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; These are the discovery preferences, passed in automatically by&#xa; the ddf device manager or ddf point manager.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<return>
+<type class="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.setDiscoveryPreferences(com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences) -->
+<method name="setDiscoveryPreferences"  public="true">
+<description>
+Set the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; These are the discovery preferences, passed in automatically by&#xa; the ddf device manager or ddf point manager.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.run(javax.baja.sys.Context) -->
+<method name="run"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.getDiscoveryRequestTypes() -->
+<method name="getDiscoveryRequestTypes"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.autoLearn() -->
+<method name="autoLearn"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.learnFromRequestType(javax.baja.sys.Type, int) -->
+<method name="learnFromRequestType"  protected="true">
+<description/>
+<parameter name="requestType">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</parameter>
+<parameter name="progressValueOfMethod">
+<type class="int"/>
+<description>
+is the absolute percentage that one pass through this method is worth on&#xa; the job&#x27;s progress bar.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.learn(com.tridium.ddf.comm.req.BIDdfDiscoverRequest, com.tridium.ddf.identify.BIDdfDiscoverParams) -->
+<method name="learn"  protected="true">
+<description>
+Transmits a given, empty, default instance of BIDdfRequest request
+</description>
+<parameter name="discoverReq">
+<type class="com.tridium.ddf.comm.req.BIDdfDiscoverRequest"/>
+<description>
+an empty, default instance of a particular
+</description>
+</parameter>
+<parameter name="discoverId">
+<type class="com.tridium.ddf.identify.BIDdfDiscoverParams"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.getDiscoveryHost() -->
+<method name="getDiscoveryHost"  public="true">
+<description>
+Gets the Ddf Network or Ddf Point Device Extension that is hosting&#xa; the discovery job.
+</description>
+<return>
+<type class="com.tridium.ddf.discover.BIDdfDiscoveryHost"/>
+<description>
+the Ddf Network or Ddf Point Device Extension that is hosting&#xa; the discovery job, cast as a BIDdfDiscoveryHost
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.discoveryPreferences -->
+<field name="discoveryPreferences"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; These are the discovery preferences, passed in automatically by&#xa; the ddf device manager or ddf point manager.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</field>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryJob.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

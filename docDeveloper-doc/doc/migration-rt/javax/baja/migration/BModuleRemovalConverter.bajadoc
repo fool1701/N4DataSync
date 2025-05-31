@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="migration" runtimeProfile="rt" qualifiedName="javax.baja.migration.BModuleRemovalConverter" name="BModuleRemovalConverter" packageName="javax.baja.migration" public="true">
+<description>
+BModuleRemovalConverter&#xa; The module removal converter handles the removal of bog elements when&#xa; the entire module that provided this type has been removed for Niagara 4.&#xa; The most common situation is a test module or obsolete driver that was&#xa; removed during the module cleanup during Niagara 4 development.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:craig.gemmill@tridium.com&#x22;&gt;Craig Gemmill&lt;/a&gt;</tag>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<implements>
+<type class="javax.baja.migration.BIBogElementConverter"/>
+</implements>
+<!-- javax.baja.migration.BModuleRemovalConverter() -->
+<constructor name="BModuleRemovalConverter" public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedDeclaration&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+</constructor>
+
+<!-- javax.baja.migration.BModuleRemovalConverter(java.lang.String) -->
+<constructor name="BModuleRemovalConverter" public="true">
+<parameter name="moduleOrTypeName">
+<type class="java.lang.String"/>
+<description>
+the module name or typespec name.
+</description>
+</parameter>
+<description>
+Create a module removal converter from the given module name.&#xa; This also accepts a type name and extracts the module name from it.
+</description>
+</constructor>
+
+<!-- javax.baja.migration.BModuleRemovalConverter.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.BModuleRemovalConverter.getConvertTypes() -->
+<method name="getConvertTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+What modules and types can this converter handle?&#xa; The ModuleRemovalConverter returns an empty List, because it&#xa; is the &#x27;fallback&#x27; converter for any module that is not found in&#xa; the system registry.
+</description>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+a &lt;code&gt;<see ref="java.util.List">java.util.List</see>&lt;/code&gt; of Strings of types and modules handled by this converter.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BModuleRemovalConverter.convertXElem(javax.baja.xml.XElem, java.lang.String, javax.baja.util.Version) -->
+<method name="convertXElem"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Migrate the given XElem to the new type.&#xa; &lt;p&gt;&#xa; The BModuleRemovalConverter simply removes any type that was part of the&#xa; removed module.
+</description>
+<parameter name="x">
+<type class="javax.baja.xml.XElem"/>
+<description>
+XElem representing a bog element to be migrated.
+</description>
+</parameter>
+<parameter name="typespecName">
+<type class="java.lang.String"/>
+<description>
+the typespec name (using the &#x27;preferred symbol&#x27; for the module name)
+</description>
+</parameter>
+<parameter name="sourceVersion">
+<type class="javax.baja.util.Version"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.util.Version">javax.baja.util.Version</see>&lt;/code&gt; of the source being converted.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+<description>
+null if the element should be removed, or the XElem with the new element.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BModuleRemovalConverter.newTypeSpec(java.lang.String) -->
+<method name="newTypeSpec"  public="true">
+<description>
+Given the original typeSpec return modified typeSpec if the original type changed or&#xa; it was moved to new module or module was renamed.
+</description>
+<parameter name="typeSpecName">
+<type class="java.lang.String"/>
+<description>
+the original typeSpec name
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a new typeSpec
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BModuleRemovalConverter.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description/>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.BModuleRemovalConverter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

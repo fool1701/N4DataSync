@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="pxEditor" runtimeProfile="wb" qualifiedName="javax.baja.px.editor.BIPxTransferWidget" name="BIPxTransferWidget" packageName="javax.baja.px.editor" public="true" interface="true" abstract="true" category="interface">
+<description>
+A BIPxTransferWidget is one of the widgets that makes up the &#xa; PxEditor itself --  either the main editing area, or &#xa; a component of one of the sidebars.&#xa; &lt;p&gt;&#xa; A BIPxTransferWidget is always a subclass of BTransferWidget.&#xa; &lt;p&gt;&#xa; A BIPxTransferWidget uses the PxEditorController to define how it should&#xa; handle having objects pasted into or dropped onto it. When insertTransferData(TransferContext)&#xa; or drop(TransferContext) is called on the transferWidget, it&#xa; creates widgets by using the following workflow:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;An array of BObjects is extracted from the TransferContext.&lt;/li&gt;&#xa; &lt;li&gt;If the the paste or drop is occuring on of a frozen slot of widget in the Px drawing,&#xa; then only the first object is retained.&lt;/li&gt;&#xa; &lt;li&gt;A WidgetInserter is created via a call to PxEditorController.getWidgetInserter(). If&#xa; a null WidgetInserter is returned, then no widgets will be inserted.&lt;/li&gt;&#xa; &lt;li&gt;If the paste or drop is occuring on a canvasPane in the Px drawing, then &#xa; each widget is sized and moved.&lt;/li&gt;&#xa; &lt;li&gt;Finally, a Command that inserts the widgets is created and invoked.  &#xa; The resulting CommandArtifact is returned.&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">24 Aug 07</tag>
+<tag name="@version">$Revision: 2$ $Date: 9/17/07 8:50:33 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.px.editor.BIPxTransferWidget.getDefaultPopupMenu(javax.baja.ui.event.BMouseEvent) -->
+<method name="getDefaultPopupMenu"  public="true" abstract="true">
+<description>
+Create the popup menu that is ordinarily displayed when the user &#xa; right-clicks on selected widgets in the PxEditor. &#xa; &lt;p&gt;&#xa; The default implementation of PxEditorController.getPopupMenu() &#xa; calls this method.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.px.editor.BIPxTransferWidget.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

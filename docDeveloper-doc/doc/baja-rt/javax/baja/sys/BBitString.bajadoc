@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BBitString" name="BBitString" packageName="javax.baja.sys" public="true" abstract="true">
+<description>
+BBitString is the super class for simples which are&#xa; composed of a set of boolean flags usually packed&#xa; as bits into an integer mask.  Like BEnum, BBitStrings&#xa; are organized as a set of 32-bit ordinal / String tag &#xa; pairs.  Unlike BEnum, the value of a BBitString&#xa; is determined by each ordinal being set or clear.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">11 Apr 02</tag>
+<tag name="@version">$Revision: 10$ $Date: 3/31/04 9:01:40 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.sys.BBitString() -->
+<constructor name="BBitString" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.BBitString.getBit(int) -->
+<method name="getBit"  public="true" abstract="true">
+<description>
+Return if the bit specified by the given ordinal is set.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.getBit(java.lang.String) -->
+<method name="getBit"  public="true" abstract="true">
+<description>
+Return if the bit specified by the given tag is set.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.getOrdinals() -->
+<method name="getOrdinals"  public="true" abstract="true">
+<description>
+Get an array enumerating the list of all known&#xa; ordinal values of this bitstring instance.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.isOrdinal(int) -->
+<method name="isOrdinal"  public="true" abstract="true">
+<description>
+Is the specified ordinal value included in this&#xa; bitstring&#x27;s range of valid ordinals.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.getTag(int) -->
+<method name="getTag"  public="true" abstract="true">
+<description>
+Get the tag identifier for an ordinal value.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.getDisplayTag(int, javax.baja.sys.Context) -->
+<method name="getDisplayTag"  public="true" abstract="true">
+<description>
+Get the user readable tag for an ordinal value.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.getInstance(int[]) -->
+<method name="getInstance"  public="true" abstract="true">
+<description>
+Get the BBitString instance which maps to the &#xa; specified set of ordinal values.
+</description>
+<parameter name="ordinals">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBitString"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.isTag(java.lang.String) -->
+<method name="isTag"  public="true" abstract="true">
+<description>
+Return true if the specified tag is contained by the range.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.tagToOrdinal(java.lang.String) -->
+<method name="tagToOrdinal"  public="true" abstract="true">
+<description>
+Get the ordinal associated with the specified tag.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.isEmpty() -->
+<method name="isEmpty"  public="true" abstract="true">
+<description>
+Return true if the set of bits is all false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.getEmptyTag() -->
+<method name="getEmptyTag"  public="true" abstract="true">
+<description>
+Return the tag used to indicate the empty bit string.&#xa; This tag is not valid for use by other methods which&#xa; accept a tag.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BBitString.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

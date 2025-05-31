@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="hx" runtimeProfile="wb" qualifiedName="javax.baja.hx.table.view.CompTableViewCol" name="CompTableViewCol" packageName="javax.baja.hx.table.view" public="true" abstract="true">
+<description>
+CompTableViewCol is used to display a column of information &#xa; in a BHxAbstractManager table or to support get/set for batch &#xa; edits.
+</description>
+<tag name="@author">Andy Frank</tag>
+<tag name="@creation">28 Jun 05</tag>
+<tag name="@version">$Revision: 1$ $Date: 11/29/05 11:17:45 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.hx.table.view.CompTableViewCol(java.lang.String) -->
+<constructor name="CompTableViewCol" protected="true">
+<parameter name="displayName">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Convience for &lt;code&gt;CompTableViewCol(displayName, 0)&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol(java.lang.String, int) -->
+<constructor name="CompTableViewCol" protected="true">
+<parameter name="displayName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<description>
+Construct an CompTableViewCol.
+</description>
+</constructor>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true">
+<description>
+Get the display name for this column.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.get(java.lang.Object) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Given a row, extract the column value.  This method&#xa; is used to get a value to display in a table.  In the&#xa; MgrTable row is the BComponent being managed.  If used&#xa; with the LearnTable then row is a discovery object.
+</description>
+<parameter name="row">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.toDisplayString(java.lang.Object, java.lang.Object, javax.baja.sys.Context) -->
+<method name="toDisplayString"  public="true">
+<description>
+Given a row and it&#x27;s value return the string to display to the &#xa; user in a table cell.  The row is BComponent or learn object,&#xa; the value is the result of &lt;code&gt;get(row)&lt;/code&gt;, and context&#xa; is the view&#x27;s current context.
+</description>
+<parameter name="row">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.getHyperlink(java.lang.Object, java.lang.Object, javax.baja.sys.Context) -->
+<method name="getHyperlink"  public="true">
+<description>
+Given a row and it&#x27;s value return the hyperlink to use for&#xa; this table cell.  The row is BComponent or learn object,&#xa; the value is the result of &lt;code&gt;get(row)&lt;/code&gt;, and context&#xa; is the view&#x27;s current context. Return &lt;code&gt;null&lt;/code&gt; to &#xa; not use a hyperlink.
+</description>
+<parameter name="row">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.getFlags() -->
+<method name="getFlags"  public="true">
+<description>
+Return the flags bit mask.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.isEditable() -->
+<method name="isEditable"  public="true">
+<description>
+Return if the EDITABLE flag is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.isUnseen() -->
+<method name="isUnseen"  public="true">
+<description>
+Return if the UNSEEN flag is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.isReadonly() -->
+<method name="isReadonly"  public="true">
+<description>
+Return if the READONLY flag is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.toString() -->
+<method name="toString"  public="true">
+<description>
+Get debug string.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.getEditor(javax.baja.sys.BComponent[]) -->
+<method name="getEditor"  public="true">
+<description>
+TODO
+</description>
+<parameter name="rows">
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.hx.BHxFieldEditor"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.save(javax.baja.sys.BComponent[], javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="save"  public="true">
+<description>
+TODO.
+</description>
+<parameter name="rows">
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.EDITABLE -->
+<field name="EDITABLE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Editable indicates a column which is included for edits&#xa;      via the MgrEdit APIs.
+</description>
+</field>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.UNSEEN -->
+<field name="UNSEEN"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The unseen flag is used on columns which are not shown&#xa;      by default until the user turns them on via table options
+</description>
+</field>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.READONLY -->
+<field name="READONLY"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Readonly flag is used on editable columns which&#xa;      are displayed via the MgrEdit dialog, but not user modifiable
+</description>
+</field>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.displayName -->
+<field name="displayName"  protected="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.hx.table.view.CompTableViewCol.flags -->
+<field name="flags"  protected="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

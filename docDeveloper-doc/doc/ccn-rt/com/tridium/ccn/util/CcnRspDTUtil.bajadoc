@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ccn" runtimeProfile="rt" qualifiedName="com.tridium.ccn.util.CcnRspDTUtil" name="CcnRspDTUtil" packageName="com.tridium.ccn.util" public="true" abstract="true">
+<description>
+Utility to parse a read table block response for instance of date time table&#xa; represented inside a given CcnResposneBuffer
+</description>
+<extends>
+<type class="com.tridium.ccn.util.CcnRspTableUtil"/>
+</extends>
+<!-- com.tridium.ccn.util.CcnRspDTUtil() -->
+<constructor name="CcnRspDTUtil" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getDsTime(com.tridium.ccn.messages.CcnResponseMessage) -->
+<method name="getDsTime"  public="true" static="true">
+<description>
+Gets the current time from a given response buffer expected to be block 2 of&#xa; read
+</description>
+<parameter name="rsp">
+<type class="com.tridium.ccn.messages.CcnResponseMessage"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.isTommorowHoliday(com.tridium.ccn.messages.CcnResponseMessage) -->
+<method name="isTommorowHoliday"  public="true">
+<description/>
+<parameter name="rsp">
+<type class="com.tridium.ccn.messages.CcnResponseMessage"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.isTodayHoliday(com.tridium.ccn.messages.CcnResponseMessage) -->
+<method name="isTodayHoliday"  public="true">
+<description/>
+<parameter name="rsp">
+<type class="com.tridium.ccn.messages.CcnResponseMessage"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.isDaylightSavingsTimeOff(com.tridium.ccn.messages.CcnResponseMessage) -->
+<method name="isDaylightSavingsTimeOff"  public="true">
+<description/>
+<parameter name="rsp">
+<type class="com.tridium.ccn.messages.CcnResponseMessage"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.isDaylightSavingsTimeOn(com.tridium.ccn.messages.CcnResponseMessage) -->
+<method name="isDaylightSavingsTimeOn"  public="true">
+<description/>
+<parameter name="rsp">
+<type class="com.tridium.ccn.messages.CcnResponseMessage"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getDsDate(com.tridium.ccn.messages.CcnResponseMessage) -->
+<method name="getDsDate"  public="true" static="true">
+<description>
+Gets the current date from a given response buffer expected to be block 3 of&#xa; read table
+</description>
+<parameter name="rsp">
+<type class="com.tridium.ccn.messages.CcnResponseMessage"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getDefTimeBlock() -->
+<method name="getDefTimeBlock"  public="true" static="true">
+<description/>
+<return>
+<type class="com.tridium.platCcn.CcnTableDef"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getDefDateBlock() -->
+<method name="getDefDateBlock"  public="true" static="true">
+<description/>
+<return>
+<type class="com.tridium.platCcn.CcnTableDef"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.timeJustPassed(javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime) -->
+<method name="timeJustPassed"  public="true" static="true">
+<description>
+Given a later &#x22;current&#x22; time, earlier &#x22;past&#x22; time, and a benchMark time, this determines if the later time&#xa; has just passed the benchMark time on the condition that the earlier time has not&#xa; passed the benchMark time.
+</description>
+<parameter name="benchMark">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="earlier">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="later">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if both the later time is passed the benchMark time and the earlier time is before the benchmark time; false otherwise
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.hourJustPassed(int, javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime) -->
+<method name="hourJustPassed"  public="true" static="true">
+<description>
+Given a later &#x22;current&#x22; time, earlier &#x22;past&#x22; time, and an hour, this determines if the later time&#xa; has just passed the benchMark hour on the condition that the earlier time has not&#xa; passed the benchMark hour.
+</description>
+<parameter name="benchMark">
+<type class="int"/>
+</parameter>
+<parameter name="earlier">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="later">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if both the hour of the later time equals the benchmark and the hour of the earlier time does not equal the benchmark; false otherwise
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getUnsolicitedTableNumber(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="getUnsolicitedTableNumber"  public="true" static="true">
+<description>
+Parses table number from unsolicited write table request.
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the table number parsed from an unsolicited write table request
+</description>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getUnsolicitedTableName(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="getUnsolicitedTableName"  public="true" static="true">
+<description>
+Parses name from unsolicited write table request.
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the table name parsed from an unsolicited write table request; or&#xa; -1 if the write table request was not indexed by name
+</description>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getUnsolicitedTableType(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="getUnsolicitedTableType"  public="true" static="true">
+<description>
+Parses type from unsolicited write table request.
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the table type parsed from an unsolicited write table request; or&#xa; -1 if the write table request was not indexed by type,instance combination
+</description>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getUnsolicitedTableInst(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="getUnsolicitedTableInst"  public="true" static="true">
+<description>
+Parses instance from unsolicited write table request.
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the table instance parsed from an unsolicited write table request; or&#xa; -1 if the write table request was not indexed by type,instance combination
+</description>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.getUnsolicitedTableBlock(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="getUnsolicitedTableBlock"  public="true" static="true">
+<description>
+Parses block nbr from unsolicited write table request.
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the table block nbr parsed from an unsolicited write table request
+</description>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.isWriteToBroadcastTableByName(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="isWriteToBroadcastTableByName"  public="true" static="true">
+<description>
+Determines if an unsolicited write table request is a request to write to&#xa; the broadcast table (by name).
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+boolean true if an unsolicited write table request is a request to write to&#xa; the broadcast table (by name); false otherwise
+</description>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.isWriteToBroadcastTableByType_Inst(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="isWriteToBroadcastTableByType_Inst"  public="true" static="true">
+<description>
+Determines if an unsolicited write table request is a request to write to&#xa; the broadcast table (by type &amp; inst).
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+boolean true if an unsolicited write table request is a request to write to&#xa; the broadcast table (by type &amp; inst); false otherwise
+</description>
+</return>
+<throws>
+<type class="com.tridium.ccn.exceptions.CcnException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.EXPECT_TBL_TYPE -->
+<field name="EXPECT_TBL_TYPE"  public="true" static="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.TIME_BLOCK -->
+<field name="TIME_BLOCK"  public="true" static="true">
+<type class="byte"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.DATE_BLOCK -->
+<field name="DATE_BLOCK"  public="true" static="true">
+<type class="byte"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.DATE_TIME_PID -->
+<field name="DATE_TIME_PID"  public="true" static="true">
+<type class="byte"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.HOUR_POSITION -->
+<field name="HOUR_POSITION"  public="true" static="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.MINUTE_POSITION -->
+<field name="MINUTE_POSITION"  public="true" static="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.HOLIDAY_DOW_POSITION -->
+<field name="HOLIDAY_DOW_POSITION"  public="true" static="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.DAY_POSITION -->
+<field name="DAY_POSITION"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.MONTH_POSITION -->
+<field name="MONTH_POSITION"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.YEAR_POSITION -->
+<field name="YEAR_POSITION"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.DATE_TIME_BROADCAST_ADDR -->
+<field name="DATE_TIME_BROADCAST_ADDR"  public="true" static="true" final="true">
+<type class="byte"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.DATE_TIME_BROADCAST_BUS -->
+<field name="DATE_TIME_BROADCAST_BUS"  public="true" static="true" final="true">
+<type class="byte"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.TIME_DATA_SIZE -->
+<field name="TIME_DATA_SIZE"  public="true" static="true" final="true">
+<type class="byte"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.DATE_DATA_SIZE -->
+<field name="DATE_DATA_SIZE"  public="true" static="true" final="true">
+<type class="byte"/>
+<description/>
+</field>
+
+<!-- com.tridium.ccn.util.CcnRspDTUtil.NO_HOLIDAY_FLAGS -->
+<field name="NO_HOLIDAY_FLAGS"  public="true" static="true" final="true">
+<type class="byte"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

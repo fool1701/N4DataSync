@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.table.TableSelection" name="TableSelection" packageName="javax.baja.ui.table" public="true">
+<description>
+TableSelection is responsible for storing the currently&#xa; selected cells.  The default implementation supports&#xa; single or muliple row selection.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">4 Aug 01</tag>
+<tag name="@version">$Revision: 13$ $Date: 6/11/07 12:41:33 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.table.BTable$TableSupport"/>
+</extends>
+<!-- javax.baja.ui.table.TableSelection() -->
+<constructor name="TableSelection" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.table.TableSelection.isSelected(int, int) -->
+<method name="isSelected"  public="true">
+<description>
+Is the specified cell selected?  This method routes &#xa; to &lt;code&gt;isSelected(int row)&lt;/code&gt; by default.  This&#xa; is the override point to implement more sophisticated&#xa; selection models on a per cell basis.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.isSelected(int) -->
+<method name="isSelected"  public="true">
+<description>
+Is the specified row selected?
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.selectAll() -->
+<method name="selectAll"  public="true">
+<description>
+Select all the items.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.select(int) -->
+<method name="select"  public="true">
+<description>
+Convenience for &lt;code&gt;select(row, false)&lt;/code&gt;.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.select(int, boolean) -->
+<method name="select"  public="true">
+<description>
+Select the specified row.  If the clear flag is set&#xa; to true then deselect all other rows first.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="clear">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.select(int, int) -->
+<method name="select"  public="true">
+<description>
+Convenience for &lt;code&gt;select(anchor, lead, false)&lt;/code&gt;.
+</description>
+<parameter name="anchor">
+<type class="int"/>
+</parameter>
+<parameter name="lead">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.select(int, int, boolean) -->
+<method name="select"  public="true">
+<description>
+Add the rows between start and end inclusively&#xa; to the current selection.  The first row&#xa; becomes the new anchor, and the second new&#xa; lead.  If the clear flag is set to true then deselect &#xa; all other rows first.
+</description>
+<parameter name="anchor">
+<type class="int"/>
+</parameter>
+<parameter name="lead">
+<type class="int"/>
+</parameter>
+<parameter name="clear">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.select(int[]) -->
+<method name="select"  public="true">
+<description>
+Select the specified rows.  The first one is &#xa; used as the selection anchor.
+</description>
+<parameter name="rows">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.deselect(int) -->
+<method name="deselect"  public="true">
+<description>
+Deselect the specified row, and set both the&#xa; anchor and lead to the new row.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.deselectAll() -->
+<method name="deselectAll"  public="true">
+<description>
+Deselect all the rows.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.isEmpty() -->
+<method name="isEmpty"  public="true">
+<description>
+Return true if row count is zero.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.getRowCount() -->
+<method name="getRowCount"  public="true">
+<description>
+Get the number of rows that are currently selected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.getRow() -->
+<method name="getRow"  public="true">
+<description>
+Get the index of the first selected row, or &#xa; return -1 if no rows are currently selected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.getRows() -->
+<method name="getRows"  public="true">
+<description>
+Get indices of the selected rows, or return an&#xa; empty array if no rows currently selected.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.getAnchor() -->
+<method name="getAnchor"  public="true">
+<description>
+Get the selection anchor index, or -1 if no&#xa; anchor is active.  The anchor selection is &#xa; the usually the first row index selected or &#xa; unselected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.getLead() -->
+<method name="getLead"  public="true">
+<description>
+Get the selection lead row index, or -1 if no &#xa; lead is active.  The lead selection is &#xa; the last row index selected or unselected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.getSubject() -->
+<method name="getSubject"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;getSubject(lead)&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.ui.table.TableSubject"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.getSubject(int) -->
+<method name="getSubject"  public="true">
+<description>
+Get the current selection as a Subject by mapping selected &#xa; row indices to objects via &lt;code&gt;TableModel.getSubject()&lt;/code&gt;.
+</description>
+<parameter name="activeRow">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.table.TableSubject"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableSelection.updateTable() -->
+<method name="updateTable"  public="true">
+<description>
+Call this method to update the table whenever the &#xa; selection is modified.  It automatically fires&#xa; the selectionModified event.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

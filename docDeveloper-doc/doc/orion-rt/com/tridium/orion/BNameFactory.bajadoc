@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.BNameFactory" name="BNameFactory" packageName="com.tridium.orion" public="true">
+<description>
+BNameFactory is responsible for providing names&#xa; for database objects.  You can override this class to provide&#xa; custom names.  The subclass should declares itself as an &#xa; agent on the BIOrionApp which it belongs to.&#xa; &lt;p&gt;&#xa; Note that even though BNameFactory is a component, it isn&#x27;t actually meant&#xa; to be mounted in a component space.  Its a component so that Fox serialization&#xa; can be used to pass it over the orion fox channel.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">09 Jun 11</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<!-- com.tridium.orion.BNameFactory() -->
+<constructor name="BNameFactory" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.orion.BNameFactory.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BNameFactory.getAppTypeSpec(com.tridium.orion.BIOrionApp) -->
+<method name="getAppTypeSpec"  public="true">
+<description>
+Allows BIOrionApp to declare a different TypeSpec for orionAppVersion table
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="app">
+<type class="com.tridium.orion.BIOrionApp"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BNameFactory.getTableName(com.tridium.orion.BOrionDatabase, com.tridium.orion.OrionType) -->
+<method name="getTableName"  public="true">
+<description>
+Get the table name for the given OrionType. This default implementation&#xa; returns &lt;code&gt;type.getModule().getModuleName() + &#x22;_&#x22; + type.getTypeName()&lt;/code&gt;.&#xa; Override this method to provide a custom table name for a type.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BNameFactory.getColumnName(com.tridium.orion.BOrionDatabase, com.tridium.orion.OrionType, javax.baja.sys.Property) -->
+<method name="getColumnName"  public="true">
+<description>
+Get the column name for the given OrionType and Property. This default implementation &#xa; returns &lt;code&gt;property.getName()&lt;/code&gt;.&#xa; Override this method to provide a custom column name for a property.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BNameFactory.getConstraintName(com.tridium.orion.BOrionDatabase, com.tridium.orion.OrionType, javax.baja.sys.Property, java.lang.String, boolean) -->
+<method name="getConstraintName"  public="true">
+<description>
+Get the a name for a constraint. In the default implementation, if isPrimaryKey is true, &#xa; then &#x27;property&#x27; will be ignored when creating the name.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="suffix">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="isPrimaryKey">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BNameFactory.getIndexName(com.tridium.orion.BOrionDatabase, com.tridium.orion.OrionType, javax.baja.sys.Property) -->
+<method name="getIndexName"  public="true">
+<description>
+Get the name for an index.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BNameFactory.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.orion.BNameFactory.INSTANCE -->
+<field name="INSTANCE"  public="true" static="true">
+<type class="com.tridium.orion.BNameFactory"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

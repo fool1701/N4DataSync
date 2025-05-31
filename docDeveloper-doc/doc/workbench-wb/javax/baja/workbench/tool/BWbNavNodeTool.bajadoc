@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.tool.BWbNavNodeTool" name="BWbNavNodeTool" packageName="javax.baja.workbench.tool" public="true" abstract="true">
+<description>
+BWbTool is a plugin which provides a stand alone utility which &#xa; is automatically made available in the workbench environment.  &#xa; The BWbNavNodeTool itself is singleton which may be used to &#xa; register one or more WbViews to work with the tool.  When the&#xa; user selects the tool from the menu, the default WbView is&#xa; displayed.  Every WbNavNodeTool is given its own BComponentSpace&#xa; which is named &#x22;tool:{typespec}&#x22;, and the WbNavNodeTool itself&#xa; has an ord of &#x22;tool:{typespec}|slot:/&#x22;.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">14 Oct 03</tag>
+<tag name="@version">$Revision: 5$ $Date: 3/28/05 1:41:01 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.workbench.tool.BWbTool"/>
+</extends>
+<!-- javax.baja.workbench.tool.BWbNavNodeTool() -->
+<constructor name="BWbNavNodeTool" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.tool.BWbNavNodeTool.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.tool.BWbNavNodeTool.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Make the singleton for the specified type spec.
+</description>
+<parameter name="typeSpec">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.tool.BWbNavNodeTool"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.tool.BWbNavNodeTool.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description>
+By default hide all the agents registered on&#xa; the super classes.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.tool.BWbNavNodeTool.invoke(javax.baja.workbench.BWbShell) -->
+<method name="invoke"  public="true">
+<description>
+Invoke the tool by hyperlinking to the default view&#xa; on this nav node type.
+</description>
+<parameter name="shell">
+<type class="javax.baja.workbench.BWbShell"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.tool.BWbNavNodeTool.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

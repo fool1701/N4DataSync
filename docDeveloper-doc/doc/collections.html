@@ -1,0 +1,133 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/registry.html" class="navbar">Prev</a> |  <a href="/doc/naming.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="collections">Collections</h1>
+<h2 id="overview-of-changes-from-niagara-ax">Overview of Changes from Niagara AX</h2>
+<p>There are several inadequacies in the Baja Collections API - <a href="module://docDeveloper/doc/baja-rt/javax/baja/collection/package-index.bajadoc">javax.baja.collection</a> and <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/Cursor.bajadoc">javax.baja.sys.Cursor</a>.  The current API suffers from a number of problems that hinder performance and encourage inefficient implementations for cases where data sets are large. The API changes aim to help developers be more productive with the collection API, and to pave the way for better implementation when underlying data sets are large.</p>
+<h2 id="impacts">Impacts</h2>
+<p>Any module that makes use of the <code>javax.baja.collection</code> classes or <code>javax.baja.sys.Cursor</code> is impacted by these changes.  Depending on what methods and classes of the API the code uses you may need to refactor your code.  Any implementations of <code>BICollection</code>, <code>BIList</code>, and <code>BITable</code> will be impacted by these changes.  In the unlikely event that you implemented the <code>javax.baja.bql.BIRelational</code> interface in your code, you will also be impacted.</p>
+<h2 id="changes">Changes</h2>
+<h3 id="removed-bicollection">Removed BICollection</h3>
+<p>One of the biggest issues with Niagara AX&rsquo;s Collections API is the <code>BICollection</code> interface. <code>BICollection</code> requires every implementation to model itself as a collection, a list, and a table. This puts a heavy burden on developers implementing a collection, and in many cases it does not make sense to model a list as a table, and vice-versa. So this interface has been removed entirely.</p>
+<h4 id="code-impacts">Code Impacts</h4>
+<p>The interface only had methods for converting the underlying collection to a list or table. Every implementation of <code>BICollection</code> in the framework now implements <code>BITable</code>. If you were casting objects to <code>BICollection</code> you should be able to safely cast them to <code>BITable</code> now. Almost invariably this was due to ord resolution of a bql query:</p>
+<p><em>Niagara AX</em></p>
+<pre><code class="sunlight-highlight-java">BICollection result = (BICollection)BOrd.make(&quot;bql:select displayName&quot;).get(base);
+BITable table = result.toTable();
+</code></pre>
+<p><em>Niagara 4</em></p>
+<pre><code class="sunlight-highlight-java">BITable table = (BITable)BOrd.make(&quot;bql:select displayName&quot;).get(base);
+</code></pre>
+<p>Any public methods that took a <code>BICollection</code> will need to be refactored to expect a <code>BITable</code>.</p>
+<h3 id="removed-bilist">Removed BIList</h3>
+<p>This change is probably the most significant in terms of fundamental philosophy change. As part of the design philosophy for collections in Niagara 4, we wanted to discourage random-access methods. In fact, they have essentially been removed from the collection API in favour of cursor-based access.  Don&rsquo;t worry, you can still work with a table in a random-access way (details below). The &lsquo;BIList&rsquo; interface essentially required random-access support for every collection. Further, an analysis of the entire framework showed that there were zero concrete implementations of <code>BIList</code>/<code>BICollection</code> in the public API that did not also implement <code>BITable</code>. This indicates that the BITable API is more useful to the framework as a whole.</p>
+<h4 id="code-impacts">Code Impacts</h4>
+<p>Similar to <code>BICollection</code> above, you should be able to cast any reference to a <code>BIList</code> to a <code>BITable</code> now. If by chance you had a public method that expected a <code>BList</code>, you will need to refactor that API to take a <code>BITable</code>.</p>
+<h3 id="refactored-bitable">Refactored BITable</h3>
+<p>The <a href="module://docDeveloper/doc/baja-rt/javax/baja/collection/BITable.bajadoc">BITable</a> interface has been greatly simplified and all random-access methods have been removed.</p>
+<p>You can iterate the rows in the table by obtaining a <a href="module://docDeveloper/doc/baja-rt/javax/baja/collection/TableCursor.bajadoc">TableCursor</a>. The <code>TableCursor</code> gives you access to the table that contains the row, the <a href="module://docDeveloper/doc/baja-rt/javax/baja/collection/Row.bajadoc">Row</a> object itself (see below), and a convenience method to obtain a cell value for the current row.</p>
+<p>Each row in a table is modelled as a <code>Row</code> object. The row object gives you direct access to the underlying <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/BIObject.bajadoc">BIObject</a> backing the row, as well as column cell values, flags, and facets.</p>
+<h4 id="code-impacts">Code Impacts</h4>
+<p>The biggest impact will occur if your code was iterating a <code>BITable</code> using the random-access methods of the old API. You have a few options.</p>
+<p>First, change your code to iterate the table using a cursor. This is the best option.</p>
+<pre><code class="sunlight-highlight-java">// Iterate a BITable using a TableCursor
+//
+BITable table = (BITable)bqlOrd.resolve().get();
+Column[] columns = table.getColumns().list();
+try(TableCursor&lt;BIObject&gt; cursor = table.cursor())
+{
+  // Just for printing purposes, not for random access.
+  int row = 0;
+  while (cursor.next())
+  {
+    System.out.print(row + &quot;: &quot;);
+    for (Column col : columns)
+    {
+      System.out.print(cursor.cell(col) + &quot;, &quot;);
+    }
+    System.out.println();
+    ++row;
+  }
+}
+</code></pre>
+<p>If you must access the table using random-access indexing, you can convert it to a <a href="module://docDeveloper/doc/baja-rt/javax/baja/collection/BIRandomAccessTable.bajadoc">BIRandomAccessTable</a> using the <code>javax.baja.collection.Tables</code> utility class.</p>
+<pre><code class="sunlight-highlight-java">BITable table = (BITable)ordThatResolvesToTable.resolve().get();
+BIRandomAccessTable rat = Tables.slurp(table);
+ 
+System.out.println(String.format(&quot;This table has %d rows&quot;, rat.size()));
+for (int i=0; i&lt;rat.size(); ++i)
+{
+  Row row = rat.get(i);
+  // Do something with each row...
+}
+</code></pre>
+<h3 id="refactored-cursor-interface">Refactored Cursor Interface</h3>
+<p>There are a few major changes to the <code>javax.baja.sys.Cursor</code> interface.</p>
+<ol>
+  <li><a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/Cursor.bajadoc">javax.baja.sys.Cursor</a> now implements <code>java.lang.AutoCloseable</code>.  This means you should be a good citizen of every cursor you work with. Failing to close a cursor may result in a resource leak and degraded system performance.  The try-with-resources statement introduced in Java 7 can help manage opening and closing cursors.</li>
+  <li><code>Cursor</code> is now generic: <code>public interface Cursor&lt;E&gt; extends AutoCloseable</code></li>
+  <li>This means it can iterate over any type; not just Niagara types.</li>
+  <li>Since it can iterate any type, we removed the nextComponent() method from the interface and moved it into <code>SlotCursor</code>. This seems to be its primary use case anyway.</li>
+  <li>A new <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/IterableCursor.bajadoc">javax.baja.sys.IterableCursor</a> interface has been added that extends Cursor and implements Java&rsquo;s <code>Iterable</code> interface. This enables a <code>Cursor</code> to be used in a for each statement as well as accessing the <code>Cursor</code> as an <code>Iterator</code>, <code>Spliterator</code> or <code>Stream</code>.</li>
+  <li><a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/SlotCursor.bajadoc">javax.baja.sys.SlotCursor</a> also implements the <code>Iterable</code> interface so it can be used to iterate over a collection of <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/Slot.bajadoc">Slot</a>s (not <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/BValue.bajadoc">BValue</a>).</li>
+</ol>
+<p>If you need to implement your own <code>Cursor</code>, use the utility class <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/AbstractCursor.bajadoc">javax.baja.collection.AbstractCursor</a>, which stubs out all methods in the interface and handles close semantics for you. You only need to provide an implementation of <code>advanceCursor()</code> and <code>doGet()</code>.</p>
+<p>Here are some example of the new <code>SlotCursor</code> design that use Java 8&rsquo;s Stream API&hellip;</p>
+<pre><code class="sunlight-highlight-java">// Remove all dynamic Properties from a point...
+point.getProperties()
+  .stream()
+  .filter(Slot::isDynamic)
+  .forEach(point::remove);
+ 
+// Print out the path string of all folders under a point...
+point.getProperties()
+  .stream()
+  .map(point::get)
+  .filter(v -&gt; v.getType().is(BFolder.TYPE))
+  .forEach(v -&gt; System.out.println(v.asComponent().toPathString()));
+</code></pre>
+<h3 id="birelational-interface-breaking-changes">BIRelational Interface Breaking Changes</h3>
+<p>In the unlikely event that you implemented the <a href="module://docDeveloper/doc/bql-rt/javax/baja/bql/BIRelational.bajadoc">javax.baja.bql.BIRelational</a> interface in your code, you will need to add a <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/Context.bajadoc">Context</a> argument to its single method.  The updated interface class is shown below:</p>
+<pre><code class="sunlight-highlight-java">public interface BIRelational&lt;T extends BIObject&gt;
+{
+  /**
+   * Get the relation with the specified identifier.
+   *
+   * @param id A string identifier for the relation.  The format
+   *   of the string is implementation specific.
+   *
+   * @param cx The Context associated with this request.
+   *           This parameter was added starting in Niagara 4.0.
+   *
+   * @return Returns the relation identified by id or null if the relation
+   *   cannot be found.
+   */
+  BITable&lt;T&gt; getRelation(String id, Context cx);
+   
+  Type TYPE = Sys.loadType(BIRelational.class);
+}
+</code></pre>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/registry.html" class="navbar">Prev</a> |  <a href="/doc/naming.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

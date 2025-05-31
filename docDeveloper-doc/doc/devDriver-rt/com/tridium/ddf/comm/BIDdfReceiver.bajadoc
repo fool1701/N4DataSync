@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.BIDdfReceiver" name="BIDdfReceiver" packageName="com.tridium.ddf.comm" public="true" interface="true" abstract="true" category="interface">
+<description>
+The BIDdfReceiver receives frames for the BIDdfCommunicator.&#xa; &#xa; Instead of implementing this directly, there are a wealth of implementations that can be extends.&#xa; These are in the packages:&#xa; &lt;OL&gt;&#xa;   &lt;LI&gt;com.tridium.ddf.comm.defaultComm&#xa;   &lt;LI&gt;com.tridium.ddf.comm.multipleTransaction&#xa;   &lt;LI&gt;com.tridium.ddf.comm.singleTransaction&#xa; &lt;/OL&gt;&#xa; In additon, there reasonable serial versions of these in the devSerialDriver module.&#xa; &#xa; There are reasonable Tcp/Ip versions of these in the devTcpDriver module.
+</description>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.comm.BIDdfReceiver.receiveFrame() -->
+<method name="receiveFrame"  public="true" abstract="true">
+<description>
+The implementor should make this method block the calling thread until an IDdfDataFrame&#xa; is received from the field-bus.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+<description>
+the IDdfDataFrame that is received from the field-bus. Returning null can cause the receive thread to spin lock the cpu.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfReceiver.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true" abstract="true">
+<description>
+The implementor should make this method return the BIDdfCommunicator that owns this BIDdfReceiver.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfReceiver.getResponseTimeout() -->
+<method name="getResponseTimeout"  public="true" abstract="true">
+<description>
+The implementor should return the default, response timeout for received frames on the field-bus.
+</description>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfReceiver.startReceiver() -->
+<method name="startReceiver"  public="true" abstract="true">
+<description>
+This called when the receive thread is started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfReceiver.stopReceiver() -->
+<method name="stopReceiver"  public="true" abstract="true">
+<description>
+This called when the receive thread is stopped.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfReceiver.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

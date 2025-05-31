@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.sql.PropertyValue" name="PropertyValue" packageName="com.tridium.orion.sql" public="true">
+<description>
+PropertyValue contains a Property and an associated BValue.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">05 Nov 07</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<property name="property" flags="">
+<type class="javax.baja.sys.Property"/>
+<description/>
+</property>
+
+<!-- com.tridium.orion.sql.PropertyValue(javax.baja.sys.Property, javax.baja.sys.BValue) -->
+<constructor name="PropertyValue" public="true">
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<description>
+Construct a new instance
+</description>
+</constructor>
+
+<!-- com.tridium.orion.sql.PropertyValue.make(javax.baja.sys.BComplex) -->
+<method name="make"  public="true" static="true">
+<description>
+Create an array of PropertyValues from the specified object.&#xa; &lt;p&gt;&#xa; The array will include entries only for those properties &#xa; whose value in the object is not equals to the property&#x27;s default value.
+</description>
+<parameter name="cmplx">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.PropertyValue" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.makeKeys(com.tridium.orion.BIOrionObject) -->
+<method name="makeKeys"  public="true" static="true">
+<description>
+Create an array of the key values for the specified object.
+</description>
+<parameter name="obj">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.PropertyValue" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.getProperty() -->
+<method name="getProperty"  public="true">
+<description>
+Get the property.
+</description>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.getValue() -->
+<method name="getValue"  public="true">
+<description>
+Get the value.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.encodeValueToString(javax.baja.sys.BValue) -->
+<method name="encodeValueToString"  public="true" static="true">
+<description>
+Encodes the value of the PropertyValue to a String.  This method should&#xa; always be used when encoding a PropertyValue value to a string.
+</description>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+<description>
+the BValue to encode to a String.  Typically this will be&#xa; the result of a call to method getValue() on an existing PropertyValue.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the String encoding of the value in this PropertyValue.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.encodeValueToString(javax.baja.sys.BValue, javax.baja.sys.Context, boolean) -->
+<method name="encodeValueToString"  public="true" static="true">
+<description>
+Encodes the value of the PropertyValue to a String.  This method should&#xa; always be used when encoding a PropertyValue value to a string.
+</description>
+<tag name="@passwordContext">is password Context to encode value using shared key.</tag>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+<description>
+the BValue to encode to a String.  Typically this will be&#xa; the result of a call to method getValue() on an existing PropertyValue.
+</description>
+</parameter>
+<parameter name="passwordContext">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="isLegacyConnection">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the String encoding of the value in this PropertyValue.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.decodeValueFromString(javax.baja.sys.Type, java.lang.String) -->
+<method name="decodeValueFromString"  public="true" static="true">
+<description>
+Decodes the value of PropertyValue from a String that was previously&#xa; encoded using encodeValueToString.
+</description>
+<parameter name="propertyType">
+<type class="javax.baja.sys.Type"/>
+<description>
+the type of the Property for the PropertyValue.  This&#xa; is used as a hint during decoding.
+</description>
+</parameter>
+<parameter name="s">
+<type class="java.lang.String"/>
+<description>
+the String to decode.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+the BValue represented by encoded string.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.decodeValueFromString(javax.baja.sys.Type, java.lang.String, javax.baja.sys.Context, boolean) -->
+<method name="decodeValueFromString"  public="true" static="true">
+<description>
+Decodes the value of PropertyValue from a String that was previously&#xa; encoded using encodeValueToString by shared password Context
+</description>
+<parameter name="propertyType">
+<type class="javax.baja.sys.Type"/>
+<description>
+the type of the Property for the PropertyValue.  This&#xa; is used as a hint during decoding.
+</description>
+</parameter>
+<parameter name="s">
+<type class="java.lang.String"/>
+<description>
+the String to decode.
+</description>
+</parameter>
+<parameter name="passwordContext">
+<type class="javax.baja.sys.Context"/>
+<description>
+the password context to decode.
+</description>
+</parameter>
+<parameter name="isLegacyConnection">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+the BValue represented by encoded string.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.orion.sql.PropertyValue.property -->
+<field name="property"  public="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description/>
+</field>
+
+<!-- com.tridium.orion.sql.PropertyValue.value -->
+<field name="value"  public="true" final="true">
+<type class="javax.baja.sys.BValue"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

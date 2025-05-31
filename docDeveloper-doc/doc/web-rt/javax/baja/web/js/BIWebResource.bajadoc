@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.js.BIWebResource" name="BIWebResource" packageName="javax.baja.web.js" public="true" interface="true" abstract="true" category="interface">
+<description>
+&lt;p&gt;&#xa;   &lt;code&gt;BIWebResource&lt;/code&gt; represents a collection of one or more resource files that can be used on&#xa;   the web.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa;   These can be configured to declare dependencies between files: for instance, the HTML views&#xa;   implemented in a &lt;code&gt;.js&lt;/code&gt; file can depend upon CSS implemented in a separate &lt;code&gt;.css&lt;/code&gt;&#xa;   file. This dependency can be implemented by having a &lt;code&gt;<see ref="javax.baja.web.js.BJsBuild">BJsBuild</see>&lt;/code&gt; depend on a&#xa;   &lt;code&gt;<see ref="javax.baja.web.js.BCssResource">BCssResource</see>&lt;/code&gt;.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa;   By creating classes that implement this interface, you register the existence of these web&#xa;   resource files with the Niagara Framework. When using the Niagara web interface (BajaScript,&#xa;   field editors, etc.), the framework can then ensure the correct dependencies are loaded in the&#xa;   correct order.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa;   Please see the User Interface section of Doc Developer for more details.&#xa; &lt;/p&gt;
+</description>
+<tag name="@author">Anita Padman on 5/5/2022</tag>
+<tag name="@since">Niagara 4.13</tag>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<!-- javax.baja.web.js.BIWebResource.getFiles() -->
+<method name="getFiles"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+<description>
+ORDs to the files represented by this resource.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BIWebResource.getRequireJsIds() -->
+<method name="getRequireJsIds"  public="true" default="true">
+<description/>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+the files represented by this resource as an array of RequireJS module IDs
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BIWebResource.getDependencies() -->
+<method name="getDependencies"  public="true" default="true">
+<description/>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="javax.baja.web.js.BIWebResource"/>
+</args>
+</parameterizedType>
+<description>
+the set of this web resource&#x27;s direct dependencies.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BIWebResource.resolve(java.util.Collection&lt;? extends javax.baja.web.js.BIWebResource&gt;) -->
+<method name="resolve"  public="true" static="true">
+<description/>
+<parameter name="resources">
+<parameterizedType class="java.util.Collection">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.web.js.BIWebResource"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="javax.baja.web.js.BIWebResource$DependencyGraph"/>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BIWebResource.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

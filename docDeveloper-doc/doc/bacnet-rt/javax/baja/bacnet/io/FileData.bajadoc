@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.io.FileData" name="FileData" packageName="javax.baja.bacnet.io" public="true" interface="true" abstract="true" category="interface">
+<description>
+FileData contains information about data that is either read from&#xa; or written to a BACnet File object using the AtomicReadFile or&#xa; AtomicWriteFile service requests.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">28 Dec 2006</tag>
+<tag name="@since">Niagara 3.2</tag>
+<!-- javax.baja.bacnet.io.FileData.isEndOfFile() -->
+<method name="isEndOfFile"  public="true" abstract="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the file is at the end.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.FileData.getAccessMethod() -->
+<method name="getAccessMethod"  public="true" abstract="true">
+<description>
+Get the file access method, according to the BACnet defined values&#xa; for stream or record access.
+</description>
+<return>
+<type class="int"/>
+<description>
+the access method used to retrieve or set this file data.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.FileData.getFileStart() -->
+<method name="getFileStart"  public="true" abstract="true">
+<description/>
+<return>
+<type class="int"/>
+<description>
+the file start position where the read began, or the write is to begin.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.FileData.getRecordCount() -->
+<method name="getRecordCount"  public="true" abstract="true">
+<description>
+Only valid for record based access.&#xa; Throws IllegalStateException if used in a stream based situation.
+</description>
+<return>
+<type class="long"/>
+<description>
+the record count written to or read from this file.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.FileData.getFileData() -->
+<method name="getFileData"  public="true" abstract="true">
+<description>
+Only valid for stream based access.&#xa; Throws IllegalStateException if used in a record based situation.&#xa; Get the file data read from or written to this file.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+a byte array containing the contents of the BBacnetOctetString.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.FileData.getFileRecordData() -->
+<method name="getFileRecordData"  public="true" abstract="true">
+<description>
+Only valid for record based access.&#xa; Throws IllegalStateException if used in a stream based situation.&#xa; Get the file data read from or written to this file.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetOctetString" dimension="1"/>
+<description>
+an array of BBacnetOctetString containing the records.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.FileData.STREAM_ACCESS -->
+<field name="STREAM_ACCESS"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Stream Access tag.
+</description>
+</field>
+
+<!-- javax.baja.bacnet.io.FileData.RECORD_ACCESS -->
+<field name="RECORD_ACCESS"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Record Access tag.
+</description>
+</field>
+
+</class>
+</bajadoc>

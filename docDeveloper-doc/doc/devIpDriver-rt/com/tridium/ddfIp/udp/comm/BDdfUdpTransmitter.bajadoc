@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devIpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter" name="BDdfUdpTransmitter" packageName="com.tridium.ddfIp.udp.comm" public="true">
+<description/>
+<extends>
+<type class="com.tridium.ddf.comm.defaultComm.BDdfTransmitter"/>
+</extends>
+<property name="sendToAddress" flags="">
+<type class="com.tridium.ddfIp.comm.BDdfIpAddressPort"/>
+<description>
+Slot for the &lt;code&gt;sendToAddress&lt;/code&gt; property.&#xa; Specifies the Udp/Ip address and port (on the field-device) to transmit to.&#xa; DatagramPackets are sent to this location, unless the corresponding BIDdfRequst&#x27;s&#xa; device Id implements BIDdfUdpDeviceId, in which case the particular request will&#xa; be sent to the Udp/Ip address identified by the request&#x27;s Device Id.
+</description>
+<tag name="@see">#getSendToAddress</tag>
+<tag name="@see">#setSendToAddress</tag>
+</property>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter() -->
+<constructor name="BDdfUdpTransmitter" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.getSendToAddress() -->
+<method name="getSendToAddress"  public="true">
+<description>
+Get the &lt;code&gt;sendToAddress&lt;/code&gt; property.&#xa; Specifies the Udp/Ip address and port (on the field-device) to transmit to.&#xa; DatagramPackets are sent to this location, unless the corresponding BIDdfRequst&#x27;s&#xa; device Id implements BIDdfUdpDeviceId, in which case the particular request will&#xa; be sent to the Udp/Ip address identified by the request&#x27;s Device Id.
+</description>
+<tag name="@see">#sendToAddress</tag>
+<return>
+<type class="com.tridium.ddfIp.comm.BDdfIpAddressPort"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.setSendToAddress(com.tridium.ddfIp.comm.BDdfIpAddressPort) -->
+<method name="setSendToAddress"  public="true">
+<description>
+Set the &lt;code&gt;sendToAddress&lt;/code&gt; property.&#xa; Specifies the Udp/Ip address and port (on the field-device) to transmit to.&#xa; DatagramPackets are sent to this location, unless the corresponding BIDdfRequst&#x27;s&#xa; device Id implements BIDdfUdpDeviceId, in which case the particular request will&#xa; be sent to the Udp/Ip address identified by the request&#x27;s Device Id.
+</description>
+<tag name="@see">#sendToAddress</tag>
+<parameter name="v">
+<type class="com.tridium.ddfIp.comm.BDdfIpAddressPort"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.getUdpCommunicator() -->
+<method name="getUdpCommunicator"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.forceTransmit(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="forceTransmit"  public="true">
+<description>
+This method places the given request&#x27;s byte array into a datagram packet&#xa; and transmits it through the Udp Communicator&#x27;s transmit socket.
+</description>
+<parameter name="ddfRequest">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.getUdpSendToAddress(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="getUdpSendToAddress"  public="true">
+<description/>
+<parameter name="ddfRequest">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+</parameter>
+<return>
+<type class="com.tridium.ddfIp.comm.BDdfIpAddressPort"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.getTransmitFromPort() -->
+<method name="getTransmitFromPort"  public="true">
+<description>
+Gets the Udp port that the Udp DatagramSocket will be bound to on the host (Jace).
+</description>
+<return>
+<type class="int"/>
+<description>
+this default implementation returns -1 which causes the BDdfUdpCommunicator&#xa; to allow Java to choose any available Udp port. If the developer&#x27;s driver requires&#xa; a particular Udp origination port for the transmit socket then the developer may&#xa; override this method and supply a Udp Port as he or she sees fit.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.sendToAddress -->
+<field name="sendToAddress"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sendToAddress&lt;/code&gt; property.&#xa; Specifies the Udp/Ip address and port (on the field-device) to transmit to.&#xa; DatagramPackets are sent to this location, unless the corresponding BIDdfRequst&#x27;s&#xa; device Id implements BIDdfUdpDeviceId, in which case the particular request will&#xa; be sent to the Udp/Ip address identified by the request&#x27;s Device Id.
+</description>
+<tag name="@see">#getSendToAddress</tag>
+<tag name="@see">#setSendToAddress</tag>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.maxRetryCount -->
+<field name="maxRetryCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxRetryCount&lt;/code&gt; property.&#xa; This is the default maximum number of times that any one message will ever be&#xa; retransmitted. This property is faceted with MGR_INCLUDE so that it can appear&#xa; in the device manager, if the device communicates on its own.
+</description>
+<tag name="@see">#getMaxRetryCount</tag>
+<tag name="@see">#setMaxRetryCount</tag>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.LEX -->
+<field name="LEX"  public="true" static="true" final="true">
+<type class="javax.baja.util.Lexicon"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.lexkeyRequestDoesNotSupportUdp -->
+<field name="lexkeyRequestDoesNotSupportUdp"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter.requestDoesNotSupportUdp -->
+<field name="requestDoesNotSupportUdp"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

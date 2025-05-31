@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.BWbPlugin" name="BWbPlugin" packageName="javax.baja.workbench" public="true">
+<description>
+BWbPlugin is a widget designed to provide plugin &#xa; functionality in the workbench tool environment.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">7 Jan 01</tag>
+<tag name="@version">$Revision: 19$ $Date: 8/15/07 3:46:56 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.BWidget"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<property name="content" flags="th">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+Slot for the &lt;code&gt;content&lt;/code&gt; property.&#xa; Default content is the null widget.
+</description>
+<tag name="@see">#getContent</tag>
+<tag name="@see">#setContent</tag>
+</property>
+
+<action name="setModified" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;setModified&lt;/code&gt; action.&#xa; The setModified action sets the modified flag&#xa; and fires the pluginModified event.
+</description>
+<tag name="@see">#setModified()</tag>
+</action>
+
+<topic name="pluginModified" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;pluginModified&lt;/code&gt; topic.&#xa; This event is fired when changes to the plugin&#x27;s value&#xa; are made by a user.  Programatic changes should never&#xa; fire an plugin modified event.  The firePluginModified()&#xa; method should never be called directly, rather use&#xa; the setModified() method.
+</description>
+<tag name="@see">#firePluginModified</tag>
+</topic>
+
+<topic name="actionPerformed" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;actionPerformed&lt;/code&gt; topic.&#xa; Action performed indicates an action event in&#xa; one of the plugin&#x27;s sub-widgets.  It is usually&#xa; used to provide an automatic commit of the&#xa; changes (for example applying all the changes on&#xa; a property sheet when the user hits Enter in a&#xa; text field).
+</description>
+<tag name="@see">#fireActionPerformed</tag>
+</topic>
+
+<!-- javax.baja.workbench.BWbPlugin() -->
+<constructor name="BWbPlugin" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.BWbPlugin.getContent() -->
+<method name="getContent"  public="true">
+<description>
+Get the &lt;code&gt;content&lt;/code&gt; property.&#xa; Default content is the null widget.
+</description>
+<tag name="@see">#content</tag>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.setContent(javax.baja.ui.BWidget) -->
+<method name="setContent"  public="true">
+<description>
+Set the &lt;code&gt;content&lt;/code&gt; property.&#xa; Default content is the null widget.
+</description>
+<tag name="@see">#content</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.setModified() -->
+<method name="setModified"  public="true">
+<description>
+Invoke the &lt;code&gt;setModified&lt;/code&gt; action.&#xa; The setModified action sets the modified flag&#xa; and fires the pluginModified event.
+</description>
+<tag name="@see">#setModified</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.firePluginModified(javax.baja.ui.event.BWidgetEvent) -->
+<method name="firePluginModified"  public="true">
+<description>
+Fire an event for the &lt;code&gt;pluginModified&lt;/code&gt; topic.&#xa; This event is fired when changes to the plugin&#x27;s value&#xa; are made by a user.  Programatic changes should never&#xa; fire an plugin modified event.  The firePluginModified()&#xa; method should never be called directly, rather use&#xa; the setModified() method.
+</description>
+<tag name="@see">#pluginModified</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.fireActionPerformed(javax.baja.ui.event.BWidgetEvent) -->
+<method name="fireActionPerformed"  public="true">
+<description>
+Fire an event for the &lt;code&gt;actionPerformed&lt;/code&gt; topic.&#xa; Action performed indicates an action event in&#xa; one of the plugin&#x27;s sub-widgets.  It is usually&#xa; used to provide an automatic commit of the&#xa; changes (for example applying all the changes on&#xa; a property sheet when the user hits Enter in a&#xa; text field).
+</description>
+<tag name="@see">#actionPerformed</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.getWbShell() -->
+<method name="getWbShell"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;BWbShell.getWbShell(this)&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.workbench.BWbShell"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.doLayout(javax.baja.ui.BWidget[]) -->
+<method name="doLayout"  public="true">
+<description/>
+<parameter name="kids">
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.isModified() -->
+<method name="isModified"  public="true" final="true">
+<description>
+Has this plugin been modified by the user.  Changes&#xa; made programatically should not effect the modified&#xa; flag.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.isModifiedStateLocked() -->
+<method name="isModifiedStateLocked"  public="true" final="true">
+<description>
+Is the plugin&#x27;s modified state currently locked. &#xa; While locked any calls to setModified() are ignored.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.lockModifiedState() -->
+<method name="lockModifiedState"  public="true" final="true">
+<description>
+Lock the plugin&#x27;s modified state so that further calls &#xa; to setModified() are ignored until unlockModifiedState()&#xa; is called.  This is useful when making a programatic &#xa; change, but you want to prevent normal event handling &#xa; from firing a modified event.  The modified state for&#xa; BWbEditors is automatically locked during loadValue().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.unlockModifiedState() -->
+<method name="unlockModifiedState"  public="true" final="true">
+<description>
+Unlock the modified state so that calls to setModified&#xa; will set the modified flag and fire the modified event.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.clearModified() -->
+<method name="clearModified"  public="true">
+<description>
+Set the modified flag to false.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.doSetModified() -->
+<method name="doSetModified"  public="true" final="true">
+<description>
+Set this plugin as modified.  If the plugin is already&#xa; modified then nothing happens.  If the plugin is not&#xa; currently modified, then set the modified flag and fire&#xa; the pluginModified event.  If the plugin currently has&#xa; the modified state locked, then this call is ignored. The &#xa; modified state is automatically locked during loadValue().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.doPerformAction() -->
+<method name="doPerformAction"  public="true">
+<description>
+Fire the action performed event.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.BWbPlugin.content -->
+<field name="content"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;content&lt;/code&gt; property.&#xa; Default content is the null widget.
+</description>
+<tag name="@see">#getContent</tag>
+<tag name="@see">#setContent</tag>
+</field>
+
+<!-- javax.baja.workbench.BWbPlugin.setModified -->
+<field name="setModified"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;setModified&lt;/code&gt; action.&#xa; The setModified action sets the modified flag&#xa; and fires the pluginModified event.
+</description>
+<tag name="@see">#setModified()</tag>
+</field>
+
+<!-- javax.baja.workbench.BWbPlugin.pluginModified -->
+<field name="pluginModified"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;pluginModified&lt;/code&gt; topic.&#xa; This event is fired when changes to the plugin&#x27;s value&#xa; are made by a user.  Programatic changes should never&#xa; fire an plugin modified event.  The firePluginModified()&#xa; method should never be called directly, rather use&#xa; the setModified() method.
+</description>
+<tag name="@see">#firePluginModified</tag>
+</field>
+
+<!-- javax.baja.workbench.BWbPlugin.actionPerformed -->
+<field name="actionPerformed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;actionPerformed&lt;/code&gt; topic.&#xa; Action performed indicates an action event in&#xa; one of the plugin&#x27;s sub-widgets.  It is usually&#xa; used to provide an automatic commit of the&#xa; changes (for example applying all the changes on&#xa; a property sheet when the user hits Enter in a&#xa; text field).
+</description>
+<tag name="@see">#fireActionPerformed</tag>
+</field>
+
+<!-- javax.baja.workbench.BWbPlugin.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

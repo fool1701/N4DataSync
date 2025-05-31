@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devIpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfIp.comm.BDdfIpCommunicator" name="BDdfIpCommunicator" packageName="com.tridium.ddfIp.comm" public="true">
+<description>
+This class is the most basic override point for an IP based&#xa; driver. It adds a &#x27;networkInterface&#x27; to the other communicator&#xa; properties.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.ddf.comm.defaultComm.BDdfCommunicator"/>
+</extends>
+<property name="networkInterface" flags="">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+<description>
+Slot for the &lt;code&gt;networkInterface&lt;/code&gt; property.&#xa; Specifies the network interface adapter to use for I.P. communications.&#xa; To get a reference to the network interface for development purposes,&#xa; developers should call the getNetworkAdapter method instead. It&#xa; performs some necessary house-keeping operations on the value that&#xa; this property stores.
+</description>
+<tag name="@see">#getNetworkInterface</tag>
+<tag name="@see">#setNetworkInterface</tag>
+</property>
+
+<property name="hostIpAdapters" flags="ht">
+<type class="javax.baja.sys.BVector"/>
+<description>
+Slot for the &lt;code&gt;hostIpAdapters&lt;/code&gt; property.&#xa; This is a copy of some of the information pertaining to each network&#xa; interface adapter that is on the host computer. This is for internal&#xa; use only and should remain hidden and transient.
+</description>
+<tag name="@see">#getHostIpAdapters</tag>
+<tag name="@see">#setHostIpAdapters</tag>
+</property>
+
+<action name="refreshHostIpAdapters" flags="h">
+<return>
+<type class="javax.baja.sys.BVector"/>
+</return>
+<description>
+Slot for the &lt;code&gt;refreshHostIpAdapters&lt;/code&gt; action.&#xa; Asks the station-side copy of the Ip Communicator to analyze&#xa; Its platform&#x27;s ip adapters and return a BVector containing&#xa; a BDdfIpAdapter for each available Ethernet adapter.&#xa; This maybe invoked programmatically from the client-side or the&#xa; server side to arrive at an array of the Jace&#x27;s Ethernet adapters
+</description>
+<tag name="@see">#refreshHostIpAdapters()</tag>
+</action>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator() -->
+<constructor name="BDdfIpCommunicator" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.getNetworkInterface() -->
+<method name="getNetworkInterface"  public="true">
+<description>
+Get the &lt;code&gt;networkInterface&lt;/code&gt; property.&#xa; Specifies the network interface adapter to use for I.P. communications.&#xa; To get a reference to the network interface for development purposes,&#xa; developers should call the getNetworkAdapter method instead. It&#xa; performs some necessary house-keeping operations on the value that&#xa; this property stores.
+</description>
+<tag name="@see">#networkInterface</tag>
+<return>
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.setNetworkInterface(com.tridium.ddfIp.comm.BDdfIpAdapter) -->
+<method name="setNetworkInterface"  public="true">
+<description>
+Set the &lt;code&gt;networkInterface&lt;/code&gt; property.&#xa; Specifies the network interface adapter to use for I.P. communications.&#xa; To get a reference to the network interface for development purposes,&#xa; developers should call the getNetworkAdapter method instead. It&#xa; performs some necessary house-keeping operations on the value that&#xa; this property stores.
+</description>
+<tag name="@see">#networkInterface</tag>
+<parameter name="v">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.getHostIpAdapters() -->
+<method name="getHostIpAdapters"  public="true">
+<description>
+Get the &lt;code&gt;hostIpAdapters&lt;/code&gt; property.&#xa; This is a copy of some of the information pertaining to each network&#xa; interface adapter that is on the host computer. This is for internal&#xa; use only and should remain hidden and transient.
+</description>
+<tag name="@see">#hostIpAdapters</tag>
+<return>
+<type class="javax.baja.sys.BVector"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.setHostIpAdapters(javax.baja.sys.BVector) -->
+<method name="setHostIpAdapters"  public="true">
+<description>
+Set the &lt;code&gt;hostIpAdapters&lt;/code&gt; property.&#xa; This is a copy of some of the information pertaining to each network&#xa; interface adapter that is on the host computer. This is for internal&#xa; use only and should remain hidden and transient.
+</description>
+<tag name="@see">#hostIpAdapters</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.refreshHostIpAdapters() -->
+<method name="refreshHostIpAdapters"  public="true">
+<description>
+Invoke the &lt;code&gt;refreshHostIpAdapters&lt;/code&gt; action.&#xa; Asks the station-side copy of the Ip Communicator to analyze&#xa; Its platform&#x27;s ip adapters and return a BVector containing&#xa; a BDdfIpAdapter for each available Ethernet adapter.&#xa; This maybe invoked programmatically from the client-side or the&#xa; server side to arrive at an array of the Jace&#x27;s Ethernet adapters
+</description>
+<tag name="@see">#refreshHostIpAdapters</tag>
+<return>
+<type class="javax.baja.sys.BVector"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.communicatorStarted() -->
+<method name="communicatorStarted"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.communicatorStopped() -->
+<method name="communicatorStopped"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.ipCommunicatorStarted() -->
+<method name="ipCommunicatorStarted"  public="true">
+<description>
+This is the override point for a developer to customize the&#xa; startup behavior.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.ipCommunicatorStopped() -->
+<method name="ipCommunicatorStopped"  public="true">
+<description>
+This is the override point for a developer to customize the&#xa; shutdown behavior.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.doRefreshHostIpAdapters() -->
+<method name="doRefreshHostIpAdapters"  public="true">
+<description>
+Implements the getHostIpAdapters action.
+</description>
+<return>
+<type class="javax.baja.sys.BVector"/>
+<description>
+a BVector containing a BDdfIpAdapter structure for each ethernet adapter on the host that is&#xa; running the station.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.getHostIpAdaptersArray() -->
+<method name="getHostIpAdaptersArray"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.getNetworkAdapter() -->
+<method name="getNetworkAdapter"  public="true">
+<description>
+Gets the BDdfIpAdapter structure representing the host&#x27;s network interface to use&#xa; for sending and receiving DatagramPackets. This default implementation looks at the&#xa; &#x22;Network Interface&#x22; property. Before returning it
+</description>
+<return>
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.updateNetworkInterfaceFromDescription(com.tridium.ddfIp.comm.BDdfIpAdapter) -->
+<method name="updateNetworkInterfaceFromDescription"  protected="true">
+<description>
+In the event that the user specified an adapter (presumably when the station was&#xa; in its infancy in offline mode) that the offline-mode VM was not able to match&#xa; to a host interface (since offline mode does not have a host-station) then this&#xa; attempts to match up the user-defined text for the adapter to a network interface&#xa; on the host that is running this station.
+</description>
+<parameter name="networkInterface">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+<description>
+the BDdfUdpIpAdapter to update
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if this method is able to match up the given networkInterface to&#xa; a host adapter and false otherwise. If true is returned then the given&#xa; networkInterface&#x27;s adapterId and ipAddress are automatically updated.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.updateIpAddress(com.tridium.ddfIp.comm.BDdfIpAdapter) -->
+<method name="updateIpAddress"  protected="true">
+<description>
+Finds the corresponding network adapter under the Platform Tcp/Ip service and&#xa; returns its ipAddress. This is necessary since the IP Address can change in a &#xa; DHCP configuration.
+</description>
+<parameter name="givenNetworkInterface">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+</parameter>
+<return>
+<type class="void"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.networkInterface -->
+<field name="networkInterface"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;networkInterface&lt;/code&gt; property.&#xa; Specifies the network interface adapter to use for I.P. communications.&#xa; To get a reference to the network interface for development purposes,&#xa; developers should call the getNetworkAdapter method instead. It&#xa; performs some necessary house-keeping operations on the value that&#xa; this property stores.
+</description>
+<tag name="@see">#getNetworkInterface</tag>
+<tag name="@see">#setNetworkInterface</tag>
+</field>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.hostIpAdapters -->
+<field name="hostIpAdapters"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;hostIpAdapters&lt;/code&gt; property.&#xa; This is a copy of some of the information pertaining to each network&#xa; interface adapter that is on the host computer. This is for internal&#xa; use only and should remain hidden and transient.
+</description>
+<tag name="@see">#getHostIpAdapters</tag>
+<tag name="@see">#setHostIpAdapters</tag>
+</field>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.refreshHostIpAdapters -->
+<field name="refreshHostIpAdapters"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;refreshHostIpAdapters&lt;/code&gt; action.&#xa; Asks the station-side copy of the Ip Communicator to analyze&#xa; Its platform&#x27;s ip adapters and return a BVector containing&#xa; a BDdfIpAdapter for each available Ethernet adapter.&#xa; This maybe invoked programmatically from the client-side or the&#xa; server side to arrive at an array of the Jace&#x27;s Ethernet adapters
+</description>
+<tag name="@see">#refreshHostIpAdapters()</tag>
+</field>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.MIN_DYNAMIC_PORT -->
+<field name="MIN_DYNAMIC_PORT"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+According to http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers, this&#xa; is the lowest possible &#x22;dynamic&#x22; port for which no applications are officially allowed&#xa; to reserve.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.comm.BDdfIpCommunicator.MAX_DYNAMIC_PORT -->
+<field name="MAX_DYNAMIC_PORT"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+According to http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers, this&#xa; is the highest possible &#x22;dynamic&#x22; port for which no applications are officially allowed&#xa; to reserve.
+</description>
+</field>
+
+</class>
+</bajadoc>

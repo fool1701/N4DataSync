@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.event.BVideoEvent" name="BVideoEvent" packageName="com.tridium.videoDriver.event" public="true">
+<description>
+In Niagara AX, cameras or other video components could feature the&#xa; notion of field-events (such as motion-detected on an actual camera).&#xa; &#xa; Each possible field-event is modeled as a driver proxy point in the&#xa; Niagara AX framework. The driver proxy ext should declare that it&#xa; implements BIVideoEventSource.&#xa; &#xa; The video system component (such as a camera component) should have a&#xa; special point-device-ext for these events only and be named &#x22;events&#x22;&#xa; or &#x22;alarms&#x22; instead of &#x22;points&#x22; as would be the case for standard&#xa; driver proxy points.&#xa; &#xa; As mentioned, the driver&#x27;s camera event proxy ext should declare that&#xa; it implements BIVideoEventSource.&#xa; &#xa; The driver&#x27;s camera event proxy ext should declare a frozen topic that&#xa; takes an event argument of type BVideoEvent (this class). The camera event&#xa; proxy ext should then return the aforementioned topic from its own &#x27;getVideoEventTopic&#x27; &#xa; method that it will have to define as a result of declaring that it implements&#xa; BIVideoEventSource.&#xa; &#xa; The proxy extension should then poll the camera to determine whether the particular&#xa; field-event is currently occurring (or if the camera driver&#x27;s protocol supports it,&#xa; then the proxy extension can be updated through the driver&#x27;s unsolicited manager&#xa; instead of through polling).&#xa; &#xa; In any case, the camera driver proxy ext should call &#x27;readOk&#x27; on itself and pass the&#xa; corresponding BStatusValue as its parent control point should require. For Boolean&#xa; points (the only type that really makes sense), this should be a BStatusBooelan of&#xa; true to indicate that the event is occurring or false if not.&#xa; &#xa; After this, the driver proxy ext should fire the corresponding, aforementioned&#xa; topic whenever its driver detects that the field-event has occurred (such as&#xa; motion-detected). It should pass an instance of this class to the topic.&#xa; &#xa; Although it is not mandatory, driver&#x27;s are encouraged to extend from devCameraDriver&#xa; for further, more comprehensive support of this functionality.
+</description>
+<tag name="@see">BIVideoEventSource</tag>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<property name="eventType" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoEventTypesEnum"/>
+<description>
+Slot for the &lt;code&gt;eventType&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEventType</tag>
+<tag name="@see">#setEventType</tag>
+</property>
+
+<property name="description" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.&#xa; This is a description of the event as reported by the field-device-camera.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</property>
+
+<property name="timestamp" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; This is the time index of the event as reported by the field-device-camera,&#xa; and converted into a Niagara AX BAbsTime.&#xa; This is displayed in Niagara AX to the user as the event time.
+</description>
+<tag name="@see">#getTimestamp</tag>
+<tag name="@see">#setTimestamp</tag>
+</property>
+
+<property name="isNormal" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isNormal&lt;/code&gt; property.&#xa; Indicates whether the event would be considered &#x27;normal&#x27; or whether&#xa; it would be an event that could generate an &#x27;offnormal&#x27; alarm. A&#xa; value of true indicates that the event is a &#x27;normal&#x27; alarm. A value&#xa; of false indicates that the event is an &#x27;offnormal&#x27; alarm. For example,&#xa; a normal alarm would be a &#x27;motion stopped&#x27; alarm. For example, an&#xa; offnormal alarm would be a &#x27;motion detected&#x27; alarm
+</description>
+<tag name="@see">#getIsNormal</tag>
+<tag name="@see">#setIsNormal</tag>
+</property>
+
+<property name="icon" flags="">
+<type class="javax.baja.sys.BIcon"/>
+<description>
+Slot for the &lt;code&gt;icon&lt;/code&gt; property.&#xa; This icon appears in many locations throughout the video driver framework.&#xa; It allows a driver to choose an icon to graphically illustrate this particular&#xa; alarm.
+</description>
+<tag name="@see">#getIcon</tag>
+<tag name="@see">#setIcon</tag>
+</property>
+
+<property name="metaData" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;metaData&lt;/code&gt; property.&#xa; This allows the driver to store custom information about the event.
+</description>
+<tag name="@see">#getMetaData</tag>
+<tag name="@see">#setMetaData</tag>
+</property>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent() -->
+<constructor name="BVideoEvent" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.getEventType() -->
+<method name="getEventType"  public="true">
+<description>
+Get the &lt;code&gt;eventType&lt;/code&gt; property.
+</description>
+<tag name="@see">#eventType</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoEventTypesEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.setEventType(com.tridium.videoDriver.enums.BVideoEventTypesEnum) -->
+<method name="setEventType"  public="true">
+<description>
+Set the &lt;code&gt;eventType&lt;/code&gt; property.
+</description>
+<tag name="@see">#eventType</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoEventTypesEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.getDescription() -->
+<method name="getDescription"  public="true">
+<description>
+Get the &lt;code&gt;description&lt;/code&gt; property.&#xa; This is a description of the event as reported by the field-device-camera.
+</description>
+<tag name="@see">#description</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.setDescription(java.lang.String) -->
+<method name="setDescription"  public="true">
+<description>
+Set the &lt;code&gt;description&lt;/code&gt; property.&#xa; This is a description of the event as reported by the field-device-camera.
+</description>
+<tag name="@see">#description</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.getTimestamp() -->
+<method name="getTimestamp"  public="true">
+<description>
+Get the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; This is the time index of the event as reported by the field-device-camera,&#xa; and converted into a Niagara AX BAbsTime.&#xa; This is displayed in Niagara AX to the user as the event time.
+</description>
+<tag name="@see">#timestamp</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.setTimestamp(javax.baja.sys.BAbsTime) -->
+<method name="setTimestamp"  public="true">
+<description>
+Set the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; This is the time index of the event as reported by the field-device-camera,&#xa; and converted into a Niagara AX BAbsTime.&#xa; This is displayed in Niagara AX to the user as the event time.
+</description>
+<tag name="@see">#timestamp</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.getIsNormal() -->
+<method name="getIsNormal"  public="true">
+<description>
+Get the &lt;code&gt;isNormal&lt;/code&gt; property.&#xa; Indicates whether the event would be considered &#x27;normal&#x27; or whether&#xa; it would be an event that could generate an &#x27;offnormal&#x27; alarm. A&#xa; value of true indicates that the event is a &#x27;normal&#x27; alarm. A value&#xa; of false indicates that the event is an &#x27;offnormal&#x27; alarm. For example,&#xa; a normal alarm would be a &#x27;motion stopped&#x27; alarm. For example, an&#xa; offnormal alarm would be a &#x27;motion detected&#x27; alarm
+</description>
+<tag name="@see">#isNormal</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.setIsNormal(boolean) -->
+<method name="setIsNormal"  public="true">
+<description>
+Set the &lt;code&gt;isNormal&lt;/code&gt; property.&#xa; Indicates whether the event would be considered &#x27;normal&#x27; or whether&#xa; it would be an event that could generate an &#x27;offnormal&#x27; alarm. A&#xa; value of true indicates that the event is a &#x27;normal&#x27; alarm. A value&#xa; of false indicates that the event is an &#x27;offnormal&#x27; alarm. For example,&#xa; a normal alarm would be a &#x27;motion stopped&#x27; alarm. For example, an&#xa; offnormal alarm would be a &#x27;motion detected&#x27; alarm
+</description>
+<tag name="@see">#isNormal</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the &lt;code&gt;icon&lt;/code&gt; property.&#xa; This icon appears in many locations throughout the video driver framework.&#xa; It allows a driver to choose an icon to graphically illustrate this particular&#xa; alarm.
+</description>
+<tag name="@see">#icon</tag>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.setIcon(javax.baja.sys.BIcon) -->
+<method name="setIcon"  public="true">
+<description>
+Set the &lt;code&gt;icon&lt;/code&gt; property.&#xa; This icon appears in many locations throughout the video driver framework.&#xa; It allows a driver to choose an icon to graphically illustrate this particular&#xa; alarm.
+</description>
+<tag name="@see">#icon</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BIcon"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.getMetaData() -->
+<method name="getMetaData"  public="true">
+<description>
+Get the &lt;code&gt;metaData&lt;/code&gt; property.&#xa; This allows the driver to store custom information about the event.
+</description>
+<tag name="@see">#metaData</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.setMetaData(javax.baja.sys.BFacets) -->
+<method name="setMetaData"  public="true">
+<description>
+Set the &lt;code&gt;metaData&lt;/code&gt; property.&#xa; This allows the driver to store custom information about the event.
+</description>
+<tag name="@see">#metaData</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.makeNoEvent() -->
+<method name="makeNoEvent"  public="true" static="true">
+<description>
+Factory method to create a BVideoEvent whose event type enum is&#xa; BVideoEventTypesEnum.nullEvent, whose description is &#x22;Null Event&#x22;,&#xa; and is considered a &#x27;normal&#x27; event.
+</description>
+<return>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.makeMotionStarted() -->
+<method name="makeMotionStarted"  public="true" static="true">
+<description>
+Factory method to create a BVideoEvent whose event type enum is&#xa; BVideoEventTypesEnum.motionStarted, whose description is &#x22;Motion Started&#x22;,&#xa; and is considered an &#x27;offnormal&#x27; event.
+</description>
+<return>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.makeMotionStopped() -->
+<method name="makeMotionStopped"  public="true" static="true">
+<description>
+Factory method to create a BVideoEvent whose event type enum is&#xa; BVideoStdEventTypesEnum.motionStoppedEvent, whose description is &#x22;Motion Stopped&#x22;,&#xa; and is considered a &#x27;normal&#x27; event.
+</description>
+<return>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.makeEventExpired() -->
+<method name="makeEventExpired"  public="true" static="true">
+<description>
+Factory method to create a BVideoEvent whose event type enum is&#xa; BVideoStdEventTypesEnum.eventExpired, whose description is &#x22;Event Expired&#x22;,&#xa; and is considered a &#x27;normal&#x27; event.
+</description>
+<return>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.makeNormalEvent() -->
+<method name="makeNormalEvent"  public="true" static="true">
+<description>
+Factory method to create an event that is considered a &#x27;normal&#x27;&#xa; event. Note that the event type enum and description will still&#xa; need to be filled in.
+</description>
+<return>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.makeOffNormalEvent() -->
+<method name="makeOffNormalEvent"  public="true" static="true">
+<description>
+Factory method to create an event that is considered an &#x27;offNormal&#x27;&#xa; event. Note that the event type enum and description will still&#xa; need to be filled in.
+</description>
+<return>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description>
+Returns the event type string plus the time stamp string plus the description string, all in one string.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.updateProxyAlarmExt(javax.baja.driver.point.BProxyExt, javax.baja.naming.BOrd) -->
+<method name="updateProxyAlarmExt"  public="true">
+<description>
+A driver&#x27;s video event proxy ext should call this method when it detects&#xa; a video event that can be alarmed if the integrator configures the video&#xa; event point with an Alarm Ext.&#xa; &#xa;  This updates any alarm extensions on the video event proxy&#x27;s parent point.&#xa;  This adds meta data, offnormal text to all such alarm extensions for the&#xa;  video event point.&#xa;  &#xa;  More specifically, the method gets the parent control point for the given&#xa;  proxy extension. This method loops through all BPointExtensions on the &#xa;  parent control point. In the loop, this method calls the &#x27;updateAlarmExt( BProxyExt, BOrd )&#x27;&#xa;  method.&#xa;  &#xa;  See the readOk(BStatusValue) method of the BDdfVideoEventProxyExt class&#xa;  in the devVideoDriver module for a sample implementation of a video event&#xa;  proxy extension that takes advantage of this method. This developer believes&#xa;  that tt should be permissible for Tridium to share this method with any&#xa;  interested developers.
+</description>
+<tag name="@see">#updateAlarmExt(BAlarmSourceExt, BOrd)</tag>
+<tag name="@see">com.tridium.ddfVideo.event.BDdfVideoEventProxyExt#readOk(javax.baja.status.BStatusValue)</tag>
+<parameter name="proxy">
+<type class="javax.baja.driver.point.BProxyExt"/>
+</parameter>
+<parameter name="noLongerUsed">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+<description>
+void but please note that this method updates the metaData and toOffnormalText&#xa;  property values of any alarm extensions that are on the parent point of the given proxy.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.updateAlarmExt(javax.baja.alarm.ext.BAlarmSourceExt, javax.baja.naming.BOrd) -->
+<method name="updateAlarmExt"  protected="true">
+<description>
+This method is called by the &#x27;updateProxyAlarmExt(BProxyExt, BOrd)&#x27; method for each&#xa; BAlarmSoruceExt child extension on the proxy&#x27;s parent point.&#xa; &#xa; If a developer does not like the default functionality, then he or she may extend this&#xa; class and override this method if he or she desires.
+</description>
+<tag name="@see">#updateProxyAlarmExt(BProxyExt, BOrd)</tag>
+<parameter name="proxyAlarmExt">
+<type class="javax.baja.alarm.ext.BAlarmSourceExt"/>
+<description>
+one of the BAlarmSourceExt children of the proxy&#x27;s parent point, found&#xa; during the loop in the &#x27;updateProxyAlarmExt(BProxyExt, BOrd)&#x27; method.
+</description>
+</parameter>
+<parameter name="eventHyperlinkOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the ord of the Camera Device that was passed into the &#x27;updateProxyAlarmExt&#x27;&#xa; method that calls this method.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.updateAlarmExtHyperlinkOrd(javax.baja.alarm.ext.BAlarmSourceExt, javax.baja.naming.BOrd) -->
+<method name="updateAlarmExtHyperlinkOrd"  protected="true">
+<description>
+This method is called by the &#x27;updateAlarmExt(BAlarmSourceExt,BOrd)&#x27; method to update&#xa; the hyperlinkOrd property on the BAlarmSourceExt.&#xa; &#xa; If the given eventHyperlinkOrd is not null and not equal to BOrd.NULL and if the current&#xa; hyperlink ord of the given proxyAlarmExt is not equal to BOrd.NULL then this sets the&#xa; hyperlinkOrd of the given proxyAlarmExt equal to the given eventHyperlinkOrd.
+</description>
+<parameter name="proxyAlarmExt">
+<type class="javax.baja.alarm.ext.BAlarmSourceExt"/>
+<description>
+the BAlarmSourceExt that was passed to the calling method. The calling&#xa; method is &#x27;updateAlarmExt(BAlarmSourceEvet,BOrd)&#x27;, which is in turn called in a loop that&#xa; loops through all point extensions on an event control point.
+</description>
+</parameter>
+<parameter name="eventHyperlinkOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the BOrd that was passed to the calling method. The calling&#xa; method is &#x27;updateAlarmExt(BAlarmSourceEvet,BOrd)&#x27;, which is in turn called in a loop that&#xa; loops through all point extensions on an event control point.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.updateAlarmExtMetaData(javax.baja.alarm.ext.BAlarmSourceExt) -->
+<method name="updateAlarmExtMetaData"  protected="true">
+<description>
+This method is called by the &#x27;updateAlarmExt(BAlarmSourceExt,BOrd)&#x27; method to update&#xa; the metaData property on the BAlarmSourceExt. This is necessary to pass along the information&#xa; about the event that is necessary to reply the video that is stored in the DVR for the camera.
+</description>
+<parameter name="proxyAlarmExt">
+<type class="javax.baja.alarm.ext.BAlarmSourceExt"/>
+<description>
+the BAlarmSourceExt that was passed to the calling method. The calling&#xa; method is &#x27;updateAlarmExt(BAlarmSourceEvet,BOrd)&#x27;, which is in turn called in a loop that&#xa; loops through all point extensions on an event control point.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.makeMetaData() -->
+<method name="makeMetaData"  protected="true">
+<description>
+Makes a set of meta data facets to store the pertinent information for this video event&#xa; in an alarm record.&#xa; &#xa; This method is called by the &#x27;updateAlarmExtMetaData(BAlarmSourceExt)&#x27; method as part&#xa; of the process that updates an event point&#x27;s alarm extensions when an event occurs.
+</description>
+<tag name="@see">#updateAlarmExtMetaData(BAlarmSourceExt)</tag>
+<tag name="@see">#updateProxyAlarmExt(BProxyExt, BOrd)</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+<description>
+a set of BFacets that represents all of the properties on this BVideoEvent.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.eventType -->
+<field name="eventType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;eventType&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEventType</tag>
+<tag name="@see">#setEventType</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.description -->
+<field name="description"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.&#xa; This is a description of the event as reported by the field-device-camera.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.timestamp -->
+<field name="timestamp"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; This is the time index of the event as reported by the field-device-camera,&#xa; and converted into a Niagara AX BAbsTime.&#xa; This is displayed in Niagara AX to the user as the event time.
+</description>
+<tag name="@see">#getTimestamp</tag>
+<tag name="@see">#setTimestamp</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.isNormal -->
+<field name="isNormal"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;isNormal&lt;/code&gt; property.&#xa; Indicates whether the event would be considered &#x27;normal&#x27; or whether&#xa; it would be an event that could generate an &#x27;offnormal&#x27; alarm. A&#xa; value of true indicates that the event is a &#x27;normal&#x27; alarm. A value&#xa; of false indicates that the event is an &#x27;offnormal&#x27; alarm. For example,&#xa; a normal alarm would be a &#x27;motion stopped&#x27; alarm. For example, an&#xa; offnormal alarm would be a &#x27;motion detected&#x27; alarm
+</description>
+<tag name="@see">#getIsNormal</tag>
+<tag name="@see">#setIsNormal</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.icon -->
+<field name="icon"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;icon&lt;/code&gt; property.&#xa; This icon appears in many locations throughout the video driver framework.&#xa; It allows a driver to choose an icon to graphically illustrate this particular&#xa; alarm.
+</description>
+<tag name="@see">#getIcon</tag>
+<tag name="@see">#setIcon</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.metaData -->
+<field name="metaData"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;metaData&lt;/code&gt; property.&#xa; This allows the driver to store custom information about the event.
+</description>
+<tag name="@see">#getMetaData</tag>
+<tag name="@see">#setMetaData</tag>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.FACET_VIDEO_EVENT_TYPE -->
+<field name="FACET_VIDEO_EVENT_TYPE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+This is the facet key for the field from the result of calling makeMetaData() used&#xa; to retrieve the BVideoEventTypeEnum for the particular video event.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.FACET_VIDEO_EVENT_DESCRIPTION -->
+<field name="FACET_VIDEO_EVENT_DESCRIPTION"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+This is the facet key for the field from the result of calling makeMetaData() used&#xa; to retrieve the description String for the particular video event.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.FACET_VIDEO_EVENT_TIMESTAMP -->
+<field name="FACET_VIDEO_EVENT_TIMESTAMP"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+This is the facet key for the field from the result of calling makeMetaData() used&#xa; to retrieve the normalized timestamp for the particular video event.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.event.BVideoEvent.EVENT_TIME_STAMP_TO_STRING_FACETS -->
+<field name="EVENT_TIME_STAMP_TO_STRING_FACETS"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+This instance of BFacets is used as the Context to display the timestamp in various&#xa; text fields throughout the video driver framework.
+</description>
+</field>
+
+</class>
+</bajadoc>

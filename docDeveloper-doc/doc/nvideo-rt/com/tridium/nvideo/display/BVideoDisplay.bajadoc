@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="rt" qualifiedName="com.tridium.nvideo.display.BVideoDisplay" name="BVideoDisplay" packageName="com.tridium.nvideo.display" public="true" abstract="true">
+<description>
+The BVideoDisplay represents a computer screen that displays one&#xa; or more camera feeds.&#xa; &#xa; On the station-side, this class automatically responds to the user&#xa; interface button presses from the client-side (for the joy-stick-like&#xa; camera pan/tilt control)
+</description>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver)</tag>
+<tag name="@creation">25 Jan 2012</tag>
+<extends>
+<type class="com.tridium.nvideo.BVideoDevice"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.camera.control.BIVideoPanTiltControl"/>
+</implements>
+<implements>
+<type class="com.tridium.videoDriver.display.BIVideoDisplay"/>
+</implements>
+<property name="videoDisplayMultistream" flags="">
+<type class="com.tridium.videoDriver.display.BVideoDisplayMultistream"/>
+<description>
+Slot for the &lt;code&gt;videoDisplayMultistream&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVideoDisplayMultistream</tag>
+<tag name="@see">#setVideoDisplayMultistream</tag>
+</property>
+
+<action name="move" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;move&lt;/code&gt; action.&#xa; This action is invoked from the graphical user interface&#xa; as the user presses or holds down a joystick button on the&#xa; pan-tilt-zoom view for Niagara AX.
+</description>
+<tag name="@see">#move(BVideoPanTiltEnum parameter)</tag>
+</action>
+
+<action name="zoom" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;zoom&lt;/code&gt; action.&#xa; This topic is invoked from the graphical user interface&#xa; as the user presses or holds down a zoom button on the&#xa; pan-tilt-zoom view for Niagara AX.
+</description>
+<tag name="@see">#zoom(BVideoZoomEnum parameter)</tag>
+</action>
+
+<action name="makeActiveCamera" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;makeActiveCamera&lt;/code&gt; action.&#xa; The BVideoCamera.makeActive method calls this method on the&#xa; display that the user chooses.
+</description>
+<tag name="@see">#makeActiveCamera(BOrd parameter)</tag>
+</action>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay() -->
+<constructor name="BVideoDisplay" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.getVideoDisplayMultistream() -->
+<method name="getVideoDisplayMultistream"  public="true">
+<description>
+Get the &lt;code&gt;videoDisplayMultistream&lt;/code&gt; property.
+</description>
+<tag name="@see">#videoDisplayMultistream</tag>
+<return>
+<type class="com.tridium.videoDriver.display.BVideoDisplayMultistream"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.setVideoDisplayMultistream(com.tridium.videoDriver.display.BVideoDisplayMultistream) -->
+<method name="setVideoDisplayMultistream"  public="true">
+<description>
+Set the &lt;code&gt;videoDisplayMultistream&lt;/code&gt; property.
+</description>
+<tag name="@see">#videoDisplayMultistream</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.display.BVideoDisplayMultistream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.move(com.tridium.videoDriver.enums.BVideoPanTiltEnum) -->
+<method name="move"  public="true">
+<description>
+Invoke the &lt;code&gt;move&lt;/code&gt; action.&#xa; This action is invoked from the graphical user interface&#xa; as the user presses or holds down a joystick button on the&#xa; pan-tilt-zoom view for Niagara AX.
+</description>
+<tag name="@see">#move</tag>
+<parameter name="parameter">
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.zoom(com.tridium.videoDriver.enums.BVideoZoomEnum) -->
+<method name="zoom"  public="true">
+<description>
+Invoke the &lt;code&gt;zoom&lt;/code&gt; action.&#xa; This topic is invoked from the graphical user interface&#xa; as the user presses or holds down a zoom button on the&#xa; pan-tilt-zoom view for Niagara AX.
+</description>
+<tag name="@see">#zoom</tag>
+<parameter name="parameter">
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.makeActiveCamera(javax.baja.naming.BOrd) -->
+<method name="makeActiveCamera"  public="true">
+<description>
+Invoke the &lt;code&gt;makeActiveCamera&lt;/code&gt; action.&#xa; The BVideoCamera.makeActive method calls this method on the&#xa; display that the user chooses.
+</description>
+<tag name="@see">#makeActiveCamera</tag>
+<parameter name="parameter">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.getLocation() -->
+<method name="getLocation"  public="true">
+<description>
+Looks up the nav tree for the most immediate BVideoLocation&#xa; ancestor
+</description>
+<return>
+<type class="com.tridium.nvideo.display.BVideoLocation"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.getDisplayDeviceExt() -->
+<method name="getDisplayDeviceExt"  public="true">
+<description>
+Looks up the nav tree for the most immediate BDisplayDeviceExt&#xa; ancestor
+</description>
+<return>
+<type class="com.tridium.videoDriver.display.BIVideoDisplayDeviceExt"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.doMove(com.tridium.videoDriver.enums.BVideoPanTiltEnum) -->
+<method name="doMove"  public="true">
+<description>
+This is the default implementation of the &#x27;move&#x27; topic. It&#xa; instantiates a DDF request of the type that is returned by the&#xa; method &#x27;getPanTiltReqType&#x27;, passes the panTiltAction, and a reference&#xa; to the BVideoDisplay, and places the request on the communicator.&#xa; &#xa; This way, the video driver developer only has to define the &#x27;toByteArray&#x27;&#xa; method of the request.
+</description>
+<parameter name="panTiltAction">
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+<description>
+- information about the button that was pressed&#xa; on the user-interface.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.doZoom(com.tridium.videoDriver.enums.BVideoZoomEnum) -->
+<method name="doZoom"  public="true">
+<description>
+This is the default implementation of the &#x27;zoom&#x27; topic. It&#xa; instantiates a DDF request of the type that is returned by the&#xa; method &#x27;getZoomReqType&#x27;, passes the zoomAction, and a reference&#xa; to the BVideoDisplay, and places the request on the communicator.&#xa; &#xa; This way, the video driver developer only has to define the &#x27;toByteArray&#x27;&#xa; method of the request.
+</description>
+<parameter name="zoomAction">
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+<description>
+- information about the button that was pressed&#xa; on the user-interface.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.doMakeActiveCamera(javax.baja.naming.BOrd) -->
+<method name="doMakeActiveCamera"  public="true">
+<description/>
+<parameter name="ordOfActiveCamera">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+from the client-side VM, this will&#xa; have to be a slot path ord but we will store it in the&#xa; activeCamera property as the absolute ord asap.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.getVideoDisplayController() -->
+<method name="getVideoDisplayController"  protected="true" abstract="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.display.VideoDisplayController"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.gotoPlaybackTime(javax.baja.sys.BAbsTime) -->
+<method name="gotoPlaybackTime"  public="true">
+<description/>
+<parameter name="time">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.switchToLayout(java.lang.Object, javax.baja.sys.Context) -->
+<method name="switchToLayout"  public="true">
+<description/>
+<parameter name="layout">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.switchToLayout(com.tridium.videoDriver.display.BIVideoDisplayLayout) -->
+<method name="switchToLayout"  public="true">
+<description/>
+<parameter name="layout">
+<type class="com.tridium.videoDriver.display.BIVideoDisplayLayout"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.mapCamerasToLayout(java.lang.Object, javax.baja.sys.Context) -->
+<method name="mapCamerasToLayout"  public="true">
+<description/>
+<parameter name="arg">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.mapCamerasToLayout(javax.baja.naming.BOrd[], com.tridium.videoDriver.display.BIVideoDisplayLayout) -->
+<method name="mapCamerasToLayout"  public="true">
+<description/>
+<parameter name="cameraOrds">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<parameter name="layout">
+<type class="com.tridium.videoDriver.display.BIVideoDisplayLayout"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.mapCamerasToCurrentLayout(java.lang.Object, javax.baja.sys.Context) -->
+<method name="mapCamerasToCurrentLayout"  public="true">
+<description/>
+<parameter name="ords">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.mapCamerasToCurrentLayout(javax.baja.naming.BOrd[]) -->
+<method name="mapCamerasToCurrentLayout"  public="true">
+<description/>
+<parameter name="cameraOrds">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.getCurrentLayout() -->
+<method name="getCurrentLayout"  public="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.display.BIVideoDisplayLayout"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.NO_MONITOR_FEED -->
+<field name="NO_MONITOR_FEED"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.videoDisplayMultistream -->
+<field name="videoDisplayMultistream"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;videoDisplayMultistream&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVideoDisplayMultistream</tag>
+<tag name="@see">#setVideoDisplayMultistream</tag>
+</field>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.move -->
+<field name="move"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;move&lt;/code&gt; action.&#xa; This action is invoked from the graphical user interface&#xa; as the user presses or holds down a joystick button on the&#xa; pan-tilt-zoom view for Niagara AX.
+</description>
+<tag name="@see">#move(BVideoPanTiltEnum parameter)</tag>
+</field>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.zoom -->
+<field name="zoom"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;zoom&lt;/code&gt; action.&#xa; This topic is invoked from the graphical user interface&#xa; as the user presses or holds down a zoom button on the&#xa; pan-tilt-zoom view for Niagara AX.
+</description>
+<tag name="@see">#zoom(BVideoZoomEnum parameter)</tag>
+</field>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.makeActiveCamera -->
+<field name="makeActiveCamera"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;makeActiveCamera&lt;/code&gt; action.&#xa; The BVideoCamera.makeActive method calls this method on the&#xa; display that the user chooses.
+</description>
+<tag name="@see">#makeActiveCamera(BOrd parameter)</tag>
+</field>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.display.BVideoDisplay.controller -->
+<field name="controller"  protected="true">
+<type class="com.tridium.videoDriver.display.VideoDisplayController"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

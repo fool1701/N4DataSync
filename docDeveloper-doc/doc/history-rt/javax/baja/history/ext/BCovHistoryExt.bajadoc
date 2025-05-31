@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.ext.BCovHistoryExt" name="BCovHistoryExt" packageName="javax.baja.history.ext" public="true" abstract="true">
+<description>
+BCovHistoryExt provides the basic interface needed to collect&#xa; history records on change of the parent point.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">18 Nov 2004</tag>
+<tag name="@version">$Revision: 3$ $Date: 2/9/05 1:20:22 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.history.ext.BHistoryExt"/>
+</extends>
+<!-- javax.baja.history.ext.BCovHistoryExt() -->
+<constructor name="BCovHistoryExt" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.history.ext.BCovHistoryExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BCovHistoryExt.activated(javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime, javax.baja.status.BStatusValue) -->
+<method name="activated"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="startTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="currentTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BCovHistoryExt.deactivated(javax.baja.sys.BAbsTime, javax.baja.status.BStatusValue) -->
+<method name="deactivated"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="currentTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BCovHistoryExt.pointChanged(javax.baja.sys.BAbsTime, javax.baja.status.BStatusValue) -->
+<method name="pointChanged"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="timestamp">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BCovHistoryExt.writeRecord(javax.baja.sys.BAbsTime, javax.baja.status.BStatusValue) -->
+<method name="writeRecord"  protected="true" abstract="true">
+<description>
+Write a record for the specified timestamp and value.
+</description>
+<parameter name="timestamp">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BCovHistoryExt.isChange(javax.baja.status.BStatusValue, javax.baja.status.BStatusValue) -->
+<method name="isChange"  protected="true">
+<description>
+Compare the specified value to see if they are significantly different.
+</description>
+<parameter name="oldValue">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The old value.
+</description>
+</parameter>
+<parameter name="newValue">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The new value.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BCovHistoryExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

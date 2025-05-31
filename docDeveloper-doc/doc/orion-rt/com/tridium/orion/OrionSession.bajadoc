@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.OrionSession" name="OrionSession" packageName="com.tridium.orion" public="true" interface="true" abstract="true" category="interface">
+<description>
+An OrionSession is the interface for interacting with the OrionDatabase.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">26 Sep 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.Context"/>
+</implements>
+<implements>
+<type class="java.lang.AutoCloseable"/>
+</implements>
+<!-- com.tridium.orion.OrionSession.getOrionDatabase() -->
+<method name="getOrionDatabase"  public="true" abstract="true">
+<description>
+Get the space that this session is interacting with.
+</description>
+<return>
+<type class="com.tridium.orion.BOrionDatabase"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.getRdbmsContext() -->
+<method name="getRdbmsContext"  public="true" abstract="true">
+<description>
+Get the RdbmsContext for this session.
+</description>
+<return>
+<type class="javax.baja.rdb.RdbmsContext"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.setAutoCommit(boolean) -->
+<method name="setAutoCommit"  public="true" abstract="true">
+<description>
+Set the auto commit behavior for this session.  If&#xa; false, commit() must be called to commit changes&#xa; for this session.  close() automatically rolls back&#xa; any uncommitted changes.
+</description>
+<parameter name="auto">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.getAutoCommit() -->
+<method name="getAutoCommit"  public="true" abstract="true">
+<description>
+Get the auto commit behavior for this session.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.commit() -->
+<method name="commit"  public="true" abstract="true">
+<description>
+Commit the any changes made with this session.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.rollback() -->
+<method name="rollback"  public="true" abstract="true">
+<description>
+Rollback any changes made since the last commit on&#xa; this session.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.isOpen() -->
+<method name="isOpen"  public="true" abstract="true">
+<description>
+Is this session open?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.close() -->
+<method name="close"  public="true" abstract="true">
+<description>
+Close the session.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.invokeDdl(javax.baja.rdb.ddl.DdlCommand) -->
+<method name="invokeDdl"  public="true" abstract="true">
+<description>
+Invoke a DDL statement that is formatted in the sql&#xa; dialect native to the current OrionSpace.
+</description>
+<parameter name="ddl">
+<type class="javax.baja.rdb.ddl.DdlCommand"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.insert(com.tridium.orion.BIOrionObject) -->
+<method name="insert"  public="true" abstract="true">
+<description>
+Create the specified object.&#xa; The object&#x27;s IDENTITY fields and/or BUuid KEY fields (if any) &#xa; will be populated with new values.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.insert(java.lang.String) -->
+<method name="insert"  public="true" abstract="true">
+<description>
+Invoke an INSERT statement.
+</description>
+<parameter name="sql">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of rows inserted.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.insert(java.lang.String, javax.baja.sys.BSimple[]) -->
+<method name="insert"  public="true" abstract="true">
+<description>
+Invoke a parameterized INSERT statement.
+</description>
+<parameter name="sql">
+<type class="java.lang.String"/>
+<description>
+the parameterized INSERT statement.
+</description>
+</parameter>
+<parameter name="paramValues">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+<description>
+the paramater values to plug in to the parameterized query.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of rows inserted.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.mappedInsert(javax.baja.sys.BObject) -->
+<method name="mappedInsert"  public="true" abstract="true">
+<description>
+Create the specified object in the database by creating a BIMappable&#xa; orion object corresponding to the given object.
+</description>
+<tag name="@see">com.tridium.orion.BIMappable</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+<description>
+the BObject to insert.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.exists(com.tridium.orion.BIOrionObject) -->
+<method name="exists"  public="true" abstract="true">
+<description>
+Test to see if the specified object exists in the database.&#xa; The object&#x27;s current key values are used to read the&#xa; existing object from the database.  The object instance&#xa; passed into the method will not be modified.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the object exists, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.exists(com.tridium.orion.OrionType, com.tridium.orion.sql.PropertyValue[]) -->
+<method name="exists"  public="true" abstract="true">
+<description>
+Test to see if the object uniquely identified by the specified type and property values&#xa; exists in the database.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="propValues">
+<type class="com.tridium.orion.sql.PropertyValue" dimension="1"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the object exists, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.mappedRead(javax.baja.sys.BObject) -->
+<method name="mappedRead"  public="true" abstract="true">
+<description>
+Creates a BIMappable orion object corresponding to the given object and&#xa; reads it out of the database.  The key values will be set from given &#xa; object.
+</description>
+<tag name="@see">com.tridium.orion.BIMappable</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+<description>
+the BObject to read from the database.  They key values&#xa; should already by set to correspond to the record you wish to retreive&#xa; from the database.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the BIOrionObject corresponding to the given object with all its&#xa; non-key values set as they are in the database, or null if the object&#xa; is not in the database.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.read(javax.baja.query.BQuery) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the object specified by the query.
+</description>
+<parameter name="query">
+<type class="javax.baja.query.BQuery"/>
+<description>
+the query.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.read(com.tridium.orion.BIOrionObject) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the specified object by setting all of its&#xa; non-key values.  The object&#x27;s key values &#xa; must already be properly set before calling this method.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object that was passed in, or null if the object&#xa; does not already exist in the database.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.read(com.tridium.orion.OrionType, javax.baja.sys.BSimple) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the object with the specified type and key.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="key">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object, or null if no such object exists.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.read(com.tridium.orion.OrionType, com.tridium.orion.sql.PropertyValue) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the object uniquely identified by the specified type and property value.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="propValue">
+<type class="com.tridium.orion.sql.PropertyValue"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object, or null if no such object exists.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.read(com.tridium.orion.OrionType, com.tridium.orion.sql.PropertyValue[]) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the object uniquely identified by the specified type and property values.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the type of objects that will be read.
+</description>
+</parameter>
+<parameter name="propValues">
+<type class="com.tridium.orion.sql.PropertyValue" dimension="1"/>
+<description>
+the array of property-value pairs that will be AND-ed together to create the query.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object, or null if no such object exists.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.read(com.tridium.orion.OrionType, java.lang.String) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the object uniquely identified by the specified statement.&#xa; The returned object will have the specified type.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="sql">
+<type class="java.lang.String"/>
+<description>
+A SELECT statement.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object, or null if no such object exists.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.read(com.tridium.orion.OrionType, java.lang.String, javax.baja.sys.BSimple[]) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the object uniquely identified by the specified statement and parameters.&#xa; The returned object will have the specified type.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="sql">
+<type class="java.lang.String"/>
+<description>
+A parameterized SELECT statement.
+</description>
+</parameter>
+<parameter name="paramValues">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+<description>
+the paramater values to plug in to the parameterized query.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object, or null if no such object exists.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.update(com.tridium.orion.sql.BSqlUpdate) -->
+<method name="update"  public="true" abstract="true">
+<description>
+Update the database by building SQL from the given update statement.&#xa; &lt;font color=&#x27;red&#x27;&gt;When using this method, none of the objects that are&#xa; updated will receive the &lt;code&gt;beforeUpdate()&lt;/code&gt; or &#xa; &lt;code&gt;afterUpdate()&lt;/code&gt; callbacks.&lt;/font&gt;
+</description>
+<tag name="@see">com.tridium.orion.sql.BSqlUpdate</tag>
+<parameter name="update">
+<type class="com.tridium.orion.sql.BSqlUpdate"/>
+<description>
+the BSqlUpdate to use for the update.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of rows that were updated.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.update(java.lang.String) -->
+<method name="update"  public="true" abstract="true">
+<description>
+Invoke an UPDATE statement.
+</description>
+<parameter name="sql">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of rows updated.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.update(java.lang.String, javax.baja.sys.BSimple[]) -->
+<method name="update"  public="true" abstract="true">
+<description>
+Invoke a parameterized UPDATE statement.
+</description>
+<parameter name="sql">
+<type class="java.lang.String"/>
+<description>
+the parameterized UPDATE statement.
+</description>
+</parameter>
+<parameter name="paramValues">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+<description>
+the paramater values to plug in to the parameterized query.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of rows updated.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.update(com.tridium.orion.BIOrionObject) -->
+<method name="update"  public="true" abstract="true">
+<description>
+Update the specified object&#x27;s non-key properties.&#xa; If none of the object&#x27;s properties have been modified,&#xa; then no update is performed.  This method is essentially &#xa; a convenience for &lt;code&gt;update(object, false)&lt;/code&gt;.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.update(com.tridium.orion.BIOrionObject, boolean) -->
+<method name="update"  public="true" abstract="true">
+<description>
+Update the specified object&#x27;s non-key properties.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object to update.
+</description>
+</parameter>
+<parameter name="forceUpdate">
+<type class="boolean"/>
+<description>
+whether to force an update even&#xa; if none of the object&#x27;s properties have been modified.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.mappedUpdate(javax.baja.sys.BObject) -->
+<method name="mappedUpdate"  public="true" abstract="true">
+<description>
+Updates the database by creating a BIMappable orion object corresponding&#xa; to the given object.
+</description>
+<tag name="@see">com.tridium.orion.BIMappable</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+<description>
+the BObject to be updated in the database.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.persist(com.tridium.orion.BIOrionObject) -->
+<method name="persist"  public="true" abstract="true">
+<description>
+Persist the specified object.  If the object does not already&#xa; exist, it is inserted.  If it does exist, it is updated.&#xa; If the object is inserted, then the object&#x27;s IDENTITY fields &#xa; and/or BUuid KEY fields (if any) will be populated with new values.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.delete(com.tridium.orion.OrionType, javax.baja.query.BExpression) -->
+<method name="delete"  public="true" abstract="true">
+<description>
+Delete all objects from the database for the given type where the given&#xa; condition evaluates to true. &lt;font color=&#x27;red&#x27;&gt;When using this method, none&#xa; of the objects that are deleted will receive the &lt;code&gt;beforeDelete()&lt;/code&gt;&#xa; or &lt;code&gt;afterDelete()&lt;/code&gt; callbacks.&lt;/font&gt;
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the OrionType of the table to delete objects from.
+</description>
+</parameter>
+<parameter name="condition">
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression used to restrict which objects are deleted.&#xa; If condition is null, all objects will be deleted.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of objects that were deleted.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.delete(java.lang.String) -->
+<method name="delete"  public="true" abstract="true">
+<description>
+Invoke a DELETE statement.
+</description>
+<parameter name="sql">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of rows deleted.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.delete(java.lang.String, javax.baja.sys.BSimple[]) -->
+<method name="delete"  public="true" abstract="true">
+<description>
+Invoke a parameterized DELETE statement.
+</description>
+<parameter name="sql">
+<type class="java.lang.String"/>
+<description>
+the parameterized DELETE statement.
+</description>
+</parameter>
+<parameter name="paramValues">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+<description>
+the paramater values to plug in to the parameterized query.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of rows deleted.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.mappedDelete(javax.baja.sys.BObject) -->
+<method name="mappedDelete"  public="true" abstract="true">
+<description>
+Deletes the object from the database by creating a BIMappable orion&#xa; object.
+</description>
+<tag name="@see">com.tridium.orion.BIMappable</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+<description>
+The BObject to delete from the database.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+wheter the object existed in the database.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.delete(com.tridium.orion.BIOrionObject) -->
+<method name="delete"  public="true" abstract="true">
+<description>
+Delete the specified object.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+whether the object existed in the database.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.select(javax.baja.query.BQuery) -->
+<method name="select"  public="true" abstract="true">
+<description>
+Invoke a query.
+</description>
+<parameter name="query">
+<type class="javax.baja.query.BQuery"/>
+<description>
+the query.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionCursor"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.select(com.tridium.orion.OrionType, java.lang.String) -->
+<method name="select"  public="true" abstract="true">
+<description>
+Invoke a SELECT statement.&#xa; Each of the objects created by the cursor&#xa; will have the specified type.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the type of objects that are returned by the cursor.
+</description>
+</parameter>
+<parameter name="sql">
+<type class="java.lang.String"/>
+<description>
+the SELECT statement.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionCursor"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.select(com.tridium.orion.OrionType, java.lang.String, javax.baja.sys.BSimple[]) -->
+<method name="select"  public="true" abstract="true">
+<description>
+Invoke a parameterized SELECT statement.&#xa; Each of the objects created by the cursor&#xa; will have the specified type.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the type of objects that are returned by the cursor.
+</description>
+</parameter>
+<parameter name="sql">
+<type class="java.lang.String"/>
+<description>
+the parameterized SELECT statement.
+</description>
+</parameter>
+<parameter name="paramValues">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+<description>
+the paramater values to plug in to the parameterized query.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionCursor"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.select(com.tridium.orion.OrionType, com.tridium.orion.sql.PropertyValue) -->
+<method name="select"  public="true" abstract="true">
+<description>
+Return a cursor of all instances of the specified type which have&#xa; the specified property value.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the type of objects that are returned by the cursor.
+</description>
+</parameter>
+<parameter name="propValue">
+<type class="com.tridium.orion.sql.PropertyValue"/>
+<description>
+the property-value pair used to create the query.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionCursor"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.select(com.tridium.orion.OrionType, com.tridium.orion.sql.PropertyValue[]) -->
+<method name="select"  public="true" abstract="true">
+<description>
+Return a cursor of all instances of the specified type which have&#xa; the specified property values.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the type of objects that are returned by the cursor.
+</description>
+</parameter>
+<parameter name="propValues">
+<type class="com.tridium.orion.sql.PropertyValue" dimension="1"/>
+<description>
+the array of property-value pairs that will be AND-ed together to create the query.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionCursor"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.scan(com.tridium.orion.OrionType) -->
+<method name="scan"  public="true" abstract="true">
+<description>
+Return a cursor of all instances of the specified type.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the type of objects that are returned by the cursor.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionCursor"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.linkedScan(com.tridium.orion.BIOrionObject, com.tridium.orion.OrionType, com.tridium.orion.OrionType) -->
+<method name="linkedScan"  public="true" abstract="true">
+<description>
+Return a cursor of all those rows from the specified scanType&#xa; that are linked to the specified object via the specified linkType.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+the object whose linked rows we want to retrieve.
+</description>
+</parameter>
+<parameter name="linkType">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the linkage type.
+</description>
+</parameter>
+<parameter name="scanType">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the type that we want to scan.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionCursor"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.batchInsert(com.tridium.orion.OrionType) -->
+<method name="batchInsert"  public="true" abstract="true">
+<description>
+Create a BatchStatement that inserts records of the given type.&#xa; When BatchStatement.execute() is called, each record is &#xa; inserted in the order that it was added to the batch.&#xa; &lt;p&gt;&#xa; Each object will have its IDENTITY fields &#xa; and/or BUuid KEY fields (if any) populated with new values.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BatchStatement"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.batchUpdate(com.tridium.orion.OrionType) -->
+<method name="batchUpdate"  public="true" abstract="true">
+<description>
+Create a BatchStatement that updates records of the given type.&#xa; When BatchStatement.execute() is called, each record is &#xa; updated in the order that it was added to the batch.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BatchStatement"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.batchPersist(com.tridium.orion.OrionType) -->
+<method name="batchPersist"  public="true" abstract="true">
+<description>
+Create a BatchStatement that persists records of the given type.&#xa; For each record, if the object does not already&#xa; exist, it is inserted.  If it does exist, it is updated.&#xa; &lt;p&gt;&#xa; &lt;i&gt;NOTE:&lt;/i&gt; Unlike the other BatchStatement commands, batchPersist&#xa; does not necessarily insert the records in the order that &#xa; they were added to the batch.  For efficiency reasons, &#xa; when BatchStatement.execute() is called,&#xa; all the updates are performed first, and then all the inserts.&#xa; &lt;p&gt;&#xa; Each object that is inserted will have its IDENTITY fields &#xa; and/or BUuid KEY fields (if any) populated with new values.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BatchStatement"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionSession.batchDelete(com.tridium.orion.OrionType) -->
+<method name="batchDelete"  public="true" abstract="true">
+<description>
+Create a BatchStatement that delete records of the given type.&#xa; When BatchStatement.execute() is called, each record is &#xa; deleted in the order that it was added to the batch.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BatchStatement"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

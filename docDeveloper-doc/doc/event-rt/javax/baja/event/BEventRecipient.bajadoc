@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="event" runtimeProfile="rt" qualifiedName="javax.baja.event.BEventRecipient" name="BEventRecipient" packageName="javax.baja.event" public="true" abstract="true">
+<description>
+An extension point for components that need to perform processing upon&#xa; receipt of an event.  Event processing is handled asynchronously by default.&#xa; Once the recipient has processed the incoming event, the &lt;code&gt;event&lt;/code&gt;&#xa; topic is fired.&#xa;&#xa; &lt;p&gt;As an implementation of &lt;code&gt;<see ref="javax.baja.event.BIEventRoutable">BIEventRoutable</see>&lt;/code&gt;, these components can be &#xa; chained to other &lt;code&gt;BEventRoutable&lt;/code&gt; components such as &#xa; &lt;code&gt;<see ref="javax.baja.event.BEventSource">BEventSource</see>&lt;/code&gt;, &lt;code&gt;<see ref="javax.baja.event.BEventService">BEventService</see>&lt;/code&gt;, &lt;code&gt;<see ref="javax.baja.event.BEventFilter">BEventFilter</see>&lt;/code&gt;, and &#xa; other &lt;code&gt;BEventRecipient&lt;/code&gt; instances.&#xa; &#xa; &lt;p&gt;Customized &lt;code&gt;BEventRecipient&lt;/code&gt; objects are intended for event &#xa; related application logic. An example would be logging or auditing the &#xa; occurrence of events:&#xa; &#xa; &lt;pre&gt;&#xa; public void eventReceived(BEvent event)&#xa; {&#xa;   BComponentEvent componentEvent = (BComponentEvent)event.getValue();&#xa;   Log log = Log.getLog(getLogName().format(componentEvent));&#xa;   log.message(&#x22;Card swipe by: &#x22; + componentEvent.getValue().toString() + &#xa;               &#x22; at &#x22; + componentEvent.getSourceComponent().getDisplayName(null));&#xa; }&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">Feb 11</tag>
+<tag name="@version">$Revision: 12$ $Date: 4/11/11 3:48:34 PM EDT$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="javax.baja.event.BEventFilter"/>
+</extends>
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; The operational status of this component.  If true, the recipient is&#xa; processing events.  If false, events are neither processed or passed&#xa; through the filter.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<!-- javax.baja.event.BEventRecipient() -->
+<constructor name="BEventRecipient" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.event.BEventRecipient.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; The operational status of this component.  If true, the recipient is&#xa; processing events.  If false, events are neither processed or passed&#xa; through the filter.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BEventRecipient.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; The operational status of this component.  If true, the recipient is&#xa; processing events.  If false, events are neither processed or passed&#xa; through the filter.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BEventRecipient.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BEventRecipient.eventReceived(javax.baja.event.BEvent) -->
+<method name="eventReceived"  public="true" abstract="true">
+<description>
+The extension point for the processing of events.  Implementors must &#xa; override this method to provide their own application logic.  This callback &#xa; is issued after the check that the component is enabled and that the &#xa; EventSevice is enabled.
+</description>
+<parameter name="event">
+<type class="javax.baja.event.BEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BEventRecipient.doProcess(javax.baja.event.BEvent) -->
+<method name="doProcess"  public="true" final="true">
+<description>
+Implementation of the &lt;code&gt;<see ref="javax.baja.event.BEventFilter#doProcess(javax.baja.event.BEvent)">BEventFilter#doProcess(BEvent)</see>&lt;/code&gt; method that &#xa; enforces the Event Service exists, is operational, and that this component&#xa; is enabled before passing the event to the &lt;code&gt;<see ref="javax.baja.event.BEventRecipient#doProcess(javax.baja.event.BEvent)">#doProcess(BEvent)</see>&lt;/code&gt;&#xa; callback for processing.  After the processing defined by the implementor,&#xa; the &lt;code&gt;event&lt;/code&gt; topic is fired.
+</description>
+<parameter name="event">
+<type class="javax.baja.event.BEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BEventRecipient.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<description>
+&lt;p&gt;<inheritDoc/>&#xa; &#xa; &lt;p&gt;&lt;code&gt;BEventRecipient&lt;/code&gt; overrides the default behavior of &#xa; posting &#x27;process&#x27; actions to a separate thread managed by the event &#xa; service.&#xa; &#xa; &lt;p&gt;Implementors may override this behavior to use another threading model&#xa; if desired.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BEventRecipient.getIcon() -->
+<method name="getIcon"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BEventRecipient.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; The operational status of this component.  If true, the recipient is&#xa; processing events.  If false, events are neither processed or passed&#xa; through the filter.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.event.BEventRecipient.process -->
+<field name="process"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;process&lt;/code&gt; action.&#xa; Override the inherited slot to be asynchronous.
+</description>
+<tag name="@see">#process(BEvent parameter)</tag>
+</field>
+
+<!-- javax.baja.event.BEventRecipient.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

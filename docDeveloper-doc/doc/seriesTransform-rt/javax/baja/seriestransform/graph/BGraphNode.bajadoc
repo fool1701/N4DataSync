@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="seriesTransform" runtimeProfile="rt" qualifiedName="javax.baja.seriestransform.graph.BGraphNode" name="BGraphNode" packageName="javax.baja.seriestransform.graph" public="true" abstract="true">
+<description>
+Base class for all graph nodes.
+</description>
+<tag name="@author">J. Spangler</tag>
+<tag name="@creation">Dec 14, 2010</tag>
+<tag name="@version">1</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<property name="transformInputs" flags="st">
+<type class="javax.baja.seriestransform.graph.BStatusSchema"/>
+<description>
+Slot for the &lt;code&gt;transformInputs&lt;/code&gt; property.&#xa; The link connection for the transformation inputs
+</description>
+<tag name="@see">#getTransformInputs</tag>
+<tag name="@see">#setTransformInputs</tag>
+</property>
+
+<property name="transformOutput" flags="str">
+<type class="javax.baja.seriestransform.graph.BStatusSchema"/>
+<description>
+Slot for the &lt;code&gt;transformOutput&lt;/code&gt; property.&#xa; The link connection for the tranformation output
+</description>
+<tag name="@see">#getTransformOutput</tag>
+<tag name="@see">#setTransformOutput</tag>
+</property>
+
+<property name="status" flags="str">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of graph node is determined by the last attempt to resolve this node.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="faultCause" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Fault cause associated with status of graph node
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<action name="schemaCheck" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;schemaCheck&lt;/code&gt; action.&#xa; This action invokes the abstract doCheckSchema method that must&#xa; be implemented by all graph nodes. If the schema check passes,&#xa; the status of the node is set to OK. If the schema check fails,&#xa; a configuration exception is caught and translated to the fault&#xa; message for the status for this node.
+</description>
+<tag name="@see">#schemaCheck()</tag>
+</action>
+
+<topic name="schemaModified" flags="h">
+<eventType>
+<type class="javax.baja.seriestransform.graph.BSeriesSchema"/>
+</eventType><description>
+Slot for the &lt;code&gt;schemaModified&lt;/code&gt; topic.&#xa; this topic is fired when the schema of this node is modified.&#xa; Interested parties may listen for the topic notification and&#xa; receive as an argument the latest schema of the node.
+</description>
+<tag name="@see">#fireSchemaModified</tag>
+</topic>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode() -->
+<constructor name="BGraphNode" public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+</constructor>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getTransformInputs() -->
+<method name="getTransformInputs"  public="true">
+<description>
+Get the &lt;code&gt;transformInputs&lt;/code&gt; property.&#xa; The link connection for the transformation inputs
+</description>
+<tag name="@see">#transformInputs</tag>
+<return>
+<type class="javax.baja.seriestransform.graph.BStatusSchema"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.setTransformInputs(javax.baja.seriestransform.graph.BStatusSchema) -->
+<method name="setTransformInputs"  public="true">
+<description>
+Set the &lt;code&gt;transformInputs&lt;/code&gt; property.&#xa; The link connection for the transformation inputs
+</description>
+<tag name="@see">#transformInputs</tag>
+<parameter name="v">
+<type class="javax.baja.seriestransform.graph.BStatusSchema"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getTransformOutput() -->
+<method name="getTransformOutput"  public="true">
+<description>
+Get the &lt;code&gt;transformOutput&lt;/code&gt; property.&#xa; The link connection for the tranformation output
+</description>
+<tag name="@see">#transformOutput</tag>
+<return>
+<type class="javax.baja.seriestransform.graph.BStatusSchema"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.setTransformOutput(javax.baja.seriestransform.graph.BStatusSchema) -->
+<method name="setTransformOutput"  public="true">
+<description>
+Set the &lt;code&gt;transformOutput&lt;/code&gt; property.&#xa; The link connection for the tranformation output
+</description>
+<tag name="@see">#transformOutput</tag>
+<parameter name="v">
+<type class="javax.baja.seriestransform.graph.BStatusSchema"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of graph node is determined by the last attempt to resolve this node.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of graph node is determined by the last attempt to resolve this node.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Fault cause associated with status of graph node
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Fault cause associated with status of graph node
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.schemaCheck() -->
+<method name="schemaCheck"  public="true">
+<description>
+Invoke the &lt;code&gt;schemaCheck&lt;/code&gt; action.&#xa; This action invokes the abstract doCheckSchema method that must&#xa; be implemented by all graph nodes. If the schema check passes,&#xa; the status of the node is set to OK. If the schema check fails,&#xa; a configuration exception is caught and translated to the fault&#xa; message for the status for this node.
+</description>
+<tag name="@see">#schemaCheck</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.fireSchemaModified(javax.baja.seriestransform.graph.BSeriesSchema) -->
+<method name="fireSchemaModified"  public="true">
+<description>
+Fire an event for the &lt;code&gt;schemaModified&lt;/code&gt; topic.&#xa; this topic is fired when the schema of this node is modified.&#xa; Interested parties may listen for the topic notification and&#xa; receive as an argument the latest schema of the node.
+</description>
+<tag name="@see">#schemaModified</tag>
+<parameter name="event">
+<type class="javax.baja.seriestransform.graph.BSeriesSchema"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.resolve(javax.baja.seriestransform.graph.QueryParams, javax.baja.naming.BOrd) -->
+<method name="resolve"  public="true" final="true">
+<description>
+The Resolve method is the mechanism used to resolve the graph node&#xa; instance against a data series in order to produce a result set in the&#xa; form of one or more &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; values.&#xa; &lt;p&gt;&#xa; The resolve method is called by the framework when resolving a transform&#xa; ORD. Implementing &lt;code&gt;<see ref="javax.baja.seriestransform.graph.BGraphNode">BGraphNode</see>&lt;/code&gt; instances must implement the &#xa; &lt;code&gt;doResolve&lt;/code&gt; method which is called when this method is&#xa; executed. &#xa; &lt;p&gt;
+</description>
+<parameter name="queryArgs">
+<type class="javax.baja.seriestransform.graph.QueryParams"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.seriestransform.graph.QueryParams">QueryParams</see>&lt;/code&gt; mapping of the query parameters of the &#xa;            transform ORD. This map contains &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; objects that &#xa;            are keyed by String &lt;code&gt;<see ref="javax.baja.naming.SlotPath">SlotPath</see>&lt;/code&gt; values. The slot paths &#xa;            indicate which property slots the parameter values are meant &#xa;            to override.&lt;br&gt;&#xa;            This value may be NULL.
+</description>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.naming.BOrd">BOrd</see>&lt;/code&gt; base to resolve all related ORD values within the&#xa;            graph against.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.seriestransform.BSeriesTransformTable" dimension="1"/>
+<description>
+An array of &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; objects.
+</description>
+</return>
+<throws>
+<type class="javax.baja.seriestransform.exceptions.TransformException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.resolve(javax.baja.seriestransform.graph.QueryParams, javax.baja.naming.BOrd, javax.baja.sys.Context) -->
+<method name="resolve"  public="true" final="true">
+<description>
+The Resolve method is the mechanism used to resolve the graph node&#xa; instance against a data series in order to produce a result set in the&#xa; form of one or more &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; values.&#xa; &lt;p&gt;&#xa; The resolve method is called by the framework when resolving a transform&#xa; ORD. Implementing &lt;code&gt;<see ref="javax.baja.seriestransform.graph.BGraphNode">BGraphNode</see>&lt;/code&gt; instances must implement the &#xa; &lt;code&gt;doResolve&lt;/code&gt; method which is called when this method is&#xa; executed. &#xa; &lt;p&gt;
+</description>
+<parameter name="queryArgs">
+<type class="javax.baja.seriestransform.graph.QueryParams"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.seriestransform.graph.QueryParams">QueryParams</see>&lt;/code&gt; mapping of the query parameters of the &#xa;            transform ORD. This map contains &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; objects that &#xa;            are keyed by String &lt;code&gt;<see ref="javax.baja.naming.SlotPath">SlotPath</see>&lt;/code&gt; values. The slot paths &#xa;            indicate which property slots the parameter values are meant &#xa;            to override.&lt;br&gt;&#xa;            This value may be NULL.
+</description>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.naming.BOrd">BOrd</see>&lt;/code&gt; base to resolve all related ORD values within the&#xa;            graph against.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.sys.Context">Context</see>&lt;/code&gt; containing user information for security checks.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.seriestransform.BSeriesTransformTable" dimension="1"/>
+<description>
+An array of &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; objects.
+</description>
+</return>
+<throws>
+<type class="javax.baja.seriestransform.exceptions.TransformException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.doResolve(javax.baja.seriestransform.BSeriesTransformTable[], javax.baja.seriestransform.graph.GraphNodeParams, javax.baja.naming.BOrd) -->
+<method name="doResolve"  protected="true">
+<description>
+This method resolves the graph node to an array of &#xa; &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; tables. Each table has an implementation&#xa; of the &lt;code&gt;<see ref="javax.baja.sys.Cursor">Cursor</see>&lt;/code&gt; specific to the graph node that it represents.&#xa; &lt;p&gt;&#xa; The doResolve callback requires that the implementing node support graph&#xa; parametrization by substituting values found in the &lt;code&gt;<see ref="javax.baja.seriestransform.graph.GraphNodeParams">GraphNodeParams</see>&lt;/code&gt;&#xa; argument for a given &lt;code&gt;<see ref="javax.baja.sys.Property">Property</see>&lt;/code&gt; slot name for the values that would &#xa; normally be obtained from the &lt;code&gt;<see ref="javax.baja.sys.Property">Property</see>&lt;/code&gt; slot itself. &#xa; &lt;p&gt;&#xa; Consider the following example:&#xa; &lt;pre&gt;&#xa; public &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt;[] doResolve( BSeriesTransformTable[] inputs, GraphArgs args, BOrd base)&#xa; {&#xa;   ...&#xa;   &#xa;   List tables = new LinkedList();&#xa;   &#xa;   BValue dataSourceVal = (BValue)args.get( dataSource.getName());&#xa;   if( null != dataSourceVal )&#xa;      tables.add ( new BSpecialDataTable(this,dataSourceVal);&#xa;   else&#xa;      tables.add ( new BSpecialDataTable(this, getDataSource() );&#xa;      &#xa;   return (BSeriesTransformTable[]) tables.toArray( new BSeriesTransformTable[]{} );&#xa; }&#xa; &lt;/pre&gt;
+</description>
+<parameter name="inputTables">
+<type class="javax.baja.seriestransform.BSeriesTransformTable" dimension="1"/>
+<description>
+- Array of &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; tables that are the&#xa;            data inputs to the graph node. The data from the cursors &#xa;            retrieved from these tables are used as inputs to the transform&#xa;            operation for the cursor implemented in the &#xa;            &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; object[s] returned from this&#xa;            method call.
+</description>
+</parameter>
+<parameter name="args">
+<type class="javax.baja.seriestransform.graph.GraphNodeParams"/>
+<description>
+- Map of runtime graph arguments keyed by the name of the&#xa;            property slot that the associated &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; should be&#xa;            substituted for.
+</description>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+- base &lt;code&gt;<see ref="javax.baja.naming.BOrd">BOrd</see>&lt;/code&gt; to use for resolving relative ORD values.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.seriestransform.BSeriesTransformTable" dimension="1"/>
+<description>
+array of &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; objects
+</description>
+</return>
+<throws>
+<type class="javax.baja.seriestransform.exceptions.TransformException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.doResolve(javax.baja.seriestransform.BSeriesTransformTable[], javax.baja.seriestransform.graph.GraphNodeParams, javax.baja.naming.BOrd, javax.baja.sys.Context) -->
+<method name="doResolve"  protected="true">
+<description>
+This method resolves the graph node to an array of &#xa; &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; tables. Each table has an implementation&#xa; of the &lt;code&gt;<see ref="javax.baja.sys.Cursor">Cursor</see>&lt;/code&gt; specific to the graph node that it represents.&#xa; &lt;p&gt;&#xa; The doResolve callback requires that the implementing node support graph&#xa; parametrization by substituting values found in the &lt;code&gt;<see ref="javax.baja.seriestransform.graph.GraphNodeParams">GraphNodeParams</see>&lt;/code&gt;&#xa; argument for a given &lt;code&gt;<see ref="javax.baja.sys.Property">Property</see>&lt;/code&gt; slot name for the values that would &#xa; normally be obtained from the &lt;code&gt;<see ref="javax.baja.sys.Property">Property</see>&lt;/code&gt; slot itself. &#xa; &lt;p&gt;&#xa; Consider the following example:&#xa; &lt;pre&gt;&#xa; public &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt;[] doResolve( BSeriesTransformTable[] inputs, GraphArgs args, BOrd base)&#xa; {&#xa;   ...&#xa;   &#xa;   List tables = new LinkedList();&#xa;   &#xa;   BValue dataSourceVal = (BValue)args.get( dataSource.getName());&#xa;   if( null != dataSourceVal )&#xa;      tables.add ( new BSpecialDataTable(this,dataSourceVal);&#xa;   else&#xa;      tables.add ( new BSpecialDataTable(this, getDataSource() );&#xa;      &#xa;   return (BSeriesTransformTable[]) tables.toArray( new BSeriesTransformTable[]{} );&#xa; }&#xa; &lt;/pre&gt;
+</description>
+<parameter name="inputTables">
+<type class="javax.baja.seriestransform.BSeriesTransformTable" dimension="1"/>
+<description>
+- Array of &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; tables that are the&#xa;            data inputs to the graph node. The data from the cursors &#xa;            retrieved from these tables are used as inputs to the transform&#xa;            operation for the cursor implemented in the &#xa;            &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; object[s] returned from this&#xa;            method call.
+</description>
+</parameter>
+<parameter name="args">
+<type class="javax.baja.seriestransform.graph.GraphNodeParams"/>
+<description>
+- Map of runtime graph arguments keyed by the name of the&#xa;            property slot that the associated &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; should be&#xa;            substituted for.
+</description>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+- base &lt;code&gt;<see ref="javax.baja.naming.BOrd">BOrd</see>&lt;/code&gt; to use for resolving relative ORD values.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.sys.Context">Context</see>&lt;/code&gt; containing user information for permissions checks.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.seriestransform.BSeriesTransformTable" dimension="1"/>
+<description>
+array of &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt; objects
+</description>
+</return>
+<throws>
+<type class="javax.baja.seriestransform.exceptions.TransformException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.doGetSchema() -->
+<method name="doGetSchema"  public="true" abstract="true">
+<description>
+This method returns a &lt;code&gt;<see ref="javax.baja.seriestransform.graph.BSeriesSchema">BSeriesSchema</see>&lt;/code&gt; for this node.
+</description>
+<return>
+<type class="javax.baja.seriestransform.graph.BSeriesSchema"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.seriestransform.graph.BSeriesSchema">BSeriesSchema</see>&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getSchema() -->
+<method name="getSchema"  public="true" final="true">
+<description>
+Get the schema for this node
+</description>
+<return>
+<type class="javax.baja.seriestransform.graph.BSeriesSchema"/>
+<description>
+BSeriesSchema for this node
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getSchemaRpc(java.lang.Object, javax.baja.sys.Context) -->
+<method name="getSchemaRpc"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="javax.baja.rpc.NiagaraRpc"/>
+<elementValue name="transports">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.rpc.Transport"/>
+<elementValue name="type">
+<annotationValue kind="enum">
+<enumField name="fox"/>
+<type class="javax.baja.rpc.TransportType"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+<elementValue name="permissions">
+<annotationValue kind="expr">
+<expression>&#x22;r&#x22;</expression>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="arg">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.seriestransform.graph.BSeriesSchema"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.doCheckSchema() -->
+<method name="doCheckSchema"  public="true" abstract="true">
+<description>
+This method is called when an input node to this graph node has&#xa; its schema modified. This provides the node implementation the opportunity&#xa; to confirm that the input schema of the node agrees with the configuration&#xa; of the node. If the configuration is incorrect, this method should throw&#xa; a &lt;code&gt;<see ref="javax.baja.seriestransform.exceptions.ConfigException">ConfigException</see>&lt;/code&gt; with a message indicating the fault cause of&#xa; the configuration exception.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.seriestransform.exceptions.ConfigException"/>
+<description>
+- thrown when design time input schema disagrees with the node&#xa;            configuration.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.doSchemaCheck() -->
+<method name="doSchemaCheck"  public="true" final="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+This action performs a schema check against the configuration of this node.&#xa; If the schema check passes, the status of the node is set to OK. If the&#xa; schema check fails, a configuration exception is caught and translated&#xa; to the fault message for the status for this node.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getSources() -->
+<method name="getSources"  public="true" final="true">
+<description>
+This method returns a list of &lt;code&gt;<see ref="javax.baja.seriestransform.graph.BGraphNode">BGraphNode</see>&lt;/code&gt; objects that serve&#xa; as inputs for this node instance.
+</description>
+<return>
+<type class="javax.baja.seriestransform.graph.BGraphNode" dimension="1"/>
+<description>
+list of &lt;code&gt;<see ref="javax.baja.seriestransform.graph.BGraphNode">BGraphNode</see>&lt;/code&gt; objects.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getSrcFieldNames() -->
+<method name="getSrcFieldNames"  public="true" final="true">
+<description>
+This method returns a String Set of fully qualified input field names&#xa; for this node. Field names use the following format:&#xa;&#xa; &lt;code&gt;SourceNode.fieldName&lt;/code&gt;&#xa;&#xa; This function does not return the timestamp field.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+String array of unique source field names
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.markFault(java.lang.String) -->
+<method name="markFault"  public="true" final="true">
+<description>
+This method marks the current graph node as having a Fault state&#xa; and uses the given fault message as the fault text. This should be&#xa; reserved for configuration faults, indicating that the graph node&#xa; implementation is improperly configured by the end user.
+</description>
+<parameter name="fault">
+<type class="java.lang.String"/>
+<description>
+- String fault message to set as the fault status for the &#xa;            node state.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.clearFault() -->
+<method name="clearFault"  public="true" final="true">
+<description>
+This method clears the current fault state of the graph node.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.isChildLegal(javax.baja.sys.BComponent) -->
+<method name="isChildLegal"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="child">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is the specified parent a legal parent for this component.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.getIllegalChildTypes() -->
+<method name="getIllegalChildTypes"  public="true" final="true">
+<description>
+This method provides the list of types that this graph node may not&#xa; parent. By default, a graph node does not allow the parenting of any &#xa; child BGraphNodes.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo" dimension="1"/>
+<description>
+Array of &lt;code&gt;<see ref="javax.baja.registry.TypeInfo">TypeInfo</see>&lt;/code&gt; objects denoting which types to prevent&#xa;         from parenting.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.setIllegalChildTypes(javax.baja.registry.TypeInfo[]) -->
+<method name="setIllegalChildTypes"  public="true" final="true">
+<description>
+Set the list of types that this graph node may not parent.
+</description>
+<parameter name="types">
+<type class="javax.baja.registry.TypeInfo" dimension="1"/>
+<description>
+- array of &lt;code&gt;<see ref="javax.baja.registry.TypeInfo">TypeInfo</see>&lt;/code&gt; objects.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.doCheckLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="doCheckLink"  protected="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.LinkCheck"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.transformInputs -->
+<field name="transformInputs"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;transformInputs&lt;/code&gt; property.&#xa; The link connection for the transformation inputs
+</description>
+<tag name="@see">#getTransformInputs</tag>
+<tag name="@see">#setTransformInputs</tag>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.transformOutput -->
+<field name="transformOutput"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;transformOutput&lt;/code&gt; property.&#xa; The link connection for the tranformation output
+</description>
+<tag name="@see">#getTransformOutput</tag>
+<tag name="@see">#setTransformOutput</tag>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of graph node is determined by the last attempt to resolve this node.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Fault cause associated with status of graph node
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.schemaCheck -->
+<field name="schemaCheck"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;schemaCheck&lt;/code&gt; action.&#xa; This action invokes the abstract doCheckSchema method that must&#xa; be implemented by all graph nodes. If the schema check passes,&#xa; the status of the node is set to OK. If the schema check fails,&#xa; a configuration exception is caught and translated to the fault&#xa; message for the status for this node.
+</description>
+<tag name="@see">#schemaCheck()</tag>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.schemaModified -->
+<field name="schemaModified"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;schemaModified&lt;/code&gt; topic.&#xa; this topic is fired when the schema of this node is modified.&#xa; Interested parties may listen for the topic notification and&#xa; receive as an argument the latest schema of the node.
+</description>
+<tag name="@see">#fireSchemaModified</tag>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.lex -->
+<field name="lex"  protected="true" static="true" final="true">
+<type class="javax.baja.util.Lexicon"/>
+<description/>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.SCHEMA_FAULT_INVALID_FIELD -->
+<field name="SCHEMA_FAULT_INVALID_FIELD"  protected="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.SCHEMA_FAULT_INVALID_TYPE -->
+<field name="SCHEMA_FAULT_INVALID_TYPE"  protected="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.SCHEMA_FAULT_UNMATCHED_FIELD -->
+<field name="SCHEMA_FAULT_UNMATCHED_FIELD"  protected="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BGraphNode.SCHEMA_FAULT_NO_SOURCES -->
+<field name="SCHEMA_FAULT_NO_SOURCES"  protected="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

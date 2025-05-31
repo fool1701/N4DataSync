@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="email" runtimeProfile="rt" qualifiedName="javax.baja.email.BEmailClientAuthenticator" name="BEmailClientAuthenticator" packageName="javax.baja.email" public="true" abstract="true">
+<description>
+This is the base class for different email authentication types.&#xa; &lt;p&gt;&#xa; Concrete implementations should handle getting the authentication information they&#xa; need from the user (e.g. via properties), and setting the appropriate Java Mail properties.&#xa; &lt;p&gt;&#xa; Subclass intended for use with a BOutgoingAccount should implement BIOutgoingAccountClientAuthenticator.&#xa; Subclass intended for use with a BIncomingAccount should implement BIIncomingAccountClientAuthenticator.
+</description>
+<tag name="@author">Melanie Coggan on 22-05-02</tag>
+<tag name="@since">Niagara 4.13</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<implements>
+<type class="javax.baja.util.BTypeConfig$IConfigurable"/>
+</implements>
+<!-- javax.baja.email.BEmailClientAuthenticator() -->
+<constructor name="BEmailClientAuthenticator" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.setOutgoingAuthenticationProperties(java.util.Properties) -->
+<method name="setOutgoingAuthenticationProperties"  public="true" abstract="true">
+<description>
+Sets any Java Mail properties required for this authentication type for an outgoing session&#xa; (i.e. smtp).
+</description>
+<parameter name="properties">
+<type class="java.util.Properties"/>
+<description>
+The Properties object that will be used to initiate the mail session.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.setIncomingAuthenticationProperties(java.util.Properties, java.lang.String) -->
+<method name="setIncomingAuthenticationProperties"  public="true" abstract="true">
+<description>
+Sets any Java Mail properties required for this authentication type for an incoming session&#xa; (e.g. imap, pop3)).
+</description>
+<parameter name="properties">
+<type class="java.util.Properties"/>
+<description>
+The Properties object that will be used to initiate the mail session.
+</description>
+</parameter>
+<parameter name="storeType">
+<type class="java.lang.String"/>
+<description>
+The store type we are connecting to (imap, pop3)
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.getAuthenticator() -->
+<method name="getAuthenticator"  public="true">
+<description>
+Subclasses may override this method to return an &lt;code&gt;<see ref="javax.mail.Authenticator">Authenticator</see>&lt;/code&gt; to use during authentication.&#xa; This will be used when creating the session via Session.getInstance(Properties props, Authenticator auth).&#xa;&#xa; Returns null by default.
+</description>
+<return>
+<type class="javax.mail.Authenticator"/>
+<description>
+An Authenticator that will be used to authenticate to the email server.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.connectOutgoingSession(javax.mail.Transport) -->
+<method name="connectOutgoingSession"  public="true" abstract="true">
+<description>
+Initiate the outgoing connection on the &lt;code&gt;<see ref="javax.mail.Transport">Transport</see>&lt;/code&gt;.&#xa;&#xa; Subclasses should call a &lt;code&gt;<see ref="javax.mail.Transport#connect()">Transport#connect()</see>&lt;/code&gt; method appropriate&#xa; to this authentication type.
+</description>
+<parameter name="transport">
+<type class="javax.mail.Transport"/>
+<description>
+The Transport that contains all the authentication information.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.mail.MessagingException"/>
+<description>
+if the connection was not successful.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.connectIncomingSession(javax.mail.Store, java.lang.String) -->
+<method name="connectIncomingSession"  public="true" abstract="true">
+<description>
+Initiate the incoming connection on the &lt;code&gt;<see ref="javax.mail.Store">Store</see>&lt;/code&gt;.&#xa; &lt;p&gt;&#xa; Subclasses should call a &lt;code&gt;<see ref="javax.mail.Store#connect()">Store#connect()</see>&lt;/code&gt; method appropriate&#xa; to this authentication type.
+</description>
+<parameter name="messageStore">
+<type class="javax.mail.Store"/>
+<description>
+The Store that contains all the authentication information.
+</description>
+</parameter>
+<parameter name="storeType">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.mail.MessagingException"/>
+<description>
+if the connection was not successful.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.listConfig() -->
+<method name="listConfig"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the list of String keys for the configurable properties.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+an array of Strings of the keys for the configurable properties.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.getConfig(java.lang.String) -->
+<method name="getConfig"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a configurable property by its string key.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.getConfigFacets(java.lang.String) -->
+<method name="getConfigFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a facets for a configurable property.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.setConfig(java.lang.String, javax.baja.sys.BValue) -->
+<method name="setConfig"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set a configurable property by its string key.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailClientAuthenticator.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

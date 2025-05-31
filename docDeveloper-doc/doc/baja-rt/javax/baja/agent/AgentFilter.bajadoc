@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.agent.AgentFilter" name="AgentFilter" packageName="javax.baja.agent" public="true" abstract="true">
+<description>
+AgentFilter is used to filter an AgentList.  It also&#xa; provides factory methods for common agent filtering&#xa; functions.
+</description>
+<tag name="@author">Brian Frank on 23 Dec 02</tag>
+<tag name="@version">$Revision: 3$ $Date: 5/12/04 4:11:16 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.agent.AgentFilter() -->
+<constructor name="AgentFilter" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.agent.AgentFilter.include(javax.baja.agent.AgentInfo) -->
+<method name="include"  public="true" abstract="true">
+<description>
+Should the specified agent be included in &#xa; the filtered agent list.
+</description>
+<parameter name="agent">
+<type class="javax.baja.agent.AgentInfo"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.is(java.lang.String) -->
+<method name="is"  public="true" static="true">
+<description>
+Make a filter for the specified agent type.
+</description>
+<parameter name="agentTypeSpec">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.is(javax.baja.sys.Type) -->
+<method name="is"  public="true" static="true">
+<description>
+Make a filter for the specified agent type.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.is(javax.baja.registry.TypeInfo) -->
+<method name="is"  public="true" static="true">
+<description>
+Make a filter for the specified agent type.
+</description>
+<parameter name="typeInfo">
+<type class="javax.baja.registry.TypeInfo"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.not(javax.baja.agent.AgentFilter) -->
+<method name="not"  public="true" static="true">
+<description>
+Make a filter for negating the specified filter
+</description>
+<tag name="@since">Niagara 3.8</tag>
+<parameter name="filter">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.has(javax.baja.security.BPermissions) -->
+<method name="has"  public="true" static="true">
+<description>
+Create a filter which only includes types for which&#xa; &lt;code&gt;permissions.has(agentInfo.requiredPermissions)&lt;/code&gt;
+</description>
+<parameter name="permissions">
+<type class="javax.baja.security.BPermissions"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.and(javax.baja.agent.AgentFilter, javax.baja.agent.AgentFilter) -->
+<method name="and"  public="true" static="true">
+<description>
+Create a compound filter which performs an AND on &#xa; the two specified agent filters.
+</description>
+<parameter name="f1">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="f2">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.and(javax.baja.agent.AgentFilter, javax.baja.security.BPermissions) -->
+<method name="and"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;and(filter, has(permissions))&lt;/code&gt;.
+</description>
+<parameter name="filter">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="permissions">
+<type class="javax.baja.security.BPermissions"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.or(javax.baja.agent.AgentFilter, javax.baja.agent.AgentFilter) -->
+<method name="or"  public="true" static="true">
+<description>
+Create a compound filter which performs an OR on &#xa; the two specified agent filters.
+</description>
+<parameter name="f1">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="f2">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.or(javax.baja.agent.AgentFilter, javax.baja.agent.AgentFilter, javax.baja.agent.AgentFilter) -->
+<method name="or"  public="true" static="true">
+<description>
+Create a compound filter which performs an OR on &#xa; the three specified agent filters.
+</description>
+<parameter name="f1">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="f2">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="f3">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.or(javax.baja.agent.AgentFilter, javax.baja.agent.AgentFilter, javax.baja.agent.AgentFilter, javax.baja.agent.AgentFilter) -->
+<method name="or"  public="true" static="true">
+<description>
+Create a compound filter which performs an OR on &#xa; the four specified agent filters.
+</description>
+<parameter name="f1">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="f2">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="f3">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<parameter name="f4">
+<type class="javax.baja.agent.AgentFilter"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.toPredicate() -->
+<method name="toPredicate"  public="true">
+<description>
+Returns this filter as a Predicate object.
+</description>
+<tag name="@since">Niagara 4.0.</tag>
+<return>
+<parameterizedType class="java.util.function.Predicate">
+<args>
+<type class="javax.baja.agent.AgentInfo"/>
+</args>
+</parameterizedType>
+<description>
+A Predicate that wraps an AgentFilter.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.agent.AgentFilter.all -->
+<field name="all"  public="true" static="true" final="true">
+<type class="javax.baja.agent.AgentFilter"/>
+<description>
+An Agent Filter that doesn&#x27;t filter anything.
+</description>
+</field>
+
+</class>
+</bajadoc>

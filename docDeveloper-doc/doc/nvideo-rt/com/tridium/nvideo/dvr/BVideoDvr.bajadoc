@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="rt" qualifiedName="com.tridium.nvideo.dvr.BVideoDvr" name="BVideoDvr" packageName="com.tridium.nvideo.dvr" public="true" abstract="true">
+<description>
+BVideoDvr is a sophisticated device that represents a piece of equipment&#xa; that consists of interconnected cameras and displays.
+</description>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver) on 25 Jan 2012</tag>
+<extends>
+<type class="com.tridium.nvideo.BVideoDevice"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.dvr.BIVideoDvr"/>
+</implements>
+<implements>
+<type class="com.tridium.videoDriver.videoStream.BIVideoMultistreamServer"/>
+</implements>
+<property name="monitor" flags="">
+<type class="javax.baja.driver.ping.BPingMonitor"/>
+<description>
+Slot for the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each camera&#xa; to monitor communication health.
+</description>
+<tag name="@see">#getMonitor</tag>
+<tag name="@see">#setMonitor</tag>
+</property>
+
+<property name="address" flags="">
+<type class="com.tridium.ndriver.datatypes.BAddress"/>
+<description>
+Slot for the &lt;code&gt;address&lt;/code&gt; property.&#xa; Descendants should override this property and define it with a default value&#xa; That extends BAddress. This is the dvr device&#x27;s address on its field bus.
+</description>
+<tag name="@see">#getAddress</tag>
+<tag name="@see">#setAddress</tag>
+</property>
+
+<property name="foxVideoStreamPreferred" flags="">
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+<description>
+Slot for the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; Indicates the Fox Stream setting for any video cameras under this DVR whose Fox Stream setting is &#x27;Inherit&#x27;
+</description>
+<tag name="@see">#getFoxVideoStreamPreferred</tag>
+<tag name="@see">#setFoxVideoStreamPreferred</tag>
+</property>
+
+<property name="multistreamPreferences" flags="">
+<type class="com.tridium.nvideo.camera.BVideoSourcePreferences"/>
+<description>
+Slot for the &lt;code&gt;multistreamPreferences&lt;/code&gt; property.&#xa; These are the default preferences that apply whenever the Niagara AX video&#xa; framework requests a video stream from the Dvr where the video stream contains&#xa; video frames for more than one video camera.
+</description>
+<tag name="@see">#getMultistreamPreferences</tag>
+<tag name="@see">#setMultistreamPreferences</tag>
+</property>
+
+<property name="displays" flags="">
+<type class="com.tridium.nvideo.display.BDisplayDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;displays&lt;/code&gt; property.&#xa; This extension is used to manage video displays.
+</description>
+<tag name="@see">#getDisplays</tag>
+<tag name="@see">#setDisplays</tag>
+</property>
+
+<property name="cameras" flags="">
+<type class="com.tridium.nvideo.camera.BCameraDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;cameras&lt;/code&gt; property.&#xa; This extension is used to manage video camera.
+</description>
+<tag name="@see">#getCameras</tag>
+<tag name="@see">#setCameras</tag>
+</property>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr() -->
+<constructor name="BVideoDvr" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getMonitor() -->
+<method name="getMonitor"  public="true">
+<description>
+Get the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each camera&#xa; to monitor communication health.
+</description>
+<tag name="@see">#monitor</tag>
+<return>
+<type class="javax.baja.driver.ping.BPingMonitor"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.setMonitor(javax.baja.driver.ping.BPingMonitor) -->
+<method name="setMonitor"  public="true">
+<description>
+Set the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each camera&#xa; to monitor communication health.
+</description>
+<tag name="@see">#monitor</tag>
+<parameter name="v">
+<type class="javax.baja.driver.ping.BPingMonitor"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getAddress() -->
+<method name="getAddress"  public="true">
+<description>
+Get the &lt;code&gt;address&lt;/code&gt; property.&#xa; Descendants should override this property and define it with a default value&#xa; That extends BAddress. This is the dvr device&#x27;s address on its field bus.
+</description>
+<tag name="@see">#address</tag>
+<return>
+<type class="com.tridium.ndriver.datatypes.BAddress"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.setAddress(com.tridium.ndriver.datatypes.BAddress) -->
+<method name="setAddress"  public="true">
+<description>
+Set the &lt;code&gt;address&lt;/code&gt; property.&#xa; Descendants should override this property and define it with a default value&#xa; That extends BAddress. This is the dvr device&#x27;s address on its field bus.
+</description>
+<tag name="@see">#address</tag>
+<parameter name="v">
+<type class="com.tridium.ndriver.datatypes.BAddress"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getFoxVideoStreamPreferred() -->
+<method name="getFoxVideoStreamPreferred"  public="true">
+<description>
+Get the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; Indicates the Fox Stream setting for any video cameras under this DVR whose Fox Stream setting is &#x27;Inherit&#x27;
+</description>
+<tag name="@see">#foxVideoStreamPreferred</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.setFoxVideoStreamPreferred(com.tridium.videoDriver.enums.BFoxVideoStreamEnum) -->
+<method name="setFoxVideoStreamPreferred"  public="true">
+<description>
+Set the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; Indicates the Fox Stream setting for any video cameras under this DVR whose Fox Stream setting is &#x27;Inherit&#x27;
+</description>
+<tag name="@see">#foxVideoStreamPreferred</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getMultistreamPreferences() -->
+<method name="getMultistreamPreferences"  public="true">
+<description>
+Get the &lt;code&gt;multistreamPreferences&lt;/code&gt; property.&#xa; These are the default preferences that apply whenever the Niagara AX video&#xa; framework requests a video stream from the Dvr where the video stream contains&#xa; video frames for more than one video camera.
+</description>
+<tag name="@see">#multistreamPreferences</tag>
+<return>
+<type class="com.tridium.nvideo.camera.BVideoSourcePreferences"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.setMultistreamPreferences(com.tridium.nvideo.camera.BVideoSourcePreferences) -->
+<method name="setMultistreamPreferences"  public="true">
+<description>
+Set the &lt;code&gt;multistreamPreferences&lt;/code&gt; property.&#xa; These are the default preferences that apply whenever the Niagara AX video&#xa; framework requests a video stream from the Dvr where the video stream contains&#xa; video frames for more than one video camera.
+</description>
+<tag name="@see">#multistreamPreferences</tag>
+<parameter name="v">
+<type class="com.tridium.nvideo.camera.BVideoSourcePreferences"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getDisplays() -->
+<method name="getDisplays"  public="true">
+<description>
+Get the &lt;code&gt;displays&lt;/code&gt; property.&#xa; This extension is used to manage video displays.
+</description>
+<tag name="@see">#displays</tag>
+<return>
+<type class="com.tridium.nvideo.display.BDisplayDeviceExt"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.setDisplays(com.tridium.nvideo.display.BDisplayDeviceExt) -->
+<method name="setDisplays"  public="true">
+<description>
+Set the &lt;code&gt;displays&lt;/code&gt; property.&#xa; This extension is used to manage video displays.
+</description>
+<tag name="@see">#displays</tag>
+<parameter name="v">
+<type class="com.tridium.nvideo.display.BDisplayDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getCameras() -->
+<method name="getCameras"  public="true">
+<description>
+Get the &lt;code&gt;cameras&lt;/code&gt; property.&#xa; This extension is used to manage video camera.
+</description>
+<tag name="@see">#cameras</tag>
+<return>
+<type class="com.tridium.nvideo.camera.BCameraDeviceExt"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.setCameras(com.tridium.nvideo.camera.BCameraDeviceExt) -->
+<method name="setCameras"  public="true">
+<description>
+Set the &lt;code&gt;cameras&lt;/code&gt; property.&#xa; This extension is used to manage video camera.
+</description>
+<tag name="@see">#cameras</tag>
+<parameter name="v">
+<type class="com.tridium.nvideo.camera.BCameraDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.started() -->
+<method name="started"  public="true" final="true">
+<description>
+Descendant classes are not allowed to override this method directly.&#xa; However, this method calls &lt;code&gt;<see ref="com.tridium.nvideo.dvr.BVideoDvr#videoDvrStarted()">#videoDvrStarted()</see>&lt;/code&gt;, which may&#xa; be overridden.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.videoDvrStarted() -->
+<method name="videoDvrStarted"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getVideoDisplayType() -->
+<method name="getVideoDisplayType"  public="true">
+<description>
+Circumvents the need for drivers that extend from this to implement&#xa; video displays. Drivers are free to override this and return their&#xa; video display type if the driver wishes to define a video display.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getVideoRecordingServerType() -->
+<method name="getVideoRecordingServerType"  public="true">
+<description>
+Circumvents the need for drivers that extend from this to implement&#xa; video recording server. Drivers are free to override this and return their&#xa; video recording server type if the driver wishes to define a video recording server.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getCameraExt() -->
+<method name="getCameraExt"  public="true">
+<description>
+Returns the BCameraDeviceExt value of the &#x27;cameras&#x27; property.
+</description>
+<return>
+<type class="com.tridium.videoDriver.camera.BIVideoCameraDeviceExt"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getDisplayExt() -->
+<method name="getDisplayExt"  public="true">
+<description>
+Returns the BDisplayDeviceExt value of the &#x27;displays&#x27; property.
+</description>
+<return>
+<type class="com.tridium.videoDriver.display.BIVideoDisplayDeviceExt"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getDvrDescription() -->
+<method name="getDvrDescription"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.supportsPlaybackControl() -->
+<method name="supportsPlaybackControl"  public="true">
+<description>
+Indicates whether the particular BIVideoSource object supports&#xa; playback control. When we say &#x27;Playback Control&#x27;, we mean ffwrd,&#xa; rew, stop, pause, etc.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.isTimestampPreferred() -->
+<method name="isTimestampPreferred"  public="true">
+<description>
+Indicates whether it is preferred to display the timestamp that&#xa; corresponds to each video frame. This is passed to the BIVideoPlayer&#xa; that displays the video.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getInterframeTimeout() -->
+<method name="getInterframeTimeout"  public="true">
+<description>
+This is the maximum amount of time permitted to elapse in between frames.&#xa; &#xa; A video stream that takes longer than this amount of time to retrieve a&#xa; video frame will be considered in need of being re-established.
+</description>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getVideoNetwork() -->
+<method name="getVideoNetwork"  public="true">
+<description>
+Gets the parent that implements BIVideoNetwork.
+</description>
+<return>
+<type class="com.tridium.videoDriver.BIVideoNetwork"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.recurseFoxVideoStreamPreferredToNet() -->
+<method name="recurseFoxVideoStreamPreferredToNet"  protected="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.isFoxVideoStreamPreferred() -->
+<method name="isFoxVideoStreamPreferred"  public="true">
+<description>
+Indicates whether it is preferred to first stream the video from the video&#xa; device to the Niagara AX station. From there, the video stream would be&#xa; forwarded through the Niagara AX fox connection to the Workbench.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true for the driver to hook into the video stream on the station&#xa; side and subsequently forward the video stream to the Workbench through&#xa; the existing fox connection. Or return false for the graphical user&#xa; interface to receive the video stream directly from the
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getFoxVideoStreamSetting() -->
+<method name="getFoxVideoStreamSetting"  public="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getPreferredResolution() -->
+<method name="getPreferredResolution"  public="true">
+<description>
+Indicates the resolution that is preferred for playback. The live video and&#xa; video playback views use this value for the video resolution that is displayed&#xa; to the user.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getPreferredFrameRate() -->
+<method name="getPreferredFrameRate"  public="true">
+<description>
+Indicates the frame rate that is preferred for playback. The live video and&#xa; video playback views use this value for the video frame rate that is displayed&#xa; to the user.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getPreferredCompression() -->
+<method name="getPreferredCompression"  public="true">
+<description>
+Indicates the compression that is preferred for playback. The live video and&#xa; video playback views use this value for the video compression that is displayed&#xa; to the user.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.streamToDestination(com.tridium.videoDriver.videoStream.BPlaybackParams, com.tridium.videoDriver.videoStream.IVideoDestination) -->
+<method name="streamToDestination"  public="true" abstract="true">
+<description>
+Arranges for the BIVideoSource component to establish a video stream from the&#xa; field-device to the given video destination.&#xa; &#xa; The videoDriver framework calls this method to ask the driver BIVideoSource&#xa; component to request a video stream from the video field-device and then&#xa; pass the video stream to the given video destination.&#xa; &#xa; Please note that the driver does not necessarily have to assign the IVideoStream&#xa; to the video destination immediately during this method invocation. Instead, the&#xa; driver may (and likely should) pass the video stream to the videoDestination&#xa; asynchronously, upon successful driver communication. In fact, it is recommended&#xa; that the developer design their logic such that the video stream is established&#xa; in the background, passed to the video destination in the background, and return&#xa; immediately from this method.
+</description>
+<tag name="@see">IVideoStream</tag>
+<tag name="@see">VideoStream</tag>
+<parameter name="playbackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+<description>
+an instance of BPlaybackParams indicating the details about&#xa; the video stream that needs to be established. This includes the playback type to&#xa; indicate live, play, fast forward, rewind, pause, etc. This also includes the time&#xa; index that applies to the playback types that are other than live (play, fast&#xa; forward, etc).
+</description>
+</parameter>
+<parameter name="videoDestination">
+<type class="com.tridium.videoDriver.videoStream.IVideoDestination"/>
+<description>
+the IVideoDestination to which the video stream needs to&#xa; be sent once it is established (preferably in the background -- please see the JavaDoc&#xa; for this method&#x27;s description). When the video stream is established, the driver must&#xa; call the receiveVideoStream method on the video destination object. Alternatively,&#xa; if the attempt to establish the video stream fails then the driver must call the &#xa; videoStreamTimeout method on the video destination object. Please note that the driver&#xa; must call one of these two methods!
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getPreferredBackgroundColor() -->
+<method name="getPreferredBackgroundColor"  public="true">
+<description/>
+<return>
+<type class="javax.baja.gx.BColor"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.getPreferredAspectRatio() -->
+<method name="getPreferredAspectRatio"  public="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoAspectRatioEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.videoDeviceId -->
+<field name="videoDeviceId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;videoDeviceId&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVideoDeviceId</tag>
+<tag name="@see">#setVideoDeviceId</tag>
+</field>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.monitor -->
+<field name="monitor"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each camera&#xa; to monitor communication health.
+</description>
+<tag name="@see">#getMonitor</tag>
+<tag name="@see">#setMonitor</tag>
+</field>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.address -->
+<field name="address"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;address&lt;/code&gt; property.&#xa; Descendants should override this property and define it with a default value&#xa; That extends BAddress. This is the dvr device&#x27;s address on its field bus.
+</description>
+<tag name="@see">#getAddress</tag>
+<tag name="@see">#setAddress</tag>
+</field>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.foxVideoStreamPreferred -->
+<field name="foxVideoStreamPreferred"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; Indicates the Fox Stream setting for any video cameras under this DVR whose Fox Stream setting is &#x27;Inherit&#x27;
+</description>
+<tag name="@see">#getFoxVideoStreamPreferred</tag>
+<tag name="@see">#setFoxVideoStreamPreferred</tag>
+</field>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.multistreamPreferences -->
+<field name="multistreamPreferences"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;multistreamPreferences&lt;/code&gt; property.&#xa; These are the default preferences that apply whenever the Niagara AX video&#xa; framework requests a video stream from the Dvr where the video stream contains&#xa; video frames for more than one video camera.
+</description>
+<tag name="@see">#getMultistreamPreferences</tag>
+<tag name="@see">#setMultistreamPreferences</tag>
+</field>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.displays -->
+<field name="displays"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;displays&lt;/code&gt; property.&#xa; This extension is used to manage video displays.
+</description>
+<tag name="@see">#getDisplays</tag>
+<tag name="@see">#setDisplays</tag>
+</field>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.cameras -->
+<field name="cameras"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;cameras&lt;/code&gt; property.&#xa; This extension is used to manage video camera.
+</description>
+<tag name="@see">#getCameras</tag>
+<tag name="@see">#setCameras</tag>
+</field>
+
+<!-- com.tridium.nvideo.dvr.BVideoDvr.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

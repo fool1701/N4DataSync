@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="rt" qualifiedName="com.tridium.andoverInfinity.BInfinityNetwork" name="BInfinityNetwork" packageName="com.tridium.andoverInfinity" public="true">
+<description>
+BInfinityNetwork extends BDdfSerialNetwork to wrap a custom communicator&#xa; and includes a single frozen slot for a BInfinityNetworkDevice which is&#xa; always present in a system.
+</description>
+<tag name="@author">cturman on May 1, 2007</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="com.tridium.ddfSerial.BDdfSerialNetwork"/>
+</extends>
+<property name="automaticallySetTime" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;automaticallySetTime&lt;/code&gt; property.&#xa; Enables automatic synchronization of the Andover&#xa; panel&#x27;s internal clock to the Jace clock
+</description>
+<tag name="@see">#getAutomaticallySetTime</tag>
+<tag name="@see">#setAutomaticallySetTime</tag>
+</property>
+
+<property name="syncTimeFrequency" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;syncTimeFrequency&lt;/code&gt; property.&#xa; Frequency at which the set time command is sent from&#xa; the Jace to the andover panel to synchronize the&#xa; clocks.
+</description>
+<tag name="@see">#getSyncTimeFrequency</tag>
+<tag name="@see">#setSyncTimeFrequency</tag>
+</property>
+
+<property name="restoreFile" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;restoreFile&lt;/code&gt; property.&#xa; This remembers the last backup/restore file name&#xa; sent to a controller.
+</description>
+<tag name="@see">#getRestoreFile</tag>
+<tag name="@see">#setRestoreFile</tag>
+</property>
+
+<property name="networkDevice" flags="">
+<type class="com.tridium.andoverInfinity.BInfinityNetworkDevice"/>
+<description>
+Slot for the &lt;code&gt;networkDevice&lt;/code&gt; property.&#xa; Since Infinity always has one device that acts as a gateway to&#xa; the Infinet, it is included here as a frozen slot.  This device&#xa; has the additional attributes of userName/password to allow&#xa; logging on to the network.  This is typically a CMX240,&#xa; Continuum NetController, CX9400, etc.  BInfinetDevice objects&#xa; would be added as dynamic slots to model other devices on the Infinet.
+</description>
+<tag name="@see">#getNetworkDevice</tag>
+<tag name="@see">#setNetworkDevice</tag>
+</property>
+
+<property name="backupModeActive" flags="ht">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;backupModeActive&lt;/code&gt; property.&#xa; Indicates whether a backup is in progress
+</description>
+<tag name="@see">#getBackupModeActive</tag>
+<tag name="@see">#setBackupModeActive</tag>
+</property>
+
+<property name="pageUpPageDown" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pageUpPageDown&lt;/code&gt; property.&#xa; if false, then use ctrl-d,ctrl-u, if true use esc sequence, see NCCB-3989
+</description>
+<tag name="@see">#getPageUpPageDown</tag>
+<tag name="@see">#setPageUpPageDown</tag>
+</property>
+
+<action name="syncTime" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;syncTime&lt;/code&gt; action.&#xa; set time and date in Andover panel to station time/date.  Is&#xa; invoked via user action or periodically if the property&#xa; syncTimeFrequency is set to a non-zero value
+</description>
+<tag name="@see">#syncTime()</tag>
+</action>
+
+<action name="refresh" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;refresh&lt;/code&gt; action.&#xa; causes a refresh command (CTL-Z) to be sent to the controller.  No&#xa; forced update of the manager view is performed.  However, if the&#xa; CTL-Z is successful, the terminal view will be refreshed by virtue of&#xa; all the lines being re-sent from the controller.&#xa; refreshTerminalView()&#xa; causes a refresh command (CTL-Z) to be sent to the controller, and&#xa; forces an update of all lines from the VT100 buffer to the manager view.
+</description>
+<tag name="@see">#refresh()</tag>
+</action>
+
+<action name="setTerminalModeActive" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;setTerminalModeActive&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes the&#xa; VT100 screen buffer to enter/exit an interactive mode whereby&#xa; keystrokes can be sent from the terminal view through the station,&#xa; and on to the controller.
+</description>
+<tag name="@see">#setTerminalModeActive(BBoolean parameter)</tag>
+</action>
+
+<action name="backupModeActivate" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;backupModeActivate&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes a&#xa; backup command to be queued into the communicator
+</description>
+<tag name="@see">#backupModeActivate()</tag>
+</action>
+
+<action name="reload" flags="hA">
+<parameter name="parameter">
+<type class="javax.baja.sys.BBlob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;reload&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes a&#xa; reload to the controller(s) via the reload command, using the&#xa; contents of the file
+</description>
+<tag name="@see">#reload(BBlob parameter)</tag>
+</action>
+
+<action name="abortReload" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;abortReload&lt;/code&gt; action.&#xa; sets a flag that the reload request can monitor to terminate itself
+</description>
+<tag name="@see">#abortReload()</tag>
+</action>
+
+<action name="retrieveNetworkDeviceInfo" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;retrieveNetworkDeviceInfo&lt;/code&gt; action.&#xa; for debug purposes, gets the &#x22;name&#x22; of the panel from the VT100&#xa; info.  The &#x22;mode&#x22; must be CURSOR_IS_IN_COMMAND_LINE for this to&#xa; succeed.
+</description>
+<tag name="@see">#retrieveNetworkDeviceInfo()</tag>
+</action>
+
+<action name="dumpScreenBuffer" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;dumpScreenBuffer&lt;/code&gt; action.&#xa; prints the screen buffer, including both &#x22;text&#x22; lines and &#x22;format&#x22;&#xa; lines, to stdOut.  The &#x22;text&#x22; portion is representative of the&#xa; current text displayed, the &#x22;format&#x22; portion is representative of&#xa; of how the text portion is displayed (Normal, Reverse, or Bold).
+</description>
+<tag name="@see">#dumpScreenBuffer()</tag>
+</action>
+
+<action name="keystrokesCommand" flags="hA">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;keystrokesCommand&lt;/code&gt; action.&#xa; keystrokes are passed from the VT100 terminal manager view to&#xa; the station via this action.
+</description>
+<tag name="@see">#keystrokesCommand(BString parameter)</tag>
+</action>
+
+<action name="getMode" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getMode&lt;/code&gt; action.&#xa; used for debug, this command prints to stdOut the current context&#xa; mode that the VT100 is in (ie, where we are in the Infinity panel&#x27;s&#xa; menu-driven interface.
+</description>
+<tag name="@see">#getMode()</tag>
+</action>
+
+<action name="loadScreenBufferFromFile" flags="hA">
+<parameter name="parameter">
+<type class="javax.baja.sys.BBlob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;loadScreenBufferFromFile&lt;/code&gt; action.&#xa; loads the VT100 with a test buffer
+</description>
+<tag name="@see">#loadScreenBufferFromFile(BBlob parameter)</tag>
+</action>
+
+<action name="saveScreenBufferToFile" flags="hA">
+<return>
+<type class="javax.baja.sys.BBlob"/>
+</return>
+<description>
+Slot for the &lt;code&gt;saveScreenBufferToFile&lt;/code&gt; action.&#xa; loads the VT100 with a test buffer
+</description>
+<tag name="@see">#saveScreenBufferToFile()</tag>
+</action>
+
+<topic name="terminalUpdated" flags="h">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;terminalUpdated&lt;/code&gt; topic.&#xa; passes data from the VT100 object to the manager view whenever&#xa; an update is required.  Normal occurance is to be fired whenever&#xa; the cursor changes to a different line, but if the manager view&#xa; is in interactive &#x22;terminal&#x22; mode, then this topic is fired on&#xa; every new character received from the panel.  Data is passed to&#xa; the manager via a BString incoded into this topic.
+</description>
+<tag name="@see">#fireTerminalUpdated</tag>
+</topic>
+
+<topic name="backupModeDone" flags="h">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;backupModeDone&lt;/code&gt; topic.&#xa; used to signal to the manager view that the backup is complete, and&#xa; passes the backup data to the manager view via a BBlob encoded into&#xa; this topic.
+</description>
+<tag name="@see">#fireBackupModeDone</tag>
+</topic>
+
+<topic name="reloadModeDone" flags="h">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;reloadModeDone&lt;/code&gt; topic.&#xa; used to signal to the manager view that the reload is complete
+</description>
+<tag name="@see">#fireReloadModeDone</tag>
+</topic>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork() -->
+<constructor name="BInfinityNetwork" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getAutomaticallySetTime() -->
+<method name="getAutomaticallySetTime"  public="true">
+<description>
+Get the &lt;code&gt;automaticallySetTime&lt;/code&gt; property.&#xa; Enables automatic synchronization of the Andover&#xa; panel&#x27;s internal clock to the Jace clock
+</description>
+<tag name="@see">#automaticallySetTime</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setAutomaticallySetTime(boolean) -->
+<method name="setAutomaticallySetTime"  public="true">
+<description>
+Set the &lt;code&gt;automaticallySetTime&lt;/code&gt; property.&#xa; Enables automatic synchronization of the Andover&#xa; panel&#x27;s internal clock to the Jace clock
+</description>
+<tag name="@see">#automaticallySetTime</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getSyncTimeFrequency() -->
+<method name="getSyncTimeFrequency"  public="true">
+<description>
+Get the &lt;code&gt;syncTimeFrequency&lt;/code&gt; property.&#xa; Frequency at which the set time command is sent from&#xa; the Jace to the andover panel to synchronize the&#xa; clocks.
+</description>
+<tag name="@see">#syncTimeFrequency</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setSyncTimeFrequency(javax.baja.sys.BRelTime) -->
+<method name="setSyncTimeFrequency"  public="true">
+<description>
+Set the &lt;code&gt;syncTimeFrequency&lt;/code&gt; property.&#xa; Frequency at which the set time command is sent from&#xa; the Jace to the andover panel to synchronize the&#xa; clocks.
+</description>
+<tag name="@see">#syncTimeFrequency</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getRestoreFile() -->
+<method name="getRestoreFile"  public="true">
+<description>
+Get the &lt;code&gt;restoreFile&lt;/code&gt; property.&#xa; This remembers the last backup/restore file name&#xa; sent to a controller.
+</description>
+<tag name="@see">#restoreFile</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setRestoreFile(javax.baja.naming.BOrd) -->
+<method name="setRestoreFile"  public="true">
+<description>
+Set the &lt;code&gt;restoreFile&lt;/code&gt; property.&#xa; This remembers the last backup/restore file name&#xa; sent to a controller.
+</description>
+<tag name="@see">#restoreFile</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getNetworkDevice() -->
+<method name="getNetworkDevice"  public="true">
+<description>
+Get the &lt;code&gt;networkDevice&lt;/code&gt; property.&#xa; Since Infinity always has one device that acts as a gateway to&#xa; the Infinet, it is included here as a frozen slot.  This device&#xa; has the additional attributes of userName/password to allow&#xa; logging on to the network.  This is typically a CMX240,&#xa; Continuum NetController, CX9400, etc.  BInfinetDevice objects&#xa; would be added as dynamic slots to model other devices on the Infinet.
+</description>
+<tag name="@see">#networkDevice</tag>
+<return>
+<type class="com.tridium.andoverInfinity.BInfinityNetworkDevice"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setNetworkDevice(com.tridium.andoverInfinity.BInfinityNetworkDevice) -->
+<method name="setNetworkDevice"  public="true">
+<description>
+Set the &lt;code&gt;networkDevice&lt;/code&gt; property.&#xa; Since Infinity always has one device that acts as a gateway to&#xa; the Infinet, it is included here as a frozen slot.  This device&#xa; has the additional attributes of userName/password to allow&#xa; logging on to the network.  This is typically a CMX240,&#xa; Continuum NetController, CX9400, etc.  BInfinetDevice objects&#xa; would be added as dynamic slots to model other devices on the Infinet.
+</description>
+<tag name="@see">#networkDevice</tag>
+<parameter name="v">
+<type class="com.tridium.andoverInfinity.BInfinityNetworkDevice"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getBackupModeActive() -->
+<method name="getBackupModeActive"  public="true">
+<description>
+Get the &lt;code&gt;backupModeActive&lt;/code&gt; property.&#xa; Indicates whether a backup is in progress
+</description>
+<tag name="@see">#backupModeActive</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setBackupModeActive(boolean) -->
+<method name="setBackupModeActive"  public="true">
+<description>
+Set the &lt;code&gt;backupModeActive&lt;/code&gt; property.&#xa; Indicates whether a backup is in progress
+</description>
+<tag name="@see">#backupModeActive</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getPageUpPageDown() -->
+<method name="getPageUpPageDown"  public="true">
+<description>
+Get the &lt;code&gt;pageUpPageDown&lt;/code&gt; property.&#xa; if false, then use ctrl-d,ctrl-u, if true use esc sequence, see NCCB-3989
+</description>
+<tag name="@see">#pageUpPageDown</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setPageUpPageDown(boolean) -->
+<method name="setPageUpPageDown"  public="true">
+<description>
+Set the &lt;code&gt;pageUpPageDown&lt;/code&gt; property.&#xa; if false, then use ctrl-d,ctrl-u, if true use esc sequence, see NCCB-3989
+</description>
+<tag name="@see">#pageUpPageDown</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.syncTime() -->
+<method name="syncTime"  public="true">
+<description>
+Invoke the &lt;code&gt;syncTime&lt;/code&gt; action.&#xa; set time and date in Andover panel to station time/date.  Is&#xa; invoked via user action or periodically if the property&#xa; syncTimeFrequency is set to a non-zero value
+</description>
+<tag name="@see">#syncTime</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.refresh() -->
+<method name="refresh"  public="true">
+<description>
+Invoke the &lt;code&gt;refresh&lt;/code&gt; action.&#xa; causes a refresh command (CTL-Z) to be sent to the controller.  No&#xa; forced update of the manager view is performed.  However, if the&#xa; CTL-Z is successful, the terminal view will be refreshed by virtue of&#xa; all the lines being re-sent from the controller.&#xa; refreshTerminalView()&#xa; causes a refresh command (CTL-Z) to be sent to the controller, and&#xa; forces an update of all lines from the VT100 buffer to the manager view.
+</description>
+<tag name="@see">#refresh</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setTerminalModeActive(javax.baja.sys.BBoolean) -->
+<method name="setTerminalModeActive"  public="true">
+<description>
+Invoke the &lt;code&gt;setTerminalModeActive&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes the&#xa; VT100 screen buffer to enter/exit an interactive mode whereby&#xa; keystrokes can be sent from the terminal view through the station,&#xa; and on to the controller.
+</description>
+<tag name="@see">#setTerminalModeActive</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.backupModeActivate() -->
+<method name="backupModeActivate"  public="true">
+<description>
+Invoke the &lt;code&gt;backupModeActivate&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes a&#xa; backup command to be queued into the communicator
+</description>
+<tag name="@see">#backupModeActivate</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.reload(javax.baja.sys.BBlob) -->
+<method name="reload"  public="true">
+<description>
+Invoke the &lt;code&gt;reload&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes a&#xa; reload to the controller(s) via the reload command, using the&#xa; contents of the file
+</description>
+<tag name="@see">#reload</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BBlob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.abortReload() -->
+<method name="abortReload"  public="true">
+<description>
+Invoke the &lt;code&gt;abortReload&lt;/code&gt; action.&#xa; sets a flag that the reload request can monitor to terminate itself
+</description>
+<tag name="@see">#abortReload</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.retrieveNetworkDeviceInfo() -->
+<method name="retrieveNetworkDeviceInfo"  public="true">
+<description>
+Invoke the &lt;code&gt;retrieveNetworkDeviceInfo&lt;/code&gt; action.&#xa; for debug purposes, gets the &#x22;name&#x22; of the panel from the VT100&#xa; info.  The &#x22;mode&#x22; must be CURSOR_IS_IN_COMMAND_LINE for this to&#xa; succeed.
+</description>
+<tag name="@see">#retrieveNetworkDeviceInfo</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.dumpScreenBuffer() -->
+<method name="dumpScreenBuffer"  public="true">
+<description>
+Invoke the &lt;code&gt;dumpScreenBuffer&lt;/code&gt; action.&#xa; prints the screen buffer, including both &#x22;text&#x22; lines and &#x22;format&#x22;&#xa; lines, to stdOut.  The &#x22;text&#x22; portion is representative of the&#xa; current text displayed, the &#x22;format&#x22; portion is representative of&#xa; of how the text portion is displayed (Normal, Reverse, or Bold).
+</description>
+<tag name="@see">#dumpScreenBuffer</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.keystrokesCommand(javax.baja.sys.BString) -->
+<method name="keystrokesCommand"  public="true">
+<description>
+Invoke the &lt;code&gt;keystrokesCommand&lt;/code&gt; action.&#xa; keystrokes are passed from the VT100 terminal manager view to&#xa; the station via this action.
+</description>
+<tag name="@see">#keystrokesCommand</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getMode() -->
+<method name="getMode"  public="true">
+<description>
+Invoke the &lt;code&gt;getMode&lt;/code&gt; action.&#xa; used for debug, this command prints to stdOut the current context&#xa; mode that the VT100 is in (ie, where we are in the Infinity panel&#x27;s&#xa; menu-driven interface.
+</description>
+<tag name="@see">#getMode</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.loadScreenBufferFromFile(javax.baja.sys.BBlob) -->
+<method name="loadScreenBufferFromFile"  public="true">
+<description>
+Invoke the &lt;code&gt;loadScreenBufferFromFile&lt;/code&gt; action.&#xa; loads the VT100 with a test buffer
+</description>
+<tag name="@see">#loadScreenBufferFromFile</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BBlob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.saveScreenBufferToFile() -->
+<method name="saveScreenBufferToFile"  public="true">
+<description>
+Invoke the &lt;code&gt;saveScreenBufferToFile&lt;/code&gt; action.&#xa; loads the VT100 with a test buffer
+</description>
+<tag name="@see">#saveScreenBufferToFile</tag>
+<return>
+<type class="javax.baja.sys.BBlob"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.fireTerminalUpdated(javax.baja.sys.BValue) -->
+<method name="fireTerminalUpdated"  public="true">
+<description>
+Fire an event for the &lt;code&gt;terminalUpdated&lt;/code&gt; topic.&#xa; passes data from the VT100 object to the manager view whenever&#xa; an update is required.  Normal occurance is to be fired whenever&#xa; the cursor changes to a different line, but if the manager view&#xa; is in interactive &#x22;terminal&#x22; mode, then this topic is fired on&#xa; every new character received from the panel.  Data is passed to&#xa; the manager via a BString incoded into this topic.
+</description>
+<tag name="@see">#terminalUpdated</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.fireBackupModeDone(javax.baja.sys.BValue) -->
+<method name="fireBackupModeDone"  public="true">
+<description>
+Fire an event for the &lt;code&gt;backupModeDone&lt;/code&gt; topic.&#xa; used to signal to the manager view that the backup is complete, and&#xa; passes the backup data to the manager view via a BBlob encoded into&#xa; this topic.
+</description>
+<tag name="@see">#backupModeDone</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.fireReloadModeDone(javax.baja.sys.BValue) -->
+<method name="fireReloadModeDone"  public="true">
+<description>
+Fire an event for the &lt;code&gt;reloadModeDone&lt;/code&gt; topic.&#xa; used to signal to the manager view that the reload is complete
+</description>
+<tag name="@see">#reloadModeDone</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getLicenseFeature() -->
+<method name="getLicenseFeature"  public="true" final="true">
+<description>
+If this driver is to be licensed using the standard licensing&#xa; mechanism then override this method to return the Feature or&#xa; return null for no license checks.  Convention is that the&#xa; vendor and feature name matches the declaring module.
+</description>
+<return>
+<type class="javax.baja.license.Feature"/>
+<description>
+&lt;code&gt;Feature&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.started() -->
+<method name="started"  public="true">
+<description>
+Override to initialize a screen buffer and clock time sync ticket.&#xa; Also hide the upload/download actions
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.descendantsStarted() -->
+<method name="descendantsStarted"  public="true">
+<description>
+Once all descendants are started, send a refresh (CTL-Z) to the&#xa; field panel to kick-start communications.  From there, a logon may&#xa; or may not be fired off as well.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.stopped() -->
+<method name="stopped"  public="true">
+<description>
+The stopped() method is called when a component is&#xa; running state is set to false.  Components are stopped&#xa; top-down, children after their parent.  Override to&#xa; kill the time sync ticket.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+override of superclass method to reset the time sync&#xa; ticket if the time sync frequency changes or if the time sync&#xa; is enabled or disabled.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getDeviceType() -->
+<method name="getDeviceType"  public="true" final="true">
+<description>
+BInfinityNetwork uses device type BInfinetDevice
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+&lt;code&gt;BInfinetDevice.TYPE&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getDeviceFolderType() -->
+<method name="getDeviceFolderType"  public="true">
+<description>
+Device type folder is BInfinityDeviceFolder
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+&lt;code&gt;BInfinityDeviceFolder.TYPE&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doRefresh() -->
+<method name="doRefresh"  public="true">
+<description>
+Callback from refresh action.&#xa; Sends a CTRL-Z command to the field panel on caller&#x27;s thread
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doSetTerminalModeActive(javax.baja.sys.BBoolean) -->
+<method name="doSetTerminalModeActive"  public="true">
+<description>
+Callback from setTerminalModeActive action.  Should&#xa; only be invoked from the VT100 terminal manager view.&#xa; Sets a flag &#x22;terminalModeActive&#x22; if activate is true,&#xa; resets it if false. The terminalModeActive flag is in turn used&#xa; in the Communicator to grant access to the communicator transmitter&#xa; only keystroke messages, while denying all others.
+</description>
+<parameter name="activate">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doBackupModeActivate() -->
+<method name="doBackupModeActivate"  public="true">
+<description>
+Callback from backupModeActivate action.&#xa; Should only be invoked from the VT100 terminal manager view.&#xa; Puts a BInfinitySaveInfinetRequest on the communicator transmit queue
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doReload(javax.baja.sys.BBlob) -->
+<method name="doReload"  public="true">
+<description>
+Callback from reload action.&#xa; Should only be invoked from the VT100 terminal manager view.&#xa; Puts a BInfinityReloadInfinetRequest on the communicator transmit queue
+</description>
+<parameter name="blob">
+<type class="javax.baja.sys.BBlob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doAbortReload() -->
+<method name="doAbortReload"  public="true">
+<description>
+Action to abort a reload sets a boolean variable that is monitored&#xa; by any active BInfinitSaveInfinetRequest
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doKeystrokesCommand(javax.baja.sys.BString) -->
+<method name="doKeystrokesCommand"  public="true">
+<description>
+Callback from keystrokesCommand action.&#xa; Should only be invoked from the VT100 terminal manager view.&#xa; Puts a BInfinityKeystrokeRequest on the communicator transmit queue, if&#xa; and only if the backup, reload, or terminal mode is active, else the&#xa; keystrokes are lost.
+</description>
+<parameter name="cmd">
+<type class="javax.baja.sys.BString"/>
+<description>
+is one or more keystrokes wrapped in a BString
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doRetrieveNetworkDeviceInfo() -->
+<method name="doRetrieveNetworkDeviceInfo"  public="true">
+<description>
+Callback from the retrieveNetworkDeviceInfo action.&#xa; Retrieve the network name from the screen buffer and set it&#xa; into the NetworkName property.  This causes communication to occur&#xa; that looks into the &#x22;Edit/ControllErs&#x22; menu and the &#x22;View/ControllErs&#x22;&#xa; menus to retrieve the top level (ie, Infinfity Network Device) controller&#x27;s&#xa; model number, serial number (from Edit menu), and id (from View menu)
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doSyncTime() -->
+<method name="doSyncTime"  public="true">
+<description>
+Send a &#x22;set time&#x22; command to the Andover panel using the station clock&#xa; as time source.  If successful, also update today as the&#xa; last time sync day.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doSaveScreenBufferToFile() -->
+<method name="doSaveScreenBufferToFile"  public="true">
+<description>
+Callback from saveScreenBufferToFile action
+</description>
+<return>
+<type class="javax.baja.sys.BBlob"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doLoadScreenBufferFromFile(javax.baja.sys.BBlob) -->
+<method name="doLoadScreenBufferFromFile"  public="true">
+<description>
+Callback from loadScreenBufferFromFile action.&#xa; Used for testing driver against various screens
+</description>
+<parameter name="fileBlob">
+<type class="javax.baja.sys.BBlob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<description>
+Since the getNavChildren on BDeviceNetwork filters out all frozen slots, and&#xa; our BInfinityCx9000Device is a frozen slot on the network, we need to add it&#xa; back in here in order for it to display on the Nav tree.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getScreen() -->
+<method name="getScreen"  public="true">
+<description>
+Get the screen buffer which includes both a content and format buffer
+</description>
+<return>
+<type class="com.tridium.andoverInfinity.comm.BVt100"/>
+<description>
+the screen buffer
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getLine() -->
+<method name="getLine"  public="true">
+<description>
+Convenience for screen.getCursorPosition().getLine()
+</description>
+<return>
+<type class="int"/>
+<description>
+a line from the screen buffer
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getCursorPosition() -->
+<method name="getCursorPosition"  public="true">
+<description>
+Convenience for screen.getCursorPosition().getLine()
+</description>
+<return>
+<type class="com.tridium.andoverInfinity.comm.CursorPosition"/>
+<description>
+the screen buffer cursor position
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doDumpScreenBuffer() -->
+<method name="doDumpScreenBuffer"  public="true">
+<description>
+Dump the screen buffer to stdOut.  Include&#xa; both content and format buffers
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.doGetMode() -->
+<method name="doGetMode"  public="true">
+<description>
+Cause the current sceen buffer cursor mode and insert mode&#xa; to printed to stdOut
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.isConnected() -->
+<method name="isConnected"  public="true">
+<description>
+Returns the connected state
+</description>
+<return>
+<type class="boolean"/>
+<description>
+the connected flag, indicating if VT100 buffer sync/initialization was&#xa; successful
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setConnected(boolean) -->
+<method name="setConnected"  public="true">
+<description>
+Set the connected stated
+</description>
+<parameter name="connected">
+<type class="boolean"/>
+<description>
+the connected to set.  If this is a transition from&#xa;                  not connected to connected, so request controller info update&#xa;                  (send a BInfinityPollForControllerInfoRequest)
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.isTerminalModeActive() -->
+<method name="isTerminalModeActive"  public="true">
+<description>
+Return the terminal mode active state.  Terminal mode is active when&#xa; a user is interactively communicating with the Infinity panel using the&#xa; terminal mode view of the BInfinityNetwork.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+the terminalModeActive flag
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.isReloadModeActive() -->
+<method name="isReloadModeActive"  public="true">
+<description>
+Return the reload active state.  Reload mode is active when a file is&#xa; currently being transerred to the Infinity panel via the Terminal view&#xa; reload button.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+the reloadModeActive flag
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setReloadModeActive(boolean) -->
+<method name="setReloadModeActive"  public="true">
+<description>
+Set the reloadModeActive flag
+</description>
+<parameter name="reloadModeActive">
+<type class="boolean"/>
+<description>
+the reloadModeActive to set
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getLogger() -->
+<method name="getLogger"  public="true">
+<description>
+Get the trace log
+</description>
+<return>
+<type class="java.util.logging.Logger"/>
+<description>
+the &lt;code&gt;Log&lt;/code&gt; for the driver
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.isShouldAbortReload() -->
+<method name="isShouldAbortReload"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+the shouldAbortReload
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setShouldAbortReload(boolean) -->
+<method name="setShouldAbortReload"  public="true">
+<description/>
+<parameter name="shouldAbortReload">
+<type class="boolean"/>
+<description>
+the shouldAbortReload to set
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.communicator -->
+<field name="communicator"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;communicator&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCommunicator</tag>
+<tag name="@see">#setCommunicator</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.discoveryPreferences -->
+<field name="discoveryPreferences"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences&#xa; that the user provides on the device manager. It&#xa; is also used as the default for the first Time&#xa; that the user is prompted for a discovery.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.automaticallySetTime -->
+<field name="automaticallySetTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;automaticallySetTime&lt;/code&gt; property.&#xa; Enables automatic synchronization of the Andover&#xa; panel&#x27;s internal clock to the Jace clock
+</description>
+<tag name="@see">#getAutomaticallySetTime</tag>
+<tag name="@see">#setAutomaticallySetTime</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.syncTimeFrequency -->
+<field name="syncTimeFrequency"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;syncTimeFrequency&lt;/code&gt; property.&#xa; Frequency at which the set time command is sent from&#xa; the Jace to the andover panel to synchronize the&#xa; clocks.
+</description>
+<tag name="@see">#getSyncTimeFrequency</tag>
+<tag name="@see">#setSyncTimeFrequency</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.restoreFile -->
+<field name="restoreFile"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;restoreFile&lt;/code&gt; property.&#xa; This remembers the last backup/restore file name&#xa; sent to a controller.
+</description>
+<tag name="@see">#getRestoreFile</tag>
+<tag name="@see">#setRestoreFile</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.networkDevice -->
+<field name="networkDevice"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;networkDevice&lt;/code&gt; property.&#xa; Since Infinity always has one device that acts as a gateway to&#xa; the Infinet, it is included here as a frozen slot.  This device&#xa; has the additional attributes of userName/password to allow&#xa; logging on to the network.  This is typically a CMX240,&#xa; Continuum NetController, CX9400, etc.  BInfinetDevice objects&#xa; would be added as dynamic slots to model other devices on the Infinet.
+</description>
+<tag name="@see">#getNetworkDevice</tag>
+<tag name="@see">#setNetworkDevice</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.backupModeActive -->
+<field name="backupModeActive"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;backupModeActive&lt;/code&gt; property.&#xa; Indicates whether a backup is in progress
+</description>
+<tag name="@see">#getBackupModeActive</tag>
+<tag name="@see">#setBackupModeActive</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.pageUpPageDown -->
+<field name="pageUpPageDown"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pageUpPageDown&lt;/code&gt; property.&#xa; if false, then use ctrl-d,ctrl-u, if true use esc sequence, see NCCB-3989
+</description>
+<tag name="@see">#getPageUpPageDown</tag>
+<tag name="@see">#setPageUpPageDown</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.syncTime -->
+<field name="syncTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;syncTime&lt;/code&gt; action.&#xa; set time and date in Andover panel to station time/date.  Is&#xa; invoked via user action or periodically if the property&#xa; syncTimeFrequency is set to a non-zero value
+</description>
+<tag name="@see">#syncTime()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.refresh -->
+<field name="refresh"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;refresh&lt;/code&gt; action.&#xa; causes a refresh command (CTL-Z) to be sent to the controller.  No&#xa; forced update of the manager view is performed.  However, if the&#xa; CTL-Z is successful, the terminal view will be refreshed by virtue of&#xa; all the lines being re-sent from the controller.&#xa; refreshTerminalView()&#xa; causes a refresh command (CTL-Z) to be sent to the controller, and&#xa; forces an update of all lines from the VT100 buffer to the manager view.
+</description>
+<tag name="@see">#refresh()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.setTerminalModeActive -->
+<field name="setTerminalModeActive"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;setTerminalModeActive&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes the&#xa; VT100 screen buffer to enter/exit an interactive mode whereby&#xa; keystrokes can be sent from the terminal view through the station,&#xa; and on to the controller.
+</description>
+<tag name="@see">#setTerminalModeActive(BBoolean parameter)</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.backupModeActivate -->
+<field name="backupModeActivate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;backupModeActivate&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes a&#xa; backup command to be queued into the communicator
+</description>
+<tag name="@see">#backupModeActivate()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.reload -->
+<field name="reload"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;reload&lt;/code&gt; action.&#xa; invoked from the terminal manager view, this action causes a&#xa; reload to the controller(s) via the reload command, using the&#xa; contents of the file
+</description>
+<tag name="@see">#reload(BBlob parameter)</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.abortReload -->
+<field name="abortReload"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;abortReload&lt;/code&gt; action.&#xa; sets a flag that the reload request can monitor to terminate itself
+</description>
+<tag name="@see">#abortReload()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.retrieveNetworkDeviceInfo -->
+<field name="retrieveNetworkDeviceInfo"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;retrieveNetworkDeviceInfo&lt;/code&gt; action.&#xa; for debug purposes, gets the &#x22;name&#x22; of the panel from the VT100&#xa; info.  The &#x22;mode&#x22; must be CURSOR_IS_IN_COMMAND_LINE for this to&#xa; succeed.
+</description>
+<tag name="@see">#retrieveNetworkDeviceInfo()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.dumpScreenBuffer -->
+<field name="dumpScreenBuffer"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;dumpScreenBuffer&lt;/code&gt; action.&#xa; prints the screen buffer, including both &#x22;text&#x22; lines and &#x22;format&#x22;&#xa; lines, to stdOut.  The &#x22;text&#x22; portion is representative of the&#xa; current text displayed, the &#x22;format&#x22; portion is representative of&#xa; of how the text portion is displayed (Normal, Reverse, or Bold).
+</description>
+<tag name="@see">#dumpScreenBuffer()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.keystrokesCommand -->
+<field name="keystrokesCommand"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;keystrokesCommand&lt;/code&gt; action.&#xa; keystrokes are passed from the VT100 terminal manager view to&#xa; the station via this action.
+</description>
+<tag name="@see">#keystrokesCommand(BString parameter)</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.getMode -->
+<field name="getMode"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;getMode&lt;/code&gt; action.&#xa; used for debug, this command prints to stdOut the current context&#xa; mode that the VT100 is in (ie, where we are in the Infinity panel&#x27;s&#xa; menu-driven interface.
+</description>
+<tag name="@see">#getMode()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.loadScreenBufferFromFile -->
+<field name="loadScreenBufferFromFile"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;loadScreenBufferFromFile&lt;/code&gt; action.&#xa; loads the VT100 with a test buffer
+</description>
+<tag name="@see">#loadScreenBufferFromFile(BBlob parameter)</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.saveScreenBufferToFile -->
+<field name="saveScreenBufferToFile"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;saveScreenBufferToFile&lt;/code&gt; action.&#xa; loads the VT100 with a test buffer
+</description>
+<tag name="@see">#saveScreenBufferToFile()</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.terminalUpdated -->
+<field name="terminalUpdated"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;terminalUpdated&lt;/code&gt; topic.&#xa; passes data from the VT100 object to the manager view whenever&#xa; an update is required.  Normal occurance is to be fired whenever&#xa; the cursor changes to a different line, but if the manager view&#xa; is in interactive &#x22;terminal&#x22; mode, then this topic is fired on&#xa; every new character received from the panel.  Data is passed to&#xa; the manager via a BString incoded into this topic.
+</description>
+<tag name="@see">#fireTerminalUpdated</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.backupModeDone -->
+<field name="backupModeDone"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;backupModeDone&lt;/code&gt; topic.&#xa; used to signal to the manager view that the backup is complete, and&#xa; passes the backup data to the manager view via a BBlob encoded into&#xa; this topic.
+</description>
+<tag name="@see">#fireBackupModeDone</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.reloadModeDone -->
+<field name="reloadModeDone"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;reloadModeDone&lt;/code&gt; topic.&#xa; used to signal to the manager view that the reload is complete
+</description>
+<tag name="@see">#fireReloadModeDone</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.BInfinityNetwork.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

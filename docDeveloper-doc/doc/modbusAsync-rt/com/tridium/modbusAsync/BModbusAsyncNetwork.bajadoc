@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="modbusAsync" runtimeProfile="rt" qualifiedName="com.tridium.modbusAsync.BModbusAsyncNetwork" name="BModbusAsyncNetwork" packageName="com.tridium.modbusAsync" public="true">
+<description>
+BModbusAsyncNetwork - represents a Modbus&#xa; Async Serial Network.
+</description>
+<tag name="@author">Andy Saunders (Original R2 code) on 04 Nov 99</tag>
+<tag name="@author">Scott Hoye (Upgraded to R3) on 10 Sep 02</tag>
+<tag name="@since">Niagara 3.0 modbusAsync 1.0</tag>
+<extends>
+<type class="com.tridium.modbusCore.client.BModbusClientNetwork"/>
+</extends>
+<implements>
+<type class="javax.baja.serial.BISerialHelperParent"/>
+</implements>
+<property name="interMessageDelay" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;interMessageDelay&lt;/code&gt; property.&#xa; Specifies the minimum amount of time to wait after a response message is&#xa; received before sending the next request message.
+</description>
+<tag name="@see">#getInterMessageDelay</tag>
+<tag name="@see">#setInterMessageDelay</tag>
+</property>
+
+<property name="maxRxInterCharacterDelay" flags="h">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;maxRxInterCharacterDelay&lt;/code&gt; property.&#xa; Specifies the minimum amount of time to wait between rx characters&#xa; before detecting a partial message received.
+</description>
+<tag name="@see">#getMaxRxInterCharacterDelay</tag>
+<tag name="@see">#setMaxRxInterCharacterDelay</tag>
+</property>
+
+<property name="minRxFrameEnd" flags="h">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;minRxFrameEnd&lt;/code&gt; property.&#xa; Specifies the minimum amount of time to wait after last rx character&#xa; before starting next transmit.
+</description>
+<tag name="@see">#getMinRxFrameEnd</tag>
+<tag name="@see">#setMinRxFrameEnd</tag>
+</property>
+
+<property name="rxPriority" flags="h">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;rxPriority&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRxPriority</tag>
+<tag name="@see">#setRxPriority</tag>
+</property>
+
+<property name="serialPortConfig" flags="">
+<type class="javax.baja.serial.BSerialHelper"/>
+<description>
+Slot for the &lt;code&gt;serialPortConfig&lt;/code&gt; property.&#xa; Contains the serial port properties
+</description>
+<tag name="@see">#getSerialPortConfig</tag>
+<tag name="@see">#setSerialPortConfig</tag>
+</property>
+
+<property name="modbusDataMode" flags="">
+<type class="com.tridium.modbusCore.enums.BModbusDataModeEnum"/>
+<description>
+Slot for the &lt;code&gt;modbusDataMode&lt;/code&gt; property.
+</description>
+<tag name="@see">#getModbusDataMode</tag>
+<tag name="@see">#setModbusDataMode</tag>
+</property>
+
+<property name="snifferMode" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;snifferMode&lt;/code&gt; property.&#xa; When true, the default serialdriver implementation&#xa; is that all outgoing serial requests made from&#xa; BSerialNetwork will be disabled, and only recognized,&#xa; unsolicited received serial messages will be processed.&#xa; This is useful for debugging purposes for sniffing&#xa; the serial network to see what recognizable serial&#xa; traffic is on the network without any outgoing requests&#xa; being made from the Niagara station.
+</description>
+<tag name="@see">#getSnifferMode</tag>
+<tag name="@see">#setSnifferMode</tag>
+</property>
+
+<property name="rtuSnifferModeBufferSize" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;rtuSnifferModeBufferSize&lt;/code&gt; property.&#xa; Specifies the receive buffer size&#xa; to use for incoming Modbus RTU mode messages&#xa; when in sniffer mode.
+</description>
+<tag name="@see">#getRtuSnifferModeBufferSize</tag>
+<tag name="@see">#setRtuSnifferModeBufferSize</tag>
+</property>
+
+</class>
+</bajadoc>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.BProgressDialog" name="BProgressDialog" packageName="javax.baja.ui" public="true">
+<description>
+BProgressDialog is used to display a dialog to the user&#xa; during long tasks.  It requires that the actual work&#xa; be done in a background thread.
+</description>
+<tag name="@author">Brian Frank 21 May 02</tag>
+<tag name="@version">$Revision: 16$ $Date: 6/6/11 8:56:47 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.BDialog"/>
+</extends>
+<!-- javax.baja.ui.BProgressDialog(javax.baja.ui.BWidget, java.lang.String, javax.baja.ui.BProgressDialog.Worker, javax.baja.gx.BImage, double, double) -->
+<constructor name="BProgressDialog" protected="true">
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+Owner widget
+</description>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+<description>
+Dialog title
+</description>
+</parameter>
+<parameter name="worker">
+<type class="javax.baja.ui.BProgressDialog$Worker"/>
+<description>
+Worker that updates the progress
+</description>
+</parameter>
+<parameter name="iconImage">
+<type class="javax.baja.gx.BImage"/>
+<description>
+Image icon for dialog
+</description>
+</parameter>
+<parameter name="min">
+<type class="double"/>
+<description>
+Lower progress limit (typically 0)
+</description>
+</parameter>
+<parameter name="max">
+<type class="double"/>
+<description>
+Upper progress limit (typically 100)
+</description>
+</parameter>
+<description>
+Protected constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.BProgressDialog() -->
+<constructor name="BProgressDialog" public="true">
+<description>
+Public no arg constructor.  Do not use directly.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.BProgressDialog.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.open(javax.baja.ui.BWidget, java.lang.String, javax.baja.ui.BProgressDialog.Worker, javax.baja.gx.BImage, int, int) -->
+<method name="open"  public="true" static="true">
+<description>
+Display the progress dialog until either the &#xa; worker finishes or the user cancels.
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="worker">
+<type class="javax.baja.ui.BProgressDialog$Worker"/>
+</parameter>
+<parameter name="icon">
+<type class="javax.baja.gx.BImage"/>
+</parameter>
+<parameter name="min">
+<type class="int"/>
+</parameter>
+<parameter name="max">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.open(javax.baja.ui.BWidget, java.lang.String, javax.baja.ui.BProgressDialog.Worker, javax.baja.gx.BImage) -->
+<method name="open"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;open(owner, title, worker, icon, 0, 100)&lt;/code&gt;
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="worker">
+<type class="javax.baja.ui.BProgressDialog$Worker"/>
+</parameter>
+<parameter name="icon">
+<type class="javax.baja.gx.BImage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.open(javax.baja.ui.BWidget, java.lang.String, javax.baja.ui.BProgressDialog.Worker) -->
+<method name="open"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;open(owner, title, worker, null, 0, 100)&lt;/code&gt;
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="worker">
+<type class="javax.baja.ui.BProgressDialog$Worker"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.&lt;T&gt;openIndeterminate(javax.baja.ui.BWidget, java.lang.String, java.util.function.Function&lt;javax.baja.ui.BProgressDialog, T&gt;) -->
+<method name="openIndeterminate"  public="true" static="true">
+<typeParameters>
+<typeVariable class="T">
+</typeVariable>
+</typeParameters>
+<description>
+Show an indeterminate progress dialog and start and thread to run the supplied function. This method&#xa; will block until the thread has done its work.&#xa; &lt;p&gt;&#xa; An optional argument is returned as a result of the work. The return value may be&#xa; empty if the dialog was cancelled or the function returned a null value.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">javax.baja.ui.BProgressDialog#open(BWidget, String, java.util.function.Function)</tag>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+The owner of the dialog.
+</description>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+<description>
+The title of the progress dialog.
+</description>
+</parameter>
+<parameter name="work">
+<parameterizedType class="java.util.function.Function">
+<args>
+<type class="javax.baja.ui.BProgressDialog"/>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+<description>
+The function to run in the thread. It&#x27;s return value will be returned by this method&#xa;             once the thread has completed its work.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+<description>
+The return argument of the function. The return value will be null if the dialog is cancelled&#xa; or the function returns null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.getMessageLabel() -->
+<method name="getMessageLabel"  public="true">
+<description>
+Get the label used to display the message text.
+</description>
+<return>
+<type class="javax.baja.ui.BLabel"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.getProgressBar() -->
+<method name="getProgressBar"  public="true">
+<description>
+Get the progress bar.
+</description>
+<return>
+<type class="javax.baja.ui.BProgressBar"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.doLayout(javax.baja.ui.BWidget[]) -->
+<method name="doLayout"  public="true">
+<description/>
+<parameter name="kids">
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.windowClosing(javax.baja.ui.event.BWindowEvent) -->
+<method name="windowClosing"  public="true">
+<description/>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWindowEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.cancel() -->
+<method name="cancel"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.paint(javax.baja.gx.Graphics) -->
+<method name="paint"  public="true">
+<description/>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BProgressDialog.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

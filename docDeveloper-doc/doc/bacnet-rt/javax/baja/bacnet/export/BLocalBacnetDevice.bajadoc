@@ -1,0 +1,3409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.export.BLocalBacnetDevice" name="BLocalBacnetDevice" packageName="javax.baja.bacnet.export" public="true">
+<description>
+BLocalBacnetDevice is the representation of Niagara as a Bacnet&#xa; device on the Bacnet internetwork.&#xa; &lt;p&gt;&#xa; Objects in Niagara are exposed to Bacnet through the&#xa; methods defined in the BIBacnetExportObject API.
+</description>
+<tag name="@author">Craig Gemmill on 06 Aug 01</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.BIBacnetObjectContainer"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.export.BacnetPropertyListProvider"/>
+</implements>
+<property name="status" flags="trd">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="faultCause" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<property name="objectId" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the Bacnet Object Identifier used by Niagara in&#xa; Bacnet communications.  Niagara acts as a Bacnet Device Object.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</property>
+
+<property name="systemStatus" flags="rt">
+<type class="javax.baja.bacnet.enums.BBacnetDeviceStatus"/>
+<description>
+Slot for the &lt;code&gt;systemStatus&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSystemStatus</tag>
+<tag name="@see">#setSystemStatus</tag>
+</property>
+
+<property name="vendorName" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;vendorName&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVendorName</tag>
+<tag name="@see">#setVendorName</tag>
+</property>
+
+<property name="vendorId" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;vendorId&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVendorId</tag>
+<tag name="@see">#setVendorId</tag>
+</property>
+
+<property name="modelName" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;modelName&lt;/code&gt; property.
+</description>
+<tag name="@see">#getModelName</tag>
+<tag name="@see">#setModelName</tag>
+</property>
+
+<property name="firmwareRevision" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;firmwareRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFirmwareRevision</tag>
+<tag name="@see">#setFirmwareRevision</tag>
+</property>
+
+<property name="applicationSoftwareVersion" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;applicationSoftwareVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#getApplicationSoftwareVersion</tag>
+<tag name="@see">#setApplicationSoftwareVersion</tag>
+</property>
+
+<property name="location" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;location&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLocation</tag>
+<tag name="@see">#setLocation</tag>
+</property>
+
+<property name="description" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</property>
+
+<property name="deviceUuid" flags="rd">
+<type class="javax.baja.util.BUuid"/>
+<description>
+Slot for the &lt;code&gt;deviceUuid&lt;/code&gt; property.&#xa; Identifies the device regardless of its current VMAC address or device instance number. It shall&#xa; be generated before first deployment of the device in an installation, shall be persistently&#xa; stored across device restarts, and shall not change over the entire lifetime of a device. If a&#xa; device is replaced in an installation, the new device is not required to re-use the UUID of the&#xa; replaced device.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#getDeviceUuid</tag>
+<tag name="@see">#setDeviceUuid</tag>
+</property>
+
+<property name="protocolVersion" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;protocolVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolVersion</tag>
+<tag name="@see">#setProtocolVersion</tag>
+</property>
+
+<property name="protocolRevision" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;protocolRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolRevision</tag>
+<tag name="@see">#setProtocolRevision</tag>
+</property>
+
+<property name="protocolConformanceClass" flags="rh">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;protocolConformanceClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolConformanceClass</tag>
+<tag name="@see">#setProtocolConformanceClass</tag>
+</property>
+
+<property name="protocolServicesSupported" flags="r">
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+<description>
+Slot for the &lt;code&gt;protocolServicesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolServicesSupported</tag>
+<tag name="@see">#setProtocolServicesSupported</tag>
+</property>
+
+<property name="protocolObjectTypesSupported" flags="r">
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+<description>
+Slot for the &lt;code&gt;protocolObjectTypesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolObjectTypesSupported</tag>
+<tag name="@see">#setProtocolObjectTypesSupported</tag>
+</property>
+
+<property name="maxAPDULengthAccepted" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxAPDULengthAccepted&lt;/code&gt; property.&#xa; maxAPDULengthAccepted is the maximum number of bytes that may be&#xa; contained in a single incoming Bacnet application message.
+</description>
+<tag name="@see">#getMaxAPDULengthAccepted</tag>
+<tag name="@see">#setMaxAPDULengthAccepted</tag>
+</property>
+
+<property name="segmentationSupported" flags="r">
+<type class="javax.baja.bacnet.enums.BBacnetSegmentation"/>
+<description>
+Slot for the &lt;code&gt;segmentationSupported&lt;/code&gt; property.&#xa; segmentationSupported states the level of message segmentation&#xa; supported by Niagara.
+</description>
+<tag name="@see">#getSegmentationSupported</tag>
+<tag name="@see">#setSegmentationSupported</tag>
+</property>
+
+<property name="maxSegmentsAccepted" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxSegmentsAccepted&lt;/code&gt; property.&#xa; maximum number of segments that can be accepted in an APDU.
+</description>
+<tag name="@see">#getMaxSegmentsAccepted</tag>
+<tag name="@see">#setMaxSegmentsAccepted</tag>
+</property>
+
+<property name="apduSegmentTimeout" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;apduSegmentTimeout&lt;/code&gt; property.&#xa; apduSegmentTimeout is the time in milliseconds between&#xa; retransmissions of one segment of an APDU.
+</description>
+<tag name="@see">#getApduSegmentTimeout</tag>
+<tag name="@see">#setApduSegmentTimeout</tag>
+</property>
+
+<property name="apduTimeout" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;apduTimeout&lt;/code&gt; property.&#xa; apduTimeout is the time in milliseconds between retransmissions&#xa; of an APDU.
+</description>
+<tag name="@see">#getApduTimeout</tag>
+<tag name="@see">#setApduTimeout</tag>
+</property>
+
+<property name="numberOfApduRetries" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;numberOfApduRetries&lt;/code&gt; property.&#xa; numberOfApduRetries indicates the number of retransmissions&#xa; of an APDU that will be attempted before the transaction is abandoned.
+</description>
+<tag name="@see">#getNumberOfApduRetries</tag>
+<tag name="@see">#setNumberOfApduRetries</tag>
+</property>
+
+<property name="deviceAddressBinding" flags="hrt">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+<description>
+Slot for the &lt;code&gt;deviceAddressBinding&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDeviceAddressBinding</tag>
+<tag name="@see">#setDeviceAddressBinding</tag>
+</property>
+
+<property name="databaseRevision" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;databaseRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDatabaseRevision</tag>
+<tag name="@see">#setDatabaseRevision</tag>
+</property>
+
+<property name="configurationFiles" flags="rh">
+<type class="javax.baja.bacnet.datatypes.BBacnetArray"/>
+<description>
+Slot for the &lt;code&gt;configurationFiles&lt;/code&gt; property.
+</description>
+<tag name="@see">#getConfigurationFiles</tag>
+<tag name="@see">#setConfigurationFiles</tag>
+</property>
+
+<property name="lastRestoreTime" flags="r">
+<type class="javax.baja.bacnet.datatypes.BBacnetTimeStamp"/>
+<description>
+Slot for the &lt;code&gt;lastRestoreTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastRestoreTime</tag>
+<tag name="@see">#setLastRestoreTime</tag>
+</property>
+
+<property name="backupFailureTimeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;backupFailureTimeout&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackupFailureTimeout</tag>
+<tag name="@see">#setBackupFailureTimeout</tag>
+</property>
+
+<property name="backupPreparationTime" flags="r">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;backupPreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackupPreparationTime</tag>
+<tag name="@see">#setBackupPreparationTime</tag>
+</property>
+
+<property name="restorePreparationTime" flags="r">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;restorePreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRestorePreparationTime</tag>
+<tag name="@see">#setRestorePreparationTime</tag>
+</property>
+
+<property name="restoreCompletionTime" flags="r">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;restoreCompletionTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRestoreCompletionTime</tag>
+<tag name="@see">#setRestoreCompletionTime</tag>
+</property>
+
+<property name="backupAndRestoreState" flags="tr">
+<type class="javax.baja.bacnet.enums.BBacnetBackupState"/>
+<description>
+Slot for the &lt;code&gt;backupAndRestoreState&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackupAndRestoreState</tag>
+<tag name="@see">#setBackupAndRestoreState</tag>
+</property>
+
+<property name="activeCovSubscriptions" flags="hrt">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+<description>
+Slot for the &lt;code&gt;activeCovSubscriptions&lt;/code&gt; property.&#xa; list of subscribed Cov recipients.
+</description>
+<tag name="@see">#getActiveCovSubscriptions</tag>
+<tag name="@see">#setActiveCovSubscriptions</tag>
+</property>
+
+<property name="characterSet" flags="">
+<type class="javax.baja.bacnet.enums.BCharacterSetEncoding"/>
+<description>
+Slot for the &lt;code&gt;characterSet&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCharacterSet</tag>
+<tag name="@see">#setCharacterSet</tag>
+</property>
+
+<property name="enumerationList" flags="">
+<type class="javax.baja.bacnet.enums.BExtensibleEnumList"/>
+<description>
+Slot for the &lt;code&gt;enumerationList&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnumerationList</tag>
+<tag name="@see">#setEnumerationList</tag>
+</property>
+
+<property name="exportTable" flags="">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+Slot for the &lt;code&gt;exportTable&lt;/code&gt; property.
+</description>
+<tag name="@see">#getExportTable</tag>
+<tag name="@see">#setExportTable</tag>
+</property>
+
+<property name="virtual" flags="h">
+<type class="javax.baja.bacnet.virtual.BLocalBacnetVirtualGateway"/>
+<description>
+Slot for the &lt;code&gt;virtual&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVirtual</tag>
+<tag name="@see">#setVirtual</tag>
+</property>
+
+<property name="covPropertyPollRate" flags="h">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;covPropertyPollRate&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCovPropertyPollRate</tag>
+<tag name="@see">#setCovPropertyPollRate</tag>
+</property>
+
+<property name="timeSynchronizationRecipients" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+<description>
+Slot for the &lt;code&gt;timeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeSynchronizationRecipients</tag>
+<tag name="@see">#setTimeSynchronizationRecipients</tag>
+</property>
+
+<property name="timeSynchronizationInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;timeSynchronizationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeSynchronizationInterval</tag>
+<tag name="@see">#setTimeSynchronizationInterval</tag>
+</property>
+
+<property name="alignIntervals" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;alignIntervals&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlignIntervals</tag>
+<tag name="@see">#setAlignIntervals</tag>
+</property>
+
+<property name="intervalOffset" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;intervalOffset&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIntervalOffset</tag>
+<tag name="@see">#setIntervalOffset</tag>
+</property>
+
+<property name="utcTimeSynchronizationRecipients" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+<description>
+Slot for the &lt;code&gt;utcTimeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUtcTimeSynchronizationRecipients</tag>
+<tag name="@see">#setUtcTimeSynchronizationRecipients</tag>
+</property>
+
+<property name="lastRestartReason" flags="">
+<type class="javax.baja.bacnet.enums.BBacnetRestartReason"/>
+<description>
+Slot for the &lt;code&gt;lastRestartReason&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastRestartReason</tag>
+<tag name="@see">#setLastRestartReason</tag>
+</property>
+
+<property name="timeOfDeviceRestart" flags="t">
+<type class="javax.baja.bacnet.datatypes.BBacnetTimeStamp"/>
+<description>
+Slot for the &lt;code&gt;timeOfDeviceRestart&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeOfDeviceRestart</tag>
+<tag name="@see">#setTimeOfDeviceRestart</tag>
+</property>
+
+<property name="restartNotificationRecipients" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+<description>
+Slot for the &lt;code&gt;restartNotificationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRestartNotificationRecipients</tag>
+<tag name="@see">#setRestartNotificationRecipients</tag>
+</property>
+
+<action name="sendIAm" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;sendIAm&lt;/code&gt; action.
+</description>
+<tag name="@see">#sendIAm()</tag>
+</action>
+
+<action name="setBackupMode" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;setBackupMode&lt;/code&gt; action.
+</description>
+<tag name="@see">#setBackupMode(BBoolean parameter)</tag>
+</action>
+
+<action name="setRestoreMode" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;setRestoreMode&lt;/code&gt; action.
+</description>
+<tag name="@see">#setRestoreMode(BBoolean parameter)</tag>
+</action>
+
+<action name="println" flags="">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;println&lt;/code&gt; action.
+</description>
+<tag name="@see">#println(BString parameter)</tag>
+</action>
+
+<action name="sendTimeSynch" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;sendTimeSynch&lt;/code&gt; action.&#xa; action for automatic time synch sending.
+</description>
+<tag name="@see">#sendTimeSynch()</tag>
+</action>
+
+<action name="checkDuplicates" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;checkDuplicates&lt;/code&gt; action.&#xa; action for checking for duplicate export descriptors
+</description>
+<tag name="@see">#checkDuplicates()</tag>
+</action>
+
+<action name="sendRestartNotifications" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;sendRestartNotifications&lt;/code&gt; action.&#xa; action for sending a restart notification
+</description>
+<tag name="@see">#sendRestartNotifications()</tag>
+</action>
+
+<action name="changeDeviceUuid" flags="c">
+<parameter name="parameter">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;changeDeviceUuid&lt;/code&gt; action.
+</description>
+<tag name="@see">#changeDeviceUuid(BUuid parameter)</tag>
+</action>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice() -->
+<constructor name="BLocalBacnetDevice" public="true">
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getObjectId() -->
+<method name="getObjectId"  public="true">
+<description>
+Get the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the Bacnet Object Identifier used by Niagara in&#xa; Bacnet communications.  Niagara acts as a Bacnet Device Object.
+</description>
+<tag name="@see">#objectId</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setObjectId(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="setObjectId"  public="true">
+<description>
+Set the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the Bacnet Object Identifier used by Niagara in&#xa; Bacnet communications.  Niagara acts as a Bacnet Device Object.
+</description>
+<tag name="@see">#objectId</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getSystemStatus() -->
+<method name="getSystemStatus"  public="true">
+<description>
+Get the &lt;code&gt;systemStatus&lt;/code&gt; property.
+</description>
+<tag name="@see">#systemStatus</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BBacnetDeviceStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setSystemStatus(javax.baja.bacnet.enums.BBacnetDeviceStatus) -->
+<method name="setSystemStatus"  public="true">
+<description>
+Set the &lt;code&gt;systemStatus&lt;/code&gt; property.
+</description>
+<tag name="@see">#systemStatus</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BBacnetDeviceStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getVendorName() -->
+<method name="getVendorName"  public="true">
+<description>
+Get the &lt;code&gt;vendorName&lt;/code&gt; property.
+</description>
+<tag name="@see">#vendorName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setVendorName(java.lang.String) -->
+<method name="setVendorName"  public="true">
+<description>
+Set the &lt;code&gt;vendorName&lt;/code&gt; property.
+</description>
+<tag name="@see">#vendorName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getVendorId() -->
+<method name="getVendorId"  public="true">
+<description>
+Get the &lt;code&gt;vendorId&lt;/code&gt; property.
+</description>
+<tag name="@see">#vendorId</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setVendorId(int) -->
+<method name="setVendorId"  public="true">
+<description>
+Set the &lt;code&gt;vendorId&lt;/code&gt; property.
+</description>
+<tag name="@see">#vendorId</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getModelName() -->
+<method name="getModelName"  public="true">
+<description>
+Get the &lt;code&gt;modelName&lt;/code&gt; property.
+</description>
+<tag name="@see">#modelName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setModelName(java.lang.String) -->
+<method name="setModelName"  public="true">
+<description>
+Set the &lt;code&gt;modelName&lt;/code&gt; property.
+</description>
+<tag name="@see">#modelName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getFirmwareRevision() -->
+<method name="getFirmwareRevision"  public="true">
+<description>
+Get the &lt;code&gt;firmwareRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#firmwareRevision</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setFirmwareRevision(java.lang.String) -->
+<method name="setFirmwareRevision"  public="true">
+<description>
+Set the &lt;code&gt;firmwareRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#firmwareRevision</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getApplicationSoftwareVersion() -->
+<method name="getApplicationSoftwareVersion"  public="true">
+<description>
+Get the &lt;code&gt;applicationSoftwareVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#applicationSoftwareVersion</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setApplicationSoftwareVersion(java.lang.String) -->
+<method name="setApplicationSoftwareVersion"  public="true">
+<description>
+Set the &lt;code&gt;applicationSoftwareVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#applicationSoftwareVersion</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getLocation() -->
+<method name="getLocation"  public="true">
+<description>
+Get the &lt;code&gt;location&lt;/code&gt; property.
+</description>
+<tag name="@see">#location</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setLocation(java.lang.String) -->
+<method name="setLocation"  public="true">
+<description>
+Set the &lt;code&gt;location&lt;/code&gt; property.
+</description>
+<tag name="@see">#location</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getDescription() -->
+<method name="getDescription"  public="true">
+<description>
+Get the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#description</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setDescription(java.lang.String) -->
+<method name="setDescription"  public="true">
+<description>
+Set the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#description</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getDeviceUuid() -->
+<method name="getDeviceUuid"  public="true">
+<description>
+Get the &lt;code&gt;deviceUuid&lt;/code&gt; property.&#xa; Identifies the device regardless of its current VMAC address or device instance number. It shall&#xa; be generated before first deployment of the device in an installation, shall be persistently&#xa; stored across device restarts, and shall not change over the entire lifetime of a device. If a&#xa; device is replaced in an installation, the new device is not required to re-use the UUID of the&#xa; replaced device.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#deviceUuid</tag>
+<return>
+<type class="javax.baja.util.BUuid"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setDeviceUuid(javax.baja.util.BUuid) -->
+<method name="setDeviceUuid"  public="true">
+<description>
+Set the &lt;code&gt;deviceUuid&lt;/code&gt; property.&#xa; Identifies the device regardless of its current VMAC address or device instance number. It shall&#xa; be generated before first deployment of the device in an installation, shall be persistently&#xa; stored across device restarts, and shall not change over the entire lifetime of a device. If a&#xa; device is replaced in an installation, the new device is not required to re-use the UUID of the&#xa; replaced device.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#deviceUuid</tag>
+<parameter name="v">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getProtocolVersion() -->
+<method name="getProtocolVersion"  public="true">
+<description>
+Get the &lt;code&gt;protocolVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolVersion</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setProtocolVersion(int) -->
+<method name="setProtocolVersion"  public="true">
+<description>
+Set the &lt;code&gt;protocolVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolVersion</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getProtocolRevision() -->
+<method name="getProtocolRevision"  public="true">
+<description>
+Get the &lt;code&gt;protocolRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolRevision</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setProtocolRevision(int) -->
+<method name="setProtocolRevision"  public="true">
+<description>
+Set the &lt;code&gt;protocolRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolRevision</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getProtocolConformanceClass() -->
+<method name="getProtocolConformanceClass"  public="true">
+<description>
+Get the &lt;code&gt;protocolConformanceClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolConformanceClass</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setProtocolConformanceClass(int) -->
+<method name="setProtocolConformanceClass"  public="true">
+<description>
+Set the &lt;code&gt;protocolConformanceClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolConformanceClass</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getProtocolServicesSupported() -->
+<method name="getProtocolServicesSupported"  public="true">
+<description>
+Get the &lt;code&gt;protocolServicesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolServicesSupported</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setProtocolServicesSupported(javax.baja.bacnet.datatypes.BBacnetBitString) -->
+<method name="setProtocolServicesSupported"  public="true">
+<description>
+Set the &lt;code&gt;protocolServicesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolServicesSupported</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getProtocolObjectTypesSupported() -->
+<method name="getProtocolObjectTypesSupported"  public="true">
+<description>
+Get the &lt;code&gt;protocolObjectTypesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolObjectTypesSupported</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setProtocolObjectTypesSupported(javax.baja.bacnet.datatypes.BBacnetBitString) -->
+<method name="setProtocolObjectTypesSupported"  public="true">
+<description>
+Set the &lt;code&gt;protocolObjectTypesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#protocolObjectTypesSupported</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getMaxAPDULengthAccepted() -->
+<method name="getMaxAPDULengthAccepted"  public="true">
+<description>
+Get the &lt;code&gt;maxAPDULengthAccepted&lt;/code&gt; property.&#xa; maxAPDULengthAccepted is the maximum number of bytes that may be&#xa; contained in a single incoming Bacnet application message.
+</description>
+<tag name="@see">#maxAPDULengthAccepted</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setMaxAPDULengthAccepted(int) -->
+<method name="setMaxAPDULengthAccepted"  public="true">
+<description>
+Set the &lt;code&gt;maxAPDULengthAccepted&lt;/code&gt; property.&#xa; maxAPDULengthAccepted is the maximum number of bytes that may be&#xa; contained in a single incoming Bacnet application message.
+</description>
+<tag name="@see">#maxAPDULengthAccepted</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getSegmentationSupported() -->
+<method name="getSegmentationSupported"  public="true">
+<description>
+Get the &lt;code&gt;segmentationSupported&lt;/code&gt; property.&#xa; segmentationSupported states the level of message segmentation&#xa; supported by Niagara.
+</description>
+<tag name="@see">#segmentationSupported</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BBacnetSegmentation"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setSegmentationSupported(javax.baja.bacnet.enums.BBacnetSegmentation) -->
+<method name="setSegmentationSupported"  public="true">
+<description>
+Set the &lt;code&gt;segmentationSupported&lt;/code&gt; property.&#xa; segmentationSupported states the level of message segmentation&#xa; supported by Niagara.
+</description>
+<tag name="@see">#segmentationSupported</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BBacnetSegmentation"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getMaxSegmentsAccepted() -->
+<method name="getMaxSegmentsAccepted"  public="true">
+<description>
+Get the &lt;code&gt;maxSegmentsAccepted&lt;/code&gt; property.&#xa; maximum number of segments that can be accepted in an APDU.
+</description>
+<tag name="@see">#maxSegmentsAccepted</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setMaxSegmentsAccepted(int) -->
+<method name="setMaxSegmentsAccepted"  public="true">
+<description>
+Set the &lt;code&gt;maxSegmentsAccepted&lt;/code&gt; property.&#xa; maximum number of segments that can be accepted in an APDU.
+</description>
+<tag name="@see">#maxSegmentsAccepted</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getApduSegmentTimeout() -->
+<method name="getApduSegmentTimeout"  public="true">
+<description>
+Get the &lt;code&gt;apduSegmentTimeout&lt;/code&gt; property.&#xa; apduSegmentTimeout is the time in milliseconds between&#xa; retransmissions of one segment of an APDU.
+</description>
+<tag name="@see">#apduSegmentTimeout</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setApduSegmentTimeout(int) -->
+<method name="setApduSegmentTimeout"  public="true">
+<description>
+Set the &lt;code&gt;apduSegmentTimeout&lt;/code&gt; property.&#xa; apduSegmentTimeout is the time in milliseconds between&#xa; retransmissions of one segment of an APDU.
+</description>
+<tag name="@see">#apduSegmentTimeout</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getApduTimeout() -->
+<method name="getApduTimeout"  public="true">
+<description>
+Get the &lt;code&gt;apduTimeout&lt;/code&gt; property.&#xa; apduTimeout is the time in milliseconds between retransmissions&#xa; of an APDU.
+</description>
+<tag name="@see">#apduTimeout</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setApduTimeout(int) -->
+<method name="setApduTimeout"  public="true">
+<description>
+Set the &lt;code&gt;apduTimeout&lt;/code&gt; property.&#xa; apduTimeout is the time in milliseconds between retransmissions&#xa; of an APDU.
+</description>
+<tag name="@see">#apduTimeout</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getNumberOfApduRetries() -->
+<method name="getNumberOfApduRetries"  public="true">
+<description>
+Get the &lt;code&gt;numberOfApduRetries&lt;/code&gt; property.&#xa; numberOfApduRetries indicates the number of retransmissions&#xa; of an APDU that will be attempted before the transaction is abandoned.
+</description>
+<tag name="@see">#numberOfApduRetries</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setNumberOfApduRetries(int) -->
+<method name="setNumberOfApduRetries"  public="true">
+<description>
+Set the &lt;code&gt;numberOfApduRetries&lt;/code&gt; property.&#xa; numberOfApduRetries indicates the number of retransmissions&#xa; of an APDU that will be attempted before the transaction is abandoned.
+</description>
+<tag name="@see">#numberOfApduRetries</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getDeviceAddressBinding() -->
+<method name="getDeviceAddressBinding"  public="true">
+<description>
+Get the &lt;code&gt;deviceAddressBinding&lt;/code&gt; property.
+</description>
+<tag name="@see">#deviceAddressBinding</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setDeviceAddressBinding(javax.baja.bacnet.datatypes.BBacnetListOf) -->
+<method name="setDeviceAddressBinding"  public="true">
+<description>
+Set the &lt;code&gt;deviceAddressBinding&lt;/code&gt; property.
+</description>
+<tag name="@see">#deviceAddressBinding</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getDatabaseRevision() -->
+<method name="getDatabaseRevision"  public="true">
+<description>
+Get the &lt;code&gt;databaseRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#databaseRevision</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setDatabaseRevision(int) -->
+<method name="setDatabaseRevision"  public="true">
+<description>
+Set the &lt;code&gt;databaseRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#databaseRevision</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getConfigurationFiles() -->
+<method name="getConfigurationFiles"  public="true">
+<description>
+Get the &lt;code&gt;configurationFiles&lt;/code&gt; property.
+</description>
+<tag name="@see">#configurationFiles</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetArray"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setConfigurationFiles(javax.baja.bacnet.datatypes.BBacnetArray) -->
+<method name="setConfigurationFiles"  public="true">
+<description>
+Set the &lt;code&gt;configurationFiles&lt;/code&gt; property.
+</description>
+<tag name="@see">#configurationFiles</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetArray"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getLastRestoreTime() -->
+<method name="getLastRestoreTime"  public="true">
+<description>
+Get the &lt;code&gt;lastRestoreTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastRestoreTime</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetTimeStamp"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setLastRestoreTime(javax.baja.bacnet.datatypes.BBacnetTimeStamp) -->
+<method name="setLastRestoreTime"  public="true">
+<description>
+Set the &lt;code&gt;lastRestoreTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastRestoreTime</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetTimeStamp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getBackupFailureTimeout() -->
+<method name="getBackupFailureTimeout"  public="true">
+<description>
+Get the &lt;code&gt;backupFailureTimeout&lt;/code&gt; property.
+</description>
+<tag name="@see">#backupFailureTimeout</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setBackupFailureTimeout(javax.baja.sys.BRelTime) -->
+<method name="setBackupFailureTimeout"  public="true">
+<description>
+Set the &lt;code&gt;backupFailureTimeout&lt;/code&gt; property.
+</description>
+<tag name="@see">#backupFailureTimeout</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getBackupPreparationTime() -->
+<method name="getBackupPreparationTime"  public="true">
+<description>
+Get the &lt;code&gt;backupPreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#backupPreparationTime</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setBackupPreparationTime(javax.baja.sys.BRelTime) -->
+<method name="setBackupPreparationTime"  public="true">
+<description>
+Set the &lt;code&gt;backupPreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#backupPreparationTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getRestorePreparationTime() -->
+<method name="getRestorePreparationTime"  public="true">
+<description>
+Get the &lt;code&gt;restorePreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#restorePreparationTime</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setRestorePreparationTime(javax.baja.sys.BRelTime) -->
+<method name="setRestorePreparationTime"  public="true">
+<description>
+Set the &lt;code&gt;restorePreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#restorePreparationTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getRestoreCompletionTime() -->
+<method name="getRestoreCompletionTime"  public="true">
+<description>
+Get the &lt;code&gt;restoreCompletionTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#restoreCompletionTime</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setRestoreCompletionTime(javax.baja.sys.BRelTime) -->
+<method name="setRestoreCompletionTime"  public="true">
+<description>
+Set the &lt;code&gt;restoreCompletionTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#restoreCompletionTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getBackupAndRestoreState() -->
+<method name="getBackupAndRestoreState"  public="true">
+<description>
+Get the &lt;code&gt;backupAndRestoreState&lt;/code&gt; property.
+</description>
+<tag name="@see">#backupAndRestoreState</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BBacnetBackupState"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setBackupAndRestoreState(javax.baja.bacnet.enums.BBacnetBackupState) -->
+<method name="setBackupAndRestoreState"  public="true">
+<description>
+Set the &lt;code&gt;backupAndRestoreState&lt;/code&gt; property.
+</description>
+<tag name="@see">#backupAndRestoreState</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BBacnetBackupState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getActiveCovSubscriptions() -->
+<method name="getActiveCovSubscriptions"  public="true">
+<description>
+Get the &lt;code&gt;activeCovSubscriptions&lt;/code&gt; property.&#xa; list of subscribed Cov recipients.
+</description>
+<tag name="@see">#activeCovSubscriptions</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setActiveCovSubscriptions(javax.baja.bacnet.datatypes.BBacnetListOf) -->
+<method name="setActiveCovSubscriptions"  public="true">
+<description>
+Set the &lt;code&gt;activeCovSubscriptions&lt;/code&gt; property.&#xa; list of subscribed Cov recipients.
+</description>
+<tag name="@see">#activeCovSubscriptions</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getCharacterSet() -->
+<method name="getCharacterSet"  public="true">
+<description>
+Get the &lt;code&gt;characterSet&lt;/code&gt; property.
+</description>
+<tag name="@see">#characterSet</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BCharacterSetEncoding"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setCharacterSet(javax.baja.bacnet.enums.BCharacterSetEncoding) -->
+<method name="setCharacterSet"  public="true">
+<description>
+Set the &lt;code&gt;characterSet&lt;/code&gt; property.
+</description>
+<tag name="@see">#characterSet</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BCharacterSetEncoding"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getEnumerationList() -->
+<method name="getEnumerationList"  public="true">
+<description>
+Get the &lt;code&gt;enumerationList&lt;/code&gt; property.
+</description>
+<tag name="@see">#enumerationList</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BExtensibleEnumList"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setEnumerationList(javax.baja.bacnet.enums.BExtensibleEnumList) -->
+<method name="setEnumerationList"  public="true">
+<description>
+Set the &lt;code&gt;enumerationList&lt;/code&gt; property.
+</description>
+<tag name="@see">#enumerationList</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BExtensibleEnumList"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getExportTable() -->
+<method name="getExportTable"  public="true">
+<description>
+Get the &lt;code&gt;exportTable&lt;/code&gt; property.
+</description>
+<tag name="@see">#exportTable</tag>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setExportTable(javax.baja.sys.BComponent) -->
+<method name="setExportTable"  public="true">
+<description>
+Set the &lt;code&gt;exportTable&lt;/code&gt; property.
+</description>
+<tag name="@see">#exportTable</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getVirtual() -->
+<method name="getVirtual"  public="true">
+<description>
+Get the &lt;code&gt;virtual&lt;/code&gt; property.
+</description>
+<tag name="@see">#virtual</tag>
+<return>
+<type class="javax.baja.bacnet.virtual.BLocalBacnetVirtualGateway"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setVirtual(javax.baja.bacnet.virtual.BLocalBacnetVirtualGateway) -->
+<method name="setVirtual"  public="true">
+<description>
+Set the &lt;code&gt;virtual&lt;/code&gt; property.
+</description>
+<tag name="@see">#virtual</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.virtual.BLocalBacnetVirtualGateway"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getCovPropertyPollRate() -->
+<method name="getCovPropertyPollRate"  public="true">
+<description>
+Get the &lt;code&gt;covPropertyPollRate&lt;/code&gt; property.
+</description>
+<tag name="@see">#covPropertyPollRate</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setCovPropertyPollRate(javax.baja.sys.BRelTime) -->
+<method name="setCovPropertyPollRate"  public="true">
+<description>
+Set the &lt;code&gt;covPropertyPollRate&lt;/code&gt; property.
+</description>
+<tag name="@see">#covPropertyPollRate</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getTimeSynchronizationRecipients() -->
+<method name="getTimeSynchronizationRecipients"  public="true">
+<description>
+Get the &lt;code&gt;timeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeSynchronizationRecipients</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setTimeSynchronizationRecipients(javax.baja.bacnet.datatypes.BBacnetListOf) -->
+<method name="setTimeSynchronizationRecipients"  public="true">
+<description>
+Set the &lt;code&gt;timeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeSynchronizationRecipients</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getTimeSynchronizationInterval() -->
+<method name="getTimeSynchronizationInterval"  public="true">
+<description>
+Get the &lt;code&gt;timeSynchronizationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeSynchronizationInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setTimeSynchronizationInterval(javax.baja.sys.BRelTime) -->
+<method name="setTimeSynchronizationInterval"  public="true">
+<description>
+Set the &lt;code&gt;timeSynchronizationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeSynchronizationInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getAlignIntervals() -->
+<method name="getAlignIntervals"  public="true">
+<description>
+Get the &lt;code&gt;alignIntervals&lt;/code&gt; property.
+</description>
+<tag name="@see">#alignIntervals</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setAlignIntervals(boolean) -->
+<method name="setAlignIntervals"  public="true">
+<description>
+Set the &lt;code&gt;alignIntervals&lt;/code&gt; property.
+</description>
+<tag name="@see">#alignIntervals</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getIntervalOffset() -->
+<method name="getIntervalOffset"  public="true">
+<description>
+Get the &lt;code&gt;intervalOffset&lt;/code&gt; property.
+</description>
+<tag name="@see">#intervalOffset</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setIntervalOffset(int) -->
+<method name="setIntervalOffset"  public="true">
+<description>
+Set the &lt;code&gt;intervalOffset&lt;/code&gt; property.
+</description>
+<tag name="@see">#intervalOffset</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getUtcTimeSynchronizationRecipients() -->
+<method name="getUtcTimeSynchronizationRecipients"  public="true">
+<description>
+Get the &lt;code&gt;utcTimeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#utcTimeSynchronizationRecipients</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setUtcTimeSynchronizationRecipients(javax.baja.bacnet.datatypes.BBacnetListOf) -->
+<method name="setUtcTimeSynchronizationRecipients"  public="true">
+<description>
+Set the &lt;code&gt;utcTimeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#utcTimeSynchronizationRecipients</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getLastRestartReason() -->
+<method name="getLastRestartReason"  public="true">
+<description>
+Get the &lt;code&gt;lastRestartReason&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastRestartReason</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BBacnetRestartReason"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setLastRestartReason(javax.baja.bacnet.enums.BBacnetRestartReason) -->
+<method name="setLastRestartReason"  public="true">
+<description>
+Set the &lt;code&gt;lastRestartReason&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastRestartReason</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BBacnetRestartReason"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getTimeOfDeviceRestart() -->
+<method name="getTimeOfDeviceRestart"  public="true">
+<description>
+Get the &lt;code&gt;timeOfDeviceRestart&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeOfDeviceRestart</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetTimeStamp"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setTimeOfDeviceRestart(javax.baja.bacnet.datatypes.BBacnetTimeStamp) -->
+<method name="setTimeOfDeviceRestart"  public="true">
+<description>
+Set the &lt;code&gt;timeOfDeviceRestart&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeOfDeviceRestart</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetTimeStamp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getRestartNotificationRecipients() -->
+<method name="getRestartNotificationRecipients"  public="true">
+<description>
+Get the &lt;code&gt;restartNotificationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#restartNotificationRecipients</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setRestartNotificationRecipients(javax.baja.bacnet.datatypes.BBacnetListOf) -->
+<method name="setRestartNotificationRecipients"  public="true">
+<description>
+Set the &lt;code&gt;restartNotificationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#restartNotificationRecipients</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetListOf"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.sendIAm() -->
+<method name="sendIAm"  public="true">
+<description>
+Invoke the &lt;code&gt;sendIAm&lt;/code&gt; action.
+</description>
+<tag name="@see">#sendIAm</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setBackupMode(javax.baja.sys.BBoolean) -->
+<method name="setBackupMode"  public="true">
+<description>
+Invoke the &lt;code&gt;setBackupMode&lt;/code&gt; action.
+</description>
+<tag name="@see">#setBackupMode</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setRestoreMode(javax.baja.sys.BBoolean) -->
+<method name="setRestoreMode"  public="true">
+<description>
+Invoke the &lt;code&gt;setRestoreMode&lt;/code&gt; action.
+</description>
+<tag name="@see">#setRestoreMode</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.println(javax.baja.sys.BString) -->
+<method name="println"  public="true">
+<description>
+Invoke the &lt;code&gt;println&lt;/code&gt; action.
+</description>
+<tag name="@see">#println</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.sendTimeSynch() -->
+<method name="sendTimeSynch"  public="true">
+<description>
+Invoke the &lt;code&gt;sendTimeSynch&lt;/code&gt; action.&#xa; action for automatic time synch sending.
+</description>
+<tag name="@see">#sendTimeSynch</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.checkDuplicates() -->
+<method name="checkDuplicates"  public="true">
+<description>
+Invoke the &lt;code&gt;checkDuplicates&lt;/code&gt; action.&#xa; action for checking for duplicate export descriptors
+</description>
+<tag name="@see">#checkDuplicates</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.sendRestartNotifications() -->
+<method name="sendRestartNotifications"  public="true">
+<description>
+Invoke the &lt;code&gt;sendRestartNotifications&lt;/code&gt; action.&#xa; action for sending a restart notification
+</description>
+<tag name="@see">#sendRestartNotifications</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.changeDeviceUuid(javax.baja.util.BUuid) -->
+<method name="changeDeviceUuid"  public="true">
+<description>
+Invoke the &lt;code&gt;changeDeviceUuid&lt;/code&gt; action.
+</description>
+<tag name="@see">#changeDeviceUuid</tag>
+<parameter name="parameter">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To String.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Started.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.descendantsStarted() -->
+<method name="descendantsStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Descendants Started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Stopped.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Property Changed.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.atSteadyState() -->
+<method name="atSteadyState"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This callback is invoked during station bootstrap after&#xa; the steady state timeout has expired.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.clockChanged(javax.baja.sys.BRelTime) -->
+<method name="clockChanged"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Clock changed.  Need to resynchronize time synchronization.
+</description>
+<parameter name="shift">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BLocalBacnetDevice can only be placed directly inside a BBacnetNetwork.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the nav children - filter out activeCovSubscriptions&#xa; and deviceAddressBinding.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getUuid() -->
+<method name="getUuid"  public="true">
+<description/>
+<return>
+<type class="java.util.UUID"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getObject() -->
+<method name="getObject"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the exported object.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getObjectOrd() -->
+<method name="getObjectOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the BOrd to the exported object.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setObjectOrd(javax.baja.naming.BOrd, javax.baja.sys.Context) -->
+<method name="setObjectOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the BOrd to the exported object.
+</description>
+<parameter name="objectOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getObjectName() -->
+<method name="getObjectName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the Object_Name property.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setObjectName(java.lang.String) -->
+<method name="setObjectName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the Object_Name property.
+</description>
+<parameter name="objectName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.checkConfiguration() -->
+<method name="checkConfiguration"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Check the configuration of this object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.export(javax.baja.bacnet.export.BIBacnetExportObject) -->
+<method name="export"  public="true">
+<description>
+Export a server object.
+</description>
+<parameter name="object">
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+<description>
+the object to be exported.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+null if the object exported ok, or a String describing the error.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.exportByOrd(javax.baja.bacnet.export.BIBacnetExportObject) -->
+<method name="exportByOrd"  public="true">
+<description>
+Export a server object only for it&#x27;s Ord.
+</description>
+<parameter name="object">
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+<description>
+the object to be exported.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+null if the object exported ok, or a String describing the error.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.unexport(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, java.lang.String, javax.baja.bacnet.export.BIBacnetExportObject) -->
+<method name="unexport"  public="true">
+<description>
+Unexport a server object.
+</description>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+the objectId that was used as the key to this object.
+</description>
+</parameter>
+<parameter name="objectName">
+<type class="java.lang.String"/>
+<description>
+the objectName that was used as the key to this object.
+</description>
+</parameter>
+<parameter name="object">
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+<description>
+the object to be unexported.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doCheckDuplicates() -->
+<method name="doCheckDuplicates"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.lookupBacnetObject(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="lookupBacnetObject"  public="true" final="true">
+<description>
+Look up a BACnet server object by its Object Identifier.
+</description>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+<description>
+the server object with that id, or null if not found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.lookupBacnetObject(java.lang.String) -->
+<method name="lookupBacnetObject"  public="true" final="true">
+<description>
+Look up a BACnet server object by its Object Name.
+</description>
+<parameter name="objectName">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+<description>
+the server object with that name, or null if not found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.lookupBacnetObjectId(javax.baja.naming.BOrd) -->
+<method name="lookupBacnetObjectId"  public="true" final="true">
+<description>
+Look up a BACnet Object Identifier by the object&#x27;s ord.
+</description>
+<parameter name="objectOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+the server objectId, or null if not found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getNextInstance(int) -->
+<method name="getNextInstance"  public="true" final="true">
+<description>
+Get the next available instance number of the given Object Type.
+</description>
+<parameter name="objectType">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the next unused instance number.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.incrementDatabaseRevision() -->
+<method name="incrementDatabaseRevision"  public="true" final="true">
+<description>
+Convenience for incrementing the Database_Revision property.&#xa; Use whenever creating/deleting an export, or changing the id or objectName.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.lookupBacnetObject(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, int, int, java.lang.String) -->
+<method name="lookupBacnetObject"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Implementation of &lt;code&gt;BIBacnetObjectContainer&lt;/code&gt;.&#xa; Look up a BACnet object by the identifiers objectId, propertyId,&#xa; and propertyArrayIndex.  Only the objectId is used by &lt;code&gt;BLocalBacnetDevice&lt;/code&gt;.
+</description>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<parameter name="propertyId">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="propertyArrayIndex">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="domain">
+<type class="java.lang.String"/>
+<description>
+(ignored here)
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+<description>
+the &lt;code&gt;BIBacnetExportObject&lt;/code&gt; with the given objectId, as a &lt;code&gt;BObject&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doSendIAm() -->
+<method name="doSendIAm"  public="true">
+<description>
+Send an I-Am message to announce ourselves on the Bacnet network.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doSetBackupMode(javax.baja.sys.BBoolean) -->
+<method name="doSetBackupMode"  public="true">
+<description/>
+<parameter name="backupMode">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doSetRestoreMode(javax.baja.sys.BBoolean) -->
+<method name="doSetRestoreMode"  public="true">
+<description/>
+<parameter name="restoreMode">
+<type class="javax.baja.sys.BBoolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doPrintln(javax.baja.sys.BString) -->
+<method name="doPrintln"  public="true">
+<description>
+Display a line on the output.
+</description>
+<parameter name="arg">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doSendTimeSynch() -->
+<method name="doSendTimeSynch"  public="true" final="true">
+<description>
+Send a Time Synch message to all time synch recipients.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doSendRestartNotifications() -->
+<method name="doSendRestartNotifications"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.doChangeDeviceUuid(javax.baja.util.BUuid) -->
+<method name="doChangeDeviceUuid"  public="true">
+<description/>
+<parameter name="uuid">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.addAddressBinding(javax.baja.bacnet.BBacnetDevice) -->
+<method name="addAddressBinding"  public="true" final="true">
+<description>
+Add an address binding.&#xa; The network number of the address must be zero if this is a locally&#xa; connected device, according to the Bacnet specification.
+</description>
+<parameter name="device">
+<type class="javax.baja.bacnet.BBacnetDevice"/>
+<description>
+SSPC135-2001, Section 12.10.33.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.removeAddressBinding(javax.baja.bacnet.BBacnetDevice) -->
+<method name="removeAddressBinding"  public="true" final="true">
+<description/>
+<parameter name="device">
+<type class="javax.baja.bacnet.BBacnetDevice"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.updateAddressBinding(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="updateAddressBinding"  public="true" final="true">
+<description/>
+<parameter name="oldId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<parameter name="newId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.updateAddressBinding(javax.baja.bacnet.datatypes.BBacnetAddress, javax.baja.bacnet.datatypes.BBacnetAddress) -->
+<method name="updateAddressBinding"  public="true" final="true">
+<description/>
+<parameter name="oldAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+</parameter>
+<parameter name="newAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.readProperty(javax.baja.bacnet.io.PropertyReference) -->
+<method name="readProperty"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the value of a property.
+</description>
+<parameter name="ref">
+<type class="javax.baja.bacnet.io.PropertyReference"/>
+<description>
+the PropertyReference containing id and index.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing the encoded value or the error.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.readPropertyMultiple(javax.baja.bacnet.io.PropertyReference[]) -->
+<method name="readPropertyMultiple"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the value of multiple Bacnet properties.
+</description>
+<parameter name="refs">
+<type class="javax.baja.bacnet.io.PropertyReference" dimension="1"/>
+<description>
+the list of property references.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue" dimension="1"/>
+<description>
+an array of PropertyValues.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.readRange(javax.baja.bacnet.io.RangeReference) -->
+<method name="readRange"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the specified range of values of a compound property.
+</description>
+<parameter name="rangeReference">
+<type class="javax.baja.bacnet.io.RangeReference"/>
+<description>
+the range reference describing the requested range.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.RangeData"/>
+<description>
+a byte array containing the encoded range.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.writeProperty(javax.baja.bacnet.io.PropertyValue) -->
+<method name="writeProperty"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the value of a property.
+</description>
+<parameter name="val">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the write information.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.addListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="addListElements"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Add list elements.
+</description>
+<parameter name="val">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;            propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to add any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.removeListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="removeListElements"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove list elements.
+</description>
+<parameter name="val">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;            propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to remove any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getDeviceTimeout() -->
+<method name="getDeviceTimeout"  public="true">
+<description>
+Convenience method to compute the total time in milliseconds&#xa; that a device has to respond to request before a tranactions&#xa; cycle will be considered failed.
+</description>
+<return>
+<type class="int"/>
+<description>
+milliseconds for: adpuTimeout + (apduTimeout * retries)
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.readProperty(int, int) -->
+<method name="readProperty"  protected="true">
+<description>
+Read the value of a property.&#xa; Allows easier readPropertyMultiple access.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing the encoded value or the error.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.readRange(javax.baja.bacnet.io.RangeReference, java.lang.Object[], int) -->
+<method name="readRange"  protected="true">
+<description>
+Execute the ReadRange for the given class and maximum encoded size&#xa; of the data type.
+</description>
+<parameter name="ref">
+<type class="javax.baja.bacnet.io.RangeReference"/>
+</parameter>
+<parameter name="list">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<parameter name="maxEncodedSize">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.RangeData"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.writeProperty(int, int, byte[], int) -->
+<method name="writeProperty"  protected="true">
+<description>
+Set the value of a property.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<parameter name="val">
+<type class="byte" dimension="1"/>
+<description>
+the Asn-encoded value for the property.
+</description>
+</parameter>
+<parameter name="pri">
+<type class="int"/>
+<description>
+the priority level (only used for commandable properties).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+<description>
+if something is wrong from a BACnet perspective.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.addListElements(int, int, byte[]) -->
+<method name="addListElements"  protected="true">
+<description>
+Add list elements.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<parameter name="val">
+<type class="byte" dimension="1"/>
+<description>
+the Asn-encoded value for the property.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+null if everything goes OK, or&#xa; a ChangeListError describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+<description>
+if something is wrong from a BACnet perspective.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.removeListElements(int, int, byte[]) -->
+<method name="removeListElements"  protected="true">
+<description>
+Remove list elements.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<parameter name="val">
+<type class="byte" dimension="1"/>
+<description>
+the Asn-encoded value for the property.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+null if everything goes OK, or&#xa; a ChangeListError describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+<description>
+if something is wrong from a BACnet perspective.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.addOptionalProps(java.util.Vector&lt;javax.baja.bacnet.enums.BBacnetPropertyIdentifier&gt;) -->
+<method name="addOptionalProps"  protected="true">
+<description>
+Override method to add optional properties.&#xa; NOTE: You MUST call super.addOptionalProps(v) first!
+</description>
+<parameter name="v">
+<parameterizedType class="java.util.Vector">
+<args>
+<type class="javax.baja.bacnet.enums.BBacnetPropertyIdentifier"/>
+</args>
+</parameterizedType>
+<description>
+Vector containing optional propertyIds, as BEnums.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.subscribeCov(javax.baja.bacnet.export.BIBacnetCovSource, javax.baja.sys.BComponent, javax.baja.sys.Property) -->
+<method name="subscribeCov"  public="true">
+<description>
+Add a COV subscription for the given export object to the target component,&#xa; and add the list element to the local device&#x27;s Active_COV_Subscriptions&#xa; BACnet property.  This API is used by BIBacnetCovSource objects when they&#xa; are adding a COV subscription.
+</description>
+<parameter name="export">
+<type class="javax.baja.bacnet.export.BIBacnetCovSource"/>
+<description>
+the export which has been subscribed for COV.
+</description>
+</parameter>
+<parameter name="src">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+the target component which must be subscribed in Niagara to receive notification of COVs.
+</description>
+</parameter>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+<description>
+the BacnetCovSubscription property that was added to the export object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.unsubscribeCov(javax.baja.bacnet.export.BIBacnetCovSource, javax.baja.sys.BComponent, javax.baja.sys.Property) -->
+<method name="unsubscribeCov"  public="true">
+<description>
+Remove a COV subscription for the given export object from the target component,&#xa; and remove the list element from the local device&#x27;s Active_COV_Subscriptions&#xa; BACnet property.  This API is used by BIBacnetCovSource objects when they&#xa; are removing a COV subscription.
+</description>
+<parameter name="export">
+<type class="javax.baja.bacnet.export.BIBacnetCovSource"/>
+<description>
+the export which has been unsubscribed for COV.
+</description>
+</parameter>
+<parameter name="src">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+the target component which must be unsubscribed in Niagara.
+</description>
+</parameter>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+<description>
+the BacnetCovSubscription property that was removed to the export object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.subscribe(javax.baja.bacnet.export.BIBacnetExportObject, java.lang.Object) -->
+<method name="subscribe"  public="true">
+<description/>
+<parameter name="export">
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+</parameter>
+<parameter name="src">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.unsubscribe(javax.baja.bacnet.export.BIBacnetExportObject, java.lang.Object) -->
+<method name="unsubscribe"  public="true">
+<description/>
+<parameter name="export">
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+</parameter>
+<parameter name="src">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getBacnetContext() -->
+<method name="getBacnetContext"  public="true" static="true">
+<description>
+Get the BACnet User context.&#xa; This context is used for determining access restrictions for&#xa; BACnet writes, and add/remove list elements, as well as any&#xa; BACnet actions that map to action invocations.
+</description>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.updateSystemStatus(javax.baja.bacnet.enums.BBacnetDeviceStatus) -->
+<method name="updateSystemStatus"  public="true">
+<description/>
+<parameter name="newStatus">
+<type class="javax.baja.bacnet.enums.BBacnetDeviceStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.restoreSystemStatus() -->
+<method name="restoreSystemStatus"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getPropertyInfo(int, int) -->
+<method name="getPropertyInfo"  public="true">
+<description>
+Get a PropertyInfo object containing metadata about this property.
+</description>
+<parameter name="objectType">
+<type class="int"/>
+<description>
+the Bacnet object type of the containing object.
+</description>
+</parameter>
+<parameter name="propId">
+<type class="int"/>
+<description>
+the property ID.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.util.PropertyInfo"/>
+<description>
+a PropertyInfo read from the manufacturer-specific XML file.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.isFatalFault() -->
+<method name="isFatalFault"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is this component in a fatal fault condition?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.getPropertyList() -->
+<method name="getPropertyList"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.objectId -->
+<field name="objectId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the Bacnet Object Identifier used by Niagara in&#xa; Bacnet communications.  Niagara acts as a Bacnet Device Object.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.systemStatus -->
+<field name="systemStatus"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;systemStatus&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSystemStatus</tag>
+<tag name="@see">#setSystemStatus</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.vendorName -->
+<field name="vendorName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;vendorName&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVendorName</tag>
+<tag name="@see">#setVendorName</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.vendorId -->
+<field name="vendorId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;vendorId&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVendorId</tag>
+<tag name="@see">#setVendorId</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.modelName -->
+<field name="modelName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;modelName&lt;/code&gt; property.
+</description>
+<tag name="@see">#getModelName</tag>
+<tag name="@see">#setModelName</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.firmwareRevision -->
+<field name="firmwareRevision"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;firmwareRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFirmwareRevision</tag>
+<tag name="@see">#setFirmwareRevision</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.applicationSoftwareVersion -->
+<field name="applicationSoftwareVersion"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;applicationSoftwareVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#getApplicationSoftwareVersion</tag>
+<tag name="@see">#setApplicationSoftwareVersion</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.location -->
+<field name="location"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;location&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLocation</tag>
+<tag name="@see">#setLocation</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.description -->
+<field name="description"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.deviceUuid -->
+<field name="deviceUuid"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;deviceUuid&lt;/code&gt; property.&#xa; Identifies the device regardless of its current VMAC address or device instance number. It shall&#xa; be generated before first deployment of the device in an installation, shall be persistently&#xa; stored across device restarts, and shall not change over the entire lifetime of a device. If a&#xa; device is replaced in an installation, the new device is not required to re-use the UUID of the&#xa; replaced device.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#getDeviceUuid</tag>
+<tag name="@see">#setDeviceUuid</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.protocolVersion -->
+<field name="protocolVersion"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;protocolVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolVersion</tag>
+<tag name="@see">#setProtocolVersion</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.protocolRevision -->
+<field name="protocolRevision"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;protocolRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolRevision</tag>
+<tag name="@see">#setProtocolRevision</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.protocolConformanceClass -->
+<field name="protocolConformanceClass"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;protocolConformanceClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolConformanceClass</tag>
+<tag name="@see">#setProtocolConformanceClass</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.protocolServicesSupported -->
+<field name="protocolServicesSupported"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;protocolServicesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolServicesSupported</tag>
+<tag name="@see">#setProtocolServicesSupported</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.protocolObjectTypesSupported -->
+<field name="protocolObjectTypesSupported"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;protocolObjectTypesSupported&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProtocolObjectTypesSupported</tag>
+<tag name="@see">#setProtocolObjectTypesSupported</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.maxAPDULengthAccepted -->
+<field name="maxAPDULengthAccepted"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxAPDULengthAccepted&lt;/code&gt; property.&#xa; maxAPDULengthAccepted is the maximum number of bytes that may be&#xa; contained in a single incoming Bacnet application message.
+</description>
+<tag name="@see">#getMaxAPDULengthAccepted</tag>
+<tag name="@see">#setMaxAPDULengthAccepted</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.segmentationSupported -->
+<field name="segmentationSupported"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;segmentationSupported&lt;/code&gt; property.&#xa; segmentationSupported states the level of message segmentation&#xa; supported by Niagara.
+</description>
+<tag name="@see">#getSegmentationSupported</tag>
+<tag name="@see">#setSegmentationSupported</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.maxSegmentsAccepted -->
+<field name="maxSegmentsAccepted"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxSegmentsAccepted&lt;/code&gt; property.&#xa; maximum number of segments that can be accepted in an APDU.
+</description>
+<tag name="@see">#getMaxSegmentsAccepted</tag>
+<tag name="@see">#setMaxSegmentsAccepted</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.apduSegmentTimeout -->
+<field name="apduSegmentTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;apduSegmentTimeout&lt;/code&gt; property.&#xa; apduSegmentTimeout is the time in milliseconds between&#xa; retransmissions of one segment of an APDU.
+</description>
+<tag name="@see">#getApduSegmentTimeout</tag>
+<tag name="@see">#setApduSegmentTimeout</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.apduTimeout -->
+<field name="apduTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;apduTimeout&lt;/code&gt; property.&#xa; apduTimeout is the time in milliseconds between retransmissions&#xa; of an APDU.
+</description>
+<tag name="@see">#getApduTimeout</tag>
+<tag name="@see">#setApduTimeout</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.numberOfApduRetries -->
+<field name="numberOfApduRetries"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;numberOfApduRetries&lt;/code&gt; property.&#xa; numberOfApduRetries indicates the number of retransmissions&#xa; of an APDU that will be attempted before the transaction is abandoned.
+</description>
+<tag name="@see">#getNumberOfApduRetries</tag>
+<tag name="@see">#setNumberOfApduRetries</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.deviceAddressBinding -->
+<field name="deviceAddressBinding"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;deviceAddressBinding&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDeviceAddressBinding</tag>
+<tag name="@see">#setDeviceAddressBinding</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.databaseRevision -->
+<field name="databaseRevision"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;databaseRevision&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDatabaseRevision</tag>
+<tag name="@see">#setDatabaseRevision</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.configurationFiles -->
+<field name="configurationFiles"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;configurationFiles&lt;/code&gt; property.
+</description>
+<tag name="@see">#getConfigurationFiles</tag>
+<tag name="@see">#setConfigurationFiles</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.lastRestoreTime -->
+<field name="lastRestoreTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastRestoreTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastRestoreTime</tag>
+<tag name="@see">#setLastRestoreTime</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.backupFailureTimeout -->
+<field name="backupFailureTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;backupFailureTimeout&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackupFailureTimeout</tag>
+<tag name="@see">#setBackupFailureTimeout</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.backupPreparationTime -->
+<field name="backupPreparationTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;backupPreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackupPreparationTime</tag>
+<tag name="@see">#setBackupPreparationTime</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.restorePreparationTime -->
+<field name="restorePreparationTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;restorePreparationTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRestorePreparationTime</tag>
+<tag name="@see">#setRestorePreparationTime</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.restoreCompletionTime -->
+<field name="restoreCompletionTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;restoreCompletionTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRestoreCompletionTime</tag>
+<tag name="@see">#setRestoreCompletionTime</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.backupAndRestoreState -->
+<field name="backupAndRestoreState"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;backupAndRestoreState&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackupAndRestoreState</tag>
+<tag name="@see">#setBackupAndRestoreState</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.activeCovSubscriptions -->
+<field name="activeCovSubscriptions"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;activeCovSubscriptions&lt;/code&gt; property.&#xa; list of subscribed Cov recipients.
+</description>
+<tag name="@see">#getActiveCovSubscriptions</tag>
+<tag name="@see">#setActiveCovSubscriptions</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.characterSet -->
+<field name="characterSet"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;characterSet&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCharacterSet</tag>
+<tag name="@see">#setCharacterSet</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.enumerationList -->
+<field name="enumerationList"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enumerationList&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnumerationList</tag>
+<tag name="@see">#setEnumerationList</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.exportTable -->
+<field name="exportTable"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;exportTable&lt;/code&gt; property.
+</description>
+<tag name="@see">#getExportTable</tag>
+<tag name="@see">#setExportTable</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.virtual -->
+<field name="virtual"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;virtual&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVirtual</tag>
+<tag name="@see">#setVirtual</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.covPropertyPollRate -->
+<field name="covPropertyPollRate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;covPropertyPollRate&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCovPropertyPollRate</tag>
+<tag name="@see">#setCovPropertyPollRate</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.timeSynchronizationRecipients -->
+<field name="timeSynchronizationRecipients"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeSynchronizationRecipients</tag>
+<tag name="@see">#setTimeSynchronizationRecipients</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.timeSynchronizationInterval -->
+<field name="timeSynchronizationInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeSynchronizationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeSynchronizationInterval</tag>
+<tag name="@see">#setTimeSynchronizationInterval</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.alignIntervals -->
+<field name="alignIntervals"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alignIntervals&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlignIntervals</tag>
+<tag name="@see">#setAlignIntervals</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.intervalOffset -->
+<field name="intervalOffset"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;intervalOffset&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIntervalOffset</tag>
+<tag name="@see">#setIntervalOffset</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.utcTimeSynchronizationRecipients -->
+<field name="utcTimeSynchronizationRecipients"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;utcTimeSynchronizationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUtcTimeSynchronizationRecipients</tag>
+<tag name="@see">#setUtcTimeSynchronizationRecipients</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.lastRestartReason -->
+<field name="lastRestartReason"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastRestartReason&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastRestartReason</tag>
+<tag name="@see">#setLastRestartReason</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.timeOfDeviceRestart -->
+<field name="timeOfDeviceRestart"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeOfDeviceRestart&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeOfDeviceRestart</tag>
+<tag name="@see">#setTimeOfDeviceRestart</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.restartNotificationRecipients -->
+<field name="restartNotificationRecipients"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;restartNotificationRecipients&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRestartNotificationRecipients</tag>
+<tag name="@see">#setRestartNotificationRecipients</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.sendIAm -->
+<field name="sendIAm"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;sendIAm&lt;/code&gt; action.
+</description>
+<tag name="@see">#sendIAm()</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setBackupMode -->
+<field name="setBackupMode"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;setBackupMode&lt;/code&gt; action.
+</description>
+<tag name="@see">#setBackupMode(BBoolean parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.setRestoreMode -->
+<field name="setRestoreMode"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;setRestoreMode&lt;/code&gt; action.
+</description>
+<tag name="@see">#setRestoreMode(BBoolean parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.println -->
+<field name="println"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;println&lt;/code&gt; action.
+</description>
+<tag name="@see">#println(BString parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.sendTimeSynch -->
+<field name="sendTimeSynch"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;sendTimeSynch&lt;/code&gt; action.&#xa; action for automatic time synch sending.
+</description>
+<tag name="@see">#sendTimeSynch()</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.checkDuplicates -->
+<field name="checkDuplicates"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;checkDuplicates&lt;/code&gt; action.&#xa; action for checking for duplicate export descriptors
+</description>
+<tag name="@see">#checkDuplicates()</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.sendRestartNotifications -->
+<field name="sendRestartNotifications"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;sendRestartNotifications&lt;/code&gt; action.&#xa; action for sending a restart notification
+</description>
+<tag name="@see">#sendRestartNotifications()</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.changeDeviceUuid -->
+<field name="changeDeviceUuid"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;changeDeviceUuid&lt;/code&gt; action.
+</description>
+<tag name="@see">#changeDeviceUuid(BUuid parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.LAST_RESTORE_TIME_FILENAME -->
+<field name="LAST_RESTORE_TIME_FILENAME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.export.BLocalBacnetDevice.OBJECT_NAME_OVERRIDE_SLOTNAME -->
+<field name="OBJECT_NAME_OVERRIDE_SLOTNAME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

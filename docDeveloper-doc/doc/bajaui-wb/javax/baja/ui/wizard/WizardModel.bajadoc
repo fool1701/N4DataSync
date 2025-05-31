@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.wizard.WizardModel" name="WizardModel" packageName="javax.baja.ui.wizard" public="true" abstract="true">
+<description>
+WizardModel implements the code required to track &#xa; a wizard process.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">28 May 02</tag>
+<tag name="@version">$Revision: 8$ $Date: 3/28/05 10:32:43 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.ui.wizard.WizardModel() -->
+<constructor name="WizardModel" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.wizard.WizardModel.getWizard() -->
+<method name="getWizard"  public="true" final="true">
+<description>
+Get the wizard managing this model.  This is only&#xa; valid while the wizard operation is active.
+</description>
+<return>
+<type class="javax.baja.ui.wizard.BWizard"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.setWizard(javax.baja.ui.wizard.BWizard) -->
+<method name="setWizard"  public="true">
+<description/>
+<parameter name="value">
+<type class="javax.baja.ui.wizard.BWizard"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.getPreferredSizeOfSteps() -->
+<method name="getPreferredSizeOfSteps"  public="true">
+<description>
+Get a preferred size which will handle all the steps.
+</description>
+<return>
+<type class="javax.baja.gx.Size"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.getTitle() -->
+<method name="getTitle"  public="true" abstract="true">
+<description>
+Get the title to display in the wizard dialog&#x27;s title bar.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.init() -->
+<method name="init"  public="true" abstract="true">
+<description>
+This callback is invoked to initialize the wizard&#x27;s &#xa; first step and enable the correct buttons.  You may&#xa; use the &lt;code&gt;update()&lt;/code&gt; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.back() -->
+<method name="back"  public="true" abstract="true">
+<description>
+This callback is invoke when the user invokes the back button.&#xa; It the model&#x27;s responsibility to update the current step and&#xa; update the button&#x27;s enabled and visibility states.  You may&#xa; do this using the &lt;code&gt;update()&lt;/code&gt; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.next() -->
+<method name="next"  public="true" abstract="true">
+<description>
+This callback is invoke when the user invokes the next button.&#xa; It the model&#x27;s responsibility to update the current step and&#xa; update the button&#x27;s enabled and visibility states.  You may&#xa; do this using the &lt;code&gt;update()&lt;/code&gt; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.finish() -->
+<method name="finish"  public="true">
+<description>
+This callback is invoke when the user invokes the finish &#xa; button.  The model should finish the operation and return&#xa; true to close the wizard dialog.  The default implementation&#xa; returns true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.cancel() -->
+<method name="cancel"  public="true">
+<description>
+Cancel is called if the user invokes the cancel button.  If&#xa; this method returns true then the dialog is closed and the&#xa; wizard operation terminates.  If this method returns false the &#xa; cancel is aborted.  The default implementation returns true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.update(javax.baja.ui.BWidget, int) -->
+<method name="update"  public="true">
+<description>
+This method updates the wizard&#x27;s current step to use the&#xa; specified widget and also updates the back, next, finish&#xa; buttons using a standard algorithm.  The mode is a bitmask&#xa; of the CAN_BACK, CAN_NEXT, and CAN_FINISH constants.
+</description>
+<parameter name="step">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="mode">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.update(int) -->
+<method name="update"  public="true">
+<description>
+Update the back, next, and finish button enabled states&#xa; without changing the current step. The mode is a bitmask&#xa; of the CAN_BACK, CAN_NEXT, and CAN_FINISH constants.
+</description>
+<parameter name="mode">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.wizard.WizardModel.CAN_BACK -->
+<field name="CAN_BACK"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.wizard.WizardModel.CAN_NEXT -->
+<field name="CAN_NEXT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.wizard.WizardModel.CAN_FINISH -->
+<field name="CAN_FINISH"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

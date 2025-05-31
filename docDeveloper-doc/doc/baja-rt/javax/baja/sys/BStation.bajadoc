@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BStation" name="BStation" packageName="javax.baja.sys" public="true" final="true">
+<description>
+BStation is always the root component of a running station.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">25 Oct 01</tag>
+<tag name="@version">$Revision: 22$ $Date: 1/3/11 2:36:00 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="stationName" flags="ro">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;stationName&lt;/code&gt; property.&#xa; This is the station name which uniquely identifies this&#xa; station within its federation of stations on the network.&#xa; This property is fixed at station launch by the station&#x27;s&#xa; home directory.
+</description>
+<tag name="@see">#getStationName</tag>
+<tag name="@see">#setStationName</tag>
+</property>
+
+<property name="sysInfo" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;sysInfo&lt;/code&gt; property.&#xa; This holds the &lt;code&gt;sysInfo&lt;/code&gt; key/value pairs.  Each key/value pair&#xa; in &lt;code&gt;sysInfo&lt;/code&gt; will be injected into the hello message during&#xa; Fox session setup.  The following keys are currently defined and&#xa; supported by Niagara:&lt;p&gt;&#xa; &lt;dl&gt;&#xa; &lt;dt&gt;&lt;b&gt;realms&lt;/b&gt;&lt;/dt&gt;&#xa; &lt;dd&gt;A &#x27;;&#x27; seperated list of single&#xa; sign-on realm names for the station.  If a user has successfully&#xa; logged on to some set of stations (&#x22;connected&#x22; stations),&#xa; and then attempts to connect to another station (&#x22;target&#x22; station),&#xa; then he will be automatically logged in&#xa; so long as the following conditions are met:&#xa; &lt;br&gt;&#xa; &lt;ol&gt;&lt;li&gt;The target station has at least one SSO realm name that is&#xa; a member of the set defined by the union of all the&#xa; connected station SSO realm names.&lt;/li&gt;&#xa; &lt;li&gt;The credentials for the user on the target station match those&#xa; used to login to the already connected station.&lt;/li&gt;&#xa; &lt;/ol&gt;&lt;p&gt;&#xa; When multiple connected stations match the target station&#x27;s&#xa; SSO realm names, then the credentials from the most recent station&#xa; connection are used.&lt;/dd&gt;&#xa; &lt;/dl&gt;
+</description>
+<tag name="@see">#getSysInfo</tag>
+<tag name="@see">#setSysInfo</tag>
+</property>
+
+<action name="save" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;save&lt;/code&gt; action.&#xa; Save the current state of the system to&#xa; persistent storage.
+</description>
+<tag name="@see">#save()</tag>
+</action>
+
+<!-- javax.baja.sys.BStation() -->
+<constructor name="BStation" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.BStation.getStationName() -->
+<method name="getStationName"  public="true">
+<description>
+Get the &lt;code&gt;stationName&lt;/code&gt; property.&#xa; This is the station name which uniquely identifies this&#xa; station within its federation of stations on the network.&#xa; This property is fixed at station launch by the station&#x27;s&#xa; home directory.
+</description>
+<tag name="@see">#stationName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.setStationName(java.lang.String) -->
+<method name="setStationName"  public="true">
+<description>
+Set the &lt;code&gt;stationName&lt;/code&gt; property.&#xa; This is the station name which uniquely identifies this&#xa; station within its federation of stations on the network.&#xa; This property is fixed at station launch by the station&#x27;s&#xa; home directory.
+</description>
+<tag name="@see">#stationName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.getSysInfo() -->
+<method name="getSysInfo"  public="true">
+<description>
+Get the &lt;code&gt;sysInfo&lt;/code&gt; property.&#xa; This holds the &lt;code&gt;sysInfo&lt;/code&gt; key/value pairs.  Each key/value pair&#xa; in &lt;code&gt;sysInfo&lt;/code&gt; will be injected into the hello message during&#xa; Fox session setup.  The following keys are currently defined and&#xa; supported by Niagara:&lt;p&gt;&#xa; &lt;dl&gt;&#xa; &lt;dt&gt;&lt;b&gt;realms&lt;/b&gt;&lt;/dt&gt;&#xa; &lt;dd&gt;A &#x27;;&#x27; seperated list of single&#xa; sign-on realm names for the station.  If a user has successfully&#xa; logged on to some set of stations (&#x22;connected&#x22; stations),&#xa; and then attempts to connect to another station (&#x22;target&#x22; station),&#xa; then he will be automatically logged in&#xa; so long as the following conditions are met:&#xa; &lt;br&gt;&#xa; &lt;ol&gt;&lt;li&gt;The target station has at least one SSO realm name that is&#xa; a member of the set defined by the union of all the&#xa; connected station SSO realm names.&lt;/li&gt;&#xa; &lt;li&gt;The credentials for the user on the target station match those&#xa; used to login to the already connected station.&lt;/li&gt;&#xa; &lt;/ol&gt;&lt;p&gt;&#xa; When multiple connected stations match the target station&#x27;s&#xa; SSO realm names, then the credentials from the most recent station&#xa; connection are used.&lt;/dd&gt;&#xa; &lt;/dl&gt;
+</description>
+<tag name="@see">#sysInfo</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.setSysInfo(javax.baja.sys.BFacets) -->
+<method name="setSysInfo"  public="true">
+<description>
+Set the &lt;code&gt;sysInfo&lt;/code&gt; property.&#xa; This holds the &lt;code&gt;sysInfo&lt;/code&gt; key/value pairs.  Each key/value pair&#xa; in &lt;code&gt;sysInfo&lt;/code&gt; will be injected into the hello message during&#xa; Fox session setup.  The following keys are currently defined and&#xa; supported by Niagara:&lt;p&gt;&#xa; &lt;dl&gt;&#xa; &lt;dt&gt;&lt;b&gt;realms&lt;/b&gt;&lt;/dt&gt;&#xa; &lt;dd&gt;A &#x27;;&#x27; seperated list of single&#xa; sign-on realm names for the station.  If a user has successfully&#xa; logged on to some set of stations (&#x22;connected&#x22; stations),&#xa; and then attempts to connect to another station (&#x22;target&#x22; station),&#xa; then he will be automatically logged in&#xa; so long as the following conditions are met:&#xa; &lt;br&gt;&#xa; &lt;ol&gt;&lt;li&gt;The target station has at least one SSO realm name that is&#xa; a member of the set defined by the union of all the&#xa; connected station SSO realm names.&lt;/li&gt;&#xa; &lt;li&gt;The credentials for the user on the target station match those&#xa; used to login to the already connected station.&lt;/li&gt;&#xa; &lt;/ol&gt;&lt;p&gt;&#xa; When multiple connected stations match the target station&#x27;s&#xa; SSO realm names, then the credentials from the most recent station&#xa; connection are used.&lt;/dd&gt;&#xa; &lt;/dl&gt;
+</description>
+<tag name="@see">#sysInfo</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.getServices() -->
+<method name="getServices"  public="true">
+<description>
+Get the &lt;code&gt;Services&lt;/code&gt; property.&#xa; The one (and only) service container for this station.  Special&#xa; services can only live in this container, while other services&#xa; can live anywhere in the station.
+</description>
+<tag name="@see">#Services</tag>
+<return>
+<type class="javax.baja.util.BServiceContainer"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.setServices(javax.baja.util.BServiceContainer) -->
+<method name="setServices"  public="true">
+<description>
+Set the &lt;code&gt;Services&lt;/code&gt; property.&#xa; The one (and only) service container for this station.  Special&#xa; services can only live in this container, while other services&#xa; can live anywhere in the station.
+</description>
+<tag name="@see">#Services</tag>
+<parameter name="v">
+<type class="javax.baja.util.BServiceContainer"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.save() -->
+<method name="save"  public="true">
+<description>
+Invoke the &lt;code&gt;save&lt;/code&gt; action.&#xa; Save the current state of the system to&#xa; persistent storage.
+</description>
+<tag name="@see">#save</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.doSave(javax.baja.sys.Context) -->
+<method name="doSave"  public="true">
+<description>
+Save the system state to persistent storage.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BStation.getStationDisplayName(javax.baja.sys.Context) -->
+<method name="getStationDisplayName"  public="true">
+<description>
+Check for a dynamic BFormat property that specifies the&#xa; display name for the station. If the property&#xa; exists, the format is resolved using the station&#xa; root as the base. If the property does not exist,&#xa; the station name is returned.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+null if the passed in BFormat or value is empty. Return a valid string otherwise
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BStation.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BStation.stationName -->
+<field name="stationName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;stationName&lt;/code&gt; property.&#xa; This is the station name which uniquely identifies this&#xa; station within its federation of stations on the network.&#xa; This property is fixed at station launch by the station&#x27;s&#xa; home directory.
+</description>
+<tag name="@see">#getStationName</tag>
+<tag name="@see">#setStationName</tag>
+</field>
+
+<!-- javax.baja.sys.BStation.sysInfo -->
+<field name="sysInfo"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sysInfo&lt;/code&gt; property.&#xa; This holds the &lt;code&gt;sysInfo&lt;/code&gt; key/value pairs.  Each key/value pair&#xa; in &lt;code&gt;sysInfo&lt;/code&gt; will be injected into the hello message during&#xa; Fox session setup.  The following keys are currently defined and&#xa; supported by Niagara:&lt;p&gt;&#xa; &lt;dl&gt;&#xa; &lt;dt&gt;&lt;b&gt;realms&lt;/b&gt;&lt;/dt&gt;&#xa; &lt;dd&gt;A &#x27;;&#x27; seperated list of single&#xa; sign-on realm names for the station.  If a user has successfully&#xa; logged on to some set of stations (&#x22;connected&#x22; stations),&#xa; and then attempts to connect to another station (&#x22;target&#x22; station),&#xa; then he will be automatically logged in&#xa; so long as the following conditions are met:&#xa; &lt;br&gt;&#xa; &lt;ol&gt;&lt;li&gt;The target station has at least one SSO realm name that is&#xa; a member of the set defined by the union of all the&#xa; connected station SSO realm names.&lt;/li&gt;&#xa; &lt;li&gt;The credentials for the user on the target station match those&#xa; used to login to the already connected station.&lt;/li&gt;&#xa; &lt;/ol&gt;&lt;p&gt;&#xa; When multiple connected stations match the target station&#x27;s&#xa; SSO realm names, then the credentials from the most recent station&#xa; connection are used.&lt;/dd&gt;&#xa; &lt;/dl&gt;
+</description>
+<tag name="@see">#getSysInfo</tag>
+<tag name="@see">#setSysInfo</tag>
+</field>
+
+<!-- javax.baja.sys.BStation.Services -->
+<field name="Services"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;Services&lt;/code&gt; property.&#xa; The one (and only) service container for this station.  Special&#xa; services can only live in this container, while other services&#xa; can live anywhere in the station.
+</description>
+<tag name="@see">#getServices</tag>
+<tag name="@see">#setServices</tag>
+</field>
+
+<!-- javax.baja.sys.BStation.save -->
+<field name="save"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;save&lt;/code&gt; action.&#xa; Save the current state of the system to&#xa; persistent storage.
+</description>
+<tag name="@see">#save()</tag>
+</field>
+
+<!-- javax.baja.sys.BStation.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

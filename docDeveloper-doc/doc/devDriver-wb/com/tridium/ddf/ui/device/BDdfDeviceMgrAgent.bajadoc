@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="wb" qualifiedName="com.tridium.ddf.ui.device.BDdfDeviceMgrAgent" name="BDdfDeviceMgrAgent" packageName="com.tridium.ddf.ui.device" public="true" abstract="true">
+<description>
+The developer may extend this class and declare their type&#xa; as an agent on their network. This will add a button, menu&#xa; item, and/or toolbar item to the corresponding ddf device&#xa; manager.&#xa; &#xa; When the ui item is clicked, the doInvoke method on an instance&#xa; of this class will be called on the client-side.
+</description>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.ui.device.BIDdfDeviceMgrAgent"/>
+</implements>
+<!-- com.tridium.ddf.ui.device.BDdfDeviceMgrAgent() -->
+<constructor name="BDdfDeviceMgrAgent" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceMgrAgent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceMgrAgent.getFlags() -->
+<method name="getFlags"  public="true">
+<description>
+By default, the getFlags method returns MgrController.BARS&#xa; to make this BDdfDeviceMgrAgent appear in the menu bar, toolbar,&#xa; and button panel (action bar) of the ddf point manager or&#xa; ddf device manager.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceMgrAgent.update(com.tridium.ddf.ui.device.BDdfDeviceManager, com.tridium.ddf.ui.DdfMgrControllerUtil.DdfDeviceMgrAgentCommand) -->
+<method name="update"  public="true">
+<description>
+The developer should review the given BDdfDeviceManager and consider&#xa; updating (eg. enable/disable) the given agentCommand and/or any other&#xa; commands on the manager&#x27;s controller. The method is called anytime&#xa; there is a change of state on the device manager (eg. discovery list&#xa; selection change, database list selection change, database component&#xa; event, learn mode changed, etc.)&#xa; &#xa; For example (to enable the agent&#x27;s UI widget(s) if one database item is selected):&#xa;  agentCommand.setEnabled(deviceManager.getController().getSelectedRows().length == 1);&#xa;  &#xa; For example (to enable the agent&#x27;s UI widget(s) if one or more database items are selected):&#xa;  agentCommand.setEnabled(deviceManager.getController().getSelectedRows().length &gt; 0);&#xa;  &#xa; For example (to enable the agent&#x27;s UI widget(s) if zero database items are selected):&#xa;  agentCommand.setEnabled(deviceManager.getController().getSelectedRows().length == 0);
+</description>
+<parameter name="deviceManager">
+<type class="com.tridium.ddf.ui.device.BDdfDeviceManager"/>
+<description/>
+</parameter>
+<parameter name="agentCommand">
+<type class="com.tridium.ddf.ui.DdfMgrControllerUtil$DdfDeviceMgrAgentCommand"/>
+<description>
+this is a special instance of IMgrCommand. It is&#xa; a reference to the corresponding GUI command (button, menu item, and/or&#xa; toolbar button) on the device manager.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceMgrAgent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

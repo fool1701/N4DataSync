@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.event.BIVideoEventSource" name="BIVideoEventSource" packageName="com.tridium.videoDriver.event" public="true" interface="true" abstract="true" category="interface">
+<description>
+Video Events are modeled in Niagara AX as proxy extensions on standard,&#xa; readonly, Niagara AX control point types.&#xa; &#xa; If on a String Point, the video driver&#x27;s proxy extension should set&#xa; the String Point to a unique description of the most recent alarm.&#xa; &#xa; If on a Boolean Point, the video driver&#x27;s proxy extension should set&#xa; the Boolean Point to true when an event is detected. The Boolean Point&#xa; should be set back to false when the event is no longer occurring or&#xa; after a user-defined expiration if it is not possible to detect the&#xa; end of the event.&#xa; &#xa; Enum Points are not supported.&#xa; &#xa; Numeric Points are supported. The video driver&#x27;s proxy extension should&#xa; set the Numeric Point to a unique number each time an event is detected.&#xa; This can be a &#x27;Click.ticks()&#x27; count or any event number so long as it&#xa; is unique and well documented in the particular driver.
+</description>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- com.tridium.videoDriver.event.BIVideoEventSource.getEventTypeEnum() -->
+<method name="getEventTypeEnum"  public="true" abstract="true">
+<description>
+Returns the enum that describes the &#x27;eventType&#x27; that the particular&#xa; data point will monitor.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoEventTypesEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BIVideoEventSource.getVideoEventTopic() -->
+<method name="getVideoEventTopic"  public="true" abstract="true">
+<description>
+This defines the topic on the BIVideoEventSource component&#xa; that is fired whenever a video event occurs on the video&#xa; event source.
+</description>
+<return>
+<type class="javax.baja.sys.Topic"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.event.BIVideoEventSource.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

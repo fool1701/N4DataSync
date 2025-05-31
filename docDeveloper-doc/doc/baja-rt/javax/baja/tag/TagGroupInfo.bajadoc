@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.tag.TagGroupInfo" name="TagGroupInfo" packageName="javax.baja.tag" public="true" interface="true" abstract="true" category="interface">
+<description>
+TagGroupInfo defines a group of tags within the same namespace.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">2/21/14</tag>
+<tag name="@since">Niagara 4.0</tag>
+<!-- javax.baja.tag.TagGroupInfo.getDictionary() -->
+<method name="getDictionary"  public="true" abstract="true">
+<description>
+Get the dictionary that includes this tag group.
+</description>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.tag.TagDictionary"/>
+</args>
+</parameterizedType>
+<description>
+Returns an optional that contains the TagDictionary for this group if&#xa; the group is part of a tag dictionary.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.getName() -->
+<method name="getName"  public="true" abstract="true">
+<description>
+Get the name of the group.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Returns the name of the group.  This is the simple name not including the namespace.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.getGroupId() -->
+<method name="getGroupId"  public="true" default="true">
+<description>
+Get the Id for this tag.  This constructs the id from the dictionary namespace, if&#xa; available, and the tag name.
+</description>
+<return>
+<type class="javax.baja.tag.Id"/>
+<description>
+Returns a tag id for this tag.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.isIdealFor(javax.baja.sys.Type) -->
+<method name="isIdealFor"  public="true" default="true">
+<description>
+Test whether this tag and ideal match for the specified entity.  Tag validity&#xa; is not enforced by the API.  Validity provides a guideline for tagging tools.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+The Type to test for the ideal match for this tag.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the tag is an ideal match for the specified type, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.isValidFor(javax.baja.tag.Entity) -->
+<method name="isValidFor"  public="true" default="true">
+<description>
+Test whether this tag is valid for the specified entity.  Tag validity&#xa; is not enforced by the API.  Validity provides a guideline for tagging tools.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+The entity to test for validity for this tag.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the tag is valid for the specified entity, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.getTags() -->
+<method name="getTags"  public="true" abstract="true">
+<description>
+Get the tags in this group.
+</description>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.tag.TagInfo"/>
+</args>
+</parameterizedType>
+<description>
+The collection of tags in the group.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.getDataPolicy() -->
+<method name="getDataPolicy"  public="true" abstract="true">
+<description>
+Get the DataPolicy associated with this tagGroup.
+</description>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.tag.DataPolicy"/>
+</args>
+</parameterizedType>
+<description>
+Returns an optional that contains the DataPolicy for this tagGroup if&#xa; it exist.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.getTagGroup(javax.baja.tag.Entity) -->
+<method name="getTagGroup"  public="true" static="true">
+<description>
+Get the TagGroupInfo associated with the given Entity.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.tag.TagGroupInfo"/>
+</args>
+</parameterizedType>
+<description>
+Returns an optional that contains the tagGroup if&#xa; it exist.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.addAllImpliedTags(javax.baja.tag.Entity, java.util.Collection&lt;javax.baja.tag.Tag&gt;) -->
+<method name="addAllImpliedTags"  public="true" default="true">
+<description>
+Add all tags from this tag group to the supplied tags collection to be implied on the entity.&#xa; Also adds a tag for the tag group itself depending on the implementation of&#xa; &lt;code&gt;<see ref="javax.baja.tag.TagGroupInfo#getNameTagInfo()">getNameTagInfo</see>&lt;/code&gt;.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+The entity that contains tags to imply.
+</description>
+</parameter>
+<parameter name="tags">
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.Tag"/>
+</args>
+</parameterizedType>
+<description>
+The collection of tags .
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagGroupInfo.getNameTagInfo() -->
+<method name="getNameTagInfo"  public="true" default="true">
+<description>
+Get a TagInfo object that represents the tag group itself. The default implementation returns&#xa; an empty Optional. This prevents addAllImpliedTags from adding the TagGroupInfo&#x27;s name as an&#xa; implied tag. Classes that implement this interface should override this method and return&#xa; TagInfo. The TagInfo should be used to generate a tag find instances of the tag group in a&#xa; station. The preferred implementation is to return a TagInfo that will result in a marker tag&#xa; with the same ID as the tag group&#x27;s ID.
+</description>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.tag.TagInfo"/>
+</args>
+</parameterizedType>
+<description>
+Returns an optional that contains the tagGroup&#x27;s name, if it exists.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

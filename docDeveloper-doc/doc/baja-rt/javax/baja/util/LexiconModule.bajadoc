@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.LexiconModule" name="LexiconModule" packageName="javax.baja.util" public="true">
+<description>
+LexiconModule is similar to a Lexicon and LexiconText, but it is most useful for when only the module name is known at the&#xa; time of construction. The key and the Context are required for all lexicon &#x27;get&#x27;, &#x27;getText&#x27; or &#x27;getHtmlSafe&#x27; look ups.&#xa; The last used language is cached in each LexiconModule, so it is optimized to be reused in scenarios where there could be multiple&#xa; calls with the same language. LexiconText will create a new lexicon on each &#x27;getText&#x27; call, so LexiconModule is more efficient&#xa; in that scenario.
+</description>
+<tag name="@author">JJ Frankovich on 9/5/2018</tag>
+<tag name="@since">Niagara 4.8</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.util.LexiconModule(javax.baja.sys.BModule) -->
+<constructor name="LexiconModule" protected="true">
+<parameter name="module">
+<type class="javax.baja.sys.BModule"/>
+</parameter>
+<description>
+Construct for the specified module.
+</description>
+</constructor>
+
+<!-- javax.baja.util.LexiconModule.make(javax.baja.sys.Type) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(typeInModule.getModule())&lt;/code&gt;
+</description>
+<parameter name="typeInModule">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.util.LexiconModule"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.make(javax.baja.sys.BModule) -->
+<method name="make"  public="true" static="true">
+<description>
+Get a place holder for the specified module.
+</description>
+<parameter name="module">
+<type class="javax.baja.sys.BModule"/>
+</parameter>
+<return>
+<type class="javax.baja.util.LexiconModule"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Get a place holder for the specified module.
+</description>
+<parameter name="module">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.util.LexiconModule"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.make(java.lang.Class&lt;?&gt;) -->
+<method name="make"  public="true" static="true">
+<description>
+Get the LexiconModule for Sys.getModuleForClass(cls)
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="javax.baja.util.LexiconModule"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.get(java.lang.String, javax.baja.sys.Context) -->
+<method name="get"  public="true">
+<description>
+Lookup the value for the specified key and context.  If the&#xa; key is not contained by the Lexicon then return&#xa; the def value.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.get(java.lang.String, javax.baja.sys.Context, java.lang.String) -->
+<method name="get"  public="true">
+<description>
+Lookup the value for the specified key and context.  If the&#xa; key is not contained by the Lexicon then return&#xa; the def value.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="def">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.getText(java.lang.String, javax.baja.sys.Context) -->
+<method name="getText"  public="true">
+<description>
+Get a text value from the lexicon and context.  If not&#xa; found then return the key as fallback value.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.getText(java.lang.String, javax.baja.sys.Context, java.lang.Object...) -->
+<method name="getText"  public="true" isVarargs="true">
+<description>
+Get a text value from the lexicon and format it using&#xa; a MessageFormat with the specified arguments.  If the&#xa; text is not found then return the key string.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="args">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.getHtmlSafe(java.lang.String, javax.baja.sys.Context) -->
+<method name="getHtmlSafe"  public="true">
+<description>
+Lookup the value for the specified key, or return&#xa; null if the key is not contained by the Lexicon.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+- The lexicon key
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+- The Context
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+- The safe lex value
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.getHtmlSafe(java.lang.String, javax.baja.sys.Context, java.lang.String) -->
+<method name="getHtmlSafe"  public="true">
+<description>
+Lookup the value for the specified key, or return&#xa; passed in default value if the key is not contained by the Lexicon.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+- The lexicon key
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+- The Context
+</description>
+</parameter>
+<parameter name="def">
+<type class="java.lang.String"/>
+<description>
+- Default value
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+- The safe lex value
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.getHtmlSafeText(java.lang.String, javax.baja.sys.Context) -->
+<method name="getHtmlSafeText"  public="true">
+<description>
+Return escaped value of the key which is safe to display
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+- The lexicon key
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+- The Context
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+The safe String value
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.getHtmlSafeText(java.lang.String, javax.baja.sys.Context, java.lang.Object...) -->
+<method name="getHtmlSafeText"  public="true" isVarargs="true">
+<description>
+Get a safe text value from the lexicon and format it using&#xa; a MessageFormat with the specified arguments.  If the&#xa; text is not found then return the key string.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+- The lexicon key
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+- The Context
+</description>
+</parameter>
+<parameter name="args">
+<type class="java.lang.Object" dimension="1"/>
+<description>
+- Array of formatting objects
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+The safe String value
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.LexiconModule.getModule() -->
+<method name="getModule"  public="true">
+<description>
+Get the Module of LexiconModule, this could be null if the module was not found
+</description>
+<return>
+<type class="javax.baja.sys.BModule"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

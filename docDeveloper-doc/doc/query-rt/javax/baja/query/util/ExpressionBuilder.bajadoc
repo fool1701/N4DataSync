@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="query" runtimeProfile="rt" qualifiedName="javax.baja.query.util.ExpressionBuilder" name="ExpressionBuilder" packageName="javax.baja.query.util" public="true">
+<description>
+Expression builder is a nice utilty for building up a complex expression.
+</description>
+<tag name="@author">Matthew Giannini</tag>
+<tag name="@creation">Apr 23, 2008</tag>
+<tag name="@version">$Revision: 4$ $Date: 6/26/08 4:06:42 PM EDT$</tag>
+<tag name="@since">Baja 3.4</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.query.util.ExpressionBuilder() -->
+<constructor name="ExpressionBuilder" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.query.util.ExpressionBuilder(javax.baja.query.BExpression) -->
+<constructor name="ExpressionBuilder" public="true">
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.query.util.ExpressionBuilder.getExpression() -->
+<method name="getExpression"  public="true" final="true">
+<description/>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+the BExpression built by this expression builder, or null if&#xa; no expression was ever set.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.doCombine(java.lang.String, javax.baja.query.BExpression) -->
+<method name="doCombine"  protected="true">
+<description>
+Creates a new binary expression by using the current expression as the &#xa; left-hand side, the operator for the binary operator, and the &lt;code&gt;rhs&lt;/code&gt;&#xa; parameters for the right-hand side.&#xa; &lt;p&gt;&#xa; If the current expr is null, the operator is ignored and the ExpressionBuilder&#xa; is just set to use the &lt;code&gt;rhs&lt;/code&gt; as the value of the expression.
+</description>
+<parameter name="operator">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="rhs">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.and(javax.baja.query.BExpression) -->
+<method name="and"  public="true">
+<description>
+Set the value of this expression builder to be&#xa; &lt;code&gt;Predicates.and(getExpression(), expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.or(javax.baja.query.BExpression) -->
+<method name="or"  public="true">
+<description>
+Set the value of this expression builder to be&#xa; &lt;code&gt;Predicates.or(getExpression(), expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.not() -->
+<method name="not"  public="true">
+<description>
+Set the value of this expression builder to be&#xa; &lt;code&gt;Predicates.not(getExpression())&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.plus(javax.baja.query.BExpression) -->
+<method name="plus"  public="true">
+<description>
+Set the value of this expression builder to be &#xa; &lt;code&gt;Exprs.binary(getExpression(), &#x22;+&#x22;, expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.minus(javax.baja.query.BExpression) -->
+<method name="minus"  public="true">
+<description>
+Set the value of this expression builder to be &#xa; &lt;code&gt;Exprs.binary(getExpression(), &#x22;-&#x22;, expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.times(javax.baja.query.BExpression) -->
+<method name="times"  public="true">
+<description>
+Set the value of this expression builder to be &#xa; &lt;code&gt;Exprs.binary(getExpression(), &#x22;*&#x22;, expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.div(javax.baja.query.BExpression) -->
+<method name="div"  public="true">
+<description>
+Set the value of this expression builder to be &#xa; &lt;code&gt;Exprs.binary(getExpression(), &#x22;/&#x22;, expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.negative() -->
+<method name="negative"  public="true">
+<description>
+Set the value of this expression builder to be &#xa; &lt;code&gt;Exprs.unary(&#x22;-&#x22;, expr)&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.ExpressionBuilder.expr -->
+<field name="expr"  protected="true">
+<type class="javax.baja.query.BExpression"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

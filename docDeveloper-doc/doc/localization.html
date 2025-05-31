@@ -1,0 +1,392 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  19 Oct 04
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Localization</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/files.html" class="navbar">Prev</a> |  <a href="/doc/spy.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+
+<!-- Header Navbar -->
+<!-- Title Block -->
+<h1 class='title'>Localization</h1> 
+
+<!------------------------------------------------------------->
+<h1>Overview</h1>
+<!------------------------------------------------------------->
+ 
+<p> 
+All aspects of the Niagara framework are designed for localization.  
+The basic philosophy for localization is that one language may be supported
+in-place or multiple languages may be supported via indirection.  The
+foundation of localization is based on the Context and Lexicon APIs. 
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="context">Context</h1>
+<!------------------------------------------------------------->
+
+<p>
+Any framework API which is designed to return a string for human display, takes a 
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/Context.bajadoc'>Context</a> 
+parameter.  Context provides information to an API about the context 
+of the call including the desired locale.  Many APIs implement Context directly 
+including <a href='module://docDeveloper/doc/baja-rt/javax/baja/naming/OrdTarget.bajadoc'>OrdTarget</a>, 
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/file/ExportOp.bajadoc'>ExportOp</a>, and 
+<a href='module://docDeveloper/doc/web-rt/javax/baja/web/WebOp.bajadoc'>WebOp</a>.  For example 
+if you are processing a web HTTP request, you can pass the WebOp instance as 
+your Context and the framework will automatically localize display strings based 
+on the user who is logged in for that HTTP session.
+</p>                                               
+
+<p class='note'>
+Note that Workbench code always uses the default locale of the VM, so it
+is typical to just use <code>null</code> for Context.  However code designed to 
+run in a station VM should always pass through Context. 
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="lexicon">Lexicon</h1>
+<!------------------------------------------------------------->
+
+<p>
+Lexicons are Java properties files which store localized key/value pairs.  They 
+are either deployed within modules or located in a directory called 
+"file:!lexicon/".  A module may contain multiple lexicon files, each of which 
+is associated with a language.  The "file:!lexicon/" directory may contain zero 
+or more <i>lang</i> subdirectories, which are used to store the lexicon files for 
+specific languages, where lang is the locale code.  Within the directory there is a 
+file per module named "<i>moduleName</i>.lexicon".  Every module with a lexicon 
+should also provide a fallback lexicon bundled in the root directory of module's 
+jar file: "module://<i>moduleName</i>/<i>moduleName</i>.lexicon" (note in the
+source tree it is just "module.lexicon").  
+</p>
+
+<p>
+Access to lexicons in Java is provided via three main APIs:
+<ul>
+  <li><a href='module://docDeveloper/doc/baja-rt/javax/baja/util/Lexicon.bajadoc'>Lexicon</a> API.
+    This is our original localization API. It requires the developer to know the user's locale at
+    the time of construction. This can sometimes be limiting for environments which want to support
+    multiple languages. You can still use a Lexicon, but you might have to create a new Lexicon
+    instance for each user with a different locale. If you ever want to construct a Lexicon for the
+    platform locale or for a single locale, this would be the proper lexicon to use.
+  </li>
+  <li><a href='module://docDeveloper/doc/baja-rt/javax/baja/util/LexiconText.bajadoc'>LexiconText</a> API.
+    If you know the exact module and lexicon key, a `LexiconText` can be used. Each time you request
+    localization via `LexiconText.getText(Context)`, the context is requested so the result can be different for
+    each locale. If you want to translate more than one lexicon key in a Java class, this may not be the best
+    option, as each LexiconText will construct and store its own Lexicon instance for the translation.
+  </li>
+  <li><a href='module://docDeveloper/doc/baja-rt/javax/baja/util/LexiconModule.bajadoc'>LexiconModule</a> API.
+    This is our newest localization API that is available in Niagara 4.8 and higher. LexiconModule is similar
+    to a Lexicon and LexiconText, but it is most useful for when only the module name is known at the time of construction.
+    The key and the Context are required for all lexicon 'get', 'getText' or 'getHtmlSafe' look ups. The last used language
+    is cached in each LexiconModule, so it is optimized to be reused in scenarios where there could be multiple calls with the
+    same language. LexiconText will create a new lexicon on each 'getText' call, so LexiconModule is more efficient in that scenario.
+  </li>
+</ul>
+</p>
+<p>
+  Access to lexicons in JavaScript is provided via the
+  <a href='module://docDeveloper/doc/jsdoc/js-ux/module-lex.html'>lex.js</a> API.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="format">BFormat</h1>
+<!------------------------------------------------------------->
+
+<p>
+Many Niagara APIs make use of the <a href='module://docDeveloper/doc/baja-rt/javax/baja/util/BFormat.bajadoc'>BFormat</a> 
+class to store a formatted display string. BFormat provides the ability to
+insert special function calls into the display string using the percent sign.
+One of these calls maps a string defined in a lexicon via the syntax
+"%lexicon(module:key)%. Whenever a display string is stored as a BFormat, you
+may store one locale in-place or you may use the %lexicon()% call to indirectly
+reference a lexicon string.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="slots">Slots</h1>
+<!------------------------------------------------------------->
+
+<p>
+One of the first steps in localization, is to provide locale specific slot 
+names.  Every slot has a programmatic name and a context sensitive display name.
+The process for deriving the display name for a slot:
+</p>
+
+<ol>
+
+<li><b>BComplex.getDisplayName(Slot, Context)</b>: The first step is to call
+this API.  You may override this method to provide your own implementation for
+localization.</li>
+
+<li><b>NameMap</b>:  The framework looks for a slot called "displayNames" that
+stores a <a href='module://docDeveloper/doc/baja-rt/javax/baja/util/BNameMap.bajadoc'>BNameMap</a>.  
+If a NameMap is found and it contains an entry for the slot,
+that is used for the display name.  Note the NameMap value is evaluated as a BFormat, 
+so it may contain a lexicon call.  NameMaps are useful ways to localize specific
+slots, localize instances, or to localize dynamic slots.</li>
+
+<li><b>Lexicon</b>:  Next the framework attempts to find the display name
+for a slot using the lexicon.  The lexicon module is based on the slot's 
+declaring type and the key is the slot name itself.</li>
+
+<li><b>Slot Default</b>:  If we still haven't found a display name, then we use
+a fallback mechanism.  If the slot is frozen, the display name is the result
+of <code>TextUtil.toFriendly(name)</code>.  If the slot is dynamic the display 
+name is the result of <code>SlotPath.unescape(name)</code>.</li>
+
+</ol>
+
+<!------------------------------------------------------------->
+<h1 id="facets">Facets</h1>
+<!------------------------------------------------------------->
+
+<p>
+Sometimes facets are used to store display string.  In these cases, the string is
+interpreted as a BFormat so that a %lexicon()% call may be configured.  This design
+pattern is used for:
+</p>
+
+<ul>
+<li>Boolean trueText</li>
+<li>Boolean falseText</li>
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="frozenEnums">FrozenEnums</h1>
+<!------------------------------------------------------------->
+
+<p>
+Compile time enums subclass from <a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BFrozenEnum.bajadoc'>BFrozenEnum</a>.  
+Similar to slot names and display names, enums have a programmatic tag and a
+display tag. Localization of display tags uses the following process:
+</p>
+
+<ol>
+
+<li><b>Lexicon</b>: The framework first attempts to map the display tag to a lexicon.  The
+module is the declaring type of the FrozenEnum and the key is the programmatic tag.</li>
+
+<li><b>Default</b>: If a display tag isn't found in the lexicon, then the fallback is
+the result of <code>TextUtil.toFriendly(tag)</code>.</li>
+
+</ol>
+
+<!------------------------------------------------------------->
+<h1 id="dynamicEnums">DynamicEnums</h1>
+<!------------------------------------------------------------->
+
+<p>
+Localization of <a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BDynamicEnum.bajadoc'>BDynamicEnums</a> 
+is done via the <a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BEnumRange.bajadoc'>BEnumRange</a>
+API. An EnumRange may be associated with a DynamicEnum directly via
+DynamicEnum.make() or indirectly via Context facets. An EnumRange may be
+composed of a FrozenEnum's range and/or dynamic ordinal/tag pairs. Any portion
+of the frozen range uses the same localization process as FrozenEnun. The
+dynamic portion of the range uses the following process:
+</p>
+
+<ol>
+
+<li><b>Lexicon</b>: If BEnumRange.getOptions() contains a "lexicon" value, then we attempt to map the display tag to a lexicon where the module is the value of the "lexicon" option and the key is the programmatic tag.</li>
+
+<li><b>Default</b>: If a display tag is not found using the lexicon, and the ordinal
+does map to a programmatic tag, then the result of <code>SlotPath.unescape(tag)</code>
+is returned.</li>
+
+<li><b>Ordinal</b>: The display tag for an ordinal that isn't included in the range
+is the ordinal itself as a decimal integer.</li>
+</ol>
+
+<!------------------------------------------------------------->
+<h1 id="userInterface">User Interface</h1>
+<!------------------------------------------------------------->
+
+<p>
+When building a user interface via the bajaui APIs, all display text should
+be localizable via lexicons.  In the case of simple BLabels, just using the
+Lexicon API is the best strategy.
+</p>
+
+<p>
+The <a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/Command.bajadoc'>Command</a>
+and <a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/ToggleCommand.bajadoc'>ToggleCommand</a> 
+APIs also provide built-in support for fetching their label, icon, accelerator, 
+and description from a lexicon.  Take the following code example:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+class DoIt extends Command
+{
+  DoIt(BWidget owner) { super(owner, lex, "do.it"); }
+
+  static final Lexicon lex = Lexicon.make(MyCommand.class);
+}
+  </code>
+</pre>
+
+<p>
+In the example above DoIt would automatically have it's display configured
+from the declaring module's lexicon:
+</p>
+
+<pre>
+do.it.label=Do It
+do.it.icon=module://icons/x16/build.png
+do.it.accelerator=Ctrl+D
+do.it.description=Do it, whatever it is.
+</pre>
+
+
+<!------------------------------------------------------------->
+<h1 id="localeSelection">Locale Selection</h1>
+<!------------------------------------------------------------->
+
+<p>
+Every time a Niagara VM is started it attempts to select a default locale using
+the host operating system.  The OS default may be overridden via the command
+line flag "-locale:<i>lang</i>", where lang is the locale code.  The locale code can be
+any string that maps to a lexicon directory, but typically it is a ISO 639 locale
+code such as "fr".  The default locale of the VM may be accessed via the
+<code>Sys.getLanguage()</code> API.
+</p>
+
+<p>
+When the workbench is launched as a desktop application it follows the rules
+above to select it's locale.  Once selected the entire workbench uses that locale
+independent of user accounts used to log into stations.
+</p>
+
+<p>
+The locale for web browser access to a station follows the rules:
+</p>
+
+<ol>
+
+<li><b>User.language</b>:  If the language property of user is a non-empty string,
+then it defines the locale to use.</li>
+
+<li><b>Accept Language</b>:  Next the framework tries to select a locale based on
+the "Accept-Language" passed in the browser's HTTP request.  Typically this is
+configured in the browser's options.</li>
+
+<li><b>Default</b>: If all else fails, then the default locale of the station's VM
+is used</li>
+
+</ol>
+
+<!------------------------------------------------------------->
+<h1 id="timeFormatting">Time Formatting</h1>
+<!------------------------------------------------------------->
+
+<p>
+The default time format is defined by the lexicon key baja:timeFormat. But 
+it may be selectively overridden by users.  To change the time format in the
+Workbench use General Options under Tools | Options.  Use the User.facets
+property to change it for browser users.
+</p>
+
+<p>
+Niagara' time format uses a simple pattern language:
+</p>
+
+<table border='1'>
+<tr><th>Pattern</th><th>Description</th></tr>
+<tr><td>YY</td><td>Two digit year</td></tr>
+<tr><td>YYYY</td><td>Four digit year</td></tr>
+<tr><td>M</td><td>One digit month</td></tr>
+<tr><td>MM</td><td>Two digit month</td></tr>
+<tr><td>MMM</td><td>Abbreviated month name</td></tr>
+<tr><td>D</td><td>One digit day of month</td></tr>
+<tr><td>DD</td><td>Two digit day of month</td></tr>
+<tr><td>h</td><td>One digit 12 hour</td></tr>
+<tr><td>hh</td><td>Two digit 12 hour</td></tr>
+<tr><td>H</td><td>One digit 24 hour</td></tr>
+<tr><td>HH</td><td>Two digit 24 hour</td></tr>
+<tr><td>mm</td><td>Two digit minutes</td></tr>
+<tr><td>ss</td><td>Seconds (and milliseconds if applicable)</td></tr>
+<tr><td>a</td><td>AM/PM marker</td></tr>
+<tr><td>z</td><td>Timezone</td></tr>
+<tr><td>anything else</td><td>Character literal</td></tr>
+</table>
+
+<p>
+In addition to the time format configured by the user, developers may
+customize the resolution via the following facets:
+</p>
+
+<pre>
+BFacets.SHOW_TIME
+BFacets.SHOW_DATE
+BFacets.SHOW_SECONDS
+BFacets.SHOW_MILLISECONDS
+BFacets.SHOW_TIME_ZONE
+</pre>
+
+<p>
+To programmatically format a time using this infrastructure use the 
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BAbsTime.bajadoc'>BAbsTime</a> 
+or <a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BTime.bajadoc'>BTime</a> APIs.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="unitConversion">Unit Conversion</h1>
+<!------------------------------------------------------------->
+
+<p>
+By default the framework displays all numeric values using their configured
+units (via Context facets).  Users may override this behavior to have
+all values converted to the US/English system or SI/Metric systems.  To
+enable this feature in Workbench use General Options under Tools | Options.
+Use the User.facets property to enable it for browser users.
+</p>
+
+<p>
+The list of units known to the system and how to convert is configured via
+the file:!lib/units.xml XML file.  The mapping of those units between English
+and Metric is done in the file:!lib/unitConversion.xml XML file.
+</p>
+
+<p>
+To programmatically format and auto-convert numerics use the 
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BFloat.bajadoc'>BFloat</a>
+or <a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BDouble.bajadoc'>BDouble</a> APIs.
+</p>
+
+<p class='note'>
+Note this unit conversion is independent of the conversion which may be performed 
+by <a href='module://docDeveloper/doc/driver-rt/javax/baja/driver/point/BProxyExt.bajadoc'>ProxyExts</a> 
+when mapping a point into a driver.
+</p>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/files.html" class="navbar">Prev</a> |  <a href="/doc/spy.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>
+

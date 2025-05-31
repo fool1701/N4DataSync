@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.export.BIBacnetExportObject" name="BIBacnetExportObject" packageName="javax.baja.bacnet.export" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIBacnetExportObject is the interface implemented by all objects&#xa; that export Niagara objects as Bacnet objects.
+</description>
+<tag name="@author">Craig Gemmill on 31 Jul 01</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.BacnetConst"/>
+</implements>
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.getParent() -->
+<method name="getParent"  public="true" abstract="true">
+<description>
+Get the parent.  Implemented by BComplex.
+</description>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+<description>
+the parent of this object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.getObject() -->
+<method name="getObject"  public="true" abstract="true">
+<description>
+Get the exported object.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+<description>
+the actual exported object by resolving the object ord.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.getObjectOrd() -->
+<method name="getObjectOrd"  public="true" abstract="true">
+<description>
+Get the BOrd to the exported object.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+a BOrd resolving to the actual exported object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.setObjectOrd(javax.baja.naming.BOrd, javax.baja.sys.Context) -->
+<method name="setObjectOrd"  public="true" abstract="true">
+<description>
+Set the BOrd to the exported object.
+</description>
+<parameter name="objectOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.getStatus() -->
+<method name="getStatus"  public="true" abstract="true">
+<description>
+Get the object&#x27;s export status.
+</description>
+<return>
+<type class="javax.baja.status.BStatus"/>
+<description>
+true if the object is properly exported.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.isFatalFault() -->
+<method name="isFatalFault"  public="true" abstract="true">
+<description>
+Is the object in fatal fault?&#xa; Fatal faults require a restart to correct.&#xa; If an object is not in fatal fault, it is included&#xa; in the local device&#x27;s object list.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the object is in fatal fault.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.checkConfiguration() -->
+<method name="checkConfiguration"  public="true" abstract="true">
+<description>
+Check the object configuration.&#xa; Checks that must be done:&#xa; - fatal fault&#xa; - object ord ok&#xa; - objectId valid&#xa; - any object-specific configuration (e.g., MS state=0)&#xa; - attempt to export object&#xa; - perform validation of value&#xa; Set reliability, status, and faultCause to appropriate&#xa; values, where applicable.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.getObjectId() -->
+<method name="getObjectId"  public="true" abstract="true">
+<description>
+Get the Object_Identifier property.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.setObjectId(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="setObjectId"  public="true" abstract="true">
+<description>
+Set the Object_Identifier property.
+</description>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.getObjectName() -->
+<method name="getObjectName"  public="true" abstract="true">
+<description>
+Get the Object_Name property.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.setObjectName(java.lang.String) -->
+<method name="setObjectName"  public="true" abstract="true">
+<description>
+Set the Object_Name property.
+</description>
+<parameter name="objectName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.getPropertyList() -->
+<method name="getPropertyList"  public="true" abstract="true">
+<description>
+Get the PropertyList property.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.readProperty(javax.baja.bacnet.io.PropertyReference) -->
+<method name="readProperty"  public="true" abstract="true">
+<description>
+Get the value of a property.
+</description>
+<parameter name="propertyReference">
+<type class="javax.baja.bacnet.io.PropertyReference"/>
+<description>
+the PropertyReference containing id and index.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing the encoded value or the error.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.readPropertyMultiple(javax.baja.bacnet.io.PropertyReference[]) -->
+<method name="readPropertyMultiple"  public="true" abstract="true">
+<description>
+Read the value of multiple Bacnet properties.
+</description>
+<parameter name="propertyReferences">
+<type class="javax.baja.bacnet.io.PropertyReference" dimension="1"/>
+<description>
+the list of property references.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue" dimension="1"/>
+<description>
+an array of PropertyValues.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.readRange(javax.baja.bacnet.io.RangeReference) -->
+<method name="readRange"  public="true" abstract="true">
+<description>
+Read the specified range of values of a compound property.
+</description>
+<parameter name="rangeReference">
+<type class="javax.baja.bacnet.io.RangeReference"/>
+<description>
+the range reference describing the requested range.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.RangeData"/>
+<description>
+a byte array containing the encoded range.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.writeProperty(javax.baja.bacnet.io.PropertyValue) -->
+<method name="writeProperty"  public="true" abstract="true">
+<description>
+Set the value of a property.
+</description>
+<parameter name="propertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the write information.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.addListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="addListElements"  public="true" abstract="true">
+<description>
+Add list elements.
+</description>
+<parameter name="propertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;                      propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to add any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.removeListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="removeListElements"  public="true" abstract="true">
+<description>
+Remove list elements.
+</description>
+<parameter name="propertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;                      propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to remove any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.setTransportLayer(com.tridium.bacnet.stack.transport.BBacnetTransportLayer) -->
+<method name="setTransportLayer"  public="true" default="true">
+<description>
+Few Export Object may require to communicate with the remote device.
+</description>
+<parameter name="transportLayer">
+<type class="com.tridium.bacnet.stack.transport.BBacnetTransportLayer"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.isDynamicallyCreated() -->
+<method name="isDynamicallyCreated"  public="true" default="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetExportObject.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

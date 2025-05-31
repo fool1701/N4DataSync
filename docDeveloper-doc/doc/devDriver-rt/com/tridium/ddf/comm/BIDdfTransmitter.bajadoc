@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.BIDdfTransmitter" name="BIDdfTransmitter" packageName="com.tridium.ddf.comm" public="true" interface="true" abstract="true" category="interface">
+<description>
+The BDdfCommunicator uses an instance of this to transmit a BIDdfRequest.&#xa; &#xa; &#xa; Instead of implementing this directly, there are some implementations that can be extended.&#xa; These are in the packages:&#xa; &lt;OL&gt;&#xa;   &lt;LI&gt;com.tridium.ddf.comm.defaultComm&#xa;   &lt;LI&gt;com.tridium.ddf.comm.multipleTransaction&#xa;   &lt;LI&gt;com.tridium.ddf.comm.singleTransaction&#xa; &lt;/OL&gt;&#xa; &#xa; In addition, there are reasonable serial versions of these in the devSerialDriver module.&#xa; &#xa; There are also reasonable Tcp/Ip and Udp/Ip versions of these in the devIpDriver module.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 10, 2006</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.transmitRequest(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="transmitRequest"  public="true" abstract="true">
+<description>
+This method should call forceTransmit and also update &#xa; any statistical values, such as a &#x27;transmissionCount&#x27;&#xa; property.
+</description>
+<parameter name="ddfRequest">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+<description>
+the driver&#x27;s request to serialize (convert to a byte array)&#xa; and transmit.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.forceTransmit(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="forceTransmit"  public="true" abstract="true">
+<description>
+This method is called to blindly transmit the byte representation of the given request&#xa; &#xa; This method should only be called internally be a BIDdfTransactionMgr.
+</description>
+<parameter name="ddfRequest">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true" abstract="true">
+<description>
+Gets the communicator that owns this transmitter.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+<description>
+the communicator that owns this transmitter.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.getMaxRetryCount() -->
+<method name="getMaxRetryCount"  public="true" abstract="true">
+<description>
+Gets the maximum number of retries that is permitted per request, unless&#xa; the individual request defines a different value, before timing out.
+</description>
+<return>
+<type class="int"/>
+<description>
+the maximum number of retries that is permitted per request, unless&#xa; the individual request defines a different value, before timing out.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.setRetransmissionCount(long) -->
+<method name="setRetransmissionCount"  public="true" abstract="true">
+<description>
+This is a &#x27;setter&#x27; for a &#x27;retransmissionCount&#x27; property. &#xa; By default, this framework will automatically call this&#xa; method each time that it attempts to retry a transmission.
+</description>
+<parameter name="retransmissionCount">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.getRetransmissionCount() -->
+<method name="getRetransmissionCount"  public="true" abstract="true">
+<description>
+This is a &#x27;getter&#x27; for a &#x27;retransmissionCount&#x27; property.&#xa;  &#xa; By default, this framework will automatically call the&#xa; corresponding &#x27;setter&#x27; each time that it attempts to retry&#xa; a transmission.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.startTransmitter() -->
+<method name="startTransmitter"  public="true" abstract="true">
+<description>
+Starts any threads that are required to accommodate the drivers&#xa; transmitter.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.stopTransmitter() -->
+<method name="stopTransmitter"  public="true" abstract="true">
+<description>
+Stops any threads that were required to accommodate the drivers&#xa; transmitter.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransmitter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,1771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.BBacnetDevice" name="BBacnetDevice" packageName="javax.baja.bacnet" public="true">
+<description>
+BBacnetDevice represents the Baja shadow object for a Bacnet device.&#xa; &lt;p&gt;&#xa; Properties such as the device address, which are not Bacnet Device&#xa; properties, but which are associated with this device, are contained&#xa; in a BBacnetDeviceData object child of this device.&#xa; &lt;p&gt;&#xa; DeviceExts for status monitoring and point monitoring are included,&#xa; as well as a configuration object used for examining the device in&#xa; its native object model as a container of Bacnet Objects.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision: 1$ $Date: 12/19/01 4:32:51 PM$</tag>
+<tag name="@creation">27 Jul 00</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.driver.loadable.BLoadableDevice"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.BacnetConst"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.util.BIBacnetPollable"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.BIBacnetObjectContainer"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.device.overrides.DeviceOverrideAware"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.device.LatencyRecorderAware"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.device.LatencyRecorder"/>
+</implements>
+<property name="address" flags="d">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description>
+Slot for the &lt;code&gt;address&lt;/code&gt; property.&#xa; the device&#x27;s address.
+</description>
+<tag name="@see">#getAddress</tag>
+<tag name="@see">#setAddress</tag>
+</property>
+
+<property name="points" flags="">
+<type class="javax.baja.bacnet.point.BBacnetPointDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Point mapping device extension.
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</property>
+
+<property name="virtual" flags="">
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualGateway"/>
+<description>
+Slot for the &lt;code&gt;virtual&lt;/code&gt; property.&#xa; Virtual Point container
+</description>
+<tag name="@see">#getVirtual</tag>
+<tag name="@see">#setVirtual</tag>
+</property>
+
+<property name="alarms" flags="">
+<type class="javax.baja.bacnet.alarm.BBacnetAlarmDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Alarm device extension.
+</description>
+<tag name="@see">#getAlarms</tag>
+<tag name="@see">#setAlarms</tag>
+</property>
+
+<property name="schedules" flags="">
+<type class="javax.baja.driver.schedule.BScheduleDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Schedule device extension.
+</description>
+<tag name="@see">#getSchedules</tag>
+<tag name="@see">#setSchedules</tag>
+</property>
+
+<property name="trendLogs" flags="">
+<type class="javax.baja.driver.history.BHistoryDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;trendLogs&lt;/code&gt; property.&#xa; History device extension.
+</description>
+<tag name="@see">#getTrendLogs</tag>
+<tag name="@see">#setTrendLogs</tag>
+</property>
+
+<property name="config" flags="">
+<type class="javax.baja.bacnet.config.BBacnetConfigDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;config&lt;/code&gt; property.&#xa; BACnet Object commissioning/configuration.
+</description>
+<tag name="@see">#getConfig</tag>
+<tag name="@see">#setConfig</tag>
+</property>
+
+<property name="enumerationList" flags="">
+<type class="javax.baja.bacnet.enums.BExtensibleEnumList"/>
+<description>
+Slot for the &lt;code&gt;enumerationList&lt;/code&gt; property.&#xa; Management of proprietary extensions to extensible enumerations.
+</description>
+<tag name="@see">#getEnumerationList</tag>
+<tag name="@see">#setEnumerationList</tag>
+</property>
+
+<property name="useCov" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useCov&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COV is supported.
+</description>
+<tag name="@see">#getUseCov</tag>
+<tag name="@see">#setUseCov</tag>
+</property>
+
+<property name="useCovProperty" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useCovProperty&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COVP is supported.
+</description>
+<tag name="@see">#getUseCovProperty</tag>
+<tag name="@see">#setUseCovProperty</tag>
+</property>
+
+<property name="maxCovSubscriptions" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxCovSubscriptions&lt;/code&gt; property.&#xa; the maximum number of COV subscriptions that Niagara will attempt to&#xa; initiate to this device.
+</description>
+<tag name="@see">#getMaxCovSubscriptions</tag>
+<tag name="@see">#setMaxCovSubscriptions</tag>
+</property>
+
+<property name="covSubscriptions" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;covSubscriptions&lt;/code&gt; property.&#xa; the number of COV subscriptions currently active to this device.
+</description>
+<tag name="@see">#getCovSubscriptions</tag>
+<tag name="@see">#setCovSubscriptions</tag>
+</property>
+
+<property name="pollFrequency" flags="hr">
+<type class="javax.baja.driver.util.BPollFrequency"/>
+<description>
+Slot for the &lt;code&gt;pollFrequency&lt;/code&gt; property.&#xa; which Poll frequency bucket does this device belong in?&#xa; deprecated as of 3.2.
+</description>
+<tag name="@see">#getPollFrequency</tag>
+<tag name="@see">#setPollFrequency</tag>
+</property>
+
+<property name="characterSet" flags="r">
+<type class="javax.baja.bacnet.enums.BCharacterSetEncoding"/>
+<description>
+Slot for the &lt;code&gt;characterSet&lt;/code&gt; property.&#xa; which default character set is currently being used by this device.
+</description>
+<tag name="@see">#getCharacterSet</tag>
+<tag name="@see">#setCharacterSet</tag>
+</property>
+
+<property name="maxPollTimeouts" flags="h">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxPollTimeouts&lt;/code&gt; property.&#xa; the maximum number of consecutive poll timeouts before marking polled&#xa; points into fault.  The device is pinged on each timeout, and only&#xa; marked down if the ping fails.
+</description>
+<tag name="@see">#getMaxPollTimeouts</tag>
+<tag name="@see">#setMaxPollTimeouts</tag>
+</property>
+
+<property name="disableDeviceOnCovSubscriptionFailure" flags="h">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;disableDeviceOnCovSubscriptionFailure&lt;/code&gt; property.&#xa; flag to configure if the device should be marked as down if&#xa; Subscribe/Unsubscribe Cov/CovProperty (and retries) have failed.
+</description>
+<tag name="@see">#getDisableDeviceOnCovSubscriptionFailure</tag>
+<tag name="@see">#setDisableDeviceOnCovSubscriptionFailure</tag>
+</property>
+
+<action name="macAddressFailed" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;macAddressFailed&lt;/code&gt; action.
+</description>
+<tag name="@see">#macAddressFailed()</tag>
+</action>
+
+<!-- javax.baja.bacnet.BBacnetDevice() -->
+<constructor name="BBacnetDevice" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getAddress() -->
+<method name="getAddress"  public="true">
+<description>
+Get the &lt;code&gt;address&lt;/code&gt; property.&#xa; the device&#x27;s address.
+</description>
+<tag name="@see">#address</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setAddress(javax.baja.bacnet.datatypes.BBacnetAddress) -->
+<method name="setAddress"  public="true">
+<description>
+Set the &lt;code&gt;address&lt;/code&gt; property.&#xa; the device&#x27;s address.
+</description>
+<tag name="@see">#address</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getPoints() -->
+<method name="getPoints"  public="true">
+<description>
+Get the &lt;code&gt;points&lt;/code&gt; property.&#xa; Point mapping device extension.
+</description>
+<tag name="@see">#points</tag>
+<return>
+<type class="javax.baja.bacnet.point.BBacnetPointDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setPoints(javax.baja.bacnet.point.BBacnetPointDeviceExt) -->
+<method name="setPoints"  public="true">
+<description>
+Set the &lt;code&gt;points&lt;/code&gt; property.&#xa; Point mapping device extension.
+</description>
+<tag name="@see">#points</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.point.BBacnetPointDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getVirtual() -->
+<method name="getVirtual"  public="true">
+<description>
+Get the &lt;code&gt;virtual&lt;/code&gt; property.&#xa; Virtual Point container
+</description>
+<tag name="@see">#virtual</tag>
+<return>
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualGateway"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setVirtual(javax.baja.bacnet.virtual.BBacnetVirtualGateway) -->
+<method name="setVirtual"  public="true">
+<description>
+Set the &lt;code&gt;virtual&lt;/code&gt; property.&#xa; Virtual Point container
+</description>
+<tag name="@see">#virtual</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualGateway"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getAlarms() -->
+<method name="getAlarms"  public="true">
+<description>
+Get the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Alarm device extension.
+</description>
+<tag name="@see">#alarms</tag>
+<return>
+<type class="javax.baja.bacnet.alarm.BBacnetAlarmDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setAlarms(javax.baja.bacnet.alarm.BBacnetAlarmDeviceExt) -->
+<method name="setAlarms"  public="true">
+<description>
+Set the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Alarm device extension.
+</description>
+<tag name="@see">#alarms</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.alarm.BBacnetAlarmDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getSchedules() -->
+<method name="getSchedules"  public="true">
+<description>
+Get the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Schedule device extension.
+</description>
+<tag name="@see">#schedules</tag>
+<return>
+<type class="javax.baja.driver.schedule.BScheduleDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setSchedules(javax.baja.driver.schedule.BScheduleDeviceExt) -->
+<method name="setSchedules"  public="true">
+<description>
+Set the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Schedule device extension.
+</description>
+<tag name="@see">#schedules</tag>
+<parameter name="v">
+<type class="javax.baja.driver.schedule.BScheduleDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getTrendLogs() -->
+<method name="getTrendLogs"  public="true">
+<description>
+Get the &lt;code&gt;trendLogs&lt;/code&gt; property.&#xa; History device extension.
+</description>
+<tag name="@see">#trendLogs</tag>
+<return>
+<type class="javax.baja.driver.history.BHistoryDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setTrendLogs(javax.baja.driver.history.BHistoryDeviceExt) -->
+<method name="setTrendLogs"  public="true">
+<description>
+Set the &lt;code&gt;trendLogs&lt;/code&gt; property.&#xa; History device extension.
+</description>
+<tag name="@see">#trendLogs</tag>
+<parameter name="v">
+<type class="javax.baja.driver.history.BHistoryDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getConfig() -->
+<method name="getConfig"  public="true">
+<description>
+Get the &lt;code&gt;config&lt;/code&gt; property.&#xa; BACnet Object commissioning/configuration.
+</description>
+<tag name="@see">#config</tag>
+<return>
+<type class="javax.baja.bacnet.config.BBacnetConfigDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setConfig(javax.baja.bacnet.config.BBacnetConfigDeviceExt) -->
+<method name="setConfig"  public="true">
+<description>
+Set the &lt;code&gt;config&lt;/code&gt; property.&#xa; BACnet Object commissioning/configuration.
+</description>
+<tag name="@see">#config</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.config.BBacnetConfigDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getEnumerationList() -->
+<method name="getEnumerationList"  public="true">
+<description>
+Get the &lt;code&gt;enumerationList&lt;/code&gt; property.&#xa; Management of proprietary extensions to extensible enumerations.
+</description>
+<tag name="@see">#enumerationList</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BExtensibleEnumList"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setEnumerationList(javax.baja.bacnet.enums.BExtensibleEnumList) -->
+<method name="setEnumerationList"  public="true">
+<description>
+Set the &lt;code&gt;enumerationList&lt;/code&gt; property.&#xa; Management of proprietary extensions to extensible enumerations.
+</description>
+<tag name="@see">#enumerationList</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BExtensibleEnumList"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getUseCov() -->
+<method name="getUseCov"  public="true">
+<description>
+Get the &lt;code&gt;useCov&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COV is supported.
+</description>
+<tag name="@see">#useCov</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setUseCov(boolean) -->
+<method name="setUseCov"  public="true">
+<description>
+Set the &lt;code&gt;useCov&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COV is supported.
+</description>
+<tag name="@see">#useCov</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getUseCovProperty() -->
+<method name="getUseCovProperty"  public="true">
+<description>
+Get the &lt;code&gt;useCovProperty&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COVP is supported.
+</description>
+<tag name="@see">#useCovProperty</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setUseCovProperty(boolean) -->
+<method name="setUseCovProperty"  public="true">
+<description>
+Set the &lt;code&gt;useCovProperty&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COVP is supported.
+</description>
+<tag name="@see">#useCovProperty</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getMaxCovSubscriptions() -->
+<method name="getMaxCovSubscriptions"  public="true">
+<description>
+Get the &lt;code&gt;maxCovSubscriptions&lt;/code&gt; property.&#xa; the maximum number of COV subscriptions that Niagara will attempt to&#xa; initiate to this device.
+</description>
+<tag name="@see">#maxCovSubscriptions</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setMaxCovSubscriptions(int) -->
+<method name="setMaxCovSubscriptions"  public="true">
+<description>
+Set the &lt;code&gt;maxCovSubscriptions&lt;/code&gt; property.&#xa; the maximum number of COV subscriptions that Niagara will attempt to&#xa; initiate to this device.
+</description>
+<tag name="@see">#maxCovSubscriptions</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getCovSubscriptions() -->
+<method name="getCovSubscriptions"  public="true">
+<description>
+Get the &lt;code&gt;covSubscriptions&lt;/code&gt; property.&#xa; the number of COV subscriptions currently active to this device.
+</description>
+<tag name="@see">#covSubscriptions</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setCovSubscriptions(int) -->
+<method name="setCovSubscriptions"  public="true">
+<description>
+Set the &lt;code&gt;covSubscriptions&lt;/code&gt; property.&#xa; the number of COV subscriptions currently active to this device.
+</description>
+<tag name="@see">#covSubscriptions</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getPollFrequency() -->
+<method name="getPollFrequency"  public="true">
+<description>
+Get the &lt;code&gt;pollFrequency&lt;/code&gt; property.&#xa; which Poll frequency bucket does this device belong in?&#xa; deprecated as of 3.2.
+</description>
+<tag name="@see">#pollFrequency</tag>
+<return>
+<type class="javax.baja.driver.util.BPollFrequency"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setPollFrequency(javax.baja.driver.util.BPollFrequency) -->
+<method name="setPollFrequency"  public="true">
+<description>
+Set the &lt;code&gt;pollFrequency&lt;/code&gt; property.&#xa; which Poll frequency bucket does this device belong in?&#xa; deprecated as of 3.2.
+</description>
+<tag name="@see">#pollFrequency</tag>
+<parameter name="v">
+<type class="javax.baja.driver.util.BPollFrequency"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getCharacterSet() -->
+<method name="getCharacterSet"  public="true">
+<description>
+Get the &lt;code&gt;characterSet&lt;/code&gt; property.&#xa; which default character set is currently being used by this device.
+</description>
+<tag name="@see">#characterSet</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BCharacterSetEncoding"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setCharacterSet(javax.baja.bacnet.enums.BCharacterSetEncoding) -->
+<method name="setCharacterSet"  public="true">
+<description>
+Set the &lt;code&gt;characterSet&lt;/code&gt; property.&#xa; which default character set is currently being used by this device.
+</description>
+<tag name="@see">#characterSet</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BCharacterSetEncoding"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getMaxPollTimeouts() -->
+<method name="getMaxPollTimeouts"  public="true">
+<description>
+Get the &lt;code&gt;maxPollTimeouts&lt;/code&gt; property.&#xa; the maximum number of consecutive poll timeouts before marking polled&#xa; points into fault.  The device is pinged on each timeout, and only&#xa; marked down if the ping fails.
+</description>
+<tag name="@see">#maxPollTimeouts</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setMaxPollTimeouts(int) -->
+<method name="setMaxPollTimeouts"  public="true">
+<description>
+Set the &lt;code&gt;maxPollTimeouts&lt;/code&gt; property.&#xa; the maximum number of consecutive poll timeouts before marking polled&#xa; points into fault.  The device is pinged on each timeout, and only&#xa; marked down if the ping fails.
+</description>
+<tag name="@see">#maxPollTimeouts</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getDisableDeviceOnCovSubscriptionFailure() -->
+<method name="getDisableDeviceOnCovSubscriptionFailure"  public="true">
+<description>
+Get the &lt;code&gt;disableDeviceOnCovSubscriptionFailure&lt;/code&gt; property.&#xa; flag to configure if the device should be marked as down if&#xa; Subscribe/Unsubscribe Cov/CovProperty (and retries) have failed.
+</description>
+<tag name="@see">#disableDeviceOnCovSubscriptionFailure</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setDisableDeviceOnCovSubscriptionFailure(boolean) -->
+<method name="setDisableDeviceOnCovSubscriptionFailure"  public="true">
+<description>
+Set the &lt;code&gt;disableDeviceOnCovSubscriptionFailure&lt;/code&gt; property.&#xa; flag to configure if the device should be marked as down if&#xa; Subscribe/Unsubscribe Cov/CovProperty (and retries) have failed.
+</description>
+<tag name="@see">#disableDeviceOnCovSubscriptionFailure</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.macAddressFailed() -->
+<method name="macAddressFailed"  public="true">
+<description>
+Invoke the &lt;code&gt;macAddressFailed&lt;/code&gt; action.
+</description>
+<tag name="@see">#macAddressFailed</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.device() -->
+<method name="device"  public="true" final="true">
+<description>
+Get the containing device object which will poll this object.
+</description>
+<return>
+<type class="javax.baja.bacnet.BBacnetDevice"/>
+<description>
+the containing BBacnetDevice
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getPollableType() -->
+<method name="getPollableType"  public="true" final="true">
+<description>
+Get the pollable type of this object.
+</description>
+<return>
+<type class="int"/>
+<description>
+one of the pollable types defined in BIBacnetPollable.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.poll() -->
+<method name="poll"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Poll all subscribed points in the device.
+</description>
+<tag name="@deprecated"/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.readFail(java.lang.String) -->
+<method name="readFail"  public="true" final="true">
+<description>
+Indicate a failure polling this object.
+</description>
+<parameter name="failureMsg">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.fromEncodedValue(byte[], javax.baja.status.BStatus, javax.baja.sys.Context) -->
+<method name="fromEncodedValue"  public="true" final="true">
+<description>
+Normalize the encoded data into the pollable&#x27;s data structure.
+</description>
+<parameter name="encodedValue">
+<type class="byte" dimension="1"/>
+<description/>
+</parameter>
+<parameter name="status">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getPollListEntries() -->
+<method name="getPollListEntries"  public="true" final="true">
+<description>
+Get the list of poll list entries for this pollable.&#xa; The first entry for points must be the configured property.
+</description>
+<return>
+<type class="javax.baja.bacnet.util.PollListEntry" dimension="1"/>
+<description>
+the list of poll list entries.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description>
+To String.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getObjectId() -->
+<method name="getObjectId"  public="true" final="true">
+<description>
+Get the object ID of this device.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+the device&#x27;s object identifier.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setObjectId(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, javax.baja.sys.Context) -->
+<method name="setObjectId"  public="true" final="true">
+<description>
+Set the object ID of this device.
+</description>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.objectIdChanged() -->
+<method name="objectIdChanged"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getMaxAPDULengthAccepted() -->
+<method name="getMaxAPDULengthAccepted"  public="true" final="true">
+<description>
+Get the maximum APDU length accepted by this device.
+</description>
+<return>
+<type class="int"/>
+<description>
+the integer maximum APDU length.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setMaxAPDULengthAccepted(int, javax.baja.sys.Context) -->
+<method name="setMaxAPDULengthAccepted"  public="true" final="true">
+<description>
+Set the maximum APDU length accepted by this device.
+</description>
+<parameter name="maxAPDULengthAccepted">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getSegmentationSupported() -->
+<method name="getSegmentationSupported"  public="true" final="true">
+<description>
+Get the device&#x27;s segmentation support.
+</description>
+<return>
+<type class="javax.baja.bacnet.enums.BBacnetSegmentation"/>
+<description>
+the segmentation support enumeration for this device.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setSegmentationSupported(javax.baja.bacnet.enums.BBacnetSegmentation, javax.baja.sys.Context) -->
+<method name="setSegmentationSupported"  public="true" final="true">
+<description>
+Set the device&#x27;s segmentation support.
+</description>
+<parameter name="segmentationSupported">
+<type class="javax.baja.bacnet.enums.BBacnetSegmentation"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getMaxSegmentsAccepted() -->
+<method name="getMaxSegmentsAccepted"  public="true" final="true">
+<description>
+Get the device&#x27;s number of segments accepted.
+</description>
+<return>
+<type class="int"/>
+<description>
+the max number of segments accepted.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getVendorId() -->
+<method name="getVendorId"  public="true" final="true">
+<description>
+Get the device&#x27;s vendor identifier.
+</description>
+<return>
+<type class="int"/>
+<description>
+the integer vendor ID.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setVendorId(int, javax.baja.sys.Context) -->
+<method name="setVendorId"  public="true" final="true">
+<description>
+Set the device&#x27;s vendor identifier.
+</description>
+<parameter name="vendorId">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isServiceSupported(int) -->
+<method name="isServiceSupported"  public="true">
+<description>
+Is the service with the given service ID supported by this device?
+</description>
+<parameter name="serviceId">
+<type class="int"/>
+<description>
+the service ID of the service type, as&#xa;                  specified in the BacnetServicesSupported bit string,&#xa;                  defined in Section 21 of the Bacnet specification.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the device indicates support for this service.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isServiceSupported(java.lang.String) -->
+<method name="isServiceSupported"  public="true">
+<description>
+Is the service with the given serviceName supported by this device?
+</description>
+<parameter name="serviceName">
+<type class="java.lang.String"/>
+<description>
+the name of the service, as&#xa;                    specified in the BacnetServicesSupported bit string,&#xa;                    defined in Section 21 of the Bacnet specification.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the device indicates support for this service.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isObjectTypeSupported(int) -->
+<method name="isObjectTypeSupported"  public="true">
+<description>
+Is the object type with the given ID supported by this device?
+</description>
+<parameter name="objectType">
+<type class="int"/>
+<description>
+the object type, as specified in the&#xa;                   BacnetObjectTypesSupported bit string,&#xa;                   defined in Section 21 of the Bacnet specification.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the device indicates support for this object type.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getProtocolRevision() -->
+<method name="getProtocolRevision"  public="true" final="true">
+<description>
+Get the Protocol_Revision property.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getObjectListStaleTime() -->
+<method name="getObjectListStaleTime"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated"/>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.network() -->
+<method name="network"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.bacnet.BBacnetNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isAddressValid() -->
+<method name="isAddressValid"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.checkAddress() -->
+<method name="checkAddress"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.started() -->
+<method name="started"  public="true">
+<description>
+Device started.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.updateServicesSupported() -->
+<method name="updateServicesSupported"  public="true">
+<description>
+Callback to indicate the supported Protocol Services (e.g. RPM)&#xa; support has changed.&#xa; &lt;p&gt;&#xa; This method will replace the local cache using&#xa; values from the device&#x27;s BBacnetDeviceObject.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.initializeDevice() -->
+<method name="initializeDevice"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.descendantsStarted() -->
+<method name="descendantsStarted"  public="true">
+<description>
+Descendants started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.uploadOnStart() -->
+<method name="uploadOnStart"  protected="true">
+<description>
+Should the device be uploaded on start?
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true, if device should be uploaded&#xa; false, if the device should not be uploaded
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.stopped() -->
+<method name="stopped"  public="true">
+<description>
+Device stopped.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Property Changed.&#xa; If necessary, update our entry in the Device Registry.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.subscribed() -->
+<method name="subscribed"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+BBacnetDevice may only be placed under a BBacnetNetwork or BBacnetDeviceFolder.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getNetworkType() -->
+<method name="getNetworkType"  public="true">
+<description>
+Get the Type of the parent network.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.updateDeviceInfo(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, javax.baja.bacnet.datatypes.BBacnetAddress, int, javax.baja.bacnet.enums.BBacnetSegmentation, int, com.tridium.bacnet.stack.network.BNetworkPort) -->
+<method name="updateDeviceInfo"  public="true">
+<description/>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<parameter name="address">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+</parameter>
+<parameter name="maxAPDULengthAccepted">
+<type class="int"/>
+</parameter>
+<parameter name="segmentationSupported">
+<type class="javax.baja.bacnet.enums.BBacnetSegmentation"/>
+</parameter>
+<parameter name="vendorId">
+<type class="int"/>
+</parameter>
+<parameter name="port">
+<type class="com.tridium.bacnet.stack.network.BNetworkPort"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.doPing() -->
+<method name="doPing"  public="true">
+<description>
+Pinging a BBacnetDevice is implemented by reading the&#xa; System_Status property of its Device object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.pingOk() -->
+<method name="pingOk"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.doUpload(javax.baja.driver.loadable.BUploadParameters, javax.baja.sys.Context) -->
+<method name="doUpload"  public="true">
+<description>
+Implementation of upload.
+</description>
+<parameter name="p">
+<type class="javax.baja.driver.loadable.BUploadParameters"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.doDownload(javax.baja.driver.loadable.BDownloadParameters, javax.baja.sys.Context) -->
+<method name="doDownload"  public="true">
+<description>
+Implementation of download.
+</description>
+<parameter name="p">
+<type class="javax.baja.driver.loadable.BDownloadParameters"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isPolling() -->
+<method name="isPolling"  public="true">
+<description>
+Is the device currently polling?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.setIsPolling(boolean) -->
+<method name="setIsPolling"  public="true">
+<description>
+Set the polling flag.
+</description>
+<parameter name="isPolling">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.addPolledPoint(javax.baja.bacnet.point.BBacnetProxyExt) -->
+<method name="addPolledPoint"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Add a proxy point to the poll list for this device.
+</description>
+<tag name="@deprecated">As of 3.2</tag>
+<parameter name="pt">
+<type class="javax.baja.bacnet.point.BBacnetProxyExt"/>
+<description>
+the BBacnetProxyExt to be added.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.removePolledPoint(javax.baja.bacnet.point.BBacnetProxyExt) -->
+<method name="removePolledPoint"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Remove a proxy point from the poll list for this device.
+</description>
+<tag name="@deprecated">As of 3.2</tag>
+<parameter name="pt">
+<type class="javax.baja.bacnet.point.BBacnetProxyExt"/>
+<description>
+the BBacnetProxyExt to be removed.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.tuningChanged(javax.baja.bacnet.point.BBacnetTuningPolicy, javax.baja.sys.Context) -->
+<method name="tuningChanged"  public="true">
+<description>
+Handle a tuning policy change.
+</description>
+<parameter name="policy">
+<type class="javax.baja.bacnet.point.BBacnetTuningPolicy"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.poll(javax.baja.bacnet.point.BBacnetProxyExt) -->
+<method name="poll"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Poll a point in this device.
+</description>
+<tag name="@deprecated">As of 3.2</tag>
+<parameter name="pt">
+<type class="javax.baja.bacnet.point.BBacnetProxyExt"/>
+<description>
+the BBacnetProxyExt containing the point access data.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.poll(javax.baja.bacnet.util.PollList) -->
+<method name="poll"  public="true">
+<description/>
+<parameter name="pl">
+<type class="javax.baja.bacnet.util.PollList"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.countPolledPoints() -->
+<method name="countPolledPoints"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated">As of 3.2</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.canAddCov() -->
+<method name="canAddCov"  public="true">
+<description>
+Can a Cov subscription be initiated for this device?&#xa; Checks the useCov flag, along with current subscription count.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if a new subscription can be attempted.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.canAddCovProperty() -->
+<method name="canAddCovProperty"  public="true">
+<description>
+Can a Cov Property subscription be initiated for this device?&#xa; Checks the useCovProperty flag, along with current subscription count.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if a new Cov Property subscription can be attempted.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.subscribeCov(javax.baja.bacnet.point.BBacnetProxyExt) -->
+<method name="subscribeCov"  public="true">
+<description>
+Subscribe a point for Cov notifications.
+</description>
+<parameter name="pt">
+<type class="javax.baja.bacnet.point.BBacnetProxyExt"/>
+<description>
+the proxy point to be subscribed - must be a Present_Value&#xa;           of an AI/AO/AV, BI/BO/BV, MSI/MSO/MSV, Loop, or LifeSafety&#xa;           object.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+boolean indicating if the subscription was successful.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.subscribeCovProperty(javax.baja.bacnet.point.BBacnetProxyExt) -->
+<method name="subscribeCovProperty"  public="true">
+<description>
+Subscribe COV Property for Cov notifications.
+</description>
+<parameter name="pt">
+<type class="javax.baja.bacnet.point.BBacnetProxyExt"/>
+<description>
+the proxy point to be subscribed - Any Property - must be a&#xa;           of an AI/AO/AV, BI/BO/BV, MSI/MSO/MSV, Loop, or LifeSafety&#xa;           object.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+boolean indicating if the subscription was successful.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.unsubscribeCov(javax.baja.bacnet.point.BBacnetProxyExt) -->
+<method name="unsubscribeCov"  public="true">
+<description>
+Unsubscribe a point for Cov notifications.
+</description>
+<parameter name="pt">
+<type class="javax.baja.bacnet.point.BBacnetProxyExt"/>
+<description>
+the proxy point to be unsubscribed.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.unsubscribeCovProperty(javax.baja.bacnet.point.BBacnetProxyExt) -->
+<method name="unsubscribeCovProperty"  public="true">
+<description>
+Unsubscribe a Cov Property point for Cov notifications.
+</description>
+<parameter name="pt">
+<type class="javax.baja.bacnet.point.BBacnetProxyExt"/>
+<description>
+the proxy Cov Property point to be unsubscribed.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getPropertyInfo(int, int) -->
+<method name="getPropertyInfo"  public="true" final="true">
+<description>
+Get a PropertyInfo object containing metadata about this property.&#xa; Vendor-defined information is checked first, allowing vendors to&#xa; override the standard property info if needed.  Then the standard&#xa; object type list is checked, and if still nothing is found, a generic&#xa; &#x22;unknown proprietary&#x22; info is created and returned.
+</description>
+<parameter name="objectType">
+<type class="int"/>
+<description>
+the Bacnet object type of the containing object.
+</description>
+</parameter>
+<parameter name="propId">
+<type class="int"/>
+<description>
+the property ID.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.util.PropertyInfo"/>
+<description>
+a PropertyInfo read from the manufacturer-specific XML file.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getPossibleProperties(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="getPossibleProperties"  public="true">
+<description/>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getRequiredProperties(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="getRequiredProperties"  public="true">
+<description/>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getVendorPropertyInfo(int, int) -->
+<method name="getVendorPropertyInfo"  protected="true">
+<description/>
+<parameter name="objectType">
+<type class="int"/>
+</parameter>
+<parameter name="propertyId">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.util.PropertyInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.getEnumRange(int, int) -->
+<method name="getEnumRange"  public="true">
+<description/>
+<parameter name="objectType">
+<type class="int"/>
+</parameter>
+<parameter name="propertyId">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BEnumRange"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isOperational() -->
+<method name="isOperational"  public="true">
+<description>
+The isOperational method is used to control optional communication&#xa; to devices, that should be skipped if the device has determined&#xa; to be non-operational&#xa; &lt;p&gt;&#xa; The default implementation is a simple status check that&#xa; the device&#x27;s status is not either down, disabled or in fault.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true, if normal communication with a device should be enabled&#xa; false, if there is a problem communicating with the device&#xa; and optional communication should stop until the&#xa; device is operational
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.lookupBacnetObject(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, int, int, java.lang.String) -->
+<method name="lookupBacnetObject"  public="true">
+<description/>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<parameter name="propertyId">
+<type class="int"/>
+</parameter>
+<parameter name="propertyArrayIndex">
+<type class="int"/>
+</parameter>
+<parameter name="domain">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.doMacAddressFailed() -->
+<method name="doMacAddressFailed"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.addDeviceOverride(javax.baja.bacnet.device.overrides.DeviceOverride) -->
+<method name="addDeviceOverride"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="override">
+<type class="javax.baja.bacnet.device.overrides.DeviceOverride"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.removeDeviceOverride(javax.baja.bacnet.device.overrides.DeviceOverride) -->
+<method name="removeDeviceOverride"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="override">
+<type class="javax.baja.bacnet.device.overrides.DeviceOverride"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.addLatencyRecorder(javax.baja.bacnet.device.LatencyRecorder) -->
+<method name="addLatencyRecorder"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="recorder">
+<type class="javax.baja.bacnet.device.LatencyRecorder"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.removeLatencyRecorder(javax.baja.bacnet.device.LatencyRecorder) -->
+<method name="removeLatencyRecorder"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="recorder">
+<type class="javax.baja.bacnet.device.LatencyRecorder"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.recordLatency(long) -->
+<method name="recordLatency"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="ms">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.isRecordingLatency() -->
+<method name="isRecordingLatency"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.BBacnetDevice.address -->
+<field name="address"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;address&lt;/code&gt; property.&#xa; the device&#x27;s address.
+</description>
+<tag name="@see">#getAddress</tag>
+<tag name="@see">#setAddress</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.points -->
+<field name="points"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Point mapping device extension.
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.virtual -->
+<field name="virtual"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;virtual&lt;/code&gt; property.&#xa; Virtual Point container
+</description>
+<tag name="@see">#getVirtual</tag>
+<tag name="@see">#setVirtual</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.alarms -->
+<field name="alarms"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Alarm device extension.
+</description>
+<tag name="@see">#getAlarms</tag>
+<tag name="@see">#setAlarms</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.schedules -->
+<field name="schedules"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Schedule device extension.
+</description>
+<tag name="@see">#getSchedules</tag>
+<tag name="@see">#setSchedules</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.trendLogs -->
+<field name="trendLogs"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;trendLogs&lt;/code&gt; property.&#xa; History device extension.
+</description>
+<tag name="@see">#getTrendLogs</tag>
+<tag name="@see">#setTrendLogs</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.config -->
+<field name="config"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;config&lt;/code&gt; property.&#xa; BACnet Object commissioning/configuration.
+</description>
+<tag name="@see">#getConfig</tag>
+<tag name="@see">#setConfig</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.enumerationList -->
+<field name="enumerationList"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enumerationList&lt;/code&gt; property.&#xa; Management of proprietary extensions to extensible enumerations.
+</description>
+<tag name="@see">#getEnumerationList</tag>
+<tag name="@see">#setEnumerationList</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.useCov -->
+<field name="useCov"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;useCov&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COV is supported.
+</description>
+<tag name="@see">#getUseCov</tag>
+<tag name="@see">#setUseCov</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.useCovProperty -->
+<field name="useCovProperty"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;useCovProperty&lt;/code&gt; property.&#xa; flag indicating if Niagara will use COV notification services to&#xa; receive data about points in this device for which COVP is supported.
+</description>
+<tag name="@see">#getUseCovProperty</tag>
+<tag name="@see">#setUseCovProperty</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.maxCovSubscriptions -->
+<field name="maxCovSubscriptions"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxCovSubscriptions&lt;/code&gt; property.&#xa; the maximum number of COV subscriptions that Niagara will attempt to&#xa; initiate to this device.
+</description>
+<tag name="@see">#getMaxCovSubscriptions</tag>
+<tag name="@see">#setMaxCovSubscriptions</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.covSubscriptions -->
+<field name="covSubscriptions"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;covSubscriptions&lt;/code&gt; property.&#xa; the number of COV subscriptions currently active to this device.
+</description>
+<tag name="@see">#getCovSubscriptions</tag>
+<tag name="@see">#setCovSubscriptions</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.pollFrequency -->
+<field name="pollFrequency"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pollFrequency&lt;/code&gt; property.&#xa; which Poll frequency bucket does this device belong in?&#xa; deprecated as of 3.2.
+</description>
+<tag name="@see">#getPollFrequency</tag>
+<tag name="@see">#setPollFrequency</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.characterSet -->
+<field name="characterSet"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;characterSet&lt;/code&gt; property.&#xa; which default character set is currently being used by this device.
+</description>
+<tag name="@see">#getCharacterSet</tag>
+<tag name="@see">#setCharacterSet</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.maxPollTimeouts -->
+<field name="maxPollTimeouts"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxPollTimeouts&lt;/code&gt; property.&#xa; the maximum number of consecutive poll timeouts before marking polled&#xa; points into fault.  The device is pinged on each timeout, and only&#xa; marked down if the ping fails.
+</description>
+<tag name="@see">#getMaxPollTimeouts</tag>
+<tag name="@see">#setMaxPollTimeouts</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.disableDeviceOnCovSubscriptionFailure -->
+<field name="disableDeviceOnCovSubscriptionFailure"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;disableDeviceOnCovSubscriptionFailure&lt;/code&gt; property.&#xa; flag to configure if the device should be marked as down if&#xa; Subscribe/Unsubscribe Cov/CovProperty (and retries) have failed.
+</description>
+<tag name="@see">#getDisableDeviceOnCovSubscriptionFailure</tag>
+<tag name="@see">#setDisableDeviceOnCovSubscriptionFailure</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.macAddressFailed -->
+<field name="macAddressFailed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;macAddressFailed&lt;/code&gt; action.
+</description>
+<tag name="@see">#macAddressFailed()</tag>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.MINIMUM_COV_SUBSCRIPTION_LIFETIME -->
+<field name="MINIMUM_COV_SUBSCRIPTION_LIFETIME"  protected="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.plog -->
+<field name="plog"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.BBacnetDevice.IGNORE_SYSTEM_STATUS -->
+<field name="IGNORE_SYSTEM_STATUS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

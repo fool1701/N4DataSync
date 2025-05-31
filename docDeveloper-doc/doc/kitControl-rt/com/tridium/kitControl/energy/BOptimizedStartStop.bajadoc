@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="kitControl" runtimeProfile="rt" qualifiedName="com.tridium.kitControl.energy.BOptimizedStartStop" name="BOptimizedStartStop" packageName="com.tridium.kitControl.energy" public="true">
+<description>
+Optimized Start Stop object&#xa;&#xa;   This object uses a space temperature input and area characteristics to &#xa;   calculate a leadtime in advance of a scheduled event that allows an &#xa;   early start to achieve a specified temperature range by occupancy time &#xa;   or an early stop operation without sacrificing the temperature range by &#xa;   unoccupancy time.  The actual area response is analyzed and weighted &#xa;   adjustments are made to the calculation parameters accordingly. &#xa;&#xa;   Calculation is performed at 15 seconds after top of minute.&#xa; &#xa;   Only one optimized start sequence is performed per day.  Multiple stop &#xa;   operations may be allowed by adjusting the &#x22;earliestStopTime&#x22; property.
+</description>
+<tag name="@author">Andy Saunders</tag>
+<tag name="@creation">18 Mar 2005</tag>
+<tag name="@version">$Revision: 21$ $Date: 11/5/2003 5:12:11 PM$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="heatCoolMode" flags="ts">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;heatCoolMode&lt;/code&gt; property.
+</description>
+<tag name="@see">#getHeatCoolMode</tag>
+<tag name="@see">#setHeatCoolMode</tag>
+</property>
+
+<property name="parameterResetTime" flags="ts">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;parameterResetTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getParameterResetTime</tag>
+<tag name="@see">#setParameterResetTime</tag>
+</property>
+
+<property name="startEnable" flags="s">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;startEnable&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStartEnable</tag>
+<tag name="@see">#setStartEnable</tag>
+</property>
+
+<property name="stopEnable" flags="s">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;stopEnable&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStopEnable</tag>
+<tag name="@see">#setStopEnable</tag>
+</property>
+
+<property name="scheduleStatus" flags="ts">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;scheduleStatus&lt;/code&gt; property.
+</description>
+<tag name="@see">#getScheduleStatus</tag>
+<tag name="@see">#setScheduleStatus</tag>
+</property>
+
+<property name="nextEventTime" flags="ts">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;nextEventTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNextEventTime</tag>
+<tag name="@see">#setNextEventTime</tag>
+</property>
+
+<property name="nextEventValue" flags="ts">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;nextEventValue&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNextEventValue</tag>
+<tag name="@see">#setNextEventValue</tag>
+</property>
+
+<property name="outsideTemp" flags="ts">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;outsideTemp&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOutsideTemp</tag>
+<tag name="@see">#setOutsideTemp</tag>
+</property>
+
+<property name="spaceTemp" flags="ts">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;spaceTemp&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSpaceTemp</tag>
+<tag name="@see">#setSpaceTemp</tag>
+</property>
+
+<property name="startTimeCommand" flags="tsd">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;startTimeCommand&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStartTimeCommand</tag>
+<tag name="@see">#setStartTimeCommand</tag>
+</property>
+
+<property name="stopTimeCommand" flags="tsd">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;stopTimeCommand&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStopTimeCommand</tag>
+<tag name="@see">#setStopTimeCommand</tag>
+</property>
+
+<property name="message" flags="ts">
+<type class="javax.baja.status.BStatusString"/>
+<description>
+Slot for the &lt;code&gt;message&lt;/code&gt; property.
+</description>
+<tag name="@see">#getMessage</tag>
+<tag name="@see">#setMessage</tag>
+</property>
+
+<property name="upperComfortLimit" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;upperComfortLimit&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUpperComfortLimit</tag>
+<tag name="@see">#setUpperComfortLimit</tag>
+</property>
+
+<property name="lowerComfortLimit" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;lowerComfortLimit&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLowerComfortLimit</tag>
+<tag name="@see">#setLowerComfortLimit</tag>
+</property>
+
+<property name="dynamicParameterAdjust" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;dynamicParameterAdjust&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDynamicParameterAdjust</tag>
+<tag name="@see">#setDynamicParameterAdjust</tag>
+</property>
+
+<property name="oldParameterMultiplier" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;oldParameterMultiplier&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOldParameterMultiplier</tag>
+<tag name="@see">#setOldParameterMultiplier</tag>
+</property>
+
+<property name="earliestStartTime" flags="">
+<type class="javax.baja.sys.BTime"/>
+<description>
+Slot for the &lt;code&gt;earliestStartTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEarliestStartTime</tag>
+<tag name="@see">#setEarliestStartTime</tag>
+</property>
+
+<property name="earliestStopTime" flags="">
+<type class="javax.baja.sys.BTime"/>
+<description>
+Slot for the &lt;code&gt;earliestStopTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEarliestStopTime</tag>
+<tag name="@see">#setEarliestStopTime</tag>
+</property>
+
+<property name="drifttimePerDegreeCoolingUserDefined" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;drifttimePerDegreeCoolingUserDefined&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDrifttimePerDegreeCoolingUserDefined</tag>
+<tag name="@see">#setDrifttimePerDegreeCoolingUserDefined</tag>
+</property>
+
+<property name="drifttimePerDegreeHeatingUserDefined" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;drifttimePerDegreeHeatingUserDefined&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDrifttimePerDegreeHeatingUserDefined</tag>
+<tag name="@see">#setDrifttimePerDegreeHeatingUserDefined</tag>
+</property>
+
+<property name="runtimePerDegreeCoolingUserDefined" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;runtimePerDegreeCoolingUserDefined&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRuntimePerDegreeCoolingUserDefined</tag>
+<tag name="@see">#setRuntimePerDegreeCoolingUserDefined</tag>
+</property>
+
+<property name="runtimePerDegreeHeatingUserDefined" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;runtimePerDegreeHeatingUserDefined&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRuntimePerDegreeHeatingUserDefined</tag>
+<tag name="@see">#setRuntimePerDegreeHeatingUserDefined</tag>
+</property>
+
+<property name="drifttimePerDegreeCooling" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;drifttimePerDegreeCooling&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDrifttimePerDegreeCooling</tag>
+<tag name="@see">#setDrifttimePerDegreeCooling</tag>
+</property>
+
+<property name="drifttimePerDegreeHeating" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;drifttimePerDegreeHeating&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDrifttimePerDegreeHeating</tag>
+<tag name="@see">#setDrifttimePerDegreeHeating</tag>
+</property>
+
+<property name="runtimePerDegreeCooling" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;runtimePerDegreeCooling&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRuntimePerDegreeCooling</tag>
+<tag name="@see">#setRuntimePerDegreeCooling</tag>
+</property>
+
+<property name="runtimePerDegreeHeating" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;runtimePerDegreeHeating&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRuntimePerDegreeHeating</tag>
+<tag name="@see">#setRuntimePerDegreeHeating</tag>
+</property>
+
+<property name="lastStartTime" flags="t">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastStartTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastStartTime</tag>
+<tag name="@see">#setLastStartTime</tag>
+</property>
+
+<property name="lastStopTime" flags="t">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastStopTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastStopTime</tag>
+<tag name="@see">#setLastStopTime</tag>
+</property>
+
+<property name="outsideTempAtBeginning" flags="t">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;outsideTempAtBeginning&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOutsideTempAtBeginning</tag>
+<tag name="@see">#setOutsideTempAtBeginning</tag>
+</property>
+
+<property name="spaceTempAtBeginning" flags="t">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;spaceTempAtBeginning&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSpaceTempAtBeginning</tag>
+<tag name="@see">#setSpaceTempAtBeginning</tag>
+</property>
+
+<property name="calculatedCommandTime" flags="td">
+<type class="javax.baja.sys.BTime"/>
+<description>
+Slot for the &lt;code&gt;calculatedCommandTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCalculatedCommandTime</tag>
+<tag name="@see">#setCalculatedCommandTime</tag>
+</property>
+
+<property name="programMode" flags="td">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;programMode&lt;/code&gt; property.
+</description>
+<tag name="@see">#getProgramMode</tag>
+<tag name="@see">#setProgramMode</tag>
+</property>
+
+<action name="startTimeTrigger" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;startTimeTrigger&lt;/code&gt; action.
+</description>
+<tag name="@see">#startTimeTrigger()</tag>
+</action>
+
+<action name="stopTimeTrigger" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;stopTimeTrigger&lt;/code&gt; action.
+</description>
+<tag name="@see">#stopTimeTrigger()</tag>
+</action>
+
+<action name="calculate" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;calculate&lt;/code&gt; action.
+</description>
+<tag name="@see">#calculate()</tag>
+</action>
+
+</class>
+</bajadoc>

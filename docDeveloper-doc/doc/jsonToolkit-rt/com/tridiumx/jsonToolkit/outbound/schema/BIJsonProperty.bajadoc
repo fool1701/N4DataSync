@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.BIJsonProperty" name="BIJsonProperty" packageName="com.tridiumx.jsonToolkit.outbound.schema" public="true" interface="true" abstract="true" category="interface">
+<description>
+Interface for all json schema properties (key/value pairs).
+</description>
+<tag name="@author">Nick Dodd</tag>
+<implements>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember"/>
+</implements>
+<typeParameters>
+<typeVariable class="T">
+<description>
+the type of properties value - the right hand side of the json pair e.g string / numeric / object
+</description>
+</typeVariable>
+</typeParameters>
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonProperty.getJsonValue() -->
+<method name="getJsonValue"  public="true" abstract="true">
+<description/>
+<return>
+<typeVariable class="T"/>
+<description>
+the right hand side of the json pair e.g string / numeric / object
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonProperty.getSchema() -->
+<method name="getSchema"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonProperty.process(com.tridium.json.JSONWriter, boolean) -->
+<method name="process"  public="true" default="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Append the json name / value pair to the current schemas output
+</description>
+<parameter name="jsonWriter">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+the json writer to which the current schemas output is being written
+</description>
+</parameter>
+<parameter name="jsonKeysValid">
+<type class="boolean"/>
+<description>
+true if we are currently inside an object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonProperty.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

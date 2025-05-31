@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.comm.NComm" name="NComm" packageName="com.tridium.ndriver.comm" public="true">
+<description>
+NComm provides access to the communication stack.  It handles sending and&#xa; receiving messages.
+</description>
+<tag name="@author">Robert A Adams</tag>
+<tag name="@creation">Oct 21, 2011</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="com.tridium.ndriver.comm.IComm"/>
+</implements>
+<!-- com.tridium.ndriver.comm.NComm(com.tridium.ndriver.datatypes.BCommConfig, com.tridium.ndriver.comm.ICommListener) -->
+<constructor name="NComm" public="true">
+<parameter name="comCfg">
+<type class="com.tridium.ndriver.datatypes.BCommConfig"/>
+</parameter>
+<parameter name="defaultListener">
+<type class="com.tridium.ndriver.comm.ICommListener"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.NComm.start() -->
+<method name="start"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called from BCommConfig when network is started.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.stop() -->
+<method name="stop"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called from BCommConfig when network is stopped.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.verifySettings(com.tridium.ndriver.datatypes.BCommConfig) -->
+<method name="verifySettings"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called from BCommConfig when a property changes.
+</description>
+<parameter name="comCfg">
+<type class="com.tridium.ndriver.datatypes.BCommConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.getLinkLayer() -->
+<method name="getLinkLayer"  public="true">
+<description>
+Access the linkLayer
+</description>
+<return>
+<type class="com.tridium.ndriver.comm.ILinkLayer"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.resetStats() -->
+<method name="resetStats"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Clear all statistics counts. Called when user invokes resetStats action on&#xa; commConfig object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.sendRequest(com.tridium.ndriver.comm.NMessage) -->
+<method name="sendRequest"  public="true">
+<description>
+Send a request message and receive a response.
+</description>
+<parameter name="msg">
+<type class="com.tridium.ndriver.comm.NMessage"/>
+</parameter>
+<return>
+<type class="com.tridium.ndriver.comm.NMessage"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.sendMessage(com.tridium.ndriver.comm.NMessage) -->
+<method name="sendMessage"  public="true">
+<description>
+Send a message.
+</description>
+<parameter name="msg">
+<type class="com.tridium.ndriver.comm.NMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.receiveMessage(com.tridium.ndriver.comm.LinkMessage) -->
+<method name="receiveMessage"  public="true">
+<description>
+Access point for linklayer to transmit received message.
+</description>
+<parameter name="lmsg">
+<type class="com.tridium.ndriver.comm.LinkMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.setDefaultListener(com.tridium.ndriver.comm.ICommListener) -->
+<method name="setDefaultListener"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the default listener.
+</description>
+<parameter name="listener">
+<type class="com.tridium.ndriver.comm.ICommListener"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.registerCommListener(com.tridium.ndriver.comm.ICommListener, com.tridium.ndriver.comm.ICommFilter, boolean) -->
+<method name="registerCommListener"  public="true">
+<description>
+Register a listener for incoming messages. Specify a filter to select&#xa; messages for this listener. Set exclusive to true if message should not&#xa; also be sent to the default listener.
+</description>
+<parameter name="listener">
+<type class="com.tridium.ndriver.comm.ICommListener"/>
+</parameter>
+<parameter name="filter">
+<type class="com.tridium.ndriver.comm.ICommFilter"/>
+</parameter>
+<parameter name="exclusive">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.unregisterCommListener(com.tridium.ndriver.comm.ICommListener, com.tridium.ndriver.comm.ICommFilter) -->
+<method name="unregisterCommListener"  public="true">
+<description>
+Unregister a listener filter pair.  If filter is null all instances of&#xa; listeners will be unregistered.
+</description>
+<parameter name="listener">
+<type class="com.tridium.ndriver.comm.ICommListener"/>
+</parameter>
+<parameter name="filter">
+<type class="com.tridium.ndriver.comm.ICommFilter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NComm.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Provide some spy debug
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

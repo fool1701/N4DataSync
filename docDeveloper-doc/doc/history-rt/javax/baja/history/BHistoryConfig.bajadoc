@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.BHistoryConfig" name="BHistoryConfig" packageName="javax.baja.history" public="true">
+<description>
+BHistoryConfig is the configuration for a history in the&#xa; history database.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">02 Apr 2003</tag>
+<tag name="@version">$Revision: 24$ $Date: 5/22/08 2:41:23 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="id" flags="dsor">
+<type class="javax.baja.history.BHistoryId"/>
+<description>
+Slot for the &lt;code&gt;id&lt;/code&gt; property.&#xa; The unique identifier for this history within the&#xa; entire system.
+</description>
+<tag name="@see">#getId</tag>
+<tag name="@see">#setId</tag>
+</property>
+
+<property name="historyName" flags="ht">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; Temporary for the transition from the old historyName&#xa; scheme.  Will be removed before the final release.
+</description>
+<tag name="@see">#getHistoryName</tag>
+<tag name="@see">#setHistoryName</tag>
+</property>
+
+<property name="source" flags="sor">
+<type class="javax.baja.naming.BOrdList"/>
+<description>
+Slot for the &lt;code&gt;source&lt;/code&gt; property.&#xa; The list of ords that identifies the original source&#xa; of the history.  For a history, the ord list indicates&#xa; the path that the history has moved through the system&#xa; via the archive mechanism.  The history in the source&#xa; device will have an ord list of length 1.
+</description>
+<tag name="@see">#getSource</tag>
+<tag name="@see">#setSource</tag>
+</property>
+
+<property name="sourceHandle" flags="h">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;sourceHandle&lt;/code&gt; property.&#xa; The handle for the source of this history in the station&#xa; that originally created it.
+</description>
+<tag name="@see">#getSourceHandle</tag>
+<tag name="@see">#setSourceHandle</tag>
+</property>
+
+<property name="timeZone" flags="dr">
+<type class="javax.baja.timezone.BTimeZone"/>
+<description>
+Slot for the &lt;code&gt;timeZone&lt;/code&gt; property.&#xa; The timezone where this history was originally collected.
+</description>
+<tag name="@see">#getTimeZone</tag>
+<tag name="@see">#setTimeZone</tag>
+</property>
+
+<property name="recordType" flags="r">
+<type class="javax.baja.util.BTypeSpec"/>
+<description>
+Slot for the &lt;code&gt;recordType&lt;/code&gt; property.&#xa; The type spec for the records in the history.
+</description>
+<tag name="@see">#getRecordType</tag>
+<tag name="@see">#setRecordType</tag>
+</property>
+
+<property name="schema" flags="rh">
+<type class="javax.baja.history.BHistorySchema"/>
+<description>
+Slot for the &lt;code&gt;schema&lt;/code&gt; property.&#xa; The schema for the record.  This allows the history&#xa; to be read even if the original record type class&#xa; has changed or is not available.
+</description>
+<tag name="@see">#getSchema</tag>
+<tag name="@see">#setSchema</tag>
+</property>
+
+<property name="capacity" flags="">
+<type class="javax.baja.history.BCapacity"/>
+<description>
+Slot for the &lt;code&gt;capacity&lt;/code&gt; property.&#xa; The amount of data that can be stored in the history.  The capacity&#xa; can be defined either by record count or by storage size.
+</description>
+<tag name="@see">#getCapacity</tag>
+<tag name="@see">#setCapacity</tag>
+</property>
+
+<property name="fullPolicy" flags="">
+<type class="javax.baja.history.BFullPolicy"/>
+<description>
+Slot for the &lt;code&gt;fullPolicy&lt;/code&gt; property.&#xa; This defines the behavior when an attempt is made to write records&#xa; to a history with limited capacity that is full.
+</description>
+<tag name="@see">#getFullPolicy</tag>
+<tag name="@see">#setFullPolicy</tag>
+</property>
+
+<property name="storageType" flags="h">
+<type class="javax.baja.history.BStorageType"/>
+<description>
+Slot for the &lt;code&gt;storageType&lt;/code&gt; property.&#xa; This defines the mechanism for storage of the history records.
+</description>
+<tag name="@see">#getStorageType</tag>
+<tag name="@see">#setStorageType</tag>
+</property>
+
+<property name="interval" flags="or">
+<type class="javax.baja.history.BCollectionInterval"/>
+<description>
+Slot for the &lt;code&gt;interval&lt;/code&gt; property.&#xa; The amount of time between records in the history.
+</description>
+<tag name="@see">#getInterval</tag>
+<tag name="@see">#setInterval</tag>
+</property>
+
+<property name="systemTags" flags="">
+<type class="javax.baja.util.BNameList"/>
+<description>
+Slot for the &lt;code&gt;systemTags&lt;/code&gt; property.&#xa; Contains a list of system tag names (each tag&#xa; is separated by a semicolon) that can be used to identify&#xa; the history as part of a system (or part of multiple systems).
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#getSystemTags</tag>
+<tag name="@see">#setSystemTags</tag>
+</property>
+
+<!-- javax.baja.history.BHistoryConfig() -->
+<constructor name="BHistoryConfig" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.history.BHistoryConfig(javax.baja.history.BHistoryId, javax.baja.util.BTypeSpec) -->
+<constructor name="BHistoryConfig" public="true">
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="recType">
+<type class="javax.baja.util.BTypeSpec"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.history.BHistoryConfig(javax.baja.history.BCapacity, javax.baja.history.BFullPolicy) -->
+<constructor name="BHistoryConfig" public="true">
+<parameter name="capacity">
+<type class="javax.baja.history.BCapacity"/>
+</parameter>
+<parameter name="fullPolicy">
+<type class="javax.baja.history.BFullPolicy"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.history.BHistoryConfig(javax.baja.history.BHistoryId, javax.baja.util.BTypeSpec, javax.baja.history.BCapacity) -->
+<constructor name="BHistoryConfig" public="true">
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="recordType">
+<type class="javax.baja.util.BTypeSpec"/>
+</parameter>
+<parameter name="capacity">
+<type class="javax.baja.history.BCapacity"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.history.BHistoryConfig.getId() -->
+<method name="getId"  public="true">
+<description>
+Get the &lt;code&gt;id&lt;/code&gt; property.&#xa; The unique identifier for this history within the&#xa; entire system.
+</description>
+<tag name="@see">#id</tag>
+<return>
+<type class="javax.baja.history.BHistoryId"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setId(javax.baja.history.BHistoryId) -->
+<method name="setId"  public="true">
+<description>
+Set the &lt;code&gt;id&lt;/code&gt; property.&#xa; The unique identifier for this history within the&#xa; entire system.
+</description>
+<tag name="@see">#id</tag>
+<parameter name="v">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getHistoryName() -->
+<method name="getHistoryName"  public="true">
+<description>
+Get the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; Temporary for the transition from the old historyName&#xa; scheme.  Will be removed before the final release.
+</description>
+<tag name="@see">#historyName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setHistoryName(java.lang.String) -->
+<method name="setHistoryName"  public="true">
+<description>
+Set the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; Temporary for the transition from the old historyName&#xa; scheme.  Will be removed before the final release.
+</description>
+<tag name="@see">#historyName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getSource() -->
+<method name="getSource"  public="true">
+<description>
+Get the &lt;code&gt;source&lt;/code&gt; property.&#xa; The list of ords that identifies the original source&#xa; of the history.  For a history, the ord list indicates&#xa; the path that the history has moved through the system&#xa; via the archive mechanism.  The history in the source&#xa; device will have an ord list of length 1.
+</description>
+<tag name="@see">#source</tag>
+<return>
+<type class="javax.baja.naming.BOrdList"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setSource(javax.baja.naming.BOrdList) -->
+<method name="setSource"  public="true">
+<description>
+Set the &lt;code&gt;source&lt;/code&gt; property.&#xa; The list of ords that identifies the original source&#xa; of the history.  For a history, the ord list indicates&#xa; the path that the history has moved through the system&#xa; via the archive mechanism.  The history in the source&#xa; device will have an ord list of length 1.
+</description>
+<tag name="@see">#source</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getSourceHandle() -->
+<method name="getSourceHandle"  public="true">
+<description>
+Get the &lt;code&gt;sourceHandle&lt;/code&gt; property.&#xa; The handle for the source of this history in the station&#xa; that originally created it.
+</description>
+<tag name="@see">#sourceHandle</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setSourceHandle(javax.baja.naming.BOrd) -->
+<method name="setSourceHandle"  public="true">
+<description>
+Set the &lt;code&gt;sourceHandle&lt;/code&gt; property.&#xa; The handle for the source of this history in the station&#xa; that originally created it.
+</description>
+<tag name="@see">#sourceHandle</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getTimeZone() -->
+<method name="getTimeZone"  public="true">
+<description>
+Get the &lt;code&gt;timeZone&lt;/code&gt; property.&#xa; The timezone where this history was originally collected.
+</description>
+<tag name="@see">#timeZone</tag>
+<return>
+<type class="javax.baja.timezone.BTimeZone"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setTimeZone(javax.baja.timezone.BTimeZone) -->
+<method name="setTimeZone"  public="true">
+<description>
+Set the &lt;code&gt;timeZone&lt;/code&gt; property.&#xa; The timezone where this history was originally collected.
+</description>
+<tag name="@see">#timeZone</tag>
+<parameter name="v">
+<type class="javax.baja.timezone.BTimeZone"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getRecordType() -->
+<method name="getRecordType"  public="true">
+<description>
+Get the &lt;code&gt;recordType&lt;/code&gt; property.&#xa; The type spec for the records in the history.
+</description>
+<tag name="@see">#recordType</tag>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setRecordType(javax.baja.util.BTypeSpec) -->
+<method name="setRecordType"  public="true">
+<description>
+Set the &lt;code&gt;recordType&lt;/code&gt; property.&#xa; The type spec for the records in the history.
+</description>
+<tag name="@see">#recordType</tag>
+<parameter name="v">
+<type class="javax.baja.util.BTypeSpec"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getSchema() -->
+<method name="getSchema"  public="true">
+<description>
+Get the &lt;code&gt;schema&lt;/code&gt; property.&#xa; The schema for the record.  This allows the history&#xa; to be read even if the original record type class&#xa; has changed or is not available.
+</description>
+<tag name="@see">#schema</tag>
+<return>
+<type class="javax.baja.history.BHistorySchema"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setSchema(javax.baja.history.BHistorySchema) -->
+<method name="setSchema"  public="true">
+<description>
+Set the &lt;code&gt;schema&lt;/code&gt; property.&#xa; The schema for the record.  This allows the history&#xa; to be read even if the original record type class&#xa; has changed or is not available.
+</description>
+<tag name="@see">#schema</tag>
+<parameter name="v">
+<type class="javax.baja.history.BHistorySchema"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getCapacity() -->
+<method name="getCapacity"  public="true">
+<description>
+Get the &lt;code&gt;capacity&lt;/code&gt; property.&#xa; The amount of data that can be stored in the history.  The capacity&#xa; can be defined either by record count or by storage size.
+</description>
+<tag name="@see">#capacity</tag>
+<return>
+<type class="javax.baja.history.BCapacity"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setCapacity(javax.baja.history.BCapacity) -->
+<method name="setCapacity"  public="true">
+<description>
+Set the &lt;code&gt;capacity&lt;/code&gt; property.&#xa; The amount of data that can be stored in the history.  The capacity&#xa; can be defined either by record count or by storage size.
+</description>
+<tag name="@see">#capacity</tag>
+<parameter name="v">
+<type class="javax.baja.history.BCapacity"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getFullPolicy() -->
+<method name="getFullPolicy"  public="true">
+<description>
+Get the &lt;code&gt;fullPolicy&lt;/code&gt; property.&#xa; This defines the behavior when an attempt is made to write records&#xa; to a history with limited capacity that is full.
+</description>
+<tag name="@see">#fullPolicy</tag>
+<return>
+<type class="javax.baja.history.BFullPolicy"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setFullPolicy(javax.baja.history.BFullPolicy) -->
+<method name="setFullPolicy"  public="true">
+<description>
+Set the &lt;code&gt;fullPolicy&lt;/code&gt; property.&#xa; This defines the behavior when an attempt is made to write records&#xa; to a history with limited capacity that is full.
+</description>
+<tag name="@see">#fullPolicy</tag>
+<parameter name="v">
+<type class="javax.baja.history.BFullPolicy"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getStorageType() -->
+<method name="getStorageType"  public="true">
+<description>
+Get the &lt;code&gt;storageType&lt;/code&gt; property.&#xa; This defines the mechanism for storage of the history records.
+</description>
+<tag name="@see">#storageType</tag>
+<return>
+<type class="javax.baja.history.BStorageType"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setStorageType(javax.baja.history.BStorageType) -->
+<method name="setStorageType"  public="true">
+<description>
+Set the &lt;code&gt;storageType&lt;/code&gt; property.&#xa; This defines the mechanism for storage of the history records.
+</description>
+<tag name="@see">#storageType</tag>
+<parameter name="v">
+<type class="javax.baja.history.BStorageType"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getInterval() -->
+<method name="getInterval"  public="true">
+<description>
+Get the &lt;code&gt;interval&lt;/code&gt; property.&#xa; The amount of time between records in the history.
+</description>
+<tag name="@see">#interval</tag>
+<return>
+<type class="javax.baja.history.BCollectionInterval"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setInterval(javax.baja.history.BCollectionInterval) -->
+<method name="setInterval"  public="true">
+<description>
+Set the &lt;code&gt;interval&lt;/code&gt; property.&#xa; The amount of time between records in the history.
+</description>
+<tag name="@see">#interval</tag>
+<parameter name="v">
+<type class="javax.baja.history.BCollectionInterval"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getSystemTags() -->
+<method name="getSystemTags"  public="true">
+<description>
+Get the &lt;code&gt;systemTags&lt;/code&gt; property.&#xa; Contains a list of system tag names (each tag&#xa; is separated by a semicolon) that can be used to identify&#xa; the history as part of a system (or part of multiple systems).
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#systemTags</tag>
+<return>
+<type class="javax.baja.util.BNameList"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.setSystemTags(javax.baja.util.BNameList) -->
+<method name="setSystemTags"  public="true">
+<description>
+Set the &lt;code&gt;systemTags&lt;/code&gt; property.&#xa; Contains a list of system tag names (each tag&#xa; is separated by a semicolon) that can be used to identify&#xa; the history as part of a system (or part of multiple systems).
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#systemTags</tag>
+<parameter name="v">
+<type class="javax.baja.util.BNameList"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getColumnType(java.lang.String) -->
+<method name="getColumnType"  public="true">
+<description>
+Get the type for the column with the specified name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+The name of the column.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+Returns the type of the target column or null if the column does&#xa;   not exist.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.makeRecord() -->
+<method name="makeRecord"  public="true">
+<description>
+Make a template record.  This creates a new instance with default values.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryRecord"/>
+<description>
+The template record.
+</description>
+</return>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.makeRecord(int) -->
+<method name="makeRecord"  public="true">
+<description/>
+<parameter name="version">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryRecord"/>
+</return>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.makePrototype() -->
+<method name="makePrototype"  public="true">
+<description>
+Make a prototype record for the relation.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.getRecordSize() -->
+<method name="getRecordSize"  public="true">
+<description>
+Get the size of the records in this history.  If the record size is not&#xa; fixed an UnsupportedOperationException is thrown.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Handle a property change.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Handle a property addition.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.removed(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="removed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Handle a property removal.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.renamed(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="renamed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called when an existing property is renamed via one&#xa; of the &lt;code&gt;rename&lt;/code&gt; methods.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="oldName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.flagsChanged(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="flagsChanged"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called when a slot&#x27;s flags are modified via one of&#xa; the &lt;code&gt;setFlags&lt;/code&gt; methods.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.facetsChanged(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="facetsChanged"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called when a slot&#x27;s facets are modified via one of&#xa; the &lt;code&gt;setFacets&lt;/code&gt; methods.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryConfig.id -->
+<field name="id"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;id&lt;/code&gt; property.&#xa; The unique identifier for this history within the&#xa; entire system.
+</description>
+<tag name="@see">#getId</tag>
+<tag name="@see">#setId</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.historyName -->
+<field name="historyName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; Temporary for the transition from the old historyName&#xa; scheme.  Will be removed before the final release.
+</description>
+<tag name="@see">#getHistoryName</tag>
+<tag name="@see">#setHistoryName</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.source -->
+<field name="source"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;source&lt;/code&gt; property.&#xa; The list of ords that identifies the original source&#xa; of the history.  For a history, the ord list indicates&#xa; the path that the history has moved through the system&#xa; via the archive mechanism.  The history in the source&#xa; device will have an ord list of length 1.
+</description>
+<tag name="@see">#getSource</tag>
+<tag name="@see">#setSource</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.sourceHandle -->
+<field name="sourceHandle"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sourceHandle&lt;/code&gt; property.&#xa; The handle for the source of this history in the station&#xa; that originally created it.
+</description>
+<tag name="@see">#getSourceHandle</tag>
+<tag name="@see">#setSourceHandle</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.timeZone -->
+<field name="timeZone"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeZone&lt;/code&gt; property.&#xa; The timezone where this history was originally collected.
+</description>
+<tag name="@see">#getTimeZone</tag>
+<tag name="@see">#setTimeZone</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.recordType -->
+<field name="recordType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;recordType&lt;/code&gt; property.&#xa; The type spec for the records in the history.
+</description>
+<tag name="@see">#getRecordType</tag>
+<tag name="@see">#setRecordType</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.schema -->
+<field name="schema"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;schema&lt;/code&gt; property.&#xa; The schema for the record.  This allows the history&#xa; to be read even if the original record type class&#xa; has changed or is not available.
+</description>
+<tag name="@see">#getSchema</tag>
+<tag name="@see">#setSchema</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.capacity -->
+<field name="capacity"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;capacity&lt;/code&gt; property.&#xa; The amount of data that can be stored in the history.  The capacity&#xa; can be defined either by record count or by storage size.
+</description>
+<tag name="@see">#getCapacity</tag>
+<tag name="@see">#setCapacity</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.fullPolicy -->
+<field name="fullPolicy"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fullPolicy&lt;/code&gt; property.&#xa; This defines the behavior when an attempt is made to write records&#xa; to a history with limited capacity that is full.
+</description>
+<tag name="@see">#getFullPolicy</tag>
+<tag name="@see">#setFullPolicy</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.storageType -->
+<field name="storageType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;storageType&lt;/code&gt; property.&#xa; This defines the mechanism for storage of the history records.
+</description>
+<tag name="@see">#getStorageType</tag>
+<tag name="@see">#setStorageType</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.interval -->
+<field name="interval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;interval&lt;/code&gt; property.&#xa; The amount of time between records in the history.
+</description>
+<tag name="@see">#getInterval</tag>
+<tag name="@see">#setInterval</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.systemTags -->
+<field name="systemTags"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;systemTags&lt;/code&gt; property.&#xa; Contains a list of system tag names (each tag&#xa; is separated by a semicolon) that can be used to identify&#xa; the history as part of a system (or part of multiple systems).
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#getSystemTags</tag>
+<tag name="@see">#setSystemTags</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryConfig.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

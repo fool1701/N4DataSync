@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="query" runtimeProfile="rt" qualifiedName="javax.baja.query.util.Columns" name="Columns" packageName="javax.baja.query.util" public="true" abstract="true">
+<description>
+Column factory utility. This factory contains useful methods for building a set of &#xa; projection columns, building a list of order by columns.
+</description>
+<tag name="@author">Matthew Giannini</tag>
+<tag name="@creation">Apr 15, 2008</tag>
+<tag name="@version">$Revision: 11$ $Date: 9/30/08 11:25:01 AM EDT$</tag>
+<tag name="@since">Baja 3.4</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.query.util.Columns() -->
+<constructor name="Columns" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.query.util.Columns.projection() -->
+<method name="projection"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;new BProjection()&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.query.BProjection"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.distinctProjection() -->
+<method name="distinctProjection"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;new BProjection().distinct()&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.query.BProjection"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.projection(javax.baja.query.BProjectionColumn) -->
+<method name="projection"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;Columns.projection().add(column)&lt;/code&gt;
+</description>
+<parameter name="column">
+<type class="javax.baja.query.BProjectionColumn"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BProjection"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.make(javax.baja.query.BExpression, boolean) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BProjectionColumn that uses the given expr as the projection&#xa; column expression.
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+<description>
+the BExpression to make a projection column for.
+</description>
+</parameter>
+<parameter name="makeCopy">
+<type class="boolean"/>
+<description>
+if true, a copy of expr will be used to make the&#xa; column expression for the projection column. if false, the given expr&#xa; will be used.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.query.BProjectionColumn"/>
+<description>
+a BProjectionColumn for the given expr.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.make(javax.baja.query.BExpression) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(expr, false)&lt;/code&gt;
+</description>
+<tag name="@see">#make(BExpression, boolean)</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BProjectionColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;Columns.make(Exprs.field(field))&lt;/code&gt;
+</description>
+<tag name="@see">#make(BExpression)</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BProjectionColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.make(javax.baja.sys.Property) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;Columns.make(property.getName())&lt;/code&gt;.
+</description>
+<tag name="@see">#make(String)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BProjectionColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.orderBy(javax.baja.query.BExpression) -->
+<method name="orderBy"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;new BOrderByCol(expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BOrderByColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.orderBy(java.lang.String) -->
+<method name="orderBy"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;orderBy(Exprs.field(field))&lt;/code&gt;
+</description>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BOrderByColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.orderBy(int) -->
+<method name="orderBy"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;orderBy(Exprs.simple(BInteger.make(projectionColumn)))&lt;/code&gt;
+</description>
+<parameter name="projectionColumn">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BOrderByColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.groupBy(javax.baja.query.BExpression) -->
+<method name="groupBy"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;new BGroupByColumn(expr)&lt;/code&gt;
+</description>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BGroupByColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Columns.groupBy(java.lang.String) -->
+<method name="groupBy"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;groupBy(Exprs.field(field))&lt;/code&gt;
+</description>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BGroupByColumn"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

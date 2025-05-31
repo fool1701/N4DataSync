@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.multipleTransaction.BDdfMultipleTransactionCommunicator" name="BDdfMultipleTransactionCommunicator" packageName="com.tridium.ddf.comm.multipleTransaction" public="true">
+<description>
+This is a default override class for BDdfCommunicator&#x27;s that require support for&#xa; multiple, simultaneously outstanding transactions on the field-bus. Concrete descendants&#xa; must override the Niagara AX &#x27;transmitter&#x27; and &#x27;receiver&#x27; properties and specify an&#xa; implementation.&#xa; &#xa; The term, &lt;i&gt;Multiple, simultaneously outstanding transactions&lt;/i&gt; means that the driver&#xa; protocol allows for a requests to be transmitted arbitrarily without first having to wait&#xa; for the response before transmitting the next request. Protocols that support this type of&#xa; communication will typically have more data in the header for the response. The extra&#xa; data in the header for the response allows the driver to determine which outstanding request&#xa; should be associated with the response. &#xa;&#xa; The devSerialDriver module provides a very reasonable implementation of this. If your&#xa; driver is serial then you can save time by using:&#xa; &lt;ul&gt;&#xa; com.tridium.ddfSerial.comm.multipleTransaction.BDdfSerialMutCommunicator&#xa; &lt;/ul&gt;&#xa; &#xa; The devIpDriver module provides a very reasonable implementation of this. If your&#xa; driver communicates over IP then you can save time by using either:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;com.tridium.ddfIp.tcp.comm.multipleTransaction.BDdfTcpMutCommunicator &lt;b&gt;OR&lt;/b&gt;&#xa; &lt;li&gt;com.tridium.ddfIp.udp.comm.multipleTransaction.BDdfUdpMutCommunicator&#xa; &lt;/ol&gt;
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 10, 2006</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="com.tridium.ddf.comm.defaultComm.BDdfCommunicator"/>
+</extends>
+<!-- com.tridium.ddf.comm.multipleTransaction.BDdfMultipleTransactionCommunicator() -->
+<constructor name="BDdfMultipleTransactionCommunicator" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.multipleTransaction.BDdfMultipleTransactionCommunicator.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.multipleTransaction.BDdfMultipleTransactionCommunicator.transactionManager -->
+<field name="transactionManager"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;transactionManager&lt;/code&gt; property.&#xa; This is the mechanism that processes outstanding transactions
+</description>
+<tag name="@see">#getTransactionManager</tag>
+<tag name="@see">#setTransactionManager</tag>
+</field>
+
+<!-- com.tridium.ddf.comm.multipleTransaction.BDdfMultipleTransactionCommunicator.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

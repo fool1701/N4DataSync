@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BIUnlinkableSlotsContainer" name="BIUnlinkableSlotsContainer" packageName="javax.baja.sys" public="true" interface="true" abstract="true" category="interface">
+<description>
+An interface that can be optionally implemented by &lt;code&gt;<see ref="javax.baja.sys.BComponent">BComponent</see>&lt;/code&gt; subclasses&#xa; that wish to declare certain &lt;code&gt;<see ref="javax.baja.sys.Slot">Slot</see>&lt;/code&gt; children that can never be the source&#xa; and/or target of a link in Niagara.  Enforcement of un-linkable child Slots occurs in&#xa; &lt;code&gt;<see ref="javax.baja.sys.BComponent#checkLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context)">BComponent#checkLink(BComponent, Slot, Slot, Context)</see>&lt;/code&gt;&#xa; and&#xa; &lt;code&gt;<see ref="javax.baja.sys.BLink#activate()">BLink#activate()</see>&lt;/code&gt;.
+</description>
+<tag name="@author">Scott Hoye on 11/17/2023</tag>
+<tag name="@since">Niagara 4.10u7</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.sys.BIUnlinkableSlotsContainer.getUnlinkableSourceSlots(javax.baja.sys.Context) -->
+<method name="getUnlinkableSourceSlots"  public="true" default="true">
+<description>
+Returns a Set of &lt;code&gt;<see ref="javax.baja.sys.Slot">Slot</see>&lt;/code&gt; instances with any direct child Slots of&#xa; the component implementing this interface that are not allowed to&#xa; be the source of links. The default implementation of this method&#xa; returns null, indicating that no child Slots are invalid to be&#xa; the source of a &lt;code&gt;<see ref="javax.baja.sys.BLink">BLink</see>&lt;/code&gt;. Subclasses overriding this method should&#xa; always return an unmodifiable Set (see &lt;code&gt;<see ref="java.util.Collections#unmodifiableSet(java.util.Set&lt;? extends T&gt;)">java.util.Collections#unmodifiableSet(Set)</see>&lt;/code&gt;&#xa; or &lt;code&gt;<see ref="java.util.Collections#singleton(T)">java.util.Collections#singleton(Object)</see>&lt;/code&gt;) and consider making&#xa; the method final. The Context parameter may be useful to give some insight&#xa; to the condition when this method is called. The Context will be null for&#xa; link activations (&lt;code&gt;<see ref="javax.baja.sys.BLink#activate()">BLink#activate()</see>&lt;/code&gt; calling this method, but it may&#xa; be non-null for link validity checks (&lt;code&gt;<see ref="javax.baja.sys.LinkCheck">LinkCheck</see>&lt;/code&gt;).
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="javax.baja.sys.Slot"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIUnlinkableSlotsContainer.getUnlinkableTargetSlots(javax.baja.sys.Context) -->
+<method name="getUnlinkableTargetSlots"  public="true" default="true">
+<description>
+Returns a Set of &lt;code&gt;<see ref="javax.baja.sys.Slot">Slot</see>&lt;/code&gt; instances with any direct child Slots of&#xa; the component implementing this interface that are not allowed to&#xa; be the target of links. The default implementation of this method&#xa; returns null, indicating that no child Slots are invalid to be&#xa; the target of a &lt;code&gt;<see ref="javax.baja.sys.BLink">BLink</see>&lt;/code&gt;. Subclasses overriding this method should&#xa; always return an unmodifiable Set (see &lt;code&gt;<see ref="java.util.Collections#unmodifiableSet(java.util.Set&lt;? extends T&gt;)">java.util.Collections#unmodifiableSet(Set)</see>&lt;/code&gt;&#xa; or &lt;code&gt;<see ref="java.util.Collections#singleton(T)">java.util.Collections#singleton(Object)</see>&lt;/code&gt;) and consider making&#xa; the method final. The Context parameter may be useful to give some insight&#xa; to the condition when this method is called. The Context will be null for&#xa; link activations (&lt;code&gt;<see ref="javax.baja.sys.BLink#activate()">BLink#activate()</see>&lt;/code&gt; calling this method, but it may&#xa; be non-null for link validity checks (&lt;code&gt;<see ref="javax.baja.sys.LinkCheck">LinkCheck</see>&lt;/code&gt;).
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="javax.baja.sys.Slot"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIUnlinkableSlotsContainer.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

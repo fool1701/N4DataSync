@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr" name="BDdfTransactionMgr" packageName="com.tridium.ddf.comm.defaultComm" public="true" abstract="true">
+<description>
+BDdfTransactionMgr - Goes with BDdfCommunicator, BDdfTransmitter, and BDdfReceiver&#xa;&#xa; Instead of extending this class directly, there are two reasonable subclasses that might&#xa; be a better choice: BDdfMultipleTransactionMgr and BDdfSingleTransactionMgr
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 16, 2006</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.comm.BIDdfTransactionMgr"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<action name="checkOutstandingTimeout" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;checkOutstandingTimeout&lt;/code&gt; action.&#xa; Internal use only.
+</description>
+<tag name="@see">#checkOutstandingTimeout(BValue parameter)</tag>
+</action>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr() -->
+<constructor name="BDdfTransactionMgr" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.checkOutstandingTimeout(javax.baja.sys.BValue) -->
+<method name="checkOutstandingTimeout"  public="true">
+<description>
+Invoke the &lt;code&gt;checkOutstandingTimeout&lt;/code&gt; action.&#xa; Internal use only.
+</description>
+<tag name="@see">#checkOutstandingTimeout&#xa;&#xa; NOTE: This forces the action to be called locally, without any network dispatching, to allow&#xa; for proxy-side communication.</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.started() -->
+<method name="started"  public="true" final="true">
+<description>
+Although this Niagara AX callback is declared as &#x27;final&#x27;, &#xa; descendants may override the &#x27;transactionMgrStarted&#x27; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.stopped() -->
+<method name="stopped"  public="true" final="true">
+<description>
+Although this Niagara AX callback is declared as &#x27;final&#x27;, &#xa; descendants may override the &#x27;transactionMgrStopped&#x27; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.processTransaction(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="processTransaction"  public="true">
+<description>
+The communicator calls this method immediately prior to transmitting to allow&#xa; the transaction manager to prepare to receive the response or timeout.
+</description>
+<parameter name="req">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+<description>
+by default, the Niagara AX Nav parent cast to BIDdfCommunicator
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.startTransactionMgr() -->
+<method name="startTransactionMgr"  public="true">
+<description>
+Starts the transaction processor and receive threads. The&#xa; transaction manger owns the references to each of these.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.stopTransactionMgr() -->
+<method name="stopTransactionMgr"  public="true">
+<description>
+Stops the transaction processor and receive threads. The&#xa; transaction manger owns the references to each of these.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.beginTransaction(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="beginTransaction"  protected="true" abstract="true">
+<description>
+This method is called immediately before the given request is serialized&#xa; and transmitted. The descendant should make any preparations that are&#xa; necessary for it to determine whether a timeout occurs (from the&#xa; descendant&#x27;s &#x22;doCheckOutstandingTimeout&#x22; method; or for it to&#xa; match received frames to the request (from the descendant&#x27;s  frameReceived&#xa; method)&#xa;&#xa; Please note that there are two subclasses of this class that should be suitable&#xa; for all drivers. Therefore, Tridium&#x27;s development team hopes that this class&#xa; should ever need to be extended anywhere else.
+</description>
+<parameter name="req">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.doCheckOutstandingTimeout(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="doCheckOutstandingTimeout"  protected="true" abstract="true">
+<description>
+This method is called when the response timeout interval for the given&#xa; ddfRequest expires. The descendant class needs to verify that the given&#xa; request has not received its response and implement a retry mechanism.&#xa;&#xa; The ddfRequest has a property on it that indicates the number of remaining&#xa; retries. When retrying, the descendant should call forceTransmit on&#xa; the ddf communicator, pass the request, and decrement the value for the&#xa; property that indicates the number of remaining retires. If no retries&#xa; remain then the descendant should process the failure.&#xa;&#xa; Please note that there are two subclasses of this class that should suitable&#xa; for all drivers. Therefore, Tridium&#x27;s development team hopes that this class&#xa; should ever need to be extended anywhere else.
+</description>
+<parameter name="ddfRequest">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.frameReceived(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="frameReceived"  protected="true" abstract="true">
+<description>
+This method is called on the transaction processor thread for all frames&#xa; that the ReceiveThread receives. The descendant needs to match up the frame&#xa; with any outstanding requests and perform all response processing. If the&#xa; frame does not match up then the descendant needs to pass the frame to&#xa; the unsolicited manager.&#xa;&#xa; Please note that there are two subclasses of this class that should be suitable&#xa; for all drivers. Therefore, Tridium&#x27;s development team hopes that this class&#xa; should never need to be extended anywhere else.
+</description>
+<parameter name="ddfReceiveFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.transactionMgrStarted() -->
+<method name="transactionMgrStarted"  protected="true">
+<description>
+This is equivalent to the Niagara AX &#x27;started&#x27; callback but&#xa; is available for descendants.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.transactionMgrStopped() -->
+<method name="transactionMgrStopped"  protected="true">
+<description>
+This is equivalent to the Niagara AX &#x27;stopped&#x27; callback but&#xa; is available for descendants.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.resetStatistics() -->
+<method name="resetStatistics"  public="true">
+<description>
+This method is called when the communicator&#x27;s &#x27;Reset Statistics&#x27;&#xa; action is invoked
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.doCheckOutstandingTimeout(javax.baja.sys.BValue) -->
+<method name="doCheckOutstandingTimeout"  public="true" final="true">
+<description>
+Implements the action &#x27;checkOutstandingTimeout&#x27;.&#xa;&#xa; NOTE: The method &#x27;scheduleToCheckForTimeout&#x27; is called when a request&#xa; is transmitted and does a BDdfScheduler.INSTANCE.schedule call, that expires&#xa; when the request&#x27;s timeout interval occurs - then calls this method&#xa; and passes in the request.&#xa;&#xa; This method casts the given arg to a BIDdfRequest and places it on the&#xa; transaction processor thread where in a matter of moments, it will be&#xa; processed further (on another thread), without any chance of backing up the BDdfScheduler&#xa; thread (on which BDdfScheduler.INSTANCE.schedule relies).
+</description>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+- The arg that was passed to BDdfScheduler.INSTANCE.schedule in the method&#xa; scheduleToCheckForTimeout. This is the the BIDdfRequest.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.scheduleToCheckForTimeout(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="scheduleToCheckForTimeout"  protected="true">
+<description>
+Arranges for the doCheckOutstandingTimeout method to be called and&#xa; passed the given req after the req&#x27;s responseTimeout interval expires.
+</description>
+<parameter name="req">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.routeToUnsolicited(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="routeToUnsolicited"  protected="true">
+<description>
+This method is called when a data frame is received that does not match up&#xa; to a request that was transmitted.
+</description>
+<parameter name="ddfReceiveFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+<description>
+a receive frame that does not match up to a reqeuest&#xa; that was transmitted. This receive frame is passed to the driver&#x27;s&#xa; unsolicited manager.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.reScheduleToCheckForTimeout(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="reScheduleToCheckForTimeout"  protected="true">
+<description>
+Descendants should consider calling this method only if a&#xa; BIDdfMultiFrameResponse is received for a BIDdfRequest&#xa; and the response is not yet complete. This resets the&#xa; timeout check and causes the framework to wait for a fresh&#xa; interval of the given request.getResponseTimeout before&#xa; retrying the transaction or possibly timing out.
+</description>
+<parameter name="req">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+<description>
+a request whose response is a BIDdfMultiFrameResponse
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.isCompletedResponse(com.tridium.ddf.comm.rsp.BIDdfResponse) -->
+<method name="isCompletedResponse"  protected="true">
+<description>
+This method is called by the receive processing logic to&#xa; determine if a BIDdfFrameResponse is &#x22;complete&#x22;. All&#xa; BIDdfFrameResponse&#x27;s are always considered &#x22;complete&#x22; unless&#xa; they are an instance of BIDdfMultiFrameResponse. In that case,&#xa; BIMultiFrameResponse&#x27;s are only considered complete if their&#xa; isComplete method returns true.
+</description>
+<parameter name="ddfResponse">
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+<description>
+the BIDdfResponse that was just returned&#xa; by the processReceive method of a BIDdfRequest.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+Please see the method&#x27;s description.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+By default, the parent must be an instance of BIDdfCommunicator.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.transmitRspAckBytes(com.tridium.ddf.comm.rsp.IDdfTransmitAckResponse) -->
+<method name="transmitRspAckBytes"  protected="true">
+<description>
+This method handles a very special case when a request receives a response&#xa; and wishes to transmit a message back to the field-device as a result.
+</description>
+<parameter name="xmitAckRsp">
+<type class="com.tridium.ddf.comm.rsp.IDdfTransmitAckResponse"/>
+<description>
+the BIDdfTransmitAckResponse the result of whose getDdfAckBytes&#xa; method will be immediately transmitted onto the fieldbus.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.getThreadSuffix() -->
+<method name="getThreadSuffix"  protected="true">
+<description>
+Gets the suffix that is placed onto the end of the ReceiveThread&#xa; and TransactionProcessor threads.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+hopefully an underscore plus the name of the ddf communicator&#x27;s&#xa; Niagara AX parent.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.checkOutstandingTimeout -->
+<field name="checkOutstandingTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;checkOutstandingTimeout&lt;/code&gt; action.&#xa; Internal use only.
+</description>
+<tag name="@see">#checkOutstandingTimeout(BValue parameter)</tag>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfTransactionMgr.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.BIJobQueryManager" name="BIJobQueryManager" packageName="javax.baja.batchJob" public="true" interface="true" abstract="true" category="interface">
+<description>
+Implementing classes allow callers to create or query summary information about jobs and job steps&#xa; that were run by a BBatchJobService.&#xa; &#xa; The types for all query manager implementations should be registerered as agents on the job and step&#xa; summary types that they manage.
+</description>
+<tag name="@author">Matt Boon</tag>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<!-- javax.baja.batchJob.BIJobQueryManager.makeJobSummary(javax.baja.batchJob.BBatchJob) -->
+<method name="makeJobSummary"  public="true" abstract="true">
+<description>
+Creates a new summary object for the completed job described by the given job object
+</description>
+<parameter name="jobDetails">
+<type class="javax.baja.batchJob.BBatchJob"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BIBatchJobSummary"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.makeStepSummary(javax.baja.batchJob.BJobStepDetails, javax.baja.sys.BAbsTime) -->
+<method name="makeStepSummary"  public="true" abstract="true">
+<description>
+Creates a new summary object for the completed job step described by the given details&#xa; object, which belongs to a job that started at the given start time
+</description>
+<parameter name="details">
+<type class="javax.baja.batchJob.BJobStepDetails"/>
+</parameter>
+<parameter name="jobStartTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BIJobStepSummary"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.listJobSummaries(javax.baja.sys.Type, javax.baja.sys.BObject) -->
+<method name="listJobSummaries"  public="true" abstract="true">
+<description>
+Returns a cursor which lists BIBatchJobSummary objects for all completed jobs whose &#xa; type matches or is a subtype of the given job type, and which were run on the same &#xa; host as the given base object.
+</description>
+<parameter name="jobType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIBatchJobSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.listJobSummaries(javax.baja.sys.Type, java.lang.String, javax.baja.sys.BSimple, javax.baja.sys.BObject) -->
+<method name="listJobSummaries"  public="true" abstract="true">
+<description>
+Returns a cursor which lists BIBatchJobSummary objects for all completed jobs which:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;have a type that matches or is a subtype of the given job type,&lt;/li&gt;&#xa; &lt;li&gt;were run on the same host as the given base object,&lt;/li&gt;&#xa; &lt;li&gt;have a property with the given property name that&#x27;s equal to the given property value&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="jobType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="propValue">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIBatchJobSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.listJobSummaries(javax.baja.sys.Type, javax.baja.query.BExpression, javax.baja.sys.BObject) -->
+<method name="listJobSummaries"  public="true" abstract="true">
+<description>
+Returns a cursor which lists BIBatchJobSummary objects for all completed jobs which:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;have a type that matches or is a subtype of the given job type,&lt;/li&gt;&#xa; &lt;li&gt;were run on the same host as the given base object,&lt;/li&gt;&#xa; &lt;li&gt;satisfies the given predicate expression&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="jobType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="predicate">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIBatchJobSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.listStepSummaries(javax.baja.sys.Type, javax.baja.sys.BObject) -->
+<method name="listStepSummaries"  public="true" abstract="true">
+<description>
+Returns a cursor which lists BIJobStepSummary objects for all completed job steps whose &#xa; type matches or is a subtype of the given step type, and which were run on the same host &#xa; as the given base object.
+</description>
+<parameter name="stepType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIJobStepSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.listStepSummaries(javax.baja.sys.Type, java.lang.String, javax.baja.sys.BSimple, javax.baja.sys.BObject) -->
+<method name="listStepSummaries"  public="true" abstract="true">
+<description>
+Returns a cursor which lists BIJobStepSummary objects for all completed job steps which:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;have a type that matches or is a subtype of the given step type,&lt;/li&gt;&#xa; &lt;li&gt;were run on the same host as the given base object,&lt;/li&gt;&#xa; &lt;li&gt;have a property with the given property name that&#x27;s equal to the given property value&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="stepType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="propValue">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIJobStepSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.listStepSummaries(javax.baja.sys.Type, javax.baja.query.BExpression, javax.baja.sys.BObject) -->
+<method name="listStepSummaries"  public="true" abstract="true">
+<description>
+Returns a cursor which lists BIJobStepSummary objects for all completed job steps which:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;have a type that matches or is a subtype of the given step type,&lt;/li&gt;&#xa; &lt;li&gt;were run on the same host as the given base object,&lt;/li&gt;&#xa; &lt;li&gt;satisfies the given predicate expression&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="jobType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="predicate">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIJobStepSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobQueryManager.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

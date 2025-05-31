@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder" name="VideoMultistreamDecoder" packageName="com.tridium.videoDriver.ui.videoStream.decoder" public="true" abstract="true">
+<description/>
+<extends>
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoDecoder"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoMultistreamDecoder"/>
+</implements>
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder(javax.baja.naming.BOrdList, com.tridium.videoDriver.dvr.BIVideoDvr) -->
+<constructor name="VideoMultistreamDecoder" public="true">
+<parameter name="cameras">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<parameter name="dvr">
+<type class="com.tridium.videoDriver.dvr.BIVideoDvr"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.getCameraGroupForFrameData(javax.baja.nre.util.ByteBuffer, com.tridium.videoDriver.videoStream.decoder.IVideoDecoder) -->
+<method name="getCameraGroupForFrameData"  protected="true" abstract="true">
+<description>
+Gets the CameraGroup from the &lt;code&gt;<see ref="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder#cameraGroups">#cameraGroups</see>&lt;/code&gt; array that contains&#xa; the set of one or more (duplicate) cameras that the given  video frame&#xa; packet corresponds to. In other words, this method determines which&#xa; video stream the given video frame packet is part of. &#xa; Get the CameraGroup
+</description>
+<parameter name="rawUndecodedFrame">
+<type class="javax.baja.nre.util.ByteBuffer"/>
+</parameter>
+<parameter name="rawFrameParser">
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoDecoder"/>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder$CameraGroup"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.videoSourceBelongsInGroup(com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.CameraGroup, com.tridium.videoDriver.videoStream.BIVideoSource) -->
+<method name="videoSourceBelongsInGroup"  protected="true" abstract="true">
+<description>
+Determines if the given video source camera is a duplicate representation&#xa; of the video source cameras in the given CameraGroup object.
+</description>
+<parameter name="group">
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder$CameraGroup"/>
+<description>
+a CameraGroup object, representing at least one video source&#xa; camera, or multiple video source cameras all of which are duplicate&#xa; camera components in the station database.
+</description>
+</parameter>
+<parameter name="videoSource">
+<type class="com.tridium.videoDriver.videoStream.BIVideoSource"/>
+<description>
+a video source camera from the station database&#xa; to determine whether it is a duplicate of the video source camera(s)&#xa; in the given camera group.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the given video source camera is a duplicate&#xa; representation of the video source cameras in the given CameraGroup&#xa; object.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.nextMultistreamFrame() -->
+<method name="nextMultistreamFrame"  public="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoMultistreamDecoder$MultistreamFrame"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.getMultistreamDecoder() -->
+<method name="getMultistreamDecoder"  public="true">
+<description>
+Gets the IVideoMultistreamDecoder that this decoder is working for&#xa; or null if this decoder is not part of a multistream decoding scheme.
+</description>
+<return>
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoMultistreamDecoder"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.getVideoDecoder(javax.baja.naming.BOrd) -->
+<method name="getVideoDecoder"  public="true">
+<description/>
+<parameter name="cameraOrd">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoDecoder"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.setMultistreamDecoder(com.tridium.videoDriver.videoStream.decoder.IVideoMultistreamDecoder) -->
+<method name="setMultistreamDecoder"  public="true">
+<description>
+Hypothetically called by the the video framework to assign a multistream&#xa; decoder to this decoder. However, in practice, since this is a multistream&#xa; decoder, the video framework will never call this method because it never&#xa; assigns a multistream decoder to another multistream decoder.
+</description>
+<parameter name="multistreamDecoder">
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoMultistreamDecoder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.init(com.tridium.videoDriver.videoStream.BIVideoSource, com.tridium.videoDriver.BIVideoPlayer, javax.baja.sys.BRelTime, com.tridium.videoDriver.videoStream.IVideoSession) -->
+<method name="init"  public="true">
+<description/>
+<parameter name="videoSource">
+<type class="com.tridium.videoDriver.videoStream.BIVideoSource"/>
+</parameter>
+<parameter name="videoPlayer">
+<type class="com.tridium.videoDriver.BIVideoPlayer"/>
+</parameter>
+<parameter name="stopDecodingTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<parameter name="videoSession">
+<type class="com.tridium.videoDriver.videoStream.IVideoSession"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.isFinished() -->
+<method name="isFinished"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.keepAlive() -->
+<method name="keepAlive"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.initVidFrame() -->
+<method name="initVidFrame"  protected="true">
+<description>
+Overrided to use MultistreamFrame during decoding.
+</description>
+<return>
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.readFrameData(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="readFrameData"  public="true">
+<description>
+Processed on multstream thread - delegate to rawFrameParser {just pick one of the decoders} to read a frame.
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.decodeFrame(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="decodeFrame"  public="true">
+<description>
+Processed on multstream thread - delegate to camera group decoder to decode the frame.
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.stopDecoding(com.tridium.videoDriver.videoStream.WaitForStopDecoding) -->
+<method name="stopDecoding"  public="true">
+<description/>
+<parameter name="monitor">
+<type class="com.tridium.videoDriver.videoStream.WaitForStopDecoding"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.receiveVideoStream(com.tridium.videoDriver.videoStream.IVideoStream) -->
+<method name="receiveVideoStream"  public="true">
+<description/>
+<parameter name="videoStream">
+<type class="com.tridium.videoDriver.videoStream.IVideoStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.videoStreamTimeout() -->
+<method name="videoStreamTimeout"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.getCameraGroups() -->
+<method name="getCameraGroups"  protected="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder$CameraGroup" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.getRawMultistreamFrame() -->
+<method name="getRawMultistreamFrame"  public="true">
+<description/>
+<return>
+<type class="javax.baja.nre.util.ByteBuffer"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.resolveAllVideoSourceOrds(javax.baja.naming.BOrdList, javax.baja.sys.BObject) -->
+<method name="resolveAllVideoSourceOrds"  public="true" static="true">
+<description>
+Converts the given BOrdList into an array of BIVideoSource objects&#xa; from the station database.
+</description>
+<parameter name="videoSourceOrds">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<parameter name="dvr">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.videoStream.BIVideoSource" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.groupCameraComponentsForSameFieldDevice(javax.baja.naming.BOrdList, com.tridium.videoDriver.dvr.BIVideoDvr) -->
+<method name="groupCameraComponentsForSameFieldDevice"  public="true">
+<description>
+This method is passed a BOrdList representing one or more cameras under&#xa; the given videoDvr in the station database that are currently being&#xa; viewed at the same time.&#xa; &#xa; This method sorts the individual ords of the given BOrdList into&#xa; CameraGroup objects. This method is important because the BOrdList can&#xa; hypothetically contain BOrds that point to different cameras in the&#xa; station database THAT represent the same physical field-device camera.&#xa; Whenever this happens, all of the BOrds in said scenario are collapsed&#xa; into a single CameraGroup object in the array that this method returns.
+</description>
+<parameter name="videoSourceOrds">
+<type class="javax.baja.naming.BOrdList"/>
+<description>
+a list of Ords representing one or more cameras&#xa; under the given videoDvr in the station database that are currently being&#xa; viewed at the same time.
+</description>
+</parameter>
+<parameter name="dvr">
+<type class="com.tridium.videoDriver.dvr.BIVideoDvr"/>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder$CameraGroup" dimension="1"/>
+<description>
+CameraGroup[] a CameraGroup array where each object, represents at least one&#xa; video source camera, or multiple video source cameras all of which are duplicate&#xa; camera components in the station database.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.ordsToCameraGroup -->
+<field name="ordsToCameraGroup"  protected="true">
+<parameterizedType class="java.util.Hashtable">
+<args>
+<type class="javax.baja.naming.BOrd"/>
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder$CameraGroup"/>
+</args>
+</parameterizedType>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.videoDvr -->
+<field name="videoDvr"  protected="true">
+<type class="com.tridium.videoDriver.dvr.BIVideoDvr"/>
+<description>
+This is the videoDvr that is passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.mostRecentMultistreamFrame -->
+<field name="mostRecentMultistreamFrame"  protected="true">
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoMultistreamDecoder$MultistreamFrame"/>
+<description>
+This represents the most recently decoded frame from this video&#xa; multistream decoder. It is assigned in the &lt;code&gt;<see ref="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder#nextMultistreamFrame()">#nextMultistreamFrame()</see>&lt;/code&gt;&#xa; method.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.cameraGroups -->
+<field name="cameraGroups"  protected="true">
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder$CameraGroup" dimension="1"/>
+<description>
+Instead of keeping an array of BIVideoSource[] (one item in the array&#xa; for each video camera to be viewed), we keep an array of CameraGroup[].&#xa; &#xa; This is similar, except that it is better in the case where the user is&#xa; looking at the video for two (or more) camera components in the station&#xa; database that represent the same field-device camera.&#xa; &#xa; So, each CameraGroup item in this array represent one or more camera&#xa; components in the station database that are for the same distinct&#xa; field-device camera.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.VideoMultistreamDecoder.rawFrameUndecoded -->
+<field name="rawFrameUndecoded"  protected="true">
+<type class="javax.baja.nre.util.ByteBuffer"/>
+<description>
+This is the most recently parsed, raw, undecoded frame from this video&#xa; multistream decoder.
+</description>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nre" runtimeProfile="rt" qualifiedName="javax.baja.xml.XInputStreamReader" name="XInputStreamReader" packageName="javax.baja.xml" public="true">
+<description>
+XInputStreamRead is used to read a XML byte stream into a stream&#xa; of unicode characters.  Mapping the byte stream into a charset&#xa; encoding is implemented according XML 1.0 Appendix F - Autodetection&#xa; of Character Encodings.  XInputStream also automatically handles&#xa; reading a PKZIP zipped XML.  Character encodings supported:&#xa; &lt;ul&gt;&#xa;  &lt;li&gt;UTF-16 big-endian with 0xFEFF byte order mark;&lt;/li&gt;&#xa;  &lt;li&gt;UTF-16 little-endian with 0xFFFE byte order mark;&lt;/li&gt;&#xa;  &lt;li&gt;UTF-8 with 0xEFBBBF byte order mark;&lt;/li&gt;&#xa;  &lt;li&gt;PKZIP containing any other format with 0x504b0304 byte&#xa;      order mark (assumes text is first zip entry)&lt;/li&gt;&#xa;  &lt;li&gt;Anything else assumes UTF-8;&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<tag name="@author">Brian Frank on 19 Apr 05</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.io.Reader"/>
+</extends>
+<!-- javax.baja.xml.XInputStreamReader(java.io.InputStream) -->
+<constructor name="XInputStreamReader" public="true">
+<parameter name="in">
+<type class="java.io.InputStream"/>
+<description>
+Underlying inputstream
+</description>
+</parameter>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if opening the underlying input stream fails
+</description>
+</throws>
+<description>
+Construct writer for specified file.
+</description>
+</constructor>
+
+<!-- javax.baja.xml.XInputStreamReader.getEncoding() -->
+<method name="getEncoding"  public="true">
+<description>
+Get the character encoding being used.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Character encoding
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if the character encoding cannot be detected
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.xml.XInputStreamReader.isZipped() -->
+<method name="isZipped"  public="true">
+<description>
+Return if the stream was zipped.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+True if the underlying stream was zipped
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if detecting zipped encoding fails
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.xml.XInputStreamReader.read() -->
+<method name="read"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read one character.
+</description>
+<return>
+<type class="int"/>
+<description>
+single character
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+on read error
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.xml.XInputStreamReader.read(char[], int, int) -->
+<method name="read"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read a block of characters into the specified buffer.
+</description>
+<parameter name="buf">
+<type class="char" dimension="1"/>
+<description>
+buffer to read into
+</description>
+</parameter>
+<parameter name="off">
+<type class="int"/>
+<description>
+offset in buffer
+</description>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+<description>
+length of buffer
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+number of characters read
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if read error occurs
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.xml.XInputStreamReader.read(char[]) -->
+<method name="read"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read a block of characters into the specified buffer.
+</description>
+<parameter name="buf">
+<type class="char" dimension="1"/>
+<description>
+buffer to read into
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+number of characters read
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if read error occurs
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.xml.XInputStreamReader.close() -->
+<method name="close"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Close the underlying input stream.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if closing the underlying input stream fails
+</description>
+</throws>
+</method>
+
+</class>
+</bajadoc>

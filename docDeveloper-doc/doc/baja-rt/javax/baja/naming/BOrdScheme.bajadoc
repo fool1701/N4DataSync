@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.naming.BOrdScheme" name="BOrdScheme" packageName="javax.baja.naming" public="true" abstract="true">
+<description>
+BOrdSchemes provide management of a registered ord scheme ID.&#xa; A Scheme ID is universally unique and mapped to a BOrdScheme&#xa; type via the registry.  Scheme IDs are case insensitive.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">15 Nov 02</tag>
+<tag name="@version">$Revision: 4$ $Date: 2/24/05 9:29:40 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSingleton"/>
+</extends>
+<!-- javax.baja.naming.BOrdScheme(java.lang.String) -->
+<constructor name="BOrdScheme" protected="true">
+<parameter name="id">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Create a BOrdScheme with the specified ID.
+</description>
+</constructor>
+
+<!-- javax.baja.naming.BOrdScheme.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrdScheme.lookup(java.lang.String) -->
+<method name="lookup"  public="true" static="true">
+<description>
+Lookup a BOrdScheme by scheme id, or throw &#xa; UnknownSchemeException if not found.
+</description>
+<parameter name="schemeId">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrdScheme"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrdScheme.find(java.lang.String) -->
+<method name="find"  public="true" static="true">
+<description>
+Find a BOrdScheme by scheme id.
+</description>
+<parameter name="schemeId">
+<type class="java.lang.String"/>
+<description>
+The id of the ord scheme.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.naming.BOrdScheme"/>
+</args>
+</parameterizedType>
+<description>
+Returns the ord scheme or null if the ord scheme cannot be found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrdScheme.getId() -->
+<method name="getId"  public="true" final="true">
+<description>
+Get the scheme identifier for this instance.  The ID &#xa; is case insensitive, but always returned as lower case.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrdScheme.parse(java.lang.String) -->
+<method name="parse"  public="true">
+<description>
+This method gives scheme the chance to return a custom &#xa; subclass of OrdQuery with a scheme specific API.  The&#xa; default implementation returns an instance of BasicQuery.
+</description>
+<parameter name="queryBody">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrdScheme.resolve(javax.baja.naming.OrdTarget, javax.baja.naming.OrdQuery) -->
+<method name="resolve"  public="true" abstract="true">
+<description>
+Parse the query and resolve it using the specified base.
+</description>
+<parameter name="base">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<parameter name="query">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+<description>
+if the query cannot be parsed &#xa;   due to invalid syntax
+</description>
+</throws>
+<throws>
+<type class="javax.baja.naming.UnresolvedException"/>
+<description>
+if the ord cannot be&#xa;   resolved to a BObject
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrdScheme.resolve(javax.baja.naming.OrdTarget, javax.baja.naming.OrdQuery, com.tridium.authn.AuthenticationClient) -->
+<method name="resolve"  public="true">
+<description/>
+<parameter name="base">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<parameter name="query">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<parameter name="client">
+<type class="com.tridium.authn.AuthenticationClient"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+</throws>
+<throws>
+<type class="javax.baja.naming.UnresolvedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrdScheme.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

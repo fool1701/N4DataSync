@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.BJobStep" name="BJobStep" packageName="javax.baja.batchJob" public="true" abstract="true">
+<description>
+A single step in that is run one or more times by a BJobStage
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">9 Jul 07</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="factoryType" flags="r">
+<type class="javax.baja.util.BTypeSpec"/>
+<description>
+Slot for the &lt;code&gt;factoryType&lt;/code&gt; property.&#xa; if the step was created by a BJobStepFactory, store&#xa; its type here
+</description>
+<tag name="@see">#getFactoryType</tag>
+<tag name="@see">#setFactoryType</tag>
+</property>
+
+<!-- javax.baja.batchJob.BJobStep() -->
+<constructor name="BJobStep" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.BJobStep.getFactoryType() -->
+<method name="getFactoryType"  public="true">
+<description>
+Get the &lt;code&gt;factoryType&lt;/code&gt; property.&#xa; if the step was created by a BJobStepFactory, store&#xa; its type here
+</description>
+<tag name="@see">#factoryType</tag>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.setFactoryType(javax.baja.util.BTypeSpec) -->
+<method name="setFactoryType"  public="true">
+<description>
+Set the &lt;code&gt;factoryType&lt;/code&gt; property.&#xa; if the step was created by a BJobStepFactory, store&#xa; its type here
+</description>
+<tag name="@see">#factoryType</tag>
+<parameter name="v">
+<type class="javax.baja.util.BTypeSpec"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.getJob() -->
+<method name="getJob"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.getStage() -->
+<method name="getStage"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.batchJob.BJobStage"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.getJobStepDetails() -->
+<method name="getJobStepDetails"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.batchJob.BJobStepDetails" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.stepComplete(javax.baja.batchJob.BJobStepDetails, javax.baja.batchJob.BatchJobOp) -->
+<method name="stepComplete"  public="true">
+<description>
+Callback invoked each time when the step has been completed.
+</description>
+<parameter name="details">
+<type class="javax.baja.batchJob.BJobStepDetails"/>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.jobComplete(javax.baja.batchJob.BatchJobOp) -->
+<method name="jobComplete"  public="true">
+<description>
+Callback invoked when the job is complete.
+</description>
+<parameter name="op">
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+returns the icon defined for the type.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.lexKey(java.lang.String) -->
+<method name="lexKey"  protected="true">
+<description>
+Convenience method to construct a lexicon key using the component type name&#xa; as the prefix of the key, and the specified suffix.&#xa;&#xa; e.g:&#xa;&#xa; &lt;code&gt;BFoo.lexKey(&amp;#x22;somekeyname&amp;#x22;) -&amp;gt; &amp;#x22;Foo.somekeyname&amp;#x22;&lt;/code&gt;
+</description>
+<parameter name="keySuffix">
+<type class="java.lang.String"/>
+<description>
+the suffix to add to the key
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a lexicon key with the component name + &#x22;.&#x22; + the suffix
+</description>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.lexValue(java.lang.String, java.lang.Object...) -->
+<method name="lexValue"  protected="true" isVarargs="true">
+<description>
+Convenience method to retrieve and format a message from the lexicon. The key is built using&#xa; the lexKey(keySuffix) method.
+</description>
+<parameter name="keySuffix">
+<type class="java.lang.String"/>
+<description>
+suffix of the lexicon key
+</description>
+</parameter>
+<parameter name="parameters">
+<type class="java.lang.Object" dimension="1"/>
+<description>
+parameters for the message
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BJobStep.factoryType -->
+<field name="factoryType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;factoryType&lt;/code&gt; property.&#xa; if the step was created by a BJobStepFactory, store&#xa; its type here
+</description>
+<tag name="@see">#getFactoryType</tag>
+<tag name="@see">#setFactoryType</tag>
+</field>
+
+<!-- javax.baja.batchJob.BJobStep.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

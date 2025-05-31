@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.BDdfRawTransmitRequest" name="BDdfRawTransmitRequest" packageName="com.tridium.ddf.comm.req" public="true">
+<description>
+This request is used to directly transmit an array of bytes&#xa; onto the driver&#x27;s field-bus. &#xa; &#xa; Please note that this request is used to bypass transaction&#xa; management and directly transmit an array of bytes onto the&#xa; driver&#x27;s field-bus. As a result, no response processing is&#xa; performed.&#xa; &#xa; Please do not use this request if you need to perform&#xa; processing on frames received as a result of this&#xa; transmission. That is not what this is for.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.ddf.comm.req.BDdfRequest"/>
+</extends>
+<!-- com.tridium.ddf.comm.req.BDdfRawTransmitRequest() -->
+<constructor name="BDdfRawTransmitRequest" public="true">
+<description>
+Niagara AX requires an empty constructor. We do not use this.&#xa; We use the version that takes the byte array as a parameter.
+</description>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfRawTransmitRequest(byte[]) -->
+<constructor name="BDdfRawTransmitRequest" public="true">
+<parameter name="rawBytes">
+<type class="byte" dimension="1"/>
+<description>
+a raw array of bytes to directly&#xa; transmit, without any transaction management.
+</description>
+</parameter>
+<description>
+Constructs a instance to transmit a raw array of&#xa; bytes.
+</description>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfRawTransmitRequest.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfRawTransmitRequest.processReceive(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="processReceive"  public="true">
+<description/>
+<parameter name="iDdfDataFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+</return>
+<throws>
+<type class="com.tridium.ddf.comm.rsp.DdfResponseException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfRawTransmitRequest.toByteArray() -->
+<method name="toByteArray"  public="true">
+<description/>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfRawTransmitRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddf.comm.req.BDdfRawTransmitRequest.rawBytes -->
+<field name="rawBytes"  protected="true">
+<type class="byte" dimension="1"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

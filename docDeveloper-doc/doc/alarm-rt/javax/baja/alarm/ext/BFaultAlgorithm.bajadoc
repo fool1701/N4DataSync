@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.ext.BFaultAlgorithm" name="BFaultAlgorithm" packageName="javax.baja.alarm.ext" public="true">
+<description>
+BFaultAlgorithm is the super-class of all fault-detection&#xa; mechanisms defined by Niagara.  The default implementation&#xa; will never generate any toFault alarms.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">13 Nov 00</tag>
+<tag name="@version">$Revision: 21$ $Date: 2/14/06 2:21:36 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.alarm.ext.BAlarmAlgorithm"/>
+</extends>
+<!-- javax.baja.alarm.ext.BFaultAlgorithm() -->
+<constructor name="BFaultAlgorithm" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.ext.BFaultAlgorithm.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.BFaultAlgorithm.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+A BFaultAlgorithm&#x27;s parent must be a BAlarmSourceExt
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.BFaultAlgorithm.isGrandparentLegal(javax.baja.sys.BComponent) -->
+<method name="isGrandparentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="grandparent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.BFaultAlgorithm.checkFault(javax.baja.status.BStatusValue) -->
+<method name="checkFault"  public="true">
+<description>
+Check for transitions to or from the fault state.&#xa;  Returns BAlarmState.fault on a to-fault transition,&#xa;  BAlarmState.normal on a to-normal transition and null&#xa;  if no change in state occured.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.ext.BAlarmState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.BFaultAlgorithm.checkAlarmState(javax.baja.status.BStatusValue) -->
+<method name="checkAlarmState"  public="true" final="true">
+<description>
+Check for a normal / fault alarm transition.  Return&#xa; new alarm state or null if no change.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.ext.BAlarmState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.BFaultAlgorithm.writeAlarmData(javax.baja.status.BStatusValue, java.util.Map) -->
+<method name="writeAlarmData"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Write the key-value pairs defining alarm data for the&#xa;  alarm algorithm and state to the given Map.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The relevant control point status value
+</description>
+</parameter>
+<parameter name="map">
+<parameterizedType class="java.util.Map">
+<args>
+</args>
+</parameterizedType>
+<description>
+The map.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.BFaultAlgorithm.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

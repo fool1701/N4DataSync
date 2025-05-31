@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="driver" runtimeProfile="rt" qualifiedName="javax.baja.driver.util.BDescriptor" name="BDescriptor" packageName="javax.baja.driver.util" public="true" abstract="true">
+<description>
+Maps an object in the local database to a remote object.  Must have&#xa; a BDescriptorDeviceExt ancestor.&#xa; &lt;p&gt;&lt;b&gt;Subclasses&lt;/b&gt;&#xa; &lt;ul&gt;&#xa; &lt;li&gt;Implement postExecute()&#xa; &lt;li&gt;Are responsible for calling the following lifecycle methods:&#xa;   &lt;li&gt;executeInProgress() - must call when doExecute() is invoked&#xa;   &lt;li&gt;executeFail()&#xa;   &lt;li&gt;executeOk()&#xa;  &lt;br&gt;&#xa; &lt;/ul&gt;
+</description>
+<tag name="@author">John Sublett, Aaron Hansen</tag>
+<tag name="@creation">Feb 2004</tag>
+<tag name="@version">$Revision: 35$ $Date: 7/2/08 11:57:15 AM EDT$</tag>
+<extends>
+<type class="javax.baja.driver.util.BAbstractDescriptor"/>
+</extends>
+<!-- javax.baja.driver.util.BDescriptor() -->
+<constructor name="BDescriptor" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.driver.util.BDescriptor.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.getDevice() -->
+<method name="getDevice"  public="true" final="true">
+<description>
+Get the parent device.  Throw an exception if this &#xa; component is not running or has a fatal fault.
+</description>
+<return>
+<type class="javax.baja.driver.BDevice"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.getDeviceExt() -->
+<method name="getDeviceExt"  public="true" final="true">
+<description>
+Get the parent PointDeviceExt.  Throw an exception if &#xa; this component is not running or has a fatal fault.
+</description>
+<return>
+<type class="javax.baja.driver.util.BDescriptorDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.getNetwork() -->
+<method name="getNetwork"  public="true" final="true">
+<description>
+Get the parent network.  Throw an exception if this &#xa; component is not running or has a fatal fault.
+</description>
+<return>
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.isUnoperational() -->
+<method name="isUnoperational"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If true, execute should be short circuited.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+True if down, disabled, or in fatal fault
+</description>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.isDown() -->
+<method name="isDown"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the parent device is down.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.isFault() -->
+<method name="isFault"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if in fault.  Is in fault if&#xa; either a fatal fault was detected, the last execute failed.&#xa; Also automatically  marked in fault if the parent device is in fault.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.isDisabled() -->
+<method name="isDisabled"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if disabled.&#xa; Is disabled is the user has manually&#xa; set the network, device, or descriptor enabled&#xa; property to false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.updateStatus() -->
+<method name="updateStatus"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.isFatalFault() -->
+<method name="isFatalFault"  public="true" final="true">
+<description>
+Return true if the point detected a fatal fault.&#xa; Fatal faults cannot be recovered until the descriptor&#xa; is restarted.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BDescriptor.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

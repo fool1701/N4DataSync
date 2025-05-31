@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.nav.menu.BNavMenuAgent" name="BNavMenuAgent" packageName="javax.baja.workbench.nav.menu" public="true">
+<description>
+BNavMenuAgent is used to build customized context sensitive &#xa; menus for a given BINavNode.  To make a menu:&#xa; &lt;pre&gt;&#xa;  BMenu menu = BNavMenuAgent.makeFor(navNode).makeMenu(owner, navNode);&#xa; &lt;/pre&gt;&#xa; See NavMenuUtil for common utilities.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">3 Feb 03</tag>
+<tag name="@version">$Revision: 7$ $Date: 5/4/05 8:24:38 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSingleton"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NiagaraSingleton"/>
+</annotation>
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent() -->
+<constructor name="BNavMenuAgent" protected="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent.makeFor(javax.baja.sys.BObject) -->
+<method name="makeFor"  public="true" static="true">
+<description>
+Make a BNavMenuAgent for the specified target.
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.nav.menu.BNavMenuAgent"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent.makeMenu(javax.baja.ui.BWidget, javax.baja.sys.BObject) -->
+<method name="makeMenu"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;makeMenu(owner, target, true, null)&lt;/code&gt;.
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent.makeMenu(javax.baja.ui.BWidget, javax.baja.sys.BObject, boolean, javax.baja.sys.Context) -->
+<method name="makeMenu"  public="true" final="true">
+<description>
+Make the the menu.  If showError is true and there is an &#xa; exception then display an error dialog and then rethrow&#xa; the exception.
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="showError">
+<type class="boolean"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent.doMakeMenu(javax.baja.ui.BWidget, javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="doMakeMenu"  protected="true">
+<description>
+Override for subclasses.  Return null for no menu.  The &#xa; default implementation returns null.
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent.INSTANCE -->
+<field name="INSTANCE"  public="true" static="true" final="true">
+<type class="javax.baja.workbench.nav.menu.BNavMenuAgent"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.nav.menu.BNavMenuAgent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

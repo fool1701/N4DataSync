@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema" name="BJsonSchema" packageName="com.tridiumx.jsonToolkit.outbound.schema" public="true">
+<description>
+Parent for all members which forms a tree of components to marshall a json string from niagara station&#xa; components and values.&#xa;&#xa; When doGenerateJson is invoked, the child structure of &lt;code&gt;<see ref="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaMember">BJsonSchemaMember</see>&lt;/code&gt; children is walked and their&#xa; content appended to a json string, resulting in update of the string output slot and lastUpdated timestamp.&#xa;&#xa; The schemaModified topic allows clients of this schema to be aware when some fundamental change has occurred which&#xa; could invalidate cached settings such as naming rules / subscriptions started. @see &lt;code&gt;<see ref="com.tridiumx.jsonToolkit.outbound.schema.support.BSchemaEvent">BSchemaEvent</see>&lt;/code&gt;&#xa;&#xa; bql / neql queries are defined and stored at this level as we want them to be managed and executed once per&#xa; json string generation when in onDemand mode or on an interval when in cov mode. They are run in parallel.&#xa;&#xa; The name casing / spacing rules are not hidden at this level to allow global settings which filters down to all&#xa; children (but is overridable at any level).&#xa;&#xa; This may be linked to a any other slot for transport over a protocol which accepts json as a payload, or an&#xa; exporter etc. Note it may be necessary to link to the proxyExt writeValue if the output updates more frequently&#xa; that the station engine cycle time, given the potentially coalescing behaviour of Niagara ControlPoint&#x27;s given&#xa; a data source such as this which may update frequently.
+</description>
+<tag name="@author">Nick Dodd</tag>
+<extends>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaMember"/>
+</extends>
+<implements>
+<type class="com.tridiumx.jsonToolkit.util.LicenseLimit"/>
+</implements>
+<implements>
+<type class="com.tridium.util.IPrefixLoggable"/>
+</implements>
+<property name="output" flags="trs">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;output&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOutput</tag>
+<tag name="@see">#setOutput</tag>
+</property>
+
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="status" flags="rt">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Required to implement LicenseLimit
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="faultCause" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<property name="lastUpdated" flags="trs">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastUpdated&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastUpdated</tag>
+<tag name="@see">#setLastUpdated</tag>
+</property>
+
+<property name="config" flags="">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.config.folder.BJsonSchemaConfigFolder"/>
+<description>
+Slot for the &lt;code&gt;config&lt;/code&gt; property.
+</description>
+<tag name="@see">#getConfig</tag>
+<tag name="@see">#setConfig</tag>
+</property>
+
+<property name="queries" flags="">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaQueryFolder"/>
+<description>
+Slot for the &lt;code&gt;queries&lt;/code&gt; property.
+</description>
+<tag name="@see">#getQueries</tag>
+<tag name="@see">#setQueries</tag>
+</property>
+
+<action name="generateJson" flags="aA">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;generateJson&lt;/code&gt; action.
+</description>
+<tag name="@see">#generateJson()</tag>
+</action>
+
+<action name="forceGenerateJson" flags="aA">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;forceGenerateJson&lt;/code&gt; action.
+</description>
+<tag name="@see">#forceGenerateJson()</tag>
+</action>
+
+<action name="clearCache" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;clearCache&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearCache()</tag>
+</action>
+
+<action name="clearOutput" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;clearOutput&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearOutput()</tag>
+</action>
+
+<action name="executeQueries" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;executeQueries&lt;/code&gt; action.
+</description>
+<tag name="@see">#executeQueries()</tag>
+</action>
+
+<action name="minWriteExpired" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;minWriteExpired&lt;/code&gt; action.&#xa; Internal use only action - fires when min write period expires.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#minWriteExpired()</tag>
+</action>
+
+<topic name="schemaModified" flags="">
+<eventType>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.support.BSchemaEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;schemaModified&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireSchemaModified</tag>
+</topic>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema() -->
+<constructor name="BJsonSchema" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getOutput() -->
+<method name="getOutput"  public="true">
+<description>
+Get the &lt;code&gt;output&lt;/code&gt; property.
+</description>
+<tag name="@see">#output</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.setOutput(java.lang.String) -->
+<method name="setOutput"  public="true">
+<description>
+Set the &lt;code&gt;output&lt;/code&gt; property.
+</description>
+<tag name="@see">#output</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.&#xa; Required to implement LicenseLimit
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.&#xa; Required to implement LicenseLimit
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getLastUpdated() -->
+<method name="getLastUpdated"  public="true">
+<description>
+Get the &lt;code&gt;lastUpdated&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastUpdated</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.setLastUpdated(javax.baja.sys.BAbsTime) -->
+<method name="setLastUpdated"  public="true">
+<description>
+Set the &lt;code&gt;lastUpdated&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastUpdated</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getConfig() -->
+<method name="getConfig"  public="true">
+<description>
+Get the &lt;code&gt;config&lt;/code&gt; property.
+</description>
+<tag name="@see">#config</tag>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.config.folder.BJsonSchemaConfigFolder"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.setConfig(com.tridiumx.jsonToolkit.outbound.schema.config.folder.BJsonSchemaConfigFolder) -->
+<method name="setConfig"  public="true">
+<description>
+Set the &lt;code&gt;config&lt;/code&gt; property.
+</description>
+<tag name="@see">#config</tag>
+<parameter name="v">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.config.folder.BJsonSchemaConfigFolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getQueries() -->
+<method name="getQueries"  public="true">
+<description>
+Get the &lt;code&gt;queries&lt;/code&gt; property.
+</description>
+<tag name="@see">#queries</tag>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaQueryFolder"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.setQueries(com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaQueryFolder) -->
+<method name="setQueries"  public="true">
+<description>
+Set the &lt;code&gt;queries&lt;/code&gt; property.
+</description>
+<tag name="@see">#queries</tag>
+<parameter name="v">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaQueryFolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.generateJson() -->
+<method name="generateJson"  public="true">
+<description>
+Invoke the &lt;code&gt;generateJson&lt;/code&gt; action.
+</description>
+<tag name="@see">#generateJson</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.forceGenerateJson() -->
+<method name="forceGenerateJson"  public="true">
+<description>
+Invoke the &lt;code&gt;forceGenerateJson&lt;/code&gt; action.
+</description>
+<tag name="@see">#forceGenerateJson</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.clearCache() -->
+<method name="clearCache"  public="true">
+<description>
+Invoke the &lt;code&gt;clearCache&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearCache</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.clearOutput() -->
+<method name="clearOutput"  public="true">
+<description>
+Invoke the &lt;code&gt;clearOutput&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearOutput</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.executeQueries() -->
+<method name="executeQueries"  public="true">
+<description>
+Invoke the &lt;code&gt;executeQueries&lt;/code&gt; action.
+</description>
+<tag name="@see">#executeQueries</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.minWriteExpired() -->
+<method name="minWriteExpired"  public="true">
+<description>
+Invoke the &lt;code&gt;minWriteExpired&lt;/code&gt; action.&#xa; Internal use only action - fires when min write period expires.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#minWriteExpired</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.fireSchemaModified(com.tridiumx.jsonToolkit.outbound.schema.support.BSchemaEvent) -->
+<method name="fireSchemaModified"  public="true">
+<description>
+Fire an event for the &lt;code&gt;schemaModified&lt;/code&gt; topic.
+</description>
+<tag name="@see">#schemaModified</tag>
+<parameter name="event">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.support.BSchemaEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.descendantsStarted() -->
+<method name="descendantsStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.atSteadyState() -->
+<method name="atSteadyState"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Schema&#x27;s can live anywhere, but prevent nesting schemas within other schemas (Not yet supported)
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.isChildLegal(javax.baja.sys.BComponent) -->
+<method name="isChildLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="child">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.checkAdd(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="checkAdd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getJsonName() -->
+<method name="getJsonName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.process(com.tridium.json.JSONWriter, boolean) -->
+<method name="process"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="jsonWriter">
+<type class="com.tridium.json.JSONWriter"/>
+</parameter>
+<parameter name="jsonKeysValid">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getRoot() -->
+<method name="getRoot"  public="true">
+<description/>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaMember"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.disableAll() -->
+<method name="disableAll"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.startQueryExecutionTimer(javax.baja.sys.Context) -->
+<method name="startQueryExecutionTimer"  protected="true">
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.shouldRunQueries() -->
+<method name="shouldRunQueries"  protected="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.queryIntervalIsSet() -->
+<method name="queryIntervalIsSet"  protected="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.cancelMinWritePublishTimer() -->
+<method name="cancelMinWritePublishTimer"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.requiresMemberSubscriptions() -->
+<method name="requiresMemberSubscriptions"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the individual members of a schema should subscribe to their binding target.&#xa; false if the schema is in on-demand mode, and false for a relative schema (which maintains it&#x27;s own subscription table)
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.requestGenerateJson(javax.baja.sys.Context) -->
+<method name="requestGenerateJson"  public="true" final="true">
+<description>
+request a generation of the json output. this will respect min write time&#xa; in that it will cancel any existing write request from within the last getMinWriteTime() ms unless&#xa; maxWrite time has been exceeded.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.currentUser() -->
+<method name="currentUser"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.userHasPermission(javax.baja.sys.BValue) -->
+<method name="userHasPermission"  public="true">
+<description/>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.doGenerateJson(javax.baja.sys.Context) -->
+<method name="doGenerateJson"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;WeakerAccess&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Performs a schema generation of a new json string and sets the new value&#xa; on the output slot. Whether the generation occurs is subject to min/max&#xa; write tuning settings.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+the current context
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.doForceGenerateJson(javax.baja.sys.Context) -->
+<method name="doForceGenerateJson"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Performs a schema generation of a new json string and sets the new value&#xa; on the output slot. Ignores min/max write tuning settings.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+the current context
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.doMinWriteExpired(javax.baja.sys.Context) -->
+<method name="doMinWriteExpired"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Action which fires at the end of the min write period. Evaluates whether&#xa; an additional request to generate has occurred during that period, if so&#xa; schema generates immediately to satisfy that request.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.generateAndOutputJson(javax.baja.sys.Context) -->
+<method name="generateAndOutputJson"  protected="true" final="true">
+<description>
+Performs a schema generation of a new json string and sets the new value&#xa; on the output slot.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+the current context
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.processQueries(javax.baja.sys.Context, boolean) -->
+<method name="processQueries"  protected="true">
+<description>
+Setup regular query execution / run queries depending on schema config.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+the context to pass into the query execution.
+</description>
+</parameter>
+<parameter name="runSynchronously">
+<type class="boolean"/>
+<description>
+true to block and await query results on current thread if&#xa;                         queries are to execute.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.processQueries(javax.baja.sys.Context) -->
+<method name="processQueries"  protected="true">
+<description>
+Setup regular query execution / run queries depending on schema config.&#xa; The queries will be run synchronously on the current thread.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+the context to pass into the query execution.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.doExecuteQueries(javax.baja.sys.Context) -->
+<method name="doExecuteQueries"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedDeclaration&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;WeakerAccess&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.doClearCache() -->
+<method name="doClearCache"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedDeclaration&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;WeakerAccess&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.doClearOutput() -->
+<method name="doClearOutput"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedDeclaration&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getOrdTarget(com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember, javax.baja.sys.BObject) -->
+<method name="getOrdTarget"  public="true">
+<description>
+Get the resolved ord target for the given bound schema member.&#xa; The binding is resolved against a provided base, if not provided - the schemas base object is used instead&#xa; (the station, or in the case of relative schemas - the current result of the base query)
+</description>
+<parameter name="member">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember"/>
+<description>
+the schema member whose binding will be resolved
+</description>
+</parameter>
+<parameter name="overrideBase">
+<type class="javax.baja.sys.BObject"/>
+<description>
+the base object to resolve the binding ord against.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+<description>
+the resolved ord target.
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.isRelative() -->
+<method name="isRelative"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getMetrics() -->
+<method name="getMetrics"  public="true">
+<description/>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.postprocess.BJsonSchemaMetrics"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.getBaseObject() -->
+<method name="getBaseObject"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+<description>
+the BComplex that ord resolution will take place against in the schema members
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.identifierForLogs() -->
+<method name="identifierForLogs"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.output -->
+<field name="output"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;output&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOutput</tag>
+<tag name="@see">#setOutput</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Required to implement LicenseLimit
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.lastUpdated -->
+<field name="lastUpdated"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastUpdated&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastUpdated</tag>
+<tag name="@see">#setLastUpdated</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.config -->
+<field name="config"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;config&lt;/code&gt; property.
+</description>
+<tag name="@see">#getConfig</tag>
+<tag name="@see">#setConfig</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.queries -->
+<field name="queries"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;queries&lt;/code&gt; property.
+</description>
+<tag name="@see">#getQueries</tag>
+<tag name="@see">#setQueries</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.generateJson -->
+<field name="generateJson"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;generateJson&lt;/code&gt; action.
+</description>
+<tag name="@see">#generateJson()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.forceGenerateJson -->
+<field name="forceGenerateJson"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;forceGenerateJson&lt;/code&gt; action.
+</description>
+<tag name="@see">#forceGenerateJson()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.clearCache -->
+<field name="clearCache"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;clearCache&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearCache()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.clearOutput -->
+<field name="clearOutput"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;clearOutput&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearOutput()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.executeQueries -->
+<field name="executeQueries"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;executeQueries&lt;/code&gt; action.
+</description>
+<tag name="@see">#executeQueries()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.minWriteExpired -->
+<field name="minWriteExpired"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;minWriteExpired&lt;/code&gt; action.&#xa; Internal use only action - fires when min write period expires.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#minWriteExpired()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.schemaModified -->
+<field name="schemaModified"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;schemaModified&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireSchemaModified</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.currentContext -->
+<field name="currentContext"  protected="true" final="true">
+<parameterizedType class="java.lang.ThreadLocal">
+<args>
+<type class="javax.baja.sys.Context"/>
+</args>
+</parameterizedType>
+<description/>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema.queryRunner -->
+<field name="queryRunner"  protected="true" final="true">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.QueryRunner"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

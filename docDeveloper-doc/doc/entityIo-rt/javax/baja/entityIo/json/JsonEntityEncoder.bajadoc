@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="entityIo" runtimeProfile="rt" qualifiedName="javax.baja.entityIo.json.JsonEntityEncoder" name="JsonEntityEncoder" packageName="javax.baja.entityIo.json" public="true" final="true">
+<description>
+JsonEntityEncoder&#xa; This class provides encoding methods for serializing Niagara &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; objects&#xa; into JSON-encoded objects.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:craig.gemmill@tridium.com&#x22;&gt;Craig Gemmill&lt;/a&gt;&#xa;         Date: 1/23/14&#xa;         Time: 3:26 PM</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.tag.io.EntityEncoder"/>
+</implements>
+<implements>
+<type class="javax.baja.entityIo.json.JsonEntityConst"/>
+</implements>
+<!-- javax.baja.entityIo.json.JsonEntityEncoder(java.io.File) -->
+<constructor name="JsonEntityEncoder" public="true">
+<parameter name="f">
+<type class="java.io.File"/>
+<description>
+the backing &lt;code&gt;<see ref="java.io.File">File</see>&lt;/code&gt; for this encoder.
+</description>
+</parameter>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if an error occurs in setting up the output writer.
+</description>
+</throws>
+<description>
+Construct a JsonEntityEncoder backed by a &lt;code&gt;<see ref="java.io.File">File</see>&lt;/code&gt;. Both tags and relations are encoded.
+</description>
+</constructor>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder(java.io.File, javax.baja.entityIo.json.JsonEntityEncoder.Options) -->
+<constructor name="JsonEntityEncoder" public="true">
+<parameter name="f">
+<type class="java.io.File"/>
+<description>
+the backing &lt;code&gt;<see ref="java.io.File">File</see>&lt;/code&gt; for this encoder.
+</description>
+</parameter>
+<parameter name="options">
+<type class="javax.baja.entityIo.json.JsonEntityEncoder$Options"/>
+<description>
+encoding options such as whether to encode each entity&#x27;s tags and/or relations
+</description>
+</parameter>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if an error occurs in setting up the output writer.
+</description>
+</throws>
+<description>
+Construct a JsonEntityEncoder backed by a &lt;code&gt;<see ref="java.io.File">File</see>&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+</constructor>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder(java.io.OutputStream) -->
+<constructor name="JsonEntityEncoder" public="true">
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+<description>
+the backing output stream.
+</description>
+</parameter>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if an error occurs in setting up the output writer.
+</description>
+</throws>
+<description>
+Construct a JsonEntityEncoder backed by a &lt;code&gt;<see ref="java.io.OutputStream">OutputStream</see>&lt;/code&gt;. Both tags and relations are&#xa; encoded.
+</description>
+</constructor>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder(java.io.OutputStream, javax.baja.entityIo.json.JsonEntityEncoder.Options) -->
+<constructor name="JsonEntityEncoder" public="true">
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+<description>
+the backing output stream.
+</description>
+</parameter>
+<parameter name="options">
+<type class="javax.baja.entityIo.json.JsonEntityEncoder$Options"/>
+<description>
+encoding options such as whether to encode each entity&#x27;s tags and/or relations
+</description>
+</parameter>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if an error occurs in setting up the output writer.
+</description>
+</throws>
+<description>
+Construct a JsonEntityEncoder backed by a &lt;code&gt;<see ref="java.io.OutputStream">OutputStream</see>&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+</constructor>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeToString(javax.baja.tag.Entity) -->
+<method name="encodeToString"  public="true" static="true">
+<description>
+Convenience method for encoding a single &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; to a JSON string.  Both tags and&#xa; relations are encoded.
+</description>
+<parameter name="e">
+<type class="javax.baja.tag.Entity"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; to be encoded
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a String containing the JSON encoded value
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeToString(javax.baja.tag.Entity, javax.baja.entityIo.json.JsonEntityEncoder.Options) -->
+<method name="encodeToString"  public="true" static="true">
+<description>
+Convenience method for encoding a single &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; to a JSON string.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="e">
+<type class="javax.baja.tag.Entity"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; to be encoded
+</description>
+</parameter>
+<parameter name="options">
+<type class="javax.baja.entityIo.json.JsonEntityEncoder$Options"/>
+<description>
+encoding options such as whether to encode each entity&#x27;s tags and/or relations
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a String containing the JSON encoded value
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeToString(java.util.Collection&lt;javax.baja.tag.Entity&gt;) -->
+<method name="encodeToString"  public="true" static="true">
+<description>
+Convenience method for encoding a group of unnamed Entities. Both tags and relations are&#xa; encoded.&#xa; The JSON syntax requires names, so they will be given default names.
+</description>
+<parameter name="c">
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+<description>
+the &lt;code&gt;<see ref="java.util.Collection">Collection</see>&lt;/code&gt; of Entities
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a String containing the JSON encoded value
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeToString(java.util.Collection&lt;javax.baja.tag.Entity&gt;, javax.baja.entityIo.json.JsonEntityEncoder.Options) -->
+<method name="encodeToString"  public="true" static="true">
+<description>
+Convenience method for encoding a group of unnamed Entities.&#xa; The JSON syntax requires names, so they will be given default names.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="c">
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+<description>
+the &lt;code&gt;<see ref="java.util.Collection">Collection</see>&lt;/code&gt; of Entities
+</description>
+</parameter>
+<parameter name="options">
+<type class="javax.baja.entityIo.json.JsonEntityEncoder$Options"/>
+<description>
+encoding options such as whether to encode each entity&#x27;s tags and/or relations
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a String containing the JSON encoded value
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.close() -->
+<method name="close"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Close the output stream and relinquish any underlying resources.&#xa; This will flush the stream, then reset the internal buffer.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encode(javax.baja.tag.Entity, java.lang.String) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode an &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; to the output stream.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; to be encoded.
+</description>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the name of the &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; being encoded
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if an I/O error occurs.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeEntity(javax.baja.tag.Entity) -->
+<method name="encodeEntity"  public="true">
+<description>
+Encode an &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;.
+</description>
+<parameter name="e">
+<type class="javax.baja.tag.Entity"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; to be encoded
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeTags(javax.baja.tag.Tags) -->
+<method name="encodeTags"  public="true">
+<description>
+Encode the &lt;code&gt;<see ref="javax.baja.tag.Tags">Tags</see>&lt;/code&gt; of an &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;.
+</description>
+<tag name="@see">#encodeTags(JSONWriter, Tags)</tag>
+<parameter name="tags">
+<type class="javax.baja.tag.Tags"/>
+<description>
+The tags to be encoded (must not be null).
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeTags(com.tridium.json.JSONWriter, javax.baja.tag.Tags) -->
+<method name="encodeTags"  public="true" static="true">
+<description>
+Encode the &lt;code&gt;<see ref="javax.baja.tag.Tags">Tags</see>&lt;/code&gt; using the specified JSONWriter.
+</description>
+<tag name="@see">#encodeTags(Tags)</tag>
+<parameter name="jout">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+The JSONWriter to write out too.
+</description>
+</parameter>
+<parameter name="tags">
+<type class="javax.baja.tag.Tags"/>
+<description>
+The tags to be encoded (must not be null).
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeSingleTag(javax.baja.tag.Tag) -->
+<method name="encodeSingleTag"  public="true">
+<description>
+Encode a single-valued &lt;code&gt;<see ref="javax.baja.tag.Tag">Tag</see>&lt;/code&gt;.  This should NOT be&#xa; used for encoding multi-valued tags, as they are encoded together as a&#xa; JSON Array object.
+</description>
+<tag name="@see">#encodeSingleTag(JSONWriter, Tag)</tag>
+<parameter name="tag">
+<type class="javax.baja.tag.Tag"/>
+<description>
+the single tag.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeSingleTag(com.tridium.json.JSONWriter, javax.baja.tag.Tag) -->
+<method name="encodeSingleTag"  public="true" static="true">
+<description>
+Encodes a single-valued &lt;code&gt;<see ref="javax.baja.tag.Tag">Tag</see>&lt;/code&gt; using the specified&#xa; JSONWriter.  This should NOT be used for encoding multi-valued tags,&#xa; as they are encoded together as a JSON Array object.
+</description>
+<tag name="@see">#encodeSingleTag(Tag)</tag>
+<parameter name="jout">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+The JSONWriter to write out too.
+</description>
+</parameter>
+<parameter name="tag">
+<type class="javax.baja.tag.Tag"/>
+<description>
+the single tag.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeRelations(javax.baja.tag.Relations) -->
+<method name="encodeRelations"  public="true">
+<description>
+Encode the &lt;code&gt;<see ref="javax.baja.tag.Relations">Relations</see>&lt;/code&gt; of an &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;.
+</description>
+<parameter name="relations">
+<type class="javax.baja.tag.Relations"/>
+<description>
+the Relations (must not be null).
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeRelations(com.tridium.json.JSONWriter, javax.baja.tag.Relations) -->
+<method name="encodeRelations"  public="true" static="true">
+<description>
+Encode the &lt;code&gt;<see ref="javax.baja.tag.Relations">Relations</see>&lt;/code&gt; of an &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;.
+</description>
+<parameter name="jout">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+The JSONWriter to write out too.
+</description>
+</parameter>
+<parameter name="relations">
+<type class="javax.baja.tag.Relations"/>
+<description>
+the Relations (must not be null).
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeRelation(javax.baja.tag.Relation) -->
+<method name="encodeRelation"  public="true">
+<description>
+Encode the &lt;code&gt;<see ref="javax.baja.tag.Relation">Relation</see>&lt;/code&gt;.&#xa; Note this encodes only Tags and the Entity&#x27;s Ord.  The full Entity is not encoded&#xa; to prevent cycles and/or recursion issues. (Possibly to be addressed/fixed later).
+</description>
+<parameter name="rel">
+<type class="javax.baja.tag.Relation"/>
+<description>
+the supplied &lt;code&gt;Relation&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.encodeRelation(com.tridium.json.JSONWriter, javax.baja.tag.Relation) -->
+<method name="encodeRelation"  public="true" static="true">
+<description>
+Encode the &lt;code&gt;<see ref="javax.baja.tag.Relation">Relation</see>&lt;/code&gt;.&#xa; Note this encodes only Tags and the Entity&#x27;s Ord.  The full Entity is not encoded&#xa; to prevent cycles and/or recursion issues. (Possibly to be addressed/fixed later).
+</description>
+<parameter name="jout">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+The JSONWriter to write out too.
+</description>
+</parameter>
+<parameter name="rel">
+<type class="javax.baja.tag.Relation"/>
+<description>
+the supplied &lt;code&gt;Relation&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.makeShouldEncodeTagsContext(javax.baja.sys.Context) -->
+<method name="makeShouldEncodeTagsContext"  public="true" static="true">
+<description>
+Convenience method to generate a Context instance that contains a special facet (named&#xa; &#x22;jsonEntityEncoderShouldEncodeTags&#x22;) to signify that an entity&#x27;s tags should be encoded when&#xa; handling queries over fox.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context that will be used as a base for generating the result. This parameter can&#xa;           be null.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context instance generated from the given base Context argument enhanced with one&#xa; additional special facet called &#x22;jsonEntityEncoderShouldEncodeTags&#x22; that has a boolean value of&#xa; true.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.makeShouldNotEncodeTagsContext(javax.baja.sys.Context) -->
+<method name="makeShouldNotEncodeTagsContext"  public="true" static="true">
+<description>
+Convenience method to generate a Context instance that contains a special facet (named&#xa; &#x22;jsonEntityEncoderShouldEncodeTags&#x22;) to signify that an entity&#x27;s tags should NOT be encoded&#xa; when handling queries over fox.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context that will be used as a base for generating the result. This parameter can&#xa;           be null.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context instance generated from the given base Context argument enhanced with one&#xa; additional special facet called &#x22;jsonEntityEncoderShouldEncodeTags&#x22; that has a boolean value of&#xa; false.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.shouldEncodeTags(javax.baja.sys.Context) -->
+<method name="shouldEncodeTags"  public="true" static="true">
+<description>
+Convenience method that checks the given Context for the presence of a special&#xa; &#x22;jsonEntityEncoderShouldEncodeTags&#x22; facet, and if found, returns its boolean value. This value&#xa; is used to signify whether an entity&#x27;s tags should be encoded when handling queries over fox.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the Context instance to check; can be null
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if cx is null, the &#x22;jsonEntityEncoderShouldEncodeTags&#x22; facet is missing, or has a&#xa; boolean true value. Otherwise false is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.makeShouldEncodeRelationsContext(javax.baja.sys.Context) -->
+<method name="makeShouldEncodeRelationsContext"  public="true" static="true">
+<description>
+Convenience method to generate a Context instance that contains a special facet (named&#xa; &#x22;jsonEntityEncoderShouldEncodeRelations&#x22;) to signify that an entity&#x27;s relations should be&#xa; encoded when handling queries over fox.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context that will be used as a base for generating the result. This parameter can&#xa;           be null.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context instance generated from the given base Context argument enhanced with one&#xa; additional special facet called &#x22;jsonEntityEncoderShouldEncodeRelations&#x22; that has a boolean&#xa; value of true.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.makeShouldNotEncodeRelationsContext(javax.baja.sys.Context) -->
+<method name="makeShouldNotEncodeRelationsContext"  public="true" static="true">
+<description>
+Convenience method to generate a Context instance that contains a special facet (named&#xa; &#x22;jsonEntityEncoderShouldEncodeRelations&#x22;) to signify that an entity&#x27;s relations should NOT be&#xa; encoded when handling queries over fox.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context that will be used as a base for generating the result. This parameter can&#xa;           be null.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context instance generated from the given base Context argument enhanced with one&#xa; additional special facet called &#x22;jsonEntityEncoderShouldEncodeRelations&#x22; that has a boolean&#xa; value of false.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.shouldEncodeRelations(javax.baja.sys.Context) -->
+<method name="shouldEncodeRelations"  public="true" static="true">
+<description>
+Convenience method that checks the given Context for the presence of a special&#xa; &#x22;jsonEntityEncoderShouldEncodeRelations&#x22; facet, and if found, returns its boolean value. This value&#xa; is used to signify whether an entity&#x27;s relations should be encoded when handling queries over fox.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the Context instance to check; can be null
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if cx is null, the &#x22;jsonEntityEncoderShouldEncodeRelations&#x22; facet is missing, or&#xa; has a boolean true value. Otherwise false is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.SHOULD_ENCODE_TAGS_KEY -->
+<field name="SHOULD_ENCODE_TAGS_KEY"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Facet key used to signify whether an entity&#x27;s tags should be encoded when handling queries over&#xa; fox.
+</description>
+</field>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.SHOULD_ENCODE_RELATIONS_KEY -->
+<field name="SHOULD_ENCODE_RELATIONS_KEY"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Facet key used to signify whether an entity&#x27;s relations should be encoded when handling queries&#xa; over fox.
+</description>
+</field>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.ENCODE_TAGS_AND_RELATIONS -->
+<field name="ENCODE_TAGS_AND_RELATIONS"  public="true" static="true" final="true">
+<type class="javax.baja.entityIo.json.JsonEntityEncoder$Options"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.entityIo.json.JsonEntityEncoder.Options">Options</see>&lt;/code&gt; to encode both &lt;code&gt;<see ref="javax.baja.tag.Entity#tags()">Entity#tags()</see>&lt;/code&gt; and&#xa; &lt;code&gt;<see ref="javax.baja.tag.Entity#relations()">Entity#relations()</see>&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+</field>
+
+<!-- javax.baja.entityIo.json.JsonEntityEncoder.NO_TAGS_OR_RELATIONS -->
+<field name="NO_TAGS_OR_RELATIONS"  public="true" static="true" final="true">
+<type class="javax.baja.entityIo.json.JsonEntityEncoder$Options"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.entityIo.json.JsonEntityEncoder.Options">Options</see>&lt;/code&gt; to encode neither &lt;code&gt;<see ref="javax.baja.tag.Entity#tags()">Entity#tags()</see>&lt;/code&gt; nor&#xa; &lt;code&gt;<see ref="javax.baja.tag.Entity#relations()">Entity#relations()</see>&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+</field>
+
+</class>
+</bajadoc>

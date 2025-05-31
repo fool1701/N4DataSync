@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ccn" runtimeProfile="rt" qualifiedName="com.tridium.ccn.util.Queue" name="Queue" packageName="com.tridium.ccn.util" public="true">
+<description>
+Reads from the Queue block until a Object is available. The behavior of&#xa; writes when the Queue is full will eventually be configurable, but for now,&#xa; it blocks.
+</description>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.ccn.util.Queue(java.lang.String, int) -->
+<constructor name="Queue" public="true">
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="queueSize">
+<type class="int"/>
+<description>
+the size of the Queue
+</description>
+</parameter>
+<description>
+Create an Queue with the specified size.
+</description>
+</constructor>
+
+<!-- com.tridium.ccn.util.Queue.getName() -->
+<method name="getName"  public="true">
+<description>
+Get name of this queue.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.dequeue() -->
+<method name="dequeue"  public="true" synchronized="true">
+<description>
+Read an object from the Queue; this method blocks until a message is&#xa; available.
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+returns the oldest Object in the Queue
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.dequeue(long) -->
+<method name="dequeue"  public="true" synchronized="true">
+<description>
+Read an object from the Queue; this method blocks until a message is&#xa; available.
+</description>
+<parameter name="timeout">
+<type class="long"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+<description>
+returns the oldest Object in the Queue
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.dequeueInBulk(long) -->
+<method name="dequeueInBulk"  public="true" synchronized="true">
+<description>
+If the queue is not empty, then this method returns everything on the&#xa; queue, or blocks until one element is enqueued, and just returns that&#xa; array.
+</description>
+<parameter name="timeout">
+<type class="long"/>
+</parameter>
+<return>
+<type class="java.lang.Object" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.dequeueInBulk() -->
+<method name="dequeueInBulk"  public="true" synchronized="true">
+<description>
+If the queue is not empty, then this method returns everything on the&#xa; queue, or blocks until one element is enqueued, and just returns that&#xa; array.
+</description>
+<return>
+<type class="java.lang.Object" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.size() -->
+<method name="size"  public="true" synchronized="true">
+<description>
+Get the number of elements in the queue.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.enqueue(java.lang.Object, boolean) -->
+<method name="enqueue"  public="true" synchronized="true">
+<description>
+Adds an Object to to the Queue.
+</description>
+<parameter name="object">
+<type class="java.lang.Object"/>
+<description>
+the incoming event to be handled
+</description>
+</parameter>
+<parameter name="block">
+<type class="boolean"/>
+<description>
+If block is false and the queue is full, then throw a&#xa;            TException with the error code set to E_QUEUE_FULL. Otherwise&#xa;            block until you can enqueue the given element.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.enqueue(java.lang.Object) -->
+<method name="enqueue"  public="true">
+<description>
+Convenience method on enqueue which sets block to false - this method&#xa; will throw an exception if the queue if full.
+</description>
+<parameter name="object">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.isFull() -->
+<method name="isFull"  public="true" synchronized="true">
+<description>
+Is the Queue full?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.util.Queue.isEmpty() -->
+<method name="isEmpty"  public="true" synchronized="true">
+<description>
+Is the Queue empty
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

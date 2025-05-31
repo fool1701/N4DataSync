@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="email" runtimeProfile="rt" qualifiedName="javax.baja.email.BEmailAccount" name="BEmailAccount" packageName="javax.baja.email" public="true" abstract="true">
+<description>
+BEmailAccount represents an email account that&#xa; communicates periodically with a host email server.&#xa; A BEmailAccount instance should always be a child of a&#xa; BEmailService.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@version">$Revision: 11$ $Date: 9/11/09 1:28:28 PM EDT$</tag>
+<tag name="@creation">6 Jan 03</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<property name="hostname" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;hostname&lt;/code&gt; property.&#xa; The hostname of the email server that&#xa; we will connect to
+</description>
+<tag name="@see">#getHostname</tag>
+<tag name="@see">#setHostname</tag>
+</property>
+
+<property name="port" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;port&lt;/code&gt; property.&#xa; The port to connect to.  -1 means&#xa; the default port.
+</description>
+<tag name="@see">#getPort</tag>
+<tag name="@see">#setPort</tag>
+</property>
+
+<property name="emailAuthenticator" flags="h">
+<type class="javax.baja.email.BEmailAuthenticatorTypeConfig"/>
+<description>
+Slot for the &lt;code&gt;emailAuthenticator&lt;/code&gt; property.&#xa; The client authenticator property for this email account. This determines the type of authentication&#xa; that will be used (e.g. basic, oauth, no auth).
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getEmailAuthenticator</tag>
+<tag name="@see">#setEmailAuthenticator</tag>
+</property>
+
+<property name="account" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;account&lt;/code&gt; property.&#xa; The name of the account on the host.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the account property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#getAccount</tag>
+<tag name="@see">#setAccount</tag>
+</property>
+
+<property name="password" flags="">
+<type class="javax.baja.security.BPassword"/>
+<description>
+Slot for the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password for the account.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the password property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#getPassword</tag>
+<tag name="@see">#setPassword</tag>
+</property>
+
+<property name="pollrate" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;pollrate&lt;/code&gt; property.&#xa; The frequency with which&#xa; to poll the host
+</description>
+<tag name="@see">#getPollrate</tag>
+<tag name="@see">#setPollrate</tag>
+</property>
+
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Is the account currently in service
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="status" flags="rt">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="lastPollSuccess" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastPollSuccess&lt;/code&gt; property.&#xa; The last time a poll was successful.
+</description>
+<tag name="@see">#getLastPollSuccess</tag>
+<tag name="@see">#setLastPollSuccess</tag>
+</property>
+
+<property name="lastPollFailure" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastPollFailure&lt;/code&gt; property.&#xa; The last time a poll failed.
+</description>
+<tag name="@see">#getLastPollFailure</tag>
+<tag name="@see">#setLastPollFailure</tag>
+</property>
+
+<property name="lastPollFailureCause" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lastPollFailureCause&lt;/code&gt; property.&#xa; The reason that the last poll failed.
+</description>
+<tag name="@see">#getLastPollFailureCause</tag>
+<tag name="@see">#setLastPollFailureCause</tag>
+</property>
+
+<property name="debug" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;debug&lt;/code&gt; property.&#xa; The java.mail debug to System.out during BEmailAccount.poll
+</description>
+<tag name="@see">#getDebug</tag>
+<tag name="@see">#setDebug</tag>
+</property>
+
+<property name="useSsl" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useSsl&lt;/code&gt; property.&#xa; Secure Socket Layer for communication with host email server.
+</description>
+<tag name="@see">#getUseSsl</tag>
+<tag name="@see">#setUseSsl</tag>
+</property>
+
+<property name="useStartTls" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useStartTls&lt;/code&gt; property.&#xa; Enable STARTTLS for emails servers that don&#x27;t support regular SSL/TLS
+</description>
+<tag name="@see">#getUseStartTls</tag>
+<tag name="@see">#setUseStartTls</tag>
+</property>
+
+<property name="tlsMinProtocol" flags="">
+<type class="javax.baja.security.crypto.BSslTlsEnum"/>
+<description>
+Slot for the &lt;code&gt;tlsMinProtocol&lt;/code&gt; property.&#xa; The minimum TLS protocol version supported for this account
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getTlsMinProtocol</tag>
+<tag name="@see">#setTlsMinProtocol</tag>
+</property>
+
+<!-- javax.baja.email.BEmailAccount() -->
+<constructor name="BEmailAccount" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.email.BEmailAccount.getHostname() -->
+<method name="getHostname"  public="true">
+<description>
+Get the &lt;code&gt;hostname&lt;/code&gt; property.&#xa; The hostname of the email server that&#xa; we will connect to
+</description>
+<tag name="@see">#hostname</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setHostname(java.lang.String) -->
+<method name="setHostname"  public="true">
+<description>
+Set the &lt;code&gt;hostname&lt;/code&gt; property.&#xa; The hostname of the email server that&#xa; we will connect to
+</description>
+<tag name="@see">#hostname</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getPort() -->
+<method name="getPort"  public="true">
+<description>
+Get the &lt;code&gt;port&lt;/code&gt; property.&#xa; The port to connect to.  -1 means&#xa; the default port.
+</description>
+<tag name="@see">#port</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setPort(int) -->
+<method name="setPort"  public="true">
+<description>
+Set the &lt;code&gt;port&lt;/code&gt; property.&#xa; The port to connect to.  -1 means&#xa; the default port.
+</description>
+<tag name="@see">#port</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getEmailAuthenticator() -->
+<method name="getEmailAuthenticator"  public="true">
+<description>
+Get the &lt;code&gt;emailAuthenticator&lt;/code&gt; property.&#xa; The client authenticator property for this email account. This determines the type of authentication&#xa; that will be used (e.g. basic, oauth, no auth).
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#emailAuthenticator</tag>
+<return>
+<type class="javax.baja.email.BEmailAuthenticatorTypeConfig"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setEmailAuthenticator(javax.baja.email.BEmailAuthenticatorTypeConfig) -->
+<method name="setEmailAuthenticator"  public="true">
+<description>
+Set the &lt;code&gt;emailAuthenticator&lt;/code&gt; property.&#xa; The client authenticator property for this email account. This determines the type of authentication&#xa; that will be used (e.g. basic, oauth, no auth).
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#emailAuthenticator</tag>
+<parameter name="v">
+<type class="javax.baja.email.BEmailAuthenticatorTypeConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getAccount() -->
+<method name="getAccount"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Get the &lt;code&gt;account&lt;/code&gt; property.&#xa; The name of the account on the host.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the account property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#account</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setAccount(java.lang.String) -->
+<method name="setAccount"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Set the &lt;code&gt;account&lt;/code&gt; property.&#xa; The name of the account on the host.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the account property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#account</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getPassword() -->
+<method name="getPassword"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Get the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password for the account.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the password property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#password</tag>
+<return>
+<type class="javax.baja.security.BPassword"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setPassword(javax.baja.security.BPassword) -->
+<method name="setPassword"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Set the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password for the account.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the password property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#password</tag>
+<parameter name="v">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getPollrate() -->
+<method name="getPollrate"  public="true">
+<description>
+Get the &lt;code&gt;pollrate&lt;/code&gt; property.&#xa; The frequency with which&#xa; to poll the host
+</description>
+<tag name="@see">#pollrate</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setPollrate(javax.baja.sys.BRelTime) -->
+<method name="setPollrate"  public="true">
+<description>
+Set the &lt;code&gt;pollrate&lt;/code&gt; property.&#xa; The frequency with which&#xa; to poll the host
+</description>
+<tag name="@see">#pollrate</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Is the account currently in service
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Is the account currently in service
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getLastPollSuccess() -->
+<method name="getLastPollSuccess"  public="true">
+<description>
+Get the &lt;code&gt;lastPollSuccess&lt;/code&gt; property.&#xa; The last time a poll was successful.
+</description>
+<tag name="@see">#lastPollSuccess</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setLastPollSuccess(javax.baja.sys.BAbsTime) -->
+<method name="setLastPollSuccess"  public="true">
+<description>
+Set the &lt;code&gt;lastPollSuccess&lt;/code&gt; property.&#xa; The last time a poll was successful.
+</description>
+<tag name="@see">#lastPollSuccess</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getLastPollFailure() -->
+<method name="getLastPollFailure"  public="true">
+<description>
+Get the &lt;code&gt;lastPollFailure&lt;/code&gt; property.&#xa; The last time a poll failed.
+</description>
+<tag name="@see">#lastPollFailure</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setLastPollFailure(javax.baja.sys.BAbsTime) -->
+<method name="setLastPollFailure"  public="true">
+<description>
+Set the &lt;code&gt;lastPollFailure&lt;/code&gt; property.&#xa; The last time a poll failed.
+</description>
+<tag name="@see">#lastPollFailure</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getLastPollFailureCause() -->
+<method name="getLastPollFailureCause"  public="true">
+<description>
+Get the &lt;code&gt;lastPollFailureCause&lt;/code&gt; property.&#xa; The reason that the last poll failed.
+</description>
+<tag name="@see">#lastPollFailureCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setLastPollFailureCause(java.lang.String) -->
+<method name="setLastPollFailureCause"  public="true">
+<description>
+Set the &lt;code&gt;lastPollFailureCause&lt;/code&gt; property.&#xa; The reason that the last poll failed.
+</description>
+<tag name="@see">#lastPollFailureCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getDebug() -->
+<method name="getDebug"  public="true">
+<description>
+Get the &lt;code&gt;debug&lt;/code&gt; property.&#xa; The java.mail debug to System.out during BEmailAccount.poll
+</description>
+<tag name="@see">#debug</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setDebug(boolean) -->
+<method name="setDebug"  public="true">
+<description>
+Set the &lt;code&gt;debug&lt;/code&gt; property.&#xa; The java.mail debug to System.out during BEmailAccount.poll
+</description>
+<tag name="@see">#debug</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getUseSsl() -->
+<method name="getUseSsl"  public="true">
+<description>
+Get the &lt;code&gt;useSsl&lt;/code&gt; property.&#xa; Secure Socket Layer for communication with host email server.
+</description>
+<tag name="@see">#useSsl</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setUseSsl(boolean) -->
+<method name="setUseSsl"  public="true">
+<description>
+Set the &lt;code&gt;useSsl&lt;/code&gt; property.&#xa; Secure Socket Layer for communication with host email server.
+</description>
+<tag name="@see">#useSsl</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getUseStartTls() -->
+<method name="getUseStartTls"  public="true">
+<description>
+Get the &lt;code&gt;useStartTls&lt;/code&gt; property.&#xa; Enable STARTTLS for emails servers that don&#x27;t support regular SSL/TLS
+</description>
+<tag name="@see">#useStartTls</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setUseStartTls(boolean) -->
+<method name="setUseStartTls"  public="true">
+<description>
+Set the &lt;code&gt;useStartTls&lt;/code&gt; property.&#xa; Enable STARTTLS for emails servers that don&#x27;t support regular SSL/TLS
+</description>
+<tag name="@see">#useStartTls</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getTlsMinProtocol() -->
+<method name="getTlsMinProtocol"  public="true">
+<description>
+Get the &lt;code&gt;tlsMinProtocol&lt;/code&gt; property.&#xa; The minimum TLS protocol version supported for this account
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#tlsMinProtocol</tag>
+<return>
+<type class="javax.baja.security.crypto.BSslTlsEnum"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.setTlsMinProtocol(javax.baja.security.crypto.BSslTlsEnum) -->
+<method name="setTlsMinProtocol"  public="true">
+<description>
+Set the &lt;code&gt;tlsMinProtocol&lt;/code&gt; property.&#xa; The minimum TLS protocol version supported for this account
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#tlsMinProtocol</tag>
+<parameter name="v">
+<type class="javax.baja.security.crypto.BSslTlsEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getService() -->
+<method name="getService"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.email.BEmailService"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.addSslProvider() -->
+<method name="addSslProvider"  protected="true">
+<description>
+Ensure that the Ssl Provider is added.&#xa; SSL requires a CryptoService that is properly licensed.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.getTargetEmailAuthenticatorType() -->
+<method name="getTargetEmailAuthenticatorType"  public="true">
+<description>
+Gets the Type of the email authenticator that is available to this email account.&#xa; &lt;p&gt;&#xa; This method can be overridden if a concrete implementation can only accept a particular subclass&#xa; of BEmailClientAuthenticator as its emailAuthenticator.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+The Type of emailAuthenticator that this email account supports. Returns&#xa; BEmailClientAuthenticator.TYPE by default.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.isOperational() -->
+<method name="isOperational"  public="true">
+<description>
+Return if the account is both enabled and not in fault.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.updateStatus() -->
+<method name="updateStatus"  public="true">
+<description>
+Update status is called to recompute the status property.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.enabled() -->
+<method name="enabled"  protected="true">
+<description>
+This method is called when moving from disabled&#xa; state into the enabled state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.disabled() -->
+<method name="disabled"  protected="true">
+<description>
+This method is called when moving from enabled&#xa; state into the disabled state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.poll() -->
+<method name="poll"  public="true" abstract="true">
+<description>
+poll the host
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.email.BEmailAccount.hostname -->
+<field name="hostname"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;hostname&lt;/code&gt; property.&#xa; The hostname of the email server that&#xa; we will connect to
+</description>
+<tag name="@see">#getHostname</tag>
+<tag name="@see">#setHostname</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.port -->
+<field name="port"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;port&lt;/code&gt; property.&#xa; The port to connect to.  -1 means&#xa; the default port.
+</description>
+<tag name="@see">#getPort</tag>
+<tag name="@see">#setPort</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.emailAuthenticator -->
+<field name="emailAuthenticator"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;emailAuthenticator&lt;/code&gt; property.&#xa; The client authenticator property for this email account. This determines the type of authentication&#xa; that will be used (e.g. basic, oauth, no auth).
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getEmailAuthenticator</tag>
+<tag name="@see">#setEmailAuthenticator</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.account -->
+<field name="account"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Slot for the &lt;code&gt;account&lt;/code&gt; property.&#xa; The name of the account on the host.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the account property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#getAccount</tag>
+<tag name="@see">#setAccount</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.password -->
+<field name="password"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Slot for the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password for the account.
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. Instead, use the password property on &lt;code&gt;<see ref="com.tridium.email.BBasicEmailClientAuthenticator">BBasicEmailClientAuthenticator</see>&lt;/code&gt;.</tag>
+<tag name="@see">#getPassword</tag>
+<tag name="@see">#setPassword</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.pollrate -->
+<field name="pollrate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pollrate&lt;/code&gt; property.&#xa; The frequency with which&#xa; to poll the host
+</description>
+<tag name="@see">#getPollrate</tag>
+<tag name="@see">#setPollrate</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Is the account currently in service
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.lastPollSuccess -->
+<field name="lastPollSuccess"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastPollSuccess&lt;/code&gt; property.&#xa; The last time a poll was successful.
+</description>
+<tag name="@see">#getLastPollSuccess</tag>
+<tag name="@see">#setLastPollSuccess</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.lastPollFailure -->
+<field name="lastPollFailure"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastPollFailure&lt;/code&gt; property.&#xa; The last time a poll failed.
+</description>
+<tag name="@see">#getLastPollFailure</tag>
+<tag name="@see">#setLastPollFailure</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.lastPollFailureCause -->
+<field name="lastPollFailureCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastPollFailureCause&lt;/code&gt; property.&#xa; The reason that the last poll failed.
+</description>
+<tag name="@see">#getLastPollFailureCause</tag>
+<tag name="@see">#setLastPollFailureCause</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.debug -->
+<field name="debug"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;debug&lt;/code&gt; property.&#xa; The java.mail debug to System.out during BEmailAccount.poll
+</description>
+<tag name="@see">#getDebug</tag>
+<tag name="@see">#setDebug</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.useSsl -->
+<field name="useSsl"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;useSsl&lt;/code&gt; property.&#xa; Secure Socket Layer for communication with host email server.
+</description>
+<tag name="@see">#getUseSsl</tag>
+<tag name="@see">#setUseSsl</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.useStartTls -->
+<field name="useStartTls"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;useStartTls&lt;/code&gt; property.&#xa; Enable STARTTLS for emails servers that don&#x27;t support regular SSL/TLS
+</description>
+<tag name="@see">#getUseStartTls</tag>
+<tag name="@see">#setUseStartTls</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.tlsMinProtocol -->
+<field name="tlsMinProtocol"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;tlsMinProtocol&lt;/code&gt; property.&#xa; The minimum TLS protocol version supported for this account
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getTlsMinProtocol</tag>
+<tag name="@see">#setTlsMinProtocol</tag>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.email.BEmailAccount.mailPlatformHandler -->
+<field name="mailPlatformHandler"  protected="true">
+<type class="com.tridium.email.MailPlatformHandler"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

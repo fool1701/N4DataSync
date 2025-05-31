@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.BHistoryId" name="BHistoryId" packageName="javax.baja.history" public="true" final="true">
+<description>
+BHistoryId is a unique identifier for a history within an&#xa; entire system.  Is is composed of two parts, the source&#xa; device name and the history name.  A device name must&#xa; be unique within a system and a history name must be&#xa; unique within a device so together that form a unique&#xa; identifier. The history name is limited to 200 characters.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">06 Mar 2003</tag>
+<tag name="@version">$Revision: 15$ $Date: 8/18/09 4:28:34 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.history.BHistoryId.make(java.lang.String, java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Create an id with the specified station name and history name.
+</description>
+<parameter name="deviceName">
+<type class="java.lang.String"/>
+<description>
+The name of the station where the&#xa;   history data is collected.
+</description>
+</parameter>
+<parameter name="historyName">
+<type class="java.lang.String"/>
+<description>
+The name of the history.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryId"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Parse the specified id string into an id instance.
+</description>
+<parameter name="idText">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryId"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.getDeviceName() -->
+<method name="getDeviceName"  public="true">
+<description>
+Get the station name.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.getHistoryName() -->
+<method name="getHistoryName"  public="true">
+<description>
+Get the history name.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.getHistoryDisplayName() -->
+<method name="getHistoryDisplayName"  public="true">
+<description>
+Get the unescaped history name.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.isShorthand() -->
+<method name="isShorthand"  public="true">
+<description>
+Test whether this history id has shorthand for the&#xa; device name.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the device name is ^ false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.toShorthand(java.lang.String) -->
+<method name="toShorthand"  public="true">
+<description>
+Create a shorthand id based on this full id.&#xa; The result id will have the shorthand character, ^,&#xa; replacing the device name specified if this id&#xa; currently contains a matching device name.
+</description>
+<parameter name="deviceName">
+<type class="java.lang.String"/>
+<description>
+The name of the device to be substituted&#xa;   by the shorthand character.  If this id&#xa;   uses this name, then the ^ shorthand character&#xa;   will be substituted for the device name in the resulting id.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryId"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.fromShorthand(java.lang.String) -->
+<method name="fromShorthand"  public="true">
+<description>
+Create a full id based on this id, which could contain one of&#xa; the shorthand characters, ^ or @, for the device name.  The result&#xa; id will have the shorthand character replaced with the&#xa; device name provided.
+</description>
+<parameter name="deviceName">
+<type class="java.lang.String"/>
+<description>
+The name of the device to substitute for the&#xa;   shorthand character, if it exists.  If this id&#xa;   contains the ^ or @ shorthand characters for the device name, this&#xa;   name will be substituted in the resulting id.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryId"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.validateName() -->
+<method name="validateName"  public="true">
+<description>
+Is the history name valid?  This method does not&#xa; check for uniqueness.  If invalid, a HistoryNameException&#xa; is thrown.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.validateName(java.lang.String) -->
+<method name="validateName"  public="true" static="true">
+<description>
+Is the specified history name valid?  This method does not&#xa; check for uniqueness.  If invalid, a HistoryNameException&#xa; is thrown.
+</description>
+<parameter name="test">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.isValidName(java.lang.String) -->
+<method name="isValidName"  public="true" static="true">
+<description>
+Is the specified history name valid?  This method does not check for&#xa; uniqueness.
+</description>
+<parameter name="test">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+Get the hash code of the id.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description/>
+<parameter name="o">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode the id to the specified output.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryId.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode the id from the specified input.
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryId.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode the id to string.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode an id from the specified string.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.isNull() -->
+<method name="isNull"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is this a null instance of BHistoryId.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.isValid() -->
+<method name="isValid"  public="true">
+<description>
+Is this id valid for an active history?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.getHistoryIdFromPoint(javax.baja.control.BControlPoint) -->
+<method name="getHistoryIdFromPoint"  public="true" static="true">
+<description>
+Returns an Optional containing the HistoryId retrieved on the&#xa; first enabled HistoryExt found under the given point, if one exists.&#xa; If no enabled HistoryExts are found, the fallback will be to return the&#xa; first disabled HistoryExt found. In either case, if the HistoryId is in&#xa; shorthand form, and it can&#x27;t be converted to long form, an empty Optional&#xa; will be returned. Also if no HistoryExt is found, an empty Optional is returned.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="point">
+<type class="javax.baja.control.BControlPoint"/>
+<description>
+- The ControlPoint instance to check for the existence of&#xa;              a HistoryExt child and return its HistoryId
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.history.BHistoryId"/>
+</args>
+</parameterizedType>
+<description>
+an Optional containing the BHistoryId, or empty if one is not found
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryId.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.history.BHistoryId"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.BHistoryId.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.history.BHistoryId"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.BHistoryId.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.BHistoryId.MAX_NAME_LENGTH -->
+<field name="MAX_NAME_LENGTH"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+History Name MAX_NAME_LENGTH is increased to 200 from 44 in Niagara 4.12.&#xa; The previous value for MAX_NAME_LENGTH (44) is now captured in LEGACY_HISTORY_NAME_MAX_LIMIT
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryId.LEGACY_HISTORY_NAME_MAX_LIMIT -->
+<field name="LEGACY_HISTORY_NAME_MAX_LIMIT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.BDdfPointDeviceExt" name="BDdfPointDeviceExt" packageName="com.tridium.ddf" public="true" abstract="true">
+<description>
+The Ddf Point Device Ext makes use of the ddf driver&#xa; framework to automatically provide a fully-functional&#xa; default behavior.
+</description>
+<extends>
+<type class="javax.baja.driver.point.BPointDeviceExt"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.comm.BIDdfCommunicating"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.discover.BIDdfDiscoveryHost"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<property name="discoveryPreferences" flags="">
+<type class="com.tridium.ddf.discover.BDdfDiscoveryPreferences"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BDdfAutoDiscoveryPreferences.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</property>
+
+<action name="submitDiscoveryJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a ddf auto discovery job and returns a BOrd to the job that is kicked off&#xa; And managed by the Niagara Ax Job Service.
+</description>
+<tag name="@see">#submitDiscoveryJob(BDdfAutoDiscoveryPreferences parameter)</tag>
+</action>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt() -->
+<constructor name="BDdfPointDeviceExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.getDiscoveryPreferences() -->
+<method name="getDiscoveryPreferences"  public="true">
+<description>
+Get the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BDdfAutoDiscoveryPreferences.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<return>
+<type class="com.tridium.ddf.discover.BDdfDiscoveryPreferences"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.setDiscoveryPreferences(com.tridium.ddf.discover.BDdfDiscoveryPreferences) -->
+<method name="setDiscoveryPreferences"  public="true">
+<description>
+Set the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BDdfAutoDiscoveryPreferences.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.discover.BDdfDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.submitDiscoveryJob(com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences) -->
+<method name="submitDiscoveryJob"  public="true">
+<description>
+Invoke the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a ddf auto discovery job and returns a BOrd to the job that is kicked off&#xa; And managed by the Niagara Ax Job Service.
+</description>
+<tag name="@see">#submitDiscoveryJob</tag>
+<parameter name="parameter">
+<type class="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.getActionParameterDefault(javax.baja.sys.Action) -->
+<method name="getActionParameterDefault"  public="true">
+<description>
+Uses the value of property deviceDiscoveryParams as the default parameter&#xa; for the submitDeviceDiscoveryJob action.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description>
+Gets the agent list.  Adds BDdfPointManager as &#x22;Your Driver Point Manager&#x22; if one&#xa; not already registered.
+</description>
+<tag name="@see">DdfAgentInfo.getAgentsHelp</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true">
+<description>
+This returns the communicator for this object&#x27;s Nav ancestor&#xa; device.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+<description>
+((BDdfDevice)getDevice()).getDdfCommunicator()
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.isDisabled() -->
+<method name="isDisabled"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+getDevice().isDisabled()
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.isFault() -->
+<method name="isFault"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+getDevice().isFault()
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.doSubmitDiscoveryJob(com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences) -->
+<method name="doSubmitDiscoveryJob"  public="true">
+<description>
+Implements the &#x27;submitDiscoveryJob&#x27; action on the station-side.&#xa; &#xa; This submits a BDdfAutoDiscoveryJob for the given BDdfAutoDiscoveryPreferences&#xa; to the Job Service.
+</description>
+<parameter name="preferences">
+<type class="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+a BOrd to the BDdfAutoDiscoveryJob that is running in the&#xa; background and is connected to the Job Service.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.discoveryPreferences -->
+<field name="discoveryPreferences"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BDdfAutoDiscoveryPreferences.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</field>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.submitDiscoveryJob -->
+<field name="submitDiscoveryJob"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a ddf auto discovery job and returns a BOrd to the job that is kicked off&#xa; And managed by the Niagara Ax Job Service.
+</description>
+<tag name="@see">#submitDiscoveryJob(BDdfAutoDiscoveryPreferences parameter)</tag>
+</field>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddf.BDdfPointDeviceExt.DEV_DEVICE_EXT_DISCOVER_ACTION -->
+<field name="DEV_DEVICE_EXT_DISCOVER_ACTION"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description>
+The &#x27;ddoSubmitDiscoveryJob&#x27; method uses this context when it submits the BDdfAutoDiscoveryJob.
+</description>
+</field>
+
+</class>
+</bajadoc>

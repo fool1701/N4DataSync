@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="rt" qualifiedName="com.tridium.nvideo.BVideoNetwork" name="BVideoNetwork" packageName="com.tridium.nvideo" public="true" abstract="true">
+<description>
+BVideoNetwork is the base container for BVideoDevices.
+</description>
+<tag name="@author">JJ Frankovich on 15 Aug 06</tag>
+<tag name="@author">Robert A Adams on 27 Oct 2011</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="com.tridium.ndriver.BNNetwork"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.BIVideoNetwork"/>
+</implements>
+<property name="foxVideoStreamPreferred" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; This is global setting for whether or not a Fox video stream is preferred. It applies to all DVR&#x27;s whose fox stream preferred setting is set to inherit.
+</description>
+<tag name="@see">#getFoxVideoStreamPreferred</tag>
+<tag name="@see">#setFoxVideoStreamPreferred</tag>
+</property>
+
+<!-- com.tridium.nvideo.BVideoNetwork() -->
+<constructor name="BVideoNetwork" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.nvideo.BVideoNetwork.getFoxVideoStreamPreferred() -->
+<method name="getFoxVideoStreamPreferred"  public="true">
+<description>
+Get the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; This is global setting for whether or not a Fox video stream is preferred. It applies to all DVR&#x27;s whose fox stream preferred setting is set to inherit.
+</description>
+<tag name="@see">#foxVideoStreamPreferred</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.setFoxVideoStreamPreferred(boolean) -->
+<method name="setFoxVideoStreamPreferred"  public="true">
+<description>
+Set the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; This is global setting for whether or not a Fox video stream is preferred. It applies to all DVR&#x27;s whose fox stream preferred setting is set to inherit.
+</description>
+<tag name="@see">#foxVideoStreamPreferred</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.getDeviceFolderType() -->
+<method name="getDeviceFolderType"  public="true">
+<description>
+Subclasses may override to supply &lt;code&gt;Type&lt;/code&gt; of&#xa; device folder object if available.  This object type will be&#xa; used in the networks DeviceManager view New Folder invocation.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.getDeviceType() -->
+<method name="getDeviceType"  public="true">
+<description>
+Subclasses may override to supply &lt;code&gt;Type&lt;/code&gt; of&#xa; device in this network.  This object type will be&#xa; used in the networks DeviceManager view New invocation.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.postAsync(java.lang.Runnable) -->
+<method name="postAsync"  public="true">
+<description>
+This provides a reasonable default implementation of the &#x27;postAsync&#x27;&#xa; method, which is required by the ancestor class BLoadableNetwork.&#xa; &#xa; This places the the given Runnable on the background processor.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+<description>
+null always
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.started() -->
+<method name="started"  public="true" final="true">
+<description>
+Descendant classes are not allowed to override this method directly.&#xa; However, this method calls &lt;code&gt;<see ref="com.tridium.nvideo.BVideoNetwork#videoNetworkStarted()">#videoNetworkStarted()</see>&lt;/code&gt;, which may&#xa; be overridden.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.videoNetworkStarted() -->
+<method name="videoNetworkStarted"  public="true">
+<description>
+Override point for subclasses to add functionality to the started() method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.BVideoNetwork.foxVideoStreamPreferred -->
+<field name="foxVideoStreamPreferred"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;foxVideoStreamPreferred&lt;/code&gt; property.&#xa; This is global setting for whether or not a Fox video stream is preferred. It applies to all DVR&#x27;s whose fox stream preferred setting is set to inherit.
+</description>
+<tag name="@see">#getFoxVideoStreamPreferred</tag>
+<tag name="@see">#setFoxVideoStreamPreferred</tag>
+</field>
+
+<!-- com.tridium.nvideo.BVideoNetwork.ping -->
+<field name="ping"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;ping&lt;/code&gt; action.&#xa; Hides the &#x27;ping&#x27; action that is inherited from BDeviceNetwork.
+</description>
+<tag name="@see">#ping()</tag>
+</field>
+
+<!-- com.tridium.nvideo.BVideoNetwork.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

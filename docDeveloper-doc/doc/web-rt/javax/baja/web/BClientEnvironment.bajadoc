@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.BClientEnvironment" name="BClientEnvironment" packageName="javax.baja.web" public="true" abstract="true">
+<description>
+BClientEnvironment provides support for a web client environment.  A client environment&#xa; is selected by passing a web request (WebOp) to each available BClientEnvironment and&#xa; allowing the first matching environment to provide a web profile.&#xa; &lt;p&gt;&#xa; The available client environments are listed under the clientEnvs property of the&#xa; WebService.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">01 Apr 2012</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="status" flags="tr">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="faultCause" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<!-- javax.baja.web.BClientEnvironment() -->
+<constructor name="BClientEnvironment" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.web.BClientEnvironment.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.matchWebEnv(javax.baja.web.WebOp) -->
+<method name="matchWebEnv"  public="true" final="true">
+<description>
+Examines the specified web request and returns an appropriate IWebEnv&#xa; to handle the request.  If this environment is not a match&#xa; for the specified web request, null is returned.
+</description>
+<parameter name="webOp">
+<type class="javax.baja.web.WebOp"/>
+<description>
+The web request to match.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.web.IWebEnv"/>
+<description>
+If the web request matches this environment, an IWebEnv is returned.&#xa;   If the requesting environment does not match, or if the ClientEnvironment&#xa;   is disabled or in fault status, null is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.doMatchWebEnv(javax.baja.web.WebOp) -->
+<method name="doMatchWebEnv"  protected="true" abstract="true">
+<description>
+Examines the specified web request and returns an appropriate IWebEnv&#xa; to handle the request.  If this environment is not a match&#xa; for the specified web request, null is returned.
+</description>
+<parameter name="webOp">
+<type class="javax.baja.web.WebOp"/>
+<description>
+The web request to match.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.web.IWebEnv"/>
+<description>
+If the web request matches this environment, an IWebEnv is returned.&#xa;   If the requesting environment does not match, null is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.getWebEnv(javax.baja.web.WebOp) -->
+<method name="getWebEnv"  public="true" final="true">
+<description>
+Get the IWebEnv associated with this ClientEnvironment.  In some cases&#xa; the IWebEnv depends on information provided by the WebOp (ex. the user).
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.web.IWebEnv"/>
+<description>
+The associated IWebEnv or null if the ClientEnvironment&#xa;   is disabled.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.doGetWebEnv(javax.baja.web.WebOp) -->
+<method name="doGetWebEnv"  protected="true" abstract="true">
+<description>
+Get the IWebEnv associated with this ClientEnvironment.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.web.IWebEnv"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Handle a property change.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.updateStatus(javax.baja.status.BStatus, java.lang.String) -->
+<method name="updateStatus"  protected="true">
+<description>
+Callback allows subclasses to override status changes.  Subclasses&#xa; must call super.updateStatus().
+</description>
+<parameter name="newStatus">
+<type class="javax.baja.status.BStatus"/>
+<description>
+The new status bits to set for this environment.
+</description>
+</parameter>
+<parameter name="faultCause">
+<type class="java.lang.String"/>
+<description>
+The new fault cause.  If null, fault cause is&#xa;   not changed.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BClientEnvironment.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.web.BClientEnvironment.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.web.BClientEnvironment.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- javax.baja.web.BClientEnvironment.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.BLonComponent" name="BLonComponent" packageName="javax.baja.lonworks" public="true" abstract="true">
+<description>
+BLonComponent is the base component for lonworks device variable&#xa;   components with qualified data (BNetworkVariable, BNetworkConfig,&#xa;   ConfigParameter).  It provides support for converting&#xa;   LonDataElements from/to their byte representation.&#xa; &lt;p&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">8 Nov 00</tag>
+<tag name="@version">$Revision: 4$ $Date: 10/18/01 2:56:42 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</extends>
+<action name="forceRead" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;forceRead&lt;/code&gt; action.&#xa; Read data from physical device.
+</description>
+<tag name="@see">#forceRead()</tag>
+</action>
+
+<action name="forceWrite" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;forceWrite&lt;/code&gt; action.&#xa; Write data to physical device.
+</description>
+<tag name="@see">#forceWrite()</tag>
+</action>
+
+<action name="update" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;update&lt;/code&gt; action.&#xa; This action will update the data elements with BLonNetwork.lonNoWrite context.&#xa; It is used to push implementation to station where lonNoWrite context can be used.
+</description>
+<tag name="@see">#update(BLonData parameter)</tag>
+</action>
+
+<!-- javax.baja.lonworks.BLonComponent() -->
+<constructor name="BLonComponent" public="true">
+<description>
+No arg constructor
+</description>
+</constructor>
+
+<!-- javax.baja.lonworks.BLonComponent.forceRead() -->
+<method name="forceRead"  public="true">
+<description>
+Invoke the &lt;code&gt;forceRead&lt;/code&gt; action.&#xa; Read data from physical device.
+</description>
+<tag name="@see">#forceRead</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.forceWrite() -->
+<method name="forceWrite"  public="true">
+<description>
+Invoke the &lt;code&gt;forceWrite&lt;/code&gt; action.&#xa; Write data to physical device.
+</description>
+<tag name="@see">#forceWrite</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.update(javax.baja.lonworks.londata.BLonData) -->
+<method name="update"  public="true">
+<description>
+Invoke the &lt;code&gt;update&lt;/code&gt; action.&#xa; This action will update the data elements with BLonNetwork.lonNoWrite context.&#xa; It is used to push implementation to station where lonNoWrite context can be used.
+</description>
+<tag name="@see">#update</tag>
+<parameter name="parameter">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+Return true if parent is a BLoadableDevice or BLoadableObject.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.getDevice() -->
+<method name="getDevice"  public="true">
+<description/>
+<return>
+<type class="javax.baja.lonworks.BLonDevice"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.started() -->
+<method name="started"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.stopped() -->
+<method name="stopped"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.lonComponentStarted() -->
+<method name="lonComponentStarted"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.lonComponentStopped() -->
+<method name="lonComponentStopped"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isNavChild() -->
+<method name="isNavChild"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.getData() -->
+<method name="getData"  public="true">
+<description>
+The LonComponent will have a &#x22;data&#x22; property if data&#xa; required subclassing BLonData. If not data elements &#xa; are direct children and this object will be returned &#xa; cast as a BLonData.
+</description>
+<return>
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.setData(javax.baja.lonworks.londata.BLonData) -->
+<method name="setData"  public="true">
+<description>
+If the  argument is a subclass of BLonData then elements&#xa; will be copied to this object.  If an instance of BLonData&#xa; is passed then it will be set as &#x22;data&#x22; property on this&#xa; object. Existing data elements will be removed.
+</description>
+<parameter name="v">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.copyData() -->
+<method name="copyData"  public="true" final="true">
+<description>
+This is intended to return a copy of data which can then be&#xa;  modified without forcing any writes to the the device.  Once changes&#xa;  are complete user should call &lt;code&gt;updateData()&lt;/code&gt; to apply changes &#xa;  before writing data.
+</description>
+<return>
+<type class="javax.baja.lonworks.londata.BLonData"/>
+<description>
+Returns a copy of the BLonData component of this BLonComponent.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.updateData(javax.baja.lonworks.londata.BLonData, boolean) -->
+<method name="updateData"  public="true" final="true">
+<description>
+Copy the supplied data to this BLonComponent using the BLonNetwork.lonNoWrite context.&#xa;   This will allow all data elements to be set without causing multiple updates to the device.&#xa;   This is intended for use with the data returned from a call to &lt;code&gt;copyData()&lt;/code&gt;.&#xa;   &lt;p&gt;  This method may be called from the station or client side. &lt;p&gt;
+</description>
+<parameter name="data">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+<description>
+data to write to this BLonComponent - must be of the same type and have the same elements
+</description>
+</parameter>
+<parameter name="write">
+<type class="boolean"/>
+<description>
+if true then force a write to device after all data is set
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.doUpdate(javax.baja.lonworks.londata.BLonData) -->
+<method name="doUpdate"  public="true" final="true">
+<description>
+For Internal use. Implementation of hidden action
+</description>
+<parameter name="dat">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<description>
+Route async actions
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.postForceRead(javax.baja.sys.Context) -->
+<method name="postForceRead"  protected="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.postForceWrite(javax.baja.sys.Context) -->
+<method name="postForceWrite"  protected="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.doForceWrite() -->
+<method name="doForceWrite"  public="true" abstract="true">
+<description>
+Override point for BLonComponents to write their data to the device.&lt;p&gt;&#xa;  The write is performed on the calling thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.doForceRead() -->
+<method name="doForceRead"  public="true" abstract="true">
+<description>
+Override point for BLonComponents to read their data from the device.&lt;p&gt;&#xa;  The read is performed on the calling thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isForeignPersistent() -->
+<method name="isForeignPersistent"  public="true">
+<description>
+Does this component represent data stored persistently in the device.&#xa; This will normally be configuration data.&#xa; &lt;p&gt;
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Returns false - subclasses should override to return true if needed.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isWriteable() -->
+<method name="isWriteable"  public="true">
+<description>
+Does this component represent a writable value in device. Default returns true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.lonDevice() -->
+<method name="lonDevice"  public="true">
+<description>
+Return the BLonDevice which contains this Component.&#xa; &lt;p&gt;
+</description>
+<return>
+<type class="javax.baja.lonworks.BLonDevice"/>
+<description>
+Parent device.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.lonNetwork() -->
+<method name="lonNetwork"  public="true">
+<description>
+Return the BLonNetwork which contains this Component.&#xa; &lt;p&gt;
+</description>
+<return>
+<type class="javax.baja.lonworks.BLonNetwork"/>
+<description>
+Parent network.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isNetworkVariable() -->
+<method name="isNetworkVariable"  public="true">
+<description>
+Is this LonComponent a BNetworkVariable.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isNetworkConfig() -->
+<method name="isNetworkConfig"  public="true">
+<description>
+Is this LonComponent a BNetworkConfig.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isConfigParameter() -->
+<method name="isConfigParameter"  public="true">
+<description>
+Is this LonComponent a BConfigParameter.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isLocalNv() -->
+<method name="isLocalNv"  public="true">
+<description>
+Is this LonComponent a BLocalNetworkVariable
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.isLocalNci() -->
+<method name="isLocalNci"  public="true">
+<description>
+Is this LonComponent a BCLocalNetworkConfig
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.subscribed() -->
+<method name="subscribed"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.unsubscribed() -->
+<method name="unsubscribed"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.readSubscribed() -->
+<method name="readSubscribed"  public="true">
+<description>
+Receive point subscriptions. Increment subscribeCount.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.debugName() -->
+<method name="debugName"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.readUnsubscribed() -->
+<method name="readUnsubscribed"  public="true">
+<description>
+Receive point subscriptions. Decrement subscribeCount
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.lonComponentSubscribed() -->
+<method name="lonComponentSubscribed"  protected="true">
+<description>
+Callback to indicate LonComponent transition from 0 to 1 subscriber
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.lonComponentUnsubscribed() -->
+<method name="lonComponentUnsubscribed"  protected="true">
+<description>
+Callback to indicate LonComponent transition from 1 to 0 subscriber
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonComponent.forceRead -->
+<field name="forceRead"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;forceRead&lt;/code&gt; action.&#xa; Read data from physical device.
+</description>
+<tag name="@see">#forceRead()</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonComponent.forceWrite -->
+<field name="forceWrite"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;forceWrite&lt;/code&gt; action.&#xa; Write data to physical device.
+</description>
+<tag name="@see">#forceWrite()</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonComponent.update -->
+<field name="update"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;update&lt;/code&gt; action.&#xa; This action will update the data elements with BLonNetwork.lonNoWrite context.&#xa; It is used to push implementation to station where lonNoWrite context can be used.
+</description>
+<tag name="@see">#update(BLonData parameter)</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonComponent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.BLonComponent.subscribeCount -->
+<field name="subscribeCount"  protected="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.BLonComponent.illegalLength -->
+<field name="illegalLength"  public="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

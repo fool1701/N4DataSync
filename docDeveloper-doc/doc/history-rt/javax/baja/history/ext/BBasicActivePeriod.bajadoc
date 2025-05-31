@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.ext.BBasicActivePeriod" name="BBasicActivePeriod" packageName="javax.baja.history.ext" public="true" final="true">
+<description>
+BBasicActivePeriod defines the active period&#xa; by day of week and time of day.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">19 Nov 2004</tag>
+<tag name="@version">$Revision: 4$ $Date: 5/26/05 4:05:40 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.history.ext.BActivePeriod"/>
+</extends>
+<property name="daysOfWeek" flags="">
+<type class="javax.baja.util.BDaysOfWeekBits"/>
+<description>
+Slot for the &lt;code&gt;daysOfWeek&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDaysOfWeek</tag>
+<tag name="@see">#setDaysOfWeek</tag>
+</property>
+
+<property name="timeRange" flags="">
+<type class="javax.baja.util.BTimeRange"/>
+<description>
+Slot for the &lt;code&gt;timeRange&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeRange</tag>
+<tag name="@see">#setTimeRange</tag>
+</property>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod() -->
+<constructor name="BBasicActivePeriod" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod(javax.baja.util.BDaysOfWeekBits, javax.baja.util.BTimeRange) -->
+<constructor name="BBasicActivePeriod" public="true">
+<parameter name="daysOfWeek">
+<type class="javax.baja.util.BDaysOfWeekBits"/>
+<description>
+The days of week when the active state is true.
+</description>
+</parameter>
+<parameter name="timeRange">
+<type class="javax.baja.util.BTimeRange"/>
+<description>
+The time range defining the active period on the active days of week.
+</description>
+</parameter>
+<description>
+Make an active period defined by the specified days of week and time range.
+</description>
+</constructor>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.getDaysOfWeek() -->
+<method name="getDaysOfWeek"  public="true">
+<description>
+Get the &lt;code&gt;daysOfWeek&lt;/code&gt; property.
+</description>
+<tag name="@see">#daysOfWeek</tag>
+<return>
+<type class="javax.baja.util.BDaysOfWeekBits"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.setDaysOfWeek(javax.baja.util.BDaysOfWeekBits) -->
+<method name="setDaysOfWeek"  public="true">
+<description>
+Set the &lt;code&gt;daysOfWeek&lt;/code&gt; property.
+</description>
+<tag name="@see">#daysOfWeek</tag>
+<parameter name="v">
+<type class="javax.baja.util.BDaysOfWeekBits"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.getTimeRange() -->
+<method name="getTimeRange"  public="true">
+<description>
+Get the &lt;code&gt;timeRange&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeRange</tag>
+<return>
+<type class="javax.baja.util.BTimeRange"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.setTimeRange(javax.baja.util.BTimeRange) -->
+<method name="setTimeRange"  public="true">
+<description>
+Set the &lt;code&gt;timeRange&lt;/code&gt; property.
+</description>
+<tag name="@see">#timeRange</tag>
+<parameter name="v">
+<type class="javax.baja.util.BTimeRange"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.isAlwaysActive() -->
+<method name="isAlwaysActive"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Does the active period always return true for isActive() with its current configuration?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.isNeverActive() -->
+<method name="isNeverActive"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Does the active period always return false for isActive() with its current configuration?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.getActiveStart(javax.baja.sys.BAbsTime) -->
+<method name="getActiveStart"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the start time of the active period that includes the specified time.
+</description>
+<parameter name="time">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+A time that is included in the active period.  That is, isActive(time)&#xa;   return true.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Returns the start time of the period that includes the specified time.  If the&#xa;   specified time is not in an active period, null is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.getActiveEnd(javax.baja.sys.BAbsTime) -->
+<method name="getActiveEnd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the end time of the active period that includes the specified time.
+</description>
+<parameter name="time">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+A time that is included in the active period.  That is, isActive(time)&#xa;   return true.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Returns the end time of the period that includes the specified time.  If the&#xa;   specified time is not in an active period, null is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.getNextActive(javax.baja.sys.BAbsTime) -->
+<method name="getNextActive"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the next active time after the specified time.
+</description>
+<parameter name="time">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+This method will always return a value after the specified time.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Returns the first start time after the specified time or null&#xa;   if this period is always active.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.getNextInactive(javax.baja.sys.BAbsTime) -->
+<method name="getNextInactive"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="time">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.isActive(javax.baja.sys.BAbsTime) -->
+<method name="isActive"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true if the conditions for history collection to&#xa; be enabled are met, false otherwise.  Determination is based&#xa; on the given timestamp.
+</description>
+<parameter name="timestamp">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.daysOfWeek -->
+<field name="daysOfWeek"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;daysOfWeek&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDaysOfWeek</tag>
+<tag name="@see">#setDaysOfWeek</tag>
+</field>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.timeRange -->
+<field name="timeRange"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeRange&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeRange</tag>
+<tag name="@see">#setTimeRange</tag>
+</field>
+
+<!-- javax.baja.history.ext.BBasicActivePeriod.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

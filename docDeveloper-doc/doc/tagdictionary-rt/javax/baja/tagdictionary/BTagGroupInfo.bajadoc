@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="tagdictionary" runtimeProfile="rt" qualifiedName="javax.baja.tagdictionary.BTagGroupInfo" name="BTagGroupInfo" packageName="javax.baja.tagdictionary" public="true">
+<description>
+BTagGroupInfo is a &lt;code&gt;BComponent&lt;/code&gt; implementation of &lt;code&gt;TagGroupInfo&lt;/code&gt;.&#xa;&#xa; &lt;p&gt;Only one data policy slot (of a type that extends &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BDataPolicy">BDataPolicy</see>&lt;/code&gt;) is allowed per tag.&#xa; Once added, the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#addDataPolicy">#addDataPolicy</see>&lt;/code&gt; slot is hidden until the policy is removed.&lt;/p&gt;
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">2/21/14</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.tag.TagGroupInfo"/>
+</implements>
+<implements>
+<type class="javax.baja.tag.BIDataPolicy"/>
+</implements>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<property name="validity" flags="">
+<type class="javax.baja.tagdictionary.BTagRuleCondition"/>
+<description>
+Slot for the &lt;code&gt;validity&lt;/code&gt; property.&#xa; Condition for determining validity within this tag group. Default value: BAlways.
+</description>
+<tag name="@see">#getValidity</tag>
+<tag name="@see">#setValidity</tag>
+</property>
+
+<property name="tagList" flags="">
+<type class="javax.baja.tagdictionary.BTagInfoList"/>
+<description>
+Slot for the &lt;code&gt;tagList&lt;/code&gt; property.&#xa; List of tags in this tag group.
+</description>
+<tag name="@see">#getTagList</tag>
+<tag name="@see">#setTagList</tag>
+</property>
+
+<action name="addDataPolicy" flags="">
+<parameter name="parameter">
+<type class="javax.baja.sys.BDynamicEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;addDataPolicy&lt;/code&gt; action.&#xa; Add a data policy to the tag group.
+</description>
+<tag name="@see">#addDataPolicy(BDynamicEnum parameter)</tag>
+</action>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo() -->
+<constructor name="BTagGroupInfo" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getValidity() -->
+<method name="getValidity"  public="true">
+<description>
+Get the &lt;code&gt;validity&lt;/code&gt; property.&#xa; Condition for determining validity within this tag group. Default value: BAlways.
+</description>
+<tag name="@see">#validity</tag>
+<return>
+<type class="javax.baja.tagdictionary.BTagRuleCondition"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.setValidity(javax.baja.tagdictionary.BTagRuleCondition) -->
+<method name="setValidity"  public="true">
+<description>
+Set the &lt;code&gt;validity&lt;/code&gt; property.&#xa; Condition for determining validity within this tag group. Default value: BAlways.
+</description>
+<tag name="@see">#validity</tag>
+<parameter name="v">
+<type class="javax.baja.tagdictionary.BTagRuleCondition"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getTagList() -->
+<method name="getTagList"  public="true">
+<description>
+Get the &lt;code&gt;tagList&lt;/code&gt; property.&#xa; List of tags in this tag group.
+</description>
+<tag name="@see">#tagList</tag>
+<return>
+<type class="javax.baja.tagdictionary.BTagInfoList"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.setTagList(javax.baja.tagdictionary.BTagInfoList) -->
+<method name="setTagList"  public="true">
+<description>
+Set the &lt;code&gt;tagList&lt;/code&gt; property.&#xa; List of tags in this tag group.
+</description>
+<tag name="@see">#tagList</tag>
+<parameter name="v">
+<type class="javax.baja.tagdictionary.BTagInfoList"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.addDataPolicy(javax.baja.sys.BDynamicEnum) -->
+<method name="addDataPolicy"  public="true">
+<description>
+Invoke the &lt;code&gt;addDataPolicy&lt;/code&gt; action.&#xa; Add a data policy to the tag group.
+</description>
+<tag name="@see">#addDataPolicy</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BDynamicEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Hides the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#addDataPolicy">#addDataPolicy</see>&lt;/code&gt; action slot if a &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BDataPolicy">BDataPolicy</see>&lt;/code&gt; is&#xa; already present (see &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#getDataPolicy()">#getDataPolicy()</see>&lt;/code&gt;).
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getDictionary() -->
+<method name="getDictionary"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the dictionary that this tag group is defined in, if one exists.
+</description>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.tag.TagDictionary"/>
+</args>
+</parameterizedType>
+<description>
+an &lt;code&gt;Optional&lt;/code&gt; that contains the &lt;code&gt;TagDictionary&lt;/code&gt;&#xa; for this tag group if the tag group is part of a &lt;code&gt;TagDictionary&lt;/code&gt;;&#xa; otherwise, an empty &lt;code&gt;Optional&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getGroupId() -->
+<method name="getGroupId"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the id for this group: &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagDictionary#namespace">BTagDictionary#namespace</see>&lt;/code&gt;:&#xa; &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#getName()">#getName()</see>&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.tag.Id"/>
+<description>
+id for this group
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.groupRenamed() -->
+<method name="groupRenamed"  public="true">
+<description>
+Regenerates the &lt;code&gt;<see ref="javax.baja.tag.Id">Id</see>&lt;/code&gt; of this group.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.isIdealFor(javax.baja.sys.Type) -->
+<method name="isIdealFor"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Test whether this tag group is an ideal match (see&#xa; &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagRuleCondition#testIdealMatch(javax.baja.sys.Type)">BTagRuleCondition#testIdealMatch(Type)</see>&lt;/code&gt;) for the specified type&#xa; using the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#validity">#validity</see>&lt;/code&gt; property.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+&lt;code&gt;Type&lt;/code&gt; to test
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+&lt;code&gt;true&lt;/code&gt; if the tag group is an ideal match for the specified&#xa; type; &lt;code&gt;false&lt;/code&gt; otherwise
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.isValidFor(javax.baja.tag.Entity) -->
+<method name="isValidFor"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Test whether this tag group is valid (see&#xa; &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagRuleCondition#test(javax.baja.tag.Entity)">BTagRuleCondition#test(Entity)</see>&lt;/code&gt;) for the specified entity using&#xa; the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#validity">#validity</see>&lt;/code&gt; property.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+&lt;code&gt;Entity&lt;/code&gt; to test
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+&lt;code&gt;true&lt;/code&gt; if the tag group is valid for the specified entity;&#xa; &lt;code&gt;false&lt;/code&gt; otherwise
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getTags() -->
+<method name="getTags"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the tags in the group.
+</description>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.tag.TagInfo"/>
+</args>
+</parameterizedType>
+<description>
+an iterator of the tags in the group
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getValidTagGroups(javax.baja.tag.TagDictionary, javax.baja.sys.BComponent, javax.baja.sys.Type) -->
+<method name="getValidTagGroups"  public="true" static="true">
+<description>
+Find all the tag groups in the specified dictionary that are valid for the specified child&#xa; type.
+</description>
+<parameter name="dictionary">
+<type class="javax.baja.tag.TagDictionary"/>
+<description>
+tag dictionary from which to retrieve tag groups
+</description>
+</parameter>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+parent component
+</description>
+</parameter>
+<parameter name="childType">
+<type class="javax.baja.sys.Type"/>
+<description>
+type against which validity (see &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#isValidFor(javax.baja.tag.Entity)">#isValidFor(Entity)</see>&lt;/code&gt;) of each tag&#xa; group is checked
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.tag.TagGroupInfo"/>
+</args>
+</parameterizedType>
+<description>
+list of tag groups in the dictionary that are valid for the child type
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getNameTagInfo() -->
+<method name="getNameTagInfo"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Allows TagGroupInfo object names to be searchable.
+</description>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.tag.TagInfo"/>
+</args>
+</parameterizedType>
+<description>
+an optional containing a BTagInfo object with this BTagGroupInfo specified as the ID,&#xa; instead of a BTagInfo.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.checkParentForRestrictedComponent(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="checkParentForRestrictedComponent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BTagGroupInfos may only be added to a &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfoList">BTagGroupInfoList</see>&lt;/code&gt; located at a tag dictionary&#x27;s&#xa; &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagDictionary#tagGroupDefinitions">BTagDictionary#tagGroupDefinitions</see>&lt;/code&gt; property and a tag rule&#x27;s&#xa; &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagRule#tagGroupList">BTagRule#tagGroupList</see>&lt;/code&gt; property.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getDataPolicy() -->
+<method name="getDataPolicy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the DataPolicy associated with this tag group.
+</description>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.tag.DataPolicy"/>
+</args>
+</parameterizedType>
+<description>
+an &lt;code&gt;Optional&lt;/code&gt; that contains the &lt;code&gt;DataPolicy&lt;/code&gt; for this&#xa; tag group, if it exists; an empty &lt;code&gt;Optional&lt;/code&gt; otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.checkAdd(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="checkAdd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Disallows adding a &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BDataPolicy">BDataPolicy</see>&lt;/code&gt; if one already exists.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+name of the child object being added
+</description>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+<description>
+child object being added
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.sys.Flags">Flags</see>&lt;/code&gt; to be added to the child object
+</description>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.sys.BFacets">BFacets</see>&lt;/code&gt; to be added to the child object
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+execution context
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Hides the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#addDataPolicy">#addDataPolicy</see>&lt;/code&gt; action slot if the property added&#xa; is of type &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BDataPolicy">BDataPolicy</see>&lt;/code&gt;.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+<description>
+&lt;code&gt;Property&lt;/code&gt; added
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+execution &lt;code&gt;Context&lt;/code&gt;
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.relationKnobAdded(javax.baja.sys.RelationKnob, javax.baja.sys.Context) -->
+<method name="relationKnobAdded"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Checks that the endpoint ord of the activated tag group relation is the slot path ord of the&#xa; tag group and not its handle ord. This ensures that the tag group relation will be copied with&#xa; the components on which it is applied.
+</description>
+<tag name="@since">Niagara 4.4u1</tag>
+<parameter name="knob">
+<type class="javax.baja.sys.RelationKnob"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.removed(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="removed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Restores the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#addDataPolicy">#addDataPolicy</see>&lt;/code&gt; action slot if the property&#xa; removed is of type &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BDataPolicy">BDataPolicy</see>&lt;/code&gt;.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+<description>
+&lt;code&gt;Property&lt;/code&gt; removed
+</description>
+</parameter>
+<parameter name="oldValue">
+<type class="javax.baja.sys.BValue"/>
+<description>
+value of the removed property
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+execution &lt;code&gt;Context&lt;/code&gt;
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getActionParameterDefault(javax.baja.sys.Action) -->
+<method name="getActionParameterDefault"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+For the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#addDataPolicy">#addDataPolicy</see>&lt;/code&gt; action slot, return a &lt;code&gt;<see ref="javax.baja.sys.BDynamicEnum">BDynamicEnum</see>&lt;/code&gt;&#xa; set to zero with a range consisting of all concrete types of&#xa; &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BDataPolicy">BDataPolicy</see>&lt;/code&gt;.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+<description>
+action for which a default value is required
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+a &lt;code&gt;BDynamicEnum&lt;/code&gt; if for the &lt;code&gt;addDataPolicy&lt;/code&gt; action&#xa; slot;&#xa; otherwise, see &lt;code&gt;<see ref="javax.baja.sys.BComponent#getActionParameterDefault(javax.baja.sys.Action)">BComponent#getActionParameterDefault(Action)</see>&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.doAddDataPolicy(javax.baja.sys.BDynamicEnum) -->
+<method name="doAddDataPolicy"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Adds an instance of an object that extends &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BDataPolicy">BDataPolicy</see>&lt;/code&gt; to the tag group.&#xa; The specific type of &lt;code&gt;BDataPolicy&lt;/code&gt; is stored in the value of the&#xa; specified &lt;code&gt;BDynamicEnum&lt;/code&gt;. The new slot will be named &#x22;dp_&#x22; + the&#xa; component name of the tag group.
+</description>
+<parameter name="selected">
+<type class="javax.baja.sys.BDynamicEnum"/>
+<description>
+type that extends &lt;code&gt;BDataPolicy&lt;/code&gt; to be added
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.equivalent(java.lang.Object) -->
+<method name="equivalent"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Ensures that the &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#addDataPolicy">#addDataPolicy</see>&lt;/code&gt; action flags are set correctly before evaluating&#xa; equivalence.  These are set by &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagGroupInfo#started()">#started()</see>&lt;/code&gt; based on the default value of the tag and&#xa; whether there is a data policy already present.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+<description>
+object to compare to this
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if obj is equivalent to this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.validity -->
+<field name="validity"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;validity&lt;/code&gt; property.&#xa; Condition for determining validity within this tag group. Default value: BAlways.
+</description>
+<tag name="@see">#getValidity</tag>
+<tag name="@see">#setValidity</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.tagList -->
+<field name="tagList"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;tagList&lt;/code&gt; property.&#xa; List of tags in this tag group.
+</description>
+<tag name="@see">#getTagList</tag>
+<tag name="@see">#setTagList</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.addDataPolicy -->
+<field name="addDataPolicy"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;addDataPolicy&lt;/code&gt; action.&#xa; Add a data policy to the tag group.
+</description>
+<tag name="@see">#addDataPolicy(BDynamicEnum parameter)</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.BTagGroupInfo.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

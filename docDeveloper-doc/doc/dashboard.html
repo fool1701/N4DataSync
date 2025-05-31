@@ -1,0 +1,78 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/jsdoc/js-ux/module-dialogs.html" class="navbar">Prev</a> |  <a href="/doc/jsdoc/export-ux/index.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="dashboards">Dashboards</h1>
+<h2 id="overview">Overview</h2>
+<p>A dashboard provides a way for users to modify properties of a <code>WebWidget</code> in a Px View in real-time, without needing to edit it manually through the Px Editor. It also allows those modifications to be saved so that the user always sees their personalized view whenever they are logged in.</p>
+<p>Currently, there are two out-of-the-box dashboardable <code>WebWidgets</code>: <code>CircularGauge</code> and <code>Chart</code> from the <code>webChart</code> Palette.</p>
+<p>These <code>Widgets</code> both allow a user to dynamically drag and drop applicable Components onto them so the user can see new values instantly. You can combine this feature with a dashboard to allow a user to save the override ORD and show their preferred content by default.</p>
+<h2 id="what-problems-do-dashboards-solve">What problems do dashboards solve?</h2>
+<ul>
+  <li>
+    <p>They remove the need to manually edit or create new Px Views every time users want to see something different.</p>
+  </li>
+  <li>
+    <p>They remove the need to create multiple &ldquo;redundant&rdquo; variants of a single Px View just to represent different possible combinations of data.</p>
+  </li>
+  <li>
+    <p>They eliminate the cost of training end-users on using the relatively complex Px Editor to modify the <code>WebWidget</code> data themselves, as well as removing the risk of inadvertent damage that accompanies that level of editing access.</p>
+  </li>
+  <li>
+    <p>They allow that personalized <code>WebWidget</code> content to be automatically propagated to other views by embedding that same Px View with dashboards into other views (like a website header).</p>
+  </li>
+</ul>
+<h2 id="setting-up-a-dashboard-px-page-designer">Setting up a dashboard (Px Page designer)</h2>
+<p>Verify <code>DashboardService</code> exists under Config &gt; Services. If not, add a <code>DashboardService</code> to Config &gt; Services from the <code>dashboard</code> Palette.</p>
+<p>In the Px Editor, add a <code>DashboardPane</code> from the <code>dashboard</code> Palette.</p>
+<p>NOTE: To adjust the size of a dashboard, you must first select the <code>DashboardPane</code> in the <code>Widget Tree</code>. Clicking on the dashboard on the Px page directly interacts with the mounted <code>Widget</code>.</p>
+<h3 id="adding-a-widget">Adding a Widget</h3>
+<p>The Component-first way is the easiest way to set up a dashboard. Drag a Component from the <code>Nav Tree</code> and drop it into the <code>Widget Tree</code>, directly onto the <code>content</code> space under the <code>DashboardPane</code> (dragging onto the dashboard itself does not work!). The <code>Make Widget</code> dialog box will show, allowing you to select a <code>WebWidget</code> from a Palette.</p>
+<p>This automatically sets up the dragged Component as the default ORD for the dashboard.</p>
+<p>Alternatively, you can drag a <code>WebWidget</code> from a Palette and drop it into the the dashboard&rsquo;s <code>content</code> space, and then set the default ORD manually.</p>
+<h3 id="manually-setting-a-default-ord">Manually setting a default ORD</h3>
+<p>You can open the <code>Widget</code> Properties by double clicking on the dashboard itself, or on <code>WebWidget(Content)</code> under the <code>DashboardPane</code> in the <code>Widget Tree</code>. Then modify the <code>ord</code> slot under <code>Wb View Binding</code> to set the default value.</p>
+<h3 id="adding-a-custom-widget">Adding a Custom Widget</h3>
+<p>If you have a custom dashboardable <code>Widget</code> that is not part of a Palette, you can still add it to a dashboard.</p>
+<p>First, add a <code>WebWidget</code> to the dashboard from the <code>workbench</code> Palette. Then open up the <code>Widget</code> Properties, and enter the ORD for the custom <code>Widget</code> in the <code>js</code> slot under <code>Web Widget</code>. For example: <code>view:myFirstModule:MyFirstWidget</code>.</p>
+<h2 id="using-a-dashboard-end-user">Using a Dashboard (End User)</h2>
+<p>To <strong>change the content</strong>, drag and drop a new point onto the <code>Widget</code>.</p>
+<p>To <strong>save changes</strong> so that your contents load next time you view this <code>Widget</code>, click the Save icon in the top area of the dashboard.</p>
+<p>To <strong>reset to default</strong> contents, click the Reset icon (X) in the top area of the dashboard.</p>
+<p>This functionality works in both Workbench as well as in the HTML5 Hx profile.</p>
+<h1 id="custom-widget-development">Custom Widget Development</h1>
+<h2 id="making-your-custom-widgets-dashboardable"><a name="dashboardable"></a>Making Your Custom Widgets Dashboardable</h2>
+<p>Check out the bajaux <a href="module://docDeveloper/doc/jsdoc/bajaux-ux/tutorial-30-mfw-dashboarding.html">Making your Widget Dashboardable</a> tutorial, the third part in a series designed to introduce bajaux basics!</p>
+<h2 id="working-demo">Working Demo</h2>
+<p>You can get a working dashboard demo from the <code>docDeveloper</code> Palette, including JavaScript examples.</p>
+<ol>
+  <li>
+    <p>From the <code>docDeveloper</code> Palette, drag the <code>BajauxExamples</code> folder onto your <code>Config</code> folder.</p>
+  </li>
+  <li>
+    <p>Expand BajauxExamples in the Nav Tree, and double-click <code>DashboardWidget</code>.</p>
+  </li>
+</ol>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/jsdoc/js-ux/module-dialogs.html" class="navbar">Prev</a> |  <a href="/doc/jsdoc/export-ux/index.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

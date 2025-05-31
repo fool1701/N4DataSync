@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="hierarchy" runtimeProfile="rt" qualifiedName="javax.baja.hierarchy.BLevelDef" name="BLevelDef" packageName="javax.baja.hierarchy" public="true" abstract="true">
+<description>
+BLevelDef implements BLevelDef to provide basic next and previous functionality.
+</description>
+<tag name="@author">Andy Saunders</tag>
+<tag name="@creation">1 July 2013</tag>
+<tag name="@since">Baja 4.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="queryContext" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;queryContext&lt;/code&gt; property.
+</description>
+<tag name="@see">#getQueryContext</tag>
+<tag name="@see">#setQueryContext</tag>
+</property>
+
+<!-- javax.baja.hierarchy.BLevelDef() -->
+<constructor name="BLevelDef" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.hierarchy.BLevelDef.getQueryContext() -->
+<method name="getQueryContext"  public="true">
+<description>
+Get the &lt;code&gt;queryContext&lt;/code&gt; property.
+</description>
+<tag name="@see">#queryContext</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.setQueryContext(javax.baja.sys.BFacets) -->
+<method name="setQueryContext"  public="true">
+<description>
+Set the &lt;code&gt;queryContext&lt;/code&gt; property.
+</description>
+<tag name="@see">#queryContext</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.isChildLegal(javax.baja.sys.BComponent) -->
+<method name="isChildLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+LevelDefs don&#x27;t have children.
+</description>
+<parameter name="child">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Only allow one BHierarchy parents.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getElements(javax.baja.hierarchy.BLevelElem, javax.baja.sys.Context) -->
+<method name="getElements"  public="true" abstract="true">
+<description>
+Get the BLevelElement array for parent BLevelElement.&#xa; If this definitions results in no elements at this level&#xa; return an array of length zero.
+</description>
+<parameter name="parentElem">
+<type class="javax.baja.hierarchy.BLevelElem"/>
+<description>
+is the parent Level Elem in the Hierarchy
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+execution context; its user is not used for getting permissions that determine which&#xa;           elements to return
+</description>
+</parameter>
+<return>
+<type class="javax.baja.hierarchy.BLevelElem" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getPrevious() -->
+<method name="getPrevious"  public="true">
+<description>
+Return the parent levelDef of null if isRoot def.
+</description>
+<return>
+<type class="javax.baja.hierarchy.BLevelDef"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getNext() -->
+<method name="getNext"  public="true">
+<description>
+Return the next levelDef or null if isLeaf.
+</description>
+<return>
+<type class="javax.baja.hierarchy.BLevelDef"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getHierarchyService() -->
+<method name="getHierarchyService"  protected="true">
+<description>
+Server side call.
+</description>
+<return>
+<type class="javax.baja.hierarchy.BHierarchyService"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getHierarchy() -->
+<method name="getHierarchy"  public="true">
+<description/>
+<return>
+<type class="javax.baja.hierarchy.BHierarchy"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getResolvedContextParams(javax.baja.tag.Entity, java.lang.String, java.lang.String, javax.baja.sys.BFacets) -->
+<method name="getResolvedContextParams"  protected="true">
+<description>
+Combine the specified existing and &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#queryContext">#queryContext</see>&lt;/code&gt; property facets along with an entity&#xa; ord (if the entity is specified; see &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#ENTITY_ORD">#ENTITY_ORD</see>&lt;/code&gt;), a hierarchy ord (using the specified&#xa; path name; see &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#HIERARCHY_ORD">#HIERARCHY_ORD</see>&lt;/code&gt;), a slot path from the hierarchy service to this level&#xa; definition (see &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#LEVEL_DEF_PATH">#LEVEL_DEF_PATH</see>&lt;/code&gt;), this level definition&#x27;s predicate (see&#xa; &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#CHILD_PREDICATE">#CHILD_PREDICATE</see>&lt;/code&gt;), and a type specification of the specified entity (see&#xa; &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#TYPE_SPEC">#TYPE_SPEC</see>&lt;/code&gt;).
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+used to resolve any queryContext facets to tag values, create the entity ord, and&#xa; determine the type spec
+</description>
+</parameter>
+<parameter name="pathName">
+<type class="java.lang.String"/>
+<description>
+prepended by a &#x27;/&#x27; and appended to a new or existing hierarchy ord
+</description>
+</parameter>
+<parameter name="childPredicate">
+<type class="java.lang.String"/>
+<description>
+this level definition&#x27;s predicate
+</description>
+</parameter>
+<parameter name="existing">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+existing facets
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+<description>
+set of facets from the combination of the specified existing ones, the contents of the&#xa; queryContext property, and ENTITY_ORD, HIERARCHY_ORD, TYPE_SPEC, LEVEL_DEF_PATH, and&#xa; CHILD_PREDICATE
+</description>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getResolvedContextParams(javax.baja.tag.Entity, java.lang.String, java.lang.String, javax.baja.sys.BFacets, javax.baja.sys.BFacets) -->
+<method name="getResolvedContextParams"  protected="true">
+<description>
+Combine the specified existing, &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#queryContext">#queryContext</see>&lt;/code&gt; property, and specified new facets along&#xa; with an entity ord (if the entity is specified; see &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#ENTITY_ORD">#ENTITY_ORD</see>&lt;/code&gt;), a hierarchy ord&#xa; (using the specified path name; see &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#HIERARCHY_ORD">#HIERARCHY_ORD</see>&lt;/code&gt;), a slot path from the hierarchy&#xa; service to this level definition (see &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#LEVEL_DEF_PATH">#LEVEL_DEF_PATH</see>&lt;/code&gt;), this level definition&#x27;s&#xa; predicate (see &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#CHILD_PREDICATE">#CHILD_PREDICATE</see>&lt;/code&gt;), and a type specification of the specified entity (see&#xa; &lt;code&gt;<see ref="javax.baja.hierarchy.BLevelDef#TYPE_SPEC">#TYPE_SPEC</see>&lt;/code&gt;).
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+used to resolve any queryContext facets to tag values, create the entity ord, and&#xa; determine the type spec
+</description>
+</parameter>
+<parameter name="pathName">
+<type class="java.lang.String"/>
+<description>
+prepended by a &#x27;/&#x27; and appended to a new or existing hierarchy ord
+</description>
+</parameter>
+<parameter name="childPredicate">
+<type class="java.lang.String"/>
+<description>
+this level definition&#x27;s predicate
+</description>
+</parameter>
+<parameter name="existing">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+existing facets
+</description>
+</parameter>
+<parameter name="newParams">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+new facets to include
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+<description>
+set of facets from the combination of the specified existing ones, the contents of the&#xa; queryContext property, specified new ones, and ENTITY_ORD, HIERARCHY_ORD, TYPE_SPEC,&#xa; LEVEL_DEF_PATH, and CHILD_PREDICATE
+</description>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.hierarchy.BLevelDef.queryContext -->
+<field name="queryContext"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;queryContext&lt;/code&gt; property.
+</description>
+<tag name="@see">#getQueryContext</tag>
+<tag name="@see">#setQueryContext</tag>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.LEVEL_DEF_PATH -->
+<field name="LEVEL_DEF_PATH"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Path from the Hierarchy Service to this Level Def
+</description>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.CHILD_PREDICATE -->
+<field name="CHILD_PREDICATE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+NEQL predicate that defines this level (based on the previous levels)
+</description>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.ENTITY_ORD -->
+<field name="ENTITY_ORD"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Ord to the resulting Entity.
+</description>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.HIERARCHY_ORD -->
+<field name="HIERARCHY_ORD"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Ord to the resulting Entity.
+</description>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.TYPE_SPEC -->
+<field name="TYPE_SPEC"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+TypeSpec of the Entity - used in WebUI.
+</description>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.DISPLAY_NAME_TAG_NAME -->
+<field name="DISPLAY_NAME_TAG_NAME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Tag Id for n:displayName
+</description>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.EMPTY_LEVEL_ELEMS -->
+<field name="EMPTY_LEVEL_ELEMS"  protected="true" static="true" final="true">
+<type class="javax.baja.hierarchy.BLevelElem" dimension="1"/>
+<description>
+Constant to be returned by getElements is something goes wrong.
+</description>
+</field>
+
+<!-- javax.baja.hierarchy.BLevelDef.fatalFault -->
+<field name="fatalFault"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

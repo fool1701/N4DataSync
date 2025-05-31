@@ -1,0 +1,110 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/architecture.html" class="navbar">Prev</a> |  <a href="/doc/apiInfo.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="niagara-4-directory-structure-change">Niagara 4 Directory Structure Change</h1>
+<h2 id="overview">Overview</h2>
+<p>In order to improve the security of a Niagara installation and adopt standard application installation patterns, the directory structure for Niagara 4 was redesigned. The new design makes it easier for system administrators to manage security of the core application as well as the security of &ldquo;user&rdquo; data.</p>
+<h2 id="who-is-impacted">Who is Impacted</h2>
+<p>Anyone who manages a Niagara installation and is familiar with the Niagara AX directory structure.</p>
+<h2 id="what-changed">What Changed</h2>
+<p>With a Niagara AX installation, configuration data and runtime data were intermixed. This required that users would need full access permissions to a Niagara AX installation and provided little to no flexibility for administrators to regulate access. In Niagara 4, an installation is composed of two pieces: the runtime piece and the user piece.</p>
+<p>The runtime piece is where the core Niagara components are installed. In a typical Windows environment, this may be <code>C:\Program Files\Niagara 4\</code> or in a typical Linux environment this may be <code>/opt/niagara4</code>. The runtime piece (except for upgrades, etc) can be read only since no configuration files are present.</p>
+<p>The &ldquo;user&rdquo; piece is where the all the configurable data resides. This includes stations, system.properties, templates, etc. There are actually two types of users. The first type of user is a person (operator, administrator, etc) who logs into the system with credentials. In Windows 7, this type of user would have a directory <code>C:\Users\&lt;username&gt;\Niagara4.0\&lt;brandId&gt;\</code>. A Linux user would have a directory <code>/home/&lt;username&gt;/Niagara4.0/&lt;brandId&gt;</code>. The second type of user is the system user. This is the user that runs the Niagara Daemon. Depending on the installation, this may also be a conventional user directory or a a special directory for the system account.</p>
+<p>From within Java, these directories can be accessed by querying <code>Sys.getNiagaraUserHome()</code> and <code>SystemFiles.getNiagaraHomeDirectory()</code>.</p>
+<p>The impact of this will mostly be felt when manipulating stations. When a new station is created in Workbench, it gets created in the Niagara User Home directory. In order to start it from Niagara Daemon, it must be installed just like you would install to a remote Niagara Daemon. Not only does this provide the security benefits that allow restricting direct access to running stations, it also allows for you to test run them yourself (with the console). Of course you have to watch out for conflicting ports.</p>
+<table>
+  <thead>
+    <tr><th align="left"> Niagara Path </th><th align="left"> File Ord Shortcut </th><th align="left"> API </th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"> Niagara Home </td><td align="left"> ! </td><td align="left"> SystemFiles.getNiagaraHomeDirectory() </td></tr>
+    <tr><td align="left"> Niagara User Home	</td><td align="left"> ~ </td><td align="left"> Sys.getNiagaraUserHome() </td></tr>
+    <tr><td align="left"> Niagara Shared User Home </td><td align="left"> N/A </td><td align="left"> Sys.getNiagaraSharedUserHome() </td></tr>
+    <tr><td align="left"> Station Home </td><td align="left"> ^ </td><td align="left"> Sys.getStationHome() </td></tr>
+    <tr><td align="left"> Protected Station Home </td><td align="left"> ^^ </td><td align="left"> Sys.getProtectedStationHome() </td></tr>
+  </tbody>
+</table>
+<h2 id="new-locations-of-files">New Locations of Files</h2>
+<h3 id="niagara-home">Niagara Home</h3>
+<p><code>\bin</code><br />
+<code>\cleanDist</code><br />
+<code>\conversion</code><br />
+<code>\defaults</code><br />
+<code>|- bacnetObjectTypes.xml</code><br />
+<code>|- colorCoding.properties</code><br />
+<code>|- lonStandardConversion.xml</code><br />
+<code>|- niagaraAxBacnetObjectTypes.xml</code><br />
+<code>|- nre.properties</code><br />
+<code>|- system.properties</code><br />
+<code>|- unitConversion.xml</code><br />
+<code>|- unitDifferentialConversion.xml</code><br />
+<code>|- units.xml</code><br />
+<code>|- workbench</code><br />
+<code>| |- facetKeys.properties</code><br />
+<code>| |- newComponents.bog</code><br />
+<code>| |- newWidgets.bog</code><br />
+<code>| |- newfiles</code><br />
+<code>\docs</code><br />
+<code>\etc</code><br />
+<code>|- gradle</code><br />
+<code>| |- &lt;gradle build scripts and plugins&gt;</code><br />
+<code>|- brand.properties</code><br />
+<code>|- extensions.properties</code><br />
+<code>\jre</code><br />
+<code>|- &lt;Java8 VM&gt;</code><br />
+<code>\lib</code><br />
+<code>|- licenseAgreement.txt</code><br />
+<code>|- readmeLicenses.txt</code><br />
+<code>\modules</code><br />
+<code>|- &lt;Niagara Modules&gt;</code><br />
+<code>\security</code><br />
+<code>|- certificates</code><br />
+<code>|- licenses</code><br />
+<code>|- policy</code><br />
+<code>\sw</code></p>
+<h3 id="niagara-user-home">Niagara User Home</h3>
+<p><code>\etc</code><br />
+<code>\logging</code><br />
+<code>|- logging.properties</code><br />
+<code>\registry</code><br />
+<code>\security</code><br />
+<code>|- .kr</code><br />
+<code>|- cacerts.jceks</code><br />
+<code>|- exemptions.tes</code><br />
+<code>|- keystore.jceks</code><br />
+<code>\shared - shared user home</code><br />
+<code>\stations</code></p>
+<p>Note: Due to application differences, there are some minor differences between the complete list of files in the logged in user&rsquo;s Niagara User Home and the Niagara Daemon&rsquo;s Niagara User Home.  For instance, daemon.properties only exists in the Niagara Daemon&rsquo;s Niagara User Home.  And navTree.xml only exists in the logged in user&rsquo;s Niagara User Home.</p>
+<h3 id="niagara-shared-user-home">Niagara Shared User Home</h3>
+<p>With the introduction of the Security Manager, we now have tighter controls on which applications can access which parts of the file system. In particular, access to the Niagara User Home has been restricted to a few core modules.</p>
+<p>In order to allow non-Tridium applications to be able to read and write files, we have created a new directory named &ldquo;shared&rdquo; under the Niagara User Home directory. All applications (including non-Tridium modules as well as program objects) have read, write and delete access to this directory.</p>
+<p>Note that this directory is different from the &ldquo;shared&rdquo; directory under station home - it provides a space outside station home, so that applications may create and manage files not directly related to a particular station.</p>
+<h3 id="protected-station-home">Protected Station Home</h3>
+<p>We now have tighter controls on which applications have access to which parts of the file system.  The <code>stations/&lt;stationName&gt;/shared</code> directory is a publicly available folder under that station to which any module can read to and write from (this is the new stationHome directory).  All other directories under the station directory are protected by the security manager.</p>
+<h3 id="notes">Notes</h3>
+<p>When creating a new station via the New Station Wizard, the new station get created under the logged in user&rsquo;s niagaraUserHome (<code>C:\Users\&lt;username&gt;\Niagara4.0\&lt;brandId&gt;</code>).  To start this station via the Platform Daemon (niagarad), use the Station Copier to copy this station from your niagaraUserHome to the daemon&rsquo;s niagaraUserHome.</p>
+<p>By default, the platform daemon (niagarad)&rsquo;s niagara_user_home is <code>C:\ProgramData\NiagaraN.N\&lt;brandId&gt;</code> where <code>N.N</code> is the Niagara minor version number and <code>brandId</code> is the <code>brand.id</code> property in <code>brand.properties</code>.   Example: <code>C:\ProgramData\Niagara4.0\tridium</code>. Each user has an etc directory for providing overrides to user configurable files. For Niagara 4.0, these contents of these files replace the contents of those in <code>&lt;niagara_home&gt;/etc</code>.  In the future this will allow the files in the  <code>&lt;niagara_user_home&gt;/etc</code> to be merged with those in <code>&lt;niagara_home&gt;/etc</code> when doing upgrades so that the files can be updated while maintaining user overrides.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/architecture.html" class="navbar">Prev</a> |  <a href="/doc/apiInfo.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

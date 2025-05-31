@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="aapup" runtimeProfile="rt" qualifiedName="com.tridium.aapup.BPupNetwork" name="BPupNetwork" packageName="com.tridium.aapup" public="true">
+<description>
+BAaPupNetwork - represents an PUP Serial Network.
+</description>
+<tag name="@author">Clif Turman on 7/14/2005 4:02PM</tag>
+<tag name="@since">Niagara 3.0 aapup 1.0</tag>
+<extends>
+<type class="com.tridium.basicdriver.serial.BSerialNetwork"/>
+</extends>
+<property name="unitNumber" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;unitNumber&lt;/code&gt; property.&#xa; This driver acts as a device on the PUP network, and must have a&#xa; address to have tokens passed to it.  This is the address.
+</description>
+<tag name="@see">#getUnitNumber</tag>
+<tag name="@see">#setUnitNumber</tag>
+</property>
+
+<property name="tokenPassConfig" flags="">
+<type class="com.tridium.aapup.datatypes.BPupTokenPassConfig"/>
+<description>
+Slot for the &lt;code&gt;tokenPassConfig&lt;/code&gt; property.&#xa; Folder for all the configuration properties for token passing
+</description>
+<tag name="@see">#getTokenPassConfig</tag>
+<tag name="@see">#setTokenPassConfig</tag>
+</property>
+
+<property name="peerList" flags="t">
+<type class="com.tridium.aapup.BPupPeerListFolder"/>
+<description>
+Slot for the &lt;code&gt;peerList&lt;/code&gt; property.&#xa; Folder that contains an record of every peer on the network that have&#xa; been configured as devices in PUP driver.  This list is populated at&#xa; startup, and devices are automatically added/removed as PupDevices are added/removed&#xa; from the configuration.
+</description>
+<tag name="@see">#getPeerList</tag>
+<tag name="@see">#setPeerList</tag>
+</property>
+
+<property name="unsolicitedReceiveHandler" flags="h">
+<type class="com.tridium.aapup.comm.BPupUnsolicitedReceive"/>
+<description>
+Slot for the &lt;code&gt;unsolicitedReceiveHandler&lt;/code&gt; property.&#xa; Queues and process unsolicited messages received from the field-bus
+</description>
+<tag name="@see">#getUnsolicitedReceiveHandler</tag>
+<tag name="@see">#setUnsolicitedReceiveHandler</tag>
+</property>
+
+<property name="allowTimeSyncBroadcast" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;allowTimeSyncBroadcast&lt;/code&gt; property.&#xa; If true, time sync messages are allowed to be broadcast using the system clock&#xa; as a time source, and the value of &#x22;holiday&#x22; property as the holiday bit.&#xa; &lt;p&gt;&#xa; Note that &#x22;directed&#x22; (not broadcast) time sync is also sent to a single device&#xa; whenever a device transitions from off-line to on-line (see PupDevice&#x27;s&#xa; allowTimeSync property)
+</description>
+<tag name="@see">#getAllowTimeSyncBroadcast</tag>
+<tag name="@see">#setAllowTimeSyncBroadcast</tag>
+</property>
+
+<property name="timeSyncFrequency" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;timeSyncFrequency&lt;/code&gt; property.&#xa; If &#x22;allowTimeSyncBroadcast&#x22; is true, then the frequency at which time sync messages&#xa; are broadcast are defined by this property.
+</description>
+<tag name="@see">#getTimeSyncFrequency</tag>
+<tag name="@see">#setTimeSyncFrequency</tag>
+</property>
+
+<property name="holiday" flags="">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;holiday&lt;/code&gt; property.&#xa; determines if the &#x22;holiday&#x22; bit should be set in the Set Time messages whenever a&#xa; time sync is performed.
+</description>
+<tag name="@see">#getHoliday</tag>
+<tag name="@see">#setHoliday</tag>
+</property>
+
+<property name="deviceTypesFile" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;deviceTypesFile&lt;/code&gt; property.&#xa; The values of the manufacturer(CM) property and controllerType(CT) property are used as&#xa; lookups in a device types file which defines metadata about controller types, such as&#xa; a controller description and channels contained within the controller.   This property&#xa; defines the path to get to the device types file.
+</description>
+<tag name="@see">#getDeviceTypesFile</tag>
+<tag name="@see">#setDeviceTypesFile</tag>
+</property>
+
+<action name="submitDeviceDiscoveryJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.aapup.datatypes.BPupDeviceDiscoveryConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitDeviceDiscoveryJob&lt;/code&gt; action.&#xa; action to submit a device discovery job to the job service.
+</description>
+<tag name="@see">#submitDeviceDiscoveryJob(BPupDeviceDiscoveryConfig parameter)</tag>
+</action>
+
+<action name="syncTime" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;syncTime&lt;/code&gt; action.&#xa; action invoked whenever transition from off-line to on-line occurs to send a&#xa; set time command using the system clock/holiday property.
+</description>
+<tag name="@see">#syncTime()</tag>
+</action>
+
+<action name="expireToken" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;expireToken&lt;/code&gt; action.&#xa; action invoked when the token expiration clock ticket expires.&#xa; This ticket expires when we&#x27;ve owned the ticket for our configured time.
+</description>
+<tag name="@see">#expireToken()</tag>
+</action>
+
+<action name="recoverToken" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;recoverToken&lt;/code&gt; action.&#xa; action invoked when the token recovery clock ticket expires
+</description>
+<tag name="@see">#recoverToken()</tag>
+</action>
+
+</class>
+</bajadoc>

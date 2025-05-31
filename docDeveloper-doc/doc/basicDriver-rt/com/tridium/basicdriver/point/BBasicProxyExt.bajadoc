@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="basicDriver" runtimeProfile="rt" qualifiedName="com.tridium.basicdriver.point.BBasicProxyExt" name="BBasicProxyExt" packageName="com.tridium.basicdriver.point" public="true" abstract="true">
+<description>
+BasicDriver implementation of BProxyExt
+</description>
+<tag name="@author">Lenard Perkins</tag>
+<tag name="@creation">24 Feb 05</tag>
+<tag name="@version">$Revision: 1$ $Date: 2/22/2005 02:43:49 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="javax.baja.driver.point.BProxyExt"/>
+</extends>
+<!-- com.tridium.basicdriver.point.BBasicProxyExt() -->
+<constructor name="BBasicProxyExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.getPollGroupCode() -->
+<method name="getPollGroupCode"  public="true">
+<description>
+This method may optionally be overridden by a subclass is the&#xa; subclass is a member of a group of proxy extensions whose values&#xa; are retrieved by the same poll message. This allows the polling&#xa; of those proxies to be coalesced into a single poll.&#xa;&#xa; Proxy extensions that belong to the same Poll Group should&#xa; return the equivalent poll group code from this method.&#xa;&#xa; In other words, if two proxy extensions are polled by one poll group&#xa; then the Objects returned by either of the proxy extension should&#xa; equal each other when passed to each other&#x27;s .equals methods.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.getPollGroupType() -->
+<method name="getPollGroupType"  public="true">
+<description>
+If the getPollGroupCode() method is overridden then this method&#xa; should also be overridden so that this class can know which&#xa; Poll Group should be used to poll this proxy extension.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.readSubscribed(javax.baja.sys.Context) -->
+<method name="readSubscribed"  public="true">
+<description>
+This callback is made when the point enters a subscribed&#xa; state based on the current status and tuning.  The driver&#xa; should register for changes or begin polling.  Any IO should&#xa; be done asynchronously on another thread - never block the&#xa; calling thread.  The result of reads should be to call the&#xa; readOk() or readFail() method.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.readUnsubscribed(javax.baja.sys.Context) -->
+<method name="readUnsubscribed"  public="true">
+<description>
+This callback is made when the point exits the subscribed&#xa; state based on the current status and tuning.  The driver&#xa; should unregister for changes of cease polling.  Any IO should&#xa; be done asynchronously on another thread - never block the&#xa; calling thread.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.stopped() -->
+<method name="stopped"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.getMode() -->
+<method name="getMode"  public="true">
+<description>
+Provides a reasonable default implementation. If under a writable point then&#xa; this returns BReadWriteMode.readWrite. Otherwise this proxy is under a control&#xa; point that is not a Writable so this method returns BReadWriteMode.readOnly.
+</description>
+<return>
+<type class="javax.baja.driver.point.BReadWriteMode"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.logWriteFail() -->
+<method name="logWriteFail"  protected="true">
+<description>
+This is an override point to allow descendant classes to override&#xa; the default behavior of the BBasicProxyExt.writeFail method.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.writeFail(java.lang.String) -->
+<method name="writeFail"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+This method is called when a write to the device&#xa; fails for any reason.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.write(javax.baja.sys.Context) -->
+<method name="write"  public="true">
+<description>
+This callback is made when a write is desired based on the&#xa; current status and tuning. This method posts a BasicWriteAsyncRequest&#xa; to the network&#x27;s write worker thread. The BasicWriteAsyncRequest&#xa; then calls this object&#x27;s doWrite method from the write worker&#x27;s&#xa; thread, where it is safe to perform foreign communication.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if a write is now pending
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.doWrite(javax.baja.status.BStatusValue) -->
+<method name="doWrite"  public="true">
+<description>
+This callback from asynchronous thread to send a write to the device.&#xa; Can be implemented by subclasses!
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.point.BBasicProxyExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

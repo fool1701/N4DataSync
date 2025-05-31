@@ -1,0 +1,1587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.BLonDevice" name="BLonDevice" packageName="javax.baja.lonworks" public="true">
+<description>
+BLonDevice is the base class to represent a physical lonworks device.&#xa; Adds support for polling, lonLinks and file access for support of&#xa; configuration properties.&#xa; &lt;p&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">06 Dec 00</tag>
+<tag name="@version">$Revision: 4$ $Date: 10/18/01 2:56:42 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="javax.baja.driver.BDevice"/>
+</extends>
+<implements>
+<type class="javax.baja.lonworks.BINvContainer"/>
+</implements>
+<implements>
+<type class="javax.baja.lonworks.BILonLoadable"/>
+</implements>
+<property name="deviceData" flags="s">
+<type class="javax.baja.lonworks.datatypes.BDeviceData"/>
+<description>
+Slot for the &lt;code&gt;deviceData&lt;/code&gt; property.&#xa; Contains data needed to represent devices&#x27; specific neuron chip.
+</description>
+<tag name="@see">#getDeviceData</tag>
+<tag name="@see">#setDeviceData</tag>
+</property>
+
+<property name="points" flags="">
+<type class="javax.baja.lonworks.proxy.BLonPointDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</property>
+
+<property name="messageIn" flags="f">
+<type class="javax.baja.lonworks.BMessageTag"/>
+<description>
+Slot for the &lt;code&gt;messageIn&lt;/code&gt; property.&#xa; Linkable input for message tags
+</description>
+<tag name="@see">#getMessageIn</tag>
+<tag name="@see">#setMessageIn</tag>
+</property>
+
+<action name="upload" flags="">
+<parameter name="parameter">
+<type class="javax.baja.driver.loadable.BUploadParameters"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;upload&lt;/code&gt; action.&#xa; Upload reads data from the physical device.
+</description>
+<tag name="@see">#upload(BUploadParameters parameter)</tag>
+</action>
+
+<action name="download" flags="">
+<parameter name="parameter">
+<type class="javax.baja.driver.loadable.BDownloadParameters"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;download&lt;/code&gt; action.&#xa; Download writes data to the physical device.
+</description>
+<tag name="@see">#download(BDownloadParameters parameter)</tag>
+</action>
+
+<action name="reset" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;reset&lt;/code&gt; action.&#xa; reset device
+</description>
+<tag name="@see">#reset()</tag>
+</action>
+
+<action name="renewProxies" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;renewProxies&lt;/code&gt; action.&#xa; resolve all proxy links to target component
+</description>
+<tag name="@see">#renewProxies()</tag>
+</action>
+
+<action name="initImport" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;initImport&lt;/code&gt; action.
+</description>
+<tag name="@see">#initImport()</tag>
+</action>
+
+<action name="closeImport" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;closeImport&lt;/code&gt; action.
+</description>
+<tag name="@see">#closeImport()</tag>
+</action>
+
+<!-- javax.baja.lonworks.BLonDevice() -->
+<constructor name="BLonDevice" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.lonworks.BLonDevice.getDeviceData() -->
+<method name="getDeviceData"  public="true">
+<description>
+Get the &lt;code&gt;deviceData&lt;/code&gt; property.&#xa; Contains data needed to represent devices&#x27; specific neuron chip.
+</description>
+<tag name="@see">#deviceData</tag>
+<return>
+<type class="javax.baja.lonworks.datatypes.BDeviceData"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.setDeviceData(javax.baja.lonworks.datatypes.BDeviceData) -->
+<method name="setDeviceData"  public="true">
+<description>
+Set the &lt;code&gt;deviceData&lt;/code&gt; property.&#xa; Contains data needed to represent devices&#x27; specific neuron chip.
+</description>
+<tag name="@see">#deviceData</tag>
+<parameter name="v">
+<type class="javax.baja.lonworks.datatypes.BDeviceData"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getPoints() -->
+<method name="getPoints"  public="true">
+<description>
+Get the &lt;code&gt;points&lt;/code&gt; property.
+</description>
+<tag name="@see">#points</tag>
+<return>
+<type class="javax.baja.lonworks.proxy.BLonPointDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.setPoints(javax.baja.lonworks.proxy.BLonPointDeviceExt) -->
+<method name="setPoints"  public="true">
+<description>
+Set the &lt;code&gt;points&lt;/code&gt; property.
+</description>
+<tag name="@see">#points</tag>
+<parameter name="v">
+<type class="javax.baja.lonworks.proxy.BLonPointDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getMessageIn() -->
+<method name="getMessageIn"  public="true">
+<description>
+Get the &lt;code&gt;messageIn&lt;/code&gt; property.&#xa; Linkable input for message tags
+</description>
+<tag name="@see">#messageIn</tag>
+<return>
+<type class="javax.baja.lonworks.BMessageTag"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.setMessageIn(javax.baja.lonworks.BMessageTag) -->
+<method name="setMessageIn"  public="true">
+<description>
+Set the &lt;code&gt;messageIn&lt;/code&gt; property.&#xa; Linkable input for message tags
+</description>
+<tag name="@see">#messageIn</tag>
+<parameter name="v">
+<type class="javax.baja.lonworks.BMessageTag"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.upload(javax.baja.driver.loadable.BUploadParameters) -->
+<method name="upload"  public="true">
+<description>
+Invoke the &lt;code&gt;upload&lt;/code&gt; action.&#xa; Upload reads data from the physical device.
+</description>
+<tag name="@see">#upload</tag>
+<parameter name="parameter">
+<type class="javax.baja.driver.loadable.BUploadParameters"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.download(javax.baja.driver.loadable.BDownloadParameters) -->
+<method name="download"  public="true">
+<description>
+Invoke the &lt;code&gt;download&lt;/code&gt; action.&#xa; Download writes data to the physical device.
+</description>
+<tag name="@see">#download</tag>
+<parameter name="parameter">
+<type class="javax.baja.driver.loadable.BDownloadParameters"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.reset() -->
+<method name="reset"  public="true">
+<description>
+Invoke the &lt;code&gt;reset&lt;/code&gt; action.&#xa; reset device
+</description>
+<tag name="@see">#reset</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.renewProxies() -->
+<method name="renewProxies"  public="true">
+<description>
+Invoke the &lt;code&gt;renewProxies&lt;/code&gt; action.&#xa; resolve all proxy links to target component
+</description>
+<tag name="@see">#renewProxies</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.initImport() -->
+<method name="initImport"  public="true">
+<description>
+Invoke the &lt;code&gt;initImport&lt;/code&gt; action.
+</description>
+<tag name="@see">#initImport</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.closeImport() -->
+<method name="closeImport"  public="true">
+<description>
+Invoke the &lt;code&gt;closeImport&lt;/code&gt; action.
+</description>
+<tag name="@see">#closeImport</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.authenticate() -->
+<method name="authenticate"  public="true" final="true">
+<description>
+Does this device require authentication of network management messages.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isLocal() -->
+<method name="isLocal"  public="true">
+<description>
+Is this the local lonDevice.  &lt;p&gt;
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Returns false. Override in BLocalLonDevice to return true.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.programIdChanges() -->
+<method name="programIdChanges"  public="true">
+<description>
+Indicates if programId may be changed during commissioning.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Returns false.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getNeuronIdAddress() -->
+<method name="getNeuronIdAddress"  public="true" final="true">
+<description>
+Return the neuronId address for this device.
+</description>
+<return>
+<type class="javax.baja.lonworks.datatypes.BNeuronId"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getSubnetNodeAddress() -->
+<method name="getSubnetNodeAddress"  public="true" final="true">
+<description>
+Return the subnet node address for this device.
+</description>
+<return>
+<type class="javax.baja.lonworks.datatypes.BSubnetNode"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isConfigOnline() -->
+<method name="isConfigOnline"  public="true" final="true">
+<description>
+Is this devices nodeState configOnline?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isConfigOffline() -->
+<method name="isConfigOffline"  public="true" final="true">
+<description>
+Is this devices nodeState configOnline?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isConfigured() -->
+<method name="isConfigured"  public="true" final="true">
+<description>
+Is this devices nodeState in a configured state?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isExtended() -->
+<method name="isExtended"  public="true">
+<description>
+Does this device use extended network management messages.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getWorkingDomain() -->
+<method name="getWorkingDomain"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getNetworkType() -->
+<method name="getNetworkType"  public="true">
+<description>
+Get the Type of the parent network.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.started() -->
+<method name="started"  public="true">
+<description>
+Register device with network.&#xa; &lt;p&gt;To override use lonDeviceInit()
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.descendantsStarted() -->
+<method name="descendantsStarted"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.atSteadyState() -->
+<method name="atSteadyState"  public="true" final="true">
+<description>
+Do an initial ping().&#xa; To override use lonDeviceAtSteadyState()
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.stopped() -->
+<method name="stopped"  public="true" final="true">
+<description>
+Unregister device with network.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.renamed(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="renamed"  public="true">
+<description>
+Override for renamed().
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="oldName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.updateDomainTable() -->
+<method name="updateDomainTable"  public="true">
+<description>
+Update domain table.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.updateNodeState() -->
+<method name="updateNodeState"  public="true">
+<description>
+Update local node state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Override for changed().
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.updateFaultCause() -->
+<method name="updateFaultCause"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<description>
+If new nvi,nvo,nci force regeneration of nv list.&#xa; If lonLink call lonLinkAdded() on destination nv.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.checkRemove(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="checkRemove"  public="true">
+<description>
+Override to add special handling for BLonlinks
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.removed(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="removed"  public="true">
+<description>
+Override to add special handling for BINetworkVariables and BLonlinks
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.knobAdded(javax.baja.sys.Knob, javax.baja.sys.Context) -->
+<method name="knobAdded"  public="true" final="true">
+<description>
+Called when a knob is activated.
+</description>
+<parameter name="knob">
+<type class="javax.baja.sys.Knob"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.knobRemoved(javax.baja.sys.Knob, javax.baja.sys.Context) -->
+<method name="knobRemoved"  public="true" final="true">
+<description>
+Called when a knob is deactivated.
+</description>
+<parameter name="knob">
+<type class="javax.baja.sys.Knob"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.postAsync(java.lang.Runnable) -->
+<method name="postAsync"  public="true">
+<description>
+Convenience for &lt;code&gt;getNetwork().postAsync(r)&lt;/code&gt;.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.postPing() -->
+<method name="postPing"  protected="true">
+<description>
+Post a ping Invocation.
+</description>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doUpload(javax.baja.driver.loadable.BUploadParameters, javax.baja.sys.Context) -->
+<method name="doUpload"  public="true" final="true">
+<description>
+Callback for processing upLoad.
+</description>
+<parameter name="params">
+<type class="javax.baja.driver.loadable.BUploadParameters"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doDownload(javax.baja.driver.loadable.BDownloadParameters, javax.baja.sys.Context) -->
+<method name="doDownload"  public="true" final="true">
+<description>
+Callback for processing downLoad.
+</description>
+<parameter name="params">
+<type class="javax.baja.driver.loadable.BDownloadParameters"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.checkState() -->
+<method name="checkState"  public="true">
+<description>
+Throw BajaRuntimeException if device is down or disabled.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.beginConfigWrite() -->
+<method name="beginConfigWrite"  public="true">
+<description>
+Override to do initial setup before a BConfigParameter or BNetworkConfig write.&#xa; This callback will not be made if write is due to download operation.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.endConfigWrite() -->
+<method name="endConfigWrite"  public="true">
+<description>
+Override to do cleanup after a BConfigParameter or BNetworkConfig write.&#xa; This callback will not be made if write is due to download operation.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description>
+Override to show ChangeableNvManager view in devices with&#xa; ProgramId indicating device has changeable nvs.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doReset() -->
+<method name="doReset"  public="true">
+<description>
+Send reset command to device.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doRenewProxies() -->
+<method name="doRenewProxies"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doInitImport() -->
+<method name="doInitImport"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doCloseImport() -->
+<method name="doCloseImport"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.lonDeviceInit() -->
+<method name="lonDeviceInit"  protected="true">
+<description>
+Override point for subclasses to do initialization before lonDevice&#xa; is registered.&#xa; &lt;p&gt; Only called if LonNetwork has been started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.lonDeviceStarted() -->
+<method name="lonDeviceStarted"  protected="true">
+<description>
+Override point for subclasses to do startup functions after device&#xa; is registered. Overrides &lt;code&gt;started()-&amp;gt;deviceStarted()&lt;/code&gt;&#xa; &lt;p&gt; Only called if LonNetwork has been started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.lonDeviceAtSteadyState() -->
+<method name="lonDeviceAtSteadyState"  protected="true">
+<description>
+Override point for subclasses to do startup functions after device&#xa;  station has reached steady state. Overrides atSteadyState();&#xa; &lt;p&gt; Only called if LonNetwork has been started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.lonDeviceStopped() -->
+<method name="lonDeviceStopped"  protected="true">
+<description>
+Override point for subclasses to do cleanup functions before device&#xa; is unregistered as the results of call to deviceStopped().&#xa; Overrides &lt;code&gt;stopped()-&amp;gt;deviceStopped()&lt;/code&gt;&#xa; &lt;p&gt; Only called if LonNetwork has been started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.deviceDataChanged(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="deviceDataChanged"  public="true">
+<description>
+Receive notification of change to device data.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.updateLocalState() -->
+<method name="updateLocalState"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.beginCommission() -->
+<method name="beginCommission"  public="true">
+<description>
+Override point for lon devices to perform any actions needed before&#xa; the device is commissioned or replaced.&#xa; &lt;p&gt;&#xa; Added in 3.6.32
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.postCommission() -->
+<method name="postCommission"  public="true">
+<description>
+Override point for lon devices to perform any actions needed after&#xa;  the device is commissioned or replaced.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.hasChangeableNvs() -->
+<method name="hasChangeableNvs"  public="true">
+<description>
+Check programId to determine if this device has changeable nvs.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.bound(int) -->
+<method name="bound"  public="true">
+<description>
+Callback during bind process when nv taken to bound state.
+</description>
+<parameter name="nvIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.unbound(int) -->
+<method name="unbound"  public="true">
+<description>
+Callback during bind process when nv taken to unbound state.
+</description>
+<parameter name="nvIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.bindComplete() -->
+<method name="bindComplete"  public="true">
+<description>
+Callback if device affected by bind after bind process is complete.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getMessageTag(int) -->
+<method name="getMessageTag"  public="true" final="true">
+<description>
+Find the message tag with the specified index.&#xa;  &lt;p&gt;
+</description>
+<parameter name="mtIndex">
+<type class="int"/>
+<description>
+The unque index of the message tag within device.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.BMessageTag"/>
+<description>
+The message tag with the specified index&#xa;          or null if not found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonDevice() -->
+<method name="getLonDevice"  public="true">
+<description/>
+<return>
+<type class="javax.baja.lonworks.BLonDevice"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonNetwork() -->
+<method name="getLonNetwork"  public="true">
+<description/>
+<return>
+<type class="javax.baja.lonworks.BLonNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isLonObject() -->
+<method name="isLonObject"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getNvContainers() -->
+<method name="getNvContainers"  public="true">
+<description>
+Get an array of BINvContainers in this device.
+</description>
+<return>
+<type class="javax.baja.lonworks.BINvContainer" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonObjects() -->
+<method name="getLonObjects"  public="true">
+<description>
+Get array of BLonObjects in this device.
+</description>
+<return>
+<type class="javax.baja.lonworks.BLonObject" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonObject(int) -->
+<method name="getLonObject"  public="true">
+<description/>
+<parameter name="objectId">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.BLonObject"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getNetworkVariable(int) -->
+<method name="getNetworkVariable"  public="true" final="true">
+<description>
+Find the network variable with the specified nvIndex.&#xa;  &lt;p&gt;
+</description>
+<parameter name="nvIndex">
+<type class="int"/>
+<description>
+The unque index of the nv within device.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.BNetworkVariable"/>
+<description>
+The network variable with the specified nvIndex&#xa;          or null if not found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getNetworkConfig(int) -->
+<method name="getNetworkConfig"  public="true" final="true">
+<description>
+Find the network config with the specified nvIndex.&#xa;  &lt;p&gt;
+</description>
+<parameter name="nvIndex">
+<type class="int"/>
+<description>
+The unque index of the nci within device.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.BNetworkConfig"/>
+<description>
+The network config with the specified nvIndex&#xa;          or null if not found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.findLonObjectNvProperty(int, int, int) -->
+<method name="findLonObjectNvProperty"  public="true" final="true">
+<description>
+Find the property for a particular network variable that is a specific member&#xa; of a specific object within the device.&#xa;  &lt;p&gt;
+</description>
+<parameter name="objectIndex">
+<type class="int"/>
+<description>
+The unque index of the object nv is member of.
+</description>
+</parameter>
+<parameter name="memberIndex">
+<type class="int"/>
+<description>
+The memberIndex within the object per the object definition.
+</description>
+</parameter>
+<parameter name="snvtType">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+<description>
+The property of the network variable with the specified objectIndex&#xa;         and memberIndex or null if not found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.findSnvtType(int) -->
+<method name="findSnvtType"  public="true" final="true">
+<description>
+Find a network variable of the specified snvt type.&#xa;  &lt;p&gt;
+</description>
+<parameter name="snvtType">
+<type class="int"/>
+<description>
+The snvt type id number to find.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.BINetworkVariable"/>
+<description>
+The first lowest nv index of the specified type.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getNetworkVariables() -->
+<method name="getNetworkVariables"  public="true" final="true">
+<description>
+Get array of NetworkVariables that are descendants of this&#xa; device. The nvs are indexed by nvIndex.  There will be null&#xa; entries for any given nv that is not represented in the&#xa; database.
+</description>
+<return>
+<type class="javax.baja.lonworks.BINetworkVariable" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getNetworkConfigs() -->
+<method name="getNetworkConfigs"  public="true" final="true">
+<description>
+Get new array of all BNetworkConfig objects in this device.
+</description>
+<return>
+<type class="javax.baja.lonworks.BNetworkConfig" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getConfigParameters() -->
+<method name="getConfigParameters"  public="true" final="true">
+<description>
+Get new array of all BConfigParameter objects in this device.
+</description>
+<return>
+<type class="javax.baja.lonworks.BConfigParameter" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.refreshNvList() -->
+<method name="refreshNvList"  public="true" final="true">
+<description>
+Force refresh of internal nv list.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getAlias(javax.baja.lonworks.BNetworkVariable, int) -->
+<method name="getAlias"  public="true" final="true">
+<description/>
+<parameter name="nv">
+<type class="javax.baja.lonworks.BNetworkVariable"/>
+</parameter>
+<parameter name="initialIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.datatypes.BAliasConfigData"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonProxies() -->
+<method name="getLonProxies"  public="true">
+<description/>
+<return>
+<type class="javax.baja.control.BControlPoint" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonProxies(javax.baja.lonworks.BLonComponent) -->
+<method name="getLonProxies"  public="true">
+<description>
+Get an array of proxies which target specified&#xa; BLonComponent. If null then get all proxies in this device.
+</description>
+<parameter name="lc">
+<type class="javax.baja.lonworks.BLonComponent"/>
+</parameter>
+<return>
+<type class="javax.baja.control.BControlPoint" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doPing() -->
+<method name="doPing"  public="true">
+<description>
+Implementation of the Pingable interface.&lt;p&gt;Determine if&#xa; the device can communicate and if so mark device up and&#xa; if not mark the device down.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isReadyForNvUpdates() -->
+<method name="isReadyForNvUpdates"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.doCheckLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="doCheckLink"  protected="true">
+<description>
+Override point for link validation between londevices.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.LinkCheck"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.linkUpdate() -->
+<method name="linkUpdate"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.makeLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="makeLink"  public="true" final="true">
+<description>
+Create an instance of BLink to use for a link to the specified&#xa; source component.  This method is used by Baja tools when users&#xa; create links via the &#x22;bajaui:javax.baja.ui.commands.LinkCommand&#x22;.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BLink"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isDownLoadInProgress() -->
+<method name="isDownLoadInProgress"  public="true" final="true">
+<description>
+Is a download in progress (i.e. has beginDownload() been called and not endDownload()).
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isUpLoadInProgress() -->
+<method name="isUpLoadInProgress"  public="true" final="true">
+<description>
+Is a upload in progress (i.e. has beginUpload() been called and not endUpload()).
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.checkUpload() -->
+<method name="checkUpload"  public="true">
+<description>
+Override point to customize upload process.  This will be called before the upload job is initiated.&#xa;  If a subclass wishes to cancel the upload, then a LocalizableRuntimeException should be thrown.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.beginUpload() -->
+<method name="beginUpload"  public="true">
+<description>
+Override point to customize upload process.  This will be called at the beginning of an upload operation.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.endUpload() -->
+<method name="endUpload"  public="true">
+<description>
+Override point to customize upload process.  This will be called after all device components have been uploaded.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.checkChangeNvType() -->
+<method name="checkChangeNvType"  public="true">
+<description>
+Override point to customize changeNvType job.  This will be called before the changeNvType job is initiated.&#xa; If a subclass wishes to cancel the changeNvType job, then a LocalizableRuntimeException should be thrown.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.changeNvTypeComplete() -->
+<method name="changeNvTypeComplete"  public="true">
+<description>
+Callback after changeNvType job is complete
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.checkDownload() -->
+<method name="checkDownload"  public="true">
+<description>
+Override point to customize download process.  This will be called before the download job is initiated.&#xa;  If a subclass wishes to cancel the download, then a LocalizableRuntimeException should be thrown.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.beginDownload() -->
+<method name="beginDownload"  public="true">
+<description>
+Override point to customize download process.  This will be called at the beginning of a download operation .
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.endDownload() -->
+<method name="endDownload"  public="true">
+<description>
+Override point to customize download process.  This will be called after all device components have been downloaded.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonFileOpen(int) -->
+<method name="getLonFileOpen"  public="true" final="true">
+<description>
+Convience call for getLonFileOpen(int fileNum, false, true)
+</description>
+<parameter name="fileNum">
+<type class="int"/>
+<description>
+The file index within the device of the desired file.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.util.LonFile"/>
+<description>
+A file object for access to the specified file if it exists,&#xa;          otherwise return null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getLonFileOpen(int, boolean, boolean) -->
+<method name="getLonFileOpen"  public="true" final="true">
+<description>
+Get a LonFile for access to the file with the specified fileNum.  Create&#xa;  and open files as needed.
+</description>
+<parameter name="fileNum">
+<type class="int"/>
+<description>
+The file index within the device of the desired file.
+</description>
+</parameter>
+<parameter name="create">
+<type class="boolean"/>
+<description>
+If true the file data will be zeroed - if false initial file contents will be read from device.
+</description>
+</parameter>
+<parameter name="random">
+<type class="boolean"/>
+<description>
+If true the allow random access (if supported by device) - if false entire contents of file will be written when file closed.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.util.LonFile"/>
+<description>
+A file object for access to the specified file if it exists,&#xa;          otherwise return null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getReadWriteFile() -->
+<method name="getReadWriteFile"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.lonworks.util.LonFile"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getReadOnlyFile() -->
+<method name="getReadOnlyFile"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.lonworks.util.LonFile"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.clearFiles() -->
+<method name="clearFiles"  public="true" final="true">
+<description>
+Force recreation of file objects on next access.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.disableObjectForCpWrite(javax.baja.lonworks.datatypes.BConfigProps) -->
+<method name="disableObjectForCpWrite"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated">since Niagara 4.13 - will be removed in Niagara 5.0</tag>
+<parameter name="configProps">
+<type class="javax.baja.lonworks.datatypes.BConfigProps"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.enableObject(javax.baja.lonworks.datatypes.BConfigProps) -->
+<method name="enableObject"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated">since Niagara 4.13 - will be removed in Niagara 5.0</tag>
+<parameter name="configProps">
+<type class="javax.baja.lonworks.datatypes.BConfigProps"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.resetDevice() -->
+<method name="resetDevice"  public="true" final="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated">since Niagara 4.13 - will be removed in Niagara 5.0</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.isObjectDisabled(int) -->
+<method name="isObjectDisabled"  public="true">
+<description>
+Check if the specified object is disabled. If the device&#xa; is not config online all objects are disable return true.  If&#xa; unable to access status throw RuntimeException.
+</description>
+<parameter name="objNdx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.enableObject(int, boolean) -->
+<method name="enableObject"  public="true">
+<description>
+Set the enable/disable state of the specified object.  Return true&#xa; if operation successfull.
+</description>
+<parameter name="objNdx">
+<type class="int"/>
+</parameter>
+<parameter name="en">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getMaxMessageLengthOut() -->
+<method name="getMaxMessageLengthOut"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.getMaxMessageLengthIn() -->
+<method name="getMaxMessageLengthIn"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.updateMaxMessageLength() -->
+<method name="updateMaxMessageLength"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.lonComm() -->
+<method name="lonComm"  public="true" final="true">
+<description>
+Convenience method to access the loncomm object.
+</description>
+<return>
+<type class="javax.baja.lonworks.LonComm"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.log() -->
+<method name="log"  public="true">
+<description>
+Convenience method to access the network log object.
+</description>
+<return>
+<type class="java.util.logging.Logger"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.lonNetwork() -->
+<method name="lonNetwork"  public="true" final="true">
+<description>
+Convenience method to access the network object.
+</description>
+<return>
+<type class="javax.baja.lonworks.BLonNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.BLonDevice.deviceData -->
+<field name="deviceData"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;deviceData&lt;/code&gt; property.&#xa; Contains data needed to represent devices&#x27; specific neuron chip.
+</description>
+<tag name="@see">#getDeviceData</tag>
+<tag name="@see">#setDeviceData</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.points -->
+<field name="points"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.messageIn -->
+<field name="messageIn"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;messageIn&lt;/code&gt; property.&#xa; Linkable input for message tags
+</description>
+<tag name="@see">#getMessageIn</tag>
+<tag name="@see">#setMessageIn</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.upload -->
+<field name="upload"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;upload&lt;/code&gt; action.&#xa; Upload reads data from the physical device.
+</description>
+<tag name="@see">#upload(BUploadParameters parameter)</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.download -->
+<field name="download"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;download&lt;/code&gt; action.&#xa; Download writes data to the physical device.
+</description>
+<tag name="@see">#download(BDownloadParameters parameter)</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.reset -->
+<field name="reset"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;reset&lt;/code&gt; action.&#xa; reset device
+</description>
+<tag name="@see">#reset()</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.renewProxies -->
+<field name="renewProxies"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;renewProxies&lt;/code&gt; action.&#xa; resolve all proxy links to target component
+</description>
+<tag name="@see">#renewProxies()</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.initImport -->
+<field name="initImport"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;initImport&lt;/code&gt; action.
+</description>
+<tag name="@see">#initImport()</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.closeImport -->
+<field name="closeImport"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;closeImport&lt;/code&gt; action.
+</description>
+<tag name="@see">#closeImport()</tag>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.staleNvList -->
+<field name="staleNvList"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.dataPntMismatchCount -->
+<field name="dataPntMismatchCount"  public="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.log -->
+<field name="log"  protected="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.downloading -->
+<field name="downloading"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.BLonDevice.uploading -->
+<field name="uploading"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="rdb" runtimeProfile="rt" qualifiedName="javax.baja.rdb.history.BRdbmsHistoryExport" name="BRdbmsHistoryExport" packageName="javax.baja.rdb.history" public="true" abstract="true">
+<description>
+BRdbmsHistoryExport defines an archive action for transferring&#xa; one or more histories from the local source to a relational database.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">24 Jul 03</tag>
+<tag name="@version">$Revision: 28$ $Date: 1/12/11 9:20:53 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.driver.history.BHistoryExport"/>
+</extends>
+<property name="userName" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.&#xa; If defined, this will be used instead of the loginName&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#getUserName</tag>
+<tag name="@see">#setUserName</tag>
+</property>
+
+<property name="password" flags="">
+<type class="javax.baja.security.BPassword"/>
+<description>
+Slot for the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.&#xa; If defined, this will be used instead of the loginPassword&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#getPassword</tag>
+<tag name="@see">#setPassword</tag>
+</property>
+
+<property name="lastTimestamp" flags="rd">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastTimestamp&lt;/code&gt; property.&#xa; Represents the maximum timestamp value of any exported record.&#xa; If this value is null, then all the history records will be exported.&#xa; Otherwise, only those history records with a timestamp newer than this&#xa; value will be exported.&#xa; After a successful export, this value is set to the maximum&#xa; timestamp value of any of the records that were exported.
+</description>
+<tag name="@see">#getLastTimestamp</tag>
+<tag name="@see">#setLastTimestamp</tag>
+</property>
+
+<property name="exportInvalidValues" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;exportInvalidValues&lt;/code&gt; property.&#xa; A flag that allows skipping of nan and +/- inf values from being exported&#xa; in most cases if a infinite value is exported the database will store the max or min possible value&#xa; if nan is exported it will go into the database as a null
+</description>
+<tag name="@see">#getExportInvalidValues</tag>
+<tag name="@see">#setExportInvalidValues</tag>
+</property>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport() -->
+<constructor name="BRdbmsHistoryExport" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.getUserName() -->
+<method name="getUserName"  public="true">
+<description>
+Get the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.&#xa; If defined, this will be used instead of the loginName&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#userName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.setUserName(java.lang.String) -->
+<method name="setUserName"  public="true">
+<description>
+Set the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.&#xa; If defined, this will be used instead of the loginName&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#userName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.getPassword() -->
+<method name="getPassword"  public="true">
+<description>
+Get the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.&#xa; If defined, this will be used instead of the loginPassword&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#password</tag>
+<return>
+<type class="javax.baja.security.BPassword"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.setPassword(javax.baja.security.BPassword) -->
+<method name="setPassword"  public="true">
+<description>
+Set the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.&#xa; If defined, this will be used instead of the loginPassword&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#password</tag>
+<parameter name="v">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.getLastTimestamp() -->
+<method name="getLastTimestamp"  public="true">
+<description>
+Get the &lt;code&gt;lastTimestamp&lt;/code&gt; property.&#xa; Represents the maximum timestamp value of any exported record.&#xa; If this value is null, then all the history records will be exported.&#xa; Otherwise, only those history records with a timestamp newer than this&#xa; value will be exported.&#xa; After a successful export, this value is set to the maximum&#xa; timestamp value of any of the records that were exported.
+</description>
+<tag name="@see">#lastTimestamp</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.setLastTimestamp(javax.baja.sys.BAbsTime) -->
+<method name="setLastTimestamp"  public="true">
+<description>
+Set the &lt;code&gt;lastTimestamp&lt;/code&gt; property.&#xa; Represents the maximum timestamp value of any exported record.&#xa; If this value is null, then all the history records will be exported.&#xa; Otherwise, only those history records with a timestamp newer than this&#xa; value will be exported.&#xa; After a successful export, this value is set to the maximum&#xa; timestamp value of any of the records that were exported.
+</description>
+<tag name="@see">#lastTimestamp</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.getExportInvalidValues() -->
+<method name="getExportInvalidValues"  public="true">
+<description>
+Get the &lt;code&gt;exportInvalidValues&lt;/code&gt; property.&#xa; A flag that allows skipping of nan and +/- inf values from being exported&#xa; in most cases if a infinite value is exported the database will store the max or min possible value&#xa; if nan is exported it will go into the database as a null
+</description>
+<tag name="@see">#exportInvalidValues</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.setExportInvalidValues(boolean) -->
+<method name="setExportInvalidValues"  public="true">
+<description>
+Set the &lt;code&gt;exportInvalidValues&lt;/code&gt; property.&#xa; A flag that allows skipping of nan and +/- inf values from being exported&#xa; in most cases if a infinite value is exported the database will store the max or min possible value&#xa; if nan is exported it will go into the database as a null
+</description>
+<tag name="@see">#exportInvalidValues</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.doExecute() -->
+<method name="doExecute"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Export the table to the target database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.postExecute(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="postExecute"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+postExecute
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.userName -->
+<field name="userName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.&#xa; If defined, this will be used instead of the loginName&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#getUserName</tag>
+<tag name="@see">#setUserName</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.password -->
+<field name="password"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.&#xa; If defined, this will be used instead of the loginPassword&#xa; that is defined on the relational database.
+</description>
+<tag name="@see">#getPassword</tag>
+<tag name="@see">#setPassword</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.lastTimestamp -->
+<field name="lastTimestamp"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastTimestamp&lt;/code&gt; property.&#xa; Represents the maximum timestamp value of any exported record.&#xa; If this value is null, then all the history records will be exported.&#xa; Otherwise, only those history records with a timestamp newer than this&#xa; value will be exported.&#xa; After a successful export, this value is set to the maximum&#xa; timestamp value of any of the records that were exported.
+</description>
+<tag name="@see">#getLastTimestamp</tag>
+<tag name="@see">#setLastTimestamp</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.exportInvalidValues -->
+<field name="exportInvalidValues"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;exportInvalidValues&lt;/code&gt; property.&#xa; A flag that allows skipping of nan and +/- inf values from being exported&#xa; in most cases if a infinite value is exported the database will store the max or min possible value&#xa; if nan is exported it will go into the database as a null
+</description>
+<tag name="@see">#getExportInvalidValues</tag>
+<tag name="@see">#setExportInvalidValues</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryExport.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.nav.tree.NavTreeNode" name="NavTreeNode" packageName="javax.baja.workbench.nav.tree" public="true">
+<description>
+NavTreeNode is a TreeNode used to visualize a BINavNode.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">14 Jan 03</tag>
+<tag name="@version">$Revision: 38$ $Date: 7/15/11 4:30:28 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.tree.TreeNode"/>
+</extends>
+<!-- javax.baja.workbench.nav.tree.NavTreeNode(javax.baja.workbench.nav.tree.NavTreeNode, javax.baja.nav.BINavNode) -->
+<constructor name="NavTreeNode" public="true">
+<parameter name="parent">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<parameter name="navNode">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<description>
+Construct a node as a child of the specified parent.&#xa; Nodes should be created using NavTreeModel as a factory.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode(javax.baja.workbench.nav.tree.NavTreeModel, javax.baja.workbench.nav.tree.NavTreeNode, javax.baja.nav.BINavNode) -->
+<constructor name="NavTreeNode" public="true">
+<parameter name="model">
+<type class="javax.baja.workbench.nav.tree.NavTreeModel"/>
+</parameter>
+<parameter name="parent">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<parameter name="navNode">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<description>
+Construct a NavTreeNode.  This method automatically&#xa; registers the node with the model using the specified&#xa; BINavNode key.  Nodes should be created using NavTreeModel&#xa; as a factory.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getSubject() -->
+<method name="getSubject"  public="true">
+<description>
+Get the target BINavNode.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getNavNode() -->
+<method name="getNavNode"  public="true">
+<description>
+Get the target BINavNode.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getText() -->
+<method name="getText"  public="true">
+<description>
+Return &lt;code&gt;navNode.getNavDisplayName()&lt;/code&gt;
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Return image for &lt;code&gt;navNode.getNavIcon()&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.hasChildren() -->
+<method name="hasChildren"  public="true">
+<description>
+Return &lt;code&gt;navNode.hasNavChildren()&lt;/code&gt;
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getChildCount() -->
+<method name="getChildCount"  public="true">
+<description>
+Convenience for &lt;code&gt;getChildren().length&lt;/code&gt;
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getChild(int) -->
+<method name="getChild"  public="true">
+<description>
+Convenience for &lt;code&gt;getChildren()[index]&lt;/code&gt;
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.tree.TreeNode"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getChild(java.lang.String, boolean) -->
+<method name="getChild"  public="true">
+<description>
+Get a child by name or return null.  If we haven&#x27;t&#xa; tried to load the children yet, then the autoLoad&#xa; flag indicates if that should be attempted first.&#xa; Return null if no matching child node.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="autoLoad">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getChild(javax.baja.nav.BINavNode, boolean) -->
+<method name="getChild"  public="true">
+<description>
+Get a child nav node where eqaulity is determined using&#xa; the BINavNode.equals() method.  If we haven&#x27;t tried to&#xa; load the children yet, then the autoLoad flag indicates&#xa; if that should be attempted first.  Return null if no&#xa; matching child node.
+</description>
+<parameter name="navNode">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<parameter name="autoLoad">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.getChildren() -->
+<method name="getChildren"  public="true">
+<description>
+If the children have not been build yet then call&#xa; buildChildren() and cache the result.  Otherwise&#xa; return the cached children node.
+</description>
+<return>
+<type class="javax.baja.workbench.nav.tree.NavTreeNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.buildChildren() -->
+<method name="buildChildren"  protected="true">
+<description>
+Build the list of children nodes using the navNode&#x27;s&#xa; getNavChildren() method.  Each of the tree nodes is&#xa; created using NavTreeModel.makeNavTreeNode().
+</description>
+<return>
+<type class="javax.baja.workbench.nav.tree.NavTreeNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.addChild(javax.baja.workbench.nav.tree.NavTreeNode) -->
+<method name="addChild"  public="true">
+<description>
+Add the child node and update the tree.
+</description>
+<parameter name="child">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.removeChild(javax.baja.workbench.nav.tree.NavTreeNode) -->
+<method name="removeChild"  public="true">
+<description>
+Remove the specified child and update the tree.
+</description>
+<parameter name="child">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.replaceChild(javax.baja.workbench.nav.tree.NavTreeNode, javax.baja.workbench.nav.tree.NavTreeNode) -->
+<method name="replaceChild"  public="true">
+<description>
+Replace the specified child and update the tree.
+</description>
+<parameter name="oldChild">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<parameter name="newChild">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.expanded() -->
+<method name="expanded"  public="true">
+<description>
+Callback when the node is expanded.
+</description>
+<tag name="@since">Niagara 3.2</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.performingRefresh(javax.baja.nav.BINavNode) -->
+<method name="performingRefresh"  public="true" static="true">
+<description>
+If the current thread is in the middle of refreshing the given&#xa; nav node, return true.  Otherwise, return false.  Also returns&#xa; false always if the supplied nav node is null.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="navNode">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.refresh() -->
+<method name="refresh"  public="true">
+<description>
+Refresh forces this tree node to attempt to rebuild its&#xa; children without unnecessary changes to the expansion state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.resetSession() -->
+<method name="resetSession"  public="true">
+<description>
+This method is used to refresh the sesh&#x27; when a user&#xa; interacts with the nav tree, in order to prevent being&#xa; automatically logged out.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeNode.children -->
+<field name="children"  protected="true">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode" dimension="1"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

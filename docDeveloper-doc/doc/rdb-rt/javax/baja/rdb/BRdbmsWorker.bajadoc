@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="rdb" runtimeProfile="rt" qualifiedName="javax.baja.rdb.BRdbmsWorker" name="BRdbmsWorker" packageName="javax.baja.rdb" public="true">
+<description>
+BRdbmsWorker manages the queue and worker for &#xa; asynchronous operations on a single database.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">18 Feb 2004</tag>
+<tag name="@version">$Revision: 6$ $Date: 2/22/09 3:21:20 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.util.BThreadPoolWorker"/>
+</extends>
+<property name="maxQueueSize" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; the size of the working queue
+</description>
+<tag name="@see">#getMaxQueueSize</tag>
+<tag name="@see">#setMaxQueueSize</tag>
+</property>
+
+<!-- javax.baja.rdb.BRdbmsWorker() -->
+<constructor name="BRdbmsWorker" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.rdb.BRdbmsWorker(int) -->
+<constructor name="BRdbmsWorker" public="true">
+<parameter name="maxThreads">
+<type class="int"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.rdb.BRdbmsWorker.getMaxQueueSize() -->
+<method name="getMaxQueueSize"  public="true">
+<description>
+Get the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; the size of the working queue
+</description>
+<tag name="@see">#maxQueueSize</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.setMaxQueueSize(int) -->
+<method name="setMaxQueueSize"  public="true">
+<description>
+Set the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; the size of the working queue
+</description>
+<tag name="@see">#maxQueueSize</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.postAsync(java.lang.Runnable) -->
+<method name="postAsync"  public="true">
+<description>
+Post an action to be run asynchronously.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.getWorker() -->
+<method name="getWorker"  public="true">
+<description>
+Start running this task.
+</description>
+<return>
+<type class="javax.baja.util.Worker"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.getWorkerThreadName() -->
+<method name="getWorkerThreadName"  protected="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Callback when a property (or possibly a ancestor of&#xa; that property) is modified on this component.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.rdb.BRdbmsWorker.maxThreads -->
+<field name="maxThreads"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxThreads&lt;/code&gt; property.&#xa; Slot for the &lt;code&gt;maxThreads&lt;/code&gt; property.&#xa; Max number of concurrent threads for working.&#xa; The default is one thread.&#xa; Each thread uses one JDBC Connection to communicate with&#xa; the database, so there will be as many connections created&#xa; as there are threads.
+</description>
+<tag name="@see">#getMaxThreads</tag>
+<tag name="@see">#setMaxThreads</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbmsWorker.maxQueueSize -->
+<field name="maxQueueSize"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; the size of the working queue
+</description>
+<tag name="@see">#getMaxQueueSize</tag>
+<tag name="@see">#setMaxQueueSize</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbmsWorker.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

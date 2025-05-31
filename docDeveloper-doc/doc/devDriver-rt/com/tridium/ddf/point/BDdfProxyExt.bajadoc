@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.point.BDdfProxyExt" name="BDdfProxyExt" packageName="com.tridium.ddf.point" public="true" abstract="true">
+<description>
+Drivers that build off of the ddf should&#xa; provide at least one proxy extension class that extends this&#xa; class.&#xa;&#xa; This automatically pings, polls, writes, and auto&#x27;s the proxy extension&#xa; as necessary.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.driver.point.BProxyExt"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.poll.BIDdfPollable"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.point.BIDdfWritable"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<property name="readParameters" flags="">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+Slot for the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; Provides information to the read request telling it how to retrieve the&#xa; value for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent readParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-poll behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to extend BDdfReadParams or implement BIDdfReadParams.
+</description>
+<tag name="@see">#getReadParameters</tag>
+<tag name="@see">#setReadParameters</tag>
+</property>
+
+<property name="writeParameters" flags="">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+Slot for the &lt;code&gt;writeParameters&lt;/code&gt; property.&#xa; Provides information to the write request telling it how to update the&#xa; value in the field-device for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent writeParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-write behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to implement BIDdfWriteParams.
+</description>
+<tag name="@see">#getWriteParameters</tag>
+<tag name="@see">#setWriteParameters</tag>
+</property>
+
+<property name="pointId" flags="">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+Slot for the &lt;code&gt;pointId&lt;/code&gt; property.&#xa; Provides information to the read response and/or the write request.&#xa;&#xa; The driver developer can use this while coding the read response&#xa; to parse the data from the received data for this particular proxy.&#xa;&#xa; The driver developer can use this write coding the write request&#x27;s&#xa; toByteArray method to fill in the portion of byte array that transmits&#xa; this particular point&#x27;s value to the field-device.&#xa;&#xa; Descendants need to override this property and define the default&#xa; As an instance of their driver&#x27;s DdfIdParams.
+</description>
+<tag name="@see">#getPointId</tag>
+<tag name="@see">#setPointId</tag>
+</property>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt() -->
+<constructor name="BDdfProxyExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getReadParameters() -->
+<method name="getReadParameters"  public="true">
+<description>
+Get the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; Provides information to the read request telling it how to retrieve the&#xa; value for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent readParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-poll behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to extend BDdfReadParams or implement BIDdfReadParams.
+</description>
+<tag name="@see">#readParameters</tag>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.setReadParameters(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setReadParameters"  public="true">
+<description>
+Set the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; Provides information to the read request telling it how to retrieve the&#xa; value for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent readParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-poll behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to extend BDdfReadParams or implement BIDdfReadParams.
+</description>
+<tag name="@see">#readParameters</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getWriteParameters() -->
+<method name="getWriteParameters"  public="true">
+<description>
+Get the &lt;code&gt;writeParameters&lt;/code&gt; property.&#xa; Provides information to the write request telling it how to update the&#xa; value in the field-device for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent writeParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-write behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to implement BIDdfWriteParams.
+</description>
+<tag name="@see">#writeParameters</tag>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.setWriteParameters(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setWriteParameters"  public="true">
+<description>
+Set the &lt;code&gt;writeParameters&lt;/code&gt; property.&#xa; Provides information to the write request telling it how to update the&#xa; value in the field-device for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent writeParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-write behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to implement BIDdfWriteParams.
+</description>
+<tag name="@see">#writeParameters</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getPointId() -->
+<method name="getPointId"  public="true">
+<description>
+Get the &lt;code&gt;pointId&lt;/code&gt; property.&#xa; Provides information to the read response and/or the write request.&#xa;&#xa; The driver developer can use this while coding the read response&#xa; to parse the data from the received data for this particular proxy.&#xa;&#xa; The driver developer can use this write coding the write request&#x27;s&#xa; toByteArray method to fill in the portion of byte array that transmits&#xa; this particular point&#x27;s value to the field-device.&#xa;&#xa; Descendants need to override this property and define the default&#xa; As an instance of their driver&#x27;s DdfIdParams.
+</description>
+<tag name="@see">#pointId</tag>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.setPointId(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setPointId"  public="true">
+<description>
+Set the &lt;code&gt;pointId&lt;/code&gt; property.&#xa; Provides information to the read response and/or the write request.&#xa;&#xa; The driver developer can use this while coding the read response&#xa; to parse the data from the received data for this particular proxy.&#xa;&#xa; The driver developer can use this write coding the write request&#x27;s&#xa; toByteArray method to fill in the portion of byte array that transmits&#xa; this particular point&#x27;s value to the field-device.&#xa;&#xa; Descendants need to override this property and define the default&#xa; As an instance of their driver&#x27;s DdfIdParams.
+</description>
+<tag name="@see">#pointId</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+Extensions may only be placed in BControlPoints.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.started() -->
+<method name="started"  public="true" final="true">
+<description>
+Although this method is declared as final, descendants may&#xa; override the &#x27;proxyExtStarted&#x27; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.stopped() -->
+<method name="stopped"  public="true" final="true">
+<description>
+Although this method is declared as final, descendants may&#xa; override the &#x27;proxyExtStopped&#x27; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true" final="true">
+<description>
+Although this method is declared as final, descendants may&#xa; override the &#x27;proxyExtChanged&#x27; method.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.writeFail(java.lang.String) -->
+<method name="writeFail"  public="true">
+<description>
+This method is called when a write to the device&#xa; fails for any reason.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.write(javax.baja.sys.Context) -->
+<method name="write"  public="true">
+<description>
+This callback is made when a write is desired based on the&#xa; current status and tuning. This method posts a Runnable&#xa; to the network&#x27;s background processor thread. The Runnable&#xa; then calls this object&#x27;s doWrite or doAuto method from the&#xa; background processor thread, where it is safe to perform&#xa; foreign communication.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+false always.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.readSubscribed(javax.baja.sys.Context) -->
+<method name="readSubscribed"  public="true" synchronized="true">
+<description>
+This callback is made when the point enters a subscribed&#xa; state based on the current status and tuning.  The driver&#xa; should register for changes or begin polling.  Any IO should&#xa; be done asynchronously on another thread - never block the&#xa; calling thread.  The result of reads should be to call the&#xa; readOk() or readFail() method.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.readUnsubscribed(javax.baja.sys.Context) -->
+<method name="readUnsubscribed"  public="true" synchronized="true">
+<description>
+This callback is made when the point exits the subscribed&#xa; state based on the current status and tuning.  The driver&#xa; should unregister for changes of cease polling.  Any IO should&#xa; be done asynchronously on another thread - never block the&#xa; calling thread.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getMode() -->
+<method name="getMode"  public="true">
+<description>
+Provides a reasonable default implementation. If under a writable point then&#xa; this returns BReadWriteMode.readWrite. Otherwise this proxy is under a control&#xa; point that is not a Writable so this method returns BReadWriteMode.readOnly.
+</description>
+<return>
+<type class="javax.baja.driver.point.BReadWriteMode"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.logWriteFail() -->
+<method name="logWriteFail"  protected="true">
+<description>
+This is an override point to allow descendant classes to override&#xa; the default behavior of the BBasicProxyExt.writeFail method.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getFacets() -->
+<method name="getFacets"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getReadRequestType() -->
+<method name="getReadRequestType"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getPollGroupCode() -->
+<method name="getPollGroupCode"  public="true" synchronized="true">
+<description/>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.makePollRequest() -->
+<method name="makePollRequest"  public="true">
+<description>
+Automatically creates an an instance of BIDdfReadRequest to be placed on the ddf&#xa; communcator. The ddf communicator can &#x27;transmit&#x27; the serialized data from that&#xa; BIDdfRequest onto the field-bus and make callbacks to that BIDdfReadRequest object&#xa; when the response is receive or timed out.&#xa;&#xa; This is automatic behavior. To take advantage of this, the driver developer needs&#xa; to simply define the readParameters of the descendant proxy ext class. The readParameters specifies&#xa; the read request type. The default behavior will be to instantiate an object of the&#xa; read request type, assign it the response timeout from the ddf communicator&#x27;s&#xa; receiver, assign it the initial remainingReturnCount from the ddf communicator&#x27;s&#xa; transmitter, assign it the deviceId from the proxy&#x27;s device, assign it&#xa; a copy of the proxy&#x27;s readParameters, if the read request is also a ping request&#xa; then assign it&#x27;s pingableSource as all devices with the equivalent deviceId,&#xa; and then return resulting read request.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.req.BIDdfReadRequest"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getWriteRequestType() -->
+<method name="getWriteRequestType"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.makeAutoRequest() -->
+<method name="makeAutoRequest"  public="true">
+<description>
+Automatically creates an an instance of BIDdfWriteReqeust to be placed on the ddf&#xa; communcator to reqlinquish control of the point from Niagara. The ddf communicator can&#xa; &#x27;transmit&#x27; the serialized data from that BIDdfRequest onto the field-bus and make callbacks&#xa; to that BIDdfWriteRequest object when the response is receive or timed out.&#xa;&#xa; This is automatic behavior. To take advantage of this, the driver developer needs&#xa; to simply define the writeParameters of the descendant proxy ext class. The writeParameters specifies&#xa; in turn the auto-request types. The default behavior will be to instantiate an object of&#xa; the first type that is returned in the getDdfAutoRequestTypes() method of the writeParameters.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.req.BIDdfWriteRequest"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.makeWriteRequest() -->
+<method name="makeWriteRequest"  public="true">
+<description>
+Automatically creates an an instance of BIDdfWriteReqeust to be placed on the ddf&#xa; communcator. The ddf communicator can &#x27;transmit&#x27; the serialized data from that&#xa; BIDdfRequest onto the field-bus and make callbacks to that BIDdfWriteRequest object&#xa; when the response is receive or timed out.&#xa;&#xa; This is automatic behavior. To take advantage of this, the driver developer needs&#xa; to simply define the writeParameters of the descendant proxy ext class. The writeParameters specifies&#xa; in turn the write request types. The default behavior will be to instantiate an object of&#xa; the first type that is returned in the getDdfWriteRequestTypes() method of the writeParameters.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.req.BIDdfWriteRequest"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getDdfDevice() -->
+<method name="getDdfDevice"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddf.BDdfDevice"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.proxyExtStarted() -->
+<method name="proxyExtStarted"  protected="true">
+<description>
+This is called from the Niagara AX started callback. Descendants can&#xa; safely extend this without having to call super.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.proxyExtStopped() -->
+<method name="proxyExtStopped"  protected="true">
+<description>
+This is called from the Niagara AX stopped callback. Descendants can&#xa; safely extend this without having to call super.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.proxyExtChanged(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="proxyExtChanged"  protected="true">
+<description>
+This is called from the Niagara AX changed callback. Descendants can&#xa; safely extend this without having to call super.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.getAutoRequestType() -->
+<method name="getAutoRequestType"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.doAuto() -->
+<method name="doAuto"  public="true">
+<description>
+This method is called when all control logic is relinquished&#xa; for this point in the event that there is no fallback value.&#xa; It allows the driver to take special action to inform the foreign&#xa; equipment that the particular point is no longer under control&#xa; of Niagara AX. Please note that not all protocols support this.&#xa;&#xa; If a protocol does not support &#x27;auto&#x27;ing a point, then this method&#xa; should not be implemented.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.doWrite(javax.baja.status.BStatusValue) -->
+<method name="doWrite"  public="true">
+<description>
+This callback from asynchronous thread to send a write to the device.&#xa; Can be implemented by subclasses!
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.readParameters -->
+<field name="readParameters"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; Provides information to the read request telling it how to retrieve the&#xa; value for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent readParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-poll behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to extend BDdfReadParams or implement BIDdfReadParams.
+</description>
+<tag name="@see">#getReadParameters</tag>
+<tag name="@see">#setReadParameters</tag>
+</field>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.writeParameters -->
+<field name="writeParameters"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;writeParameters&lt;/code&gt; property.&#xa; Provides information to the write request telling it how to update the&#xa; value in the field-device for this proxy and all other proxy&#x27;s under the same device with the&#xa; equivalent writeParameters. This is fundamental to the developer driver framework&#x27;s&#xa; auto-write behavior, especially for its ability to automatically group multiple&#xa; proxies into the same request on the field-bus whenever possible.&#xa; The default value needs to implement BIDdfWriteParams.
+</description>
+<tag name="@see">#getWriteParameters</tag>
+<tag name="@see">#setWriteParameters</tag>
+</field>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.pointId -->
+<field name="pointId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pointId&lt;/code&gt; property.&#xa; Provides information to the read response and/or the write request.&#xa;&#xa; The driver developer can use this while coding the read response&#xa; to parse the data from the received data for this particular proxy.&#xa;&#xa; The driver developer can use this write coding the write request&#x27;s&#xa; toByteArray method to fill in the portion of byte array that transmits&#xa; this particular point&#x27;s value to the field-device.&#xa;&#xa; Descendants need to override this property and define the default&#xa; As an instance of their driver&#x27;s DdfIdParams.
+</description>
+<tag name="@see">#getPointId</tag>
+<tag name="@see">#setPointId</tag>
+</field>
+
+<!-- com.tridium.ddf.point.BDdfProxyExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

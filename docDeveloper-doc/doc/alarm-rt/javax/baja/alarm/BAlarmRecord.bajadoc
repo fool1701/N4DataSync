@@ -1,0 +1,1319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.BAlarmRecord" name="BAlarmRecord" packageName="javax.baja.alarm" public="true" final="true">
+<description>
+Representation of a time stamped alarm record.&#xa;&#xa;&lt;p&gt;&#xa; Alarm records are mutable records that are capable of changing&#xa; type as their state changes.  For more information on state changes,&#xa; refer to the package documentation.  Typical state changes include:&#xa;   &lt;ul&gt;&#xa;     &lt;li&gt;Alarm -&amp;gt; Alarm Ack Request -&amp;gt; Alarm Ack Notification&lt;/li&gt;&#xa;   &lt;/ul&gt;
+</description>
+<tag name="@author">Blake M Puhak</tag>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">16 Feb 01</tag>
+<tag name="@version">$Revision: 84$ $Date: 10/6/10 3:15:16 PM EDT$javax.baja.alarm.BAlarmRecord(3666406805)1.0$ @</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<property name="timestamp" flags="s">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; The time that the alarm was generated.
+</description>
+<tag name="@see">#getTimestamp</tag>
+<tag name="@see">#setTimestamp</tag>
+</property>
+
+<property name="uuid" flags="">
+<type class="javax.baja.util.BUuid"/>
+<description>
+Slot for the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#getUuid</tag>
+<tag name="@see">#setUuid</tag>
+</property>
+
+<property name="sourceState" flags="">
+<type class="javax.baja.alarm.BSourceState"/>
+<description>
+Slot for the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#getSourceState</tag>
+<tag name="@see">#setSourceState</tag>
+</property>
+
+<property name="ackState" flags="">
+<type class="javax.baja.alarm.BAckState"/>
+<description>
+Slot for the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#getAckState</tag>
+<tag name="@see">#setAckState</tag>
+</property>
+
+<property name="ackRequired" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#getAckRequired</tag>
+<tag name="@see">#setAckRequired</tag>
+</property>
+
+<property name="source" flags="s">
+<type class="javax.baja.naming.BOrdList"/>
+<description>
+Slot for the &lt;code&gt;source&lt;/code&gt; property.&#xa; The path to the source of the alarm. Should use getNavOrd().
+</description>
+<tag name="@see">#getSource</tag>
+<tag name="@see">#setSource</tag>
+</property>
+
+<property name="alarmClass" flags="s">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;alarmClass&lt;/code&gt; property.&#xa; The path to the alarm class of the alarm.  In BacSpeak, the Notification&#xa; class of the alarm.  Essentially, the routing information.
+</description>
+<tag name="@see">#getAlarmClass</tag>
+<tag name="@see">#setAlarmClass</tag>
+</property>
+
+<property name="priority" flags="s">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#getPriority</tag>
+<tag name="@see">#setPriority</tag>
+</property>
+
+<property name="normalTime" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#getNormalTime</tag>
+<tag name="@see">#setNormalTime</tag>
+</property>
+
+<property name="ackTime" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note: that interpretation of this&#xa; property&#x27;s value depends upon the state of the alarm.
+</description>
+<tag name="@see">#getAckTime</tag>
+<tag name="@see">#setAckTime</tag>
+</property>
+
+<property name="user" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;user&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#getUser</tag>
+<tag name="@see">#setUser</tag>
+</property>
+
+<property name="alarmData" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;alarmData&lt;/code&gt; property.&#xa; Containing dynamic alarm data, in key-value pairs.
+</description>
+<tag name="@see">#getAlarmData</tag>
+<tag name="@see">#setAlarmData</tag>
+</property>
+
+<property name="alarmTransition" flags="">
+<type class="javax.baja.alarm.BSourceState"/>
+<description>
+Slot for the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#getAlarmTransition</tag>
+<tag name="@see">#setAlarmTransition</tag>
+</property>
+
+<property name="lastUpdate" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occur at creation,&#xa; acknowledgement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#getLastUpdate</tag>
+<tag name="@see">#setLastUpdate</tag>
+</property>
+
+<!-- javax.baja.alarm.BAlarmRecord() -->
+<constructor name="BAlarmRecord" public="true">
+<description>
+Create a default instance of an alarm record without creating&#xa; a new BUuid, to avoid consuming entropy. If a new BUuid is&#xa; required, use new BAlarmRecord(BUuid.make()).
+</description>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmRecord(javax.baja.util.BUuid) -->
+<constructor name="BAlarmRecord" public="true">
+<parameter name="uuid">
+<type class="javax.baja.util.BUuid"/>
+<description>
+The uuid for this alarm record.
+</description>
+</parameter>
+<description>
+Creates a new default instance of an alarm record
+</description>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmRecord(javax.baja.sys.BComponent, java.lang.String, javax.baja.sys.BFacets) -->
+<constructor name="BAlarmRecord" public="true">
+<parameter name="comp">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="alarmClass">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="alarmData">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmRecord(javax.baja.sys.BComponent, java.lang.String, javax.baja.sys.BFacets, javax.baja.util.BUuid) -->
+<constructor name="BAlarmRecord" public="true">
+<parameter name="comp">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="alarmClass">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="alarmData">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="uuid">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmRecord(javax.baja.naming.BOrd, java.lang.String, javax.baja.sys.BFacets) -->
+<constructor name="BAlarmRecord" public="true">
+<parameter name="source">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+The string identifier of the alarm source.
+</description>
+</parameter>
+<parameter name="alarmClass">
+<type class="java.lang.String"/>
+<description>
+The class of the alarm used for notification/routing&#xa;   of the alarm.
+</description>
+</parameter>
+<parameter name="alarmData">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+The dynamic alarm data.
+</description>
+</parameter>
+<description>
+Create a new instance of an alarm record.
+</description>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmRecord(javax.baja.naming.BOrd, java.lang.String, javax.baja.sys.BFacets, javax.baja.util.BUuid) -->
+<constructor name="BAlarmRecord" public="true">
+<parameter name="source">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+The string identifier of the alarm source.
+</description>
+</parameter>
+<parameter name="alarmClass">
+<type class="java.lang.String"/>
+<description>
+The class of the alarm used for notification/routing&#xa;   of the alarm.
+</description>
+</parameter>
+<parameter name="alarmData">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+The dynamic alarm data.
+</description>
+</parameter>
+<parameter name="uuid">
+<type class="javax.baja.util.BUuid"/>
+<description>
+The uuid for this alarm record.
+</description>
+</parameter>
+<description>
+Create a new instance of an alarm record.
+</description>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmRecord.getTimestamp() -->
+<method name="getTimestamp"  public="true">
+<description>
+Get the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; The time that the alarm was generated.
+</description>
+<tag name="@see">#timestamp</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setTimestamp(javax.baja.sys.BAbsTime) -->
+<method name="setTimestamp"  public="true">
+<description>
+Set the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; The time that the alarm was generated.
+</description>
+<tag name="@see">#timestamp</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getUuid() -->
+<method name="getUuid"  public="true">
+<description>
+Get the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#uuid</tag>
+<return>
+<type class="javax.baja.util.BUuid"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setUuid(javax.baja.util.BUuid) -->
+<method name="setUuid"  public="true">
+<description>
+Set the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#uuid</tag>
+<parameter name="v">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getSourceState() -->
+<method name="getSourceState"  public="true">
+<description>
+Get the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#sourceState</tag>
+<return>
+<type class="javax.baja.alarm.BSourceState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setSourceState(javax.baja.alarm.BSourceState) -->
+<method name="setSourceState"  public="true">
+<description>
+Set the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#sourceState</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BSourceState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAckState() -->
+<method name="getAckState"  public="true">
+<description>
+Get the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#ackState</tag>
+<return>
+<type class="javax.baja.alarm.BAckState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setAckState(javax.baja.alarm.BAckState) -->
+<method name="setAckState"  public="true">
+<description>
+Set the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#ackState</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BAckState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAckRequired() -->
+<method name="getAckRequired"  public="true">
+<description>
+Get the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#ackRequired</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setAckRequired(boolean) -->
+<method name="setAckRequired"  public="true">
+<description>
+Set the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#ackRequired</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getSource() -->
+<method name="getSource"  public="true">
+<description>
+Get the &lt;code&gt;source&lt;/code&gt; property.&#xa; The path to the source of the alarm. Should use getNavOrd().
+</description>
+<tag name="@see">#source</tag>
+<return>
+<type class="javax.baja.naming.BOrdList"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setSource(javax.baja.naming.BOrdList) -->
+<method name="setSource"  public="true">
+<description>
+Set the &lt;code&gt;source&lt;/code&gt; property.&#xa; The path to the source of the alarm. Should use getNavOrd().
+</description>
+<tag name="@see">#source</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAlarmClass() -->
+<method name="getAlarmClass"  public="true">
+<description>
+Get the &lt;code&gt;alarmClass&lt;/code&gt; property.&#xa; The path to the alarm class of the alarm.  In BacSpeak, the Notification&#xa; class of the alarm.  Essentially, the routing information.
+</description>
+<tag name="@see">#alarmClass</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setAlarmClass(java.lang.String) -->
+<method name="setAlarmClass"  public="true">
+<description>
+Set the &lt;code&gt;alarmClass&lt;/code&gt; property.&#xa; The path to the alarm class of the alarm.  In BacSpeak, the Notification&#xa; class of the alarm.  Essentially, the routing information.
+</description>
+<tag name="@see">#alarmClass</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getPriority() -->
+<method name="getPriority"  public="true">
+<description>
+Get the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#priority</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setPriority(int) -->
+<method name="setPriority"  public="true">
+<description>
+Set the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#priority</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getNormalTime() -->
+<method name="getNormalTime"  public="true">
+<description>
+Get the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#normalTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setNormalTime(javax.baja.sys.BAbsTime) -->
+<method name="setNormalTime"  public="true">
+<description>
+Set the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#normalTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAckTime() -->
+<method name="getAckTime"  public="true">
+<description>
+Get the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note: that interpretation of this&#xa; property&#x27;s value depends upon the state of the alarm.
+</description>
+<tag name="@see">#ackTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setAckTime(javax.baja.sys.BAbsTime) -->
+<method name="setAckTime"  public="true">
+<description>
+Set the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note: that interpretation of this&#xa; property&#x27;s value depends upon the state of the alarm.
+</description>
+<tag name="@see">#ackTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getUser() -->
+<method name="getUser"  public="true">
+<description>
+Get the &lt;code&gt;user&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#user</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setUser(java.lang.String) -->
+<method name="setUser"  public="true">
+<description>
+Set the &lt;code&gt;user&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#user</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAlarmData() -->
+<method name="getAlarmData"  public="true">
+<description>
+Get the &lt;code&gt;alarmData&lt;/code&gt; property.&#xa; Containing dynamic alarm data, in key-value pairs.
+</description>
+<tag name="@see">#alarmData</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setAlarmData(javax.baja.sys.BFacets) -->
+<method name="setAlarmData"  public="true">
+<description>
+Set the &lt;code&gt;alarmData&lt;/code&gt; property.&#xa; Containing dynamic alarm data, in key-value pairs.
+</description>
+<tag name="@see">#alarmData</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAlarmTransition() -->
+<method name="getAlarmTransition"  public="true">
+<description>
+Get the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#alarmTransition</tag>
+<return>
+<type class="javax.baja.alarm.BSourceState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setAlarmTransition(javax.baja.alarm.BSourceState) -->
+<method name="setAlarmTransition"  public="true">
+<description>
+Set the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#alarmTransition</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BSourceState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getLastUpdate() -->
+<method name="getLastUpdate"  public="true">
+<description>
+Get the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occur at creation,&#xa; acknowledgement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#lastUpdate</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.setLastUpdate(javax.baja.sys.BAbsTime) -->
+<method name="setLastUpdate"  public="true">
+<description>
+Set the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occur at creation,&#xa; acknowledgement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#lastUpdate</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.isFixedSize() -->
+<method name="isFixedSize"  public="true">
+<description>
+Due to the text fields, alarm records do not have a fixed size.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getRecordSize() -->
+<method name="getRecordSize"  public="true">
+<description>
+Get the size of this record.  This is a potentially&#xa; expensive operation.  The default behavior is to&#xa; serialize the record to a buffer and return the&#xa; resulting number of bytes.&#xa;&#xa; For non-fixed length records, return -1.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="int"/>
+<description>
+Returns the size of the record in bytes or&#xa;   -1 if the size cannot be determined.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.ackAlarm() -->
+<method name="ackAlarm"  public="true">
+<description>
+Add an alarm acknowledgement notification to the alarm.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.ackAlarm(java.lang.String) -->
+<method name="ackAlarm"  public="true">
+<description>
+Add an alarm acknowledgement notification to the alarm.
+</description>
+<parameter name="user">
+<type class="java.lang.String"/>
+<description>
+The user.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.isAlarm() -->
+<method name="isAlarm"  public="true">
+<description>
+Is the alarm record type an alarm?
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the record type is alarm.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.isAcknowledged() -->
+<method name="isAcknowledged"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the ackState is acked.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.isAckPending() -->
+<method name="isAckPending"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the ackState is ackPending.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.isNormal() -->
+<method name="isNormal"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the sourceState is normal.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.isOpen() -->
+<method name="isOpen"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the record is not acked and not normal.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.addAlarmFacet(java.lang.String, javax.baja.data.BIDataValue) -->
+<method name="addAlarmFacet"  public="true">
+<description>
+And a name value pair to the alarmData.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAlarmFacet(java.lang.String) -->
+<method name="getAlarmFacet"  public="true">
+<description>
+Get a value from the alarmData.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAlarmValue() -->
+<method name="getAlarmValue"  public="true">
+<description>
+If the alarm is a point alarm, this will look for an&#xa; ALARM_VALUE, OFFNORMAL_VALUE, or FAULT_VALUE in that order.  If nothing &#xa; is found, returns null.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+<description>
+Null if nothing is found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.removeAlarmFacet(java.lang.String) -->
+<method name="removeAlarmFacet"  public="true">
+<description>
+Remove a name value pair from the alarmData.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="ctxt">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAlarmClassDisplayName(javax.baja.sys.Context) -->
+<method name="getAlarmClassDisplayName"  public="true">
+<description>
+Station-Side only call for resolving BFormats.&#xa; Return getAlarmClass() if called from client.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getSchema() -->
+<method name="getSchema"  public="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="javax.baja.alarm.BAlarmSchema"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getSerialVersionId() -->
+<method name="getSerialVersionId"  public="true">
+<description>
+Get the serial version id for this record.  This&#xa; uniquely identifies the set of properties and the&#xa; format in which they are serialized.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.write(java.io.DataOutput) -->
+<method name="write"  public="true">
+<description>
+Write this record to the output.&#xa;&#xa; NOTE: Since Niagara 4.10 this method also acts as a convenience&#xa; (and backwards compatible) method for writing the record with no&#xa; special context (null) via the write(DataOutput out, Context context) method.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.write(java.io.DataOutput, javax.baja.sys.Context) -->
+<method name="write"  public="true">
+<description>
+Write this record to the output with the provided context.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.read(java.io.DataInput) -->
+<method name="read"  public="true">
+<description>
+Read this record from the input.&#xa;&#xa; NOTE: Since Niagara 4.10 this method also acts as a convenience&#xa; (and backwards compatible) method for reading the record with no&#xa; special context (null) via the read(DataOutput out, Context context) method.&#xa;&#xa; Subclasses must override this method to read all of the record fields except&#xa; for the first timestamp.
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.read(java.io.DataInput, javax.baja.sys.Context) -->
+<method name="read"  public="true">
+<description>
+Read this record from the input with the provided context.&#xa;&#xa; Subclasses must override this method to read all of the record fields except&#xa; for the first timestamp.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.toSummaryString() -->
+<method name="toSummaryString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getAlarmDataFields() -->
+<method name="getAlarmDataFields"  public="true" static="true">
+<description>
+Returns an array of common user defined alarm data keys for an alarm record.  &#xa;&#xa; Note that this array contains only the public static final String fields in BAlarmRecord
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+String array containing user defined fields for an alarm record
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.isAlarmDataFieldFormat(java.lang.String) -->
+<method name="isAlarmDataFieldFormat"  public="true" final="true">
+<description>
+Return true if the alarm data field can be processed as&#xa; a &lt;code&gt;<see ref="javax.baja.util.BFormat">javax.baja.util.BFormat</see>&lt;/code&gt;.
+</description>
+<tag name="@see">#getAlarmDataFields()</tag>
+<tag name="@since">Niagara 4.6</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+<description>
+The field name.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the field should be processed as a format.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.getFormattedAlarmDataValue(java.lang.String, javax.baja.sys.Context) -->
+<method name="getFormattedAlarmDataValue"  public="true" final="true">
+<description>
+Returns a formatted string from the alarm data facets for the specified key.&#xa; &lt;p&gt;&#xa; An empty string is returned if the key can&#x27;t be found in the alarm data.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">#getAlarmDataFields()</tag>
+<tag name="@see">#isAlarmDataFieldFormat(String)</tag>
+<tag name="@since">Niagara 4.6</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+<description>
+The alarm data field name.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The calling context. Can be null.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+A string that may have been formatted or an empty string.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmRecord.timestamp -->
+<field name="timestamp"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timestamp&lt;/code&gt; property.&#xa; The time that the alarm was generated.
+</description>
+<tag name="@see">#getTimestamp</tag>
+<tag name="@see">#setTimestamp</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.uuid -->
+<field name="uuid"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#getUuid</tag>
+<tag name="@see">#setUuid</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.sourceState -->
+<field name="sourceState"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#getSourceState</tag>
+<tag name="@see">#setSourceState</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.ackState -->
+<field name="ackState"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#getAckState</tag>
+<tag name="@see">#setAckState</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.ackRequired -->
+<field name="ackRequired"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#getAckRequired</tag>
+<tag name="@see">#setAckRequired</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.source -->
+<field name="source"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;source&lt;/code&gt; property.&#xa; The path to the source of the alarm. Should use getNavOrd().
+</description>
+<tag name="@see">#getSource</tag>
+<tag name="@see">#setSource</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.alarmClass -->
+<field name="alarmClass"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmClass&lt;/code&gt; property.&#xa; The path to the alarm class of the alarm.  In BacSpeak, the Notification&#xa; class of the alarm.  Essentially, the routing information.
+</description>
+<tag name="@see">#getAlarmClass</tag>
+<tag name="@see">#setAlarmClass</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.priority -->
+<field name="priority"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#getPriority</tag>
+<tag name="@see">#setPriority</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.normalTime -->
+<field name="normalTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#getNormalTime</tag>
+<tag name="@see">#setNormalTime</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.ackTime -->
+<field name="ackTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note: that interpretation of this&#xa; property&#x27;s value depends upon the state of the alarm.
+</description>
+<tag name="@see">#getAckTime</tag>
+<tag name="@see">#setAckTime</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.user -->
+<field name="user"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;user&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#getUser</tag>
+<tag name="@see">#setUser</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.alarmData -->
+<field name="alarmData"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmData&lt;/code&gt; property.&#xa; Containing dynamic alarm data, in key-value pairs.
+</description>
+<tag name="@see">#getAlarmData</tag>
+<tag name="@see">#setAlarmData</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.alarmTransition -->
+<field name="alarmTransition"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#getAlarmTransition</tag>
+<tag name="@see">#setAlarmTransition</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.lastUpdate -->
+<field name="lastUpdate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occur at creation,&#xa; acknowledgement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#getLastUpdate</tag>
+<tag name="@see">#setLastUpdate</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.DATA_RECOVERY_CX -->
+<field name="DATA_RECOVERY_CX"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.ALARM_STORE_CX -->
+<field name="ALARM_STORE_CX"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description>
+This context is used when a BAlarmRecord is doing a &lt;code&gt;<see ref="javax.baja.alarm.BAlarmRecord#read(java.io.DataInput, javax.baja.sys.Context)">#read(DataInput, Context)</see>&lt;/code&gt;&#xa; or &lt;code&gt;<see ref="javax.baja.alarm.BAlarmRecord#write(java.io.DataOutput, javax.baja.sys.Context)">#write(DataOutput, Context)</see>&lt;/code&gt; from/to an alarm store for persistence, such as a&#xa; &lt;code&gt;<see ref="javax.baja.alarm.BAlarmDatabase">BAlarmDatabase</see>&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.TIMESTAMP_FACETS -->
+<field name="TIMESTAMP_FACETS"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BFacets"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.MSG_TEXT -->
+<field name="MSG_TEXT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+User defined message text key
+</description>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.FROM_STATE -->
+<field name="FROM_STATE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.TO_STATE -->
+<field name="TO_STATE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.NOTIFY_TYPE -->
+<field name="NOTIFY_TYPE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.STATUS -->
+<field name="STATUS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.NEW_VALUE -->
+<field name="NEW_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.SETPT_VALUE -->
+<field name="SETPT_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.SETPT_NUMERIC -->
+<field name="SETPT_NUMERIC"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.ERROR_LIMIT -->
+<field name="ERROR_LIMIT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.DEADBAND -->
+<field name="DEADBAND"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.COUNT -->
+<field name="COUNT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.HIGH_LIMIT -->
+<field name="HIGH_LIMIT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.LOW_LIMIT -->
+<field name="LOW_LIMIT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.HIGH_DIFF_LIMIT -->
+<field name="HIGH_DIFF_LIMIT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.LOW_DIFF_LIMIT -->
+<field name="LOW_DIFF_LIMIT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.ALARM_VALUE -->
+<field name="ALARM_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.OFFNORMAL_VALUE -->
+<field name="OFFNORMAL_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.FAULT_VALUE -->
+<field name="FAULT_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.PRESENT_VALUE -->
+<field name="PRESENT_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.NUMERIC_VALUE -->
+<field name="NUMERIC_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.FEEDBACK_VALUE -->
+<field name="FEEDBACK_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.FEEDBACK_NUMERIC -->
+<field name="FEEDBACK_NUMERIC"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.CONTROLLED_VALUE -->
+<field name="CONTROLLED_VALUE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.HYPERLINK_ORD -->
+<field name="HYPERLINK_ORD"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.SOUND_FILE -->
+<field name="SOUND_FILE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.ICON -->
+<field name="ICON"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.SOURCE_NAME -->
+<field name="SOURCE_NAME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.NOTES -->
+<field name="NOTES"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.INSTRUCTIONS -->
+<field name="INSTRUCTIONS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.TIME_ZONE -->
+<field name="TIME_ZONE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.TIME_DELAY -->
+<field name="TIME_DELAY"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmRecord.TIME_DELAY_TO_NORMAL -->
+<field name="TIME_DELAY_TO_NORMAL"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

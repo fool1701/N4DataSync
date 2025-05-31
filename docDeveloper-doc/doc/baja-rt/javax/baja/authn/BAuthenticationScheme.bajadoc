@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.authn.BAuthenticationScheme" name="BAuthenticationScheme" packageName="javax.baja.authn" public="true" abstract="true">
+<description>
+Base class for all authentication schemes to be added to the&#xa; Authentication Service. All schemes must implement:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;&lt;code&gt;<see ref="javax.baja.authn.BAuthenticationScheme#getSchemeName()">#getSchemeName</see>&lt;/code&gt;: The name of the authentication scheme. This&#xa; is used by the client and server to determine the scheme.&lt;/li&gt;&#xa; &lt;li&gt;&lt;code&gt;<see ref="javax.baja.authn.BAuthenticationScheme#getLoginConfiguration()">#getLoginConfiguration</see>&lt;/code&gt;: The JAAS login configuration to be&#xa; associated with this scheme. This should include any options specified&#xa; in the authentication service (e.g. debug)&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<tag name="@author">Melanie Coggan</tag>
+<tag name="@creation">2013-12-27</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<!-- javax.baja.authn.BAuthenticationScheme() -->
+<constructor name="BAuthenticationScheme" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.authn.BAuthenticationScheme.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.getSchemeName() -->
+<method name="getSchemeName"  public="true" abstract="true">
+<description>
+Gets the name of the authentication scheme. Each scheme should have&#xa; a unique name.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+a String containing the name of the BAuthenticationScheme
+</description>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.getLoginConfiguration() -->
+<method name="getLoginConfiguration"  public="true" abstract="true">
+<description>
+Gets the JAAS login &lt;code&gt;<see ref="javax.security.auth.login.Configuration">Configuration</see>&lt;/code&gt;&#xa; associated with this BAuthenticationScheme. The Configuration must&#xa; at least specify the name of the &lt;code&gt;<see ref="javax.security.auth.spi.LoginModule">LoginModule</see>&lt;/code&gt;&#xa; to use, but can also specify various options (e.g. debug).
+</description>
+<return>
+<type class="javax.security.auth.login.Configuration"/>
+<description>
+A &lt;code&gt;<see ref="javax.security.auth.login.Configuration">Configuration</see>&lt;/code&gt; object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.&lt;T extends javax.baja.sys.BIObject&gt;getAgentOn(java.lang.Class&lt;T&gt;) -->
+<method name="getAgentOn"  public="true" final="true">
+<typeParameters>
+<typeVariable class="T">
+<bounds>
+<type class="javax.baja.sys.BIObject"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<description>
+Returns an agent on this BAuthenticationScheme of type T
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<typeVariable class="T"/>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.getSchemeFromName(java.lang.String) -->
+<method name="getSchemeFromName"  public="true" static="true">
+<description>
+Gets an authenticationScheme based on the scheme name&#xa; TODO: store a map of this so we don&#x27;t have to look up the agents each time&#xa; Or just go through the different auth schemes on the AuthenticationService&#xa; and find the correct one.
+</description>
+<parameter name="schemeName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.authn.BAuthenticationScheme"/>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.supportsRemoteUsers() -->
+<method name="supportsRemoteUsers"  public="true">
+<description>
+Returns true if the scheme supports remote users or false if it does not.&#xa; Schemes that support remote users should override this method and return&#xa; true.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+True is the scheme supports remote users, false otherwise
+</description>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.getKeyExchangeMethodName() -->
+<method name="getKeyExchangeMethodName"  public="true">
+<description>
+Returns the name of the Key Exchange method, if any, supported by this &#xa; authentication scheme.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Defaults to return a null algorithm
+</description>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.login(javax.security.auth.callback.CallbackHandler) -->
+<method name="login"  public="true">
+<description/>
+<parameter name="handler">
+<type class="javax.security.auth.callback.CallbackHandler"/>
+</parameter>
+<return>
+<type class="javax.security.auth.login.LoginContext"/>
+</return>
+<throws>
+<type class="javax.security.auth.login.LoginException"/>
+</throws>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.getDefaultAuthenticator() -->
+<method name="getDefaultAuthenticator"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.security.BAbstractAuthenticator"/>
+</return>
+</method>
+
+<!-- javax.baja.authn.BAuthenticationScheme.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

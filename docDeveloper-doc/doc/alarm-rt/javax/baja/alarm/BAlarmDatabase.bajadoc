@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.BAlarmDatabase" name="BAlarmDatabase" packageName="javax.baja.alarm" public="true" abstract="true">
+<description>
+BAlarmDatabase stores both a history of alarms and a&#xa; list of unacked alarm persistently.
+</description>
+<tag name="@author">John Sublett</tag>
+<extends>
+<type class="javax.baja.space.BSpace"/>
+</extends>
+<implements>
+<type class="javax.baja.bql.Queryable"/>
+</implements>
+<implements>
+<parameterizedType class="javax.baja.bql.BIRelational">
+<args>
+</args>
+</parameterizedType>
+</implements>
+<implements>
+<type class="javax.baja.security.BIProtected"/>
+</implements>
+<implements>
+<type class="javax.baja.alarm.BIAlarmSpace"/>
+</implements>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<!-- javax.baja.alarm.BAlarmDatabase() -->
+<constructor name="BAlarmDatabase" protected="true">
+<description>
+Default constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmDatabase(java.lang.String, javax.baja.util.LexiconText) -->
+<constructor name="BAlarmDatabase" protected="true">
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+module name
+</description>
+</parameter>
+<parameter name="lexiconText">
+<type class="javax.baja.util.LexiconText"/>
+<description>
+place holder for the module name
+</description>
+</parameter>
+<description>
+Parameterized constructor
+</description>
+<tag name="@since">Niagara 4.11</tag>
+</constructor>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getConnection(javax.baja.sys.Context) -->
+<method name="getConnection"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.AlarmSpaceConnection"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getDbConnection(javax.baja.sys.Context) -->
+<method name="getDbConnection"  public="true" abstract="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.AlarmDbConnection"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.open() -->
+<method name="open"  public="true" final="true" synchronized="true">
+<description>
+Open the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.doOpen() -->
+<method name="doOpen"  protected="true">
+<description>
+Subclass override for open.&#xa;&#xa; This method must also initializes the totalAlarmCount, unackedAlarmCount,&#xa; openAlarmCount, and inAlarmCount properties on all BAlarmClasses.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.isOpen() -->
+<method name="isOpen"  public="true">
+<description>
+Is the database open?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.save() -->
+<method name="save"  public="true" final="true" synchronized="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.doSave() -->
+<method name="doSave"  protected="true">
+<description>
+Save the database.  In some cases, flush is sufficient.&#xa; The default implementation of doSave does nothing. It is&#xa; guaranteed that flush() has been called before a call to&#xa; doSave(), and no changes have been made since flush()&#xa; was called.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.flush() -->
+<method name="flush"  public="true" final="true" synchronized="true">
+<description>
+Commit any outstanding changes.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.doFlush() -->
+<method name="doFlush"  protected="true">
+<description>
+Subclass override for flush.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.assertOpen() -->
+<method name="assertOpen"  protected="true" synchronized="true">
+<description>
+Make sure the database is open.  If not, an AlarmException is thrown.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.close() -->
+<method name="close"  public="true" final="true" synchronized="true">
+<description>
+Close the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.doClose() -->
+<method name="doClose"  protected="true">
+<description>
+Subclass override for close.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.updateConfig(javax.baja.alarm.BAlarmDbConfig, javax.baja.sys.Property) -->
+<method name="updateConfig"  public="true" abstract="true">
+<description>
+Update the database with the new configuration.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="config">
+<type class="javax.baja.alarm.BAlarmDbConfig"/>
+<description>
+new BAlarmDbConfig
+</description>
+</parameter>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+<description>
+Property to update
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.alarm.AlarmException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.toNormal(javax.baja.alarm.BAlarmRecord) -->
+<method name="toNormal"  public="true">
+<description>
+Generate and route toNormal notifications for all current offnormal and&#xa; fault alarms.&#xa;&#xa; If the alarm source is an AlarmSourceExt, this method will fire the&#xa; source&#x27;s fireToNormal method with the most recent alarm record as the&#xa; parameter.&#xa;&#xa; This is a server side only call and a potentially long running method.&#xa;  It should never be called from the Nre:Engine thread.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="normalRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.bqlQuery(javax.baja.naming.OrdTarget, javax.baja.naming.OrdQuery) -->
+<method name="bqlQuery"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="base">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<parameter name="query">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getRelation(java.lang.String, javax.baja.sys.Context) -->
+<method name="getRelation"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="id">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getAlarmService() -->
+<method name="getAlarmService"  protected="true">
+<description/>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="javax.baja.alarm.BAlarmService"/>
+<description/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getOrdInSession() -->
+<method name="getOrdInSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+The ord in the session is always &#x22;alarm:&#x22;.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.hasNavChildren() -->
+<method name="hasNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to return if alarm archive is present
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getAlarmArchive() -->
+<method name="getAlarmArchive"  protected="true">
+<description>
+Get the alarm archive from the AlarmService&#x27;s AlarmArchiveProvider
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.alarm.BAlarmArchive"/>
+</args>
+</parameterizedType>
+<description>
+AlarmArchive if present
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getCategoryMask() -->
+<method name="getCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Files are mapped to categories by ord in &lt;code&gt;CategoryService.ordMap&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getAppliedCategoryMask() -->
+<method name="getAppliedCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Files are mapped to categories by ord in &lt;code&gt;CategoryService.ordMap&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getPermissions(javax.baja.sys.Context) -->
+<method name="getPermissions"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.canRead(javax.baja.naming.OrdTarget) -->
+<method name="canRead"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.canWrite(javax.baja.naming.OrdTarget) -->
+<method name="canWrite"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.canInvoke(javax.baja.naming.OrdTarget) -->
+<method name="canInvoke"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.filterAgents(javax.baja.agent.AgentList) -->
+<method name="filterAgents"  public="true" static="true">
+<description>
+Return a filtered agent list for the alarm database.&#xa; &lt;p&gt;&#xa; Please note, this method is also used in&#xa; &lt;code&gt;<see ref="javax.baja.alarm.BAlarmService#getAgents(javax.baja.sys.Context)">BAlarmService#getAgents(javax.baja.sys.Context)</see>&lt;/code&gt; and&#xa; &lt;code&gt;<see ref="javax.baja.alarm.BArchiveAlarmProvider#getAgents(javax.baja.sys.Context)">BArchiveAlarmProvider#getAgents(javax.baja.sys.Context)</see>&lt;/code&gt;.&#xa; &lt;/p&gt;
+</description>
+<parameter name="list">
+<type class="javax.baja.agent.AgentList"/>
+<description>
+The AgentList to be filtered.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+<description>
+The filtered agent list.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarm.BAlarmDatabase.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarm.BAlarmDatabase.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nre" runtimeProfile="rt" qualifiedName="javax.baja.nre.util.ByteBuffer" name="ByteBuffer" packageName="javax.baja.nre.util" public="true">
+<description>
+ByteBuffer is a dynamically growable byte array which&#xa; has implicit support for the DataOuput and DataInput&#xa; interfaces.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">25 Jan 01</tag>
+<tag name="@version">$Revision: 17$ $Date: 3/25/08 11:19:10 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="java.io.DataOutput"/>
+</implements>
+<implements>
+<type class="java.io.DataInput"/>
+</implements>
+<!-- javax.baja.nre.util.ByteBuffer(byte[], int) -->
+<constructor name="ByteBuffer" public="true">
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<description>
+Create a ByteBuffer of length &lt;code&gt;len&lt;/code&gt; using &#xa; the specified byte array for the internal buffer.
+</description>
+</constructor>
+
+<!-- javax.baja.nre.util.ByteBuffer(byte[]) -->
+<constructor name="ByteBuffer" public="true">
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<description>
+Create a ByteBuffer of length &lt;code&gt;buf.length&lt;/code&gt;&#xa; using the specified byte array for the internal buffer.
+</description>
+</constructor>
+
+<!-- javax.baja.nre.util.ByteBuffer(int) -->
+<constructor name="ByteBuffer" public="true">
+<parameter name="initialCapacity">
+<type class="int"/>
+</parameter>
+<description>
+Create a buffer with the specified inital capacity.
+</description>
+</constructor>
+
+<!-- javax.baja.nre.util.ByteBuffer() -->
+<constructor name="ByteBuffer" public="true">
+<description>
+Create a buffer with an inital capacity of 64 bytes.
+</description>
+</constructor>
+
+<!-- javax.baja.nre.util.ByteBuffer.getLength() -->
+<method name="getLength"  public="true">
+<description>
+Get the length of the buffer.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.reset() -->
+<method name="reset"  public="true">
+<description>
+Set the length and pos back to 0.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.seek(int) -->
+<method name="seek"  public="true">
+<description>
+Move the current read position index.
+</description>
+<parameter name="pos">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.getPosition() -->
+<method name="getPosition"  public="true">
+<description>
+Get the current read position index.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.getBytes() -->
+<method name="getBytes"  public="true">
+<description>
+Get a direct reference to the internal buffer array.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.toByteArray() -->
+<method name="toByteArray"  public="true">
+<description>
+Get a copy of the byte array sized to actual length.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.isBigEndian() -->
+<method name="isBigEndian"  public="true">
+<description>
+Get the big endian flag for byte ordering.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.setBigEndian(boolean) -->
+<method name="setBigEndian"  public="true">
+<description>
+Set the big endian flag for byte ordering.
+</description>
+<parameter name="bigEndian">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.getInputStream() -->
+<method name="getInputStream"  public="true">
+<description>
+Get a new InputStream for reading the internal buffer.
+</description>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.getOutputStream() -->
+<method name="getOutputStream"  public="true">
+<description>
+Get a new OutputStream for the writing to the internal buffer.
+</description>
+<return>
+<type class="java.io.OutputStream"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readFrom(java.io.InputStream, int) -->
+<method name="readFrom"  public="true">
+<description>
+Read the specified number of bytes from the input&#xa; stream into the internal buffer.
+</description>
+<parameter name="in">
+<type class="java.io.InputStream"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of bytes actually read.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readFullyFrom(java.io.InputStream, int) -->
+<method name="readFullyFrom"  public="true">
+<description>
+Read the specified number of bytes from the input&#xa; stream into the internal buffer.  If the len&#xa; passed is less than zero, then this method routes&#xa; to readToEnd().
+</description>
+<parameter name="in">
+<type class="java.io.InputStream"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readToEnd(java.io.InputStream) -->
+<method name="readToEnd"  public="true">
+<description>
+Read from the specified InputStream into the internal&#xa; buffer.  The stream is read until it returns -1 indicating&#xa; the end of the input stream.
+</description>
+<parameter name="in">
+<type class="java.io.InputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeTo(java.io.OutputStream) -->
+<method name="writeTo"  public="true">
+<description>
+Write the internal buffer in its entirity to the &#xa; specified output stream.
+</description>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeTo(java.io.OutputStream, int, int) -->
+<method name="writeTo"  public="true">
+<description>
+Write &lt;code&gt;len&lt;/code&gt; bytes of the internal buffer &#xa; starting at &lt;code&gt;offset&lt;/code&gt; to the specified output &#xa; stream.
+</description>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeTo(java.io.DataOutput) -->
+<method name="writeTo"  public="true">
+<description>
+Write the entire internal buffer to the specified output.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeTo(java.io.DataOutput, int, int) -->
+<method name="writeTo"  public="true">
+<description>
+Write &lt;code&gt;len&lt;/code&gt; bytes of the internal buffer &#xa; starting at &lt;code&gt;offset&lt;/code&gt; to the specified output.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.write(int) -->
+<method name="write"  public="true">
+<description>
+Write the specified byte to the internal buffer.
+</description>
+<parameter name="b">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.write(byte[]) -->
+<method name="write"  public="true">
+<description>
+Write the specified buffer to the internal buffer.
+</description>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.write(byte[], int, int) -->
+<method name="write"  public="true">
+<description>
+Writes &lt;code&gt;len&lt;/code&gt; bytes from the specified byte array &#xa; starting at &lt;code&gt;offset&lt;/code&gt; to the internal buffer.
+</description>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeBoolean(boolean) -->
+<method name="writeBoolean"  public="true">
+<description>
+Write a boolean value to the internal buffer.
+</description>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeByte(int) -->
+<method name="writeByte"  public="true">
+<description>
+Write a 8 bit value to the internal buffer.
+</description>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeShort(int) -->
+<method name="writeShort"  public="true">
+<description>
+Write a 16 bit value to the internal buffer.
+</description>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeChar(int) -->
+<method name="writeChar"  public="true">
+<description>
+Write a unicode char to the internal buffer.
+</description>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeInt(int) -->
+<method name="writeInt"  public="true">
+<description>
+Write a 32 bit value to the internal buffer.
+</description>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeLong(long) -->
+<method name="writeLong"  public="true">
+<description>
+Write a 64 bit value to the internal buffer.
+</description>
+<parameter name="v">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeFloat(float) -->
+<method name="writeFloat"  public="true">
+<description>
+Write a 32 bit float to the internal buffer.
+</description>
+<parameter name="v">
+<type class="float"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeDouble(double) -->
+<method name="writeDouble"  public="true">
+<description>
+Write a 64 bit double to the internal buffer.
+</description>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeBytes(java.lang.String) -->
+<method name="writeBytes"  public="true">
+<description>
+Write the specified String&#x27;s bytes to the internal buffer.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeChars(java.lang.String) -->
+<method name="writeChars"  public="true">
+<description>
+Write the specified String&#x27;s characters to the internal buffer.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.writeUTF(java.lang.String) -->
+<method name="writeUTF"  public="true">
+<description>
+Write the specified String&#x27;s to the internal buffer&#xa; using modified UTF-8 format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.UTFDataFormatException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.utfEncodedSize(java.lang.String) -->
+<method name="utfEncodedSize"  public="true" static="true">
+<description>
+Utility which returns the number of bytes required to encode the &#xa; given string with the modified UTF-8 format used by DataOutput.writeUTF().
+</description>
+<parameter name="string">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.utfEncodedSize(char) -->
+<method name="utfEncodedSize"  public="true" static="true">
+<description>
+Utility which returns the number of bytes required to encode the &#xa; given character as part of a string with the modified UTF-8 format &#xa; used by DataOutput.writeUTF().
+</description>
+<parameter name="c">
+<type class="char"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.available() -->
+<method name="available"  public="true">
+<description>
+Return the number of bytes available based on the&#xa; current read position and the buffer length.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.peek() -->
+<method name="peek"  public="true">
+<description>
+Peek at the next byte to read without&#xa; actually changing the read position.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.read() -->
+<method name="read"  public="true">
+<description>
+Read the next byte from the internal buffer.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.read(byte[]) -->
+<method name="read"  public="true">
+<description>
+Read &lt;code&gt;buf.length&lt;/code&gt; bytes from the internal&#xa; buffer into the specified byte array.
+</description>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.read(byte[], int, int) -->
+<method name="read"  public="true">
+<description>
+Read &lt;code&gt;len&lt;/code&gt; bytes from the internal buffer &#xa; into the specified byte array at &lt;code&gt;offset&lt;/code&gt;.
+</description>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readFully(byte[]) -->
+<method name="readFully"  public="true">
+<description>
+Read &lt;code&gt;buf.length&lt;/code&gt; bytes from the internal&#xa; buffer into the specified byte array.
+</description>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readFully(byte[], int, int) -->
+<method name="readFully"  public="true">
+<description>
+Read &lt;code&gt;len&lt;/code&gt; bytes from the internal buffer &#xa; into the specified byte array at &lt;code&gt;offset&lt;/code&gt;.
+</description>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.skipBytes(int) -->
+<method name="skipBytes"  public="true">
+<description>
+Skip &lt;code&gt;n&lt;/code&gt; bytes in the internal buffer.
+</description>
+<parameter name="n">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readBoolean() -->
+<method name="readBoolean"  public="true">
+<description>
+Read a boolean from the internal buffer.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readByte() -->
+<method name="readByte"  public="true">
+<description>
+Read a 8-bit signed byte value value from the internal buffer.
+</description>
+<return>
+<type class="byte"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readUnsignedByte() -->
+<method name="readUnsignedByte"  public="true">
+<description>
+Read a 8-bit unsigned byte value from the internal buffer.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readShort() -->
+<method name="readShort"  public="true">
+<description>
+Read a 16-bit signed byte value from the internal buffer.
+</description>
+<return>
+<type class="short"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readUnsignedShort() -->
+<method name="readUnsignedShort"  public="true">
+<description>
+Read a 16-bit unsigned byte value from the internal buffer.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readChar() -->
+<method name="readChar"  public="true">
+<description>
+Read a unicode char from the internal buffer.
+</description>
+<return>
+<type class="char"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readInt() -->
+<method name="readInt"  public="true">
+<description>
+Read a 32-bit integer value from the internal buffer.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readLong() -->
+<method name="readLong"  public="true">
+<description>
+Read a 64-bit long value from the internal buffer.
+</description>
+<return>
+<type class="long"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readFloat() -->
+<method name="readFloat"  public="true">
+<description>
+Read a 32-bit float value from the internal buffer.
+</description>
+<return>
+<type class="float"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readDouble() -->
+<method name="readDouble"  public="true">
+<description>
+Read a 64-bit double value from the internal buffer.
+</description>
+<return>
+<type class="double"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readLine() -->
+<method name="readLine"  public="true">
+<description>
+Always throw an UnsupportedOperationException.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.readUTF() -->
+<method name="readUTF"  public="true">
+<description>
+Read a UTF encoded string from the internal buffer.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.startsWith(int) -->
+<method name="startsWith"  public="true">
+<description>
+Return true if the current byte buffer starts&#xa; with the specified byte.
+</description>
+<parameter name="b">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.startsWith(byte[]) -->
+<method name="startsWith"  public="true">
+<description>
+Return true if the current byte buffer &#xa; starts with the specified byte array.
+</description>
+<parameter name="b">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.endsWith(int) -->
+<method name="endsWith"  public="true">
+<description>
+Return true if the current byte buffer ends&#xa; with the specified byte.
+</description>
+<parameter name="b">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.endsWith(byte[]) -->
+<method name="endsWith"  public="true">
+<description>
+Return true if the current byte buffer &#xa; ends with the specified byte array.
+</description>
+<parameter name="b">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.indexOf(int) -->
+<method name="indexOf"  public="true">
+<description>
+Get first the index of the specified byte or &#xa; return -1  if the byte is not found.
+</description>
+<parameter name="b">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.indexOf(int, int) -->
+<method name="indexOf"  public="true">
+<description>
+Get first the index of the specified byte or &#xa; return -1  if the byte is not found.
+</description>
+<parameter name="b">
+<type class="int"/>
+<description>
+byte to search for.
+</description>
+</parameter>
+<parameter name="fromIndex">
+<type class="int"/>
+<description>
+the index to start the search from. &#xa;   There is no restriction on the value of fromIndex. If &#xa;   it is greater than the length of this string, it has the &#xa;   same effect as if it were equal to the length. If it is &#xa;   negative, it has the same effect as if it 0.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.indexOf(byte[]) -->
+<method name="indexOf"  public="true">
+<description>
+Get first the index of the specified byte array &#xa; pattern or return -1 if the pattern is not found.
+</description>
+<parameter name="b">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.indexOf(byte[], int) -->
+<method name="indexOf"  public="true">
+<description>
+Get first the index of the specified byte array &#xa; pattern or return -1 if the pattern is not found.
+</description>
+<parameter name="b">
+<type class="byte" dimension="1"/>
+<description>
+byte array containing pattern to search for.
+</description>
+</parameter>
+<parameter name="fromIndex">
+<type class="int"/>
+<description>
+the index to start the search from. &#xa;   There is no restriction on the value of fromIndex. If &#xa;   it is greater than the length of this string, it has the &#xa;   same effect as if it were equal to the length. If it is &#xa;   negative, it has the same effect as if it were 0.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.lastIndexOf(int) -->
+<method name="lastIndexOf"  public="true">
+<description>
+Get last the index of the specified byte or &#xa; return -1 if the byte is not found.
+</description>
+<parameter name="b">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.lastIndexOf(int, int) -->
+<method name="lastIndexOf"  public="true">
+<description>
+Get last the index of the specified byte or &#xa; return -1 if the byte is not found.
+</description>
+<parameter name="b">
+<type class="int"/>
+<description>
+byte array containing pattern to search for.
+</description>
+</parameter>
+<parameter name="fromIndex">
+<type class="int"/>
+<description>
+the index to start the search from. &#xa;   There is no restriction on the value of fromIndex. If &#xa;   it is greater than the length of this string, it has the &#xa;   same effect as if it were equal to the length. If it is &#xa;   negative, it has the same effect as if it were -1: -1 is &#xa;   returned.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.lastIndexOf(byte[]) -->
+<method name="lastIndexOf"  public="true">
+<description>
+Get last the index of the specified byte array &#xa; pattern or return -1 if the pattern is not found.
+</description>
+<parameter name="b">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.lastIndexOf(byte[], int) -->
+<method name="lastIndexOf"  public="true">
+<description>
+Get last the index of the specified byte array &#xa; pattern or return -1 if the pattern is not found.
+</description>
+<parameter name="b">
+<type class="byte" dimension="1"/>
+<description>
+byte array containing pattern to search for.
+</description>
+</parameter>
+<parameter name="fromIndex">
+<type class="int"/>
+<description>
+the index to start the search from. &#xa;   There is no restriction on the value of fromIndex. If &#xa;   it is greater than the length of this string, it has the &#xa;   same effect as if it were equal to the length. If it is &#xa;   negative, it has the same effect as if it were -1: -1 is &#xa;   returned.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.setLength(int) -->
+<method name="setLength"  public="true">
+<description/>
+<parameter name="newLen">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.setBuffer(byte[]) -->
+<method name="setBuffer"  public="true">
+<description/>
+<parameter name="newBuf">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.dump() -->
+<method name="dump"  public="true">
+<description>
+Dump the byte buffer to standard output.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.dumpToString() -->
+<method name="dumpToString"  public="true">
+<description>
+Dump the byte buffer to a String.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nre.util.ByteBuffer.length -->
+<field name="length"  protected="true">
+<type class="int"/>
+<description>
+Actual length of valid data in buffer.
+</description>
+</field>
+
+<!-- javax.baja.nre.util.ByteBuffer.buffer -->
+<field name="buffer"  protected="true">
+<type class="byte" dimension="1"/>
+<description>
+Byte array buffer.
+</description>
+</field>
+
+<!-- javax.baja.nre.util.ByteBuffer.pos -->
+<field name="pos"  protected="true">
+<type class="int"/>
+<description>
+Pos is used to store the next read index
+</description>
+</field>
+
+<!-- javax.baja.nre.util.ByteBuffer.bigEndian -->
+<field name="bigEndian"  protected="true">
+<type class="boolean"/>
+<description>
+Flag which determines whether to use &#xa;      big or little endian byte ordering
+</description>
+</field>
+
+</class>
+</bajadoc>

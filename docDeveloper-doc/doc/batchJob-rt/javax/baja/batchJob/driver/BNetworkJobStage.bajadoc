@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.driver.BNetworkJobStage" name="BNetworkJobStage" packageName="javax.baja.batchJob.driver" public="true">
+<description>
+Job stage for a BDeviceNetworkJob that executes a sequence &#xa; of steps exactly once.&#xa; &#xa; If any step fails, the stage terminates and no remaining steps&#xa; are executed.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">9 Jul 07</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.batchJob.BJobStage"/>
+</extends>
+<property name="steps" flags="r">
+<type class="javax.baja.util.BFolder"/>
+<description>
+Slot for the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#getSteps</tag>
+<tag name="@see">#setSteps</tag>
+</property>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage() -->
+<constructor name="BNetworkJobStage" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage(java.lang.String) -->
+<constructor name="BNetworkJobStage" public="true">
+<parameter name="stageName">
+<type class="java.lang.String"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.getSteps() -->
+<method name="getSteps"  public="true">
+<description>
+Get the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#steps</tag>
+<return>
+<type class="javax.baja.util.BFolder"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.setSteps(javax.baja.util.BFolder) -->
+<method name="setSteps"  public="true">
+<description>
+Set the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#steps</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.getDevices() -->
+<method name="getDevices"  public="true">
+<description/>
+<return>
+<type class="javax.baja.driver.BDevice" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.getNetwork() -->
+<method name="getNetwork"  public="true">
+<description/>
+<return>
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.doRun(javax.baja.batchJob.BBatchJobService, javax.baja.batchJob.BBatchJob, javax.baja.batchJob.BatchJobOp) -->
+<method name="doRun"  public="true">
+<description/>
+<parameter name="service">
+<type class="javax.baja.batchJob.BBatchJobService"/>
+</parameter>
+<parameter name="job">
+<type class="javax.baja.batchJob.BBatchJob"/>
+</parameter>
+<parameter name="opIn">
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobState"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.addStep(javax.baja.batchJob.BJobStep) -->
+<method name="addStep"  public="true">
+<description>
+Add an new step to the stage
+</description>
+<parameter name="step">
+<type class="javax.baja.batchJob.BJobStep"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.removeAllSteps() -->
+<method name="removeAllSteps"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.getAllSteps() -->
+<method name="getAllSteps"  public="true">
+<description>
+Return all of the steps that this stage runs for its devices
+</description>
+<return>
+<type class="javax.baja.batchJob.BJobStep" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.getCombinedSteps() -->
+<method name="getCombinedSteps"  protected="true">
+<description>
+Combines any combinable steps and returns the resulting list.
+</description>
+<return>
+<type class="javax.baja.batchJob.driver.BNetworkJobStep" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.prepareStage(javax.baja.sys.BObject) -->
+<method name="prepareStage"  public="true">
+<description>
+Makes any changes necessary to the stage and its steps to run on the&#xa; VM where &#x22;target&#x22; exists.&#xa; &#xa; The client is responsible for invoking prepareJob before sending&#xa; the job to the target host for submitting
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.jobComplete(javax.baja.batchJob.BatchJobOp) -->
+<method name="jobComplete"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="op">
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.stepComplete(javax.baja.batchJob.BBatchJobService, javax.baja.batchJob.driver.BNetworkStepDetails, javax.baja.batchJob.driver.DeviceNetworkJobOp) -->
+<method name="stepComplete"  protected="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedParameters&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="batch">
+<type class="javax.baja.batchJob.BBatchJobService"/>
+</parameter>
+<parameter name="stepDetails">
+<type class="javax.baja.batchJob.driver.BNetworkStepDetails"/>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.batchJob.driver.DeviceNetworkJobOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.checkCanceled() -->
+<method name="checkCanceled"  protected="true" final="true" synchronized="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.doDispose(javax.baja.sys.Context) -->
+<method name="doDispose"  public="true">
+<description>
+Clean up any files that belong to this job
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.steps -->
+<field name="steps"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#getSteps</tag>
+<tag name="@see">#setSteps</tag>
+</field>
+
+<!-- javax.baja.batchJob.driver.BNetworkJobStage.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

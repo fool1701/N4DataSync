@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="email" runtimeProfile="rt" qualifiedName="javax.baja.email.converters.BAbstractStringToEmailAddressConverter" name="BAbstractStringToEmailAddressConverter" packageName="javax.baja.email.converters" public="true" abstract="true">
+<description>
+Provides a base class for converters from strings to&#xa; BEmailAddress instances.  Uses regular expressions to detect&#xa; and convert values.
+</description>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">1 Feb 11</tag>
+<tag name="@version">$Revision: 8$ $Date: 3/15/11 2:20:01 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.util.BConverter"/>
+</extends>
+<!-- javax.baja.email.converters.BAbstractStringToEmailAddressConverter() -->
+<constructor name="BAbstractStringToEmailAddressConverter" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.email.converters.BAbstractStringToEmailAddressConverter.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.email.converters.BAbstractStringToEmailAddressConverter.getEmailAddress(java.lang.String) -->
+<method name="getEmailAddress"  protected="true">
+<description>
+Given an email address and name in one of the formats below,&#xa; this method will return a corresponding BEmailAddress instance.&#xa; &#xa; email@email.email&#xa; &amp;lt;email@email.email&amp;gt;&#xa; name email@email.email&#xa; &#x22;name&#x22; email@email.email&#xa; name &amp;lt;email@email.email&amp;gt;&#xa; &#x22;name&#x22; &amp;lt;email@email.email&amp;gt;&#xa; &#xa; When the name value is not within quotes, it must not contain &#xa; spaces, or any of these characters &amp;lt;&amp;gt;@,&#x22;
+</description>
+<parameter name="nameEmailString">
+<type class="java.lang.String"/>
+<description>
+a properly formated string containg an optional&#xa; person name and required email address.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.email.BEmailAddress"/>
+<description>
+A BEmailAddress, or null if the name and address can not&#xa; be parsed.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.email.converters.BAbstractStringToEmailAddressConverter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

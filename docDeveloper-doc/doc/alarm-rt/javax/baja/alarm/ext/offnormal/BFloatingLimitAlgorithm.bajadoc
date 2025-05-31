@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm" name="BFloatingLimitAlgorithm" packageName="javax.baja.alarm.ext.offnormal" public="true" final="true">
+<description>
+BFloatingLimitAlgorithm implements the floating-limit event algorithm as described in BACnet.&#xa; The algorithm behaves like a standard out-of-range alarming algorithm except that the range is&#xa; based on a dynamic setpoint value rather than being fixed.
+</description>
+<tag name="@author">Uday Rapuru on 28 Jan 22</tag>
+<tag name="@since">Niagara 4.10.3</tag>
+<tag name="@since">Niagara 4.11.1</tag>
+<tag name="@since">Niagara 4.12.0</tag>
+<extends>
+<type class="javax.baja.alarm.ext.BOffnormalAlgorithm"/>
+</extends>
+<property name="setpoint" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;setpoint&lt;/code&gt; property.&#xa; Value that, when its status and value is valid, is the basis for defining the range considered&#xa; normal.
+</description>
+<tag name="@see">#getSetpoint</tag>
+<tag name="@see">#setSetpoint</tag>
+</property>
+
+<property name="lastValidSetpoint" flags="r">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;lastValidSetpoint&lt;/code&gt; property.&#xa; The setpoint value when its status and value were last valid.
+</description>
+<tag name="@see">#getLastValidSetpoint</tag>
+<tag name="@see">#setLastValidSetpoint</tag>
+</property>
+
+<property name="lowDiffLimit" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;lowDiffLimit&lt;/code&gt; property.&#xa; Value is subtracted from the last valid setpoint value to determine the low limit of the range&#xa; considered normal.
+</description>
+<tag name="@see">#getLowDiffLimit</tag>
+<tag name="@see">#setLowDiffLimit</tag>
+</property>
+
+<property name="highDiffLimit" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;highDiffLimit&lt;/code&gt; property.&#xa; Value is added to the last valid setpoint value to determine the high limit of the range considered&#xa; normal.
+</description>
+<tag name="@see">#getHighDiffLimit</tag>
+<tag name="@see">#setHighDiffLimit</tag>
+</property>
+
+<property name="deadband" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;deadband&lt;/code&gt; property.&#xa; Differential value applied to high and low limits before return-to-normal. This value is subtracted&#xa; from the high limit and added to low limit.
+</description>
+<tag name="@see">#getDeadband</tag>
+<tag name="@see">#setDeadband</tag>
+</property>
+
+<property name="lowLimitText" flags="">
+<type class="javax.baja.util.BFormat"/>
+<description>
+Slot for the &lt;code&gt;lowLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-low-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#getLowLimitText</tag>
+<tag name="@see">#setLowLimitText</tag>
+</property>
+
+<property name="highLimitText" flags="">
+<type class="javax.baja.util.BFormat"/>
+<description>
+Slot for the &lt;code&gt;highLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-high-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#getHighLimitText</tag>
+<tag name="@see">#setHighLimitText</tag>
+</property>
+
+<property name="limitEnable" flags="">
+<type class="javax.baja.alarm.ext.BLimitEnable"/>
+<description>
+Slot for the &lt;code&gt;limitEnable&lt;/code&gt; property.&#xa; Flags that enable the low-limit and high-limit alarms, as needed.
+</description>
+<tag name="@see">#getLimitEnable</tag>
+<tag name="@see">#setLimitEnable</tag>
+</property>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm() -->
+<constructor name="BFloatingLimitAlgorithm" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getSetpoint() -->
+<method name="getSetpoint"  public="true">
+<description>
+Get the &lt;code&gt;setpoint&lt;/code&gt; property.&#xa; Value that, when its status and value is valid, is the basis for defining the range considered&#xa; normal.
+</description>
+<tag name="@see">#setpoint</tag>
+<return>
+<type class="javax.baja.status.BStatusNumeric"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setSetpoint(javax.baja.status.BStatusNumeric) -->
+<method name="setSetpoint"  public="true">
+<description>
+Set the &lt;code&gt;setpoint&lt;/code&gt; property.&#xa; Value that, when its status and value is valid, is the basis for defining the range considered&#xa; normal.
+</description>
+<tag name="@see">#setpoint</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatusNumeric"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getLastValidSetpoint() -->
+<method name="getLastValidSetpoint"  public="true">
+<description>
+Get the &lt;code&gt;lastValidSetpoint&lt;/code&gt; property.&#xa; The setpoint value when its status and value were last valid.
+</description>
+<tag name="@see">#lastValidSetpoint</tag>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setLastValidSetpoint(double) -->
+<method name="setLastValidSetpoint"  public="true">
+<description>
+Set the &lt;code&gt;lastValidSetpoint&lt;/code&gt; property.&#xa; The setpoint value when its status and value were last valid.
+</description>
+<tag name="@see">#lastValidSetpoint</tag>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getLowDiffLimit() -->
+<method name="getLowDiffLimit"  public="true">
+<description>
+Get the &lt;code&gt;lowDiffLimit&lt;/code&gt; property.&#xa; Value is subtracted from the last valid setpoint value to determine the low limit of the range&#xa; considered normal.
+</description>
+<tag name="@see">#lowDiffLimit</tag>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setLowDiffLimit(double) -->
+<method name="setLowDiffLimit"  public="true">
+<description>
+Set the &lt;code&gt;lowDiffLimit&lt;/code&gt; property.&#xa; Value is subtracted from the last valid setpoint value to determine the low limit of the range&#xa; considered normal.
+</description>
+<tag name="@see">#lowDiffLimit</tag>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getHighDiffLimit() -->
+<method name="getHighDiffLimit"  public="true">
+<description>
+Get the &lt;code&gt;highDiffLimit&lt;/code&gt; property.&#xa; Value is added to the last valid setpoint value to determine the high limit of the range considered&#xa; normal.
+</description>
+<tag name="@see">#highDiffLimit</tag>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setHighDiffLimit(double) -->
+<method name="setHighDiffLimit"  public="true">
+<description>
+Set the &lt;code&gt;highDiffLimit&lt;/code&gt; property.&#xa; Value is added to the last valid setpoint value to determine the high limit of the range considered&#xa; normal.
+</description>
+<tag name="@see">#highDiffLimit</tag>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getDeadband() -->
+<method name="getDeadband"  public="true">
+<description>
+Get the &lt;code&gt;deadband&lt;/code&gt; property.&#xa; Differential value applied to high and low limits before return-to-normal. This value is subtracted&#xa; from the high limit and added to low limit.
+</description>
+<tag name="@see">#deadband</tag>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setDeadband(double) -->
+<method name="setDeadband"  public="true">
+<description>
+Set the &lt;code&gt;deadband&lt;/code&gt; property.&#xa; Differential value applied to high and low limits before return-to-normal. This value is subtracted&#xa; from the high limit and added to low limit.
+</description>
+<tag name="@see">#deadband</tag>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getLowLimitText() -->
+<method name="getLowLimitText"  public="true">
+<description>
+Get the &lt;code&gt;lowLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-low-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#lowLimitText</tag>
+<return>
+<type class="javax.baja.util.BFormat"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setLowLimitText(javax.baja.util.BFormat) -->
+<method name="setLowLimitText"  public="true">
+<description>
+Set the &lt;code&gt;lowLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-low-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#lowLimitText</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFormat"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getHighLimitText() -->
+<method name="getHighLimitText"  public="true">
+<description>
+Get the &lt;code&gt;highLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-high-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#highLimitText</tag>
+<return>
+<type class="javax.baja.util.BFormat"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setHighLimitText(javax.baja.util.BFormat) -->
+<method name="setHighLimitText"  public="true">
+<description>
+Set the &lt;code&gt;highLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-high-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#highLimitText</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFormat"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getLimitEnable() -->
+<method name="getLimitEnable"  public="true">
+<description>
+Get the &lt;code&gt;limitEnable&lt;/code&gt; property.&#xa; Flags that enable the low-limit and high-limit alarms, as needed.
+</description>
+<tag name="@see">#limitEnable</tag>
+<return>
+<type class="javax.baja.alarm.ext.BLimitEnable"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setLimitEnable(javax.baja.alarm.ext.BLimitEnable) -->
+<method name="setLimitEnable"  public="true">
+<description>
+Set the &lt;code&gt;limitEnable&lt;/code&gt; property.&#xa; Flags that enable the low-limit and high-limit alarms, as needed.
+</description>
+<tag name="@see">#limitEnable</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.ext.BLimitEnable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.isGrandparentLegal(javax.baja.sys.BComponent) -->
+<method name="isGrandparentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Grandparent must implement the NumericPoint interface
+</description>
+<parameter name="grandparent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.checkAlarms(javax.baja.status.BStatusValue, long, long) -->
+<method name="checkAlarms"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<parameter name="toAlarmTimeDelay">
+<type class="long"/>
+</parameter>
+<parameter name="toNormalTimeDelay">
+<type class="long"/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.ext.BAlarmState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.writeAlarmData(javax.baja.status.BStatusValue, java.util.Map) -->
+<method name="writeAlarmData"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Write the key-value pairs defining alarm data for the alarm algorithm and state to the given&#xa; Facets.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The relevant control point status value
+</description>
+</parameter>
+<parameter name="map">
+<parameterizedType class="java.util.Map">
+<args>
+</args>
+</parameterizedType>
+<description>
+The map.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.setpoint -->
+<field name="setpoint"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;setpoint&lt;/code&gt; property.&#xa; Value that, when its status and value is valid, is the basis for defining the range considered&#xa; normal.
+</description>
+<tag name="@see">#getSetpoint</tag>
+<tag name="@see">#setSetpoint</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.lastValidSetpoint -->
+<field name="lastValidSetpoint"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastValidSetpoint&lt;/code&gt; property.&#xa; The setpoint value when its status and value were last valid.
+</description>
+<tag name="@see">#getLastValidSetpoint</tag>
+<tag name="@see">#setLastValidSetpoint</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.lowDiffLimit -->
+<field name="lowDiffLimit"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lowDiffLimit&lt;/code&gt; property.&#xa; Value is subtracted from the last valid setpoint value to determine the low limit of the range&#xa; considered normal.
+</description>
+<tag name="@see">#getLowDiffLimit</tag>
+<tag name="@see">#setLowDiffLimit</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.highDiffLimit -->
+<field name="highDiffLimit"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;highDiffLimit&lt;/code&gt; property.&#xa; Value is added to the last valid setpoint value to determine the high limit of the range considered&#xa; normal.
+</description>
+<tag name="@see">#getHighDiffLimit</tag>
+<tag name="@see">#setHighDiffLimit</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.deadband -->
+<field name="deadband"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;deadband&lt;/code&gt; property.&#xa; Differential value applied to high and low limits before return-to-normal. This value is subtracted&#xa; from the high limit and added to low limit.
+</description>
+<tag name="@see">#getDeadband</tag>
+<tag name="@see">#setDeadband</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.lowLimitText -->
+<field name="lowLimitText"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lowLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-low-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#getLowLimitText</tag>
+<tag name="@see">#setLowLimitText</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.highLimitText -->
+<field name="highLimitText"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;highLimitText&lt;/code&gt; property.&#xa; Text descriptor included in a to-high-limit alarm for this object. Uses BFormat.
+</description>
+<tag name="@see">#getHighLimitText</tag>
+<tag name="@see">#setHighLimitText</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.limitEnable -->
+<field name="limitEnable"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;limitEnable&lt;/code&gt; property.&#xa; Flags that enable the low-limit and high-limit alarms, as needed.
+</description>
+<tag name="@see">#getLimitEnable</tag>
+<tag name="@see">#setLimitEnable</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BFloatingLimitAlgorithm.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

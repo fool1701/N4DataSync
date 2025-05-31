@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.export.BIBacnetCovSource" name="BIBacnetCovSource" packageName="javax.baja.bacnet.export" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIBacnetCovSource is the interface implemented by all export&#xa; descriptors that support object-level COV subscription.&lt;p&gt;&#xa; &lt;p&gt;&#xa; Components implementing BIBacnetCovSource must also implement&#xa; BIBacnetExportObject; although this is not enforced, it may&#xa; be enforced in the future.
+</description>
+<tag name="@author">Craig Gemmill on 02 Apr 2008</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.getObject() -->
+<method name="getObject"  public="true" abstract="true">
+<description>
+Get the exported object.
+</description>
+<tag name="@see">BIBacnetExportObject</tag>
+<return>
+<type class="javax.baja.sys.BObject"/>
+<description>
+the actual exported object by resolving the object ord.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.getExport() -->
+<method name="getExport"  public="true" abstract="true">
+<description>
+Get the export descriptor for this cov source.  Usually this.
+</description>
+<return>
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+<description>
+the relevant export descriptor.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.addCovSubscription(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="addCovSubscription"  public="true" abstract="true">
+<description>
+Add a COV subscription for the given COV subscriber information.
+</description>
+<parameter name="sub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.removeCovSubscription(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="removeCovSubscription"  public="true" abstract="true">
+<description>
+Remove the COV subscription for the given COV subscriber.
+</description>
+<parameter name="sub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.findCovSubscription(javax.baja.bacnet.datatypes.BBacnetAddress, long, javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="findCovSubscription"  public="true" abstract="true">
+<description>
+Attempt to locate a COV subscription for the given subscriber information&#xa; on this object.
+</description>
+<parameter name="subscriberAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</parameter>
+<parameter name="processId">
+<type class="long"/>
+<description/>
+</parameter>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description>
+the subscription if found, or null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.findCovPropertySubscription(javax.baja.bacnet.datatypes.BBacnetAddress, long, javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, int, int) -->
+<method name="findCovPropertySubscription"  public="true" abstract="true">
+<description>
+Attempt to locate a COV subscription for the given subscriber information&#xa; on this object.
+</description>
+<parameter name="subscriberAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</parameter>
+<parameter name="processId">
+<type class="long"/>
+<description/>
+</parameter>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<parameter name="propertyId">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="propertyArrayIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description>
+the subscription if found, or null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.startCovTimer(javax.baja.bacnet.datatypes.BBacnetCovSubscription, long) -->
+<method name="startCovTimer"  public="true" abstract="true">
+<description>
+Start or restart a timer for the given COV subscription.
+</description>
+<parameter name="covSub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description>
+the subscription for which to start the timer.
+</description>
+</parameter>
+<parameter name="lifetime">
+<type class="long"/>
+<description>
+the lifetime, in seconds, of the subscription.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.checkCov() -->
+<method name="checkCov"  public="true" abstract="true">
+<description>
+Check to see if a COV notification is necessary.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.getOutProperty() -->
+<method name="getOutProperty"  public="true" abstract="true">
+<description>
+Get the output property mapped as Present_Value for this export.
+</description>
+<return>
+<type class="javax.baja.sys.Property"/>
+<description>
+the property used for Present_Value in COV notifications.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.supportsSubscribeCov() -->
+<method name="supportsSubscribeCov"  public="true" abstract="true">
+<description>
+Does this COV source support SubscribeCOV in addition to SubscribeCOVProperty?&#xa; This is true for input, output, value, and loop objects.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if Subscribe-COV can be used with this object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.getCurrentCovValue(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="getCurrentCovValue"  public="true" abstract="true">
+<description/>
+<parameter name="sub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BIBacnetCovSource.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

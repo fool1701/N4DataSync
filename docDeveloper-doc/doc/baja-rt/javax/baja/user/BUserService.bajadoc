@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.user.BUserService" name="BUserService" packageName="javax.baja.user" public="true">
+<description>
+BUserService is the service used to manage &#xa; SecurityDomains, Profiles, and Users.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">30 Oct 00</tag>
+<tag name="@version">$Revision: 41$ $Date: 5/17/11 4:55:37 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<implements>
+<type class="javax.baja.role.BIRoleListener"/>
+</implements>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<implements>
+<type class="javax.baja.sys.IPropertyValidator"/>
+</implements>
+<implements>
+<type class="javax.baja.sys.BIUnlinkableSlotsContainer"/>
+</implements>
+<property name="lockOutEnabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;lockOutEnabled&lt;/code&gt; property.&#xa; If enabled then repeated authentication failures&#xa; will temporarily set the lockOut property of the user.&#xa; Using lockOut makes it difficult to automate guessing&#xa; of passwords.
+</description>
+<tag name="@see">#getLockOutEnabled</tag>
+<tag name="@see">#setLockOutEnabled</tag>
+</property>
+
+<property name="lockOutPeriod" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;lockOutPeriod&lt;/code&gt; property.&#xa; If lockOut is enabled, then this is the period of&#xa; time a user account is locked out before being reset.
+</description>
+<tag name="@see">#getLockOutPeriod</tag>
+<tag name="@see">#setLockOutPeriod</tag>
+</property>
+
+<property name="maxBadLoginsBeforeLockOut" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxBadLoginsBeforeLockOut&lt;/code&gt; property.&#xa; If lock out is enabled, then this number, in conjunction with the&#xa; lock-out window, indicates how many failed login attempts are tolerated&#xa; within a certain amount of time before locking the user out.
+</description>
+<tag name="@see">#getMaxBadLoginsBeforeLockOut</tag>
+<tag name="@see">#setMaxBadLoginsBeforeLockOut</tag>
+</property>
+
+<property name="lockOutWindow" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;lockOutWindow&lt;/code&gt; property.&#xa; When lock out is enabled a user will be locked out for lock-out&#xa; period of time if maxBadLoginsBeforeLockOut occur within this&#xa; amount of time.
+</description>
+<tag name="@see">#getLockOutWindow</tag>
+<tag name="@see">#setLockOutWindow</tag>
+</property>
+
+<property name="defaultAutoLogoffPeriod" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;defaultAutoLogoffPeriod&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDefaultAutoLogoffPeriod</tag>
+<tag name="@see">#setDefaultAutoLogoffPeriod</tag>
+</property>
+
+<property name="secureOnlyPasswordSet" flags="hrt">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;secureOnlyPasswordSet&lt;/code&gt; property.&#xa; Only allow setting or resetting passwords over secure connections
+</description>
+<tag name="@see">#getSecureOnlyPasswordSet</tag>
+<tag name="@see">#setSecureOnlyPasswordSet</tag>
+</property>
+
+<property name="userPrototypes" flags="">
+<type class="javax.baja.user.BUserPrototypes"/>
+<description>
+Slot for the &lt;code&gt;userPrototypes&lt;/code&gt; property.&#xa; The container for prototype users.  A prototype user&#xa; defines configuration properties common to many users.  Prototypes&#xa; are also used when synchronizing user accounts between stations.&#xa; In this case, the prototype defines which properties are defined&#xa; locally rather than being copied with the user account.
+</description>
+<tag name="@see">#getUserPrototypes</tag>
+<tag name="@see">#setUserPrototypes</tag>
+</property>
+
+<property name="licenseExpirationNotificationSettings" flags="">
+<type class="com.tridium.sys.license.BLicenseExpirationNotificationSettings"/>
+<description>
+Slot for the &lt;code&gt;licenseExpirationNotificationSettings&lt;/code&gt; property.&#xa; Maintain license expiration warning notifications.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<tag name="@see">#getLicenseExpirationNotificationSettings</tag>
+<tag name="@see">#setLicenseExpirationNotificationSettings</tag>
+</property>
+
+<topic name="userEvent" flags="">
+<eventType>
+<type class="javax.baja.user.BUserEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;userEvent&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireUserEvent</tag>
+</topic>
+
+<!-- javax.baja.user.BUserService() -->
+<constructor name="BUserService" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.user.BUserService.getLockOutEnabled() -->
+<method name="getLockOutEnabled"  public="true">
+<description>
+Get the &lt;code&gt;lockOutEnabled&lt;/code&gt; property.&#xa; If enabled then repeated authentication failures&#xa; will temporarily set the lockOut property of the user.&#xa; Using lockOut makes it difficult to automate guessing&#xa; of passwords.
+</description>
+<tag name="@see">#lockOutEnabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setLockOutEnabled(boolean) -->
+<method name="setLockOutEnabled"  public="true">
+<description>
+Set the &lt;code&gt;lockOutEnabled&lt;/code&gt; property.&#xa; If enabled then repeated authentication failures&#xa; will temporarily set the lockOut property of the user.&#xa; Using lockOut makes it difficult to automate guessing&#xa; of passwords.
+</description>
+<tag name="@see">#lockOutEnabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getLockOutPeriod() -->
+<method name="getLockOutPeriod"  public="true">
+<description>
+Get the &lt;code&gt;lockOutPeriod&lt;/code&gt; property.&#xa; If lockOut is enabled, then this is the period of&#xa; time a user account is locked out before being reset.
+</description>
+<tag name="@see">#lockOutPeriod</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setLockOutPeriod(javax.baja.sys.BRelTime) -->
+<method name="setLockOutPeriod"  public="true">
+<description>
+Set the &lt;code&gt;lockOutPeriod&lt;/code&gt; property.&#xa; If lockOut is enabled, then this is the period of&#xa; time a user account is locked out before being reset.
+</description>
+<tag name="@see">#lockOutPeriod</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getMaxBadLoginsBeforeLockOut() -->
+<method name="getMaxBadLoginsBeforeLockOut"  public="true">
+<description>
+Get the &lt;code&gt;maxBadLoginsBeforeLockOut&lt;/code&gt; property.&#xa; If lock out is enabled, then this number, in conjunction with the&#xa; lock-out window, indicates how many failed login attempts are tolerated&#xa; within a certain amount of time before locking the user out.
+</description>
+<tag name="@see">#maxBadLoginsBeforeLockOut</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setMaxBadLoginsBeforeLockOut(int) -->
+<method name="setMaxBadLoginsBeforeLockOut"  public="true">
+<description>
+Set the &lt;code&gt;maxBadLoginsBeforeLockOut&lt;/code&gt; property.&#xa; If lock out is enabled, then this number, in conjunction with the&#xa; lock-out window, indicates how many failed login attempts are tolerated&#xa; within a certain amount of time before locking the user out.
+</description>
+<tag name="@see">#maxBadLoginsBeforeLockOut</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getLockOutWindow() -->
+<method name="getLockOutWindow"  public="true">
+<description>
+Get the &lt;code&gt;lockOutWindow&lt;/code&gt; property.&#xa; When lock out is enabled a user will be locked out for lock-out&#xa; period of time if maxBadLoginsBeforeLockOut occur within this&#xa; amount of time.
+</description>
+<tag name="@see">#lockOutWindow</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setLockOutWindow(javax.baja.sys.BRelTime) -->
+<method name="setLockOutWindow"  public="true">
+<description>
+Set the &lt;code&gt;lockOutWindow&lt;/code&gt; property.&#xa; When lock out is enabled a user will be locked out for lock-out&#xa; period of time if maxBadLoginsBeforeLockOut occur within this&#xa; amount of time.
+</description>
+<tag name="@see">#lockOutWindow</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getDefaultAutoLogoffPeriod() -->
+<method name="getDefaultAutoLogoffPeriod"  public="true">
+<description>
+Get the &lt;code&gt;defaultAutoLogoffPeriod&lt;/code&gt; property.
+</description>
+<tag name="@see">#defaultAutoLogoffPeriod</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setDefaultAutoLogoffPeriod(javax.baja.sys.BRelTime) -->
+<method name="setDefaultAutoLogoffPeriod"  public="true">
+<description>
+Set the &lt;code&gt;defaultAutoLogoffPeriod&lt;/code&gt; property.
+</description>
+<tag name="@see">#defaultAutoLogoffPeriod</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getSecureOnlyPasswordSet() -->
+<method name="getSecureOnlyPasswordSet"  public="true">
+<description>
+Get the &lt;code&gt;secureOnlyPasswordSet&lt;/code&gt; property.&#xa; Only allow setting or resetting passwords over secure connections
+</description>
+<tag name="@see">#secureOnlyPasswordSet</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setSecureOnlyPasswordSet(boolean) -->
+<method name="setSecureOnlyPasswordSet"  public="true">
+<description>
+Set the &lt;code&gt;secureOnlyPasswordSet&lt;/code&gt; property.&#xa; Only allow setting or resetting passwords over secure connections
+</description>
+<tag name="@see">#secureOnlyPasswordSet</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getUserPrototypes() -->
+<method name="getUserPrototypes"  public="true">
+<description>
+Get the &lt;code&gt;userPrototypes&lt;/code&gt; property.&#xa; The container for prototype users.  A prototype user&#xa; defines configuration properties common to many users.  Prototypes&#xa; are also used when synchronizing user accounts between stations.&#xa; In this case, the prototype defines which properties are defined&#xa; locally rather than being copied with the user account.
+</description>
+<tag name="@see">#userPrototypes</tag>
+<return>
+<type class="javax.baja.user.BUserPrototypes"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setUserPrototypes(javax.baja.user.BUserPrototypes) -->
+<method name="setUserPrototypes"  public="true">
+<description>
+Set the &lt;code&gt;userPrototypes&lt;/code&gt; property.&#xa; The container for prototype users.  A prototype user&#xa; defines configuration properties common to many users.  Prototypes&#xa; are also used when synchronizing user accounts between stations.&#xa; In this case, the prototype defines which properties are defined&#xa; locally rather than being copied with the user account.
+</description>
+<tag name="@see">#userPrototypes</tag>
+<parameter name="v">
+<type class="javax.baja.user.BUserPrototypes"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getSMANotificationSettings() -->
+<method name="getSMANotificationSettings"  public="true">
+<description>
+Get the &lt;code&gt;SMANotificationSettings&lt;/code&gt; property.&#xa; SMA Notification settings can be set here
+</description>
+<tag name="@see">#SMANotificationSettings</tag>
+<return>
+<type class="com.tridium.sys.license.BSMANotificationSettings"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setSMANotificationSettings(com.tridium.sys.license.BSMANotificationSettings) -->
+<method name="setSMANotificationSettings"  public="true">
+<description>
+Set the &lt;code&gt;SMANotificationSettings&lt;/code&gt; property.&#xa; SMA Notification settings can be set here
+</description>
+<tag name="@see">#SMANotificationSettings</tag>
+<parameter name="v">
+<type class="com.tridium.sys.license.BSMANotificationSettings"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getLicenseExpirationNotificationSettings() -->
+<method name="getLicenseExpirationNotificationSettings"  public="true">
+<description>
+Get the &lt;code&gt;licenseExpirationNotificationSettings&lt;/code&gt; property.&#xa; Maintain license expiration warning notifications.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<tag name="@see">#licenseExpirationNotificationSettings</tag>
+<return>
+<type class="com.tridium.sys.license.BLicenseExpirationNotificationSettings"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setLicenseExpirationNotificationSettings(com.tridium.sys.license.BLicenseExpirationNotificationSettings) -->
+<method name="setLicenseExpirationNotificationSettings"  public="true">
+<description>
+Set the &lt;code&gt;licenseExpirationNotificationSettings&lt;/code&gt; property.&#xa; Maintain license expiration warning notifications.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<tag name="@see">#licenseExpirationNotificationSettings</tag>
+<parameter name="v">
+<type class="com.tridium.sys.license.BLicenseExpirationNotificationSettings"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.fireUserEvent(javax.baja.user.BUserEvent) -->
+<method name="fireUserEvent"  public="true">
+<description>
+Fire an event for the &lt;code&gt;userEvent&lt;/code&gt; topic.
+</description>
+<tag name="@see">#userEvent</tag>
+<parameter name="event">
+<type class="javax.baja.user.BUserEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getService() -->
+<method name="getService"  public="true" static="true">
+<description>
+Get the UserService or throw ServiceNotFoundException.
+</description>
+<return>
+<type class="javax.baja.user.BUserService"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Register this component under &#x22;baja:UserService&#x22;.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Service start.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.user.BUserService.serviceStopped() -->
+<method name="serviceStopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Service stop.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.user.BUserService.checkParentForRestrictedComponent(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="checkParentForRestrictedComponent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Only one allowed to live under the station&#x27;s BServiceContainer.&#xa; Only Super Users are allowed to add an instance of this type to the station.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.isDistributable() -->
+<method name="isDistributable"  public="true">
+<description>
+Test to see if this user service supports distribution of&#xa; user accounts to other stations.  Subclasses may override to&#xa; disable the standard distribution behavior.  This is used&#xa; for implementations like LDAP that has its own mechanism&#xa; for distributing user accounts.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getDisplayName(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Force admin and guest to be their programmatic, username.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getUser(java.lang.String) -->
+<method name="getUser"  public="true">
+<description>
+Get a user by name or return null.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.user.BUser"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getUsers() -->
+<method name="getUsers"  public="true">
+<description>
+Get all users in the station.
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<return>
+<type class="javax.baja.user.BUser" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getAdmin() -->
+<method name="getAdmin"  public="true">
+<description>
+In Niagara4 there is no requirement&#xa; for there to be a user named &#x22;admin&#x22;.&#xa; &#xa; This method now returns the &#x27;admin&#x27; user&#xa; only if it is a superuser. If there is no &#x27;admin&#x27;&#xa; user then the first enabled super user is returned.&#xa; &#xa; There must always be at least one enabled &#xa; superuser.
+</description>
+<return>
+<type class="javax.baja.user.BUser"/>
+<description>
+the &#x27;admin&#x27; user if superuser and enabled&#xa;         otherwise return the first enabled superuser
+</description>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.canLogin(javax.baja.user.BUser) -->
+<method name="canLogin"  public="true">
+<description>
+Can the specified user currently login into this station.
+</description>
+<parameter name="user">
+<type class="javax.baja.user.BUser"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getAuthenticationSchemeForUser(java.lang.String) -->
+<method name="getAuthenticationSchemeForUser"  public="true">
+<description>
+Returns the authentication scheme for the requested username. If no&#xa; user by the name exists, returns the station default authentication&#xa; scheme.
+</description>
+<parameter name="username">
+<type class="java.lang.String"/>
+<description>
+The name of the user for which we want the authentication scheme.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.authn.BAuthenticationScheme"/>
+<description>
+The authentication scheme associated with the specified user, or the station&#xa;         default scheme if the user doesn&#x27;t exist.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getAuthenticationSchemeForUser(javax.baja.user.BUser) -->
+<method name="getAuthenticationSchemeForUser"  public="true">
+<description>
+Returns the authentication scheme for the requested username. If no&#xa; user by the name exists, returns the station default authentication&#xa; scheme.
+</description>
+<parameter name="user">
+<type class="javax.baja.user.BUser"/>
+<description>
+The user for which we want the authentication scheme.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.authn.BAuthenticationScheme"/>
+<description>
+The authentication scheme associated with the specified user, or the station&#xa;         default scheme if the user is null;
+</description>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.auditLoginAttempt(boolean, javax.baja.user.BUser, javax.baja.sys.Context) -->
+<method name="auditLoginAttempt"  public="true" final="true">
+<description>
+Records a standard formatted audit history record for a user &#xa; authentication event (login attempt).&#xa; &lt;p&gt;&#xa; The &lt;b&gt;loginSuccessful&lt;/b&gt; boolean parameter specifies whether the&#xa; login attempt was successful (true) or failed (false).&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; The &lt;b&gt;user&lt;/b&gt; parameter specifies the user that attempted authentication.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; The &lt;b&gt;auditContext&lt;/b&gt; parameter is used to configure how the&#xa; audit trail will be handled when invoking this method.&#xa; If this Context is null, then no audit trail record will be&#xa; recorded for this call.  When the Context is not null, an&#xa; audit trail will be recorded for this authentication attempt&#xa; in which the following facets are checked on the Context for &#xa; formatting the audit record: &#xa; &lt;/p&gt;&#xa;  &lt;pre&gt;&#xa;   Name                     Value    Function&#xa;   ----                     -----    --------&#xa;&#xa;   &#x22;target&#x22;                 String   This optional String will be used for the &#xa;                                     &#x22;Target&#x22; column of the audit record (by &#xa;                                     convention, this field is often used to specify&#xa;                                     a short String description of the service &#xa;                                     attempting authentication).  When this key doesn&#x27;t &#xa;                                     exist, a blank String will be used for the &#xa;                                     &#x22;Target&#x22; field.&#xa;&#xa;   &#x22;slotName&#x22;               String   This optional String will be used for the &#xa;                                     &#x22;Slot Name&#x22; column of the audit record (by &#xa;                                     convention, this field is often used to specify &#xa;                                     the host attempting authentication).  When&#xa;                                     this key doesn&#x27;t exist, a blank String will be&#xa;                                     used for the &#x22;Slot Name&#x22; field.&#xa;&#xa;   &#x22;oldValue&#x22;               String   This optional String will be used for the&#xa;                                     &#x22;Old Value&#x22; column of the audit record.  When&#xa;                                     this key doesn&#x27;t exist, a blank String will be&#xa;                                     used for the &#x22;Old Value&#x22; field.&#xa; &lt;/pre&gt;
+</description>
+<tag name="@since">Niagara 3.3</tag>
+<parameter name="loginSuccessful">
+<type class="boolean"/>
+</parameter>
+<parameter name="user">
+<type class="javax.baja.user.BUser"/>
+</parameter>
+<parameter name="auditContext">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.checkAdd(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="checkAdd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.checkRename(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="checkRename"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.checkRemove(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="checkRemove"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.checkSuperuser(javax.baja.user.BUser) -->
+<method name="checkSuperuser"  public="true">
+<description>
+Return true if the given user is a SuperUser, or false otherwise.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="user">
+<type class="javax.baja.user.BUser"/>
+<description>
+the user to check
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the user is a SuperUser, false otherwise
+</description>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getAutoLogoffSettings(java.lang.String, javax.baja.sys.Context) -->
+<method name="getAutoLogoffSettings"  public="true" static="true">
+<annotation><type class="javax.baja.rpc.NiagaraRpc"/>
+<elementValue name="permissions">
+<annotationValue kind="expr">
+<expression>&#x22;unrestricted&#x22;</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="transports">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.rpc.Transport"/>
+<elementValue name="type">
+<annotationValue kind="enum">
+<enumField name="box"/>
+<type class="javax.baja.rpc.TransportType"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.rpc.Transport"/>
+<elementValue name="type">
+<annotationValue kind="enum">
+<enumField name="web"/>
+<type class="javax.baja.rpc.TransportType"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Get the auto log off settings for the user. The period could either be default or user&#xa; specific if overridden
+</description>
+<parameter name="username">
+<type class="java.lang.String"/>
+<description>
+- The current (logged in) user
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</parameter>
+<return>
+<type class="com.tridium.json.JSONObject"/>
+<description>
+JSONObject - returns a jsonobject of this example form&#xa;        {&#xa;          autoLogoffEnabled : true,&#xa;          autoLogoffPeriod : 300000&#xa;        }
+</description>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getPropertyValidator(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="getPropertyValidator"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<tag name="@since">Niagara 4.4U1</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.IPropertyValidator"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.validateSet(javax.baja.sys.Validatable, javax.baja.sys.Context) -->
+<method name="validateSet"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<tag name="@since">Niagara 4.4U1</tag>
+<parameter name="validatable">
+<type class="javax.baja.sys.Validatable"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.addPermissionsManager(javax.baja.user.PermissionsManager) -->
+<method name="addPermissionsManager"  public="true" synchronized="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Add a custom permissions manager.  Each installed PermissionsManager&#xa; gets a chance to override a user&#x27;s default permissions map for&#xa; a protected object.  A custom permissions managers is typically&#xa; installed by an application specific service on startup.
+</description>
+<tag name="@deprecated">Will be removed in a future release</tag>
+<parameter name="pmgr">
+<type class="javax.baja.user.PermissionsManager"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.removePermissionsManager(javax.baja.user.PermissionsManager) -->
+<method name="removePermissionsManager"  public="true" synchronized="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Remove the specified permissions manager.
+</description>
+<tag name="@deprecated">Will be removed in a future release</tag>
+<parameter name="pmgr">
+<type class="javax.baja.user.PermissionsManager"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getPermissionsManagers() -->
+<method name="getPermissionsManagers"  public="true" synchronized="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Get the list of installed permissions managers.  For performance&#xa; reasons, this returns the internal array of managers and must&#xa; not be modified by the caller.
+</description>
+<tag name="@deprecated">Will be removed in a future release</tag>
+<return>
+<type class="javax.baja.user.PermissionsManager" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.setModified(javax.baja.user.BUser) -->
+<method name="setModified"  public="true">
+<description/>
+<parameter name="user">
+<type class="javax.baja.user.BUser"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.removeRole(javax.baja.role.BIRoleService, java.lang.String) -->
+<method name="removeRole"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="service">
+<type class="javax.baja.role.BIRoleService"/>
+</parameter>
+<parameter name="roleIdentifier">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.renameRole(javax.baja.role.BIRoleService, java.lang.String, java.lang.String) -->
+<method name="renameRole"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="service">
+<type class="javax.baja.role.BIRoleService"/>
+</parameter>
+<parameter name="oldRoleIdentifier">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="newRoleIdentifier">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.changedRole(javax.baja.role.BIRoleService, java.lang.String) -->
+<method name="changedRole"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="service">
+<type class="javax.baja.role.BIRoleService"/>
+</parameter>
+<parameter name="roleIdentifier">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.removed(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="removed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="oldValue">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getUnlinkableTargetSlots(javax.baja.sys.Context) -->
+<method name="getUnlinkableTargetSlots"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to specify properties that are not allowed to be the target of a link.
+</description>
+<tag name="@since">Niagara 4.10u8</tag>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="javax.baja.sys.Slot"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.user.BUserService.lockOutEnabled -->
+<field name="lockOutEnabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lockOutEnabled&lt;/code&gt; property.&#xa; If enabled then repeated authentication failures&#xa; will temporarily set the lockOut property of the user.&#xa; Using lockOut makes it difficult to automate guessing&#xa; of passwords.
+</description>
+<tag name="@see">#getLockOutEnabled</tag>
+<tag name="@see">#setLockOutEnabled</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.lockOutPeriod -->
+<field name="lockOutPeriod"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lockOutPeriod&lt;/code&gt; property.&#xa; If lockOut is enabled, then this is the period of&#xa; time a user account is locked out before being reset.
+</description>
+<tag name="@see">#getLockOutPeriod</tag>
+<tag name="@see">#setLockOutPeriod</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.maxBadLoginsBeforeLockOut -->
+<field name="maxBadLoginsBeforeLockOut"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxBadLoginsBeforeLockOut&lt;/code&gt; property.&#xa; If lock out is enabled, then this number, in conjunction with the&#xa; lock-out window, indicates how many failed login attempts are tolerated&#xa; within a certain amount of time before locking the user out.
+</description>
+<tag name="@see">#getMaxBadLoginsBeforeLockOut</tag>
+<tag name="@see">#setMaxBadLoginsBeforeLockOut</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.lockOutWindow -->
+<field name="lockOutWindow"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lockOutWindow&lt;/code&gt; property.&#xa; When lock out is enabled a user will be locked out for lock-out&#xa; period of time if maxBadLoginsBeforeLockOut occur within this&#xa; amount of time.
+</description>
+<tag name="@see">#getLockOutWindow</tag>
+<tag name="@see">#setLockOutWindow</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.defaultAutoLogoffPeriod -->
+<field name="defaultAutoLogoffPeriod"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;defaultAutoLogoffPeriod&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDefaultAutoLogoffPeriod</tag>
+<tag name="@see">#setDefaultAutoLogoffPeriod</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.secureOnlyPasswordSet -->
+<field name="secureOnlyPasswordSet"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;secureOnlyPasswordSet&lt;/code&gt; property.&#xa; Only allow setting or resetting passwords over secure connections
+</description>
+<tag name="@see">#getSecureOnlyPasswordSet</tag>
+<tag name="@see">#setSecureOnlyPasswordSet</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.userPrototypes -->
+<field name="userPrototypes"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;userPrototypes&lt;/code&gt; property.&#xa; The container for prototype users.  A prototype user&#xa; defines configuration properties common to many users.  Prototypes&#xa; are also used when synchronizing user accounts between stations.&#xa; In this case, the prototype defines which properties are defined&#xa; locally rather than being copied with the user account.
+</description>
+<tag name="@see">#getUserPrototypes</tag>
+<tag name="@see">#setUserPrototypes</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.SMANotificationSettings -->
+<field name="SMANotificationSettings"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;SMANotificationSettings&lt;/code&gt; property.&#xa; SMA Notification settings can be set here
+</description>
+<tag name="@see">#getSMANotificationSettings</tag>
+<tag name="@see">#setSMANotificationSettings</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.licenseExpirationNotificationSettings -->
+<field name="licenseExpirationNotificationSettings"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;licenseExpirationNotificationSettings&lt;/code&gt; property.&#xa; Maintain license expiration warning notifications.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<tag name="@see">#getLicenseExpirationNotificationSettings</tag>
+<tag name="@see">#setLicenseExpirationNotificationSettings</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.userEvent -->
+<field name="userEvent"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;userEvent&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireUserEvent</tag>
+</field>
+
+<!-- javax.baja.user.BUserService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

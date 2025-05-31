@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.comm.serial.SerialLinkLayer" name="SerialLinkLayer" packageName="com.tridium.ndriver.comm.serial" public="true">
+<description>
+LinkLayer implementation for Serial interface.  Send and receive messages&#xa; using a serial comm port.&#xa; &lt;p&gt;&#xa; SerialLinkLayer also implements apis to allow SerialTunnelShare to&#xa; synchronize access to the comm port.
+</description>
+<tag name="@author">Robert A Adams</tag>
+<tag name="@creation">Oct 23, 2011</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="com.tridium.ndriver.comm.ILinkLayer"/>
+</implements>
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer(com.tridium.ndriver.comm.NComm, com.tridium.ndriver.datatypes.BSerialCommConfig) -->
+<constructor name="SerialLinkLayer" public="true">
+<parameter name="comm">
+<type class="com.tridium.ndriver.comm.NComm"/>
+</parameter>
+<parameter name="serCfg">
+<type class="com.tridium.ndriver.datatypes.BSerialCommConfig"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.start() -->
+<method name="start"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Start linklayer - called from NComm
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.stop() -->
+<method name="stop"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Stop linklayer - called from NComm
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.verifySettings(com.tridium.ndriver.datatypes.BCommConfig) -->
+<method name="verifySettings"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called when comm config parameter changes.
+</description>
+<parameter name="comCfg">
+<type class="com.tridium.ndriver.datatypes.BCommConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.sendMessage(com.tridium.ndriver.comm.LinkMessage) -->
+<method name="sendMessage"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Entry point for NComm to send message to link layer
+</description>
+<parameter name="msg">
+<type class="com.tridium.ndriver.comm.LinkMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.tunnelLock() -->
+<method name="tunnelLock"  public="true">
+<description>
+Callback used by &lt;code&gt;BSerialTunnelShare&lt;/code&gt; to lock access to comm&#xa; port for tunneling.
+</description>
+<return>
+<type class="javax.baja.serial.BISerialPort"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.releaseLock() -->
+<method name="releaseLock"  public="true">
+<description>
+Callback used by &lt;code&gt;BSerialTunnelShare&lt;/code&gt; to release lock on comm&#xa; port to allow general message processing.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Provide some spy debug
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.resetStats() -->
+<method name="resetStats"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Clear all statistics counts. Called when user invokes resetStats action on&#xa; commConfig object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.serial.SerialLinkLayer.log() -->
+<method name="log"  public="true" final="true">
+<description/>
+<return>
+<type class="java.util.logging.Logger"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

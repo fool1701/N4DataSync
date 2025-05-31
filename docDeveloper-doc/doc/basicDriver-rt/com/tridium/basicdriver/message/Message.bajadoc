@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="basicDriver" runtimeProfile="rt" qualifiedName="com.tridium.basicdriver.message.Message" name="Message" packageName="com.tridium.basicdriver.message" public="true" abstract="true">
+<description>
+The Message class is the super class for all basic messages.&#xa; It usually boils down to an array of bytes.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">25 Mar 02</tag>
+<tag name="@version">$Revision: 1$ $Date: 03/25/02 12:47:14 PM$</tag>
+<tag name="@since">Niagara 3.0 basicdriver 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.basicdriver.message.Message() -->
+<constructor name="Message" public="true">
+<description>
+Empty constructor
+</description>
+</constructor>
+
+<!-- com.tridium.basicdriver.message.Message.setTag(java.lang.Object) -->
+<method name="setTag"  public="true">
+<description>
+Sets the tag associated with this message.  &#xa; Used to match transactions (i.e. request/response transactions). &#xa; Note to developers - if this tag value is kept the same (default is an Integer of -1) for &#xa; all messages (both requests and responses), then the basicdriver &#xa; will default and work one transaction at a time (request/immediate response).&#xa; Only change from default Integer -1 if you want to support multiple simultaneous &#xa; transactions in which case this tag is used for request/response matching.
+</description>
+<parameter name="t">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.getTag() -->
+<method name="getTag"  public="true">
+<description>
+Returns the tag associated with this message.  &#xa; Used to match transactions (i.e. request/response transactions). &#xa; Note to developers - if this tag value is kept the same (default Integer -1) for &#xa; all messages (both requests and responses), then the basicdriver &#xa; will default and work one transaction at a time (request/immediate response).&#xa; Only change from default Integer -1 if you want to support multiple simultaneous &#xa; transactions in which case this tag is used for request/response matching.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.getResponseExpected() -->
+<method name="getResponseExpected"  public="true">
+<description>
+Returns true if a response is expected for this message, false if not.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.setResponseExpected(boolean) -->
+<method name="setResponseExpected"  public="true">
+<description>
+Sets whether a response is expected for this message.  True if a response&#xa; is expected, false if not.
+</description>
+<parameter name="expected">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.setSuccessfulResponse(boolean) -->
+<method name="setSuccessfulResponse"  public="true">
+<description>
+Sets whether the response was successful.  True for successful, false&#xa; for unsuccessful.
+</description>
+<parameter name="b">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.getSuccessfulResponse() -->
+<method name="getSuccessfulResponse"  public="true">
+<description>
+Returns whether the response was successful.  True for successful, false&#xa; for unsuccessful.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.write(java.io.OutputStream) -->
+<method name="write"  public="true" abstract="true">
+<description>
+Write the message to the given output stream. &#xa; Must be overridden by subclasses.
+</description>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.toResponse(com.tridium.basicdriver.message.ReceivedMessage) -->
+<method name="toResponse"  public="true" abstract="true">
+<description>
+Converts a basic response ReceivedMessage to a Message.&#xa; Normally, the received message passed in&#xa; just contains the raw bytes of a received message&#xa; that need to be interpreted.&#xa; Must be overridden by subclasses.
+</description>
+<parameter name="resp">
+<type class="com.tridium.basicdriver.message.ReceivedMessage"/>
+</parameter>
+<return>
+<type class="com.tridium.basicdriver.message.Message"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.toDebugString() -->
+<method name="toDebugString"  public="true">
+<description>
+Return a debug string for this message.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.message.Message.DEFAULT_TAG -->
+<field name="DEFAULT_TAG"  public="true" static="true" final="true">
+<type class="java.lang.Object"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

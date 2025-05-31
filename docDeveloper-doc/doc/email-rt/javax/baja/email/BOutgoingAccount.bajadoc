@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="email" runtimeProfile="rt" qualifiedName="javax.baja.email.BOutgoingAccount" name="BOutgoingAccount" packageName="javax.baja.email" public="true">
+<description>
+BOutgoingAccount is a BEmailAccount that sends mail.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@author">JJ Frankovich</tag>
+<tag name="@version">$Revision: 33$ $Date: 7/8/11 7:32:57 AM EDT$</tag>
+<tag name="@creation">6 Jan 03</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.email.BEmailAccount"/>
+</extends>
+<property name="transport" flags="">
+<type class="javax.baja.email.BTransport"/>
+<description>
+Slot for the &lt;code&gt;transport&lt;/code&gt; property.&#xa; The type of transport.
+</description>
+<tag name="@see">#getTransport</tag>
+<tag name="@see">#setTransport</tag>
+</property>
+
+<property name="connectionTimeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;connectionTimeout&lt;/code&gt; property.&#xa; Request Timeout for Server
+</description>
+<tag name="@see">#getConnectionTimeout</tag>
+<tag name="@see">#setConnectionTimeout</tag>
+</property>
+
+<property name="useAuthentication" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useAuthentication&lt;/code&gt; property.&#xa; Should we use Authentication?
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. The emailClientAuthenticator type now determines whether authentication is used.</tag>
+<tag name="@see">#getUseAuthentication</tag>
+<tag name="@see">#setUseAuthentication</tag>
+</property>
+
+<property name="replyTo" flags="">
+<type class="javax.baja.email.BEmailAddress"/>
+<description>
+Slot for the &lt;code&gt;replyTo&lt;/code&gt; property.&#xa; This account&#x27;s reply-to address
+</description>
+<tag name="@see">#getReplyTo</tag>
+<tag name="@see">#setReplyTo</tag>
+</property>
+
+<property name="persistent" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;persistent&lt;/code&gt; property.&#xa; Is the email queue persistent? If not, then the&#xa; queue is kept in-memory,  which means it is&#xa; lost each time the station is restarted.
+</description>
+<tag name="@see">#getPersistent</tag>
+<tag name="@see">#setPersistent</tag>
+</property>
+
+<property name="persistenceDirectory" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;persistenceDirectory&lt;/code&gt; property.&#xa; The directory that outgoing emails will be queued in.&#xa; Each OutgoingAccount must have its own unique&#xa; Persistence Directory. This property is ignored&#xa; if the &#x27;persistent&#x27; property is set to false.
+</description>
+<tag name="@see">#getPersistenceDirectory</tag>
+<tag name="@see">#setPersistenceDirectory</tag>
+</property>
+
+<property name="maxPersistedEmailSize" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxPersistedEmailSize&lt;/code&gt; property.&#xa; The maximum size (in kilobytes) of email files that will be processed from the persistence&#xa; directory. Any files above this size will be discarded.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getMaxPersistedEmailSize</tag>
+<tag name="@see">#setMaxPersistedEmailSize</tag>
+</property>
+
+<property name="allowDisabledQueueing" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;allowDisabledQueueing&lt;/code&gt; property.&#xa; If this is true, then emails will be queued&#xa; even if this account is disabled.
+</description>
+<tag name="@see">#getAllowDisabledQueueing</tag>
+<tag name="@see">#setAllowDisabledQueueing</tag>
+</property>
+
+<property name="queueSize" flags="rt">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;queueSize&lt;/code&gt; property.&#xa; The number of emails currently queued.
+</description>
+<tag name="@see">#getQueueSize</tag>
+<tag name="@see">#setQueueSize</tag>
+</property>
+
+<property name="maxQueueSize" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; The maximum number of emails to queue.  If the&#xa; queue reaches this size, then no more emails will&#xa; be queued.
+</description>
+<tag name="@see">#getMaxQueueSize</tag>
+<tag name="@see">#setMaxQueueSize</tag>
+</property>
+
+<property name="numberSent" flags="rt">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;numberSent&lt;/code&gt; property.&#xa; The number of emails sent since midnight.
+</description>
+<tag name="@see">#getNumberSent</tag>
+<tag name="@see">#setNumberSent</tag>
+</property>
+
+<property name="maxSendablePerDay" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxSendablePerDay&lt;/code&gt; property.&#xa; The maximum number of emails that can be sent out&#xa; on any given day (i.e. 24-hour period from midnight&#xa; to midnight).  If this limit is reached, then no&#xa; more emails will be queued until the next day&#xa; (or until numberSent is manually reset),&#xa; and the queue will be cleared.
+</description>
+<tag name="@see">#getMaxSendablePerDay</tag>
+<tag name="@see">#setMaxSendablePerDay</tag>
+</property>
+
+<property name="numberDiscarded" flags="rt">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;numberDiscarded&lt;/code&gt; property.&#xa; The number of emails discarded since midnight.
+</description>
+<tag name="@see">#getNumberDiscarded</tag>
+<tag name="@see">#setNumberDiscarded</tag>
+</property>
+
+<property name="lastDiscard" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastDiscard&lt;/code&gt; property.&#xa; The last time an email was discarded.
+</description>
+<tag name="@see">#getLastDiscard</tag>
+<tag name="@see">#setLastDiscard</tag>
+</property>
+
+<property name="lastDiscardCause" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lastDiscardCause&lt;/code&gt; property.&#xa; The reason that the email was discarded.
+</description>
+<tag name="@see">#getLastDiscardCause</tag>
+<tag name="@see">#setLastDiscardCause</tag>
+</property>
+
+<action name="send" flags="">
+<parameter name="parameter">
+<type class="javax.baja.email.BEmail"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;send&lt;/code&gt; action.&#xa; Enqueue an email.  It will be sent next&#xa; time the host email server is polled.&#xa; If the email does not have its &#x27;from&#x27;&#xa; property set, then &#x27;replyTo&#x27; will be&#xa; used instead.
+</description>
+<tag name="@see">#send(BEmail parameter)</tag>
+</action>
+
+<action name="clearQueue" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;clearQueue&lt;/code&gt; action.&#xa; Clear out the email queue.  All emails&#xa; in the queue will be discarded.
+</description>
+<tag name="@see">#clearQueue()</tag>
+</action>
+
+<action name="resetNumberSent" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetNumberSent&lt;/code&gt; action.&#xa; Reset the counter for the number of&#xa; emails sent since midnight.
+</description>
+<tag name="@see">#resetNumberSent()</tag>
+</action>
+
+<!-- javax.baja.email.BOutgoingAccount() -->
+<constructor name="BOutgoingAccount" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.email.BOutgoingAccount.getTransport() -->
+<method name="getTransport"  public="true">
+<description>
+Get the &lt;code&gt;transport&lt;/code&gt; property.&#xa; The type of transport.
+</description>
+<tag name="@see">#transport</tag>
+<return>
+<type class="javax.baja.email.BTransport"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setTransport(javax.baja.email.BTransport) -->
+<method name="setTransport"  public="true">
+<description>
+Set the &lt;code&gt;transport&lt;/code&gt; property.&#xa; The type of transport.
+</description>
+<tag name="@see">#transport</tag>
+<parameter name="v">
+<type class="javax.baja.email.BTransport"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getConnectionTimeout() -->
+<method name="getConnectionTimeout"  public="true">
+<description>
+Get the &lt;code&gt;connectionTimeout&lt;/code&gt; property.&#xa; Request Timeout for Server
+</description>
+<tag name="@see">#connectionTimeout</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setConnectionTimeout(javax.baja.sys.BRelTime) -->
+<method name="setConnectionTimeout"  public="true">
+<description>
+Set the &lt;code&gt;connectionTimeout&lt;/code&gt; property.&#xa; Request Timeout for Server
+</description>
+<tag name="@see">#connectionTimeout</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getUseAuthentication() -->
+<method name="getUseAuthentication"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Get the &lt;code&gt;useAuthentication&lt;/code&gt; property.&#xa; Should we use Authentication?
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. The emailClientAuthenticator type now determines whether authentication is used.</tag>
+<tag name="@see">#useAuthentication</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setUseAuthentication(boolean) -->
+<method name="setUseAuthentication"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Set the &lt;code&gt;useAuthentication&lt;/code&gt; property.&#xa; Should we use Authentication?
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. The emailClientAuthenticator type now determines whether authentication is used.</tag>
+<tag name="@see">#useAuthentication</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getReplyTo() -->
+<method name="getReplyTo"  public="true">
+<description>
+Get the &lt;code&gt;replyTo&lt;/code&gt; property.&#xa; This account&#x27;s reply-to address
+</description>
+<tag name="@see">#replyTo</tag>
+<return>
+<type class="javax.baja.email.BEmailAddress"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setReplyTo(javax.baja.email.BEmailAddress) -->
+<method name="setReplyTo"  public="true">
+<description>
+Set the &lt;code&gt;replyTo&lt;/code&gt; property.&#xa; This account&#x27;s reply-to address
+</description>
+<tag name="@see">#replyTo</tag>
+<parameter name="v">
+<type class="javax.baja.email.BEmailAddress"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getPersistent() -->
+<method name="getPersistent"  public="true">
+<description>
+Get the &lt;code&gt;persistent&lt;/code&gt; property.&#xa; Is the email queue persistent? If not, then the&#xa; queue is kept in-memory,  which means it is&#xa; lost each time the station is restarted.
+</description>
+<tag name="@see">#persistent</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setPersistent(boolean) -->
+<method name="setPersistent"  public="true">
+<description>
+Set the &lt;code&gt;persistent&lt;/code&gt; property.&#xa; Is the email queue persistent? If not, then the&#xa; queue is kept in-memory,  which means it is&#xa; lost each time the station is restarted.
+</description>
+<tag name="@see">#persistent</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getPersistenceDirectory() -->
+<method name="getPersistenceDirectory"  public="true">
+<description>
+Get the &lt;code&gt;persistenceDirectory&lt;/code&gt; property.&#xa; The directory that outgoing emails will be queued in.&#xa; Each OutgoingAccount must have its own unique&#xa; Persistence Directory. This property is ignored&#xa; if the &#x27;persistent&#x27; property is set to false.
+</description>
+<tag name="@see">#persistenceDirectory</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setPersistenceDirectory(javax.baja.naming.BOrd) -->
+<method name="setPersistenceDirectory"  public="true">
+<description>
+Set the &lt;code&gt;persistenceDirectory&lt;/code&gt; property.&#xa; The directory that outgoing emails will be queued in.&#xa; Each OutgoingAccount must have its own unique&#xa; Persistence Directory. This property is ignored&#xa; if the &#x27;persistent&#x27; property is set to false.
+</description>
+<tag name="@see">#persistenceDirectory</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getMaxPersistedEmailSize() -->
+<method name="getMaxPersistedEmailSize"  public="true">
+<description>
+Get the &lt;code&gt;maxPersistedEmailSize&lt;/code&gt; property.&#xa; The maximum size (in kilobytes) of email files that will be processed from the persistence&#xa; directory. Any files above this size will be discarded.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#maxPersistedEmailSize</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setMaxPersistedEmailSize(int) -->
+<method name="setMaxPersistedEmailSize"  public="true">
+<description>
+Set the &lt;code&gt;maxPersistedEmailSize&lt;/code&gt; property.&#xa; The maximum size (in kilobytes) of email files that will be processed from the persistence&#xa; directory. Any files above this size will be discarded.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#maxPersistedEmailSize</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getAllowDisabledQueueing() -->
+<method name="getAllowDisabledQueueing"  public="true">
+<description>
+Get the &lt;code&gt;allowDisabledQueueing&lt;/code&gt; property.&#xa; If this is true, then emails will be queued&#xa; even if this account is disabled.
+</description>
+<tag name="@see">#allowDisabledQueueing</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setAllowDisabledQueueing(boolean) -->
+<method name="setAllowDisabledQueueing"  public="true">
+<description>
+Set the &lt;code&gt;allowDisabledQueueing&lt;/code&gt; property.&#xa; If this is true, then emails will be queued&#xa; even if this account is disabled.
+</description>
+<tag name="@see">#allowDisabledQueueing</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getQueueSize() -->
+<method name="getQueueSize"  public="true">
+<description>
+Get the &lt;code&gt;queueSize&lt;/code&gt; property.&#xa; The number of emails currently queued.
+</description>
+<tag name="@see">#queueSize</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setQueueSize(int) -->
+<method name="setQueueSize"  public="true">
+<description>
+Set the &lt;code&gt;queueSize&lt;/code&gt; property.&#xa; The number of emails currently queued.
+</description>
+<tag name="@see">#queueSize</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getMaxQueueSize() -->
+<method name="getMaxQueueSize"  public="true">
+<description>
+Get the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; The maximum number of emails to queue.  If the&#xa; queue reaches this size, then no more emails will&#xa; be queued.
+</description>
+<tag name="@see">#maxQueueSize</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setMaxQueueSize(int) -->
+<method name="setMaxQueueSize"  public="true">
+<description>
+Set the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; The maximum number of emails to queue.  If the&#xa; queue reaches this size, then no more emails will&#xa; be queued.
+</description>
+<tag name="@see">#maxQueueSize</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getNumberSent() -->
+<method name="getNumberSent"  public="true">
+<description>
+Get the &lt;code&gt;numberSent&lt;/code&gt; property.&#xa; The number of emails sent since midnight.
+</description>
+<tag name="@see">#numberSent</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setNumberSent(int) -->
+<method name="setNumberSent"  public="true">
+<description>
+Set the &lt;code&gt;numberSent&lt;/code&gt; property.&#xa; The number of emails sent since midnight.
+</description>
+<tag name="@see">#numberSent</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getMaxSendablePerDay() -->
+<method name="getMaxSendablePerDay"  public="true">
+<description>
+Get the &lt;code&gt;maxSendablePerDay&lt;/code&gt; property.&#xa; The maximum number of emails that can be sent out&#xa; on any given day (i.e. 24-hour period from midnight&#xa; to midnight).  If this limit is reached, then no&#xa; more emails will be queued until the next day&#xa; (or until numberSent is manually reset),&#xa; and the queue will be cleared.
+</description>
+<tag name="@see">#maxSendablePerDay</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setMaxSendablePerDay(int) -->
+<method name="setMaxSendablePerDay"  public="true">
+<description>
+Set the &lt;code&gt;maxSendablePerDay&lt;/code&gt; property.&#xa; The maximum number of emails that can be sent out&#xa; on any given day (i.e. 24-hour period from midnight&#xa; to midnight).  If this limit is reached, then no&#xa; more emails will be queued until the next day&#xa; (or until numberSent is manually reset),&#xa; and the queue will be cleared.
+</description>
+<tag name="@see">#maxSendablePerDay</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getNumberDiscarded() -->
+<method name="getNumberDiscarded"  public="true">
+<description>
+Get the &lt;code&gt;numberDiscarded&lt;/code&gt; property.&#xa; The number of emails discarded since midnight.
+</description>
+<tag name="@see">#numberDiscarded</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setNumberDiscarded(int) -->
+<method name="setNumberDiscarded"  public="true">
+<description>
+Set the &lt;code&gt;numberDiscarded&lt;/code&gt; property.&#xa; The number of emails discarded since midnight.
+</description>
+<tag name="@see">#numberDiscarded</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getLastDiscard() -->
+<method name="getLastDiscard"  public="true">
+<description>
+Get the &lt;code&gt;lastDiscard&lt;/code&gt; property.&#xa; The last time an email was discarded.
+</description>
+<tag name="@see">#lastDiscard</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setLastDiscard(javax.baja.sys.BAbsTime) -->
+<method name="setLastDiscard"  public="true">
+<description>
+Set the &lt;code&gt;lastDiscard&lt;/code&gt; property.&#xa; The last time an email was discarded.
+</description>
+<tag name="@see">#lastDiscard</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getLastDiscardCause() -->
+<method name="getLastDiscardCause"  public="true">
+<description>
+Get the &lt;code&gt;lastDiscardCause&lt;/code&gt; property.&#xa; The reason that the email was discarded.
+</description>
+<tag name="@see">#lastDiscardCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.setLastDiscardCause(java.lang.String) -->
+<method name="setLastDiscardCause"  public="true">
+<description>
+Set the &lt;code&gt;lastDiscardCause&lt;/code&gt; property.&#xa; The reason that the email was discarded.
+</description>
+<tag name="@see">#lastDiscardCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.send(javax.baja.email.BEmail) -->
+<method name="send"  public="true">
+<description>
+Invoke the &lt;code&gt;send&lt;/code&gt; action.&#xa; Enqueue an email.  It will be sent next&#xa; time the host email server is polled.&#xa; If the email does not have its &#x27;from&#x27;&#xa; property set, then &#x27;replyTo&#x27; will be&#xa; used instead.
+</description>
+<tag name="@see">#send</tag>
+<parameter name="parameter">
+<type class="javax.baja.email.BEmail"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.clearQueue() -->
+<method name="clearQueue"  public="true">
+<description>
+Invoke the &lt;code&gt;clearQueue&lt;/code&gt; action.&#xa; Clear out the email queue.  All emails&#xa; in the queue will be discarded.
+</description>
+<tag name="@see">#clearQueue</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.resetNumberSent() -->
+<method name="resetNumberSent"  public="true">
+<description>
+Invoke the &lt;code&gt;resetNumberSent&lt;/code&gt; action.&#xa; Reset the counter for the number of&#xa; emails sent since midnight.
+</description>
+<tag name="@see">#resetNumberSent</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+started
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.poll() -->
+<method name="poll"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+poll the host
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.pollUndeletables() -->
+<method name="pollUndeletables"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.pollQueue() -->
+<method name="pollQueue"  public="true">
+<description>
+poll the host
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.doSend(javax.baja.email.BEmail, javax.baja.sys.Context) -->
+<method name="doSend"  public="true">
+<description>
+doSend
+</description>
+<parameter name="email">
+<type class="javax.baja.email.BEmail"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.doClearQueue() -->
+<method name="doClearQueue"  public="true">
+<description>
+doClearQueue
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.doResetNumberSent() -->
+<method name="doResetNumberSent"  public="true">
+<description>
+doResetNumberSent
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.doPersistentChanged(javax.baja.sys.Context) -->
+<method name="doPersistentChanged"  protected="true">
+<description>
+Handles changes in state resulting from changing the &#x27;persistent&#x27; property value.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The &lt;code&gt;Context&lt;/code&gt; under which the persistent property value was changed.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.addDiscarded(java.lang.String) -->
+<method name="addDiscarded"  public="true">
+<description/>
+<parameter name="message">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.addDiscarded(java.lang.Exception) -->
+<method name="addDiscarded"  public="true">
+<description/>
+<parameter name="e">
+<type class="java.lang.Exception"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.addDiscarded(java.lang.String, java.lang.Exception) -->
+<method name="addDiscarded"  public="true">
+<description/>
+<parameter name="message">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="e">
+<type class="java.lang.Exception"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.addDiscarded(java.lang.String, java.lang.Exception, int, boolean) -->
+<method name="addDiscarded"  public="true">
+<description/>
+<parameter name="message">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="e">
+<type class="java.lang.Exception"/>
+</parameter>
+<parameter name="amount">
+<type class="int"/>
+</parameter>
+<parameter name="logError">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.getTargetEmailAuthenticatorType() -->
+<method name="getTargetEmailAuthenticatorType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Gets the Type of the email authenticator that is available to this email account.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+The Type of emailAuthenticator that this email account supports.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.email.BOutgoingAccount.port -->
+<field name="port"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;port&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPort</tag>
+<tag name="@see">#setPort</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.emailAuthenticator -->
+<field name="emailAuthenticator"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;emailAuthenticator&lt;/code&gt; property.&#xa; The client authenticator property for this email account. This determines the type of authentication&#xa; that will be used (e.g. basic, oauth, no auth).
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getEmailAuthenticator</tag>
+<tag name="@see">#setEmailAuthenticator</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.transport -->
+<field name="transport"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;transport&lt;/code&gt; property.&#xa; The type of transport.
+</description>
+<tag name="@see">#getTransport</tag>
+<tag name="@see">#setTransport</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.connectionTimeout -->
+<field name="connectionTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;connectionTimeout&lt;/code&gt; property.&#xa; Request Timeout for Server
+</description>
+<tag name="@see">#getConnectionTimeout</tag>
+<tag name="@see">#setConnectionTimeout</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.useAuthentication -->
+<field name="useAuthentication"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Slot for the &lt;code&gt;useAuthentication&lt;/code&gt; property.&#xa; Should we use Authentication?
+</description>
+<tag name="@deprecated">since Niagara 4.13. This is no longer used. The emailClientAuthenticator type now determines whether authentication is used.</tag>
+<tag name="@see">#getUseAuthentication</tag>
+<tag name="@see">#setUseAuthentication</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.replyTo -->
+<field name="replyTo"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;replyTo&lt;/code&gt; property.&#xa; This account&#x27;s reply-to address
+</description>
+<tag name="@see">#getReplyTo</tag>
+<tag name="@see">#setReplyTo</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.persistent -->
+<field name="persistent"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;persistent&lt;/code&gt; property.&#xa; Is the email queue persistent? If not, then the&#xa; queue is kept in-memory,  which means it is&#xa; lost each time the station is restarted.
+</description>
+<tag name="@see">#getPersistent</tag>
+<tag name="@see">#setPersistent</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.persistenceDirectory -->
+<field name="persistenceDirectory"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;persistenceDirectory&lt;/code&gt; property.&#xa; The directory that outgoing emails will be queued in.&#xa; Each OutgoingAccount must have its own unique&#xa; Persistence Directory. This property is ignored&#xa; if the &#x27;persistent&#x27; property is set to false.
+</description>
+<tag name="@see">#getPersistenceDirectory</tag>
+<tag name="@see">#setPersistenceDirectory</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.maxPersistedEmailSize -->
+<field name="maxPersistedEmailSize"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxPersistedEmailSize&lt;/code&gt; property.&#xa; The maximum size (in kilobytes) of email files that will be processed from the persistence&#xa; directory. Any files above this size will be discarded.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getMaxPersistedEmailSize</tag>
+<tag name="@see">#setMaxPersistedEmailSize</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.allowDisabledQueueing -->
+<field name="allowDisabledQueueing"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;allowDisabledQueueing&lt;/code&gt; property.&#xa; If this is true, then emails will be queued&#xa; even if this account is disabled.
+</description>
+<tag name="@see">#getAllowDisabledQueueing</tag>
+<tag name="@see">#setAllowDisabledQueueing</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.queueSize -->
+<field name="queueSize"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;queueSize&lt;/code&gt; property.&#xa; The number of emails currently queued.
+</description>
+<tag name="@see">#getQueueSize</tag>
+<tag name="@see">#setQueueSize</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.maxQueueSize -->
+<field name="maxQueueSize"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; The maximum number of emails to queue.  If the&#xa; queue reaches this size, then no more emails will&#xa; be queued.
+</description>
+<tag name="@see">#getMaxQueueSize</tag>
+<tag name="@see">#setMaxQueueSize</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.numberSent -->
+<field name="numberSent"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;numberSent&lt;/code&gt; property.&#xa; The number of emails sent since midnight.
+</description>
+<tag name="@see">#getNumberSent</tag>
+<tag name="@see">#setNumberSent</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.maxSendablePerDay -->
+<field name="maxSendablePerDay"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxSendablePerDay&lt;/code&gt; property.&#xa; The maximum number of emails that can be sent out&#xa; on any given day (i.e. 24-hour period from midnight&#xa; to midnight).  If this limit is reached, then no&#xa; more emails will be queued until the next day&#xa; (or until numberSent is manually reset),&#xa; and the queue will be cleared.
+</description>
+<tag name="@see">#getMaxSendablePerDay</tag>
+<tag name="@see">#setMaxSendablePerDay</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.numberDiscarded -->
+<field name="numberDiscarded"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;numberDiscarded&lt;/code&gt; property.&#xa; The number of emails discarded since midnight.
+</description>
+<tag name="@see">#getNumberDiscarded</tag>
+<tag name="@see">#setNumberDiscarded</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.lastDiscard -->
+<field name="lastDiscard"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastDiscard&lt;/code&gt; property.&#xa; The last time an email was discarded.
+</description>
+<tag name="@see">#getLastDiscard</tag>
+<tag name="@see">#setLastDiscard</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.lastDiscardCause -->
+<field name="lastDiscardCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastDiscardCause&lt;/code&gt; property.&#xa; The reason that the email was discarded.
+</description>
+<tag name="@see">#getLastDiscardCause</tag>
+<tag name="@see">#setLastDiscardCause</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.send -->
+<field name="send"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;send&lt;/code&gt; action.&#xa; Enqueue an email.  It will be sent next&#xa; time the host email server is polled.&#xa; If the email does not have its &#x27;from&#x27;&#xa; property set, then &#x27;replyTo&#x27; will be&#xa; used instead.
+</description>
+<tag name="@see">#send(BEmail parameter)</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.clearQueue -->
+<field name="clearQueue"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;clearQueue&lt;/code&gt; action.&#xa; Clear out the email queue.  All emails&#xa; in the queue will be discarded.
+</description>
+<tag name="@see">#clearQueue()</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.resetNumberSent -->
+<field name="resetNumberSent"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;resetNumberSent&lt;/code&gt; action.&#xa; Reset the counter for the number of&#xa; emails sent since midnight.
+</description>
+<tag name="@see">#resetNumberSent()</tag>
+</field>
+
+<!-- javax.baja.email.BOutgoingAccount.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

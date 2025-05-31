@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.js.JsInfo" name="JsInfo" packageName="javax.baja.web.js" public="true" final="true">
+<description>
+A data structure for holding JavaScript information.
+</description>
+<tag name="@see">BIJavaScript</tag>
+<tag name="@author">Gareth Johnson on 17 Oct 2012</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.web.js.JsInfo.make(javax.baja.naming.BOrd, java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description/>
+<parameter name="js">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+ORD to the JS file this JsInfo represents
+</description>
+</parameter>
+<parameter name="buildId">
+<type class="java.lang.String"/>
+<description>
+ID for the JsBuild in which this JS file resides. If null,&#xa;                it is not considered part of any JsBuild and therefore &#xa;                will always be downloaded unminified.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.web.js.JsInfo"/>
+<description>
+new JsInfo
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.make(javax.baja.naming.BOrd, javax.baja.sys.Type) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a JsInfo using the given BJsBuild Type&#x27;s ID as the build ID.
+</description>
+<parameter name="js">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+ORD to the JS file this JsInfo represents
+</description>
+</parameter>
+<parameter name="buildType">
+<type class="javax.baja.sys.Type"/>
+<description>
+BJsBuild subtype whose ID to use
+</description>
+</parameter>
+<return>
+<type class="javax.baja.web.js.JsInfo"/>
+<description>
+new JsInfo
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.make(javax.baja.naming.BOrd) -->
+<method name="make"  public="true" static="true">
+<description>
+Create JsInfo with no build ID - this file will always be downloaded&#xa; unminified.
+</description>
+<parameter name="js">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+ORD to the JS file this JsInfo represents
+</description>
+</parameter>
+<return>
+<type class="javax.baja.web.js.JsInfo"/>
+<description>
+new JsInfo
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.getJs() -->
+<method name="getJs"  public="true">
+<description/>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+an ORD to the non-minified JavaScript file.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.getJsId() -->
+<method name="getJsId"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+<description>
+the RequireJS Id for the JavaScript resource.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.getBuildId() -->
+<method name="getBuildId"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+<description>
+ID for the JsBuild in which this JS file resides, or null if this JS file is not&#xa; associated with a JsBuild
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.getBuiltJsIds() -->
+<method name="getBuiltJsIds"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Return the RequireJS IDs necessary to preload before loading this&#xa; JavaScript resource. Each dependent BJsBuild will have its webdev&#xa; status checked; its module IDs will be included in the resultant list&#xa; only if webdev is disabled.&#xa;&#xa; As of Niagara 4.13, this method is deprecated, as a flat list of dependencies will not ensure&#xa; that builtfiles are correctly loaded in the right order, and unnecessary network calls may&#xa; result. Use &lt;code&gt;<see ref="javax.baja.web.js.JsInfo#resolveDependencies()">#resolveDependencies()</see>&lt;/code&gt; instead to correctly resolve dependencies.
+</description>
+<tag name="@deprecated"/>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+all RequireJS IDs
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.resolveDependencies() -->
+<method name="resolveDependencies"  public="true">
+<description/>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<type class="javax.baja.web.js.BIWebResource$DependencyGraph"/>
+<description>
+a graph of all dependencies that are required to load the JS represented by this&#xa; JsInfo.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.hasBuiltJs() -->
+<method name="hasBuiltJs"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+As of Niagara 4.13, this method is deprecated. The JS represented by this &lt;code&gt;JsInfo&lt;/code&gt; may&#xa; not have any JS builtfiles associated with it, but may still have other dependencies to load.&#xa; Instead, use &lt;code&gt;<see ref="javax.baja.web.js.JsInfo#resolveDependencies()">#resolveDependencies()</see>&lt;/code&gt; and the&#xa; &lt;code&gt;<see ref="javax.baja.web.js.BIWebResource.DependencyGraph#isEmpty()">isEmpty()</see>&lt;/code&gt; method.
+</description>
+<tag name="@deprecated"/>
+<return>
+<type class="boolean"/>
+<description>
+true if built JavaScript information is available.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.toRequireJsId(javax.baja.naming.BOrd) -->
+<method name="toRequireJsId"  public="true" static="true">
+<description/>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+an ORD pointing to a JS or CSS file
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a RequireJS AMD ID representation of that ORD
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.JsInfo.STRINGS -->
+<field name="STRINGS"  public="true" static="true" final="true">
+<type class="java.lang.String" dimension="1"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

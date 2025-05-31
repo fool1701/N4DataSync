@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="seriesTransform" runtimeProfile="rt" qualifiedName="javax.baja.seriestransform.graph.GraphNodeParams" name="GraphNodeParams" packageName="javax.baja.seriestransform.graph" public="true" interface="true" abstract="true" category="interface">
+<description>
+This class represents a mapping of &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; objects keyed by &lt;code&gt;<see ref="javax.baja.sys.Slot">Slot</see>&lt;/code&gt;&#xa; name. Each key/value pairing represents a decoded transform &#xa; ORD query parameter value.&#xa; &lt;p&gt;&#xa; The transform ORD may include parameter values, which are denoted in the&#xa; ORD query body with the &lt;code&gt;?&lt;/code&gt; symbol. Each query parameter is &#xa; intended to override a setting in the executed transform graph &lt;b&gt;only&#xa; for the duration of the execution. The value should not be set on the graph&#xa; node itself.&lt;/b&gt;&#xa; &lt;p&gt;&#xa; It is the responsibility of the implementing developer to check the &#xa; instance of this class which is an argument of the &lt;code&gt;<see ref="javax.baja.seriestransform.graph.BGraphNode">BGraphNode</see>&lt;/code&gt; &#xa; &lt;code&gt;doResolve&lt;/code&gt; callback method to use any values that pertain&#xa; to that node instance at resolve time.&#xa; &lt;p&gt;&#xa; Consider the following code example where the query arguments are checked&#xa; within the &lt;code&gt;doResolve&lt;/code&gt; callback of a graph node.&#xa; &lt;pre&gt;&#xa; public &lt;code&gt;<see ref="javax.baja.seriestransform.BSeriesTransformTable">BSeriesTransformTable</see>&lt;/code&gt;[] doResolve( BSeriesTransformTable[] inputs, GraphNodeArgs args, BOrd base)&#xa; {&#xa;   ...&#xa;   &#xa;   List tables = new LinkedList();&#xa;   &#xa;   BValue dataSourceVal = (BValue)args.get( dataSource.getName());&#xa;   if( null != dataSourceVal )&#xa;      tables.add ( new BSpecialDataTable(this,dataSourceVal);&#xa;   else&#xa;      tables.add ( new BSpecialDataTable(this, getDataSource() );&#xa;      &#xa;   return (BSeriesTransformTable[]) tables.toArray( new BSeriesTransformTable[]{} );&#xa; }&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">J. Spangler</tag>
+<tag name="@creation">Apr 4, 2012</tag>
+<!-- javax.baja.seriestransform.graph.GraphNodeParams.size() -->
+<method name="size"  public="true" abstract="true">
+<description>
+Returns the number of arguments for the current graph node.
+</description>
+<return>
+<type class="int"/>
+<description>
+int
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.GraphNodeParams.isEmpty() -->
+<method name="isEmpty"  public="true" abstract="true">
+<description>
+Returns boolean flag indicating whether any arguments are present for&#xa; the current graph node.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if no values are stored; else false.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.GraphNodeParams.containsSlotName(java.lang.String) -->
+<method name="containsSlotName"  public="true" abstract="true">
+<description>
+Returns true if the given slot name key is contained in our mapping.
+</description>
+<parameter name="slotName">
+<type class="java.lang.String"/>
+<description>
+- String name of the slot that we checking for.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if found; else false.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.GraphNodeParams.getSlotNames() -->
+<method name="getSlotNames"  public="true" abstract="true">
+<description>
+Returns all Slot names for the current graph node that have defined node &#xa; arguments as an array of String values.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+String array.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.GraphNodeParams.get(java.lang.String) -->
+<method name="get"  public="true" abstract="true">
+<description>
+This method returns the &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; stored with the given key Slot name.
+</description>
+<parameter name="slotName">
+<type class="java.lang.String"/>
+<description>
+- String name of the &lt;code&gt;<see ref="javax.baja.sys.Slot">Slot</see>&lt;/code&gt; that we are retrieving a value for.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; or NULL if no value is associated with the given &#xa;          slot name.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.GraphNodeParams.get(java.lang.String, javax.baja.sys.BValue) -->
+<method name="get"  public="true" abstract="true">
+<description>
+This method returns the &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; stored with the given key Slot name.&#xa; If no value is found associated with the given Key, returns the default&#xa; &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; instead.
+</description>
+<parameter name="slotName">
+<type class="java.lang.String"/>
+<description>
+- String name of the &lt;code&gt;<see ref="javax.baja.sys.Slot">Slot</see>&lt;/code&gt; that we are retrieving a value for.
+</description>
+</parameter>
+<parameter name="defaultValue">
+<type class="javax.baja.sys.BValue"/>
+<description>
+- Default &lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt; to return if no value is found for the&#xa;            given slot name.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.sys.BValue">BValue</see>&lt;/code&gt;
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

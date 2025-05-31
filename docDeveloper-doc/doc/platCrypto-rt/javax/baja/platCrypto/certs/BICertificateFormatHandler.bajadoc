@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platCrypto" runtimeProfile="rt" qualifiedName="javax.baja.platCrypto.certs.BICertificateFormatHandler" name="BICertificateFormatHandler" packageName="javax.baja.platCrypto.certs" public="true" interface="true" abstract="true" category="interface">
+<description>
+Implementations of this interface provide a number of utility methods&#xa; to help with handling certificate files in a specific format. This includes&#xa; methods to ready the certificate for writing to a specific format, as well&#xa; as methods for retrieving lexicon entries, file extension names, etc...
+</description>
+<tag name="@author">Melanie Coggan on 2020-04-16</tag>
+<tag name="@since">Niagara 4.10</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.writeCertToFile(javax.baja.nre.security.IX509Certificate[], javax.baja.file.BAbstractFile) -->
+<method name="writeCertToFile"  public="true" default="true">
+<description>
+&lt;p&gt;Writes the certificate to the specified file, in the format handled by this handler.&lt;/p&gt;&#xa;&#xa; &lt;p&gt;NOTE: Implementing classes should take care to close any resources opened while writing&#xa; to the file.&lt;/p&gt;
+</description>
+<parameter name="certChain">
+<type class="javax.baja.nre.security.IX509Certificate" dimension="1"/>
+<description>
+The certs to write to the file
+</description>
+</parameter>
+<parameter name="certFile">
+<type class="javax.baja.file.BAbstractFile"/>
+<description>
+The file to which the cert should be written
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.writeCertToFile(java.security.cert.X509Certificate[], javax.baja.file.BAbstractFile) -->
+<method name="writeCertToFile"  public="true" abstract="true">
+<description>
+&lt;p&gt;Writes the certificate to the specified file, in the format handled by this handler.&lt;/p&gt;&#xa;&#xa; &lt;p&gt;NOTE: Implementing classes should take care to close any resources opened while writing&#xa; to the file.&lt;/p&gt;
+</description>
+<parameter name="certChain">
+<type class="java.security.cert.X509Certificate" dimension="1"/>
+<description>
+The certs to write to the file
+</description>
+</parameter>
+<parameter name="certFile">
+<type class="javax.baja.file.BAbstractFile"/>
+<description>
+The file to which the cert should be written
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.writeKeyToFile(java.security.PrivateKey, boolean, javax.baja.security.BPassword, javax.baja.file.BAbstractFile) -->
+<method name="writeKeyToFile"  public="true" abstract="true">
+<description>
+&lt;p&gt;Writes the key to the specified file, in the format handled by this handler.&lt;/p&gt;&#xa;&#xa; &lt;p&gt;NOTE: Implementing classes should take care to close any resources opened while writing&#xa; to the file.&lt;/p&gt;
+</description>
+<parameter name="privateKey">
+<type class="java.security.PrivateKey"/>
+<description>
+a private key to write out
+</description>
+</parameter>
+<parameter name="encryptKey">
+<type class="boolean"/>
+</parameter>
+<parameter name="encryptionKey">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<parameter name="certFile">
+<type class="javax.baja.file.BAbstractFile"/>
+<description>
+The file to which the cert should be written
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.writeCertAndKeyToFile(java.security.PrivateKey, boolean, javax.baja.security.BPassword, java.security.cert.X509Certificate[], javax.baja.file.BAbstractFile) -->
+<method name="writeCertAndKeyToFile"  public="true" abstract="true">
+<description>
+&lt;p&gt;Writes the certificate and key to the specified file, in the format handled by this handler.&lt;/p&gt;&#xa;&#xa; &lt;p&gt;NOTE: Implementing classes should take care to close any resources opened while writing&#xa; to the file.&lt;/p&gt;
+</description>
+<parameter name="privateKey">
+<type class="java.security.PrivateKey"/>
+<description>
+a private key to write out
+</description>
+</parameter>
+<parameter name="encryptKey">
+<type class="boolean"/>
+</parameter>
+<parameter name="encryptionKey">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<parameter name="certChain">
+<type class="java.security.cert.X509Certificate" dimension="1"/>
+<description>
+The certs to write to the file
+</description>
+</parameter>
+<parameter name="certFile">
+<type class="javax.baja.file.BAbstractFile"/>
+<description>
+The file to which the cert should be written
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.writeCert(java.security.cert.X509Certificate[]) -->
+<method name="writeCert"  public="true" default="true">
+<description>
+&lt;p&gt;Encode the certificate chain in the format for this handler.&lt;/p&gt;&#xa;&#xa; &lt;p&gt;NOTE: Implementing classes should take care to close any resources opened&#xa; while generating the formatted certificate.&lt;/p&gt;
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<parameter name="certChain">
+<type class="java.security.cert.X509Certificate" dimension="1"/>
+<description>
+The certs to format
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+A String representation of the formatted certificate
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.writeKey(java.security.PrivateKey, boolean, javax.baja.security.BPassword) -->
+<method name="writeKey"  public="true" default="true">
+<description>
+&lt;p&gt;Encode the key in the format for this handler.&lt;/p&gt;&#xa;&#xa; &lt;p&gt;NOTE: Implementing classes should take care to close any resources opened&#xa; while generating the formatted certificate.&lt;/p&gt;
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<parameter name="privateKey">
+<type class="java.security.PrivateKey"/>
+<description>
+a private key to write out
+</description>
+</parameter>
+<parameter name="encryptKey">
+<type class="boolean"/>
+<description>
+encrypts the private key if true
+</description>
+</parameter>
+<parameter name="encryptionKey">
+<type class="javax.baja.security.BPassword"/>
+<description>
+the BPassword used to encrypt the private key
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+A String representation of the formatted certificate
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.writeCertAndKey(java.security.PrivateKey, boolean, javax.baja.security.BPassword, java.security.cert.X509Certificate[]) -->
+<method name="writeCertAndKey"  public="true" default="true">
+<description>
+&lt;p&gt;Encode the certificate chain and key in the format for this handler.&lt;/p&gt;&#xa;&#xa; &lt;p&gt;NOTE: Implementing classes should take care to close any resources opened&#xa; while generating the formatted certificate.&lt;/p&gt;
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<parameter name="privateKey">
+<type class="java.security.PrivateKey"/>
+<description>
+a private key to write out
+</description>
+</parameter>
+<parameter name="encryptKey">
+<type class="boolean"/>
+<description>
+encrypts the private key if true
+</description>
+</parameter>
+<parameter name="encryptionKey">
+<type class="javax.baja.security.BPassword"/>
+<description>
+the BPassword used to encrypt the private key
+</description>
+</parameter>
+<parameter name="certChain">
+<type class="java.security.cert.X509Certificate" dimension="1"/>
+<description>
+The certs to format
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+A String representation of the formatted certificate
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.getMimeType() -->
+<method name="getMimeType"  public="true" abstract="true">
+<description>
+Gets the mime type for this certificate format when downloaded from the web.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<type class="java.lang.String"/>
+<description>
+the mime type for this certificate format when downloaded from the web.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.getSupportedFileExtensions() -->
+<method name="getSupportedFileExtensions"  public="true" abstract="true">
+<description>
+Gets a list of all extensions that may correspond to this certificate format.
+</description>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+A Set of all extensions that may correspond to this certificate format
+</description>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.getDefaultFileExtension() -->
+<method name="getDefaultFileExtension"  public="true" abstract="true">
+<description>
+Gets the default file extension to use for this certificate type. This is used when writing&#xa; out files.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+The default file extension to use for this certificate type
+</description>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.getCertificateFormatName(javax.baja.sys.Context) -->
+<method name="getCertificateFormatName"  public="true" abstract="true">
+<description>
+Gets the localized name of this certificate format. For example, the name for PEM certificate&#xa; would be &#x22;PEM&#x22;. This is used when allowing to user to choose between different certificate format&#xa; types, for example in a drop down menu.&#xa;&#xa; This should be taken from a lexicon entry.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the context to use to determine which lexicon to use
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the localized name of this certificate format
+</description>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.getCertificateFormatFileTypeName(javax.baja.sys.Context) -->
+<method name="getCertificateFormatFileTypeName"  public="true" abstract="true">
+<description>
+Gets the localized name of this certificate format&#x27;s file type. For example, the file type name&#xa; for PEM certificates would be &#x22;PEM Files&#x22;. This is used when allowing to user to choose between&#xa; different certificate format types, for example in a drop down menu on a file chooser.&#xa;&#xa; This should be taken from a lexicon entry.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the context to use to determine which lexicon to use
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the localized name of this certificate format file type
+</description>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.supportsPrivateKey() -->
+<method name="supportsPrivateKey"  public="true" abstract="true">
+<description>
+Indicates whether or not a certificate format handler supports exporting a private key.&#xa;&#xa; If exporting a private key is not supported,&#xa; &lt;code&gt;<see ref="javax.baja.platCrypto.certs.BICertificateFormatHandler#writeKeyToFile(java.security.PrivateKey, boolean, javax.baja.security.BPassword, javax.baja.file.BAbstractFile)">writeKeyToFile</see>&lt;/code&gt; and&#xa; &lt;code&gt;<see ref="javax.baja.platCrypto.certs.BICertificateFormatHandler#writeCertAndKeyToFile(java.security.PrivateKey, boolean, javax.baja.security.BPassword, java.security.cert.X509Certificate[], javax.baja.file.BAbstractFile)">writeCertAndKeyToFile</see>&lt;/code&gt;&#xa; should each throw &lt;code&gt;<see ref="java.lang.UnsupportedOperationException">UnsupportedOperationException</see>&lt;/code&gt;.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+boolean indicating that the handler does (true), or does not (false), support exporting a private key.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.getCertificateFormatHandlers() -->
+<method name="getCertificateFormatHandlers"  public="true" static="true">
+<description/>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="javax.baja.platCrypto.certs.BICertificateFormatHandler"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.getHandlerFromFormatName(java.lang.String, javax.baja.sys.Context) -->
+<method name="getHandlerFromFormatName"  public="true" static="true">
+<description/>
+<parameter name="formatName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.platCrypto.certs.BICertificateFormatHandler"/>
+</return>
+</method>
+
+<!-- javax.baja.platCrypto.certs.BICertificateFormatHandler.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

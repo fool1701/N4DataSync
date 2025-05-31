@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor" name="BSMAExpirationMonitor" packageName="com.tridiumx.jsonToolkit.outbound.schema.support" public="true">
+<description>
+Given the jsonToolkit&#x27;s requirement for active Maintenance (SMA) on&#xa; non demo licenses, this monitor increases notifications to the user as&#xa; expiration approaches. It run on startup, then every 24 hours since the last&#xa; check to establish if the expiration date is within the warning period, or expired,&#xa; and will generate an offNormal or Fault alarm accordingly.&#xa;&#xa; Although the alarms are likely the most accessibly notification type, the&#xa; SMA Monitor will also log to the Station console, and expose the days remaining&#xa; as a slot which could be shown on a dashboard, for example.&#xa;&#xa; The Station itself has a SMA Notification Setting beneath the user service&#xa; which will also alert users at the web login screen.&#xa;&#xa; As extension of SMA currently requires a reboot to install the new license,&#xa; no further checks are performed once expiration is detected, until the Station&#xa; starts again.&#xa;&#xa; Every 24 hours since last check, check the warnBelow alarm level and generate an OffNormal alarm&#xa; if needed. When SMA expires, then a fault alarm is raised.
+</description>
+<tag name="@author">Jason Woollard</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.alarm.BIAlarmSource"/>
+</implements>
+<property name="exempt" flags="trh">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;exempt&lt;/code&gt; property.&#xa; Does the jsonToolkit feature on this hosts license exempt from SMA requirement
+</description>
+<tag name="@see">#getExempt</tag>
+<tag name="@see">#setExempt</tag>
+</property>
+
+<property name="mode" flags="os">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitorMode"/>
+<description>
+Slot for the &lt;code&gt;mode&lt;/code&gt; property.&#xa; Warning, Expired, Disabled
+</description>
+<tag name="@see">#getMode</tag>
+<tag name="@see">#setMode</tag>
+</property>
+
+<property name="warnBelow" flags="os">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;warnBelow&lt;/code&gt; property.&#xa; Raise an offNormal alarm below this value
+</description>
+<tag name="@see">#getWarnBelow</tag>
+<tag name="@see">#setWarnBelow</tag>
+</property>
+
+<property name="checkInterval" flags="ohr">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;checkInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCheckInterval</tag>
+<tag name="@see">#setCheckInterval</tag>
+</property>
+
+<property name="alarmSourceInfo" flags="">
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+<description>
+Slot for the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.&#xa; Set the alarm class used for routing Schema alarm.
+</description>
+<tag name="@see">#getAlarmSourceInfo</tag>
+<tag name="@see">#setAlarmSourceInfo</tag>
+</property>
+
+<property name="remaining" flags="rs">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;remaining&lt;/code&gt; property.&#xa; Expose the value read from license into the component space so user can display as desired
+</description>
+<tag name="@see">#getRemaining</tag>
+<tag name="@see">#setRemaining</tag>
+</property>
+
+<action name="checkMaintenanceExpiration" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;checkMaintenanceExpiration&lt;/code&gt; action.
+</description>
+<tag name="@see">#checkMaintenanceExpiration()</tag>
+</action>
+
+<action name="ackAlarm" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+<description>
+Slot for the &lt;code&gt;ackAlarm&lt;/code&gt; action.&#xa; Acknowledge the alarm matching this ack request
+</description>
+<tag name="@see">#ackAlarm(BAlarmRecord parameter)</tag>
+</action>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor() -->
+<constructor name="BSMAExpirationMonitor" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getExempt() -->
+<method name="getExempt"  public="true">
+<description>
+Get the &lt;code&gt;exempt&lt;/code&gt; property.&#xa; Does the jsonToolkit feature on this hosts license exempt from SMA requirement
+</description>
+<tag name="@see">#exempt</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.setExempt(boolean) -->
+<method name="setExempt"  public="true">
+<description>
+Set the &lt;code&gt;exempt&lt;/code&gt; property.&#xa; Does the jsonToolkit feature on this hosts license exempt from SMA requirement
+</description>
+<tag name="@see">#exempt</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getMode() -->
+<method name="getMode"  public="true">
+<description>
+Get the &lt;code&gt;mode&lt;/code&gt; property.&#xa; Warning, Expired, Disabled
+</description>
+<tag name="@see">#mode</tag>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitorMode"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.setMode(com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitorMode) -->
+<method name="setMode"  public="true">
+<description>
+Set the &lt;code&gt;mode&lt;/code&gt; property.&#xa; Warning, Expired, Disabled
+</description>
+<tag name="@see">#mode</tag>
+<parameter name="v">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitorMode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getWarnBelow() -->
+<method name="getWarnBelow"  public="true">
+<description>
+Get the &lt;code&gt;warnBelow&lt;/code&gt; property.&#xa; Raise an offNormal alarm below this value
+</description>
+<tag name="@see">#warnBelow</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.setWarnBelow(int) -->
+<method name="setWarnBelow"  public="true">
+<description>
+Set the &lt;code&gt;warnBelow&lt;/code&gt; property.&#xa; Raise an offNormal alarm below this value
+</description>
+<tag name="@see">#warnBelow</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getCheckInterval() -->
+<method name="getCheckInterval"  public="true">
+<description>
+Get the &lt;code&gt;checkInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#checkInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.setCheckInterval(javax.baja.sys.BRelTime) -->
+<method name="setCheckInterval"  public="true">
+<description>
+Set the &lt;code&gt;checkInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#checkInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getAlarmSourceInfo() -->
+<method name="getAlarmSourceInfo"  public="true">
+<description>
+Get the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.&#xa; Set the alarm class used for routing Schema alarm.
+</description>
+<tag name="@see">#alarmSourceInfo</tag>
+<return>
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.setAlarmSourceInfo(javax.baja.alarm.BAlarmSourceInfo) -->
+<method name="setAlarmSourceInfo"  public="true">
+<description>
+Set the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.&#xa; Set the alarm class used for routing Schema alarm.
+</description>
+<tag name="@see">#alarmSourceInfo</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getRemaining() -->
+<method name="getRemaining"  public="true">
+<description>
+Get the &lt;code&gt;remaining&lt;/code&gt; property.&#xa; Expose the value read from license into the component space so user can display as desired
+</description>
+<tag name="@see">#remaining</tag>
+<return>
+<type class="javax.baja.status.BStatusNumeric"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.setRemaining(javax.baja.status.BStatusNumeric) -->
+<method name="setRemaining"  public="true">
+<description>
+Set the &lt;code&gt;remaining&lt;/code&gt; property.&#xa; Expose the value read from license into the component space so user can display as desired
+</description>
+<tag name="@see">#remaining</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatusNumeric"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.checkMaintenanceExpiration() -->
+<method name="checkMaintenanceExpiration"  public="true">
+<description>
+Invoke the &lt;code&gt;checkMaintenanceExpiration&lt;/code&gt; action.
+</description>
+<tag name="@see">#checkMaintenanceExpiration</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.ackAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="ackAlarm"  public="true">
+<description>
+Invoke the &lt;code&gt;ackAlarm&lt;/code&gt; action.&#xa; Acknowledge the alarm matching this ack request
+</description>
+<tag name="@see">#ackAlarm</tag>
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.doCheckMaintenanceExpiration() -->
+<method name="doCheckMaintenanceExpiration"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.doAckAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="doAckAlarm"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getDaysRemaining(long, long) -->
+<method name="getDaysRemaining"  public="true" static="true">
+<description/>
+<parameter name="now">
+<type class="long"/>
+</parameter>
+<parameter name="expiration">
+<type class="long"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.service() -->
+<method name="service"  public="true">
+<description/>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.support.BJsonSchemaService"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.isChildLegal(javax.baja.sys.BComponent) -->
+<method name="isChildLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="child">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.isNavChild() -->
+<method name="isNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.exempt -->
+<field name="exempt"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;exempt&lt;/code&gt; property.&#xa; Does the jsonToolkit feature on this hosts license exempt from SMA requirement
+</description>
+<tag name="@see">#getExempt</tag>
+<tag name="@see">#setExempt</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.mode -->
+<field name="mode"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;mode&lt;/code&gt; property.&#xa; Warning, Expired, Disabled
+</description>
+<tag name="@see">#getMode</tag>
+<tag name="@see">#setMode</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.warnBelow -->
+<field name="warnBelow"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;warnBelow&lt;/code&gt; property.&#xa; Raise an offNormal alarm below this value
+</description>
+<tag name="@see">#getWarnBelow</tag>
+<tag name="@see">#setWarnBelow</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.checkInterval -->
+<field name="checkInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;checkInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCheckInterval</tag>
+<tag name="@see">#setCheckInterval</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.alarmSourceInfo -->
+<field name="alarmSourceInfo"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.&#xa; Set the alarm class used for routing Schema alarm.
+</description>
+<tag name="@see">#getAlarmSourceInfo</tag>
+<tag name="@see">#setAlarmSourceInfo</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.remaining -->
+<field name="remaining"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;remaining&lt;/code&gt; property.&#xa; Expose the value read from license into the component space so user can display as desired
+</description>
+<tag name="@see">#getRemaining</tag>
+<tag name="@see">#setRemaining</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.checkMaintenanceExpiration -->
+<field name="checkMaintenanceExpiration"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;checkMaintenanceExpiration&lt;/code&gt; action.
+</description>
+<tag name="@see">#checkMaintenanceExpiration()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.ackAlarm -->
+<field name="ackAlarm"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;ackAlarm&lt;/code&gt; action.&#xa; Acknowledge the alarm matching this ack request
+</description>
+<tag name="@see">#ackAlarm(BAlarmRecord parameter)</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.support.BSMAExpirationMonitor.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

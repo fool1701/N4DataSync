@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="wb" qualifiedName="com.tridium.ddf.ui.DdfMgrColumnUtil" name="DdfMgrColumnUtil" packageName="com.tridium.ddf.ui" public="true">
+<description>
+This class contains utility methods to help the Ddf Device Manager&#xa; and the Ddf Point Manager automatically generate the MgrColumn arrays&#xa; that are needed for the database and discovery tables.&#xa;&#xa; The method &#x27;getColumnsFor&#x27; reviews a prototype database or discovery&#xa; object and returns an array of MgrColumns objects for use in the&#xa; database or discovery table&#x27;s table-model.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.ui.DdfMgrColumnUtil() -->
+<constructor name="DdfMgrColumnUtil" protected="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.ui.DdfMgrColumnUtil.getMgrColumnFlags(javax.baja.sys.BComplex, javax.baja.sys.Property) -->
+<method name="getMgrColumnFlags"  public="true" static="true">
+<description>
+Constructs a set of MgrColumn flags for a particular property.
+</description>
+<parameter name="owner">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+is the BComplex that owns the particular property
+</description>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+<description>
+is the property for which to get MgrColumn flags
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.DdfMgrColumnUtil.getColumnsFor(javax.baja.sys.BComplex) -->
+<method name="getColumnsFor"  public="true" static="true">
+<description>
+Gets the MgrColumn[] array for the given sample instance of a database or discovery&#xa; object.
+</description>
+<parameter name="databaseOrDiscoveryPrototypeObject">
+<type class="javax.baja.sys.BComplex"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrColumn" dimension="1"/>
+<description>
+the MgrColumn[] array for the given sample instance of a database or discovery&#xa; object.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.DdfMgrColumnUtil.getDirectColumnsFor(javax.baja.sys.BComplex) -->
+<method name="getDirectColumnsFor"  protected="true" static="true">
+<description>
+Creates an array of DdfMgrProp[] for all BSimple, MGR_INCLUDE properties under the given BComplex.
+</description>
+<parameter name="complex">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrColumn" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.DdfMgrColumnUtil.getColumnsRecursive(javax.baja.sys.BComplex) -->
+<method name="getColumnsRecursive"  protected="true" static="true">
+<description>
+This method returns an array of MgrColumn.PropPath objects for each BSimple that&#xa; has the INCLUDE facets. Recurses under under BComplexes that have the MGR_INCLUDE&#xa; facet.
+</description>
+<parameter name="complex">
+<type class="javax.baja.sys.BComplex"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrColumn" dimension="1"/>
+<description>
+see the method&#x27;s description for details.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.DdfMgrColumnUtil.getRecursive(javax.baja.sys.BComplex, javax.baja.sys.Property[]) -->
+<method name="getRecursive"  protected="true" static="true">
+<description>
+Returns an MgrColumn.PropPath array identifying each BSimple under the given BComplex that is facet&#x27;ted as MGR_INCLUDE.&#xa;&#xa; If the given complex has child properties that are also complex and those child properties are&#xa; flagged as MGR_INCLUDE then this method will recurse.
+</description>
+<parameter name="complex">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+- the BComplex to get Simples from underneath.
+</description>
+</parameter>
+<parameter name="propPathSoFar">
+<type class="javax.baja.sys.Property" dimension="1"/>
+<description>
+- The prop path so far as an Array
+</description>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrColumn$PropPath" dimension="1"/>
+<description>
+the MgrColumn.PropPath[] array identifying all BSimple&#x27;s (with the MGR_INDLUDE facet) recursively under the given complexValue
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

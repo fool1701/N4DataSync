@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.BWebServer" name="BWebServer" packageName="javax.baja.web" public="true" abstract="true">
+<description>
+This class serves as the base for any class wishing to provide web server capabilities. A web&#xa; server must reside as a child of a &lt;code&gt;<see ref="javax.baja.web.BWebService">BWebService</see>&lt;/code&gt;. This class is primarily responsible for&#xa; managing the lifecycle of &lt;code&gt;<see ref="javax.baja.web.BWebServer#stopWebServer()">stopping</see>&lt;/code&gt; and &lt;code&gt;<see ref="javax.baja.web.BWebServer#startWebServer()">starting</see>&lt;/code&gt;&#xa; the web server.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:mgiannini@tridium.com&#x22;&gt;Matthew Giannini&lt;/a&gt;</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<property name="serverState" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;serverState&lt;/code&gt; property.&#xa; The running state of the web server.
+</description>
+<tag name="@see">#getServerState</tag>
+<tag name="@see">#setServerState</tag>
+</property>
+
+<action name="restart" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;restart&lt;/code&gt; action.&#xa; Restart the web server.
+</description>
+<tag name="@see">#restart()</tag>
+</action>
+
+<!-- javax.baja.web.BWebServer() -->
+<constructor name="BWebServer" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.web.BWebServer.getServerState() -->
+<method name="getServerState"  public="true">
+<description>
+Get the &lt;code&gt;serverState&lt;/code&gt; property.&#xa; The running state of the web server.
+</description>
+<tag name="@see">#serverState</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.setServerState(java.lang.String) -->
+<method name="setServerState"  public="true">
+<description>
+Set the &lt;code&gt;serverState&lt;/code&gt; property.&#xa; The running state of the web server.
+</description>
+<tag name="@see">#serverState</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.restart() -->
+<method name="restart"  public="true">
+<description>
+Invoke the &lt;code&gt;restart&lt;/code&gt; action.&#xa; Restart the web server.
+</description>
+<tag name="@see">#restart</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.getWebService() -->
+<method name="getWebService"  protected="true" final="true">
+<description/>
+<return>
+<type class="javax.baja.web.BWebService"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.isRestartRequired(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="isRestartRequired"  protected="true">
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.doWebServiceConfigurationChanged(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="doWebServiceConfigurationChanged"  protected="true">
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.doStartWebServer() -->
+<method name="doStartWebServer"  protected="true" abstract="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServer.doStopWebServer() -->
+<method name="doStopWebServer"  protected="true" abstract="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Stop the web server.
+</description>
+<tag name="@deprecated">use &lt;code&gt;<see ref="javax.baja.web.BWebServer#doStopWebServer(javax.baja.sys.Context)">#doStopWebServer(Context)</see>&lt;/code&gt; instead.</tag>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServer.doStopWebServer(javax.baja.sys.Context) -->
+<method name="doStopWebServer"  protected="true">
+<description>
+Stop the web server. The context can be used to modify the stop behavior.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServer.register(javax.baja.web.BINiagaraWebServlet) -->
+<method name="register"  public="true" final="true">
+<description>
+Register a WebServlet Component with the Web Server. This will dynamically&#xa; mount a Servlet so it can be accessed through the Web Server.
+</description>
+<parameter name="servlet">
+<type class="javax.baja.web.BINiagaraWebServlet"/>
+<description>
+The Servlet to register.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.doRegister(javax.baja.web.BINiagaraWebServlet) -->
+<method name="doRegister"  protected="true" abstract="true">
+<description/>
+<tag name="@see">BWebServer#register(BINiagaraWebServlet)</tag>
+<parameter name="servlet">
+<type class="javax.baja.web.BINiagaraWebServlet"/>
+<description>
+The Web Servlet to register.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.unregister(javax.baja.web.BINiagaraWebServlet) -->
+<method name="unregister"  public="true" final="true">
+<description>
+Unregister the Servlet from the Web Server. This will unmount the Servlet&#xa; so it can no longer be accessed from the Web Server.
+</description>
+<parameter name="servlet">
+<type class="javax.baja.web.BINiagaraWebServlet"/>
+<description>
+The Servlet to unregister.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.doUnregister(javax.baja.web.BINiagaraWebServlet) -->
+<method name="doUnregister"  protected="true" abstract="true">
+<description/>
+<tag name="@see">BWebServer#unregister(BINiagaraWebServlet)</tag>
+<parameter name="servlet">
+<type class="javax.baja.web.BINiagaraWebServlet"/>
+<description>
+The Web Servlet to unregister.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.getWebServlets() -->
+<method name="getWebServlets"  public="true">
+<description>
+Return an array of the registered BWebServlets.&#xa;&#xa; We have changed getServlets() to return a new BINiagaraWebServlet type. This method was&#xa; added if developers need the old behavior that returned only BWebServlets and its subclasses.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="javax.baja.web.BWebServlet" dimension="1"/>
+<description>
+An array of the currently registered BWebServlets.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.getServlets() -->
+<method name="getServlets"  public="true" abstract="true">
+<description>
+Return an array of the registered Servlets. Includes any implementations of BINiagaraWebServlet and&#xa; not only BWebServlets. The signature was changed with the addition of the BINiagaraWebServlet type.&#xa; The getWebServlets() method is available if only BWebServlet and its subclasses are required.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="javax.baja.web.BINiagaraWebServlet" dimension="1"/>
+<description>
+an array of the currently registered BINiagaraWebServlets
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.scheduleRestart() -->
+<method name="scheduleRestart"  protected="true" final="true" synchronized="true">
+<description>
+Schedule a restart for 500ms from now. Any pending restart is cancelled and a new one is&#xa; scheduled.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.scheduleRestart(javax.baja.sys.BRelTime) -->
+<method name="scheduleRestart"  protected="true" synchronized="true">
+<description/>
+<parameter name="delay">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.doRestart(javax.baja.sys.Context) -->
+<method name="doRestart"  public="true" final="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Implementation of &lt;code&gt;<see ref="javax.baja.web.BWebServer#restart">#restart</see>&lt;/code&gt; action.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the Context at time of invocation.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.post(java.lang.Runnable) -->
+<method name="post"  public="true" final="true">
+<description>
+Post some work to the Web Server Config Thread.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+<description>
+The work to be done.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.concurrent.Future">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServer.serviceStopped() -->
+<method name="serviceStopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServer.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+May only be parented by a &lt;code&gt;<see ref="javax.baja.web.BWebService">BWebService</see>&lt;/code&gt;.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+the parent component.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the parent is a &lt;code&gt;<see ref="javax.baja.web.BWebService">BWebService</see>&lt;/code&gt;. false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.invalidateAllSessions() -->
+<method name="invalidateAllSessions"  protected="true">
+<description>
+This method should invalidate all currently active sessions tied to this BWebServer, removing them,&#xa; if appropriate, from the SessionManager as well.&#xa; This will be called when the BWebService.resetAllConnections is invoked.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServer.serverState -->
+<field name="serverState"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;serverState&lt;/code&gt; property.&#xa; The running state of the web server.
+</description>
+<tag name="@see">#getServerState</tag>
+<tag name="@see">#setServerState</tag>
+</field>
+
+<!-- javax.baja.web.BWebServer.restart -->
+<field name="restart"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;restart&lt;/code&gt; action.&#xa; Restart the web server.
+</description>
+<tag name="@see">#restart()</tag>
+</field>
+
+<!-- javax.baja.web.BWebServer.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.BWebServer.restartTicket -->
+<field name="restartTicket"  protected="true" volatile="true">
+<type class="javax.baja.sys.Clock$Ticket"/>
+<description>
+For scheduling a restart in the future
+</description>
+</field>
+
+<!-- javax.baja.web.BWebServer.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.BWebServer.EMPTY_WEB_SERVLET_ARRAY -->
+<field name="EMPTY_WEB_SERVLET_ARRAY"  protected="true" static="true" final="true">
+<type class="javax.baja.web.BWebServlet" dimension="1"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.londata.BLonData" name="BLonData" packageName="javax.baja.lonworks.londata" public="true">
+<description>
+The BLonData is the superclass for all classes which can&#xa; be used as the data component of BLonComponents.  These&#xa; classes can convert their data from and to the byte&#xa; format used by physical lonworks device. It will contain&#xa; one or more BLonPrimitives.&#xa; &lt;p&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">5 May 01</tag>
+<tag name="@version">$Revision: 8$ $Date: 9/28/01 10:20:42 AM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="javax.baja.sys.BVector"/>
+</extends>
+<!-- javax.baja.lonworks.londata.BLonData() -->
+<constructor name="BLonData" public="true">
+<description>
+No arg constructor
+</description>
+</constructor>
+
+<!-- javax.baja.lonworks.londata.BLonData(javax.baja.lonworks.londata.BLonPrimitive, javax.baja.lonworks.londata.BLonElementQualifiers, javax.baja.units.BUnit) -->
+<constructor name="BLonData" public="true">
+<parameter name="prim">
+<type class="javax.baja.lonworks.londata.BLonPrimitive"/>
+</parameter>
+<parameter name="elemQual">
+<type class="javax.baja.lonworks.londata.BLonElementQualifiers"/>
+</parameter>
+<parameter name="units">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<description>
+Constructor with qualifiers and units
+</description>
+</constructor>
+
+<!-- javax.baja.lonworks.londata.BLonData.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Filter out data changes and call dataChanged()
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<description/>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.isDataProp(javax.baja.sys.Property) -->
+<method name="isDataProp"  public="true" static="true">
+<description>
+Is the specified property a BLonPrimitive or BLonData?
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.dataChanged(javax.baja.sys.Context) -->
+<method name="dataChanged"  protected="true">
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.writeOk() -->
+<method name="writeOk"  public="true">
+<description>
+Callback for notification by parent lonComponent that value&#xa;  was successfully written to device.  Notify any associated&#xa;  proxy points.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.writeFail(java.lang.String) -->
+<method name="writeFail"  public="true">
+<description>
+Callback for notification by parent lonComponent that write&#xa;  failed.  Call setWriteFail on any associated proxy points.
+</description>
+<parameter name="err">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.readFail(java.lang.String) -->
+<method name="readFail"  public="true">
+<description>
+Callback for notification by parent lonComponent that read&#xa;  failed.  Call setReadFault on any associated proxy points.
+</description>
+<parameter name="err">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.readOk() -->
+<method name="readOk"  public="true">
+<description>
+Callback for notification by parent lonComponent that read&#xa;  succeeded.  Call readOk on any associated proxy points.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.markStale(boolean, javax.baja.sys.Context) -->
+<method name="markStale"  public="true">
+<description>
+Callback for notification by parent lonComponent that value&#xa;  is stale.  Call setStale on any associated proxy points.
+</description>
+<parameter name="s">
+<type class="boolean"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.registerProxyExt(javax.baja.lonworks.proxy.BLonProxyExt) -->
+<method name="registerProxyExt"  public="true">
+<description>
+Register BLonProxyExt.
+</description>
+<parameter name="c">
+<type class="javax.baja.lonworks.proxy.BLonProxyExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.unregisterProxyExt(javax.baja.lonworks.proxy.BLonProxyExt) -->
+<method name="unregisterProxyExt"  public="true">
+<description>
+Unregister BLonProxyExt.
+</description>
+<parameter name="c">
+<type class="javax.baja.lonworks.proxy.BLonProxyExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.removeProxies(javax.baja.sys.Context) -->
+<method name="removeProxies"  public="true">
+<description>
+Remove any proxies registered with this data component.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.hasProxies() -->
+<method name="hasProxies"  public="true">
+<description>
+Check if any proxy points are linked to this data component.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.hasWriteProxies() -->
+<method name="hasWriteProxies"  public="true">
+<description>
+Check if any writable proxy points are linked to this data component.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getProxies(boolean) -->
+<method name="getProxies"  public="true">
+<description>
+Get an array of all the proxy points linked to this data component.
+</description>
+<parameter name="writeable">
+<type class="boolean"/>
+<description>
+set to only return writeable points
+</description>
+</parameter>
+<return>
+<type class="javax.baja.control.BControlPoint" dimension="1"/>
+<description>
+list of control points or null if no proxies.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.forceProxyUpdates() -->
+<method name="forceProxyUpdates"  public="true" final="true">
+<description>
+For internal use.  Force any writable proxies point to update&#xa; target with writeValue.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.canCopyFrom(javax.baja.lonworks.londata.BLonData) -->
+<method name="canCopyFrom"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Verify that it would be valid to pass the specified BLonData&#xa;  in call to this objects copyFrom() method.
+</description>
+<tag name="@deprecated">- use hasEquivalentElements()</tag>
+<parameter name="ld">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.hasEquivalentElements(javax.baja.lonworks.londata.BLonData) -->
+<method name="hasEquivalentElements"  public="true">
+<description>
+Verify that the specified lonData has the same set of primitive&#xa;  data elements by type, qualifiers, and name. Will recurse  into&#xa;  nested datatypes.
+</description>
+<parameter name="ld">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.subscribed() -->
+<method name="subscribed"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.unsubscribed() -->
+<method name="unsubscribed"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.readSubscribed() -->
+<method name="readSubscribed"  public="true">
+<description>
+Receive point subscriptions and pass up to parent. These&#xa; will ultimately accumulate in BLonComponent and be used&#xa; to determine if polling should be enabled.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.readUnsubscribed() -->
+<method name="readUnsubscribed"  public="true">
+<description>
+Receive point unsubscriptions and pass up to parent. These&#xa; will ultimately accumulate in BLonComponent and be used&#xa; to determine if polling should be enabled.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getLonComponent() -->
+<method name="getLonComponent"  public="true">
+<description>
+Get the BLonComponent containing this BLonData.
+</description>
+<return>
+<type class="javax.baja.lonworks.BLonComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.initDataElements(float[]) -->
+<method name="initDataElements"  public="true">
+<description>
+Initialize data elements with specified array of initial values.
+</description>
+<parameter name="d">
+<type class="float" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getPrimitives() -->
+<method name="getPrimitives"  public="true">
+<description>
+Utility method to get an array of BLonPrimitives in&#xa; this BLonData instance.  Will recurse into nested BLonData.
+</description>
+<return>
+<type class="javax.baja.lonworks.londata.BLonPrimitive" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getByteLength() -->
+<method name="getByteLength"  public="true">
+<description>
+Get the length of the network byte data array.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.toNetBytes() -->
+<method name="toNetBytes"  public="true">
+<description>
+Converts the current value of the data property to network&#xa; byte format.&#xa; &lt;p&gt;
+</description>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+Byte array representation of current value of data.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.toOutputStream(javax.baja.lonworks.io.LonOutputStream) -->
+<method name="toOutputStream"  protected="true">
+<description>
+Writes the current value of the data in the correct byte order&#xa; to the supplied LonOutputStream.
+</description>
+<parameter name="out">
+<type class="javax.baja.lonworks.io.LonOutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.primitiveToOutputStream(javax.baja.sys.Property, javax.baja.lonworks.io.LonOutputStream) -->
+<method name="primitiveToOutputStream"  protected="true">
+<description>
+Writes the value of a single primitive to the output stream.  For BLonData with&#xa;  multiple elements, calls must be made in the proper sequence.&#xa;  &lt;p&gt;
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+<description>
+primitive slot to be processed
+</description>
+</parameter>
+<parameter name="out">
+<type class="javax.baja.lonworks.io.LonOutputStream"/>
+<description>
+output stream for data.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.fromNetBytes(byte[]) -->
+<method name="fromNetBytes"  public="true">
+<description>
+Translates from network bytes. Sets the value&#xa;  of the object&#x27;s data to the state represented&#xa;  by the given bytes.&#xa;  &lt;p&gt;
+</description>
+<parameter name="netBytes">
+<type class="byte" dimension="1"/>
+<description>
+Byte array representation of data.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.fromInputStream(javax.baja.lonworks.io.LonInputStream) -->
+<method name="fromInputStream"  protected="true">
+<description>
+Sets the value of the object&#x27;s data from&#xa;  the specified LonInputStream.&#xa;  &lt;p&gt;
+</description>
+<parameter name="in">
+<type class="javax.baja.lonworks.io.LonInputStream"/>
+<description>
+LonInputStream containing byte representation of data.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.primitiveFromInputStream(javax.baja.sys.Property, javax.baja.lonworks.io.LonInputStream) -->
+<method name="primitiveFromInputStream"  protected="true">
+<description>
+Set the value of a single primitive from the input stream.  For BLonData with&#xa;  multiple elements, calls must be made in the proper sequence.&#xa;  &lt;p&gt;
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+<description>
+primitive slot to be processed
+</description>
+</parameter>
+<parameter name="in">
+<type class="javax.baja.lonworks.io.LonInputStream"/>
+<description>
+LonInputStream containing byte representation of data.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.toDebugString() -->
+<method name="toDebugString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.setLonInt(java.lang.String, int, javax.baja.sys.Context) -->
+<method name="setLonInt"  public="true">
+<description>
+Set BLonData element from int value.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="val">
+<type class="int"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.setLonBoolean(java.lang.String, boolean, javax.baja.sys.Context) -->
+<method name="setLonBoolean"  public="true">
+<description>
+Set BLonData element from boolean value.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="val">
+<type class="boolean"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.setLonFloat(java.lang.String, float, javax.baja.sys.Context) -->
+<method name="setLonFloat"  public="true">
+<description>
+Set BLonData element from float value.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="val">
+<type class="float"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.setLonString(java.lang.String, java.lang.String, javax.baja.sys.Context) -->
+<method name="setLonString"  public="true">
+<description>
+Set BLonData element from String value.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="val">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.setLonEnum(java.lang.String, java.lang.String, javax.baja.sys.Context) -->
+<method name="setLonEnum"  public="true">
+<description>
+DEPRECATE.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="val">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.setLonEnum(java.lang.String, javax.baja.sys.BEnum, javax.baja.sys.Context) -->
+<method name="setLonEnum"  public="true">
+<description>
+Set BLonData element from enum value.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="val">
+<type class="javax.baja.sys.BEnum"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getLonInt(java.lang.String) -->
+<method name="getLonInt"  public="true">
+<description>
+Get int value from BLonData element.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getLonBoolean(java.lang.String) -->
+<method name="getLonBoolean"  public="true">
+<description>
+Get boolean value from BLonData element.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getLonFloat(java.lang.String) -->
+<method name="getLonFloat"  public="true">
+<description>
+Get float value from BLonData element.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getLonString(java.lang.String) -->
+<method name="getLonString"  public="true">
+<description>
+Get String value from BLonData element.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.getLonEnum(java.lang.String, javax.baja.sys.BEnum) -->
+<method name="getLonEnum"  public="true">
+<description>
+Get enum value from BLonData element.
+</description>
+<parameter name="propName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="en">
+<type class="javax.baja.sys.BEnum"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BEnum"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.isUnion() -->
+<method name="isUnion"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonData.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.spy.ISpyDir" name="ISpyDir" packageName="javax.baja.spy" public="true" interface="true" abstract="true" category="interface">
+<description>
+ISpyDir is implemented by Spy pages which contain&#xa; child Spy pages.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">5 Mar 03</tag>
+<tag name="@version">$Revision: 2$ $Date: 3/28/05 9:23:04 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.spy.ISpyDir.list() -->
+<method name="list"  public="true" abstract="true">
+<description>
+List the child spy names.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.spy.ISpyDir.find(java.lang.String) -->
+<method name="find"  public="true" abstract="true">
+<description>
+Get the specified child by name or return null.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.spy.Spy"/>
+</return>
+</method>
+
+<!-- javax.baja.spy.ISpyDir.regenerateNameWithCsrfToken(java.lang.String) -->
+<method name="regenerateNameWithCsrfToken"  public="true" default="true">
+<description>
+Some spy children names contain an appended CSRF token.&#xa; In the case of a CSRF validation failure, the error spy page&#xa; attempts to provide a &#x27;retry&#x27; name containing a proper CSRF&#xa; token for the current session.  This method is given the&#xa; invalid name that failed the CSRF validation and should return&#xa; a new name containing a proper CSRF token for the current session.&#xa;&#xa; The default implementation replaces the CSRF token at the end&#xa; of the given invalid name with a new token.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<parameter name="invalidName">
+<type class="java.lang.String"/>
+<description>
+A child name that failed during CSRF token validation.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+A new child name containing a properly formed CSRF token for the&#xa; current session.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

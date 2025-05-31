@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.dataRecovery.BIDataRecoverySource" name="BIDataRecoverySource" packageName="javax.baja.dataRecovery" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIDataRecoverySource defines the contract that all data recovery&#xa; sources, that is clients of data recovery storage, must obey.
+</description>
+<tag name="@author">Mike James</tag>
+<tag name="@creation">Jul 14, 2009</tag>
+<tag name="@version">Original</tag>
+<tag name="@since">Niagara 3.6</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.dataRecovery.BIDataRecoverySource.getOrdInSession() -->
+<method name="getOrdInSession"  public="true" abstract="true">
+<description>
+This is the Ord the DataRecoveryService will use to categorize your data.&#xa; It is one of two parts used to uniquely identify data in the data recovery&#xa; storage.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.dataRecovery.BIDataRecoverySource.dataRecoveryReserve() -->
+<method name="dataRecoveryReserve"  public="true" default="true">
+<description>
+Notify the source that the service has entered the reserved state associated with&#xa; a Niagara Station save. This source should immediately re-send, or invalidate, any meta-data&#xa; associated with records it might have sent prior to entering the reserve state, as those&#xa; records will be lost when the save completes and the older blocks are purged. Invoker&#xa; should guarantee that no records can enter the data recovery service from this source&#xa; until reserve process has been completed.&#xa;&#xa; Use default implementation to avoid impact to implementing classes that pre-date usage.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.dataRecovery.BIDataRecoverySource.dataRecoveryRestore(javax.baja.dataRecovery.IDataRecoveryRecord) -->
+<method name="dataRecoveryRestore"  public="true" abstract="true">
+<description>
+Replay the provided record from the data recovery storage.&#xa; The BIDataRecoveryService should guarantee that recorded events are not&#xa; lost, but it cannot guarantee that events that were already saved by the&#xa; station will not be replayed again.  So objects should be able to &#xa; gracefully handle such &#x22;duplicate&#x22; data, should it occur.
+</description>
+<parameter name="record">
+<type class="javax.baja.dataRecovery.IDataRecoveryRecord"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.dataRecovery.BIDataRecoverySource.dataRecoveryRestoreComplete() -->
+<method name="dataRecoveryRestoreComplete"  public="true" abstract="true">
+<description>
+Callback to indicate that no further records will be restored to this source.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.dataRecovery.BIDataRecoverySource.dataRecoverySpy(javax.baja.spy.SpyWriter, java.util.Iterator&lt;javax.baja.dataRecovery.IDataRecoveryRecord&gt;) -->
+<method name="dataRecoverySpy"  public="true" abstract="true">
+<description>
+Decode the data recovery provided to you by the Iterator and place it&#xa; into the SpyWriter for runtime analysis for the DataRecoverySource.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<parameter name="dataRecovery">
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.dataRecovery.IDataRecoveryRecord"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.dataRecovery.BIDataRecoverySource.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

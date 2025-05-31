@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="aapup" runtimeProfile="rt" qualifiedName="com.tridium.aapup.job.BPupDiscoverDevicesJob" name="BPupDiscoverDevicesJob" packageName="com.tridium.aapup.job" public="true">
+<description>
+PUP Device Discovery.&#xa; This job class handles the implementation of the scan for&#xa; devices on the PUP Bus.&#xa; &lt;p&gt;&#xa; At each address, a Say Hello message is sent for&#xa; the device code.  If an ACK response is received, we&#xa; have found a PUP device.&#xa; &lt;p&gt;&#xa; If a device is discovered, then it also querried for manufacturer code (attribute&#xa; CM in channel FF00) and controller type (attribute CT in channel FF00), and peer&#xa; type (attribute TP in channel FF00).&#xa; &lt;p&gt;&#xa; The discovery process uses its own timeout and retry values,&#xa; of 100ms and 0, respectively.
+</description>
+<tag name="@author">Clif Turman</tag>
+<tag name="@creation">7/21/2005 2:32PM</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">3.0.91</tag>
+<extends>
+<type class="javax.baja.job.BSimpleJob"/>
+</extends>
+<implements>
+<type class="com.tridium.aapup.AaPupConst"/>
+</implements>
+<property name="learnedDevices" flags="">
+<type class="javax.baja.util.BFolder"/>
+<description>
+Slot for the &lt;code&gt;learnedDevices&lt;/code&gt; property.&#xa; the folder where devices discovered are plopped.
+</description>
+<tag name="@see">#getLearnedDevices</tag>
+<tag name="@see">#setLearnedDevices</tag>
+</property>
+
+<topic name="deviceLearned" flags="">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;deviceLearned&lt;/code&gt; topic.&#xa; Whenever a device is discovered by this job,&#xa; this topic if fired to pass the discovery object to the manager.  If&#xa; there are n devices discovered, this will be fired n times.
+</description>
+<tag name="@see">#fireDeviceLearned</tag>
+</topic>
+
+</class>
+</bajadoc>

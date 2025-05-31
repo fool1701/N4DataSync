@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="rt" qualifiedName="com.tridium.nvideo.display.BDisplayDeviceExt" name="BDisplayDeviceExt" packageName="com.tridium.nvideo.display" public="true">
+<description>
+This extension goes on video devices that support video displays. We define a&#xa; video diplay as a VGA monitor, LCD Panel, Plasma Screen, etc. that security&#xa; personnel look at to view the video feeds of one or more camera. For example,&#xa; the BVideoDvr has one of these extensions.&#xa; &#xa; Displays can be grouped by location.
+</description>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver)</tag>
+<tag name="@creation">25 Jan 2012</tag>
+<extends>
+<type class="javax.baja.driver.BDeviceExt"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.display.BIVideoDisplayDeviceExt"/>
+</implements>
+<implements>
+<type class="javax.baja.driver.BIDeviceFolder"/>
+</implements>
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt() -->
+<constructor name="BDisplayDeviceExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getVideoSystem() -->
+<method name="getVideoSystem"  public="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.BIVideoDeviceSystem"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getLocationType() -->
+<method name="getLocationType"  protected="true">
+<description>
+Returns the Type of BVideoLocation to look for in the getLocations&#xa; method and on the location manager.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getDisplayType() -->
+<method name="getDisplayType"  protected="true">
+<description>
+Returns the Type of BVideoDisplay to use.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getAllLocations() -->
+<method name="getAllLocations"  public="true">
+<description>
+Get an array containing all the BVideoLocation children of this&#xa; BDisplayDeviceExt component.
+</description>
+<return>
+<type class="com.tridium.videoDriver.display.BIVideoLocation" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getAllDisplays() -->
+<method name="getAllDisplays"  public="true">
+<description>
+Get an array containing all the BIVideoDisplay children of this&#xa; BDisplayDeviceExt component.
+</description>
+<return>
+<type class="com.tridium.videoDriver.display.BIVideoDisplay" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.updateStatus() -->
+<method name="updateStatus"  public="true">
+<description>
+Update the status of all the BVideoDisplay components that&#xa; are under this component in the Niagara AX nav tree.&#xa; &#xa; This method is automatically called by the Niagara AX framework whenever&#xa; the nav tree parent device status changes
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getDeviceType() -->
+<method name="getDeviceType"  public="true">
+<description>
+Defines the Niagara AX type for the devices that can be under&#xa; this component in the Niagara AX nav tree.&#xa; &#xa; BVideoDisplay devices may appear under this component&#xa; type in the Niagara AX nav tree.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+whatever the getDisplayType() method returns
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getDeviceFolderType() -->
+<method name="getDeviceFolderType"  public="true" final="true">
+<description>
+Defines the Niagara AX type for the device-folder class that&#xa; would contain any devices that may be recursively under this&#xa; component in the Niagara AX nav tree.&#xa; &#xa; Note that BVideoDisplay devices may appear under this&#xa; component type in the Niagara AX nav tree. Furthermore,&#xa; BVideoLocation components woould serve as the device&#xa; folders for recursive BVideoDisplay nav children devices.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+whatever the getLocationType() method returns.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.display.BDisplayDeviceExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

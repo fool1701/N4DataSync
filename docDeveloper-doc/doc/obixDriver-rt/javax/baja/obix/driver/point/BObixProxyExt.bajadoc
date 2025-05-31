@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="obixDriver" runtimeProfile="rt" qualifiedName="javax.baja.obix.driver.point.BObixProxyExt" name="BObixProxyExt" packageName="javax.baja.obix.driver.point" public="true">
+<description>
+The ObixProxyExt is a &#x22;point-level&#x22; component in the NiagaraAX architecture.&#xa; It has the standard proxy extension properties such as status and enabled&#xa; (see &#x22;Data and Control Model / About proxy points / ProxyExt properties&#x22;&#xa; in the NiagaraAX User Guide for more information). &lt;p&gt;&#xa; The following slots are unique or have special importance to the&#xa; ObixProxyExt:&#xa; &lt;ul&gt;&#xa; &lt;li&gt; Href - This is the URI of the point on the server.  This value must be&#xa; unique among all the points of any given ObixClient.&lt;/li&gt;&#xa; &lt;li&gt; Force Update- This action forces a read, updates the dynamic actions&#xa; on the control point and updates the device facets in the ObixProxyExt.&#xa; Lastly, if the point is supposed to be subscribed, but not, this will&#xa; attempt to re-subscribe the point.&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<tag name="@author">Aaron Hansen</tag>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@creation">Apr 2006</tag>
+<tag name="@since">Niagara 3.1</tag>
+<tag name="@version">$Revision: $ $Date: $</tag>
+<extends>
+<type class="javax.baja.driver.point.BProxyExt"/>
+</extends>
+<implements>
+<type class="javax.baja.obix.driver.util.BIObixPollable"/>
+</implements>
+<implements>
+<type class="javax.baja.alarm.BIRemoteAlarmSource"/>
+</implements>
+<property name="href" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;href&lt;/code&gt; property.&#xa; URI to the point within the server device.
+</description>
+<tag name="@see">#getHref</tag>
+<tag name="@see">#setHref</tag>
+</property>
+
+<property name="subscription" flags="drt">
+<type class="javax.baja.obix.driver.util.BObixSubscription"/>
+<description>
+Slot for the &lt;code&gt;subscription&lt;/code&gt; property.&#xa; State of the watch subscription for this point.
+</description>
+<tag name="@see">#getSubscription</tag>
+<tag name="@see">#setSubscription</tag>
+</property>
+
+<action name="forceUpdate" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;forceUpdate&lt;/code&gt; action.&#xa; Forces a read, updates facets, actions, and if unsubscribed, tries to subscribe.
+</description>
+<tag name="@see">#forceUpdate()</tag>
+</action>
+
+<action name="ackAlarm" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+<description>
+Slot for the &lt;code&gt;ackAlarm&lt;/code&gt; action.&#xa; Acknowledge an OBIX alarm.
+</description>
+<tag name="@see">#ackAlarm(BAlarmRecord parameter)</tag>
+</action>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt() -->
+<constructor name="BObixProxyExt" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getHref() -->
+<method name="getHref"  public="true">
+<description>
+Get the &lt;code&gt;href&lt;/code&gt; property.&#xa; URI to the point within the server device.
+</description>
+<tag name="@see">#href</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.setHref(java.lang.String) -->
+<method name="setHref"  public="true">
+<description>
+Set the &lt;code&gt;href&lt;/code&gt; property.&#xa; URI to the point within the server device.
+</description>
+<tag name="@see">#href</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getSubscription() -->
+<method name="getSubscription"  public="true">
+<description>
+Get the &lt;code&gt;subscription&lt;/code&gt; property.&#xa; State of the watch subscription for this point.
+</description>
+<tag name="@see">#subscription</tag>
+<return>
+<type class="javax.baja.obix.driver.util.BObixSubscription"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.setSubscription(javax.baja.obix.driver.util.BObixSubscription) -->
+<method name="setSubscription"  public="true">
+<description>
+Set the &lt;code&gt;subscription&lt;/code&gt; property.&#xa; State of the watch subscription for this point.
+</description>
+<tag name="@see">#subscription</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.util.BObixSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.forceUpdate() -->
+<method name="forceUpdate"  public="true">
+<description>
+Invoke the &lt;code&gt;forceUpdate&lt;/code&gt; action.&#xa; Forces a read, updates facets, actions, and if unsubscribed, tries to subscribe.
+</description>
+<tag name="@see">#forceUpdate</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.ackAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="ackAlarm"  public="true">
+<description>
+Invoke the &lt;code&gt;ackAlarm&lt;/code&gt; action.&#xa; Acknowledge an OBIX alarm.
+</description>
+<tag name="@see">#ackAlarm</tag>
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.atSteadyState() -->
+<method name="atSteadyState"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.doAckAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="doAckAlarm"  public="true">
+<description/>
+<parameter name="alarm">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.doForceUpdate() -->
+<method name="doForceUpdate"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getDeviceExtType() -->
+<method name="getDeviceExtType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getMode() -->
+<method name="getMode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.driver.point.BReadWriteMode"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getFolder() -->
+<method name="getFolder"  public="true">
+<description/>
+<return>
+<type class="javax.baja.obix.driver.point.BObixPointFolder"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getLogger() -->
+<method name="getLogger"  public="true">
+<description/>
+<return>
+<type class="java.util.logging.Logger"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getObixClient() -->
+<method name="getObixClient"  public="true">
+<description/>
+<return>
+<type class="javax.baja.obix.driver.BObixClient"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getObixPointDeviceExt() -->
+<method name="getObixPointDeviceExt"  public="true">
+<description/>
+<return>
+<type class="javax.baja.obix.driver.point.BObixPointDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getObixNetwork() -->
+<method name="getObixNetwork"  public="true">
+<description/>
+<return>
+<type class="javax.baja.obix.driver.BObixNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.getPollFrequency() -->
+<method name="getPollFrequency"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.driver.util.BPollFrequency"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.isReadSubscribed() -->
+<method name="isReadSubscribed"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.poll() -->
+<method name="poll"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Invokes read only if unsubscribed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Enqueus the invocation in the network object.
+</description>
+<parameter name="a">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.read() -->
+<method name="read"  public="true">
+<description>
+Calls read on ObixPointDeviceExt who batches reads.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.readSubscribed(javax.baja.sys.Context) -->
+<method name="readSubscribed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Calls subscribe on ObixPointDeviceExt who batches subscribes.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.readUnsubscribed(javax.baja.sys.Context) -->
+<method name="readUnsubscribed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Calls unsubscribe on ObixPointDeviceExt who batches unsubscribes.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.setStale(boolean, javax.baja.sys.Context) -->
+<method name="setStale"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Override.&#xa; If the point is being marked stale, but we think it is subscribed, then something&#xa; has gone wrong with the subscription and we need to resubscribe it.
+</description>
+<parameter name="stale">
+<type class="boolean"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.started() -->
+<method name="started"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.write(javax.baja.sys.Context) -->
+<method name="write"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Calls write on ObixPointDeviceExt who batches writes.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.batchWrite(obix.net.BatchIn) -->
+<method name="batchWrite"  protected="true">
+<description>
+Called by the deviceExt.
+</description>
+<parameter name="bin">
+<type class="obix.net.BatchIn"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.batchWriteResult(obix.Obj) -->
+<method name="batchWriteResult"  protected="true">
+<description>
+Called by the deviceExt.
+</description>
+<parameter name="o">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.force(obix.Obj) -->
+<method name="force"  protected="true">
+<description/>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.performWrite() -->
+<method name="performWrite"  protected="true">
+<description>
+Called by the deviceExt.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.proxyAtSteadyState() -->
+<method name="proxyAtSteadyState"  protected="true">
+<description>
+Override point for subclasses to implement steady-state behavior.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+if a problem occurs
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.proxyStarted() -->
+<method name="proxyStarted"  protected="true">
+<description>
+Override point for subclasses to implement startup behavior.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+if a problem occurs
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.readOk(obix.Obj) -->
+<method name="readOk"  protected="true">
+<description>
+Called by the deviceExt.
+</description>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.subscribeFail(java.lang.String) -->
+<method name="subscribeFail"  protected="true">
+<description>
+Called by the deviceExt.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.subscribeFailTryPolling(java.lang.String) -->
+<method name="subscribeFailTryPolling"  protected="true">
+<description>
+Called by the deviceExt.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.subscribeOk() -->
+<method name="subscribeOk"  protected="true">
+<description>
+Called by the deviceExt.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.deviceFacets -->
+<field name="deviceFacets"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;deviceFacets&lt;/code&gt; property.&#xa; Make my own deviceFacets using an OBIX-specific method.
+</description>
+<tag name="@see">#getDeviceFacets</tag>
+<tag name="@see">#setDeviceFacets</tag>
+</field>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.href -->
+<field name="href"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;href&lt;/code&gt; property.&#xa; URI to the point within the server device.
+</description>
+<tag name="@see">#getHref</tag>
+<tag name="@see">#setHref</tag>
+</field>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.subscription -->
+<field name="subscription"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;subscription&lt;/code&gt; property.&#xa; State of the watch subscription for this point.
+</description>
+<tag name="@see">#getSubscription</tag>
+<tag name="@see">#setSubscription</tag>
+</field>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.forceUpdate -->
+<field name="forceUpdate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;forceUpdate&lt;/code&gt; action.&#xa; Forces a read, updates facets, actions, and if unsubscribed, tries to subscribe.
+</description>
+<tag name="@see">#forceUpdate()</tag>
+</field>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.ackAlarm -->
+<field name="ackAlarm"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;ackAlarm&lt;/code&gt; action.&#xa; Acknowledge an OBIX alarm.
+</description>
+<tag name="@see">#ackAlarm(BAlarmRecord parameter)</tag>
+</field>
+
+<!-- javax.baja.obix.driver.point.BObixProxyExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

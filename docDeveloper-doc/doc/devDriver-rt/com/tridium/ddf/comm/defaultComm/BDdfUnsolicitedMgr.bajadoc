@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr" name="BDdfUnsolicitedMgr" packageName="com.tridium.ddf.comm.defaultComm" public="true" abstract="true">
+<description>
+This is the base override point for a custom unsolicited&#xa; message processor. This puts unsolicited data frames&#xa; on a queue, pulls them off one-by-one (on a dedicated&#xa; unsolicited mgr therad), and passes them to the abstract&#xa; processUnsolicitedFrame method for developers to process&#xa; further.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.comm.BIDdfUnsolicitedMgr"/>
+</implements>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<property name="unsolicitedMessageCount" flags="r">
+<type class="long"/>
+<description>
+Slot for the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#getUnsolicitedMessageCount</tag>
+<tag name="@see">#setUnsolicitedMessageCount</tag>
+</property>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr() -->
+<constructor name="BDdfUnsolicitedMgr" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.getUnsolicitedMessageCount() -->
+<method name="getUnsolicitedMessageCount"  public="true">
+<description>
+Get the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#unsolicitedMessageCount</tag>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.setUnsolicitedMessageCount(long) -->
+<method name="setUnsolicitedMessageCount"  public="true">
+<description>
+Set the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#unsolicitedMessageCount</tag>
+<parameter name="v">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+Callback from BComponenet
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.started() -->
+<method name="started"  public="true" final="true">
+<description>
+Callback from BComponent. Although this is declared as being&#xa; final, descendants may override the &#x27;unsolicitedMgrStarted&#x27;&#xa; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.stopped() -->
+<method name="stopped"  public="true" final="true">
+<description>
+Callback from BComponent. Although this is declared as being&#xa; final, descendants may override the &#x27;unsolicitedMgrStopped&#x27;&#xa; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.startUnsolicitedMgr() -->
+<method name="startUnsolicitedMgr"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.stopUnsolicitedMgr() -->
+<method name="stopUnsolicitedMgr"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+<description>
+(BIDdfCommunicator)getParent()
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.enqueueUnsolicitedFrame(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="enqueueUnsolicitedFrame"  public="true">
+<description>
+Access point called by the DdfCommunicator Comm API to place&#xa; unsolicited frames on the Unsolicited Manager&#x27;s queue.
+</description>
+<parameter name="unsolicitedFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.run() -->
+<method name="run"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.processUnsolicitedFrame(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="processUnsolicitedFrame"  public="true" abstract="true">
+<description>
+Descendants should override this method and process to given unsolicited&#xa; frame. This method is called on the unsolicited manager&#x27;s own thread.
+</description>
+<parameter name="unsolicitedFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.resetStatistics() -->
+<method name="resetStatistics"  public="true">
+<description>
+Callback from BDdfCommunicator
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.unsolicitedMgrStarted() -->
+<method name="unsolicitedMgrStarted"  protected="true">
+<description>
+Override point for descendants during station startup.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.unsolicitedMgrStopped() -->
+<method name="unsolicitedMgrStopped"  protected="true">
+<description>
+Override point for descendants during station shutdown.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.unsolicitedMessageCount -->
+<field name="unsolicitedMessageCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#getUnsolicitedMessageCount</tag>
+<tag name="@see">#setUnsolicitedMessageCount</tag>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfUnsolicitedMgr.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

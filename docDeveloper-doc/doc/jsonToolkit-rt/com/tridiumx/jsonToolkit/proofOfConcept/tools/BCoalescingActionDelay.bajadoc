@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay" name="BCoalescingActionDelay" packageName="com.tridiumx.jsonToolkit.proofOfConcept.tools" public="true">
+<description>
+Allows no arg action invocations to be coalesced, by resetting the delay each time one arrives and&#xa; waiting until said delay expires before firing output topic.
+</description>
+<tag name="@author">Jason Woollard</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="delay" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;delay&lt;/code&gt; property.&#xa; After receiving new platform Id&#x27;s the registered points need to be republished to subscribe for changes on the&#xa; newly added point(s). The timer allows this to happen at the end of a group of points being registered, not during
+</description>
+<tag name="@see">#getDelay</tag>
+<tag name="@see">#setDelay</tag>
+</property>
+
+<action name="input" flags="s">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;input&lt;/code&gt; action.
+</description>
+<tag name="@see">#input()</tag>
+</action>
+
+<action name="delayedReceive" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;delayedReceive&lt;/code&gt; action.&#xa; The action exists only to invoke firing of the topic by the delay timer, no other function
+</description>
+<tag name="@see">#delayedReceive()</tag>
+</action>
+
+<topic name="output" flags="s">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;output&lt;/code&gt; topic.&#xa; Fired when the delay expires, intended to allow republishing to occur
+</description>
+<tag name="@see">#fireOutput</tag>
+</topic>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay() -->
+<constructor name="BCoalescingActionDelay" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.getDelay() -->
+<method name="getDelay"  public="true">
+<description>
+Get the &lt;code&gt;delay&lt;/code&gt; property.&#xa; After receiving new platform Id&#x27;s the registered points need to be republished to subscribe for changes on the&#xa; newly added point(s). The timer allows this to happen at the end of a group of points being registered, not during
+</description>
+<tag name="@see">#delay</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.setDelay(javax.baja.sys.BRelTime) -->
+<method name="setDelay"  public="true">
+<description>
+Set the &lt;code&gt;delay&lt;/code&gt; property.&#xa; After receiving new platform Id&#x27;s the registered points need to be republished to subscribe for changes on the&#xa; newly added point(s). The timer allows this to happen at the end of a group of points being registered, not during
+</description>
+<tag name="@see">#delay</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.input() -->
+<method name="input"  public="true">
+<description>
+Invoke the &lt;code&gt;input&lt;/code&gt; action.
+</description>
+<tag name="@see">#input</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.delayedReceive() -->
+<method name="delayedReceive"  public="true">
+<description>
+Invoke the &lt;code&gt;delayedReceive&lt;/code&gt; action.&#xa; The action exists only to invoke firing of the topic by the delay timer, no other function
+</description>
+<tag name="@see">#delayedReceive</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.fireOutput(javax.baja.sys.BValue) -->
+<method name="fireOutput"  public="true">
+<description>
+Fire an event for the &lt;code&gt;output&lt;/code&gt; topic.&#xa; Fired when the delay expires, intended to allow republishing to occur
+</description>
+<tag name="@see">#output</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.doInput() -->
+<method name="doInput"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+After receiving new sensor ID&#x27;s the registered points need to be republished to subscribe for changes on the&#xa; newly added point(s). The timer allows this to happen at the end of a group of points being registered.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.doDelayedReceive() -->
+<method name="doDelayedReceive"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Allow the firing of the topic to be delayed, yep, an action just to work with the ticket elapsing.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.delay -->
+<field name="delay"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;delay&lt;/code&gt; property.&#xa; After receiving new platform Id&#x27;s the registered points need to be republished to subscribe for changes on the&#xa; newly added point(s). The timer allows this to happen at the end of a group of points being registered, not during
+</description>
+<tag name="@see">#getDelay</tag>
+<tag name="@see">#setDelay</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.input -->
+<field name="input"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;input&lt;/code&gt; action.
+</description>
+<tag name="@see">#input()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.delayedReceive -->
+<field name="delayedReceive"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;delayedReceive&lt;/code&gt; action.&#xa; The action exists only to invoke firing of the topic by the delay timer, no other function
+</description>
+<tag name="@see">#delayedReceive()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.output -->
+<field name="output"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;output&lt;/code&gt; topic.&#xa; Fired when the delay expires, intended to allow republishing to occur
+</description>
+<tag name="@see">#fireOutput</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.proofOfConcept.tools.BCoalescingActionDelay.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

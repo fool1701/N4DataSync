@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="com.tridium.bacnet.schedule.BBacnetScheduleExport" name="BBacnetScheduleExport" packageName="com.tridium.bacnet.schedule" public="true">
+<description>
+BBacnetScheduleExport is a child extension of a schedule that&#xa; is being exported to a BACnet device.&#xa; &lt;p&gt;&#xa; The schedule in the remote BACnet device is the &#x22;subordinate&#x22;, and Niagara&#xa; will periodically synchronize the values by writing its local values to&#xa; the remote device using WriteProperty service requests.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">03 Mar 2004</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.driver.schedule.BScheduleExport"/>
+</extends>
+<property name="supervisorOrd" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;supervisorOrd&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSupervisorOrd</tag>
+<tag name="@see">#setSupervisorOrd</tag>
+</property>
+
+<property name="objectId" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; object ID of the schedule.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</property>
+
+<property name="dataType" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;dataType&lt;/code&gt; property.&#xa; the Asn primitive application data type.
+</description>
+<tag name="@see">#getDataType</tag>
+<tag name="@see">#setDataType</tag>
+</property>
+
+<property name="priorityForWriting" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;priorityForWriting&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPriorityForWriting</tag>
+<tag name="@see">#setPriorityForWriting</tag>
+</property>
+
+<property name="skipWrites" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;skipWrites&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSkipWrites</tag>
+<tag name="@see">#setSkipWrites</tag>
+</property>
+
+<property name="writeEnumAs" flags="">
+<type class="javax.baja.sys.BEnum"/>
+<description>
+Slot for the &lt;code&gt;writeEnumAs&lt;/code&gt; property.
+</description>
+<tag name="@see">#getWriteEnumAs</tag>
+<tag name="@see">#setWriteEnumAs</tag>
+</property>
+
+<property name="outOfService" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;outOfService&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOutOfService</tag>
+<tag name="@see">#setOutOfService</tag>
+</property>
+
+<action name="readFromDevice" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;readFromDevice&lt;/code&gt; action.&#xa; Initialize the supervisor schedule for this export from the values&#xa; in the remote device schedule.
+</description>
+<tag name="@see">#readFromDevice()</tag>
+</action>
+
+<action name="readChangeTypeParams" flags="h">
+<return>
+<type class="com.tridium.bacnet.schedule.BBacnetChangeTypeParm"/>
+</return>
+<description>
+Slot for the &lt;code&gt;readChangeTypeParams&lt;/code&gt; action.&#xa; Read properties related to changeType action from device
+</description>
+<tag name="@see">#readChangeTypeParams()</tag>
+</action>
+
+<action name="changeType" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.bacnet.schedule.BBacnetChangeTypeParm"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;changeType&lt;/code&gt; action.&#xa; Write changed properties to device
+</description>
+<tag name="@see">#changeType(BBacnetChangeTypeParm parameter)</tag>
+</action>
+
+</class>
+</bajadoc>

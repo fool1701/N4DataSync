@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator" name="StationSideVideoCoordinator" packageName="com.tridium.videoDriver.videoStream.fox" public="true">
+<description>
+A StationSideVideoCoordinator object is allocated for each BFoxVideoChannel&#xa; instance. The StationSideVideoCoordinator object is used on the station side&#xa; VM. It performs the bulk of the work to read chunks of video data from&#xa; video field devices and forward the chunks of video data to the&#xa; corresponding Workbench clients.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 14, 2008</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator() -->
+<constructor name="StationSideVideoCoordinator" protected="true">
+<description>
+Called when a session is opened to a BFoxVideoChannel. &#xa; &#xa; Note that exactly one BFoxVideoChannel exists between the station and one&#xa; particular video client.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.openStreamAsync(com.tridium.videoDriver.videoStream.BPlaybackParams, java.lang.String, int) -->
+<method name="openStreamAsync"  public="true">
+<description>
+This method is called from the station side call to &#x27;openVideoStream&#x27;&#xa; on the BFoxVideoChannel.
+</description>
+<parameter name="playbackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+<description>
+the BPlaybackParams structure that the&#xa; BFoxVideoChannel receives from the video or Workbench client. This is&#xa; passed to the particular video driver that is built on this framework&#xa; in order to ask it for a video stream from the video field device.
+</description>
+</parameter>
+<parameter name="videoClient">
+<type class="java.lang.String"/>
+<description>
+(String) a name or name:int that uniquely identifies&#xa; the particular video or Workbench client from within the station server.
+</description>
+</parameter>
+<parameter name="videoStreamId">
+<type class="int"/>
+<description>
+an int that uniquely identifies the particular&#xa; video stream from within the video or Workbench client.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.getPlaybackParamsForStream(java.lang.String, int) -->
+<method name="getPlaybackParamsForStream"  protected="true">
+<description>
+This method is called by the fox video channel when it receives a request&#xa; from the Workbench client to get playback params for a particular video stream.
+</description>
+<parameter name="videoClient">
+<type class="java.lang.String"/>
+<description>
+(String) the name or name:id of the client for which to&#xa; get playbcak params for the particular video stream
+</description>
+</parameter>
+<parameter name="videoStreamId">
+<type class="int"/>
+<description>
+the unique if of the video stream to get playback params&#xa; for within the particular Workbench client.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.pauseVideoStream(java.lang.String, int) -->
+<method name="pauseVideoStream"  protected="true">
+<description>
+This method is called by the fox video channel when it receives a request&#xa; from the Workbench client to pause a particular video stream.
+</description>
+<parameter name="videoClient">
+<type class="java.lang.String"/>
+<description>
+(String) the name or name:id of the client for which to&#xa; pause the particular video stream
+</description>
+</parameter>
+<parameter name="videoStreamId">
+<type class="int"/>
+<description>
+the unique if of the video stream to pause within&#xa; the particular Workbench client.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+throws any underlying IOException that occurs
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.resumeVideoStream(java.lang.String, int) -->
+<method name="resumeVideoStream"  protected="true">
+<description>
+This method is called by the fox video channel when it receives a request&#xa; from the Workbench client to resume a particular video stream.
+</description>
+<parameter name="videoClient">
+<type class="java.lang.String"/>
+<description>
+(String) the name or name:id of the client for which to&#xa; resume the particular video stream
+</description>
+</parameter>
+<parameter name="videoStreamId">
+<type class="int"/>
+<description>
+the unique if of the video stream to resume within&#xa; the particular Workbench client.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+throws any underlying IOException that occurs
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.closeVideoStream(java.lang.String, int) -->
+<method name="closeVideoStream"  protected="true">
+<description>
+This method is called by the fox video channel when it receives a request&#xa; from the Workbench client to close a particular video stream. This is also&#xa; called in the event that this StationSideVideoCoordinator object gets an&#xa; end-of-file notification when reading from the video stream&#x27;s input stream&#xa; that is connected to the video field-device.&#xa; &#xa; This method will also call &#x27;close&#x27; on the underlying input stream from&#xa; the video field-device.
+</description>
+<parameter name="videoClient">
+<type class="java.lang.String"/>
+<description>
+(String) the name or name:id of the client for which to&#xa; close the particular video stream
+</description>
+</parameter>
+<parameter name="videoStreamId">
+<type class="int"/>
+<description>
+the unique if of the video stream to close within&#xa; the particular Workbench client.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+throws any IOException that occurs as a result of&#xa; calling &#x27;close&#x27; on the underlying video field-device.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.stopCoordinating() -->
+<method name="stopCoordinating"  public="true">
+<description>
+Called when the BFoxVideoChannel session is closed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.videoSessionTimeOut(com.tridium.videoDriver.videoStream.fox.StationSideVideoSession) -->
+<method name="videoSessionTimeOut"  protected="true">
+<description>
+This method is potentially called by a StationSideVideoSession&#xa; when the particular StationSideVideoSession is notified by its&#xa; underlying video driver that an attempt to establish a video stream&#xa; has timed out.&#xa; &#xa; This method sends a FoxMessage to the corresponding Workbench through&#xa; the video fox circuit.
+</description>
+<parameter name="videoSession">
+<type class="com.tridium.videoDriver.videoStream.fox.StationSideVideoSession"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.handshakeClient(com.tridium.fox.session.FoxCircuit, java.lang.StringBuffer) -->
+<method name="handshakeClient"  protected="true">
+<description>
+This method is called by the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator#coordinateVideoForClient(com.tridium.fox.session.FoxCircuit)">#coordinateVideoForClient(FoxCircuit)</see>&lt;/code&gt;&#xa; method which is called by the BFoxVideoChannel.circuitOpened method.&#xa; &#xa; This method writes a &#x22;hello&#x22; message to the circuit and reads back a&#xa; &#x22;hello&#x22; message from the circuit.
+</description>
+<parameter name="foxCircuit">
+<type class="com.tridium.fox.session.FoxCircuit"/>
+<description>
+the FoxCircuit to the new Workbench client
+</description>
+</parameter>
+<parameter name="videoClientId">
+<type class="java.lang.StringBuffer"/>
+<description>
+a StringBuffer into which the id that uniquely&#xa; identifies the client will be written.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if this method successfully writes a &#x22;hello&#x22; message to&#xa; the circuit and reads back a &#x22;hello&#x22; message from the circuit. The&#xa; &#x22;hello&#x22; message that is read back from the circuit also contains&#xa; the video client id.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.holdCircuitOpen(com.tridium.videoDriver.videoStream.fox.FoxVideoConnection, java.lang.String) -->
+<method name="holdCircuitOpen"  protected="true">
+<description>
+This method is called by the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator#coordinateVideoForClient(com.tridium.fox.session.FoxCircuit)">#coordinateVideoForClient(FoxCircuit)</see>&lt;/code&gt;&#xa; method after it finishes hand shaking and hashing a new FoxVideoConnection&#xa; for the new Workbench client connection.&#xa; &#xa; This method blocks the calling thread, which is a Fox circuit dispatch&#xa; thread. This is necessary because otherwise Fox closes the circuit&#xa; when its Fox circuit dispatch thread returns.
+</description>
+<parameter name="clientConnection">
+<type class="com.tridium.videoDriver.videoStream.fox.FoxVideoConnection"/>
+<description>
+the FoxVideoConnection object that wraps&#xa; the FoxCircuit to the new Workbench.
+</description>
+</parameter>
+<parameter name="videoClientId">
+<type class="java.lang.String"/>
+<description>
+an id that uniquely identifies the &#xa; client within this station server.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.coordinateVideoForClient(com.tridium.fox.session.FoxCircuit) -->
+<method name="coordinateVideoForClient"  public="true">
+<description>
+This method hooks up the given FoxCiruit so that it&#xa; can be fed data from the driver that goes with it.&#xa; &#xa; This method also blocks indefinitely (by calling the&#xa; &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator#holdCircuitOpen(FoxVideoConnection, int)">#holdCircuitOpen(FoxVideoConnection, int)</see>&lt;/code&gt; method,&#xa; as it is intended for this method to be called by the&#xa; BFoxVideoChannel&#x27;s circuitOpened callback, which closes&#xa; the circuit when the callback returns.
+</description>
+<parameter name="foxCircuit">
+<type class="com.tridium.fox.session.FoxCircuit"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.closedCircuitToClient(java.lang.String) -->
+<method name="closedCircuitToClient"  public="true">
+<description>
+This method is called by the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator#coordinateVideoForClient(com.tridium.fox.session.FoxCircuit)">#coordinateVideoForClient(FoxCircuit)</see>&lt;/code&gt;&#xa; when the FoxCircuit is about to close for good, at the end of the&#xa; Workbench client session.
+</description>
+<parameter name="videoClientId">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.getVideoSessionsWatchdog() -->
+<method name="getVideoSessionsWatchdog"  public="true">
+<description>
+This method is called by the &#x27;run&#x27; method each the StationSideVideoSession&#xa; just before each one attempts to read a chunk of video from its underlying&#xa; video stream to get the VideoSessionsWatchdog, which will gaurd against a&#xa; driver video stream that blocks forever in the call to read a chunk of&#xa; data from the driver video stream.
+</description>
+<return>
+<type class="com.tridium.videoDriver.videoStream.fox.VideoSessionsWatchdog"/>
+<description>
+the videoSessionsWatchdog for this object
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.videoSessions -->
+<field name="videoSessions"  protected="true">
+<parameterizedType class="java.util.HashMap">
+<args>
+<type class="java.lang.Integer"/>
+<type class="com.tridium.videoDriver.videoStream.fox.StationSideVideoSession"/>
+</args>
+</parameterizedType>
+<description>
+Hashes all StationSideVideoSession objects that are passed to the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator#startVideoSession(StationSideVideoSession)">#startVideoSession(StationSideVideoSession)</see>&lt;/code&gt; method.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.videoSessionsWatchdog -->
+<field name="videoSessionsWatchdog"  protected="true">
+<type class="com.tridium.videoDriver.videoStream.fox.VideoSessionsWatchdog"/>
+<description>
+Guards StationSideVideoSession objects from becoming indefinitely blocked&#xa; inside a call to read a chunk of video from an underlying driver video&#xa; stream.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.connectionToClient -->
+<field name="connectionToClient"  protected="true">
+<type class="com.tridium.videoDriver.videoStream.fox.FoxVideoConnection"/>
+<description>
+Encapsulates the fox circuit to the client.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator.log -->
+<field name="log"  protected="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

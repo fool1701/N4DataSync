@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane" name="BVideoMultistreamPane" packageName="com.tridium.videoDriver.ui.multistream" public="true">
+<description>
+BVideoMultistreamPane - combines all descendant video players&#xa; into a single, multiplexed video stream.&#xa; &#xa; Note: BVideoMultistreamPane has a BVideoMultistreamBinding that hooks&#xa; this pane to a driver video server component (such as&#xa; a driver DVR component) that implements BIVideoMultistreamServer.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Sep 23, 2008</tag>
+<extends>
+<type class="javax.baja.ui.pane.BBorderPane"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.BIVideoPlayer"/>
+</implements>
+<property name="videoStreamFox" flags="">
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+<description>
+Slot for the &lt;code&gt;videoStreamFox&lt;/code&gt; property.&#xa; Indicates whether the stream should be forwarded through the station&#xa; to the player (true) or whether the player should attempt direct&#xa; communication to the field-device (false) to get the video stream.&#xa; If strict firewalls are in place then setting this value to true&#xa; might help by allowing the station to communicate to the field-device&#xa; and forward the video stream to the player through the Niagara AX Fox&#xa; protocol (the same protocol used for all Workbench-to-Station comm).&#xa; This at least overcomes firewall issues on the Workbench side.
+</description>
+<tag name="@see">#getVideoStreamFox</tag>
+<tag name="@see">#setVideoStreamFox</tag>
+</property>
+
+<property name="resolution" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+<description>
+Slot for the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#getResolution</tag>
+<tag name="@see">#setResolution</tag>
+</property>
+
+<property name="frameRate" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+<description>
+Slot for the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#getFrameRate</tag>
+<tag name="@see">#setFrameRate</tag>
+</property>
+
+<property name="compression" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+<description>
+Slot for the &lt;code&gt;compression&lt;/code&gt; property.&#xa; This is the compression that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#getCompression</tag>
+<tag name="@see">#setCompression</tag>
+</property>
+
+<property name="streamFacets" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;streamFacets&lt;/code&gt; property.&#xa; This meta data is passed to the particular video driver. It exists to&#xa; provide flexibility and extensibility. It allows any unspecified data&#xa; values to be passed to the particulr video driver.
+</description>
+<tag name="@see">#getStreamFacets</tag>
+<tag name="@see">#setStreamFacets</tag>
+</property>
+
+<topic name="reloadVideo" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</eventType><description>
+Slot for the &lt;code&gt;reloadVideo&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireReloadVideo</tag>
+</topic>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane() -->
+<constructor name="BVideoMultistreamPane" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getVideoStreamFox() -->
+<method name="getVideoStreamFox"  public="true">
+<description>
+Get the &lt;code&gt;videoStreamFox&lt;/code&gt; property.&#xa; Indicates whether the stream should be forwarded through the station&#xa; to the player (true) or whether the player should attempt direct&#xa; communication to the field-device (false) to get the video stream.&#xa; If strict firewalls are in place then setting this value to true&#xa; might help by allowing the station to communicate to the field-device&#xa; and forward the video stream to the player through the Niagara AX Fox&#xa; protocol (the same protocol used for all Workbench-to-Station comm).&#xa; This at least overcomes firewall issues on the Workbench side.
+</description>
+<tag name="@see">#videoStreamFox</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.setVideoStreamFox(com.tridium.videoDriver.enums.BFoxVideoStreamEnum) -->
+<method name="setVideoStreamFox"  public="true">
+<description>
+Set the &lt;code&gt;videoStreamFox&lt;/code&gt; property.&#xa; Indicates whether the stream should be forwarded through the station&#xa; to the player (true) or whether the player should attempt direct&#xa; communication to the field-device (false) to get the video stream.&#xa; If strict firewalls are in place then setting this value to true&#xa; might help by allowing the station to communicate to the field-device&#xa; and forward the video stream to the player through the Niagara AX Fox&#xa; protocol (the same protocol used for all Workbench-to-Station comm).&#xa; This at least overcomes firewall issues on the Workbench side.
+</description>
+<tag name="@see">#videoStreamFox</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getResolution() -->
+<method name="getResolution"  public="true">
+<description>
+Get the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#resolution</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.setResolution(com.tridium.videoDriver.enums.BVideoResolutionEnum) -->
+<method name="setResolution"  public="true">
+<description>
+Set the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#resolution</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getFrameRate() -->
+<method name="getFrameRate"  public="true">
+<description>
+Get the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#frameRate</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.setFrameRate(com.tridium.videoDriver.enums.BVideoFrameRateEnum) -->
+<method name="setFrameRate"  public="true">
+<description>
+Set the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#frameRate</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getCompression() -->
+<method name="getCompression"  public="true">
+<description>
+Get the &lt;code&gt;compression&lt;/code&gt; property.&#xa; This is the compression that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#compression</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.setCompression(com.tridium.videoDriver.enums.BVideoCompressionEnum) -->
+<method name="setCompression"  public="true">
+<description>
+Set the &lt;code&gt;compression&lt;/code&gt; property.&#xa; This is the compression that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#compression</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getStreamFacets() -->
+<method name="getStreamFacets"  public="true">
+<description>
+Get the &lt;code&gt;streamFacets&lt;/code&gt; property.&#xa; This meta data is passed to the particular video driver. It exists to&#xa; provide flexibility and extensibility. It allows any unspecified data&#xa; values to be passed to the particulr video driver.
+</description>
+<tag name="@see">#streamFacets</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.setStreamFacets(javax.baja.sys.BFacets) -->
+<method name="setStreamFacets"  public="true">
+<description>
+Set the &lt;code&gt;streamFacets&lt;/code&gt; property.&#xa; This meta data is passed to the particular video driver. It exists to&#xa; provide flexibility and extensibility. It allows any unspecified data&#xa; values to be passed to the particulr video driver.
+</description>
+<tag name="@see">#streamFacets</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.fireReloadVideo(com.tridium.videoDriver.videoStream.BPlaybackParams) -->
+<method name="fireReloadVideo"  public="true">
+<description>
+Fire an event for the &lt;code&gt;reloadVideo&lt;/code&gt; topic.
+</description>
+<tag name="@see">#reloadVideo</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.loadVideoPlayers() -->
+<method name="loadVideoPlayers"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.dispatchMessage(java.lang.String) -->
+<method name="dispatchMessage"  protected="true">
+<description/>
+<parameter name="message">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getVideoPlayers() -->
+<method name="getVideoPlayers"  public="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.BIVideoPlayer" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getVideoMultistreamPane(javax.baja.ui.BWidget) -->
+<method name="getVideoMultistreamPane"  public="true" static="true">
+<description/>
+<parameter name="videoPlayer">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getVideoPlayers(javax.baja.ui.BWidget) -->
+<method name="getVideoPlayers"  protected="true" static="true">
+<description/>
+<parameter name="root">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.BIVideoPlayer" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.resetImage() -->
+<method name="resetImage"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getMessage() -->
+<method name="getMessage"  public="true">
+<description>
+Gets the &#x27;message&#x27;, such as &#x27;buffering...&#x27; that is displayed in a message area inside the video&#xa; player&#x27;s real estate.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.setMessage(java.lang.String) -->
+<method name="setMessage"  public="true">
+<description>
+Sets the &#x27;message&#x27;, such as &#x27;buffering...&#x27; that is displayed in a message area inside the video&#xa; player&#x27;s real estate.
+</description>
+<parameter name="message">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.setVideoDecoder(com.tridium.videoDriver.videoStream.decoder.IVideoDecoder) -->
+<method name="setVideoDecoder"  public="true">
+<description>
+Associates the video player to the BIVideoDecoder updates the current video image.
+</description>
+<parameter name="videoDecoder">
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoDecoder"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getVideoDecoder() -->
+<method name="getVideoDecoder"  public="true">
+<description>
+Gets the IVideoDecoder that was most recently passed to the &#x27;setVideoDecoder&#x27; method.
+</description>
+<return>
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoDecoder"/>
+<description>
+the IVideoDecoder that was most recently passed to the &#x27;setVideoDecoder&#x27; method.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.updateVideoFrame(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="updateVideoFrame"  public="true">
+<description>
+The BIVideoDecoder calls this method each time it decodes a new frame.
+</description>
+<parameter name="newFrame">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getPlaybackParams() -->
+<method name="getPlaybackParams"  public="true">
+<description>
+Returns the playback params that describes the video that this&#xa; video player widget is currently displaying. This structure&#xa; includes the resolution, framerate, video facets (with the&#xa; stream facets merged in), and the time index.
+</description>
+<return>
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getReloadVideoTopic() -->
+<method name="getReloadVideoTopic"  public="true">
+<description>
+Gets the topic that the this component fires when it needs&#xa; to have the video stream re-established based on the current&#xa; play back parameters.
+</description>
+<return>
+<type class="javax.baja.sys.Topic"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.label -->
+<field name="label"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;label&lt;/code&gt; property.&#xa; Label widget to display on border If a label is&#xa; set then the label always displayed at the top left.
+</description>
+<tag name="@see">#getLabel</tag>
+<tag name="@see">#setLabel</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.content -->
+<field name="content"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;content&lt;/code&gt; property.&#xa; Widget content to display inside border.
+</description>
+<tag name="@see">#getContent</tag>
+<tag name="@see">#setContent</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.videoStreamFox -->
+<field name="videoStreamFox"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;videoStreamFox&lt;/code&gt; property.&#xa; Indicates whether the stream should be forwarded through the station&#xa; to the player (true) or whether the player should attempt direct&#xa; communication to the field-device (false) to get the video stream.&#xa; If strict firewalls are in place then setting this value to true&#xa; might help by allowing the station to communicate to the field-device&#xa; and forward the video stream to the player through the Niagara AX Fox&#xa; protocol (the same protocol used for all Workbench-to-Station comm).&#xa; This at least overcomes firewall issues on the Workbench side.
+</description>
+<tag name="@see">#getVideoStreamFox</tag>
+<tag name="@see">#setVideoStreamFox</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.resolution -->
+<field name="resolution"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#getResolution</tag>
+<tag name="@see">#setResolution</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.frameRate -->
+<field name="frameRate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; This is the resolution that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#getFrameRate</tag>
+<tag name="@see">#setFrameRate</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.compression -->
+<field name="compression"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;compression&lt;/code&gt; property.&#xa; This is the compression that this widget will request from the particular&#xa; video driver.
+</description>
+<tag name="@see">#getCompression</tag>
+<tag name="@see">#setCompression</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.streamFacets -->
+<field name="streamFacets"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;streamFacets&lt;/code&gt; property.&#xa; This meta data is passed to the particular video driver. It exists to&#xa; provide flexibility and extensibility. It allows any unspecified data&#xa; values to be passed to the particulr video driver.
+</description>
+<tag name="@see">#getStreamFacets</tag>
+<tag name="@see">#setStreamFacets</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.reloadVideo -->
+<field name="reloadVideo"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;reloadVideo&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireReloadVideo</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.message -->
+<field name="message"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This message is displayed at the bottom of the screen. It is intended to display something&#xa; like, buffering...
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.videoMultistreamDecoder -->
+<field name="videoMultistreamDecoder"  protected="true">
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoMultistreamDecoder"/>
+<description>
+This is the video decoder that is associated with this video player. The&#xa; video decoder object feeds this video player widget with video frames from&#xa; a video stream.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.playBackParams -->
+<field name="playBackParams"  protected="true">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+<description>
+This structure stores the current play back state of this video player.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.multistream.BVideoMultistreamPane.videoPlayers -->
+<field name="videoPlayers"  protected="true">
+<type class="com.tridium.videoDriver.BIVideoPlayer" dimension="1"/>
+<description>
+This is an array of BIVideoPlayer Nav descendants that are present when&#xa; this widget is started.
+</description>
+</field>
+
+</class>
+</bajadoc>

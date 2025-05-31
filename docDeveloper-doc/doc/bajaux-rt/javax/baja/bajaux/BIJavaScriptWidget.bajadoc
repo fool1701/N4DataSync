@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaux" runtimeProfile="rt" qualifiedName="javax.baja.bajaux.BIJavaScriptWidget" name="BIJavaScriptWidget" packageName="javax.baja.bajaux" public="true" interface="true" abstract="true" category="interface">
+<description>
+Use this interface to mark a BIJavaScript instance as an analog of a BWidget.&#xa; For instance, Label.js is a JS-based reimplementation of BLabel. This will&#xa; allow the Ux framework to correctly insert the JS version in place of the&#xa; Java version, when rendering Px graphics in a browser.
+</description>
+<tag name="@author">Logan Byam</tag>
+<tag name="@since">Niagara 4.10</tag>
+<implements>
+<type class="javax.baja.web.js.BIJavaScript"/>
+</implements>
+<!-- javax.baja.bajaux.BIJavaScriptWidget.forType(javax.baja.sys.Type, javax.baja.sys.Context) -->
+<method name="forType"  public="true" static="true">
+<description>
+Retrieve the BIJavaScript instance from the registry corresponding to the&#xa; given BWidget type.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+the type of a bajaui:Widget
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+user context
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bajaux.BIJavaScriptWidget"/>
+<description>
+the BIJavaScript instance for the given BWidget type, or null if&#xa; not found
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bajaux.BIJavaScriptWidget.validateWidget(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="validateWidget"  public="true" default="true">
+<description>
+Return a non-null Localized String if something in the widget&#x27;s configuration is not configured correctly&#xa; to work with the target media. To show multiple warnings separate them with a newline character for best display&#xa; results.
+</description>
+<parameter name="widget">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bajaux.BIJavaScriptWidget.isChildWidgetValidationRequired(javax.baja.sys.BComponent, javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="isChildWidgetValidationRequired"  public="true" default="true">
+<description>
+Return false for a widget&#x27;s child if widget validation is not required. It is typical to override this method to&#xa; return false if your widget is responsible for providing the functionality for that child widget.
+</description>
+<parameter name="widget">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="childWidget">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bajaux.BIJavaScriptWidget.isBindingValidationRequired(javax.baja.sys.BComponent, javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="isBindingValidationRequired"  public="true" default="true">
+<description>
+Return false for a widget&#x27;s Binding if binding validation is not required. It is typical to override this method to&#xa; return false if your widget is responsible for providing the functionality for that binding.
+</description>
+<parameter name="widget">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="binding">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bajaux.BIJavaScriptWidget.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

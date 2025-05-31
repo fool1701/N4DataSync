@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.nav.BNavContainer" name="BNavContainer" packageName="javax.baja.nav" public="true" abstract="true">
+<description>
+BNavContainer is a generic BINavNode that allows mounting&#xa; and unmounting of other arbitary BINavNodes.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">22 Jan 03</tag>
+<tag name="@version">$Revision: 20$ $Date: 6/11/07 12:41:23 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<implements>
+<type class="javax.baja.nav.BINavNode"/>
+</implements>
+<implements>
+<type class="javax.baja.nav.BINavContainer"/>
+</implements>
+<!-- javax.baja.nav.BNavContainer(java.lang.String, javax.baja.util.LexiconText) -->
+<constructor name="BNavContainer" protected="true">
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexText">
+<type class="javax.baja.util.LexiconText"/>
+</parameter>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.nav.BNavContainer(java.lang.String) -->
+<constructor name="BNavContainer" protected="true">
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.nav.BNavContainer.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getLexiconText() -->
+<method name="getLexiconText"  public="true">
+<description>
+Return the lexicon text used to get the display &#xa; name, null if one is not installed.
+</description>
+<return>
+<type class="javax.baja.util.LexiconText"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.setLexiconText(javax.baja.util.LexiconText) -->
+<method name="setLexiconText"  public="true">
+<description>
+Install a lexicon text used to get the display name.
+</description>
+<parameter name="lexText">
+<type class="javax.baja.util.LexiconText"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getNavName() -->
+<method name="getNavName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the name passed to the constructor.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getNavDisplayName(javax.baja.sys.Context) -->
+<method name="getNavDisplayName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the display text of the navigation node.  If&#xa; a LexiconText is installed then use it to get the&#xa; display name.  Otherwise default to use getNavName().
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getNavDescription(javax.baja.sys.Context) -->
+<method name="getNavDescription"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If a LexiconText is installed, then attempt to return&#xa; it&#x27;s module&#x27;s lexicon key + &#x22;.description&#x22;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getNavParent() -->
+<method name="getNavParent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this instance has been mounted under another&#xa; BNavContainer, then return it.  Otherwise the default&#xa; implementation is to return null.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.hasNavChildren() -->
+<method name="hasNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return is any children have been added.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the child by the specified name, or &#xa; return null if not found.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.resolveNavChild(java.lang.String) -->
+<method name="resolveNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the child by the specified name, or throw&#xa; UnresolvedException if not found.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the children nodes for this navigation node.&#xa; Return an array of length zero if there are no &#xa; children.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.getNavIcon() -->
+<method name="getNavIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Default implementation is to call BObject.getIcon().
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.addNavChild(javax.baja.nav.BINavNode) -->
+<method name="addNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Add the specified BINavNode to this container.
+</description>
+<parameter name="child">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.removeNavChild(javax.baja.nav.BINavNode) -->
+<method name="removeNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove the specified BINavNode from this container.
+</description>
+<parameter name="child">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.clearNavChildren() -->
+<method name="clearNavChildren"  protected="true">
+<description>
+Clear the list of nav children so the subclass can re-add
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.reorderNavChildren(javax.baja.nav.BINavNode[]) -->
+<method name="reorderNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Reorder the nav children.  The list of children passed must&#xa; be instances returned from &lt;code&gt;getNavChildren&lt;/code&gt;.
+</description>
+<parameter name="children">
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.fireNavEvent(javax.baja.nav.NavEvent) -->
+<method name="fireNavEvent"  protected="true">
+<description>
+This callback is used to provide a hook for processing the &#xa; NavEvents generated by child add, remove, and reorder.  The &#xa; default implementation routes to BNavRoot.INSTANCE.fireNavEvent.
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To string.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Dump links to the children.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.filter(javax.baja.nav.BINavNode[], javax.baja.sys.Context) -->
+<method name="filter"  public="true" static="true">
+<description>
+Filter an array of nav nodes to produce a new array of&#xa; nodes by checking security permissions for the specified&#xa; context.  This method is typically used server side such&#xa; as in a web servlet.
+</description>
+<parameter name="nodes">
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BNavContainer.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platform" runtimeProfile="rt" qualifiedName="com.tridium.platform.BSystemPlatformService" name="BSystemPlatformService" packageName="com.tridium.platform" public="true">
+<description>
+BSystemPlatformService exposes several system summary properties and implements basic system control&#xa; actions
+</description>
+<tag name="@author">Matt Boon on 23 Apr 02</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="com.tridium.platform.BPlatformService"/>
+</extends>
+<implements>
+<type class="com.tridium.platform.alarm.BIAlarmablePlatformService"/>
+</implements>
+<property name="javaVmName" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;javaVmName&lt;/code&gt; property.
+</description>
+<tag name="@see">#getJavaVmName</tag>
+<tag name="@see">#setJavaVmName</tag>
+</property>
+
+<property name="javaVmVendor" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;javaVmVendor&lt;/code&gt; property.
+</description>
+<tag name="@see">#getJavaVmVendor</tag>
+<tag name="@see">#setJavaVmVendor</tag>
+</property>
+
+<property name="javaVmVersion" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;javaVmVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#getJavaVmVersion</tag>
+<tag name="@see">#setJavaVmVersion</tag>
+</property>
+
+<property name="osArch" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;osArch&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOsArch</tag>
+<tag name="@see">#setOsArch</tag>
+</property>
+
+<property name="osName" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;osName&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOsName</tag>
+<tag name="@see">#setOsName</tag>
+</property>
+
+<property name="osVersion" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;osVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOsVersion</tag>
+<tag name="@see">#setOsVersion</tag>
+</property>
+
+<property name="hostId" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;hostId&lt;/code&gt; property.&#xa; Niagara host ID
+</description>
+<tag name="@see">#getHostId</tag>
+<tag name="@see">#setHostId</tag>
+</property>
+
+<property name="hostIdStatus" flags="tr">
+<type class="com.tridium.platform.BHostIdStatus"/>
+<description>
+Slot for the &lt;code&gt;hostIdStatus&lt;/code&gt; property.
+</description>
+<tag name="@see">#getHostIdStatus</tag>
+<tag name="@see">#setHostIdStatus</tag>
+</property>
+
+<property name="model" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;model&lt;/code&gt; property.&#xa; Hardware model
+</description>
+<tag name="@see">#getModel</tag>
+<tag name="@see">#setModel</tag>
+</property>
+
+<property name="product" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;product&lt;/code&gt; property.&#xa; Product description
+</description>
+<tag name="@see">#getProduct</tag>
+<tag name="@see">#setProduct</tag>
+</property>
+
+<property name="modelVersion" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;modelVersion&lt;/code&gt; property.&#xa; Hardware model version
+</description>
+<tag name="@see">#getModelVersion</tag>
+<tag name="@see">#setModelVersion</tag>
+</property>
+
+<property name="niagaraVersion" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;niagaraVersion&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNiagaraVersion</tag>
+<tag name="@see">#setNiagaraVersion</tag>
+</property>
+
+<property name="locale" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;locale&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLocale</tag>
+<tag name="@see">#setLocale</tag>
+</property>
+
+<property name="stationName" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;stationName&lt;/code&gt; property.&#xa; station name, if this platform is on a running station, otherwise &#x22;system&#x22;
+</description>
+<tag name="@see">#getStationName</tag>
+<tag name="@see">#setStationName</tag>
+</property>
+
+<property name="systemTime" flags="tr">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;systemTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSystemTime</tag>
+<tag name="@see">#setSystemTime</tag>
+</property>
+
+<property name="timeZone" flags="tr">
+<type class="javax.baja.timezone.BTimeZone"/>
+<description>
+Slot for the &lt;code&gt;timeZone&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimeZone</tag>
+<tag name="@see">#setTimeZone</tag>
+</property>
+
+<property name="isSystemTimeReadonly" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isSystemTimeReadonly&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIsSystemTimeReadonly</tag>
+<tag name="@see">#setIsSystemTimeReadonly</tag>
+</property>
+
+<property name="currentCpuUsage" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;currentCpuUsage&lt;/code&gt; property.&#xa; cpu utilization (all processors) percent since last sample, or -1 if not available
+</description>
+<tag name="@see">#getCurrentCpuUsage</tag>
+<tag name="@see">#setCurrentCpuUsage</tag>
+</property>
+
+<property name="overallCpuUsage" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;overallCpuUsage&lt;/code&gt; property.&#xa; cpu utilization (all processors) percent since boot, or -1 if not available
+</description>
+<tag name="@see">#getOverallCpuUsage</tag>
+<tag name="@see">#setOverallCpuUsage</tag>
+</property>
+
+<property name="numCpus" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;numCpus&lt;/code&gt; property.&#xa; number of processors
+</description>
+<tag name="@see">#getNumCpus</tag>
+<tag name="@see">#setNumCpus</tag>
+</property>
+
+<property name="totalPhysicalMemory" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;totalPhysicalMemory&lt;/code&gt; property.&#xa; total RAM in kb
+</description>
+<tag name="@see">#getTotalPhysicalMemory</tag>
+<tag name="@see">#setTotalPhysicalMemory</tag>
+</property>
+
+<property name="freePhysicalMemory" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;freePhysicalMemory&lt;/code&gt; property.&#xa; free RAM in kb
+</description>
+<tag name="@see">#getFreePhysicalMemory</tag>
+<tag name="@see">#setFreePhysicalMemory</tag>
+</property>
+
+<property name="filesystemAttributes" flags="tr">
+<type class="javax.baja.sys.BVector"/>
+<description>
+Slot for the &lt;code&gt;filesystemAttributes&lt;/code&gt; property.&#xa; attributes for fixed filesystems/drives&#xa; property name is filesystem name, value is a BFilesystemAttributes object
+</description>
+<tag name="@see">#getFilesystemAttributes</tag>
+<tag name="@see">#setFilesystemAttributes</tag>
+</property>
+
+<property name="isStation" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isStation&lt;/code&gt; property.&#xa; returns true if this Niagara runtime is running a station
+</description>
+<tag name="@see">#getIsStation</tag>
+<tag name="@see">#setIsStation</tag>
+</property>
+
+<property name="engineWatchdogPolicy" flags="r">
+<type class="com.tridium.platform.BEngineWatchdogPolicy"/>
+<description>
+Slot for the &lt;code&gt;engineWatchdogPolicy&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEngineWatchdogPolicy</tag>
+<tag name="@see">#setEngineWatchdogPolicy</tag>
+</property>
+
+<property name="engineWatchdogTimeout" flags="r">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;engineWatchdogTimeout&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEngineWatchdogTimeout</tag>
+<tag name="@see">#setEngineWatchdogTimeout</tag>
+</property>
+
+<property name="isStationAutoSaveEnabled" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isStationAutoSaveEnabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIsStationAutoSaveEnabled</tag>
+<tag name="@see">#setIsStationAutoSaveEnabled</tag>
+</property>
+
+<property name="stationAutoSaveFrequency" flags="r">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;stationAutoSaveFrequency&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStationAutoSaveFrequency</tag>
+<tag name="@see">#setStationAutoSaveFrequency</tag>
+</property>
+
+<property name="stationSaveBackupCount" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;stationSaveBackupCount&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStationSaveBackupCount</tag>
+<tag name="@see">#setStationSaveBackupCount</tag>
+</property>
+
+<property name="timezoneDayModeSupport" flags="tr">
+<type class="com.tridium.platform.timezone.BDstSupportLevel"/>
+<description>
+Slot for the &lt;code&gt;timezoneDayModeSupport&lt;/code&gt; property.&#xa; OS support for daylight savings time rules.
+</description>
+<tag name="@see">#getTimezoneDayModeSupport</tag>
+<tag name="@see">#setTimezoneDayModeSupport</tag>
+</property>
+
+<property name="localDaemonAccess" flags="tr">
+<type class="com.tridium.platform.daemon.BDaemonAccessLevel"/>
+<description>
+Slot for the &lt;code&gt;localDaemonAccess&lt;/code&gt; property.&#xa; true if this service is in a station which can use restricted&#xa; platform daemon functions
+</description>
+<tag name="@see">#getLocalDaemonAccess</tag>
+<tag name="@see">#setLocalDaemonAccess</tag>
+</property>
+
+<property name="localDaemonPort" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;localDaemonPort&lt;/code&gt; property.&#xa; port on which the local platform daemon is listening
+</description>
+<tag name="@see">#getLocalDaemonPort</tag>
+<tag name="@see">#setLocalDaemonPort</tag>
+</property>
+
+<property name="localDaemonSslPort" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;localDaemonSslPort&lt;/code&gt; property.&#xa; port on which the local platform ssl daemon is listening
+</description>
+<tag name="@see">#getLocalDaemonSslPort</tag>
+<tag name="@see">#setLocalDaemonSslPort</tag>
+</property>
+
+<property name="stationSaveAlarmSupport" flags="">
+<type class="com.tridium.platform.alarm.BPlatformAlarmSupport"/>
+<description>
+Slot for the &lt;code&gt;stationSaveAlarmSupport&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStationSaveAlarmSupport</tag>
+<tag name="@see">#setStationSaveAlarmSupport</tag>
+</property>
+
+<property name="stationSaveAlarmProxy" flags="th">
+<type class="com.tridium.platform.alarm.BPlatformAlarmProxy"/>
+<description>
+Slot for the &lt;code&gt;stationSaveAlarmProxy&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStationSaveAlarmProxy</tag>
+<tag name="@see">#setStationSaveAlarmProxy</tag>
+</property>
+
+<property name="bajaHome" flags="th">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;bajaHome&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBajaHome</tag>
+<tag name="@see">#setBajaHome</tag>
+</property>
+
+<property name="niagaraUserHome" flags="th">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;niagaraUserHome&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNiagaraUserHome</tag>
+<tag name="@see">#setNiagaraUserHome</tag>
+</property>
+
+<property name="allowStationRestart" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;allowStationRestart&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAllowStationRestart</tag>
+<tag name="@see">#setAllowStationRestart</tag>
+</property>
+
+<property name="fipsStatus" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fipsStatus&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFipsStatus</tag>
+<tag name="@see">#setFipsStatus</tag>
+</property>
+
+<property name="isServiceReadonly" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isServiceReadonly&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIsServiceReadonly</tag>
+<tag name="@see">#setIsServiceReadonly</tag>
+</property>
+
+<property name="allowBrandChange" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;allowBrandChange&lt;/code&gt; property.&#xa; Determine if a branded license change is allowed for this platform.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<tag name="@see">#getAllowBrandChange</tag>
+<tag name="@see">#setAllowBrandChange</tag>
+</property>
+
+<property name="isLicenseReadonly" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isLicenseReadonly&lt;/code&gt; property.&#xa; Determine if any license change is allowed for this platform.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<tag name="@see">#getIsLicenseReadonly</tag>
+<tag name="@see">#setIsLicenseReadonly</tag>
+</property>
+
+<property name="isNiagaraHomeReadonly" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isNiagaraHomeReadonly&lt;/code&gt; property.&#xa; Determine if niagara home is readonly for this platform.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getIsNiagaraHomeReadonly</tag>
+<tag name="@see">#setIsNiagaraHomeReadonly</tag>
+</property>
+
+<action name="getFilesystemForPath" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BString"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getFilesystemForPath&lt;/code&gt; action.&#xa; given a file path body, return the name of the filesystem the&#xa; path maps to, suitable as a key for fileSystemAttributes
+</description>
+<tag name="@see">#getFilesystemForPath(BString parameter)</tag>
+</action>
+
+<action name="getAllTimeZones" flags="h">
+<return>
+<type class="javax.baja.sys.BVector"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getAllTimeZones&lt;/code&gt; action.
+</description>
+<tag name="@see">#getAllTimeZones()</tag>
+</action>
+
+<action name="reboot" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;reboot&lt;/code&gt; action.&#xa; reboot the system
+</description>
+<tag name="@see">#reboot()</tag>
+</action>
+
+<action name="requestGarbageCollection" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;requestGarbageCollection&lt;/code&gt; action.
+</description>
+<tag name="@see">#requestGarbageCollection()</tag>
+</action>
+
+<action name="sendThreadDumpToConsole" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;sendThreadDumpToConsole&lt;/code&gt; action.
+</description>
+<tag name="@see">#sendThreadDumpToConsole()</tag>
+</action>
+
+<action name="getEngineWatchdogPolicyFacets" flags="h">
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getEngineWatchdogPolicyFacets&lt;/code&gt; action.
+</description>
+<tag name="@see">#getEngineWatchdogPolicyFacets()</tag>
+</action>
+
+<action name="restartStation" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;restartStation&lt;/code&gt; action.&#xa; restart the running station
+</description>
+<tag name="@see">#restartStation()</tag>
+</action>
+
+</class>
+</bajadoc>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.nav.BINavNode" name="BINavNode" packageName="javax.baja.nav" public="true" interface="true" abstract="true" category="interface">
+<description>
+BINavNode is the interface implemented by BObjects which are &#xa; mounted into the navigation tree under BNavRoot.INSTANCE.&#xa; Each nav node in the tree is uniquely identified under its&#xa; parent via a nav name, and uniquely idenfified in the entire&#xa; tree via the NavPath.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">22 Jan 03</tag>
+<tag name="@version">$Revision: 6$ $Date: 3/1/05 10:24:39 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.nav.BINavNode.getNavName() -->
+<method name="getNavName"  public="true" abstract="true">
+<description>
+Get the name which uniquely identifies this node in its &#xa; parent.  This name must be a valid slot name.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.getNavDisplayName(javax.baja.sys.Context) -->
+<method name="getNavDisplayName"  public="true" abstract="true">
+<description>
+Get the display text of the navigation node.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.getNavDescription(javax.baja.sys.Context) -->
+<method name="getNavDescription"  public="true" abstract="true">
+<description>
+Get a short description of the nav node.  Return &#xa; null if no description is available.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.getNavParent() -->
+<method name="getNavParent"  public="true" abstract="true">
+<description>
+Get the parent navigation node.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.hasNavChildren() -->
+<method name="hasNavChildren"  public="true" abstract="true">
+<description>
+If this node knows that it has no children, then&#xa; return false.  If the node has children or will&#xa; find out during a call to getNavChildren(), then &#xa; return true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true" abstract="true">
+<description>
+Get the child by the specified name, or &#xa; return null if not found.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.resolveNavChild(java.lang.String) -->
+<method name="resolveNavChild"  public="true" abstract="true">
+<description>
+Get the child by the specified name, or throw&#xa; UnresolvedException if not found.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.getNavChildren() -->
+<method name="getNavChildren"  public="true" abstract="true">
+<description>
+Get the children nodes for this navigation node.  Return &#xa; an array of length zero if there are no children.  Note &#xa; that this method does not take a Context, so it is possible &#xa; that the resulting list doesn&#x27;t take security permissions &#xa; into account.  Use &lt;code&gt;BNavContainer.filter()&lt;/code&gt; to&#xa; filter out nodes based on permissions; this is typically&#xa; done when using this method to do server side processing&#xa; such as a web servlet.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.getNavOrd() -->
+<method name="getNavOrd"  public="true" abstract="true">
+<description>
+Get the primary ord used to navigate to a view on &#xa; this object.  This should be an normalized absolute &#xa; ord.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.getNavIcon() -->
+<method name="getNavIcon"  public="true" abstract="true">
+<description>
+Get the icon for the navigation node.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.iterateNavDescendants() -->
+<method name="iterateNavDescendants"  public="true" default="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.nav.BINavNode"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.nav.BINavNode.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

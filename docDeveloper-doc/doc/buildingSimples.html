@@ -1,0 +1,208 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  2 Oct 01
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Building Simples</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/entityModel.html" class="navbar">Prev</a> |  <a href="/doc/buildingEnums.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Building Simples</h1> 
+
+<!------------------------------------------------------------->
+<h1 id="overview">Overview</h1>
+<!------------------------------------------------------------->
+
+<p>
+<code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BSimple.bajadoc'>BSimple</a></code>
+ is the base class for all atomic data types 
+in Niagara.  As an atomic data type, <code>BSimples</code> store 
+a simple piece of data which cannot be decomposed.  All simples are 
+immutable, that is once an instance is created it may never change 
+its state.  Concrete subclasses of <code>BSimples</code> must meet
+the following requirements:
+</p>
+
+<ul>
+
+<li>Meet the common rules applicable to all 
+<a href='objectModel.html#buildingObjects'><code>BObjects</code></a>;
+</li>
+
+<li>
+Must declare a <code>public static final</code> field named
+<code>DEFAULT</code> which contains a reference to the default 
+instance for the <code>BSimple</code>;
+</li>
+
+<li>
+All <code>BSimples</code> must be immutable!  Under no circumstances
+should there be any way for an instance of <code>BSimple</code> to
+have its state changed after construction;
+</li>
+
+<li>
+Every concrete subclass of <code>BSimple</code> must be 
+declared final;
+</li>
+
+<li>
+Every <code>BSimple</code> must implement the <code>equals()</code>
+method to compare the equality of its atomic data;
+</li>
+
+<li>
+Every <code>BSimple</code> must implement binary serialization:
+<pre>
+  <code class="sunlight-highlight-java">
+  public abstract void encode(DataOutput out);
+  public abstract BObject decode(DataInput in);
+  </code>
+</pre>
+</li>
+
+<li>
+Every <code>BSimple</code> must implement text serialization:
+<pre>
+  <code class="sunlight-highlight-java">
+  public abstract String encodeToString();
+  public abstract BObject decodeFromString(String s);
+  </code>
+</pre>
+</li>
+
+<li>
+Convention is to make constructors private and provide one
+or more factory methods called <code>make</code>. 
+</li>
+
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="example">Example</h1>
+<!------------------------------------------------------------->
+
+The following source provides a example:
+
+<pre>
+  <code class="sunlight-highlight-java">
+/*
+ * Copyright 2000 Tridium, Inc. All Rights Reserved.
+ */
+package javax.baja.sys;
+
+import java.io.*;
+
+/**
+ * The BInteger is the wrapper class for Java primitive
+ * int objects.
+ */
+public final class BInteger
+  extends BNumber
+{ 
+
+  public static BInteger make(int value)
+  {
+    if (value == 0) return DEFAULT;
+    return new BInteger(value);
+  }
+
+  private BInteger(int value)
+  {
+    this.value = value;
+  }
+
+  public int getInt()
+  {
+    return value;
+  }
+
+  public float getFloat()
+  {
+    return (float)value;
+  }
+  
+  public int hashCode()
+  {
+    return value;
+  }
+  
+  public boolean equals(Object obj)
+  {
+    if (obj instanceof BInteger)
+      return ((BInteger)obj).value == value;
+    return false;
+  }
+        
+  public String toString(Context context)
+  {
+    return String.valueOf(value);
+  }
+  
+  public void encode(DataOutput out)
+    throws IOException
+  {
+    out.writeInt(value);
+  }
+  
+  public BObject decode(DataInput in)
+    throws IOException
+  {
+    return new BInteger( in.readInt() );
+  }
+
+  public String encodeToString()
+    throws IOException
+  {
+    return String.valueOf(value);
+  }
+
+  public BObject decodeFromString(String s)
+    throws IOException
+  {
+    try
+    {
+      return new BInteger( Integer.parseInt(s) );
+    }
+    catch(Exception e)
+    {
+      throw new IOException("Invalid integer: " + s);
+    }
+  }
+
+  public static final BInteger DEFAULT = new BInteger(0);
+
+  public Type getType() { return TYPE; }
+  public static final Type TYPE = Sys.loadType(BInteger.class);
+  
+  private int value;
+}
+  </code>
+</pre>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/entityModel.html" class="navbar">Prev</a> |  <a href="/doc/buildingEnums.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.londata.BLonPrimitive" name="BLonPrimitive" packageName="javax.baja.lonworks.londata" public="true" abstract="true">
+<description>
+This class file is the superclass for all primitive&#xa; lonworks data types used to build up BLonData.&#xa; &lt;p&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">5 May 01</tag>
+<tag name="@version">$Revision: 9$ $Date: 9/28/01 10:20:41 AM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<!-- javax.baja.lonworks.londata.BLonPrimitive() -->
+<constructor name="BLonPrimitive" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.toOutputStream(javax.baja.lonworks.io.LonOutputStream, javax.baja.lonworks.londata.BLonElementQualifiers) -->
+<method name="toOutputStream"  public="true" abstract="true">
+<description>
+Converts data to network byte format
+</description>
+<parameter name="out">
+<type class="javax.baja.lonworks.io.LonOutputStream"/>
+</parameter>
+<parameter name="e">
+<type class="javax.baja.lonworks.londata.BLonElementQualifiers"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.fromInputStream(javax.baja.lonworks.io.LonInputStream, javax.baja.lonworks.londata.BLonElementQualifiers) -->
+<method name="fromInputStream"  public="true" abstract="true">
+<description>
+Translates from network byte. Return the resulting&#xa;  BLonPrimitive or null if can&#x27;t convert data in stream.
+</description>
+<parameter name="in">
+<type class="javax.baja.lonworks.io.LonInputStream"/>
+</parameter>
+<parameter name="e">
+<type class="javax.baja.lonworks.londata.BLonElementQualifiers"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonPrimitive"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.getDataAsDouble() -->
+<method name="getDataAsDouble"  public="true">
+<description>
+Subclasses should override this method to return a float representation&#xa; of their data if feasible.  The default implementation throws BajaRuntimeException.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.getDataAsBoolean() -->
+<method name="getDataAsBoolean"  public="true">
+<description>
+Subclasses should override this method to return a boolean representation&#xa; of their data if feasible.  The default implementation throws BajaRuntimeException.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.getDataAsString() -->
+<method name="getDataAsString"  public="true">
+<description>
+Subclasses should override this method to return a String representation&#xa; of their data if feasible.  The default implementation throws BajaRuntimeException.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.getDataAsEnum(javax.baja.sys.BEnum) -->
+<method name="getDataAsEnum"  public="true">
+<description>
+Subclasses should override this method to return a BDynamicEnum representation&#xa; of their data if feasible.  The default implementation throws BajaRuntimeException.
+</description>
+<parameter name="en">
+<type class="javax.baja.sys.BEnum"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BEnum"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.makeFromDouble(double) -->
+<method name="makeFromDouble"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Deprecated - use makeFromDouble(double val, BLonElementQualifiers e)
+</description>
+<tag name="@deprecated">since 3.8.27</tag>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonPrimitive"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.makeFromDouble(double, javax.baja.lonworks.londata.BLonElementQualifiers) -->
+<method name="makeFromDouble"  public="true">
+<description>
+Subclasses should override this method to return a response of their data type from the specified float&#xa; or null if conversion not possible.  The default implementation throws BajaRuntimeException.
+</description>
+<tag name="@since">3.8.27</tag>
+<parameter name="val">
+<type class="double"/>
+</parameter>
+<parameter name="e">
+<type class="javax.baja.lonworks.londata.BLonElementQualifiers"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonPrimitive"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.makeFromBoolean(boolean) -->
+<method name="makeFromBoolean"  public="true">
+<description>
+Subclasses should override this method to return a response of their data type from the specified boolean&#xa; or null if conversion not possible.  The default implementation throws BajaRuntimeException.
+</description>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonPrimitive"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.makeFromString(java.lang.String) -->
+<method name="makeFromString"  public="true">
+<description>
+Subclasses should override this method to return a response of their data type from the specified string&#xa; or null if conversion not possible.  The default implementation throws BajaRuntimeException.
+</description>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonPrimitive"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.makeFromEnum(javax.baja.sys.BEnum) -->
+<method name="makeFromEnum"  public="true">
+<description>
+Subclasses should override this method to return a response of their data type from the specified BDynamicEnum&#xa; or null if conversion not possible.  The default implementation throws BajaRuntimeException.
+</description>
+<parameter name="v">
+<type class="javax.baja.sys.BEnum"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonPrimitive"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.isNumeric() -->
+<method name="isNumeric"  public="true">
+<description>
+Is this BLonPrimitive a numeric value (float,double,integer).&#xa;  The default implementation is false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.toDebugString() -->
+<method name="toDebugString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.encodeClass(javax.baja.sys.BSimple) -->
+<method name="encodeClass"  protected="true">
+<description>
+Encode information to allow recreation of class &#xa;  in the form module:class
+</description>
+<parameter name="s">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.decodeClass(java.lang.String) -->
+<method name="decodeClass"  protected="true">
+<description>
+Get an instance of the class encoded as module:class.
+</description>
+<parameter name="cl">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.londata.BLonPrimitive.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

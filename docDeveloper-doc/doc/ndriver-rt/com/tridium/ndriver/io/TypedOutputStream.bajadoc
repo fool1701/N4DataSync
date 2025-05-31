@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.io.TypedOutputStream" name="TypedOutputStream" packageName="com.tridium.ndriver.io" public="true">
+<description>
+The TypedOutputStream is an extension of the standard ByteArrayOutputStream&#xa; for use in building messages.  It contains utility methods to convert various&#xa; types and pass them to the data stream.
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">30 Jan 2013</tag>
+<tag name="@since">Niagara 3.7.104</tag>
+<extends>
+<type class="java.io.ByteArrayOutputStream"/>
+</extends>
+<!-- com.tridium.ndriver.io.TypedOutputStream() -->
+<constructor name="TypedOutputStream" public="true">
+<description>
+Construct a TypedOutputStream with no initial capacity
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream(int) -->
+<constructor name="TypedOutputStream" public="true">
+<parameter name="size">
+<type class="int"/>
+<description>
+initial capacity in bytes
+</description>
+</parameter>
+<description>
+Construct a TypedOutputStream with the specified initial capacity.
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream(byte[]) -->
+<constructor name="TypedOutputStream" public="true">
+<parameter name="b">
+<type class="byte" dimension="1"/>
+<description>
+supplied byte array
+</description>
+</parameter>
+<description>
+Construct a TypedOutputStream which wraps the specified byte array
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeByteArray(byte[]) -->
+<method name="writeByteArray"  public="true">
+<description>
+Writes the entire array to the output stream.
+</description>
+<parameter name="byteArray">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeByteArray(byte[], int) -->
+<method name="writeByteArray"  public="true">
+<description>
+Writes the specifiec number of bytes to the output stream from the given&#xa; array. Pad with 0&#x27;s to fill out count.
+</description>
+<parameter name="byteArray">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="count">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeCharArray(java.lang.String, int) -->
+<method name="writeCharArray"  public="true">
+<description>
+Writes the specified number of characters to the output stream from the&#xa; given String. Pad with 0&#x27;s to fill out count.
+</description>
+<parameter name="str">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="count">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeString(java.lang.String) -->
+<method name="writeString"  public="true">
+<description>
+Writes a null terminated string to the output stream.
+</description>
+<parameter name="str">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeBooleanBit(boolean, int, int, int) -->
+<method name="writeBooleanBit"  public="true">
+<description>
+Write boolean value to a bit field in the output stream. If true write 1&#xa; else write 0. &lt;p&gt;
+</description>
+<tag name="@see">com.tridium.ndriver.io.TypedOutputStream#writeBit</tag>
+<parameter name="val">
+<type class="boolean"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitCount">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeBit(int, int, int, int) -->
+<method name="writeBit"  public="true">
+<description>
+Write an unsigned value to a bit field. Multiple calls to writeBit with the&#xa; same byteOffset is supported.  &lt;p&gt; Bitfield can not span more than 32 bits&#xa; (bitCount+bitOffset&lt;=32).
+</description>
+<parameter name="val">
+<type class="int"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+<description>
+Offset from first byte in output stream or bitFieldMark&#xa;                   (if multi byte bit field, specify offset of lsb)
+</description>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+<description>
+Number of positions (0-31) to shift value. O if value in&#xa;                   lsb.
+</description>
+</parameter>
+<parameter name="bitCount">
+<type class="int"/>
+<description>
+The number of bits in bit field
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeSignedBit(int, int, int, int) -->
+<method name="writeSignedBit"  public="true">
+<description>
+Write a signed value to a bit field.  &lt;p&gt;
+</description>
+<tag name="@see">com.tridium.ndriver.io.TypedOutputStream#writeBit</tag>
+<parameter name="val">
+<type class="int"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitCount">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeNibble(int, int, boolean) -->
+<method name="writeNibble"  public="true">
+<description>
+Write a value to the upper or lower nibble at the specified byteOffset.&lt;p&gt;
+</description>
+<tag name="@since">3.8.38.1, 3.7.202, 3.6.503</tag>
+<parameter name="val">
+<type class="int"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+<description>
+Offset from first byte in output stream
+</description>
+</parameter>
+<parameter name="upper">
+<type class="boolean"/>
+<description>
+flag to indicate upper nibble (offset 4) - if false will&#xa;                   read lower nibble (offset 0)
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeBoolean(boolean) -->
+<method name="writeBoolean"  public="true">
+<description>
+Write a 8 bit boolean value to the output stream. If true write 1 else&#xa; write 0.
+</description>
+<parameter name="b">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeSigned16(int) -->
+<method name="writeSigned16"  public="true">
+<description>
+Write a 16 bit signed value to the output stream. Valid values (-32768 to&#xa; 32767)
+</description>
+<parameter name="l">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeUnsigned16(int) -->
+<method name="writeUnsigned16"  public="true">
+<description>
+Write a 16 bit unsigned value to the output stream Valid values (0 to&#xa; 65535)
+</description>
+<parameter name="l">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeSigned8(int) -->
+<method name="writeSigned8"  public="true">
+<description>
+Write a 8 bit signed value to the output stream Valid values (-128 to 127)
+</description>
+<parameter name="i">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeUnsigned8(int) -->
+<method name="writeUnsigned8"  public="true">
+<description>
+Write a 8 bit unsigned value to the output stream Valid values (0 to 255)
+</description>
+<parameter name="i">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeSigned32(int) -->
+<method name="writeSigned32"  public="true">
+<description>
+Writes a 32-bit value to the output stream.
+</description>
+<parameter name="i">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeSigned64(long) -->
+<method name="writeSigned64"  public="true">
+<description>
+Writes a 64-bit value to the output stream.
+</description>
+<tag name="@since">4.2.35</tag>
+<parameter name="lval">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeUnsigned32(long) -->
+<method name="writeUnsigned32"  public="true">
+<description>
+Writes an unsigned 32-bit value to the output stream.
+</description>
+<parameter name="i">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeFloat(float) -->
+<method name="writeFloat"  public="true">
+<description>
+Writes a 32-bit value to the output stream, high-order byte first.
+</description>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeDouble(double) -->
+<method name="writeDouble"  public="true">
+<description>
+Writes a 64-bit value to the output stream, high-order byte first.
+</description>
+<parameter name="value">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeUnsigned8Float(float, int, int) -->
+<method name="writeUnsigned8Float"  public="true">
+<description>
+Writes a float value as an unsigned8.  If value is NaN then write invalid,&#xa; otherwise multiple by scale and write results as an int.
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeUnsigned16Float(float, int, int) -->
+<method name="writeUnsigned16Float"  public="true">
+<description>
+Writes a float value as an unsigned16.  If value is NaN then write invalid,&#xa; otherwise multiple by scale and write results as an int.
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeSigned8Float(float, int, int) -->
+<method name="writeSigned8Float"  public="true">
+<description>
+Writes a float value as an signed8.  If value is NaN then write invalid,&#xa; otherwise multiple by scale and write results as an int.
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.writeSigned16Float(float, int, int) -->
+<method name="writeSigned16Float"  public="true">
+<description>
+Writes a float value as an signed16.  If value is NaN then write invalid,&#xa; otherwise multiple by scale and write results as an int.
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.setBitFieldMark() -->
+<method name="setBitFieldMark"  public="true">
+<description>
+For internal use.&lt;p&gt; Used to mark bit field count at entry in nested&#xa; structs to allow correct handling of byteOffsets.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.resetBitFieldMark(int) -->
+<method name="resetBitFieldMark"  public="true">
+<description>
+For internal use.&lt;p&gt; Used to reset bit field count at exit from structs to&#xa; allow correct handling of byteOffsets.
+</description>
+<parameter name="orig">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.setPosition(int) -->
+<method name="setPosition"  public="true">
+<description>
+Write bytes to ensure next byte writes to specified position. If position&#xa; is less than current byte count it will have no effect.
+</description>
+<parameter name="position">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedOutputStream.toOutputStream(java.io.OutputStream) -->
+<method name="toOutputStream"  public="true">
+<description>
+Transfer the contents of this TypedOutputStream to the specified&#xa; OutputStream.
+</description>
+<tag name="@since">3.8.38.1, 3.7.202, 3.6.503</tag>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

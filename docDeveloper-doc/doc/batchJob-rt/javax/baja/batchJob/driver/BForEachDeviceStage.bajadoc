@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.driver.BForEachDeviceStage" name="BForEachDeviceStage" packageName="javax.baja.batchJob.driver" public="true">
+<description>
+Job stage for a BDeviceNetworkJob which iterates through each of the&#xa; job&#x27;s devices, and executes a sequence of steps for each device.   &#xa; &#xa; If any step fails for a device, the remaining steps will not be executed&#xa; for that device, and the stage will continue executing against the next&#xa; device.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">9 Jul 07</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.batchJob.BJobStage"/>
+</extends>
+<property name="steps" flags="r">
+<type class="javax.baja.util.BFolder"/>
+<description>
+Slot for the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#getSteps</tag>
+<tag name="@see">#setSteps</tag>
+</property>
+
+<property name="deviceStates" flags="r">
+<type class="javax.baja.util.BFolder"/>
+<description>
+Slot for the &lt;code&gt;deviceStates&lt;/code&gt; property.&#xa; slot name is escaped device name, value is a BJobState for that&#xa; device
+</description>
+<tag name="@see">#getDeviceStates</tag>
+<tag name="@see">#setDeviceStates</tag>
+</property>
+
+<property name="runDevicesInParallel" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;runDevicesInParallel&lt;/code&gt; property.&#xa; switch to run device jobs in parallel
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<tag name="@see">#getRunDevicesInParallel</tag>
+<tag name="@see">#setRunDevicesInParallel</tag>
+</property>
+
+<property name="forceUnsafeParallelExecution" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;forceUnsafeParallelExecution&lt;/code&gt; property.&#xa; Switch to force parallel execution of job steps that are not always &#x22;safe&#x22; for parallel&#xa; execution. Unsafe steps are those that can cause steps running on other devices&#xa; in the job to fail. For example, a reboot step run on a device with an integrated network&#xa; switch daisy chained with other devices in the job is unsafe, because it would potentially&#xa; disconnect the other devices from the network.&#xa; If this switch is true, the batch job service will run all steps in parallel,&#xa; regardless of whether the steps are safe or unsafe.&#xa; If this switch is false, the batch job service will only run safe steps in parallel,&#xa; and run unsafe steps sequentially.
+</description>
+<tag name="@since">Niagara 4.7</tag>
+<tag name="@see">#getForceUnsafeParallelExecution</tag>
+<tag name="@see">#setForceUnsafeParallelExecution</tag>
+</property>
+
+<action name="cancelDevice" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;cancelDevice&lt;/code&gt; action.&#xa; Cancel the remaining steps for the given device, but&#xa; allow the remaining devices to continue processing.
+</description>
+<tag name="@see">#cancelDevice(BSimple parameter)</tag>
+</action>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage() -->
+<constructor name="BForEachDeviceStage" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage(java.lang.String) -->
+<constructor name="BForEachDeviceStage" public="true">
+<parameter name="stageName">
+<type class="java.lang.String"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getSteps() -->
+<method name="getSteps"  public="true">
+<description>
+Get the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#steps</tag>
+<return>
+<type class="javax.baja.util.BFolder"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.setSteps(javax.baja.util.BFolder) -->
+<method name="setSteps"  public="true">
+<description>
+Set the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#steps</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getDeviceStates() -->
+<method name="getDeviceStates"  public="true">
+<description>
+Get the &lt;code&gt;deviceStates&lt;/code&gt; property.&#xa; slot name is escaped device name, value is a BJobState for that&#xa; device
+</description>
+<tag name="@see">#deviceStates</tag>
+<return>
+<type class="javax.baja.util.BFolder"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.setDeviceStates(javax.baja.util.BFolder) -->
+<method name="setDeviceStates"  public="true">
+<description>
+Set the &lt;code&gt;deviceStates&lt;/code&gt; property.&#xa; slot name is escaped device name, value is a BJobState for that&#xa; device
+</description>
+<tag name="@see">#deviceStates</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getRunDevicesInParallel() -->
+<method name="getRunDevicesInParallel"  public="true">
+<description>
+Get the &lt;code&gt;runDevicesInParallel&lt;/code&gt; property.&#xa; switch to run device jobs in parallel
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<tag name="@see">#runDevicesInParallel</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.setRunDevicesInParallel(boolean) -->
+<method name="setRunDevicesInParallel"  public="true">
+<description>
+Set the &lt;code&gt;runDevicesInParallel&lt;/code&gt; property.&#xa; switch to run device jobs in parallel
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<tag name="@see">#runDevicesInParallel</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getForceUnsafeParallelExecution() -->
+<method name="getForceUnsafeParallelExecution"  public="true">
+<description>
+Get the &lt;code&gt;forceUnsafeParallelExecution&lt;/code&gt; property.&#xa; Switch to force parallel execution of job steps that are not always &#x22;safe&#x22; for parallel&#xa; execution. Unsafe steps are those that can cause steps running on other devices&#xa; in the job to fail. For example, a reboot step run on a device with an integrated network&#xa; switch daisy chained with other devices in the job is unsafe, because it would potentially&#xa; disconnect the other devices from the network.&#xa; If this switch is true, the batch job service will run all steps in parallel,&#xa; regardless of whether the steps are safe or unsafe.&#xa; If this switch is false, the batch job service will only run safe steps in parallel,&#xa; and run unsafe steps sequentially.
+</description>
+<tag name="@since">Niagara 4.7</tag>
+<tag name="@see">#forceUnsafeParallelExecution</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.setForceUnsafeParallelExecution(boolean) -->
+<method name="setForceUnsafeParallelExecution"  public="true">
+<description>
+Set the &lt;code&gt;forceUnsafeParallelExecution&lt;/code&gt; property.&#xa; Switch to force parallel execution of job steps that are not always &#x22;safe&#x22; for parallel&#xa; execution. Unsafe steps are those that can cause steps running on other devices&#xa; in the job to fail. For example, a reboot step run on a device with an integrated network&#xa; switch daisy chained with other devices in the job is unsafe, because it would potentially&#xa; disconnect the other devices from the network.&#xa; If this switch is true, the batch job service will run all steps in parallel,&#xa; regardless of whether the steps are safe or unsafe.&#xa; If this switch is false, the batch job service will only run safe steps in parallel,&#xa; and run unsafe steps sequentially.
+</description>
+<tag name="@since">Niagara 4.7</tag>
+<tag name="@see">#forceUnsafeParallelExecution</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.cancelDevice(javax.baja.sys.BSimple) -->
+<method name="cancelDevice"  public="true">
+<description>
+Invoke the &lt;code&gt;cancelDevice&lt;/code&gt; action.&#xa; Cancel the remaining steps for the given device, but&#xa; allow the remaining devices to continue processing.
+</description>
+<tag name="@see">#cancelDevice</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getDeviceState(javax.baja.sys.BSimple) -->
+<method name="getDeviceState"  public="true">
+<description>
+Return the state for the given device.  If it&#x27;s unknown, the&#xa; device has not yet been processed by the job.  If success, every&#xa; step was successful for the device.  If failed or canceled, a&#xa; step failed or was canceled.
+</description>
+<parameter name="deviceId">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobState"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getDeviceState(javax.baja.driver.BDevice) -->
+<method name="getDeviceState"  public="true">
+<description/>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobState"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getDeviceId(javax.baja.driver.BDevice) -->
+<method name="getDeviceId"  protected="true">
+<description/>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.setDeviceState(javax.baja.driver.BDevice, javax.baja.job.BJobState) -->
+<method name="setDeviceState"  public="true">
+<description/>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.job.BJobState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.setDeviceState(javax.baja.sys.BSimple, javax.baja.job.BJobState) -->
+<method name="setDeviceState"  public="true">
+<description/>
+<parameter name="deviceId">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.job.BJobState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getDevices() -->
+<method name="getDevices"  public="true">
+<description/>
+<return>
+<type class="javax.baja.driver.BDevice" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getNetwork() -->
+<method name="getNetwork"  public="true">
+<description/>
+<return>
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.canPassDefaultCheck(javax.baja.driver.BDevice, javax.baja.batchJob.driver.BDeviceJobStep) -->
+<method name="canPassDefaultCheck"  public="true">
+<description>
+Check to see if the given step is allowed to execute on the given device. The&#xa; default implementation returns true. Subclasses of BForEachDeviceStage&#xa; may provide different implementations.
+</description>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+<description/>
+</parameter>
+<parameter name="step">
+<type class="javax.baja.batchJob.driver.BDeviceJobStep"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the step should be allowed to execute.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.doRun(javax.baja.batchJob.BBatchJobService, javax.baja.batchJob.BBatchJob, javax.baja.batchJob.BatchJobOp) -->
+<method name="doRun"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="service">
+<type class="javax.baja.batchJob.BBatchJobService"/>
+</parameter>
+<parameter name="job">
+<type class="javax.baja.batchJob.BBatchJob"/>
+</parameter>
+<parameter name="opIn">
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobState"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.addStep(javax.baja.batchJob.BJobStep) -->
+<method name="addStep"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Add an new step to the stage
+</description>
+<parameter name="step">
+<type class="javax.baja.batchJob.BJobStep"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.removeAllSteps() -->
+<method name="removeAllSteps"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getAllSteps() -->
+<method name="getAllSteps"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return all of the steps that this stage runs for its devices
+</description>
+<return>
+<type class="javax.baja.batchJob.BJobStep" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.getCombinedSteps(javax.baja.batchJob.driver.DeviceNetworkJobOp) -->
+<method name="getCombinedSteps"  protected="true">
+<description>
+Combines any combinable steps and returns the resulting list.
+</description>
+<parameter name="op">
+<type class="javax.baja.batchJob.driver.DeviceNetworkJobOp"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.driver.BDeviceJobStep" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.prepareStage(javax.baja.sys.BObject) -->
+<method name="prepareStage"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Makes any changes necessary to the stage and its steps to run on the&#xa; VM where &#x22;target&#x22; exists.&#xa; &#xa; The client is responsible for invoking prepareJob before sending&#xa; the job to the target host for submitting
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.stepComplete(javax.baja.batchJob.BBatchJobService, javax.baja.batchJob.driver.BDeviceStepDetails, javax.baja.batchJob.driver.DeviceNetworkJobOp) -->
+<method name="stepComplete"  public="true">
+<description/>
+<parameter name="batch">
+<type class="javax.baja.batchJob.BBatchJobService"/>
+</parameter>
+<parameter name="stepDetails">
+<type class="javax.baja.batchJob.driver.BDeviceStepDetails"/>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.batchJob.driver.DeviceNetworkJobOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.jobComplete(javax.baja.batchJob.BatchJobOp) -->
+<method name="jobComplete"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="op">
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.isCanceled(javax.baja.sys.BSimple) -->
+<method name="isCanceled"  protected="true" final="true" synchronized="true">
+<description/>
+<parameter name="deviceId">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.checkCanceled(javax.baja.sys.BSimple) -->
+<method name="checkCanceled"  protected="true" final="true" synchronized="true">
+<description/>
+<parameter name="deviceId">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.doDispose(javax.baja.sys.Context) -->
+<method name="doDispose"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Clean up any files that belong to this job
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.doCancelDevice(javax.baja.sys.BSimple, javax.baja.sys.Context) -->
+<method name="doCancelDevice"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedParameters&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="deviceId">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.steps -->
+<field name="steps"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;steps&lt;/code&gt; property.&#xa; vector of job step objects, to be run in order
+</description>
+<tag name="@see">#getSteps</tag>
+<tag name="@see">#setSteps</tag>
+</field>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.deviceStates -->
+<field name="deviceStates"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;deviceStates&lt;/code&gt; property.&#xa; slot name is escaped device name, value is a BJobState for that&#xa; device
+</description>
+<tag name="@see">#getDeviceStates</tag>
+<tag name="@see">#setDeviceStates</tag>
+</field>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.runDevicesInParallel -->
+<field name="runDevicesInParallel"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;runDevicesInParallel&lt;/code&gt; property.&#xa; switch to run device jobs in parallel
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<tag name="@see">#getRunDevicesInParallel</tag>
+<tag name="@see">#setRunDevicesInParallel</tag>
+</field>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.forceUnsafeParallelExecution -->
+<field name="forceUnsafeParallelExecution"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;forceUnsafeParallelExecution&lt;/code&gt; property.&#xa; Switch to force parallel execution of job steps that are not always &#x22;safe&#x22; for parallel&#xa; execution. Unsafe steps are those that can cause steps running on other devices&#xa; in the job to fail. For example, a reboot step run on a device with an integrated network&#xa; switch daisy chained with other devices in the job is unsafe, because it would potentially&#xa; disconnect the other devices from the network.&#xa; If this switch is true, the batch job service will run all steps in parallel,&#xa; regardless of whether the steps are safe or unsafe.&#xa; If this switch is false, the batch job service will only run safe steps in parallel,&#xa; and run unsafe steps sequentially.
+</description>
+<tag name="@since">Niagara 4.7</tag>
+<tag name="@see">#getForceUnsafeParallelExecution</tag>
+<tag name="@see">#setForceUnsafeParallelExecution</tag>
+</field>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.cancelDevice -->
+<field name="cancelDevice"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;cancelDevice&lt;/code&gt; action.&#xa; Cancel the remaining steps for the given device, but&#xa; allow the remaining devices to continue processing.
+</description>
+<tag name="@see">#cancelDevice(BSimple parameter)</tag>
+</field>
+
+<!-- javax.baja.batchJob.driver.BForEachDeviceStage.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

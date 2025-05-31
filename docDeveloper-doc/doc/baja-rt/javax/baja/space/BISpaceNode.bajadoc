@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.space.BISpaceNode" name="BISpaceNode" packageName="javax.baja.space" public="true" interface="true" abstract="true" category="interface">
+<description>
+BISpaceNode
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@version">$Revision: 9$ $Date: 5/19/03 11:15:29 AM EDT$</tag>
+<tag name="@creation">21 Jan 03</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.nav.BINavNode"/>
+</implements>
+<!-- javax.baja.space.BISpaceNode.getHost() -->
+<method name="getHost"  public="true" default="true">
+<description>
+Get the host containing this node, or null if unmounted.
+</description>
+<return>
+<type class="javax.baja.naming.BHost"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.getSession() -->
+<method name="getSession"  public="true" default="true">
+<description>
+Get the session containing this node, or null if unmounted.
+</description>
+<return>
+<type class="javax.baja.naming.BISession"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.getSpace() -->
+<method name="getSpace"  public="true" abstract="true">
+<description>
+Get the space containing this node, or null if unmounted.
+</description>
+<return>
+<type class="javax.baja.space.BSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.isMounted() -->
+<method name="isMounted"  public="true" default="true">
+<description>
+A space node is mounted if it is parented by a mounted&#xa; space.  Mounted nodes have a host absolute ord and return&#xa; non-null for getSpace(), getSession(), and getHost().
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.getAbsoluteOrd() -->
+<method name="getAbsoluteOrd"  public="true" default="true">
+<description>
+Get an host absolute ord.  Return null if not&#xa; mounted.  This should be space.absoluteOrd + ordInSpace.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.getOrdInHost() -->
+<method name="getOrdInHost"  public="true" default="true">
+<description>
+Get an ord relative to the host.  Return null if not&#xa; mounted.  This should be space.ordInHost + ordInSpace.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.getOrdInSession() -->
+<method name="getOrdInSession"  public="true" abstract="true">
+<description>
+Get an ord relative to the session.  Return null if not&#xa; mounted.  This should be space.ordInSession + ordInSpace.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.getOrdInSpace() -->
+<method name="getOrdInSpace"  public="true" abstract="true">
+<description>
+Get the ord which identifies this entry in its space.&#xa; This ord should be relative with the space as the base.&#xa; If not mounted then return null.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.isPendingMove() -->
+<method name="isPendingMove"  public="true" abstract="true">
+<description>
+If this object is currently contained by the current Mark&#xa; and the mark is set to pending move, then this method returns&#xa; true.  In user interfaces this flag should be used to render&#xa; the object grayed out to illustrate that a cut operation has&#xa; been performed on the object, but that a paste operation&#xa; is needed to complete the move.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.setPendingMove(boolean) -->
+<method name="setPendingMove"  public="true" abstract="true">
+<description>
+Set the pending move flag.
+</description>
+<parameter name="pendingMove">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpaceNode.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

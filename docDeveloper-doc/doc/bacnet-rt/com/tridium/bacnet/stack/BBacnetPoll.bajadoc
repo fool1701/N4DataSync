@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="com.tridium.bacnet.stack.BBacnetPoll" name="BBacnetPoll" packageName="com.tridium.bacnet.stack" public="true">
+<description>
+BBacnetPoll is a subclass of BAbstractPollService specifically&#xa; customized for BACnet polling.  The entries in the poll service&#xa; are &lt;code&gt;PollList&lt;/code&gt;s, which contain one or more &lt;code&gt;BIBacnetPollable&lt;/code&gt;s.&#xa; The PollLists are capped when their expected response size would&#xa; exceed the device&#x27;s Max_APDU_Length_Accepted value, because it is&#xa; intended that regular polling should not incur any segmentation.&#xa; When a new pollable is subscribed to the service, it is added to&#xa; an existing poll list if one can be found that is not yet full,&#xa; and associated with the pollable&#x27;s parent device.  If none can be&#xa; found, a new list is created and the pollable is added to that one.&#xa; &lt;p&gt;&#xa; This service is multithreaded, because in many cases, one slow device&#xa; could otherwise hold up polling for the entire trunk.  Currently the&#xa; number of threads is fixed at two.&#xa; &lt;p&gt;&#xa; This poll service provides the same configuration as the basic&#xa; &lt;code&gt;BPollScheduler&lt;/code&gt; service, with a few additional statistics.&#xa; Because the items in the list are BIBacnetPollables, it is not as&#xa; helpful to know the item count of each &#x27;bucket&#x27;.  Therefore the point&#xa; count, object count, and virtual count are included to identify the&#xa; number of proxy points, BBacnetObjects, and BBacnetVirtualComponents,&#xa; respectively, that are currently in the poll lists.&#xa; &lt;p&gt;&#xa; Every ten seconds the poll scheduler rechecks the buckets&#xa; for configuration changes.  So if a BIBacnetPollable&#x27;s configuration&#xa; is changed from slow to fast, it takes at most ten seconds&#xa; for the change to take effect.  Statistics are also updated&#xa; every ten seconds.  Statistics may be manually reset using&#xa; the resetStatistics action.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision: 1$ $Date: 12/1/2003 03:20:12 PM$</tag>
+<tag name="@creation">1 Dec 03</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.driver.util.BAbstractPollService"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<property name="fastRate" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;fastRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to fast.
+</description>
+<tag name="@see">#getFastRate</tag>
+<tag name="@see">#setFastRate</tag>
+</property>
+
+<property name="normalRate" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;normalRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to normal.
+</description>
+<tag name="@see">#getNormalRate</tag>
+<tag name="@see">#setNormalRate</tag>
+</property>
+
+<property name="slowRate" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;slowRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to slow.
+</description>
+<tag name="@see">#getSlowRate</tag>
+<tag name="@see">#setSlowRate</tag>
+</property>
+
+<property name="statisticsStart" flags="rt">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;statisticsStart&lt;/code&gt; property.&#xa; Last reset time of statistics.
+</description>
+<tag name="@see">#getStatisticsStart</tag>
+<tag name="@see">#setStatisticsStart</tag>
+</property>
+
+<property name="averagePoll" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;averagePoll&lt;/code&gt; property.&#xa; Average time spent in each poll.
+</description>
+<tag name="@see">#getAveragePoll</tag>
+<tag name="@see">#setAveragePoll</tag>
+</property>
+
+<property name="busyTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;busyTime&lt;/code&gt; property.&#xa; Percentage of time spent busy doing polls.
+</description>
+<tag name="@see">#getBusyTime</tag>
+<tag name="@see">#setBusyTime</tag>
+</property>
+
+<property name="totalPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;totalPolls&lt;/code&gt; property.&#xa; Total number of polls made and time&#xa; spent waiting for polls to execute.
+</description>
+<tag name="@see">#getTotalPolls</tag>
+<tag name="@see">#setTotalPolls</tag>
+</property>
+
+<property name="dibsPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;dibsPolls&lt;/code&gt; property.&#xa; Total number of polls made processing the dibs stack.
+</description>
+<tag name="@see">#getDibsPolls</tag>
+<tag name="@see">#setDibsPolls</tag>
+</property>
+
+<property name="fastPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fastPolls&lt;/code&gt; property.&#xa; Total number of polls made processing fast queue.
+</description>
+<tag name="@see">#getFastPolls</tag>
+<tag name="@see">#setFastPolls</tag>
+</property>
+
+<property name="normalPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;normalPolls&lt;/code&gt; property.&#xa; Total number of polls made processing normal queue.
+</description>
+<tag name="@see">#getNormalPolls</tag>
+<tag name="@see">#setNormalPolls</tag>
+</property>
+
+<property name="slowPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;slowPolls&lt;/code&gt; property.&#xa; Total number of polls made processing slow queue.
+</description>
+<tag name="@see">#getSlowPolls</tag>
+<tag name="@see">#setSlowPolls</tag>
+</property>
+
+<property name="dibsCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;dibsCount&lt;/code&gt; property.&#xa; Current and average number of components in dibs stack.
+</description>
+<tag name="@see">#getDibsCount</tag>
+<tag name="@see">#setDibsCount</tag>
+</property>
+
+<property name="fastCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fastCount&lt;/code&gt; property.&#xa; Current and average number of components in fast queue.
+</description>
+<tag name="@see">#getFastCount</tag>
+<tag name="@see">#setFastCount</tag>
+</property>
+
+<property name="normalCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;normalCount&lt;/code&gt; property.&#xa; Current and average number of components in normal queue.
+</description>
+<tag name="@see">#getNormalCount</tag>
+<tag name="@see">#setNormalCount</tag>
+</property>
+
+<property name="slowCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;slowCount&lt;/code&gt; property.&#xa; Current and average number of components in slow queue.
+</description>
+<tag name="@see">#getSlowCount</tag>
+<tag name="@see">#setSlowCount</tag>
+</property>
+
+<property name="fastCycleTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fastCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the fast queue.
+</description>
+<tag name="@see">#getFastCycleTime</tag>
+<tag name="@see">#setFastCycleTime</tag>
+</property>
+
+<property name="normalCycleTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;normalCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the normal queue.
+</description>
+<tag name="@see">#getNormalCycleTime</tag>
+<tag name="@see">#setNormalCycleTime</tag>
+</property>
+
+<property name="slowCycleTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;slowCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the slow queue.
+</description>
+<tag name="@see">#getSlowCycleTime</tag>
+<tag name="@see">#setSlowCycleTime</tag>
+</property>
+
+<property name="deviceCount" flags="htr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;deviceCount&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDeviceCount</tag>
+<tag name="@see">#setDeviceCount</tag>
+</property>
+
+<property name="pointCount" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;pointCount&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPointCount</tag>
+<tag name="@see">#setPointCount</tag>
+</property>
+
+<property name="objectCount" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;objectCount&lt;/code&gt; property.
+</description>
+<tag name="@see">#getObjectCount</tag>
+<tag name="@see">#setObjectCount</tag>
+</property>
+
+<property name="virtualCount" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;virtualCount&lt;/code&gt; property.
+</description>
+<tag name="@see">#getVirtualCount</tag>
+<tag name="@see">#setVirtualCount</tag>
+</property>
+
+<action name="resetStatistics" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetStatistics&lt;/code&gt; action.&#xa; Reset all the statistics properties.
+</description>
+<tag name="@see">#resetStatistics()</tag>
+</action>
+
+<action name="rebuildPollLists" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;rebuildPollLists&lt;/code&gt; action.&#xa; Rebuild poll lists
+</description>
+<tag name="@see">#rebuildPollLists()</tag>
+</action>
+
+</class>
+</bajadoc>

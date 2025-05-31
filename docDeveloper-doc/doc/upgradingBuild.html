@@ -1,0 +1,241 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/ax-to-n4-module-migration.html" class="navbar">Prev</a> |  <a href="/doc/arch-stack.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!---
+  @author    Garrett L. Ward on 19 Oct 2021
+  @since     Niagara 4.13
+--->
+<h1 class='title'>Upgrading build environments from prior versions of Niagara</h1>
+<ul>
+  <li><a href="#overview">Overview</a>
+    <ul>
+      <li><a href="#breaking-changes">Breaking changes</a>
+        <ul>
+          <li><a href="#removal-of-compile-and-runtime-configurations">Removal of &lsquo;compile&rsquo; and &lsquo;runtime&rsquo; configurations</a></li>
+          <li><a href="#replacement-of-niagaramodule-extension">Replacement of &lsquo;niagaraModule&rsquo; extension</a></li>
+          <li><a href="#removal-of-environmentgradle">Removal of &lsquo;environment.gradle&rsquo;</a></li>
+          <li><a href="#removal-of-vendorgradle">Removal of &lsquo;vendor.gradle&rsquo;</a></li>
+          <li><a href="#deprecated-support-for-most-tags-in-module-includexml">Deprecated support for most tags in &lsquo;module-include.xml&rsquo;</a></li>
+        </ul>
+      </li>
+      <li><a href="#new-features">New Features</a>
+        <ul>
+          <li><a href="#manage-signing-profile-entirely-within-gradle">Manage signing profile entirely within Gradle</a></li>
+          <li><a href="#full-support-for-parallel-gradle-builds">Full support for parallel Gradle builds</a></li>
+          <li><a href="#support-for-jacoco-code-coverage">Support for JaCoCo code coverage</a></li>
+          <li><a href="#declare-brand-dependencies-for-modules">Declare brand dependencies for modules</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#upgrading-the-easy-way-the-new-module-wizard">Upgrading the easy way: the New Module Wizard</a></li>
+  <li><a href="#upgrading-from-gradle-4-niagara-46-though-412">Upgrading from Gradle 4 (Niagara 4.6 though 4.12)</a>
+    <ul>
+      <li><a href="#replace-environmentgradle-with-gradleproperties">Replace &lsquo;environment.gradle&rsquo; with &lsquo;gradle.properties&rsquo;</a></li>
+      <li><a href="#replace-settingsgradle">Replace settings.gradle</a></li>
+      <li><a href="#replace-buildgradle">Replace build.gradle</a>
+        <ul>
+          <li><a href="#replace-vendorgradle">Replace &lsquo;vendor.gradle&rsquo;</a></li>
+          <li><a href="#configure-signing">Configure signing</a></li>
+        </ul>
+      </li>
+      <li><a href="#update-module-build-scripts">Update module build scripts</a>
+        <ul>
+          <li><a href="#fix-dependency-declarations">Fix dependency declarations</a></li>
+          <li><a href="#replace-niagaramodule">Replace &lsquo;niagaraModule&rsquo;</a></li>
+          <li><a href="#configure-signing">Configure signing</a></li>
+          <li><a href="#generate-niagara-modulexml">Generate niagara-module.xml</a></li>
+        </ul>
+      </li>
+      <li><a href="#build-and-test">Build and test</a></li>
+    </ul>
+  </li>
+  <li><a href="#upgrading-from-gradle-16-or-gradle-213-niagara-40-through-44">Upgrading from Gradle 1.6 or Gradle 2.13 (Niagara 4.0 through 4.4)</a></li>
+  <li><a href="#example-gradle-files">Example Gradle Files</a></li>
+  <li><a href="#appendix-using-the-newer-environment-with-older-niagara">Appendix: Using the newer environment with older Niagara</a></li>
+</ul>
+<h1 id="overview">Overview</h1>
+<p>Starting with Niagara 4.13, the build environment for building your Niagara 4 modules has significantly changed, including a major Gradle update from Gradle 4 to Gradle 7. Unfortunately, these changes are not backwards-compatible and will require you to make changes to your existing build environments for them to continue working. These changes have been made with future stability in mind, and this document will be updated as needed to reflect any future breaking changes in the build environment.</p>
+<p>This document will walk you through the process of upgrading your build environment from Gradle 4 to Gradle 7 to build against Niagara 4.13.</p>
+<h2 id="breaking-changes">Breaking changes</h2>
+<p>While it is not necessary, it is recommended to also consult the <a href="https://docs.gradle.org/7.3.1/userguide/upgrading_version_7.html">Gradle Upgrade Guide</a> as many of the changes there are also applicable here. While the highlights are presented here, you may need to consult the Gradle updating guide if you have done any custom steps outside of the typical Niagara Gradle environment.</p>
+<h3 id="removal-of-compile-and-runtime-configurations">Removal of &lsquo;compile&rsquo; and &lsquo;runtime&rsquo; configurations</h3>
+<p>Gradle has removed the <code>compile</code> and <code>runtime</code> configurations in Gradle 7, as well as any derived configurations (for Niagara, this includes <code>niagaraModuleTestCompile</code> and <code>niagaraModuleTestRuntime</code>) Their recommended replacements are not quite applicable for building a Niagara module. A table of replacements is given below:</p>
+<table>
+  <thead>
+    <tr><th> Gradle 4                                  </th><th> Gradle 7                                  </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> compile(project(&ldquo;:&hellip;&rdquo;))                  </td><td> api(project(&ldquo;:&hellip;&rdquo;))                      </td></tr>
+    <tr><td> runtime(project(&ldquo;:&hellip;&rdquo;))                  </td><td> runtimeOnly(project(&ldquo;:&hellip;&rdquo;))              </td></tr>
+    <tr><td> niagaraModuleTestCompile(project(&ldquo;:&hellip;&rdquo;)) </td><td> moduleTestImplementation(project(&ldquo;:&hellip;&rdquo;)) </td></tr>
+  </tbody>
+</table>
+<p>Note that depending on external dependencies has not changed as the Niagara build environment requires all external dependencies to be declared as <code>uberjar</code> or <code>testUberjar</code>.</p>
+<p>If you have previously used <code>compile</code> or <code>runtime</code> to pull in dependencies that are provided by the Niagara Runtime Environment in <code>!bin/ext</code>, such as BouncyCastle, you should replace those with <code>nre</code> or <code>testNre</code>, respectively. For Niagara modules, <code>api</code> dependencies can only be on other Niagara modules.</p>
+<h3 id="replacement-of-niagaramodule-extension">Replacement of &lsquo;niagaraModule&rsquo; extension</h3>
+<p>The <code>niagaraModule</code> extension has been replaced with a more specific set of extensions: the <code>moduleManifest</code> extension, which controls the contents of the <code>module.xml</code> manifest for your module; and the <code>niagaraSigning</code> extension for configuring module signing, replacing <code>certAlias</code> in the old <code>niagaraModule</code> extension. For the most part, you can replace <code>niagaraModule</code> with <code>moduleManifest</code> in your existing build scripts, as the vast majority of the methods on this extension have not changed.</p>
+<p>Additionally, some information about the module parts of a single module has been moved into a separate <code>niagara-module.xml</code> file. This file contains information about what parts a module has, as well as some shared metadata that <em>must</em> be consistent between module parts. It replaces the <code>moduleParts { }</code> block of <code>niagaraModule</code>, as well as the <code>preferredSymbol</code> field. This will make misconfigurations (e.g, declaring a module part without a matching Gradle project) fail the build immediately rather than allow them to be runtime issues once your module is deployed.</p>
+<h3 id="removal-of-environmentgradle">Removal of &lsquo;environment.gradle&rsquo;</h3>
+<p>The <code>environment.gradle</code> file used to configure the location of Niagara for building against has been removed. Its functionality has been replaced with Gradle properties, which can be specified in a <code>gradle.properties</code> file at the root of your build.</p>
+<h3 id="removal-of-vendorgradle">Removal of &lsquo;vendor.gradle&rsquo;</h3>
+<p>The <code>vendor.gradle</code> file used to configure vendor-specific information has been replaced with a <code>vendor</code> extension in the root <code>build.gradle.kts</code> file.</p>
+<h3 id="deprecated-support-for-most-tags-in-module-includexml">Deprecated support for most tags in &lsquo;module-include.xml&rsquo;</h3>
+<p><code>module-include.xml</code> and <code>moduleTest-include.xml</code> should only contain <code>&lt;types&gt;</code>, and with few exception should be generated by the build process and not edited manually. Support for <code>defs</code>, <code>lexicons</code>, <code>installation</code>, and finer-grained <code>dependencies</code> has been added to the new  <code>moduleManifest {}</code> extension instead. You can see all the supported options in the <a href="local:|module://docDeveloper/doc/build#modulemanifest-extension">relevant section of Building Niagara</a></p>
+<h2 id="new-features">New Features</h2>
+<p>While there are some major breaking changes as outlined above, there are also several new features and improvements available in Gradle 7.</p>
+<h3 id="manage-signing-profile-entirely-within-gradle">Manage signing profile entirely within Gradle</h3>
+<p>There are now Gradle tasks for managing signing profiles, including generating new profiles, creating new certificates, and importing signed certificates from commercial vendors. It is no longer necessary to use <code>keytool</code> to manage profiles. The <a href="local:|module://docDeveloper/doc/security/codeSigning.html">Code Signing Guide</a> has been updated to reflect the new commands; you can read that for more information.</p>
+<h3 id="full-support-for-parallel-gradle-builds">Full support for parallel Gradle builds</h3>
+<p>All plugins used to build Niagara modules are now parallel-safe. This allows you to run Gradle with the <code>--parallel</code> flag, which can result in a significantly faster build, especially for larger projects.</p>
+<h3 id="support-for-jacoco-code-coverage">Support for JaCoCo code coverage</h3>
+<p>Niagara test modules can now be run via Gradle to get JaCoCo test coverage reports. Once you have set up a new environment using the upgrade guide, you can run the following commands to test your module with coverage and generate an HTML report.</p>
+<pre><code class="sunlight-highlight-none">gradlew :my-module-rt:niagaraTest
+gradlew :my-module-rt:jacocoNiagaraTestReport
+</code></pre>
+<p>This will output a report in <code>my-module/build/reports/jacoco</code> that you can load in any web browser.</p>
+<h3 id="declare-brand-dependencies-for-modules">Declare brand dependencies for modules</h3>
+<p>It is now possible to declare a brand dependency for your modules, which will prevent them from being installed on any platform which is not of the same brand. While it is generally preferable to use license checks to enforce this, you do now have the option by adding the following to the <code>moduleManifest</code> block in any module build script:</p>
+<pre><code class="sunlight-highlight-java">moduleManifest {
+  ...
+  (dependencies) {
+    create(&quot;brand&quot;) {
+      dependency {
+        name.set(&quot;Acme&quot;)
+      }
+    }
+  }
+  ...
+}
+</code></pre>
+<h1 id="upgrading-the-easy-way-the-new-module-wizard">Upgrading the easy way: the New Module Wizard</h1>
+<p>By far the most straightforward approach to migration is to generate an empty shell using the <a href="local:|module://docUser/doc/aNewModuleWizard.html">New Module Wizard in Workbench</a>. Once you have created the shell of a project, you can just copy your entire <code>src</code> and <code>srcTest</code> folders to the new module directory. You will also need to copy any <code>module.palette</code>, <code>module.lexicon</code>, and <code>module-permissions.xml</code> files. You should not need to copy <code>module-include.xml</code> as that will be automatically generated when your module is compiled, but you will need to copy any manual changes to that file.</p>
+<p>For modules containing JavaScript, you can follow the same general steps of &lsquo;create a new module part and copy your existing source into it&rsquo; by following the instructions at <a href="local:|module://docDeveloper/doc/js/buildingJS.html">Building JavaScript Applications for Niagara</a>. Be sure to pay attention to any changes you need to make to <code>package.json</code> and <code>Gruntfile.js</code> in addition to the other files outlined above.</p>
+<p>Once you have moved your source, you can edit the newly-generated <code>gradle.kts</code> file to specify your module&rsquo;s dependencies. Be sure to consult the major changes section above &ndash; specifically regarding the removal of <code>compile</code> &ndash; when you do so.</p>
+<h1 id="upgrading-from-gradle-4-niagara-46-though-412">Upgrading from Gradle 4 (Niagara 4.6 though 4.12)</h1>
+<p>Again, the recommended approach is to start fresh and copy files from your existing builds as needed. These steps outline the full process for manually updating your environment, and can be used as a reference if you run into any issues.</p>
+<h2 id="replace-environmentgradle-with-gradleproperties">Replace &lsquo;environment.gradle&rsquo; with &lsquo;gradle.properties&rsquo;</h2>
+<p>First, you&rsquo;ll need to replace &lsquo;environment.gradle&rsquo; with a &lsquo;gradle.properties&rsquo; file. This will tell the Gradle build where your Niagara installation is located, among other things. If you already have a &lsquo;gradle.properties&rsquo; to configure Gradle options, you can just add the needed properties to your existing file.</p>
+<p>At a bare minimum, you must define the <code>niagara_home</code>, <code>niagara_user_home</code>, and <code>org.gradle.java.installations.paths</code> properties, pointing to your Niagara installation. You can find the values appropriate to your installation by running <code>nre -version</code> from a Niagara Console; they are <code>niagara.home</code>, <code>niagara.user.home</code>, and <code>java.home</code>. Be sure to escape &quot;&quot; as &ldquo;\&rdquo; if you&rsquo;re building on Windows:</p>
+<pre><code class="sunlight-highlight-plaintext">#The path of the Gradle plugins if they are not in niagara_home
+#NOTE: Be sure to escape '\' as '\\' in paths
+#gradlePluginHome=C:\\path\\to\\gradlePlugins
+#The path to the installation of Niagara you are building against
+#NOTE: Be sure to escape '\' as '\\' in paths
+niagara_home=
+#The path to niagara_user_home for the installation of Niagara you are building against
+#NOTE: Be sure to escape '\' as '\\' in paths
+niagara_user_home=
+#Uncomment and set to the path to your node install if it is not available on your PATH
+#NOTE: Be sure to escape '\' as '\\' in paths
+#nodeHome=
+#AUTOMATICALLY GENERATED BY GRADLE -- DO NOT MODIFY
+org.gradle.java.installations.auto-detect=false
+#AUTOMATICALLY GENERATED BY GRADLE -- DO NOT MODIFY
+org.gradle.java.installations.auto-download=false
+#Set this to the path of the &quot;jre&quot; folder in your Niagara installation
+#NOTE: Be sure to escape '\' as '\\' in paths
+org.gradle.java.installations.paths=
+</code></pre>
+<p>You can use <code>gradlePluginHome</code> to specify a different path to look for the Niagara Gradle plugins; this can be used to leverage the newer Gradle build environment in building against older Niagara modules. The Gradle build environment shipped with Niagara 4.13 can build modules for Niagara 4.10 and newer; see <a href="#appendix-using-the-newer-environment-with-older-niagara">the appendix</a> for more details.</p>
+<p>You will need to set <code>nodeHome</code> if you are developing JavaScript UI components. Consult the <code>grunt-niagara</code> documentation for more details.</p>
+<h2 id="replace-settingsgradle">Replace settings.gradle</h2>
+<p>Next, we need to replace &lsquo;settings.gradle&rsquo; with an updated &lsquo;settings.gradle.kts&rsquo;.</p>
+<p>Note: If you have lots of projects, you may want to migrate them one at a time. You can do this by replacing the single <code>findProjects()</code> call in <code>settings.gradle.kts</code> with several, each referencing a folder containing projects. For example, if you have 3 modules &lsquo;moduleA&rsquo;, &lsquo;moduleB&rsquo;, and &lsquo;moduleC&rsquo;, you can just work on &lsquo;moduleA&rsquo; by calling <code>findProjects(&quot;moduleA&quot;)</code> &ndash; this will only search the &lsquo;moduleA&rsquo; folder when discovering projects.</p>
+<h2 id="replace-buildgradle">Replace build.gradle</h2>
+<p>We also need to replace &lsquo;build.gradle&rsquo; with an updated &lsquo;build.gradle.kts&rsquo;. For the most part, &lsquo;build.gradle.kts&rsquo; has been greatly simplified; most of the previous contents are handled automatically by plugins.</p>
+<h3 id="replace-vendorgradle">Replace &lsquo;vendor.gradle&rsquo;</h3>
+<p>As mentioned, the &lsquo;vendor.gradle&rsquo; script is no longer used. Instead, you will find the <code>vendor</code> extension in &lsquo;build.gradle.kts&rsquo; where you can configure these options instead:</p>
+<pre><code class="sunlight-highlight-java">vendor {
+  // defaultVendor sets the &quot;vendor&quot; attribute on module and dist files; it's
+  // what's shown in Niagara when viewing a module or dist.
+  defaultVendor(&quot;...&quot;)
+
+  // defaultModuleVersion sets the &quot;vendorVersion&quot; attribute on all modules
+  defaultModuleVersion(&quot;...&quot;)
+}
+</code></pre>
+<p><code>defaultVendor</code> should be set to the value of <code>group</code> in &lsquo;vendor.gradle&rsquo;, and <code>defaultModuleVersion</code> set to the value of <code>moduleVersion</code>. As the name implies, this just sets the <em>default</em> value of these; you can change both on a per-module basis using the <code>moduleManifest</code> extension if you need to. More complex options, such as managing versions automatically in a CI environment, or patch versions, are not provided by the Niagara plugins. Several options exist in the Gradle ecosystem for managing these and any one of them should work fine with your build.</p>
+<h3 id="configure-signing">Configure signing</h3>
+<p>All signing configuration can now be done in the root &lsquo;build.gradle.kts&rsquo;, and this is the recommended way going forward. You find more detail about how to configure this in the <a href="local:|module://docDeveloper/doc/security/codeSigning.html">Code Signing Documentation</a></p>
+<h2 id="update-module-build-scripts">Update module build scripts</h2>
+<h3 id="fix-dependency-declarations">Fix dependency declarations</h3>
+<p>As mentioned, <code>compile</code> and <code>runtime</code> are no longer supported. <code>runtime</code> in general does not work with Niagara modules anyway, and it (and its replacements) should not be used. For other configurations:</p>
+<ul>
+  <li>Replace <code>compile</code> with <code>api</code>. These should only be other Niagara modules, either your own or ones available in your Niagara installation</li>
+  <li>Replace <code>niagaraModuleTestCompile</code> with <code>moduleTestImplementation</code>. Again, this should only be other Niagara modules</li>
+  <li>Continue to use <code>uberjar</code> or <code>testUberjar</code> for third-party libraries you need for your module or its test code, respectively</li>
+  <li>Use <code>nre</code> or <code>testNre</code> for dependencies on libraries provided by the Niagara Runtime Environment (that is, libraries in <code>!bin/ext</code> and its subfolders)</li>
+</ul>
+<p>Additionally, you can safely remove versions from module dependencies:</p>
+<pre><code class="sunlight-highlight-java">dependencies {
+  // this
+  api(&quot;Tridium:baja&quot;)
+  // not this
+  // api(&quot;Tridium:baja:4.13&quot;)
+}
+</code></pre>
+<p>Specifying versions for dependencies on modules in <code>!modules</code> has never made sense, since regardless of the version <em>specified</em>, the version <em>used</em> is whatever is in <code>!modules</code>.</p>
+<h3 id="replace-niagaramodule">Replace &lsquo;niagaraModule&rsquo;</h3>
+<p>This should be straightforward &ndash; replace <code>niagaraModule</code> with <code>moduleManifest</code>. You will need to then remove the <code>certAlias</code>, <code>preferredSymbol</code>, and <code>moduleParts</code> sections and replace them as outlined below.</p>
+<h3 id="configure-signing">Configure signing</h3>
+<p><code>certAlias</code> has been replaced with the options documented in the <a href="local:|module://docDeveloper/doc/security/codeSigning.html">Code Signing Documentation</a>. You can follow the steps there to configure the aliases your build uses, and configure per-module signing if that is required for your use case.</p>
+<h3 id="generate-niagara-modulexml">Generate niagara-module.xml</h3>
+<p>You need to create a &lsquo;niagara-module.xml&rsquo; in your module&rsquo;s folder (not your module parts&rsquo; folder &ndash; see <a href="local:|module://docDeveloper/doc/build.html#multiModuleProject">the build layout documentation</a> )</p>
+<p>This file defines shared configuration for all parts of your module &ndash; the module&rsquo;s name, its preferred symbol, and the list of parts it has. This must match the layout of your module on disk. Defining a module part that does not exist, or having a module part project that is not declared, will result in build errors.</p>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;niagara-module moduleName=&quot;myModule&quot; preferredSymbol=&quot;mmod&quot; runtimeProfiles=&quot;rt,ux,wb&quot;/&gt;
+</code></pre>
+<h2 id="build-and-test">Build and test</h2>
+<p>At this point, your module should be ready to build with <code>gradlew moduleTestJar</code>. If you run into any issues, check that you&rsquo;ve followed the steps above correctly, and consult the Gradle documentation for potential resolutions.</p>
+<h1 id="upgrading-from-gradle-16-or-gradle-213-niagara-40-through-44">Upgrading from Gradle 1.6 or Gradle 2.13 (Niagara 4.0 through 4.4)</h1>
+<p>Niagara 4.4 and earlier used a very rudimentary build environment. You <em>must</em> start with a shell generated by the New Module Wizard to migrate these effectively.</p>
+<h1 id="example-gradle-files">Example Gradle Files</h1>
+<p>The <a href="build.html#example-gradle-scripts">building Niagara</a> guide has a full set of example Gradle files you can use as templates if needed.</p>
+<h1 id="appendix-using-the-newer-environment-with-older-niagara">Appendix: Using the newer environment with older Niagara</h1>
+<p>It is possible to use the Gradle build environment shipped with Niagara 4.13 and newer to build against Niagara 4.10 and newer. This can be done by customizing &lsquo;gradle.properties&rsquo;. For this example, we&rsquo;ll assume we want to build 4.10U3 modules against a Niagara installation at <code>C:\Niagara\Niagara-4.10.3</code> using the toolchain shipped with <code>C:\Niagara\Niagara-4.13.0</code>. The following gradle.properties file will configure this setup:</p>
+<pre><code class="sunlight-highlight-plaintext">#The path of the Gradle plugins if they are not in niagara_home
+#NOTE: Be sure to escape '\' as '\\' in paths
+gradlePluginHome=C:\\Niagara\\Niagara-4.13.0\\etc\\m2
+#The path to the installation of Niagara you are building against
+#NOTE: Be sure to escape '\' as '\\' in paths
+niagara_home=C:\\Niagara\\Niagara-4.10.3
+#The path to niagara_user_home for the installation of Niagara you are building against
+#NOTE: Be sure to escape '\' as '\\' in paths
+niagara_user_home=C:\\Users\\user\\Niagara4.10\\brand
+#Uncomment and set to the path to your node install if it is not available on your PATH
+#NOTE: Be sure to escape '\' as '\\' in paths
+#nodeHome=
+#AUTOMATICALLY GENERATED BY GRADLE -- DO NOT MODIFY
+org.gradle.java.installations.auto-detect=false
+#AUTOMATICALLY GENERATED BY GRADLE -- DO NOT MODIFY
+org.gradle.java.installations.auto-download=false
+#Set this to the path of the &quot;jre&quot; folder in your Niagara installation
+#NOTE: Be sure to escape '\' as '\\' in paths
+org.gradle.java.installations.paths=C:\\Niagara\\Niagara-4.10.3\\jre
+</code></pre>
+<p>Note that we use the 4.10U3 JRE, and not the 4.13 JRE, when building modules for 4.10U3.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/ax-to-n4-module-migration.html" class="navbar">Prev</a> |  <a href="/doc/arch-stack.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

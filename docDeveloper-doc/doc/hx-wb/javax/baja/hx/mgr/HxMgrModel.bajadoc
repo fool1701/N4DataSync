@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="hx" runtimeProfile="wb" qualifiedName="javax.baja.hx.mgr.HxMgrModel" name="HxMgrModel" packageName="javax.baja.hx.mgr" public="true">
+<description>
+HxMgrModel manages the logical model of the BComponents&#xa; in the station database (as opposed to the discovery&#xa; model managed by MgrLearn).
+</description>
+<tag name="@author">Andy Frank</tag>
+<tag name="@creation">22 Mar 05</tag>
+<tag name="@version">$Revision: 7$ $Date: 6/22/05 2:21:58 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<!-- javax.baja.hx.mgr.HxMgrModel() -->
+<constructor name="HxMgrModel" public="true">
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.init(javax.baja.hx.mgr.MgrOp) -->
+<method name="init"  public="true">
+<description>
+Init is called once from &lt;code&gt;BHxAbstractManager&lt;/code&gt;&#xa; Must call &lt;code&gt;super.init()&lt;/code&gt; if overridden.
+</description>
+<parameter name="op">
+<type class="javax.baja.hx.mgr.MgrOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getMgrOp() -->
+<method name="getMgrOp"  public="true" final="true">
+<description>
+Get the MgrOp for this context.
+</description>
+<return>
+<type class="javax.baja.hx.mgr.MgrOp"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getRows() -->
+<method name="getRows"  public="true" final="true">
+<description>
+Get the rows to display in the database table. These&#xa; rows are initialzed from the makeRows() methods.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.toRowValue(javax.baja.sys.BComponent, int) -->
+<method name="toRowValue"  public="true">
+<description>
+Get the value for the specified row.  If this&#xa; method is overridden, toRowIndex() should also&#xa; be overridden.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="rowIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.valueToIndex(java.lang.String) -->
+<method name="valueToIndex"  public="true">
+<description>
+Get the index for the row with the specified value.
+</description>
+<parameter name="rowValue">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.valueToComponent(java.lang.String) -->
+<method name="valueToComponent"  public="true">
+<description>
+Get the row component for the specified value.&#xa; The default implementation is getRows()[valueToIndex(rowValue)].
+</description>
+<parameter name="rowValue">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getColumns() -->
+<method name="getColumns"  public="true" final="true">
+<description>
+Get the columns to display for the database table.  These&#xa; columns are initialized from the makeColumns() method.
+</description>
+<return>
+<type class="javax.baja.hx.mgr.HxMgrColumn" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getColumn(int) -->
+<method name="getColumn"  public="true" final="true">
+<description>
+Get the column at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.hx.mgr.HxMgrColumn"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getEditableColumns() -->
+<method name="getEditableColumns"  public="true" final="true">
+<description>
+Get the columns which are editable using the EditMgr APIs. &#xa; This list the subset of &lt;code&gt;getColumns()&lt;/code&gt; which&#xa; has the &lt;code&gt;MgrColumn.EDITABLE&lt;/code&gt; flag set.
+</description>
+<return>
+<type class="javax.baja.hx.mgr.HxMgrColumn" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getCommands() -->
+<method name="getCommands"  public="true" final="true">
+<description>
+Get the list of commands this manager has.
+</description>
+<return>
+<type class="javax.baja.hx.mgr.HxMgrCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getTableTitle() -->
+<method name="getTableTitle"  public="true">
+<description>
+Get the title to use for the database table.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getRowType() -->
+<method name="getRowType"  public="true">
+<description>
+Return the row type used for row count.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getNewTypes() -->
+<method name="getNewTypes"  public="true">
+<description>
+Get the list of types supported by the new operation.  The&#xa; first entry in the list should be the default type.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.getIncludeTypes() -->
+<method name="getIncludeTypes"  public="true">
+<description>
+Get the list of types to inculde in this manager.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.accept(javax.baja.sys.BComponent) -->
+<method name="accept"  public="true">
+<description>
+The &lt;code&gt;accept()&lt;/code&gt; method is used to provide an &#xa; additional level of filtering for the components displayed &#xa; by this manager.  This method is NOT a replacement for &#xa; &lt;code&gt;getIncludeTypes()&lt;/code&gt;, but augments it.
+</description>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.newInstance(javax.baja.sys.Type) -->
+<method name="newInstance"  public="true">
+<description>
+Given a Type create a new BComponent instance.  This is&#xa; used by the new command to initialize components from&#xa; a user selected type.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.makeRows() -->
+<method name="makeRows"  protected="true">
+<description>
+This method is called once to initialize the rows.&#xa;&#xa; &lt;p&gt;&#xa;  &lt;b&gt;Note:&lt;/b&gt; Subclasses overriding this method should ensure that the row components&#xa;  are filtered for the correct include types, including calling&#xa;  the accept() method and checking for the appropriate permissions on the target components&#xa; &lt;/p&gt;
+</description>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.makeColumns() -->
+<method name="makeColumns"  protected="true">
+<description>
+This method is called once to initialize the columns.
+</description>
+<return>
+<type class="javax.baja.hx.mgr.HxMgrColumn" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.mgr.HxMgrModel.makeCommands() -->
+<method name="makeCommands"  protected="true">
+<description>
+This method is called once to initialize the commands.
+</description>
+<return>
+<type class="javax.baja.hx.mgr.HxMgrCommand" dimension="1"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

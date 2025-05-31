@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="com.tridium.bacnet.stack.server.cov.BBacnetCovWorker" name="BBacnetCovWorker" packageName="com.tridium.bacnet.stack.server.cov" public="true">
+<description>
+The BBacnetCovWorker multithreads Change of Value(COV) notifications.&#xa; &lt;p&gt;&#xa; Previously the BBacnetWorker on the BBacnetNetwork handled COV notifications.&#xa; One non-responsive BACnet device could halt all COV notifications (even to other devices).&#xa; For APDU Timeout + (Number of retries * APDU Timeout)&#xa; &lt;p&gt;&#xa; The CovWorker keeps a queue for each device receiving COV notifications.&#xa; Every queue is locked and processed by a separate CovWorkerThread.&#xa; The result is a COV process that tolerates (numberOfThreads - 1) device failures.
+</description>
+<tag name="@author">jchandler</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="maxQueueSize" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxQueueSize&lt;/code&gt; property.&#xa; the size of the queue for this worker.
+</description>
+<tag name="@see">#getMaxQueueSize</tag>
+<tag name="@see">#setMaxQueueSize</tag>
+</property>
+
+<property name="workerThreadName" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;workerThreadName&lt;/code&gt; property.&#xa; name of the worker thread.
+</description>
+<tag name="@see">#getWorkerThreadName</tag>
+<tag name="@see">#setWorkerThreadName</tag>
+</property>
+
+<property name="numberOfThreads" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;numberOfThreads&lt;/code&gt; property.&#xa; number of worker threads to be servicing the cov queue.
+</description>
+<tag name="@see">#getNumberOfThreads</tag>
+<tag name="@see">#setNumberOfThreads</tag>
+</property>
+
+<action name="removeStaleQueues" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;removeStaleQueues&lt;/code&gt; action.&#xa; Cleans out empty/unused queues
+</description>
+<tag name="@see">#removeStaleQueues()</tag>
+</action>
+
+</class>
+</bajadoc>

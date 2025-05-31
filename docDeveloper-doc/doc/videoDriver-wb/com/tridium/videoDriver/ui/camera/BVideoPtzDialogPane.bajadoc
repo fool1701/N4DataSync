@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane" name="BVideoPtzDialogPane" packageName="com.tridium.videoDriver.ui.camera" public="true">
+<description>
+Displays a video player, overlays navigation pan controls, adds zooming, iris control,&#xa; focus control, and preset  control too.&#xa; &#xa; This can be added to any baja ui graphic through Java code. In addition, this pane is&#xa; placed in the pop-up window when the user double-clicks the camera widget on a PxPage.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.ui.pane.BEdgePane"/>
+</extends>
+<action name="videoPlaybackChanged" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;videoPlaybackChanged&lt;/code&gt; action.
+</description>
+<tag name="@see">#videoPlaybackChanged()</tag>
+</action>
+
+<topic name="adjustIris" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.enums.BVideoIrisEnum"/>
+</eventType><description>
+Slot for the &lt;code&gt;adjustIris&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireAdjustIris</tag>
+</topic>
+
+<topic name="adjustFocus" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.enums.BVideoFocusEnum"/>
+</eventType><description>
+Slot for the &lt;code&gt;adjustFocus&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireAdjustFocus</tag>
+</topic>
+
+<topic name="adjustZoom" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</eventType><description>
+Slot for the &lt;code&gt;adjustZoom&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireAdjustZoom</tag>
+</topic>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane() -->
+<constructor name="BVideoPtzDialogPane" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane(com.tridium.videoDriver.camera.BIVideoCamera, javax.baja.ui.BWidget) -->
+<constructor name="BVideoPtzDialogPane" public="true">
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<parameter name="container">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane(com.tridium.videoDriver.camera.BIVideoCamera, javax.baja.ui.BWidget, javax.baja.sys.BRelTime, javax.baja.sys.BRelTime) -->
+<constructor name="BVideoPtzDialogPane" public="true">
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<parameter name="container">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="moveInterval">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<parameter name="zoomInterval">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane(com.tridium.videoDriver.camera.BIVideoCamera, javax.baja.ui.BWidget, javax.baja.gx.BSize, com.tridium.videoDriver.videoStream.BPlaybackParams) -->
+<constructor name="BVideoPtzDialogPane" public="true">
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<parameter name="parent">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="size">
+<type class="javax.baja.gx.BSize"/>
+</parameter>
+<parameter name="playbackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane(com.tridium.videoDriver.camera.BIVideoCamera, javax.baja.ui.BWidget, javax.baja.gx.BSize, javax.baja.ui.BBorder, javax.baja.sys.BRelTime, javax.baja.gx.BBrush, javax.baja.sys.BRelTime, int, com.tridium.videoDriver.videoStream.BPlaybackParams, com.tridium.videoDriver.enums.BFoxVideoStreamEnum) -->
+<constructor name="BVideoPtzDialogPane" public="true">
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<parameter name="parentWidget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="totalSize">
+<type class="javax.baja.gx.BSize"/>
+</parameter>
+<parameter name="videoPaneBorder">
+<type class="javax.baja.ui.BBorder"/>
+</parameter>
+<parameter name="panTiltKeepDownInterval">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<parameter name="zoomBackground">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<parameter name="zoomKeepDownInterval">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<parameter name="videoPaneThrottleRefreshRate">
+<type class="int"/>
+</parameter>
+<parameter name="playBackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</parameter>
+<parameter name="streamFox">
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane(com.tridium.videoDriver.ui.camera.BVideoCameraWidget, com.tridium.videoDriver.camera.BIVideoCamera) -->
+<constructor name="BVideoPtzDialogPane" public="true">
+<parameter name="videoCameraWidget">
+<type class="com.tridium.videoDriver.ui.camera.BVideoCameraWidget"/>
+<description>
+the video camera widget that is placing this pane in a pop-up&#xa; as a result of the videoCameraWidget being double-clicked.
+</description>
+</parameter>
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+<description>
+the video camera that is bound to the video camera widget.
+</description>
+</parameter>
+<description>
+This constructor is used when the video camera widget is double-clicked. The video camera&#xa; widget is Px Widget that is available when an integrator or end user drags a driver&#x27;s&#xa; video camera onto a Px Page.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.videoPlaybackChanged() -->
+<method name="videoPlaybackChanged"  public="true">
+<description>
+Invoke the &lt;code&gt;videoPlaybackChanged&lt;/code&gt; action.
+</description>
+<tag name="@see">#videoPlaybackChanged</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.fireAdjustIris(com.tridium.videoDriver.enums.BVideoIrisEnum) -->
+<method name="fireAdjustIris"  public="true">
+<description>
+Fire an event for the &lt;code&gt;adjustIris&lt;/code&gt; topic.
+</description>
+<tag name="@see">#adjustIris</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.enums.BVideoIrisEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.fireAdjustFocus(com.tridium.videoDriver.enums.BVideoFocusEnum) -->
+<method name="fireAdjustFocus"  public="true">
+<description>
+Fire an event for the &lt;code&gt;adjustFocus&lt;/code&gt; topic.
+</description>
+<tag name="@see">#adjustFocus</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.enums.BVideoFocusEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.fireAdjustZoom(com.tridium.videoDriver.enums.BVideoZoomEnum) -->
+<method name="fireAdjustZoom"  public="true">
+<description>
+Fire an event for the &lt;code&gt;adjustZoom&lt;/code&gt; topic.
+</description>
+<tag name="@see">#adjustZoom</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.isPanTiltAvailable() -->
+<method name="isPanTiltAvailable"  protected="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.makePanTiltJoystick(javax.baja.ui.BWidget, javax.baja.ui.BBorder, javax.baja.sys.BRelTime) -->
+<method name="makePanTiltJoystick"  protected="true">
+<description/>
+<parameter name="parentWidget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="videoPaneBorder">
+<type class="javax.baja.ui.BBorder"/>
+</parameter>
+<parameter name="panTiltKeepDownInterval">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.isZoomAvailable() -->
+<method name="isZoomAvailable"  protected="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.makeZoomSlider(javax.baja.ui.BWidget, javax.baja.ui.BBorder, javax.baja.gx.BBrush, javax.baja.sys.BRelTime) -->
+<method name="makeZoomSlider"  protected="true">
+<description/>
+<parameter name="parentWidget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="videoPaneBorder">
+<type class="javax.baja.ui.BBorder"/>
+</parameter>
+<parameter name="zoomBackground">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<parameter name="zoomKeepDownInterval">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.isVideoAvailable() -->
+<method name="isVideoAvailable"  protected="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.makeVideoPlayer(javax.baja.ui.BWidget, int, com.tridium.videoDriver.videoStream.BPlaybackParams, com.tridium.videoDriver.enums.BFoxVideoStreamEnum) -->
+<method name="makeVideoPlayer"  protected="true">
+<description/>
+<parameter name="parentWidget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="videoPaneThrottleRefreshRate">
+<type class="int"/>
+</parameter>
+<parameter name="playBackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</parameter>
+<parameter name="streamFox">
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.startVideoPlayerBinding() -->
+<method name="startVideoPlayerBinding"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.configureIrisFocusBinding(javax.baja.ui.BWidget, javax.baja.naming.BOrd) -->
+<method name="configureIrisFocusBinding"  protected="true">
+<description/>
+<parameter name="parentWidget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="videoCameraStationOrd">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.configurePanTiltBinding(javax.baja.ui.BWidget, javax.baja.naming.BOrd) -->
+<method name="configurePanTiltBinding"  protected="true">
+<description/>
+<parameter name="parentWidget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="videoCameraStationOrd">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.overlayPanTiltJoystickOnVideoPlayer() -->
+<method name="overlayPanTiltJoystickOnVideoPlayer"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.ui.pane.BPane"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description>
+This is a baja ui callback.&#xa; &#xa; If the size object that was passed to the constructor has a height or width or&#xa; less than 50 then this uses the actual size of the video feed, plus the various&#xa; controls that are around the feed.&#xa; &#xa; If the size object that was passed to the constructor is reasonable (length &amp; width&#xa; at least 50) then this uses the dimensions in the size object as the preferred size.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.makeTitlePane() -->
+<method name="makeTitlePane"  protected="true">
+<description>
+Creates the label pane that the fully specified constructor places at the&#xa; top of this widget.
+</description>
+<return>
+<type class="javax.baja.ui.pane.BGridPane"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.isIrisAvailable(com.tridium.videoDriver.camera.BIVideoCamera) -->
+<method name="isIrisAvailable"  public="true" static="true">
+<description/>
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.isFocusAvailable(com.tridium.videoDriver.camera.BIVideoCamera) -->
+<method name="isFocusAvailable"  public="true" static="true">
+<description/>
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.isIrisFocusOrBothAvailable(com.tridium.videoDriver.camera.BIVideoCamera) -->
+<method name="isIrisFocusOrBothAvailable"  public="true" static="true">
+<description/>
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.makeIrisFocusButtonPane(javax.baja.ui.BWidget, javax.baja.ui.BWidget, com.tridium.videoDriver.camera.BIVideoCamera, javax.baja.sys.Topic, javax.baja.sys.Topic, boolean) -->
+<method name="makeIrisFocusButtonPane"  public="true" static="true">
+<description>
+Creates the pane that contains the &#x27;Iris&#x27; and &#x27;Focus&#x27; controls. This appears&#xa; towards the bottom of this ptz-dialog-pane.
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="center">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<parameter name="adjustIrisTopic">
+<type class="javax.baja.sys.Topic"/>
+</parameter>
+<parameter name="adjustFocusTopic">
+<type class="javax.baja.sys.Topic"/>
+</parameter>
+<parameter name="fullsize">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.pane.BPane"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.makeCameraControlPane(javax.baja.ui.BWidget, java.lang.String, javax.baja.sys.Topic, javax.baja.sys.BValue, javax.baja.sys.BValue, javax.baja.sys.BValue, javax.baja.sys.BValue, boolean) -->
+<method name="makeCameraControlPane"  protected="true" static="true">
+<description>
+Creates a two buttons to increase or decrease a camera control. This&#xa; method is reused for creating both the &#x27;iris&#x27; and &#x27;focus&#x27; button&#xa; panes.
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the name of the camera control (lexiconized version of&#xa; either &#x27;Iris&#x27; or &#x27;Focus&#x27;
+</description>
+</parameter>
+<parameter name="eitherButtonPressTopic">
+<type class="javax.baja.sys.Topic"/>
+<description>
+this is the camera control topic to&#xa; fire when the button is pressed, held down, and eventually released.
+</description>
+</parameter>
+<parameter name="plusButtonDownValue">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this is the value to fire with the topic&#xa; when the plus button is is pressed. This value basically indicates either&#xa; &#x27;Focus In&#x27; or &#x27;Iris In&#x27;. This is continually fired with the topic on a&#xa; periodic interval as the button is held down.
+</description>
+</parameter>
+<parameter name="plusButtonReleaseValue">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this is the value to fire with the topic&#xa; when the plus button is released. This value basically indicates either&#xa; &#x27;Focus In Stop&#x27; or &#x27;Iris In Stop&#x27;.
+</description>
+</parameter>
+<parameter name="minusButtonDownValue">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this is the value to fire with the topic&#xa; when the minus button is is pressed. This value basically indicates either&#xa; &#x27;Focus Out&#x27; or &#x27;Iris Out&#x27;. This is continually fired with the topic on a&#xa; periodic interval as the button is held down.
+</description>
+</parameter>
+<parameter name="minusButtonReleaseValue">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="fullsize">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.pane.BPane"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.makePresetsPane(javax.baja.ui.BWidget, com.tridium.videoDriver.camera.BIVideoCamera, boolean) -->
+<method name="makePresetsPane"  public="true" static="true">
+<description>
+Creates the pane that presents the &#x22;Go to Preset&#x22; and &#x22;Store&#x22; preset control&#xa; to the end-user.
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="videoCamera">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+</parameter>
+<parameter name="fullSize">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.pane.BPane"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.doVideoPlaybackChanged() -->
+<method name="doVideoPlaybackChanged"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.videoPlaybackChanged -->
+<field name="videoPlaybackChanged"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;videoPlaybackChanged&lt;/code&gt; action.
+</description>
+<tag name="@see">#videoPlaybackChanged()</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.adjustIris -->
+<field name="adjustIris"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;adjustIris&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireAdjustIris</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.adjustFocus -->
+<field name="adjustFocus"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;adjustFocus&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireAdjustFocus</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.adjustZoom -->
+<field name="adjustZoom"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;adjustZoom&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireAdjustZoom</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.videoPlayer -->
+<field name="videoPlayer"  public="true">
+<type class="com.tridium.videoDriver.ui.BVideoPlayer"/>
+<description>
+This is a reference to the videoPlayer widget that is actually painting the&#xa; video stream from the decoder.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.videoCamera -->
+<field name="videoCamera"  public="true" final="true">
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+<description>
+This is a reference to the client-side proxy of the video camera that is serving&#xa; the video stream to the decoder, which is feeding frames to the videoPlayer.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.joystick -->
+<field name="joystick"  public="true">
+<type class="com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.zoomSlider -->
+<field name="zoomSlider"  public="true">
+<type class="com.tridium.videoDriver.ui.camera.BVideoZoomSlider"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.bottomPane -->
+<field name="bottomPane"  public="true" final="true">
+<type class="javax.baja.ui.pane.BPane"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.videoStreamBinding -->
+<field name="videoStreamBinding"  public="true">
+<type class="com.tridium.videoDriver.ui.videoStream.BVideoStreamBinding"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.preferedSize -->
+<field name="preferedSize"  public="true" final="true">
+<type class="javax.baja.gx.BSize"/>
+<description>
+This is the size object that was passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPtzDialogPane.LEX -->
+<field name="LEX"  public="true" static="true" final="true">
+<type class="javax.baja.util.Lexicon"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

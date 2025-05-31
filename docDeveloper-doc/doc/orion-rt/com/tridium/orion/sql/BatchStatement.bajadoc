@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.sql.BatchStatement" name="BatchStatement" packageName="com.tridium.orion.sql" public="true" interface="true" abstract="true" category="interface">
+<description>
+BatchStatement does inserts/updates/deletes in batch mode,&#xa; which is generally much more efficient than doing them&#xa; one at a time.&#xa;&#xa; Note that not all underlying databases fully support batch mode.&#xa; Some have complete support, while others have only partial support,&#xa; or no support at all.  For those databases lacking e.g. batch insert support,&#xa; batch mode is silently made to work like &#x27;normal&#x27; mode.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">06 May 09</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- com.tridium.orion.sql.BatchStatement.add(com.tridium.orion.BIOrionObject) -->
+<method name="add"  public="true" abstract="true">
+<description>
+Add an object to the batch.
+</description>
+<parameter name="object">
+<type class="com.tridium.orion.BIOrionObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BatchStatement.get(int) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get the object at the given index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BIOrionObject"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BatchStatement.size() -->
+<method name="size"  public="true" abstract="true">
+<description>
+Return the current size of the batch.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BatchStatement.getOrionType() -->
+<method name="getOrionType"  public="true" abstract="true">
+<description>
+Get the OrionType for this batch.
+</description>
+<return>
+<type class="com.tridium.orion.OrionType"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BatchStatement.execute() -->
+<method name="execute"  public="true" abstract="true">
+<description>
+Execute the current contents of the batch.&#xa; If this method executes cleanly, without throwing an Exception,&#xa; then &lt;code&gt;clear()&lt;/code&gt; is called, to clear out the &#xa; contents of the batch.&#xa; If an Exception is thrown during execution, then &lt;code&gt;clear()&lt;/code&gt;&#xa; is not called.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BatchStatement.clear() -->
+<method name="clear"  public="true" abstract="true">
+<description>
+Clear the contents of the batch.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BatchStatement.setChunkSize(int) -->
+<method name="setChunkSize"  public="true" abstract="true">
+<description>
+Set the chunk size to use when executing.  &#xa; &lt;p&gt;&#xa; A value of 0 (the default) indicates that the entire batch&#xa; will be executed in one big chunk.&#xa; &lt;p&gt;&#xa; A positive value indicates the size of each chunk during execution.&#xa; For instance, if the batch has a total of 500 objects, and the &#xa; chunk size is set to 200, then the batch will be executed in &#xa; 3 chunks:  200, 200, and 100. This is helpful when very large &#xa; numbers of records are batched up, and&#xa; you do not want to execute them in one huge batch.
+</description>
+<parameter name="chunkSize">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BatchStatement.getChunkSize() -->
+<method name="getChunkSize"  public="true" abstract="true">
+<description>
+Get the current chunk size.  The default chunk size is 0.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

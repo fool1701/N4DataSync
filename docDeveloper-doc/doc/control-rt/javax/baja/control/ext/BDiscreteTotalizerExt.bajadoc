@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="control" runtimeProfile="rt" qualifiedName="javax.baja.control.ext.BDiscreteTotalizerExt" name="BDiscreteTotalizerExt" packageName="javax.baja.control.ext" public="true">
+<description>
+BDiscreteTotalizerExt is a standard point extension useful&#xa; for accumulating run time and change of state counts&#xa; on binary or enum values.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">1 Nov 00</tag>
+<tag name="@version">$Revision: 36$ $Date: 7/8/09 3:16:32 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.control.BPointExtension"/>
+</extends>
+<property name="changeOfStateCountTransition" flags="">
+<type class="javax.baja.control.enums.BCountTransition"/>
+<description>
+Slot for the &lt;code&gt;changeOfStateCountTransition&lt;/code&gt; property.
+</description>
+<tag name="@see">#getChangeOfStateCountTransition</tag>
+<tag name="@see">#setChangeOfStateCountTransition</tag>
+</property>
+
+<property name="propagateFlags" flags="">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;propagateFlags&lt;/code&gt; property.&#xa; defines which input status flags will be propagated from&#xa; input to output.
+</description>
+<tag name="@see">#getPropagateFlags</tag>
+<tag name="@see">#setPropagateFlags</tag>
+</property>
+
+<property name="invalidValueFlags" flags="">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;invalidValueFlags&lt;/code&gt; property.&#xa; defines which input status flags will denote invalid input&#xa; values that should not be included in the total
+</description>
+<tag name="@see">#getInvalidValueFlags</tag>
+<tag name="@see">#setInvalidValueFlags</tag>
+</property>
+
+<property name="changeOfStateTime" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;changeOfStateTime&lt;/code&gt; property.&#xa; Shows a date/timestamp for the last change of state.
+</description>
+<tag name="@see">#getChangeOfStateTime</tag>
+<tag name="@see">#setChangeOfStateTime</tag>
+</property>
+
+<property name="changeOfStateCount" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;changeOfStateCount&lt;/code&gt; property.&#xa; Shows the total number of changes of state that have occurred&#xa; since the last reset of change of state count.
+</description>
+<tag name="@see">#getChangeOfStateCount</tag>
+<tag name="@see">#setChangeOfStateCount</tag>
+</property>
+
+<property name="timeOfStateCountReset" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;timeOfStateCountReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the change of state count was last cleared.
+</description>
+<tag name="@see">#getTimeOfStateCountReset</tag>
+<tag name="@see">#setTimeOfStateCountReset</tag>
+</property>
+
+<property name="elapsedActiveTime" flags="r">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;elapsedActiveTime&lt;/code&gt; property.&#xa; Shows the accumulated runtime (elapsed active time).
+</description>
+<tag name="@see">#getElapsedActiveTime</tag>
+<tag name="@see">#setElapsedActiveTime</tag>
+</property>
+
+<property name="elapsedActiveTimeNumeric" flags="r">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;elapsedActiveTimeNumeric&lt;/code&gt; property.&#xa; Shows the accumulated runtime as a numeric.
+</description>
+<tag name="@see">#getElapsedActiveTimeNumeric</tag>
+<tag name="@see">#setElapsedActiveTimeNumeric</tag>
+</property>
+
+<property name="timeOfActiveTimeReset" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;timeOfActiveTimeReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the accumulated runtime (elapsed active time) was last cleared.
+</description>
+<tag name="@see">#getTimeOfActiveTimeReset</tag>
+<tag name="@see">#setTimeOfActiveTimeReset</tag>
+</property>
+
+<property name="eaTimeUpdateInterval" flags="s">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;eaTimeUpdateInterval&lt;/code&gt; property.&#xa; Shows the minimum update time for Elapsed Active Time and Elapsed Active Time Numeric properties.
+</description>
+<tag name="@see">#getEaTimeUpdateInterval</tag>
+<tag name="@see">#setEaTimeUpdateInterval</tag>
+</property>
+
+<action name="timerExpired" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;timerExpired&lt;/code&gt; action.&#xa; timerExpired
+</description>
+<tag name="@see">#timerExpired()</tag>
+</action>
+
+<action name="resetChangeOfStateCount" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetChangeOfStateCount&lt;/code&gt; action.&#xa; This sets the changeOfStateCount property value to zero (0), clearing any change of state count.
+</description>
+<tag name="@see">#resetChangeOfStateCount()</tag>
+</action>
+
+<action name="resetElapsedActiveTime" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetElapsedActiveTime&lt;/code&gt; action.&#xa; This sets the elapsedActiveTime property value to zero, clearing any accumulated runtime.
+</description>
+<tag name="@see">#resetElapsedActiveTime()</tag>
+</action>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt() -->
+<constructor name="BDiscreteTotalizerExt" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getChangeOfStateCountTransition() -->
+<method name="getChangeOfStateCountTransition"  public="true">
+<description>
+Get the &lt;code&gt;changeOfStateCountTransition&lt;/code&gt; property.
+</description>
+<tag name="@see">#changeOfStateCountTransition</tag>
+<return>
+<type class="javax.baja.control.enums.BCountTransition"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setChangeOfStateCountTransition(javax.baja.control.enums.BCountTransition) -->
+<method name="setChangeOfStateCountTransition"  public="true">
+<description>
+Set the &lt;code&gt;changeOfStateCountTransition&lt;/code&gt; property.
+</description>
+<tag name="@see">#changeOfStateCountTransition</tag>
+<parameter name="v">
+<type class="javax.baja.control.enums.BCountTransition"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getPropagateFlags() -->
+<method name="getPropagateFlags"  public="true">
+<description>
+Get the &lt;code&gt;propagateFlags&lt;/code&gt; property.&#xa; defines which input status flags will be propagated from&#xa; input to output.
+</description>
+<tag name="@see">#propagateFlags</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setPropagateFlags(javax.baja.status.BStatus) -->
+<method name="setPropagateFlags"  public="true">
+<description>
+Set the &lt;code&gt;propagateFlags&lt;/code&gt; property.&#xa; defines which input status flags will be propagated from&#xa; input to output.
+</description>
+<tag name="@see">#propagateFlags</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getInvalidValueFlags() -->
+<method name="getInvalidValueFlags"  public="true">
+<description>
+Get the &lt;code&gt;invalidValueFlags&lt;/code&gt; property.&#xa; defines which input status flags will denote invalid input&#xa; values that should not be included in the total
+</description>
+<tag name="@see">#invalidValueFlags</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setInvalidValueFlags(javax.baja.status.BStatus) -->
+<method name="setInvalidValueFlags"  public="true">
+<description>
+Set the &lt;code&gt;invalidValueFlags&lt;/code&gt; property.&#xa; defines which input status flags will denote invalid input&#xa; values that should not be included in the total
+</description>
+<tag name="@see">#invalidValueFlags</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getChangeOfStateTime() -->
+<method name="getChangeOfStateTime"  public="true">
+<description>
+Get the &lt;code&gt;changeOfStateTime&lt;/code&gt; property.&#xa; Shows a date/timestamp for the last change of state.
+</description>
+<tag name="@see">#changeOfStateTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setChangeOfStateTime(javax.baja.sys.BAbsTime) -->
+<method name="setChangeOfStateTime"  public="true">
+<description>
+Set the &lt;code&gt;changeOfStateTime&lt;/code&gt; property.&#xa; Shows a date/timestamp for the last change of state.
+</description>
+<tag name="@see">#changeOfStateTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getChangeOfStateCount() -->
+<method name="getChangeOfStateCount"  public="true">
+<description>
+Get the &lt;code&gt;changeOfStateCount&lt;/code&gt; property.&#xa; Shows the total number of changes of state that have occurred&#xa; since the last reset of change of state count.
+</description>
+<tag name="@see">#changeOfStateCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setChangeOfStateCount(int) -->
+<method name="setChangeOfStateCount"  public="true">
+<description>
+Set the &lt;code&gt;changeOfStateCount&lt;/code&gt; property.&#xa; Shows the total number of changes of state that have occurred&#xa; since the last reset of change of state count.
+</description>
+<tag name="@see">#changeOfStateCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getTimeOfStateCountReset() -->
+<method name="getTimeOfStateCountReset"  public="true">
+<description>
+Get the &lt;code&gt;timeOfStateCountReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the change of state count was last cleared.
+</description>
+<tag name="@see">#timeOfStateCountReset</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setTimeOfStateCountReset(javax.baja.sys.BAbsTime) -->
+<method name="setTimeOfStateCountReset"  public="true">
+<description>
+Set the &lt;code&gt;timeOfStateCountReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the change of state count was last cleared.
+</description>
+<tag name="@see">#timeOfStateCountReset</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getElapsedActiveTime() -->
+<method name="getElapsedActiveTime"  public="true">
+<description>
+Get the &lt;code&gt;elapsedActiveTime&lt;/code&gt; property.&#xa; Shows the accumulated runtime (elapsed active time).
+</description>
+<tag name="@see">#elapsedActiveTime</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setElapsedActiveTime(javax.baja.sys.BRelTime) -->
+<method name="setElapsedActiveTime"  public="true">
+<description>
+Set the &lt;code&gt;elapsedActiveTime&lt;/code&gt; property.&#xa; Shows the accumulated runtime (elapsed active time).
+</description>
+<tag name="@see">#elapsedActiveTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getElapsedActiveTimeNumeric() -->
+<method name="getElapsedActiveTimeNumeric"  public="true">
+<description>
+Get the &lt;code&gt;elapsedActiveTimeNumeric&lt;/code&gt; property.&#xa; Shows the accumulated runtime as a numeric.
+</description>
+<tag name="@see">#elapsedActiveTimeNumeric</tag>
+<return>
+<type class="javax.baja.status.BStatusNumeric"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setElapsedActiveTimeNumeric(javax.baja.status.BStatusNumeric) -->
+<method name="setElapsedActiveTimeNumeric"  public="true">
+<description>
+Set the &lt;code&gt;elapsedActiveTimeNumeric&lt;/code&gt; property.&#xa; Shows the accumulated runtime as a numeric.
+</description>
+<tag name="@see">#elapsedActiveTimeNumeric</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatusNumeric"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getTimeOfActiveTimeReset() -->
+<method name="getTimeOfActiveTimeReset"  public="true">
+<description>
+Get the &lt;code&gt;timeOfActiveTimeReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the accumulated runtime (elapsed active time) was last cleared.
+</description>
+<tag name="@see">#timeOfActiveTimeReset</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setTimeOfActiveTimeReset(javax.baja.sys.BAbsTime) -->
+<method name="setTimeOfActiveTimeReset"  public="true">
+<description>
+Set the &lt;code&gt;timeOfActiveTimeReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the accumulated runtime (elapsed active time) was last cleared.
+</description>
+<tag name="@see">#timeOfActiveTimeReset</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getEaTimeUpdateInterval() -->
+<method name="getEaTimeUpdateInterval"  public="true">
+<description>
+Get the &lt;code&gt;eaTimeUpdateInterval&lt;/code&gt; property.&#xa; Shows the minimum update time for Elapsed Active Time and Elapsed Active Time Numeric properties.
+</description>
+<tag name="@see">#eaTimeUpdateInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.setEaTimeUpdateInterval(javax.baja.sys.BRelTime) -->
+<method name="setEaTimeUpdateInterval"  public="true">
+<description>
+Set the &lt;code&gt;eaTimeUpdateInterval&lt;/code&gt; property.&#xa; Shows the minimum update time for Elapsed Active Time and Elapsed Active Time Numeric properties.
+</description>
+<tag name="@see">#eaTimeUpdateInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.timerExpired() -->
+<method name="timerExpired"  public="true">
+<description>
+Invoke the &lt;code&gt;timerExpired&lt;/code&gt; action.&#xa; timerExpired
+</description>
+<tag name="@see">#timerExpired</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.resetChangeOfStateCount() -->
+<method name="resetChangeOfStateCount"  public="true">
+<description>
+Invoke the &lt;code&gt;resetChangeOfStateCount&lt;/code&gt; action.&#xa; This sets the changeOfStateCount property value to zero (0), clearing any change of state count.
+</description>
+<tag name="@see">#resetChangeOfStateCount</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.resetElapsedActiveTime() -->
+<method name="resetElapsedActiveTime"  public="true">
+<description>
+Invoke the &lt;code&gt;resetElapsedActiveTime&lt;/code&gt; action.&#xa; This sets the elapsedActiveTime property value to zero, clearing any accumulated runtime.
+</description>
+<tag name="@see">#resetElapsedActiveTime</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.requiresPointSubscription() -->
+<method name="requiresPointSubscription"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Parent must be a DiscretePoint.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.isSiblingLegal(javax.baja.sys.BComponent) -->
+<method name="isSiblingLegal"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Any sibling is legal for an alarm extension.
+</description>
+<parameter name="sibling">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.doTimerExpired() -->
+<method name="doTimerExpired"  public="true">
+<description>
+Callback for timer expired.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.onExecute(javax.baja.status.BStatusValue, javax.baja.sys.Context) -->
+<method name="onExecute"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called when either me or my parent control &#xa; point is updated.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.doResetChangeOfStateCount() -->
+<method name="doResetChangeOfStateCount"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.doResetElapsedActiveTime() -->
+<method name="doResetElapsedActiveTime"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.changeOfStateCountTransition -->
+<field name="changeOfStateCountTransition"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;changeOfStateCountTransition&lt;/code&gt; property.
+</description>
+<tag name="@see">#getChangeOfStateCountTransition</tag>
+<tag name="@see">#setChangeOfStateCountTransition</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.propagateFlags -->
+<field name="propagateFlags"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;propagateFlags&lt;/code&gt; property.&#xa; defines which input status flags will be propagated from&#xa; input to output.
+</description>
+<tag name="@see">#getPropagateFlags</tag>
+<tag name="@see">#setPropagateFlags</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.invalidValueFlags -->
+<field name="invalidValueFlags"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;invalidValueFlags&lt;/code&gt; property.&#xa; defines which input status flags will denote invalid input&#xa; values that should not be included in the total
+</description>
+<tag name="@see">#getInvalidValueFlags</tag>
+<tag name="@see">#setInvalidValueFlags</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.changeOfStateTime -->
+<field name="changeOfStateTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;changeOfStateTime&lt;/code&gt; property.&#xa; Shows a date/timestamp for the last change of state.
+</description>
+<tag name="@see">#getChangeOfStateTime</tag>
+<tag name="@see">#setChangeOfStateTime</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.changeOfStateCount -->
+<field name="changeOfStateCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;changeOfStateCount&lt;/code&gt; property.&#xa; Shows the total number of changes of state that have occurred&#xa; since the last reset of change of state count.
+</description>
+<tag name="@see">#getChangeOfStateCount</tag>
+<tag name="@see">#setChangeOfStateCount</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.timeOfStateCountReset -->
+<field name="timeOfStateCountReset"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeOfStateCountReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the change of state count was last cleared.
+</description>
+<tag name="@see">#getTimeOfStateCountReset</tag>
+<tag name="@see">#setTimeOfStateCountReset</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.elapsedActiveTime -->
+<field name="elapsedActiveTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;elapsedActiveTime&lt;/code&gt; property.&#xa; Shows the accumulated runtime (elapsed active time).
+</description>
+<tag name="@see">#getElapsedActiveTime</tag>
+<tag name="@see">#setElapsedActiveTime</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.elapsedActiveTimeNumeric -->
+<field name="elapsedActiveTimeNumeric"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;elapsedActiveTimeNumeric&lt;/code&gt; property.&#xa; Shows the accumulated runtime as a numeric.
+</description>
+<tag name="@see">#getElapsedActiveTimeNumeric</tag>
+<tag name="@see">#setElapsedActiveTimeNumeric</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.timeOfActiveTimeReset -->
+<field name="timeOfActiveTimeReset"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeOfActiveTimeReset&lt;/code&gt; property.&#xa; Shows a date/timestamp for when the accumulated runtime (elapsed active time) was last cleared.
+</description>
+<tag name="@see">#getTimeOfActiveTimeReset</tag>
+<tag name="@see">#setTimeOfActiveTimeReset</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.eaTimeUpdateInterval -->
+<field name="eaTimeUpdateInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;eaTimeUpdateInterval&lt;/code&gt; property.&#xa; Shows the minimum update time for Elapsed Active Time and Elapsed Active Time Numeric properties.
+</description>
+<tag name="@see">#getEaTimeUpdateInterval</tag>
+<tag name="@see">#setEaTimeUpdateInterval</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.timerExpired -->
+<field name="timerExpired"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;timerExpired&lt;/code&gt; action.&#xa; timerExpired
+</description>
+<tag name="@see">#timerExpired()</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.resetChangeOfStateCount -->
+<field name="resetChangeOfStateCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;resetChangeOfStateCount&lt;/code&gt; action.&#xa; This sets the changeOfStateCount property value to zero (0), clearing any change of state count.
+</description>
+<tag name="@see">#resetChangeOfStateCount()</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.resetElapsedActiveTime -->
+<field name="resetElapsedActiveTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;resetElapsedActiveTime&lt;/code&gt; action.&#xa; This sets the elapsedActiveTime property value to zero, clearing any accumulated runtime.
+</description>
+<tag name="@see">#resetElapsedActiveTime()</tag>
+</field>
+
+<!-- javax.baja.control.ext.BDiscreteTotalizerExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

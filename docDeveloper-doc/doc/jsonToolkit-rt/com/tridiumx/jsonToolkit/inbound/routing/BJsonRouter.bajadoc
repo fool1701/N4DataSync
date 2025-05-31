@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter" name="BJsonRouter" packageName="com.tridiumx.jsonToolkit.inbound.routing" public="true" abstract="true">
+<description>
+Base class for JSON message routers.&#xa;&#xa; Message Router components are used to redirect an incoming message (or subset) to a new slot so that links may redirect the JSON&#xa; to be handled by another component.
+</description>
+<tag name="@author">Nick Dodd</tag>
+<extends>
+<type class="com.tridiumx.jsonToolkit.inbound.BJsonInbound"/>
+</extends>
+<implements>
+<type class="com.tridiumx.jsonToolkit.inbound.routing.slot.DynamicSlotUtil"/>
+</implements>
+<property name="learnMode" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;learnMode&lt;/code&gt; property.&#xa; Automatically add slots for unmatched key values
+</description>
+<tag name="@see">#getLearnMode</tag>
+<tag name="@see">#setLearnMode</tag>
+</property>
+
+<action name="addSlot" flags="">
+<parameter name="parameter">
+<type class="com.tridiumx.jsonToolkit.inbound.routing.slot.BAddSlotDetail"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;addSlot&lt;/code&gt; action.
+</description>
+<tag name="@see">#addSlot(BAddSlotDetail parameter)</tag>
+</action>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter() -->
+<constructor name="BJsonRouter" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.getLearnMode() -->
+<method name="getLearnMode"  public="true">
+<description>
+Get the &lt;code&gt;learnMode&lt;/code&gt; property.&#xa; Automatically add slots for unmatched key values
+</description>
+<tag name="@see">#learnMode</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.setLearnMode(boolean) -->
+<method name="setLearnMode"  public="true">
+<description>
+Set the &lt;code&gt;learnMode&lt;/code&gt; property.&#xa; Automatically add slots for unmatched key values
+</description>
+<tag name="@see">#learnMode</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.addSlot(com.tridiumx.jsonToolkit.inbound.routing.slot.BAddSlotDetail) -->
+<method name="addSlot"  public="true">
+<description>
+Invoke the &lt;code&gt;addSlot&lt;/code&gt; action.
+</description>
+<tag name="@see">#addSlot</tag>
+<parameter name="parameter">
+<type class="com.tridiumx.jsonToolkit.inbound.routing.slot.BAddSlotDetail"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.doAddSlot(com.tridiumx.jsonToolkit.inbound.routing.slot.BAddSlotDetail) -->
+<method name="doAddSlot"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="detail">
+<type class="com.tridiumx.jsonToolkit.inbound.routing.slot.BAddSlotDetail"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.setNewValueOnSlot(java.lang.String, java.lang.String, javax.baja.sys.BValue) -->
+<method name="setNewValueOnSlot"  public="true">
+<description/>
+<parameter name="message">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="slotName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridiumx.jsonToolkit.inbound.routing.RoutingFailedException"/>
+</throws>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.implOutputsToClear() -->
+<method name="implOutputsToClear"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.learnMode -->
+<field name="learnMode"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;learnMode&lt;/code&gt; property.&#xa; Automatically add slots for unmatched key values
+</description>
+<tag name="@see">#getLearnMode</tag>
+<tag name="@see">#setLearnMode</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.addSlot -->
+<field name="addSlot"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;addSlot&lt;/code&gt; action.
+</description>
+<tag name="@see">#addSlot(BAddSlotDetail parameter)</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.routing.BJsonRouter.DEFAULT_ROUTER_SLOT_FLAGS -->
+<field name="DEFAULT_ROUTER_SLOT_FLAGS"  public="true" static="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

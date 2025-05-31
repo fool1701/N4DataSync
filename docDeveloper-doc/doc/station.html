@@ -1,0 +1,54 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/execution.html" class="navbar">Prev</a> |  <a href="/doc/remoteProgramming.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="station">Station</h1>
+<h2 id="overview">Overview</h2>
+<p>A station is the main unit of server processing in the Niagara architecture:</p>
+<ul>
+  <li>A station database is defined by a single .bog file <code>&quot;file:~stations/{name}/config.bog&quot;</code>.</li>
+  <li>Stations are booted from their <code>config.bog</code> file into a single VM/process on the host machine.</li>
+  <li>There is usually a one to one correspondence between stations and host machines (Supervisors or Jaces).  However, it is possible to run two stations on the same machine if they are configured to use different IP ports.</li>
+</ul>
+<h2 id="bootstrap">Bootstrap</h2>
+<p>The following defines the station boot process:</p>
+<ol>
+  <li><strong>Load</strong>: The first phase of bootstrap is to deserialize the <code>config.bog</code> database into memory as a <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/BStation.bajadoc"><code>BStation</code></a> and mount it into the ord namespace as <code>&quot;local:|station:&quot;</code>.</li>
+  <li><strong>Service Registration</strong>: Once the bog file has been loaded into memory and mounted, the framework registers all services.  Services are defined by implementing the <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/BIService.bajadoc"><code>BIService</code></a>.  After this step is complete, each service from the bog file may be resolved using the <code>Sys.getService()</code> and <code>Sys.getServices()</code> methods.</li>
+  <li><strong>Service Initialization</strong>:  Once all services are registered by the framework, each service is initialized via the <code>Service.serviceStarted()</code> callback.  This gives services a chance to initialize themselves after other services have been registered, but before general components get started.</li>
+  <li><strong>Component Start</strong>:  After service initialization, the entire component tree under <code>&quot;local:|station:&quot;</code> is started using <code>BComponent.start()</code>.  This call in turn results in the <code>started()</code> and <code>descendentsStarted()</code> callbacks.  Once this phase is complete the entire station database is in the running state and all active links continue propagation until the station is shutdown.</li>
+  <li><strong>Station Started</strong>:  After all the components under the <code>BStation</code> have been started, each component receives the <code>stationStarted()</code> callback.  As a general rule, external communications should wait until this stage so that all components get a chance to initialize themselves.</li>
+  <li><strong>Steady State</strong>: Some control algorithms take a few seconds before the station should start sending control commands to external devices.  To handle this case there is a built-in timer during station bootstrap that waits a few seconds, then invokes the <code>BComponent.atSteadyState()</code> callback.  The steady state timer may be configured using the &ldquo;nre.steadystate&rdquo; system property.  Use <code>Sys.atSteadyState()</code> to check if a station VM has completed its steady state wait period.</li>
+</ol>
+<h2 id="shutdown">Shutdown</h2>
+<p>The following defines the station shutdown process:</p>
+<ol>
+  <li><strong>Save</strong>: The first phase of station shutdown is to serialize the <code>BStation</code> stored in memory to the <code>config.bog</code> file.  Any changes that were made to the station durring runtime will now be reflected in the <code>config.bog</code></li>
+  <li><strong>Component Stop</strong>: Once the bog has been saved, the entire component tree under <code>&quot;local:|station:&quot;</code> is stopped using <code>BComponent.stop()</code>.  This call in turn results in the <code>stopped()</code> and <code>descendentsStopped()</code> callbacks.</li>
+  <li><strong>Service Stop</strong>: After all the components under the <code>BStation</code> have been stopped, each service is stopped using the <code>Service.serviceStopped()</code> callback.</li>
+</ol>
+<h2 id="station-lifecycle">Station Lifecycle</h2>
+<p><img src="stationLifecycle.png" alt="Station Lifecycle Diagram" title="Station Lifecycle Diagram" /></p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/execution.html" class="navbar">Prev</a> |  <a href="/doc/remoteProgramming.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

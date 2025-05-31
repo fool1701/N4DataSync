@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="kitControl" runtimeProfile="rt" qualifiedName="com.tridium.kitControl.math.BMath" name="BMath" packageName="com.tridium.kitControl.math" public="true" abstract="true">
+<description>
+BMath is the abstract superclass of all Baja math &#xa; objects.  These objects take 1-4 numeric inputs, &#xa; perform a mathematical operation such as addition, &#xa; averaging, sin, etc. and update the out property.&#xa; &lt;p&gt;&#xa; By convention, input values with invalid status &#xa; (down, fault or null) bit set are ignored (not &#xa; used in the math calculation).  However, the &#xa; status bits set on the output are the logical &#xa; OR of the status bits set on the input, with&#xa; one exception. If the null bit is set, any&#xa; other bits (status, in_alarm, etc) are ignored.&#xa; &lt;p&gt;&#xa; By  default, all &#x27;in&#x27; property slots have the null &#xa; bit set, therefore unlinked values are ignored. &#xa; If all inputs have the null bit set, the output&#xa; will have the null bit set.  &#xa; &lt;p&gt;&#xa; Each math object requires a minimum number of &#xa; inputs. If less than the minimum number of inputs &#xa; are non-null, the output will have the null bit set.&#xa; &lt;p&gt;&#xa; Input values with the Double.NaN are NOT ignored.&#xa; The calculation will proceed normally, resulting&#xa; in a Double.NaN output.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">8 Nov 00</tag>
+<tag name="@version">$Revision: 17$ $Date: 3/30/2004 3:42:02 PM$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.control.BNumericPoint"/>
+</extends>
+<property name="propagateFlags" flags="">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;propagateFlags&lt;/code&gt; property.&#xa; defines which input status flags will be propagated from&#xa; input to output.
+</description>
+<tag name="@see">#getPropagateFlags</tag>
+<tag name="@see">#setPropagateFlags</tag>
+</property>
+
+</class>
+</bajadoc>

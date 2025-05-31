@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.file.BFileSystem" name="BFileSystem" packageName="javax.baja.file" public="true">
+<description>
+BFileSystem is a BFileSpace for the local machine&#x27;s&#xa; file system.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">24 Jan 03</tag>
+<tag name="@version">$Revision: 42$ $Date: 9/2/10 1:52:08 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.file.BLocalizedFileSpace"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NiagaraSingleton"/>
+</annotation>
+<!-- javax.baja.file.BFileSystem.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.isNiagaraHomeReadOnly() -->
+<method name="isNiagaraHomeReadOnly"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Determines if the target system has a read-only Niagara Home directory.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getSysHome() -->
+<method name="getSysHome"  public="true">
+<description>
+Get &lt;code&gt;Nre.getNiagaraHome()&lt;/code&gt; as a BDirectory.
+</description>
+<return>
+<type class="javax.baja.file.BDirectory"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getUserHome() -->
+<method name="getUserHome"  public="true">
+<description>
+Get &lt;code&gt;Sys.getNiagaraUserHome()&lt;/code&gt; as a BDirectory.
+</description>
+<return>
+<type class="javax.baja.file.BDirectory"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getStationHome() -->
+<method name="getStationHome"  public="true">
+<description>
+Get &lt;code&gt;Sys.getStationHome()&lt;/code&gt; as a BDirectory or null&#xa; if this is not a station VM.
+</description>
+<return>
+<type class="javax.baja.file.BDirectory"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getProtectedStationHome() -->
+<method name="getProtectedStationHome"  public="true">
+<description>
+Get &lt;code&gt;Sys.getProtectedStationHome()&lt;/code&gt; as a BDirectory or null&#xa; if this is not a station VM.
+</description>
+<return>
+<type class="javax.baja.file.BDirectory"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.makeDir(javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="makeDir"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Make a directory for the specified path or return&#xa; the existing directory.  This creates zero or more&#xa; directories as needed.
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BDirectory"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BFileSystem.makeFile(javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="makeFile"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Make a file for the specified path or return the&#xa; existing file.  This creates zero or more directories&#xa; as needed.
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFile"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BFileSystem.move(javax.baja.file.FilePath, javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="move"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Move/rename the specified file.  If the &#x22;to&#x22; path is not&#xa; absolute, then it is relative to the from.getParent().
+</description>
+<parameter name="from">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="to">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BFileSystem.delete(javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="delete"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Delete the specified file store.
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getLocalizedFilePath(javax.baja.file.FilePath) -->
+<method name="getLocalizedFilePath"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+When Niagara Home is read-only, redirect certain system file paths to an alternate writable&#xa; location. For example, !modules and !security will be redirected to ~modules and ~security&#xa; respectively.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+<description>
+the original file path
+</description>
+</parameter>
+<return>
+<type class="javax.baja.file.FilePath"/>
+<description>
+the redirected file path if the target system requires redirection;&#xa; otherwise the original file path
+</description>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.fireNavEvent(javax.baja.nav.NavEvent) -->
+<method name="fireNavEvent"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Sometimes an event on a file under ^ or ! results&#xa; in two or three events.  This whole design assumes&#xa; that the station home is properly mounted under sys home!
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.listFiles() -->
+<method name="listFiles"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return root files.
+</description>
+<return>
+<type class="javax.baja.file.BIFile" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.pathToLocalFile(javax.baja.file.FilePath) -->
+<method name="pathToLocalFile"  public="true">
+<description>
+Given a file path, map it to a java.io.File.&#xa; This doesn&#x27;t guarantee that the file exists.
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="java.io.File"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.localFileToPath(java.io.File) -->
+<method name="localFileToPath"  public="true">
+<description>
+Map a local file to a FilePath.
+</description>
+<parameter name="file">
+<type class="java.io.File"/>
+</parameter>
+<return>
+<type class="javax.baja.file.FilePath"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.localFileToOrd(java.io.File) -->
+<method name="localFileToOrd"  public="true">
+<description>
+Map a local file to an ord.
+</description>
+<parameter name="file">
+<type class="java.io.File"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.findFile(javax.baja.file.FilePath) -->
+<method name="findFile"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Map the file path to an instance of BLocalFileStore&#xa; or return null if it doesn&#x27;t exist.
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFile"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.findStore(javax.baja.file.FilePath) -->
+<method name="findStore"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Map the file path to an instance of BLocalFileStore&#xa; or return null if it doesn&#x27;t exist.
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFileStore"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getChild(javax.baja.file.BIFile, java.lang.String) -->
+<method name="getChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the child of the specified directory or return null.
+</description>
+<parameter name="dir">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFile"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getChildren(javax.baja.file.BIFile) -->
+<method name="getChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the children of the specified directory or&#xa; return an empty array.
+</description>
+<parameter name="dir">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFile" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.hasNavChildren() -->
+<method name="hasNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a root by name.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the file system roots.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getOrdInHost() -->
+<method name="getOrdInHost"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the ord in host.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.getOrdInSession() -->
+<method name="getOrdInSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the ord in session.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BFileSystem.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BFileSystem.INSTANCE -->
+<field name="INSTANCE"  public="true" static="true" final="true">
+<type class="javax.baja.file.BFileSystem"/>
+<description/>
+</field>
+
+<!-- javax.baja.file.BFileSystem.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

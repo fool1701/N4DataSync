@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton" name="BHoldDownPxButton" packageName="com.tridium.videoDriver.ui.holdDownButton.px" public="true">
+<description>
+Works with a BHoldDownPxBinding to periodically invoke an action, fire&#xa; a topic, or set a property value as the main mouse button is held down.&#xa; &#xa; Also works with the BHoldDownPxBinding to invoke an action, fire a topic,&#xa; or set a property value as the main mouse button is released.&#xa; &#xa; This is accomplished by using a topic named &#x27;mouseActivity&#x27;. When the&#xa; main mouse button is pressed, the mouseActivity topic is fired with&#xa; a BHoldDownPxButton.MOUSE_DOWN_EVENT. Then, as/if the main mouse button&#xa; is held down, the &#x27;mouseActivity&#x27; topic is fired periodically with a&#xa; BHoldDownPxButton.MOUSE_DOWN_EVENT until the main mouse button is released.&#xa; When the main mouse button is release, this fires the mouseActivity&#xa; topic with a BHoldDownPxButton.MOUSE_RELEASE_EVENT.&#xa; &#xa; Then the BHoldDownPxBinding child of this button (configured by the &#xa; integrator on the PxEditor) detects the &#x27;mouseActivity&#x27; topic with the&#xa; BHoldDownPxBinding.MOUSE_DOWN_EVENT and invokes the action, fires the&#xa; topic, or sets the property that is identified by the mouseDownSlot&#xa; on the binding.&#xa; &#xa; Likewise, the BHoldDownPxBinding child of the button (configured by the&#xa; integrator on the PxEditor) detects the &#x27;mouseActivity&#x27; topic with the&#xa; BHoldDownPxBinding.MOUSE_RELEASE_EVENT and invokes the action, fires&#xa; the topic, or sets the property that is identified by the&#xa; mouseReleaseSlot on the binding.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton"/>
+</extends>
+<topic name="mouseActivity" flags="">
+<eventType>
+<type class="javax.baja.sys.BString"/>
+</eventType><description>
+Slot for the &lt;code&gt;mouseActivity&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireMouseActivity</tag>
+</topic>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton() -->
+<constructor name="BHoldDownPxButton" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton.fireMouseActivity(javax.baja.sys.BString) -->
+<method name="fireMouseActivity"  public="true">
+<description>
+Fire an event for the &lt;code&gt;mouseActivity&lt;/code&gt; topic.
+</description>
+<tag name="@see">#mouseActivity</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton.mouseActivity -->
+<field name="mouseActivity"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;mouseActivity&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireMouseActivity</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton.MOUSE_DOWN_EVENT -->
+<field name="MOUSE_DOWN_EVENT"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BString"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.px.BHoldDownPxButton.MOUSE_RELEASE_EVENT -->
+<field name="MOUSE_RELEASE_EVENT"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BString"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

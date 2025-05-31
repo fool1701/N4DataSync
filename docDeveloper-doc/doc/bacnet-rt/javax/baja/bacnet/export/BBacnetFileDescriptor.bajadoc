@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.export.BBacnetFileDescriptor" name="BBacnetFileDescriptor" packageName="javax.baja.bacnet.export" public="true">
+<description>
+BBacnetFileDescriptor exposes a BIFile to Bacnet as a File object.&#xa; &lt;p&gt;&#xa; This extension is different from the point extensions, which are&#xa; dropped as children to the control point that they are exposing.&#xa; The BBacnetFileDescriptor can be placed anywhere.  The BFile which is&#xa; exposed by this extension is referenced by the file property.&#xa; &lt;p&gt;&#xa; The name by which this file is known to Bacnet (the Object_Name&#xa; property) is the name of the extension.&#xa; &lt;p&gt;&#xa; All files in Niagara are accessed using the STREAM_ACCESS method.
+</description>
+<tag name="@author">Craig Gemmill on 06 Mar 02</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.export.BacnetPropertyListProvider"/>
+</implements>
+<property name="status" flags="trd">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="faultCause" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<property name="fileOrd" flags="d">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;fileOrd&lt;/code&gt; property.&#xa; the file exposed via this extension.
+</description>
+<tag name="@see">#getFileOrd</tag>
+<tag name="@see">#setFileOrd</tag>
+</property>
+
+<property name="objectId" flags="d">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</property>
+
+<property name="objectName" flags="d">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#getObjectName</tag>
+<tag name="@see">#setObjectName</tag>
+</property>
+
+<property name="description" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</property>
+
+<property name="fileType" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fileType&lt;/code&gt; property.&#xa; identifies the intended usage of this file.
+</description>
+<tag name="@see">#getFileType</tag>
+<tag name="@see">#setFileType</tag>
+</property>
+
+<property name="archiveTime" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;archiveTime&lt;/code&gt; property.&#xa; time the file was last archived.
+</description>
+<tag name="@see">#getArchiveTime</tag>
+<tag name="@see">#setArchiveTime</tag>
+</property>
+
+<property name="fileAccessMethod" flags="r">
+<type class="javax.baja.bacnet.enums.BBacnetFileAccessMethod"/>
+<description>
+Slot for the &lt;code&gt;fileAccessMethod&lt;/code&gt; property.&#xa; only STREAM_ACCESS is supported for now.
+</description>
+<tag name="@see">#getFileAccessMethod</tag>
+<tag name="@see">#setFileAccessMethod</tag>
+</property>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor() -->
+<constructor name="BBacnetFileDescriptor" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getFileOrd() -->
+<method name="getFileOrd"  public="true">
+<description>
+Get the &lt;code&gt;fileOrd&lt;/code&gt; property.&#xa; the file exposed via this extension.
+</description>
+<tag name="@see">#fileOrd</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setFileOrd(javax.baja.naming.BOrd) -->
+<method name="setFileOrd"  public="true">
+<description>
+Set the &lt;code&gt;fileOrd&lt;/code&gt; property.&#xa; the file exposed via this extension.
+</description>
+<tag name="@see">#fileOrd</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getObjectId() -->
+<method name="getObjectId"  public="true">
+<description>
+Get the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#objectId</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setObjectId(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="setObjectId"  public="true">
+<description>
+Set the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#objectId</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getObjectName() -->
+<method name="getObjectName"  public="true">
+<description>
+Get the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#objectName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setObjectName(java.lang.String) -->
+<method name="setObjectName"  public="true">
+<description>
+Set the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#objectName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getDescription() -->
+<method name="getDescription"  public="true">
+<description>
+Get the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#description</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setDescription(java.lang.String) -->
+<method name="setDescription"  public="true">
+<description>
+Set the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#description</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getFileType() -->
+<method name="getFileType"  public="true">
+<description>
+Get the &lt;code&gt;fileType&lt;/code&gt; property.&#xa; identifies the intended usage of this file.
+</description>
+<tag name="@see">#fileType</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setFileType(java.lang.String) -->
+<method name="setFileType"  public="true">
+<description>
+Set the &lt;code&gt;fileType&lt;/code&gt; property.&#xa; identifies the intended usage of this file.
+</description>
+<tag name="@see">#fileType</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getArchiveTime() -->
+<method name="getArchiveTime"  public="true">
+<description>
+Get the &lt;code&gt;archiveTime&lt;/code&gt; property.&#xa; time the file was last archived.
+</description>
+<tag name="@see">#archiveTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setArchiveTime(javax.baja.sys.BAbsTime) -->
+<method name="setArchiveTime"  public="true">
+<description>
+Set the &lt;code&gt;archiveTime&lt;/code&gt; property.&#xa; time the file was last archived.
+</description>
+<tag name="@see">#archiveTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getFileAccessMethod() -->
+<method name="getFileAccessMethod"  public="true">
+<description>
+Get the &lt;code&gt;fileAccessMethod&lt;/code&gt; property.&#xa; only STREAM_ACCESS is supported for now.
+</description>
+<tag name="@see">#fileAccessMethod</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BBacnetFileAccessMethod"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setFileAccessMethod(javax.baja.bacnet.enums.BBacnetFileAccessMethod) -->
+<method name="setFileAccessMethod"  public="true">
+<description>
+Set the &lt;code&gt;fileAccessMethod&lt;/code&gt; property.&#xa; only STREAM_ACCESS is supported for now.
+</description>
+<tag name="@see">#fileAccessMethod</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BBacnetFileAccessMethod"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.started() -->
+<method name="started"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Register with the Bacnet service when this component is started.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.stopped() -->
+<method name="stopped"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Unregister with the Bacnet service when this component is stopped.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Property Changed.&#xa; If the objectId changes, make sure the new ID is not already in use.&#xa; If it is, reset it to the current value.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get slot facets.
+</description>
+<parameter name="s">
+<type class="javax.baja.sys.Slot"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+<description>
+the appropriate slot facets.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getObject() -->
+<method name="getObject"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the exported object.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+<description>
+the actual exported object by resolving the object ord.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getObjectOrd() -->
+<method name="getObjectOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the BOrd to the exported object.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setObjectOrd(javax.baja.naming.BOrd, javax.baja.sys.Context) -->
+<method name="setObjectOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the BOrd to the exported object.
+</description>
+<parameter name="objectOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.checkConfiguration() -->
+<method name="checkConfiguration"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Check the configuration of this object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getPropertyList() -->
+<method name="getPropertyList"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.readProperty(javax.baja.bacnet.io.PropertyReference) -->
+<method name="readProperty"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the value of a property.
+</description>
+<parameter name="ref">
+<type class="javax.baja.bacnet.io.PropertyReference"/>
+<description>
+the PropertyReference containing id and index.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing either the encoded value or the error.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.readPropertyMultiple(javax.baja.bacnet.io.PropertyReference[]) -->
+<method name="readPropertyMultiple"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the value of multiple Bacnet properties.
+</description>
+<parameter name="refs">
+<type class="javax.baja.bacnet.io.PropertyReference" dimension="1"/>
+<description>
+the list of property references.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue" dimension="1"/>
+<description>
+an array of PropertyValues.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.readRange(javax.baja.bacnet.io.RangeReference) -->
+<method name="readRange"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the specified range of values of a compound property.
+</description>
+<parameter name="rangeReference">
+<type class="javax.baja.bacnet.io.RangeReference"/>
+<description>
+the range reference describing the requested range.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.RangeData"/>
+<description>
+a byte array containing the encoded range.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.writeProperty(javax.baja.bacnet.io.PropertyValue) -->
+<method name="writeProperty"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the value of a property.
+</description>
+<parameter name="val">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the write information.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.addListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="addListElements"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Add list elements.
+</description>
+<parameter name="propertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;                      propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to add any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.removeListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="removeListElements"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove list elements.
+</description>
+<parameter name="propertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;                      propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to remove any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.readProperty(int, int) -->
+<method name="readProperty"  protected="true">
+<description>
+Get the value of a property.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing the encoded value or the error.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.writeProperty(int, int, byte[], int) -->
+<method name="writeProperty"  protected="true">
+<description>
+Set the value of a property.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<parameter name="val">
+<type class="byte" dimension="1"/>
+<description>
+the Asn-encoded value for the property.
+</description>
+</parameter>
+<parameter name="pri">
+<type class="int"/>
+<description>
+the priority level (only used for commandable properties).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To String.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getFile() -->
+<method name="getFile"  protected="true" final="true">
+<description/>
+<return>
+<type class="javax.baja.file.BIFile"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.read(int, int) -->
+<method name="read"  public="true" final="true">
+<description>
+Read from the file.
+</description>
+<parameter name="fileStartPosition">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="requestedOctetCount">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+byte array containing the data.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.readFile(int, int) -->
+<method name="readFile"  protected="true">
+<description/>
+<parameter name="fileStartPosition">
+<type class="int"/>
+</parameter>
+<parameter name="requestedOctetCount">
+<type class="int"/>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.write(int, byte[]) -->
+<method name="write"  public="true" final="true">
+<description>
+Write to the file.&#xa; This has to use the java.io.RandomAccessFile API because the Baja&#xa; file API does not support the necessary functionality.
+</description>
+<parameter name="fileStartPosition">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="fileData">
+<type class="byte" dimension="1"/>
+<description/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+-1 if ok, or BBacnetErrorCode ordinal if failed.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.writeFile(int, byte[]) -->
+<method name="writeFile"  protected="true">
+<description/>
+<parameter name="fileStartPosition">
+<type class="int"/>
+</parameter>
+<parameter name="fileData">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getFileSize() -->
+<method name="getFileSize"  public="true">
+<description>
+Get the file size.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.isEOF() -->
+<method name="isEOF"  public="true" final="true">
+<description>
+Did the last read reach the end of the file?
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if file read to EOF.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.isFatalFault() -->
+<method name="isFatalFault"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is this component in a fatal fault condition?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.isBackupConigFile() -->
+<method name="isBackupConigFile"  public="true">
+<description>
+Check if the file description created for backup procedure
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.setBackupConigFile(boolean) -->
+<method name="setBackupConigFile"  public="true">
+<description>
+Set as file description created for backup procedure.&#xa; Creation and deletion of temporary configuration files during a backup or restore&#xa; procedure shall not affect database revision. Setting file descriptor as&#xa; backup file will not increment the database revision at any time.
+</description>
+<parameter name="backupConigFile">
+<type class="boolean"/>
+<description>
+set file description as temporary backup file. By default false.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; the status for Niagara server-side behavior.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a description of a fault with server-side behavior.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.fileOrd -->
+<field name="fileOrd"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fileOrd&lt;/code&gt; property.&#xa; the file exposed via this extension.
+</description>
+<tag name="@see">#getFileOrd</tag>
+<tag name="@see">#setFileOrd</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.objectId -->
+<field name="objectId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.objectName -->
+<field name="objectName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#getObjectName</tag>
+<tag name="@see">#setObjectName</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.description -->
+<field name="description"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.fileType -->
+<field name="fileType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fileType&lt;/code&gt; property.&#xa; identifies the intended usage of this file.
+</description>
+<tag name="@see">#getFileType</tag>
+<tag name="@see">#setFileType</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.archiveTime -->
+<field name="archiveTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;archiveTime&lt;/code&gt; property.&#xa; time the file was last archived.
+</description>
+<tag name="@see">#getArchiveTime</tag>
+<tag name="@see">#setArchiveTime</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.fileAccessMethod -->
+<field name="fileAccessMethod"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fileAccessMethod&lt;/code&gt; property.&#xa; only STREAM_ACCESS is supported for now.
+</description>
+<tag name="@see">#getFileAccessMethod</tag>
+<tag name="@see">#setFileAccessMethod</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.FILE_WRITE_OK -->
+<field name="FILE_WRITE_OK"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetFileDescriptor.APPEND_START_POSITION -->
+<field name="APPEND_START_POSITION"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

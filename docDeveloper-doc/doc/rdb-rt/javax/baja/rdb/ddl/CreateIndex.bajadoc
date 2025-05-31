@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="rdb" runtimeProfile="rt" qualifiedName="javax.baja.rdb.ddl.CreateIndex" name="CreateIndex" packageName="javax.baja.rdb.ddl" public="true">
+<description>
+CreateIndex creates a database index.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">06 Feb 08</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.rdb.ddl.DdlCommand"/>
+</implements>
+<!-- javax.baja.rdb.ddl.CreateIndex(java.lang.String, java.lang.String, boolean, javax.baja.rdb.ddl.CreateIndex.Column[]) -->
+<constructor name="CreateIndex" public="true">
+<parameter name="indexName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="tableName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="isUnique">
+<type class="boolean"/>
+</parameter>
+<parameter name="columns">
+<type class="javax.baja.rdb.ddl.CreateIndex$Column" dimension="1"/>
+</parameter>
+<description>
+Convenience for creating an unclustered index
+</description>
+</constructor>
+
+<!-- javax.baja.rdb.ddl.CreateIndex(java.lang.String, java.lang.String, boolean, javax.baja.rdb.ddl.BClustered, javax.baja.rdb.ddl.CreateIndex.Column[]) -->
+<constructor name="CreateIndex" public="true">
+<parameter name="indexName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="tableName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="isUnique">
+<type class="boolean"/>
+</parameter>
+<parameter name="clustered">
+<type class="javax.baja.rdb.ddl.BClustered"/>
+</parameter>
+<parameter name="columns">
+<type class="javax.baja.rdb.ddl.CreateIndex$Column" dimension="1"/>
+</parameter>
+<description>
+Create an index.
+</description>
+</constructor>
+
+<!-- javax.baja.rdb.ddl.CreateIndex(java.lang.String, java.lang.String, boolean, java.lang.String[]) -->
+<constructor name="CreateIndex" public="true">
+<parameter name="indexName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="tableName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="isUnique">
+<type class="boolean"/>
+</parameter>
+<parameter name="columnNames">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<description>
+Convenience for creating an index&#xa; whose columns are all sorted in ascending order.
+</description>
+</constructor>
+
+<!-- javax.baja.rdb.ddl.CreateIndex(java.lang.String, java.lang.String, boolean, javax.baja.rdb.ddl.BClustered, java.lang.String[]) -->
+<constructor name="CreateIndex" public="true">
+<parameter name="indexName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="tableName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="isUnique">
+<type class="boolean"/>
+</parameter>
+<parameter name="clustered">
+<type class="javax.baja.rdb.ddl.BClustered"/>
+</parameter>
+<parameter name="columnNames">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<description>
+Convenience for creating an index&#xa; whose columns are all sorted in ascending order.
+</description>
+</constructor>
+
+<!-- javax.baja.rdb.ddl.CreateIndex.getDdl(javax.baja.rdb.RdbmsContext) -->
+<method name="getDdl"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Create the CREATE INDEX statement.&#xa; &lt;p&gt;&#xa; If the index is clustered, and the session&#x27;s&#xa; underlying BRdbms does not support clustering,&#xa; then a warning will be logged, and the index&#xa; will &lt;i&gt;not&lt;/i&gt; be clustered.
+</description>
+<parameter name="context">
+<type class="javax.baja.rdb.RdbmsContext"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.CreateIndex.getIndexName() -->
+<method name="getIndexName"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.CreateIndex.getTableName() -->
+<method name="getTableName"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.CreateIndex.isUnique() -->
+<method name="isUnique"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.CreateIndex.isClustered() -->
+<method name="isClustered"  public="true">
+<description/>
+<return>
+<type class="javax.baja.rdb.ddl.BClustered"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.CreateIndex.getColumns() -->
+<method name="getColumns"  public="true">
+<description/>
+<return>
+<type class="javax.baja.rdb.ddl.CreateIndex$Column" dimension="1"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

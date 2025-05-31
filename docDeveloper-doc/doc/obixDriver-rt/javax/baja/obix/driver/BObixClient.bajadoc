@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="obixDriver" runtimeProfile="rt" qualifiedName="javax.baja.obix.driver.BObixClient" name="BObixClient" packageName="javax.baja.obix.driver" public="true">
+<description>
+ObixClient is a client of an oBIX server.  It is a &#x22;device-level&#x22; component&#xa; in the NiagaraAX architecture. It has the standard device component&#xa; properties such as status and enabled (see &#x22;Driver Architecture / Common&#xa; device components&#x22; in the NiagaraAX User Guide for more information).&#xa; &lt;p&gt;&#xa; In addition, the following properties are unique or have special importance&#xa; to the ObixClient:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;Lobby - The URI to the root of the server&#x27;s object tree.  If the server&#xa; host changes, only the authority (scheme://host[:port]) here needs to be&#xa; changed and all sub-objects will work for the new host.&lt;/li&gt;&#xa; &lt;li&gt;Auth User - The user name the client should use to access the server.&#xa; It can be blank if the server supports unauthenticated access.&lt;/li&gt;&#xa; &lt;li&gt; Auth Pass - The passphrase for the auth user.&lt;/li&gt;&#xa; &lt;li&gt; Poll Scheduler - The poll scheduler is only used when watches on the&#xa; server are not working.&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<tag name="@author">Craig Gemmill on Dec 2004</tag>
+<tag name="@since">Niagara 3.1</tag>
+<extends>
+<type class="javax.baja.driver.BDevice"/>
+</extends>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;DanglingJavadoc&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<property name="lobby" flags="d">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lobby&lt;/code&gt; property.&#xa; URL to the Server&#x27;s Lobby
+</description>
+<tag name="@see">#getLobby</tag>
+<tag name="@see">#setLobby</tag>
+</property>
+
+<property name="authUser" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;authUser&lt;/code&gt; property.&#xa; Username for connecting to the Server
+</description>
+<tag name="@see">#getAuthUser</tag>
+<tag name="@see">#setAuthUser</tag>
+</property>
+
+<property name="authPass" flags="">
+<type class="javax.baja.security.BPassword"/>
+<description>
+Slot for the &lt;code&gt;authPass&lt;/code&gt; property.&#xa; Password for connecting to the Server
+</description>
+<tag name="@see">#getAuthPass</tag>
+<tag name="@see">#setAuthPass</tag>
+</property>
+
+<property name="debugResponses" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;debugResponses&lt;/code&gt; property.&#xa; Debug flag for responses from the Server
+</description>
+<tag name="@see">#getDebugResponses</tag>
+<tag name="@see">#setDebugResponses</tag>
+</property>
+
+<property name="debugRequests" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;debugRequests&lt;/code&gt; property.&#xa; Debug flag for requests to the Server
+</description>
+<tag name="@see">#getDebugRequests</tag>
+<tag name="@see">#setDebugRequests</tag>
+</property>
+
+<property name="pollScheduler" flags="">
+<type class="javax.baja.obix.driver.util.BObixPollScheduler"/>
+<description>
+Slot for the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; Poll Scheduler - only used if watch creation fails
+</description>
+<tag name="@see">#getPollScheduler</tag>
+<tag name="@see">#setPollScheduler</tag>
+</property>
+
+<property name="state" flags="drt">
+<type class="javax.baja.obix.driver.util.BObixState"/>
+<description>
+Slot for the &lt;code&gt;state&lt;/code&gt; property.&#xa; Current connection state
+</description>
+<tag name="@see">#getState</tag>
+<tag name="@see">#setState</tag>
+</property>
+
+<property name="alarms" flags="">
+<type class="javax.baja.obix.driver.alarm.BObixAlarmDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Device Ext for mapping alarms from the Server into Niagara
+</description>
+<tag name="@see">#getAlarms</tag>
+<tag name="@see">#setAlarms</tag>
+</property>
+
+<property name="histories" flags="">
+<type class="javax.baja.obix.driver.history.BObixHistoryDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;histories&lt;/code&gt; property.&#xa; Device Ext for mapping histories from the Server into Niagara
+</description>
+<tag name="@see">#getHistories</tag>
+<tag name="@see">#setHistories</tag>
+</property>
+
+<property name="points" flags="">
+<type class="javax.baja.obix.driver.point.BObixPointDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Device Ext for mapping points from the Server into Niagara
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</property>
+
+<property name="schedules" flags="h">
+<type class="javax.baja.obix.driver.schedule.BObixScheduleDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Device Ext for mapping schedules from the Server into Niagara
+</description>
+<tag name="@see">#getSchedules</tag>
+<tag name="@see">#setSchedules</tag>
+</property>
+
+<property name="sessionTimeout" flags="h">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;sessionTimeout&lt;/code&gt; property.&#xa; Timeout to use when sending OBIX requests to the Server
+</description>
+<tag name="@see">#getSessionTimeout</tag>
+<tag name="@see">#setSessionTimeout</tag>
+</property>
+
+<property name="watchSafetyFactor" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;watchSafetyFactor&lt;/code&gt; property.&#xa; Safety factor to add to the requested watch lease time beyond the configured watch interval
+</description>
+<tag name="@see">#getWatchSafetyFactor</tag>
+<tag name="@see">#setWatchSafetyFactor</tag>
+</property>
+
+<action name="attach" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;attach&lt;/code&gt; action.&#xa; Attach the Niagara client to the Server
+</description>
+<tag name="@see">#attach()</tag>
+</action>
+
+<action name="detach" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;detach&lt;/code&gt; action.&#xa; Detach the Niagara client from the Server
+</description>
+<tag name="@see">#detach()</tag>
+</action>
+
+<action name="reattach" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;reattach&lt;/code&gt; action.&#xa; Convenience to detach and attach the Niagara client from the Server
+</description>
+<tag name="@see">#reattach()</tag>
+</action>
+
+<!-- javax.baja.obix.driver.BObixClient() -->
+<constructor name="BObixClient" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.obix.driver.BObixClient.getLobby() -->
+<method name="getLobby"  public="true">
+<description>
+Get the &lt;code&gt;lobby&lt;/code&gt; property.&#xa; URL to the Server&#x27;s Lobby
+</description>
+<tag name="@see">#lobby</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setLobby(java.lang.String) -->
+<method name="setLobby"  public="true">
+<description>
+Set the &lt;code&gt;lobby&lt;/code&gt; property.&#xa; URL to the Server&#x27;s Lobby
+</description>
+<tag name="@see">#lobby</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getAuthUser() -->
+<method name="getAuthUser"  public="true">
+<description>
+Get the &lt;code&gt;authUser&lt;/code&gt; property.&#xa; Username for connecting to the Server
+</description>
+<tag name="@see">#authUser</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setAuthUser(java.lang.String) -->
+<method name="setAuthUser"  public="true">
+<description>
+Set the &lt;code&gt;authUser&lt;/code&gt; property.&#xa; Username for connecting to the Server
+</description>
+<tag name="@see">#authUser</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getAuthPass() -->
+<method name="getAuthPass"  public="true">
+<description>
+Get the &lt;code&gt;authPass&lt;/code&gt; property.&#xa; Password for connecting to the Server
+</description>
+<tag name="@see">#authPass</tag>
+<return>
+<type class="javax.baja.security.BPassword"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setAuthPass(javax.baja.security.BPassword) -->
+<method name="setAuthPass"  public="true">
+<description>
+Set the &lt;code&gt;authPass&lt;/code&gt; property.&#xa; Password for connecting to the Server
+</description>
+<tag name="@see">#authPass</tag>
+<parameter name="v">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getDebugResponses() -->
+<method name="getDebugResponses"  public="true">
+<description>
+Get the &lt;code&gt;debugResponses&lt;/code&gt; property.&#xa; Debug flag for responses from the Server
+</description>
+<tag name="@see">#debugResponses</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setDebugResponses(boolean) -->
+<method name="setDebugResponses"  public="true">
+<description>
+Set the &lt;code&gt;debugResponses&lt;/code&gt; property.&#xa; Debug flag for responses from the Server
+</description>
+<tag name="@see">#debugResponses</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getDebugRequests() -->
+<method name="getDebugRequests"  public="true">
+<description>
+Get the &lt;code&gt;debugRequests&lt;/code&gt; property.&#xa; Debug flag for requests to the Server
+</description>
+<tag name="@see">#debugRequests</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setDebugRequests(boolean) -->
+<method name="setDebugRequests"  public="true">
+<description>
+Set the &lt;code&gt;debugRequests&lt;/code&gt; property.&#xa; Debug flag for requests to the Server
+</description>
+<tag name="@see">#debugRequests</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getPollScheduler() -->
+<method name="getPollScheduler"  public="true">
+<description>
+Get the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; Poll Scheduler - only used if watch creation fails
+</description>
+<tag name="@see">#pollScheduler</tag>
+<return>
+<type class="javax.baja.obix.driver.util.BObixPollScheduler"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setPollScheduler(javax.baja.obix.driver.util.BObixPollScheduler) -->
+<method name="setPollScheduler"  public="true">
+<description>
+Set the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; Poll Scheduler - only used if watch creation fails
+</description>
+<tag name="@see">#pollScheduler</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.util.BObixPollScheduler"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getState() -->
+<method name="getState"  public="true">
+<description>
+Get the &lt;code&gt;state&lt;/code&gt; property.&#xa; Current connection state
+</description>
+<tag name="@see">#state</tag>
+<return>
+<type class="javax.baja.obix.driver.util.BObixState"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setState(javax.baja.obix.driver.util.BObixState) -->
+<method name="setState"  public="true">
+<description>
+Set the &lt;code&gt;state&lt;/code&gt; property.&#xa; Current connection state
+</description>
+<tag name="@see">#state</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.util.BObixState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getAlarms() -->
+<method name="getAlarms"  public="true">
+<description>
+Get the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Device Ext for mapping alarms from the Server into Niagara
+</description>
+<tag name="@see">#alarms</tag>
+<return>
+<type class="javax.baja.obix.driver.alarm.BObixAlarmDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setAlarms(javax.baja.obix.driver.alarm.BObixAlarmDeviceExt) -->
+<method name="setAlarms"  public="true">
+<description>
+Set the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Device Ext for mapping alarms from the Server into Niagara
+</description>
+<tag name="@see">#alarms</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.alarm.BObixAlarmDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getHistories() -->
+<method name="getHistories"  public="true">
+<description>
+Get the &lt;code&gt;histories&lt;/code&gt; property.&#xa; Device Ext for mapping histories from the Server into Niagara
+</description>
+<tag name="@see">#histories</tag>
+<return>
+<type class="javax.baja.obix.driver.history.BObixHistoryDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setHistories(javax.baja.obix.driver.history.BObixHistoryDeviceExt) -->
+<method name="setHistories"  public="true">
+<description>
+Set the &lt;code&gt;histories&lt;/code&gt; property.&#xa; Device Ext for mapping histories from the Server into Niagara
+</description>
+<tag name="@see">#histories</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.history.BObixHistoryDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getPoints() -->
+<method name="getPoints"  public="true">
+<description>
+Get the &lt;code&gt;points&lt;/code&gt; property.&#xa; Device Ext for mapping points from the Server into Niagara
+</description>
+<tag name="@see">#points</tag>
+<return>
+<type class="javax.baja.obix.driver.point.BObixPointDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setPoints(javax.baja.obix.driver.point.BObixPointDeviceExt) -->
+<method name="setPoints"  public="true">
+<description>
+Set the &lt;code&gt;points&lt;/code&gt; property.&#xa; Device Ext for mapping points from the Server into Niagara
+</description>
+<tag name="@see">#points</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.point.BObixPointDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getSchedules() -->
+<method name="getSchedules"  public="true">
+<description>
+Get the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Device Ext for mapping schedules from the Server into Niagara
+</description>
+<tag name="@see">#schedules</tag>
+<return>
+<type class="javax.baja.obix.driver.schedule.BObixScheduleDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setSchedules(javax.baja.obix.driver.schedule.BObixScheduleDeviceExt) -->
+<method name="setSchedules"  public="true">
+<description>
+Set the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Device Ext for mapping schedules from the Server into Niagara
+</description>
+<tag name="@see">#schedules</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.schedule.BObixScheduleDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getSessionTimeout() -->
+<method name="getSessionTimeout"  public="true">
+<description>
+Get the &lt;code&gt;sessionTimeout&lt;/code&gt; property.&#xa; Timeout to use when sending OBIX requests to the Server
+</description>
+<tag name="@see">#sessionTimeout</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setSessionTimeout(javax.baja.sys.BRelTime) -->
+<method name="setSessionTimeout"  public="true">
+<description>
+Set the &lt;code&gt;sessionTimeout&lt;/code&gt; property.&#xa; Timeout to use when sending OBIX requests to the Server
+</description>
+<tag name="@see">#sessionTimeout</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getWatchSafetyFactor() -->
+<method name="getWatchSafetyFactor"  public="true">
+<description>
+Get the &lt;code&gt;watchSafetyFactor&lt;/code&gt; property.&#xa; Safety factor to add to the requested watch lease time beyond the configured watch interval
+</description>
+<tag name="@see">#watchSafetyFactor</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.setWatchSafetyFactor(javax.baja.sys.BRelTime) -->
+<method name="setWatchSafetyFactor"  public="true">
+<description>
+Set the &lt;code&gt;watchSafetyFactor&lt;/code&gt; property.&#xa; Safety factor to add to the requested watch lease time beyond the configured watch interval
+</description>
+<tag name="@see">#watchSafetyFactor</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.attach() -->
+<method name="attach"  public="true">
+<description>
+Invoke the &lt;code&gt;attach&lt;/code&gt; action.&#xa; Attach the Niagara client to the Server
+</description>
+<tag name="@see">#attach</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.detach() -->
+<method name="detach"  public="true">
+<description>
+Invoke the &lt;code&gt;detach&lt;/code&gt; action.&#xa; Detach the Niagara client from the Server
+</description>
+<tag name="@see">#detach</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.reattach() -->
+<method name="reattach"  public="true">
+<description>
+Invoke the &lt;code&gt;reattach&lt;/code&gt; action.&#xa; Convenience to detach and attach the Niagara client from the Server
+</description>
+<tag name="@see">#reattach</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.atSteadyState() -->
+<method name="atSteadyState"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Invokes attach.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework method.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.doAttach() -->
+<method name="doAttach"  public="true">
+<description>
+Action impl.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.doDetach() -->
+<method name="doDetach"  public="true">
+<description>
+Action impl.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.doReattach() -->
+<method name="doReattach"  public="true">
+<description>
+Action impl - attempts the detach an then attach on the same thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.doPing() -->
+<method name="doPing"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Attempts to read the servers &#x22;about&#x22; object.  If not attached then&#xa; will attempt to do so.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getNetworkType() -->
+<method name="getNetworkType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework method.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getAbsoluteUri(obix.Uri) -->
+<method name="getAbsoluteUri"  public="true" final="true">
+<description>
+If the arg is relative, this normalizes it against the lobby uri.
+</description>
+<parameter name="arg">
+<type class="obix.Uri"/>
+</parameter>
+<return>
+<type class="obix.Uri"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getObixNetwork() -->
+<method name="getObixNetwork"  public="true" final="true">
+<description>
+Convenience method.
+</description>
+<return>
+<type class="javax.baja.obix.driver.BObixNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getRelativeUri(obix.Uri) -->
+<method name="getRelativeUri"  public="true" final="true">
+<description>
+Attempts to make the argument relative to the lobby authority.  The arg&#xa; must be absolute and start with the lobby uri for this work.
+</description>
+<parameter name="arg">
+<type class="obix.Uri"/>
+</parameter>
+<return>
+<type class="obix.Uri"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.isTridiumServer() -->
+<method name="isTridiumServer"  public="true" final="true">
+<description/>
+<return>
+<type class="java.lang.Boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeBatch() -->
+<method name="makeBatch"  public="true">
+<description/>
+<return>
+<type class="obix.net.BatchIn"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeBoolRange(obix.Uri) -->
+<method name="makeBoolRange"  public="true">
+<description/>
+<parameter name="uri">
+<type class="obix.Uri"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeFacets(javax.baja.sys.BFacets, obix.Obj) -->
+<method name="makeFacets"  public="true">
+<description>
+Doesn&#x27;t actually fetch ranges or units, but instead stores their&#xa; relative URIs in &#x22;rangeUri&#x22; for enum ranges, &#x22;boolUri&#x22; for bool&#xa; ranges and &#x22;unitsUri&#x22; for units.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeEnumRange(obix.Uri) -->
+<method name="makeEnumRange"  public="true">
+<description/>
+<parameter name="uri">
+<type class="obix.Uri"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BEnumRange"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeObj(javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="makeObj"  public="true">
+<description/>
+<parameter name="val">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="obix.Obj"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeSimple(obix.Obj, javax.baja.sys.Context) -->
+<method name="makeSimple"  public="true">
+<description/>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeStatusValue(obix.Obj, javax.baja.sys.BFacets) -->
+<method name="makeStatusValue"  public="true">
+<description/>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatusValue"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeUnits(obix.Uri) -->
+<method name="makeUnits"  public="true">
+<description/>
+<parameter name="uri">
+<type class="obix.Uri"/>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.makeWatch(java.lang.String, long, obix.net.WatchListener) -->
+<method name="makeWatch"  public="true">
+<description/>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="watchPollRate">
+<type class="long"/>
+</parameter>
+<parameter name="listener">
+<type class="obix.net.WatchListener"/>
+</parameter>
+<return>
+<type class="obix.net.SessionWatch"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.obixInvoke(obix.Uri, obix.Obj) -->
+<method name="obixInvoke"  public="true">
+<description>
+Invokes an op on the server.
+</description>
+<parameter name="uri">
+<type class="obix.Uri"/>
+</parameter>
+<parameter name="arg">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="obix.Obj"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.obixRead(obix.Uri) -->
+<method name="obixRead"  public="true">
+<description>
+Reads an object from the server.
+</description>
+<parameter name="uri">
+<type class="obix.Uri"/>
+</parameter>
+<return>
+<type class="obix.Obj"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.obixReadChildren(obix.Obj) -->
+<method name="obixReadChildren"  public="true">
+<description>
+Direct descendant refs of the given Obj are resolved.
+</description>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.obixReadFully(obix.Obj) -->
+<method name="obixReadFully"  public="true">
+<description>
+All refs in the entire tree rooted at the given Obj are resolved.
+</description>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.obixWrite(obix.Obj) -->
+<method name="obixWrite"  public="true">
+<description>
+Writes a value to the server.
+</description>
+<parameter name="arg">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="obix.Obj"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.open(obix.Uri) -->
+<method name="open"  public="true">
+<description/>
+<parameter name="uri">
+<type class="obix.Uri"/>
+</parameter>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework method.
+</description>
+<parameter name="a">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.postPing() -->
+<method name="postPing"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework method.
+</description>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.started() -->
+<method name="started"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.deviceAtSteadyState() -->
+<method name="deviceAtSteadyState"  protected="true">
+<description>
+Device Steady State.  Override point for subclasses.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.deviceStarted() -->
+<method name="deviceStarted"  protected="true">
+<description>
+Device started.  Override point for subclasses.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.getFullRelativeUri(obix.Obj, obix.Uri) -->
+<method name="getFullRelativeUri"  protected="true">
+<description>
+Get the full relative URI that should be used for getting metadata&#xa; like units, operation hrefs, etc.&#xa; This is used ONLY by normalize() during the makeFacets process.&#xa; The R2 server returns only relative uris, without the full path,&#xa; to reduce packet size.
+</description>
+<parameter name="obj">
+<type class="obix.Obj"/>
+<description>
+obix obj
+</description>
+</parameter>
+<parameter name="uri">
+<type class="obix.Uri"/>
+<description>
+uri to relativize
+</description>
+</parameter>
+<return>
+<type class="obix.Uri"/>
+<description>
+full relative URI for getting metadata
+</description>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixClient.lobby -->
+<field name="lobby"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lobby&lt;/code&gt; property.&#xa; URL to the Server&#x27;s Lobby
+</description>
+<tag name="@see">#getLobby</tag>
+<tag name="@see">#setLobby</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.authUser -->
+<field name="authUser"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;authUser&lt;/code&gt; property.&#xa; Username for connecting to the Server
+</description>
+<tag name="@see">#getAuthUser</tag>
+<tag name="@see">#setAuthUser</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.authPass -->
+<field name="authPass"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;authPass&lt;/code&gt; property.&#xa; Password for connecting to the Server
+</description>
+<tag name="@see">#getAuthPass</tag>
+<tag name="@see">#setAuthPass</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.debugResponses -->
+<field name="debugResponses"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;debugResponses&lt;/code&gt; property.&#xa; Debug flag for responses from the Server
+</description>
+<tag name="@see">#getDebugResponses</tag>
+<tag name="@see">#setDebugResponses</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.debugRequests -->
+<field name="debugRequests"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;debugRequests&lt;/code&gt; property.&#xa; Debug flag for requests to the Server
+</description>
+<tag name="@see">#getDebugRequests</tag>
+<tag name="@see">#setDebugRequests</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.pollScheduler -->
+<field name="pollScheduler"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; Poll Scheduler - only used if watch creation fails
+</description>
+<tag name="@see">#getPollScheduler</tag>
+<tag name="@see">#setPollScheduler</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.state -->
+<field name="state"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;state&lt;/code&gt; property.&#xa; Current connection state
+</description>
+<tag name="@see">#getState</tag>
+<tag name="@see">#setState</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.alarms -->
+<field name="alarms"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarms&lt;/code&gt; property.&#xa; Device Ext for mapping alarms from the Server into Niagara
+</description>
+<tag name="@see">#getAlarms</tag>
+<tag name="@see">#setAlarms</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.histories -->
+<field name="histories"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;histories&lt;/code&gt; property.&#xa; Device Ext for mapping histories from the Server into Niagara
+</description>
+<tag name="@see">#getHistories</tag>
+<tag name="@see">#setHistories</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.points -->
+<field name="points"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Device Ext for mapping points from the Server into Niagara
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.schedules -->
+<field name="schedules"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;schedules&lt;/code&gt; property.&#xa; Device Ext for mapping schedules from the Server into Niagara
+</description>
+<tag name="@see">#getSchedules</tag>
+<tag name="@see">#setSchedules</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.sessionTimeout -->
+<field name="sessionTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sessionTimeout&lt;/code&gt; property.&#xa; Timeout to use when sending OBIX requests to the Server
+</description>
+<tag name="@see">#getSessionTimeout</tag>
+<tag name="@see">#setSessionTimeout</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.watchSafetyFactor -->
+<field name="watchSafetyFactor"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;watchSafetyFactor&lt;/code&gt; property.&#xa; Safety factor to add to the requested watch lease time beyond the configured watch interval
+</description>
+<tag name="@see">#getWatchSafetyFactor</tag>
+<tag name="@see">#setWatchSafetyFactor</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.attach -->
+<field name="attach"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;attach&lt;/code&gt; action.&#xa; Attach the Niagara client to the Server
+</description>
+<tag name="@see">#attach()</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.detach -->
+<field name="detach"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;detach&lt;/code&gt; action.&#xa; Detach the Niagara client from the Server
+</description>
+<tag name="@see">#detach()</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.reattach -->
+<field name="reattach"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;reattach&lt;/code&gt; action.&#xa; Convenience to detach and attach the Niagara client from the Server
+</description>
+<tag name="@see">#reattach()</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixClient.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="tagdictionary" runtimeProfile="rt" qualifiedName="javax.baja.tagdictionary.BTagRuleCondition" name="BTagRuleCondition" packageName="javax.baja.tagdictionary" public="true" abstract="true">
+<description>
+BTagRuleCondition is a condition that must be met for a &lt;code&gt;<see ref="javax.baja.tagdictionary.TagRule">TagRule</see>&lt;/code&gt; to be activated. This is&#xa; a &lt;code&gt;BComponent&lt;/code&gt; implementation of &lt;code&gt;Predicate&amp;lt;Entity&amp;gt;&lt;/code&gt;. It also include&#xa; &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagRuleCondition#testIdealMatch(javax.baja.sys.Type)">#testIdealMatch(Type)</see>&lt;/code&gt; to test against a &lt;code&gt;<see ref="javax.baja.sys.Type">Type</see>&lt;/code&gt;.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">2/18/14</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<parameterizedType class="java.util.function.Predicate">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+</implements>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<!-- javax.baja.tagdictionary.BTagRuleCondition() -->
+<constructor name="BTagRuleCondition" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.tagdictionary.BTagRuleCondition.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagRuleCondition.test(javax.baja.tag.Entity) -->
+<method name="test"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Test the entity against the condition.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+entity to evaluate
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+&lt;code&gt;true&lt;/code&gt; if the condition is met; &lt;code&gt;false&lt;/code&gt; otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagRuleCondition.testIdealMatch(javax.baja.sys.Type) -->
+<method name="testIdealMatch"  public="true" abstract="true">
+<description>
+Test the type against the condition.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+type to evaluate
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+&lt;code&gt;true&lt;/code&gt; if the condition is met; &lt;code&gt;false&lt;/code&gt; otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagRuleCondition.checkAdd(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="checkAdd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Most subclasses of BTagRuleCondition do not use and will not accept child BTagRuleConditions.&#xa; BTagRuleConditions, such as &lt;code&gt;<see ref="com.tridium.tagdictionary.condition.BAnd">BAnd</see>&lt;/code&gt; and &lt;code&gt;<see ref="com.tridium.tagdictionary.condition.BOr">BOr</see>&lt;/code&gt;, that do accept other child&#xa; BTagRuleConditions should override this method.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagRuleCondition.checkParentForRestrictedComponent(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="checkParentForRestrictedComponent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BTagRuleConditions may only be added to other BTagRuleConditions.  They are frozen properties&#xa; on &lt;code&gt;<see ref="javax.baja.tagdictionary.BTagRule">BTagRule</see>&lt;/code&gt;s but they should not be dropped onto other types.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.BTagRuleCondition.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember" name="BIJsonSchemaMember" packageName="com.tridiumx.jsonToolkit.outbound.schema" public="true" interface="true" abstract="true" category="interface">
+<description>
+Contract for all members of a json schema. All schema members should define a name that will be the&#xa; key in the json key/value pair. All schema members need to be able to append their content, and&#xa; the contents of any nested child schema members to a json builder.
+</description>
+<tag name="@author">Nick Dodd</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember.getJsonName() -->
+<method name="getJsonName"  public="true" abstract="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+<description>
+the key in the json key/value pair for this schema member.
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember.process(com.tridium.json.JSONWriter, boolean) -->
+<method name="process"  public="true" abstract="true">
+<description>
+Append this members json content into the supplied json builder.
+</description>
+<parameter name="jsonWriter">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+the existing json builder.
+</description>
+</parameter>
+<parameter name="jsonKeysValid">
+<type class="boolean"/>
+<description>
+true if we are currently inside an object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember.processChildJsonMembers(com.tridium.json.JSONWriter, boolean) -->
+<method name="processChildJsonMembers"  public="true" default="true">
+<description>
+Append the content of this members nested children into the supplied json builder.
+</description>
+<parameter name="json">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+the existing json.
+</description>
+</parameter>
+<parameter name="jsonKeysValid">
+<type class="boolean"/>
+<description>
+true if we are currently inside an object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember.getSchema() -->
+<method name="getSchema"  public="true" abstract="true">
+<description>
+Get the parent json schema.
+</description>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+<description>
+the parent json schema to which this schema member belongs
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember.getParent() -->
+<method name="getParent"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember.&lt;T&gt;getChildren(java.lang.Class&lt;T&gt;) -->
+<method name="getChildren"  public="true" abstract="true">
+<typeParameters>
+<typeVariable class="T">
+</typeVariable>
+</typeParameters>
+<description/>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="java.lang.T" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.BIJsonSchemaMember.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="axvelocity" runtimeProfile="rt" qualifiedName="javax.baja.velocity.VelocityContextUtil" name="VelocityContextUtil" packageName="javax.baja.velocity" public="true" final="true">
+<description>
+VelocityContextUtil contains utility methods for use in velocity templates.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">23 Jun 2011</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.velocity.VelocityContextUtil(javax.baja.sys.Context) -->
+<constructor name="VelocityContextUtil" public="true">
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getPath(java.lang.Object) -->
+<method name="getPath"  public="true">
+<description>
+Return the path to the specified target object as an array of objects.
+</description>
+<tag name="@see">VelocityContextUtil#getPath(Object, Object)</tag>
+<parameter name="navObj">
+<type class="java.lang.Object"/>
+<description>
+a BINavNode or ORD (or String) that resolves to a BINavNode.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.nav.BINavNode"/>
+</args>
+</parameterizedType>
+<description>
+the path to the given node.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getPath(java.lang.Object, java.lang.Object) -->
+<method name="getPath"  public="true">
+<description>
+Return the path to the specified target object as an array of objects using the specified base.
+</description>
+<tag name="@see">VelocityContextUtil#getPath(Object)</tag>
+<parameter name="navObj">
+<type class="java.lang.Object"/>
+<description>
+a BINavNode or ORD that resolves to a BINavNode.
+</description>
+</parameter>
+<parameter name="base">
+<type class="java.lang.Object"/>
+<description>
+if an ORD is being resolved, this base is used.&#xa;                If the base is a BOrd (or String) then it will be resolved as an ORD with&#xa;                the resulting argument being used as the base.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.nav.BINavNode"/>
+</args>
+</parameterizedType>
+<description>
+the path to the given node.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getChildren(java.lang.Object) -->
+<method name="getChildren"  public="true">
+<description>
+Return all the child values of a Complex.
+</description>
+<tag name="@see">VelocityContextUtil#getChildren(Object, Object)</tag>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the BComplex to get the children from.&#xa;                 This can also be an ORD that can resolve to a Complex.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.sys.BValue"/>
+</args>
+</parameterizedType>
+<description>
+a list of Property values from the given Component.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getChildren(java.lang.Object, java.lang.Object) -->
+<method name="getChildren"  public="true">
+<description>
+Return the child values of of a particular type from a Complex.
+</description>
+<tag name="@see">VelocityContextUtil#getChildren(Object)</tag>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the BComplex to get the children from.&#xa;                 This can also be an ORD that can resolve to a Complex.
+</description>
+</parameter>
+<parameter name="type">
+<type class="java.lang.Object"/>
+<description>
+the type (or String typeSpec) used to filter the children returned.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.sys.BValue"/>
+</args>
+</parameterizedType>
+<description>
+a list of Property values from the given Component.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.is(javax.baja.sys.BObject, java.lang.Object) -->
+<method name="is"  public="true">
+<description>
+Is the value an instance of the specified type?
+</description>
+<tag name="@see">Type#is(Type)</tag>
+<parameter name="value">
+<type class="javax.baja.sys.BObject"/>
+<description>
+the value to test against.
+</description>
+</parameter>
+<parameter name="type">
+<type class="java.lang.Object"/>
+<description>
+the Type (or String typeSpec) to test the value against.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the value is of the specified type.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.isHidden(java.lang.Object, java.lang.Object) -->
+<method name="isHidden"  public="true">
+<description>
+Should the given Slot be shown?&#xa; &lt;p&gt;&#xa; This will also filter out Properties that don&#x27;t normally show up on a Property Sheet&#xa; including BWsAnnotation, BLinks and BNampMap (displayNames).
+</description>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the complex for the Slot. This can be a BComplex or an ORD (or String) that resolves to&#xa;                 a BComplex.
+</description>
+</parameter>
+<parameter name="slotObj">
+<type class="java.lang.Object"/>
+<description>
+the slot to test. This can be a Slot or a String for the Slot name.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+return true if the Slot should be hidden.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.canRead(java.lang.Object) -->
+<method name="canRead"  public="true">
+<description>
+Return true if the given Component has read permissions by the user.
+</description>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the Component used to checked permissions against. This can also&#xa;                 be a BOrd (or String) that resolves to a BComponent.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the given Component can be read.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.canRead(java.lang.Object, java.lang.Object) -->
+<method name="canRead"  public="true">
+<description>
+Return true if the given Slot on the Component can be read by the user.
+</description>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the Component used to checked permissions against. This can also&#xa;                 be a BOrd (or String) that resolves to a BComponent.
+</description>
+</parameter>
+<parameter name="slotObj">
+<type class="java.lang.Object"/>
+<description>
+the Slot or String Slot name used to test against.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the given Slot on the Component can be read.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.canWrite(java.lang.Object, java.lang.Object) -->
+<method name="canWrite"  public="true">
+<description>
+Return true if the given Slot on the Component can be written by the user.
+</description>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the Component used to checked permissions against. This can also&#xa;                 be a BOrd (or String) that resolves to a BComponent.
+</description>
+</parameter>
+<parameter name="slotObj">
+<type class="java.lang.Object"/>
+<description>
+the Slot or String Slot name used to test against.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the given Slot on the Component can be written too.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.canInvoke(java.lang.Object, java.lang.Object) -->
+<method name="canInvoke"  public="true">
+<description>
+Return true if the given Slot on the Component can be invoked by the user.
+</description>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the Component used to checked permissions against. This can also&#xa;                 be a BOrd (or String) that resolves to a BComponent.
+</description>
+</parameter>
+<parameter name="slotObj">
+<type class="java.lang.Object"/>
+<description>
+the Slot or String Slot name used to test against.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the given Slot on the Component can be invoked by the user.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.toUri(java.lang.Object) -->
+<method name="toUri"  public="true">
+<description>
+Return a valid URI from the given ORD, Component, Icon or Object.&#xa; &lt;p&gt;&#xa; The returned URI will be correctly encoded.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+<description>
+can be a BOrd, BComponent, BIcon or Object (that has toString called on it)&#xa;             to form a URI.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the encoded URI.
+</description>
+</return>
+<throws>
+<type class="java.io.UnsupportedEncodingException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.get(java.lang.Object) -->
+<method name="get"  public="true">
+<description>
+Resolve an ORD to an Object and return the result.&#xa; &lt;p&gt;&#xa; If the ORD resolves to a mounted Component, the Component will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#get(Object, Object)</tag>
+<parameter name="ordObj">
+<type class="java.lang.Object"/>
+<description>
+the ORD or (ORD String) to resolve.
+</description>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+<description>
+the resolved object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.get(java.lang.Object, java.lang.Object) -->
+<method name="get"  public="true">
+<description>
+Resolve an ORD to an Object and return the result.&#xa; &lt;p&gt;&#xa; If the ORD resolves to a mounted Component, the Component will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#get(Object)</tag>
+<parameter name="ordObj">
+<type class="java.lang.Object"/>
+<description>
+the ORD or (ORD String) to resolve.
+</description>
+</parameter>
+<parameter name="baseObj">
+<type class="java.lang.Object"/>
+<description>
+the base to resolve the ORD against. If the base is a BOrd&#xa;                (or a String ORD) this will be resolved and then used as the base&#xa;                for the ORD.
+</description>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+<description>
+the resolved object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.resolve(java.lang.Object) -->
+<method name="resolve"  public="true">
+<description>
+Resolve an ORD to an Object and return the resolved OrdTarget.&#xa; &lt;p&gt;&#xa; If the ORD resolves to a mounted Component, the Component will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#resolve(Object, Object)</tag>
+<parameter name="ordObj">
+<type class="java.lang.Object"/>
+<description>
+the ORD or (ORD String) to resolve.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+<description>
+the resolved OrdTarget.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.resolve(java.lang.Object, java.lang.Object) -->
+<method name="resolve"  public="true">
+<description>
+Resolve an ORD to an Object and return the OrdTarget.&#xa; &lt;p&gt;&#xa; If the ORD resolves to a mounted Component, the Component will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#resolve(Object)</tag>
+<parameter name="ordObj">
+<type class="java.lang.Object"/>
+<description>
+the ORD or (ORD String) to resolve.
+</description>
+</parameter>
+<parameter name="baseObj">
+<type class="java.lang.Object"/>
+<description>
+the base to resolve the ORD against. If the base is a BOrd&#xa;                (or a String ORD) this will be resolved and then used as the base&#xa;                for the ORD.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+<description>
+the resolved OrdTarget.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.ord(java.lang.Object, java.lang.Object) -->
+<method name="ord"  public="true">
+<description>
+Create a new ORD from a base and child.&#xa; &lt;p&gt;&#xa; The returned ORD will also be normalized.
+</description>
+<tag name="@see">BOrd#make(BOrd, BOrd)</tag>
+<parameter name="base">
+<type class="java.lang.Object"/>
+<description>
+the base ORD (or String).
+</description>
+</parameter>
+<parameter name="child">
+<type class="java.lang.Object"/>
+<description>
+the child ORD (or String).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the new ORD.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.lex(java.lang.String) -->
+<method name="lex"  public="true">
+<description>
+Return a Lexicon for the given module name
+</description>
+<parameter name="moduleName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.util.Lexicon"/>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.escapeHtml(java.lang.Object) -->
+<method name="escapeHtml"  public="true">
+<description/>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getDisplay(java.lang.Object) -->
+<method name="getDisplay"  public="true">
+<description>
+Return a display string of a BComplex.&#xa; &lt;p&gt;&#xa; If the BComplex is a BComponent then it will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#getDisplay(Object, Object)</tag>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the complex to get the display string from.&#xa;                 If this is an ORD (or String) then it will be resolved&#xa;                 to a Complex.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the display String.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getDisplay(java.lang.Object, java.lang.Object) -->
+<method name="getDisplay"  public="true">
+<description>
+Return a display string of a BComplex.&#xa; &lt;p&gt;&#xa; If the BComplex is a BComponent then it will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#getDisplay(Object)</tag>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the complex to get the display string from.&#xa;                 If this is an ORD (or String) then it will be resolved&#xa;                 to a Complex.
+</description>
+</parameter>
+<parameter name="base">
+<type class="java.lang.Object"/>
+<description>
+if compObj is an ORD (or a String) this is used to resolve the ORD against.&#xa;                 If the base is an ORD (or a String) then it will be first resolved before&#xa;                 being used to resolve compObj.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the display String.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getDisplayFromProperty(java.lang.Object, java.lang.Object) -->
+<method name="getDisplayFromProperty"  public="true">
+<description>
+Return the display string of a Property value.&#xa; &lt;p&gt;&#xa; If the complex is a BComponent then it will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#getDisplayFromProperty(Object, Object, Object)</tag>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the complex to get the display string from.&#xa;                 If this is an ORD (or String) then it will be resolved&#xa;                 to a Complex.
+</description>
+</parameter>
+<parameter name="propObj">
+<type class="java.lang.Object"/>
+<description>
+the Property or Property name.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the display string of the Property value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getDisplayFromProperty(java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="getDisplayFromProperty"  public="true">
+<description>
+Return the display string of a Property value.&#xa; &lt;p&gt;&#xa; If the complex is a BComponent then it will be leased.
+</description>
+<tag name="@see">VelocityContextUtil#getDisplayFromProperty(Object, Object)</tag>
+<parameter name="compObj">
+<type class="java.lang.Object"/>
+<description>
+the complex to get the display string from.&#xa;                 If this is an ORD (or String) then it will be resolved&#xa;                 to a Complex.
+</description>
+</parameter>
+<parameter name="propObj">
+<type class="java.lang.Object"/>
+<description>
+the Property or Property name.
+</description>
+</parameter>
+<parameter name="base">
+<type class="java.lang.Object"/>
+<description>
+if compObj is an ORD (or a String) this is used to resolve the ORD against.&#xa;                 If the base is an ORD (or a String) then it will be first resolved before&#xa;                 being used to resolve compObj.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the display String.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.getLastRegBuild() -->
+<method name="getLastRegBuild"  public="true">
+<description>
+Return the last Registry build time in milliseconds&#xa; since the epoch relative to UTC.
+</description>
+<tag name="@since">Niagara 3.8</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.requirejs() -->
+<method name="requirejs"  public="true">
+<description>
+Return the HTML and JavaScript for injecting RequireJS into a web page.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.requirejs(java.lang.String) -->
+<method name="requirejs"  public="true">
+<description>
+Return the HTML and JavaScript for injecting RequireJS into a web page.
+</description>
+<parameter name="mainOrd">
+<type class="java.lang.String"/>
+<description>
+an ORD that specifies the main entry point JavaScript for the Web Application.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.requirejs(java.lang.String, java.lang.String) -->
+<method name="requirejs"  public="true">
+<description>
+Return the HTML and JavaScript for injecting RequireJS into a web page.
+</description>
+<parameter name="mainOrd">
+<type class="java.lang.String"/>
+<description>
+an ORD that specifies the main entry point JavaScript for the Web Application.
+</description>
+</parameter>
+<parameter name="configFileOrd">
+<type class="java.lang.String"/>
+<description>
+an ORD that specifies the location of a JavaScript file that contains the&#xa;                      declaration of the require config object. Please note, the JavaScript in&#xa;                      this file must contain a declaration of a global require object.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.startActivityMonitor() -->
+<method name="startActivityMonitor"  public="true">
+<description>
+Return the script tag for activity monitor to start the monitoring.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Script tag
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.keepSessionAlive() -->
+<method name="keepSessionAlive"  public="true">
+<description>
+Return the script tag for activity monitor to keep session alive.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Script tag
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.isWebDev(java.lang.String) -->
+<method name="isWebDev"  public="true">
+<description>
+Return true if Web Development Mode is enabled for the given name.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the name of the web development application.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description/>
+</return>
+</method>
+
+<!-- javax.baja.velocity.VelocityContextUtil.jQuery() -->
+<method name="jQuery"  public="true">
+<description>
+Return the HTML script tag for jQuery.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

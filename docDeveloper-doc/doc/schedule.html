@@ -1,0 +1,187 @@
+<!-- Htmldoc has been run -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!--
+   @author    Aaron Hansen
+   @creation  Feb 05
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+  <title>Schedule</title>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/alarm.html" class="navbar">Prev</a> |  <a href="/doc/report.html" class="navbar">Next</a></p>
+
+<!-- Title Block -->
+<h1 class="title">Schedule</h1>
+<!------------------------------------------------------------->
+<h2>Overview</h2>
+<div style="margin-left: 40px;">A schedule is effective or it is
+not.&nbsp; When it becomes effective, it will do something like fire an
+event or change an output.&nbsp; When a schedule is not effective, it
+will have some default configurable behavior.<br>
+<br>
+Most schedules will be a hierarchy of many schedules.&nbsp; Container
+schedules combine the effective state of their descendants to determine
+effectiveness.&nbsp; Atomic schedules use some internal criteria to
+determine effectiveness.&nbsp; An example of an atomic schedule is the
+month schedule.&nbsp; It can be configured to be effective in some
+months and not in others.<br>
+<br>
+</div>
+<h2>Creating New Schedule Types<br>
+</h2>
+<h3 style="margin-left: 40px;"><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BAbstractSchedule.bajadoc">BAbstractSchedule</a></h3>
+<div style="margin-left: 40px;">All schedules subclass this.<br>
+<div style="margin-left: 40px;"><br>
+<span style="font-weight: bold;">Subclassing.</span>&nbsp; To create a
+new schedule type, one simply needs to implement methods <code>isEffective(BAbsTime)</code>
+and <code>nextEvent(BAbsTime)</code>.&nbsp; See the API documentation
+for details.<br>
+<br>
+<span style="font-weight: bold;">New Properties.</span>&nbsp;
+Properties on new schedule types should have the <code>user_defined_1</code>
+flag set.&nbsp; This is important for properties who when changed,
+should cause supervisor (master) schedules to update their subordinates
+(slaves).<br>
+<br>
+<span style="font-weight: bold;">Output.</span>&nbsp; If the new
+schedule is going to be used in a control schedule, it will be
+necessary to assign an effective value to it.&nbsp; A control schedule
+finds output by searching child schedules, in order, for the first
+effective schedule with a dynamic property named
+"effectiveValue".&nbsp; The effectiveValue may be 10 levels deep, it
+will be found.&nbsp; Just remember the order of schedules in a
+composite is important.<br>
+</div>
+<br>
+</div>
+<h3 style="margin-left: 40px;"><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BCompositeSchedule.bajadoc">BCompositeSchedule</a></h3>
+<div style="margin-left: 40px;">Composite schedules shouldn't need to
+be subclassed.&nbsp; However, they will be used (frequently) in
+building new schedule hierarchies.<br>
+<br>
+These schedules perform a simple function, they determine their
+effective state by combining the effective state of their
+children.&nbsp; A composite can either perform a union or an
+intersection of it's children.&nbsp; A union means only one child has
+to be effective for the parent composite to be effective.&nbsp; An
+intersection means all children have to be effective.<br>
+<br>
+</div>
+<h2>Using Existing Schedules<br>
+</h2>
+<div style="margin-left: 40px;">There are six preconfigured
+schedules.&nbsp; The weekly schedules look like control objects, the
+calendar schedule helps configure special events that will be used by
+multiple schedules.&nbsp; Lastly, the trigger schedule enables
+sophisticated scheduling of topics (events) which can be linked
+to actions on other components.<br>
+</div>
+<h3 style="margin-left: 40px;"><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BBooleanSchedule.bajadoc">BBooleanSchedule</a>,
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BEnumSchedule.bajadoc">BEnumSchedule</a>,
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BNumericSchedule.bajadoc">BNumericSchedule</a> and <a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BStringSchedule.bajadoc">BStringSchedule</a></h3>
+<div style="margin-left: 80px;">These are all <a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BWeeklySchedule.bajadoc">BWeeklySchedules</a> whose output matches
+their name.&nbsp; There is one input who if linked and not null,
+completely overrides the schedule.<br>
+<br>
+Example:&nbsp; Adding a special event<br>
+<div style="margin-left: 40px;"><code><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDailySchedule.bajadoc">BDailySchedule</a> specialEvent = new BDailySchedule(<br>
+&nbsp;&nbsp;&nbsp; new BDateSchedule(5,BMonth.may,-1),<br>
+&nbsp;&nbsp;&nbsp; BTime.make(11,0,0),<br>
+&nbsp;&nbsp;&nbsp; BTime.make(12,0,0), //first excluded time<br>
+&nbsp;&nbsp;&nbsp; BStatusBoolean.make(true));<br>
+myBooleanSchedule.addSpecialEvent(specialEvent);</code><br>
+</div>
+</div>
+<div style="margin-left: 40px;">
+<div style="margin-left: 40px;"><br>
+Example:&nbsp; Adding to the normal weekly schedule<br>
+<div style="margin-left: 40px;"><code><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDaySchedule.bajadoc">BDaySchedule</a> day = myBooleanSchedule.get(BWeekday.monday);<br>
+day.add(BTime.make(11,0,0),BTime.make(12,0,0),BStatusBoolean.make(true));</code><br>
+</div>
+</div>
+<div style="margin-left: 40px;"><br>
+Example:&nbsp; Retrieving all schedules in a normal weekday<br>
+<div style="margin-left: 40px;"><code>BDaySchedule day =
+myBooleanSchedule.get(BWeekday.monday);<br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BTimeSchedule.bajadoc">BTimeSchedule</a>[]
+schedules = day.getTimesInOrder();</code><br>
+</div>
+</div>
+<div style="margin-left: 40px;"><br>
+Example:&nbsp; Modifying the day schedule of a special event<br>
+<div style="margin-left: 40px;"><code>BDailySchedule specEvent =
+(BDailySchedule) myWeeklySchedule.getSpecialEvents().get("cincoDiMayo");<br>
+BDaySchedule day = specEvent.getDay();</code><br>
+</div>
+<br>
+Example:&nbsp; Retrieving all special events<br>
+<div style="margin-left: 40px;"><code>BDailySchedule[] specEvents =
+myWeeklySchedule.getSpecialEventsChildren();<br>
+</code></div>
+<div style="margin-left: 40px;"><br>
+</div>
+</div>
+<div style="margin-left: 40px;">Legal special event schedule types:<br>
+<div style="margin-left: 40px;"><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDateSchedule.bajadoc">BDateSchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDateRangeSchedule.bajadoc">BDateRangeSchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BWeekAndDaySchedule.bajadoc">BWeekAndDaySchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BCustomSchedule.bajadoc">BCustomSchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BScheduleReference.bajadoc">BScheduleReference</a><br>
+</div>
+</div>
+</div>
+<div style="margin-left: 80px;"></div>
+<div style="margin-left: 40px;">
+<h3><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BCalendarSchedule.bajadoc">BCalendarSchedule</a></h3>
+<div style="margin-left: 40px;">This schedule has a boolean
+output.&nbsp; However, it's most common use is for special events in
+the four weekly schedules discussed above.&nbsp; The weekly schedule
+can store a
+special reference to any calendar in the same station and assign their
+own output to it.<br>
+<br>
+Example:&nbsp; Adding a date schedule event<br>
+<div style="margin-left: 40px;"><code>myCalendarSchedule.add("cincoDiMayo",aDateSchedule);</code><br>
+<br>
+</div>
+Legal event schedule types:<br>
+<div style="margin-left: 40px;"><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDateSchedule.bajadoc">BDateSchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDateRangeSchedule.bajadoc">BDateRangeSchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BWeekAndDaySchedule.bajadoc">BWeekAndDaySchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BCustomSchedule.bajadoc">BCustomSchedule</a><br>
+</div>
+</div>
+</div>
+<div style="margin-left: 40px;">
+<h3><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BTriggerSchedule.bajadoc">BTriggerSchedule</a></h3>
+<div style="margin-left: 40px;">This schedule fires an event when a
+schedule becomes effective.&nbsp; There is also an event signifying
+that a normal event has been missed.<br>
+<br>
+Example: Add a date schedule event<br>
+<div style="margin-left: 40px;"><code>myTriggerSchedule.getDates().add("cincoDiMayo",aDateSchedule);</code><br>
+</div>
+<br>
+Example: Add a trigger time<br>
+<div style="margin-left: 40px;"><code>myTriggerSchedule.getTimes().addTrigger(11,00);</code><br>
+</div>
+<br>
+Legal event schedule types:<br>
+<div style="margin-left: 40px;"><a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDateSchedule.bajadoc">BDateSchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BDateRangeSchedule.bajadoc">BDateRangeSchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BWeekAndDaySchedule.bajadoc">BWeekAndDaySchedule</a><br>
+<a href="module://docDeveloper/doc/schedule-rt/javax/baja/schedule/BCustomSchedule.bajadoc">BCustomSchedule</a><br>
+</div>
+</div>
+</div>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/alarm.html" class="navbar">Prev</a> |  <a href="/doc/report.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

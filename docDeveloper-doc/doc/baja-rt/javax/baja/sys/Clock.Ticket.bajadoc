@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.Clock$Ticket" name="Clock.Ticket" packageName="javax.baja.sys" public="true" interface="true" abstract="true" static="true" innerClass="true" category="interface">
+<description>
+Ticket is returned from the timer scheduling methods.&#xa; A ticket may be used to inspect the scheduled action&#xa; and also to cancel it.
+</description>
+<!-- javax.baja.sys.Clock.Ticket.cancel() -->
+<method name="cancel"  public="true" abstract="true">
+<description>
+Cancel all scheduled action.  After this call the&#xa; Ticket is expired and should be discarded for garbage&#xa; collection.  This method may be called safely even&#xa; after the ticket has expired with no effect.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Clock.Ticket.isExpired() -->
+<method name="isExpired"  public="true" abstract="true">
+<description>
+Return false if there is an outstanding scheduled&#xa; action.  Return true is this is a ticket to an&#xa; expired one shot timer, or if the ticket has been&#xa; canceled.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Clock.Ticket.getComponent() -->
+<method name="getComponent"  public="true" abstract="true">
+<description>
+Get the component this schedule invoke actions on.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Clock.Ticket.getAction() -->
+<method name="getAction"  public="true" abstract="true">
+<description>
+Get the action which is scheduled to be invoked.
+</description>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Clock.Ticket.getActionArgument() -->
+<method name="getActionArgument"  public="true" abstract="true">
+<description>
+Get the argument to the scheduled action.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

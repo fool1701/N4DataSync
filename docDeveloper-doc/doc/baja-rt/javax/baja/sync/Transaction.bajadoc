@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sync.Transaction" name="Transaction" packageName="javax.baja.sync" public="true" abstract="true">
+<description>
+Transaction is a special Context type used to trap&#xa; BComponent modifications into a SyncBuffer.  There&#xa; are two ways to use Transactions:&#xa;&#xa; &lt;pre&gt;               &#xa;&#xa; If you have a space:&#xa;   Transaction tx = space.newTransaction(cx);&#xa;   comp.set(p1, v1, tx);&#xa;   comp.set(p2, v2, tx);&#xa;   tx.commit();                              &#xa;&#xa; If you have a component and don&#x27;t know if it is mounted:&#xa;   Context tx = Transaction.start(comp, cx);&#xa;   comp.set(p1, v1, tx);&#xa;   comp.set(p2, v2, tx);&#xa;   Transaction.end(comp, tx);                              &#xa;&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">13 Nov 01</tag>
+<tag name="@version">$Revision: 3$ $Date: 4/18/05 4:59:00 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sync.SyncBuffer"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.Context"/>
+</implements>
+<!-- javax.baja.sync.Transaction(javax.baja.space.BComponentSpace, javax.baja.sys.Context) -->
+<constructor name="Transaction" protected="true">
+<parameter name="space">
+<type class="javax.baja.space.BComponentSpace"/>
+</parameter>
+<parameter name="baseContext">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<description>
+Construct a Transaction for the specified space.&#xa; The client API to get a transaction is to call&#xa; &lt;code&gt;BComponentSpace.newTransaction()&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.sync.Transaction(javax.baja.space.BComponentSpace, javax.baja.sys.Context, javax.baja.sys.BFacets) -->
+<constructor name="Transaction" protected="true">
+<parameter name="space">
+<type class="javax.baja.space.BComponentSpace"/>
+</parameter>
+<parameter name="baseContext">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="additionalFacets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<description>
+Construct a Transaction for the specified space.&#xa; The client API to get a transaction is to call&#xa; &lt;code&gt;BComponentSpace.newTransaction()&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+</constructor>
+
+<!-- javax.baja.sync.Transaction.start(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="start"  public="true" static="true">
+<description>
+Begin a transaction.  If the component is mounted, then return &#xa; &lt;code&gt;c.getComponentSpace().newTransaction(baseContext)&lt;/code&gt;.&#xa; Otherwise return the baseContext.  See class documentation&#xa; for examples.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="baseContext">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.Transaction.end(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="end"  public="true" static="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedParameters&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Commit a transaction which was started via the &lt;code&gt;start()&lt;/code&gt;&#xa; help method.  If the specified context is a Transaction then&#xa; commit it, otherwise assume
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sync.Transaction.getBase() -->
+<method name="getBase"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.Transaction.getUser() -->
+<method name="getUser"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.user.BUser"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.Transaction.getFacets() -->
+<method name="getFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.Transaction.getFacet(java.lang.String) -->
+<method name="getFacet"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.Transaction.getLanguage() -->
+<method name="getLanguage"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

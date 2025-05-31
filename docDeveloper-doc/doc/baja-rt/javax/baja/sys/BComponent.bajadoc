@@ -1,0 +1,2196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BComponent" name="BComponent" packageName="javax.baja.sys" public="true">
+<description>
+BComponent is the required base class for all&#xa; Baja component classes.
+</description>
+<tag name="@author">Brian Frank&#xa;         creation  8 Aug 00</tag>
+<tag name="@version">$Revision: 227$ $Date: 7/15/11 11:42:43 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComplex"/>
+</extends>
+<implements>
+<type class="javax.baja.space.BISpaceNode"/>
+</implements>
+<implements>
+<type class="javax.baja.security.BIProtected"/>
+</implements>
+<implements>
+<type class="javax.baja.category.BICategorizable"/>
+</implements>
+<implements>
+<type class="javax.baja.sys.BIPropertyContainer"/>
+</implements>
+<implements>
+<type class="javax.baja.tag.BIEntity"/>
+</implements>
+<!-- javax.baja.sys.BComponent() -->
+<constructor name="BComponent" public="true">
+<description>
+Public no arg constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.sys.BComponent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getTagDictionaryService() -->
+<method name="getTagDictionaryService"  public="true">
+<description/>
+<return>
+<type class="javax.baja.tag.TagDictionaryService"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.tags() -->
+<method name="tags"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.tag.Tags"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.relations() -->
+<method name="relations"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.tag.Relations"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getOrdToEntity() -->
+<method name="getOrdToEntity"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.naming.BOrd"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getHandle() -->
+<method name="getHandle"  public="true">
+<description>
+Get the handle which uniquely identifies this&#xa; component within its component space.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getSlotPath() -->
+<method name="getSlotPath"  public="true">
+<description>
+Get the slot path of this component within its space.&#xa; If not mounted within a space return null.
+</description>
+<return>
+<type class="javax.baja.naming.SlotPath"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.clearHandles() -->
+<method name="clearHandles"  public="true">
+<description>
+Recursively clear the handle of this component&#xa; and all it descendant components.  Sometimes this&#xa; is necessary if adding a component tree into a&#xa; new ComponentSpace.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isRunning() -->
+<method name="isRunning"  public="true" final="true">
+<description>
+Is this component running.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.start() -->
+<method name="start"  public="true" final="true">
+<description>
+Start this component, and all its descendant&#xa; components.  The start sequence is:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Resolve all components links&lt;/li&gt;&#xa; &lt;li&gt;The started() method is called this component&lt;/li&gt;&#xa; &lt;li&gt;The component&#x27;s children components are recursively&#xa; started&lt;/li&gt;&#xa; &lt;li&gt;The descendantsStarted() method is called on this&#xa; component&lt;/li&gt;&#xa; &lt;li&gt;The execution engine works its magic&#xa; through link and timer execution.&lt;/li&gt;&#xa; &lt;/ol&gt;&#xa; Once a component is running, it may be stopped using&#xa; the stop() method.  Calling the start() method has no&#xa; effect if the component is currently running.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.stop() -->
+<method name="stop"  public="true" final="true">
+<description>
+Stop the component graph from running.&#xa; The stop sequence for a component graph is:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Stop the execution engine from&#xa; executing links and timers&lt;/li&gt;&#xa; &lt;li&gt;The stopped() method is called on this component&lt;/li&gt;&#xa; &lt;li&gt;The component&#x27;s children components are recursively&#xa; stopped&lt;/li&gt;&#xa; &lt;li&gt;The descendantsStopped() method is called on this&#xa; component&lt;/li&gt;&#xa; &lt;/ol&gt;&#xa; Calling this method on a component which is not currently&#xa; running has no effect.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.started() -->
+<method name="started"  public="true">
+<description>
+The started() method is called when a component&#x27;s&#xa; running state moves to true.  Components are started&#xa; top-down, children after their parent.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.descendantsStarted() -->
+<method name="descendantsStarted"  public="true">
+<description>
+This method is called after started() has been called&#xa; on this component and all its descendants.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.stopped() -->
+<method name="stopped"  public="true">
+<description>
+The stopped() method is called when a component is&#xa; running state is set to false.  Components are stopped&#xa; top-down, children after their parent.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.descendantsStopped() -->
+<method name="descendantsStopped"  public="true">
+<description>
+This method is called after stopped() has been called&#xa; on this component and all its descendants.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.stationStarted() -->
+<method name="stationStarted"  public="true">
+<description>
+This callback is invoked during station bootstrap after&#xa; all components in the station have been started.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.atSteadyState() -->
+<method name="atSteadyState"  public="true">
+<description>
+This callback is invoked during station bootstrap after&#xa; the steady state timeout has expired.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.clockChanged(javax.baja.sys.BRelTime) -->
+<method name="clockChanged"  public="true">
+<description>
+This callback is invoked when the system clock is modified.&#xa; The shift parameter specifies the positive or negative change&#xa; in the clock&#x27;s value.
+</description>
+<parameter name="shift">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.isSubscribed() -->
+<method name="isSubscribed"  public="true" final="true">
+<description>
+Return if this component is in the subscribed state.  A&#xa; component is defined as subscribed:&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa;  isPermanentlySubscribed() ||&amp;#xa;  getSubscribers().length &amp;gt; 0 ||&amp;#xa;  (getKnobs().length &amp;gt; 0 &amp;amp;&amp;amp; isRunning())&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getSubscribers() -->
+<method name="getSubscribers"  public="true" final="true">
+<description>
+Get the list of subscribers on this component.  Each&#xa; subscriber for this component receives callbacks on&#xa; component state changes.
+</description>
+<return>
+<type class="javax.baja.sys.Subscriber" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.subscribed() -->
+<method name="subscribed"  public="true">
+<description>
+Callback when the component enters the subscribed state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.unsubscribed() -->
+<method name="unsubscribed"  public="true">
+<description>
+Callback when the component exits the subscribed state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isPermanentlySubscribed() -->
+<method name="isPermanentlySubscribed"  public="true" final="true">
+<description>
+Return if the permanent subscription flag is set.  If&#xa; true then the component is in the subscribed state regardless&#xa; of other conditions like knob and subscriber count.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.setPermanentlySubscribed(boolean) -->
+<method name="setPermanentlySubscribed"  protected="true" final="true">
+<description>
+This method allows a subclass to set the permanent subscription&#xa; flag.  If permanent subscription is true then this component is&#xa; locked in the subscription state regardless of knob count or&#xa; subscriber count.  If it is false, then normal subscription rules&#xa; apply.  Since there is only one permanent subscribe flag, it is&#xa; impertative that only the subclass itself determine how the flag gets&#xa; set and cleared.  This method should only be used for components&#xa; running in a station VM (it is not intended for use in a workbench VM).
+</description>
+<parameter name="subscribed">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getLeaseExpiration() -->
+<method name="getLeaseExpiration"  public="true" final="true">
+<description>
+If this component is currently leased, then return&#xa; the expiration time in ticks.  If not currently leased&#xa; then return -1.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.lease() -->
+<method name="lease"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Convenience for &lt;code&gt;lease(0, getComponentSpace().getDefaultLeaseTime())&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.lease(int) -->
+<method name="lease"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;lease(depth, getComponentSpace().getDefaultLeaseTime())&lt;/code&gt;.
+</description>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.lease(int, long) -->
+<method name="lease"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Lease this component for the specified number of milliseconds&#xa; so that it expires at &lt;code&gt;Clock.ticks() + millis&lt;/code&gt;.&#xa; Leasing is a stateless form of subscription which automatically&#xa; performs a subscribe and then an unsubscribe when the lease&#xa; expires.  If the component is already under lease, then the&#xa; new lease expiration is the max of &lt;code&gt;getLeaseExpiration()&lt;/code&gt;&#xa; or &lt;code&gt;Clock.ticks() + millis&lt;/code&gt;.  If depth is greater than&#xa; zero then the lease includes descendants (one is children, two is&#xa; children and grandchildren, etc).
+</description>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<parameter name="millis">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.lease(javax.baja.sys.BComponent[], int) -->
+<method name="lease"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;lease(components, depth, components[0].getComponentSpace().getDefaultLeaseTime())&lt;/code&gt;.
+</description>
+<parameter name="components">
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.lease(javax.baja.sys.BComponent[], int, long) -->
+<method name="lease"  public="true" static="true">
+<description>
+This method is used to lease a batch of components at once.&#xa; It provides the same semantics as calling lease on each&#xa; component in the array, but potentially has much higher&#xa; performance.  All the components passed in the specified&#xa; array must exist inside the same component space.
+</description>
+<parameter name="components">
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<parameter name="millis">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getSpace() -->
+<method name="getSpace"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;getComponentSpace()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.space.BSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getComponentSpace() -->
+<method name="getComponentSpace"  public="true" final="true">
+<description>
+If this component is in a space, then get the BComponentSpace&#xa; instance.  Return null for components which are not mounted&#xa; in a space.
+</description>
+<return>
+<type class="javax.baja.space.BComponentSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isComponentReadonly() -->
+<method name="isComponentReadonly"  public="true">
+<description>
+Return true if this component is readonly and shouldn&#x27;t be&#xa; modified.  The default implementation of this returns&#xa; space.isSpaceReadonly().  This readonly state is independent&#xa; of any security permissions which might apply.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getOrdInSession() -->
+<method name="getOrdInSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return ord relative to host using componentSpace.ordInSession.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getOrdInSpace() -->
+<method name="getOrdInSpace"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return getHandleOrd().
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getHandleOrd() -->
+<method name="getHandleOrd"  public="true">
+<description>
+Return &#x22;h:&#x22; + getHandle(), or null if not mounted.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getSlotPathOrd() -->
+<method name="getSlotPathOrd"  public="true">
+<description>
+Return &#x22;slot:&#x22; + getSlotPath(), or null if not mounted.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isPendingMove() -->
+<method name="isPendingMove"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this BComponent is currently contained by the current Mark&#xa; and the mark is set to pending move, then this method returns&#xa; true.  In user interfaces this flag should be used to render&#xa; the component grayed out to illustrate that a cut operation&#xa; has been performed on the component, but that a paste operation&#xa; is needed to complete the move.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.setPendingMove(boolean) -->
+<method name="setPendingMove"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the pending move flag.
+</description>
+<parameter name="pendingMove">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.toPathString() -->
+<method name="toPathString"  public="true">
+<description>
+Return a string of this component&#x27;s programmatic slot path.&#xa; If there is no slot path return a non-null string.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.toDisplayPathString(javax.baja.sys.Context) -->
+<method name="toDisplayPathString"  public="true">
+<description>
+Return a string of this component&#x27;s display slot path.&#xa; Typically this is the unescaped version of toPathString().&#xa; If there is no slot path return a non-null string.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavName() -->
+<method name="getNavName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;getName()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavDisplayName(javax.baja.sys.Context) -->
+<method name="getNavDisplayName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;getDisplayName(cx)&lt;/code&gt;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavParent() -->
+<method name="getNavParent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;getParent()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.hasNavChildren() -->
+<method name="hasNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;true&lt;/code&gt;.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return child slot if it is a BINavNode.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.resolveNavChild(java.lang.String) -->
+<method name="resolveNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return getNavChild() or throw UnresolvedException if null.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return all the non-hidden child components..
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isNavChild() -->
+<method name="isNavChild"  public="true">
+<description>
+Override to return false to prevent this component being&#xa; included in the getNavChildren list of its parent.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavDescription(javax.baja.sys.Context) -->
+<method name="getNavDescription"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a short description.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavOrd() -->
+<method name="getNavOrd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;space.navOrd + slotPathOrd&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getNavIcon() -->
+<method name="getNavIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;getIcon&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.add(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="add"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Add a new slot to the component.  The new slot is&#xa; always a dynamic (un-frozen) Property.  If the&#xa; value is an subclass of BAction the new slot is&#xa; also an Action slot.  If the value is a subclass of&#xa; BTopic the new slot is also a Topic.  All other&#xa; types are simple Property slots.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the unique name to use as the String key for the slot.&#xa;                The name must meet the &#x22;name&#x22; production in the SlotPath BNF&#xa;                grammar. Informally this means that the name must start with&#xa;                an ascii letter and contain only ascii letters, ascii&#xa;                digits, or &#x27;_&#x27;.  Escape sequences can be specified using the&#xa;                &#x27;$&#x27; char.  Use SlotPath.escape() to escape illegal&#xa;                characters.&#xa;                If null is passed, then a unique name will automatically be&#xa;                generated.&#xa;                If the name ends with the &#x27;?&#x27; character, a unique name will&#xa;                automatically be generated by appending numbers to the&#xa;                specified name. Note that when using the &#x27;?&#x27; character, the&#xa;                specified name must be unescaped: e.g.,&#xa;                &lt;code&gt;&amp;#x22;hello world?&amp;#x22;&lt;/code&gt; not &lt;code&gt;&amp;#x22;hello$20world?&amp;#x22;&lt;/code&gt;.
+</description>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+<description>
+BValue value of the new property.
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+<description>
+Mask of the properties slots using constants&#xa;                defined in Flags.
+</description>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Facets provide additional meta-data about&#xa;                the property. Maybe null or BFacets.NULL if no facets&#xa;                are required.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+Used to provide additional contextual info.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+<description>
+the property the slot was added with, or&#xa; null if trapped by a transaction or remote call.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.add(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.Context) -->
+<method name="add"  public="true" final="true">
+<description>
+Convenience method for add with BFacets.NULL.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.add(java.lang.String, javax.baja.sys.BValue, int) -->
+<method name="add"  public="true" final="true">
+<description>
+Convenience method for add with BFacets.NULL and null context.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.add(java.lang.String, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="add"  public="true" final="true">
+<description>
+Convenience method for add with a default flags value 0 and&#xa; BFacets.NULL.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.add(java.lang.String, javax.baja.sys.BValue) -->
+<method name="add"  public="true" final="true">
+<description>
+Convenience method for add with a default flags of 0,&#xa; BFacets.NULL, and null context.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.remove(java.lang.String, javax.baja.sys.Context) -->
+<method name="remove"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove the dynamic slot by the specified name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.remove(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="remove"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.remove(java.lang.String) -->
+<method name="remove"  public="true" final="true">
+<description>
+Convenience method for remove with null context.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.remove(javax.baja.sys.Property) -->
+<method name="remove"  public="true" final="true">
+<description>
+Convenience method for remove with null context.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.remove(javax.baja.sys.BComplex) -->
+<method name="remove"  public="true" final="true">
+<description>
+Convenience method for &lt;code&gt;remove(child.getPropertyInParent())&lt;/code&gt;.
+</description>
+<parameter name="child">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.removeAll(javax.baja.sys.Context) -->
+<method name="removeAll"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove all dynamic properties.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.removeAll() -->
+<method name="removeAll"  public="true" final="true">
+<description>
+Remove all dynamic properties with null context.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.rename(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="rename"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Rename the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+<description>
+Property to rename.
+</description>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+<description>
+New String name for the property.&#xa;                The name must meet the &#x22;name&#x22; production in the&#xa;                SlotPath BNF grammar.  Informally this means that&#xa;                the name must start with an ascii letter, and&#xa;                contain only ascii letters, ascii digits, or &#x27;_&#x27;.&#xa;                Escape sequences can be specified using the &#x27;$&#x27; char.&#xa;                Use SlotPath.escape() to escape illegal characters.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+Used to provide additional contextual info.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.rename(javax.baja.sys.Property, java.lang.String) -->
+<method name="rename"  public="true" final="true">
+<description>
+Convenience method for rename with null context.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getDisplayNameFormat(javax.baja.sys.Property) -->
+<method name="getDisplayNameFormat"  public="true">
+<description>
+Get the display name format for the specified slot.  This returns&#xa; the BFormat stored in the displayNames map for the specified slot&#xa; or null if the slot does not have a display name defined.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BFormat"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.setDisplayName(javax.baja.sys.Property, javax.baja.util.BFormat, javax.baja.sys.Context) -->
+<method name="setDisplayName"  public="true" final="true">
+<description>
+Set the display name for the specified slot.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="newName">
+<type class="javax.baja.util.BFormat"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.reorder(javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="reorder"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Reorder the component&#x27;s dynamic properties.
+</description>
+<parameter name="dynamicProperties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.reorder(javax.baja.sys.Property[]) -->
+<method name="reorder"  public="true" final="true">
+<description>
+Reorder the component&#x27;s dynamic properties with null context.
+</description>
+<parameter name="dynamicProperties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.reorderToTop(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="reorderToTop"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Reorder the specified dynamic property to the&#xa; first dynamic slot position.
+</description>
+<parameter name="dynamicProperty">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.reorderToTop(javax.baja.sys.Property) -->
+<method name="reorderToTop"  public="true" final="true">
+<description>
+Reorder the specified dynamic property to the&#xa; first dynamic slot position using a null context.
+</description>
+<parameter name="dynamicProperty">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.reorderToBottom(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="reorderToBottom"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Reorder the specified dynamic property to the&#xa; last dynamic slot position.
+</description>
+<parameter name="dynamicProperty">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.reorderToBottom(javax.baja.sys.Property) -->
+<method name="reorderToBottom"  public="true" final="true">
+<description>
+Reorder the specified dynamic property to the&#xa; last dynamic slot position using a null context.
+</description>
+<parameter name="dynamicProperty">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getActionParameterDefault(javax.baja.sys.Action) -->
+<method name="getActionParameterDefault"  public="true">
+<description>
+This method allows subclasses to create the&#xa; default value to use when prompting the user for&#xa; the action&#x27;s argument.  By default it calls&#xa; &lt;code&gt;Action.getParameterDefault()&lt;/code&gt;.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.invoke(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="invoke"  public="true" final="true">
+<description>
+Invoke the specified action.  If the action is synchronous&#xa; then the &#x22;do&#x22; implementation is invoked on the callers&#xa; thread.  If the action is asynchronous then multiple&#xa; invocations are coalesced and actually executed at some&#xa; point in the near future.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+<description>
+Action to invoke
+</description>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+<description>
+the argument to pass to the action&#xa;                 or null if no argument is required.  The specified&#xa;                 argument must be the same type as the action&#x27;s&#xa;                 parameter or the invoke will fail.  Passing an&#xa;                 argument to an action with no parameter is ok, and&#xa;                 the specified argument will be ignored.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+action return value or null if the action has&#xa; a void return value or the action is asynchronous.
+</description>
+</return>
+<throws>
+<type class="javax.baja.sys.ActionInvokeException"/>
+<description>
+any invocation on a synchronous&#xa;                               action that raises an exception will raise the exception to&#xa;                               the caller wrapped by an ActionInvokeException.  Actions which&#xa;                               occur asynchronously or in the background will log any&#xa;                               raised exceptions.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.invoke(javax.baja.sys.Action, javax.baja.sys.BValue) -->
+<method name="invoke"  public="true" final="true">
+<description>
+Convenience method for invoke with a null context.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="javax.baja.sys.ActionInvokeException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<description>
+This is a callback when an async action is invoked.  It gives&#xa; subclasses a chance to manage the invocation using their own&#xa; queues and threading models.  The default implementation schedules&#xa; the action using the engine manager thread.  The action should&#xa; invoked using the doInvoke() method on another thread and&#xa; immediately return control to the calling thread.  See the&#xa; utility classes Invocation, Queue, and Worker.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+<description>
+always return null
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.doInvoke(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="doInvoke"  public="true">
+<description>
+This method forces the do method of an async action&#xa; to be called.  Calling this method should be the result&#xa; of a post callback.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.sys.ActionInvokeException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponent.fire(javax.baja.sys.Topic, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="fire"  public="true" final="true">
+<description>
+Fire an event on the specified topic.  Any&#xa; actions linked to this topic will get invoked&#xa; by the execution engine.
+</description>
+<parameter name="topic">
+<type class="javax.baja.sys.Topic"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.fire(javax.baja.sys.Topic, javax.baja.sys.BValue) -->
+<method name="fire"  public="true" final="true">
+<description>
+Fire an event on the specified topic with a null&#xa; context.  Any actions linked to this topic will&#xa; get invoked by the execution engine.
+</description>
+<parameter name="topic">
+<type class="javax.baja.sys.Topic"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.checkAdd(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="checkAdd"  public="true">
+<description>
+This method is called during the first phase of &lt;code&gt;add()&lt;/code&gt;&#xa; before the add is committed.  If a subclass wishes to cancel the&#xa; add, then a &lt;code&gt;LocalizableRuntimeException&lt;/code&gt; should be thrown.&#xa; This method is called before &lt;code&gt;isParentLegal&lt;/code&gt; and&#xa; &lt;code&gt;isChildLegal()&lt;/code&gt;.  However, unlike the parent and&#xa; child checks, this method is called when adding any type&#xa; of BValue, not just BComponents.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.checkRemove(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="checkRemove"  public="true">
+<description>
+This method is called during the first phase of &lt;code&gt;remove()&lt;/code&gt;&#xa; before the remove is committed.  If a subclass wishes to cancel&#xa; the remove, then a &lt;code&gt;LocalizableRuntimeException&lt;/code&gt; should&#xa; be thrown.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.checkRename(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="checkRename"  public="true">
+<description>
+This method is called during the first phase of &lt;code&gt;rename()&lt;/code&gt;&#xa; before the rename is committed.  If a subclass wishes to cancel&#xa; the rename, then a &lt;code&gt;IllegalNameException&lt;/code&gt; should&#xa; be thrown.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.checkReorder(javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="checkReorder"  public="true">
+<description>
+This method is called during the first phase of the reorder&#xa; methods before the reorder is committed.  If a subclass wishes to&#xa; cancel the reorder, then a &lt;code&gt;LocalizableRuntimeException&lt;/code&gt;&#xa; should be thrown.
+</description>
+<parameter name="properties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.checkSetFlags(javax.baja.sys.Slot, int, javax.baja.sys.Context) -->
+<method name="checkSetFlags"  public="true">
+<description>
+This method is called during the first phase of &lt;code&gt;setFlags()&lt;/code&gt;&#xa; before the set flags is committed.  If a subclass wishes to cancel&#xa; the set flags, then a &lt;code&gt;LocalizableRuntimeException&lt;/code&gt; should&#xa; be thrown.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.checkSetFacets(javax.baja.sys.Slot, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="checkSetFacets"  public="true">
+<description>
+This method is called during the first phase of &lt;code&gt;setFacets()&lt;/code&gt;&#xa; before the set facets is committed.  If a subclass wishes to cancel&#xa; the set facets, then a &lt;code&gt;LocalizableRuntimeException&lt;/code&gt; should&#xa; be thrown.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+Is the specified parent a legal parent for this component.&#xa; Default is to return true for any parent.  Note that this&#xa; check is disabled if adding to a BUnrestrictedFolder.  This&#xa; method is called during the &lt;code&gt;add()&lt;/code&gt; method.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isChildLegal(javax.baja.sys.BComponent) -->
+<method name="isChildLegal"  public="true">
+<description>
+Is the specified child a legal child component for this&#xa; component.  There are no restrictions placed on BSimple&#xa; and BStruct children, only BComponent children.  Default&#xa; is to return true for any child. This method is called&#xa; during the &lt;code&gt;add()&lt;/code&gt; method.
+</description>
+<parameter name="child">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Callback when a property (or possibly a descendant of&#xa; that property) is modified on this component via&#xa; one of the &lt;code&gt;set&lt;/code&gt; methods.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<description>
+Called when a new property is added to this component&#xa; via one of the &lt;code&gt;add&lt;/code&gt; methods.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.removed(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="removed"  public="true">
+<description>
+Called when an existing property is removed from this&#xa; component via one of the &lt;code&gt;remove&lt;/code&gt; methods.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="oldValue">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.renamed(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="renamed"  public="true">
+<description>
+Called when an existing property is renamed via one&#xa; of the &lt;code&gt;rename&lt;/code&gt; methods.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="oldName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.reordered(javax.baja.sys.Context) -->
+<method name="reordered"  public="true">
+<description>
+Called when the properties are reordered via one of&#xa; the &lt;code&gt;reorder&lt;/code&gt; methods.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.flagsChanged(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="flagsChanged"  public="true">
+<description>
+Called when a slot&#x27;s flags are modified via one of&#xa; the &lt;code&gt;setFlags&lt;/code&gt; methods.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.facetsChanged(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="facetsChanged"  public="true">
+<description>
+Called when a slot&#x27;s facets are modified via one of&#xa; the &lt;code&gt;setFacets&lt;/code&gt; methods.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.recategorized(javax.baja.sys.Context) -->
+<method name="recategorized"  public="true">
+<description>
+Callback when the component&#x27;s category mask is changed.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.childParented(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="childParented"  public="true">
+<description>
+Called when a BValue is being parented as a direct child&#xa; of this component either because of a set or an add.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="newChild">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.childUnparented(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="childUnparented"  public="true">
+<description>
+The childUnparented callback is invoked when a BValue&#xa; is being removed as a direct child of this component&#xa; either because of a set or a remove.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="oldChild">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.knobAdded(javax.baja.sys.Knob, javax.baja.sys.Context) -->
+<method name="knobAdded"  public="true">
+<description>
+Called when a knob is activated.
+</description>
+<parameter name="knob">
+<type class="javax.baja.sys.Knob"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.knobRemoved(javax.baja.sys.Knob, javax.baja.sys.Context) -->
+<method name="knobRemoved"  public="true">
+<description>
+Called when a knob is deactivated.
+</description>
+<parameter name="knob">
+<type class="javax.baja.sys.Knob"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.relationKnobAdded(javax.baja.sys.RelationKnob, javax.baja.sys.Context) -->
+<method name="relationKnobAdded"  public="true">
+<description>
+Called when a relationKnob is added.
+</description>
+<parameter name="knob">
+<type class="javax.baja.sys.RelationKnob"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.relationKnobRemoved(javax.baja.sys.RelationKnob, javax.baja.sys.Context) -->
+<method name="relationKnobRemoved"  public="true">
+<description>
+Called when a relationKnob is removed.
+</description>
+<parameter name="knob">
+<type class="javax.baja.sys.RelationKnob"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.batchChanged(javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="batchChanged"  public="true">
+<description>
+Callback when a group of properties is modified on this component&#xa; in batch via the batch &lt;code&gt;set&lt;/code&gt; method.  This callback will&#xa; occur after all of the individual &lt;code&gt;changed()&lt;/code&gt; callbacks&#xa; have occurred.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="properties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+<description>
+an array of the properties that just&#xa;                   had a batch change of value.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+the Context associated with the batch change.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getChildComponents() -->
+<method name="getChildComponents"  public="true" synchronized="true">
+<description>
+Get all an array of the children properties&#xa; which are instances of BComponent.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.&lt;T&gt;getChildren(java.lang.Class&lt;T&gt;) -->
+<method name="getChildren"  public="true" synchronized="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<typeParameters>
+<typeVariable class="T">
+</typeVariable>
+</typeParameters>
+<description>
+This is a convenience method to get an array of all&#xa; this object&#x27;s children which are an instance of the&#xa; specified class.
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="java.lang.T" dimension="1"/>
+<description>
+an array of with a component type of the&#xa; specified class which contains all the child&#xa; property values which are an instance of the&#xa; specified class.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getMixIn(javax.baja.sys.Type) -->
+<method name="getMixIn"  public="true">
+<description>
+Get the MixIn child property value.  MixIns are always&#xa; stored with a property name equal to the type spec string&#xa; where the colon is replaced with an underbar.  Return&#xa; null if the specified MixIn type has not been added to&#xa; this component.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.checkLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="checkLink"  public="true" final="true">
+<description>
+Check if the specified link if valid, and return&#xa; an appropriate LinkCheck instance.  This method is&#xa; does standard checking, then routes to doCheckLink().
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.LinkCheck"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.doCheckLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="doCheckLink"  protected="true">
+<description>
+This an override point to specify additional link checking&#xa; between the specified source and my target slot.  If the&#xa; link is valid then return LinkCheck.makeValid().  Or if&#xa; the link would result in an error condition return then&#xa; return a LinkCheck with the appropriate reason.  The default&#xa; implementation returns LinkCheck.makeValid().
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.LinkCheck"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.makeLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="makeLink"  public="true">
+<description>
+Create an instance of BLink to use for a link to the specified&#xa; source component.  This method is used by Baja tools when users&#xa; create links via the &#x22;bajaui:javax.baja.ui.commands.LinkCommand&#x22;.&#xa; The default implementation returns a standard BLink instance with&#xa; enable set to true.  When setting the source ord of the BLink you&#xa; should use &lt;code&gt;source.getHandleOrd()&lt;/code&gt;.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BLink"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getLinks() -->
+<method name="getLinks"  public="true">
+<description>
+Get all the children on this component which are BLinks which by definition have this component&#xa; as the target.&#xa;&#xa; &lt;p&gt;Method used to be synchronized but synchronization is now handled within the method. This&#xa; method should not be called within a block synchronized on this component.
+</description>
+<return>
+<type class="javax.baja.sys.BLink" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getLinks(javax.baja.sys.Slot) -->
+<method name="getLinks"  public="true">
+<description>
+Get all the children BLinks on this component which are linked to the specified target slot.&#xa;&#xa; &lt;p&gt;Method used to be synchronized but synchronization is now handled within the method. This&#xa; method should not be called within a block synchronized on this component.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BLink" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getKnobCount() -->
+<method name="getKnobCount"  public="true" synchronized="true">
+<description>
+Get the number of knobs currently registered on&#xa; this component.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getKnobs() -->
+<method name="getKnobs"  public="true" synchronized="true">
+<description>
+Get the link knobs currently registered on this&#xa; component.  Knobs indicate this component&#x27;s usage&#xa; as a link source.
+</description>
+<return>
+<type class="javax.baja.sys.Knob" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getKnobs(javax.baja.sys.Slot) -->
+<method name="getKnobs"  public="true" synchronized="true">
+<description>
+Get all the Knobs for the specified slot.  These&#xa; knobs indicate the links which are sourced on&#xa; this component and the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Knob" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isLinkTarget(javax.baja.sys.Slot) -->
+<method name="isLinkTarget"  public="true">
+<description>
+Return true if the specified slot is currently already&#xa; the target slot of an existing link.&#xa;&#xa; &lt;p&gt;Method used to be synchronized. This method calls &lt;code&gt;<see ref="javax.baja.sys.BComponent#getLinks(javax.baja.sys.Slot)">#getLinks(Slot)</see>&lt;/code&gt;, which also used&#xa; to be synchronized, and synchronization is now handled within that method. This method should&#xa; not be called within a block synchronized on this component.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.linkTo(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot) -->
+<method name="linkTo"  public="true">
+<description>
+Create a direct link to the specified source, add it&#xa; a dynamic transient property, and activate it.  The name&#xa; is autogenerated.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BLink"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.linkTo(java.lang.String, javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot) -->
+<method name="linkTo"  public="true">
+<description>
+Create a direct link to the specified source, add it&#xa; a dynamic transient property, and activate it.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BLink"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.makeRelation(javax.baja.tag.Id, javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="makeRelation"  public="true">
+<description>
+Create an instance of BRelation to use for a relation to the specified&#xa; endpoint component.  This method is used by Baja tools when users&#xa; create relations via the &#x22;bajaui:javax.baja.ui.commands.RelateCommand&#x22;.&#xa; The default implementation returns a standard BRelation instance with&#xa; enable set to true.  When setting the endpoint ord of the BRelation you&#xa; should use &lt;code&gt;source.getHandleOrd()&lt;/code&gt;.
+</description>
+<parameter name="id">
+<type class="javax.baja.tag.Id"/>
+</parameter>
+<parameter name="endpoint">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BRelation"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getComponentRelations() -->
+<method name="getComponentRelations"  public="true">
+<description>
+Get all the children on this component which are BRelation which by definition have this&#xa; component as the target.&#xa;&#xa; &lt;p&gt;Method used to be synchronized but synchronization is now handled within the method. This&#xa; method should not be called within a block synchronized on this component.
+</description>
+<return>
+<type class="javax.baja.sys.BRelation" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getRelationKnobCount() -->
+<method name="getRelationKnobCount"  public="true" synchronized="true">
+<description>
+Get the number of knobs currently registered on&#xa; this component.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getRelationKnobs() -->
+<method name="getRelationKnobs"  public="true" synchronized="true">
+<description>
+Get the link knobs currently registered on this&#xa; component.  Knobs indicate this component&#x27;s usage&#xa; as a link source.
+</description>
+<return>
+<type class="javax.baja.sys.RelationKnob" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getRelationKnob(javax.baja.tag.Id) -->
+<method name="getRelationKnob"  public="true" synchronized="true">
+<description>
+Get the link knobs currently registered on this&#xa; component.  Knobs indicate this component&#x27;s usage&#xa; as a link source.
+</description>
+<parameter name="id">
+<type class="javax.baja.tag.Id"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.RelationKnob"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.isRelationTarget() -->
+<method name="isRelationTarget"  public="true">
+<description>
+Return true if the specified slot is currently already the target slot of an existing link.&#xa;&#xa; &lt;p&gt;Method used to be synchronized. This method calls &lt;code&gt;<see ref="javax.baja.sys.BComponent#getComponentRelations()">#getComponentRelations()</see>&lt;/code&gt;, which&#xa; also used to be synchronized, and synchronization is now handled within that method. This&#xa; method should not be called within a block synchronized on this component.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.relateTo(javax.baja.tag.Id, javax.baja.sys.BComponent) -->
+<method name="relateTo"  public="true">
+<description>
+Create a direct relation to the specified endpoint, add it&#xa; a dynamic transient property, and activate it.  The name&#xa; is autogenerated.
+</description>
+<parameter name="id">
+<type class="javax.baja.tag.Id"/>
+</parameter>
+<parameter name="endpoint">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BRelation"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.relateTo(java.lang.String, javax.baja.tag.Id, javax.baja.sys.BComponent) -->
+<method name="relateTo"  public="true">
+<description>
+Create a direct link to the specified source, add it&#xa; a dynamic transient property, and activate it.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="id">
+<type class="javax.baja.tag.Id"/>
+</parameter>
+<parameter name="endpoint">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BRelation"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getAppliedCategoryMask() -->
+<method name="getAppliedCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the category mask to actually use for this component.&#xa; If &lt;code&gt;getCategoryMask()&lt;/code&gt; is null, then return&#xa; the inherited category mask.
+</description>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getCategoryMask() -->
+<method name="getCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the raw category mask for this component.  If this&#xa; method returns &lt;code&gt;BCategoryMask.NULL&lt;/code&gt;, then the&#xa; component is inheriting categories from it&#x27;s parent and&#xa; &lt;code&gt;getAppliedCategoryMask()&lt;/code&gt; will return the&#xa; actual category mask to use.
+</description>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.setCategoryMask(javax.baja.category.BCategoryMask, javax.baja.sys.Context) -->
+<method name="setCategoryMask"  public="true">
+<description>
+Set the raw category mask for this component.  Set the&#xa; mask to &lt;code&gt;BCategoryMask.NULL&lt;/code&gt; to inherit categories&#xa; from the component&#x27;s parent.
+</description>
+<parameter name="mask">
+<type class="javax.baja.category.BCategoryMask"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getPermissions(javax.baja.sys.Context) -->
+<method name="getPermissions"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the set of permissions available based on the&#xa; specified context.  If the context is non-null and&#xa; has a non-null user then this method must be return&#xa; &lt;code&gt;cx.getUser().getPermissionsFor(this)&lt;/code&gt;.&#xa; If the context is null then typically this method&#xa; should return &lt;code&gt;BPermissions.all&lt;/code&gt;.  If this&#xa; happens to be a proxy object within a remote session,&#xa; then this method should return a cached instance&#xa; of BPermissions based on the credentials used to&#xa; establish the session.  Under no circumstances should&#xa; this method return null or make a network call.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.canRead(javax.baja.naming.OrdTarget) -->
+<method name="canRead"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If the target is to a slot within this component&#xa; then use the read permission based on the slot&#x27;s&#xa; operator flag.  If the target is the component itself&#xa; return if operator read is enabled.
+</description>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.canWrite(javax.baja.naming.OrdTarget) -->
+<method name="canWrite"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If the target is to a slot within this component&#xa; then use the write permission based on the slot&#x27;s&#xa; readonly *and* operator flags.  If the target is the&#xa; component itself return if operator write is enabled.
+</description>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.canInvoke(javax.baja.naming.OrdTarget) -->
+<method name="canInvoke"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If the target is to a slot within this component&#xa; then use the invoke permission based on the slot&#x27;s&#xa; operator flag.  If the target is the component itself&#xa; return if operator invoke is enabled.
+</description>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.  The default implement checks if&#xa; there is a BIcon property called &#x22;icon&#x22;.  If&#xa; not then return a default icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.newAction(int, javax.baja.sys.BValue, javax.baja.sys.BFacets) -->
+<method name="newAction"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="parameterDefault">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.newAction(int, javax.baja.sys.BValue) -->
+<method name="newAction"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="parameterDefault">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.newAction(int, javax.baja.sys.BFacets) -->
+<method name="newAction"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.newAction(int) -->
+<method name="newAction"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.newTopic(int, javax.baja.sys.BFacets) -->
+<method name="newTopic"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Topic"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.newTopic(int) -->
+<method name="newTopic"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Topic"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.spyRelations(javax.baja.spy.SpyWriter) -->
+<method name="spyRelations"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.spyTags(javax.baja.spy.SpyWriter) -->
+<method name="spyTags"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

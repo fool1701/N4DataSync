@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="tagdictionary" runtimeProfile="rt" qualifiedName="javax.baja.tagdictionary.data.BTagGroupMonitor" name="BTagGroupMonitor" packageName="javax.baja.tagdictionary.data" public="true">
+<description>
+The BTagGroupMonitor periodically scans the station taggables looking for applied tags and&#xa; tagGroups. If a taggable has direct tags for every tag in a tag group, the direct tags will be&#xa; removed and replaced with an n:tagGroup relation to the tag group. The tag group tags will be&#xa; implied on the taggable that owns the n:tagGroup relation. In addition to a periodic full scan,&#xa; individual taggables are scanned when tags are added or removed from them.
+</description>
+<tag name="@author">Andy Saunders</tag>
+<tag name="@creation">04  Sept, 2015</tag>
+<tag name="@since">Baja 4.1</tag>
+<tag name="@deprecated">since Niagara 4.3U1; the automatic tag group replacement was not always accurate or&#xa; desired by the user</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<property name="status" flags="rt">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the overall component- ok or disabled.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Enable or disabled scanning the station.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="frequency" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;frequency&lt;/code&gt; property.&#xa; Specifies the frequency at which the station will be scanned.
+</description>
+<tag name="@see">#getFrequency</tag>
+<tag name="@see">#setFrequency</tag>
+</property>
+
+<property name="executeCountDown" flags="rtN">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;executeCountDown&lt;/code&gt; property.&#xa; Seconds until the next full station scan.
+</description>
+<tag name="@see">#getExecuteCountDown</tag>
+<tag name="@see">#setExecuteCountDown</tag>
+</property>
+
+<property name="executeStatus" flags="rtN">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;executeStatus&lt;/code&gt; property.&#xa; Current status of either the full station scan or scan of entities with tags added or removed.
+</description>
+<tag name="@see">#getExecuteStatus</tag>
+<tag name="@see">#setExecuteStatus</tag>
+</property>
+
+<property name="lastScanTime" flags="rtN">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastScanTime&lt;/code&gt; property.&#xa; Time of the last full station scan.
+</description>
+<tag name="@see">#getLastScanTime</tag>
+<tag name="@see">#setLastScanTime</tag>
+</property>
+
+<property name="scanCount" flags="rtN">
+<type class="long"/>
+<description>
+Slot for the &lt;code&gt;scanCount&lt;/code&gt; property.&#xa; Number of full station scans executed.
+</description>
+<tag name="@see">#getScanCount</tag>
+<tag name="@see">#setScanCount</tag>
+</property>
+
+<property name="avgExecuteTime" flags="rtN">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;avgExecuteTime&lt;/code&gt; property.&#xa; Average duration of a full station scan.
+</description>
+<tag name="@see">#getAvgExecuteTime</tag>
+<tag name="@see">#setAvgExecuteTime</tag>
+</property>
+
+<property name="lastExecuteTime" flags="rtN">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;lastExecuteTime&lt;/code&gt; property.&#xa; Duration of the last full station scan.
+</description>
+<tag name="@see">#getLastExecuteTime</tag>
+<tag name="@see">#setLastExecuteTime</tag>
+</property>
+
+<property name="tagGroupCount" flags="rtN">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;tagGroupCount&lt;/code&gt; property.&#xa; Number of tag groups in the station.
+</description>
+<tag name="@see">#getTagGroupCount</tag>
+<tag name="@see">#setTagGroupCount</tag>
+</property>
+
+<property name="entityCount" flags="rtN">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;entityCount&lt;/code&gt; property.&#xa; Number of entities in the station.
+</description>
+<tag name="@see">#getEntityCount</tag>
+<tag name="@see">#setEntityCount</tag>
+</property>
+
+<property name="tagGroupRelationCount" flags="rtN">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;tagGroupRelationCount&lt;/code&gt; property.&#xa; Number of tag group (n:tagGroup) relations in the station.
+</description>
+<tag name="@see">#getTagGroupRelationCount</tag>
+<tag name="@see">#setTagGroupRelationCount</tag>
+</property>
+
+<property name="dataPolicyCount" flags="rtN">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;dataPolicyCount&lt;/code&gt; property.&#xa; Number of data policies in the station.
+</description>
+<tag name="@see">#getDataPolicyCount</tag>
+<tag name="@see">#setDataPolicyCount</tag>
+</property>
+
+<action name="execute" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;execute&lt;/code&gt; action.&#xa; Perform an immediate full station scan.
+</description>
+<tag name="@see">#execute()</tag>
+</action>
+
+<action name="dump" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;dump&lt;/code&gt; action.&#xa; Print out diagnostic information to the console (see &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BTagGroupMonitor#doDump()">#doDump()</see>&lt;/code&gt;).
+</description>
+<tag name="@see">#dump()</tag>
+</action>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor() -->
+<constructor name="BTagGroupMonitor" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the overall component- ok or disabled.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the overall component- ok or disabled.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Enable or disabled scanning the station.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Enable or disabled scanning the station.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getFrequency() -->
+<method name="getFrequency"  public="true">
+<description>
+Get the &lt;code&gt;frequency&lt;/code&gt; property.&#xa; Specifies the frequency at which the station will be scanned.
+</description>
+<tag name="@see">#frequency</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setFrequency(javax.baja.sys.BRelTime) -->
+<method name="setFrequency"  public="true">
+<description>
+Set the &lt;code&gt;frequency&lt;/code&gt; property.&#xa; Specifies the frequency at which the station will be scanned.
+</description>
+<tag name="@see">#frequency</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getExecuteCountDown() -->
+<method name="getExecuteCountDown"  public="true">
+<description>
+Get the &lt;code&gt;executeCountDown&lt;/code&gt; property.&#xa; Seconds until the next full station scan.
+</description>
+<tag name="@see">#executeCountDown</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setExecuteCountDown(int) -->
+<method name="setExecuteCountDown"  public="true">
+<description>
+Set the &lt;code&gt;executeCountDown&lt;/code&gt; property.&#xa; Seconds until the next full station scan.
+</description>
+<tag name="@see">#executeCountDown</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getExecuteStatus() -->
+<method name="getExecuteStatus"  public="true">
+<description>
+Get the &lt;code&gt;executeStatus&lt;/code&gt; property.&#xa; Current status of either the full station scan or scan of entities with tags added or removed.
+</description>
+<tag name="@see">#executeStatus</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setExecuteStatus(java.lang.String) -->
+<method name="setExecuteStatus"  public="true">
+<description>
+Set the &lt;code&gt;executeStatus&lt;/code&gt; property.&#xa; Current status of either the full station scan or scan of entities with tags added or removed.
+</description>
+<tag name="@see">#executeStatus</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getLastScanTime() -->
+<method name="getLastScanTime"  public="true">
+<description>
+Get the &lt;code&gt;lastScanTime&lt;/code&gt; property.&#xa; Time of the last full station scan.
+</description>
+<tag name="@see">#lastScanTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setLastScanTime(javax.baja.sys.BAbsTime) -->
+<method name="setLastScanTime"  public="true">
+<description>
+Set the &lt;code&gt;lastScanTime&lt;/code&gt; property.&#xa; Time of the last full station scan.
+</description>
+<tag name="@see">#lastScanTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getScanCount() -->
+<method name="getScanCount"  public="true">
+<description>
+Get the &lt;code&gt;scanCount&lt;/code&gt; property.&#xa; Number of full station scans executed.
+</description>
+<tag name="@see">#scanCount</tag>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setScanCount(long) -->
+<method name="setScanCount"  public="true">
+<description>
+Set the &lt;code&gt;scanCount&lt;/code&gt; property.&#xa; Number of full station scans executed.
+</description>
+<tag name="@see">#scanCount</tag>
+<parameter name="v">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getAvgExecuteTime() -->
+<method name="getAvgExecuteTime"  public="true">
+<description>
+Get the &lt;code&gt;avgExecuteTime&lt;/code&gt; property.&#xa; Average duration of a full station scan.
+</description>
+<tag name="@see">#avgExecuteTime</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setAvgExecuteTime(int) -->
+<method name="setAvgExecuteTime"  public="true">
+<description>
+Set the &lt;code&gt;avgExecuteTime&lt;/code&gt; property.&#xa; Average duration of a full station scan.
+</description>
+<tag name="@see">#avgExecuteTime</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getLastExecuteTime() -->
+<method name="getLastExecuteTime"  public="true">
+<description>
+Get the &lt;code&gt;lastExecuteTime&lt;/code&gt; property.&#xa; Duration of the last full station scan.
+</description>
+<tag name="@see">#lastExecuteTime</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setLastExecuteTime(int) -->
+<method name="setLastExecuteTime"  public="true">
+<description>
+Set the &lt;code&gt;lastExecuteTime&lt;/code&gt; property.&#xa; Duration of the last full station scan.
+</description>
+<tag name="@see">#lastExecuteTime</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getTagGroupCount() -->
+<method name="getTagGroupCount"  public="true">
+<description>
+Get the &lt;code&gt;tagGroupCount&lt;/code&gt; property.&#xa; Number of tag groups in the station.
+</description>
+<tag name="@see">#tagGroupCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setTagGroupCount(int) -->
+<method name="setTagGroupCount"  public="true">
+<description>
+Set the &lt;code&gt;tagGroupCount&lt;/code&gt; property.&#xa; Number of tag groups in the station.
+</description>
+<tag name="@see">#tagGroupCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getEntityCount() -->
+<method name="getEntityCount"  public="true">
+<description>
+Get the &lt;code&gt;entityCount&lt;/code&gt; property.&#xa; Number of entities in the station.
+</description>
+<tag name="@see">#entityCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setEntityCount(int) -->
+<method name="setEntityCount"  public="true">
+<description>
+Set the &lt;code&gt;entityCount&lt;/code&gt; property.&#xa; Number of entities in the station.
+</description>
+<tag name="@see">#entityCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getTagGroupRelationCount() -->
+<method name="getTagGroupRelationCount"  public="true">
+<description>
+Get the &lt;code&gt;tagGroupRelationCount&lt;/code&gt; property.&#xa; Number of tag group (n:tagGroup) relations in the station.
+</description>
+<tag name="@see">#tagGroupRelationCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setTagGroupRelationCount(int) -->
+<method name="setTagGroupRelationCount"  public="true">
+<description>
+Set the &lt;code&gt;tagGroupRelationCount&lt;/code&gt; property.&#xa; Number of tag group (n:tagGroup) relations in the station.
+</description>
+<tag name="@see">#tagGroupRelationCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getDataPolicyCount() -->
+<method name="getDataPolicyCount"  public="true">
+<description>
+Get the &lt;code&gt;dataPolicyCount&lt;/code&gt; property.&#xa; Number of data policies in the station.
+</description>
+<tag name="@see">#dataPolicyCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.setDataPolicyCount(int) -->
+<method name="setDataPolicyCount"  public="true">
+<description>
+Set the &lt;code&gt;dataPolicyCount&lt;/code&gt; property.&#xa; Number of data policies in the station.
+</description>
+<tag name="@see">#dataPolicyCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.execute() -->
+<method name="execute"  public="true">
+<description>
+Invoke the &lt;code&gt;execute&lt;/code&gt; action.&#xa; Perform an immediate full station scan.
+</description>
+<tag name="@see">#execute</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.dump() -->
+<method name="dump"  public="true">
+<description>
+Invoke the &lt;code&gt;dump&lt;/code&gt; action.&#xa; Print out diagnostic information to the console (see &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BTagGroupMonitor#doDump()">#doDump()</see>&lt;/code&gt;).
+</description>
+<tag name="@see">#dump</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.atSteadyState() -->
+<method name="atSteadyState"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.doExecute() -->
+<method name="doExecute"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getEntities() -->
+<method name="getEntities"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getTagGroups() -->
+<method name="getTagGroups"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.tagdictionary.BTagGroupInfo"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getDataPolicies() -->
+<method name="getDataPolicies"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<type class="javax.baja.tagdictionary.data.BDataPolicy"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.run() -->
+<method name="run"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.updateDataPolicyRelationCount() -->
+<method name="updateDataPolicyRelationCount"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.tagAdded(javax.baja.tag.Entity, javax.baja.tag.Id) -->
+<method name="tagAdded"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<parameter name="target">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="tagId">
+<type class="javax.baja.tag.Id"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.tagRemoved(javax.baja.tag.Entity, javax.baja.tag.Id) -->
+<method name="tagRemoved"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<parameter name="target">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="tagId">
+<type class="javax.baja.tag.Id"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.doDump() -->
+<method name="doDump"  public="true">
+<description>
+Performs no action because the class was deprecated and should no longer be used.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.checkParentForRestrictedComponent(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="checkParentForRestrictedComponent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BTagGroupMonitor can no longer be added back to a station.
+</description>
+<tag name="@since">Niagara 4.3U1</tag>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the overall component- ok or disabled.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Enable or disabled scanning the station.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.frequency -->
+<field name="frequency"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;frequency&lt;/code&gt; property.&#xa; Specifies the frequency at which the station will be scanned.
+</description>
+<tag name="@see">#getFrequency</tag>
+<tag name="@see">#setFrequency</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.executeCountDown -->
+<field name="executeCountDown"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;executeCountDown&lt;/code&gt; property.&#xa; Seconds until the next full station scan.
+</description>
+<tag name="@see">#getExecuteCountDown</tag>
+<tag name="@see">#setExecuteCountDown</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.executeStatus -->
+<field name="executeStatus"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;executeStatus&lt;/code&gt; property.&#xa; Current status of either the full station scan or scan of entities with tags added or removed.
+</description>
+<tag name="@see">#getExecuteStatus</tag>
+<tag name="@see">#setExecuteStatus</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.lastScanTime -->
+<field name="lastScanTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastScanTime&lt;/code&gt; property.&#xa; Time of the last full station scan.
+</description>
+<tag name="@see">#getLastScanTime</tag>
+<tag name="@see">#setLastScanTime</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.scanCount -->
+<field name="scanCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;scanCount&lt;/code&gt; property.&#xa; Number of full station scans executed.
+</description>
+<tag name="@see">#getScanCount</tag>
+<tag name="@see">#setScanCount</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.avgExecuteTime -->
+<field name="avgExecuteTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;avgExecuteTime&lt;/code&gt; property.&#xa; Average duration of a full station scan.
+</description>
+<tag name="@see">#getAvgExecuteTime</tag>
+<tag name="@see">#setAvgExecuteTime</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.lastExecuteTime -->
+<field name="lastExecuteTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastExecuteTime&lt;/code&gt; property.&#xa; Duration of the last full station scan.
+</description>
+<tag name="@see">#getLastExecuteTime</tag>
+<tag name="@see">#setLastExecuteTime</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.tagGroupCount -->
+<field name="tagGroupCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;tagGroupCount&lt;/code&gt; property.&#xa; Number of tag groups in the station.
+</description>
+<tag name="@see">#getTagGroupCount</tag>
+<tag name="@see">#setTagGroupCount</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.entityCount -->
+<field name="entityCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;entityCount&lt;/code&gt; property.&#xa; Number of entities in the station.
+</description>
+<tag name="@see">#getEntityCount</tag>
+<tag name="@see">#setEntityCount</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.tagGroupRelationCount -->
+<field name="tagGroupRelationCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;tagGroupRelationCount&lt;/code&gt; property.&#xa; Number of tag group (n:tagGroup) relations in the station.
+</description>
+<tag name="@see">#getTagGroupRelationCount</tag>
+<tag name="@see">#setTagGroupRelationCount</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.dataPolicyCount -->
+<field name="dataPolicyCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;dataPolicyCount&lt;/code&gt; property.&#xa; Number of data policies in the station.
+</description>
+<tag name="@see">#getDataPolicyCount</tag>
+<tag name="@see">#setDataPolicyCount</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.execute -->
+<field name="execute"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;execute&lt;/code&gt; action.&#xa; Perform an immediate full station scan.
+</description>
+<tag name="@see">#execute()</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.dump -->
+<field name="dump"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;dump&lt;/code&gt; action.&#xa; Print out diagnostic information to the console (see &lt;code&gt;<see ref="javax.baja.tagdictionary.data.BTagGroupMonitor#doDump()">#doDump()</see>&lt;/code&gt;).
+</description>
+<tag name="@see">#dump()</tag>
+</field>
+
+<!-- javax.baja.tagdictionary.data.BTagGroupMonitor.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

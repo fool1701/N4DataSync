@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaScript" runtimeProfile="ux" qualifiedName="javax.baja.bajascript.BIBajaScriptTypeExt" name="BIBajaScriptTypeExt" packageName="javax.baja.bajascript" public="true" interface="true" abstract="true" category="interface">
+<description>
+A BajaScript Type Extension is used to extend BajaScript&#x27;s own Type system.
+</description>
+<tag name="@author">gjohnson on 27 Jan 2011</tag>
+<tag name="@version">1</tag>
+<tag name="@since">Niagara 4.0</tag>
+<implements>
+<type class="javax.baja.box.BIBoxTypeExt"/>
+</implements>
+<!-- javax.baja.bajascript.BIBajaScriptTypeExt.getTypeExtJs(javax.baja.sys.Context) -->
+<method name="getTypeExtJs"  public="true" abstract="true">
+<description>
+Return the JavaScript information associated with this Type Extension.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the security context used when requesting the type extension&#x27;s&#xa; JavaScript
+</description>
+</parameter>
+<return>
+<type class="javax.baja.web.js.JsInfo"/>
+<description>
+info on the type extension&#x27;s JavaScript implementation, or null&#xa; if no type extension should be loaded
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bajascript.BIBajaScriptTypeExt.encodeToJson(javax.baja.sys.Context) -->
+<method name="encodeToJson"  public="true" default="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+&lt;p&gt;Encode and return this BajaScript Type extension to JSON. The generated&#xa; JSON will/must adhere to the following schema:&lt;/p&gt;&#xa;&#xa; &lt;pre&gt;&#xa; {&#xa;   &#x22;title&#x22;: &#x22;BIBajaScriptTypeExt JSON encoding&#x22;,&#xa;   &#x22;type&#x22;: &#x22;object&#x22;,&#xa;   &#x22;properties&#x22;: {&#xa;     &#x22;js&#x22;: {&#xa;       &#x22;type&#x22;: &#x22;string&#x22;,&#xa;       &#x22;description&#x22;: &#x22;RequireJS ID of the type extension implementation&#x22;&#xa;     },&#xa;     &#x22;dg&#x22;: {&#xa;       &#x22;type&#x22;: &#x22;array&#x22;,&#xa;       &#x22;items&#x22;: { &#x22;type&#x22;: &#x22;string[]&#x22; },&#xa;       &#x22;description&#x22;: &#x22;Array of arrays of RequireJS IDs of built/minified files that should be loaded before requiring the primary module ID&#x22;&#xa;     }&#xa;   }&#xa; }&#xa; &lt;/pre&gt;
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<tag name="@see">JsInfo#resolveDependencies() which can provide the array of dependencies</tag>
+<tag name="@see">BIWebResource#resolve(Collection) for information about generating the array of dependencies by hand</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the security context used when requesting the type extension&#x27;s&#xa; JavaScript
+</description>
+</parameter>
+<return>
+<type class="com.tridium.json.JSONObject"/>
+<description>
+JSON information about the type extension
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bajascript.BIBajaScriptTypeExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

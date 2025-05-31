@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platform" runtimeProfile="rt" qualifiedName="javax.baja.platform.StationManager" name="StationManager" packageName="javax.baja.platform" public="true" interface="true" abstract="true" category="interface">
+<description>
+Interface for PlatformDaemon station management functions&#xa;&#xa; A StationManager instance can be obtained by calling&#xa; PlatformDaemon.getStationManager()
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">24 Feb 05</tag>
+<tag name="@version">$Revision: 7$ $Date: 12/14/05 10:16:01 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.platform.StationManager.createStation(javax.baja.file.BDirectory, java.lang.String, javax.baja.platform.IPlatformOperationListener, java.util.function.Supplier&lt;char[]&gt;) -->
+<method name="createStation"  public="true" abstract="true">
+<description>
+Transfer a local station to the remote host.  If the station already&#xa; exists, then the existing station will be stopped, and any existing&#xa; files will be overwritten by the transfer
+</description>
+<tag name="@since">Niagara 4.1</tag>
+<parameter name="localSourceDirectory">
+<type class="javax.baja.file.BDirectory"/>
+<description>
+local directory which contains a&#xa; station&#x27;s config.bog database, plus any additional station-related&#xa; files
+</description>
+</parameter>
+<parameter name="targetName">
+<type class="java.lang.String"/>
+<description>
+name to give the station on the remote host
+</description>
+</parameter>
+<parameter name="listener">
+<type class="javax.baja.platform.IPlatformOperationListener"/>
+<description>
+can be used to cancel the request, or receive status during &#xa; the operation
+</description>
+</parameter>
+<parameter name="passPhraseSupplier">
+<parameterizedType class="java.util.function.Supplier">
+<args>
+<type class="char" dimension="1"/>
+</args>
+</parameterizedType>
+<description>
+provides the pass phrase for the local station&#x27;s BOG&#xa;                           file.  Ignored for AX stations, required for Niagara 4&#xa;                           stations when the local config.bog is protected with&#xa;                           a passphrase that&#x27;s different from the remote host&#x27;s&#xa;                           system passphrase.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.RemoteStation"/>
+<description>
+interface to the updated or newly created station
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.StationManager.createStation(javax.baja.file.BDirectory, java.lang.String, javax.baja.platform.IPlatformOperationListener) -->
+<method name="createStation"  public="true" default="true">
+<description>
+Transfer a local station to the remote host.  If the station already&#xa; exists, then the existing station will be stopped, and any existing&#xa; files will be overwritten by the transfer.&#xa;&#xa; Note: If the local copy of the station config.bog file uses a passphrase&#xa; that&#x27;s different from the target host&#x27;s system passphrase, you need to&#xa; provide the passphrase value.  Use &lt;code&gt;<see ref="javax.baja.platform.StationManager#createStation(javax.baja.file.BDirectory, java.lang.String, javax.baja.platform.IPlatformOperationListener, java.util.function.Supplier&lt;char[]&gt;)">#createStation(BDirectory, String, IPlatformOperationListener, Supplier)</see>&lt;/code&gt;&#xa; if this is the case.
+</description>
+<parameter name="localSourceDirectory">
+<type class="javax.baja.file.BDirectory"/>
+<description>
+local directory which contains a&#xa; station&#x27;s config.bog database, plus any additional station-related&#xa; files
+</description>
+</parameter>
+<parameter name="targetName">
+<type class="java.lang.String"/>
+<description>
+name to give the station on the remote host
+</description>
+</parameter>
+<parameter name="listener">
+<type class="javax.baja.platform.IPlatformOperationListener"/>
+<description>
+can be used to cancel the request, or receive status during&#xa; the operation
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.RemoteStation"/>
+<description>
+interface to the updated or newly created station
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.StationManager.getAllStations() -->
+<method name="getAllStations"  public="true" abstract="true">
+<description>
+Return information about all of the stations on the given host
+</description>
+<return>
+<type class="javax.baja.platform.RemoteStation" dimension="1"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.StationManager.getStation(java.lang.String) -->
+<method name="getStation"  public="true" abstract="true">
+<description>
+Return information about the station with the given name, or&#xa; null if a station with that name does not exist.
+</description>
+<parameter name="stationName">
+<type class="java.lang.String"/>
+<description>
+name of a station that&#x27;s currently installed&#xa; on the remote host
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.RemoteStation"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.StationManager.stopAllStations(javax.baja.platform.IPlatformOperationListener) -->
+<method name="stopAllStations"  public="true" abstract="true">
+<description>
+Send a request to the platform daemon to stop all running stations,&#xa; and block until they have all stopped successfully.
+</description>
+<parameter name="listener">
+<type class="javax.baja.platform.IPlatformOperationListener"/>
+</parameter>
+<return>
+<type class="javax.baja.platform.RemoteStation" dimension="1"/>
+<description>
+array of stations which were running and are now stopped
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.StationManager.rebootAsync() -->
+<method name="rebootAsync"  public="true" abstract="true">
+<description>
+Request that the remote host be rebooted after gracefully shutting &#xa; down all running stations
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.net.ConnectException"/>
+</throws>
+<throws>
+<type class="javax.baja.security.AuthenticationException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.StationManager.rebootSync(javax.baja.platform.IPlatformOperationListener) -->
+<method name="rebootSync"  public="true" abstract="true">
+<description>
+Request that the remote host  be rebooted after gracefully shutting &#xa; down all running stations, return after the reboot is complete and &#xa; the platform daemon is running again
+</description>
+<parameter name="listener">
+<type class="javax.baja.platform.IPlatformOperationListener"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

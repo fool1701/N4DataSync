@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sync.ProxyBroker" name="ProxyBroker" packageName="javax.baja.sync" public="true">
+<description>
+ProxyBroker is used to buffer up changes made to a component&#xa; space to forward to a BProxyComponentSpace for synchronization.&#xa; The space a ProxyBroker is registered on is called the master space.
+</description>
+<tag name="@author">Brian Frank on 21 Jan 03</tag>
+<tag name="@version">$Revision: 9$ $Date: 2/6/07 3:59:07 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.Subscriber"/>
+</extends>
+<implements>
+<type class="javax.baja.nav.NavListener"/>
+</implements>
+<!-- javax.baja.sync.ProxyBroker(javax.baja.space.BComponentSpace) -->
+<constructor name="ProxyBroker" public="true">
+<parameter name="masterSpace">
+<type class="javax.baja.space.BComponentSpace"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.sync.ProxyBroker(javax.baja.space.BComponentSpace, javax.baja.sync.ProxyBroker.IProxyBrokerPlugin) -->
+<constructor name="ProxyBroker" public="true">
+<parameter name="masterSpace">
+<type class="javax.baja.space.BComponentSpace"/>
+</parameter>
+<parameter name="plugin">
+<type class="javax.baja.sync.ProxyBroker$IProxyBrokerPlugin"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.sync.ProxyBroker.getMasterSpace() -->
+<method name="getMasterSpace"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Get the master space this broker is registered on.
+</description>
+<return>
+<type class="javax.baja.space.BComponentSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.start() -->
+<method name="start"  public="true">
+<description>
+Start this broker buffering up changes.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.stop() -->
+<method name="stop"  public="true">
+<description>
+Cleanup this broker for disposal.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.detachBuffer() -->
+<method name="detachBuffer"  public="true">
+<description>
+This method takes the current buffer, detaches it&#xa; from this broker so that it buffers no more changes,&#xa; and installs a fresh buffer.
+</description>
+<return>
+<type class="javax.baja.sync.SyncBuffer"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.loadOp(javax.baja.sys.BComponent, int) -->
+<method name="loadOp"  public="true">
+<description>
+Buffer up a LoadOp
+</description>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.loadOp(javax.baja.sys.BComponent, int, boolean) -->
+<method name="loadOp"  public="true">
+<description>
+Buffer up a LoadOp and specify whether partial loading&#xa; is enabled.&#xa; This method should only be used&#xa; with caution, as it is intended for supporting the&#xa; virtual component scenario.  It basically allows for&#xa; partial loading, which is ONLY used in the case of&#xa; virtuals.
+</description>
+<tag name="@since">Niagara 3.2</tag>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<parameter name="partialLoad">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.subscribeOp(javax.baja.sys.BComponent, int) -->
+<method name="subscribeOp"  public="true">
+<description>
+Perform a subscription and buffer up a LoadOp.
+</description>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.subscribeOp(javax.baja.sys.BComponent, int, boolean) -->
+<method name="subscribeOp"  public="true">
+<description>
+Perform a subscription and buffer up a LoadOp also specifying&#xa; the partialLoad constraint.&#xa; This method should only be used&#xa; with caution, as it is intended for supporting the&#xa; virtual component scenario.  It basically allows for&#xa; partial loading, which is ONLY used in the case of&#xa; virtuals.
+</description>
+<tag name="@since">Niagara 3.2</tag>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<parameter name="partialLoad">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.navEvent(javax.baja.nav.NavEvent) -->
+<method name="navEvent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If the event is for a component within the&#xa; master space, then add it to the sync buffer.
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.ProxyBroker.event(javax.baja.sys.BComponentEvent) -->
+<method name="event"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Add the operation to the sync buffer.
+</description>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.file.BIDeployable" name="BIDeployable" packageName="javax.baja.file" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIDeployable should be implemented by objects that can be deployed&#xa; to a BSpace in multiple copy operations.
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">12 Dec 13</tag>
+<tag name="@version">$Revision: 4$ $Date: 6/11/07 12:41:23 PM EDT$</tag>
+<tag name="@since">Niagara 4.0</tag>
+<implements>
+<type class="javax.baja.file.BIFile"/>
+</implements>
+<!-- javax.baja.file.BIDeployable.getSteps(java.lang.Object, javax.baja.sys.BComponent, java.lang.String) -->
+<method name="getSteps"  public="true" abstract="true">
+<description>
+Get array of steps to implement to deploy this file to the specified target.
+</description>
+<parameter name="owner">
+<type class="java.lang.Object"/>
+<description>
+parent widget for use in any dialogs to modify components in this&#xa;                  file before copying (may be null)
+</description>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+target component this file was to be copied to
+</description>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+name specified during copy initiation
+</description>
+</parameter>
+<return>
+<type class="javax.baja.file.BIDeployable$Step" dimension="1"/>
+<description>
+An array of steps which include mark and destination ord
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIDeployable.postDeploy(com.tridium.sys.transfer.TransferResult[], com.tridium.sys.transfer.TransferStrategy, javax.baja.sys.Context) -->
+<method name="postDeploy"  public="true" abstract="true">
+<description>
+Do any clean up after deployment. Should be called after deploy steps are executed.
+</description>
+<parameter name="tres">
+<type class="com.tridium.sys.transfer.TransferResult" dimension="1"/>
+</parameter>
+<parameter name="strategy">
+<type class="com.tridium.sys.transfer.TransferStrategy"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIDeployable.getDeployName() -->
+<method name="getDeployName"  public="true" abstract="true">
+<description>
+Get the preferred name of root component to use during deployment.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+preferred name
+</description>
+</return>
+</method>
+
+<!-- javax.baja.file.BIDeployable.isDeployable(javax.baja.sys.BComponent) -->
+<method name="isDeployable"  public="true" abstract="true">
+<description>
+Check to see if this file can be deployed to a given target
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+Target for deployment
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the deployment is possible, false if not
+</description>
+</return>
+</method>
+
+<!-- javax.baja.file.BIDeployable.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="tls" runtimeProfile="rt" qualifiedName="com.tridium.tls.point.BTls350PriAlmHisProxyExt" name="BTls350PriAlmHisProxyExt" packageName="com.tridium.tls.point" public="true">
+<description>
+Tls350 PriAlmHis implementation of BProxyExt&#xa; - has a comma delimited string out property with last rcv&#x27;d value set&#xa; - has a table of the most recent comma delimited string value sets (as&#xa;   specified by maxPriorityAlarmHistoryEntriesForView property)
+</description>
+<tag name="@author">Saunders, Barrow  R2 Original</tag>
+<tag name="@creation">14 Apr 2000</tag>
+<tag name="@author">Sam Barrow        Convert to AX</tag>
+<tag name="@modified">15 Oct 2005</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.0 tls 1.0</tag>
+<extends>
+<type class="com.tridium.tls.point.BTls350StringProxyExt"/>
+</extends>
+<implements>
+<type class="com.tridium.tls.messages.TlsMessageConst"/>
+</implements>
+<property name="minimumPollInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;minimumPollInterval&lt;/code&gt; property.&#xa; minimumPollInterval for this object
+</description>
+<tag name="@see">#getMinimumPollInterval</tag>
+<tag name="@see">#setMinimumPollInterval</tag>
+</property>
+
+<property name="priorityAlarmHistoryTable" flags="or">
+<type class="com.tridium.tls.datatypes.BPriorityAlarmHistoryTable"/>
+<description>
+Slot for the &lt;code&gt;priorityAlarmHistoryTable&lt;/code&gt; property.&#xa; array of BPriorityAlarmHistoryEntry(s) retrieved to date (limited by maxOldEntriesSaved)
+</description>
+<tag name="@see">#getPriorityAlarmHistoryTable</tag>
+<tag name="@see">#setPriorityAlarmHistoryTable</tag>
+</property>
+
+<property name="maxOldEntriesSaved" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxOldEntriesSaved&lt;/code&gt; property.&#xa; support maxOldEntriesSaved just for historical purposes&#xa; provide reasonable default (16 entries)&#xa; be careful not to make this number too high for too long as&#xa; it can consume a lot of system memory
+</description>
+<tag name="@see">#getMaxOldEntriesSaved</tag>
+<tag name="@see">#setMaxOldEntriesSaved</tag>
+</property>
+
+<action name="purgeHashtable" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;purgeHashtable&lt;/code&gt; action.&#xa; flag process to run that purges old Hashtable values&#xa; let it run in sycn with poll which actually builds the pAHHashtable
+</description>
+<tag name="@see">#purgeHashtable()</tag>
+</action>
+
+<topic name="newAlarmNotify" flags="">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;newAlarmNotify&lt;/code&gt; topic.&#xa; Whenever a new alarm (or alarm clear) is detected,&#xa; this topic is fired to pass the alarm notification object&#xa; to interested consumers.
+</description>
+<tag name="@see">#fireNewAlarmNotify</tag>
+</topic>
+
+</class>
+</bajadoc>

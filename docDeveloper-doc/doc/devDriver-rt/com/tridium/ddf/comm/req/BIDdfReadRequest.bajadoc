@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.BIDdfReadRequest" name="BIDdfReadRequest" packageName="com.tridium.ddf.comm.req" public="true" interface="true" abstract="true" category="interface">
+<description>
+Driver developers who wish to declare a request that will&#xa; retrieve one or more data point values should implement this&#xa; method or extend BDdfReadRequest. In the toByteArray method,&#xa; you should call getReadParameters() and getDeviceId() to&#xa; get a copy of your data point&#x27;s read parameters and device id,&#xa; and use the information in those copies to formulate your&#xa; byte array.
+</description>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+</implements>
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.getReadParameters() -->
+<method name="getReadParameters"  public="true" abstract="true">
+<description>
+Gets the read parameters that distinguish one instance&#xa; of the request class from another instance, in addition&#xa; to the deviceId that BIDdfRequest already provides.
+</description>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.setReadParameters(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setReadParameters"  public="true" abstract="true">
+<description>
+Sets the read parameters that distinguishes one instance&#xa; of the request class from another instance, in addition&#xa; to the deviceId that BIDdfRequest already provides.
+</description>
+<parameter name="requestId">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.getReadableSource() -->
+<method name="getReadableSource"  public="true" abstract="true">
+<description>
+Returns the readableSource objects that this message can&#xa; update. The ddf will automatically call&#xa; this method after it instantiates an instance of particular&#xa; type of request. The ddf will pass in an&#xa; array of all database and/or discovery items to be updated.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.req.IDdfReadable" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.setReadableSource(com.tridium.ddf.comm.req.IDdfReadable[]) -->
+<method name="setReadableSource"  public="true" abstract="true">
+<description>
+Assigns the readableSource objects that this message can&#xa; update. Typically these will be passed to the concrete&#xa; descendant&#x27;s constructor. If the message only reads one&#xa; item then the array may be of length one!&#xa;&#xa; This method is also called automatically in the&#xa; com.tridium.ddf.poll framework to automatically&#xa; poll points in drivers that are based on the ddf driver&#xa; framework.
+</description>
+<parameter name="readableSource">
+<type class="com.tridium.ddf.comm.req.IDdfReadable" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.getAutoReadOk() -->
+<method name="getAutoReadOk"  public="true" abstract="true">
+<description>
+If set to true then the ddf will automatically&#xa; call readOk on all readable source objects whenever a response is&#xa; received for this request.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.getAutoReadOkLate() -->
+<method name="getAutoReadOkLate"  public="true" abstract="true">
+<description>
+If set to true then the ddf will automatically&#xa; call readOk on all readable source objects in the event that the&#xa; response to this message is received late after this request times&#xa; out. This behavior is sometimes desireable for protocols that support&#xa; multiple outstanding requests.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.getAutoReadFailOnTimeout() -->
+<method name="getAutoReadFailOnTimeout"  public="true" abstract="true">
+<description>
+If set to true then the ddf will automatically&#xa; call readFail on all readable source objects in  the event that the&#xa; a timeout occurs while waiting for the response to this message.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.getAutoReadFailOnError() -->
+<method name="getAutoReadFailOnError"  public="true" abstract="true">
+<description>
+If this method returns true then the ddf driver&#xa; framework will call readFail on all readable sources&#xa; for this message upon receipt of a response that&#xa; indicates an error condition.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfReadRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

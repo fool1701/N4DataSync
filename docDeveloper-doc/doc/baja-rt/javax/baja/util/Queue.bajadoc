@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.Queue" name="Queue" packageName="javax.baja.util" public="true">
+<description>
+Queue is a linked list of objects designed for FIFO access.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">19 Jan 01</tag>
+<tag name="@version">$Revision: 11$ $Date: 11/13/08 4:31:53 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.util.Worker$ITodo"/>
+</implements>
+<!-- javax.baja.util.Queue(int) -->
+<constructor name="Queue" public="true">
+<parameter name="maxSize">
+<type class="int"/>
+</parameter>
+<description>
+Create a new Queue with the specified max number&#xa; of entries.  Attempts to enqueue more than maxSize &#xa; will result in QueueFullException.
+</description>
+</constructor>
+
+<!-- javax.baja.util.Queue() -->
+<constructor name="Queue" public="true">
+<description>
+Construct a new Queue with a max size of Integer.MAX_VALUE.
+</description>
+</constructor>
+
+<!-- javax.baja.util.Queue.size() -->
+<method name="size"  public="true">
+<description>
+Get the number of entries currently in the queue.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.maxSize() -->
+<method name="maxSize"  public="true">
+<description>
+Get the max number of entries this queue will&#xa; access before throwing QueueFullException.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.isEmpty() -->
+<method name="isEmpty"  public="true">
+<description>
+Return true if this queue has a size of 0.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.isFull() -->
+<method name="isFull"  public="true">
+<description>
+Return true if this queue has a size of maxSize.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.tail() -->
+<method name="tail"  public="true" synchronized="true">
+<description>
+Peek at the newest object on the queue,&#xa; but don&#x27;t actually dequeue it.
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+newest queue element, or null&#xa;    if the queue is empty.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.peek() -->
+<method name="peek"  public="true" synchronized="true">
+<description>
+Peek at the oldest object on the queue,&#xa; but don&#x27;t actually dequeue it.
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest queue element, or null&#xa;    if the queue is empty.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.peek(int) -->
+<method name="peek"  public="true" synchronized="true">
+<description>
+Peek at the oldest object on the queue.  If&#xa; no objects exist on the queue, then wait for&#xa; up to timeout milliseconds before returning.
+</description>
+<parameter name="timeout">
+<type class="int"/>
+<description>
+number of milliseconds to wait&#xa;    before timing out or -1 to wait forever.
+</description>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest Queue element, or null&#xa;    if the queue is empty and the timeout&#xa;    expired.
+</description>
+</return>
+<throws>
+<type class="java.lang.InterruptedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.Queue.find(java.lang.Object) -->
+<method name="find"  public="true" synchronized="true">
+<description>
+Search the enqueued entries for an entry that&#xa; returns true for equals(value).  If such an&#xa; entry is found then return it.  Otherwise return&#xa; null.  This is an expensive operation because&#xa; it requires a linear search.
+</description>
+<parameter name="value">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.dequeue() -->
+<method name="dequeue"  public="true" synchronized="true">
+<description>
+Read off the oldest object from the queue.
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest queue element, or null&#xa;    if the queue is empty.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.dequeue(int) -->
+<method name="dequeue"  public="true" synchronized="true">
+<description>
+Read off the oldest object from the queue.  If&#xa; no objects exist on the queue, then wait for&#xa; up to timeout milliseconds before returning
+</description>
+<parameter name="timeout">
+<type class="int"/>
+<description>
+number of milliseconds to wait&#xa;    before timing out or -1 to wait forever.
+</description>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest Queue element, or null&#xa;    if the queue is empty and the timeout&#xa;    expired.
+</description>
+</return>
+<throws>
+<type class="java.lang.InterruptedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.Queue.enqueue(java.lang.Object) -->
+<method name="enqueue"  public="true" synchronized="true">
+<description>
+Adds an entry to the end of the Queue.
+</description>
+<parameter name="value">
+<type class="java.lang.Object"/>
+<description>
+Object to append to the&#xa;    end of the queue.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if object was enqueued.
+</description>
+</return>
+<throws>
+<type class="javax.baja.util.QueueFullException"/>
+<description>
+is the queue&#xa;    is already at max size.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.util.Queue.push(java.lang.Object) -->
+<method name="push"  public="true" synchronized="true">
+<description>
+Adds an entry to the front of the Queue.
+</description>
+<parameter name="value">
+<type class="java.lang.Object"/>
+<description>
+Object to add to the front&#xa;    of the queue.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if object was enqueued.
+</description>
+</return>
+<throws>
+<type class="javax.baja.util.QueueFullException"/>
+<description>
+is the queue&#xa;    if already at max size.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.util.Queue.toArray() -->
+<method name="toArray"  public="true" synchronized="true">
+<description>
+Get a snapshot of the queue&#x27;s list.
+</description>
+<return>
+<type class="java.lang.Object" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.clear() -->
+<method name="clear"  public="true" synchronized="true">
+<description>
+Remove all the enqueued entries.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.util.Queue.todo(int) -->
+<method name="todo"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this queue is being with with a Worker, then dequeue&#xa; the top entry as a Runnable with the specified timeout.
+</description>
+<parameter name="timeout">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Runnable"/>
+</return>
+<throws>
+<type class="java.lang.InterruptedException"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

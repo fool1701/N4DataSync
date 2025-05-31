@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.space.TrapCallbacks" name="TrapCallbacks" packageName="javax.baja.space" public="true">
+<description>
+TrapCallbacks provides a BComponentSpace the hooks to&#xa; trap all changes to its BComponents.  To commit a change&#xa; and by pass trap callbacks use Context.commit.
+</description>
+<tag name="@author">Brian Frank       &#xa; creation  23 Oct 01</tag>
+<tag name="@version">$Revision: 4$ $Date: 2/12/05 4:51:10 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.space.TrapCallbacks() -->
+<constructor name="TrapCallbacks" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.space.TrapCallbacks.isTrapEnabled() -->
+<method name="isTrapEnabled"  public="true">
+<description>
+Return true if changes should be trapped, or false&#xa; to short circuit the entire process.  If true is returned, &#xa; then the subclass must override add(), remove(), rename(), &#xa; reorder(), setFlags(), and invoke().  Default implementation &#xa; of this method is to return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.trapSets() -->
+<method name="trapSets"  public="true">
+<description>
+This callback is a performance hook for to indicate to &#xa; if the set() callback should be invoked.  If true is&#xa; returned, then set() must be overridden and isTrapEnabled()&#xa; must return true.  Default is to return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.set(javax.baja.sys.BComponent, javax.baja.sys.Property[], javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="set"  public="true">
+<description>
+The set callback indicates that a slot under the component&#x27;s&#xa; property tree has been modified through a call to BComplex.set().&#xa; Changes are only reported to BSimples or BStructs, but not&#xa; bubbled up further than the first BComponent ancestor.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="propertyPath">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if you the property set should be &#xa;    automtically be committed.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.add(javax.baja.sys.BComponent, java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="add"  public="true">
+<description>
+The add callback is a trap for BComponent.add().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.remove(javax.baja.sys.BComponent, javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="remove"  public="true">
+<description>
+The remove callback is a trap for BComponent.remove().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.rename(javax.baja.sys.BComponent, javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="rename"  public="true">
+<description>
+The rename callback is a trap for BComponent.rename().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.reorder(javax.baja.sys.BComponent, javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="reorder"  public="true">
+<description>
+The reorder callback is a trap for BComponent.reorder().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="order">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.setFlags(javax.baja.sys.BComponent, javax.baja.sys.Slot, int, javax.baja.sys.Context) -->
+<method name="setFlags"  public="true">
+<description>
+The setFlags callback is a trap for BComponent.setFlags().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.setFacets(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="setFacets"  public="true">
+<description>
+The setFacets callback is a trap for BComponent.setFacets().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.setCategoryMask(javax.baja.sys.BComponent, javax.baja.category.BCategoryMask, javax.baja.sys.Context) -->
+<method name="setCategoryMask"  public="true">
+<description>
+The setCategoryMask callback is a trap for BComponent.setCategoryMask().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="mask">
+<type class="javax.baja.category.BCategoryMask"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.TrapCallbacks.invoke(javax.baja.sys.BComponent, javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="invoke"  public="true">
+<description>
+The invoke callback is a trap for BComponent.invoke().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.util.AgentInfoUtil" name="AgentInfoUtil" packageName="com.tridium.ndriver.util" public="true">
+<description>
+This is used to rename the auto manager views based on the name of the driver&#xa; that is built off of this framework.&#xa; &lt;p&gt;&#xa; For example, instead of being named &#x27;NDeviceManager&#x27;, the device manager is&#xa; named &#x27;Your Driver Device Manager&#x27; &#x27;Your Driver&#x27; is the name of a driver that&#xa; inherits from this framework.&#xa; &lt;p&gt;&#xa; This basically wraps another AgentInfo object but provides its own&#xa; implementation of the &#x27;getDisplayName&#x27; method.
+</description>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver)</tag>
+<tag name="@creation">25 Jan 2012</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.AgentInfo"/>
+</implements>
+<!-- com.tridium.ndriver.util.AgentInfoUtil(javax.baja.agent.AgentInfo, java.lang.String, java.lang.String, java.lang.String) -->
+<constructor name="AgentInfoUtil" public="true">
+<parameter name="nAgentInfo">
+<type class="javax.baja.agent.AgentInfo"/>
+<description>
+the default instance of AgentInfo for a&#xa;                           BComponent
+</description>
+</parameter>
+<parameter name="driverModuleName">
+<type class="java.lang.String"/>
+<description>
+the name of the driver that builds off of this&#xa;                           framework
+</description>
+</parameter>
+<parameter name="displayNameKey">
+<type class="java.lang.String"/>
+<description>
+the name of the key in the driver&#x27;s Lexicon from&#xa;                           which to lookup the text for &#x27;Device Manager&#x27;
+</description>
+</parameter>
+<parameter name="displayNameDefault">
+<type class="java.lang.String"/>
+<description>
+the default text to use for the String &#x27;Device&#xa;                           Manager&#x27; in the event that the driver&#x27;s Lexicon&#xa;                           does not define the &#x27;displayNameKey&#x27;
+</description>
+</parameter>
+<description>
+Creates an instance of this class, that wraps the given AgentInfo, yet&#xa; provides its own implementation of the &#x27;getDisplayName(Context)&#x27; method.
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getAgentId() -->
+<method name="getAgentId"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the agent id which is used to uniquely identify it in AgentLists.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getAgentOn() -->
+<method name="getAgentOn"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get an array of the TypeInfos which this agent is directly registered on.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getAgentType() -->
+<method name="getAgentType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the TypeInfo for the instance which would be returned by the&#xa; &lt;code&gt;getInstance()&lt;code&gt;.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Customized the &#x27;displayName&#x27; as described in the Java Doc for the class&#xa; definition.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getIcon(javax.baja.sys.Context) -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon for the agent.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getInstance() -->
+<method name="getInstance"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Create an instance of the agent.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getRequiredPermissions() -->
+<method name="getRequiredPermissions"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the permissions required to use this agent.
+</description>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getAgentsHelp(javax.baja.agent.AgentList, java.lang.String, java.lang.String, java.lang.String, java.lang.String) -->
+<method name="getAgentsHelp"  public="true" static="true">
+<description>
+Used by agents of auto manager views to rename manager in agentlist by&#xa; prepending module name.
+</description>
+<parameter name="agents">
+<type class="javax.baja.agent.AgentList"/>
+<description>
+The result of calling super.getAgents(cx) on the&#xa;                         component that calls this method.
+</description>
+</parameter>
+<parameter name="driverModuleName">
+<type class="java.lang.String"/>
+<description>
+The name of the module.
+</description>
+</parameter>
+<parameter name="mgrTypeSpec">
+<type class="java.lang.String"/>
+<description>
+the type spec of the manager whose name will be&#xa;                         changed
+</description>
+</parameter>
+<parameter name="mgrSuffixKey">
+<type class="java.lang.String"/>
+<description>
+the lexicon key to look up for the suffix, for&#xa;                         example, &#x22;DeviceManager&#x22;, in case the driver&#xa;                         developer wishes to customize the manager&#x27;s name&#xa;                         (he or she can do so from his or her driver&#x27;s&#xa;                         Lexicon)
+</description>
+</parameter>
+<parameter name="mgrSuffixDefault">
+<type class="java.lang.String"/>
+<description>
+the default suffix. This is used if the driver&#xa;                         developer does not provide a &#x27;mgrSuffixKey&#x27; in his&#xa;                         or her driver&#x27;s Lexicon to customize the manager&#x27;s&#xa;                         name (for example, &#x22;Device Manager&#x22;)
+</description>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+<description>
+the AgentList with the one particular agent renamed as prescribed.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.getAppName() -->
+<method name="getAppName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This method is required for AgentInfo in baja 3.1. For backwards&#xa; compatibility, it simply returns null.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.processDeviceManagerAgents(javax.baja.agent.AgentList, boolean, java.lang.String) -->
+<method name="processDeviceManagerAgents"  public="true" static="true">
+<description>
+Used by agents of auto manager views to refactor the agent list for a&#xa; Device Manager.&#xa; &lt;p&gt;&#xa; If automanager is true, the manager agents are changed to use the module&#xa; name as their prefix instead of N Driver If false the ndriver manager&#xa; agents are removed,
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="agents">
+<type class="javax.baja.agent.AgentList"/>
+<description>
+The result of calling super.getAgents(cx) on the&#xa;                       component that calls this method.
+</description>
+</parameter>
+<parameter name="useAutoManager">
+<type class="boolean"/>
+<description>
+whether automanager is being used by the module.
+</description>
+</parameter>
+<parameter name="moduleName">
+<type class="java.lang.String"/>
+<description>
+the module name of the manager
+</description>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+<description>
+the refactored AgentList.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.processPointManagerAgents(javax.baja.agent.AgentList, boolean, java.lang.String) -->
+<method name="processPointManagerAgents"  public="true" static="true">
+<description>
+Used by agents of auto manager views to refactor the agent list for a Point&#xa; Manager.&#xa; &lt;p&gt;&#xa; If automanager is true, the manager agents are changed to use the module&#xa; name as their prefix instead of N Driver If false the ndriver manager&#xa; agents are removed,
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="agents">
+<type class="javax.baja.agent.AgentList"/>
+<description>
+The result of calling super.getAgents(cx) on the&#xa;                       component that calls this method.
+</description>
+</parameter>
+<parameter name="useAutoManager">
+<type class="boolean"/>
+<description>
+whether automanager is being used by the module.
+</description>
+</parameter>
+<parameter name="moduleName">
+<type class="java.lang.String"/>
+<description>
+the module name of the manager
+</description>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+<description>
+the refactored AgentList.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.nAgentInfo -->
+<field name="nAgentInfo"  protected="true">
+<type class="javax.baja.agent.AgentInfo"/>
+<description>
+This is the AgentInfo object that this object wraps. See the Java Doc with&#xa; the class description for more details.
+</description>
+</field>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.driverModuleName -->
+<field name="driverModuleName"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the driverModuleName that is passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.displayNameKey -->
+<field name="displayNameKey"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the displayNameKey that is passed to the constructor.&#xa; &lt;p&gt;&#xa; This is used to look up text in the Lexicon for a driver that is built on&#xa; this framework.
+</description>
+</field>
+
+<!-- com.tridium.ndriver.util.AgentInfoUtil.displayNameDefault -->
+<field name="displayNameDefault"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the displayNameKey that is passed to the constructor.&#xa; &lt;p&gt;&#xa; This is used by default, if the driver that is built on this framework does&#xa; not define a displayNameKey in its lexicon.
+</description>
+</field>
+
+</class>
+</bajadoc>

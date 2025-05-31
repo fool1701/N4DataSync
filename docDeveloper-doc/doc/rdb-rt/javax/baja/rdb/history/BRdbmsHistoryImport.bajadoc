@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="rdb" runtimeProfile="rt" qualifiedName="javax.baja.rdb.history.BRdbmsHistoryImport" name="BRdbmsHistoryImport" packageName="javax.baja.rdb.history" public="true">
+<description>
+BRdbmsHistoryImport defines an archive action for transferring&#xa; a history from the relational database to the local source.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">06 Apr 06</tag>
+<tag name="@version">$Revision: 6$ $Date: 3/25/09 1:38:49 PM EDT$</tag>
+<tag name="@since">Baja 3.1</tag>
+<extends>
+<type class="javax.baja.driver.history.BHistoryImport"/>
+</extends>
+<property name="rdbTableName" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;rdbTableName&lt;/code&gt; property.&#xa; The name of the rdb table to import
+</description>
+<tag name="@see">#getRdbTableName</tag>
+<tag name="@see">#setRdbTableName</tag>
+</property>
+
+<property name="rdbCatalogName" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;rdbCatalogName&lt;/code&gt; property.&#xa; The name of the rdb catalog where the table to import exists
+</description>
+<tag name="@see">#getRdbCatalogName</tag>
+<tag name="@see">#setRdbCatalogName</tag>
+</property>
+
+<property name="rdbSchemaName" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;rdbSchemaName&lt;/code&gt; property.&#xa; The name of the rdb schema where the table to import exists
+</description>
+<tag name="@see">#getRdbSchemaName</tag>
+<tag name="@see">#setRdbSchemaName</tag>
+</property>
+
+<property name="timestampColumn" flags="">
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+<description>
+Slot for the &lt;code&gt;timestampColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s timestamp column
+</description>
+<tag name="@see">#getTimestampColumn</tag>
+<tag name="@see">#setTimestampColumn</tag>
+</property>
+
+<property name="valueColumn" flags="">
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+<description>
+Slot for the &lt;code&gt;valueColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s value column
+</description>
+<tag name="@see">#getValueColumn</tag>
+<tag name="@see">#setValueColumn</tag>
+</property>
+
+<property name="statusColumn" flags="">
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+<description>
+Slot for the &lt;code&gt;statusColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s status column
+</description>
+<tag name="@see">#getStatusColumn</tag>
+<tag name="@see">#setStatusColumn</tag>
+</property>
+
+<property name="queryPredicate" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;queryPredicate&lt;/code&gt; property.&#xa; An optional SQL query predicate that the user might want to narrow&#xa; the import query.  Default (blank) is no additional predicate.
+</description>
+<tag name="@see">#getQueryPredicate</tag>
+<tag name="@see">#setQueryPredicate</tag>
+</property>
+
+<property name="fullImportOnExecute" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;fullImportOnExecute&lt;/code&gt; property.&#xa; If true, each execute will query for the full table (clears/recreates history)&#xa; If false, each execute will only query for new data since the last recorded&#xa; timestamp (appends new records to existing history)
+</description>
+<tag name="@see">#getFullImportOnExecute</tag>
+<tag name="@see">#setFullImportOnExecute</tag>
+</property>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport() -->
+<constructor name="BRdbmsHistoryImport" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getRdbTableName() -->
+<method name="getRdbTableName"  public="true">
+<description>
+Get the &lt;code&gt;rdbTableName&lt;/code&gt; property.&#xa; The name of the rdb table to import
+</description>
+<tag name="@see">#rdbTableName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setRdbTableName(java.lang.String) -->
+<method name="setRdbTableName"  public="true">
+<description>
+Set the &lt;code&gt;rdbTableName&lt;/code&gt; property.&#xa; The name of the rdb table to import
+</description>
+<tag name="@see">#rdbTableName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getRdbCatalogName() -->
+<method name="getRdbCatalogName"  public="true">
+<description>
+Get the &lt;code&gt;rdbCatalogName&lt;/code&gt; property.&#xa; The name of the rdb catalog where the table to import exists
+</description>
+<tag name="@see">#rdbCatalogName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setRdbCatalogName(java.lang.String) -->
+<method name="setRdbCatalogName"  public="true">
+<description>
+Set the &lt;code&gt;rdbCatalogName&lt;/code&gt; property.&#xa; The name of the rdb catalog where the table to import exists
+</description>
+<tag name="@see">#rdbCatalogName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getRdbSchemaName() -->
+<method name="getRdbSchemaName"  public="true">
+<description>
+Get the &lt;code&gt;rdbSchemaName&lt;/code&gt; property.&#xa; The name of the rdb schema where the table to import exists
+</description>
+<tag name="@see">#rdbSchemaName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setRdbSchemaName(java.lang.String) -->
+<method name="setRdbSchemaName"  public="true">
+<description>
+Set the &lt;code&gt;rdbSchemaName&lt;/code&gt; property.&#xa; The name of the rdb schema where the table to import exists
+</description>
+<tag name="@see">#rdbSchemaName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getTimestampColumn() -->
+<method name="getTimestampColumn"  public="true">
+<description>
+Get the &lt;code&gt;timestampColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s timestamp column
+</description>
+<tag name="@see">#timestampColumn</tag>
+<return>
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setTimestampColumn(javax.baja.rdb.history.BRdbmsColumnSelection) -->
+<method name="setTimestampColumn"  public="true">
+<description>
+Set the &lt;code&gt;timestampColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s timestamp column
+</description>
+<tag name="@see">#timestampColumn</tag>
+<parameter name="v">
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getValueColumn() -->
+<method name="getValueColumn"  public="true">
+<description>
+Get the &lt;code&gt;valueColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s value column
+</description>
+<tag name="@see">#valueColumn</tag>
+<return>
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setValueColumn(javax.baja.rdb.history.BRdbmsColumnSelection) -->
+<method name="setValueColumn"  public="true">
+<description>
+Set the &lt;code&gt;valueColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s value column
+</description>
+<tag name="@see">#valueColumn</tag>
+<parameter name="v">
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getStatusColumn() -->
+<method name="getStatusColumn"  public="true">
+<description>
+Get the &lt;code&gt;statusColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s status column
+</description>
+<tag name="@see">#statusColumn</tag>
+<return>
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setStatusColumn(javax.baja.rdb.history.BRdbmsColumnSelection) -->
+<method name="setStatusColumn"  public="true">
+<description>
+Set the &lt;code&gt;statusColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s status column
+</description>
+<tag name="@see">#statusColumn</tag>
+<parameter name="v">
+<type class="javax.baja.rdb.history.BRdbmsColumnSelection"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getQueryPredicate() -->
+<method name="getQueryPredicate"  public="true">
+<description>
+Get the &lt;code&gt;queryPredicate&lt;/code&gt; property.&#xa; An optional SQL query predicate that the user might want to narrow&#xa; the import query.  Default (blank) is no additional predicate.
+</description>
+<tag name="@see">#queryPredicate</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setQueryPredicate(java.lang.String) -->
+<method name="setQueryPredicate"  public="true">
+<description>
+Set the &lt;code&gt;queryPredicate&lt;/code&gt; property.&#xa; An optional SQL query predicate that the user might want to narrow&#xa; the import query.  Default (blank) is no additional predicate.
+</description>
+<tag name="@see">#queryPredicate</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getFullImportOnExecute() -->
+<method name="getFullImportOnExecute"  public="true">
+<description>
+Get the &lt;code&gt;fullImportOnExecute&lt;/code&gt; property.&#xa; If true, each execute will query for the full table (clears/recreates history)&#xa; If false, each execute will only query for new data since the last recorded&#xa; timestamp (appends new records to existing history)
+</description>
+<tag name="@see">#fullImportOnExecute</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.setFullImportOnExecute(boolean) -->
+<method name="setFullImportOnExecute"  public="true">
+<description>
+Set the &lt;code&gt;fullImportOnExecute&lt;/code&gt; property.&#xa; If true, each execute will query for the full table (clears/recreates history)&#xa; If false, each execute will only query for new data since the last recorded&#xa; timestamp (appends new records to existing history)
+</description>
+<tag name="@see">#fullImportOnExecute</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.started() -->
+<method name="started"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.importDescriptorStarted() -->
+<method name="importDescriptorStarted"  public="true">
+<description>
+The importDescriptorStarted() method is called when this descriptor&#x27;s&#xa; running state moves to true and all license checks have been passed.&#xa; Components are started top-down, children after their parent.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.doExecute() -->
+<method name="doExecute"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Import the table from the target database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.executeRdbImport() -->
+<method name="executeRdbImport"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.postExecute(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="postExecute"  protected="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.rdbTableName -->
+<field name="rdbTableName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;rdbTableName&lt;/code&gt; property.&#xa; The name of the rdb table to import
+</description>
+<tag name="@see">#getRdbTableName</tag>
+<tag name="@see">#setRdbTableName</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.rdbCatalogName -->
+<field name="rdbCatalogName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;rdbCatalogName&lt;/code&gt; property.&#xa; The name of the rdb catalog where the table to import exists
+</description>
+<tag name="@see">#getRdbCatalogName</tag>
+<tag name="@see">#setRdbCatalogName</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.rdbSchemaName -->
+<field name="rdbSchemaName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;rdbSchemaName&lt;/code&gt; property.&#xa; The name of the rdb schema where the table to import exists
+</description>
+<tag name="@see">#getRdbSchemaName</tag>
+<tag name="@see">#setRdbSchemaName</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.timestampColumn -->
+<field name="timestampColumn"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timestampColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s timestamp column
+</description>
+<tag name="@see">#getTimestampColumn</tag>
+<tag name="@see">#setTimestampColumn</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.valueColumn -->
+<field name="valueColumn"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;valueColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s value column
+</description>
+<tag name="@see">#getValueColumn</tag>
+<tag name="@see">#setValueColumn</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.statusColumn -->
+<field name="statusColumn"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;statusColumn&lt;/code&gt; property.&#xa; The rdb table column to map to a history&#x27;s status column
+</description>
+<tag name="@see">#getStatusColumn</tag>
+<tag name="@see">#setStatusColumn</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.queryPredicate -->
+<field name="queryPredicate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;queryPredicate&lt;/code&gt; property.&#xa; An optional SQL query predicate that the user might want to narrow&#xa; the import query.  Default (blank) is no additional predicate.
+</description>
+<tag name="@see">#getQueryPredicate</tag>
+<tag name="@see">#setQueryPredicate</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.fullImportOnExecute -->
+<field name="fullImportOnExecute"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fullImportOnExecute&lt;/code&gt; property.&#xa; If true, each execute will query for the full table (clears/recreates history)&#xa; If false, each execute will only query for new data since the last recorded&#xa; timestamp (appends new records to existing history)
+</description>
+<tag name="@see">#getFullImportOnExecute</tag>
+<tag name="@see">#setFullImportOnExecute</tag>
+</field>
+
+<!-- javax.baja.rdb.history.BRdbmsHistoryImport.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

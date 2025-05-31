@@ -1,0 +1,137 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/autoLogoff.html" class="navbar">Prev</a> |  <a href="/doc/autoLogoffWb.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="user-activity-monitoring-and-auto-logoff">User Activity Monitoring and Auto Logoff</h1>
+<p>Activity Monitoring is the feature that monitors any user interaction and signals the server to reset session timeout based on any activity. Activity Monitoring works out of the box for Hx (including HTML5) and is built into Velocity and Mobile profiles and can be accessed via utility methods.</p>
+<p>The system will automatically logoff a user if there has not been any interaction for a certain amount of time.</p>
+<p>For more information on Velocity check out the Activity Monitoring section here <a href="velocity/velocity.html">Apache Velocity</a></p>
+<h2 id="keep-session-alive">Keep session alive</h2>
+<p>The Activity Monitor can be paused in cases where a view may have to stay online permanently. An example is a dashboard that keeps reporting out changing data of a system. There is really no interaction here but provides timely visual feedback of a system. In such cases, the Activity Monitor can be paused and the session kept alive for as long as the view is open. Every call to keep the view alive returns a token that can be released when pausing is no longer needed. Based on the type of view there are different approaches to pausing the Activity Monitor.</p>
+<h3 id="keep-alive-mixin-for-bajaux-widgets">Keep Alive mixin for Bajaux widgets</h3>
+<p>For Bajaux widgets a convenient mixin is available that does the setup and release automatically. In the example below, calling the mixin inside a widget&rsquo;s constructor immediately pauses the monitor and releases the keep alive token when the widget is destroyed.</p>
+<pre><code class="javascript">var MyWidget = function MyWidget() {
+  Widget.apply(this, arguments);
+  //Keeps the widget alive and releases the token in the widget's doDestroy.
+  activityMonitor.mixinKeepAlive(this);
+};
+</code></pre>
+<h3 id="general-keep-alive-usage">General Keep Alive usage</h3>
+<p>The example below shows how to typically use Activity Monitor to keep a view alive and release the token to restart monitoring. The example below could apply to a HxView that loads in a javascript file that does all the view related work. Note that if destroy in the example below is called when the view is unloaded then it is not necessary to call release. However, if for example, this view is loaded as a widget on a px view that has other widgets, then it is important to release the token.</p>
+<pre><code class="javascript">var MyView = function MyView(){
+    var that = this;
+    activityMonitor.keepAlive()
+    .then(function(t){
+      that.token = t; //Get the token
+    });
+};
+
+MyView.prototype.destroy = function(){
+    return activityMonitor.release(this.token);
+};
+</code></pre>
+<p><em><strong>Note:</strong> Sometimes a view may have multiple widgets calling keepAlive on the Activity Monitor. In such cases it is important that each widget releases its keepAlive token when it is destroyed. When all tokens are released, monitoring will start automatically.</em></p>
+<h2 id="activity-monitoring-for-non-profile-based-views-and-any-arbitrary-html-file">Activity Monitoring for non-profile based views and any arbitrary HTML file.</h2>
+<p>There may be cases where a view outside of a working profile, say <a href="servingFromFileSys.html">any HTML file served off of a station</a>, needs auto logoff support.</p>
+<h3 id="starting-the-activity-monitor">Starting the Activity Monitor</h3>
+<p>The example below includes the Activity Monitor script and starts after the HTML document has loaded. As long as there is user interaction (mouse click, scroll, keyboard actions, etc) within the configured session expiry time, the user will not be automatically logged out.</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;!-- @noSnoop --&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;This is a Sample HTML&lt;/title&gt;
+  &lt;script type='text/javascript' src='/module/web/rc/util/activityMonitor.js'&gt;&lt;/script&gt;
+  &lt;script&gt;
+    function startMonitor(){
+      window.activityMonitor.start();
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload=&quot;startMonitor()&quot;&gt;
+  &lt;h1&gt;This page has user activity monitoring enabled&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><em><strong>Note:</strong> Including the activityMonitor script will attach it to the global window object.</em></p>
+<h3 id="keep-session-alive">Keep session alive</h3>
+<p>The example below shows how to pause Activity Monitoring on any HTML file.</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;!-- @noSnoop --&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Dashboard&lt;/title&gt;
+  &lt;script type='text/javascript' src='/module/web/rc/util/activityMonitor.js'&gt;&lt;/script&gt;
+  &lt;script&gt;
+    function keepViewAlive(){
+      window.activityMonitor.keepAlive();
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload=&quot;keepViewAlive()&quot;&gt;
+  &lt;h1&gt;I am a dashboard and I am always on&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>Note:</strong> IE11 does not natively support the Javascript Promise API. To ensure Activity Monitoring works well in IE, include either of the scripts here in your HTML file. Note that promise.min.js provides a lightweight minimum Promise compatibility while bluebird.min.js is a more full-fledged Promise API implementation. The lightweight version is enough to get the Activity Monitor working without any issues.</p>
+<pre><code class="html">&lt;!-- @noSnoop --&gt;&lt;script type='text/javascript' src='/module/js/rc/polyfills/promise/promise.min.js'&gt;&lt;/script&gt;
+</code></pre>
+<pre><code class="html">&lt;!-- @noSnoop --&gt;&lt;script type='text/javascript' src='/module/js/rc/bluebird/bluebird.min.js'&gt;&lt;/script&gt;
+</code></pre>
+<h2 id="some-useful-tips">Some useful tips</h2>
+<p>Sometimes an operation might take a long time to execute and there is a progress bar indicating it. The user in such cases might have no option but to just wait until it is finished. To make the Activity Monitor not accidentally log the user off, it is possible to call keepAlive() when the operation starts, followed by a release(token) when it ends. See example below.</p>
+<pre><code class="javascript">function longRunningTask() {
+  return new Promise(function (resolve, reject) {
+    //Do something long running 
+    resolve();
+  });
+}
+
+var token;
+activityMonitor.keepAlive()
+  .then(function(keepAliveToken){
+    token = keepAliveToken;
+    return longRunningTask();
+  })
+  .then(function(){
+    activityMonitor.release(token); //release the token when the task is done
+  })
+  .catch(function () {
+    if(token){
+      activityMonitor.release(token); //release the token if task fails    
+    }
+  });
+</code></pre>
+<h2 id="useractivityfilter">UserActivityFilter</h2>
+<p>If you have a servlet, and each request made to it should be considered user activity, you can add the UserActivityFilter to your servlet. You should only use this method if, for some reason, you cannot use the activity monitor. To set the UserActivityFilter on your servlet, add the following to your web.xml file.</p>
+<pre><code class="sunlight-highlight-xml">&lt;filter&gt;
+  &lt;filter-name&gt;myServletUserActivityFilter&lt;/filter-name&gt;
+  &lt;filter-class&gt;javax.baja.web.filters.UserActivityFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;myServletUserActivityFilter&lt;/filter-name&gt;
+  &lt;servlet-name&gt;myServlet&lt;/servlet-name&gt;
+&lt;/filter-mapping&gt;
+</code></pre>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/autoLogoff.html" class="navbar">Prev</a> |  <a href="/doc/autoLogoffWb.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

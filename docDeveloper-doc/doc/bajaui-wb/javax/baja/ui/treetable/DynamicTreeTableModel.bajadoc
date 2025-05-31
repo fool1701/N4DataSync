@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.treetable.DynamicTreeTableModel" name="DynamicTreeTableModel" packageName="javax.baja.ui.treetable" public="true">
+<description>
+DynamicTableModel wraps another root TableModel to&#xa; allow columns to be toggled on and off.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">16 Oct 03</tag>
+<tag name="@version">$Revision: 2$ $Date: 6/28/11 8:35:36 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.treetable.WrapperTreeTableModel"/>
+</extends>
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel(javax.baja.ui.treetable.TreeTableModel, int[]) -->
+<constructor name="DynamicTreeTableModel" public="true">
+<parameter name="root">
+<type class="javax.baja.ui.treetable.TreeTableModel"/>
+</parameter>
+<parameter name="showColumns">
+<type class="int" dimension="1"/>
+</parameter>
+<description>
+Construct with where only the specified columns&#xa; are visible by default.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel(javax.baja.ui.treetable.TreeTableModel) -->
+<constructor name="DynamicTreeTableModel" public="true">
+<parameter name="root">
+<type class="javax.baja.ui.treetable.TreeTableModel"/>
+</parameter>
+<description>
+Construct with every column visible by default.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.getColumnCount() -->
+<method name="getColumnCount"  public="true">
+<description>
+Return the number of showing columns.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.getColumnName(int) -->
+<method name="getColumnName"  public="true">
+<description>
+Return &lt;code&gt;root.getColumnName(toRootColumnIndex(col))&lt;/code&gt;.
+</description>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.getValueAt(int, int) -->
+<method name="getValueAt"  public="true">
+<description>
+Return &lt;code&gt;root.getValueAt(row, toRootColumnIndex(col)&lt;/code&gt;.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.getSubject(int) -->
+<method name="getSubject"  public="true">
+<description>
+Return &lt;code&gt;root.getSubject(row)&lt;/code&gt;.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.getColumnAlignment(int) -->
+<method name="getColumnAlignment"  public="true">
+<description>
+Return &lt;code&gt;root.getColumnAlignment(toRootColumnIndex(col))&lt;/code&gt;.
+</description>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.enums.BHalign"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.isColumnSortable(int) -->
+<method name="isColumnSortable"  public="true">
+<description>
+Return &lt;code&gt;root.isColumnSortable(toRootColumnIndex(col))&lt;/code&gt;.
+</description>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.sortByColumn(int, boolean) -->
+<method name="sortByColumn"  public="true">
+<description>
+Call &lt;code&gt;root.sortByColumn(toRootColumnIndex(col), ascending)&lt;/code&gt;.
+</description>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<parameter name="ascending">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.getRootColumnCount() -->
+<method name="getRootColumnCount"  public="true">
+<description>
+Get the root&#x27;s number of columns.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.getRootColumnName(int) -->
+<method name="getRootColumnName"  public="true">
+<description>
+Get the root model&#x27;s column name for the&#xa; specified root column index.
+</description>
+<parameter name="rootCol">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.toRootColumnIndex(int) -->
+<method name="toRootColumnIndex"  public="true">
+<description>
+Map a column index from the my index space to &#xa; the root&#x27;s index space.
+</description>
+<parameter name="showCol">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.fromRootColumnIndex(int) -->
+<method name="fromRootColumnIndex"  public="true">
+<description>
+Map a column index from the the root&#x27;s index space &#xa; to my index space.
+</description>
+<parameter name="rootCol">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.showColumn(int) -->
+<method name="showColumn"  public="true">
+<description>
+Return if the specified root column index &#xa; is currently showing.
+</description>
+<parameter name="rootCol">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.setShowColumn(int, boolean) -->
+<method name="setShowColumn"  public="true">
+<description>
+Set the specified root column index as showing &#xa; or not showing.
+</description>
+<parameter name="rootCol">
+<type class="int"/>
+</parameter>
+<parameter name="show">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.columnsModified() -->
+<method name="columnsModified"  public="true">
+<description>
+Called when the root model&#x27;s columns are updated&#xa; in order to recalculate and cache column information.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.setColumnShowable(int, boolean) -->
+<method name="setColumnShowable"  public="true">
+<description>
+Set whether the specified column can be hidden&#xa; or shown.  If false, then the visibility of the&#xa; specified column cannot be modified.
+</description>
+<parameter name="rootCol">
+<type class="int"/>
+</parameter>
+<parameter name="show">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.isColumnShowable(int) -->
+<method name="isColumnShowable"  public="true">
+<description>
+Test whether hidden columns can be shown.  If false,&#xa; then the visibility of the specified column cannot&#xa; be modified.
+</description>
+<parameter name="rootCol">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.DynamicTreeTableModel.export(int, int) -->
+<method name="export"  public="true">
+<description>
+Export a cell as a BObject value.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

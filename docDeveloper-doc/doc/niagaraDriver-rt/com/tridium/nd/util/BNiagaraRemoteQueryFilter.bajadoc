@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="niagaraDriver" runtimeProfile="rt" qualifiedName="com.tridium.nd.util.BNiagaraRemoteQueryFilter" name="BNiagaraRemoteQueryFilter" packageName="com.tridium.nd.util" public="true">
+<description>
+A filter for remote queries processed on the server to translate query results into Niagara&#xa; virtual based Entities.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">25 Apr 2017</tag>
+<tag name="@since">Niagara 4.4</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="com.tridium.fox.sys.data.BIPreQueryValidator"/>
+</implements>
+<implements>
+<type class="com.tridium.fox.sys.data.BIPostQueryFilter"/>
+</implements>
+<property name="translateOrds" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;translateOrds&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTranslateOrds</tag>
+<tag name="@see">#setTranslateOrds</tag>
+</property>
+
+<property name="failWhenFindExport" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;failWhenFindExport&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFailWhenFindExport</tag>
+<tag name="@see">#setFailWhenFindExport</tag>
+</property>
+
+<property name="persistCategoryMask" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;persistCategoryMask&lt;/code&gt; property.&#xa; Useful to enable for the local system indexing use case, when set to true, it tells the filter&#xa; to persist category mask information for any BICategorizable Entities it processes.&#xa; Disabled by default.
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<tag name="@see">#getPersistCategoryMask</tag>
+<tag name="@see">#setPersistCategoryMask</tag>
+</property>
+
+<property name="allowVirtuals" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;allowVirtuals&lt;/code&gt; property.&#xa; When set to true, virtual gateways and virtual components are allowed to be included in the query&#xa; results.  When left at the default value of false, all virtual gateways and virtual components&#xa; will be filtered out of the query results.
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<tag name="@see">#getAllowVirtuals</tag>
+<tag name="@see">#setAllowVirtuals</tag>
+</property>
+
+<property name="tagsThatExcludeEntities" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;tagsThatExcludeEntities&lt;/code&gt; property.&#xa; A semicolon separated list of tag Ids used to filter out entities on the remote station. The&#xa; default value is the single tag id &#x22;systemIndex:excluded&#x22;.  Entities with any tags that have an&#xa; id that matches one of the ids in this list will not be returned by the remote query that&#xa; includes BNiagaraRemoteQueryFilter as a post-query filter.  Only the ids of the remote entity&#xa; tags are considered and not their values.
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<tag name="@see">#getTagsThatExcludeEntities</tag>
+<tag name="@see">#setTagsThatExcludeEntities</tag>
+</property>
+
+</class>
+</bajadoc>

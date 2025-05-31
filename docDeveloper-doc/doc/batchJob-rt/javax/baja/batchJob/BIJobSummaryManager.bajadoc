@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.BIJobSummaryManager" name="BIJobSummaryManager" packageName="javax.baja.batchJob" public="true" interface="true" abstract="true" category="interface">
+<description>
+Implementing classes are used by a supervisor&#x27;s BBatchJobService to manage summary information&#xa; about jobs and steps as they finish execution.&#xa; &#xa; All of the methods described in this interface are intended only for use by BBatchJobService and&#xa; subclasses of BBatchJob and BJobStep.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">19 March 2008</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.4</tag>
+<implements>
+<type class="javax.baja.batchJob.BIJobQueryManager"/>
+</implements>
+<!-- javax.baja.batchJob.BIJobSummaryManager.importSummaries(javax.baja.batchJob.BIJobSummaryManager) -->
+<method name="importSummaries"  public="true" abstract="true">
+<description>
+Import all job and step summary objects from a given BIJobSummaryManager into this manager.
+</description>
+<parameter name="fromManager">
+<type class="javax.baja.batchJob.BIJobSummaryManager"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.removeSummaryManager() -->
+<method name="removeSummaryManager"  public="true" abstract="true">
+<description>
+Cleanup method invoked by BBatchJobService when this manager is removed and is replaced by&#xa; a different manager.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.performHousekeeping() -->
+<method name="performHousekeeping"  public="true" abstract="true">
+<description>
+Invoked periodically by BBatchJobService to do any required housekeeping
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.getAllJobSummaries() -->
+<method name="getAllJobSummaries"  public="true" abstract="true">
+<description>
+Returns a cursor of BIBatchJobSummary objects for all BBatchJobs that have completed on this&#xa; supervisor.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIBatchJobSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.whenManagerStarted() -->
+<method name="whenManagerStarted"  public="true" abstract="true">
+<description>
+Returns a future for this summary manager&#x27;s initialization
+</description>
+<return>
+<parameterizedType class="java.util.concurrent.CompletableFuture">
+<args>
+<type class="java.lang.Void"/>
+</args>
+</parameterizedType>
+<description>
+status of this summary manager&#x27;s initialization, which may be pending.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.startAsync() -->
+<method name="startAsync"  public="true" abstract="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.write(javax.baja.batchJob.BIBatchJobSummary) -->
+<method name="write"  public="true" abstract="true">
+<description>
+Invoked by a BBatchJob instance to write summary information to permanent storage
+</description>
+<parameter name="jobSummary">
+<type class="javax.baja.batchJob.BIBatchJobSummary"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.write(javax.baja.batchJob.BIJobStepSummary) -->
+<method name="write"  public="true" abstract="true">
+<description>
+Invoked by a BJobStep instance to write summary information to permanent storage
+</description>
+<parameter name="jobSummary">
+<type class="javax.baja.batchJob.BIJobStepSummary"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.disposeJobSummary(javax.baja.sys.Type, javax.baja.sys.BAbsTime) -->
+<method name="disposeJobSummary"  public="true" abstract="true">
+<description>
+Remove the summary instance from permanent storage which summarizes a job with the given&#xa; type and which started at the given time
+</description>
+<parameter name="jobType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="jobStartTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.disposeStepSummary(javax.baja.sys.Type, javax.baja.sys.BAbsTime) -->
+<method name="disposeStepSummary"  public="true" abstract="true">
+<description>
+Remove the summary instance from permanent storage which summarizes a job step with the given&#xa; type and which started at the given time
+</description>
+<parameter name="stepType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="stepStartTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobSummaryManager.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient" name="BVideoAlarmRecipient" packageName="com.tridium.videoDriver.ui.alarm" public="true">
+<description>
+This allows a station designer the ability to have a video driver component&#xa; take special action, such as asking a video camera to start recording, when&#xa; an alarm occurs within the Niagara AX framework.&#xa;&#xa; Here is how this class plugs in the overall grand scheme of things:&#xa; 1.) An integrator adds a BVideoAlarmRecipient to the station under the&#xa; alarm service.&#xa; 2.) The integrator links the BVideoAlarmRecipient to the appropriate&#xa; alarm class(es).&#xa; 3.) On the property sheet of the BVideoAlarmRecipient, the integrator&#xa;  chooses a component in the station to serve as the &#x27;video responder&#x27;.&#xa; 4.) The component in the station that he or she chooses will be a&#xa; component from a video driver.&#xa; 5.) The component&#x27;s &#x27;handleAlarm(BAlarmRecord) method will be called whenever&#xa; the BVideoAlarmRecipient receives an alarm from the alarm service.&#xa; 6.) The particular video driver component will take special action, such as&#xa; to ask a video camera to start recording.
+</description>
+<tag name="@see">BVideoAlarmRecipient</tag>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.alarm.BConsoleRecipient"/>
+</extends>
+<property name="presetOnNormal" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;presetOnNormal&lt;/code&gt; property.&#xa; By default, the camera go to preset on return to normal alarm
+</description>
+<tag name="@see">#getPresetOnNormal</tag>
+<tag name="@see">#setPresetOnNormal</tag>
+</property>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient() -->
+<constructor name="BVideoAlarmRecipient" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getPresetOnNormal() -->
+<method name="getPresetOnNormal"  public="true">
+<description>
+Get the &lt;code&gt;presetOnNormal&lt;/code&gt; property.&#xa; By default, the camera go to preset on return to normal alarm
+</description>
+<tag name="@see">#presetOnNormal</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.setPresetOnNormal(boolean) -->
+<method name="setPresetOnNormal"  public="true">
+<description>
+Set the &lt;code&gt;presetOnNormal&lt;/code&gt; property.&#xa; By default, the camera go to preset on return to normal alarm
+</description>
+<tag name="@see">#presetOnNormal</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.filterStationRecipientsForAlarmClass(java.lang.String, com.tridium.alarm.BStationRecipient[]) -->
+<method name="filterStationRecipientsForAlarmClass"  protected="true" static="true">
+<description/>
+<parameter name="alarmClass">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="allStationRecipients">
+<type class="com.tridium.alarm.BStationRecipient" dimension="1"/>
+</parameter>
+<return>
+<type class="com.tridium.alarm.BStationRecipient" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getStationRecipients() -->
+<method name="getStationRecipients"  protected="true">
+<description/>
+<return>
+<type class="com.tridium.alarm.BStationRecipient" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getAlarmClassesForRecipient(javax.baja.alarm.BAlarmRecipient) -->
+<method name="getAlarmClassesForRecipient"  protected="true" static="true">
+<description/>
+<parameter name="alarmRecipient">
+<type class="javax.baja.alarm.BAlarmRecipient"/>
+</parameter>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.handleAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="handleAlarm"  public="true">
+<description>
+This method is called by the Niagara AX alarm service to process a Niagara&#xa; AX alarm.&#xa;&#xa; This particular implementation extracts the cameraOrd and cameraPreset (optional)&#xa; from the alarm data. Next, this resolves the cameraOrd to a camera component in&#xa; the station. Then this asks the camera to move to the cameraPreset (if&#xa; the cameraPreset is provided in the alarm record). After that, this notifies the&#xa; camera of the event where it should start recording based on its usual criteria&#xa; for recording its own native events (this delegates handling of the preset&#xa; duration and record duration to the actual camera itself).
+</description>
+<tag name="@see">#getCameraObject(BAlarmRecord)</tag>
+<tag name="@see">#getCameraObject(BAlarmRecord)</tag>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+routed from the default alarm class.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getAlarmService() -->
+<method name="getAlarmService"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.alarm.BAlarmService"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.addFieldDeviceCameraTime(javax.baja.alarm.BAlarmRecord, javax.baja.sys.BObject) -->
+<method name="addFieldDeviceCameraTime"  protected="true">
+<description/>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<parameter name="cameraObject">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.isVideoAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="isVideoAlarm"  protected="true" static="true">
+<description/>
+<parameter name="alarm">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.startRecording(javax.baja.alarm.BAlarmRecord, javax.baja.sys.BObject) -->
+<method name="startRecording"  protected="true">
+<description/>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<parameter name="cameraObject">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.sendAlarmToDisplay(javax.baja.alarm.BAlarmRecord, javax.baja.sys.BObject) -->
+<method name="sendAlarmToDisplay"  protected="true">
+<description/>
+<parameter name="alarm">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<parameter name="camera">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getCameraPreset(javax.baja.alarm.BAlarmRecord) -->
+<method name="getCameraPreset"  protected="true">
+<description>
+Gets the &#x27;cameraPreset&#x27; from the alarmRecord
+</description>
+<tag name="@see">#handleAlarm(BAlarmRecord)</tag>
+<tag name="@see">#getCameraObject(BAlarmRecord)</tag>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+the alarmRecord
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+the &#x27;cameraPreset&#x27; from the alarmRecord.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getStartRecording(javax.baja.alarm.BAlarmRecord) -->
+<method name="getStartRecording"  protected="true">
+<description>
+Gets the &#x27;startRecording&#x27; boolean from the alarmREcord.
+</description>
+<tag name="@see">#handleAlarm(BAlarmRecord)</tag>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+the alarmRecord
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+the &#x27;startRecording&#x27; boolean from the alarmRecord.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getSendAlarmToDisplay(javax.baja.alarm.BAlarmRecord) -->
+<method name="getSendAlarmToDisplay"  protected="true">
+<description>
+Gets the &#x27;sendAlarmToDisplay&#x27; boolean from the alarmREcord.
+</description>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+the &#x27;sendAlarmToDisplay&#x27; boolean from the alarmRecord.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getCameraObject(javax.baja.alarm.BAlarmRecord) -->
+<method name="getCameraObject"  protected="true">
+<description>
+Gets the camera object from the alarm record. This takes several&#xa; steps since the camera is stored in the alarm record as a string&#xa; facet. This string facet is assumed to be the text of a BOrd. This&#xa; wraps the camera ord text in a BOrd, resolves it, and returns a&#xa; reference to the resolved BObject in the station (hopefully a camera&#xa; component otherwise there is chaos).
+</description>
+<tag name="@see">#handleAlarm(BAlarmRecord)</tag>
+<tag name="@see">#getCameraPreset(BAlarmRecord)</tag>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+the alarm record that was passed to the &#x27;handleAlarm&#x27;&#xa; callback.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+<description>
+the resolved camera object or null if not found or unresolvable.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.presetOnNormal -->
+<field name="presetOnNormal"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;presetOnNormal&lt;/code&gt; property.&#xa; By default, the camera go to preset on return to normal alarm
+</description>
+<tag name="@see">#getPresetOnNormal</tag>
+<tag name="@see">#setPresetOnNormal</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.backgroundWorker -->
+<field name="backgroundWorker"  protected="true" static="true">
+<type class="javax.baja.util.Worker"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.backgroundQueue -->
+<field name="backgroundQueue"  protected="true" static="true">
+<type class="javax.baja.util.Queue"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.alarmService -->
+<field name="alarmService"  protected="true">
+<type class="javax.baja.alarm.BAlarmService"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.alarm.BVideoAlarmRecipient.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

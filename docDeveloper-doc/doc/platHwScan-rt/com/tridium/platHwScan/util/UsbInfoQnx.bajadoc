@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platHwScan" runtimeProfile="rt" qualifiedName="com.tridium.platHwScan.util.UsbInfoQnx" name="UsbInfoQnx" packageName="com.tridium.platHwScan.util" public="true">
+<description>
+UsbInfo is used for executing and parsing information from the usb command.&#xa; Used by titan hardware scan to identify option cards.
+</description>
+<tag name="@author">Patrick Sager</tag>
+<tag name="@creation">12/16/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.platHwScan.util.UsbInfoQnx() -->
+<constructor name="UsbInfoQnx" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.makeBuses() -->
+<method name="makeBuses"  public="true">
+<description>
+execute the usb command and return the results. Results are stored as a list of lists.&#xa; Each list in the main list represents a usb bus. Each bus contains several devices which&#xa; are represented as a map of properties and values.&#xa;&#xa; Clif Turman, Dec 7, 2016, N4.3&#xa; HAREMB-23945 - Add JACE-8000 HDK Support to platHwScanService&#xa; Added HDK support.  Instead of issuing the &#x22;usb&#x22; command, we now&#xa; instead re-use the work done by QNX startup script usb-parse.sh, which&#xa; places the entire usb configuration into /dev/shmem/u_map (/tmp/u_map).&#xa; Read this file and generate the arraylist of&#xa;&#xa; NOTE: /tmp/u_map Niagara 4.3 - Niagara 4.7 (QNX6.5) uses this format&#xa; COM1 /dev/serusb1 0 0 0x03eb 0x2425 0x02 0x02 0x01 (Tridium) (Tridium485-2_r04)&#xa; COM2 /dev/serusb2 0 0 0x03eb 0x2425 0x02 0x02 0x01 (Tridium) (Tridium485-2_r04)&#xa; COM3 /dev/serusb3 1 1 0x05a5 0xdead 0x02 0x02 0x01 (Acme Desert Extensions) (Cliff hanger - 12 seconds)&#xa; COM4 /dev/serusb4 1 2 0x03eb 0x2404 0x02 0x02 0x01 (Tridium) (Tridium232-1_r03)&#xa; COM5 /dev/serusb5 1 3 0x2e0c 0x0100 0x02 0x02 0x01 (Shenzhen MEK Intellisys) (MEKi J8K M-Bus Expansion Module)&#xa; LON1 /dev/serusb6 1 4 0x0920 0x5550 0x02 0x02 0x01 (Echelon) (Echelon U60 FT Network Interface)&#xa;&#xa; NOTE: /tmp/u_map Niagara 4.8+ (QNX7) uses this format, adding devno column&#xa; COM1 /dev/serusb1 0 2 0 0x03eb 0x2425 0x02 0x02 0x01 (Tridium) (Tridium485-2_r04)&#xa; COM2 /dev/serusb2 0 2 0 0x03eb 0x2425 0x02 0x02 0x01 (Tridium) (Tridium485-2_r04)&#xa; COM3 /dev/serusb3 1 2 1 0x05a5 0xdead 0x02 0x02 0x01 (Acme Desert Extensions) (Cliff hanger - 12 seconds)&#xa; COM4 /dev/serusb4 1 4 2 0x03eb 0x2404 0x02 0x02 0x01 (Tridium) (Tridium232-1_r03)&#xa; COM5 /dev/serusb5 1 6 3 0x2e0c 0x0100 0x02 0x02 0x01 (Shenzhen MEK Intellisys) (MEKi J8K M-Bus Expansion Module)&#xa; LON1 /dev/serusb6 1 8 4 0x0920 0x5550 0x02 0x02 0x01 (Echelon) (Echelon U60 FT Network Interface)&#xa;&#xa;  Fields of /tmp/u_map are as follows:&#xa;     1)  &#x22;Common&#x22; name, used by Niagara for serial devices&#xa;     2)  OS Name, in the QNX world for the same device&#xa;     3)  The USB bus device was located on (0=baseboard, or 1=expansion)&#xa; **  4)  The USB enumerated device number (devno - added in Niagara 4.8/QNX 7)&#xa;     5)  Module position, used by Niagara HwScanService, where 0=baseboard, 1,2,3,4 is numbered expansion module position&#xa;     6)  Vendor ID&#xa;     7)  Product ID&#xa;     8)  Interface Class(from Configurations/Configuration/Interfaces/Interface/Class&#xa;     9)  Interface Subclass(from Configurations/Configuration/Interfaces/Interface/Subclass&#xa;     10)  Interface Protocol(from Configurations/Configuration/Interfaces/Interface/Protocol&#xa;     11) Vendor String - special handling for Tridium, see HAREMB-434 (&#x22;Tridium&#x22; replaces &#x22;Atmel&#x22;)&#xa;     12) Product String&#xa; ** Added N4.8/QNX 7 to support new USB stack
+</description>
+<return>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<parameterizedType class="java.util.ArrayList">
+<args>
+<parameterizedType class="java.util.HashMap">
+<args>
+<type class="java.lang.String"/>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+</args>
+</parameterizedType>
+</args>
+</parameterizedType>
+<description>
+List representing usb buses
+</description>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.toOptCardCodes() -->
+<method name="toOptCardCodes"  public="true">
+<description>
+Converts the usb info to an opt card code string. Opt card codes start with the board name&#xa; followed by 0 or more vendor product combinations represented by a pair of hex values.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the opt card code string
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.isOccupied() -->
+<method name="isOccupied"  public="true">
+<description>
+Determines whether or not a device is present on the titan usb port.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if occupied, false if empty
+</description>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.getUsbConfigError() -->
+<method name="getUsbConfigError"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.SERIAL_PORT_PREFIX -->
+<field name="SERIAL_PORT_PREFIX"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.LON_PORT_PREFIX -->
+<field name="LON_PORT_PREFIX"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.NUM_U_MAP_SPACE_DELIMITED_FIELDS -->
+<field name="NUM_U_MAP_SPACE_DELIMITED_FIELDS"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.util.UsbInfoQnx.NUM_U_MAP_PAREN_DELIMITED_FIELDS -->
+<field name="NUM_U_MAP_PAREN_DELIMITED_FIELDS"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="kitControl" runtimeProfile="rt" qualifiedName="com.tridium.kitControl.util.BReset" name="BReset" packageName="com.tridium.kitControl.util" public="true">
+<description>
+This function performs a &#x22;reset&#x22; on the value inA.&#xa; &#x22;Reset&#x22; is a HVAC term for scaling a number &#xa; between two limits.  &#xa;&#xa; When inputLowLimit &lt; inA &lt; inputHighLimit, &#xa; the output value  scales linearly &#xa; between outputLowLimit and outputHighLimit.  &#xa;&#xa; If inA &lt; inputLowLimit, the value is capped&#xa; at outputLowLimit.  &#xa; &#xa; If inA &gt; inputHighLimit, the value is capped &#xa; at outputHighLimit.&#xa; &#xa; To calculate out, the following equation is used:&#xa; &lt;pre&gt;&#xa;       (D-B)&#xa;   y = ----- * (x - A) + B&#xa;       (C-A)  &#xa;&#xa;  where &#xa;     A = inputLowLimit&#xa;     B = outputLowLimit&#xa;     C = inputHighLimit&#xa;     D = outputHighLimit&#xa;     x = inA&#xa;     y = out&#xa; &lt;/pre&gt;&#xa; &#xa;  The equation can be derived by solving the &#xa; three linear equations below simultaneously:&#xa;&#xa;   B = mA + b&#xa;   D = mC + b&#xa;   y = mx + b&#xa;&#xa; The proof is left as an exercise to the reader...
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">30 Aug 2001</tag>
+<tag name="@version">$Revision: 13$ $Date: 3/30/2004 3:42:29 PM$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="com.tridium.kitControl.math.BMath"/>
+</extends>
+<property name="inA" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;inA&lt;/code&gt; property.&#xa; Input A
+</description>
+<tag name="@see">#getInA</tag>
+<tag name="@see">#setInA</tag>
+</property>
+
+<property name="inputLowLimit" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;inputLowLimit&lt;/code&gt; property.&#xa; Input low limit
+</description>
+<tag name="@see">#getInputLowLimit</tag>
+<tag name="@see">#setInputLowLimit</tag>
+</property>
+
+<property name="inputHighLimit" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;inputHighLimit&lt;/code&gt; property.&#xa; Input high limit
+</description>
+<tag name="@see">#getInputHighLimit</tag>
+<tag name="@see">#setInputHighLimit</tag>
+</property>
+
+<property name="outputLowLimit" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;outputLowLimit&lt;/code&gt; property.&#xa; Output low limit
+</description>
+<tag name="@see">#getOutputLowLimit</tag>
+<tag name="@see">#setOutputLowLimit</tag>
+</property>
+
+<property name="outputHighLimit" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;outputHighLimit&lt;/code&gt; property.&#xa; Output high limit
+</description>
+<tag name="@see">#getOutputHighLimit</tag>
+<tag name="@see">#setOutputHighLimit</tag>
+</property>
+
+<property name="inputLimitsExceededMode" flags="">
+<type class="com.tridium.kitControl.enums.BResetLimitsExceededMode"/>
+<description>
+Slot for the &lt;code&gt;inputLimitsExceededMode&lt;/code&gt; property.&#xa; Indicates the desired behavior of the Out property when&#xa; inA exceeds the inputLowLimit or inputHighLimit.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<tag name="@see">#getInputLimitsExceededMode</tag>
+<tag name="@see">#setInputLimitsExceededMode</tag>
+</property>
+
+</class>
+</bajadoc>

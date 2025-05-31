@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient" name="BJsonAlarmRecipient" packageName="com.tridiumx.jsonToolkit.outbound.schema.alarm" public="true">
+<description>
+The JsonAlarmRecipient exports alarms using the recipient&#x2019;s schema.&#xa; &lt;p&gt;&#xa; Linking the alarm topic of an alarm class into the route action of a JsonAlarmRecipient triggers the generation of a new payload each time the alarm class receives an alarm.&#xa; The JsonAlarmRecipient comes with a nested schema whose payload output depends on the alarms passed through from the parent recipient.&#xa; Queries, bound objects and arrays, and/or properties can include present value data from the station in the payload.&#xa; There are, however, some alarm-specific data types you can include, notably the properties from a Niagara Alarm Record.&#xa; By including the unique identifier in an outgoing message, an inbound payload can acknowledge alarms.
+</description>
+<tag name="@author">Jason Woollard</tag>
+<tag name="@since">Niagara 4.9</tag>
+<extends>
+<type class="javax.baja.alarm.BAlarmRecipient"/>
+</extends>
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="publishPoint" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;publishPoint&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPublishPoint</tag>
+<tag name="@see">#setPublishPoint</tag>
+</property>
+
+<property name="jsonSchema" flags="">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+<description>
+Slot for the &lt;code&gt;jsonSchema&lt;/code&gt; property.
+</description>
+<tag name="@see">#getJsonSchema</tag>
+<tag name="@see">#setJsonSchema</tag>
+</property>
+
+<property name="queue" flags="h">
+<type class="com.tridiumx.jsonToolkit.util.BEngineCycleAlarmQueue"/>
+<description>
+Slot for the &lt;code&gt;queue&lt;/code&gt; property.
+</description>
+<tag name="@see">#getQueue</tag>
+<tag name="@see">#setQueue</tag>
+</property>
+
+<action name="processAlarm" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;processAlarm&lt;/code&gt; action.
+</description>
+<tag name="@see">#processAlarm(BAlarmRecord parameter)</tag>
+</action>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient() -->
+<constructor name="BJsonAlarmRecipient" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.getPublishPoint() -->
+<method name="getPublishPoint"  public="true">
+<description>
+Get the &lt;code&gt;publishPoint&lt;/code&gt; property.
+</description>
+<tag name="@see">#publishPoint</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.setPublishPoint(javax.baja.naming.BOrd) -->
+<method name="setPublishPoint"  public="true">
+<description>
+Set the &lt;code&gt;publishPoint&lt;/code&gt; property.
+</description>
+<tag name="@see">#publishPoint</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.getJsonSchema() -->
+<method name="getJsonSchema"  public="true">
+<description>
+Get the &lt;code&gt;jsonSchema&lt;/code&gt; property.
+</description>
+<tag name="@see">#jsonSchema</tag>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.setJsonSchema(com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema) -->
+<method name="setJsonSchema"  public="true">
+<description>
+Set the &lt;code&gt;jsonSchema&lt;/code&gt; property.
+</description>
+<tag name="@see">#jsonSchema</tag>
+<parameter name="v">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.getQueue() -->
+<method name="getQueue"  public="true">
+<description>
+Get the &lt;code&gt;queue&lt;/code&gt; property.
+</description>
+<tag name="@see">#queue</tag>
+<return>
+<type class="com.tridiumx.jsonToolkit.util.BEngineCycleAlarmQueue"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.setQueue(com.tridiumx.jsonToolkit.util.BEngineCycleAlarmQueue) -->
+<method name="setQueue"  public="true">
+<description>
+Set the &lt;code&gt;queue&lt;/code&gt; property.
+</description>
+<tag name="@see">#queue</tag>
+<parameter name="v">
+<type class="com.tridiumx.jsonToolkit.util.BEngineCycleAlarmQueue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.processAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="processAlarm"  public="true">
+<description>
+Invoke the &lt;code&gt;processAlarm&lt;/code&gt; action.
+</description>
+<tag name="@see">#processAlarm</tag>
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.handleAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="handleAlarm"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="record">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.doProcessAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="doProcessAlarm"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="record">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.isChildLegal(javax.baja.sys.BComponent) -->
+<method name="isChildLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="child">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.publishPoint -->
+<field name="publishPoint"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;publishPoint&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPublishPoint</tag>
+<tag name="@see">#setPublishPoint</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.jsonSchema -->
+<field name="jsonSchema"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;jsonSchema&lt;/code&gt; property.
+</description>
+<tag name="@see">#getJsonSchema</tag>
+<tag name="@see">#setJsonSchema</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.queue -->
+<field name="queue"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;queue&lt;/code&gt; property.
+</description>
+<tag name="@see">#getQueue</tag>
+<tag name="@see">#setQueue</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.processAlarm -->
+<field name="processAlarm"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;processAlarm&lt;/code&gt; action.
+</description>
+<tag name="@see">#processAlarm(BAlarmRecord parameter)</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.BJsonAlarmRecipient.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

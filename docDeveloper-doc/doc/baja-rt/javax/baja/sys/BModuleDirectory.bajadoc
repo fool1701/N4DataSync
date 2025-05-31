@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BModuleDirectory" name="BModuleDirectory" packageName="javax.baja.sys" public="true">
+<description/>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<implements>
+<type class="javax.baja.file.BIFileStore"/>
+</implements>
+<implements>
+<type class="javax.baja.file.BIFile"/>
+</implements>
+<implements>
+<type class="javax.baja.file.BIDirectory"/>
+</implements>
+<!-- javax.baja.sys.BModuleDirectory(javax.baja.sys.BModule, javax.baja.file.FilePath, javax.baja.file.BIDirectory) -->
+<constructor name="BModuleDirectory" public="true">
+<parameter name="module">
+<type class="javax.baja.sys.BModule"/>
+</parameter>
+<parameter name="filePath">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="parent">
+<type class="javax.baja.file.BIDirectory"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.BModuleDirectory.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getModuleName() -->
+<method name="getModuleName"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.addFile(javax.baja.file.FilePath, javax.baja.file.zip.BZipSpace) -->
+<method name="addFile"  public="true">
+<description/>
+<parameter name="pathToAdd">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="zipSpace">
+<type class="javax.baja.file.zip.BZipSpace"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.findDirectory(javax.baja.file.FilePath) -->
+<method name="findDirectory"  public="true">
+<description/>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BModuleDirectory"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.findZipSpace(javax.baja.file.FilePath) -->
+<method name="findZipSpace"  public="true">
+<description/>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="javax.baja.file.zip.BZipSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getChildStore(java.lang.String) -->
+<method name="getChildStore"  public="true">
+<description/>
+<parameter name="fileName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFileStore"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.listFiles() -->
+<method name="listFiles"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the list of containing files.
+</description>
+<return>
+<type class="javax.baja.file.BIFile" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getPermissions(javax.baja.sys.Context) -->
+<method name="getPermissions"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the set of permissions available based on the&#xa; specified context.  If the context is non-null and&#xa; has a non-null user then this method must return&#xa; &lt;code&gt;cx.getUser().getPermissionsFor(this)&lt;/code&gt;.&#xa; If the context is null then typically this method&#xa; should return &lt;code&gt;BPermissions.all&lt;/code&gt;.  If this&#xa; happens to be a proxy object within a remote session,&#xa; then this method should return a cached instance&#xa; of BPermissions based on the credentials used to&#xa; establish the session.  Under no circumstances should&#xa; this method return null or make a network call.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.canRead(javax.baja.naming.OrdTarget) -->
+<method name="canRead"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the specified target object has read permission.&#xa; It is up to the implementation to decide whether operator or&#xa; admin read permission should be checked.
+</description>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.canWrite(javax.baja.naming.OrdTarget) -->
+<method name="canWrite"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the specified target object has write permission.&#xa; It is up to the implementation to decide whether operator or&#xa; admin write permission should be checked.
+</description>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.canInvoke(javax.baja.naming.OrdTarget) -->
+<method name="canInvoke"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the specified target object has invoke permission.&#xa; It is up to the implementation to decide whether operator or&#xa; admin invoke permission should be checked.
+</description>
+<parameter name="cx">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavName() -->
+<method name="getNavName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the name which uniquely identifies this node in its&#xa; parent.  This name must be a valid slot name.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavDisplayName(javax.baja.sys.Context) -->
+<method name="getNavDisplayName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the display text of the navigation node.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavDescription(javax.baja.sys.Context) -->
+<method name="getNavDescription"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a short description of the nav node.  Return&#xa; null if no description is available.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavParent() -->
+<method name="getNavParent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the parent navigation node.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.hasNavChildren() -->
+<method name="hasNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this node knows that it has no children, then&#xa; return false.  If the node has children or will&#xa; find out during a call to getNavChildren(), then&#xa; return true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the child by the specified name, or&#xa; return null if not found.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.resolveNavChild(java.lang.String) -->
+<method name="resolveNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the child by the specified name, or throw&#xa; UnresolvedException if not found.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the children nodes for this navigation node.  Return&#xa; an array of length zero if there are no children.  Note&#xa; that this method does not take a Context, so it is possible&#xa; that the resulting list doesn&#x27;t take security permissions&#xa; into account.  Use &lt;code&gt;BNavContainer.filter()&lt;/code&gt; to&#xa; filter out nodes based on permissions; this is typically&#xa; done when using this method to do server side processing&#xa; such as a web servlet.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavOrd() -->
+<method name="getNavOrd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the primary ord used to navigate to a view on&#xa; this object.  This should be an normalized absolute&#xa; ord.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getNavIcon() -->
+<method name="getNavIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon for the navigation node.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getAppliedCategoryMask() -->
+<method name="getAppliedCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the category mask to actually use for this object.  This&#xa; may be different from &lt;code&gt;getCategoryMask()&lt;/code&gt; if using&#xa; category inheritance.
+</description>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getCategoryMask() -->
+<method name="getCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the raw category mask for this object.  If the object&#xa; supports category inheritance, then this method should return&#xa; &lt;code&gt;BCategoryMask.NULL&lt;/code&gt; and return the inherited&#xa; mask for &lt;code&gt;getAppliedCategoryMask()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getSpace() -->
+<method name="getSpace"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the space containing this node, or null if unmounted.
+</description>
+<return>
+<type class="javax.baja.space.BSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.isMounted() -->
+<method name="isMounted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+A space node is mounted if it is parented by a mounted&#xa; space.  Mounted nodes have a host absolute ord and return&#xa; non-null for getSpace(), getSession(), and getHost().
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getOrdInSession() -->
+<method name="getOrdInSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get an ord relative to the session.  Return null if not&#xa; mounted.  This should be space.ordInSession + ordInSpace.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getOrdInSpace() -->
+<method name="getOrdInSpace"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the ord which identifies this entry in its space.&#xa; This ord should be relative with the space as the base.&#xa; If not mounted then return null.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.isPendingMove() -->
+<method name="isPendingMove"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this object is currently contained by the current Mark&#xa; and the mark is set to pending move, then this method returns&#xa; true.  In user interfaces this flag should be used to render&#xa; the object grayed out to illustrate that a cut operation has&#xa; been performed on the object, but that a paste operation&#xa; is needed to complete the move.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.setPendingMove(boolean) -->
+<method name="setPendingMove"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the pending move flag.
+</description>
+<parameter name="pendingMove">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getStore() -->
+<method name="getStore"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the file&#x27;s backing store.
+</description>
+<return>
+<type class="javax.baja.file.BIFileStore"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.setStore(javax.baja.file.BIFileStore) -->
+<method name="setStore"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the file&#x27;s backing store.
+</description>
+<parameter name="store">
+<type class="javax.baja.file.BIFileStore"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getMimeType() -->
+<method name="getMimeType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the mime type string for this file.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getSize() -->
+<method name="getSize"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the size of the file in bytes, or&#xa; return -1 if not a data file.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getFileSpace() -->
+<method name="getFileSpace"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the file space containing this file.&#xa; Return null if not mounted.
+</description>
+<return>
+<type class="javax.baja.file.BFileSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getFilePath() -->
+<method name="getFilePath"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the file path of this file in its space.  The&#xa; result of BISpaceEntry.getOrdInSpace() should match&#xa; this path query.  Return null if not mounted.
+</description>
+<return>
+<type class="javax.baja.file.FilePath"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getFileName() -->
+<method name="getFileName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the simple file name.  This name should be&#xa; the same as &lt;code&gt;getFilePath().getName()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getExtension() -->
+<method name="getExtension"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the extension for this file. The extension&#xa; appears after the last &#x27;.&#x27; in the file name.&#xa; Return null if no &#x27;.&#x27; appears in the file name.&#xa; Implementers should use FileUtil.getExtension().
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.isDirectory() -->
+<method name="isDirectory"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if this a file that contains other files.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getLastModified() -->
+<method name="getLastModified"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the last modification time of this&#xa; file as a BAbsTime instance.  Return&#xa; BAbsTime.NULL if last modified unknown.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.setLastModified(javax.baja.sys.BAbsTime) -->
+<method name="setLastModified"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Sets file&#x27;s lastModified absTime to nearest second.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="absTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.isReadonly() -->
+<method name="isReadonly"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is the file readonly.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getPermissions(javax.baja.file.BIFile, javax.baja.sys.Context) -->
+<method name="getPermissions"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the permissions for the specified file using the user&#xa; from the specified context.  This is a delegation from&#xa; BIFile&#x27;s implementation of BIProtected.getPermissions().
+</description>
+<parameter name="file">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getInputStream() -->
+<method name="getInputStream"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get an input stream to read the contents&#xa; of this file.
+</description>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if the file is not&#xa;                             not readable.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.read() -->
+<method name="read"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the contents of this file fully into a&#xa; byte array.  Implementers should use FileUtil.read().
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if this file is&#xa;                             not readable or an error occurs&#xa;                             during the read.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.delete() -->
+<method name="delete"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Call &lt;code&gt;getFileSpace().delete(getFilePath())&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getOutputStream() -->
+<method name="getOutputStream"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get an output stream to write the file.&#xa; The caller is responsible for invoking close()&#xa; on the OutputStream.
+</description>
+<return>
+<type class="java.io.OutputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if this file is&#xa;                             not writable.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.write(byte[]) -->
+<method name="write"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Write the specified contents to this file.&#xa; Implementers should use FileUtil.write().
+</description>
+<parameter name="content">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if this file is&#xa;                             not writable or an error occurs&#xa;                             during the write.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.getCrc() -->
+<method name="getCrc"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the CRC of the contents of this file.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="long"/>
+<description>
+CRC
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModuleDirectory.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

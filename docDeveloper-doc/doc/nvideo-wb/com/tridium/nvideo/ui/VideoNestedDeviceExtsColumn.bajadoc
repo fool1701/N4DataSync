@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="wb" qualifiedName="com.tridium.nvideo.ui.VideoNestedDeviceExtsColumn" name="VideoNestedDeviceExtsColumn" packageName="com.tridium.nvideo.ui" public="true">
+<description>
+Overcomes bug in DeviceExtsColumn that forces the device folder&#xa; to extend from BDeviceFolder rather than allowing the device folder&#xa; to implement BIDeviceFolder instead.&#xa; &#xa; This is necessary since the BVideoCameraFolder and BVideoLocation&#xa; do not extend BDeviceFolder. Unfortunately, they can not extend BDeviceFolder&#xa; because BDeviceFolder declares its getDeviceType methods as final and&#xa; its default implementation returns getNetwork().getDeviceType(). This&#xa; would return the DVR in the case of BVideoCameraFolder and/or &#xa; BVideoLocation. If BDeviceFolder.getDeviceType() was not final then&#xa; BVideoCameraFolder and BVideoLocation could have extended from it&#xa; and overridden the getDeviceType() method to return the camera type or&#xa; display type.&#xa; &#xa; However, that was not possible so instead, BVideoCameraFolder and &#xa; BVideoLocation extend BFolder or BComponent and implement BIDeviceFolder.&#xa; Without customizing the device exts column, the video camera folder and&#xa; video location folder would be painted with the device extension icons in&#xa; the table. Then if the user double-clicked them, an exception would be&#xa; thrown in workbench.&#xa; &#xa; This makes it so that no icons are painted for BVideoCameraFolders or&#xa; BVideoLocations (more specifically, for BIDeviceFolders).&#xa; &#xa; Since much of the internal details are locked-down in DeviceExtsColumn, this&#xa; class basically has to copy to source code from DeviceExtsColumn and customize&#xa; the source code directly.
+</description>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver)</tag>
+<tag name="@creation">25 Jan 2012</tag>
+<extends>
+<type class="javax.baja.driver.ui.device.DeviceExtsColumn"/>
+</extends>
+<!-- com.tridium.nvideo.ui.VideoNestedDeviceExtsColumn(javax.baja.driver.BDevice) -->
+<constructor name="VideoNestedDeviceExtsColumn" public="true">
+<parameter name="protoType">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<description>
+Constructor with flags set to zero.
+</description>
+</constructor>
+
+<!-- com.tridium.nvideo.ui.VideoNestedDeviceExtsColumn(javax.baja.driver.BDevice, int) -->
+<constructor name="VideoNestedDeviceExtsColumn" public="true">
+<parameter name="protoType">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<description>
+Constructor with specified flags.
+</description>
+</constructor>
+
+<!-- com.tridium.nvideo.ui.VideoNestedDeviceExtsColumn.get(java.lang.Object) -->
+<method name="get"  public="true">
+<description/>
+<parameter name="row">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.ui.VideoNestedDeviceExtsColumn.getCellRenderer() -->
+<method name="getCellRenderer"  public="true">
+<description/>
+<return>
+<type class="javax.baja.ui.table.TableCellRenderer"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.ui.VideoNestedDeviceExtsColumn.videoCellDoubleClicked(javax.baja.workbench.mgr.BMgrTable, javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="videoCellDoubleClicked"  public="true">
+<description>
+Serves as a replacement for the hidden &#x27;cellDoubleClicked&#x27; method&#xa; from the ancestor class DeviceExtsColumn. The BCameraManager&#x27;s&#xa; controller overrides it own, non-locked version of &#x27;cellDoubleClicked&#x27;&#xa; and calls this method instead of &#x27;cellDoubleClicked&#x27; since it is&#xa; locked out in the DeviceExtsColumns ancestor class.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BMgrTable"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

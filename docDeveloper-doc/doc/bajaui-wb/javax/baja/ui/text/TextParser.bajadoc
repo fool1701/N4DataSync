@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.text.TextParser" name="TextParser" packageName="javax.baja.ui.text" public="true">
+<description>
+TextParser is responsible for parsing char[] data &#xa; into Line[] data.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">9 Dec 00</tag>
+<tag name="@version">$Revision: 6$ $Date: 3/28/05 10:32:35 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.text.BTextEditor$TextSupport"/>
+</extends>
+<!-- javax.baja.ui.text.TextParser() -->
+<constructor name="TextParser" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.text.TextParser.parse(char[]) -->
+<method name="parse"  public="true" synchronized="true">
+<description>
+Parse the given character buffer into an array of Lines,&#xa; which are in turn parsed into their elemental Segment.&#xa; This method sets up the local buffer fields, and loops&#xa; calling nextSegment() until the end of file is reached.
+</description>
+<parameter name="buffer">
+<type class="char" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.text.Line" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.nextSegment() -->
+<method name="nextSegment"  protected="true">
+<description>
+Parse the next segment from the buffer.  When this&#xa; method is called the value of pos is on the first&#xa; character of the segment.  When this method returns &#xa; the value of pos should be the first character AFTER &#xa; the segment.  Use the advance() to move to the next&#xa; character.
+</description>
+<return>
+<type class="javax.baja.ui.text.Segment"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.parseWhitespace() -->
+<method name="parseWhitespace"  protected="true">
+<description>
+This method checks if the current character is&#xa; whitespace, and if so parses it into a SPACES,&#xa; TAB, or NEWLINE Segment.  If the current token&#xa; is not whitespace, then return true.
+</description>
+<return>
+<type class="javax.baja.ui.text.Segment"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.newSegment(int) -->
+<method name="newSegment"  protected="true" final="true">
+<description>
+Allocate a new Segment using the specified type&#xa; code, getSegmentOffset(), and getSegmentLength().
+</description>
+<parameter name="type">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.text.Segment"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.newSegment(int, int) -->
+<method name="newSegment"  protected="true" final="true">
+<description>
+Allocate a new Segment using the specified type&#xa; code, subType code, getSegmentOffset(), and &#xa; getSegmentLength().
+</description>
+<parameter name="type">
+<type class="int"/>
+</parameter>
+<parameter name="subType">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.text.Segment"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.getSegmentOffset() -->
+<method name="getSegmentOffset"  protected="true" final="true">
+<description>
+Get the segment offset on the current line which&#xa; may be used for the Segment constructor.  This is&#xa; computed as &lt;code&gt;segmentStart-lineStart&lt;/code&gt;.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.getSegmentLength() -->
+<method name="getSegmentLength"  protected="true" final="true">
+<description>
+Get the segment length on the current line which&#xa; may be used for the Segment constructor.  This is&#xa; computed as &lt;code&gt;pos-segmentStart&lt;/code&gt;.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.advance() -->
+<method name="advance"  protected="true" final="true">
+<description>
+Advance the position of the current buffer to the&#xa; next character and update the pos, last, current,&#xa; and next instance fields.  Return true if we advanced&#xa; to a valid char, or false if we advanced beyond&#xa; the end of the file.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.isCurrent(java.lang.String) -->
+<method name="isCurrent"  protected="true">
+<description>
+Return is the current position contains the specified&#xa; string.  If it does then advance to the end of the string&#xa; in the segment stream.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextParser.buffer -->
+<field name="buffer"  protected="true">
+<type class="char" dimension="1"/>
+<description>
+The buffer currently being parsed.&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.length -->
+<field name="length"  protected="true">
+<type class="int"/>
+<description>
+The current buffer&#x27;s length.&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.lineStart -->
+<field name="lineStart"  protected="true">
+<type class="int"/>
+<description>
+Index into buffer where the current line started. &#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.segmentStart -->
+<field name="segmentStart"  protected="true">
+<type class="int"/>
+<description>
+Index into buffer where the current segment started.&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.pos -->
+<field name="pos"  protected="true">
+<type class="int"/>
+<description>
+The index into buffer where currently positioned.&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.lastLast -->
+<field name="lastLast"  protected="true">
+<type class="int"/>
+<description>
+The second to last character read or -1 if at position 0.&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.last -->
+<field name="last"  protected="true">
+<type class="int"/>
+<description>
+The last character read or -1 if at position 0.&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.current -->
+<field name="current"  protected="true">
+<type class="int"/>
+<description>
+The current character at buffer[position].&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+<!-- javax.baja.ui.text.TextParser.next -->
+<field name="next"  protected="true">
+<type class="int"/>
+<description>
+The next character in the buffer or -1 if we &#xa;      are at the last character in the buffer.&#xa;      This field should NOT be modified by subclasses.
+</description>
+</field>
+
+</class>
+</bajadoc>

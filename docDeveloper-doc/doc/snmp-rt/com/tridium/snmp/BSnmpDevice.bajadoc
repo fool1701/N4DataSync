@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="snmp" runtimeProfile="rt" qualifiedName="com.tridium.snmp.BSnmpDevice" name="BSnmpDevice" packageName="com.tridium.snmp" public="true">
+<description>
+Represents a remote SNMP device that is&#xa; treated as an agent.
+</description>
+<tag name="@author">Robert Adams (Original R2 code)</tag>
+<tag name="@creation">11 Apr 01</tag>
+<tag name="@author">Scott Hoye (Upgraded to R3)</tag>
+<tag name="@creation">21 Nov 02</tag>
+<tag name="@version">$Revision: 2$ $Date: 12/30/02 2:56:14 PM$</tag>
+<tag name="@since">Niagara 3.0 snmp 1.0</tag>
+<extends>
+<type class="com.tridium.snmp.BSnmpNetworkObject"/>
+</extends>
+<implements>
+<type class="javax.baja.driver.util.BIPollable"/>
+</implements>
+<property name="pollFrequency" flags="">
+<type class="javax.baja.driver.util.BPollFrequency"/>
+<description>
+Slot for the &lt;code&gt;pollFrequency&lt;/code&gt; property.&#xa; Poll frequency bucket
+</description>
+<tag name="@see">#getPollFrequency</tag>
+<tag name="@see">#setPollFrequency</tag>
+</property>
+
+<property name="retryCount" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; specifies the number of retries to perform after a null response&#xa; to a SNMP request made to this device.
+</description>
+<tag name="@see">#getRetryCount</tag>
+<tag name="@see">#setRetryCount</tag>
+</property>
+
+<property name="responseTimeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; specifies the maximum time to wait for a response&#xa; after a SNMP request before determining a failure
+</description>
+<tag name="@see">#getResponseTimeout</tag>
+<tag name="@see">#setResponseTimeout</tag>
+</property>
+
+<property name="ipAddress" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;ipAddress&lt;/code&gt; property.&#xa; The IP address of this remote SNMP device.
+</description>
+<tag name="@see">#getIpAddress</tag>
+<tag name="@see">#setIpAddress</tag>
+</property>
+
+<property name="port" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;port&lt;/code&gt; property.&#xa; The remote port on the SNMP device&#xa; where outgoing requests from this station&#xa; are sent.
+</description>
+<tag name="@see">#getPort</tag>
+<tag name="@see">#setPort</tag>
+</property>
+
+<property name="snmpVersion" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;snmpVersion&lt;/code&gt; property.&#xa; The SNMP version to use for communicating&#xa; with this SNMP device.  Only versions 1 and&#xa; 2 are supported.
+</description>
+<tag name="@see">#getSnmpVersion</tag>
+<tag name="@see">#setSnmpVersion</tag>
+</property>
+
+<property name="community" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;community&lt;/code&gt; property.&#xa; The community for SNMP requests&#xa; sent to this SNMP device.
+</description>
+<tag name="@see">#getCommunity</tag>
+<tag name="@see">#setCommunity</tag>
+</property>
+
+<property name="maxVariableBindingsPerRequest" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxVariableBindingsPerRequest&lt;/code&gt; property.&#xa; The maximum number of variable bindings&#xa; to include in an outgoing SNMP request made&#xa; to this SNMP device
+</description>
+<tag name="@see">#getMaxVariableBindingsPerRequest</tag>
+<tag name="@see">#setMaxVariableBindingsPerRequest</tag>
+</property>
+
+<property name="traps" flags="">
+<type class="com.tridium.snmp.alarm.BSnmpAlarmDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;traps&lt;/code&gt; property.&#xa; holds the stored trap types for this SNMP device.&#xa; The generic trap types are automatically included.
+</description>
+<tag name="@see">#getTraps</tag>
+<tag name="@see">#setTraps</tag>
+</property>
+
+<property name="mib" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;mib&lt;/code&gt; property.&#xa; Mib for device - used to specify points for proxys.
+</description>
+<tag name="@see">#getMib</tag>
+<tag name="@see">#setMib</tag>
+</property>
+
+<action name="walkMib" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.snmp.datatypes.BMibListTable"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;walkMib&lt;/code&gt; action.
+</description>
+<tag name="@see">#walkMib(BMibListTable parameter)</tag>
+</action>
+
+</class>
+</bajadoc>

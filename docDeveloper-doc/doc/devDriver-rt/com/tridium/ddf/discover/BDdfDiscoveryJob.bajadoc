@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.discover.BDdfDiscoveryJob" name="BDdfDiscoveryJob" packageName="com.tridium.ddf.discover" public="true">
+<description>
+Discovery objects by default are placed as Niagara AX children directly&#xa; under this. However, if the driver wants to persist the discovery objects&#xa; or place them in another location for any reason, then the discovery&#xa; objects are placed under the discoveryFolder that is identified by the&#xa; discoveryFolder property.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.job.BSimpleJob"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<property name="discoveryFolder" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects,&#xa; In case they are not stored under the job. It is equally valid to&#xa; Store discovery objects on a driver&#x27;s network or device.
+</description>
+<tag name="@see">#getDiscoveryFolder</tag>
+<tag name="@see">#setDiscoveryFolder</tag>
+</property>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob() -->
+<constructor name="BDdfDiscoveryJob" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.getDiscoveryFolder() -->
+<method name="getDiscoveryFolder"  public="true">
+<description>
+Get the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects,&#xa; In case they are not stored under the job. It is equally valid to&#xa; Store discovery objects on a driver&#x27;s network or device.
+</description>
+<tag name="@see">#discoveryFolder</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.setDiscoveryFolder(javax.baja.naming.BOrd) -->
+<method name="setDiscoveryFolder"  public="true">
+<description>
+Set the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects,&#xa; In case they are not stored under the job. It is equally valid to&#xa; Store discovery objects on a driver&#x27;s network or device.
+</description>
+<tag name="@see">#discoveryFolder</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.run(javax.baja.sys.Context) -->
+<method name="run"  public="true">
+<description>
+Descendants should override this method and perform some field-bus communications,&#xa; and populate a list of root-level discovery objects or discovery groups. The discovery&#xa; groups should also be populated with all sub-ordinate discovery groups or discovery&#xa; objects.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.getRootDiscoveryObjects() -->
+<method name="getRootDiscoveryObjects"  public="true">
+<description>
+Gets the root-level BIDiscoveryObjects that this job discovered. By default,&#xa; these are stored under this job in the Niagara AX tree. Descendants can override&#xa; this and pull the roots from a more permanent location such as the driver&#x27;s&#xa; network or device, if necessary, for the driver.
+</description>
+<return>
+<type class="com.tridium.ddf.discover.BIDdfDiscoveryObject" dimension="1"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.clearRootDiscoveryObjects() -->
+<method name="clearRootDiscoveryObjects"  protected="true">
+<description>
+Removes all dynamic properties from under the discovery folder.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.discoveryFolder -->
+<field name="discoveryFolder"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects,&#xa; In case they are not stored under the job. It is equally valid to&#xa; Store discovery objects on a driver&#x27;s network or device.
+</description>
+<tag name="@see">#getDiscoveryFolder</tag>
+<tag name="@see">#setDiscoveryFolder</tag>
+</field>
+
+<!-- com.tridium.ddf.discover.BDdfDiscoveryJob.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

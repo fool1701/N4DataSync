@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.ExecutorUtil" name="ExecutorUtil" packageName="javax.baja.util" public="true" final="true">
+<description>
+Java concurrency &lt;code&gt;<see ref="java.util.concurrent.Executor">java.util.concurrent.Executor</see>&lt;/code&gt; utilities.&#xa; &lt;p&gt;&#xa; Java already comes with a useful set of utility methods in &lt;code&gt;<see ref="java.util.concurrent.Executors">java.util.concurrent.Executors</see>&lt;/code&gt;.&#xa; This class provides some additional utility methods that are missing from the standard Java library.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">java.util.concurrent.Executor</tag>
+<tag name="@see">java.util.concurrent.ExecutorService</tag>
+<tag name="@see">java.util.concurrent.ScheduledExecutorService</tag>
+<tag name="@author">Gareth Johnson on 08/09/2015.</tag>
+<tag name="@since">Niagara 4.1</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.util.ExecutorUtil.shutdown(java.util.concurrent.ExecutorService) -->
+<method name="shutdown"  public="true" static="true">
+<description>
+Shutdown an Executor Service.&#xa; &lt;p&gt;&#xa; This method attempts to shutdown, wait and then forcibly shutdown an&#xa; Executor Service. For more information, see the&#xa; &lt;a href=&#x22;http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html&#x22;&gt;&#xa; Executor Service class comments&lt;/a&gt;.
+</description>
+<parameter name="service">
+<type class="java.util.concurrent.ExecutorService"/>
+<description>
+The Executor Service to shutdown.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.util.ExecutorUtil.newSingleThreadBackgroundExecutor(java.lang.String, long, java.util.concurrent.TimeUnit) -->
+<method name="newSingleThreadBackgroundExecutor"  public="true" static="true">
+<description>
+Return a fixed single threaded Executor Service. The underlying thread will shut itself&#xa; down after a period inactivity. If a task is submitted to the Executor Service&#xa; after the thread and been shutdown, the thread will be created again.&#xa; &lt;p&gt;&#xa; The created Executor Service is useful for services that require a background thread&#xa; that not used too often.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; It&#x27;s important to note that since the underlying thread may be shutdown and then created&#xa; again, the thread&#x27;s id may differ over time.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">#newSingleThreadBackgroundScheduledExecutor(String, long, TimeUnit)</tag>
+<parameter name="threadName">
+<type class="java.lang.String"/>
+<description>
+The name of the thread.
+</description>
+</parameter>
+<parameter name="keepAliveTime">
+<type class="long"/>
+<description>
+The amount of time to keep the thread alive before it&#x27;s shutdown.
+</description>
+</parameter>
+<parameter name="keepAliveUnits">
+<type class="java.util.concurrent.TimeUnit"/>
+<description>
+The units for the keep alive time.
+</description>
+</parameter>
+<return>
+<type class="java.util.concurrent.ExecutorService"/>
+<description>
+A new Executor Service.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.ExecutorUtil.newSingleThreadBackgroundScheduledExecutor(java.lang.String, long, java.util.concurrent.TimeUnit) -->
+<method name="newSingleThreadBackgroundScheduledExecutor"  public="true" static="true">
+<description>
+Return a fixed single threaded Scheduled Executor Service. The underlying thread&#xa; will shut itself down after a period inactivity. If a task is submitted to the&#xa; Executor Service after the thread and been shutdown, the thread will be created again.&#xa; &lt;p&gt;&#xa; The created Scheduled Executor Service is useful for services that require a background thread&#xa; that&#x27;s not used too often.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; It&#x27;s important to note that since the underlying thread may be shutdown and then created&#xa; again, the thread&#x27;s id may differ over time.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">#newSingleThreadBackgroundExecutor(String, long, TimeUnit)</tag>
+<parameter name="threadName">
+<type class="java.lang.String"/>
+<description>
+The name of the thread.
+</description>
+</parameter>
+<parameter name="keepAliveTime">
+<type class="long"/>
+<description>
+The amount of time to keep the thread alive before it&#x27;s shutdown.
+</description>
+</parameter>
+<parameter name="keepAliveUnits">
+<type class="java.util.concurrent.TimeUnit"/>
+<description>
+The units for the keep alive time.
+</description>
+</parameter>
+<return>
+<type class="java.util.concurrent.ScheduledExecutorService"/>
+<description>
+A new Scheduled Executor Service.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.ExecutorUtil.newSingleThreadBackgroundScheduledExecutor(java.lang.String, long, java.util.concurrent.TimeUnit, boolean) -->
+<method name="newSingleThreadBackgroundScheduledExecutor"  public="true" static="true">
+<description>
+Return a fixed single threaded Scheduled Executor Service. The underlying thread&#xa; will shut itself down after a period inactivity. If a task is submitted to the&#xa; Executor Service after the thread has been shutdown, the thread will be created again.&#xa; &lt;p&gt;&#xa; The created Scheduled Executor Service is useful for services that require a background thread&#xa; that&#x27;s not used too often.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; It&#x27;s important to note that since the underlying thread may be shutdown and then created&#xa; again, the thread&#x27;s id may differ over time.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">#newSingleThreadBackgroundExecutor(String, long, TimeUnit)</tag>
+<tag name="@since">Niagara 4.13</tag>
+<parameter name="threadName">
+<type class="java.lang.String"/>
+<description>
+The name of the thread.
+</description>
+</parameter>
+<parameter name="keepAliveTime">
+<type class="long"/>
+<description>
+The amount of time to keep the thread alive before it&#x27;s shutdown.
+</description>
+</parameter>
+<parameter name="keepAliveUnits">
+<type class="java.util.concurrent.TimeUnit"/>
+<description>
+The units for the keep alive time.
+</description>
+</parameter>
+<parameter name="isDaemon">
+<type class="boolean"/>
+<description>
+specifies the value for the call to &lt;code&gt;<see ref="java.lang.Thread#setDaemon(boolean)">Thread#setDaemon(boolean)</see>&lt;/code&gt; on each&#xa;                 thread created by the returned Executor.
+</description>
+</parameter>
+<return>
+<type class="java.util.concurrent.ScheduledExecutorService"/>
+<description>
+A new Scheduled Executor Service.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

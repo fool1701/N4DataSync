@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver" name="ClientSideVideoReceiver" packageName="com.tridium.videoDriver.videoStream.fox" public="true">
+<description>
+The ClientSideVideoReceiver reads video frames from the fox video circuit&#xa; that exists between a Workbench client and a station server. This reads&#xa; video frames from the circuit and stuffs the video packets into the correct&#xa; ClientVideoInputStream object for the particular video stream.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 14, 2008</tag>
+<extends>
+<type class="java.lang.Thread"/>
+</extends>
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver(com.tridium.videoDriver.videoStream.fox.BFoxVideoChannel, java.lang.String, javax.baja.sys.BInteger) -->
+<constructor name="ClientSideVideoReceiver" protected="true">
+<parameter name="foxVideoChannel">
+<type class="com.tridium.videoDriver.videoStream.fox.BFoxVideoChannel"/>
+<description>
+this is a reference to the BFoxVideoChannel whose&#xa; client-side openVideoStream method is calling this method.
+</description>
+</parameter>
+<parameter name="videoClient">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="videoClientId">
+<type class="javax.baja.sys.BInteger"/>
+<description>
+this is the unique integer that identifies this&#xa; Workbench client from the perspective of the station
+</description>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+if any Exception occurs while this constructor is&#xa; executing, including, but not limited to exceptiosn that might occur&#xa; while attempting Fox communication.
+</description>
+</throws>
+<description>
+One instance of this is created by BFoxVideoChannel&#x27;s client-side&#xa; openVideoStream method when the first Fox Video Stream is established.&#xa; This constructor handles the fox handshakes needed to establish the circuit&#xa; with StationSideVideoCoordinator.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver() -->
+<constructor name="ClientSideVideoReceiver" protected="true">
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+<description>
+This empty constructor exists for future compatibility
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.getVideoClientId() -->
+<method name="getVideoClientId"  public="true">
+<description>
+Gets the videoClientId, which uniquely identifies the Workbench client&#xa; for this instance. The videoClientId is unique within the corresponding&#xa; station server.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the videoClientId
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.getInputStream(int, com.tridium.videoDriver.videoStream.IVideoDestination, com.tridium.videoDriver.videoStream.fox.FoxVideoStream) -->
+<method name="getInputStream"  public="true">
+<description>
+Gets a ClientVideoInputStream, which is a custom type of java.io.InputStream,&#xa; that will be filled with bytes for a particular video feed. This method&#xa; is called from the client-side &#x27;openVideoStream&#x27; method on the BFoxVideoChannel.
+</description>
+<parameter name="videoStreamId">
+<type class="int"/>
+<description>
+an int that uniquely identifies the particular video stream&#xa; within the Workbench client.
+</description>
+</parameter>
+<parameter name="videoDestination">
+<type class="com.tridium.videoDriver.videoStream.IVideoDestination"/>
+</parameter>
+<parameter name="foxVideoStream">
+<type class="com.tridium.videoDriver.videoStream.fox.FoxVideoStream"/>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.videoStream.fox.ClientVideoInputStream"/>
+<description>
+the ClientVideoInputStream for the given, unique video stream id.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.isDone() -->
+<method name="isDone"  public="true">
+<description>
+Indicates whether this ClientSideVideoReceiver&#x27;s thread has terminated.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if this object&#x27;s thread has terminated.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.startVideoReceiver() -->
+<method name="startVideoReceiver"  public="true">
+<description>
+Starts this object&#x27;s thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.stopVideoReceiver() -->
+<method name="stopVideoReceiver"  public="true">
+<description>
+Stops this object&#x27;s thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.readVideoFrameMessage() -->
+<method name="readVideoFrameMessage"  protected="true">
+<description>
+Reads a FoxMessage from the circuit.
+</description>
+<return>
+<type class="com.tridium.fox.message.FoxMessage"/>
+<description>
+the next FoxMessage from the circuit
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.dispatchTimeout(com.tridium.fox.message.FoxMessage) -->
+<method name="dispatchTimeout"  protected="true">
+<description/>
+<parameter name="videoFrameFromStation">
+<type class="com.tridium.fox.message.FoxMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.dispatchVideoFrameChunk(com.tridium.fox.message.FoxMessage) -->
+<method name="dispatchVideoFrameChunk"  protected="true">
+<description>
+This method is called by the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver#dispatch(com.tridium.fox.message.FoxMessage)">#dispatch(FoxMessage)</see>&lt;/code&gt; method when it&#xa; receives a FoxMessage whose &#x27;msgType&#x27; is &#x27;videoFrameData&#x27;
+</description>
+<parameter name="videoFrameFromStation">
+<type class="com.tridium.fox.message.FoxMessage"/>
+<description>
+the FoxMessage that was just received whose&#xa; &#x27;msgType&#x27; is &#x27;videoFrameData&#x27;
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.dispatch(com.tridium.fox.message.FoxMessage) -->
+<method name="dispatch"  protected="true">
+<description>
+This method is called from this thread&#x27;s &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver#run()">#run()</see>&lt;/code&gt; method.
+</description>
+<parameter name="videoFrameFromStation">
+<type class="com.tridium.fox.message.FoxMessage"/>
+<description>
+the FoxMessage that this thread&#x27;s &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver#run()">#run()</see>&lt;/code&gt;&#xa; method has just read from the fox circuit.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.clientVideoInputStreamClosed(com.tridium.videoDriver.videoStream.fox.ClientVideoInputStream) -->
+<method name="clientVideoInputStreamClosed"  public="true">
+<description>
+Cleans up the given ClientVideoInputStream from the internal&#xa; hash table and then sends a request through the fox video&#xa; channel asking the station server to close the video stream&#xa; on its end.&#xa; &#xa; This is called by the ClientVideoInputStream.close method.
+</description>
+<parameter name="clientIn">
+<type class="com.tridium.videoDriver.videoStream.fox.ClientVideoInputStream"/>
+<description>
+a reference to the ClientVideoInputStream that&#xa; is calling this method.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.run() -->
+<method name="run"  public="true">
+<description>
+This is the independent execution point for this thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.getFoxVideoChannel() -->
+<method name="getFoxVideoChannel"  public="true">
+<description>
+Gets the fox video channel for this instance of ClientSideVideoReceiver.
+</description>
+<return>
+<type class="com.tridium.videoDriver.videoStream.fox.BFoxVideoChannel"/>
+<description>
+the fox video channel for this instance of ClientSideVideoReceiver.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.log -->
+<field name="log"  protected="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.running -->
+<field name="running"  protected="true">
+<type class="boolean"/>
+<description>
+This is used internally as necessary to gracefully stop this thread&#x27;s&#xa; execution.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.done -->
+<field name="done"  protected="true">
+<type class="boolean"/>
+<description>
+This is used internally to track whether this thread is indeed currently&#xa; executing.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.foxVideoChannel -->
+<field name="foxVideoChannel"  protected="true">
+<type class="com.tridium.videoDriver.videoStream.fox.BFoxVideoChannel"/>
+<description>
+This is the fox video channel that is passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.videoClientId -->
+<field name="videoClientId"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the video client id that is passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.foxCircuit -->
+<field name="foxCircuit"  protected="true">
+<type class="com.tridium.fox.session.FoxCircuit"/>
+<description>
+This is the FoxCircuit that is established in the constructor.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver.videoPlayerStreams -->
+<field name="videoPlayerStreams"  protected="true">
+<type class="javax.baja.nre.util.IntHashMap"/>
+<description>
+This maps a ClientSideInputStream object to each unique video stream id&#xa; within the client Workbench.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.ClientSideVideoReceiver._256KB -->
+<field name="_256KB"  public="true" static="true" final="true">
+<type class="long"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

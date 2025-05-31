@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.SlotCursor" name="SlotCursor" packageName="javax.baja.sys" public="true" interface="true" abstract="true" category="interface">
+<description>
+Cursor are used to iterate through a BObject&#x27;s &#xa; slots, properties, actions, or topics.
+</description>
+<tag name="@author">Brian Frank</tag>
+<implements>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.sys.BValue"/>
+</args>
+</parameterizedType>
+</implements>
+<implements>
+<parameterizedType class="java.lang.Iterable">
+<args>
+<typeVariable class="S"/>
+</args>
+</parameterizedType>
+</implements>
+<typeParameters>
+<typeVariable class="S">
+<bounds>
+<type class="javax.baja.sys.Slot"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<!-- javax.baja.sys.SlotCursor.target() -->
+<method name="target"  public="true" abstract="true">
+<description>
+Get the target which the cursor is iterating upon.&#xa; This is always the object which is the parent of the&#xa; current slot and property value.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.nextObject() -->
+<method name="nextObject"  public="true" abstract="true">
+<description>
+This is special implementation of next() which is only &#xa; applicable when iterating through properties.  It &#xa; automatically skips any properties which do not have &#xa; a type access of Slot.BOBJECT_TYPE.  This allows iteration &#xa; without the need for wrapper object allocation.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.nextComponent() -->
+<method name="nextComponent"  public="true" abstract="true">
+<description>
+This is a convenience method which is semantically equivalent to &lt;code&gt;next(BComponent.class)&lt;/code&gt;
+</description>
+<tag name="@see">#next(Class)</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.next(java.lang.Class&lt;?&gt;) -->
+<method name="next"  public="true" abstract="true">
+<description>
+This is a convenience method to iterate the cursor until the current value is an instance&#xa; of the given class.
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.slot() -->
+<method name="slot"  public="true" abstract="true">
+<description>
+Get the cursor&#x27;s current slot.&#xa; This really should return S, but this is incompatable with the implementations of TopicCursor and ActionCursor&#xa; which can sometimes return an NProperty (which is a Slot, but not a Topic or Action)
+</description>
+<return>
+<typeVariable class="S"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.property() -->
+<method name="property"  public="true" abstract="true">
+<description>
+Get the cursor&#x27;s current slot as a Property.  This method is &#xa; semantically equivalent to &lt;code&gt;slot().asProperty()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.action() -->
+<method name="action"  public="true" abstract="true">
+<description>
+Get the cursor&#x27;s current slot as an Action.  This method is&#xa; semantically equivalent to &lt;code&gt;slot().asAction()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.topic() -->
+<method name="topic"  public="true" abstract="true">
+<description>
+Get the cursor&#x27;s current slot as a Topic.  This method is&#xa; semantically equivalent to &lt;code&gt;slot().asTopic()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.Topic"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.getTypeAccess() -->
+<method name="getTypeAccess"  public="true" abstract="true">
+<description>
+If the cursor is positioned on a Property, then  return the &#xa; Property&#x27;s type access constant.  This method is semantically&#xa; equivalent to &lt;code&gt;slot().asProperty().getTypeAccess().&lt;/code&gt;
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.getBoolean() -->
+<method name="getBoolean"  public="true" abstract="true">
+<description>
+Get current value as a boolean.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.getInt() -->
+<method name="getInt"  public="true" abstract="true">
+<description>
+Get current value as an int.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.getLong() -->
+<method name="getLong"  public="true" abstract="true">
+<description>
+Get current value as a long.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.getFloat() -->
+<method name="getFloat"  public="true" abstract="true">
+<description>
+Get current value as a float.
+</description>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.getDouble() -->
+<method name="getDouble"  public="true" abstract="true">
+<description>
+Get current value as a double.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.getString() -->
+<method name="getString"  public="true" abstract="true">
+<description>
+Get current value as a String.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.get() -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get the object at the current cursor position.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.iterator() -->
+<method name="iterator"  public="true" default="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<typeVariable class="S"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.spliterator() -->
+<method name="spliterator"  public="true" default="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<parameterizedType class="java.util.Spliterator">
+<args>
+<typeVariable class="S"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.SlotCursor.stream() -->
+<method name="stream"  public="true" default="true">
+<description>
+Returns a Stream for the Cursor.
+</description>
+<return>
+<parameterizedType class="java.util.stream.Stream">
+<args>
+<typeVariable class="S"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+</class>
+</bajadoc>

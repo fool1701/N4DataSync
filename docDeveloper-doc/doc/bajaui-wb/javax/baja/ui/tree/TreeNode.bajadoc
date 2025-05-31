@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.tree.TreeNode" name="TreeNode" packageName="javax.baja.ui.tree" public="true" abstract="true">
+<description>
+TreeNode is the model for a single node in the BTree.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">04 Dec 2000</tag>
+<tag name="@version">$Revision: 34$ $Date: 6/20/11 9:34:25 AM EDT$</tag>
+<tag name="@since">Niagara 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.ui.tree.TreeNode(javax.baja.ui.tree.TreeModel, javax.baja.ui.tree.TreeNode) -->
+<constructor name="TreeNode" public="true">
+<parameter name="model">
+<type class="javax.baja.ui.tree.TreeModel"/>
+</parameter>
+<parameter name="parent">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<description>
+Create a root node for the specified tree model and parent.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.tree.TreeNode(javax.baja.ui.tree.TreeModel) -->
+<constructor name="TreeNode" public="true">
+<parameter name="model">
+<type class="javax.baja.ui.tree.TreeModel"/>
+</parameter>
+<description>
+Create a root node for the specified model.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.tree.TreeNode(javax.baja.ui.tree.TreeNode) -->
+<constructor name="TreeNode" public="true">
+<parameter name="parent">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<description>
+Create a tree node with the specified parent.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.tree.TreeNode.getModel() -->
+<method name="getModel"  public="true">
+<description/>
+<return>
+<type class="javax.baja.ui.tree.TreeModel"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getTree() -->
+<method name="getTree"  public="true">
+<description>
+Get the tree that contains this node.
+</description>
+<return>
+<type class="javax.baja.ui.tree.BTree"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getShell() -->
+<method name="getShell"  public="true">
+<description>
+Convenience for getTree().getShell().
+</description>
+<return>
+<type class="javax.baja.ui.BWidgetShell"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getText() -->
+<method name="getText"  public="true" abstract="true">
+<description>
+Get the name of the tree node.  This will be the string displayed&#xa; in the tree.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.toString() -->
+<method name="toString"  public="true">
+<description>
+Get a string for this node.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getIcon() -->
+<method name="getIcon"  public="true" abstract="true">
+<description>
+Get the icon for the tree node.  The icon should be no larger&#xa; than 16x16 pixels.
+</description>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.isLeaf() -->
+<method name="isLeaf"  public="true">
+<description>
+Is the node a leaf node in the tree?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.hasChildren() -->
+<method name="hasChildren"  public="true">
+<description>
+Does this node have any children?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getChildCount() -->
+<method name="getChildCount"  public="true" abstract="true">
+<description>
+Get the number of children for this node.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getChild(int) -->
+<method name="getChild"  public="true" abstract="true">
+<description>
+Get the child at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.tree.TreeNode"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getChildIndex(javax.baja.ui.tree.TreeNode) -->
+<method name="getChildIndex"  public="true">
+<description>
+Get the index of the specified child of this node.
+</description>
+<parameter name="child">
+<type class="javax.baja.ui.tree.TreeNode"/>
+<description>
+The child at the returned index.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+Returns the index of the specified child.  If the&#xa;   node is not a child of this node, then -1 is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getSubject() -->
+<method name="getSubject"  public="true">
+<description>
+Get the subject of this node.  This object is used to&#xa; map the selection to a Subject instance.  The default&#xa; returns &lt;code&gt;getText()&lt;/code&gt;, but this method should&#xa; usually be overridden.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getParent() -->
+<method name="getParent"  public="true">
+<description>
+Get the parent of this node.  If this node is a root, null should&#xa; be returned.
+</description>
+<return>
+<type class="javax.baja.ui.tree.TreeNode"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.isDescendantOf(javax.baja.ui.tree.TreeNode) -->
+<method name="isDescendantOf"  public="true">
+<description>
+Is this node a descendant of the specified node?
+</description>
+<parameter name="ancestor">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getPathFromRoot() -->
+<method name="getPathFromRoot"  public="true">
+<description>
+Get the path of this tree node starting from the root.
+</description>
+<return>
+<type class="javax.baja.ui.tree.TreeNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.isValid() -->
+<method name="isValid"  public="true">
+<description>
+Make sure this node is still a valid member of the tree.  This&#xa; checks up the ancestry and back down to make sure all parent&#xa; child links are still intact.  It also verifies that the&#xa; root ancestor of this node is still a root in the tree.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.setExpanded(boolean) -->
+<method name="setExpanded"  public="true" final="true">
+<description>
+Set the expanded state of this node.
+</description>
+<parameter name="expanded">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.isExpanded() -->
+<method name="isExpanded"  public="true" final="true">
+<description>
+Test the expanded state of this node.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.expanded() -->
+<method name="expanded"  public="true">
+<description>
+Callback when the node is expanded.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.collapsed() -->
+<method name="collapsed"  public="true">
+<description>
+Callback when the node is collapsed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.isSelected() -->
+<method name="isSelected"  public="true">
+<description>
+Test the selected state of this node.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.setSelected(boolean) -->
+<method name="setSelected"  public="true">
+<description>
+Set the selected state of this node.
+</description>
+<parameter name="s">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.hasFocus() -->
+<method name="hasFocus"  public="true">
+<description>
+Test the focus state of this node.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.isMouseOver() -->
+<method name="isMouseOver"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.setMouseOver(boolean) -->
+<method name="setMouseOver"  public="true">
+<description/>
+<parameter name="over">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getX() -->
+<method name="getX"  public="true">
+<description>
+Get the x location of this node.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getY() -->
+<method name="getY"  public="true">
+<description>
+Get the y location of this node.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.inExpander(double, double) -->
+<method name="inExpander"  public="true">
+<description>
+Is the specified location in the expander for this node.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.isSelection(double, double) -->
+<method name="isSelection"  public="true">
+<description>
+Is the specified location in the selection bounds for this node.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.TreeNode.getWidth() -->
+<method name="getWidth"  public="true">
+<description>
+Get the width of this node including the expander, icon, and text.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="basicDriver" runtimeProfile="rt" qualifiedName="com.tridium.basicdriver.util.BBasicUnsolicitedReceive" name="BBasicUnsolicitedReceive" packageName="com.tridium.basicdriver.util" public="true" abstract="true">
+<description>
+The receive handler for processing unsolicited received messages.&#xa; By default, this handler is not &#x22;hooked-up&#x22; in basic driver. Not&#xa; all drivers will need to process unsolicited messages. However,&#xa; those that do, will need to process them in a customized fashion.&#xa; Therefore, this class cannot quite do all of the work. However, it&#xa; does handle queueing them up and processing them on its own thread.&#xa;&#xa; The driver developer needs to follow these steps to hook this into&#xa; their driver:&#xa;&#xa; 1. Make a class that extends this class.&#xa;    - Descendant class name should start with a &#x27;B&#x27;&#xa;    - Descendant class needs declared in driver&#x27;s module-include.xml&#xa;    - Implement the method processUnsolicitedMessage(ReceivedMessage)&#xa;      and handle the unsolicited messages in a manner that satisfies&#xa;      the requirements of the driver.&#xa;&#xa; 2. Add a slot to the driver&#x27;s network whose slot type is the same as&#xa;    the descendant class created in step 1.&#xa;    - Since this is a BComponent, it already gets the started and stopped&#xa;      callbacks. No further set-up is required to &#x22;hook it up.&#x22;&#xa;&#xa; 3. That&#x27;s it!
+</description>
+<tag name="@author">Andy Saunders (Original R2 code)</tag>
+<tag name="@creation">29 Feb 00</tag>
+<tag name="@author">Lenard Perkins (Moved Into BasicDriver)</tag>
+<tag name="@creation">04 Apr 05</tag>
+<tag name="@version">$Revision: 1$ $Date: 11/13/02 12:47:14 PM$</tag>
+<tag name="@since">Niagara 3.0 andi 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<implements>
+<type class="com.tridium.basicdriver.UnsolicitedMessageListener"/>
+</implements>
+<property name="unsolicitedMessageCount" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#getUnsolicitedMessageCount</tag>
+<tag name="@see">#setUnsolicitedMessageCount</tag>
+</property>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive() -->
+<constructor name="BBasicUnsolicitedReceive" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.getUnsolicitedMessageCount() -->
+<method name="getUnsolicitedMessageCount"  public="true">
+<description>
+Get the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#unsolicitedMessageCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.setUnsolicitedMessageCount(int) -->
+<method name="setUnsolicitedMessageCount"  public="true">
+<description>
+Set the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#unsolicitedMessageCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.started() -->
+<method name="started"  public="true">
+<description>
+Callback from BComponenet
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.stopped() -->
+<method name="stopped"  public="true">
+<description>
+Callback from BComponenet
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+Callback from BComponenet
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.run() -->
+<method name="run"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.processUnsolicitedMessage(com.tridium.basicdriver.message.ReceivedMessage) -->
+<method name="processUnsolicitedMessage"  protected="true" abstract="true">
+<description>
+Process the unsolicited message. This must be overridden&#xa; by subclasses in order to customize the behavior.
+</description>
+<parameter name="unsolicitedMsg">
+<type class="com.tridium.basicdriver.message.ReceivedMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.getUnsolicitedListenerCode() -->
+<method name="getUnsolicitedListenerCode"  public="true">
+<description>
+Returns an unsolicited listener code object associated with&#xa; this listener to use for matching unsolicited received messages&#xa; that should be routed to this listener.&#xa;&#xa; This method is called by BasicDriver&#x27;s Comm object. The hash code of the return&#xa; value from this method should match the return code from the corresponding method&#xa; on the driver&#x27;s ReceivedMessage.&#xa;&#xa; BasicDriver is allowing for different handlers to process diffrerent&#xa; types of unsolicited messages. Therefore, in theory, the driver could&#xa; have multiple BBasicUnsolicitedReceive components under the network. The&#xa; Comm handler will route an unsolicited ReceivedMessage to the handler that&#xa; returns the same unsolicited listener code.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.receiveMessage(com.tridium.basicdriver.message.ReceivedMessage) -->
+<method name="receiveMessage"  public="true">
+<description>
+Access point called by the BasicDriver Comm API to place&#xa; unsolicited messages on the UnsolicitedMessages queue.
+</description>
+<parameter name="message">
+<type class="com.tridium.basicdriver.message.ReceivedMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.unsolicitedMessageCount -->
+<field name="unsolicitedMessageCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;unsolicitedMessageCount&lt;/code&gt; property.&#xa; This is the number of unsolicited messages that have been received by the driver since station startup
+</description>
+<tag name="@see">#getUnsolicitedMessageCount</tag>
+<tag name="@see">#setUnsolicitedMessageCount</tag>
+</field>
+
+<!-- com.tridium.basicdriver.util.BBasicUnsolicitedReceive.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

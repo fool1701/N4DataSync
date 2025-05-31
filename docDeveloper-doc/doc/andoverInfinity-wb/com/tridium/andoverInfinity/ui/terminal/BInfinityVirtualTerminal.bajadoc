@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="wb" qualifiedName="com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal" name="BInfinityVirtualTerminal" packageName="com.tridium.andoverInfinity.ui.terminal" public="true">
+<description>
+BInfinityVirtualTerminal - This view provides the user with&#xa; view into the VT100 interface of the infinity network.&#xa; It converts the VT100 data into color text for display, mapping&#xa; the VT100 text attributes Normal/Reverse/Bold and graphics characters&#xa; into corresponding color text in the BTextPane.  Uses custom&#xa; text controller (InfinityVt100TextController), custom text model&#xa; (InfinityVt100TextModel), and custom text parser (InfinityVt100TextParser)&#xa; plug-ins.
+</description>
+<tag name="@author">Clif Turman on 3/29/2007</tag>
+<tag name="@since">Niagara 3.2.10</tag>
+<extends>
+<type class="javax.baja.workbench.view.BWbComponentView"/>
+</extends>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.Vt100Const"/>
+</implements>
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal() -->
+<constructor name="BInfinityVirtualTerminal" public="true">
+<description>
+Constructor
+</description>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.doLoadValue(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="doLoadValue"  public="true">
+<description>
+This the override method used to populate the&#xa; editor&#x27;s state based on the specified value.  This&#xa; refreshes the terminal view by causing a refresh command&#xa; to be sent to the field panel, with the result that the&#xa; panel will resend all of its lines back to this view side.
+</description>
+<tag name="@see">javax.baja.workbench.BWbEditor#doLoadValue(javax.baja.sys.BObject, javax.baja.sys.Context)</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.deactivated() -->
+<method name="deactivated"  public="true">
+<description>
+Deactivated is called when the view is&#xa; being unloaded from the BWbShell.  In this case, we need to&#xa; kill the thread which monitors changes in the screen buffer
+</description>
+<tag name="@see">javax.baja.workbench.view.BWbView#deactivated()</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.exec(java.lang.String) -->
+<method name="exec"  public="true">
+<description>
+Handle keystrokes received from the text controller by sending&#xa; them to the station side
+</description>
+<parameter name="cmd">
+<type class="java.lang.String"/>
+<description>
+is a string of keystrokes received from the text controller
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.handleComponentEvent(javax.baja.sys.BComponentEvent) -->
+<method name="handleComponentEvent"  public="true">
+<description>
+Handle an event received from the station side.  This event may&#xa; contain data to be displayed, or may be a signal to coordinate&#xa; backup/restore modes on station/client sides.
+</description>
+<tag name="@see">javax.baja.workbench.view.BWbComponentView#handleComponentEvent(javax.baja.sys.BComponentEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.repaintBuffer() -->
+<method name="repaintBuffer"  protected="true">
+<description>
+Refresh the model with new lines and line formats, and move the caret to a new position
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.toFilePath(javax.baja.naming.BOrd) -->
+<method name="toFilePath"  public="true" static="true">
+<description>
+Convert a BOrd into a FilePath
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+to convert to a FilePath
+</description>
+</parameter>
+<return>
+<type class="javax.baja.file.FilePath"/>
+<description>
+FilePath of supplied BOrd
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.getCaretPosition() -->
+<method name="getCaretPosition"  public="true">
+<description>
+Get the &lt;code&gt;Position&lt;/code&gt; of the screen buffer
+</description>
+<return>
+<type class="javax.baja.ui.text.Position"/>
+<description>
+the caretPosition
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

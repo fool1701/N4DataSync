@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.BIOrionApp" name="BIOrionApp" packageName="com.tridium.orion" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIOrionApp is a service that manages data in the Orion database.&#xa; The BIOrionApp boot process is as follows:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Register the BIOrionApp in serviceStarted().  &#xa; &lt;li&gt;Implement getOrionTypes() to return the types that are stored&#xa;    in the database.&#xa; &lt;li&gt;Implement orionReady() to receive notification when the Orion&#xa;    database is ready for access.&#xa; &lt;/ol&gt;&#xa; &lt;p&gt;&#xa; An application can also interrogate the ready state of the Orion&#xa; database using the isOrionReady() method on BOrionService.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">13 Nov 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<!-- com.tridium.orion.BIOrionApp.getOrionTypes() -->
+<method name="getOrionTypes"  public="true" abstract="true">
+<description>
+Get the types that are owned by this app.
+</description>
+<return>
+<type class="com.tridium.orion.OrionType" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionApp.orionReady(com.tridium.orion.BOrionDatabase) -->
+<method name="orionReady"  public="true" abstract="true">
+<description>
+Receive notification that the orion database&#xa; is ready for access.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionApp.getSchemaVersion() -->
+<method name="getSchemaVersion"  public="true" abstract="true">
+<description>
+Get this app&#x27;s current schema version.
+</description>
+<return>
+<type class="com.tridium.orion.BSchemaVersion"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionApp.performSchemaUpgrade(com.tridium.orion.BLocalOrionDatabase, com.tridium.orion.BSchemaVersion) -->
+<method name="performSchemaUpgrade"  public="true" abstract="true">
+<description>
+Upgrade an outdated database schema so that it matches the current schema.&#xa; &#xa; This method should be invoked only by the orion database during initialization.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BLocalOrionDatabase"/>
+</parameter>
+<parameter name="oldVersion">
+<type class="com.tridium.orion.BSchemaVersion"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.orion.BIOrionApp.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

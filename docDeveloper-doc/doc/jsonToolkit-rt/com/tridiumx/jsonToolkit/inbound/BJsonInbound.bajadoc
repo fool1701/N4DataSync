@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.inbound.BJsonInbound" name="BJsonInbound" packageName="com.tridiumx.jsonToolkit.inbound" public="true" abstract="true">
+<description>
+Base class for all incoming json routers/handlers/selectors etc&#xa; &lt;p&gt;&#xa; Introduces the route method defined in subclasses
+</description>
+<tag name="@author">Jason Woollard</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="com.tridiumx.jsonToolkit.util.JsonKeyExtractUtil"/>
+</implements>
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="lastResult" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lastResult&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastResult</tag>
+<tag name="@see">#setLastResult</tag>
+</property>
+
+<property name="lastResultTime" flags="rt">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastResultTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastResultTime</tag>
+<tag name="@see">#setLastResultTime</tag>
+</property>
+
+<property name="lastInput" flags="rtN">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lastInput&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastInput</tag>
+<tag name="@see">#setLastInput</tag>
+</property>
+
+<property name="status" flags="rtN">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<action name="route" flags="sAa">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;route&lt;/code&gt; action.
+</description>
+<tag name="@see">#route(BString parameter)</tag>
+</action>
+
+<action name="runLastInput" flags="A">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;runLastInput&lt;/code&gt; action.
+</description>
+<tag name="@see">#runLastInput()</tag>
+</action>
+
+<action name="clearOutputs" flags="A">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;clearOutputs&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearOutputs()</tag>
+</action>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound() -->
+<constructor name="BJsonInbound" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getLastResult() -->
+<method name="getLastResult"  public="true">
+<description>
+Get the &lt;code&gt;lastResult&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastResult</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.setLastResult(java.lang.String) -->
+<method name="setLastResult"  public="true">
+<description>
+Set the &lt;code&gt;lastResult&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastResult</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getLastResultTime() -->
+<method name="getLastResultTime"  public="true">
+<description>
+Get the &lt;code&gt;lastResultTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastResultTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.setLastResultTime(javax.baja.sys.BAbsTime) -->
+<method name="setLastResultTime"  public="true">
+<description>
+Set the &lt;code&gt;lastResultTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastResultTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getLastInput() -->
+<method name="getLastInput"  public="true">
+<description>
+Get the &lt;code&gt;lastInput&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastInput</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.setLastInput(java.lang.String) -->
+<method name="setLastInput"  public="true">
+<description>
+Set the &lt;code&gt;lastInput&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastInput</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.route(javax.baja.sys.BString) -->
+<method name="route"  public="true">
+<description>
+Invoke the &lt;code&gt;route&lt;/code&gt; action.
+</description>
+<tag name="@see">#route</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.runLastInput() -->
+<method name="runLastInput"  public="true">
+<description>
+Invoke the &lt;code&gt;runLastInput&lt;/code&gt; action.
+</description>
+<tag name="@see">#runLastInput</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.clearOutputs() -->
+<method name="clearOutputs"  public="true">
+<description>
+Invoke the &lt;code&gt;clearOutputs&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearOutputs</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getRerunTriggers() -->
+<method name="getRerunTriggers"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+<description>
+an array of properties whose change will trigger a re-route using the last input value.
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.doRoute(javax.baja.sys.BString, javax.baja.sys.Context) -->
+<method name="doRoute"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="string">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.routeValue(javax.baja.sys.BString, javax.baja.sys.Context) -->
+<method name="routeValue"  protected="true" abstract="true">
+<description/>
+<parameter name="message">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="com.tridiumx.jsonToolkit.inbound.routing.RoutingFailedException"/>
+</throws>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.doRunLastInput(javax.baja.sys.Context) -->
+<method name="doRunLastInput"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Allows the last received String to be &#x22;reconsidered&#x22; without toggling&#xa; to potentially undesired value
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+Current Context
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.doClearOutputs() -->
+<method name="doClearOutputs"  public="true">
+<description>
+Reset all slots which contain results or outputs.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.implOutputsToClear() -->
+<method name="implOutputsToClear"  protected="true" abstract="true">
+<description>
+Define any slots which should be defaulted by the clearOutputs action.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+<description>
+a list of slots which should be defaulted by the clearOutputs action.
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.processRouterExt(javax.baja.sys.BString) -->
+<method name="processRouterExt"  protected="true">
+<description>
+May be called during routeValue to allow processing of &lt;code&gt;<see ref="com.tridiumx.jsonToolkit.inbound.routing.ext.BRouterExt">BRouterExt</see>&lt;/code&gt; placed&#xa; under this Handler.
+</description>
+<parameter name="message">
+<type class="javax.baja.sys.BString"/>
+<description>
+The json payload to process
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.routingFailed(java.lang.String, java.lang.String, java.lang.Exception) -->
+<method name="routingFailed"  protected="true">
+<description/>
+<parameter name="payload">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="reason">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="e">
+<type class="java.lang.Exception"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.&lt;T&gt;runJsonPathQuery(java.lang.String, java.lang.String, java.lang.Class&lt;T&gt;) -->
+<method name="runJsonPathQuery"  protected="true">
+<typeParameters>
+<typeVariable class="T">
+</typeVariable>
+</typeParameters>
+<description/>
+<parameter name="message">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="query">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="type">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<typeVariable class="T"/>
+</return>
+<throws>
+<type class="com.tridiumx.jsonToolkit.inbound.routing.RoutingFailedException"/>
+</throws>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.lastResult -->
+<field name="lastResult"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastResult&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastResult</tag>
+<tag name="@see">#setLastResult</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.lastResultTime -->
+<field name="lastResultTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastResultTime&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastResultTime</tag>
+<tag name="@see">#setLastResultTime</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.lastInput -->
+<field name="lastInput"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastInput&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastInput</tag>
+<tag name="@see">#setLastInput</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.route -->
+<field name="route"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;route&lt;/code&gt; action.
+</description>
+<tag name="@see">#route(BString parameter)</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.runLastInput -->
+<field name="runLastInput"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;runLastInput&lt;/code&gt; action.
+</description>
+<tag name="@see">#runLastInput()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.clearOutputs -->
+<field name="clearOutputs"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;clearOutputs&lt;/code&gt; action.
+</description>
+<tag name="@see">#clearOutputs()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.MESSAGE_ROUTED -->
+<field name="MESSAGE_ROUTED"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.LOG -->
+<field name="LOG"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.inbound.BJsonInbound.NO_PROPERTIES -->
+<field name="NO_PROPERTIES"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property" dimension="1"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

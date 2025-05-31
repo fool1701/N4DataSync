@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devIpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfIp.tcp.comm.TcpSocketManager" name="TcpSocketManager" packageName="com.tridium.ddfIp.tcp.comm" public="true">
+<description/>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager(com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator) -->
+<constructor name="TcpSocketManager" public="true">
+<parameter name="tcpComm">
+<type class="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.isTraceOn() -->
+<method name="isTraceOn"  protected="true">
+<description>
+Defines whether or not extra trace information should be printed&#xa; to the station stdout.&#xa;&#xa; This method was limited to package prive access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.startSocketManager() -->
+<method name="startSocketManager"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.isConnected() -->
+<method name="isConnected"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Indicates whether or not the socket manager currently has&#xa; an open, client socket connection to the field-device or server.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.switchState(int) -->
+<method name="switchState"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Changes the internal state of the socket manager. Valid&#xa; states are &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_GOT_SOCKET">#STATE_GOT_SOCKET</see>&lt;/code&gt;, &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_IDLE">#STATE_IDLE</see>&lt;/code&gt;,&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt;.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<parameter name="newState">
+<type class="int"/>
+<description>
+the new state
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.stopSocketManager() -->
+<method name="stopSocketManager"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.doIdle() -->
+<method name="doIdle"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This is implementation of the idle state.  This method is called&#xa; by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; method if the internal state is&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_IDLE">#STATE_IDLE</see>&lt;/code&gt;&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.finiteStateMachine() -->
+<method name="finiteStateMachine"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called in a continuous loop on the socket maanager&#x27;s&#xa; own thread.&#xa;&#xa; It essentially checks the internal state and either calls&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#doIdle()">#doIdle()</see>&lt;/code&gt;, &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#initSocketConnection()">#initSocketConnection()</see>&lt;/code&gt;, or&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessage()">#readMessage()</see>&lt;/code&gt;.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.getPrefix() -->
+<method name="getPrefix"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.trace(java.lang.String) -->
+<method name="trace"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called throughout various locations in this class&#xa; to print trace text to the station standard output. It is usually&#xa; only called if the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#isTraceOn()">#isTraceOn()</see>&lt;/code&gt; method returns true.&#xa;&#xa; Subclasses may override this method to customize each individual&#xa; line of trace that is printed to the station stdout.&#xa;&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<parameter name="details">
+<type class="java.lang.String"/>
+<description>
+the text to print to the station stdout as a trace.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.getLog() -->
+<method name="getLog"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This gets a reference to the log object that is used to&#xa; print information to standard output or log errors in the&#xa; station.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="javax.baja.log.Log"/>
+<description>
+a reference to the log object that is used to&#xa; print information to standard output or log errors in the&#xa; station.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.readMessageFromStream() -->
+<method name="readMessageFromStream"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method reads a chunk of bytes from the input stream that&#xa; is connected to the socket. The chunk of bytes is then passed&#xa; to the internal &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#bos">#bos</see>&lt;/code&gt;, which is piped to the internal&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#bin">#bin</see>&lt;/code&gt;, from which the driver&#x27;s receiver / transaction mgr&#xa; component reads bytes (by calling the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readByte()">#readByte()</see>&lt;/code&gt; method)&#xa; while attempting to extract recognized frames.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessage()">#readMessage()</see>&lt;/code&gt; method, which&#xa; is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; method, which is&#xa; called continuously on the socket manager&#x27;s own thread when the&#xa; internal &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; is 2.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.readByte() -->
+<method name="readByte"  public="true">
+<description>
+The Ddf Transaction layer calls this method in a tight loop.&#xa; This method blocks until a byte is available (or doesn&#x27;t block&#xa; if bytes are already available) and returns the next next&#xa; available byte.
+</description>
+<return>
+<type class="int"/>
+<description>
+the next available incoming byte from the Tcp/Ip socket
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.processReadStreamException(java.lang.Exception) -->
+<method name="processReadStreamException"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessageFromStream()">#readMessageFromStream()</see>&lt;/code&gt;&#xa; method in the event that an exception occurs during an attempt&#xa; to read a chunk of bytes from the socket. The particular exception&#xa; that occurred is passed to this method. Basically, if the exception&#xa; is an instance of standard SocketException then the internal state&#xa; is changed to &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt; thereby causing subsequent&#xa; iterations through the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; method to&#xa; attempt to open a new socket to the field-device or server.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<parameter name="e">
+<type class="java.lang.Exception"/>
+<description>
+the exception that occurred in the&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessageFromStream()">#readMessageFromStream()</see>&lt;/code&gt; method while trying to read a chunk&#xa; of bytes from the socket.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.considerReinitialize() -->
+<method name="considerReinitialize"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessageFromStream()">#readMessageFromStream()</see>&lt;/code&gt; after&#xa; reading (or at least attempting to read) a chunk of bytes from the&#xa; socket. The default functionality of this method is to set the internal&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; back to &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt; &lt;b&gt;if&lt;/b&gt; more than&#xa; one driver request has been transmitted without the&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessageFromStream()">#readMessageFromStream()</see>&lt;/code&gt; method at least receiving some bytes&#xa; in reply. This is tracked via the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#numOutstandingRequests">#numOutstandingRequests</see>&lt;/code&gt;&#xa; variable.&#xa;&#xa; Developers will probably need to override this method if the driver&#xa; is does not feature a master-slave communication protocol. If the&#xa; driver does not feature a master-slave communication protocol then&#xa; this method should probably be overridden with an empty implementation.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.setNextReadTimeout() -->
+<method name="setNextReadTimeout"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessage()">#readMessage()</see>&lt;/code&gt; method just&#xa; prior to calling the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessageFromStream()">#readMessageFromStream()</see>&lt;/code&gt; method to&#xa; read a chunk of bytes from the socket. This method calls&#xa; &#x27;setSoTimeout()&#x27; on the underlying socket and passes in the&#xa; value that is returned by &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#getResponseTimeout()">#getResponseTimeout()</see>&lt;/code&gt;.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.readMessage() -->
+<method name="readMessage"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called from the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; method&#xa; continuously in a loop while the internal &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; is&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_GOT_SOCKET">#STATE_GOT_SOCKET</see>&lt;/code&gt;. This method calls&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#setNextReadTimeout()">#setNextReadTimeout()</see>&lt;/code&gt; before it delegates most of its&#xa; functionality to the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMessageFromStream()">#readMessageFromStream()</see>&lt;/code&gt; method&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.run() -->
+<method name="run"  public="true">
+<description>
+This is the entry point for the socket manager&#x27;s own thread.&#xa;&#xa; This basically calls &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; in a continuous&#xa; loop.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.closeSocket() -->
+<method name="closeSocket"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Closes the socket.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.failureSocketConnectionInit(java.lang.Exception) -->
+<method name="failureSocketConnectionInit"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#initSocketConnection()">#initSocketConnection()</see>&lt;/code&gt; if it&#xa; fails to establish a client TCP socket to the field-device or&#xa; server.&#xa;&#xa; This method basically calls &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#nullStreams()">#nullStreams()</see>&lt;/code&gt; and&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#closeSocket()">#closeSocket()</see>&lt;/code&gt;.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<parameter name="e">
+<type class="java.lang.Exception"/>
+<description>
+the exception that occurs when attempting to establish&#xa; the client TPC socket connection to the field-device or server.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.notifyConnectMonitor() -->
+<method name="notifyConnectMonitor"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method notifies the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#connectMonitor">#connectMonitor</see>&lt;/code&gt; object of a&#xa; successful socket connection being established. This comes into&#xa; play in the event that the driver tries to transmit before the&#xa; socket connection is established (to make the driver wait for&#xa; the socket connection to be established before transmitting).&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.successSocketConnectionInit() -->
+<method name="successSocketConnectionInit"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#initSocketConnection()">#initSocketConnection()</see>&lt;/code&gt; method&#xa; as a final step after successfully establishing a socket connection&#xa; to a field-device or server. The method basically changes the internal&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; to &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_GOT_SOCKET">#STATE_GOT_SOCKET</see>&lt;/code&gt;, calls&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#notifyConnectMonitor()">#notifyConnectMonitor()</see>&lt;/code&gt;, and initializes&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#numOutstandingRequests">#numOutstandingRequests</see>&lt;/code&gt; to zero.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.getDestAddress() -->
+<method name="getDestAddress"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Gets the text that the integrator or user has entered as the Tcp/Ip&#xa; address of the field-device or server.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="java.lang.String"/>
+<description>
+tddfTcpCommunicator.getTcpIpComm().getDestinationAddress().getIpAddress();
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.getConnectionTimeout() -->
+<method name="getConnectionTimeout"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Gets the number of millis to wait / time-out whenever trying to&#xa; establish a Tcp/Ip connection to the field-device or server.&#xa;&#xa; By default, this method returns the socket connection timeout value&#xa; as entered by the user or integrator&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="int"/>
+<description>
+(int)ddfTcpCommunicator.getTcpIpComm().getSocketConnectionTimeout().getMillis();
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.getResponseTimeout() -->
+<method name="getResponseTimeout"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Indicates the amount of time to wait before timing out during any&#xa; attempt to read bytes from the underlying socket.&#xa;&#xa; By default, this method returns the greater of 100 millis or&#xa; whatever the user enters on the Tcp Receiver component for&#xa; the response timeout duration.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="long"/>
+<description>
+the greater of 100 and ddfTcpCommunicator.getReceiver().getResponseTimeout().getMillis();
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.icmpPing(java.lang.String) -->
+<method name="icmpPing"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Performs an ICMP ping on the host that is identified by the given&#xa; string. This method is called before attempting to establish a&#xa; socket connection to the field-device or server. It is important&#xa; to ICMP ping the field-device or server (if at all possible) in order&#xa; to prevent the underlying operating system from taking an indefinite,&#xa; undefined amount of time to timeout the socket connection. This is&#xa; a safeguard against side-effects that could occur due to the varying&#xa; underlying implementations of the Java socket API. During development,&#xa; it was observed that some operating systems will block the thread that&#xa; attempts to connect a socket to a non-existent host for an indefinite&#xa; or unpredictably long duration. Tridium&#x27;s Tcp drivers, such as ModbusTCP&#xa; perform much better on unreliable networks with this safeguard in place.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<parameter name="userIpText">
+<type class="java.lang.String"/>
+<description>
+the name of the host on which to perform an ICMP&#xa; ping. This can typically be an IP address or a DNS hostname.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the field-device or server responds to ICMP ping&#xa; within one second (meaning that it is relatively close and probably&#xa; currently reliably connected on the network).
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.connectSocket() -->
+<method name="connectSocket"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#initSocketConnection()">#initSocketConnection()</see>&lt;/code&gt; method to&#xa; open a Tcp/Ip client socket connection to the field-device or server.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+any exception passed along from the underlying&#xa; Niagara AX and/or Java socket API.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.nullStreams() -->
+<method name="nullStreams"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Called by &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#initSocketConnection()">#initSocketConnection()</see>&lt;/code&gt;,&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#failureSocketConnectionInit(java.lang.Exception)">#failureSocketConnectionInit(Exception)</see>&lt;/code&gt;, and &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#doIdle()">#doIdle()</see>&lt;/code&gt;&#xa; to set the underlying references to &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#inStream">#inStream</see>&lt;/code&gt; and&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#outStream">#outStream</see>&lt;/code&gt; to null.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.createStreams() -->
+<method name="createStreams"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#initSocketConnection()">#initSocketConnection()</see>&lt;/code&gt; method&#xa; after opening a Tcp/Ip client socket connection to the field-device&#xa; or server. This method sets the underlying &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#inStream">#inStream</see>&lt;/code&gt; and&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#outStream">#outStream</see>&lt;/code&gt; references to refer to the underlying input&#xa; and output streams for the socket.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+any IOException that is passed along from the&#xa; Java socket API (commSocket.getInputStream() or&#xa; commSocket.getOutputStream())&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.initSocketConnection() -->
+<method name="initSocketConnection"  protected="true" synchronized="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called in a continuous loop from the&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; method while the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt;&#xa; is &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt;.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.notifyReceiveMonitor() -->
+<method name="notifyReceiveMonitor"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Notifies the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readMonitor">#readMonitor</see>&lt;/code&gt; object that it is time to&#xa; start attempting to receive a chunk of bytes from the Tcp/Ip&#xa; socket as a result of the driver transmitting a frame. This&#xa; only comes into play if the driver transaction manager component&#xa; is a single transaction manager.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.waitForeverForSend() -->
+<method name="waitForeverForSend"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; method&#xa; if the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; is &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt; and the transaction&#xa; manager is a single transactio manager. This idea is that there is no&#xa; need to establish the socket until or unless there is data to send in&#xa; a master-slave protocol.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.waitLittleWhileForSend() -->
+<method name="waitLittleWhileForSend"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; method&#xa; if the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; is &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_GOT_SOCKET">#STATE_GOT_SOCKET</see>&lt;/code&gt; and the transaction&#xa; manager is a single transactio manager. This idea is that there is no&#xa; need to even try to read from socket until or unless some data is sent&#xa; (at least for a master-slave protocol).&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.waitForConnect(long) -->
+<method name="waitForConnect"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called make a thread wait for a socket connection to&#xa; be established. More specifically, this method waits for the given&#xa; amount of time for the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#connectMonitor">#connectMonitor</see>&lt;/code&gt; object to be notified.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<parameter name="waitInterval">
+<type class="long"/>
+<description>
+number of milliseconds
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.waitAWhileForConnect() -->
+<method name="waitAWhileForConnect"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#writeOutputStream(byte[], int, int)">#writeOutputStream(byte[], int, int)</see>&lt;/code&gt;&#xa; method to make the transmitter thread wait for a socket connection to&#xa; be established before attempting to transmit bytes through the&#xa; socket.&#xa;&#xa; Waits up to &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#getConnectionTimeout()">#getConnectionTimeout()</see>&lt;/code&gt; interval of time for the&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#connectMonitor">#connectMonitor</see>&lt;/code&gt; to be notified of a successful socket connection&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.isConnecting() -->
+<method name="isConnecting"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Determines if this socket manager is presently in a mode where it is&#xa; attempting to establish socket connection (in other words, if the&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; is &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt;&#xa;&#xa; Waits up to &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#getConnectionTimeout()">#getConnectionTimeout()</see>&lt;/code&gt; interval of time for the&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#connectMonitor">#connectMonitor</see>&lt;/code&gt; to be notified of a successful socket connection&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.isConnectingFirstTime() -->
+<method name="isConnectingFirstTime"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Determines if this socket manager is connecting for the first time&#xa;&#xa; Connecting for the first time is when the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#isConnecting()">#isConnecting()</see>&lt;/code&gt;&#xa; method returns true and when the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#numConnectionFailures">#numConnectionFailures</see>&lt;/code&gt; is&#xa; zero.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="boolean"/>
+<description>
+true if this socket manager is connecting to the field-device&#xa; or server for the first time since boot.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.writeOutputStream(byte[], int, int) -->
+<method name="writeOutputStream"  public="true">
+<description>
+This method is called by BDdfTcpTransmitter.forceTransmit(...) in order&#xa; to transmit an array of bytes out of the Tcp/Ip socket.
+</description>
+<parameter name="data">
+<type class="byte" dimension="1"/>
+<description>
+the byte array to transmit bytes from.
+</description>
+</parameter>
+<parameter name="startIndex">
+<type class="int"/>
+<description>
+the index of the first byte in the given array&#xa; to transmit
+</description>
+</parameter>
+<parameter name="endIndex">
+<type class="int"/>
+<description>
+the last index of the given array to transmit.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+any exception that occurs in the underlying socket&#xa; API.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.getDebugCurTimeSecAndMs() -->
+<method name="getDebugCurTimeSecAndMs"  protected="true">
+<description>
+This method is intended mainly for internal use. Advanced&#xa; developers who wish to customize this class may override&#xa; or call this method from a subclass.&#xa;&#xa; Called when formatting trace data for standard output.&#xa;&#xa; This method was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="java.lang.String"/>
+<description>
+a string detailing the exact moment with millisecond&#xa; granularity.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.idleMonitor -->
+<field name="idleMonitor"  protected="true">
+<type class="java.lang.Object"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; The &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#doIdle()">#doIdle()</see>&lt;/code&gt; method waits on this object to&#xa; be notified.&#xa;&#xa; The &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#switchState(int)">#switchState(int)</see>&lt;/code&gt; method notifies this object.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.connectMonitor -->
+<field name="connectMonitor"  protected="true">
+<type class="java.lang.Object"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; Throughout the logic in this class for establishing the Tcp/Ip&#xa; connection, many methods wait on this monitor.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.commSocket -->
+<field name="commSocket"  protected="true">
+<type class="java.net.Socket"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; In general, safe access to the underlying socket should be made&#xa; indirectly through the public methods on this class.&#xa;&#xa; This is a reference to the underlying socket.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.inStream -->
+<field name="inStream"  protected="true">
+<type class="java.io.InputStream"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; In general, safe access to the underlying socket should be made&#xa; indirectly through the public methods on this class.&#xa;&#xa; This is a reference to the input stream that is tied&#xa; to the underlying socket (if one has been established).&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.outStream -->
+<field name="outStream"  protected="true">
+<type class="java.io.OutputStream"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; In general, safe access to the underlying socket should be made&#xa; indirectly through the public methods on this class.&#xa;&#xa; This is a reference to the output stream that is tied&#xa; to the underlying socket (if one has been established).&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.numOutstandingRequests -->
+<field name="numOutstandingRequests"  protected="true">
+<type class="int"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; This variable is incremented each time a byte array is&#xa; transmitted. It is set to zero each time a series of&#xa; one or more bytes is received and upon initial establishment&#xa; of the socket. The &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#considerReinitialize()">#considerReinitialize()</see>&lt;/code&gt; method&#xa; looks at this variable in deciding whether to revert the&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#state">#state</see>&lt;/code&gt; to &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt;.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.numConnectionFailures -->
+<field name="numConnectionFailures"  protected="true">
+<type class="int"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; This variable is used to determine whether or not the socket&#xa; manager is attempting to establish a socket connection for the&#xa; very first time.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.state -->
+<field name="state"  protected="true">
+<type class="int"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; This is the internal state of the socket manager. This greatly&#xa; affects how the socket manager thread behaves. Possible values are&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_IDLE">#STATE_IDLE</see>&lt;/code&gt;, &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_NO_SOCKET">#STATE_NO_SOCKET</see>&lt;/code&gt;, and&#xa; &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#STATE_GOT_SOCKET">#STATE_GOT_SOCKET</see>&lt;/code&gt;.
+</description>
+<tag name="@see">#switchState(int)</tag>
+<tag name="@see">#finiteStateMachine()&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.</tag>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.ddfTcpCommunicator -->
+<field name="ddfTcpCommunicator"  protected="true">
+<type class="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; This is a reference to the BDdfTcpCommunicator object that owns&#xa; this socket manager. This is used to get property values from the&#xa; station database.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.running -->
+<field name="running"  protected="true">
+<type class="boolean"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; This variable is used in the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#run()">#run()</see>&lt;/code&gt; method to keep the&#xa; socket manager thread continuously looping under normal circumstances&#xa; and calling the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#finiteStateMachine()">#finiteStateMachine()</see>&lt;/code&gt; continuously.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.bos -->
+<field name="bos"  protected="true">
+<type class="java.io.PipedOutputStream"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; This is used to isolate the socket manager thread from&#xa; the BDdfTcpCommunicator&#x27;s receiver thread. As th3 socket&#xa; manger independently read bytes from the underlying socket,&#xa; it writes the bytes to this output stream. This output&#xa; stream is piped to the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#bin">#bin</see>&lt;/code&gt;. The BDdfTcpCommunicator&#x27;s&#xa; receiver reads bytes from the corresponding &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#bin">#bin</see>&lt;/code&gt;.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@see">#bin</tag>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.bin -->
+<field name="bin"  protected="true">
+<type class="java.io.PipedInputStream"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; The BDdfTcpCommunicator&#x27;s receiver reads from this input&#xa; stream to indirectly read bytes from the socket. This is&#xa; done in the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.TcpSocketManager#readByte()">#readByte()</see>&lt;/code&gt; method.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@see">#bos</tag>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.readMonitor -->
+<field name="readMonitor"  protected="true">
+<type class="java.lang.Object"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; The &#x27;receive&#x27; logic uses this object throughout the logic&#xa; for this class to wait until it is time to receive.&#xa;&#xa; This field was limited to private access until Niagara AX 3.5.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.ioMonitor -->
+<field name="ioMonitor"  protected="true">
+<type class="java.lang.Object"/>
+<description>
+Unless advanced developers are significantly customizing&#xa; this class, then this field should not need to be directly&#xa; accessed.&#xa;&#xa; This monitor ensures that underlying calls to the socket API&#xa; for sending and receiving are mutually exclusive operations.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.messageSent -->
+<field name="messageSent"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.timeTxEnd -->
+<field name="timeTxEnd"  protected="true">
+<type class="long"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.timeRxEnd -->
+<field name="timeRxEnd"  protected="true">
+<type class="long"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.SHOW_SECONDS_AND_MILLIS -->
+<field name="SHOW_SECONDS_AND_MILLIS"  protected="true">
+<type class="javax.baja.sys.BFacets"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.STATE_IDLE -->
+<field name="STATE_IDLE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.STATE_NO_SOCKET -->
+<field name="STATE_NO_SOCKET"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.TcpSocketManager.STATE_GOT_SOCKET -->
+<field name="STATE_GOT_SOCKET"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

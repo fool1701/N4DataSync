@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.collection.Row" name="Row" packageName="javax.baja.collection" public="true" interface="true" abstract="true" category="interface">
+<description/>
+<tag name="@author">&lt;a href=&#x22;mailto:mgiannini@tridium.com&#x22;&gt;Matthew Giannini&lt;/a&gt;</tag>
+<typeParameters>
+<typeVariable class="T">
+<bounds>
+<type class="javax.baja.sys.BIObject"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<!-- javax.baja.collection.Row.getTable() -->
+<method name="getTable"  public="true" abstract="true">
+<description>
+Get the table this row belongs to.
+</description>
+<return>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.collection.Row.rowObject() -->
+<method name="rowObject"  public="true" abstract="true">
+<description>
+Get the object representing the current row.
+</description>
+<return>
+<typeVariable class="T"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.Row.cell(javax.baja.collection.Column) -->
+<method name="cell"  public="true" abstract="true">
+<description/>
+<parameter name="column">
+<type class="javax.baja.collection.Column"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIObject"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.Row.getCellFlags(javax.baja.collection.Column) -->
+<method name="getCellFlags"  public="true" abstract="true">
+<description/>
+<parameter name="column">
+<type class="javax.baja.collection.Column"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.Row.getCellFacets(javax.baja.collection.Column) -->
+<method name="getCellFacets"  public="true" abstract="true">
+<description/>
+<parameter name="column">
+<type class="javax.baja.collection.Column"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.Row.safeCopy() -->
+<method name="safeCopy"  public="true" abstract="true">
+<description>
+Get a safe copy of the row.&#xa; This method is useful if you need to maintain references to rows returned by a cursor&#xa; between invocations to the &lt;code&gt;<see ref="javax.baja.collection.TableCursor#next()">javax.baja.collection.TableCursor#next()</see>&lt;/code&gt;} method.&#xa; &lt;p&gt;&#xa; You cannot safely assume that you get a new &lt;code&gt;<see ref="javax.baja.collection.Row">javax.baja.collection.Row</see>&lt;/code&gt; for every iteration of the table cursor&#xa; because the backing &lt;code&gt;<see ref="javax.baja.collection.BITable">javax.baja.collection.BITable</see>&lt;/code&gt; may be re-using the same&#xa; Row object and re-filling it on each iteration through the cursor. Therefore this code is&#xa; considered unsafe:&#xa;&#xa;   &lt;pre&gt;&#xa;   // UNSAFE: DO NOT DO THIS&#xa;   TableCursor cursor = table.cursor();&#xa;   cursor.next();&#xa;   Row r1 = cursor.get();&#xa;   cursor.next();&#xa;   Row r2 = cursor.get();&#xa;&#xa;   // COULD FAIL!&#xa;   //&#xa;   assert r1 != r2;&#xa;   &lt;/pre&gt;&#xa; &lt;p&gt;&#xa; Instead do this:&#xa;&#xa;   &lt;pre&gt;&#xa;   // OK: The safe way to save rows&#xa;   TableCursor cursor = table.cursor();&#xa;   cursor.next();&#xa;   Row r1 = cursor.get().safeCopy();&#xa;   cursor.next();&#xa;   Row r2 = cursor.get().safeCopy();&#xa;&#xa;   // Will not fail&#xa;   //&#xa;   assert r1 != r2;&#xa;   &lt;/pre&gt;
+</description>
+<return>
+<parameterizedType class="javax.baja.collection.Row">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+<description>
+a safe copy of the row.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

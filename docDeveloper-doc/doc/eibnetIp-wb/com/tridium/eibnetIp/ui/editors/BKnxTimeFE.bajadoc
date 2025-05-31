@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="eibnetIp" runtimeProfile="wb" qualifiedName="com.tridium.eibnetIp.ui.editors.BKnxTimeFE" name="BKnxTimeFE" packageName="com.tridium.eibnetIp.ui.editors" public="true">
+<description>
+BKnxTimeFE - The field editor for BKnxDatapointType. This presents two drop&#xa; down lists for data type and dimensionFE type.  A change in selection in the first&#xa; drop down will change the selections available in the second drop down.&#xa;&#xa;  NOTE:&#xa;  I don&#x27;t know why, but if I call save value on BOTH the timeFE and the &#xa;  dowFE here, I get a &#x22;doLoadValue&#x22; callback after the first saveValue, &#xa;  resulting in a re-load of the second editor before I have a chance to&#xa;  call saveValue on the second editor.  This results in one of the two&#xa;  struct values being saved at an old value.  To get around this, I found I&#xa;  could change the super class to a BVector, but that is so heavy-weight for&#xa;  such a simple struct.  As a plan B, I save away the dow as a local variable,&#xa;  and update it only when the dowFE changes (see links in the constructor) via&#xa;  the action &#x22;weekdayChanged&#x22;.  When it comes time to save, I use the saveValue&#xa;  from the timeFE, and the local instance value &#x22;dow&#x22; for the day of week&#xa;  value so that I don&#x27;t have to worry about reloads of the dow.
+</description>
+<tag name="@author">Clif Turman</tag>
+<tag name="@creation">July 24, 2006</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.1</tag>
+<extends>
+<type class="javax.baja.workbench.fieldeditor.BWbFieldEditor"/>
+</extends>
+<action name="weekdayChanged" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;weekdayChanged&lt;/code&gt; action.
+</description>
+<tag name="@see">#weekdayChanged()</tag>
+</action>
+
+</class>
+</bajadoc>

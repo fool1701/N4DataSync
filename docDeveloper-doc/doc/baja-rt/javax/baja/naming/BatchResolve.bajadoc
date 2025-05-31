@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.naming.BatchResolve" name="BatchResolve" packageName="javax.baja.naming" public="true">
+<description>
+BatchResolve is used to resolve a list of ords together.  Often&#xa; batch resolve has better performance then resolving the individual&#xa; ords especially over the network.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">29 Nov 04</tag>
+<tag name="@version">$Revision: 6$ $Date: 12/20/06 4:50:39 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.naming.BatchResolve(javax.baja.naming.BOrd[]) -->
+<constructor name="BatchResolve" public="true">
+<parameter name="ords">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<description>
+Construct with the specified list of ords.
+</description>
+</constructor>
+
+<!-- javax.baja.naming.BatchResolve.size() -->
+<method name="size"  public="true">
+<description>
+Get the number of items in the batch.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.getOrd(int) -->
+<method name="getOrd"  public="true">
+<description>
+Get the ord at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.isResolved(int) -->
+<method name="isResolved"  public="true">
+<description>
+Return true if the ord at the specified &#xa; index has been successfully resolved.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.getException(int) -->
+<method name="getException"  public="true">
+<description>
+Get the resolve exception for the ord at the specified index or&#xa; null if no exception was raised during resolve (or if resolve&#xa; hasn&#x27;t been attempted yet).
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Throwable"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.getTarget(int) -->
+<method name="getTarget"  public="true">
+<description>
+Get the OrdTarget result at the specified index.  If the&#xa; ord at the specified index is unresolved, then throw an&#xa; exception.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.get(int) -->
+<method name="get"  public="true">
+<description>
+Convenience for &lt;code&gt;getTarget(index).get()&lt;/code&gt;.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.getTargets() -->
+<method name="getTargets"  public="true">
+<description>
+This method returns an array of all the resolved components.  &#xa; If any one targets was unresolved, then throw an exception.
+</description>
+<return>
+<type class="javax.baja.naming.OrdTarget" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.getTargetObjects() -->
+<method name="getTargetObjects"  public="true">
+<description>
+Return an array of the targets as BObjects.  If any one of &#xa; the targets was unresolved, then throw an exception.
+</description>
+<return>
+<type class="javax.baja.sys.BObject" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.getTargetComponents() -->
+<method name="getTargetComponents"  public="true">
+<description>
+Return an array of the targets cast to a BComponent.  If&#xa; any one of the targets was unresolved, then throw an exception.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.resolve(javax.baja.sys.BObject) -->
+<method name="resolve"  public="true">
+<description>
+Convenience for &lt;code&gt;resolve(base, null)&lt;/code&gt;.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BatchResolve"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BatchResolve.resolve(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="resolve"  public="true">
+<description>
+Resolve the list of ords passed to the constructor.  Return this.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BatchResolve"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

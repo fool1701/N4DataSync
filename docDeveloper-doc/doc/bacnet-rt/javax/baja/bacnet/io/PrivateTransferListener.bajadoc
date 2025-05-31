@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.io.PrivateTransferListener" name="PrivateTransferListener" packageName="javax.baja.bacnet.io" public="true" interface="true" abstract="true" category="interface">
+<description>
+PrivateTransferListener is the interface objects use to identify that they&#xa; need to be informed of incoming PrivateTransfer requests.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">23 Aug 2006</tag>
+<tag name="@since">Niagara 3.2</tag>
+<implements>
+<type class="javax.baja.bacnet.io.BacnetServiceListener"/>
+</implements>
+<!-- javax.baja.bacnet.io.PrivateTransferListener.getVendorId() -->
+<method name="getVendorId"  public="true" abstract="true">
+<description>
+What Vendor ID is this listener servicing?
+</description>
+<return>
+<type class="int"/>
+<description>
+the vendorID that this listener uses.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.PrivateTransferListener.receiveConfirmedPrivateTransfer(long, long, byte[], javax.baja.bacnet.datatypes.BBacnetAddress) -->
+<method name="receiveConfirmedPrivateTransfer"  public="true" abstract="true">
+<description>
+Receive a ConfirmedPrivateTransfer request.
+</description>
+<parameter name="vendorId">
+<type class="long"/>
+</parameter>
+<parameter name="serviceNumber">
+<type class="long"/>
+</parameter>
+<parameter name="serviceParameters">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="sourceAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.PrivateTransferListener.receiveUnconfirmedPrivateTransfer(long, long, byte[], javax.baja.bacnet.datatypes.BBacnetAddress) -->
+<method name="receiveUnconfirmedPrivateTransfer"  public="true" abstract="true">
+<description>
+Receive an UnconfirmedPrivateTransfer request.
+</description>
+<parameter name="vendorId">
+<type class="long"/>
+</parameter>
+<parameter name="serviceNumber">
+<type class="long"/>
+</parameter>
+<parameter name="serviceParameters">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="sourceAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

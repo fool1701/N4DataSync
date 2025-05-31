@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.dataRecovery.BIDataRecoverySourceService" name="BIDataRecoverySourceService" packageName="javax.baja.dataRecovery" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIDataRecoverySourceService should be implemented by any service that&#xa; supports data recovery.  On station bootup, it allows for notification &#xa; to the service that initialization should happen just before the &#xa; BIDataRecoveryService starts restoring data recovery.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">Apr 13, 2010</tag>
+<tag name="@version">Original</tag>
+<tag name="@since">Niagara 3.6</tag>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<!-- javax.baja.dataRecovery.BIDataRecoverySourceService.initDataRecoverySource(javax.baja.dataRecovery.BIDataRecoveryService) -->
+<method name="initDataRecoverySource"  public="true" abstract="true">
+<description>
+This method is called during the station bootup process.  It notifies&#xa; this service that it is time to initialize anything necessary to &#xa; restore data recovery.  This callback is guaranteed to happen before&#xa; the BIDataRecoveryService starts restoring (pushing) data recovery&#xa; events to each BIDataRecoverySource.  &#xa;&#xa; In this method, the service should initialize the BIDataRecoverySource&#xa; that it manages, so that it is in a state ready to receive recovery&#xa; data restored back to it and commit those events.  This also means making &#xa; sure that the BIDataRecoverySource&#x27;s ordInSession is resolvable, since the &#xa; BIDataRecoveryService must resolve BIDataRecoverySources by ordInSession &#xa; during the restoration process.
+</description>
+<parameter name="service">
+<type class="javax.baja.dataRecovery.BIDataRecoveryService"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.dataRecovery.BIDataRecoverySourceService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

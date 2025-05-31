@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="gx" runtimeProfile="rt" qualifiedName="javax.baja.gx.BPathGeom" name="BPathGeom" packageName="javax.baja.gx" public="true" final="true">
+<description>
+BPathGeom stores a general path composed of Segments.&#xa; The model and string format of PathGeom maps to the SVG &#xa; specification.  A path is a list of segments identified&#xa; with a single ASCII letter.  If the letter is uppercase&#xa; then the segment uses absolute coordinates, if lowercase&#xa; then relative coordinates.  Multiple segments with the&#xa; same segment command may omit the command letter. The list&#xa; of commands:&#xa;&#xa; &lt;pre&gt; &#xa;   closePath     := Z|z&#xa;   moveTo        := M|m x y&#xa;   lineTo        := L|l x y&#xa;   hlineTo       := H|h x &#xa;   vlineTo       := V|v y &#xa;   curveTo       := C|c x2 y2 x1 y1 x y &#xa;   smoothCurveTo := S|s x2 y2 x y &#xa;   quadTo        := Q|q x1 y1 x y &#xa;   smoothQuadTo  := T|t x y &#xa;   arcTo         := A|a rx ry xAxisRotation largeArcFlag sweepFlag x y &#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">5 Apr 04</tag>
+<tag name="@version">$Revision: 6$ $Date: 9/30/08 5:09:01 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.gx.BGeom"/>
+</extends>
+<implements>
+<type class="javax.baja.gx.IPathGeom"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.gx.BPathGeom.make(javax.baja.gx.IPathGeom.Segment[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Constructor.
+</description>
+<parameter name="segments">
+<type class="javax.baja.gx.IPathGeom$Segment" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BPathGeom"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.make(javax.baja.gx.IPathGeom) -->
+<method name="make"  public="true" static="true">
+<description>
+Constructor.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.IPathGeom"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BPathGeom"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Make from string encoding.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BPathGeom"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.getGeomCase() -->
+<method name="getGeomCase"  public="true">
+<description>
+Return PATH.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.segments() -->
+<method name="segments"  public="true">
+<description>
+Get a copy of the segments list.
+</description>
+<return>
+<type class="javax.baja.gx.IPathGeom$Segment" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.segment(int) -->
+<method name="segment"  public="true">
+<description>
+Get segment at specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.IPathGeom$Segment"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.size() -->
+<method name="size"  public="true">
+<description>
+Get the number of segments.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.isNull() -->
+<method name="isNull"  public="true">
+<description>
+A null path is one without any segments.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BPathGeom hash code.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Return if the specified object is an equivalent BPathGeom.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description>
+Encode to string.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<description>
+Decode from string.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPathGeom.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BPathGeom"/>
+<description>
+The default path has no segments.
+</description>
+</field>
+
+<!-- javax.baja.gx.BPathGeom.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BPathGeom"/>
+<description>
+The null path is the same as the default.
+</description>
+</field>
+
+<!-- javax.baja.gx.BPathGeom.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,222 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  19 Jun 02
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Licensing</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/spy.html" class="navbar">Prev</a> |  <a href="/doc/xml.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Licensing</h1> 
+
+<!------------------------------------------------------------->
+<h1>Overview</h1>
+<!------------------------------------------------------------->
+
+<p>
+The Niagara licensing model is based upon the following elements:
+</p>
+
+<ul>
+
+<li><b>HostId</b>  A short String id which uniquely identifies
+a physical box which runs Niagara.  This could a Windows workstation,
+Jace-NP, or any Jace-XXX embedded platform.  You can always check
+your hostId using the command "nre -version".</li>  
+
+<li><b>Certificate:</b>  A file ending in "certificate" which matches
+a vendor id to a public key.  Certificates are granted by Tridium,
+and digitally signed to prevent tampering.  Certificates are stored
+in the "{home}\certificates" directory.</li>  
+
+<!--
+<li><b>Private Key:</b>  A file ending in "privateKey" which matches
+a vendor id to a private key.  Private keys are distributed to OEMs
+in order to sign their vendor specific features.  Private key files 
+are always matched to exactly one "certificate" file.  Private key
+files are stored in the "{home}\privateKeys" directory.</li>  
+-->
+
+<li><b>License File:</b>  A file ending in "license" which enables a
+set of vendor specific features.  A licenses file is only valid
+for a machine which matches its hostId.  Licenses are digitally
+signed by a specific vendor to prevent tampering.  License files
+are stored in the "{home}\licenses" directory.</li>  
+
+<li><b>Feature:</b>  A feature is a unique item in the license
+database keyed by a vendor id and feature name.  For example
+"Tridium:jade" is required to run the Jade tool.</li>  
+
+<li><b>API:</b>  The 
+<code><a href='module://docDeveloper/doc/baja-rt/javax/baja/license/package-index.bajadoc'>javax.baja.license</a></code>
+package provides a simple API to perform checks against the license
+database.</li>  
+
+</ul>
+
+<!------------------------------------------------------------->
+<h1>License File</h1>
+<!------------------------------------------------------------->
+
+<p>A license file is an XML file with a ".license" extension.  License
+files are placed in "{home}\licenses".  The filename itself can be
+whatever you like, but convention is to name the file based on the
+file's vendor id.  The following is an example license file:</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;license
+     version="1.0"
+     vendor="Acme"
+     generated="2002-06-01"
+     expiration="never"
+     hostId="Win-0000-1111-2222-3333"&gt;
+ &lt;feature name="alpha"/&gt;
+ &lt;feature name="beta" expiration="2003-01-15"/&gt;
+ &lt;feature name="gamma" count="10"/&gt;
+ &lt;signature>MC0CFACwUvUwA+mNXMfogNb6PVURneerAhUAgZnTYb6kBCsvsmC2by1tUe/5k/4=&lt;/signature&gt;
+&lt;/license&gt;
+  </code>
+</pre>
+
+
+<!------------------------------------------------------------->
+<h2>Validation</h2>
+<!------------------------------------------------------------->
+
+<p>During bootstrap, the Niagara Framework loads its license database 
+based on the files found in the "{home}\licenses" directory.  Each
+license file is validated using the following steps:</p>
+
+<ol>
+
+<li>The <code>hostId</code> attribute matches the license file to a 
+specific machine.  If this license file is placed onto a machine with
+a different hostId, then the license is automatically invalidated.</li>
+
+<li>The <code>expiration</code> attribute in the root element specifies the
+master expiration.  Expiration must be a format of "YYYY-MM-DD".  If
+the current time is past the expiration, the license file is invalidated.  
+The string "never" may be used to indicate no expiration.</li>
+
+<li>The <code>generated</code> attribute in the root element specifies
+the license file generation date as "YYYY-MM-DD".  If the current time 
+is before the generated date, the license file is invalidated.</li>
+
+<li>The <code>vendor</code> attribute is used to inform the framework
+who has digitally signed this license file.  In order to use a license
+file, there must be a corresponding certificate file for that vendor
+in the "{home}\certificates" directory.</li>
+
+<li>The <code>signature</code> element contains the digital signature
+of the license file.  The digital signature is created by the vendor
+using the vendor's private key.  The signature is verified against the
+vendor's public key as found in the vendor's certificate.  If the
+digital signature indicates tampering, the license file is invalid.</li>
+
+</ol>
+
+<!------------------------------------------------------------->
+<h2>Features</h2>
+<!------------------------------------------------------------->
+
+<p>A license database is a list of features merged from the machine's 
+license files that are validated using the procedure discussed above.  Each 
+feature is defined using a single XML element called <code>feature</code>.  
+Features are identified by the vendor id which is signed into the license 
+file and a feature name defined by the <code>name</code> attribute.</p>
+
+<p>The <code>expiration</code> attribute may be specified in the
+feature element to declare a feature level expiration.  Expiration
+is a string in the format of "never" or "YYYY-MM-DD".  If expiration
+is not specified then never is assumed.</p>
+
+<p>Each feature may declare zero or more name/value properties
+as additional XML attributes.  In the example license above the "gamma"
+feature has one property called "count" with a value of "10".</p>
+
+<!------------------------------------------------------------->
+<h1>Predefined Features</h1>
+<!------------------------------------------------------------->
+
+<p>The following is a list of predefined features used by the
+Niagara Framework.  All of these features require a vendor id
+of "Tridium":</p>
+
+<ul>
+
+<li><b>workbench</b>: Required to run the workbench tool.</li>
+
+<li><b>station</b>: Required to run a station database.</li>
+
+</ul>
+
+<!------------------------------------------------------------->
+<h1>API Usage</h1>
+<!------------------------------------------------------------->
+
+<p>The following are some snippets of Java code used to access
+the license database:</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+// verify that the "Acme:CoolFeature" is licensed on this machine
+try
+{
+  Sys.getLicenseManager().checkFeature("Acme", "CoolFeature");
+  System.out.println("licensed!");
+}
+catch(LicenseException e)
+{
+  System.out.println("not licensed!");
+}
+
+// get some feature properties
+Feature f = Sys.getLicenseManager().getFeature("Acme", "gamma");
+f.check();
+String count = f.get("count");
+  </code>
+</pre>
+
+
+<!------------------------------------------------------------->
+<h1>Checking Licenses</h1>
+<!------------------------------------------------------------->
+
+<p>You may use the following mechanisms to check your 
+license database:</p>
+
+<ol>
+
+<li>Use the console command "nre -licenses".</li>
+<li>Use the <a href="local:|spy:/sysManagers/licenseManager">spy page</a>.</li>
+
+</ol>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/spy.html" class="navbar">Prev</a> |  <a href="/doc/xml.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

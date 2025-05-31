@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.file.BIFileStore" name="BIFileStore" packageName="javax.baja.file" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIFileStore is a pluggable implementation of file storage.  &#xa; It encapsulates implementation details for file I/O storage &#xa; and meta-data.  BIFileStore implementations are bound to &#xa; BFileSpace implementations.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">24 Jan 03</tag>
+<tag name="@version">$Revision: 7$ $Date: 3/28/05 9:22:56 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.file.BIFileStore.getFileSpace() -->
+<method name="getFileSpace"  public="true" abstract="true">
+<description>
+Get the file space containing this file.  &#xa; Return null if not mounted.
+</description>
+<return>
+<type class="javax.baja.file.BFileSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getFilePath() -->
+<method name="getFilePath"  public="true" abstract="true">
+<description>
+Get the file path of this file in its space.  The&#xa; result of BISpaceEntry.getOrdInSpace() should match&#xa; this path query.  Return null if not mounted.
+</description>
+<return>
+<type class="javax.baja.file.FilePath"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getFileName() -->
+<method name="getFileName"  public="true" abstract="true">
+<description>
+Get the simple file name.  This name should be&#xa; the same as &lt;code&gt;getFilePath().getName()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getExtension() -->
+<method name="getExtension"  public="true" abstract="true">
+<description>
+Get the extension for this file. The extension&#xa; appears after the last &#x27;.&#x27; in the file name.&#xa; Return null if no &#x27;.&#x27; appears in the file name.&#xa; Implementers should use FileUtil.getExtension().
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.isDirectory() -->
+<method name="isDirectory"  public="true" abstract="true">
+<description>
+Return true if this a file that contains other files.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getSize() -->
+<method name="getSize"  public="true" abstract="true">
+<description>
+Get the size of the file in bytes, or &#xa; return -1 if not a data file.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getLastModified() -->
+<method name="getLastModified"  public="true" abstract="true">
+<description>
+Get the last modification time of this&#xa; file as a BAbsTime instance.  Return&#xa; BAbsTime.NULL if last modified unknown.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.setLastModified(javax.baja.sys.BAbsTime) -->
+<method name="setLastModified"  public="true" abstract="true">
+<description>
+Sets file&#x27;s lastModified absTime to nearest second.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="absTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFileStore.isReadonly() -->
+<method name="isReadonly"  public="true" abstract="true">
+<description>
+Is the file readonly.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getPermissions(javax.baja.file.BIFile, javax.baja.sys.Context) -->
+<method name="getPermissions"  public="true" abstract="true">
+<description>
+Get the permissions for the specified file using the user &#xa; from the specified context.  This is a delegation from &#xa; BIFile&#x27;s implementation of BIProtected.getPermissions().
+</description>
+<parameter name="file">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getInputStream() -->
+<method name="getInputStream"  public="true" abstract="true">
+<description>
+Get an input stream to read the contents&#xa; of this file.
+</description>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if the file is not&#xa;    not readable.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFileStore.read() -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the contents of this file fully into a&#xa; byte array.  Implementers should use FileUtil.read().
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if this file is&#xa;    not readable or an error occurs&#xa;    during the read.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getOutputStream() -->
+<method name="getOutputStream"  public="true" abstract="true">
+<description>
+Get an output stream to write the file.&#xa; The caller is responsible for invoking close() &#xa; on the OutputStream.
+</description>
+<return>
+<type class="java.io.OutputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if this file is &#xa;    not writable.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFileStore.write(byte[]) -->
+<method name="write"  public="true" abstract="true">
+<description>
+Write the specified contents to this file.&#xa; Implementers should use FileUtil.write().
+</description>
+<parameter name="content">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if this file is &#xa;    not writable or an error occurs&#xa;    during the write.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFileStore.getCrc() -->
+<method name="getCrc"  public="true" abstract="true">
+<description>
+Get the CRC of the contents of this file.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="long"/>
+<description>
+CRC
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFileStore.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

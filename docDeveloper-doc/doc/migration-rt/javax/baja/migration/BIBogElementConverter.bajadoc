@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="migration" runtimeProfile="rt" qualifiedName="javax.baja.migration.BIBogElementConverter" name="BIBogElementConverter" packageName="javax.baja.migration" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIBogElementConverter&#xa;&#xa; This interface is implemented by classes that handle the migration of a&#xa; particular Niagara AX module or type to Niagara 4.  This may entail removal&#xa; of the type entirely, or it may require changing the type to a new type,&#xa; possibly in a new module.&#xa; &lt;p&gt;&#xa; Subclasses of BIBogElementConverter should include log entries which will&#xa; be included in feedback to users of migration tools.  Use the log object from&#xa; this interface.  Add log.info() entries to indicate items that were changed.&#xa; Add log.warning() entries to indicate items which will require special user&#xa; attention.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:craig.gemmill@tridium.com&#x22;&gt;Craig Gemmill&lt;/a&gt;</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedParameters&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<!-- javax.baja.migration.BIBogElementConverter.getConvertTypes() -->
+<method name="getConvertTypes"  public="true" default="true">
+<description>
+What modules and types can this converter handle?&#xa; The default implementation returns an empty list, indicating no types&#xa; are handled.
+</description>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+a &lt;code&gt;<see ref="java.util.List">java.util.List</see>&lt;/code&gt; of Strings of types and modules handled by this converter.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.convertXElem(javax.baja.xml.XElem, java.lang.String) -->
+<method name="convertXElem"  public="true" default="true">
+<description>
+Convert the given XElem to the new type.&#xa; &lt;p&gt;&#xa; This is used in the offline conversion of a bog file.&#xa; The default implementation simply returns the original element.&#xa; Subclasses can override to remove a bog element, or modify its type or&#xa; properties to something else.  With no &lt;code&gt;<see ref="javax.baja.util.Version">javax.baja.util.Version</see>&lt;/code&gt; argument, this&#xa; method calls &lt;code&gt;convertXElem()&lt;/code&gt; with Version 3.8.
+</description>
+<parameter name="x">
+<type class="javax.baja.xml.XElem"/>
+<description>
+XElem representing a bog element to be converted.
+</description>
+</parameter>
+<parameter name="typeSpecName">
+<type class="java.lang.String"/>
+<description>
+the typespec name.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+<description>
+null if the element should be removed, or the XElem with the new element.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.convertXElem(javax.baja.xml.XElem, java.lang.String, javax.baja.util.Version) -->
+<method name="convertXElem"  public="true" default="true">
+<description>
+Convert the given XElem to the new type.&#xa; &lt;p&gt;&#xa; This is used in the offline conversion of a bog file.&#xa; The default implementation simply returns the original element.&#xa; Subclasses can override to remove a bog element, or modify its type or&#xa; properties to something else.
+</description>
+<parameter name="x">
+<type class="javax.baja.xml.XElem"/>
+<description>
+XElem representing a bog element to be converted.
+</description>
+</parameter>
+<parameter name="typeSpecName">
+<type class="java.lang.String"/>
+<description>
+the typespec name.
+</description>
+</parameter>
+<parameter name="sourceVersion">
+<type class="javax.baja.util.Version"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.util.Version">Version</see>&lt;/code&gt; of the source being converted.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+<description>
+null if the element should be removed, or the XElem with the new element.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.convertXElem(javax.baja.xml.XElem, java.lang.String, javax.baja.util.Version, javax.baja.xml.XElem) -->
+<method name="convertXElem"  public="true" default="true">
+<description>
+Convert the given XElem to the new type while using a deep copy of the bog.&#xa; &lt;p&gt;&#xa; This is used in the offline conversion of a bog file.&#xa; The default implementation simply calls convertXElem without a root element.&#xa; Subclasses can override to remove a bog element, or modify its type or&#xa; properties to something else.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="x">
+<type class="javax.baja.xml.XElem"/>
+<description>
+XElem representing a bog element to be converted.
+</description>
+</parameter>
+<parameter name="typeSpecName">
+<type class="java.lang.String"/>
+<description>
+the typespec name.
+</description>
+</parameter>
+<parameter name="sourceVersion">
+<type class="javax.baja.util.Version"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.util.Version">Version</see>&lt;/code&gt; of the source being converted.
+</description>
+</parameter>
+<parameter name="root">
+<type class="javax.baja.xml.XElem"/>
+<description>
+XElem representing the bog&#x27;s root element. This element is not expected to be modified.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+<description>
+null if the element should be removed, or the XElem with the new element.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.convertComplex(javax.baja.sys.BComponent, javax.baja.io.ValueDocDecoder.ITypeResolver, javax.baja.sys.BComplex, javax.baja.util.Version) -->
+<method name="convertComplex"  public="true" default="true">
+<description>
+Perform any conversion that must be done with a Component tree view of the bog.
+</description>
+<parameter name="root">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+the root station component
+</description>
+</parameter>
+<parameter name="resolver">
+<type class="javax.baja.io.ValueDocDecoder$ITypeResolver"/>
+<description>
+bog type resolver, used for resolving bog elements
+</description>
+</parameter>
+<parameter name="toConvert">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.sys.BComplex">BComplex</see>&lt;/code&gt; to be converted
+</description>
+</parameter>
+<parameter name="sourceVersion">
+<type class="javax.baja.util.Version"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.util.Version">Version</see>&lt;/code&gt; of the source being converted.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.newInstance(java.lang.String, java.lang.String) -->
+<method name="newInstance"  public="true" default="true">
+<description>
+Generate a new instance of the specified type in the specified module.&#xa; This is used during bog decoding when an obsoleted or removed type has&#xa; been replaced by a new type, and the handler needs to provide an on-the-fly&#xa; updated type.
+</description>
+<parameter name="moduleName">
+<type class="java.lang.String"/>
+<description>
+the module name
+</description>
+</parameter>
+<parameter name="typeName">
+<type class="java.lang.String"/>
+<description>
+the type name
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+a new instance of the type specified by the module and type names
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.resolvableOrd(javax.baja.sys.BComplex, javax.baja.sys.Property) -->
+<method name="resolvableOrd"  public="true" default="true">
+<description>
+Returns an indication that the ord at the specified property can be resolved.&#xa; Some ords are not intended to be resolved locally.  This method calls classes&#xa; to constrain the migration process by indicating that no attempt should be&#xa; made to resolve any of the ords in the child property.
+</description>
+<parameter name="obj">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+reference object
+</description>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+<description>
+property of ord
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the ord at the specified property can be resolved in the local station
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.getOrdBase(javax.baja.sys.BComplex, javax.baja.sys.Property) -->
+<method name="getOrdBase"  public="true" default="true">
+<description>
+The given property in the specified object is a relative ord.  Return the absolute&#xa; ord of the reference object used to resolve that ord.  If unknown or the specified object is&#xa; the reference for the ord return BOrd.NULL.
+</description>
+<parameter name="obj">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+reference object
+</description>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+<description>
+property of ord
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the absolute ord for the relative ord in the given object property
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.fixOrd(javax.baja.naming.BOrd) -->
+<method name="fixOrd"  public="true" default="true">
+<description>
+Given an ord referencing a slot with an original property name return an equivalent&#xa; ord referencing new name.  If there is no valid equivalent return null.&#xa; This callback is used during station migration.   This call is only made&#xa; if the originalOrd will not resolve.
+</description>
+<parameter name="originalOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the original property name to be converted
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+converted ord or null
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.newTypeSpec(java.lang.String) -->
+<method name="newTypeSpec"  public="true" default="true">
+<description>
+Given the original typeSpec return modified typeSpec if the original type changed or&#xa; it was moved to new module or module was renamed.
+</description>
+<parameter name="typeSpecName">
+<type class="java.lang.String"/>
+<description>
+the original typeSpec name
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a new typeSpec
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.getPackageConversions() -->
+<method name="getPackageConversions"  public="true" default="true">
+<description>
+Return a list of package conversions strings. Entries shall have the form&#xa; &#x22;origMod:origPackage,newMod:newPackage&#x22;.&#xa; (i.e. &#x22;historyFunc:com.tridium.historyFunc,history:com.tridium.history&#x22; )
+</description>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+list of package conversion Strings
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.typeRemoved(java.lang.String) -->
+<method name="typeRemoved"  public="true" static="true">
+<description/>
+<parameter name="typeName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.moduleRemoved(java.lang.String) -->
+<method name="moduleRemoved"  public="true" static="true">
+<description/>
+<parameter name="moduleName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIBogElementConverter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.migration.BIBogElementConverter.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- javax.baja.migration.BIBogElementConverter.TYPE_REMOVED -->
+<field name="TYPE_REMOVED"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.migration.BIBogElementConverter.MODULE_REMOVED -->
+<field name="MODULE_REMOVED"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.migration.BIBogElementConverter.TYPE_ATTR -->
+<field name="TYPE_ATTR"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.migration.BIBogElementConverter.MODULE_ATTR -->
+<field name="MODULE_ATTR"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.migration.BIBogElementConverter.VERSION_3_8 -->
+<field name="VERSION_3_8"  public="true" static="true" final="true">
+<type class="javax.baja.util.Version"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

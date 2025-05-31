@@ -1,0 +1,205 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  30 Mar 05
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Px</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/web.html" class="navbar">Prev</a> |  <a href="/doc/hx.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Px</h1> 
+
+<!------------------------------------------------------------->
+<h1>Overview</h1>
+<!------------------------------------------------------------->
+
+<p>
+Px is a technology used to package a UI presentation as an XML file.
+A px file defines a tree of bajaui widgets and their data bindings.
+Any <code><a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/BWidget.bajadoc'>BWidget</a></code> 
+and <code><a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/BBinding.bajadoc'>BBinding</a></code> 
+may be used, including those custom developed by you.  Typically px files
+are created using a WYSIWYG tool called the PxEditor, although they can
+also be handcoded or auto-generated.
+</p>                                          
+
+<p>
+Px files are always given a ".px" extension, and modeled with the 
+<code><a href='module://docDeveloper/doc/file-rt/javax/baja/file/types/text/BPxFile.bajadoc'>file:PxFile</a></code>
+type.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="views">Px Views</h1>
+<!------------------------------------------------------------->
+
+<p> 
+A px file may be used in a UI via a variety of mechanisms:
+</p>                                                      
+
+<ul>                
+<li>Navigating directly to a px file will display its presentation</li>
+<li>The px file may be attached to a component as a dynamic view</li>
+<li>Many px files can be automatically translated into HTML using hx</li>
+</ul>    
+
+<p>
+The <code>WbPxView</code> is the standard presentation engine for
+px files.  <code>WbPxView</code> is the default view of 
+<code>file:PxFile</code>, so you can use px files just like an HTML
+file - by navigating to one.
+</p>
+
+<p> 
+The <code><a href='module://docDeveloper/doc/baja-rt/javax/baja/agent/BPxView.bajadoc'>BPxView</a></code> 
+class may be used to define <i>dynamic views</i> on components.  Dynamic
+views are like dynamic slots, in that they are registered on an instance
+versus a type.  A dynamic view is automatically available for every 
+<code>BPxView</code> found in a component.  Each <code>BPxView</code> provides
+an ord to the px file to use for that view.  PxViews may be added through
+the workbench or programmatically.  Since the bindings within a px file
+are always resolved relative to the current ord, you can reuse the same
+px file across multiple components by specifying bindings with relative 
+ords.
+</p>           
+
+<p>
+If all the widgets used in a px file have a translation to hx, then
+the entire px file can be automatically translated into HTML for
+hx users.  See <a href='hx.html'>hx</a> for more details. 
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="media">PxMedia</h1>
+<!------------------------------------------------------------->
+
+<p> 
+As a general rule any <code>BWidget</code> is automatically supported
+when viewing a px file.  However, viewing a px file in hx only supports
+a subset of widgets (those that have a hx agent).  This means that you
+must target the lowest common denominator when creating px presentations.
+The target media for a px presentation is captured via the 
+<code><a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/px/BPxMedia.bajadoc'>BPxMedia</a></code>
+class.  Both the px file and the PxView can store a PxMedia type.
+Currently there are only two available media types: <code>workbench:WbPxMedia</code>
+and <code>hx:HxPxMedia</code>.  The PxEditor will warn you if you attempt
+to use widgets and bindings not supported by the target media.
+</p>                                               
+ 
+
+<!------------------------------------------------------------->
+<h1 id="api">API</h1>
+<!------------------------------------------------------------->
+
+<p>            
+The bajaui module provides a standard API for serializing and
+deserializing a widget tree to and from it's XML representation.
+The <code><a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/px/PxEncoder.bajadoc'>PxEncoder</a></code> 
+class writes a widget tree to an XML document.  
+<code><a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/px/PxDecoder.bajadoc'>PxDecoder</a></code> 
+is used to read an XML document into memory as a widget tree.
+</p>               
+
+<!------------------------------------------------------------->
+<h1 id="syntax">Syntax</h1>
+<!------------------------------------------------------------->
+
+<p> 
+The bog XML format is optimized to be very concise with equal
+weight given to both read and write speed.  The px XML format is
+designed to be more human usable.  All px files have a root 
+<code>px</code> element with a required <code>version</code> and 
+optional <code>media</code> attribute.  Within the root <code>px</code> 
+element is an <code>import</code> element and a <code>content</code> 
+element.
+</p>                                             
+
+<p>
+The <code>import</code> section contains a list of <code>module</code>
+elements.  Each <code>module</code> specifies a Niagara module
+name using the <code>name</code> attribute.  This module list is
+used to resolve type names declared in the <code>content</code> 
+section.
+</p> 
+
+<p>
+The <code>content</code> section contains a single element which
+is the root of the px file's widget tree.  Each component in the
+tree uses a type name as the element name.  These type names are
+resolved to fully specified type specs via the import section.
+</p>                                                          
+
+<p> 
+Frozen simple properties of each component are declared as attributes
+in the component's start tag.  Complex and dynamic slots are specified
+as children elements.  The name of the slot inside the parent component
+may be specified using the <code>name</code> attribute.  Dynamic simple
+properties specify their string encoding using the <code>value</code>
+attribute.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="example">Example</h1>
+<!------------------------------------------------------------->
+
+<p>
+The following example shows a BoundLabel placed at 20,20 on a
+CanvasPane, which is itself nested in a ScrollPane.  Note since
+the CanvasPane is the value of ScrollPane's frozen property 
+<code>content</code>, it uses the <code>name</code> attribute.
+Note how frozen simple properties like <code>viewSize</code>, 
+<code>layout</code>, and <code>ord</code> are defined as attributes.
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;px version="1.0" media="workbench:WbPxMedia"&gt;
+&lt;import&gt;
+  &lt;module name="baja"/&gt;
+  &lt;module name="bajaui"/&gt;
+  &lt;module name="converters"/&gt;
+  &lt;module name="gx"/&gt;
+  &lt;module name="kitPx"/&gt;
+&lt;/import&gt;
+&lt;content&gt;
+&lt;ScrollPane&gt;
+  &lt;CanvasPane name="content" viewSize="500.0,400.0"&gt;
+    &lt;BoundLabel layout="20,20,100,20"&gt;
+      &lt;BoundLabelBinding ord="station:|slot:/Playground/SineWave" statusEffect="none"&gt;
+        &lt;ObjectToString name="text"/&gt;
+      &lt;/BoundLabelBinding&gt;
+    &lt;/BoundLabel&gt;
+  &lt;/CanvasPane&gt;
+&lt;/ScrollPane&gt;
+&lt;/content&gt;
+&lt;/px&gt;
+  </code>
+</pre>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/web.html" class="navbar">Prev</a> |  <a href="/doc/hx.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

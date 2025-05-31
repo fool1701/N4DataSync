@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarmOrion" runtimeProfile="rt" qualifiedName="javax.baja.alarmOrion.BOrionAlarmRecord" name="BOrionAlarmRecord" packageName="javax.baja.alarmOrion" public="true">
+<description>
+The representation of an alarm record within the orion database.
+</description>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">March 18, 2009</tag>
+<extends>
+<type class="com.tridium.orion.BOrionObject"/>
+</extends>
+<annotation><type class="com.tridium.orion.annotations.NiagaraOrionType"/>
+</annotation>
+<annotation><type class="com.tridium.orion.annotations.OrionProperty"/>
+<elementValue name="name">
+<annotationValue kind="expr">
+<expression>&#x22;alarmClass&#x22;</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="refType">
+<annotationValue kind="expr">
+<expression>&#x22;alarmOrion:OrionAlarmClass&#x22;</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="flags">
+<annotationValue kind="expr">
+<expression>8</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="facets">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.nre.annotations.Facet"/>
+<elementValue name="name">
+<annotationValue kind="expr">
+<expression>&#x22;ON_DELETE&#x22;</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="value">
+<annotationValue kind="expr">
+<expression>&#x22;BOnDelete.CASCADE&#x22;</expression>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.nre.annotations.Facet"/>
+<elementValue name="name">
+<annotationValue kind="expr">
+<expression>&#x22;AUTO_RESOLVE&#x22;</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="value">
+<annotationValue kind="expr">
+<expression>&#x22;true&#x22;</expression>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<property name="id" flags="rs">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;id&lt;/code&gt; property.
+</description>
+<tag name="@see">#getId</tag>
+<tag name="@see">#setId</tag>
+</property>
+
+<property name="timestamp" flags="s">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;timestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimestamp</tag>
+<tag name="@see">#setTimestamp</tag>
+</property>
+
+<property name="datestamp" flags="s">
+<type class="javax.baja.sys.BDate"/>
+<description>
+Slot for the &lt;code&gt;datestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDatestamp</tag>
+<tag name="@see">#setDatestamp</tag>
+</property>
+
+<property name="uuidHash" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;uuidHash&lt;/code&gt; property.&#xa; The hash of the universal identifier of the alarm.
+</description>
+<tag name="@see">#getUuidHash</tag>
+<tag name="@see">#setUuidHash</tag>
+</property>
+
+<property name="uuid" flags="">
+<type class="javax.baja.util.BUuid"/>
+<description>
+Slot for the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#getUuid</tag>
+<tag name="@see">#setUuid</tag>
+</property>
+
+<property name="isOpen" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;isOpen&lt;/code&gt; property.&#xa; Is the alarm open.
+</description>
+<tag name="@see">#getIsOpen</tag>
+<tag name="@see">#setIsOpen</tag>
+</property>
+
+<property name="sourceState" flags="">
+<type class="javax.baja.alarm.BSourceState"/>
+<description>
+Slot for the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#getSourceState</tag>
+<tag name="@see">#setSourceState</tag>
+</property>
+
+<property name="ackState" flags="">
+<type class="javax.baja.alarm.BAckState"/>
+<description>
+Slot for the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#getAckState</tag>
+<tag name="@see">#setAckState</tag>
+</property>
+
+<property name="ackRequired" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#getAckRequired</tag>
+<tag name="@see">#setAckRequired</tag>
+</property>
+
+<property name="alarmClass" flags="s">
+<type class="com.tridium.orion.BRef"/>
+<description>
+Slot for the &lt;code&gt;alarmClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlarmClass</tag>
+<tag name="@see">#setAlarmClass</tag>
+</property>
+
+<property name="priority" flags="s">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#getPriority</tag>
+<tag name="@see">#setPriority</tag>
+</property>
+
+<property name="normalTime" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#getNormalTime</tag>
+<tag name="@see">#setNormalTime</tag>
+</property>
+
+<property name="ackTime" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note:&#xa; that interpretation of this property&#x27;s value depends upon&#xa; the state of the alarm.
+</description>
+<tag name="@see">#getAckTime</tag>
+<tag name="@see">#setAckTime</tag>
+</property>
+
+<property name="userAccount" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;userAccount&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#getUserAccount</tag>
+<tag name="@see">#setUserAccount</tag>
+</property>
+
+<property name="alarmTransition" flags="">
+<type class="javax.baja.alarm.BSourceState"/>
+<description>
+Slot for the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#getAlarmTransition</tag>
+<tag name="@see">#setAlarmTransition</tag>
+</property>
+
+<property name="lastUpdate" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occour&#xa; at creation, acknowlegement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#getLastUpdate</tag>
+<tag name="@see">#setLastUpdate</tag>
+</property>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord() -->
+<constructor name="BOrionAlarmRecord" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getId() -->
+<method name="getId"  public="true">
+<description>
+Get the &lt;code&gt;id&lt;/code&gt; property.
+</description>
+<tag name="@see">#id</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setId(int) -->
+<method name="setId"  public="true">
+<description>
+Set the &lt;code&gt;id&lt;/code&gt; property.
+</description>
+<tag name="@see">#id</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getTimestamp() -->
+<method name="getTimestamp"  public="true">
+<description>
+Get the &lt;code&gt;timestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#timestamp</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setTimestamp(javax.baja.sys.BAbsTime) -->
+<method name="setTimestamp"  public="true">
+<description>
+Set the &lt;code&gt;timestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#timestamp</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getDatestamp() -->
+<method name="getDatestamp"  public="true">
+<description>
+Get the &lt;code&gt;datestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#datestamp</tag>
+<return>
+<type class="javax.baja.sys.BDate"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setDatestamp(javax.baja.sys.BDate) -->
+<method name="setDatestamp"  public="true">
+<description>
+Set the &lt;code&gt;datestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#datestamp</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BDate"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getUuidHash() -->
+<method name="getUuidHash"  public="true">
+<description>
+Get the &lt;code&gt;uuidHash&lt;/code&gt; property.&#xa; The hash of the universal identifier of the alarm.
+</description>
+<tag name="@see">#uuidHash</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setUuidHash(int) -->
+<method name="setUuidHash"  public="true">
+<description>
+Set the &lt;code&gt;uuidHash&lt;/code&gt; property.&#xa; The hash of the universal identifier of the alarm.
+</description>
+<tag name="@see">#uuidHash</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getUuid() -->
+<method name="getUuid"  public="true">
+<description>
+Get the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#uuid</tag>
+<return>
+<type class="javax.baja.util.BUuid"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setUuid(javax.baja.util.BUuid) -->
+<method name="setUuid"  public="true">
+<description>
+Set the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#uuid</tag>
+<parameter name="v">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getIsOpen() -->
+<method name="getIsOpen"  public="true">
+<description>
+Get the &lt;code&gt;isOpen&lt;/code&gt; property.&#xa; Is the alarm open.
+</description>
+<tag name="@see">#isOpen</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setIsOpen(boolean) -->
+<method name="setIsOpen"  public="true">
+<description>
+Set the &lt;code&gt;isOpen&lt;/code&gt; property.&#xa; Is the alarm open.
+</description>
+<tag name="@see">#isOpen</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getSourceState() -->
+<method name="getSourceState"  public="true">
+<description>
+Get the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#sourceState</tag>
+<return>
+<type class="javax.baja.alarm.BSourceState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setSourceState(javax.baja.alarm.BSourceState) -->
+<method name="setSourceState"  public="true">
+<description>
+Set the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#sourceState</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BSourceState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAckState() -->
+<method name="getAckState"  public="true">
+<description>
+Get the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#ackState</tag>
+<return>
+<type class="javax.baja.alarm.BAckState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setAckState(javax.baja.alarm.BAckState) -->
+<method name="setAckState"  public="true">
+<description>
+Set the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#ackState</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BAckState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAckRequired() -->
+<method name="getAckRequired"  public="true">
+<description>
+Get the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#ackRequired</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setAckRequired(boolean) -->
+<method name="setAckRequired"  public="true">
+<description>
+Set the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#ackRequired</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAlarmClass() -->
+<method name="getAlarmClass"  public="true">
+<description>
+Get the &lt;code&gt;alarmClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#alarmClass</tag>
+<return>
+<type class="com.tridium.orion.BRef"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setAlarmClass(com.tridium.orion.BRef) -->
+<method name="setAlarmClass"  public="true">
+<description>
+Set the &lt;code&gt;alarmClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#alarmClass</tag>
+<parameter name="v">
+<type class="com.tridium.orion.BRef"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.resolveAlarmClass(com.tridium.orion.OrionSession) -->
+<method name="resolveAlarmClass"  public="true">
+<description>
+Resolve the &lt;code&gt;alarmClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#alarmClass</tag>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="javax.baja.alarmOrion.BOrionAlarmClass"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getPriority() -->
+<method name="getPriority"  public="true">
+<description>
+Get the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#priority</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setPriority(int) -->
+<method name="setPriority"  public="true">
+<description>
+Set the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#priority</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getNormalTime() -->
+<method name="getNormalTime"  public="true">
+<description>
+Get the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#normalTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setNormalTime(javax.baja.sys.BAbsTime) -->
+<method name="setNormalTime"  public="true">
+<description>
+Set the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#normalTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAckTime() -->
+<method name="getAckTime"  public="true">
+<description>
+Get the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note:&#xa; that interpretation of this property&#x27;s value depends upon&#xa; the state of the alarm.
+</description>
+<tag name="@see">#ackTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setAckTime(javax.baja.sys.BAbsTime) -->
+<method name="setAckTime"  public="true">
+<description>
+Set the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note:&#xa; that interpretation of this property&#x27;s value depends upon&#xa; the state of the alarm.
+</description>
+<tag name="@see">#ackTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getUserAccount() -->
+<method name="getUserAccount"  public="true">
+<description>
+Get the &lt;code&gt;userAccount&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#userAccount</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setUserAccount(java.lang.String) -->
+<method name="setUserAccount"  public="true">
+<description>
+Set the &lt;code&gt;userAccount&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#userAccount</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAlarmTransition() -->
+<method name="getAlarmTransition"  public="true">
+<description>
+Get the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#alarmTransition</tag>
+<return>
+<type class="javax.baja.alarm.BSourceState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setAlarmTransition(javax.baja.alarm.BSourceState) -->
+<method name="setAlarmTransition"  public="true">
+<description>
+Set the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#alarmTransition</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BSourceState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getLastUpdate() -->
+<method name="getLastUpdate"  public="true">
+<description>
+Get the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occour&#xa; at creation, acknowlegement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#lastUpdate</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.setLastUpdate(javax.baja.sys.BAbsTime) -->
+<method name="setLastUpdate"  public="true">
+<description>
+Set the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occour&#xa; at creation, acknowlegement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#lastUpdate</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.make(javax.baja.alarm.BAlarmRecord, com.tridium.orion.OrionSession) -->
+<method name="make"  public="true" static="true">
+<description>
+Create an BOrionAlarm object representation of a BAlarmRecord.  This does not&#xa; store the object within the database, or set the alarm source or alarm data values.
+</description>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="javax.baja.alarmOrion.BOrionAlarmRecord"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.get(javax.baja.util.BUuid, com.tridium.orion.OrionSession) -->
+<method name="get"  public="true" static="true">
+<description>
+Get an alarm record from the database based on a unique uuid.
+</description>
+<parameter name="uuid">
+<type class="javax.baja.util.BUuid"/>
+</parameter>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="javax.baja.alarmOrion.BOrionAlarmRecord"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAlarmRecord(com.tridium.orion.OrionSession) -->
+<method name="getAlarmRecord"  public="true">
+<description>
+Get the BAlarmRecord object that was represented in the&#xa; database by this BOrionAlarm object.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAlarmClass(com.tridium.orion.OrionSession) -->
+<method name="getAlarmClass"  public="true">
+<description>
+Get the alarm&#x27;s class
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getSource(com.tridium.orion.OrionSession) -->
+<method name="getSource"  public="true">
+<description>
+Get the alarm&#x27;s source
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrdList"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAlarmData(com.tridium.orion.OrionSession) -->
+<method name="getAlarmData"  public="true">
+<description>
+Get the alarm&#x27;s facet data
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.getAlarmData(java.lang.String, com.tridium.orion.OrionSession) -->
+<method name="getAlarmData"  public="true">
+<description>
+Retrieve the value of a specific alarm facet. This is most efficient if you need only&#xa; a single facet value, but if you plan on accessing multiple facets it is best to use&#xa; the getAlarmData method to retrieve them all instead.
+</description>
+<parameter name="facetName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="javax.baja.data.BIDataValue"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.isAlarm() -->
+<method name="isAlarm"  public="true">
+<description>
+Mirrors the behavior of BAlarmRecord.isAlarm().
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the record type is alarm.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.isAcknowledged() -->
+<method name="isAcknowledged"  public="true">
+<description>
+Mirrors the behavior of BAlarmRecord.isAcknowledged().
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the ackState is acked.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.isAckPending() -->
+<method name="isAckPending"  public="true">
+<description>
+Mirrors the behavior of BAlarmRecord.isAckPending().
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the ackState is ackPending.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.isNormal() -->
+<method name="isNormal"  public="true">
+<description>
+Mirrors the behavior of BAlarmRecord.isNormal().
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the sourceState is normal.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.isOpen() -->
+<method name="isOpen"  public="true">
+<description>
+Mirrors the behavior of BAlarmRecord.isOpen().
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the record is open
+</description>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.beforeInsert(com.tridium.orion.OrionSession) -->
+<method name="beforeInsert"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.beforeUpdate(com.tridium.orion.OrionSession) -->
+<method name="beforeUpdate"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.id -->
+<field name="id"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;id&lt;/code&gt; property.
+</description>
+<tag name="@see">#getId</tag>
+<tag name="@see">#setId</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.timestamp -->
+<field name="timestamp"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTimestamp</tag>
+<tag name="@see">#setTimestamp</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.datestamp -->
+<field name="datestamp"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;datestamp&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDatestamp</tag>
+<tag name="@see">#setDatestamp</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.uuidHash -->
+<field name="uuidHash"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;uuidHash&lt;/code&gt; property.&#xa; The hash of the universal identifier of the alarm.
+</description>
+<tag name="@see">#getUuidHash</tag>
+<tag name="@see">#setUuidHash</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.uuid -->
+<field name="uuid"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;uuid&lt;/code&gt; property.&#xa; The unique universal identifier of the alarm.
+</description>
+<tag name="@see">#getUuid</tag>
+<tag name="@see">#setUuid</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.isOpen -->
+<field name="isOpen"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;isOpen&lt;/code&gt; property.&#xa; Is the alarm open.
+</description>
+<tag name="@see">#getIsOpen</tag>
+<tag name="@see">#setIsOpen</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.sourceState -->
+<field name="sourceState"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sourceState&lt;/code&gt; property.&#xa; The current state of the alarm source.
+</description>
+<tag name="@see">#getSourceState</tag>
+<tag name="@see">#setSourceState</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.ackState -->
+<field name="ackState"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ackState&lt;/code&gt; property.&#xa; The current acknowledged state of the alarm.
+</description>
+<tag name="@see">#getAckState</tag>
+<tag name="@see">#setAckState</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.ackRequired -->
+<field name="ackRequired"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ackRequired&lt;/code&gt; property.&#xa; If alarm is required to be routed back to its source.
+</description>
+<tag name="@see">#getAckRequired</tag>
+<tag name="@see">#setAckRequired</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.alarmClass -->
+<field name="alarmClass"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmClass&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlarmClass</tag>
+<tag name="@see">#setAlarmClass</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.priority -->
+<field name="priority"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;priority&lt;/code&gt; property.&#xa; The priority of the alarm (0=high, 255=low).
+</description>
+<tag name="@see">#getPriority</tag>
+<tag name="@see">#setPriority</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.normalTime -->
+<field name="normalTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;normalTime&lt;/code&gt; property.&#xa; The time at which the alarm goes back to normal state
+</description>
+<tag name="@see">#getNormalTime</tag>
+<tag name="@see">#setNormalTime</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.ackTime -->
+<field name="ackTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ackTime&lt;/code&gt; property.&#xa; The time at which the alarm is acked.  Note:&#xa; that interpretation of this property&#x27;s value depends upon&#xa; the state of the alarm.
+</description>
+<tag name="@see">#getAckTime</tag>
+<tag name="@see">#setAckTime</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.userAccount -->
+<field name="userAccount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;userAccount&lt;/code&gt; property.&#xa; The name of the user who acknowledged the alarm.
+</description>
+<tag name="@see">#getUserAccount</tag>
+<tag name="@see">#setUserAccount</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.alarmTransition -->
+<field name="alarmTransition"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmTransition&lt;/code&gt; property.&#xa; The initial source state that caused the alarm to be generated.
+</description>
+<tag name="@see">#getAlarmTransition</tag>
+<tag name="@see">#setAlarmTransition</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.lastUpdate -->
+<field name="lastUpdate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastUpdate&lt;/code&gt; property.&#xa; The time at which the alarm was last updated. Updates occour&#xa; at creation, acknowlegement, and changes to alarmData such as notes.
+</description>
+<tag name="@see">#getLastUpdate</tag>
+<tag name="@see">#setLastUpdate</tag>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.alarmOrion.BOrionAlarmRecord.ORION_TYPE -->
+<field name="ORION_TYPE"  public="true" static="true" final="true">
+<type class="com.tridium.orion.OrionType"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

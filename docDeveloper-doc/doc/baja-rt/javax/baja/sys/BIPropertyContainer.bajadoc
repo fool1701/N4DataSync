@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BIPropertyContainer" name="BIPropertyContainer" packageName="javax.baja.sys" public="true" interface="true" abstract="true" category="interface">
+<description>
+This interface is implemented by objects that contain dynamic properties.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">12 Aug 09</tag>
+<tag name="@version">$Revision: 1$ $Date: 8/18/09 4:26:55 PM EDT$</tag>
+<tag name="@since">Niagara 3.5</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.sys.BIPropertyContainer.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" abstract="true">
+<description>
+Get the display name for this instance.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getDisplayName(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" abstract="true">
+<description>
+Get the display name of the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true" abstract="true">
+<description>
+Get the facets for the specified slot.&#xa; You should *never* return null, but rather BFacets.DEFAULT.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.propertyValueToString(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="propertyValueToString"  public="true" abstract="true">
+<description>
+This is a convenience for:&#xa; &lt;code&gt;get(prop).toString(getSlotFacets(prop))&lt;/code&gt;
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getSlot(java.lang.String) -->
+<method name="getSlot"  public="true" abstract="true">
+<description>
+Get the Slot for specified name, or return null if name&#xa; does map to a Slot.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+String name of slot to find.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Slot"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getProperty(java.lang.String) -->
+<method name="getProperty"  public="true" abstract="true">
+<description>
+Get the Property for specified name, or return null if&#xa; name does map to a Property.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+String name of property to find.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getSlotCount() -->
+<method name="getSlotCount"  public="true" abstract="true">
+<description>
+Get the number of slots on this object.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getSlotCount(java.lang.Class&lt;?&gt;) -->
+<method name="getSlotCount"  public="true" abstract="true">
+<description>
+Convenience method to get the number of slots&#xa; of a particular class.
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getSlotsArray() -->
+<method name="getSlotsArray"  public="true" abstract="true">
+<description>
+Get a array listing all the slots.
+</description>
+<return>
+<type class="javax.baja.sys.Slot" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getSlots() -->
+<method name="getSlots"  public="true" abstract="true">
+<description>
+Get a SlotCursor to iterate through all the slots.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Slot"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getPropertiesArray() -->
+<method name="getPropertiesArray"  public="true" abstract="true">
+<description>
+Get an array of all the properties.
+</description>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getFrozenPropertiesArray() -->
+<method name="getFrozenPropertiesArray"  public="true" abstract="true">
+<description>
+Get an array of all the frozen properties.
+</description>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getDynamicPropertiesArray() -->
+<method name="getDynamicPropertiesArray"  public="true" abstract="true">
+<description>
+Get an array of all the dynamic properties.
+</description>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getProperties() -->
+<method name="getProperties"  public="true" abstract="true">
+<description>
+Get a cursor to iterate through all the properties.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.loadSlots() -->
+<method name="loadSlots"  public="true" abstract="true">
+<description>
+Make sure that the children slots are loaded.  This method&#xa; allows component spaces to lazy load their components via&#xa; the LoadCallbacks API.  It may not be applicable to all&#xa; BIPropertyContainer subclasses, so it may be a no op and&#xa; return null for some non-BComponents instances.
+</description>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+<description>
+the BComplex instance that had its properties loaded (usually this, or null if not applicable)
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.lease() -->
+<method name="lease"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;lease(0, 60000L)&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.lease(int, long) -->
+<method name="lease"  public="true" abstract="true">
+<description>
+Only used for BComponents (in other cases, this is a no op).&#xa; Lease this component for the specified number of milliseconds&#xa; so that it expires at &lt;code&gt;Clock.ticks() + millis&lt;/code&gt;.&#xa; Leasing is a stateless form of subscription which automatically &#xa; performs a subscribe and then an unsubscribe when the lease &#xa; expires.  If the component is already under lease, then the &#xa; new lease expiration is the max of the previous lease expiration&#xa; or &lt;code&gt;Clock.ticks() + millis&lt;/code&gt;.  If depth is greater than&#xa; zero then the lease includes descendants (one is children, two is&#xa; children and grandchildren, etc).
+</description>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<parameter name="millis">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.get(javax.baja.sys.Property) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get the specified property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.get(java.lang.String) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get a property by it&#x27;s String name, or return&#xa; null if the name doesn&#x27;t map to a property.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+<description>
+String name of property to get.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.set(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="set"  public="true" abstract="true">
+<description>
+Set the specified property value.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.set(java.lang.String, javax.baja.sys.BValue) -->
+<method name="set"  public="true" abstract="true">
+<description>
+Set using a String property name.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.getFlags(javax.baja.sys.Slot) -->
+<method name="getFlags"  public="true" abstract="true">
+<description>
+Get the bitmask of flags for the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.setFlags(javax.baja.sys.Slot, int, javax.baja.sys.Context) -->
+<method name="setFlags"  public="true" abstract="true">
+<description>
+Set the bitmask of flags for the specified slot.  This&#xa; method is only supported on BComponent instances.  BSimples&#xa; have no slots and BStruct properties have fixed flags&#xa; which may not be modified on a per instance basis.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.add(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="add"  public="true" abstract="true">
+<description>
+Add a new slot to this container.  The new slot is&#xa; always a dynamic (un-frozen) Property.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the unique name to use as the String&#xa;    key for the slot.  If null is passed, then a&#xa;    unique name should automatically be generated.&#xa;    If the name ends with the &#x27;?&#x27; character a unique&#xa;    name should automatically be generated by appending&#xa;    numbers to the specified name.  The name must meet &#xa;    the &#x22;name&#x22; production in the SlotPath BNF grammar.  &#xa;    Informally this means that the name must start with &#xa;    an ascii letter and contain only ascii letters, ascii &#xa;    digits, or &#x27;_&#x27;.  Escape sequences can be specified &#xa;    using the &#x27;$&#x27; char.  Use SlotPath.escape() to escape&#xa;    illegal characters.
+</description>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+<description>
+BValue value of the new property.
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+<description>
+Mask of the properties slots using constants&#xa;    defined in Flags.
+</description>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Facets provide additional meta-data about&#xa;    the property. Maybe null or BFacets.NULL if no facets&#xa;    are required.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+Used to provide additional contextual info.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+<description>
+the property the slot was added with, or&#xa;    null if trapped by a transaction or remote call.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.remove(java.lang.String, javax.baja.sys.Context) -->
+<method name="remove"  public="true" abstract="true">
+<description>
+Remove the dynamic slot by the specified name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.remove(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="remove"  public="true" abstract="true">
+<description>
+Remove the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.removeAll(javax.baja.sys.Context) -->
+<method name="removeAll"  public="true" abstract="true">
+<description>
+Remove all dynamic properties.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.rename(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="rename"  public="true" abstract="true">
+<description>
+Rename the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Property"/>
+<description>
+Property to rename.
+</description>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+<description>
+New String name for the property.&#xa;    The name must meet the &#x22;name&#x22; production in the&#xa;    SlotPath BNF grammar.  Informally this means that&#xa;    the name must start with an ascii letter, and &#xa;    contain only ascii letters, ascii digits, or &#x27;_&#x27;.  &#xa;    Escape sequences can be specified using the &#x27;$&#x27; char.  &#xa;    Use SlotPath.escape() to escape illegal characters.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+Used to provide additional contextual info.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.setFacets(javax.baja.sys.Slot, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="setFacets"  public="true" abstract="true">
+<description>
+Change the facets of a dynamic slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+<description>
+Dynamic slot to change.
+</description>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+The BFacets instance to use as new facets for slot.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+Used to provide additional contextual info.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.reorder(javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="reorder"  public="true" abstract="true">
+<description>
+Reorder this instance&#x27;s dynamic properties.
+</description>
+<parameter name="dynamicProperties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.reorderToTop(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="reorderToTop"  public="true" abstract="true">
+<description>
+Reorder the specified dynamic property to the &#xa; first dynamic slot position.
+</description>
+<parameter name="dynamicProperty">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.reorderToBottom(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="reorderToBottom"  public="true" abstract="true">
+<description>
+Reorder the specified dynamic property to the &#xa; last dynamic slot position.
+</description>
+<parameter name="dynamicProperty">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIPropertyContainer.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

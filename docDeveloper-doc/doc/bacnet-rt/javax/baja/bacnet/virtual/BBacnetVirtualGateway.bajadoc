@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.virtual.BBacnetVirtualGateway" name="BBacnetVirtualGateway" packageName="javax.baja.bacnet.virtual" public="true">
+<description>
+BBacnetVirtualGateway is the gateway to the BACnet virtual component&#xa; space.  It defines the root virtual component, and implements the&#xa; discovery and creation of virtual components.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">12 Dec 2006</tag>
+<tag name="@since">NiagaraAX 3.2</tag>
+<extends>
+<type class="javax.baja.virtual.BVirtualGateway"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.BacnetConst"/>
+</implements>
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway() -->
+<constructor name="BBacnetVirtualGateway" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.makeBacnetVirtualComponent(java.lang.String) -->
+<method name="makeBacnetVirtualComponent"  protected="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated"/>
+<parameter name="virtualPathName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.makeBacnetVirtualObject(java.lang.String) -->
+<method name="makeBacnetVirtualObject"  protected="true">
+<description/>
+<parameter name="virtualPathName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualObject"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.makeBacnetVirtualProperty(int, javax.baja.sys.BValue, java.lang.String, boolean) -->
+<method name="makeBacnetVirtualProperty"  protected="true">
+<description/>
+<parameter name="propertyId">
+<type class="int"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="readFault">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="useFacets">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualProperty"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.getAuditWrites() -->
+<method name="getAuditWrites"  protected="true">
+<description>
+Should writes performed through the BVirtualPropertyWrite dynamic action&#xa; generate separate audit log events?
+</description>
+<return>
+<type class="boolean"/>
+<description>
+false by default, subclasses may override.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.setAuditWrites(boolean) -->
+<method name="setAuditWrites"  protected="true">
+<description>
+Set the flag indicating if BVirtualPropertyWrite invocations should generate&#xa; separate audit log events.
+</description>
+<parameter name="aw">
+<type class="boolean"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.makeVirtualSpace() -->
+<method name="makeVirtualSpace"  protected="true">
+<description>
+Creates a new virtual component space to use for this virtual gateway.&#xa; Subclasses can override this method if they wish to insert their&#xa; own custom virtual component space, otherwise a default one will be used.&#xa; &lt;p&gt;&#xa; NOTE: The virtual space created should have its root component&#xa; assigned in this method.  This is done by using the makeVirtualRoot()&#xa; method.
+</description>
+<return>
+<type class="javax.baja.virtual.BVirtualComponentSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.loadVirtualSlot(javax.baja.virtual.BVirtualComponent, java.lang.String) -->
+<method name="loadVirtualSlot"  public="true">
+<description>
+This method is called by the virtual space&#x27;s LoadCallbacks when a&#xa; slot should be loaded/resolved under the given parent.&#xa; This is the time to load an individual slot, or return the existing&#xa; slot if already loaded.&#xa; &lt;p&gt;&#xa; The default implementation of this method is sufficient for most&#xa; scenarios.  By default, if the specified virtual path name does not&#xa; specify an existing slot under the given parent, then the addVirtualSlot()&#xa; callback will be made to give subclasses a chance to generate and add&#xa; the appropriate virtual slot to the the parent component.&#xa; &lt;p&gt;&#xa; NOTE:  Virtual slots added should always use a slot name that is the&#xa; escaped virtual path name ie. use SlotPath.escape(virtualPathName) as&#xa; the name of the virtual slot added.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possibility of a partial loaded state supported by&#xa; virtuals, subclasses should also be aware of the subscription state.&#xa; This means that a loadVirtualSlot() call for a new virtual slot&#xa; could occur while the parent is already subscribed.  So this could affect&#xa; how the new virtual slot should be handled (ie. added to a poll scheduler).&#xa; Subclasses should always be aware of this potential state.
+</description>
+<parameter name="parent">
+<type class="javax.baja.virtual.BVirtualComponent"/>
+</parameter>
+<parameter name="virtualPathName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Slot"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.addVirtualSlot(javax.baja.virtual.BVirtualComponent, java.lang.String) -->
+<method name="addVirtualSlot"  protected="true">
+<description>
+This method is called by the default implementation of loadVirtualSlot()&#xa; and should be implemented by subclasses to add a new&#xa; instance of a virtual component (or a BValue instance to be a property&#xa; on a virtual component).  The value added should be based on the&#xa; given virtual path name and relative to the parent virtual component.&#xa; The contract is that the new slot added for the generated virtual&#xa; instance MUST be named by the escaped virtual path name&#xa; (ie. always use SlotPath.escape(virtualPathName) as the name of the slot added&#xa; to the parent).  This method should return the property for the slot added.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possibility of a partial loaded state supported by&#xa; virtuals, subclasses should also be aware of the subscription state.&#xa; This means that an addVirtualSlot() call for a new virtual slot&#xa; could occur while the parent is already subscribed.  So this could affect&#xa; how the new virtual slot should be handled (ie. added to a poll scheduler).&#xa; Subclasses should always be aware of this potential state.
+</description>
+<parameter name="parent">
+<type class="javax.baja.virtual.BVirtualComponent"/>
+</parameter>
+<parameter name="virtualPathName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.loadVirtualSlots(javax.baja.virtual.BVirtualComponent) -->
+<method name="loadVirtualSlots"  public="true">
+<description>
+This method is called by the virtual space&#x27;s LoadCallbacks when&#xa; it is time for a virtual component to lazy load all of its dynamic&#xa; slots.  Subclasses should implement this method to&#xa; &#x22;discover&#x22; and dynamically add the direct children of the parent&#xa; virtual component instance provided.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possibility of a &#x22;partial&#x22; loaded state, this&#xa; method may be called when the parent instance already has some&#xa; of its dynamic child slots loaded, but not all.  So this means&#xa; that it is important to check for existing slots on the parent&#xa; before adding any new dynamic slots of the same name.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possibility of a partial loaded state supported by&#xa; virtuals, subclasses should also be aware of the subscription state.&#xa; This means that a loadVirtualSlots() call&#xa; could occur while the parent is already subscribed.  So this could affect&#xa; how any new virtual slots added should be handled (ie. added to a poll scheduler).&#xa; Subclasses should always be aware of this potential state.
+</description>
+<parameter name="parent">
+<type class="javax.baja.virtual.BVirtualComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.updateStatus() -->
+<method name="updateStatus"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.loadObjects(javax.baja.virtual.BVirtualComponent) -->
+<method name="loadObjects"  protected="true">
+<description>
+Load objects into the gateway by reading the device&#x27;s Object_List property.
+</description>
+<parameter name="parent">
+<type class="javax.baja.virtual.BVirtualComponent"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.loadProperties(javax.baja.bacnet.virtual.BBacnetVirtualObject) -->
+<method name="loadProperties"  protected="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Load properties for a BacnetVirtualComponent by reading all its properties.&#xa; This can be done with RPM(all), or by reading the list of possible properties.
+</description>
+<parameter name="parent">
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualObject"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.readArraySize(javax.baja.bacnet.virtual.BBacnetVirtualProperty) -->
+<method name="readArraySize"  protected="true">
+<description/>
+<parameter name="vp">
+<type class="javax.baja.bacnet.virtual.BBacnetVirtualProperty"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.virtual.BBacnetVirtualGateway.log -->
+<field name="log"  protected="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

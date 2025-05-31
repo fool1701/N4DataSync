@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devIpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfIp.tcp.comm.BDdfTcpHelper" name="BDdfTcpHelper" packageName="com.tridium.ddfIp.tcp.comm" public="true">
+<description>
+This is used as a property on the BDdfTcpCommunicator to define&#xa; the IP address and IP port of the field-device or field-gateway&#xa; to which the driver will communicate. This also defines the Tcp/Ip&#xa; socket connection timeout.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<property name="destinationAddress" flags="">
+<type class="com.tridium.ddfIp.comm.BDdfIpAddressPort"/>
+<description>
+Slot for the &lt;code&gt;destinationAddress&lt;/code&gt; property.&#xa; Encapsulates the ipAddress and port for the Tcp/Ip target server.&#xa; This is flagged as summary so that it&#xa; Can appear in the device manager, if the device communicates on&#xa; Its own.
+</description>
+<tag name="@see">#getDestinationAddress</tag>
+<tag name="@see">#setDestinationAddress</tag>
+</property>
+
+<property name="socketConnectionTimeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;socketConnectionTimeout&lt;/code&gt; property.&#xa; This defines the amount of time to wait when establishing the Tcp connection before timing out
+</description>
+<tag name="@see">#getSocketConnectionTimeout</tag>
+<tag name="@see">#setSocketConnectionTimeout</tag>
+</property>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper() -->
+<constructor name="BDdfTcpHelper" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.getDestinationAddress() -->
+<method name="getDestinationAddress"  public="true">
+<description>
+Get the &lt;code&gt;destinationAddress&lt;/code&gt; property.&#xa; Encapsulates the ipAddress and port for the Tcp/Ip target server.&#xa; This is flagged as summary so that it&#xa; Can appear in the device manager, if the device communicates on&#xa; Its own.
+</description>
+<tag name="@see">#destinationAddress</tag>
+<return>
+<type class="com.tridium.ddfIp.comm.BDdfIpAddressPort"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.setDestinationAddress(com.tridium.ddfIp.comm.BDdfIpAddressPort) -->
+<method name="setDestinationAddress"  public="true">
+<description>
+Set the &lt;code&gt;destinationAddress&lt;/code&gt; property.&#xa; Encapsulates the ipAddress and port for the Tcp/Ip target server.&#xa; This is flagged as summary so that it&#xa; Can appear in the device manager, if the device communicates on&#xa; Its own.
+</description>
+<tag name="@see">#destinationAddress</tag>
+<parameter name="v">
+<type class="com.tridium.ddfIp.comm.BDdfIpAddressPort"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.getSocketConnectionTimeout() -->
+<method name="getSocketConnectionTimeout"  public="true">
+<description>
+Get the &lt;code&gt;socketConnectionTimeout&lt;/code&gt; property.&#xa; This defines the amount of time to wait when establishing the Tcp connection before timing out
+</description>
+<tag name="@see">#socketConnectionTimeout</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.setSocketConnectionTimeout(javax.baja.sys.BRelTime) -->
+<method name="setSocketConnectionTimeout"  public="true">
+<description>
+Set the &lt;code&gt;socketConnectionTimeout&lt;/code&gt; property.&#xa; This defines the amount of time to wait when establishing the Tcp connection before timing out
+</description>
+<tag name="@see">#socketConnectionTimeout</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.createSocket() -->
+<method name="createSocket"  public="true">
+<description/>
+<return>
+<type class="java.net.Socket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.getLocalPort() -->
+<method name="getLocalPort"  public="true">
+<description>
+If the developer&#x27;s Tcp protocol requires a specific local bind port, then the developer should override this method&#xa; and define the specific local bind port.
+</description>
+<return>
+<type class="int"/>
+<description>
+by default, this returns -1. This causes the &#x27;createSocket&#x27; logic to use any available port to bind to&#xa;         locally.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.getTcpCommunicator() -->
+<method name="getTcpCommunicator"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.createSocket(com.tridium.ddfIp.comm.BDdfIpAdapter, int) -->
+<method name="createSocket"  protected="true">
+<description/>
+<parameter name="networkInterface">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+</parameter>
+<parameter name="bindPort">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.net.Socket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.makeLocalHostSocket(int) -->
+<method name="makeLocalHostSocket"  protected="true">
+<description>
+Makes a Tcp/Ip socket bound locally to the given bind port. The socket will be bound&#xa; to the default localhost.
+</description>
+<parameter name="bindPort">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="java.net.Socket"/>
+<description>
+the requested socket
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.makeFullySpecifiedSocket(com.tridium.ddfIp.comm.BDdfIpAdapter, int) -->
+<method name="makeFullySpecifiedSocket"  protected="true">
+<description/>
+<parameter name="networkInterface">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+</parameter>
+<parameter name="bindPort">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.net.Socket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.destinationAddress -->
+<field name="destinationAddress"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;destinationAddress&lt;/code&gt; property.&#xa; Encapsulates the ipAddress and port for the Tcp/Ip target server.&#xa; This is flagged as summary so that it&#xa; Can appear in the device manager, if the device communicates on&#xa; Its own.
+</description>
+<tag name="@see">#getDestinationAddress</tag>
+<tag name="@see">#setDestinationAddress</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.socketConnectionTimeout -->
+<field name="socketConnectionTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;socketConnectionTimeout&lt;/code&gt; property.&#xa; This defines the amount of time to wait when establishing the Tcp connection before timing out
+</description>
+<tag name="@see">#getSocketConnectionTimeout</tag>
+<tag name="@see">#setSocketConnectionTimeout</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpHelper.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.BHistoryEvent" name="BHistoryEvent" packageName="javax.baja.history" public="true" final="true">
+<description>
+BHistoryEvent encapsulates the information associated&#xa; with a modification to the history database.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">14 Nov 08</tag>
+<tag name="@version">$Revision: 5$ $Date: 8/3/10 1:04:04 PM EDT$</tag>
+<tag name="@since">Niagara 3.4.47</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="javax.baja.io.BIEncodable"/>
+</implements>
+<!-- javax.baja.history.BHistoryEvent(int) -->
+<constructor name="BHistoryEvent" public="true">
+<parameter name="eventId">
+<type class="int"/>
+</parameter>
+<description>
+Constructor for a history database event.
+</description>
+</constructor>
+
+<!-- javax.baja.history.BHistoryEvent(int, javax.baja.history.BHistoryId) -->
+<constructor name="BHistoryEvent" public="true">
+<parameter name="eventId">
+<type class="int"/>
+</parameter>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<description>
+Constructor for a history event.
+</description>
+</constructor>
+
+<!-- javax.baja.history.BHistoryEvent() -->
+<constructor name="BHistoryEvent" public="true">
+<description>
+Public no arg constructor.  Framework use only!
+</description>
+</constructor>
+
+<!-- javax.baja.history.BHistoryEvent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeCreated(javax.baja.history.BHistoryId) -->
+<method name="makeCreated"  public="true" static="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Make a CREATED history event.
+</description>
+<tag name="@deprecated">As of Niagara 3.5, use &lt;code&gt;makeCreated(BHistoryId historyId, BHistoryConfig config)&lt;/code&gt; instead.</tag>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeCreated(javax.baja.history.BHistoryId, javax.baja.history.BHistoryConfig) -->
+<method name="makeCreated"  public="true" static="true">
+<description>
+Make a CREATED history event.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="config">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeDeleted(javax.baja.history.BHistoryId) -->
+<method name="makeDeleted"  public="true" static="true">
+<description>
+Make a DELETED history event.
+</description>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeAppended(javax.baja.history.BHistoryId, javax.baja.history.BIHistoryRecordSet) -->
+<method name="makeAppended"  public="true" static="true">
+<description>
+Make an APPENDED history event.
+</description>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="records">
+<type class="javax.baja.history.BIHistoryRecordSet"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeUpdated(javax.baja.history.BHistoryId, javax.baja.history.BIHistoryRecordSet) -->
+<method name="makeUpdated"  public="true" static="true">
+<description>
+Make an UPDATED history event.
+</description>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="record">
+<type class="javax.baja.history.BIHistoryRecordSet"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeClearedAll(javax.baja.history.BHistoryId) -->
+<method name="makeClearedAll"  public="true" static="true">
+<description>
+Make a CLEARED_ALL_RECORDS history event.
+</description>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeClearedOld(javax.baja.history.BHistoryId, javax.baja.sys.BAbsTime) -->
+<method name="makeClearedOld"  public="true" static="true">
+<description>
+Make a CLEARED_OLD_RECORDS history event.
+</description>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="clearOldTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeRenamed(javax.baja.history.BHistoryId, java.lang.String) -->
+<method name="makeRenamed"  public="true" static="true">
+<description>
+Make a RENAMED history event.
+</description>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="newHistoryName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeResized(javax.baja.history.BHistoryId, javax.baja.history.BCapacity, javax.baja.history.BFullPolicy) -->
+<method name="makeResized"  public="true" static="true">
+<description>
+Make a RESIZED history event.
+</description>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="capacity">
+<type class="javax.baja.history.BCapacity"/>
+</parameter>
+<parameter name="fullPolicy">
+<type class="javax.baja.history.BFullPolicy"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeDbOpened() -->
+<method name="makeDbOpened"  public="true" static="true">
+<description>
+Make a DB_OPENED history event.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeDbClosed() -->
+<method name="makeDbClosed"  public="true" static="true">
+<description>
+Make a DB_CLOSED history event.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeDbFlushed() -->
+<method name="makeDbFlushed"  public="true" static="true">
+<description>
+Make a DB_FLUSHED history event.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeDbSaved() -->
+<method name="makeDbSaved"  public="true" static="true">
+<description>
+Make a DB_SAVED history event.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeConfigChanged(javax.baja.history.BHistoryId, javax.baja.history.BHistoryConfig) -->
+<method name="makeConfigChanged"  public="true" static="true">
+<description>
+Make a CONFIG_CHANGED history event.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="historyId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="config">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeShorthand(javax.baja.history.BHistoryEvent, boolean) -->
+<method name="makeShorthand"  public="true" static="true">
+<description>
+The default encoding for history events does not&#xa; use the shorthand version for the history ids.  This means&#xa; the encoding is slightly bloated, but necessary for decoding in some&#xa; cases.  You can use this factory method to return a shorthand version&#xa; of the given history event (if useShorthand is true) which&#xa; enables shorthand encoding of history ids.  A false parameter indicates&#xa; the (default) full history id encoding will be used.  Be aware that if&#xa; this history event is being encoded to be passed to another station, you&#xa; may not want to use shorthand encoding since the device name&#xa; will be lost on decode.  So shorthand events should only be used for local&#xa; history events.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="event">
+<type class="javax.baja.history.BHistoryEvent"/>
+</parameter>
+<parameter name="useShorthand">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeStorageEvent(javax.baja.history.BHistoryEvent, javax.baja.io.BIEncodable, boolean) -->
+<method name="makeStorageEvent"  public="true" static="true">
+<description>
+Permit caller to substitute an alternative history ID string to that of the one found in the&#xa; HistoryEvent provided. Will internally call makeShorthand() passing the provided argument,&#xa; applying the provided ID afterwords. This is used to store history events in the data recovery&#xa; service and generally has no use outside of that workflow.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="event">
+<type class="javax.baja.history.BHistoryEvent"/>
+</parameter>
+<parameter name="alternativeEncodable">
+<type class="javax.baja.io.BIEncodable"/>
+</parameter>
+<parameter name="useShorthand">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.makeReplayEvent(javax.baja.history.BHistoryEvent, javax.baja.history.BHistoryId, boolean) -->
+<method name="makeReplayEvent"  public="true" static="true">
+<description>
+Permit caller to substitute an alternative history ID to that of the one found in the&#xa; HistoryEvent provided. Will internally call makeShorthand() passing the provided argument,&#xa; applying the provided ID afterwords. This is used to replay data recovery history events&#xa; to the history space and generally has no use outside of that workflow.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="event">
+<type class="javax.baja.history.BHistoryEvent"/>
+</parameter>
+<parameter name="alternativeId">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="useShorthand">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryEvent"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getId() -->
+<method name="getId"  public="true">
+<description>
+Get the event id constant.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getHistoryId() -->
+<method name="getHistoryId"  public="true">
+<description>
+Get the history Ids for the event.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryId"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getRecordSet() -->
+<method name="getRecordSet"  public="true">
+<description>
+Get the history records for the event.  Only valid&#xa; for APPENDED or UPDATED history events.
+</description>
+<return>
+<type class="javax.baja.history.BIHistoryRecordSet"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getClearOldTime() -->
+<method name="getClearOldTime"  public="true">
+<description>
+Get the clear old time.  Only valid for the&#xa; CLEARED_OLD_RECORDS history event.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getNewHistoryName() -->
+<method name="getNewHistoryName"  public="true">
+<description>
+Get the new history name (for a rename, this is the new&#xa; history name, the history Id will contain the old name).&#xa; Only valid for the RENAMED history event.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getCapacity() -->
+<method name="getCapacity"  public="true">
+<description>
+Get the new capacity for the history.  Only valid for the&#xa; RESIZED history event.
+</description>
+<return>
+<type class="javax.baja.history.BCapacity"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getFullPolicy() -->
+<method name="getFullPolicy"  public="true">
+<description>
+Get the new full policy for the history.  Only valid for the&#xa; RESIZED history event.
+</description>
+<return>
+<type class="javax.baja.history.BFullPolicy"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getConfig() -->
+<method name="getConfig"  public="true">
+<description>
+Get the new history config for the history.  Only valid for the&#xa; CREATED and CONFIG_CHANGED history events.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<return>
+<type class="javax.baja.history.BHistoryConfig"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.getUseShorthandEncoding() -->
+<method name="getUseShorthandEncoding"  public="true">
+<description>
+Returns whether shorthand encoding is used for the history id&#xa; of this history event.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To debug string.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode this BHistoryEvent instance to the provided DataOutput&#xa; stream.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode a BHistoryEvent instance from the provided DataInput&#xa; stream.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode this BHistoryEvent instance to a String representation.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode a BHistoryEvent instance from its String representation.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.clone() -->
+<method name="clone"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryEvent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.CREATED -->
+<field name="CREATED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history was created in the history database.&#xa; The value contains the history id of the new&#xa; history created.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.DELETED -->
+<field name="DELETED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history was deleted from the history database.&#xa; The value contains the history id of the old&#xa; history just deleted.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.APPENDED -->
+<field name="APPENDED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history has had an append of a history record.&#xa; The value contains the new history record appended.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.UPDATED -->
+<field name="UPDATED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history has had an update of an existing history record.&#xa; The value contains the new (updated) history record.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.CLEARED_ALL_RECORDS -->
+<field name="CLEARED_ALL_RECORDS"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history has had all records cleared.&#xa; The value contains the history id of the&#xa; history just cleared.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.CLEARED_OLD_RECORDS -->
+<field name="CLEARED_OLD_RECORDS"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history has had old records cleared.&#xa; The value contains the history id of the&#xa; history just cleared.  The timestamp indicates&#xa; the earliest time to kept in the result after the&#xa; clear (Records before this time were removed from&#xa; the specified history).
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.RENAMED -->
+<field name="RENAMED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history was renamed in the history database.&#xa; The value contains the new name&#xa; assigned to the history.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.RESIZED -->
+<field name="RESIZED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history was resized in the history database.&#xa; The value contains the new capacity and full policy.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.DB_OPENED -->
+<field name="DB_OPENED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the history&#xa; databased was just opened.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.DB_CLOSED -->
+<field name="DB_CLOSED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the history&#xa; databased was just closed.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.DB_FLUSHED -->
+<field name="DB_FLUSHED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the history&#xa; databased was just flushed.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.DB_SAVED -->
+<field name="DB_SAVED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the history&#xa; databased was just saved (perhaps archived).&#xa; Note that a DB_FLUSHED event will normally happen&#xa; just prior to a DB_SAVED event.
+</description>
+</field>
+
+<!-- javax.baja.history.BHistoryEvent.CONFIG_CHANGED -->
+<field name="CONFIG_CHANGED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This event id indicates that the specified&#xa; history has had its history config changed.&#xa; The value contains the history id of the&#xa; history whose config has changed.  The config indicates&#xa; the new history config assigned to the history.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.tag.TagDictionary" name="TagDictionary" packageName="javax.baja.tag" public="true" interface="true" abstract="true" category="interface">
+<description>
+A TagDictionary is a collection of tags and defined relationships.  A TagDictionary&#xa; must be installed in a station in order to have all of its features enabled.&#xa;&#xa; A TagDictionary defines:&#xa; 1. A set of tags within a single namespace.&#xa; 2. Relationships between tags within a dictionary.&#xa; 3. Implicit tags for any Entity based on criteria determined by the&#xa;    dictionary.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">02/13/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<!-- javax.baja.tag.TagDictionary.getEnabled() -->
+<method name="getEnabled"  public="true" abstract="true">
+<description>
+Is this TagDictionary enabled for use in tag-aware applications?
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the dictionary is enabled, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagDictionary.getNamespace() -->
+<method name="getNamespace"  public="true" abstract="true">
+<description>
+Get the namespace for all tags in the dictionary.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Returns the namespace string identifier.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagDictionary.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" abstract="true">
+<description>
+Get the display name for the dictionary.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagDictionary.getTags() -->
+<method name="getTags"  public="true" abstract="true">
+<description>
+Get the tags in this dictionary.  Each tag is defined by a TagInfo that&#xa; that includes the tag id and any additional tag metadata.
+</description>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.tag.TagInfo"/>
+</args>
+</parameterizedType>
+<description>
+Returns an iterator of tags in this TagDictionary.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagDictionary.getTagGroups() -->
+<method name="getTagGroups"  public="true" abstract="true">
+<description>
+Get the tag groups in this dictionary.  Each tag group is defined by a TagGroupInfo&#xa; that include the group id, the collection of tags, and any additional tag metadata.
+</description>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.tag.TagGroupInfo"/>
+</args>
+</parameterizedType>
+<description>
+Returns an iterator of the groups in this TagDictionary.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagDictionary.getValidTags(javax.baja.tag.Entity) -->
+<method name="getValidTags"  public="true" abstract="true">
+<description>
+Get the tags from this dictionary that are valid for the&#xa; specified entity.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+The entity to evaluate for valid tags.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.TagInfo"/>
+</args>
+</parameterizedType>
+<description>
+Returns a collection of the valid tags from this dictionary for the entity.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagDictionary.getValidTagGroups(javax.baja.tag.Entity) -->
+<method name="getValidTagGroups"  public="true" abstract="true">
+<description>
+Get the tag groups from this dictionary that are valid for the&#xa; specified entity.
+</description>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+The entity to evaluate for valid tag groups.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.TagGroupInfo"/>
+</args>
+</parameterizedType>
+<description>
+Returns a collection of the valid tag groups from this&#xa;   dictionary for the entity.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.TagDictionary.getRelations() -->
+<method name="getRelations"  public="true" abstract="true">
+<description>
+Get the relations defined by this dictionary.
+</description>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.tag.RelationInfo"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+</class>
+</bajadoc>

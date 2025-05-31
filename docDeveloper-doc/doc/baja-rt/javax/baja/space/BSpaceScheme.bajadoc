@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.space.BSpaceScheme" name="BSpaceScheme" packageName="javax.baja.space" public="true" abstract="true">
+<description>
+BSpaceScheme is an abstract scheme used for space ord&#xa; schemes which have different implementations based on&#xa; the ord base.  A space scheme works as follows:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Map the base to an BISession using toSession()&lt;/li&gt;&#xa; &lt;li&gt;Check if the session has a cached BSpace mounted as&#xa;     as nav child using the scheme id for the name.&lt;/li&gt;&#xa; &lt;li&gt;If there is no cached BSpace, then we create one using&#xa;     makeSpaceForSession() and cache it by adding it&#xa;     as a nav child to the session with a nav name&#xa;     equal to the scheme id.&lt;/li&gt;&#xa; &lt;li&gt;Route to resolve&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">4 Jan 03</tag>
+<tag name="@version">$Revision: 9$ $Date: 3/28/05 9:23:04 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.naming.BOrdScheme"/>
+</extends>
+<!-- javax.baja.space.BSpaceScheme(java.lang.String) -->
+<constructor name="BSpaceScheme" protected="true">
+<parameter name="schemeId">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Constructor with scheme id.
+</description>
+</constructor>
+
+<!-- javax.baja.space.BSpaceScheme.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BSpaceScheme.resolve(javax.baja.naming.OrdTarget, javax.baja.naming.OrdQuery) -->
+<method name="resolve"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+See documentation in class header for how resolve works.
+</description>
+<parameter name="base">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<parameter name="query">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+</throws>
+<throws>
+<type class="javax.baja.naming.UnresolvedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.space.BSpaceScheme.toSession(javax.baja.sys.BObject) -->
+<method name="toSession"  public="true">
+<description>
+Given an object, map it to a session.  If no session can &#xa; not be infered from the object then throw InvalidOrdBaseException.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BISession"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BSpaceScheme.makeSpaceForSession(javax.baja.naming.BISession) -->
+<method name="makeSpaceForSession"  public="true">
+<description>
+Instanstiate the correct type of BSpace
+</description>
+<parameter name="session">
+<type class="javax.baja.naming.BISession"/>
+</parameter>
+<return>
+<type class="javax.baja.space.BSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BSpaceScheme.getNavChildSpaceId() -->
+<method name="getNavChildSpaceId"  protected="true">
+<description>
+Returns a nav child name for a target space within a session&#x27;s nav children.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<return>
+<type class="java.lang.String"/>
+<description>
+the default implementation returns &lt;code&gt;getId()&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- javax.baja.space.BSpaceScheme.getSpaceType() -->
+<method name="getSpaceType"  public="true" abstract="true">
+<description>
+Get the subtype of BSpace which this scheme&#xa; is used to identify.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BSpaceScheme.resolve(javax.baja.naming.OrdTarget, javax.baja.naming.OrdQuery, javax.baja.space.BSpace) -->
+<method name="resolve"  public="true" abstract="true">
+<description>
+This is the subclass hook for resolve after the &#xa; default implementation has mapped the ord to an &#xa; instanceof BSpace.
+</description>
+<parameter name="base">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<parameter name="query">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<parameter name="space">
+<type class="javax.baja.space.BSpace"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BSpaceScheme.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

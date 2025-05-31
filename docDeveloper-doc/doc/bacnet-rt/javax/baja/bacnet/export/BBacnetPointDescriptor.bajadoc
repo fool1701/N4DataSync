@@ -1,0 +1,1542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.export.BBacnetPointDescriptor" name="BBacnetPointDescriptor" packageName="javax.baja.bacnet.export" public="true" abstract="true">
+<description>
+BBacnetPointDescriptor is the extension that allows a normal Baja&#xa; ControlPoint to be exposed to Bacnet.
+</description>
+<tag name="@author">Craig Gemmill on 31 Jul 01</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.bacnet.export.BBacnetEventSource"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.export.BIBacnetCovSource"/>
+</implements>
+<implements>
+<type class="javax.baja.bacnet.export.BacnetPropertyListProvider"/>
+</implements>
+<property name="pointOrd" flags="d">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;pointOrd&lt;/code&gt; property.&#xa; the ord to the exposed Control Point.
+</description>
+<tag name="@see">#getPointOrd</tag>
+<tag name="@see">#setPointOrd</tag>
+</property>
+
+<property name="objectId" flags="d">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</property>
+
+<property name="objectName" flags="d">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#getObjectName</tag>
+<tag name="@see">#setObjectName</tag>
+</property>
+
+<property name="reliability" flags="tr">
+<type class="javax.baja.sys.BEnum"/>
+<description>
+Slot for the &lt;code&gt;reliability&lt;/code&gt; property.&#xa; indicates misconfiguration
+</description>
+<tag name="@see">#getReliability</tag>
+<tag name="@see">#setReliability</tag>
+</property>
+
+<property name="outOfService" flags="hr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;outOfService&lt;/code&gt; property.&#xa; Is this descriptor disconnected from the control point which it maps?
+</description>
+<tag name="@see">#getOutOfService</tag>
+<tag name="@see">#setOutOfService</tag>
+</property>
+
+<property name="description" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</property>
+
+<property name="notifyType" flags="">
+<type class="javax.baja.bacnet.enums.BBacnetNotifyType"/>
+<description>
+Slot for the &lt;code&gt;notifyType&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNotifyType</tag>
+<tag name="@see">#setNotifyType</tag>
+</property>
+
+<action name="addCovSubscription" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;addCovSubscription&lt;/code&gt; action.&#xa; add a COV subscription for a client device.
+</description>
+<tag name="@see">#addCovSubscription(BBacnetCovSubscription parameter)</tag>
+</action>
+
+<action name="removeCovSubscription" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;removeCovSubscription&lt;/code&gt; action.&#xa; remove a COV subscription for a client device.
+</description>
+<tag name="@see">#removeCovSubscription(BBacnetCovSubscription parameter)</tag>
+</action>
+
+<action name="makeWritable" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;makeWritable&lt;/code&gt; action.&#xa; configure the BACnet writability of the point.
+</description>
+<tag name="@see">#makeWritable(BValue parameter)</tag>
+</action>
+
+<action name="sendCovNotification" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;sendCovNotification&lt;/code&gt; action.
+</description>
+<tag name="@see">#sendCovNotification(BBacnetCovSubscription parameter)</tag>
+</action>
+
+<action name="checkCov" flags="ha">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;checkCov&lt;/code&gt; action.
+</description>
+<tag name="@see">#checkCov()</tag>
+</action>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor() -->
+<constructor name="BBacnetPointDescriptor" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getPointOrd() -->
+<method name="getPointOrd"  public="true">
+<description>
+Get the &lt;code&gt;pointOrd&lt;/code&gt; property.&#xa; the ord to the exposed Control Point.
+</description>
+<tag name="@see">#pointOrd</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setPointOrd(javax.baja.naming.BOrd) -->
+<method name="setPointOrd"  public="true">
+<description>
+Set the &lt;code&gt;pointOrd&lt;/code&gt; property.&#xa; the ord to the exposed Control Point.
+</description>
+<tag name="@see">#pointOrd</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getObjectId() -->
+<method name="getObjectId"  public="true">
+<description>
+Get the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#objectId</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setObjectId(javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="setObjectId"  public="true">
+<description>
+Set the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#objectId</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getObjectName() -->
+<method name="getObjectName"  public="true">
+<description>
+Get the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#objectName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setObjectName(java.lang.String) -->
+<method name="setObjectName"  public="true">
+<description>
+Set the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#objectName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getReliability() -->
+<method name="getReliability"  public="true">
+<description>
+Get the &lt;code&gt;reliability&lt;/code&gt; property.&#xa; indicates misconfiguration
+</description>
+<tag name="@see">#reliability</tag>
+<return>
+<type class="javax.baja.sys.BEnum"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setReliability(javax.baja.sys.BEnum) -->
+<method name="setReliability"  public="true">
+<description>
+Set the &lt;code&gt;reliability&lt;/code&gt; property.&#xa; indicates misconfiguration
+</description>
+<tag name="@see">#reliability</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getOutOfService() -->
+<method name="getOutOfService"  public="true">
+<description>
+Get the &lt;code&gt;outOfService&lt;/code&gt; property.&#xa; Is this descriptor disconnected from the control point which it maps?
+</description>
+<tag name="@see">#outOfService</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setOutOfService(boolean) -->
+<method name="setOutOfService"  public="true">
+<description>
+Set the &lt;code&gt;outOfService&lt;/code&gt; property.&#xa; Is this descriptor disconnected from the control point which it maps?
+</description>
+<tag name="@see">#outOfService</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getDescription() -->
+<method name="getDescription"  public="true">
+<description>
+Get the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#description</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setDescription(java.lang.String) -->
+<method name="setDescription"  public="true">
+<description>
+Set the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#description</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getNotifyType() -->
+<method name="getNotifyType"  public="true">
+<description>
+Get the &lt;code&gt;notifyType&lt;/code&gt; property.
+</description>
+<tag name="@see">#notifyType</tag>
+<return>
+<type class="javax.baja.bacnet.enums.BBacnetNotifyType"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setNotifyType(javax.baja.bacnet.enums.BBacnetNotifyType) -->
+<method name="setNotifyType"  public="true">
+<description>
+Set the &lt;code&gt;notifyType&lt;/code&gt; property.
+</description>
+<tag name="@see">#notifyType</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.enums.BBacnetNotifyType"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.addCovSubscription(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="addCovSubscription"  public="true">
+<description>
+Invoke the &lt;code&gt;addCovSubscription&lt;/code&gt; action.&#xa; add a COV subscription for a client device.
+</description>
+<tag name="@see">#addCovSubscription</tag>
+<parameter name="parameter">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.removeCovSubscription(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="removeCovSubscription"  public="true">
+<description>
+Invoke the &lt;code&gt;removeCovSubscription&lt;/code&gt; action.&#xa; remove a COV subscription for a client device.
+</description>
+<tag name="@see">#removeCovSubscription</tag>
+<parameter name="parameter">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.makeWritable(javax.baja.sys.BValue) -->
+<method name="makeWritable"  public="true">
+<description>
+Invoke the &lt;code&gt;makeWritable&lt;/code&gt; action.&#xa; configure the BACnet writability of the point.
+</description>
+<tag name="@see">#makeWritable</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.sendCovNotification(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="sendCovNotification"  public="true">
+<description>
+Invoke the &lt;code&gt;sendCovNotification&lt;/code&gt; action.
+</description>
+<tag name="@see">#sendCovNotification</tag>
+<parameter name="parameter">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.checkCov() -->
+<method name="checkCov"  public="true">
+<description>
+Invoke the &lt;code&gt;checkCov&lt;/code&gt; action.
+</description>
+<tag name="@see">#checkCov</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Started.&#xa; Initialize the point name subscriber and check the export configuration.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.stopped() -->
+<method name="stopped"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Stopped.&#xa; Clean up the point name subscriber and null references.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Added.&#xa; Cov subscriptions will generate a new Cov notification on add.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Changed.&#xa; If the objectId changes, make sure the new ID is not already in use.&#xa; If it is, reset it to the current value.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.statusChanged() -->
+<method name="statusChanged"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.reliabilityChanged() -->
+<method name="reliabilityChanged"  protected="true">
+<description>
+When reliability property is changed, if BReliabilityAlarmSourceExt added to the point,&#xa; notify the extension about the reliability property changed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.clockChanged(javax.baja.sys.BRelTime) -->
+<method name="clockChanged"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Clock Changed.&#xa; COV Subscriptions need to have their subscriptionEndTime adjusted by the&#xa; amount of the clock change.
+</description>
+<parameter name="shift">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.doAddCovSubscription(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="doAddCovSubscription"  public="true" final="true">
+<description/>
+<parameter name="sub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.doRemoveCovSubscription(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="doRemoveCovSubscription"  public="true" final="true">
+<description/>
+<parameter name="sub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.doMakeWritable(javax.baja.sys.BValue) -->
+<method name="doMakeWritable"  public="true">
+<description/>
+<parameter name="v">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.doSendCovNotification(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="doSendCovNotification"  public="true">
+<description>
+Send a Cov notification.
+</description>
+<parameter name="covSub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.doCheckCov() -->
+<method name="doCheckCov"  public="true" final="true">
+<description>
+Check Cov subscriptions to see if any require a notification.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.checkCovProperty(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="checkCovProperty"  public="true" final="true">
+<description/>
+<parameter name="covSub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getObject() -->
+<method name="getObject"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the exported object.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getObjectOrd() -->
+<method name="getObjectOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the BOrd to the exported object.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.setObjectOrd(javax.baja.naming.BOrd, javax.baja.sys.Context) -->
+<method name="setObjectOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the BOrd to the exported object.
+</description>
+<parameter name="objectOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.checkConfiguration() -->
+<method name="checkConfiguration"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Check the configuration of this object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.isEventInitiationEnabled() -->
+<method name="isEventInitiationEnabled"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is this object currently configured to support event initiation?&#xa; This will return false if the exported object does not have an&#xa; appropriate alarm extension configured to allow Bacnet event initiation.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if this object can initiate Bacnet events.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getEventState() -->
+<method name="getEventState"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the current Event_State of the object.&#xa; If the exported object also has an alarm extension, this&#xa; returns the current event state as translated from the&#xa; alarm extension&#x27;s alarm state.  Otherwise, it returns null.
+</description>
+<return>
+<type class="javax.baja.sys.BEnum"/>
+<description>
+the object&#x27;s event state if configured for alarming, or null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getAckedTransitions() -->
+<method name="getAckedTransitions"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the current Acknowledged_Transitions property of the object.&#xa; If the exported object also has an alarm extension, this&#xa; returns the current acked transitions as translated from the&#xa; alarm extension&#x27;s alarm transitions.  Otherwise, it returns null.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+<description>
+the object&#x27;s acknowledged transitions if configured for alarming, or null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getEventTimeStamps() -->
+<method name="getEventTimeStamps"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the event time stamps.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetTimeStamp" dimension="1"/>
+<description>
+the event time stamps, or null if event initiation is not enabled.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getEventEnable() -->
+<method name="getEventEnable"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the event enable bits.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+<description>
+the event enable bits, or null if event initiation is not enabled.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getEventPriorities() -->
+<method name="getEventPriorities"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the event priorities.
+</description>
+<return>
+<type class="int" dimension="1"/>
+<description>
+the event priorities, or null if event initiation is not enabled.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getNotificationClass() -->
+<method name="getNotificationClass"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the Notification Class object for this event source.
+</description>
+<return>
+<type class="javax.baja.bacnet.export.BBacnetNotificationClassDescriptor"/>
+<description>
+the &lt;code&gt;BacnetNotificationClassDescriptor&lt;/code&gt; for this object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getEventType() -->
+<method name="getEventType"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the BACnetEventType reported by this object.
+</description>
+<return>
+<type class="javax.baja.sys.BEnum"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getExport() -->
+<method name="getExport"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the export descriptor for this cov source.  Usually this.
+</description>
+<return>
+<type class="javax.baja.bacnet.export.BIBacnetExportObject"/>
+<description>
+the relevant export descriptor.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.findCovSubscription(javax.baja.bacnet.datatypes.BBacnetAddress, long, javax.baja.bacnet.datatypes.BBacnetObjectIdentifier) -->
+<method name="findCovSubscription"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Attempt to locate a COV subscription for the given subscriber information&#xa; on this object.
+</description>
+<parameter name="subscriberAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</parameter>
+<parameter name="processId">
+<type class="long"/>
+<description/>
+</parameter>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description>
+the subscription if found, or null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.findCovPropertySubscription(javax.baja.bacnet.datatypes.BBacnetAddress, long, javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, int, int) -->
+<method name="findCovPropertySubscription"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Attempt to locate a COVProperty subscription for the given subscriber information&#xa; on this object.
+</description>
+<parameter name="subscriberAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</parameter>
+<parameter name="processId">
+<type class="long"/>
+<description/>
+</parameter>
+<parameter name="objectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<parameter name="propertyId">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="propertyArrayIndex">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description>
+the subscription if found, or null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.startCovTimer(javax.baja.bacnet.datatypes.BBacnetCovSubscription, long) -->
+<method name="startCovTimer"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Start or restart a timer for the given COV subscription.
+</description>
+<parameter name="covSub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+<description>
+the subscription for which to start the timer.
+</description>
+</parameter>
+<parameter name="lifetime">
+<type class="long"/>
+<description>
+the lifetime, in seconds, of the subscription.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getOutProperty() -->
+<method name="getOutProperty"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the output property mapped as Present_Value for this export.
+</description>
+<return>
+<type class="javax.baja.sys.Property"/>
+<description>
+the property used for Present_Value in COV notifications.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.supportsSubscribeCov() -->
+<method name="supportsSubscribeCov"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Does this COV source support SubscribeCOV in addition to SubscribeCOVProperty?&#xa; This is true for input, output, value, and loop objects.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if Subscribe-COV can be used with this object.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getCurrentCovValue(javax.baja.bacnet.datatypes.BBacnetCovSubscription) -->
+<method name="getCurrentCovValue"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="sub">
+<type class="javax.baja.bacnet.datatypes.BBacnetCovSubscription"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.readProperty(javax.baja.bacnet.io.PropertyReference) -->
+<method name="readProperty"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the value of a property.
+</description>
+<parameter name="ref">
+<type class="javax.baja.bacnet.io.PropertyReference"/>
+<description>
+the PropertyReference containing id and index.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing either the encoded value or the error.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.readPropertyMultiple(javax.baja.bacnet.io.PropertyReference[]) -->
+<method name="readPropertyMultiple"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the value of multiple Bacnet properties.
+</description>
+<parameter name="refs">
+<type class="javax.baja.bacnet.io.PropertyReference" dimension="1"/>
+<description>
+the list of property references.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue" dimension="1"/>
+<description>
+an array of PropertyValues.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.readRange(javax.baja.bacnet.io.RangeReference) -->
+<method name="readRange"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the specified range of values of a compound property.
+</description>
+<parameter name="rangeReference">
+<type class="javax.baja.bacnet.io.RangeReference"/>
+<description>
+the range reference describing the requested range.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.RangeData"/>
+<description>
+a byte array containing the encoded range.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.RejectException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.writeProperty(javax.baja.bacnet.io.PropertyValue) -->
+<method name="writeProperty"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the value of a property.
+</description>
+<parameter name="val">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the write information.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.addListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="addListElements"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Add list elements.
+</description>
+<parameter name="propertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;                      propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to add any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.removeListElements(javax.baja.bacnet.io.PropertyValue) -->
+<method name="removeListElements"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove list elements.
+</description>
+<parameter name="propertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the PropertyValue containing the propertyId,&#xa;                      propertyArrayIndex, and the encoded list elements.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ChangeListError"/>
+<description>
+a ChangeListError if unable to remove any elements,&#xa; or null if ok.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.readProperty(int, int) -->
+<method name="readProperty"  protected="true">
+<description>
+Get the value of a property.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing either the encoded value or the error.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.readOptionalProperty(int, int) -->
+<method name="readOptionalProperty"  protected="true">
+<description>
+Read the value of an optional property.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+a PropertyValue containing either the encoded value or the error.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.writeProperty(int, int, byte[], int) -->
+<method name="writeProperty"  protected="true">
+<description>
+Set the value of a property.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<parameter name="val">
+<type class="byte" dimension="1"/>
+<description>
+the Asn-encoded value for the property.
+</description>
+</parameter>
+<parameter name="pri">
+<type class="int"/>
+<description>
+the priority level (only used for commandable properties).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.writeOptionalProperty(int, int, byte[], int) -->
+<method name="writeOptionalProperty"  protected="true">
+<description>
+Set the value of an optional property.&#xa; Subclasses with additional properties override this to check for&#xa; their properties.  If no match is found, call this superclass&#xa; method to check these properties.
+</description>
+<parameter name="pId">
+<type class="int"/>
+<description>
+the requested property-identifier.
+</description>
+</parameter>
+<parameter name="ndx">
+<type class="int"/>
+<description>
+the property array index (-1 if not specified).
+</description>
+</parameter>
+<parameter name="val">
+<type class="byte" dimension="1"/>
+<description>
+the Asn-encoded value for the property.
+</description>
+</parameter>
+<parameter name="pri">
+<type class="int"/>
+<description>
+the priority level (only used for commandable properties).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.io.ErrorType"/>
+<description>
+null if everything goes OK, or&#xa; an ErrorType describing the error if not.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.BacnetException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getRequiredProps() -->
+<method name="getRequiredProps"  public="true">
+<description>
+Get all the required properties for this object.&#xa; Calculated once, if needed.
+</description>
+<return>
+<type class="int" dimension="1"/>
+<description>
+the list as an array of ints.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getOptionalProps() -->
+<method name="getOptionalProps"  public="true">
+<description>
+Get all the optional properties for this object.
+</description>
+<return>
+<type class="int" dimension="1"/>
+<description>
+the list as an array of ints.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getPropertyList() -->
+<method name="getPropertyList"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.addRequiredProps(java.util.Vector) -->
+<method name="addRequiredProps"  protected="true">
+<description>
+Override method to add required properties.&#xa; NOTE: You MUST call super.addRequiredProps(v) first!
+</description>
+<parameter name="v">
+<parameterizedType class="java.util.Vector">
+<args>
+</args>
+</parameterizedType>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Vector containing required propertyIds.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.addOptionalProps(java.util.Vector) -->
+<method name="addOptionalProps"  protected="true">
+<description>
+Override method to add optional properties.&#xa; NOTE: You MUST call super.addOptionalProps(v) first!
+</description>
+<parameter name="v">
+<parameterizedType class="java.util.Vector">
+<args>
+</args>
+</parameterizedType>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Vector containing optional propertyIds.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.isPointTypeLegal(javax.baja.control.BControlPoint) -->
+<method name="isPointTypeLegal"  protected="true">
+<description>
+Override point for BBacnetPointDescriptors to enforce&#xa; type rules for their exposed points.
+</description>
+<parameter name="pt">
+<type class="javax.baja.control.BControlPoint"/>
+<description>
+the exposed point
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the Niagara point type is legal for this point type.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.checkPointConfiguration() -->
+<method name="checkPointConfiguration"  protected="true">
+<description>
+Override point for subclasses to provide additional configuration&#xa; constraints to allow point export.  Default implementation returns true.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if configuration is ok, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.validate() -->
+<method name="validate"  protected="true">
+<description>
+Override point for subclasses to validate their exposed point&#x27;s&#xa; current state.  Default implementation clears export status fault.&#xa; Some points may set the BACnet status flags to fault if the Niagara&#xa; value is disallowed for the exposed BACnet object type.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To String.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getPoint() -->
+<method name="getPoint"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Find the exposed control point.
+</description>
+<return>
+<type class="javax.baja.control.BControlPoint"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getPoint(boolean) -->
+<method name="getPoint"  public="true" final="true">
+<description>
+Allow getPoint to not try too hard to&#xa; find the exposed control point.
+</description>
+<parameter name="force">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.control.BControlPoint"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getAlarmExt() -->
+<method name="getAlarmExt"  protected="true">
+<description>
+Get the BAlarmSourceExtension that gives this point&#xa; alarming capability.
+</description>
+<return>
+<type class="javax.baja.alarm.ext.BAlarmSourceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getOosExt() -->
+<method name="getOosExt"  public="true">
+<description/>
+<return>
+<type class="javax.baja.bacnet.export.BOutOfServiceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.isCommandable() -->
+<method name="isCommandable"  protected="true">
+<description>
+Is this export descriptor representing a BACnet object&#xa; with a Commandable Present_Value property (per the Clause 19&#xa; prioritization procedure)?&lt;p&gt;&#xa; Writable descriptors must override this to return true.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if commandable, otherwise false
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.getBacnetWritable() -->
+<method name="getBacnetWritable"  public="true">
+<description>
+Get a String representing the BACnet writability of the point.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.updateAlarmInhibit() -->
+<method name="updateAlarmInhibit"  protected="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.pointOrd -->
+<field name="pointOrd"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pointOrd&lt;/code&gt; property.&#xa; the ord to the exposed Control Point.
+</description>
+<tag name="@see">#getPointOrd</tag>
+<tag name="@see">#setPointOrd</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.objectId -->
+<field name="objectId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.objectName -->
+<field name="objectName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;objectName&lt;/code&gt; property.&#xa; the name by which this object is known to the Bacnet world.
+</description>
+<tag name="@see">#getObjectName</tag>
+<tag name="@see">#setObjectName</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.reliability -->
+<field name="reliability"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;reliability&lt;/code&gt; property.&#xa; indicates misconfiguration
+</description>
+<tag name="@see">#getReliability</tag>
+<tag name="@see">#setReliability</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.outOfService -->
+<field name="outOfService"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;outOfService&lt;/code&gt; property.&#xa; Is this descriptor disconnected from the control point which it maps?
+</description>
+<tag name="@see">#getOutOfService</tag>
+<tag name="@see">#setOutOfService</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.description -->
+<field name="description"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;description&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDescription</tag>
+<tag name="@see">#setDescription</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.notifyType -->
+<field name="notifyType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;notifyType&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNotifyType</tag>
+<tag name="@see">#setNotifyType</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.addCovSubscription -->
+<field name="addCovSubscription"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;addCovSubscription&lt;/code&gt; action.&#xa; add a COV subscription for a client device.
+</description>
+<tag name="@see">#addCovSubscription(BBacnetCovSubscription parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.removeCovSubscription -->
+<field name="removeCovSubscription"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;removeCovSubscription&lt;/code&gt; action.&#xa; remove a COV subscription for a client device.
+</description>
+<tag name="@see">#removeCovSubscription(BBacnetCovSubscription parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.makeWritable -->
+<field name="makeWritable"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;makeWritable&lt;/code&gt; action.&#xa; configure the BACnet writability of the point.
+</description>
+<tag name="@see">#makeWritable(BValue parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.sendCovNotification -->
+<field name="sendCovNotification"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;sendCovNotification&lt;/code&gt; action.
+</description>
+<tag name="@see">#sendCovNotification(BBacnetCovSubscription parameter)</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.checkCov -->
+<field name="checkCov"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;checkCov&lt;/code&gt; action.
+</description>
+<tag name="@see">#checkCov()</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPointDescriptor.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

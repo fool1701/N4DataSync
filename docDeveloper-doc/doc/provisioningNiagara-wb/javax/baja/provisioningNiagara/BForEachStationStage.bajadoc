@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="provisioningNiagara" runtimeProfile="wb" qualifiedName="javax.baja.provisioningNiagara.BForEachStationStage" name="BForEachStationStage" packageName="javax.baja.provisioningNiagara" public="true">
+<description>
+Job stage for a BNiagaraNetworkJob which iterates through each of the&#xa; job&#x27;s stations, and executes a sequence of steps for each station.&#xa;&#xa; If any step fails for a station, the remaining steps will not be executed&#xa; for that station, and the stage will continue executing against the next&#xa; station.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">9 Jul 07</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.4</tag>
+<extends>
+<type class="javax.baja.batchJob.driver.BForEachDeviceStage"/>
+</extends>
+<!-- javax.baja.provisioningNiagara.BForEachStationStage() -->
+<constructor name="BForEachStationStage" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.provisioningNiagara.BForEachStationStage.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BForEachStationStage.getCombinedSteps(javax.baja.batchJob.driver.DeviceNetworkJobOp) -->
+<method name="getCombinedSteps"  protected="true">
+<description/>
+<parameter name="opIn">
+<type class="javax.baja.batchJob.driver.DeviceNetworkJobOp"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.driver.BDeviceJobStep" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BForEachStationStage.canPassDefaultCheck(javax.baja.driver.BDevice, javax.baja.batchJob.driver.BDeviceJobStep) -->
+<method name="canPassDefaultCheck"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Check to see if this step is a privileged job step that is allowed to run if default&#xa; credentials or passphrase exist
+</description>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<parameter name="step">
+<type class="javax.baja.batchJob.driver.BDeviceJobStep"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BForEachStationStage.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="control" runtimeProfile="rt" qualifiedName="javax.baja.control.BPointExtension" name="BPointExtension" packageName="javax.baja.control" public="true" abstract="true">
+<description>
+BPointExtension is the base class for all point&#xa; extensions designed to provide plug-in functionality&#xa; for BControlPoints.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">11 Oct 00</tag>
+<tag name="@version">$Revision: 34$ $Date: 4/23/08 11:54:58 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<!-- javax.baja.control.BPointExtension() -->
+<constructor name="BPointExtension" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.control.BPointExtension.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.getParentPoint() -->
+<method name="getParentPoint"  public="true" final="true">
+<description>
+Get this extension&#x27;s parent point, or null if&#xa; the parent is not an instance of BControlPoint.
+</description>
+<return>
+<type class="javax.baja.control.BControlPoint"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.isParentPointSubscribed() -->
+<method name="isParentPointSubscribed"  public="true" final="true">
+<description>
+Return true if the parent point is available&#xa; and in the subscribed state.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.getPointFacets() -->
+<method name="getPointFacets"  public="true" final="true">
+<description>
+Get this extension&#x27;s parent point&#x27;s facets, or BFacets.NULL&#xa; if the parent point  is not an instance of BControlPoint.
+</description>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.executePoint() -->
+<method name="executePoint"  public="true">
+<description>
+This causes execute to be called on the parent&#xa; point as long as getParentPoint() is not null.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.requiresPointSubscription() -->
+<method name="requiresPointSubscription"  public="true">
+<description>
+Return if this extension requires that the point be permanently&#xa; subscribed to operate correctly.  The default returns false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.pointFacetsChanged() -->
+<method name="pointFacetsChanged"  public="true">
+<description>
+This callback is made when the parent point&#x27;s facets are modified.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.onExecute(javax.baja.status.BStatusValue, javax.baja.sys.Context) -->
+<method name="onExecute"  public="true" abstract="true">
+<description>
+This callback is invoked when the extension&#x27;s&#xa; parent BControlPoint is modified.  Any changes&#xa; to be made to the output value should be applied&#xa; to the specified working variable.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.doCheckParentLink(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="doCheckParentLink"  protected="true">
+<description>
+This callback is invoked during link validation&#xa; on the parent
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.LinkCheck"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description>
+Extensions may only be placed in BControlPoints.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.isSiblingLegal(javax.baja.sys.BComponent) -->
+<method name="isSiblingLegal"  protected="true">
+<description>
+In most cases, only a single instance of a particular&#xa; type of BPointExtension should exist within a BControlObject.&#xa; This method is invoked by the parent BControlObject whenever&#xa; a new BPointExtension is added.  By default, if the types match,&#xa; the sibling is not allowed.
+</description>
+<parameter name="sibling">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.control.BPointExtension.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

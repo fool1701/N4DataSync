@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm" name="BTwoStateFaultAlgorithm" packageName="javax.baja.alarm.ext.fault" public="true" abstract="true">
+<description>
+BTwoStateFaultAlgorithm implements a generic algorithm for&#xa; objects with only an normal / fault states (vs. high alarm,&#xa; low alarm, etc.)  The generic algorithm conforms to the&#xa; CHANGE_OF_STATE algorithm described in BACnet 13.3.2 and&#xa; the COMMAND_FAILURE algorithm described in 13.3.4.
+</description>
+<tag name="@author">Blake M Puhak</tag>
+<tag name="@creation">08 Nov 04</tag>
+<tag name="@version">$Revision: 3$ $Date: 3/23/05 11:53:23 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.alarm.ext.BFaultAlgorithm"/>
+</extends>
+<!-- javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm() -->
+<constructor name="BTwoStateFaultAlgorithm" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm.checkFault(javax.baja.status.BStatusValue) -->
+<method name="checkFault"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return the new alarm state or null if no change
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.ext.BAlarmState"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm.isNormal(javax.baja.status.BStatusValue) -->
+<method name="isNormal"  protected="true" abstract="true">
+<description>
+Returns true is the present value is offnormal
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm.isCurrentFault() -->
+<method name="isCurrentFault"  protected="true">
+<description>
+Return true if the current states is offnormal
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.fault.BTwoStateFaultAlgorithm.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

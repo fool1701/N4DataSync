@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.videoStream.IVideoStream" name="IVideoStream" packageName="com.tridium.videoDriver.videoStream" public="true" interface="true" abstract="true" category="interface">
+<description>
+This class encapsulates a video stream that streams the content of a single&#xa; video.&#xa; &#xa; Here is an example of a process by which an IVideoStream is created and utilized:&#xa; - The user looks at a BVideoPlayback view for a particular driver&#x27;s video camera.&#xa; - The particular driver&#x27;s video camera implements BIVideoSource&#xa; - The BVideoPlayback view implements IVideoPlayback.&#xa; - The BVideoPlayback view creates a BVideoStreamBinding&#xa; - The BVideoPlayback view starts the BVideoStreamBinding&#xa; - The BVideoStreamBinding asks the BIVideoSource (driver video camera) to create a&#xa;   video decoder.&#xa; - The BVideoStreamBinding associates the video decoder to its video player widget.&#xa; - The BVideoStreamBinding creates an IVideoSession to represent itself and wrap the&#xa;   video decoder.&#xa; - The BVideoStreamBinding creates an IVideoDestination to also wrap the video decoder&#xa;   and receive the video stream&#xa; - The BVideoStreamBinding asks the BIVideoSource (driver video camera) for a video stream,&#xa;   passes the BIVideoSource the IVideoSession and the IVideoDestination, and asks it to&#xa;   establish the video stream asynchronously, and pass the video stream to the&#xa;   IVideoDestination&#xa; - The BIVideoSource creates an IVideoStream and passes it to the IVideoDestination&#xa; - The IVideoDestination passes the video stream to the and starts the video decoder&#xa; - The video decoder reads from the input stream for the IVideoStream and updates&#xa;   the BIVideoPlayer with each new frame that it reads and decodes from the video&#xa;   stream.
+</description>
+<tag name="@author">lperkins</tag>
+<!-- com.tridium.videoDriver.videoStream.IVideoStream.getPlaybackParams() -->
+<method name="getPlaybackParams"  public="true" abstract="true">
+<description>
+Gets the BPlaybackParams that were used to establish this&#xa; particular video stream.
+</description>
+<return>
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.IVideoStream.getInputStream() -->
+<method name="getInputStream"  public="true" abstract="true">
+<description>
+Gets the binary video data stream. A video widget ultimately&#xa; receives its video feed from this input stream.
+</description>
+<return>
+<type class="java.io.InputStream"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.IVideoStream.closeVideoStream() -->
+<method name="closeVideoStream"  public="true" abstract="true">
+<description>
+Closes the video stream and any underlying resources.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if the stream cannot be closed.
+</description>
+</throws>
+</method>
+
+</class>
+</bajadoc>

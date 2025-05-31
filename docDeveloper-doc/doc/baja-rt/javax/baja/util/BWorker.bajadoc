@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.BWorker" name="BWorker" packageName="javax.baja.util" public="true" abstract="true">
+<description>
+BWorker is a BComponent wrapper for Worker
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">6 Feb 04</tag>
+<tag name="@version">$Revision: 2$ $Date: 8/25/04 8:47:34 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<!-- javax.baja.util.BWorker() -->
+<constructor name="BWorker" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.util.BWorker.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BWorker.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If not isSteadyStateWorker() then call startWorker().
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BWorker.atSteadyState() -->
+<method name="atSteadyState"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If isSteadyStateWorker() then call startWorker().
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BWorker.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Call stopWorker().
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BWorker.getWorker() -->
+<method name="getWorker"  public="true" abstract="true">
+<description>
+Get the Worker this BWorker wraps.
+</description>
+<return>
+<type class="javax.baja.util.Worker"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BWorker.startWorker() -->
+<method name="startWorker"  protected="true">
+<description>
+Default implementation is &lt;code&gt;getWorker().start(toPathString())&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BWorker.stopWorker() -->
+<method name="stopWorker"  protected="true">
+<description>
+Default implementation is &lt;code&gt;getWorker().stop()&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BWorker.isSteadyStateWorker() -->
+<method name="isSteadyStateWorker"  protected="true">
+<description>
+Return true if this worker doesn&#x27;t start until steady&#xa; state is reached.  Return false to start immediately&#xa; on the &lt;code&gt;BComponent.started()&lt;/code&gt; callback.  The &#xa; default returns false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BWorker.getWorkerThreadName() -->
+<method name="getWorkerThreadName"  protected="true">
+<description>
+Get the thread name used to start the worker.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BWorker.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Include worker&#x27;s spy in diagnostics.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BWorker.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BWorker.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.category.BCategoryService" name="BCategoryService" packageName="javax.baja.category" public="true" final="true">
+<description>
+BCategoryService maps BCategoryMasks bits to BCategory components.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">12 Feb 05</tag>
+<tag name="@version">$Revision: 7$ $Date: 4/15/09 1:30:41 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<property name="ordMap" flags="rh">
+<type class="javax.baja.category.BOrdToCategoryMap"/>
+<description>
+Slot for the &lt;code&gt;ordMap&lt;/code&gt; property.&#xa; Used to map ords to categories for ICategorizable objects&#xa; which aren&#x27;t capabable of storing their own category mask.
+</description>
+<tag name="@see">#getOrdMap</tag>
+<tag name="@see">#setOrdMap</tag>
+</property>
+
+<property name="updatePeriod" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;updatePeriod&lt;/code&gt; property.&#xa; Frequency of automatic updates, or zero to disable.
+</description>
+<tag name="@see">#getUpdatePeriod</tag>
+<tag name="@see">#setUpdatePeriod</tag>
+</property>
+
+<action name="update" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;update&lt;/code&gt; action.&#xa; Update causes a rescan of the complete component database&#xa; to recompute categories.
+</description>
+<tag name="@see">#update()</tag>
+</action>
+
+<!-- javax.baja.category.BCategoryService() -->
+<constructor name="BCategoryService" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.category.BCategoryService.getOrdMap() -->
+<method name="getOrdMap"  public="true">
+<description>
+Get the &lt;code&gt;ordMap&lt;/code&gt; property.&#xa; Used to map ords to categories for ICategorizable objects&#xa; which aren&#x27;t capabable of storing their own category mask.
+</description>
+<tag name="@see">#ordMap</tag>
+<return>
+<type class="javax.baja.category.BOrdToCategoryMap"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.setOrdMap(javax.baja.category.BOrdToCategoryMap) -->
+<method name="setOrdMap"  public="true">
+<description>
+Set the &lt;code&gt;ordMap&lt;/code&gt; property.&#xa; Used to map ords to categories for ICategorizable objects&#xa; which aren&#x27;t capabable of storing their own category mask.
+</description>
+<tag name="@see">#ordMap</tag>
+<parameter name="v">
+<type class="javax.baja.category.BOrdToCategoryMap"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getUpdatePeriod() -->
+<method name="getUpdatePeriod"  public="true">
+<description>
+Get the &lt;code&gt;updatePeriod&lt;/code&gt; property.&#xa; Frequency of automatic updates, or zero to disable.
+</description>
+<tag name="@see">#updatePeriod</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.setUpdatePeriod(javax.baja.sys.BRelTime) -->
+<method name="setUpdatePeriod"  public="true">
+<description>
+Set the &lt;code&gt;updatePeriod&lt;/code&gt; property.&#xa; Frequency of automatic updates, or zero to disable.
+</description>
+<tag name="@see">#updatePeriod</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.update() -->
+<method name="update"  public="true">
+<description>
+Invoke the &lt;code&gt;update&lt;/code&gt; action.&#xa; Update causes a rescan of the complete component database&#xa; to recompute categories.
+</description>
+<tag name="@see">#update</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getService() -->
+<method name="getService"  public="true" static="true">
+<description>
+Get the CategoryService or throw ServiceNotFoundException.
+</description>
+<return>
+<type class="javax.baja.category.BCategoryService"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getCategories() -->
+<method name="getCategories"  public="true">
+<description>
+Get all the categories configured.
+</description>
+<return>
+<type class="javax.baja.category.BCategory" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getMaxCategoryIndex() -->
+<method name="getMaxCategoryIndex"  public="true">
+<description>
+Get the maximum category index currently defined in this&#xa; service.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getCategory(int) -->
+<method name="getCategory"  public="true">
+<description>
+Get a category by index or return null if index not configured.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.category.BCategory"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getCategories(javax.baja.category.BCategoryMask) -->
+<method name="getCategories"  public="true">
+<description>
+Get the list of categories for the specified mask.  Ignore&#xa; any bits in the mask which don&#x27;t have a category configured.
+</description>
+<parameter name="mask">
+<type class="javax.baja.category.BCategoryMask"/>
+</parameter>
+<return>
+<type class="javax.baja.category.BCategory" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getCategoryMask(javax.baja.naming.BOrd) -->
+<method name="getCategoryMask"  public="true">
+<description>
+Map the ord to a mask using the ordMap property.  This method &#xa; is used to implement &lt;code&gt;getCategoryMask()&lt;/code&gt; by&#xa; ICategorizable objects incapable of storing their own mask.&#xa; If no match find, then return a default mask of &#x22;1&#x22;.
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getAppliedCategoryMask(javax.baja.naming.BOrd) -->
+<method name="getAppliedCategoryMask"  public="true">
+<description>
+Map the ord to a mask using the ordMap property.  This method &#xa; is used to implement &lt;code&gt;getAppliedCategoryMask()&lt;/code&gt; by&#xa; ICategorizable objects incapable of storing their own mask.&#xa; If no match find, then return a default mask of &#x22;1&#x22;.
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Register this component under &#x22;baja:CategoryService&#x22;.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.category.BCategoryService.serviceStopped() -->
+<method name="serviceStopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.category.BCategoryService.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.category.BCategoryService.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.category.BCategoryService.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.removed(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="removed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="old">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.checkParentForRestrictedComponent(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="checkParentForRestrictedComponent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Only one allowed to live under the station&#x27;s BServiceContainer.&#xa; Only Super Users are allowed to add an instance of this type to the station.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.doUpdate() -->
+<method name="doUpdate"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.updateRpc(javax.baja.sys.Context) -->
+<method name="updateRpc"  public="true">
+<annotation><type class="javax.baja.rpc.NiagaraRpc"/>
+<elementValue name="permissions">
+<annotationValue kind="expr">
+<expression>&#x22;r&#x22;</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="transports">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.rpc.Transport"/>
+<elementValue name="type">
+<annotationValue kind="enum">
+<enumField name="box"/>
+<type class="javax.baja.rpc.TransportType"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.rpc.Transport"/>
+<elementValue name="type">
+<annotationValue kind="enum">
+<enumField name="fox"/>
+<type class="javax.baja.rpc.TransportType"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.rpc.Transport"/>
+<elementValue name="type">
+<annotationValue kind="enum">
+<enumField name="web"/>
+<type class="javax.baja.rpc.TransportType"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Utility method to allow a user with operator read privileges on the&#xa; BCategoryService to remotely invoke the &lt;code&gt;<see ref="javax.baja.category.BCategoryService#update()">#update()</see>&lt;/code&gt; action on this&#xa; BCategoryService instance. This is needed since certain views (such as the&#xa; Category Browser and Category Sheet views) don&#x27;t necessarily require admin&#xa; invoke privileges on the BCategoryService to load and modify category&#xa; settings for station objects. In those cases, those views still need to&#xa; call the &lt;code&gt;<see ref="javax.baja.category.BCategoryService#update()">#update()</see>&lt;/code&gt; action to synchronously update the &#x22;deep or&#x22;&#xa; masks. Therefore, this RPC call allows the &lt;code&gt;<see ref="javax.baja.category.BCategoryService#update()">#update()</see>&lt;/code&gt; action to be&#xa; called in such cases by users who do not have admin invoke privileges.&#xa; Since the &lt;code&gt;<see ref="javax.baja.category.BCategoryService#update()">#update()</see>&lt;/code&gt; action is called automatically (at a periodic&#xa; interval), it is safe to allow a non-admin invoke user to invoke it&#xa; remotely via this mechanism as long as the user has at least basic&#xa; (operator read) access to the BCategoryService.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the context associated with the RPC call
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.retrieveDeepOrMasks(java.util.List&lt;java.lang.String&gt;, javax.baja.sys.Context) -->
+<method name="retrieveDeepOrMasks"  public="true">
+<annotation><type class="javax.baja.rpc.NiagaraRpc"/>
+<elementValue name="permissions">
+<annotationValue kind="expr">
+<expression>&#x22;R&#x22;</expression>
+</annotationValue>
+</elementValue>
+<elementValue name="transports">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="annotation">
+<annotation><type class="javax.baja.rpc.Transport"/>
+<elementValue name="type">
+<annotationValue kind="enum">
+<enumField name="fox"/>
+<type class="javax.baja.rpc.TransportType"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Utility method to allow a user with admin read privileges on the&#xa; BCategoryService to remotely retrieve deepOr category masks for the given&#xa; list of String ORDs referencing station objects. The result list of&#xa; deepOr category masks is guaranteed to have the same number of entries as&#xa; the request list.  The context user must have at least operator read access&#xa; to a resolved ORD in the request list, otherwise a&#xa; &lt;code&gt;<see ref="javax.baja.category.BCategoryMask#NULL">BCategoryMask#NULL</see>&lt;/code&gt; value will be returned for that entry. If there&#xa; are any problems retrieving the deepOr category mask for any entry (e.g.&#xa; the resolved ORD is not a &lt;code&gt;<see ref="javax.baja.category.BICategorizable">BICategorizable</see>&lt;/code&gt; that lives in the&#xa; component space), then a &lt;code&gt;<see ref="javax.baja.category.BCategoryMask#NULL">BCategoryMask#NULL</see>&lt;/code&gt; value will be returned&#xa; for that entry.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="ords">
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+A list of String ORDs for which this RPC call should attempt&#xa;             to resolve and retrieve the deepOr category masks
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the context associated with the RPC call
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+A list of String encoded deepOr category masks that match up with&#xa;         the list of requested String ORDs.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.checkRemove(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="checkRemove"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Check that the category being removed is not being referenced by a Role.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getPropertyValidator(javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="getPropertyValidator"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns a category validator to validate server-side user changes to the &lt;code&gt;<see ref="javax.baja.category.BCategoryService#ordMap">#ordMap</see>&lt;/code&gt;&#xa; property.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="properties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.IPropertyValidator"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getPropertyValidator(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="getPropertyValidator"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns a category validator to validate server-side user changes to the &lt;code&gt;<see ref="javax.baja.category.BCategoryService#ordMap">#ordMap</see>&lt;/code&gt;&#xa; property.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.IPropertyValidator"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.category.BCategoryService.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.category.BCategoryService.ordMap -->
+<field name="ordMap"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ordMap&lt;/code&gt; property.&#xa; Used to map ords to categories for ICategorizable objects&#xa; which aren&#x27;t capabable of storing their own category mask.
+</description>
+<tag name="@see">#getOrdMap</tag>
+<tag name="@see">#setOrdMap</tag>
+</field>
+
+<!-- javax.baja.category.BCategoryService.updatePeriod -->
+<field name="updatePeriod"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;updatePeriod&lt;/code&gt; property.&#xa; Frequency of automatic updates, or zero to disable.
+</description>
+<tag name="@see">#getUpdatePeriod</tag>
+<tag name="@see">#setUpdatePeriod</tag>
+</field>
+
+<!-- javax.baja.category.BCategoryService.update -->
+<field name="update"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;update&lt;/code&gt; action.&#xa; Update causes a rescan of the complete component database&#xa; to recompute categories.
+</description>
+<tag name="@see">#update()</tag>
+</field>
+
+<!-- javax.baja.category.BCategoryService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

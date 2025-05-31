@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="email" runtimeProfile="rt" qualifiedName="javax.baja.email.BIncomingAccount" name="BIncomingAccount" packageName="javax.baja.email" public="true">
+<description>
+BIncomingAccount is a BEmailAccount that receives mail.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@version">$Revision: 14$ $Date: 7/8/11 7:32:57 AM EDT$</tag>
+<tag name="@creation">6 Jan 03</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.email.BEmailAccount"/>
+</extends>
+<property name="store" flags="">
+<type class="javax.baja.email.BStore"/>
+<description>
+Slot for the &lt;code&gt;store&lt;/code&gt; property.&#xa; The type of store.
+</description>
+<tag name="@see">#getStore</tag>
+<tag name="@see">#setStore</tag>
+</property>
+
+<property name="deliveryPolicy" flags="">
+<type class="javax.baja.email.BDeliveryPolicy"/>
+<description>
+Slot for the &lt;code&gt;deliveryPolicy&lt;/code&gt; property.&#xa; How to retain emails on the server if the server allows this decision&#xa; to be made by the client. Many POP3 email servers will&#xa; delete the message no matter what. IMAP is usually more flexible
+</description>
+<tag name="@see">#getDeliveryPolicy</tag>
+<tag name="@see">#setDeliveryPolicy</tag>
+</property>
+
+<property name="emailToRead" flags="">
+<type class="javax.baja.email.BEmailRead"/>
+<description>
+Slot for the &lt;code&gt;emailToRead&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEmailToRead</tag>
+<tag name="@see">#setEmailToRead</tag>
+</property>
+
+<property name="incomingEmailSizeLimit" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;incomingEmailSizeLimit&lt;/code&gt; property.&#xa; The maximum size for an individual incoming email, in kilobytes. Any email larger than this size&#xa; will be ignored and marked as read.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getIncomingEmailSizeLimit</tag>
+<tag name="@see">#setIncomingEmailSizeLimit</tag>
+</property>
+
+<property name="sizeLimitPerPoll" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;sizeLimitPerPoll&lt;/code&gt; property.&#xa; The maximum cumulative size of emails that can be processed per poll, in kilobytes. Once the limit&#xa; is reached, any additional emails will be read on the next poll.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getSizeLimitPerPoll</tag>
+<tag name="@see">#setSizeLimitPerPoll</tag>
+</property>
+
+<property name="ignoreAttachments" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;ignoreAttachments&lt;/code&gt; property.&#xa; Determines whether attachments on incoming emails should be processed. When true, attachments will&#xa; be ignored.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getIgnoreAttachments</tag>
+<tag name="@see">#setIgnoreAttachments</tag>
+</property>
+
+<topic name="received" flags="">
+<eventType>
+<type class="javax.baja.email.BEmail"/>
+</eventType><description>
+Slot for the &lt;code&gt;received&lt;/code&gt; topic.&#xa; Fired when an email has been received.
+</description>
+<tag name="@see">#fireReceived</tag>
+</topic>
+
+<!-- javax.baja.email.BIncomingAccount() -->
+<constructor name="BIncomingAccount" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.email.BIncomingAccount.getStore() -->
+<method name="getStore"  public="true">
+<description>
+Get the &lt;code&gt;store&lt;/code&gt; property.&#xa; The type of store.
+</description>
+<tag name="@see">#store</tag>
+<return>
+<type class="javax.baja.email.BStore"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.setStore(javax.baja.email.BStore) -->
+<method name="setStore"  public="true">
+<description>
+Set the &lt;code&gt;store&lt;/code&gt; property.&#xa; The type of store.
+</description>
+<tag name="@see">#store</tag>
+<parameter name="v">
+<type class="javax.baja.email.BStore"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getDeliveryPolicy() -->
+<method name="getDeliveryPolicy"  public="true">
+<description>
+Get the &lt;code&gt;deliveryPolicy&lt;/code&gt; property.&#xa; How to retain emails on the server if the server allows this decision&#xa; to be made by the client. Many POP3 email servers will&#xa; delete the message no matter what. IMAP is usually more flexible
+</description>
+<tag name="@see">#deliveryPolicy</tag>
+<return>
+<type class="javax.baja.email.BDeliveryPolicy"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.setDeliveryPolicy(javax.baja.email.BDeliveryPolicy) -->
+<method name="setDeliveryPolicy"  public="true">
+<description>
+Set the &lt;code&gt;deliveryPolicy&lt;/code&gt; property.&#xa; How to retain emails on the server if the server allows this decision&#xa; to be made by the client. Many POP3 email servers will&#xa; delete the message no matter what. IMAP is usually more flexible
+</description>
+<tag name="@see">#deliveryPolicy</tag>
+<parameter name="v">
+<type class="javax.baja.email.BDeliveryPolicy"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getEmailToRead() -->
+<method name="getEmailToRead"  public="true">
+<description>
+Get the &lt;code&gt;emailToRead&lt;/code&gt; property.
+</description>
+<tag name="@see">#emailToRead</tag>
+<return>
+<type class="javax.baja.email.BEmailRead"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.setEmailToRead(javax.baja.email.BEmailRead) -->
+<method name="setEmailToRead"  public="true">
+<description>
+Set the &lt;code&gt;emailToRead&lt;/code&gt; property.
+</description>
+<tag name="@see">#emailToRead</tag>
+<parameter name="v">
+<type class="javax.baja.email.BEmailRead"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getIncomingEmailSizeLimit() -->
+<method name="getIncomingEmailSizeLimit"  public="true">
+<description>
+Get the &lt;code&gt;incomingEmailSizeLimit&lt;/code&gt; property.&#xa; The maximum size for an individual incoming email, in kilobytes. Any email larger than this size&#xa; will be ignored and marked as read.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#incomingEmailSizeLimit</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.setIncomingEmailSizeLimit(int) -->
+<method name="setIncomingEmailSizeLimit"  public="true">
+<description>
+Set the &lt;code&gt;incomingEmailSizeLimit&lt;/code&gt; property.&#xa; The maximum size for an individual incoming email, in kilobytes. Any email larger than this size&#xa; will be ignored and marked as read.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#incomingEmailSizeLimit</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getSizeLimitPerPoll() -->
+<method name="getSizeLimitPerPoll"  public="true">
+<description>
+Get the &lt;code&gt;sizeLimitPerPoll&lt;/code&gt; property.&#xa; The maximum cumulative size of emails that can be processed per poll, in kilobytes. Once the limit&#xa; is reached, any additional emails will be read on the next poll.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#sizeLimitPerPoll</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.setSizeLimitPerPoll(int) -->
+<method name="setSizeLimitPerPoll"  public="true">
+<description>
+Set the &lt;code&gt;sizeLimitPerPoll&lt;/code&gt; property.&#xa; The maximum cumulative size of emails that can be processed per poll, in kilobytes. Once the limit&#xa; is reached, any additional emails will be read on the next poll.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#sizeLimitPerPoll</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getIgnoreAttachments() -->
+<method name="getIgnoreAttachments"  public="true">
+<description>
+Get the &lt;code&gt;ignoreAttachments&lt;/code&gt; property.&#xa; Determines whether attachments on incoming emails should be processed. When true, attachments will&#xa; be ignored.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#ignoreAttachments</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.setIgnoreAttachments(boolean) -->
+<method name="setIgnoreAttachments"  public="true">
+<description>
+Set the &lt;code&gt;ignoreAttachments&lt;/code&gt; property.&#xa; Determines whether attachments on incoming emails should be processed. When true, attachments will&#xa; be ignored.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#ignoreAttachments</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.fireReceived(javax.baja.email.BEmail) -->
+<method name="fireReceived"  public="true">
+<description>
+Fire an event for the &lt;code&gt;received&lt;/code&gt; topic.&#xa; Fired when an email has been received.
+</description>
+<tag name="@see">#received</tag>
+<parameter name="event">
+<type class="javax.baja.email.BEmail"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.poll() -->
+<method name="poll"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+poll the host
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.getTargetEmailAuthenticatorType() -->
+<method name="getTargetEmailAuthenticatorType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Gets the Type of the email authenticator that is available to this email account.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+The Type of emailAuthenticator that this email account supports.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.email.BIncomingAccount.port -->
+<field name="port"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;port&lt;/code&gt; property.
+</description>
+<tag name="@see">#getPort</tag>
+<tag name="@see">#setPort</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.emailAuthenticator -->
+<field name="emailAuthenticator"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;emailAuthenticator&lt;/code&gt; property.&#xa; The client authenticator property for this email account. This determines the type of authentication&#xa; that will be used (e.g. basic, oauth, no auth).
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getEmailAuthenticator</tag>
+<tag name="@see">#setEmailAuthenticator</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.store -->
+<field name="store"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;store&lt;/code&gt; property.&#xa; The type of store.
+</description>
+<tag name="@see">#getStore</tag>
+<tag name="@see">#setStore</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.deliveryPolicy -->
+<field name="deliveryPolicy"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;deliveryPolicy&lt;/code&gt; property.&#xa; How to retain emails on the server if the server allows this decision&#xa; to be made by the client. Many POP3 email servers will&#xa; delete the message no matter what. IMAP is usually more flexible
+</description>
+<tag name="@see">#getDeliveryPolicy</tag>
+<tag name="@see">#setDeliveryPolicy</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.emailToRead -->
+<field name="emailToRead"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;emailToRead&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEmailToRead</tag>
+<tag name="@see">#setEmailToRead</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.incomingEmailSizeLimit -->
+<field name="incomingEmailSizeLimit"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;incomingEmailSizeLimit&lt;/code&gt; property.&#xa; The maximum size for an individual incoming email, in kilobytes. Any email larger than this size&#xa; will be ignored and marked as read.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getIncomingEmailSizeLimit</tag>
+<tag name="@see">#setIncomingEmailSizeLimit</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.sizeLimitPerPoll -->
+<field name="sizeLimitPerPoll"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sizeLimitPerPoll&lt;/code&gt; property.&#xa; The maximum cumulative size of emails that can be processed per poll, in kilobytes. Once the limit&#xa; is reached, any additional emails will be read on the next poll.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getSizeLimitPerPoll</tag>
+<tag name="@see">#setSizeLimitPerPoll</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.ignoreAttachments -->
+<field name="ignoreAttachments"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ignoreAttachments&lt;/code&gt; property.&#xa; Determines whether attachments on incoming emails should be processed. When true, attachments will&#xa; be ignored.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<tag name="@see">#getIgnoreAttachments</tag>
+<tag name="@see">#setIgnoreAttachments</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.received -->
+<field name="received"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;received&lt;/code&gt; topic.&#xa; Fired when an email has been received.
+</description>
+<tag name="@see">#fireReceived</tag>
+</field>
+
+<!-- javax.baja.email.BIncomingAccount.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

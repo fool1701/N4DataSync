@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.videoStream.fox.FoxVideoConnection" name="FoxVideoConnection" packageName="com.tridium.videoDriver.videoStream.fox" public="true">
+<description>
+This wraps a FoxCircuit on the station side.  An instance of this&#xa; class corresponds with a particular connection between a Workbench&#xa; client and a station server.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 9, 2008</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection(com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator, com.tridium.fox.session.FoxCircuit, java.lang.String) -->
+<constructor name="FoxVideoConnection" protected="true">
+<parameter name="videoRouter">
+<type class="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator"/>
+<description>
+an instance to the StationSideVideoCoordinator that is&#xa; constructing this object.
+</description>
+</parameter>
+<parameter name="circuit">
+<type class="com.tridium.fox.session.FoxCircuit"/>
+<description>
+an instance to the FoxCircuit that is being established&#xa; through the FoxVideoChannel.
+</description>
+</parameter>
+<parameter name="videoClientId">
+<type class="java.lang.String"/>
+<description>
+(String) a name or name:int that uniquely&#xa; identifies that particular Workbench client connection within the&#xa; station server.
+</description>
+</parameter>
+<description>
+This constructor is called by the StationSideVideoCoordinator as a&#xa; FoxVideoChannel circuit is established between one Workbench client&#xa; and the station server.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection() -->
+<constructor name="FoxVideoConnection" protected="true">
+<description>
+This empty constructor exists for future compatibility.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.connectionClosed() -->
+<method name="connectionClosed"  protected="true">
+<description>
+This is called if and when the StationSideVideoCoordinator loses the&#xa; circuit connection to the particular Workbench client. Currently&#xa; this method is empty.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.getCircuit() -->
+<method name="getCircuit"  public="true">
+<description>
+Gets the FoxCircuit that this object wraps.
+</description>
+<return>
+<type class="com.tridium.fox.session.FoxCircuit"/>
+<description>
+the FoxCircuit that this object wraps.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.sendTimeout(com.tridium.videoDriver.videoStream.fox.StationSideVideoSession) -->
+<method name="sendTimeout"  public="true">
+<description>
+This method is called by the StationSideVideoCoordinator if and when&#xa; it detects that a timeout has occurred during an attempt to establish&#xa; a video stream to a video field device.&#xa; &#xa;  This method sends a &#x27;timeout&#x27; notification to the Workbench client,&#xa;  which will be received by its ClientSideVideoReceiver which is what&#xa;  reads from the client end of the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.fox.FoxVideoConnection#circuit">#circuit</see>&lt;/code&gt;.
+</description>
+<parameter name="videoSession">
+<type class="com.tridium.videoDriver.videoStream.fox.StationSideVideoSession"/>
+<description>
+a StationSideVideoSession object that wraps the particular&#xa; video stream.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+any exception that occurs during the Fox communication&#xa; to the Workbench client.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.writeChunkToCircuit(com.tridium.videoDriver.videoStream.fox.StationSideVideoSession, com.tridium.fox.message.FoxMessage, int) -->
+<method name="writeChunkToCircuit"  protected="true">
+<description>
+This method is called by the sendFrameChunk()&#xa; method to send a chunk of video data to a Workbench client.&#xa; &#xa; param StationSideVideoSession the videoSession from the sendFrameChunk() method
+</description>
+<parameter name="videoSession">
+<type class="com.tridium.videoDriver.videoStream.fox.StationSideVideoSession"/>
+</parameter>
+<parameter name="frameChunkMsg">
+<type class="com.tridium.fox.message.FoxMessage"/>
+<description>
+the FoxMessage that wraps the byte array chunk of &#xa; video data
+</description>
+</parameter>
+<parameter name="videoStreamId">
+<type class="int"/>
+<description>
+the id of the video stream to which the chunk belongs&#xa; on the Workbench client side.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+any exception that occurs during the Fox communication&#xa; to the Workbench client.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.getVideoClientId() -->
+<method name="getVideoClientId"  public="true">
+<description>
+Gets the id that uniquely identifies the particular client&#xa; to which the FoxVideoConnection&#x27;s circuit is connected. This is unique&#xa; within the entire station server.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.log -->
+<field name="log"  protected="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.videoClientId -->
+<field name="videoClientId"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the videoClientId that is passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.videoCoordinator -->
+<field name="videoCoordinator"  protected="true">
+<type class="com.tridium.videoDriver.videoStream.fox.StationSideVideoCoordinator"/>
+<description>
+This is the StationSideVideoCoordinator object that is passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.fox.FoxVideoConnection.circuit -->
+<field name="circuit"  protected="true">
+<type class="com.tridium.fox.session.FoxCircuit"/>
+<description>
+This is the FoxCircuit that is passed to the constructor.
+</description>
+</field>
+
+</class>
+</bajadoc>

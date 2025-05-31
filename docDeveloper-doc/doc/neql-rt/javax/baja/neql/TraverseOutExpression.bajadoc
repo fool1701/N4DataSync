@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="neql" runtimeProfile="rt" qualifiedName="javax.baja.neql.TraverseOutExpression" name="TraverseOutExpression" packageName="javax.baja.neql" public="true">
+<description>
+A TraverseOutExpression traverses an outbound relation on an Entity&#xa; and returns the target entity.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">01/16/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.neql.Expression"/>
+</extends>
+<!-- javax.baja.neql.TraverseOutExpression(javax.baja.neql.Expression) -->
+<constructor name="TraverseOutExpression" public="true">
+<parameter name="expr">
+<type class="javax.baja.neql.Expression"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.neql.TraverseOutExpression.getNodeType() -->
+<method name="getNodeType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the node type.
+</description>
+<return>
+<type class="int"/>
+<description>
+AST_TRAVERSE_OUT
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.TraverseOutExpression.getExpression() -->
+<method name="getExpression"  public="true">
+<description>
+Get the expression the subexpression that must evaluate&#xa; to an Entity.
+</description>
+<return>
+<type class="javax.baja.neql.Expression"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.TraverseOutExpression.evaluate(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evaluate"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.neql.TraverseOutExpression.evalBoolean(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evalBoolean"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true if the entity contains an outbound relation with this expression&#x27;s relation id.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+entity on which to search for an outbound relation with this expression&#x27;s&#xa;   relation id
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+context that may contain the default namespace to form the relation id
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the entity contains an outbound relation with this expression&#x27;s relation id
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

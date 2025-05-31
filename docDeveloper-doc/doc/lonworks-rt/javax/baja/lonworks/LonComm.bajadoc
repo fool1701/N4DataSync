@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.LonComm" name="LonComm" packageName="javax.baja.lonworks" public="true" interface="true" abstract="true" category="interface">
+<description>
+LonComm defines the api for the lonworks communication&#xa; stack. It provides a means to send and receive messages&#xa; using the various service types. It also provides the&#xa; ability for a &lt;code&gt;LonListener&lt;/code&gt; to register to&#xa; receive unsolicited messages.
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">19 Feb 02</tag>
+<tag name="@version">$Revision: 14$ $Date: 10/17/00 12:47:14 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<!-- javax.baja.lonworks.LonComm.sendRequest(javax.baja.lonworks.datatypes.LonAddress, javax.baja.lonworks.LonMessage) -->
+<method name="sendRequest"  public="true" abstract="true">
+<description>
+Send a message using request/response service to&#xa;  the specified address. Block the calling thread &#xa;  until the response is received or the transaction times out. &#xa;  Return the response or null if there is a transmission error or&#xa;  failed response.
+</description>
+<parameter name="destAddr">
+<type class="javax.baja.lonworks.datatypes.LonAddress"/>
+</parameter>
+<parameter name="netRequest">
+<type class="javax.baja.lonworks.LonMessage"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.LonMessage"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.LonComm.sendAcked(javax.baja.lonworks.datatypes.LonAddress, javax.baja.lonworks.LonMessage) -->
+<method name="sendAcked"  public="true" abstract="true">
+<description>
+Send a message using acknowledged service to&#xa;  the specified address. Block the calling thread &#xa;  until the ack is received or the transaction times out.
+</description>
+<parameter name="destAddr">
+<type class="javax.baja.lonworks.datatypes.LonAddress"/>
+</parameter>
+<parameter name="netRequest">
+<type class="javax.baja.lonworks.LonMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.LonComm.sendResponse(javax.baja.lonworks.LonMessage, javax.baja.lonworks.LonMessage) -->
+<method name="sendResponse"  public="true" abstract="true">
+<description>
+Send a response to message received from lonComm. The original&#xa;  message will contain the neccessary information to complete the&#xa;  transaction.
+</description>
+<parameter name="origMsg">
+<type class="javax.baja.lonworks.LonMessage"/>
+</parameter>
+<parameter name="netResponse">
+<type class="javax.baja.lonworks.LonMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonComm.sendUnacknowledged(javax.baja.lonworks.datatypes.LonAddress, javax.baja.lonworks.LonMessage) -->
+<method name="sendUnacknowledged"  public="true" abstract="true">
+<description>
+Send a message using unacknowledged service to&#xa;  the specified address. Block the calling thread &#xa;  until the message is sent(Neuron returns completion event).
+</description>
+<parameter name="destAddr">
+<type class="javax.baja.lonworks.datatypes.LonAddress"/>
+</parameter>
+<parameter name="netRequest">
+<type class="javax.baja.lonworks.LonMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.LonComm.sendUnackRepeat(javax.baja.lonworks.datatypes.LonAddress, javax.baja.lonworks.LonMessage) -->
+<method name="sendUnackRepeat"  public="true" abstract="true">
+<description>
+Send a message using unacknowledged repeat service to&#xa;  the specified address. Block the calling thread &#xa;  until the message is sent(Neuron returns completion event).
+</description>
+<parameter name="destAddr">
+<type class="javax.baja.lonworks.datatypes.LonAddress"/>
+</parameter>
+<parameter name="netRequest">
+<type class="javax.baja.lonworks.LonMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.LonComm.registerLonListener(javax.baja.lonworks.LonListener, int, javax.baja.lonworks.datatypes.BSubnetNode, java.lang.Class&lt;?&gt;) -->
+<method name="registerLonListener"  public="true" abstract="true">
+<description>
+Register a &lt;code&gt;LonListener&lt;/code&gt; to receive unsolicited messages.
+</description>
+<parameter name="listner">
+<type class="javax.baja.lonworks.LonListener"/>
+<description>
+Reference to object which implements the LonListener interface.&#xa;                Will receive &lt;code&gt;receiveLonMessage()&lt;/code&gt; callbacks.&lt;p&gt;
+</description>
+</parameter>
+<parameter name="msgCode">
+<type class="int"/>
+<description>
+The message code of messages to route to listener. The same &#xa;                listner may be registered for multiple message codes. Multiple&#xa;                listners may register for the same message code.&lt;p&gt;
+</description>
+</parameter>
+<parameter name="address">
+<type class="javax.baja.lonworks.datatypes.BSubnetNode"/>
+<description>
+Optional reference to address of device from which to receive messages&#xa;                  from.  If null all messages of the specified msgCode will be&#xa;                  routed to listner.&lt;p&gt;
+</description>
+</parameter>
+<parameter name="messageClass">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+<description>
+Optional subclass of LonMessage for decoding received &#xa;                     message.  If null a &lt;code&gt;LonMessage&lt;/code&gt; will be passed in &#xa;                     receiveLonMessage() callback.  Specifying the messageClass&#xa;                     will make process more efficient.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonComm.unregisterLonListener(javax.baja.lonworks.LonListener, int, javax.baja.lonworks.datatypes.BSubnetNode) -->
+<method name="unregisterLonListener"  public="true" abstract="true">
+<description>
+Unregister the specified &lt;code&gt;LonListener&lt;/code&gt;.
+</description>
+<parameter name="listner">
+<type class="javax.baja.lonworks.LonListener"/>
+<description>
+&lt;code&gt;LonListener&lt;/code&gt; passed in &lt;code&gt;registerLonListener&lt;/code&gt; call to be unregistered.&lt;p&gt;
+</description>
+</parameter>
+<parameter name="msgCode">
+<type class="int"/>
+<description>
+The message code of message type to stop listening for.  If -1 &#xa;                then unregister listener for all msgCodes currently registered for.&lt;p&gt;
+</description>
+</parameter>
+<parameter name="address">
+<type class="javax.baja.lonworks.datatypes.BSubnetNode"/>
+<description>
+The address passed in &lt;code&gt;registerLonListener&lt;/code&gt; call.  If null&#xa;                then unregister listner for all cases it is registered for specified&#xa;                msgCode.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonComm.lonNetwork() -->
+<method name="lonNetwork"  public="true" abstract="true">
+<description>
+Convenience method to access the network object.
+</description>
+<return>
+<type class="javax.baja.lonworks.BLonNetwork"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

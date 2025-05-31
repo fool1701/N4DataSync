@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm" name="BBooleanChangeOfStateAlgorithm" packageName="javax.baja.alarm.ext.offnormal" public="true">
+<description>
+BBooleanChangeOfStateAlgorithm implements a change of&#xa; state alarm detection algorithm for boolean objects&#xa; as described in BACnet Clause 13.3.2.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">03 May 01</tag>
+<tag name="@version">$Revision: 27$ $Date: 8/12/05 11:26:22 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.alarm.ext.offnormal.BTwoStateAlgorithm"/>
+</extends>
+<property name="alarmValue" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;alarmValue&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#getAlarmValue</tag>
+<tag name="@see">#setAlarmValue</tag>
+</property>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm() -->
+<constructor name="BBooleanChangeOfStateAlgorithm" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.getAlarmValue() -->
+<method name="getAlarmValue"  public="true">
+<description>
+Get the &lt;code&gt;alarmValue&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#alarmValue</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.setAlarmValue(boolean) -->
+<method name="setAlarmValue"  public="true">
+<description>
+Set the &lt;code&gt;alarmValue&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#alarmValue</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.isGrandparentLegal(javax.baja.sys.BComponent) -->
+<method name="isGrandparentLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+A BBooleanChangeOfStateAlgorithm&#x27;s grandparent must implement&#xa; the BooleanPoint interface
+</description>
+<parameter name="grandparent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.isNormal(javax.baja.status.BStatusValue) -->
+<method name="isNormal"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the present value
+</description>
+<parameter name="o">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.writeAlarmData(javax.baja.status.BStatusValue, java.util.Map) -->
+<method name="writeAlarmData"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Write the key-value pairs defining alarm data for the&#xa;  alarm algorithm and state to the given Facets.&#xa; &lt;p&gt;&#xa;  The alarm data for a Change Of State alarm is given by&#xa;  BACnet table 13-3, Standard Object Property Values&#xa;  returned in notifications.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The relevant control point status value
+</description>
+</parameter>
+<parameter name="map">
+<parameterizedType class="java.util.Map">
+<args>
+</args>
+</parameterizedType>
+<description>
+The map.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.alarmValue -->
+<field name="alarmValue"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmValue&lt;/code&gt; property.&#xa; Set of all offnormal states
+</description>
+<tag name="@see">#getAlarmValue</tag>
+<tag name="@see">#setAlarmValue</tag>
+</field>
+
+<!-- javax.baja.alarm.ext.offnormal.BBooleanChangeOfStateAlgorithm.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

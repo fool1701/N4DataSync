@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverAC256" runtimeProfile="rt" qualifiedName="com.tridium.andoverAC256.BAndoverDevice" name="BAndoverDevice" packageName="com.tridium.andoverAC256" public="true">
+<description>
+Device level class for the AC256 or AC8 controller
+</description>
+<tag name="@author">Clif Turman</tag>
+<tag name="@creation">10/4/2004 2:14PM</tag>
+<tag name="@version">$Revision: 2$ $Date: 10/4/2004 2:14PM$</tag>
+<tag name="@since">Niagara 3.0 andoverAC256 1.0</tag>
+<extends>
+<type class="com.tridium.basicdriver.BBasicDevice"/>
+</extends>
+<implements>
+<type class="com.tridium.andoverAC256.messages.AndoverMessageConst"/>
+</implements>
+<property name="deviceType" flags="h">
+<type class="com.tridium.andoverAC256.enums.BAndoverDeviceTypeEnum"/>
+<description>
+Slot for the &lt;code&gt;deviceType&lt;/code&gt; property.&#xa; Set the type of Andover device to AC256 or AC8&#xa; Not used, reserved for future use
+</description>
+<tag name="@see">#getDeviceType</tag>
+<tag name="@see">#setDeviceType</tag>
+</property>
+
+<property name="devicePassword" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;devicePassword&lt;/code&gt; property.&#xa; The password unique to a specific panel
+</description>
+<tag name="@see">#getDevicePassword</tag>
+<tag name="@see">#setDevicePassword</tag>
+</property>
+
+<property name="builtInUserPassword" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;builtInUserPassword&lt;/code&gt; property.&#xa; The super user password
+</description>
+<tag name="@see">#getBuiltInUserPassword</tag>
+<tag name="@see">#setBuiltInUserPassword</tag>
+</property>
+
+<property name="configuredUserPassword" flags="h">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;configuredUserPassword&lt;/code&gt; property.&#xa; A user with credentials to download and program&#xa; Not used, reserved for future use
+</description>
+<tag name="@see">#getConfiguredUserPassword</tag>
+<tag name="@see">#setConfiguredUserPassword</tag>
+</property>
+
+<property name="commInitialized" flags="rt">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;commInitialized&lt;/code&gt; property.&#xa; Set true if a successful logon attempt
+</description>
+<tag name="@see">#getCommInitialized</tag>
+<tag name="@see">#setCommInitialized</tag>
+</property>
+
+<property name="promptStatus" flags="rtd">
+<type class="javax.baja.sys.BEnum"/>
+<description>
+Slot for the &lt;code&gt;promptStatus&lt;/code&gt; property.&#xa; Returned messages almost always end with a&#xa; prompt string which corresponds to some&#xa; context of communication.  It is necessary&#xa; to keep track of this context.
+</description>
+<tag name="@see">#getPromptStatus</tag>
+<tag name="@see">#setPromptStatus</tag>
+</property>
+
+<property name="currentDomain" flags="rtd">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;currentDomain&lt;/code&gt; property.&#xa; This tracks the communication context&#xa; as returned by the promptStatus as the context&#xa; changes from talking to the AC256 panel (0) or&#xa; an LCU sub-panel (1 to 127)
+</description>
+<tag name="@see">#getCurrentDomain</tag>
+<tag name="@see">#setCurrentDomain</tag>
+</property>
+
+<property name="printStatusReadings" flags="rtd">
+<type class="com.tridium.andoverAC256.datatypes.BPrintStatusReadings"/>
+<description>
+Slot for the &lt;code&gt;printStatusReadings&lt;/code&gt; property.&#xa; Contains the relevant data contained in the&#xa; Andover PRINT STATUS command response.
+</description>
+<tag name="@see">#getPrintStatusReadings</tag>
+<tag name="@see">#setPrintStatusReadings</tag>
+</property>
+
+<property name="jaceDateTime" flags="rtd">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;jaceDateTime&lt;/code&gt; property.&#xa; A display only taken from the Jace system clock&#xa; Is used for comparison to the andoverDateTime&#xa; during clock synchronization.
+</description>
+<tag name="@see">#getJaceDateTime</tag>
+<tag name="@see">#setJaceDateTime</tag>
+</property>
+
+<property name="automaticallySetTime" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;automaticallySetTime&lt;/code&gt; property.&#xa; Enables automatic synchronization of the Andover&#xa; panel&#x27;s internal clock to the Jace clock
+</description>
+<tag name="@see">#getAutomaticallySetTime</tag>
+<tag name="@see">#setAutomaticallySetTime</tag>
+</property>
+
+<property name="syncTimeFrequency" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;syncTimeFrequency&lt;/code&gt; property.&#xa; Frequency at which the set time command is sent from&#xa; the Jace to the andover panel to synchronize the&#xa; clocks.
+</description>
+<tag name="@see">#getSyncTimeFrequency</tag>
+<tag name="@see">#setSyncTimeFrequency</tag>
+</property>
+
+<property name="automaticallyReloadProgram" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;automaticallyReloadProgram&lt;/code&gt; property.&#xa; Enables automatic reload of the controller program&#xa; if the program is lost due to power outage or a cold reset
+</description>
+<tag name="@see">#getAutomaticallyReloadProgram</tag>
+<tag name="@see">#setAutomaticallyReloadProgram</tag>
+</property>
+
+<property name="programReloadSettings" flags="">
+<type class="com.tridium.andoverAC256.datatypes.BProgramReloadSettings"/>
+<description>
+Slot for the &lt;code&gt;programReloadSettings&lt;/code&gt; property.&#xa; Component that encapsulates all relevant&#xa; data used to re-set the number of IOUs and LCUs in the Andover&#xa; configuration.  Necessary info in the event the Andover panel&#xa; loses its program and has to be reloaded.
+</description>
+<tag name="@see">#getProgramReloadSettings</tag>
+<tag name="@see">#setProgramReloadSettings</tag>
+</property>
+
+<property name="automaticallySetOptions" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;automaticallySetOptions&lt;/code&gt; property.&#xa; Enables automatic set options commansynchronization of the Andover&#xa; panel&#x27;s internal clock to the Jace clock
+</description>
+<tag name="@see">#getAutomaticallySetOptions</tag>
+<tag name="@see">#setAutomaticallySetOptions</tag>
+</property>
+
+<property name="optionCommandSettings" flags="">
+<type class="com.tridium.andoverAC256.datatypes.BAndoverSetOptionsConfig"/>
+<description>
+Slot for the &lt;code&gt;optionCommandSettings&lt;/code&gt; property.&#xa; Component that encapsulates all relevant&#xa; data used in the SET OPTIONS command or command sequence.&#xa; SET OPTIONS must be issued after a program reload, and may optionally&#xa; be issued at any time.
+</description>
+<tag name="@see">#getOptionCommandSettings</tag>
+<tag name="@see">#setOptionCommandSettings</tag>
+</property>
+
+<property name="monitorPoint" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;monitorPoint&lt;/code&gt; property.&#xa; The name of an AC256/AC8 point to use for ping purposes&#xa; Should be a short built-in point that never changes name
+</description>
+<tag name="@see">#getMonitorPoint</tag>
+<tag name="@see">#setMonitorPoint</tag>
+</property>
+
+<property name="useSPort" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useSPort&lt;/code&gt; property.&#xa; Is the RS232 cable connected to the SPort of the controller?&#xa; If so, the logon sequence is slightly changed, and the&#xa; Upload/Download process is affected.
+</description>
+<tag name="@see">#getUseSPort</tag>
+<tag name="@see">#setUseSPort</tag>
+</property>
+
+<property name="points" flags="">
+<type class="com.tridium.andoverAC256.point.BAndoverPointDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Contains the created proxy points representing&#xa; data values on this device
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</property>
+
+<property name="backupList" flags="h">
+<type class="com.tridium.andoverAC256.BAndoverBackupFolder"/>
+<description>
+Slot for the &lt;code&gt;backupList&lt;/code&gt; property.&#xa; Is a holding folder for holding data about previous backups
+</description>
+<tag name="@see">#getBackupList</tag>
+<tag name="@see">#setBackupList</tag>
+</property>
+
+<property name="supportsDomainKeyword" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;supportsDomainKeyword&lt;/code&gt; property.&#xa; Some OLD panels don&#x27;t support the DOM keyword&#xa; Note: customer found an old AC256M with rev 5.5 firmware&#xa; that gives an ?Invalid Keyword? response to &#x22;DOM 0&#x22; command.
+</description>
+<tag name="@see">#getSupportsDomainKeyword</tag>
+<tag name="@see">#setSupportsDomainKeyword</tag>
+</property>
+
+<action name="submitDiscoverPointsJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.andoverAC256.datatypes.BAndoverPointDiscoveryConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitDiscoverPointsJob&lt;/code&gt; action.&#xa; launches the point learn process
+</description>
+<tag name="@see">#submitDiscoverPointsJob(BAndoverPointDiscoveryConfig parameter)</tag>
+</action>
+
+<action name="submitBackupControllerJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.andoverAC256.datatypes.BAndoverBackupConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitBackupControllerJob&lt;/code&gt; action.&#xa; saves a copy of a controller&#x27;s program
+</description>
+<tag name="@see">#submitBackupControllerJob(BAndoverBackupConfig parameter)</tag>
+</action>
+
+<action name="submitRestoreControllerJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.andoverAC256.datatypes.BAndoverRestoreConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitRestoreControllerJob&lt;/code&gt; action.&#xa; restores a copy of a controller&#x27;s program
+</description>
+<tag name="@see">#submitRestoreControllerJob(BAndoverRestoreConfig parameter)</tag>
+</action>
+
+<action name="deleteBackupFile" flags="hc">
+<parameter name="parameter">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;deleteBackupFile&lt;/code&gt; action.&#xa; deletes a file from the backups directory of the station
+</description>
+<tag name="@see">#deleteBackupFile(BOrd parameter)</tag>
+</action>
+
+<action name="submitSetOptionsJob" flags="hc">
+<parameter name="parameter">
+<type class="com.tridium.andoverAC256.datatypes.BAndoverSetOptionsConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitSetOptionsJob&lt;/code&gt; action.&#xa; sets controller options in an AC256 using the SET OPTIONS command
+</description>
+<tag name="@see">#submitSetOptionsJob(BAndoverSetOptionsConfig parameter)</tag>
+</action>
+
+<action name="statusCommand" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;statusCommand&lt;/code&gt; action.&#xa; causes a PRINT STATUS command
+</description>
+<tag name="@see">#statusCommand()</tag>
+</action>
+
+<action name="syncTime" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;syncTime&lt;/code&gt; action.&#xa; set time and date in Andover panel to station time/date
+</description>
+<tag name="@see">#syncTime()</tag>
+</action>
+
+<topic name="logonSuccessful" flags="">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;logonSuccessful&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireLogonSuccessful</tag>
+</topic>
+
+</class>
+</bajadoc>

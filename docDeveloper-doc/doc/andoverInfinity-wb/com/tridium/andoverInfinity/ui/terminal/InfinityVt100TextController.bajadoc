@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="wb" qualifiedName="com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController" name="InfinityVt100TextController" packageName="com.tridium.andoverInfinity.ui.terminal" public="true">
+<description>
+InfinityVt100TextController extends TextController to&#xa; intercept mouse and keyboard input and route&#xa; to the network object of andover infinity.  It translates several keys&#xa; that are peculiar to the infinity VT100 interface into the equivalent&#xa; escape sequences that are sent on to the controller.
+</description>
+<tag name="@author">Clif Turman</tag>
+<tag name="@creation">3/29/2007 10:16AM</tag>
+<tag name="@version">$Revision: 22$ $Date: 9/29/2005 10:16AM$</tag>
+<tag name="@since">Niagara 3.2.10</tag>
+<extends>
+<type class="javax.baja.ui.text.TextController"/>
+</extends>
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController(com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal) -->
+<constructor name="InfinityVt100TextController" public="true">
+<parameter name="manager">
+<type class="com.tridium.andoverInfinity.ui.terminal.BInfinityVirtualTerminal"/>
+</parameter>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController.keyPressed(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyPressed"  public="true">
+<description>
+Override the callback keyPressed() on BTextEditor so that we don&#x27;t consume&#xa; CTRL-T&#x27;s (so we can issue the new tab command in the workbench)
+</description>
+<tag name="@see">javax.baja.ui.text.TextController#keyPressed(javax.baja.ui.event.BKeyEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController.keyReleased(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyReleased"  public="true">
+<description>
+Override the callback keyReleased() on BTextEditor to substitute&#xa; custom chars/strings to be sent whenever certain keys are released.
+</description>
+<tag name="@see">javax.baja.ui.text.TextController#keyReleased(javax.baja.ui.event.BKeyEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController.keyTyped(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyTyped"  public="true">
+<description>
+Override keyTyped to provide unique key mapping for Infinity&#xa; and to propagate/not propagate certain keystrokes.
+</description>
+<tag name="@see">javax.baja.ui.text.TextController#keyTyped(javax.baja.ui.event.BKeyEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController.mouseEntered(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseEntered"  public="true">
+<description>
+Override to make sure the mouse pointer stays an arrow, instead&#xa; of changing to a text pointer
+</description>
+<tag name="@see">javax.baja.ui.text.TextController#mouseEntered(javax.baja.ui.event.BMouseEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController.mouseExited(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseExited"  public="true">
+<description>
+Override to make sure the mouse pointer stays an arrow, instead&#xa; of changing to a text pointer
+</description>
+<tag name="@see">javax.baja.ui.text.TextController#mouseExited(javax.baja.ui.event.BMouseEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController.mousePressed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePressed"  public="true">
+<description>
+Override so that the cursor position remains at the screen buffer&#xa; cursor position.
+</description>
+<tag name="@see">javax.baja.ui.text.TextController#mousePressed(javax.baja.ui.event.BMouseEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.ui.terminal.InfinityVt100TextController.mouseDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragged"  public="true">
+<description>
+Override to make sure nothing happens when we drag the cursor. We &#xa; don&#x27;t want to select text, because selection leads to the cursor&#xa; moving, which we don&#x27;t want
+</description>
+<tag name="@see">javax.baja.ui.text.TextController#mouseDragged(javax.baja.ui.event.BMouseEvent)</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.authn.AuthMessage" name="AuthMessage" packageName="javax.baja.web.authn" public="true">
+<description>
+Representation of messages used by the HTTP header authentication protocol.
+</description>
+<tag name="@author">Patrick sager</tag>
+<tag name="@creation">4/24/2017</tag>
+<tag name="@since">Niagara 4.4</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.web.authn.AuthMessage() -->
+<constructor name="AuthMessage" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.web.authn.AuthMessage.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true" static="true">
+<description>
+Create a new AuthMessage decoded from the provided string.&#xa; Comma is used as token delimiter.
+</description>
+<parameter name="message">
+<type class="java.lang.String"/>
+<description>
+the string representation of the message
+</description>
+</parameter>
+<return>
+<type class="javax.baja.web.authn.AuthMessage"/>
+<description>
+the decoded AuthMessage
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.authn.AuthMessage.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description>
+Encode this auth message to a string
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the string encoding of this auth message
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.authn.AuthMessage.setParameter(java.lang.String, java.lang.String) -->
+<method name="setParameter"  public="true">
+<description>
+Add a key-value pair to this auth message. Key&#x27;s are case insensitive, but encodeToString()&#xa; will preserve the original case. Both the key and value must conform to the &#x22;token&#x22; syntax&#xa; described in [RFC7230], Section 3.2.6
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+parameter key
+</description>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+<description>
+parameter value
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.authn.AuthMessage.getParameter(java.lang.String) -->
+<method name="getParameter"  public="true">
+<description>
+Get the value of a parameter for a given key. Key is case insensitive.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+the parameter key
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the value of the parameter, or null if no parameter exists with the given key.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.authn.AuthMessage.setScheme(java.lang.String) -->
+<method name="setScheme"  public="true">
+<description>
+Sets the message&#x27;s scheme. Scheme must conform to the &#x22;token&#x22; syntax&#xa; described in [RFC7230], Section 3.2.6
+</description>
+<parameter name="scheme">
+<type class="java.lang.String"/>
+<description>
+the scheme of this message.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.authn.AuthMessage.getScheme() -->
+<method name="getScheme"  public="true">
+<description>
+Get the scheme of this message
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the message&#x27;s scheme, or null if the scheme has not been set
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.authn.AuthMessage.isValidToken(java.lang.String) -->
+<method name="isValidToken"  protected="true" static="true">
+<description>
+https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6&#xa;&#xa; Most HTTP header field values are defined using common syntax&#xa;    components (token, quoted-string, and comment) separated by&#xa;    whitespace or specific delimiting characters. Delimiters are chosen&#xa;    from the set of US-ASCII visual characters not allowed in a token&#xa;    &lt;code&gt;(DQUOTE and &amp;#x22;(),/:;&amp;lt;=&amp;gt;?@[\]{}&amp;#x22;)&lt;/code&gt;.&#xa;&#xa;     ........&#xa;&#xa; A string of text is parsed as a single value if it is quoted using double-quote marks.&#xa;&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa; quoted-string  = DQUOTE *( qdtext / quoted-pair ) DQUOTE&amp;#xa;      qdtext         = HTAB / SP /%x21 / %x23-5B / %x5D-7E / obs-text&amp;#xa;      obs-text       = %x80-FF&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<parameter name="token">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.web.authn.AuthMessage.ILLEGAL_TOKEN_CHARS -->
+<field name="ILLEGAL_TOKEN_CHARS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.HELLO -->
+<field name="HELLO"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.HANDSHAKE_TOKEN -->
+<field name="HANDSHAKE_TOKEN"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.USERNAME -->
+<field name="USERNAME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.BEARER -->
+<field name="BEARER"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.AUTH_TOKEN -->
+<field name="AUTH_TOKEN"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.WWW_AUTHENTICATE -->
+<field name="WWW_AUTHENTICATE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.AUTHORIZATION -->
+<field name="AUTHORIZATION"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.web.authn.AuthMessage.AUTHENTICATION_INFO -->
+<field name="AUTHENTICATION_INFO"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

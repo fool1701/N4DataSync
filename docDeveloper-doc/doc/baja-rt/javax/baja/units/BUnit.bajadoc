@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.units.BUnit" name="BUnit" packageName="javax.baja.units" public="true" final="true">
+<description>
+BUnit encapsulates a unit of measurement.  A BUnit is&#xa; composed of a unitName which must be unique within the&#xa; VM.  It may optionally have a symbol which may be an&#xa; abbreviation or shorthand notation for the unit.  Every&#xa; BUnit is mapped to an instance of BDimension which&#xa; specifies the units ratio of the seven base SI units.&#xa; Lastly each BUnit contains a scale and offset which is&#xa; used to normalize the BUnit to the unit represented&#xa; by the BDimension.  Non-linear unit conversion are currently &#xa; not supported.&#xa; &lt;p&gt;&#xa; Normalization equations:&#xa; &lt;pre&gt;&#xa;   unit = dimension * scale + offset&#xa;   toNormal = scalar * scale + offset&#xa;   fromNormal = (scalar - offset) / scale&#xa;   toUnit = fromNormal( toUnit.toNormal(scalar) )&#xa;   toUnit = ((scalar*thisScale + thisOffset) - toOffset) / toScale&#xa; &lt;/pre&gt;&#xa; &lt;p&gt;&#xa; Serialization format:&#xa; &lt;pre&gt;&#xa;   unit          = unitName symbol dimension scaleOffset&#xa;   unitName      = string &#x22;;&#x22;&#xa;   symbol        = (&#x22;&#x22; | string) &#x22;;&#x22;&#xa;   dimension     = dimension.encodeToString &#x22;;&#x22;&#xa;   scaleOffset   = [&#x22;*&#x22; scale] [&#x22;+&#x22; offset] &#x22;;&#x22;&#xa;   scale         = double&#xa;   offset        = double&#xa;&#xa; Examples:&#xa;   kilometer;km;(m);*1000;&#xa;   meters/second;;(m)(s-1);;&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">17 Dec 01</tag>
+<tag name="@version">$Revision: 17$ $Date: 11/13/09 4:47:24 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<implements>
+<type class="javax.baja.data.BIDataValue"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.units.BUnit.getUnit(java.lang.String) -->
+<method name="getUnit"  public="true" static="true">
+<description>
+Get an existing unit by name.  This requires that&#xa; the unit already created with through a call to&#xa; make() or by loading the UnitDatabase.  This method&#xa; throws UnitException if the specified unit does&#xa; not exist.
+</description>
+<parameter name="unitName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.make(java.lang.String, javax.baja.units.BDimension) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a unit: symbol defaults to unitName, &#xa; scale defaults to 1, offset defaults to 0.
+</description>
+<parameter name="unitName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="dimension">
+<type class="javax.baja.units.BDimension"/>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.make(java.lang.String, java.lang.String, javax.baja.units.BDimension) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a unit: scale defaults to 1, offset defaults to 0.
+</description>
+<parameter name="unitName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="symbol">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="dimension">
+<type class="javax.baja.units.BDimension"/>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.make(java.lang.String, java.lang.String, javax.baja.units.BDimension, double) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a unit: offset defaults to 0.
+</description>
+<parameter name="unitName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="symbol">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="dimension">
+<type class="javax.baja.units.BDimension"/>
+</parameter>
+<parameter name="scale">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.make(java.lang.String, javax.baja.units.BDimension, double) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a unit: symbol defaults to unitName, offset defaults to 0.
+</description>
+<parameter name="unitName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="dimension">
+<type class="javax.baja.units.BDimension"/>
+</parameter>
+<parameter name="scale">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.make(java.lang.String, java.lang.String, javax.baja.units.BDimension, double, double) -->
+<method name="make"  public="true" static="true">
+<description>
+Factory which accepts all components of a BUnit.
+</description>
+<parameter name="unitName">
+<type class="java.lang.String"/>
+<description>
+Unique name which identifies this unit.&#xa;   The name may contain any character but &#x27;;&#x27; or &#x27;&#x22;&#x27;.
+</description>
+</parameter>
+<parameter name="symbol">
+<type class="java.lang.String"/>
+<description>
+Abbreviated notation for unit.  The symbol may &#xa;   contain any character but &#x27;;&#x27;.
+</description>
+</parameter>
+<parameter name="dimension">
+<type class="javax.baja.units.BDimension"/>
+<description>
+Mathematical ratio of the seven base&#xa;   SI units (plus cost).  The dimension serves as the&#xa;   normalization unit and to identify like quantities.
+</description>
+</parameter>
+<parameter name="scale">
+<type class="double"/>
+<description>
+This is the multiplier to convert from&#xa;   normal to this unit.  For instance km would have a &#xa;   scale of 1000 since you must multiply meter (the &#xa;   dimension)by 1000 to get 1 km.  Likewise the scale for &#xa;   mm is .001.  A value of 1 indicates no scale.
+</description>
+</parameter>
+<parameter name="offset">
+<type class="double"/>
+<description>
+Rarely used, but specifies a scalar to&#xa;   add to the dimension to get this unit.  Celsius has&#xa;   an offset of 273.15 from its dimension Kelvin.  A value &#xa;   of 0 indicates no offset.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.make(java.lang.String, java.lang.String, javax.baja.units.BDimension, double, double, boolean) -->
+<method name="make"  public="true" static="true">
+<description>
+Factory which accepts all components of a BUnit.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="unitName">
+<type class="java.lang.String"/>
+<description>
+Unique name which identifies this unit.&#xa;   The name may contain any character but &#x27;;&#x27; or &#x27;&#x22;&#x27;.
+</description>
+</parameter>
+<parameter name="symbol">
+<type class="java.lang.String"/>
+<description>
+Abbreviated notation for unit.  The symbol may &#xa;   contain any character but &#x27;;&#x27;.
+</description>
+</parameter>
+<parameter name="dimension">
+<type class="javax.baja.units.BDimension"/>
+<description>
+Mathematical ratio of the seven base&#xa;   SI units (plus cost).  The dimension serves as the&#xa;   normalization unit and to identify like quantities.
+</description>
+</parameter>
+<parameter name="scale">
+<type class="double"/>
+<description>
+This is the multiplier to convert from&#xa;   normal to this unit.  For instance km would have a &#xa;   scale of 1000 since you must multiply meter (the &#xa;   dimension)by 1000 to get 1 km.  Likewise the scale for &#xa;   mm is .001.  A value of 1 indicates no scale.
+</description>
+</parameter>
+<parameter name="offset">
+<type class="double"/>
+<description>
+Rarely used, but specifies a scalar to&#xa;   add to the dimension to get this unit.  Celsius has&#xa;   an offset of 273.15 from its dimension Kelvin.  A value &#xa;   of 0 indicates no offset.
+</description>
+</parameter>
+<parameter name="prefix">
+<type class="boolean"/>
+<description>
+Is this unit a prefix to the value, otherwise&#xa;   is assumed follow the value when output as a text string.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getDimension() -->
+<method name="getDimension"  public="true" final="true">
+<description>
+Get the unit&#x27;s dimension.
+</description>
+<return>
+<type class="javax.baja.units.BDimension"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getUnitName() -->
+<method name="getUnitName"  public="true" final="true">
+<description>
+Get the unit name which uniquely identifies &#xa; this BUnit instance in the VM.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getUnitName(javax.baja.sys.Context) -->
+<method name="getUnitName"  public="true" final="true">
+<description>
+Get the unit name using the specified Context.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getSymbol() -->
+<method name="getSymbol"  public="true" final="true">
+<description>
+Get the symbol to use as an abbreviation for the&#xa; unit.  If no symbol was specified, this defaults&#xa; to use the unit name.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getSymbol(javax.baja.sys.Context) -->
+<method name="getSymbol"  public="true" final="true">
+<description>
+Get the symbol using the specified Context.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getScale() -->
+<method name="getScale"  public="true" final="true">
+<description>
+Get the scale which is used multiply the &#xa; dimension to get this unit:&#xa; &lt;pre&gt;&#xa;   unit = dimension * scale + offset&#xa; &lt;/pre&gt;
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getOffset() -->
+<method name="getOffset"  public="true" final="true">
+<description>
+Get the offset which is used to add to the &#xa; dimension to get this unit:&#xa; &lt;pre&gt;&#xa;   unit = dimension * scale + offset&#xa; &lt;/pre&gt;
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getIsPrefix() -->
+<method name="getIsPrefix"  public="true" final="true">
+<description>
+Get whether this unit should be displayed prior&#xa; to the numeric value.  Otherwise it is displayed after.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.isConvertible(javax.baja.units.BUnit) -->
+<method name="isConvertible"  public="true" final="true">
+<description>
+Is this unit convertible to the specified unit.&#xa; Convertible units must have identical dimensions.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.toNormal(double) -->
+<method name="toNormal"  public="true" final="true">
+<description>
+Given a scalar measurement of this unit, convert&#xa; it to its normal value which is a conversion from&#xa; this unit to its dimension (scale=1, offset=0):&#xa; &lt;pre&gt;&#xa;   toNormal = scalar*scale + offset&#xa; &lt;/pre&gt;
+</description>
+<parameter name="scalar">
+<type class="double"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.fromNormal(double) -->
+<method name="fromNormal"  public="true" final="true">
+<description>
+Given a scalar measurement normalized to the dimension&#xa; unit (scale=1, offset=0), convert it to a measurement&#xa; in this unit:&#xa; &lt;pre&gt;&#xa;   fromNormal = (scalar - offset)/scale&#xa; &lt;/pre&gt;
+</description>
+<parameter name="scalar">
+<type class="double"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.convertTo(javax.baja.units.BUnit, double) -->
+<method name="convertTo"  public="true" final="true">
+<description>
+Convert a scalar in this unit to a scalar in the&#xa; specified unit:&#xa; &lt;pre&gt;&#xa;   toUnit = fromNormal( toUnit.toNormal(scalar) )&#xa;   toUnit = ((scalar*thisScale + thisOffset) - toOffset) / toScale&#xa; &lt;/pre&gt;
+</description>
+<parameter name="toUnit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<parameter name="scalar">
+<type class="double"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getDifferentialUnit() -->
+<method name="getDifferentialUnit"  public="true">
+<description>
+Converts an absolute unit to a differential unit.&#xa; This is useful for units like &#x22;celsius&#x22; where&#xa; a differential is not the same as an absolute value&#xa; due to a non-zero offset.&#xa; &#xa; If the unit is already a differential, or the&#xa; differential is the same, returns the unit.
+</description>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getAbsoluteUnit() -->
+<method name="getAbsoluteUnit"  public="true">
+<description>
+Converts a differential unit to an absolute unit.&#xa; This is useful for units like &#x22;celsius&#x22; where&#xa; a differential is not the same as an absolute value&#xa; due to a non-zero offset.&#xa; &#xa; If the unit is already an absolute, or the&#xa; absolute is the same, returns the unit.
+</description>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.isNull() -->
+<method name="isNull"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is this instance the NULL unit.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To string returns the unit&#x27;s symbol.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.hashCode() -->
+<method name="hashCode"  public="true" final="true">
+<description>
+BUnit hashcode.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.equals(java.lang.Object) -->
+<method name="equals"  public="true" final="true">
+<description>
+BUnit equality.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.encode(java.io.DataOutput) -->
+<method name="encode"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BUnit is serialized using writeUTF(encodeToString()).
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.units.BUnit.decode(java.io.DataInput) -->
+<method name="decode"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BUnit is unserialized using decodeFromString(readUTF()).
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.units.BUnit.encodeToString() -->
+<method name="encodeToString"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode the unit in its string format.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode the unit in its string format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.units.BUnit.toDataValue() -->
+<method name="toDataValue"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return this instance since it&#x27;s already a data value.
+</description>
+<return>
+<type class="javax.baja.data.BIDataValue"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.units.BUnit.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.units.BUnit"/>
+<description>
+The null unit.
+</description>
+</field>
+
+<!-- javax.baja.units.BUnit.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.units.BUnit"/>
+<description>
+The default unit is the NULL.
+</description>
+</field>
+
+<!-- javax.baja.units.BUnit.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

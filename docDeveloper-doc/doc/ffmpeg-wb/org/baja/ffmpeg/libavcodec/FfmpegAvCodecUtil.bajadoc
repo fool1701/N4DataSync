@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ffmpeg" runtimeProfile="wb" qualifiedName="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil" name="FfmpegAvCodecUtil" packageName="org.baja.ffmpeg.libavcodec" public="true">
+<description>
+This is one of the main ways to access the underlying FFmpeg library.&#xa;&#xa; FFmpeg is an amazing, open-source, LGPL-licensed library for converting video from&#xa; any format to any format. The initial use in Niagara 4 is to convert an&#xa; incoming stream from a video camera into raw frames of pixels that we will&#xa; paint on the screen using BajaUI.&#xa;&#xa; Unfortunately, since FFmpeg is so comprehensive, I do not understand it very&#xa; well at all!!! It seems to work best to convert video files on disk from one&#xa; format to another. Or, perhaps I should say, most examples on the WWW show how&#xa; to use FFmpeg to convert video files on the disk. However, I need FFmpeg for&#xa; converting streams in memory.&#xa;&#xa; This utility class is the result of my research into using the FFmpeg library.&#xa; It provides access to those methods that I required in order to support the&#xa; FfmpegVideoDecoder class, which, in theory can convert from any video camera&#x27;s&#xa; stream to a sequence of pixel arrays that a BVideoPlayer can paint on the screen.&#xa;&#xa; It is my intention that any third-party Niagara-4 developer interested in&#xa; modifying this library or adding extra support should be able to do so.&#xa;&#xa; The native FFmpeg library is licensed under terms of GNU LGPL v2.1.&#xa; See the text files in the docs directory of the ffmpeg.jar module&#xa; for licensing details.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Aug 20, 2009</tag>
+<extends>
+<type class="org.baja.ffmpeg.Ffmpeg"/>
+</extends>
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil() -->
+<constructor name="FfmpegAvCodecUtil" public="true">
+<description/>
+</constructor>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.setLogLevel(org.baja.ffmpeg.enums.BFfmpegLogLevel) -->
+<method name="setLogLevel"  public="true" static="true">
+<description>
+Calls av_log_set_level in the underlying FFmpeg library&#xa;&#xa; This method controls the level of ffmpeg related output in the workbench console.
+</description>
+<parameter name="level">
+<type class="org.baja.ffmpeg.enums.BFfmpegLogLevel"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.av_log_set_level(int) -->
+<method name="av_log_set_level"  public="true" static="true" native="true">
+<description/>
+<parameter name="level">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.av_register_all() -->
+<method name="av_register_all"  public="true" static="true" native="true">
+<description>
+Calls av_register_all in the underlying FFmpeg library.&#xa;&#xa; From what I have learned about FFmpeg development, this step&#xa; is necessary before doing anything else in the FFmpeg library.&#xa;&#xa; I think you pretty much need to call this method in your initialization&#xa; process.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_alloc_context(org.baja.ffmpeg.libavcodec.FfmpegAVCodec) -->
+<method name="avcodec_alloc_context"  public="true" static="true">
+<description>
+Calls avcodec_alloc_context in avcodec of ffmpeg library.&#xa;&#xa; From what I have learned about FFmpeg development, it is necessary&#xa; to allocate an empty AVCodecContext to serve as a wrapper around&#xa; and AVCodec.&#xa;&#xa; Here&#x27;s an outline of how to use this method:&#xa; &lt;ol&gt;&#xa; &lt;li&gt; Call this method &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_alloc_context(BCodecIdEnum codecId)">#avcodec_alloc_context(BCodecIdEnum codecId)</see>&lt;/code&gt;, retain the return value&#xa; &lt;li&gt; Call &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_find_decoder(org.baja.ffmpeg.enums.BCodecIdEnum)">#avcodec_find_decoder(BCodecIdEnum)</see>&lt;/code&gt; or &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_find_encoder(org.baja.ffmpeg.enums.BCodecIdEnum)">#avcodec_find_encoder(BCodecIdEnum)</see>&lt;/code&gt;, retain the return value&#xa; &lt;li&gt; Call &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_open(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext, org.baja.ffmpeg.libavcodec.FfmpegAVCodec)">#avcodec_open(FfmpegAVCodecContext, FfmpegAVCodec)</see>&lt;/code&gt; and pass in the context and codec that you retained in the previous steps.&#xa; &lt;/ol&gt;
+</description>
+<parameter name="ffmpegCodec">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodec"/>
+</parameter>
+<return>
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+<description>
+a Java representation of the AVCodecContext object&#xa; that is returned by the underlying native call to avcodec_alloc_context.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_alloc_frame() -->
+<method name="avcodec_alloc_frame"  public="true" static="true">
+<description>
+Calls avcodec_alloc_frame in the underlying FFmpeg library.&#xa;&#xa; This works fine to get an empty frame to pass to avcodec_decode_video.&#xa;&#xa; However, to get a frame to pass to sws_Scale as the destination, then&#xa; this method is insufficient. For doing that, I am pretty sure that you&#xa; need to call &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#allocateAndInitFormattedFrame(int, int, org.baja.ffmpeg.enums.BPixelFormatEnum)">#allocateAndInitFormattedFrame(int, int, BPixelFormatEnum)</see>&lt;/code&gt;&#xa;&#xa; I do not fully understand why. I am just the messenger here...trying to provide&#xa; access to the FFmpeg library from Niagara 4.
+</description>
+<return>
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVFrame"/>
+<description>
+a java representation of the emtpy AVFrame that is allocated as a result&#xa; of the call to avcoded_alloc_frame in the underlying FFmpeg library.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.av_packet_alloc() -->
+<method name="av_packet_alloc"  public="true" static="true">
+<description>
+Calls av_packet_alloc0 in the underlying FFmpeg library.&#xa; Allocate an AVPacket and set its fields to default values.
+</description>
+<return>
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVPacket"/>
+<description>
+a java representation of the allocated AVPacket and set&#xa; its fields to default values as a result of the call to&#xa; av_packet_alloc0 in the underlying FFmpeg library.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_decode_video(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext, org.baja.ffmpeg.libavcodec.FfmpegAVFrame, org.baja.ffmpeg.libavcodec.FfmpegAVPacket, boolean[], byte[], int) -->
+<method name="avcodec_decode_video"  public="true" static="true">
+<description>
+Calls avcodec_decocde_video in the underlying native FFmpeg layer.
+</description>
+<parameter name="avCodecContext">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+<description>
+an FfmpegAVCodecContext that was previously&#xa; retrieved by callilng @see &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_alloc_context()">#avcodec_alloc_context()</see>&lt;/code&gt;. Note&#xa; that prior to calling this method for the first time, you must&#xa; call avcodec_open passing in the saame avCodecContext.
+</description>
+</parameter>
+<parameter name="avFrame">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVFrame"/>
+<description>
+an FfmpegAVFrame that was previously&#xa; retrieved by callilng @see &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_alloc_frame()">#avcodec_alloc_frame()</see>&lt;/code&gt;
+</description>
+</parameter>
+<parameter name="avPacket">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVPacket"/>
+</parameter>
+<parameter name="frameFinished">
+<type class="boolean" dimension="1"/>
+<description>
+OUT the underlying call uses a boolean by&#xa; reference to indicate whether it is able to decode a video frame&#xa; from the given data. To make this work from Java, pass in a boolean&#xa; array of size 1. After this method returns to you, you may access&#xa; the zeroeth element of this array to determine whether or not the&#xa; underlying FFmpeg native layer was able to decode a video frame&#xa; from the given data.
+</description>
+</parameter>
+<parameter name="packetData">
+<type class="byte" dimension="1"/>
+<description>
+a frame of video data from a video driver
+</description>
+</parameter>
+<parameter name="packetSize">
+<type class="int"/>
+<description>
+the number of valid bytes in the given packetData array
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the return code from the call to avcodec_decode_video in the&#xa; underlying native ffmpeg library. According to the documentation&#xa; for the Ffmpeg source code, this will be negative on failure, otherwise&#xa; this will be &#x27;the number of bytes used or zero if no frame could be&#xa; decompressed&#x27;.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_encode_video(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext, byte[], int, org.baja.ffmpeg.libavcodec.FfmpegAVFrame) -->
+<method name="avcodec_encode_video"  public="true" static="true">
+<description>
+Calls avcodec_encode_video in the underlying FFmpeg library.&#xa;&#xa; WARNING: We have not got this working yet!!!
+</description>
+<parameter name="avCodecContext">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+<description>
+the context wrapper for the FFmpeg encoder
+</description>
+</parameter>
+<parameter name="bitBuffer">
+<type class="byte" dimension="1"/>
+<description>
+a byte array in which to place the resulting encoded frame data
+</description>
+</parameter>
+<parameter name="bitBufferSize">
+<type class="int"/>
+<description>
+the size of the bit buffer in which to place the resulting encoded frame data
+</description>
+</parameter>
+<parameter name="avFrame">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVFrame"/>
+<description>
+the frame to encode. If this method actually worked, then this would be a frame&#xa; produced / populated by a previous call to &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_decode_video(FfmpegAVCodecContext, FfmpegAVFrame, boolean[], byte[], int)">#avcodec_decode_video(FfmpegAVCodecContext, FfmpegAVFrame, boolean[], byte[], int)</see>&lt;/code&gt;
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of new bytes copied into the given bitBuffer byte array. This is the resulting image size in bytes.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_find_decoder(org.baja.ffmpeg.enums.BCodecIdEnum) -->
+<method name="avcodec_find_decoder"  public="true" static="true">
+<description>
+Calls avcodec_find_decoder in the underlying FFmpeg library.
+</description>
+<parameter name="codecId">
+<type class="org.baja.ffmpeg.enums.BCodecIdEnum"/>
+<description>
+identifies the desired codec to decode from.
+</description>
+</parameter>
+<return>
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodec"/>
+<description>
+a java representation of the resulting, underlying AVCodec structure.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_close(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext) -->
+<method name="avcodec_close"  public="true" static="true">
+<description/>
+<parameter name="context">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_find_encoder(org.baja.ffmpeg.enums.BCodecIdEnum) -->
+<method name="avcodec_find_encoder"  public="true" static="true">
+<description>
+Calls avcodec_find_encoder in the underlying FFmpeg library.
+</description>
+<parameter name="codecId">
+<type class="org.baja.ffmpeg.enums.BCodecIdEnum"/>
+<description>
+identifies the desired codec to encode to.
+</description>
+</parameter>
+<return>
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodec"/>
+<description>
+a java representation of the resulting, underlying AVCodec structure.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_get_dimensions(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext) -->
+<method name="avcodec_get_dimensions"  public="true" static="true">
+<description>
+Gets the Size (width x height in pixels) of the AVFrames / AVPictures that would&#xa; be produced by the given codecContext.&#xa;&#xa; There is not really a function in the underlying library with this name. I wish&#xa; there was --- it would really go with &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_set_dimensions(long, int, int)">#avcodec_set_dimensions(long, int, int)</see>&lt;/code&gt;!!!&#xa;&#xa; This jumps into the native layer and gets the &#x27;width&#x27; and &#x27;height&#x27; attributes&#xa; of the AVCodecContext for the given jPtrAvCodecContext. It places the &#x27;width&#x27;&#xa; and &#x27;height&#x27; into a Baja/Gx &#x27;Size&#x27; object and returns it.&#xa;&#xa; NOTE: It is intended that this method be passed a context for an FFmpeg decoder&#xa; and that this method be called after the first call to avcodec_decode_video.&#xa; Otherwise, there is no guarantee that the decoder context has been automatically&#xa; assigned a width or height attribute.
+</description>
+<parameter name="codecContext">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.Size"/>
+<description>
+the &#x27;width&#x27; and &#x27;height&#x27; of the underlying AVCodecContext represented inside&#xa; of a Baja / Gx &#x27;Size&#x27; object.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_open(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext, org.baja.ffmpeg.libavcodec.FfmpegAVCodec) -->
+<method name="avcodec_open"  public="true" static="true">
+<description>
+Calls avcodec_open in the native ffmpeg library and passes in the&#xa; native representation of the given FfmpegAVCodecContext and&#xa; FfmpegAVCodec objects.
+</description>
+<parameter name="ffmpegContext">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+<description>
+an FfmpegAVCodecContext that was previously&#xa; retrieved by callilng @see &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_alloc_context()">#avcodec_alloc_context()</see>&lt;/code&gt;
+</description>
+</parameter>
+<parameter name="ffmpegCodec">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodec"/>
+<description>
+an FfmpegAVCodec that was previously retrieved&#xa; by calling @see &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#avcodec_find_decoder(org.baja.ffmpeg.enums.BCodecIdEnum)">#avcodec_find_decoder(BCodecIdEnum)</see>&lt;/code&gt;
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the return code from the call to avcodec_open in the&#xa; underlying native ffmpeg library. According to the documentation&#xa; for the Ffmpeg source code, this will be zero on success, and a&#xa; negative value on error.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_set_dimensions(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext, int, int) -->
+<method name="avcodec_set_dimensions"  public="true" static="true">
+<description>
+Calls avcodec_set_dimensions on the given codec context in the underlying FFmpeg&#xa; api.&#xa;&#xa; I though that I might need access to this function but ultimately, I never actually&#xa; needed it.
+</description>
+<parameter name="avCodecContext">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+<description>
+the java representation of an AVCodecContext.
+</description>
+</parameter>
+<parameter name="width">
+<type class="int"/>
+<description>
+the width to explicitly assign to the codec context in the underlying API.
+</description>
+</parameter>
+<parameter name="height">
+<type class="int"/>
+<description>
+the height to explicitly assign to the codec context in the underlying API.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.av_free(org.baja.ffmpeg.FfmpegNativeStruct) -->
+<method name="av_free"  public="true" static="true">
+<description>
+Calls av_free in the underlying FFmpeg library. This is equivalent to the&#xa; the &#x27;free&#x27; function in the C/C++ language. However, the FFmpeg library&#xa; requires that memory for FFmpeg structures be cleaned up using av_free.&#xa;&#xa; NOTE: You should not need to call this directly (fingers-crossed) because&#xa; this method is called by the &lt;code&gt;<see ref="org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil#finalize()">#finalize()</see>&lt;/code&gt; method of each particular&#xa; Java wrapper when it is garbage collected.
+</description>
+<parameter name="ffmpegStructObj">
+<type class="org.baja.ffmpeg.FfmpegNativeStruct"/>
+<description>
+any one of the Java representations of underlying&#xa; FFmpeg structures.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avpicture_get_size(org.baja.ffmpeg.enums.BPixelFormatEnum, int, int) -->
+<method name="avpicture_get_size"  public="true" static="true">
+<description>
+Calls avpicture_get_size in the underlying FFmpeg api.&#xa;&#xa; I did not ultimately need to use this function. However, since I had already&#xa; taken the effort to provide access, I have left it in this class.
+</description>
+<parameter name="pixelFormat">
+<type class="org.baja.ffmpeg.enums.BPixelFormatEnum"/>
+<description>
+the format of a hypothetical AVFrame / AVPicture
+</description>
+</parameter>
+<parameter name="width">
+<type class="int"/>
+<description>
+the width (in pixels) of a hypothetical AVFrame / AVPicture
+</description>
+</parameter>
+<parameter name="height">
+<type class="int"/>
+<description>
+the height (in pixels) of a hypothetical AVFrame / AVPicture
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the hypothetical size in bytes of the AVFrame / AVPicture that would&#xa; represent and image of the given pixelFormat, width, and height.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.computePpmLength(int, int) -->
+<method name="computePpmLength"  public="true" static="true">
+<description>
+Computes the size of the PPM file that would result if an RGB frame&#xa; were saved as a color PPM file.&#xa;&#xa; Here is a URL to an article about the PPM format:&#xa;  http://en.wikipedia.org/wiki/Portable_pixmap
+</description>
+<parameter name="width">
+<type class="int"/>
+<description>
+the hypothetical width of an AVFrame / AVPicture in RGB24 format.
+</description>
+</parameter>
+<parameter name="height">
+<type class="int"/>
+<description>
+the hypothetical height of an AVFrame / AVPicture in RGB24 format.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+hypothetical length in bytes of a PPM file that would result if converting&#xa; a hypothetical AVFrame / AVPicture in RGB24 format of the given width and height to&#xa; PPM bitmap format.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.getPixels(org.baja.ffmpeg.libavcodec.FfmpegAVFrame, int, int, int[]) -->
+<method name="getPixels"  public="true" static="true">
+<description/>
+<parameter name="avFrame">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVFrame"/>
+</parameter>
+<parameter name="width">
+<type class="int"/>
+</parameter>
+<parameter name="height">
+<type class="int"/>
+</parameter>
+<parameter name="pixelBuffer">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.convertRgbFrameToPpm(org.baja.ffmpeg.libavcodec.FfmpegAVFrame, int, int, byte[]) -->
+<method name="convertRgbFrameToPpm"  public="true" static="true">
+<description>
+Converts the given FfmpegAVFrame of RGB24 format to PPM.&#xa;&#xa; NOTE: This function does not explicitly exist in the underlying FFmpeg API.
+</description>
+<parameter name="avRgbFrame">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVFrame"/>
+<description>
+a fully decoded AVFrame of RGB24 format
+</description>
+</parameter>
+<parameter name="width">
+<type class="int"/>
+<description>
+the width, in pixels, of the given avRgbFrame
+</description>
+</parameter>
+<parameter name="height">
+<type class="int"/>
+<description>
+the height, in pizels, of the given avRgbFrame
+</description>
+</parameter>
+<parameter name="ppmBytes">
+<type class="byte" dimension="1"/>
+<description>
+a pre-allocated the array into which the converted PPM bytes will be stored (this can be null)
+</description>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+the array of ppm bytes. If an array is passed in for ppmBytes, then this will be the same array, otherwise, this will be a newly allocated array.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.allocateAndInitFormattedFrame(int, int, org.baja.ffmpeg.enums.BPixelFormatEnum) -->
+<method name="allocateAndInitFormattedFrame"  public="true" static="true">
+<description>
+This function is necessary in order to convert from the AVFrame that is populated by&#xa; the avcodec_decode_frame method into an AVFrame of a different pixel format.&#xa;&#xa; Pixel format is a special notion in FFmpeg. You can see the BPixelFormatEnum class&#xa; for a hint as to the different possible pixel formats. The MPEG4 decoder yields frames&#xa; in format YUV420P. However,&#xa;&#xa; YUV420P is useless to Java or Niagara. Java or Niagara needs a JPEG, PNG, or GIF iamge&#xa; in order to render it on the screen.&#xa;&#xa; As of August 2009, we choose to convert from YUV420P to uncompressed PNG. It is a bit&#xa; of an endeavor to accomplish this. To accomplish this, we convert from YUV420P to&#xa; RGB24 (using FFmpeg sws_scale) to PPM (using our own native function that we adapted&#xa; from the SaveFrame function that we found in a nice tutorial that we found on the web&#xa; at http://www.dranger.com/ffmpeg/tutorial01.html) to PNG (using lesser GPL version of&#xa; the ImageMagick library which happens to support conversion from PPM to PNG).&#xa;&#xa; Anyways, this native code does as follows:&#xa;&#xa; &lt;pre&gt;&#xa;  enum PixelFormat pixFmt = (enum PixelFormat)pixFmtOrdinal;&#xa;&#xa;  // Allocates an empty AVFrame structure&#xa;  AVFrame *pFrameRGB = avcodec_alloc_frame();&#xa;&#xa;  if(pFrameRGB==NULL)&#xa;  {&#xa;    return NULL;&#xa;  }&#xa;&#xa;  // Creates a buffer that we will make serve as the internal buffer for the AVFrame structure&#xa;  int numRgbBytes=avpicture_get_size(pixFmt, width, height);&#xa;  uint8_t *rgbBuffer=(uint8_t *)av_malloc(numRgbBytes*sizeof(uint8_t));&#xa;&#xa;  avpicture_fill((AVPicture *)pFrameRGB, rgbBuffer, pixFmt, width, height);&#xa;&#xa;  return (jlong)pFrameRGB;&lt;/pre&gt;
+</description>
+<parameter name="width">
+<type class="int"/>
+<description>
+the width (in pixels) of the frame to allocate in the given pixel format
+</description>
+</parameter>
+<parameter name="height">
+<type class="int"/>
+<description>
+the height (in pixels) of the frame to allocate in the given pixel format
+</description>
+</parameter>
+<parameter name="pixFmt">
+<type class="org.baja.ffmpeg.enums.BPixelFormatEnum"/>
+<description>
+the pixel format for the allocated image
+</description>
+</parameter>
+<return>
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVFrame"/>
+<description/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.getFfmpegNativeID(org.baja.ffmpeg.enums.BCodecIdEnum) -->
+<method name="getFfmpegNativeID"  public="true" static="true">
+<description>
+This method should hardly ever need to be called directly. Most other&#xa; methods that need a BPixelFormatEnum call this method to convert the Baja&#xa; version into its C/C++ counterpart before calling into the underlying&#xa; FFmpeg library.&#xa;&#xa; Gets the native ordinal for the given BCodecIdEnum. This is important because&#xa; Baja enums do not necessarily map into C/C++ enums. This method cross-references&#xa; the Baja BCodecIdEnum into its native C/C++ counterpart.&#xa;&#xa; BCodecIdEnum maps into the enum CodecID in avcodec.h
+</description>
+<parameter name="codecId">
+<type class="org.baja.ffmpeg.enums.BCodecIdEnum"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the native ordinal for the given BCodecIdEnum.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.getFfmpegNativeID(org.baja.ffmpeg.enums.BPixelFormatEnum) -->
+<method name="getFfmpegNativeID"  public="true" static="true">
+<description>
+This method should hardly ever need to be called directly. Most other&#xa; methods that need a BPixelFormatEnum call this method to convert the Baja&#xa; version into its C/C++ counterpart before calling into the underlying&#xa; FFmpeg library.&#xa;&#xa; Gets the native ordinal for the given BPixelFormatEnum. This is important because&#xa; Baja enums do not necessarily map into C/C++ enums. This method cross-references&#xa; the Baja BPixelFormatEnum into its native C/C++ counterpart.&#xa;&#xa; BPixelFormatEnum maps into the enum PixelFormat in pixfmt.h
+</description>
+<parameter name="pixelFormatEnum">
+<type class="org.baja.ffmpeg.enums.BPixelFormatEnum"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the native ordinal for the given BPixelFormatEnum.
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.ffmpegSetEndodeOptions(org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext, org.baja.ffmpeg.enums.BPixelFormatEnum, int, int) -->
+<method name="ffmpegSetEndodeOptions"  public="true" static="true">
+<description>
+This sets the pixFmt, timeBase numerator, and timeBase denominator of the given&#xa; codec context.&#xa;&#xa; I though I might need this function but I never really found a use for this function.&#xa;&#xa; Call this function only at your own risk!!!
+</description>
+<parameter name="avCodecContext">
+<type class="org.baja.ffmpeg.libavcodec.FfmpegAVCodecContext"/>
+<description/>
+</parameter>
+<parameter name="pixFmt">
+<type class="org.baja.ffmpeg.enums.BPixelFormatEnum"/>
+<description/>
+</parameter>
+<parameter name="timeBaseNum">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="timeBaseDen">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.avcodec_alloc_frame0() -->
+<method name="avcodec_alloc_frame0"  public="true" static="true" native="true" synchronized="true">
+<description>
+Calls &#x27;avcodec_alloc_frame&#x27; and returns a pointer to the&#xa; native memory location for the corresponding AVFrame;
+</description>
+<tag name="@see">#avcodec_alloc_frame()</tag>
+<return>
+<type class="long"/>
+<description>
+the native memory location of the AVFrame
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.av_packet_alloc0() -->
+<method name="av_packet_alloc0"  public="true" static="true" native="true" synchronized="true">
+<description>
+Calls &#x27;av_packet_alloc&#x27; and returns a pointer to the&#xa; native memory location for the corresponding AVFrame;
+</description>
+<tag name="@see">#av_packet_alloc()</tag>
+<return>
+<type class="long"/>
+<description>
+the native memory location of the AVPacket
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.libavcodec.FfmpegAvCodecUtil.av_packet_free(long) -->
+<method name="av_packet_free"  public="true" static="true" native="true">
+<description>
+Calls &#x27;av_packet_free&#x27; in the underlying FFmpeg library and passes in the&#xa; given pointer. Free the packet, if the packet is reference counted,&#xa; it will be unreferenced first.
+</description>
+<parameter name="pAvPacketFree">
+<type class="long"/>
+<description>
+the native handle that is wrapped by the FfmpegNativeStruct&#xa; object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.BEnumSet" name="BEnumSet" packageName="javax.baja.util" public="true" final="true">
+<description>
+The BEnumSet is a dynamic list of enum ordinals, which may&#xa; customized with an EnumRange.  Enum set&#x27;s string format&#xa; is a list of ords separated by commas, with an option&#xa; range specified as &#x22;@range&#x22;:&#xa; &lt;pre&gt;&#xa;   set      = ordinals [ &#x22;@&#x22; range ]&#xa;   ordinals = ordinal ( &#x22;,&#x22; ordinals)&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">27 Jul 04</tag>
+<tag name="@version">$Revision: 2$ $Date: 1/25/08 4:04:07 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.util.BEnumSet.make(int[], javax.baja.sys.BEnumRange) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BEnumSet with the specified ordinals and range.
+</description>
+<parameter name="ordinal">
+<type class="int" dimension="1"/>
+</parameter>
+<parameter name="range">
+<type class="javax.baja.sys.BEnumRange"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BEnumSet"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.make(int[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Create an BEnumSet with the specified ordinals with a&#xa; range equal to BEnumRange.NULL.
+</description>
+<parameter name="ordinals">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BEnumSet"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.getOrdinals() -->
+<method name="getOrdinals"  public="true">
+<description>
+Get the array of ordinals.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.contains(int) -->
+<method name="contains"  public="true">
+<description>
+Does this set contain the specified ordinal.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.getRange() -->
+<method name="getRange"  public="true">
+<description>
+Return the range associated with this set.
+</description>
+<return>
+<type class="javax.baja.sys.BEnumRange"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.isNull() -->
+<method name="isNull"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the ordinals have a length of zero.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BEnumSet uses its encodeToString() value&#x27;s hash code.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Return if obj is an equivalent BEnumSet.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To string method.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encoded as using writeUTF(encodeToString()).
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BEnumSet.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decoded using decodeFromString(readUTF()).
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BEnumSet.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Write the simple in text format.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BEnumSet.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the simple from text format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BEnumSet.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BEnumSet.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.util.BEnumSet"/>
+<description>
+Null is the empty set.
+</description>
+</field>
+
+<!-- javax.baja.util.BEnumSet.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.util.BEnumSet"/>
+<description>
+The default set is NULL.
+</description>
+</field>
+
+<!-- javax.baja.util.BEnumSet.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

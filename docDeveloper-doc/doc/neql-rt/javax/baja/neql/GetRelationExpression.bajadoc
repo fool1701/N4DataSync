@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="neql" runtimeProfile="rt" qualifiedName="javax.baja.neql.GetRelationExpression" name="GetRelationExpression" packageName="javax.baja.neql" public="true">
+<description>
+A GetRelationExpression gets a relation on the evaluated entity.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">01/16/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.neql.Expression"/>
+</extends>
+<!-- javax.baja.neql.GetRelationExpression(java.lang.String, java.lang.String) -->
+<constructor name="GetRelationExpression" public="true">
+<parameter name="namespace">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.neql.GetRelationExpression(java.lang.String, java.lang.String, int) -->
+<constructor name="GetRelationExpression" public="true">
+<parameter name="namespace">
+<type class="java.lang.String"/>
+<description>
+the namespace for this relation. This is the text before the colon
+</description>
+</parameter>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+the key (or name) of the relation. This is the text after the colon, if there is one.
+</description>
+</parameter>
+<parameter name="direction">
+<type class="int"/>
+<description>
+indicates the direction of the relation to be created.
+</description>
+</parameter>
+<description>
+A constructor for the GetRelationExpression
+</description>
+<tag name="@since">Niagara 4.10</tag>
+</constructor>
+
+<!-- javax.baja.neql.GetRelationExpression.getNodeType() -->
+<method name="getNodeType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the node type.
+</description>
+<return>
+<type class="int"/>
+<description>
+AST_GET_RELATION
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetRelationExpression.getNodeDisplay() -->
+<method name="getNodeDisplay"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetRelationExpression.getNamespace() -->
+<method name="getNamespace"  public="true">
+<description>
+Get the namespace for the tag or null if it is a global tag.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetRelationExpression.getKey() -->
+<method name="getKey"  public="true">
+<description>
+Get the tag key.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetRelationExpression.evaluate(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evaluate"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.Relation"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetRelationExpression.evalBoolean(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evalBoolean"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true if the entity contains a relation (inbound or outbound) with this expression&#x27;s&#xa; relation id.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+entity on which to search for a relation with this expression&#x27;s relation id
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+context that may contain the default namespace to form the relation id
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the entity contains a relation (inbound or outbound) with this expression&#x27;s&#xa;   relation id
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetRelationExpression.getId(javax.baja.sys.Context) -->
+<method name="getId"  public="true">
+<description>
+Return this expression&#x27;s relation id.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+context that may contain the default namespace to form the relation id
+</description>
+</parameter>
+<return>
+<type class="javax.baja.tag.Id"/>
+<description>
+expression&#x27;s relation id, if fully specified; if the expression&#x27;s namespace is not&#xa;   specified, look for one in the context
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

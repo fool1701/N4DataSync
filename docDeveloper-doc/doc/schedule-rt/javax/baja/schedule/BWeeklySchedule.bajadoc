@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="schedule" runtimeProfile="rt" qualifiedName="javax.baja.schedule.BWeeklySchedule" name="BWeeklySchedule" packageName="javax.baja.schedule" public="true" abstract="true">
+<description>
+A week schedule with special events and an effective period.
+</description>
+<tag name="@author">Aaron Hansen</tag>
+<tag name="@creation">Oct 2001</tag>
+<tag name="@version">$Revision: 19$ $Date: 3/4/11 9:30:26 AM EST$</tag>
+<extends>
+<type class="javax.baja.schedule.BControlSchedule"/>
+</extends>
+<property name="effective" flags="ho">
+<type class="javax.baja.schedule.BDateRangeSchedule"/>
+<description>
+Slot for the &lt;code&gt;effective&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEffective</tag>
+<tag name="@see">#setEffective</tag>
+</property>
+
+<property name="schedule" flags="ho">
+<type class="javax.baja.schedule.BCompositeSchedule"/>
+<description>
+Slot for the &lt;code&gt;schedule&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSchedule</tag>
+<tag name="@see">#setSchedule</tag>
+</property>
+
+<property name="outSource" flags="orstA">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;outSource&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOutSource</tag>
+<tag name="@see">#setOutSource</tag>
+</property>
+
+<!-- javax.baja.schedule.BWeeklySchedule() -->
+<constructor name="BWeeklySchedule" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getEffective() -->
+<method name="getEffective"  public="true">
+<description>
+Get the &lt;code&gt;effective&lt;/code&gt; property.
+</description>
+<tag name="@see">#effective</tag>
+<return>
+<type class="javax.baja.schedule.BDateRangeSchedule"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.setEffective(javax.baja.schedule.BDateRangeSchedule) -->
+<method name="setEffective"  public="true">
+<description>
+Set the &lt;code&gt;effective&lt;/code&gt; property.
+</description>
+<tag name="@see">#effective</tag>
+<parameter name="v">
+<type class="javax.baja.schedule.BDateRangeSchedule"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getSchedule() -->
+<method name="getSchedule"  public="true">
+<description>
+Get the &lt;code&gt;schedule&lt;/code&gt; property.
+</description>
+<tag name="@see">#schedule</tag>
+<return>
+<type class="javax.baja.schedule.BCompositeSchedule"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.setSchedule(javax.baja.schedule.BCompositeSchedule) -->
+<method name="setSchedule"  public="true">
+<description>
+Set the &lt;code&gt;schedule&lt;/code&gt; property.
+</description>
+<tag name="@see">#schedule</tag>
+<parameter name="v">
+<type class="javax.baja.schedule.BCompositeSchedule"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getOutSource() -->
+<method name="getOutSource"  public="true">
+<description>
+Get the &lt;code&gt;outSource&lt;/code&gt; property.
+</description>
+<tag name="@see">#outSource</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.setOutSource(java.lang.String) -->
+<method name="setOutSource"  public="true">
+<description>
+Set the &lt;code&gt;outSource&lt;/code&gt; property.
+</description>
+<tag name="@see">#outSource</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.addSpecialEvent(java.lang.String, javax.baja.schedule.BDailySchedule) -->
+<method name="addSpecialEvent"  public="true">
+<description/>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="specialEvent">
+<type class="javax.baja.schedule.BDailySchedule"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.addSpecialEvent(java.lang.String, javax.baja.schedule.BDailySchedule, javax.baja.sys.Context) -->
+<method name="addSpecialEvent"  public="true">
+<description/>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="specialEvent">
+<type class="javax.baja.schedule.BDailySchedule"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.clear() -->
+<method name="clear"  public="true">
+<description>
+Set the effectivePeriod and overridableWeely slots to new&#xa; instances, doesn&#x27;t clear the old ones.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.doCleanup() -->
+<method name="doCleanup"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Removes expired special events.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.get(javax.baja.sys.BWeekday) -->
+<method name="get"  public="true">
+<description/>
+<parameter name="day">
+<type class="javax.baja.sys.BWeekday"/>
+</parameter>
+<return>
+<type class="javax.baja.schedule.BDaySchedule"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getSummary(javax.baja.schedule.BAbstractSchedule) -->
+<method name="getSummary"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated">as of Niagara 4.11, use the version that takes a context for&#xa; string formatting.</tag>
+<parameter name="outputSource">
+<type class="javax.baja.schedule.BAbstractSchedule"/>
+<description>
+a schedule to summarize
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a string summary of the input schedule
+</description>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getSummary(javax.baja.schedule.BAbstractSchedule, javax.baja.sys.Context) -->
+<method name="getSummary"  public="true">
+<description/>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="outputSource">
+<type class="javax.baja.schedule.BAbstractSchedule"/>
+<description>
+a schedule to summarize
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+user context
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a string summary of the input schedule
+</description>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getSpecialEvents() -->
+<method name="getSpecialEvents"  public="true" final="true">
+<description>
+The special event container.
+</description>
+<return>
+<type class="javax.baja.schedule.BCompositeSchedule"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getSpecialEventsChildren() -->
+<method name="getSpecialEventsChildren"  public="true">
+<description>
+The actual special events.
+</description>
+<return>
+<type class="javax.baja.schedule.BDailySchedule" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.getWeek() -->
+<method name="getWeek"  public="true" final="true">
+<description/>
+<return>
+<type class="javax.baja.schedule.BWeekSchedule"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.nextEvent(javax.baja.sys.BAbsTime) -->
+<method name="nextEvent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="after">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.currentOutputSource(javax.baja.schedule.BAbstractSchedule) -->
+<method name="currentOutputSource"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="sch">
+<type class="javax.baja.schedule.BAbstractSchedule"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.currentOutputSourceIsInput() -->
+<method name="currentOutputSourceIsInput"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BWeeklySchedule.effective -->
+<field name="effective"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;effective&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEffective</tag>
+<tag name="@see">#setEffective</tag>
+</field>
+
+<!-- javax.baja.schedule.BWeeklySchedule.schedule -->
+<field name="schedule"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;schedule&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSchedule</tag>
+<tag name="@see">#setSchedule</tag>
+</field>
+
+<!-- javax.baja.schedule.BWeeklySchedule.outSource -->
+<field name="outSource"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;outSource&lt;/code&gt; property.
+</description>
+<tag name="@see">#getOutSource</tag>
+<tag name="@see">#setOutSource</tag>
+</field>
+
+<!-- javax.baja.schedule.BWeeklySchedule.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

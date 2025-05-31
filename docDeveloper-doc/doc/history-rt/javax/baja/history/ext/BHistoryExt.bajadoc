@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.ext.BHistoryExt" name="BHistoryExt" packageName="javax.baja.history.ext" public="true" abstract="true">
+<description>
+BHistoryExt is a standard point extension used&#xa; for logging a point&#x27;s historical data.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">02 Apr 02</tag>
+<tag name="@version">$Revision: 84$ $Date: 2/25/10 1:42:14 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.control.BPointExtension"/>
+</extends>
+<implements>
+<type class="javax.baja.history.BIHistorySource"/>
+</implements>
+<property name="status" flags="rt">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; The status of the history extension.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="faultCause" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; If the extension is in a fault state, this provides&#xa; a description of the problem.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<property name="enabled" flags="d">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to manually enable and disable this extension.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="activePeriod" flags="">
+<type class="javax.baja.history.ext.BActivePeriod"/>
+<description>
+Slot for the &lt;code&gt;activePeriod&lt;/code&gt; property.&#xa; Defines the time period when this extension should be collecting&#xa; history records.
+</description>
+<tag name="@see">#getActivePeriod</tag>
+<tag name="@see">#setActivePeriod</tag>
+</property>
+
+<property name="active" flags="rt">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;active&lt;/code&gt; property.&#xa; Indicates whether this extension is currently in it&#x27;s active period.
+</description>
+<tag name="@see">#getActive</tag>
+<tag name="@see">#setActive</tag>
+</property>
+
+<property name="historyName" flags="">
+<type class="javax.baja.util.BFormat"/>
+<description>
+Slot for the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; This properties defines a pattern for deriving the&#xa; name of the history created by this extension.&#xa; It can be static text or a simple pattern that allows&#xa; the actual history name to be derived from the context.&#xa; The default value of this property is %parent.name% which&#xa; sets the history name in the id to the name of the parent&#xa; of this extension.&lt;p&gt;&#xa; Changes to this property cause the format to be reapplied&#xa; and the history id in the history config is updated.
+</description>
+<tag name="@see">#getHistoryName</tag>
+<tag name="@see">#setHistoryName</tag>
+</property>
+
+<property name="historyNameFormat" flags="ht">
+<type class="javax.baja.util.BFormat"/>
+<description>
+Slot for the &lt;code&gt;historyNameFormat&lt;/code&gt; property.&#xa; This is only here temporarily to help with the transition&#xa; to the new historyName mechanism.  It will be removed&#xa; before the final release.
+</description>
+<tag name="@see">#getHistoryNameFormat</tag>
+<tag name="@see">#setHistoryNameFormat</tag>
+</property>
+
+<property name="historyConfig" flags="">
+<type class="javax.baja.history.BHistoryConfig"/>
+<description>
+Slot for the &lt;code&gt;historyConfig&lt;/code&gt; property.&#xa; The configuration for the history created by this extension.
+</description>
+<tag name="@see">#getHistoryConfig</tag>
+<tag name="@see">#setHistoryConfig</tag>
+</property>
+
+<property name="lastRecord" flags="rt">
+<type class="javax.baja.history.BHistoryRecord"/>
+<description>
+Slot for the &lt;code&gt;lastRecord&lt;/code&gt; property.&#xa; This property stores a copy of the most recent record&#xa; successfully appended to the history for this extension.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#getLastRecord</tag>
+<tag name="@see">#setLastRecord</tag>
+</property>
+
+<action name="updateHistoryId" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;updateHistoryId&lt;/code&gt; action.&#xa; Update the history id of the history config with&#xa; the current value of the history name property.&#xa; This applies the historyName as a format relative&#xa; to the history extension.  If the result is different&#xa; from the name in the history id, the history id is&#xa; changed and if necessary, the attached history is renamed.
+</description>
+<tag name="@see">#updateHistoryId()</tag>
+</action>
+
+<action name="syncConfig" flags="ha">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;syncConfig&lt;/code&gt; action.&#xa; Synchronize the history configuration of this extension&#xa; with the configuration that is stored with the history&#xa; in the database.
+</description>
+<tag name="@see">#syncConfig()</tag>
+</action>
+
+<action name="activate" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;activate&lt;/code&gt; action.&#xa; Enter the active period.  This action should never be linked.&#xa; It is invoked internally by the extension.
+</description>
+<tag name="@see">#activate()</tag>
+</action>
+
+<action name="deactivate" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;deactivate&lt;/code&gt; action.&#xa; Exit the active period.  This action should never be linked.&#xa; It is invoked internally by the extension.
+</description>
+<tag name="@see">#deactivate()</tag>
+</action>
+
+<!-- javax.baja.history.ext.BHistoryExt() -->
+<constructor name="BHistoryExt" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.history.ext.BHistoryExt.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.&#xa; The status of the history extension.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.&#xa; The status of the history extension.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; If the extension is in a fault state, this provides&#xa; a description of the problem.
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; If the extension is in a fault state, this provides&#xa; a description of the problem.
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to manually enable and disable this extension.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to manually enable and disable this extension.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getActivePeriod() -->
+<method name="getActivePeriod"  public="true">
+<description>
+Get the &lt;code&gt;activePeriod&lt;/code&gt; property.&#xa; Defines the time period when this extension should be collecting&#xa; history records.
+</description>
+<tag name="@see">#activePeriod</tag>
+<return>
+<type class="javax.baja.history.ext.BActivePeriod"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setActivePeriod(javax.baja.history.ext.BActivePeriod) -->
+<method name="setActivePeriod"  public="true">
+<description>
+Set the &lt;code&gt;activePeriod&lt;/code&gt; property.&#xa; Defines the time period when this extension should be collecting&#xa; history records.
+</description>
+<tag name="@see">#activePeriod</tag>
+<parameter name="v">
+<type class="javax.baja.history.ext.BActivePeriod"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getActive() -->
+<method name="getActive"  public="true">
+<description>
+Get the &lt;code&gt;active&lt;/code&gt; property.&#xa; Indicates whether this extension is currently in it&#x27;s active period.
+</description>
+<tag name="@see">#active</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setActive(boolean) -->
+<method name="setActive"  public="true">
+<description>
+Set the &lt;code&gt;active&lt;/code&gt; property.&#xa; Indicates whether this extension is currently in it&#x27;s active period.
+</description>
+<tag name="@see">#active</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getHistoryName() -->
+<method name="getHistoryName"  public="true">
+<description>
+Get the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; This properties defines a pattern for deriving the&#xa; name of the history created by this extension.&#xa; It can be static text or a simple pattern that allows&#xa; the actual history name to be derived from the context.&#xa; The default value of this property is %parent.name% which&#xa; sets the history name in the id to the name of the parent&#xa; of this extension.&lt;p&gt;&#xa; Changes to this property cause the format to be reapplied&#xa; and the history id in the history config is updated.
+</description>
+<tag name="@see">#historyName</tag>
+<return>
+<type class="javax.baja.util.BFormat"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setHistoryName(javax.baja.util.BFormat) -->
+<method name="setHistoryName"  public="true">
+<description>
+Set the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; This properties defines a pattern for deriving the&#xa; name of the history created by this extension.&#xa; It can be static text or a simple pattern that allows&#xa; the actual history name to be derived from the context.&#xa; The default value of this property is %parent.name% which&#xa; sets the history name in the id to the name of the parent&#xa; of this extension.&lt;p&gt;&#xa; Changes to this property cause the format to be reapplied&#xa; and the history id in the history config is updated.
+</description>
+<tag name="@see">#historyName</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFormat"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getHistoryNameFormat() -->
+<method name="getHistoryNameFormat"  public="true">
+<description>
+Get the &lt;code&gt;historyNameFormat&lt;/code&gt; property.&#xa; This is only here temporarily to help with the transition&#xa; to the new historyName mechanism.  It will be removed&#xa; before the final release.
+</description>
+<tag name="@see">#historyNameFormat</tag>
+<return>
+<type class="javax.baja.util.BFormat"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setHistoryNameFormat(javax.baja.util.BFormat) -->
+<method name="setHistoryNameFormat"  public="true">
+<description>
+Set the &lt;code&gt;historyNameFormat&lt;/code&gt; property.&#xa; This is only here temporarily to help with the transition&#xa; to the new historyName mechanism.  It will be removed&#xa; before the final release.
+</description>
+<tag name="@see">#historyNameFormat</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFormat"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getHistoryConfig() -->
+<method name="getHistoryConfig"  public="true">
+<description>
+Get the &lt;code&gt;historyConfig&lt;/code&gt; property.&#xa; The configuration for the history created by this extension.
+</description>
+<tag name="@see">#historyConfig</tag>
+<return>
+<type class="javax.baja.history.BHistoryConfig"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setHistoryConfig(javax.baja.history.BHistoryConfig) -->
+<method name="setHistoryConfig"  public="true">
+<description>
+Set the &lt;code&gt;historyConfig&lt;/code&gt; property.&#xa; The configuration for the history created by this extension.
+</description>
+<tag name="@see">#historyConfig</tag>
+<parameter name="v">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getLastRecord() -->
+<method name="getLastRecord"  public="true">
+<description>
+Get the &lt;code&gt;lastRecord&lt;/code&gt; property.&#xa; This property stores a copy of the most recent record&#xa; successfully appended to the history for this extension.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#lastRecord</tag>
+<return>
+<type class="javax.baja.history.BHistoryRecord"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.setLastRecord(javax.baja.history.BHistoryRecord) -->
+<method name="setLastRecord"  public="true">
+<description>
+Set the &lt;code&gt;lastRecord&lt;/code&gt; property.&#xa; This property stores a copy of the most recent record&#xa; successfully appended to the history for this extension.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#lastRecord</tag>
+<parameter name="v">
+<type class="javax.baja.history.BHistoryRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.updateHistoryId() -->
+<method name="updateHistoryId"  public="true">
+<description>
+Invoke the &lt;code&gt;updateHistoryId&lt;/code&gt; action.&#xa; Update the history id of the history config with&#xa; the current value of the history name property.&#xa; This applies the historyName as a format relative&#xa; to the history extension.  If the result is different&#xa; from the name in the history id, the history id is&#xa; changed and if necessary, the attached history is renamed.
+</description>
+<tag name="@see">#updateHistoryId</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.syncConfig() -->
+<method name="syncConfig"  public="true">
+<description>
+Invoke the &lt;code&gt;syncConfig&lt;/code&gt; action.&#xa; Synchronize the history configuration of this extension&#xa; with the configuration that is stored with the history&#xa; in the database.
+</description>
+<tag name="@see">#syncConfig</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.activate() -->
+<method name="activate"  public="true">
+<description>
+Invoke the &lt;code&gt;activate&lt;/code&gt; action.&#xa; Enter the active period.  This action should never be linked.&#xa; It is invoked internally by the extension.
+</description>
+<tag name="@see">#activate</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.deactivate() -->
+<method name="deactivate"  public="true">
+<description>
+Invoke the &lt;code&gt;deactivate&lt;/code&gt; action.&#xa; Exit the active period.  This action should never be linked.&#xa; It is invoked internally by the extension.
+</description>
+<tag name="@see">#deactivate</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getSourceOrd() -->
+<method name="getSourceOrd"  public="true">
+<description>
+Get the ord to use as the source for the history.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.isSiblingLegal(javax.baja.sys.BComponent) -->
+<method name="isSiblingLegal"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Any sibling is legal for a history extension.
+</description>
+<parameter name="sibling">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Initialize the status on startup.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.descendantsStarted() -->
+<method name="descendantsStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Component start callback.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Component stop callback.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Handle a property change.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.onExecute(javax.baja.status.BStatusValue, javax.baja.sys.Context) -->
+<method name="onExecute"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Point change callback.&#xa;&#xa; &lt;p&gt;&#xa; Any point change callbacks must be captured&#xa; in case the algorithm is a change of value one.
+</description>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.pointChanged(javax.baja.sys.BAbsTime, javax.baja.status.BStatusValue) -->
+<method name="pointChanged"  public="true" abstract="true">
+<description>
+Handle a change to the parent control point.
+</description>
+<parameter name="timestamp">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.requiresPointSubscription() -->
+<method name="requiresPointSubscription"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+A history extension requires its point to be subscribed&#xa; whenever it is enabled.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.checkPointSubscription() -->
+<method name="checkPointSubscription"  public="true">
+<description>
+Make sure the subscribed state of the parent control point&#xa; is correct.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.updateStatus() -->
+<method name="updateStatus"  public="true">
+<description>
+Update the extension status based on the current configuration&#xa; and state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.doActivate() -->
+<method name="doActivate"  public="true">
+<description>
+Activate the extension.  This is typically invoked&#xa; when the extension enters its active period.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.activated(javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime, javax.baja.status.BStatusValue) -->
+<method name="activated"  protected="true" abstract="true">
+<description>
+Receive notification that the extension has entered the active period.
+</description>
+<parameter name="activeStartTime">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+The configured start time of the active period that has just started.
+</description>
+</parameter>
+<parameter name="currentTime">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+The current time.
+</description>
+</parameter>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The output value of the control point at the time of activation.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.doDeactivate() -->
+<method name="doDeactivate"  public="true">
+<description>
+End the active period.  This is typically invoked&#xa; when the extension exits its active period.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.deactivated(javax.baja.sys.BAbsTime, javax.baja.status.BStatusValue) -->
+<method name="deactivated"  protected="true" abstract="true">
+<description>
+Receive notification that the extension has exited the active period.
+</description>
+<parameter name="currentTime">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+The current time.
+</description>
+</parameter>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+The output value of the control point at the time of deactivation.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getHistory() -->
+<method name="getHistory"  public="true">
+<description>
+Returns the history or null if not initialized.
+</description>
+<return>
+<type class="javax.baja.history.BIHistory"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.resolveHistoryName() -->
+<method name="resolveHistoryName"  public="true">
+<description>
+Resolve the history name pattern to a string.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.initConfig(javax.baja.history.BHistoryConfig) -->
+<method name="initConfig"  protected="true">
+<description>
+Subclass override for setting properties
+</description>
+<parameter name="config">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.historyConfigChanged(javax.baja.history.BHistoryConfig, javax.baja.sys.Property) -->
+<method name="historyConfigChanged"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Handle a history configuration change.
+</description>
+<parameter name="config">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.doUpdateHistoryId() -->
+<method name="doUpdateHistoryId"  public="true">
+<description>
+Update the history id based on the current history name&#xa; if necessary.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.doSyncConfig() -->
+<method name="doSyncConfig"  public="true" synchronized="true">
+<description>
+Synchronize the history configuration of this extension&#xa; with the configuration that is stored with the history&#xa; in the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getRecordType() -->
+<method name="getRecordType"  public="true" abstract="true">
+<description>
+Get the type of the records written by this extension.  The type&#xa; must be a subtype of history:TrendRecord.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.append(javax.baja.history.BTrendRecord) -->
+<method name="append"  public="true" final="true">
+<description>
+Append a new record to the history.
+</description>
+<parameter name="record">
+<type class="javax.baja.history.BTrendRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the agents for a history.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.history.ext.BHistoryExt.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; The status of the history extension.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; If the extension is in a fault state, this provides&#xa; a description of the problem.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to manually enable and disable this extension.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.activePeriod -->
+<field name="activePeriod"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;activePeriod&lt;/code&gt; property.&#xa; Defines the time period when this extension should be collecting&#xa; history records.
+</description>
+<tag name="@see">#getActivePeriod</tag>
+<tag name="@see">#setActivePeriod</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.active -->
+<field name="active"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;active&lt;/code&gt; property.&#xa; Indicates whether this extension is currently in it&#x27;s active period.
+</description>
+<tag name="@see">#getActive</tag>
+<tag name="@see">#setActive</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.historyName -->
+<field name="historyName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;historyName&lt;/code&gt; property.&#xa; This properties defines a pattern for deriving the&#xa; name of the history created by this extension.&#xa; It can be static text or a simple pattern that allows&#xa; the actual history name to be derived from the context.&#xa; The default value of this property is %parent.name% which&#xa; sets the history name in the id to the name of the parent&#xa; of this extension.&lt;p&gt;&#xa; Changes to this property cause the format to be reapplied&#xa; and the history id in the history config is updated.
+</description>
+<tag name="@see">#getHistoryName</tag>
+<tag name="@see">#setHistoryName</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.historyNameFormat -->
+<field name="historyNameFormat"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;historyNameFormat&lt;/code&gt; property.&#xa; This is only here temporarily to help with the transition&#xa; to the new historyName mechanism.  It will be removed&#xa; before the final release.
+</description>
+<tag name="@see">#getHistoryNameFormat</tag>
+<tag name="@see">#setHistoryNameFormat</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.historyConfig -->
+<field name="historyConfig"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;historyConfig&lt;/code&gt; property.&#xa; The configuration for the history created by this extension.
+</description>
+<tag name="@see">#getHistoryConfig</tag>
+<tag name="@see">#setHistoryConfig</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.lastRecord -->
+<field name="lastRecord"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastRecord&lt;/code&gt; property.&#xa; This property stores a copy of the most recent record&#xa; successfully appended to the history for this extension.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<tag name="@see">#getLastRecord</tag>
+<tag name="@see">#setLastRecord</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.updateHistoryId -->
+<field name="updateHistoryId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;updateHistoryId&lt;/code&gt; action.&#xa; Update the history id of the history config with&#xa; the current value of the history name property.&#xa; This applies the historyName as a format relative&#xa; to the history extension.  If the result is different&#xa; from the name in the history id, the history id is&#xa; changed and if necessary, the attached history is renamed.
+</description>
+<tag name="@see">#updateHistoryId()</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.syncConfig -->
+<field name="syncConfig"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;syncConfig&lt;/code&gt; action.&#xa; Synchronize the history configuration of this extension&#xa; with the configuration that is stored with the history&#xa; in the database.
+</description>
+<tag name="@see">#syncConfig()</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.activate -->
+<field name="activate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;activate&lt;/code&gt; action.&#xa; Enter the active period.  This action should never be linked.&#xa; It is invoked internally by the extension.
+</description>
+<tag name="@see">#activate()</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.deactivate -->
+<field name="deactivate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;deactivate&lt;/code&gt; action.&#xa; Exit the active period.  This action should never be linked.&#xa; It is invoked internally by the extension.
+</description>
+<tag name="@see">#deactivate()</tag>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.ext.BHistoryExt.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

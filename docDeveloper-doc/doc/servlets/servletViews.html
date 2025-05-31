@@ -1,0 +1,75 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/servlets/webModules.html" class="navbar">Prev</a> |  <a href="/doc/servlets/webServlets.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="bservletview">BServletView</h1>
+<h2 id="overview">Overview</h2>
+<p>A <a href="../web-rt/javax/baja/web/BServletView.bajadoc">Servlet View</a> is Niagara view that typically generates HTML.</p>
+<p>Alternatives to extending <a href="../web-rt/javax/baja/web/BWebServlet.bajadoc">BWebServlet</a> are&hellip;</p>
+<ul>
+  <li><a href="../web-rt/javax/baja/web/BServletView.bajadoc">BServletView</a>: used by developers who want to create Web Views on Components.</li>
+  <li><a href="webModules.html">Java Servlets</a>: create standard Java Servlets.</li>
+</ul>
+<p>Please note&hellip;</p>
+<ul>
+  <li><a href="../hx-wb/javax/baja/hx/BHxView.bajadoc">BHxView</a> extends <a href="../web-rt/javax/baja/web/BServletView.bajadoc">BServletView</a> and may be a preferred alternative. Click <a href="../hx.html">here</a> for more information on creating Hx Views.</li>
+  <li>In Niagara 4&rsquo;s new <a href="../index.html#openWeb">Open Web architecture</a>, you can create client side views in JavaScript. You may find this a better alternative than traditional Server Side Servlet programming for User Interfaces.</li>
+</ul>
+<p>A developer creates a Servlet View in the following way&hellip;</p>
+<ul>
+  <li>Extend <code>javax.baja.sys.BServletView</code>.</li>
+  <li>Override <code>doGet</code> or any other HTTP verb related methods to handle implementation.</li>
+  <li>Register the View as an Agent on the desired Niagara Type.</li>
+</ul>
+<p>A few things to note about <code>BServletView</code>&hellip;</p>
+<ul>
+  <li><code>BServletView</code> extends <code>BSingleton</code>. Therefore, there&rsquo;s only ever one instance of a View.</li>
+  <li><code>BHxView</code> extends <code>BServletView</code>.</li>
+</ul>
+<h2 id="example">Example</h2>
+<p>Here&rsquo;s an example of a Servlet View that will be rendered in a web browser when the user navigates to the UserService. Please note, in this case the view is declared as an Agent on <code>baja:UserService</code>.</p>
+<pre><code class="sunlight-highlight-java">public final class BMyFirstServletView extends BServletView
+{
+  private BMyFirstServletView() {}
+  public static final BMyFirstServletView INSTANCE = new BMyFirstServletView();
+
+  @Override
+  public Type getType() { return TYPE; }
+  public static final Type TYPE = Sys.loadType(BMyFirstServletView.class);
+
+  @Override
+  public void doGet(WebOp op) throws Exception
+  {
+    op.getHtmlWriter()
+      .w(&quot;&lt;!DOCTYPE html&gt;&quot;).nl()
+      .w(&quot;&lt;html&gt;&quot;).nl()
+      .w(&quot;&lt;head&gt;&lt;/head&gt;&quot;).nl()
+      .w(&quot;&lt;body&gt;&quot;).nl()
+      .w(&quot;&lt;h1&gt;Hello World!&lt;/h1&gt;&quot;).nl()
+      .w(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);
+  }
+}
+</code></pre>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/servlets/webModules.html" class="navbar">Prev</a> |  <a href="/doc/servlets/webServlets.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devIpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfIp.tcp.comm.BDdfTcpReceiver" name="BDdfTcpReceiver" packageName="com.tridium.ddfIp.tcp.comm" public="true" abstract="true">
+<description>
+BDdfTcpReceiver&#xa; &#xa; Descendants need to extend this class and implement the following methods:&#xa; &#xa; isCompleteFrame(...)&#xa; &#xa; isStartOfFrame(...)
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 17, 2006</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="com.tridium.ddf.comm.defaultComm.BDdfReceiver"/>
+</extends>
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpReceiver() -->
+<constructor name="BDdfTcpReceiver" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpReceiver.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpReceiver.readByte() -->
+<method name="readByte"  protected="true">
+<description>
+Hooks into BDdfReceiver. BDdfReceiver calls readByte as necessary to construct&#xa; incoming messages. This implementation of readByte reads the next byte off of the&#xa; TcpSocketManager&#x27;s piped input stream. The TcpSocketManager&#x27;s piped input stream&#xa; is fed by a corresponding piped output stream into which the TcpSocketManager&#xa; writes all incoming Tcp data.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpReceiver.responseTimeout -->
+<field name="responseTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Descendants should redefine this property appropriately.&#xa; This is where this BDdfTcpHelper will connect.&#xa; This is flagged as summary so that it&#xa; Can appear in the device manager, if the device communicates on&#xa; Its own.
+</description>
+<tag name="@see">#getResponseTimeout</tag>
+<tag name="@see">#setResponseTimeout</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpReceiver.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "id": "https://mitsubishielectricaustralia.com/schemas/V2/BComponents.schema.json",
+    "version": "2.0.0",
+    "title": "Niagara Baja Component Schema",
+    "description": "Schema for a Niagara Baja components",
+    "type": "array",
+    "items": { "$ref": "#/definitions/component" },
+    "definitions": {
+        "component": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string", "description": "Name of the Niagara component" },
+                "type": { "type": "string", "description": "Type of the Niagara component" },
+                "config": { "description": "Configuration of the Niagara component" },
+                "components": {
+                    "type": "array",
+                    "items": { "$ref": "#" },
+                    "description": "Sub-components of the Niagara component"
+                }
+            }
+        }
+    }   
+}

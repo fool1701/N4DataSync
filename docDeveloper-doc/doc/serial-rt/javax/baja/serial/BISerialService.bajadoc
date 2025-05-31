@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="serial" runtimeProfile="rt" qualifiedName="javax.baja.serial.BISerialService" name="BISerialService" packageName="javax.baja.serial" public="true" interface="true" abstract="true" category="interface">
+<description>
+The BISerialService is the public API used to lookup serial ports
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">03 Feb 04</tag>
+<tag name="@version">$Revision: 5$ $Date: 3/28/05 11:40:35 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<!-- javax.baja.serial.BISerialService.checkPropertiesLoaded() -->
+<method name="checkPropertiesLoaded"  public="true" abstract="true">
+<description>
+Lazy-loads serial service properties.&#xa; &#xa; This must be called before any getters are used, otherwise&#xa; they can return inaccurate results.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.serial.BISerialService.getPortNames() -->
+<method name="getPortNames"  public="true" abstract="true">
+<description>
+Returns array of all port names on the platform
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.serial.BISerialService.getCurrentOwner(java.lang.String) -->
+<method name="getCurrentOwner"  public="true" abstract="true">
+<description>
+Return the current owner for the given port
+</description>
+<parameter name="portName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="javax.baja.serial.PortNotFoundException"/>
+</throws>
+</method>
+
+<!-- javax.baja.serial.BISerialService.openPort(java.lang.String, java.lang.String) -->
+<method name="openPort"  public="true" abstract="true">
+<description>
+Open port for use by the given owner.&#xa;  The port may be released by calling BSerialPort.close();
+</description>
+<parameter name="port">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="owner">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.serial.BISerialPort"/>
+</return>
+<throws>
+<type class="javax.baja.serial.PortNotFoundException"/>
+</throws>
+<throws>
+<type class="javax.baja.serial.PortDeniedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.serial.BISerialService.getMinTimeout() -->
+<method name="getMinTimeout"  public="true" abstract="true">
+<description>
+Get the mimimum receive timeout supported on the platform
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.serial.BISerialService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.io.AsnInput" name="AsnInput" packageName="javax.baja.bacnet.io" public="true" interface="true" abstract="true" category="interface">
+<description>
+This interface specifies the methods for decoding Niagara&#xa; quantities from BACnet ASN.1 primitives.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">09 May 02</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<!-- javax.baja.bacnet.io.AsnInput.available() -->
+<method name="available"  public="true" abstract="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.peekTag() -->
+<method name="peekTag"  public="true" abstract="true">
+<description>
+Examines the number of the next tag in&#xa; the input stream. Does not actually remove&#xa; the tag from the stream.&#xa; Note that the tag number alone does not contain&#xa; enough information to determine if this&#xa; is the desired tag.  A check for a value tag&#xa; vs opening/closing tag must also be made.
+</description>
+<return>
+<type class="int"/>
+<description>
+the next tag in the stream.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.isApplicationTag(int) -->
+<method name="isApplicationTag"  public="true" abstract="true">
+<description>
+Is the current tag an application tag of the given tag number?
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the current tag is the given application tag.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.isContextTag(int) -->
+<method name="isContextTag"  public="true" abstract="true">
+<description>
+Is the current tag a context tag of the given tag number?
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the current tag is the given application tag.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.isOpeningTag(int) -->
+<method name="isOpeningTag"  public="true" abstract="true">
+<description>
+Returns true if current tag is an opening tag.
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+<description>
+the given tag number.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the current tag is an opening tag.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.skipOpeningTag(int) -->
+<method name="skipOpeningTag"  public="true" abstract="true">
+<description>
+Verify next tag is opening tag with specified tagNumber. In not valid&#xa; throw AsnException, if valid skip the tag.
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next tag not specified opening tag
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.isClosingTag(int) -->
+<method name="isClosingTag"  public="true" abstract="true">
+<description>
+Returns true if current tag is a closing tag.
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+<description>
+the given tag number.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the current tag is a closing tag.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.skipClosingTag(int) -->
+<method name="skipClosingTag"  public="true" abstract="true">
+<description>
+Verify next tag is closing tag with specified tagNumber. In not valid&#xa; throw AsnException, if valid skip the tag.
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next tag not specified closing tag
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.isValueTag(int) -->
+<method name="isValueTag"  public="true" abstract="true">
+<description>
+Is the current tag a value tag with this tag number?&#xa; Note this will return true for application AND context tags&#xa; that match the supplied tag number.
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+<description>
+the given tag number.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if current tag is a value tag&#xa; with the given tag number.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.peekApplicationTag() -->
+<method name="peekApplicationTag"  public="true" abstract="true">
+<description>
+Get the current application tag number by peeking the tag.
+</description>
+<return>
+<type class="int"/>
+<description>
+the current tag number if it is an application tag,&#xa; or -1 if it is a context tag.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.getDataLength() -->
+<method name="getDataLength"  public="true" abstract="true">
+<description>
+Get the data length specified for the current data.
+</description>
+<return>
+<type class="int"/>
+<description>
+the Asn.1 data length from the LVT field.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.skipTag() -->
+<method name="skipTag"  public="true" abstract="true">
+<description>
+Skips the next tag in the Asn data stream.
+</description>
+<return>
+<type class="int"/>
+<description>
+tagNumber of next tag or END_OF_DATA&#xa; if entire stream has been read.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readNull() -->
+<method name="readNull"  public="true" abstract="true">
+<description>
+Reads a null value from the Asn data stream.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetNull"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a null value.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readNull(int) -->
+<method name="readNull"  public="true" abstract="true">
+<description>
+Reads a null value from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description>
+the given contextTag.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetNull"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a null value.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readBoolean() -->
+<method name="readBoolean"  public="true" abstract="true">
+<description>
+Reads a boolean value from the Asn data stream.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+boolean value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a boolean value.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readBoolean(int) -->
+<method name="readBoolean"  public="true" abstract="true">
+<description>
+Reads a boolean value with the given context&#xa; tag from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description>
+the given context tag.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+boolean value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if value in&#xa;                      data stream is not a boolean value.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readInteger() -->
+<method name="readInteger"  public="true" abstract="true">
+<description>
+Reads an integer value (signed or unsigned)&#xa; from the Asn data stream.
+</description>
+<return>
+<type class="int"/>
+<description>
+integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an integer.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readUnsignedInteger() -->
+<method name="readUnsignedInteger"  public="true" abstract="true">
+<description>
+Reads an unsigned integer value from the Asn data stream.&#xa; Because Java&#x27;s int is signed, and cannot represent the&#xa; full range of values, the result is returned as a long.&#xa; This is only necessary for values that can be greater than&#xa; 0x80000000L (2147483648).  Values that are constrained to be&#xa; less than this (e.g., sequence number in BBacnetTimeStamp)&#xa; can use readUnsignedInt().
+</description>
+<return>
+<type class="long"/>
+<description>
+integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an unsigned integer.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readUnsignedInteger(int) -->
+<method name="readUnsignedInteger"  public="true" abstract="true">
+<description>
+Reads an unsigned integer value from the Asn data stream.&#xa; Because Java&#x27;s int is signed, and cannot represent the&#xa; full range of values, the result is returned as a long.&#xa; This is only necessary for values that can be greater than&#xa; 0x80000000L (2147483648).  Values that are constrained to be&#xa; less than this (e.g., sequence number in BBacnetTimeStamp)&#xa; can use readUnsignedInt().
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description>
+the given context tag.
+</description>
+</parameter>
+<return>
+<type class="long"/>
+<description>
+integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not proper type.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readUnsignedInt() -->
+<method name="readUnsignedInt"  public="true" abstract="true">
+<description>
+Reads an unsigned integer value from the Asn data stream.&#xa; This method is a convenience for Unsigned values that are&#xa; constrained to be within the valid range of a Java int.
+</description>
+<return>
+<type class="int"/>
+<description>
+integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an unsigned integer.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readUnsignedInt(int) -->
+<method name="readUnsignedInt"  public="true" abstract="true">
+<description>
+Reads an unsigned integer value from the Asn data stream.&#xa; This method is a convenience for Unsigned values that are&#xa; constrained to be within the valid range of a Java int.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description>
+the given context tag.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not proper type.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readUnsigned() -->
+<method name="readUnsigned"  public="true" abstract="true">
+<description>
+Reads an unsigned integer value from the Asn data stream.&#xa; This method is a convenience for Unsigned values that are&#xa; constrained to be within the valid range of a Java int.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetUnsigned"/>
+<description>
+a BUnsigned with the integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an unsigned integer.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readUnsigned(int) -->
+<method name="readUnsigned"  public="true" abstract="true">
+<description>
+Reads an unsigned integer value from the Asn data stream.&#xa; This method is a convenience for Unsigned values that are&#xa; constrained to be within the valid range of a Java int.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description>
+the given context tag.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetUnsigned"/>
+<description>
+a BUnsigned with the integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not proper type.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readSignedInteger() -->
+<method name="readSignedInteger"  public="true" abstract="true">
+<description>
+Reads a signed integer value from the&#xa; Asn data stream.
+</description>
+<return>
+<type class="int"/>
+<description>
+integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a signed integer.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readSignedInteger(int) -->
+<method name="readSignedInteger"  public="true" abstract="true">
+<description>
+Reads a signed integer value from the&#xa; Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+integer value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not proper type
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readSigned() -->
+<method name="readSigned"  public="true" abstract="true">
+<description>
+Reads a signed integer value from the&#xa; Asn data stream.
+</description>
+<return>
+<type class="javax.baja.sys.BInteger"/>
+<description>
+integer value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a signed integer.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readSigned(int) -->
+<method name="readSigned"  public="true" abstract="true">
+<description>
+Reads a signed integer value from the&#xa; Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BInteger"/>
+<description>
+integer value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not proper type
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readReal() -->
+<method name="readReal"  public="true" abstract="true">
+<description>
+Reads a real (float) value from the&#xa; Asn data stream.
+</description>
+<return>
+<type class="float"/>
+<description>
+value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not proper type
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readReal(int) -->
+<method name="readReal"  public="true" abstract="true">
+<description>
+Reads a real (float) value from the&#xa; Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+</parameter>
+<return>
+<type class="float"/>
+<description>
+value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is a real
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readFloat() -->
+<method name="readFloat"  public="true" abstract="true">
+<description>
+Reads a real (float) value from the&#xa; Asn data stream.
+</description>
+<return>
+<type class="javax.baja.sys.BFloat"/>
+<description>
+value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not proper type
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readFloat(int) -->
+<method name="readFloat"  public="true" abstract="true">
+<description>
+Reads a real (float) value from the&#xa; Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFloat"/>
+<description>
+value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is a real
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readDouble() -->
+<method name="readDouble"  public="true" abstract="true">
+<description>
+Reads a double precision real value (double) from the Asn data stream.
+</description>
+<return>
+<type class="double"/>
+<description>
+value.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in data stream is not a double.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readDouble(int) -->
+<method name="readDouble"  public="true" abstract="true">
+<description>
+Reads a double precision real value (double) with the given context tag&#xa; from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="double"/>
+<description>
+value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in data stream is a not a double.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readOctetString() -->
+<method name="readOctetString"  public="true" abstract="true">
+<description>
+Reads an octet string from the Asn data stream.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+array of bytes
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an octet string
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readOctetString(int) -->
+<method name="readOctetString"  public="true" abstract="true">
+<description>
+Reads an octet string from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description>
+tag
+</description>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+array of bytes
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a octet string
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readBacnetOctetString() -->
+<method name="readBacnetOctetString"  public="true" abstract="true">
+<description>
+Reads an octet string from the Asn data stream.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetOctetString"/>
+<description>
+a BBacnetOctetString
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an octet string
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readBacnetOctetString(int) -->
+<method name="readBacnetOctetString"  public="true" abstract="true">
+<description>
+Reads an octet string from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description>
+tag
+</description>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetOctetString"/>
+<description>
+a BBacnetOctetString
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a octet string
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readCharacterString() -->
+<method name="readCharacterString"  public="true" abstract="true">
+<description>
+Reads character string from the Asn data stream.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+array of bytes
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a character string
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readCharacterString(int) -->
+<method name="readCharacterString"  public="true" abstract="true">
+<description>
+Reads a character string with the given&#xa; context tag from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+array of bytes
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a character string
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readBitString() -->
+<method name="readBitString"  public="true" abstract="true">
+<description>
+Reads a bit string from the Asn data stream.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+<description>
+array of booleans representing bits.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a bit string.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readBitString(int) -->
+<method name="readBitString"  public="true" abstract="true">
+<description>
+Reads a bit string from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetBitString"/>
+<description>
+array of booleans representing bits.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a bit string.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readEnumerated() -->
+<method name="readEnumerated"  public="true" abstract="true">
+<description>
+Reads an enumerated value from the Asn data stream.
+</description>
+<return>
+<type class="int"/>
+<description>
+enumerated value as an int
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an enumeration
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readEnumerated(int) -->
+<method name="readEnumerated"  public="true" abstract="true">
+<description>
+Reads an enumerated value from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an enumeration
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readDate() -->
+<method name="readDate"  public="true" abstract="true">
+<description>
+Reads a date value from the Asn data stream.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetDate"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a Date.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readDate(int) -->
+<method name="readDate"  public="true" abstract="true">
+<description>
+Reads a context-tagged date value from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetDate"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a Date.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readTime() -->
+<method name="readTime"  public="true" abstract="true">
+<description>
+Reads a time value from the Asn data stream.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetTime"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a Time.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readTime(int) -->
+<method name="readTime"  public="true" abstract="true">
+<description>
+Reads a context-tagged time value from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetTime"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not a Time.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readObjectIdentifier() -->
+<method name="readObjectIdentifier"  public="true" abstract="true">
+<description>
+Reads an Object Identifier value from the Asn data stream.
+</description>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+value as a BBacnetObjectIdentifier
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an object id.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readObjectIdentifier(int) -->
+<method name="readObjectIdentifier"  public="true" abstract="true">
+<description>
+Reads a context-tagged Object Identifier value from the Asn data stream.
+</description>
+<parameter name="contextTag">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description>
+value as a BBacnetObjectIdentifier.
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if next value in&#xa;                      data stream is not an Object Id.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readContextTaggedData() -->
+<method name="readContextTaggedData"  public="true" abstract="true">
+<description/>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.readEncodedValue(int) -->
+<method name="readEncodedValue"  public="true" abstract="true">
+<description>
+Returns the encoded value surrounded by the&#xa; given opening / closing tag number.
+</description>
+<parameter name="tagNumber">
+<type class="int"/>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.read(byte[]) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Reads an array of bytes from the input stream.&#xa; Overrides read() in InputStream, which&#xa; throws an IOException.
+</description>
+<parameter name="array">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.io.AsnInput.END_OF_DATA -->
+<field name="END_OF_DATA"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+This constant is returned when the&#xa; end of data has been reached
+</description>
+</field>
+
+</class>
+</bajadoc>

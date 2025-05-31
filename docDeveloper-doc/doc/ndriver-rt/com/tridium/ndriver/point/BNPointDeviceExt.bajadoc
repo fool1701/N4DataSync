@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.point.BNPointDeviceExt" name="BNPointDeviceExt" packageName="com.tridium.ndriver.point" public="true" abstract="true">
+<description>
+BNPointDeviceExt is an BPointDeviceExt that adds a auto manager view and&#xa; implements BINDiscoverHost.
+</description>
+<extends>
+<type class="javax.baja.driver.point.BPointDeviceExt"/>
+</extends>
+<implements>
+<type class="com.tridium.ndriver.discover.BINDiscoveryHost"/>
+</implements>
+<property name="discoveryPreferences" flags="">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</property>
+
+<action name="submitDiscoveryJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a auto discovery job and returns its BOrd
+</description>
+<tag name="@see">#submitDiscoveryJob(BNDiscoveryPreferences parameter)</tag>
+</action>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt() -->
+<constructor name="BNPointDeviceExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.getDiscoveryPreferences() -->
+<method name="getDiscoveryPreferences"  public="true">
+<description>
+Get the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<return>
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.setDiscoveryPreferences(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="setDiscoveryPreferences"  public="true">
+<description>
+Set the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<parameter name="v">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.submitDiscoveryJob(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="submitDiscoveryJob"  public="true">
+<description>
+Invoke the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a auto discovery job and returns its BOrd
+</description>
+<tag name="@see">#submitDiscoveryJob</tag>
+<parameter name="parameter">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.getActionParameterDefault(javax.baja.sys.Action) -->
+<method name="getActionParameterDefault"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Uses the value of property deviceDiscoveryParams as the default parameter&#xa; for the submitDeviceDiscoveryJob action.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Gets the agent list.  Adds BNPointManager as &#x22;Your Driver Point Manager&#x22; if&#xa; one not already registered.
+</description>
+<tag name="@see">AgentInfoUtil#getAgentsHelp</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.useAutoManager() -->
+<method name="useAutoManager"  protected="true">
+<description>
+Override point to disable use of auto point manager view. Return false to&#xa; remove point manager view.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.doSubmitDiscoveryJob(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="doSubmitDiscoveryJob"  public="true">
+<description>
+Submits a BNDiscoveryJob to the Job Service.
+</description>
+<parameter name="preferences">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+<description>
+User specified preferences
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+BOrd of discovery job.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.discoveryPreferences -->
+<field name="discoveryPreferences"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the point manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</field>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.submitDiscoveryJob -->
+<field name="submitDiscoveryJob"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a auto discovery job and returns its BOrd
+</description>
+<tag name="@see">#submitDiscoveryJob(BNDiscoveryPreferences parameter)</tag>
+</field>
+
+<!-- com.tridium.ndriver.point.BNPointDeviceExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

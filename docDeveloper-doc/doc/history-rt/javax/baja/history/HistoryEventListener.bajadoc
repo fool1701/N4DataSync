@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.HistoryEventListener" name="HistoryEventListener" packageName="javax.baja.history" public="true" interface="true" abstract="true" category="interface">
+<description>
+HistoryEventListener should be implemented by objects&#xa; that wish to receive a callback for local history events.  &#xa; A HistoryEventListener must first register for events with &#xa; the History Database.  BEWARE, when implementers of this &#xa; interface receive history event callbacks, the history &#xa; database service is blocked waiting for the method to complete.&#xa; Thus the implementation should return quickly (any expensive&#xa; work should be posted to a separate worker thread).
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">14 Nov 08</tag>
+<tag name="@version">$Revision: 2$ $Date: 1/30/09 3:08:58 PM EST$</tag>
+<tag name="@since">Niagara 3.4.47</tag>
+<!-- javax.baja.history.HistoryEventListener.historyEvent(javax.baja.history.BHistoryEvent) -->
+<method name="historyEvent"  public="true" abstract="true">
+<description>
+Handle the specified history event.&#xa; &#xa; BEWARE, this callback causes the history database service &#xa; to be blocked until the method completes.&#xa; Thus the implementation should return quickly (any expensive&#xa; work should be posted to a separate worker thread so&#xa; control can be safely returned).
+</description>
+<parameter name="event">
+<type class="javax.baja.history.BHistoryEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

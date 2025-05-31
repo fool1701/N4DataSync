@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.BUserAgentClientEnvironment" name="BUserAgentClientEnvironment" packageName="javax.baja.web" public="true" abstract="true">
+<description>
+A client environment that matches based on patterns in the user-agent&#xa; of the request.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">02 Apr 2012</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="javax.baja.web.BClientEnvironment"/>
+</extends>
+<property name="userAgentPattern" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;userAgentPattern&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUserAgentPattern</tag>
+<tag name="@see">#setUserAgentPattern</tag>
+</property>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment() -->
+<constructor name="BUserAgentClientEnvironment" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.getUserAgentPattern() -->
+<method name="getUserAgentPattern"  public="true">
+<description>
+Get the &lt;code&gt;userAgentPattern&lt;/code&gt; property.
+</description>
+<tag name="@see">#userAgentPattern</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.setUserAgentPattern(java.lang.String) -->
+<method name="setUserAgentPattern"  public="true">
+<description>
+Set the &lt;code&gt;userAgentPattern&lt;/code&gt; property.
+</description>
+<tag name="@see">#userAgentPattern</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.getWebProfileConfigType() -->
+<method name="getWebProfileConfigType"  public="true" abstract="true">
+<description>
+Get the type of the BIWebProfileConfig for this environment.&#xa; The returned BIWebProfileConfig will be added to BUser.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.makeWebEnv(javax.baja.web.WebOp) -->
+<method name="makeWebEnv"  public="true" abstract="true">
+<description>
+Make an IWebEnv for the specified web request.  When this callback&#xa; is invoked, the user-agent pattern has already been matched.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.web.IWebEnv"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Initialize on startup.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Cleanup on stop.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Handle a property change.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.doMatchWebEnv(javax.baja.web.WebOp) -->
+<method name="doMatchWebEnv"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the IWebEnv for the specified web request.  A match is&#xa; determined by comparing the requesting user-agent&#xa; to the userAgentPattern regular expression.  If no match&#xa; is found, null is returned.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.web.IWebEnv"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.doGetWebEnv(javax.baja.web.WebOp) -->
+<method name="doGetWebEnv"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the IWebEnv for the specified web request.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.web.IWebEnv"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.matchesUserAgentPattern(java.lang.String) -->
+<method name="matchesUserAgentPattern"  public="true">
+<description>
+Test whether the provided user-agent string matches the regular&#xa; expression pattern specified in the userAgentPattern property.&#xa; The pattern will be tested in a case insensitive manner.
+</description>
+<parameter name="txt">
+<type class="java.lang.String"/>
+<description>
+The browser&#x27;s user-agent string.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the text matches the user-agent pattern.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.userAgentPattern -->
+<field name="userAgentPattern"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;userAgentPattern&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUserAgentPattern</tag>
+<tag name="@see">#setUserAgentPattern</tag>
+</field>
+
+<!-- javax.baja.web.BUserAgentClientEnvironment.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

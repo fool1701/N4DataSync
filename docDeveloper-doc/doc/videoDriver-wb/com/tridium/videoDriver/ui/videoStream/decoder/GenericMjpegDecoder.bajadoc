@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder" name="GenericMjpegDecoder" packageName="com.tridium.videoDriver.ui.videoStream.decoder" public="true">
+<description>
+This is a VideoDecoder that should suffice to read just about any&#xa; motion JPEG video stream. Drivers should still extend this however,&#xa; and override the &#x27;processJpegComment&#x27; method or take whatever means&#xa; are necessary to parse the time index for the each jpeg frame. The&#xa; driver decoder should pass the time index to the &lt;code&gt;<see ref="com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder#setTimeIndex(javax.baja.sys.BAbsTime)">#setTimeIndex(javax.baja.sys.BAbsTime)</see>&lt;/code&gt;&#xa; method.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.VideoDecoder"/>
+</extends>
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder() -->
+<constructor name="GenericMjpegDecoder" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.makeInputStreamForDecoder(com.tridium.videoDriver.videoStream.IVideoStream) -->
+<method name="makeInputStreamForDecoder"  protected="true">
+<description/>
+<parameter name="videoStream">
+<type class="com.tridium.videoDriver.videoStream.IVideoStream"/>
+</parameter>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.frameStarting() -->
+<method name="frameStarting"  protected="true">
+<description>
+This method calls &lt;code&gt;<see ref="com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder#readUntilStartOfJpeg()">#readUntilStartOfJpeg()</see>&lt;/code&gt; in order to position&#xa; the current index of the input stream so that it points to the zeroeth&#xa; byte of the next JPEG image.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.readFrameData(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="readFrameData"  public="true">
+<description>
+For a motion JPEG stream this method would read the bytes for the&#xa; next frame from the video stream. For MPEG type streams, this method&#xa; would read either the next reference frame or it would read the next&#xa; delta frame and return the bytes for either;
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+<description>
+video frame buffer to decode
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.decodeFrame(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="decodeFrame"  public="true">
+<description>
+Override to create image from fram bytes. &#xa; For JPEG decode just wrap bytes in a BImage
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.readUntilStartOfJpeg(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="readUntilStartOfJpeg"  protected="true">
+<description>
+Reads bytes from the video input stream in order to point the input&#xa; stream on the zeroeth byte of the next JPEG image.
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.readUntilStartOfJpeg_driverSpecific(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="readUntilStartOfJpeg_driverSpecific"  protected="true">
+<description>
+For a video stream that is not an Http Mime, Multi-part stream, this method&#xa; is called at the beginning of the video stream and immediately following each&#xa; Jpeg image that is retrieved from the video frame.&#xa; &#xa;  Presumably the Jpeg images are transmitted with some form of driver-specific&#xa;  header around each Jpeg image. The driver developer should read just enough&#xa;  bytes from the video stream in order to position the video stream at the zeroeth&#xa;  byte of the very next Jpeg image. While reading these bytes, let&#x27;s hope that&#xa;  the driver-specific header provides a length of the Jpeg image that is to&#xa;  follow. This is a high-hope because there is no way to determine the byte&#xa;  length of a Jpeg image without actually digesting it.&#xa;  &#xa;  The GenericMjpegDecoder does not go so far as to digest the Jpeg bytes. Instead,&#xa;  it passes them to the video player widget to which it is associated and allows&#xa;  it to digest the bytes according to its own criteria.
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.readUntilStartOfJpeg_mimeMultipart() -->
+<method name="readUntilStartOfJpeg_mimeMultipart"  protected="true">
+<description>
+This method starts out with the video stream indexed likely at a somewhat driver-specific&#xa; header. This method needs to read past the header so that the video stream is positioned&#xa; at the zeroeth byte of the next Jpeg image.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if an IO Exception occurs read from the video stream in order to&#xa; position it at the start of the next Jpeg image, as described above.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.readJpegImageToBuffer(com.tridium.videoDriver.videoStream.decoder.VidFrame) -->
+<method name="readJpegImageToBuffer"  protected="true">
+<description>
+This method reads a JPEG image from the video input stream to the internal buffer. This&#xa; method assumes that the video input stream is positioned at the zeroeth byte of the next&#xa; JPEG image. Note that the &lt;code&gt;<see ref="com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder#readUntilStartOfJpeg()">#readUntilStartOfJpeg()</see>&lt;/code&gt; method should have already&#xa; been called to position the video input stream at the zeroeth byte of the next JPEG&#xa; image.
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.processMarker(com.tridium.videoDriver.videoStream.decoder.VidFrame, int, byte[], int, int) -->
+<method name="processMarker"  protected="true">
+<description>
+This method is called for each marker that is encountered within the JPEG image.&#xa; &#xa; The driver developer may override this method to process markers. However, please&#xa; call super.processMarker(...) because this default version looks for the JPEG&#xa; comment marker and calls &lt;code&gt;<see ref="com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder#processJpegComment(byte[], int, int)">#processJpegComment(byte[], int, int)</see>&lt;/code&gt;
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<parameter name="markerLsb">
+<type class="int"/>
+<description>
+this is the LSB of the marker, which can be used to identify which&#xa;        particular marker has been encountered.
+</description>
+</parameter>
+<parameter name="buffer">
+<type class="byte" dimension="1"/>
+<description>
+this is an internal buffer that contains the marker and the marker header
+</description>
+</parameter>
+<parameter name="from">
+<type class="int"/>
+<description>
+this is the position within the buffer of the first actual header byte of&#xa;        the marker. Note that this location is just beyond the marker MSB, marker LSB,&#xa;        and the two bytes that comprise the marker header length. Note also that the&#xa;        marker header length is also passed into this method as a parameter.
+</description>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+<description>
+this is the length of the marker header. This many bytes may safely be read&#xa;        from the given buffer starting at the given &#x27;from&#x27; location (the previous param).
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.processJpegComment(com.tridium.videoDriver.videoStream.decoder.VidFrame, byte[], int, int) -->
+<method name="processJpegComment"  protected="true">
+<description>
+This method is called when a JPEG comment is encountered in the current JPEG image&#xa; from the MJPEG stream.
+</description>
+<parameter name="vf">
+<type class="com.tridium.videoDriver.videoStream.decoder.VidFrame"/>
+</parameter>
+<parameter name="buffer">
+<type class="byte" dimension="1"/>
+<description>
+this is an internal buffer that contains the JPEG comment, plus other&#xa; stuff.
+</description>
+</parameter>
+<parameter name="from">
+<type class="int"/>
+<description>
+this is the index of the first byte of the JPEG comment within the given&#xa; buffer.
+</description>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+<description>
+this is the number of bytes that comprise the JPEG comment. The developer&#xa; may safely read this many bytes from the given buffer starting at the given &#x27;from&#x27;&#xa; index.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.MARKER_JPEG_COMMENT -->
+<field name="MARKER_JPEG_COMMENT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.MARKER_STATE_NOT_IN_JPEG_MARKER -->
+<field name="MARKER_STATE_NOT_IN_JPEG_MARKER"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.MARKER_STATE_READ_JPEG_MARKER_SIZE_MSB -->
+<field name="MARKER_STATE_READ_JPEG_MARKER_SIZE_MSB"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.MARKER_STATE_READ_JPEG_MARKER_SIZE_LSB -->
+<field name="MARKER_STATE_READ_JPEG_MARKER_SIZE_LSB"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.MARKER_STATE_READ_JPEG_MARKER_HEADER -->
+<field name="MARKER_STATE_READ_JPEG_MARKER_HEADER"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.mjpegByteBuffer -->
+<field name="mjpegByteBuffer"  protected="true">
+<type class="com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder$MjpegByteBuffer"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.positionInBuffer -->
+<field name="positionInBuffer"  protected="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.videoStream.decoder.GenericMjpegDecoder.buffer -->
+<field name="buffer"  protected="true">
+<type class="byte" dimension="1"/>
+<description>
+This is the internal buffer used to read video pages from the stream. It is&#xa; automatically enlarged as needed. This never shrinks. The initial size is&#xa; 40 kilobytes.
+</description>
+</field>
+
+</class>
+</bajadoc>

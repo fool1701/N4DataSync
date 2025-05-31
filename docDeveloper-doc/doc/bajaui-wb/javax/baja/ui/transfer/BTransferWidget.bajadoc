@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.transfer.BTransferWidget" name="BTransferWidget" packageName="javax.baja.ui.transfer" public="true" abstract="true">
+<description>
+BTransferWidget is the base class for BWidgets which&#xa; support the transfer framework.  Transfer includes&#xa; cut/copy/paste and drag-and-drop.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">6 Mar 02</tag>
+<tag name="@version">$Revision: 26$ $Date: 6/30/10 9:52:39 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.BWidget"/>
+</extends>
+<implements>
+<type class="javax.baja.ui.transfer.TransferConst"/>
+</implements>
+<!-- javax.baja.ui.transfer.BTransferWidget() -->
+<constructor name="BTransferWidget" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.isCutEnabled() -->
+<method name="isCutEnabled"  public="true">
+<description>
+Is the cut command enabled on this widget.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.setCutEnabled(boolean) -->
+<method name="setCutEnabled"  public="true">
+<description>
+Set the cut command&#x27;s enable state for this widget.
+</description>
+<parameter name="cutEnabled">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.isCopyEnabled() -->
+<method name="isCopyEnabled"  public="true">
+<description>
+Is the copy command enabled on this widget.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.setCopyEnabled(boolean) -->
+<method name="setCopyEnabled"  public="true">
+<description>
+Set the copy command&#x27;s enable state for this widget.
+</description>
+<parameter name="copyEnabled">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.isPasteEnabled() -->
+<method name="isPasteEnabled"  public="true">
+<description>
+Is the paste command enabled on this widget.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.setPasteEnabled(boolean) -->
+<method name="setPasteEnabled"  public="true">
+<description>
+Set the paste command&#x27;s enable state for this widget.
+</description>
+<parameter name="pasteEnabled">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.isPasteSpecialEnabled() -->
+<method name="isPasteSpecialEnabled"  public="true">
+<description>
+Is the paste special command enabled on this widget.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.setPasteSpecialEnabled(boolean) -->
+<method name="setPasteSpecialEnabled"  public="true">
+<description>
+Set the paste special command&#x27;s enable state for this widget.
+</description>
+<parameter name="pasteSpecialEnabled">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.isDuplicateEnabled() -->
+<method name="isDuplicateEnabled"  public="true">
+<description>
+Is the duplicate command enabled on this widget.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.setDuplicateEnabled(boolean) -->
+<method name="setDuplicateEnabled"  public="true">
+<description>
+Set the duplicate command&#x27;s enable state for this widget.
+</description>
+<parameter name="duplicateEnabled">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.isDeleteEnabled() -->
+<method name="isDeleteEnabled"  public="true">
+<description>
+Is the delete command enabled on this widget.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.setDeleteEnabled(boolean) -->
+<method name="setDeleteEnabled"  public="true">
+<description>
+Set the delete command&#x27;s enable state for this widget.
+</description>
+<parameter name="deleteEnabled">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.isRenameEnabled() -->
+<method name="isRenameEnabled"  public="true">
+<description>
+Is the rename command enabled on this widget.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.setRenameEnabled(boolean) -->
+<method name="setRenameEnabled"  public="true">
+<description>
+Set the rename command&#x27;s enable state for this widget.
+</description>
+<parameter name="renameEnabled">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.startDrag(javax.baja.ui.event.BMouseEvent, javax.baja.ui.transfer.TransferContext, javax.baja.ui.transfer.DragRenderer) -->
+<method name="startDrag"  public="true">
+<description>
+This method starts a drag operation within in the process.  &#xa; The most common way to start a drag is the mouseDragStarted() &#xa; callback.  The startDrag() method should be passed the mouse &#xa; operation which started the drag as well as the data which &#xa; will be transferred (usually created via makeTransferContext()).  &#xa; &lt;p&gt;&#xa; The DragRenderer passed to this method is used to&#xa; paint an effect under the mouse cursor representing&#xa; the data being dragged.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+<description>
+MouseEvent which originated the drag gesture.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+<description>
+The TransferContext which will be used during&#xa;   the drag operation.  It is immaterial what action is specified&#xa;   as both the action and coordinate will be updated as the mouse&#xa;   is dragged over potential drop targets.
+</description>
+</parameter>
+<parameter name="dragRenderer">
+<type class="javax.baja.ui.transfer.DragRenderer"/>
+<description>
+Is used to visualize the data being dragged&#xa;   as the mouse is dragged around.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.startDrag(javax.baja.ui.event.BMouseEvent, javax.baja.ui.transfer.TransferEnvelope, javax.baja.ui.transfer.DragRenderer) -->
+<method name="startDrag"  public="true">
+<description>
+Convenience for &lt;code&gt;startDrag(event, makeTransferContext(envelope), dragRenderer)&lt;/code&gt;
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="envelope">
+<type class="javax.baja.ui.transfer.TransferEnvelope"/>
+</parameter>
+<parameter name="dragRenderer">
+<type class="javax.baja.ui.transfer.DragRenderer"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.dragEnter(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragEnter"  public="true">
+<description>
+This is called when the cursor enters this widget&#xa; during a drag operation.  The TransferContext specifies&#xa; the TransferEnvelope being dragged and the location of&#xa; the mouse cursor over this widget.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.dragOver(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragOver"  public="true">
+<description>
+This is called when the cursor is dragged over this widget&#xa; during a drag operation.  The TransferContext specifies&#xa; the TransferEnvelope being dragged and the location of the mouse &#xa; cursor over this widget.&#xa; &lt;p&gt;&#xa; If this widget can accept a drop from the data specified&#xa; in the given TransferContext then return a mask of the&#xa; available actions that may result.  This mask should be&#xa; a bitwise OR of the TransferConst.ACTION_x constants.  &#xa; If the drop is not legal over this widget then return 0 &#xa; to indicate no legal actions.  The default implementation &#xa; returns 0.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.dragExit(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragExit"  public="true">
+<description>
+This is called when the cursor exits this widget&#xa; during a drag operation.  The TransferContext specifies&#xa; the TransferEnvelope being dragged and the location of&#xa; the mouse cursor over this widget.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.drop(javax.baja.ui.transfer.TransferContext) -->
+<method name="drop"  public="true">
+<description>
+This callback is invoked when a drop occurs over this&#xa; widget during a drag operation.  In order to reach&#xa; this stage the dragOver() method must have returned a&#xa; non-zero bit mask of the valid transfer actions.  Return&#xa; the artifact used to undo the operation.  If dropping&#xa; the source into a BComponent, then use the dropOnComponent()&#xa; method.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.doCopy() -->
+<method name="doCopy"  public="true">
+<description>
+Implement the copy command.  Default implementation:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Mark.setCurrent(null)&lt;/li&gt;&#xa; &lt;li&gt;if copy not enabled bail&lt;/li&gt;&#xa; &lt;li&gt;getTransferData(); if null bail&lt;/li&gt;&#xa; &lt;li&gt;put data on clipboard&lt;/li&gt;&#xa; &lt;li&gt;if envelope supports mark format then Mark.setCurrent&lt;/li&gt;&#xa; &lt;li&gt;return null&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.doCut() -->
+<method name="doCut"  public="true">
+<description>
+Implement the cut command.  Default implementation:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Mark.setCurrent(null)&lt;/li&gt;&#xa; &lt;li&gt;if cut not enabled bail&lt;/li&gt;&#xa; &lt;li&gt;getTransferData(); if null bail&lt;/li&gt;&#xa; &lt;li&gt;put data on clipboard&lt;/li&gt;&#xa; &lt;li&gt;if envelope supports mark format then Mark.setCurrent&lt;/li&gt;&#xa; &lt;li&gt;if envelope supports mark format then setPendingMove(true)&lt;/li&gt;&#xa; &lt;li&gt;removeTransferData()&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.doPaste() -->
+<method name="doPaste"  public="true">
+<description>
+Implement the paste command.  Default implementation:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if paste not enabled bail&lt;/li&gt;&#xa; &lt;li&gt;get contents from clipboard, if null bail&lt;/li&gt;&#xa; &lt;li&gt;if contents are a mark, then clear pending move flag&lt;/li&gt;&#xa; &lt;li&gt;insertTransferData()&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.doPasteSpecial() -->
+<method name="doPasteSpecial"  public="true">
+<description>
+Implement the paste special command.  Default implementation:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if paste special not enabled bail&lt;/li&gt;&#xa; &lt;li&gt;throw UnsupportedOperation&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.doDuplicate() -->
+<method name="doDuplicate"  public="true">
+<description>
+Implement the duplicate command.  Default implementation:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if duplicate not enabled bail&lt;/li&gt;&#xa; &lt;li&gt;getTransferData(); if null bail&lt;/li&gt;&#xa; &lt;li&gt;insertTransferData()&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.doDelete() -->
+<method name="doDelete"  public="true">
+<description>
+Implement the delete command.  Default implementation:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if delete not enabled bail&lt;/li&gt;&#xa; &lt;li&gt;throw UnsupportedOperation&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.doRename() -->
+<method name="doRename"  public="true">
+<description>
+Implement the rename command.  Default implementation:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if rename not enabled bail&lt;/li&gt;&#xa; &lt;li&gt;throw UnsupportedOperation&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.getTransferData() -->
+<method name="getTransferData"  public="true" abstract="true">
+<description>
+This is the callback to get the current selection&#xa; as an instance of TransferEnvelope.  This data will be&#xa; the source of a cut, copy, or drag operation.
+</description>
+<return>
+<type class="javax.baja.ui.transfer.TransferEnvelope"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.insertTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="insertTransferData"  public="true" abstract="true">
+<description>
+This callback is used to insert the data into the&#xa; target widget.  This callback results from a paste &#xa; or drop operation.  The data is accessed via the&#xa; TransferContext.getEnvelope() method.  Return an artifact&#xa; used to undo the operation or null.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.removeTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="removeTransferData"  public="true" abstract="true">
+<description>
+This callback is invoked on the source of a cut or&#xa; drag-move operation after it has been inserted into&#xa; the target.  The source should remove the data and&#xa; return an artifact used to undo the operation or return&#xa; null if not undoable.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.makeTransferContext(javax.baja.ui.transfer.TransferEnvelope) -->
+<method name="makeTransferContext"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;makeTransferContext(null, ACTION_COPY, envelope)&lt;/code&gt;.
+</description>
+<parameter name="envelope">
+<type class="javax.baja.ui.transfer.TransferEnvelope"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.makeTransferContext(javax.baja.sys.Context, int, javax.baja.ui.transfer.TransferEnvelope) -->
+<method name="makeTransferContext"  public="true">
+<description>
+This is a hook for subclasses of BTransferWidget to create &#xa; specialized a TransferContext which is used in the standard&#xa; implementations of doCut(), doPaste(), and doDuplicate().
+</description>
+<parameter name="sourceContext">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="action">
+<type class="int"/>
+</parameter>
+<parameter name="envelope">
+<type class="javax.baja.ui.transfer.TransferEnvelope"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.transfer.BTransferWidget.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

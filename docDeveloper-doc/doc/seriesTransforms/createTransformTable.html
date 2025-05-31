@@ -1,0 +1,82 @@
+<!-- Htmldoc has been run -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Creating a Series Transform Table</title>
+    <meta name="author" content="jspangler" />
+    <link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+    <!-- Date: 2012-05-23 -->
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+  </head>
+  <body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/seriesTransforms/extendingGraphNode.html" class="navbar">Prev</a> |  <a href="/doc/seriesTransforms/creatingSeriesCursors.html" class="navbar">Next</a></p>
+
+  
+    <script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+    <script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+    <script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+  
+    <h1>Creating a Series Transform Table</h1>
+    <p>
+      All graph node implementations are expected to return a BSeriesTransformTable implementation. 
+      The Series Transform Table is an abstract implementation of the BITable interface that 
+      includes additional series data information. 
+    </p>
+    <p>
+      When creating a series transform table, two pieces of information are required: the 
+      <a href="nodeSchema.html">Series Schema</a> of the records that will be returned by 
+      the table's cursor, and the <strong>Series Name</strong> of the data.
+    </p>
+    <p>
+      The schema data is the same schema data that is returned for the graph node&#39;s <strong>getSchema()</strong> method. 
+      This schema is the format of the data of each record that will be returned by the 
+      Cursor returned by the table instance.
+    </p>
+    <p>
+      The Series Name is name of the graph node that creates the table instance. The series 
+      name is used to handle name space issues when combining data from multiple input sources. 
+    </p>
+    <pre>
+      <code class="sunlight-highlight-java">
+        public BCompositeTable(String seriesName, BSeriesSchema schema, 
+                       CompositeMapping[] mappings, IFilter filter)
+        {
+            super(seriesName, schema);
+            this.mappings = mappings;
+            setFilter(filter);
+            
+            //Perform other initialization operations as necessary
+            ...    
+        }
+      </code>
+    </pre>
+    
+    <p>
+      The only required method implementation is the <strong>cursor()</strong> method. This method will return a 
+      <strong>Cursor</strong> that performs the data transformations as intended by the graph node. 
+      Below is an example implementation of the cursor method for the BCompositeTable class.
+    </p>
+    
+    <pre>
+      <code class="sunlight-highlight-java">
+        public Cursor cursor()
+        { 
+          return new CompositeCursor(getSchema(),mappings,getFilter()); 
+        }
+      </code>
+    </pre>
+   
+  <script type="text/javascript">
+      window.niagara.docDevUtil.highlightCode();
+  </script>   
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/seriesTransforms/extendingGraphNode.html" class="navbar">Prev</a> |  <a href="/doc/seriesTransforms/creatingSeriesCursors.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+  </body>
+</html>
+

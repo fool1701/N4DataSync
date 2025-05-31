@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="entityIo" runtimeProfile="rt" qualifiedName="javax.baja.entityIo.json.JsonEntityDecoder" name="JsonEntityDecoder" packageName="javax.baja.entityIo.json" public="true" final="true">
+<description>
+JsonEntityDecoder
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:craig.gemmill@tridium.com&#x22;&gt;Craig Gemmill&lt;/a&gt;&#xa;         Date: 2/3/14&#xa;         Time: 8:33 PM</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.tag.io.EntityDecoder"/>
+</implements>
+<implements>
+<type class="javax.baja.entityIo.json.JsonEntityConst"/>
+</implements>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<!-- javax.baja.entityIo.json.JsonEntityDecoder(java.io.Reader) -->
+<constructor name="JsonEntityDecoder" public="true">
+<parameter name="reader">
+<type class="java.io.Reader"/>
+<description>
+The &lt;code&gt;<see ref="java.io.Reader">Reader</see>&lt;/code&gt; which supplies JSON tokens.
+</description>
+</parameter>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder(java.io.InputStream) -->
+<constructor name="JsonEntityDecoder" public="true">
+<parameter name="in">
+<type class="java.io.InputStream"/>
+<description>
+The &lt;code&gt;<see ref="java.io.InputStream">InputStream</see>&lt;/code&gt; of JSON tokens.
+</description>
+</parameter>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true" static="true">
+<description>
+Convenience method for decoding a String containing a single JSON-encoded&#xa; &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;.  This will return a &lt;code&gt;<see ref="javax.baja.tag.util.BasicEntity">BasicEntity</see>&lt;/code&gt;.
+</description>
+<parameter name="encodedString">
+<type class="java.lang.String"/>
+<description>
+the &lt;code&gt;<see ref="java.lang.String">String</see>&lt;/code&gt; containing the JSON-encoded entity
+</description>
+</parameter>
+<return>
+<type class="javax.baja.tag.Entity"/>
+<description>
+a new &lt;code&gt;<see ref="javax.baja.tag.util.BasicEntity">BasicEntity</see>&lt;/code&gt; with the decoded tags.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.mergeFromString(java.lang.String, javax.baja.tag.Entity) -->
+<method name="mergeFromString"  public="true" static="true">
+<description>
+Convenience method for merging a String containing a single JSON-encoded&#xa; &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;.  This will merge the Entity&#x27;s tags with the decoded ones and&#xa; return the Entity.
+</description>
+<parameter name="encodedString">
+<type class="java.lang.String"/>
+<description>
+the &lt;code&gt;<see ref="java.lang.String">String</see>&lt;/code&gt; containing the JSON-encoded entity
+</description>
+</parameter>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.decodeEntities(java.io.Reader) -->
+<method name="decodeEntities"  public="true" static="true">
+<description>
+Convenience method to decode a group of Entities from a supplied&#xa; &lt;code&gt;<see ref="java.io.Reader">Reader</see>&lt;/code&gt;, and return them in a &lt;code&gt;<see ref="java.util.Collection">Collection</see>&lt;/code&gt;.&#xa; The results are returned in an &lt;code&gt;ArrayList&amp;lt;Entity&amp;gt;&lt;/code&gt;.&#xa; All &lt;code&gt;<see ref="com.tridium.json.JSONException">JSONException</see>&lt;/code&gt;s thrown by the decoder are wrapped with&#xa; &lt;code&gt;<see ref="java.io.IOException">IOException</see>&lt;/code&gt; for ease of use.
+</description>
+<parameter name="r">
+<type class="java.io.Reader"/>
+<description>
+a &lt;code&gt;<see ref="java.io.Reader">Reader</see>&lt;/code&gt; loaded with a list of encoded Entities
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+<description>
+an &lt;code&gt;ArrayList&amp;lt;Entity&amp;gt;&lt;/code&gt;, returned as a &lt;code&gt;Collection&lt;/code&gt;.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.close() -->
+<method name="close"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Close the input stream and relinquish any underlying resources.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.decode() -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode from the decoder&#x27;s input a serialized &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; tag set.&#xa; This method will return a new &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;,&#xa; decorated with the decoded &lt;code&gt;<see ref="javax.baja.tag.Tag">javax.baja.tag.Tag</see>&lt;/code&gt;s.&#xa; The default implementation will use a &lt;code&gt;<see ref="javax.baja.tag.util.BasicEntity">BasicEntity</see>&lt;/code&gt; to hold the&#xa; deserialized &lt;code&gt;<see ref="javax.baja.tag.Tag">javax.baja.tag.Tag</see>&lt;/code&gt;s.
+</description>
+<return>
+<type class="javax.baja.tag.Entity"/>
+<description>
+an (@code Entity} with the decoded &lt;code&gt;<see ref="javax.baja.tag.Tag">javax.baja.tag.Tag</see>&lt;/code&gt;s.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if anything fails with the decoding.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.decodeEntity(com.tridium.json.JSONObject) -->
+<method name="decodeEntity"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;SpellCheckingInspection&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Decode a single &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; tag set from the supplied &lt;code&gt;<see ref="com.tridium.json.JSONObject">JSONObject</see>&lt;/code&gt;.&#xa; This method will return a new &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;,&#xa; decorated with the decoded &lt;code&gt;<see ref="javax.baja.tag.Tag">javax.baja.tag.Tag</see>&lt;/code&gt;s.&#xa; This implementation will use a &lt;code&gt;<see ref="javax.baja.tag.util.BasicEntity">BasicEntity</see>&lt;/code&gt; to hold the&#xa; deserialized object.
+</description>
+<parameter name="jsonObject">
+<type class="com.tridium.json.JSONObject"/>
+</parameter>
+<return>
+<type class="javax.baja.tag.Entity"/>
+<description>
+a &lt;code&gt;<see ref="javax.baja.tag.util.BasicEntity">BasicEntity</see>&lt;/code&gt; with the decoded tags, relations, and ord.
+</description>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description>
+if the underlying JSON processing fails.
+</description>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if anything fails with the decoding.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.decodeTags(com.tridium.json.JSONObject) -->
+<method name="decodeTags"  public="true">
+<description>
+Decode &lt;code&gt;<see ref="javax.baja.tag.Tags">Tags</see>&lt;/code&gt; from a &lt;code&gt;<see ref="com.tridium.json.JSONObject">JSONObject</see>&lt;/code&gt;.
+</description>
+<parameter name="jsonObject">
+<type class="com.tridium.json.JSONObject"/>
+<description>
+the JSON object containing the encoded tags
+</description>
+</parameter>
+<return>
+<type class="javax.baja.tag.Tags"/>
+<description>
+a &lt;code&gt;<see ref="javax.baja.tag.util.TagSet">TagSet</see>&lt;/code&gt; containing the tags.
+</description>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.decodeRelations(com.tridium.json.JSONArray) -->
+<method name="decodeRelations"  public="true">
+<description>
+Decode &lt;code&gt;<see ref="javax.baja.tag.Relations">Relations</see>&lt;/code&gt; from a &lt;code&gt;<see ref="com.tridium.json.JSONArray">JSONArray</see>&lt;/code&gt;.
+</description>
+<parameter name="jsonArray">
+<type class="com.tridium.json.JSONArray"/>
+<description>
+the JSON array containing the encoded relations.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.tag.Relations"/>
+<description>
+a &lt;code&gt;<see ref="javax.baja.tag.util.RelationSet">RelationSet</see>&lt;/code&gt; containing the relations.
+</description>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.entityIo.json.JsonEntityDecoder.decodeRelation(com.tridium.json.JSONObject) -->
+<method name="decodeRelation"  public="true">
+<description>
+Decode a &lt;code&gt;<see ref="javax.baja.tag.Relation">Relation</see>&lt;/code&gt; from a &lt;code&gt;<see ref="com.tridium.json.JSONObject">JSONObject</see>&lt;/code&gt;.&#xa; Note this decode contains only Tags and the Entity Ord.  It uses an empty &lt;code&gt;<see ref="javax.baja.tag.util.BasicEntity">BasicEntity</see>&lt;/code&gt;&#xa; as the &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;, because the full Entity is not encoded&#xa; to prevent cycles and/or recursion issues. (Possibly to be addressed/fixed later).
+</description>
+<parameter name="jsonObject">
+<type class="com.tridium.json.JSONObject"/>
+<description>
+the JSON object containing the encoded &lt;code&gt;Relation&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.tag.Relation"/>
+<description>
+a new &lt;code&gt;<see ref="javax.baja.tag.Relation">Relation</see>&lt;/code&gt; with the encoded Tags and entityOrd.
+</description>
+</return>
+<throws>
+<type class="com.tridium.json.JSONException"/>
+<description/>
+</throws>
+<throws>
+<type class="java.io.IOException"/>
+<description/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

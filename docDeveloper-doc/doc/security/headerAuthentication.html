@@ -1,0 +1,90 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/roles.html" class="navbar">Prev</a> |  <a href="/doc/security/scramshaexample.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="http-header-authentication-mechanism">HTTP Header Authentication Mechanism</h1>
+<p>In Niagara 4.4, an authentication mechanism was implemented that utilizes HTTP headers to send and receive authentication information in order to better support machine to machine authentication.</p>
+<h2 id="authentication-messages">Authentication Messages</h2>
+<p>This authentication mechanism relies on authentication messages sent between the client and server as HTTP headers. The client sends credentials in the <code>Authorization</code> header and the server sends challenges in the <code>WWW-Authenticate</code> header. Auth messages are restricted to the following syntax:</p>
+<pre><code>auth-scheme  = token
+auth-param   = token BWS &quot;=&quot; BWS token
+
+auth-message = auth-scheme [ 1*SP #auth-param ]
+</code></pre>
+<p>Token syntax is defined in <a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">[RFC7230], Section 3.2.6</a>. If an auth-param value is not a valid token, it should be <code>base64url</code> encoded with no padding.</p>
+<h2 id="hello-message">Hello Message</h2>
+<p>The first step in the authentication process is for the client to send a <code>HELLO</code> message to the server. This message must include a <code>username</code> parameter with the base64url encoding of the UTF-8 encoded username.</p>
+<pre><code>Authorization: HELLO username=dXNlcg
+</code></pre>
+<p>The server responds with a 401 Unauthorized response with a <code>WWW-Authenticate header</code> indicating what authentication mechanisms are supported for the user. If the user does not exist, the server will still return a 401 with at least one valid authentication mechanism. The server may include a <code>handshakeToken</code> in the response message in order to maintain state between requests. If a <code>handshakeToken</code> is included, the client must include the token on subsequent requests.</p>
+<pre><code>401 Unauthorized
+WWW-Authenticate: SCRAM hash=SHA-256, handshakeToken=1234
+</code></pre>
+<h2 id="authentication-exchange">Authentication Exchange</h2>
+<p>After the server responds to the <code>HELLO</code> message, the client should select an authentication mechanism and continue with the authentication exchange as defined by the selected mechanism.</p>
+<p>If authentication fails during the exchange, the server must respond with a 403 Forbidden status.</p>
+<h2 id="auth-token">Auth Token</h2>
+<p>Once the user has successfully authenticated, the server must respond with a 200 Ok status and an <code>Authentication-Info</code> header with an <code>authToken</code> parameter that the client will use to make future requests to the server.</p>
+<pre><code>200 Ok
+Authentication-Info: authToken=5678
+</code></pre>
+<p>The client must use the <code>BEARER</code> auth scheme to pass the <code>authToken</code> to the server on subsequent requests.</p>
+<pre><code>Authorization: BEARER authToken=5678
+</code></pre>
+<h2 id="scram">SCRAM</h2>
+<p>The only authentication mechanism currently supported by Niagara is SCRAM (Salted Challenge Response Authentication Mechanism). Any Niagara user with the digest authentication scheme will support the SCRAM HTTP header authentication message. An example of the SCRAM authentication exchange is shown below.</p>
+<p>Client sends `HELLO&rsquo; message</p>
+<pre><code>Authorization: HELLO username=dXNlcg
+</code></pre>
+<p>Server responds with SCRAM authentication scheme, the hash function as a hash parameter, and the handshake token. The hash function can either be SHA-256 or SHA-512. Currently, only SHA-256 is supported in Niagara.</p>
+<pre><code>401 Unauthorized
+WWW-Authenticate: SCRAM hash=SHA-256, handshakeToken=1234
+</code></pre>
+<p>The client sends the base64url encoded client first message as the data parameter.</p>
+<pre><code>Authorization: SCRAM handshakeToken=1234, data=biwsbj11c2VyLHI9ck9wck5HZndFYmVSV2diTkVrcU8K
+</code></pre>
+<p>The server responds with the base64 encoded server first message as the data parameter.</p>
+<pre><code>401 Unauthorized
+WWW-Authenticate: SCRAM handshakeToken=1234, hash=SHA-256,
+    data=cj1yT3ByTkdmd0ViZVJXZ2JORWtxTyVodllEcFdVYTJSYVRDQWZ1eEZJ
+         bGopaE5sRixzPVcyMlphSjBTTlk3c29Fc1VFamI2Z1E9PSxpPTQwOTYK
+</code></pre>
+<p>The client sends the base64url encoded client final message as the data parameter.</p>
+<pre><code>Authorization: SCRAM handshakeToken=1234,
+    data=Yz1iaXdzLHI9ck9wck5HZndFYmVSV2diTkVrcU8laHZZRHBXVWEyUmFUQ
+         0FmdXhGSWxqKWhObEYscD1kSHpiWmFwV0lrNGpVaE4rVXRlOXl0YWc5em
+         pmTUhnc3FtbWl6N0FuZFZRPQo
+</code></pre>
+<p>The server responds with the base64 encoded server final message, as well as an authToken since authentication was successful.</p>
+<pre><code>200 Ok
+Authentication-Info: authToken=5678, hash=SHA-256,
+    data=dj02cnJpVFJCaTIzV3BSUi93dHVwK21NaFVaVW4vZEI1bkxUSlJzamw5NUc0PQo
+</code></pre>
+<p>The client verifies the server final message, then makes subsequent requests to the server and includes the authToken in the BEARER auth message.</p>
+<pre><code>Authorization: BEARER authToken=5678
+</code></pre>
+<h2 id="example">Example</h2>
+<p>See <a href="module://docDeveloper/doc/security/scramshaexample.html">Scram Sha Client Authentication Example</a> for a sample implementation utilizing the HTTP Header Authentication Mechanism.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/roles.html" class="navbar">Prev</a> |  <a href="/doc/security/scramshaexample.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

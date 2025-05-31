@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.util.LocalBacnetPoll" name="LocalBacnetPoll" packageName="javax.baja.bacnet.util" public="true" abstract="true">
+<description>
+LocalBacnetPoll&#xa; This base class provides a mechanism for performing local polls of BACnet&#xa; properties from BACnet export objects in Niagara&#x27;s export table.  Specific&#xa; implementations will need to provide customization of how the polling is&#xa; done for their needs.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">Nov 11, 2008</tag>
+<tag name="@since">NiagaraAX 3.5</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<!-- javax.baja.bacnet.util.LocalBacnetPoll() -->
+<constructor name="LocalBacnetPoll" protected="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.run() -->
+<method name="run"  public="true">
+<description>
+Poll service execution engine.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.poll(javax.baja.sys.BObject) -->
+<method name="poll"  protected="true" abstract="true">
+<description>
+Poll an object in the local station.
+</description>
+<parameter name="o">
+<type class="javax.baja.sys.BObject"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if ok, or false if this item should be removed from the list
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.getPollRate() -->
+<method name="getPollRate"  protected="true" abstract="true">
+<description>
+Get the relevant poll rate for this poll thread.
+</description>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+BRelTime
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.getThreadName() -->
+<method name="getThreadName"  protected="true" abstract="true">
+<description>
+Get the thread name for this poll thread.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+threadName
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.getPolledType() -->
+<method name="getPolledType"  protected="true" abstract="true">
+<description>
+Get the Niagara Type of the objects that are being polled&#xa; by this poll thread.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+polledType
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.subscribe(javax.baja.sys.BObject) -->
+<method name="subscribe"  public="true" synchronized="true">
+<description>
+Subscribe an object to the poll service.
+</description>
+<parameter name="o">
+<type class="javax.baja.sys.BObject"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.unsubscribe(javax.baja.sys.BObject) -->
+<method name="unsubscribe"  public="true" synchronized="true">
+<description>
+Unsubscribe an object from the poll service.
+</description>
+<parameter name="o">
+<type class="javax.baja.sys.BObject"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.LocalBacnetPoll.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

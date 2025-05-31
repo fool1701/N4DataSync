@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="commercialCooking" runtimeProfile="rt" qualifiedName="com.tridium.commercialCooking.devices.BLangCooker" name="BLangCooker" packageName="com.tridium.commercialCooking.devices" public="true">
+<description>
+The Device class represents the BLangCooker object.
+</description>
+<tag name="@author">Sam Barrow original code on 18 Nov 2004</tag>
+<tag name="@author">Sam Barrow Migrated to AX on 01 Nov 2005</tag>
+<tag name="@since">Niagara 3.0 commercialCooking 1.0</tag>
+<extends>
+<type class="com.tridium.commercialCooking.devices.BCookerBase"/>
+</extends>
+<implements>
+<type class="com.tridium.commercialCooking.messages.CcMessageConst"/>
+</implements>
+<implements>
+<type class="com.tridium.commercialCooking.messages.LangMessageConst"/>
+</implements>
+<property name="cookerDeviceNumber" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;cookerDeviceNumber&lt;/code&gt; property.&#xa; Specifies the Lang Cookers device number
+</description>
+<tag name="@see">#getCookerDeviceNumber</tag>
+<tag name="@see">#setCookerDeviceNumber</tag>
+</property>
+
+<property name="cookerIdentifier" flags="">
+<type class="com.tridium.commercialCooking.enums.BLcIdentifierEnum"/>
+<description>
+Slot for the &lt;code&gt;cookerIdentifier&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCookerIdentifier</tag>
+<tag name="@see">#setCookerIdentifier</tag>
+</property>
+
+<property name="password" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;password&lt;/code&gt; property.&#xa; the default password to log on to the Lang Cooker&#xa; Controller interface to make configuration changes
+</description>
+<tag name="@see">#getPassword</tag>
+<tag name="@see">#setPassword</tag>
+</property>
+
+<property name="alarmFrequency" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;alarmFrequency&lt;/code&gt; property.&#xa; Contains this Lang Cookers alarm frequency
+</description>
+<tag name="@see">#getAlarmFrequency</tag>
+<tag name="@see">#setAlarmFrequency</tag>
+</property>
+
+<property name="alarmDutyCycle" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;alarmDutyCycle&lt;/code&gt; property.&#xa; Contains this Lang Cookers alarm duty cycle
+</description>
+<tag name="@see">#getAlarmDutyCycle</tag>
+<tag name="@see">#setAlarmDutyCycle</tag>
+</property>
+
+<property name="levelNumber" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;levelNumber&lt;/code&gt; property.&#xa; Contains this Lang Cookers  level number
+</description>
+<tag name="@see">#getLevelNumber</tag>
+<tag name="@see">#setLevelNumber</tag>
+</property>
+
+<property name="userData" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;userData&lt;/code&gt; property.&#xa; used for test and debug to perform some static tests
+</description>
+<tag name="@see">#getUserData</tag>
+<tag name="@see">#setUserData</tag>
+</property>
+
+<property name="cookerShutdown" flags="">
+<type class="com.tridium.commercialCooking.datatypes.BCookerShutdownState"/>
+<description>
+Slot for the &lt;code&gt;cookerShutdown&lt;/code&gt; property.&#xa; contains all config and status properties related to CookerShutdown
+</description>
+<tag name="@see">#getCookerShutdown</tag>
+<tag name="@see">#setCookerShutdown</tag>
+</property>
+
+<property name="pollForInputs" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pollForInputs&lt;/code&gt; property.&#xa; Contains this user can enable / disable polling for input status
+</description>
+<tag name="@see">#getPollForInputs</tag>
+<tag name="@see">#setPollForInputs</tag>
+</property>
+
+<property name="pollForShelves" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pollForShelves&lt;/code&gt; property.&#xa; Contains this user can enable / disable polling for shelf status
+</description>
+<tag name="@see">#getPollForShelves</tag>
+<tag name="@see">#setPollForShelves</tag>
+</property>
+
+<property name="currentOvenRecipes" flags="r">
+<type class="com.tridium.commercialCooking.datatypes.BCookerProductList"/>
+<description>
+Slot for the &lt;code&gt;currentOvenRecipes&lt;/code&gt; property.&#xa; array of BCookerProductEntry(s) retrieved from the Lang Oven
+</description>
+<tag name="@see">#getCurrentOvenRecipes</tag>
+<tag name="@see">#setCurrentOvenRecipes</tag>
+</property>
+
+<property name="mostRecentDlStatus" flags="r">
+<type class="com.tridium.commercialCooking.datatypes.BOvenRecipesDlStatus"/>
+<description>
+Slot for the &lt;code&gt;mostRecentDlStatus&lt;/code&gt; property.&#xa; used for progress reporting on a download sequence
+</description>
+<tag name="@see">#getMostRecentDlStatus</tag>
+<tag name="@see">#setMostRecentDlStatus</tag>
+</property>
+
+<property name="points" flags="">
+<type class="com.tridium.commercialCooking.point.BLangCookerPointDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Contains the control points where Niagara AX logic can be linked&#xa; to read and or write data in the foreign equipment
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</property>
+
+<action name="exitOvenProgramMode" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;exitOvenProgramMode&lt;/code&gt; action.&#xa; test aid... set oven controller in standby mode
+</description>
+<tag name="@see">#exitOvenProgramMode()</tag>
+</action>
+
+<action name="setOvenProgramMode" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;setOvenProgramMode&lt;/code&gt; action.&#xa; test aid... set oven controller in program mode
+</description>
+<tag name="@see">#setOvenProgramMode()</tag>
+</action>
+
+<action name="getProductRecipes" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getProductRecipes&lt;/code&gt; action.&#xa; test aid... get all product recipes
+</description>
+<tag name="@see">#getProductRecipes()</tag>
+</action>
+
+<action name="addProduct" flags="c">
+<parameter name="parameter">
+<type class="com.tridium.commercialCooking.datatypes.BCookerProductEntry"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;addProduct&lt;/code&gt; action.&#xa; test aid... add a product recipe
+</description>
+<tag name="@see">#addProduct(BCookerProductEntry parameter)</tag>
+</action>
+
+<action name="deleteAllProducts" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;deleteAllProducts&lt;/code&gt; action.&#xa; test aid... delete all product recipes
+</description>
+<tag name="@see">#deleteAllProducts()</tag>
+</action>
+
+<action name="getDeviceStatus" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getDeviceStatus&lt;/code&gt; action.&#xa; test aid... get device status
+</description>
+<tag name="@see">#getDeviceStatus()</tag>
+</action>
+
+<action name="getInputsStatus" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getInputsStatus&lt;/code&gt; action.&#xa; test aid... get inputs status
+</description>
+<tag name="@see">#getInputsStatus()</tag>
+</action>
+
+<action name="getShelvesStatus" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getShelvesStatus&lt;/code&gt; action.&#xa; test aid... get shelves status
+</description>
+<tag name="@see">#getShelvesStatus()</tag>
+</action>
+
+<action name="reschedDlOvenRecipesList" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;reschedDlOvenRecipesList&lt;/code&gt; action.&#xa; this will intiate a rescheduled download of the current dlOvenRecipesList&#xa; dlOvenRecipesList as specified by the dlOvenRecipesOvrFlag
+</description>
+<tag name="@see">#reschedDlOvenRecipesList()</tag>
+</action>
+
+<action name="startOvenShutdown" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;startOvenShutdown&lt;/code&gt; action.&#xa; it is now time to shutdown this oven if not in use
+</description>
+<tag name="@see">#startOvenShutdown()</tag>
+</action>
+
+<action name="terminateDlOvenRecipesList" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;terminateDlOvenRecipesList&lt;/code&gt; action.&#xa; test aid... permits termination of a download ticket&#xa; that is not performing as expected
+</description>
+<tag name="@see">#terminateDlOvenRecipesList()</tag>
+</action>
+
+<action name="terminateOvenShutdown" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;terminateOvenShutdown&lt;/code&gt; action.&#xa; test aid... permits termination of a shutdown ticket&#xa; that is not performing as expected
+</description>
+<tag name="@see">#terminateOvenShutdown()</tag>
+</action>
+
+<action name="handleShutdownIdleTimerExpiration" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;handleShutdownIdleTimerExpiration&lt;/code&gt; action.&#xa; before shutdown can execute, the minShutdownIdleTimerTicket&#xa; must expire
+</description>
+<tag name="@see">#handleShutdownIdleTimerExpiration()</tag>
+</action>
+
+<action name="handleDownloadIdleTimerExpiration" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;handleDownloadIdleTimerExpiration&lt;/code&gt; action.&#xa; before downdown can execute, the minDownloadIdleTimerTicket&#xa; must expire
+</description>
+<tag name="@see">#handleDownloadIdleTimerExpiration()</tag>
+</action>
+
+</class>
+</bajadoc>

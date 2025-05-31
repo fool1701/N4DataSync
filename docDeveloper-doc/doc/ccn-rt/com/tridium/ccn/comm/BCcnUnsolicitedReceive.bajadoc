@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ccn" runtimeProfile="rt" qualifiedName="com.tridium.ccn.comm.BCcnUnsolicitedReceive" name="BCcnUnsolicitedReceive" packageName="com.tridium.ccn.comm" public="true">
+<description>
+The BCcnUnsolicitedReceive class customizes unsolicited receive handling for the CCN driver.&#xa; Most functionality is inherited from &lt;code&gt;<see ref="com.tridium.basicdriver.util.BBasicUnsolicitedReceive">BBasicUnsolicitedReceive</see>&lt;/code&gt;.
+</description>
+<tag name="@author">Ramadevi Telaprolu on 13-Mar-08</tag>
+<extends>
+<type class="com.tridium.basicdriver.util.BBasicUnsolicitedReceive"/>
+</extends>
+<implements>
+<type class="com.tridium.ccn.messages.CcnMessageConst"/>
+</implements>
+<implements>
+<type class="com.tridium.platCcn.CcnUnsolMsgListener"/>
+</implements>
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive() -->
+<constructor name="BCcnUnsolicitedReceive" public="true">
+<description>
+Framework use only
+</description>
+</constructor>
+
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive(com.tridium.ccn.BCcnNetwork) -->
+<constructor name="BCcnUnsolicitedReceive" public="true">
+<parameter name="newNetwork">
+<type class="com.tridium.ccn.BCcnNetwork"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive.getNetwork() -->
+<method name="getNetwork"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ccn.BCcnNetwork"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive.callProcessUnsolicitedMessage(com.tridium.basicdriver.message.ReceivedMessage) -->
+<method name="callProcessUnsolicitedMessage"  public="true">
+<description>
+Customized to process the unsolicited message for this driver.
+</description>
+<parameter name="unsolicitedMsg">
+<type class="com.tridium.basicdriver.message.ReceivedMessage"/>
+<description>
+incoming BasicDriver unsolicited message
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive.processUnsolicitedMessage(com.tridium.basicdriver.message.ReceivedMessage) -->
+<method name="processUnsolicitedMessage"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="unsolicitedMsg">
+<type class="com.tridium.basicdriver.message.ReceivedMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive.unsolicitedMessageReceived(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<method name="unsolicitedMessageReceived"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+CcnUnsolMsgListener implementation wraps the message as CcnUnsolicitedMsgWrapper, a special&#xa; implementation of &lt;code&gt;<see ref="com.tridium.basicdriver.message.ReceivedMessage">ReceivedMessage</see>&lt;/code&gt; then enqueues it for processing.&#xa;&#xa; See &lt;code&gt;<see ref="com.tridium.platCcn.BCcnPlatformService">com.tridium.platCcn.BCcnPlatformService</see>&lt;/code&gt; for entry vector from native layer.
+</description>
+<parameter name="unsolMsg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+<description>
+CcnUnsolMsgListener to process
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ccn.comm.BCcnUnsolicitedReceive.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

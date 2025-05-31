@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="query" runtimeProfile="rt" qualifiedName="javax.baja.query.BQuery" name="BQuery" packageName="javax.baja.query" public="true">
+<description>
+Represents a generic query. If a BQuery is being handled by a specific query&#xa; language (like BQL or SQL (Orion)), that language should ignore any of the&#xa; basic functionality provided here that the language does not support.  BQuery&#xa; may also be extended to provide additional functionality for a specific query&#xa; language.  &#xa; &lt;p&gt;&#xa; For example, the orion module provides a BSqlQuery that provides&#xa; a method for adding JOIN statements.  A query language like GQL does not&#xa; support GROUP BY or HAVING clauses; so a class that converted a BQuery to&#xa; a GQL string would simply ignore those parts of the BQuery.
+</description>
+<tag name="@author">Matthew Giannini</tag>
+<tag name="@creation">Apr 14, 2008</tag>
+<tag name="@version">$Revision: 20$ $Date: 2/2/09 12:18:16 PM EST$</tag>
+<tag name="@since">Baja 3.4</tag>
+<extends>
+<type class="javax.baja.query.BQueryNode"/>
+</extends>
+<!-- javax.baja.query.BQuery() -->
+<constructor name="BQuery" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.query.BQuery.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.reset() -->
+<method name="reset"  public="true">
+<description>
+Resets the query back to its default state. All query clauses are removed&#xa; and the query is as though it had just been constructed with the default&#xa; constructor.
+</description>
+<return>
+<type class="javax.baja.query.BQuery"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.select(javax.baja.query.BProjection) -->
+<method name="select"  public="true">
+<description>
+Sets the projection for this query. If a projection has already been set,&#xa; it gets overwritten.
+</description>
+<parameter name="projection">
+<type class="javax.baja.query.BProjection"/>
+<description>
+the BProjection for this query.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.select(javax.baja.query.BProjectionColumn) -->
+<method name="select"  public="true">
+<description>
+Convenience to add a column to the projection. The given column will&#xa; be appended to the projection. This allows for the following idiom:&#xa; &lt;pre&gt;&#xa;  BQuery query = new BQuery();&#xa;  query.select(Columns.make(&#x22;id&#x22;))&#xa;       .select(Columns.make(&#x22;firstName&#x22;))&#xa;       .from(...)&#xa;       .where(...); &#xa; &lt;/pre&gt;
+</description>
+<parameter name="column">
+<type class="javax.baja.query.BProjectionColumn"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.select(javax.baja.query.BExpression) -->
+<method name="select"  public="true">
+<description>
+Convenience for &lt;code&gt;return select(Columns.make(columnExpr))&lt;/code&gt;.&#xa; This allows for the following idiom:&#xa; &lt;pre&gt;&#xa;  BQuery query = new BQuery();&#xa;  query.select(Funcs.max(&#x22;humidity&#x22;))&#xa;       .select(Funcs.min(&#x22;temp&#x22;))&#xa;       .from(...)&#xa;       .where(...);&#xa; &lt;/pre&gt;
+</description>
+<tag name="@see">#select(BProjectionColumn)</tag>
+<parameter name="columnExpr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.hasProjection() -->
+<method name="hasProjection"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.getProjection() -->
+<method name="getProjection"  public="true">
+<description/>
+<return>
+<type class="javax.baja.query.BProjection"/>
+<description>
+the BProjection for this query, or null if there is no projection.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.from(javax.baja.query.BExtent) -->
+<method name="from"  public="true">
+<description/>
+<parameter name="extent">
+<type class="javax.baja.query.BExtent"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.hasExtent() -->
+<method name="hasExtent"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if &lt;code&gt;from&lt;/code&gt; has been called on this query. False&#xa; otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.getExtent() -->
+<method name="getExtent"  public="true">
+<description/>
+<return>
+<type class="javax.baja.query.BExtent"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.where(javax.baja.query.BPredicate) -->
+<method name="where"  public="true">
+<description>
+Sets the predicate for this query.
+</description>
+<parameter name="predicate">
+<type class="javax.baja.query.BPredicate"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.where(javax.baja.query.BExpression) -->
+<method name="where"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;where(new BPredicate(predicateExpr))&lt;/code&gt;
+</description>
+<parameter name="predicateExpr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.where(javax.baja.query.util.ExpressionBuilder) -->
+<method name="where"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;where(builder.getExpression())&lt;/code&gt;. This method&#xa; should not be called when the builder&#x27;s expression is null.
+</description>
+<parameter name="builder">
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.hasPredicate() -->
+<method name="hasPredicate"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the query contains a BPredicate, and the predicates &#xa; expression is not null; false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.getPredicate() -->
+<method name="getPredicate"  public="true">
+<description/>
+<return>
+<type class="javax.baja.query.BPredicate"/>
+<description>
+the BPredicate for this BQuery, or null if there is no predicate.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.groupBy(javax.baja.query.BGrouping) -->
+<method name="groupBy"  public="true">
+<description/>
+<parameter name="grouping">
+<type class="javax.baja.query.BGrouping"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.hasGrouping() -->
+<method name="hasGrouping"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.getGrouping() -->
+<method name="getGrouping"  public="true">
+<description/>
+<return>
+<type class="javax.baja.query.BGrouping"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.having(javax.baja.query.BHaving) -->
+<method name="having"  public="true">
+<description>
+Set the having clause for this query.
+</description>
+<parameter name="having">
+<type class="javax.baja.query.BHaving"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.having(javax.baja.query.BExpression) -->
+<method name="having"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;having(new BPredicate(havingExpr))&lt;/code&gt;
+</description>
+<parameter name="havingExpr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.having(javax.baja.query.util.ExpressionBuilder) -->
+<method name="having"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;having(builder.getExpression())&lt;/code&gt;. This method&#xa; should not be called if the builder has a null expression.
+</description>
+<parameter name="builder">
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.hasHaving() -->
+<method name="hasHaving"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true if the query has a having clause, and the having clause&#xa; expression is not null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.getHaving() -->
+<method name="getHaving"  public="true">
+<description/>
+<return>
+<type class="javax.baja.query.BHaving"/>
+<description>
+the BHaving for this query, or null if there is no having clause set.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.orderBy(javax.baja.query.BOrdering) -->
+<method name="orderBy"  public="true">
+<description>
+Set the order by clause for this query.  Any previous one is overwritten.
+</description>
+<parameter name="ordering">
+<type class="javax.baja.query.BOrdering"/>
+<description>
+the BOrdering to set.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.query.BQuery"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.hasOrdering() -->
+<method name="hasOrdering"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.getOrdering() -->
+<method name="getOrdering"  public="true">
+<description/>
+<return>
+<type class="javax.baja.query.BOrdering"/>
+<description>
+the BOrdering for this BQuery, or null if there is no ordering.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQuery.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

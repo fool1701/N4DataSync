@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="com.tridium.bacnet.stack.link.mstp.BBacnetMstpLinkLayer" name="BBacnetMstpLinkLayer" packageName="com.tridium.bacnet.stack.link.mstp" public="true">
+<description>
+Tridium Bacnet MS/TP Virtual Link Layer Implementation.
+</description>
+<tag name="@author">Craig Gemmill on 23 Oct 02</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="com.tridium.bacnet.stack.link.BBacnetLinkLayer"/>
+</extends>
+<implements>
+<type class="com.tridium.platMstp.MstpListener"/>
+</implements>
+<property name="portName" flags="d">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;portName&lt;/code&gt; property.&#xa; The serial comm port
+</description>
+<tag name="@see">#getPortName</tag>
+<tag name="@see">#setPortName</tag>
+</property>
+
+<property name="mstpTrunk" flags="rh">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;mstpTrunk&lt;/code&gt; property.&#xa; The MSTP trunk number
+</description>
+<tag name="@see">#getMstpTrunk</tag>
+<tag name="@see">#setMstpTrunk</tag>
+</property>
+
+<property name="baudRate" flags="">
+<type class="com.tridium.bacnet.enums.BBacnetMstpBaudRate"/>
+<description>
+Slot for the &lt;code&gt;baudRate&lt;/code&gt; property.&#xa; The baud rate to use for the serial communication
+</description>
+<tag name="@see">#getBaudRate</tag>
+<tag name="@see">#setBaudRate</tag>
+</property>
+
+<property name="mstpAddress" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;mstpAddress&lt;/code&gt; property.&#xa; the address of this station on the Bacnet MS/TP trunk.  The&#xa; default value is 0, allowing Niagara to be the first to regenerate&#xa; a lost token.  Since Niagara is a master node, the highest address&#xa; it can take is 127.
+</description>
+<tag name="@see">#getMstpAddress</tag>
+<tag name="@see">#setMstpAddress</tag>
+</property>
+
+<property name="maxMaster" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxMaster&lt;/code&gt; property.&#xa; the address of the highest master on the MSTP trunk
+</description>
+<tag name="@see">#getMaxMaster</tag>
+<tag name="@see">#setMaxMaster</tag>
+</property>
+
+<property name="maxInfoFrames" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxInfoFrames&lt;/code&gt; property.&#xa; the maximum number of frames that this device will send&#xa; before passing the token
+</description>
+<tag name="@see">#getMaxInfoFrames</tag>
+<tag name="@see">#setMaxInfoFrames</tag>
+</property>
+
+<property name="supportExtendedFrames" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;supportExtendedFrames&lt;/code&gt; property.&#xa; support extended frames as specified in proposed addendum &#x22;an&#x22; of Standard 135-2010
+</description>
+<tag name="@see">#getSupportExtendedFrames</tag>
+<tag name="@see">#setSupportExtendedFrames</tag>
+</property>
+
+<property name="usageTimeout" flags="h">
+<type class="com.tridium.bacnet.enums.BBacnetMstpUsageTimeout"/>
+<description>
+Slot for the &lt;code&gt;usageTimeout&lt;/code&gt; property.&#xa; the t_usage_timeout - how long to wait for 4 characters to appear on the wire&#xa; after sending a Token or PFM message
+</description>
+<tag name="@see">#getUsageTimeout</tag>
+<tag name="@see">#setUsageTimeout</tag>
+</property>
+
+<property name="txThrottle" flags="h">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;txThrottle&lt;/code&gt; property.&#xa; delay inserted between info frames while we hold the token
+</description>
+<tag name="@see">#getTxThrottle</tag>
+<tag name="@see">#setTxThrottle</tag>
+</property>
+
+<action name="resetCounters" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetCounters&lt;/code&gt; action.
+</description>
+<tag name="@see">#resetCounters()</tag>
+</action>
+
+<action name="getStatistics" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;getStatistics&lt;/code&gt; action.
+</description>
+<tag name="@see">#getStatistics()</tag>
+</action>
+
+</class>
+</bajadoc>

@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="schedule" runtimeProfile="rt" qualifiedName="javax.baja.schedule.BTriggerSchedule" name="BTriggerSchedule" packageName="javax.baja.schedule" public="true">
+<description>
+An schedule that fires events; there is no output.
+</description>
+<tag name="@author">Aaron Hansen</tag>
+<tag name="@creation">Sept 2001</tag>
+<tag name="@version">$Revision: 64$ $Date: 11/6/07 5:01:02 PM EST$</tag>
+<extends>
+<type class="javax.baja.schedule.BCompositeSchedule"/>
+</extends>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<implements>
+<type class="com.tridium.sys.metrics.IMetricResource"/>
+</implements>
+<property name="dates" flags="ho">
+<type class="javax.baja.schedule.BCalendarSchedule"/>
+<description>
+Slot for the &lt;code&gt;dates&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDates</tag>
+<tag name="@see">#setDates</tag>
+</property>
+
+<property name="times" flags="ho">
+<type class="javax.baja.schedule.BDaySchedule"/>
+<description>
+Slot for the &lt;code&gt;times&lt;/code&gt; property.&#xa; Times during the days selected by the calendar and matix&#xa; for firing triggers.
+</description>
+<tag name="@see">#getTimes</tag>
+<tag name="@see">#setTimes</tag>
+</property>
+
+<property name="enabled" flags="os1">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="lastTrigger" flags="ors">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastTrigger</tag>
+<tag name="@see">#setLastTrigger</tag>
+</property>
+
+<property name="nextTrigger" flags="ors">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;nextTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNextTrigger</tag>
+<tag name="@see">#setNextTrigger</tag>
+</property>
+
+<property name="nextTriggerSearchLimit" flags="o1">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;nextTriggerSearchLimit&lt;/code&gt; property.&#xa; Limits how far to search for a next trigger event.
+</description>
+<tag name="@see">#getNextTriggerSearchLimit</tag>
+<tag name="@see">#setNextTriggerSearchLimit</tag>
+</property>
+
+<property name="lastModified" flags="or">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastModified&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastModified</tag>
+<tag name="@see">#setLastModified</tag>
+</property>
+
+<action name="execute" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;execute&lt;/code&gt; action.
+</description>
+<tag name="@see">#execute()</tag>
+</action>
+
+<topic name="trigger" flags="s">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;trigger&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireTrigger</tag>
+</topic>
+
+<topic name="triggerMissed" flags="">
+<eventType>
+<type class="javax.baja.sys.BAbsTime"/>
+</eventType><description>
+Slot for the &lt;code&gt;triggerMissed&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireTriggerMissed</tag>
+</topic>
+
+<!-- javax.baja.schedule.BTriggerSchedule() -->
+<constructor name="BTriggerSchedule" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getDates() -->
+<method name="getDates"  public="true">
+<description>
+Get the &lt;code&gt;dates&lt;/code&gt; property.
+</description>
+<tag name="@see">#dates</tag>
+<return>
+<type class="javax.baja.schedule.BCalendarSchedule"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.setDates(javax.baja.schedule.BCalendarSchedule) -->
+<method name="setDates"  public="true">
+<description>
+Set the &lt;code&gt;dates&lt;/code&gt; property.
+</description>
+<tag name="@see">#dates</tag>
+<parameter name="v">
+<type class="javax.baja.schedule.BCalendarSchedule"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getTimes() -->
+<method name="getTimes"  public="true">
+<description>
+Get the &lt;code&gt;times&lt;/code&gt; property.&#xa; Times during the days selected by the calendar and matix&#xa; for firing triggers.
+</description>
+<tag name="@see">#times</tag>
+<return>
+<type class="javax.baja.schedule.BDaySchedule"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.setTimes(javax.baja.schedule.BDaySchedule) -->
+<method name="setTimes"  public="true">
+<description>
+Set the &lt;code&gt;times&lt;/code&gt; property.&#xa; Times during the days selected by the calendar and matix&#xa; for firing triggers.
+</description>
+<tag name="@see">#times</tag>
+<parameter name="v">
+<type class="javax.baja.schedule.BDaySchedule"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getLastTrigger() -->
+<method name="getLastTrigger"  public="true">
+<description>
+Get the &lt;code&gt;lastTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastTrigger</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.setLastTrigger(javax.baja.sys.BAbsTime) -->
+<method name="setLastTrigger"  public="true">
+<description>
+Set the &lt;code&gt;lastTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastTrigger</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getNextTrigger() -->
+<method name="getNextTrigger"  public="true">
+<description>
+Get the &lt;code&gt;nextTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#nextTrigger</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.setNextTrigger(javax.baja.sys.BAbsTime) -->
+<method name="setNextTrigger"  public="true">
+<description>
+Set the &lt;code&gt;nextTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#nextTrigger</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getNextTriggerSearchLimit() -->
+<method name="getNextTriggerSearchLimit"  public="true">
+<description>
+Get the &lt;code&gt;nextTriggerSearchLimit&lt;/code&gt; property.&#xa; Limits how far to search for a next trigger event.
+</description>
+<tag name="@see">#nextTriggerSearchLimit</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.setNextTriggerSearchLimit(javax.baja.sys.BRelTime) -->
+<method name="setNextTriggerSearchLimit"  public="true">
+<description>
+Set the &lt;code&gt;nextTriggerSearchLimit&lt;/code&gt; property.&#xa; Limits how far to search for a next trigger event.
+</description>
+<tag name="@see">#nextTriggerSearchLimit</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getLastModified() -->
+<method name="getLastModified"  public="true">
+<description>
+Get the &lt;code&gt;lastModified&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastModified</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.setLastModified(javax.baja.sys.BAbsTime) -->
+<method name="setLastModified"  public="true">
+<description>
+Set the &lt;code&gt;lastModified&lt;/code&gt; property.
+</description>
+<tag name="@see">#lastModified</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.execute() -->
+<method name="execute"  public="true">
+<description>
+Invoke the &lt;code&gt;execute&lt;/code&gt; action.
+</description>
+<tag name="@see">#execute</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.fireTrigger(javax.baja.sys.BValue) -->
+<method name="fireTrigger"  public="true">
+<description>
+Fire an event for the &lt;code&gt;trigger&lt;/code&gt; topic.
+</description>
+<tag name="@see">#trigger</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.fireTriggerMissed(javax.baja.sys.BAbsTime) -->
+<method name="fireTriggerMissed"  public="true">
+<description>
+Fire an event for the &lt;code&gt;triggerMissed&lt;/code&gt; topic.
+</description>
+<tag name="@see">#triggerMissed</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.addDates(java.lang.String, javax.baja.schedule.BAbstractSchedule) -->
+<method name="addDates"  public="true">
+<description>
+Convenience for programmatically adding a schedule that selects the&#xa; dates on which triggers are fired.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="sch">
+<type class="javax.baja.schedule.BAbstractSchedule"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.addTime(int, int) -->
+<method name="addTime"  public="true">
+<description>
+Convenience for programmatically adding a time.
+</description>
+<parameter name="hour">
+<type class="int"/>
+<description>
+Hour of day, 0 - 23
+</description>
+</parameter>
+<parameter name="min">
+<type class="int"/>
+<description>
+Minute of hour, 0 - 59
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.addTime(java.lang.String) -->
+<method name="addTime"  public="true">
+<description>
+Convenience for programmatically adding a time.
+</description>
+<tag name="@since">4.2</tag>
+<parameter name="time">
+<type class="java.lang.String"/>
+<description>
+in the form hh:mm [am|pm]
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.clearTimes() -->
+<method name="clearTimes"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.clockChanged(javax.baja.sys.BRelTime) -->
+<method name="clockChanged"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="shift">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.doExecute() -->
+<method name="doExecute"  public="true">
+<description>
+If the schedule transitions from ineffective into effective, the&#xa; trigger topic is fired.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.nextEvent(javax.baja.sys.BAbsTime) -->
+<method name="nextEvent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="after">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.nextTrigger(javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime) -->
+<method name="nextTrigger"  public="true">
+<description>
+The next time a trigger will be fired after the from time, up until&#xa; the to time.
+</description>
+<parameter name="from">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="to">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Null if no trigger will occur in the give range.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.stationStarted() -->
+<method name="stationStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.modified() -->
+<method name="modified"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Increments the modification property.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.schedule.BTriggerSchedule.alwaysEffective -->
+<field name="alwaysEffective"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alwaysEffective&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlwaysEffective</tag>
+<tag name="@see">#setAlwaysEffective</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.union -->
+<field name="union"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;union&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUnion</tag>
+<tag name="@see">#setUnion</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.dates -->
+<field name="dates"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;dates&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDates</tag>
+<tag name="@see">#setDates</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.times -->
+<field name="times"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;times&lt;/code&gt; property.&#xa; Times during the days selected by the calendar and matix&#xa; for firing triggers.
+</description>
+<tag name="@see">#getTimes</tag>
+<tag name="@see">#setTimes</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.lastTrigger -->
+<field name="lastTrigger"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastTrigger</tag>
+<tag name="@see">#setLastTrigger</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.nextTrigger -->
+<field name="nextTrigger"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;nextTrigger&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNextTrigger</tag>
+<tag name="@see">#setNextTrigger</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.nextTriggerSearchLimit -->
+<field name="nextTriggerSearchLimit"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;nextTriggerSearchLimit&lt;/code&gt; property.&#xa; Limits how far to search for a next trigger event.
+</description>
+<tag name="@see">#getNextTriggerSearchLimit</tag>
+<tag name="@see">#setNextTriggerSearchLimit</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.lastModified -->
+<field name="lastModified"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;lastModified&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastModified</tag>
+<tag name="@see">#setLastModified</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.execute -->
+<field name="execute"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;execute&lt;/code&gt; action.
+</description>
+<tag name="@see">#execute()</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.trigger -->
+<field name="trigger"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;trigger&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireTrigger</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.triggerMissed -->
+<field name="triggerMissed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;triggerMissed&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireTriggerMissed</tag>
+</field>
+
+<!-- javax.baja.schedule.BTriggerSchedule.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

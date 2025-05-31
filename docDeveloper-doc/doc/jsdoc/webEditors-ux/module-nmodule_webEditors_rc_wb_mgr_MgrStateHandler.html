@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>webEditors Module: nmodule/webEditors/rc/wb/mgr/MgrStateHandler</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">webEditors</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-nmodule_webEditors_rc_fe_baja_BaseEditor.html">nmodule/webEditors/rc/fe/baja/BaseEditor</a></li><li><a href="module-nmodule_webEditors_rc_fe_BaseWidget.html">nmodule/webEditors/rc/fe/BaseWidget</a></li><li><a href="module-nmodule_webEditors_rc_fe_fe.html">nmodule/webEditors/rc/fe/fe</a></li><li><a href="module-nmodule_webEditors_rc_fe_feDialogs.html">nmodule/webEditors/rc/fe/feDialogs</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_commands_MgrCommand.html">nmodule/webEditors/rc/wb/mgr/commands/MgrCommand</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">nmodule/webEditors/rc/wb/mgr/Manager</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_MgrLearn.html">nmodule/webEditors/rc/wb/mgr/MgrLearn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_MgrStateHandler.html">nmodule/webEditors/rc/wb/mgr/MgrStateHandler</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_MgrTypeInfo.html">nmodule/webEditors/rc/wb/mgr/MgrTypeInfo</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_IconMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/IconMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_MixinMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/MixinMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_MixinPropMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/MixinPropMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_NameMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/NameMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_PathMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/PathMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_PropertyMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/PropertyMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_PropertyPathMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/PropertyPathMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_columns_TypeMgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/columns/TypeMgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_MgrColumn.html">nmodule/webEditors/rc/wb/mgr/model/MgrColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_mgr_model_MgrModel.html">nmodule/webEditors/rc/wb/mgr/model/MgrModel</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_Column.html">nmodule/webEditors/rc/wb/table/model/Column</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_columns_DisplayNameColumn.html">nmodule/webEditors/rc/wb/table/model/columns/DisplayNameColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_columns_IconColumn.html">nmodule/webEditors/rc/wb/table/model/columns/IconColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_columns_JsonObjectPropertyColumn.html">nmodule/webEditors/rc/wb/table/model/columns/JsonObjectPropertyColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_columns_PropertyColumn.html">nmodule/webEditors/rc/wb/table/model/columns/PropertyColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_columns_ToStringColumn.html">nmodule/webEditors/rc/wb/table/model/columns/ToStringColumn</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_ComponentSource.html">nmodule/webEditors/rc/wb/table/model/ComponentSource</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_ComponentTableModel.html">nmodule/webEditors/rc/wb/table/model/ComponentTableModel</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_Row.html">nmodule/webEditors/rc/wb/table/model/Row</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_model_TableModel.html">nmodule/webEditors/rc/wb/table/model/TableModel</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_Table.html">nmodule/webEditors/rc/wb/table/Table</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_tree_TreeNodeRow.html">nmodule/webEditors/rc/wb/table/tree/TreeNodeRow</a></li><li><a href="module-nmodule_webEditors_rc_wb_table_tree_TreeTableModel.html">nmodule/webEditors/rc/wb/table/tree/TreeTableModel</a></li><li><a href="module-nmodule_webEditors_rc_wb_tree_TreeNode.html">nmodule/webEditors/rc/wb/tree/TreeNode</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-6-managers.html">Managers</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	<h1 class="page-title">Module: nmodule/webEditors/rc/wb/mgr/MgrStateHandler</h1>
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>API Status: <strong>Development</strong></p>
+<p>MgrStateHandler provides the ability to save some state for a <code>Manager</code> view, allowing, at<br>
+the most basic level, a <code>Manager</code> to preserve the state of its hidden/visible columns<br>
+and the visibility of the learn table when moving between views. Managers may also<br>
+optionally use it to remember other state, such as the items that were found during<br>
+the last discovery action.</p>
+<p>Note that although it provides similar functionality to the Java MgrState type, it differs<br>
+in that this type is not used to preserve the state on its own instance. This type provides<br>
+the functionality to serialize and deserialize the data to JSON; the object instance itself<br>
+does not store any state and is not preserved between hyperlinks or page reloads.</p>
+<p>A Manager may provide its own functions that can be used to save and restore custom data<br>
+for a particular Manager type. See the description of the <code>save()</code> function for information.</p></div>
+        
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="module:nmodule/webEditors/rc/wb/mgr/MgrStateHandler"><span class="type-signature"></span>new (require("nmodule/webEditors/rc/wb/mgr/MgrStateHandler"))()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Constructor not to be called directly. Call <code>.make()</code> instead.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id=".make"><span class="type-signature">&lt;static> </span>make(params)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Takes a key string that will be used to index the<br>
+state information in the storage. This key is usually derived from<br>
+the Manager widget's <code>moduleName</code> and <code>keyName</code> parameters.</p>
+<p>Note that <code>MgrStateHandler</code> relies upon <code>SyncedSessionStorage</code> which can<br>
+take up to 1000ms to initialize, so this may take that long to resolve.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the parameters object or a string containing the<br>
+key parameter.</p>
+                <h6 class="method-params-label method-subparams-label">Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the key name used to index the saved state<br>
+information. Usually derived from the Manager's moduleName and keyName<br>
+parameters.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;<a href="module-nmodule_webEditors_rc_wb_mgr_MgrStateHandler.html">module:nmodule/webEditors/rc/wb/mgr/MgrStateHandler</a>></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="deserializeFromStorage"><span class="type-signature"></span>deserializeFromStorage()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Retrieve the state from storage and return the state object. This will be called<br>
+early in the manager's load process in order for it to be able to access relevant<br>
+state before the model is created. The object returned from this method will be<br>
+passed back to the restore function later in the load process.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li>the stored state deserialized from JSON.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="doRestore"><span class="type-signature"></span>doRestore(mgr, obj)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Use the deserialized object to restore the state of the manager.<br>
+This will restore the basic state, then invoke the custom functions on the<br>
+manager itself, if they are defined.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being restored.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the object containing the state to be restored</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="doSave"><span class="type-signature"></span>doSave(mgr, state)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Save the Manager's state to the given object, prior to serialization.<br>
+This will save the basic state supported for all Manager views, and then<br>
+try to see if the Manager provides its own functions for saving custom<br>
+data.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being saved.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>an object instance that will contain the state to be serialized.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="postRestore"><span class="type-signature"></span>postRestore(mgr, obj)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Test whether the Manager has a <code>postRestore</code> function, and invoke it, if found.<br>
+This allows for additional actions such as clean up or other calls to be handled after<br>
+restoring the state.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being restored.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+	<dt class="tag-since method-doc-label method-doc-details-label">Since:</dt>
+	<dd class="tag-since">
+		<ul class="dummy">
+			<li>Niagara 4.12</li>
+		</ul>
+	</dd>
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li>The Promise returned by the Manager's function<br>
+if the manager does not provide the function.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="restore"><span class="type-signature"></span>restore(mgr, state)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Restore the state of a <code>Manager</code>. This function will retrieve the stored<br>
+state information from session storage using the Manager's key. It takes a<br>
+deserialized state object returned from an earlier call to <code>deserializeFromStorage</code>.<br>
+The properties of that object will then be used to restore the prior<br>
+state.</p>
+<p>The default <code>restore</code> implementation will restore the visibility of the table<br>
+columns and the discovery tables. If the Manager provides <code>restoreStateForKey</code> and/or<br>
+<code>restoreStateForOrd</code> functions to correspond to the save functions, these will be<br>
+called with the deserialized versions of the objects the save functions returned.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being restored.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>a deserialized state object with properties containing the state to be restored.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li>A promise resolved when the state restoration has completed.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+        <p class="code-caption">
+  Add a function on the Manager to restore the items found in the last discovery.
+</p>
+    
+    <pre class="sunlight-highlight-javascript">MyDeviceMgr.prototype.restoreStateForOrd = function (state) {
+  if (state.discoveries) {
+    this.discoveredItems = state.discoveries;
+  }
+  return this.reloadLearnModel(); // Returns a Promise that will reload the table
+};</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="restoreForKey"><span class="type-signature"></span>restoreForKey(mgr, obj)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Test whether the Manager has a <code>restoreStateForKey</code> function, and invoke it, if found.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being restored.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the object containing the state to be restored</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li>The Promise returned by the Manager's function, or undefined<br>
+if the manager does not provide the function.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="restoreForOrd"><span class="type-signature"></span>restoreForOrd(mgr, obj)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Test whether the Manager has a <code>restoreStateForOrd</code> function, and invoke it, if found.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being restored.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li>The Promise returned by the Manager's function, or undefined<br>
+if the manager does not provide the function.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="save"><span class="type-signature"></span>save(mgr)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Save the state of the <code>Manager</code> to session storage. This will perform three steps:<br>
+first the manager's state is saved as properties upon a state object, secondly the<br>
+object is serialized to JSON, and finally the JSON string is placed in session storage.</p>
+<p>The default save implementation will save the common basic state of the manager;<br>
+that is the visibility of the table columns and the visibility of the discovery table.<br>
+The manager can also provide functions to save state, which will be called by<br>
+this type, if defined. The manager may provide a <code>saveStateForKey</code> and or a <code>saveStateForOrd</code><br>
+function. The <code>saveStateForOrd</code> function will be used to store information against a particular<br>
+ord loaded in the manager, typically to save discovery data. Only the last ord that was loaded<br>
+for a particular manager type will have its ord data saved.  Any previous ord data for the<br>
+same manager type will not be reloaded and thus will be erased when the data is saved again.<br>
+The <code>saveStateForKey</code> function can be used to save generic data for the type of Manager.<br>
+Both of these functions should return an Object containing the state to save.<br>
+The returned value will be added to the data to be serialized. The Manager should also provide<br>
+corresponding restoreStateForKey<code>and/or</code>restoreStateForOrd` functions that will receive a<br>
+deserialized version of the object.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance requiring its state to be saved.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+        <p class="code-caption">
+  Add a function on the Manager to save the items found in the last discovery.
+</p>
+    
+    <pre class="sunlight-highlight-javascript">MyDeviceMgr.prototype.saveStateForOrd = function () {
+  return {
+    discoveries: this.discoveredItems // These objects will be serialized as JSON
+  };
+};</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="saveForKey"><span class="type-signature"></span>saveForKey(mgr, state)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Test whether the Manager has a <code>saveStateForKey</code> function, and invoke it, if found.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being saved.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>an object instance that will contain the state to be serialized.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="saveForOrd"><span class="type-signature"></span>saveForOrd(mgr, state)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Test whether the Manager has a <code>saveStateForOrd</code> function, and invoke it, if found.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mgr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-nmodule_webEditors_rc_wb_mgr_Manager.html">module:nmodule/webEditors/rc/wb/mgr/Manager</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the Manager instance being saved.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>an object instance that will contain the state to be serialized.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	webEditors Copyright © 2024 Tridium. DocStrap Copyright © 2012-2013 the contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
+	
+		on 2024-05-03T00:29:00+00:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

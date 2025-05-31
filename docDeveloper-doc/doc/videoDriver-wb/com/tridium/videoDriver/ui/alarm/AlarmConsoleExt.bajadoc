@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.alarm.AlarmConsoleExt" name="AlarmConsoleExt" packageName="com.tridium.videoDriver.ui.alarm" public="true">
+<description>
+This class provides hooks into the video driver framework from the alarm&#xa; console which resides in the alarm module.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt() -->
+<constructor name="AlarmConsoleExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.refreshAlarmRecord(com.tridium.alarm.ui.BAlarmConsole, javax.baja.alarm.BAlarmRecord) -->
+<method name="refreshAlarmRecord"  protected="true" static="true">
+<description>
+This method is called by BAlarmConsoleVideoPlayaerDialog if the videEventTimeStamp in the given&#xa; alarm record is null.&#xa;&#xa; This is necessary because the BVideoAlarmRecipient updates the alarm record&#xa; with the video DVR&#x27;s time-stamp (videoEventTimeStamp). If that happens, then&#xa; the given alarm record will not contain the updated time-stamp **if** the user&#xa; was looking at the alarm console and has not clicked the refresh button. To&#xa; overcome this, we refresh the alarm record from the alarm database right now,&#xa; in order to get the latest copy of the alarm record.&#xa;&#xa; NOTE: This is intended to be called on the client-side (from WB).
+</description>
+<parameter name="alarmConsole">
+<type class="com.tridium.alarm.ui.BAlarmConsole"/>
+<description/>
+</parameter>
+<parameter name="selectedRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+the updated version of the given alarm record. This will ideally be a new&#xa; reference to an updated copy of the given alarm record.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.resolveVideoCameraObject(com.tridium.alarm.ui.BAlarmConsole, javax.baja.alarm.BAlarmRecord, java.lang.String) -->
+<method name="resolveVideoCameraObject"  protected="true" static="true">
+<description/>
+<parameter name="alarmConsole">
+<type class="com.tridium.alarm.ui.BAlarmConsole"/>
+</parameter>
+<parameter name="selectedRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<parameter name="ordFacetKey">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.resolveVideoCameraObject(javax.baja.sys.BObject, javax.baja.alarm.BAlarmRecord, java.lang.String) -->
+<method name="resolveVideoCameraObject"  public="true" static="true">
+<description/>
+<tag name="@oparam">ordFacetKey (for example, &#x22;cameraHandleOrd&#x22; or &#x22;cameraOrd&#x22;</tag>
+<tag name="@since">3.4.53.2, 3.2.24, 3.3.32, 3.5.20</tag>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+<description>
+base object to resolve camera ord from inside given record
+</description>
+</parameter>
+<parameter name="selectedRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+alarm record to get resolved camera for (in order&#xa; to maybe playback video)
+</description>
+</parameter>
+<parameter name="ordFacetKey">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.resolveVideoCameraObjectForAlarmPortal(com.tridium.alarm.ui.portal.BAlarmPortalTool, javax.baja.alarm.BAlarmRecord, java.lang.String) -->
+<method name="resolveVideoCameraObjectForAlarmPortal"  public="true" static="true">
+<description>
+This function Uses the AlarmPortal to resolve the cameraObject&#xa; *Author* JJ Frankovich
+</description>
+<parameter name="obj">
+<type class="com.tridium.alarm.ui.portal.BAlarmPortalTool"/>
+</parameter>
+<parameter name="selectedRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<parameter name="alarmSourceExtCamera">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.getLocalizedMessage(java.lang.String) -->
+<method name="getLocalizedMessage"  protected="true" static="true">
+<description>
+This is called by the &lt;code&gt;<see ref="com.tridium.videoDriver.ui.alarm.AlarmConsoleExt#resolveVideoCameraObject(com.tridium.alarm.ui.BAlarmConsole, javax.baja.alarm.BAlarmRecord, java.lang.String)">#resolveVideoCameraObject(BAlarmConsole, BAlarmRecord, String)</see>&lt;/code&gt; if a ServerException&#xa; occurs when it tries to resolve the video camera object. In which case, the remote video mechanism has sent a&#xa; clever, back-door message to be localized and displayed to the user. This method converts the back-door&#xa; message to a localized string (using the lexicon) for display to the user.
+</description>
+<parameter name="remoteVideoLocalizationCode">
+<type class="java.lang.String"/>
+<description>
+This is the sneaky part of the text that is in the &#x27;message&#x27; for the ServerException.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.resolveVideoCameraObject(com.tridium.alarm.ui.BAlarmConsole, javax.baja.alarm.BAlarmRecord) -->
+<method name="resolveVideoCameraObject"  protected="true" static="true">
+<description/>
+<parameter name="alarmConsole">
+<type class="com.tridium.alarm.ui.BAlarmConsole"/>
+</parameter>
+<parameter name="selectedRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.resolveVideoCameraObject(javax.baja.sys.BObject, javax.baja.alarm.BAlarmRecord) -->
+<method name="resolveVideoCameraObject"  public="true" static="true">
+<description/>
+<tag name="@since">3.4.53.2, 3.2.24, 3.3.32, 3.5.20</tag>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+<description>
+base object to resolve camera ord from inside given record
+</description>
+</parameter>
+<parameter name="selectedRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+alarm record to get resolved camera for (in order&#xa; to maybe playback video)
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.doShowVideo(com.tridium.alarm.ui.BAlarmConsole, javax.baja.alarm.BAlarmRecord) -->
+<method name="doShowVideo"  public="true" static="true">
+<description>
+The BAlarmConsole calls this method via introspection when the &#x27;Show Video&#x27;&#xa; button is clicked on an alarm with some video meta data.
+</description>
+<parameter name="alarmConsole">
+<type class="com.tridium.alarm.ui.BAlarmConsole"/>
+<description>
+this is the BAlarmConsole that is calling this method
+</description>
+</parameter>
+<parameter name="selectedRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+this is the BAlarmRecord that the user selected&#xa; in the alarm console when he or she clicked the &#x27;Show Video&#x27; button.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.toLocalizedServerException(java.lang.Exception) -->
+<method name="toLocalizedServerException"  public="true" static="true">
+<description/>
+<parameter name="e">
+<type class="java.lang.Exception"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.log -->
+<field name="log"  public="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.START_OF_REMOTE_VIDEO_LOCALIZATION_CODE -->
+<field name="START_OF_REMOTE_VIDEO_LOCALIZATION_CODE"  public="true" static="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.alarm.AlarmConsoleExt.SERVER_MESSAGE_REMOTE_VIDEO_LOCALIZATION_CODE -->
+<field name="SERVER_MESSAGE_REMOTE_VIDEO_LOCALIZATION_CODE"  public="true" static="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

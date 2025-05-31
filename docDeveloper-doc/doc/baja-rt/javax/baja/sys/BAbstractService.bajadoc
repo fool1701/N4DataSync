@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BAbstractService" name="BAbstractService" packageName="javax.baja.sys" public="true" abstract="true">
+<description>
+BAbstractService provides a basic template for building&#xa; consistent service components.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">8 Jan 04</tag>
+<tag name="@version">$Revision: 8$ $Date: 4/7/06 10:15:30 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<implements>
+<type class="javax.baja.license.BILicensed"/>
+</implements>
+<property name="status" flags="rt">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="faultCause" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<!-- javax.baja.sys.BAbstractService() -->
+<constructor name="BAbstractService" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.BAbstractService.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Service started callback.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.serviceStopped() -->
+<method name="serviceStopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Service stopped callback.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.isDisabled() -->
+<method name="isDisabled"  public="true" final="true">
+<description>
+Return true if the service is disabled.  A service is&#xa; disabled if the user has manually set the enabled property&#xa; to false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.isFault() -->
+<method name="isFault"  public="true" final="true">
+<description>
+Return true if the service is in fault.  A service&#xa; is in fault if either a fatal fault was detected or if&#xa; &lt;code&gt;configFail()&lt;/code&gt; has been called more recently&#xa; than &lt;code&gt;configOk()&lt;/code&gt;.  Refer to &lt;code&gt;faultCause&lt;/code&gt;&#xa; for the fault reason.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.isOperational() -->
+<method name="isOperational"  public="true" final="true">
+<description>
+Return if the service is neither disabled, nor in fault.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.updateStatus() -->
+<method name="updateStatus"  public="true">
+<description>
+Update status is called to recompute the status&#xa; property based on the current enable and fault states.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.isFatalFault() -->
+<method name="isFatalFault"  public="true" final="true">
+<description>
+Return true if the service detected a fatal fault.&#xa; Fatal faults cannot be recovered until the service&#xa; is restarted.  Fatal faults trump config faults.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.configOk() -->
+<method name="configOk"  public="true" final="true">
+<description>
+Clear the configuration fault status.  If there are no fatal&#xa; faults then clear the entire service&#x27;s fault status, otherwise&#xa; the service remains in fault.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.configFail(java.lang.String) -->
+<method name="configFail"  public="true" final="true">
+<description>
+Set the service into configuration fault.  If the service was&#xa; previously not in fault, then this sets the service into fault.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.configFatal(java.lang.String) -->
+<method name="configFatal"  public="true" final="true">
+<description>
+Set the service into the fatal fault condition.  Unlike&#xa; configFail(), the fatal fault condition cannot be cleared&#xa; until station restart.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.getLicenseFeature() -->
+<method name="getLicenseFeature"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this service is to be licensed using the standard licensing&#xa; mechanism then override this method to return the Feature or&#xa; return null for no license checks.  Convention is that the&#xa; vendor and feature name matches the declaring module.
+</description>
+<return>
+<type class="javax.baja.license.Feature"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.enabled() -->
+<method name="enabled"  protected="true">
+<description>
+This method is called when moving from disabled&#xa; state into the enabled state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.disabled() -->
+<method name="disabled"  protected="true">
+<description>
+This method is called when moving from enabled&#xa; state into the disabled state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.checkSetFlags(javax.baja.sys.Slot, int, javax.baja.sys.Context) -->
+<method name="checkSetFlags"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework use only.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BAbstractService.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.sys.BAbstractService.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- javax.baja.sys.BAbstractService.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.sys.BAbstractService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

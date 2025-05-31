@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.comm.IFragmentable" name="IFragmentable" packageName="com.tridium.ndriver.comm" public="true" interface="true" abstract="true" category="interface">
+<description>
+IFragmentable interface must be implemented by NMessage subclasses that&#xa; represent messages that can be received in fragments.
+</description>
+<tag name="@author">Robert A Adams</tag>
+<tag name="@creation">Feb 23, 2012</tag>
+<!-- com.tridium.ndriver.comm.IFragmentable.merge(com.tridium.ndriver.comm.IFragmentable) -->
+<method name="merge"  public="true" abstract="true">
+<description>
+Merge the specified fragment into this message.  Called as each fragment&#xa; after the first is received.
+</description>
+<parameter name="frag">
+<type class="com.tridium.ndriver.comm.IFragmentable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.IFragmentable.isFinalFragment() -->
+<method name="isFinalFragment"  public="true" abstract="true">
+<description>
+Return true if this is the last or only fragment for a message.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.IFragmentable.getHash() -->
+<method name="getHash"  public="true" abstract="true">
+<description>
+Get hash object used to match fragments.  Hash must be able to distinguish&#xa; between fragments for different messages and be the same for fragments of&#xa; the same message.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.IFragmentable.getTimeout() -->
+<method name="getTimeout"  public="true" abstract="true">
+<description>
+Get time to allow to receive all fragments in milliseconds.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.IFragmentable.size() -->
+<method name="size"  public="true" abstract="true">
+<description>
+Current size of message as it is being reconstructed. Used for spy.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.IFragmentable.getFragmentAck() -->
+<method name="getFragmentAck"  public="true" abstract="true">
+<description>
+Get fragment ack message if the protocol requires one. The fragment ack&#xa; message will be sent immediately to the link layer. &lt;p&gt;
+</description>
+<return>
+<type class="com.tridium.ndriver.comm.NMessage"/>
+<description>
+fragment ack message or null.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

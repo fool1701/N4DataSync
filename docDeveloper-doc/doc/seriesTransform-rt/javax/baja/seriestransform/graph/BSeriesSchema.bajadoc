@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="seriesTransform" runtimeProfile="rt" qualifiedName="javax.baja.seriestransform.graph.BSeriesSchema" name="BSeriesSchema" packageName="javax.baja.seriestransform.graph" public="true" final="true">
+<description>
+This class represents an output schema for a transformation graph node.&#xa; The Schema is stored as dynamic properties on this component. Each schema&#xa; element is represented as a dynamic property with the schema field name&#xa; as the property name and the field type, a &lt;code&gt;<see ref="javax.baja.util.BTypeSpec">BTypeSpec</see>&lt;/code&gt; value, &#xa; stored as the value of the property.
+</description>
+<tag name="@author">J. Spangler</tag>
+<tag name="@creation">Apr 8, 2011</tag>
+<tag name="@version">1</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<!-- javax.baja.seriestransform.graph.BSeriesSchema() -->
+<constructor name="BSeriesSchema" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.getFieldType(java.lang.String) -->
+<method name="getFieldType"  public="true">
+<description>
+this method returns the &lt;code&gt;<see ref="javax.baja.util.BTypeSpec">BTypeSpec</see>&lt;/code&gt; value that corresponds&#xa; to the schema field name given. A schema field name is the same&#xa; as a column name.
+</description>
+<parameter name="fieldName">
+<type class="java.lang.String"/>
+<description>
+- String name of the data schema field to retrieve &lt;code&gt;<see ref="javax.baja.util.BTypeSpec">BTypeSpec</see>&lt;/code&gt;&#xa;            information for.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.util.BTypeSpec">BTypeSpec</see>&lt;/code&gt; of the schema field. If no type spec found &#xa;          for the give field name, returns NULL.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.getFieldFacets(java.lang.String) -->
+<method name="getFieldFacets"  public="true">
+<description>
+This method returns the &lt;code&gt;<see ref="javax.baja.sys.BFacets">BFacets</see>&lt;/code&gt; associated with the given field &#xa; name.
+</description>
+<parameter name="fieldName">
+<type class="java.lang.String"/>
+<description>
+- String name of the data schema field to retrieve &lt;code&gt;<see ref="javax.baja.sys.BFacets">BFacets</see>&lt;/code&gt;&#xa;            information for.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.sys.BFacets">BFacets</see>&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.getFieldNames() -->
+<method name="getFieldNames"  public="true">
+<description>
+this method returns a list of all schema field names that are stored&#xa; in this Node Schema.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+List of String schema field names.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.getKeyField() -->
+<method name="getKeyField"  public="true">
+<description>
+This method returns the schema field that is marked as a primary key &#xa; for this schema. The primary key field is marked using the&#xa; PRIMARY_KEY facet name.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+String of key field; if not found, returns default Timestamp key.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.mergeFieldFacets(java.lang.String, javax.baja.sys.BFacets) -->
+<method name="mergeFieldFacets"  public="true">
+<description>
+This method merges the facets for the given schema field with the given &#xa; facets.
+</description>
+<parameter name="fieldName">
+<type class="java.lang.String"/>
+<description>
+field to merge into
+</description>
+</parameter>
+<parameter name="mergeFacets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+facets to merge
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.addField(java.lang.String, javax.baja.util.BTypeSpec, javax.baja.sys.BFacets) -->
+<method name="addField"  public="true">
+<description>
+Adds a field to the schema. If the field already exists, the new field&#xa; will not be added. The method returns false.
+</description>
+<parameter name="fieldName">
+<type class="java.lang.String"/>
+<description>
+- String name of the field.
+</description>
+</parameter>
+<parameter name="fieldType">
+<type class="javax.baja.util.BTypeSpec"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.util.BTypeSpec">BTypeSpec</see>&lt;/code&gt; field type.
+</description>
+</parameter>
+<parameter name="fieldFacets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.sys.BFacets">BFacets</see>&lt;/code&gt; of the schema field.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the field does not already exist and is added; else false.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.removeField(java.lang.String) -->
+<method name="removeField"  public="true">
+<description>
+This method removes the schema field of the given name if present.
+</description>
+<parameter name="fieldName">
+<type class="java.lang.String"/>
+<description>
+- String name of the schema field to remove from this schema.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.hasField(java.lang.String) -->
+<method name="hasField"  public="true">
+<description>
+This methods checks to see if a given field name exists
+</description>
+<parameter name="fieldName">
+<type class="java.lang.String"/>
+<description>
+String name of the schema field to check for
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+True if the field exists, false otherwise
+</description>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.loadSchema(javax.baja.sys.BObject) -->
+<method name="loadSchema"  public="true">
+<description>
+This method loads the types of the schema using the given source&#xa; object as the data source. The schema is extracted from the source.&#xa;  &#xa; Each property includes the type name and the column name of that type. &#xa; It is expected that the schema pointed to by the given ORD resolves to&#xa; a BITable.
+</description>
+<parameter name="src">
+<type class="javax.baja.sys.BObject"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.sys.BObject">BObject</see>&lt;/code&gt; that the schema may be loaded from. This is&#xa;            expected to be a &lt;code&gt;<see ref="javax.baja.collection.BITable">BITable</see>&lt;/code&gt; or a &lt;code&gt;<see ref="com.tridium.history.BHistory">BHistory</see>&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.seriestransform.exceptions.SchemaException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.equivalent(java.lang.Object) -->
+<method name="equivalent"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.checkAdd(java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="checkAdd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.seriestransform.graph.BSeriesSchema.PRIMARY_KEY -->
+<field name="PRIMARY_KEY"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Facet key used to mark as schema field as the primary key
+</description>
+</field>
+
+</class>
+</bajadoc>

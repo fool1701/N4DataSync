@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="query" runtimeProfile="rt" qualifiedName="javax.baja.query.util.Exprs" name="Exprs" packageName="javax.baja.query.util" public="true" abstract="true">
+<description>
+Basic BExpression Factory.  There are a bunch of factories that are&#xa; designed for specific purposes, and they all inherit from this one.
+</description>
+<tag name="@author">Matthew Giannini</tag>
+<tag name="@creation">Apr 16, 2008</tag>
+<tag name="@version">$Revision: 9$ $Date: 9/2/09 12:01:28 PM EDT$</tag>
+<tag name="@since">Baja 3.4</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.query.util.Exprs() -->
+<constructor name="Exprs" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.query.util.Exprs.builder() -->
+<method name="builder"  public="true" static="true">
+<description/>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.builder(javax.baja.query.BExpression) -->
+<method name="builder"  public="true" static="true">
+<description/>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.util.ExpressionBuilder"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.Null() -->
+<method name="Null"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;simple(BNull.NULL)&lt;/code&gt;
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<tag name="@see">#simple(BSimple)</tag>
+<tag name="@see">javax.baja.query.BNull</tag>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.binary(javax.baja.query.BExpression, java.lang.String, javax.baja.query.BExpression) -->
+<method name="binary"  public="true" static="true">
+<description>
+Creates a BBinaryExpression representing the following expression:&#xa; &lt;pre&gt;&amp;lt;lhs&amp;gt; &amp;lt;operator&amp;gt; &amp;lt;rhs&amp;gt;&lt;/pre&gt;
+</description>
+<parameter name="lhs">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="operator">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="rhs">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BBinaryExpression"/>
+<description>
+a BBinaryExpression built to represent the binary expression&#xa; detailed above.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.binary(java.lang.String, java.lang.String, javax.baja.sys.BSimple) -->
+<method name="binary"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field(lhs), operator, simple(rhs))&lt;/code&gt;
+</description>
+<tag name="@see">#field(String)</tag>
+<tag name="@see">#simple(BSimple)</tag>
+<parameter name="lhs">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="operator">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="rhs">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BBinaryExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.binary(java.lang.String, java.lang.String, java.lang.String) -->
+<method name="binary"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field(lhs), operator, field(rhs))&lt;/code&gt;
+</description>
+<tag name="@see">#field(String)</tag>
+<parameter name="lhs">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="operator">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="rhs">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BBinaryExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.field(java.lang.String) -->
+<method name="field"  public="true" static="true">
+<description/>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BFieldExpression"/>
+<description>
+a BFieldExpression for the given field.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.field(javax.baja.sys.Property) -->
+<method name="field"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;field(property.getName())&lt;/code&gt;
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BFieldExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.list(javax.baja.sys.BSimple[]) -->
+<method name="list"  public="true" static="true">
+<description/>
+<parameter name="elements">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BListExpression"/>
+<description>
+a BListExpression containing the given elements.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.simple(javax.baja.sys.BSimple) -->
+<method name="simple"  public="true" static="true">
+<description/>
+<parameter name="s">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BSimpleExpression"/>
+<description>
+a BSimpleExpression for the given BSimple.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.unary(java.lang.String, javax.baja.query.BExpression) -->
+<method name="unary"  public="true" static="true">
+<description>
+Convenicence for &lt;code&gt;unary(operator, operand, false)&lt;/code&gt;
+</description>
+<tag name="@see">#unary(String, BExpression, boolean)</tag>
+<parameter name="operator">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="operand">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BUnaryExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Exprs.unary(java.lang.String, javax.baja.query.BExpression, boolean) -->
+<method name="unary"  public="true" static="true">
+<description/>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="operator">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="operand">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="postfix">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.query.expression.BUnaryExpression"/>
+<description>
+a BUnaryExpression using the given operator, operand, and postfix&#xa; flag.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

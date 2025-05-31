@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="neql" runtimeProfile="rt" qualifiedName="javax.baja.neql.ContextExpression" name="ContextExpression" packageName="javax.baja.neql" public="true">
+<description>
+A ContextExpression is an expression that is evaluated against the&#xa; query context.  Typically the query context is the base object from&#xa; the ord that the query is part of.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">01/16/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.neql.Expression"/>
+</extends>
+<!-- javax.baja.neql.ContextExpression(javax.baja.neql.Expression) -->
+<constructor name="ContextExpression" public="true">
+<parameter name="expr">
+<type class="javax.baja.neql.Expression"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.neql.ContextExpression.getNodeType() -->
+<method name="getNodeType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the node type.
+</description>
+<return>
+<type class="int"/>
+<description>
+AST_CONTEXT_EXPR
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.ContextExpression.getExpression() -->
+<method name="getExpression"  public="true">
+<description>
+Get the expression to evaluate against the context.
+</description>
+<return>
+<type class="javax.baja.neql.Expression"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.ContextExpression.evaluate(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evaluate"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.sys.BObject"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.neql.ContextExpression.evalBoolean(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evalBoolean"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true if the context contains a facet with the expression&#x27;s key and its value is not&#xa; BBoolean.FALSE.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+not used
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+context checked for a facet with the expression&#x27;s key
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the context contains a facet with the expression&#x27;s key and its value is not&#xa;   BBoolean.FALSE.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

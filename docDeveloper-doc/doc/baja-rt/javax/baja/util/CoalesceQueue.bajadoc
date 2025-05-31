@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.CoalesceQueue" name="CoalesceQueue" packageName="javax.baja.util" public="true">
+<description>
+CoalesceQueue is a specialization of Queue designed to &#xa; coalesce duplicate entries using the ICoalesceable interface.&#xa; Internally CoalesceQueue is a linked list with a hash index&#xa; to the link entries.
+</description>
+<tag name="@author">Brian Frank on 23 Jan 02</tag>
+<tag name="@version">$Revision: 3$ $Date: 2/7/04 4:24:43 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.util.Queue"/>
+</extends>
+<!-- javax.baja.util.CoalesceQueue(int) -->
+<constructor name="CoalesceQueue" public="true">
+<parameter name="maxSize">
+<type class="int"/>
+</parameter>
+<description>
+Construct a CoalesceQueue with the specified max size.
+</description>
+</constructor>
+
+<!-- javax.baja.util.CoalesceQueue() -->
+<constructor name="CoalesceQueue" public="true">
+<description>
+Construct a CoalesceQueuewith max size of Integer.MAX_VALUE.
+</description>
+</constructor>
+
+<!-- javax.baja.util.CoalesceQueue.find(java.lang.Object) -->
+<method name="find"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Find on a CoalesceQueue provides fast access using&#xa; &lt;code&gt;ICoalesceable.getCoalesceKey()&lt;/code&gt; as the index.&#xa; If the value does not implement ICoalesceable then&#xa; return null.
+</description>
+<parameter name="value">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.util.CoalesceQueue.dequeue() -->
+<method name="dequeue"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read off the oldest object from the queue.
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest queue element, or null&#xa;    if the queue is empty.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.util.CoalesceQueue.enqueue(java.lang.Object) -->
+<method name="enqueue"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If &lt;code&gt;find(value)&lt;/code&gt; returns null then add&#xa; the value to the end of the queue.  If find returns&#xa; a match then update the existing enqueued item using&#xa; &lt;code&gt;ICoalesceable.coalesce(value)&lt;/code&gt;.
+</description>
+<parameter name="value">
+<type class="java.lang.Object"/>
+<description>
+Object to append to the&#xa;    end of the queue.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if new value was enqueued and&#xa;   false if it was coalesced.
+</description>
+</return>
+<throws>
+<type class="javax.baja.util.QueueFullException"/>
+<description>
+is the queue&#xa;    is already at max size.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.util.CoalesceQueue.clear() -->
+<method name="clear"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Remove all the enqueued entries.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

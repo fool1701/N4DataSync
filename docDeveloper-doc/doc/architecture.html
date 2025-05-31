@@ -1,0 +1,115 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/overview.html" class="navbar">Prev</a> |  <a href="/doc/directoryRestructure.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="architecture">Architecture</h1>
+<h2 id="overview">Overview</h2>
+<p>This chapter introduces key concepts and terminology used in the Niagara architecture.</p>
+<h3 id="programs">Programs</h3>
+<p>There are typically four different programs (or processes) associated with a Niagara system. These programs and their network communication are illustrated via the <a href="arch-communication.html">arch-communication</a>:</p>
+<ul>
+  <li><b>Station</b>: is the Niagara runtime - a Java VM which runs a Niagara component application.</li>
+  <li><b>Workbench</b>: is the Niagara tool - a Java VM which hosts Niagara plugin components.</li>
+  <li><b>Daemon</b>: is a native daemon process used to boot stations and to manage platform configuration such as IP settings.</li>
+  <li><b>Web Browser</b>: is standard web browser such as IE or Chrome that hosts one of Niagara&rsquo;s web user interfaces.</li>
+</ul>
+<h3 id="protocols">Protocols</h3>
+<p>There are typically three network protocols that are used to integrate the four programs described above:</p>
+<ul>
+  <li><b>Fox</b>: is the proprietary TCP/IP protocol used for station-to-station and workbench-to-station communication.</li>
+  <li><b>HTTP</b>: is the standard protocol used by web browsers to access web pages from a station.</li>
+  <li><b>Niagarad</b>: is the proprietary protocol used for workbench-to-daemon communication.</li>
+</ul>
+<p>Encrypted versions of these protocols are available and are generally the preferred configuration default.</p>
+<h3 id="platforms">Platforms</h3>
+<p>Niagara is hosted on a wide range of platforms from small embedded controllers to high end servers:</p>
+<ul>
+  <li><b>Jace</b>: the term Jace (Java Application Control Engine) is used to describe a variety of headless, embedded platforms. Jaces usually host a station and a daemon process, but not workbench. Jaces typically run QNX as their operating system.</li>
+  <li><b>Supervisor</b>: the term Supervisor is applied to a station running on a workstation or server class machine. Supervisors are typically stations that provide support services to other stations within a system such as history or alarm consolidation. Supervisors by definition run a station, and may potentially run the daemon or workbench.</li>
+  <li><b>Client</b>: most often clients running a desktop OS such as Windows or Linux access Niagara using the workbench or a web browser.</li>
+</ul>
+<h2 id="stations">Stations</h2>
+<p>The Niagara architecture is designed around the concept of component oriented programming. <a href="componentModel.html">Components</a> are self contained units of code written in Java and packaged up for deployment as <a href="modules.html">modules</a>. Components are then wired together to define an application and executed using the <a href="station.html">station</a> runtime.</p>
+<p>A Niagara application designed to be run as a station is stored in an XML file called <a href="bog.html">config.bog</a>. The bog file contains a tree of components, their property configuration, and how they are wired together using <a href="links.html">links</a>. Station databases can be created using a variety of mechanisms:</p>
+<ul>
+  <li>Created on the fly and in the field using workbench graphical programming tools.</li>
+  <li>Created offline using workbench graphical programming tools.</li>
+  <li>Predefined and installed at manufacturing time.</li>
+  <li>Programmatically generated in the field, potentially from a learn operation.</li>
+</ul>
+<p>Stations which restrict their programmability to accomplish a dedicated task are often called <em>appliances</em>.</p>
+<p>Note: Often the term Supevisor or Jace will be used interchangeably with station. Technically the term station describes the component runtime environment common all to all platforms, and Supervisor and Jace describe the hosting platform.</p>
+<h2 id="daemon">Daemon</h2>
+<p>The daemon provides functionality used to commission and bootstrap a Niagara platform:</p>
+<ul>
+  <li>Manages installing and backing up station databases</li>
+  <li>Manages launching and monitoring stations</li>
+  <li>Manages configuration of TCP/IP settings</li>
+  <li>Manages installation and upgrades of the operating system (QNX only)</li>
+  <li>Manages installation and upgrades of the Java virtual machine</li>
+  <li>Manages installation and upgrades of the Niagara software</li>
+  <li>Manages installation of lexicons for localization</li>
+  <li>Manages installation of licenses</li>
+</ul>
+<p>On Windows platforms, the daemon is run in the background as a Windows service. On QNX it is run as a daemon process on startup.</p>
+<p>The most common way to access daemon functionality is through the workbench. A connection to the daemon is established via the &ldquo;Open Platform&rdquo; command which opens a PlatformSession to the remote machine. A suite of views on the PlatformSession provides tools for accomplishing the tasks listed above.</p>
+<p>Another mechanism used to access daemon functionality is via the plat.exe command line utility. This utility provides much of the functionality of the workbench tools, but via a command line program suitable for scripting.<br />
+Run <code>plat.exe</code> in a console for more information.</p>
+<h2 id="workbench">Workbench</h2>
+<p>Niagara includes a powerful tool framework called the <a href="workbench.html">workbench</a>. The workbench is built using the <a href="bajaui.html">bajaui</a> widget framework which is itself built using the standard Niagara component model.</p>
+<p>The workbench architecture is designed to provide a common shell used to host plugins written by multiple vendors. The most common type of plugin is a <em>view</em> which is a viewer or editor for working with a specific type of object such as a component or file. Other plugins include sidebars and tools.</p>
+<p>Workbench itself may be morphed into new applications using the <a href="module://docDeveloper/doc/workbench-wb/javax/baja/workbench/BWbProfile.bajadoc"><code>BWbProfile</code></a> API. Profiles allow developers to reuse the workbench infrastructure to create custom applications by adding or removing menu items, toolbar buttons, sidebars, and views.</p>
+<h2 id="web-ui">Web UI</h2>
+<p>An important feature of Niagara is the ability to provide a user interface via a standard web browser such as IE or Chrome. Niagara provides both server side and client side technologies to build <a href="web.html">web</a> UIs.</p>
+<p>On the server side, the <a href="module://docDeveloper/doc/web-rt/javax/baja/web/BWebService.bajadoc"><code>WebService</code></a> component provides HTTP and HTTPS support in a station runtime. The WebService provides a standard servlet engine. Servlets are deployed as components subclassed from <a href="module://docDeveloper/doc/web-rt/javax/baja/web/BWebServlet.bajadoc"><code>BWebServlet</code></a>. Additional classes and APIs are built upon this foundation to provide higher level abstractions such as <a href="module://docDeveloper/doc/web-rt/javax/baja/web/BServletView.bajadoc"><code>BServletView</code></a>.</p>
+<p>There are three client side technologies provided by Niagara. The first is <em>web workbench</em> which allows the standard Workbench software to be run using a client application called Niagara Web Launcher (NWL). Once installed, NWL downloads modules as needed to the client machine to host the Workbench shell. These modules are cached locally on the browser&rsquo;s hard drive.</p>
+<p>In addition to the web workbench, a suite of technologies called <a href="hx.html">hx</a> is available. The hx framework is a set of server side servlets and a client side JavaScript library. Hx allows a real-time user interface to be built without use of the Java Plugin. It requires only web standards: HTML, CSS, and JavaScript.</p>
+<p>Bajaux provides an environment for developing modern web-based user interfaces. In Niagara 4, the user interface is moving in a new direction with a heavy focus on HTML5 applications and open web technologies. A number of frameworks and utilities are provided, and are intended to give developers the power to create their own web apps, from tiny field editors to powerful, full-featured full-screen views. Find information at <a href="js/buildingJS.html">Building JavaScript Applications for Niagara</a>.</p>
+<h2 id="fox">Fox</h2>
+<p>The Niagara Framework includes a proprietary protocol called <em>Fox</em> which is used for all network communication between stations as well as between Workbench and stations. Fox is a multiplexed peer to peer protocol which sits on top of a TCP connection. The default port for Fox connections is 1911. FoxS is the encrypted protocol that encapsulates all Fox communications in a secure transmission. The default port for FoxS is 4911. Fox features include:</p>
+<ul>
+  <li>Layered over a single TCP socket connection</li>
+  <li>Digest authentication (username/passwords are encrypted)</li>
+  <li>Peer to peer</li>
+  <li>Request / response</li>
+  <li>Asynchronous eventing</li>
+  <li>Streaming</li>
+  <li>Ability to support multiple applications over a single socket via channel multiplexing</li>
+  <li>Text based framing and messaging for easy debugging</li>
+  <li>Unified message payload syntax</li>
+  <li>High performance</li>
+  <li>Java implementation of the protocol stack</li>
+</ul>
+<h2 id="api-stack">API Stack</h2>
+<p>Niagara provides a broad suite of Java APIs used to customize and extend the station and workbench. The <a href="arch-stack.html">software stack</a> diagram illustrates the various software layers of the architecture:</p>
+<ul>
+  <li><b>Baja</b>: The foundation of the architecture is defined via the <a href="module://docDeveloper/doc/baja-rt/module-index.bajadoc">baja</a> module APIs.<br />
+    These APIs define the basics such as modules, component model, naming, navigation, and security.</li>
+  <li><b>Base Interfaces</b>: Niagara includes an extensive library of prebuilt components applicable to various M2M domains. The modules provide standard components and APIs, including: <a href="control.html">control</a>, <a href="alarm.html">alarming</a>, <a href="history.html">historical</a> data collection, <a href="schedule.html">scheduling</a>, and <a href="bql.html">BQL</a>.</li>
+  <li><b>Drivers</b>: Niagara is designed from the ground up to support multiple heterogeneous protocols. Modules designed to model and synchronize data with external devices or systems are called <em>drivers</em> and are typically built with the <a href="driverFramework.html">driver framework</a>. Drivers integrate both fieldbus protocols like BACnet and Lonworks as well as enterprise systems like relational databases and web services.</li>
+  <li><b>Human Interfaces</b>: An extensive software stack is provided for user interfaces.<br />
+    The <a href="gx.html">gx</a> framework provides a standard model and APIs for low level graphics. Built upon gx is the <a href="bajaui.html">bajaui</a> module which provides a professional toolkit of standard widgets. Built upon bajaui is the <a href="workbench.html">workbench</a> framework which provides the standard APIs for writing plugin tools. The <a href="px.html">px</a> framework and tools are used to enable non-programmers and developers alike to create new user interfaces via XML. The bajaux framework enables modern web-based interfaces utilizing HTML5, JavaScript, and other open web technologies.</li>
+</ul>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/overview.html" class="navbar">Prev</a> |  <a href="/doc/directoryRestructure.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

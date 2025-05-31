@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="rt" qualifiedName="com.tridium.nvideo.camera.BCameraDeviceExt" name="BCameraDeviceExt" packageName="com.tridium.nvideo.camera" public="true">
+<description>
+This class is analogous to the Point-Device-Ext class that exists&#xa; on ordinary Niagara AX drivers. The BCameraDeviceExt is the root&#xa; container of all BVideoCameras under a device. This component&#xa; has a Camera Manager view on it.
+</description>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver)</tag>
+<tag name="@creation">25 Jan 2012</tag>
+<extends>
+<type class="javax.baja.driver.BDeviceExt"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.camera.BIVideoCameraDeviceExt"/>
+</implements>
+<implements>
+<type class="javax.baja.driver.BIDeviceFolder"/>
+</implements>
+<implements>
+<type class="com.tridium.ndriver.discover.BINDiscoveryHost"/>
+</implements>
+<property name="discoveryPreferences" flags="">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the camera manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</property>
+
+<action name="submitDiscoveryJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a auto discovery job and returns a BOrd to the job that is kicked off&#xa; And managed by the Niagara Ax Job Service.
+</description>
+<tag name="@see">#submitDiscoveryJob(BNDiscoveryPreferences parameter)</tag>
+</action>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt() -->
+<constructor name="BCameraDeviceExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getDiscoveryPreferences() -->
+<method name="getDiscoveryPreferences"  public="true">
+<description>
+Get the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the camera manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<return>
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.setDiscoveryPreferences(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="setDiscoveryPreferences"  public="true">
+<description>
+Set the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the camera manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<parameter name="v">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.submitDiscoveryJob(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="submitDiscoveryJob"  public="true">
+<description>
+Invoke the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a auto discovery job and returns a BOrd to the job that is kicked off&#xa; And managed by the Niagara Ax Job Service.
+</description>
+<tag name="@see">#submitDiscoveryJob</tag>
+<parameter name="parameter">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getVideoSystem() -->
+<method name="getVideoSystem"  public="true">
+<description>
+Get parent as &lt;code&gt;BIVideoDeviceSystem&lt;?code&gt;
+</description>
+<return>
+<type class="com.tridium.videoDriver.BIVideoDeviceSystem"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getCameraFolderType() -->
+<method name="getCameraFolderType"  protected="true">
+<description>
+Returns the Type of BCameraFolder to look for in the getLocations&#xa; method and on the location manager.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getCameraType() -->
+<method name="getCameraType"  protected="true">
+<description>
+Returns the &lt;code&gt;Type&lt;/code&gt; of BVideoCamera for this extension.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getAllCameras() -->
+<method name="getAllCameras"  public="true">
+<description>
+Get an array containing all the &lt;code&gt;BIVideoCamera&lt;/code&gt;&#xa; children of this BCameraDeviceExt.
+</description>
+<return>
+<type class="com.tridium.videoDriver.camera.BIVideoCamera" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.mergeDvrStatusToCamera(javax.baja.driver.BDevice) -->
+<method name="mergeDvrStatusToCamera"  protected="true">
+<description/>
+<parameter name="camera">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.updateStatus() -->
+<method name="updateStatus"  public="true">
+<description>
+Update the status of all the points, by calling&#xa; BProxyExt.updateStatus().&#xa; &#xa; NOTE: This is a callback from BDevice that is called&#xa; whenever the &#x27;status&#x27; property on the parent device&#xa; is changed.&#xa; &#xa; This method merges the device status with each of the&#xa; camera statuses.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getDeviceType() -->
+<method name="getDeviceType"  public="true">
+<description>
+The BCameraDeviceExt&#x27;s Nav descendant devices are BVideoCameras.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+whatever the getCameraType() method returns
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getDeviceFolderType() -->
+<method name="getDeviceFolderType"  public="true" final="true">
+<description>
+Get the type of DeviceFolder for this driver.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+whatever the getCameraFolderType() method returns.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getDiscoveryFolder() -->
+<method name="getDiscoveryFolder"  public="true">
+<description/>
+<return>
+<type class="javax.baja.util.BFolder"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.isDisabled() -->
+<method name="isDisabled"  public="true">
+<description>
+Networks and devices inherit this method from BDeviceNetwork&#xa; and BDevice. The Ddf-Point-Device-ext returns getDevice().isDisabled().
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.isFault() -->
+<method name="isFault"  public="true">
+<description>
+Networks and devices inherit this method from BDeviceNetwork&#xa; and BDevice. The Ddf-Point-Device-ext returns getDevice().isFault().
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.doSubmitDiscoveryJob(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="doSubmitDiscoveryJob"  public="true">
+<description>
+Implements the &#x27;submitDiscoveryJob&#x27; action on the station-side.&#xa; &#xa; This submits a BAutoDiscoveryJob for the given BAutoDiscoveryPreferences&#xa; to the Job Service.
+</description>
+<parameter name="preferences">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+a BOrd to the BAutoDiscoveryJob that is running in the&#xa; background and is connected to the Job Service.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getDiscoveryObjects(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="getDiscoveryObjects"  public="true">
+<description>
+Call back for discoveryJob to get an array of discovery objects.&#xa;  Override point for driver specific discovery.
+</description>
+<parameter name="prefs">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="com.tridium.ndriver.discover.BINDiscoveryObject" dimension="1"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.discoveryPreferences -->
+<field name="discoveryPreferences"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; This saves the last set of discovery preferences that the user provided&#xa; on the camera manager.&#xa; Descendants should re-define this property and provide a custom default&#xa; Value whose class extends BNDiscoveryPreferences.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</field>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.submitDiscoveryJob -->
+<field name="submitDiscoveryJob"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;submitDiscoveryJob&lt;/code&gt; action.&#xa; Submits a auto discovery job and returns a BOrd to the job that is kicked off&#xa; And managed by the Niagara Ax Job Service.
+</description>
+<tag name="@see">#submitDiscoveryJob(BNDiscoveryPreferences parameter)</tag>
+</field>
+
+<!-- com.tridium.nvideo.camera.BCameraDeviceExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

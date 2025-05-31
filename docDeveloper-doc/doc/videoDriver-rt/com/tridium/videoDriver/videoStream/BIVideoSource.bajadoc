@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.videoStream.BIVideoSource" name="BIVideoSource" packageName="com.tridium.videoDriver.videoStream" public="true" interface="true" abstract="true" category="interface">
+<description>
+Driver camera classes implement this method if they display&#xa; video in the Niagara AX framework.
+</description>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.supportsPlaybackControl() -->
+<method name="supportsPlaybackControl"  public="true" abstract="true">
+<description>
+Indicates whether the particular BIVideoSource object supports&#xa; playback control. When we say &#x27;Playback Control&#x27;, we mean ffwrd,&#xa; rew, stop, pause, etc.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.isTimestampPreferred() -->
+<method name="isTimestampPreferred"  public="true" abstract="true">
+<description>
+Indicates whether it is preferred to display the timestamp that&#xa; corresponds to each video frame. This is passed to the BIVideoPlayer&#xa; that displays the video.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.isFoxVideoStreamPreferred() -->
+<method name="isFoxVideoStreamPreferred"  public="true" abstract="true">
+<description>
+Indicates whether it is preferred to first stream the video from the video&#xa; device to the Niagara AX station. From there, the video stream would be&#xa; forwarded through the Niagara AX fox connection to the Workbench.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true for the driver to hook into the video stream on the station&#xa; side and subsequently forward the video stream to the Workbench through&#xa; the existing fox connection. Or return false for the graphical user&#xa; interface to receive the video stream directly from the video device. Note&#xa; that this method resolves the BFoxVideoStreamEnum.inherit to a true or&#xa; false value, if necessary, by looking at the appropriate Niagara AX Nav&#xa; parent (video DVR or video network) for this video source.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getFoxVideoStreamSetting() -->
+<method name="getFoxVideoStreamSetting"  public="true" abstract="true">
+<description>
+Indicates whether or not a fox stream is preferred for this video&#xa; source.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BFoxVideoStreamEnum"/>
+<description>
+BFoxVideoStreamEnum.yes if a fox video stream is preferred,&#xa; BFoxVideoStreamEnum.no if a fox video stream is not preferred, or&#xa; BFoxVideoStreamEnum.inherit to use the settings from the video source&#x27;s&#xa; appropriate Niagara AX nav parent (a dvr or video network component)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getPreferredBackgroundColor() -->
+<method name="getPreferredBackgroundColor"  public="true" abstract="true">
+<description>
+Indicates the background color for the blank edges around a video frame
+</description>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getPreferredAspectRatio() -->
+<method name="getPreferredAspectRatio"  public="true" abstract="true">
+<description>
+Indicates the desired aspect ratio of the video frame
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoAspectRatioEnum"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getPreferredResolution() -->
+<method name="getPreferredResolution"  public="true" abstract="true">
+<description>
+Indicates the resolution that is preferred for playback. The live video and&#xa; video playback views use this value for the video resolution that is displayed&#xa; to the user.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getPreferredFrameRate() -->
+<method name="getPreferredFrameRate"  public="true" abstract="true">
+<description>
+Indicates the frame rate that is preferred for playback. The live video and&#xa; video playback views use this value for the video frame rate that is displayed&#xa; to the user.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getPreferredCompression() -->
+<method name="getPreferredCompression"  public="true" abstract="true">
+<description>
+Indicates the compression that is preferred for playback. The live video and&#xa; video playback views use this value for the video compression that is displayed&#xa; to the user.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.streamToDestination(com.tridium.videoDriver.videoStream.BPlaybackParams, com.tridium.videoDriver.videoStream.IVideoDestination) -->
+<method name="streamToDestination"  public="true" abstract="true">
+<description>
+Arranges for the BIVideoSource component to establish a video stream from the&#xa; field-device to the given video destination.&#xa; &#xa; The videoDriver framework calls this method to ask the driver BIVideoSource&#xa; component to request a video stream from the video field-device and then&#xa; pass the video stream to the given video destination.&#xa; &#xa; Please note that the driver does not necessarily have to assign the IVideoStream&#xa; to the video destination immediately during this method invocation. Instead, the&#xa; driver may (and likely should) pass the video stream to the videoDestination&#xa; asynchronously, upon successful driver communication. In fact, it is recommended&#xa; that the developer design their logic such that the video stream is established&#xa; in the background, passed to the video destination in the background, and return&#xa; immediately from this method.
+</description>
+<tag name="@see">IVideoStream</tag>
+<tag name="@see">VideoStream</tag>
+<parameter name="playbackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+<description>
+an instance of BPlaybackParams indicating the details about&#xa; the video stream that needs to be established. This includes the playback type to&#xa; indicate live, play, fast forward, rewind, pause, etc. This also includes the time&#xa; index that applies to the playback types that are other than live (play, fast&#xa; forward, etc).
+</description>
+</parameter>
+<parameter name="videoDestination">
+<type class="com.tridium.videoDriver.videoStream.IVideoDestination"/>
+<description>
+the IVideoDestination to which the video stream needs to&#xa; be sent once it is established (preferably in the background -- please see the JavaDoc&#xa; for this method&#x27;s description). When the video stream is established, the driver must&#xa; call the receiveVideoStream method on the video destination object. Alternatively,&#xa; if the attempt to establish the video stream fails then the driver must call the &#xa; videoStreamTimeout method on the video destination object. Please note that the driver&#xa; must call one of these two methods!
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.makeVideoDecoder(com.tridium.videoDriver.videoStream.BPlaybackParams) -->
+<method name="makeVideoDecoder"  public="true" default="true">
+<description>
+Creates a video decoder object to decode the video stream that would be established&#xa; according to the given playback parameters object and the given video session object.&#xa; &lt;p&gt;&#xa; Default implementation will call makeVideoDecoder() on the BIVideoAgent for this videoSource.
+</description>
+<parameter name="playbackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+<description>
+an instance of BPlaybackParams that provides details about the&#xa; video stream that is about to be established.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.videoDriver.videoStream.decoder.IVideoDecoder"/>
+<description>
+an instance of IVideoDecoder that is capable of decoding the&#xa; video stream from this source
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getSlotPathOrd() -->
+<method name="getSlotPathOrd"  public="true" abstract="true">
+<description>
+Gets the slot path ord for the component that implements this interface. Note that&#xa; this method is inherited from BComponent automatically. Therefore, the developer should&#xa; not really have to do any special other than extend BComponent or a subclass thereof in&#xa; order to implement this particular method.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the slot path ord for the component that implements this interface. Note that&#xa; this method is inherited from BComponent automatically.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.initPlaybackParams(com.tridium.videoDriver.videoStream.BPlaybackParams, com.tridium.videoDriver.videoStream.IVideoSession) -->
+<method name="initPlaybackParams"  public="true" abstract="true">
+<description>
+This method is called on the client-side just before a video stream is&#xa; initiated to allow the video source to perform any driver-specific&#xa; customization on the given playback params object for the video stream.&#xa; &#xa; Please note that the driver developer does not necessarily have to do&#xa; anything inside his or her implementation of this method. This method&#xa; exists to give him or her the opportunity to initialize the settings&#xa; inside the playback parameters object.&#xa; &#xa; The developers of the videoDriver framework predict that it will be&#xa; the most useful for the driver developer to customize the meta data&#xa; facets in the given playbackParams in case he or she needs to pass&#xa; any special data to the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.BIVideoSource#makeVideoDecoder(com.tridium.videoDriver.videoStream.BPlaybackParams)">#makeVideoDecoder(BPlaybackParams)</see>&lt;/code&gt;&#xa; method.
+</description>
+<parameter name="playbackParams">
+<type class="com.tridium.videoDriver.videoStream.BPlaybackParams"/>
+<description>
+this is a direct reference to the same playback&#xa; parameters object that will be passed to the  &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.BIVideoSource#streamToDestination(com.tridium.videoDriver.videoStream.BPlaybackParams, com.tridium.videoDriver.videoStream.IVideoDestination)">#streamToDestination(BPlaybackParams, IVideoDestination)</see>&lt;/code&gt;&#xa; method. This is the driver&#x27;s chance to customize the values of this&#xa; instance before the videoDriver framework asks the driver to establish&#xa; the video stream.
+</description>
+</parameter>
+<parameter name="videoSession">
+<type class="com.tridium.videoDriver.videoStream.IVideoSession"/>
+<description>
+the video session that the video stream applies to.&#xa; This represents the lifecycle of the graphical user interface video player&#xa; that will display the video stream.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.getInterframeTimeout() -->
+<method name="getInterframeTimeout"  public="true" abstract="true">
+<description>
+This is the maximum amount of time permitted to elapse in between frames.&#xa; &#xa; A video stream that takes longer than this amount of time to retrieve a&#xa; video frame will be considered in need of being re-established.
+</description>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+a BRelTime encoding the amount of time as described.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BIVideoSource.VID_AGENT_FILTER -->
+<field name="VID_AGENT_FILTER"  public="true" static="true" final="true">
+<type class="javax.baja.agent.AgentFilter"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

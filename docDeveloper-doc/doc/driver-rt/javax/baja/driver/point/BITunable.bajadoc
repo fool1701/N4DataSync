@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="driver" runtimeProfile="rt" qualifiedName="javax.baja.driver.point.BITunable" name="BITunable" packageName="javax.baja.driver.point" public="true" interface="true" abstract="true" category="interface">
+<description>
+BITunable is the interface implemented by components&#xa; which use the point tuning framework to control their &#xa; read and writes.  All ITunable instances must create their&#xa; own instance of Tuning.  It is the responsibility of the &#xa; ITunable component to make the following callbacks on its &#xa; child Tuning:&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa;   started         -&amp;gt; transition()&amp;#xa;   atSteadyState   -&amp;gt; transition()&amp;#xa;   stopped         -&amp;gt; transition()&amp;#xa;   subscribed      -&amp;gt; transition()&amp;#xa;   unsubscribed    -&amp;gt; transition()&amp;#xa;   status changed  -&amp;gt; transition()&amp;#xa;&amp;#xa;   read success    -&amp;gt; readOk()&amp;#xa;   read failure    -&amp;gt; readFail()&amp;#xa;&amp;#xa;   write success   -&amp;gt; writeOk()&amp;#xa;   write failure   -&amp;gt; writeFail()&amp;#xa; &lt;/code&gt;&lt;/pre&gt;&#xa; Note that ProxyExt automatically handles these callbacks.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">17 Jun 04</tag>
+<tag name="@version">$Revision: 8$ $Date: 11/7/05 10:22:52 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.driver.point.BITunable.getTuningPolicyName() -->
+<method name="getTuningPolicyName"  public="true" abstract="true">
+<description>
+Get the tuning policy name for this component.  Typically&#xa; this is mapped to a tuningPolicyName property.  If mapped to &#xa; a configurable property, then apply TUNING_POLICY_NAME_FACETS.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.getTuning() -->
+<method name="getTuning"  public="true" abstract="true">
+<description>
+Get the tuning support instance for this component.
+</description>
+<return>
+<type class="javax.baja.driver.point.Tuning"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.isFatalFault() -->
+<method name="isFatalFault"  public="true" abstract="true">
+<description>
+Return true if the network/device/component has a &#xa; fatal fault which prevents normal operation.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.getStatus() -->
+<method name="getStatus"  public="true" abstract="true">
+<description>
+Get the status of the component.  The status should have the down &#xa; bit set if the network or device is down.  The status should have &#xa; the disabled bit set if the  network/device/component is disabled.
+</description>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.isRunning() -->
+<method name="isRunning"  public="true" abstract="true">
+<description>
+Return if the tunable component is current running.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.isSubscribedDesired() -->
+<method name="isSubscribedDesired"  public="true" abstract="true">
+<description>
+Return if the tunable component currently desires&#xa; to be subscribed.  This is independent of any status&#xa; conditions which might be preventing actual subscription.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.getMode() -->
+<method name="getMode"  public="true" abstract="true">
+<description>
+Return if the component is readonly, readWrite, or writeOnly.
+</description>
+<return>
+<type class="javax.baja.driver.point.BReadWriteMode"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.readSubscribed(javax.baja.sys.Context) -->
+<method name="readSubscribed"  public="true" abstract="true">
+<description>
+This callback is made when the component enters a subscribed &#xa; state based on the current status and tuning.  The driver &#xa; should register for changes or begin polling.  Any IO should&#xa; be done asynchronously on another thread - never block the&#xa; calling thread.  The result of reads should be to call the&#xa; readOk() or readFail() method.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.readUnsubscribed(javax.baja.sys.Context) -->
+<method name="readUnsubscribed"  public="true" abstract="true">
+<description>
+This callback is made when the component exits the subscribed&#xa; state based on the current status and tuning.  The driver&#xa; should unregister for changes of cease polling.  Any IO should&#xa; be done asynchronously on another thread - never block the&#xa; calling thread.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.write(javax.baja.sys.Context) -->
+<method name="write"  public="true" abstract="true">
+<description>
+This callback is made when a write is desired based on the&#xa; current status and tuning.  Any IO should be done asynchronously &#xa; on another thread - never block the calling thread.  If the write &#xa; is enqueued then return true and call writeOk() or writeFail() &#xa; once it has been processed.  If the write is canceled immediately&#xa; for other reasons then return false.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if a write is now pending
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.setStale(boolean, javax.baja.sys.Context) -->
+<method name="setStale"  public="true" abstract="true">
+<description>
+This callback is made with a value of true when the tuning indicates &#xa; that the last readOk() was too long ago to make the current value &#xa; trustworthy.  This callback should result in the stale status bit &#xa; being set or cleared appropriately.
+</description>
+<parameter name="stale">
+<type class="boolean"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.readFail(java.lang.String) -->
+<method name="readFail"  public="true" abstract="true">
+<description>
+This method is used by Tunable to log a failure if &#xa; &lt;code&gt;readSubscribed(Context)&lt;/code&gt; raises an exception.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.writeFail(java.lang.String) -->
+<method name="writeFail"  public="true" abstract="true">
+<description>
+This method is used by Tunable to log a write failure if &#xa; &lt;code&gt;write(Context)&lt;/code&gt; raises an exception.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BITunable.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.driver.point.BITunable.TUNING_POLICY_NAME_FACETS -->
+<field name="TUNING_POLICY_NAME_FACETS"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BFacets"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

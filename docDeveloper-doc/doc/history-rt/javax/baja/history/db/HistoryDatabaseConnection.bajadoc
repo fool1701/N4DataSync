@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.db.HistoryDatabaseConnection" name="HistoryDatabaseConnection" packageName="javax.baja.history.db" public="true" abstract="true">
+<description/>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.history.HistorySpaceConnection"/>
+</implements>
+<!-- javax.baja.history.db.HistoryDatabaseConnection() -->
+<constructor name="HistoryDatabaseConnection" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.getSummary(javax.baja.history.BIHistory) -->
+<method name="getSummary"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="history">
+<type class="javax.baja.history.BIHistory"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistorySummary"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.getHistoryDatabase() -->
+<method name="getHistoryDatabase"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.history.db.BHistoryDatabase"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.deleteHistory(javax.baja.history.BHistoryId) -->
+<method name="deleteHistory"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.doDeleteHistory(javax.baja.history.BHistoryId) -->
+<method name="doDeleteHistory"  public="true" abstract="true">
+<description>
+Subclass implementation of delete history.&#xa; Classes that implement doDeleteHistory() method are responsible for firing the appropriate history and nav events.
+</description>
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.deleteHistories(javax.baja.naming.BOrd[]) -->
+<method name="deleteHistories"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="ords">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.renameHistory(javax.baja.history.BHistoryId, java.lang.String) -->
+<method name="renameHistory"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="historyName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.doRenameHistory(javax.baja.history.BHistoryId, java.lang.String) -->
+<method name="doRenameHistory"  public="true" abstract="true">
+<description>
+Subclass rename.
+</description>
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="historyName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.clearAllRecords(javax.baja.history.BHistoryId) -->
+<method name="clearAllRecords"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Clear all records from the specified history.
+</description>
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.clearAllRecords(javax.baja.naming.BOrd[]) -->
+<method name="clearAllRecords"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="ords">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.clearOldRecords(javax.baja.history.BHistoryId, javax.baja.sys.BAbsTime) -->
+<method name="clearOldRecords"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+</parameter>
+<parameter name="before">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.clearOldRecords(javax.baja.naming.BOrd[], javax.baja.sys.BAbsTime) -->
+<method name="clearOldRecords"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="ords">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<parameter name="before">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.createHistory(javax.baja.history.BHistoryConfig) -->
+<method name="createHistory"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="config">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.doCreateHistory(javax.baja.history.BHistoryConfig) -->
+<method name="doCreateHistory"  protected="true" abstract="true">
+<description>
+Subclass create.
+</description>
+<parameter name="config">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.recreateHistory(javax.baja.history.BHistoryConfig, boolean) -->
+<method name="recreateHistory"  public="true" abstract="true">
+<description>
+Recreate the history with the id specified in newConfig.
+</description>
+<parameter name="newConfig">
+<type class="javax.baja.history.BHistoryConfig"/>
+<description>
+The new configuration for the history.
+</description>
+</parameter>
+<parameter name="saveOld">
+<type class="boolean"/>
+<description>
+If true, the existing history is saved before&#xa;   creating the new history.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.resizeHistory(javax.baja.history.BHistoryId, javax.baja.history.BCapacity, javax.baja.history.BFullPolicy) -->
+<method name="resizeHistory"  public="true" abstract="true">
+<description>
+Resize the specified history to a new capacity and full policy.
+</description>
+<parameter name="id">
+<type class="javax.baja.history.BHistoryId"/>
+<description>
+The id of the history to resize.
+</description>
+</parameter>
+<parameter name="capacity">
+<type class="javax.baja.history.BCapacity"/>
+<description>
+The new capacity of the history.
+</description>
+</parameter>
+<parameter name="fullPolicy">
+<type class="javax.baja.history.BFullPolicy"/>
+<description>
+The new full policy.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.reconfigureHistory(javax.baja.history.BHistoryConfig) -->
+<method name="reconfigureHistory"  public="true">
+<description>
+Reconfigure an existing history.
+</description>
+<parameter name="newConfig">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.close() -->
+<method name="close"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Close the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.doClose() -->
+<method name="doClose"  protected="true" abstract="true">
+<description>
+Subclass close.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.HistoryDatabaseConnection.log -->
+<field name="log"  public="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

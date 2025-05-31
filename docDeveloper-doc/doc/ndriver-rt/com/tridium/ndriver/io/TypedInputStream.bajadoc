@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.io.TypedInputStream" name="TypedInputStream" packageName="com.tridium.ndriver.io" public="true">
+<description>
+The TypedInputStream is an extension of the standard ByteArrayInputStream for&#xa; use in parsing messages.  It contains utility methods to extract various&#xa; types from the data stream.
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">30 Jan 2013</tag>
+<tag name="@since">Niagara 3.7.104</tag>
+<extends>
+<type class="java.io.ByteArrayInputStream"/>
+</extends>
+<!-- com.tridium.ndriver.io.TypedInputStream(byte[]) -->
+<constructor name="TypedInputStream" public="true">
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<description>
+Construct an input stream that reads data from the given byte array.
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.io.TypedInputStream(byte[], int, int) -->
+<constructor name="TypedInputStream" public="true">
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="length">
+<type class="int"/>
+</parameter>
+<description>
+Construct an input stream that reads data from the given byte array.
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readBoolean() -->
+<method name="readBoolean"  public="true">
+<description>
+Reads a 8 bit boolean value from the input stream.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+If bit field=0 return false else return true.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSigned32() -->
+<method name="readSigned32"  public="true">
+<description>
+Reads a 32 bit value from the input stream.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSigned64() -->
+<method name="readSigned64"  public="true">
+<description>
+Reads a 64 bit value from the input stream.
+</description>
+<tag name="@since">4.2.35</tag>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readUnsigned32() -->
+<method name="readUnsigned32"  public="true">
+<description>
+Reads a 32 bit unsigned value from the input stream.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readUnsigned16() -->
+<method name="readUnsigned16"  public="true">
+<description>
+Read an 16 bit unsigned value from the input stream.
+</description>
+<return>
+<type class="int"/>
+<description>
+int (0 to 65535)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSigned16() -->
+<method name="readSigned16"  public="true">
+<description>
+Read a 16 bit signed value from the input stream
+</description>
+<return>
+<type class="int"/>
+<description>
+int (-32768 to 32767)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSigned8() -->
+<method name="readSigned8"  public="true">
+<description>
+Read an 8 bit signed value from the input stream
+</description>
+<return>
+<type class="int"/>
+<description>
+int (-128 to 127)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readUnsigned8() -->
+<method name="readUnsigned8"  public="true">
+<description>
+Read an 8 bit unsigned value from the input stream
+</description>
+<return>
+<type class="int"/>
+<description>
+int (0 to 255)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readBit(int, int, int) -->
+<method name="readBit"  public="true">
+<description>
+Read an unsigned value from a bit field. The stream pos will be set to&#xa; byteOffset to allow multiple readBit calls to access bit fields in the same&#xa; byte. &lt;p&gt; Bitfield can not span more than 32 bits (bitCount+bitOffset&lt;=32).
+</description>
+<parameter name="byteOffset">
+<type class="int"/>
+<description>
+Offset from first byte in output stream (if multi byte&#xa;                   bit field, specify offset of lsb)
+</description>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+<description>
+Number of positions (0-31) to shift value. O if value in&#xa;                   lsb.
+</description>
+</parameter>
+<parameter name="bitCount">
+<type class="int"/>
+<description>
+The number of bits in bit field
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSignedBit(int, int, int) -->
+<method name="readSignedBit"  public="true">
+<description>
+Read an signed value from a bit field.&lt;p&gt;
+</description>
+<tag name="@see">com.tridium.ndriver.io.TypedInputStream#readBit</tag>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitCount">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readNibble(int, boolean) -->
+<method name="readNibble"  public="true">
+<description>
+Read the upper or lower nibble at the specified byteOffset as an unsigned&#xa; int.
+</description>
+<tag name="@since">3.8.38.1, 3.7.202, 3.6.503</tag>
+<parameter name="byteOffset">
+<type class="int"/>
+<description>
+Offset from first byte in output stream
+</description>
+</parameter>
+<parameter name="upper">
+<type class="boolean"/>
+<description>
+flag to indicate upper nibble (offset 4) - if false will&#xa;                   read lower nibble (offset 0)
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSignedNibble(int, boolean) -->
+<method name="readSignedNibble"  public="true">
+<description>
+Read the upper or lower nibble at the specified byteOffset as an signed&#xa; int.
+</description>
+<tag name="@since">3.8.38.1, 3.7.202, 3.6.503</tag>
+<parameter name="byteOffset">
+<type class="int"/>
+<description>
+Offset from first byte in output stream
+</description>
+</parameter>
+<parameter name="upper">
+<type class="boolean"/>
+<description>
+flag to indicate upper nibble (offset 4) - if false will&#xa;                   read lower nibble (offset 0)
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readBooleanBit(int, int, int) -->
+<method name="readBooleanBit"  public="true">
+<description>
+Read the bit field and return the result as a boolean.
+</description>
+<tag name="@see">com.tridium.ndriver.io.TypedInputStream#readBit</tag>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitCount">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+If bit field=0 return false else return true.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readString() -->
+<method name="readString"  public="true">
+<description>
+Reads in a null terminated string from the input stream. Discard null&#xa; termination &#x27;\0&#x27;. Next read begins at byte following null termination.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readCharArray(int) -->
+<method name="readCharArray"  public="true">
+<description>
+Reads no more than the specified number of chars from the input stream to&#xa; create a string. If len is greater then the number of available chars then&#xa; it is reduced to that number.&lt;p&gt;
+</description>
+<parameter name="len">
+<type class="int"/>
+<description>
+the maximum number of chars to read from stream..
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readByteArray(int) -->
+<method name="readByteArray"  public="true">
+<description>
+Reads no more than the specified number of bytes from the input stream. If&#xa; len is greater then the number of available bytes then it is reduced to&#xa; that number.&lt;p&gt;
+</description>
+<parameter name="len">
+<type class="int"/>
+<description>
+the maximum number of bytes to read from stream.
+</description>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readByteArray() -->
+<method name="readByteArray"  public="true">
+<description>
+Reads the remaining bytes in the stream.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readFloat() -->
+<method name="readFloat"  public="true">
+<description>
+Read a 32 bit float value from the input stream.
+</description>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readDouble() -->
+<method name="readDouble"  public="true">
+<description>
+Read a 64 bit double value from the input stream.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readUnsigned8Float(int, int) -->
+<method name="readUnsigned8Float"  public="true">
+<description>
+Read an unsigned8 field, divide by scale and return as a float. If the read&#xa; value == invalid then return Float.NaN
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readUnsigned16Float(int, int) -->
+<method name="readUnsigned16Float"  public="true">
+<description>
+Read an unsigned16 field, divide by scale and return as a float. If the&#xa; read value == invalid then return Float.NaN
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSigned8Float(int, int) -->
+<method name="readSigned8Float"  public="true">
+<description>
+Read an signed8 field, divide by scale and return as a float. If the read&#xa; value == invalid then return Float.NaN
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.readSigned16Float(int, int) -->
+<method name="readSigned16Float"  public="true">
+<description>
+Read an signed16 field, divide by scale and return as a float. If the read&#xa; value == invalid then return Float.NaN
+</description>
+<tag name="@since">3.7.105</tag>
+<parameter name="invalid">
+<type class="int"/>
+</parameter>
+<parameter name="scale">
+<type class="int"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.reset() -->
+<method name="reset"  public="true">
+<description>
+Reposition stream at beginning of message.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.reset(int) -->
+<method name="reset"  public="true">
+<description>
+Reposition stream at specified offset.
+</description>
+<parameter name="position">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.setBitFieldMark() -->
+<method name="setBitFieldMark"  public="true">
+<description>
+Set the value of bit field mark to current position and return previous bit&#xa; field mark.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.resetBitFieldMark(int) -->
+<method name="resetBitFieldMark"  public="true">
+<description>
+Reset bit field mark.
+</description>
+<parameter name="orig">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.position() -->
+<method name="position"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.io.TypedInputStream.read() -->
+<method name="read"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Check for available byte and throw exception if none available.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

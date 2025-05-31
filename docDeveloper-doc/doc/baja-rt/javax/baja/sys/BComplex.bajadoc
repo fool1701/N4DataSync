@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BComplex" name="BComplex" packageName="javax.baja.sys" public="true" abstract="true">
+<description>
+BComplex is the BValue which is defined by one or more&#xa; property slots.  BComplex is never used directly, rather&#xa; it is the base class for BStruct and BComponent.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">1 Feb 00</tag>
+<tag name="@version">$Revision: 95$ $Date: 7/15/11 11:42:43 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BValue"/>
+</extends>
+<!-- javax.baja.sys.BComplex.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getName() -->
+<method name="getName"  public="true" final="true">
+<description>
+The name of this object is based on containment in&#xa; its parent which is accessed via the getParentProperty()&#xa; method.  If the object is not parented, then name is null.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" final="true">
+<description>
+The display name of this object is based on the display&#xa; name of containment in its parent which is accessed via&#xa; the getParentProperty() method.  If the object is not&#xa; parented, then null is returned.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getDisplayName(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true">
+<description>
+Get the display name of the specified slot.  The&#xa; default implementation is as follows:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;If there is BNameMap property called &#x22;displayNames&#x22;,&#xa;         then use the map&#x27;s value if found.&lt;/li&gt;&#xa; &lt;li&gt;Return slot.getDefaultDisplayName(cx)&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getParent() -->
+<method name="getParent"  public="true" final="true">
+<description>
+Get the parent object which contains this object.  If&#xa; this object is not currently the value of any slot, then&#xa; return null.
+</description>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getPropertyInParent() -->
+<method name="getPropertyInParent"  public="true" final="true">
+<description>
+Get the Property which is used to describe how this object is&#xa; contained by its parent.  If this object is not currently&#xa; parented, then return null.
+</description>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getParentComponent() -->
+<method name="getParentComponent"  public="true" final="true">
+<description>
+Get the nearest ancestor of this object which is&#xa; an instance of BComponent.  If this object is itself&#xa; a BComponent then return &lt;code&gt;this&lt;/code&gt;.  Return&#xa; null if this object doesn&#x27;t exist under a component.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getPropertyInParentComponent() -->
+<method name="getPropertyInParentComponent"  public="true" final="true">
+<description>
+Get the property this object occupies within its&#xa; parent component&#x27;s slot namespace.  If the object&#xa; is a component, then this is null indicating it&#xa; occupies the entire namespace.  If this object&#xa; is a direct child of the parent component then&#xa; this property is the same as getPropertyInParent().&#xa; Otherwise this object is actually a grandchild&#xa; or further descendent of the parent component, and&#xa; this method returns the property in the component&#xa; which represents the root of this object&#x27;s path inside&#xa; the component.  Return null if this object doesn&#x27;t&#xa; exist under a component.
+</description>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.isDescendentOf(javax.baja.sys.BComponent) -->
+<method name="isDescendentOf"  public="true">
+<description/>
+<parameter name="ancestor">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newCopy() -->
+<method name="newCopy"  public="true" final="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Convenience for &lt;code&gt;newCopy(CopyHints)&lt;/code&gt;&#xa; using CopyHint defaults.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newCopy(boolean) -->
+<method name="newCopy"  public="true" final="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Convenience for &lt;code&gt;newCopy(CopyHints)&lt;/code&gt; where&#xa; &lt;code&gt;CopyHints.defaultOnClone = !exact&lt;/code&gt;.
+</description>
+<parameter name="exact">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newCopy(javax.baja.sys.CopyHints) -->
+<method name="newCopy"  public="true" final="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This method creates a clone of the BValue using the&#xa; specified CopyHints.  Refer to the public fields&#xa; of CopyHints for details on copy options.
+</description>
+<parameter name="hints">
+<type class="javax.baja.sys.CopyHints"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.copyFrom(javax.baja.sys.BComplex, javax.baja.sys.Context) -->
+<method name="copyFrom"  public="true" final="true">
+<description>
+This operation copies the frozen property values from&#xa; the specified object to this instance.  The&#xa; specified object must be the same class or a&#xa; subclass of this instance.  Only properties declared&#xa; on this instance are copied, even though the specified&#xa; object may contain additional properties (frozen&#xa; or dynamic).  If this instance contains dynamic properties&#xa; then they are never copied since there can be no&#xa; guarantee about their existence or context on the&#xa; specified object.&#xa; &lt;p&gt;&#xa; This operation does not copy tags from the specified object.&#xa; &lt;p&gt;&#xa; When actually copying properties, this method is&#xa; applied recursively.  For properties which are&#xa; BSimples, then the value is simply a set using&#xa; a get from object.  But for all other properties&#xa; which are BComplexes, then copyFrom is applied.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+the BComplex which contains the&#xa;   property values to copy into this instance&#x27;s&#xa;   properties.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.copyFrom(javax.baja.sys.BComplex) -->
+<method name="copyFrom"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;copyFrom(object, Context.copying)&lt;/code&gt;.
+</description>
+<tag name="@see">#copyFrom(BComplex, Context)</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.hashCode() -->
+<method name="hashCode"  public="true" final="true">
+<description>
+Return built-in &lt;code&gt;java.lang.Object.hashCode()&lt;/code&gt;.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.equals(java.lang.Object) -->
+<method name="equals"  public="true" final="true">
+<description>
+BComplex.equals() is defined as &#x22;this == obj&#x22;.&#xa; To compare equality between the properites of&#xa; of this instance and the specified instance use&#xa; equivalent().
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.equivalent(java.lang.Object) -->
+<method name="equivalent"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Compare if all of this object&#x27;s properties are&#xa; equal to the specified object.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setFacets(javax.baja.sys.Slot, javax.baja.sys.BFacets) -->
+<method name="setFacets"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;setFacets(slot, facets, null)&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setFacets(javax.baja.sys.Slot, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="setFacets"  public="true" final="true">
+<description>
+For Complexes mounted in a component tree, change the facets of a slot.&#xa; The facets will be merged with the facets on the frozen slot giving&#xa; the slot&#x27;s facets priority over the facets being set. The facets are stored&#xa; on the parent component in its slotFacets FacetsMap.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+<description>
+Slot to change.
+</description>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+The BFacets instance to use as new facets for slot.
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+Used to provide additional contextual info.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true">
+<description>
+Get the facets for the specified slot.  The default&#xa; implementation is to return slot.getFacets().  You&#xa; should *never* return null, but rather BFacets.DEFAULT.&#xa;&#xa; Since Niagara 3.7 - If this Object is mounted in a component tree, it merges&#xa; the slot&#x27;s facets with the facets defined for the slot in the slotFacets BFacetsMap&#xa; on the Object&#x27;s parent Component (or the Object itself if it is a Component).
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.propertyValueToString(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="propertyValueToString"  public="true">
+<description>
+This is a convenience for:&#xa; &lt;code&gt;get(prop).toString(getSlotFacets(prop))&lt;/code&gt;
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.loadSlots() -->
+<method name="loadSlots"  public="true" final="true">
+<description>
+Make sure that the children slots are loaded.  This method&#xa; allows component spaces to lazy load their components via&#xa; the LoadCallbacks API.
+</description>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+<description>
+this
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getSlot(java.lang.String) -->
+<method name="getSlot"  public="true" final="true">
+<description>
+Get the Slot for specified name, or return null if name&#xa; does not map to a Slot.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+String name of slot to find.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Slot"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getProperty(java.lang.String) -->
+<method name="getProperty"  public="true" final="true">
+<description>
+Get the Property for specified name, or return null if&#xa; name does not map to a Slot.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+String name of property to find.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getAction(java.lang.String) -->
+<method name="getAction"  public="true" final="true">
+<description>
+Get the Action for specified name, or return&#xa; null if name does not map to a Slot.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getTopic(java.lang.String) -->
+<method name="getTopic"  public="true" final="true">
+<description>
+Get the Topic for specified name, or return&#xa; null if name does not map to a Slot.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Topic"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getSlotCount() -->
+<method name="getSlotCount"  public="true" final="true">
+<description>
+Get the number of slots on this object.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getSlotCount(java.lang.Class&lt;?&gt;) -->
+<method name="getSlotCount"  public="true" final="true">
+<description>
+Convenience method to get the number of slots&#xa; of a particular class.
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getSlotsArray() -->
+<method name="getSlotsArray"  public="true" final="true">
+<description>
+Get a array listing all the slots.
+</description>
+<return>
+<type class="javax.baja.sys.Slot" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getSlots() -->
+<method name="getSlots"  public="true" final="true">
+<description>
+Get a SlotCursor to iterate through all the slots.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Slot"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getPropertiesArray() -->
+<method name="getPropertiesArray"  public="true" final="true">
+<description>
+Get an array of all the properties.
+</description>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getFrozenPropertiesArray() -->
+<method name="getFrozenPropertiesArray"  public="true" final="true">
+<description>
+Get an array of all the frozen properties.
+</description>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getDynamicPropertiesArray() -->
+<method name="getDynamicPropertiesArray"  public="true" final="true">
+<description>
+Get an array of all the dynamic properties.
+</description>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getPropertyCount() -->
+<method name="getPropertyCount"  public="true">
+<description>
+Get the number of properties including both frozen and dynamic.
+</description>
+<return>
+<type class="int"/>
+<description>
+Returns the number of properties.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getProperties() -->
+<method name="getProperties"  public="true" final="true">
+<description>
+Get a cursor to iterate through all the properties.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getActionsArray() -->
+<method name="getActionsArray"  public="true" final="true">
+<description>
+Get an array of all the actions.
+</description>
+<return>
+<type class="javax.baja.sys.Action" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getActions() -->
+<method name="getActions"  public="true" final="true">
+<description>
+Get a cursor to iterate through all the actions.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Action"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getTopicsArray() -->
+<method name="getTopicsArray"  public="true" final="true">
+<description>
+Get an array of all the topics.
+</description>
+<return>
+<type class="javax.baja.sys.Topic" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getTopics() -->
+<method name="getTopics"  public="true" final="true">
+<description>
+Get a cursor to iterate through all the topics.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Topic"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.get(javax.baja.sys.Property) -->
+<method name="get"  public="true" final="true">
+<description>
+Get the specified property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getBoolean(javax.baja.sys.Property) -->
+<method name="getBoolean"  public="true" final="true">
+<description>
+Get the specified boolean property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getInt(javax.baja.sys.Property) -->
+<method name="getInt"  public="true" final="true">
+<description>
+Get the specified int property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getLong(javax.baja.sys.Property) -->
+<method name="getLong"  public="true" final="true">
+<description>
+Get the specified long property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getFloat(javax.baja.sys.Property) -->
+<method name="getFloat"  public="true" final="true">
+<description>
+Get the specified float property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getDouble(javax.baja.sys.Property) -->
+<method name="getDouble"  public="true" final="true">
+<description>
+Get the specified double property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getString(javax.baja.sys.Property) -->
+<method name="getString"  public="true" final="true">
+<description>
+Get the specified String property.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.get(java.lang.String) -->
+<method name="get"  public="true" final="true">
+<description>
+Get a property by it&#x27;s String name, or return&#xa; null if the name doesn&#x27;t map to a property.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+<description>
+String name of property to get.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getPropertyValidator(javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="getPropertyValidator"  public="true">
+<description>
+When a user-invoked batch &lt;code&gt;set()&lt;/code&gt; of properties is about to be&#xa; committed on this complex, this callback will be made to allow any subclasses &#xa; who wish to validate the new property values to be given a chance to do so&#xa; BEFORE the changes are committed.  If a non-null IPropertyValidator instance &#xa; is returned, it will be given a chance to validate the new property values that &#xa; are pending a batch set.&#xa; &#xa; This callback only occurs when it is detected that a user caused the batch property &#xa; change AND the context associated with the batch &lt;code&gt;set()&lt;/code&gt; is not&#xa; one that would cause validation to be skipped.  In particular, this callback&#xa; will be made for a pending batch set when:&#xa; &#xa; The given Context is not equal to &lt;code&gt;Context.skipValidate&lt;/code&gt;,&#xa; &lt;code&gt;Context.commit&lt;/code&gt;, &lt;code&gt;Context.decoding&lt;/code&gt;, or&#xa; &lt;code&gt;Context.copying&lt;/code&gt;&#xa; AND one or more of the following conditions are true: &#xa; 1. The given Context is equal to &lt;code&gt;Context.forceValidate&lt;/code&gt;&#xa; 2. The given Context contains a non-null user (indicating the server side&#xa; handling of a user-invoked client side change)&#xa; 3. The space in which this complex lives is non-null and of type &#xa; &lt;code&gt;BBogSpace&lt;/code&gt; (indicating an offline change)&#xa; 4. The space in which this complex lives is non-null and returns true&#xa; for &lt;code&gt;isProxyComponentSpace()&lt;/code&gt; (indicating a client side change)&#xa; &#xa; It is worth noting that since this callback is made in both the proxy and &#xa; master component spaces for a user-invoked batch property change, it gives you&#xa; the option to perform validation on the client and/or server side. If you only &#xa; want to perform validation on the master component space (server side), you &#xa; could check for &lt;code&gt;getParentComponent().isRunning()&lt;/code&gt; prior to returning&#xa; a non-null IPropertyValidator instance from this method.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="properties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+<description>
+- The array of properties that are about to be set to new values (in batch)
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+- The context associated with the pending set.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.IPropertyValidator"/>
+<description>
+an IPropertyValidator instance that should be used to validate the pending batch&#xa; set, or null if validation is not needed (at the batch level) for this pending batch set.  If&#xa; a non-null value is returned, then the individual property &lt;code&gt;getPropertyValidator()&lt;/code&gt;&#xa; callback will not be called for each individual property in the batch set.  Otherwise if null &#xa; is returned, then the individual property &lt;code&gt;getPropertyValidator()&lt;/code&gt; callback will be&#xa; called for each individual property in the batch set.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getPropertyValidator(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="getPropertyValidator"  public="true">
+<description>
+When a user-invoked &lt;code&gt;set()&lt;/code&gt; of a property is about to be committed&#xa; on this complex, this callback will be made to allow any subclasses who wish &#xa; to validate the new property value to be given a chance to do so BEFORE the change&#xa; is committed.  If a non-null IPropertyValidator instance is returned, it will be &#xa; given a chance to validate the new property value that is pending a set.&#xa; &#xa; This callback only occurs when it is detected that a user caused the property &#xa; change AND the context associated with the &lt;code&gt;set()&lt;/code&gt; is not&#xa; one that would cause validation to be skipped.  In particular, this callback&#xa; will be made for a pending set when:&#xa; &#xa; The given Context is not equal to &lt;code&gt;Context.skipValidate&lt;/code&gt;,&#xa; &lt;code&gt;Context.commit&lt;/code&gt;, &lt;code&gt;Context.decoding&lt;/code&gt;, or&#xa; &lt;code&gt;Context.copying&lt;/code&gt;&#xa; AND one or more of the following conditions are true:&#xa; 1. The given Context is equal to &lt;code&gt;Context.forceValidate&lt;/code&gt;&#xa; 2. The given Context contains a non-null user (indicating the server side&#xa; handling of a user-invoked client side change)&#xa; 3. The space in which this complex lives is non-null and of type &#xa; &lt;code&gt;BBogSpace&lt;/code&gt; (indicating an offline change)&#xa; 4. The space in which this complex lives is non-null and returns true&#xa; for &lt;code&gt;isProxyComponentSpace()&lt;/code&gt; (indicating a client side change)&#xa; &#xa; It is worth noting that since this callback is made in both the proxy and &#xa; master component spaces for a user-invoked property change, it gives you&#xa; the option to perform validation on the client and/or server side. If you only &#xa; want to perform validation on the master component space (server side), you &#xa; could check for &lt;code&gt;getParentComponent().isRunning()&lt;/code&gt; prior to returning&#xa; a non-null IPropertyValidator instance from this method.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+<description>
+- The property that is about to be set to a new value
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+- The context associated with the pending set.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.IPropertyValidator"/>
+<description>
+an IPropertyValidator instance that should be used to validate the pending&#xa; set, or null if validation is not needed for this pending set.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.set(javax.baja.sys.Property[], javax.baja.sys.BValue[], javax.baja.sys.Context) -->
+<method name="set"  public="true" final="true">
+<description>
+Set a group of properties on this BComplex in batch.  This is not&#xa; a transactional operation. Instead, it will attempt to set all properties&#xa; given, and for any that fail, they will be recorded in a BatchSetException while&#xa; successful ones will remain committed regardless of any failures.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="properties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+<description>
+- The properties that should have their values set in batch&#xa;    (the array&#x27;s entries should map one to one to the values array argument).
+</description>
+</parameter>
+<parameter name="values">
+<type class="javax.baja.sys.BValue" dimension="1"/>
+<description>
+- The new values that should be set in batch on the properties.&#xa;    (the array&#x27;s entries should map one to one to the properties array argument).
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+- The context associated with this set operation.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.set(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="set"  public="true" final="true">
+<description>
+Set the specified property value.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.set(javax.baja.sys.Property, javax.baja.sys.BValue) -->
+<method name="set"  public="true" final="true">
+<description>
+Set with null context
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setBoolean(javax.baja.sys.Property, boolean, javax.baja.sys.Context) -->
+<method name="setBoolean"  public="true" final="true">
+<description>
+Set for a boolean
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="boolean"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setInt(javax.baja.sys.Property, int, javax.baja.sys.Context) -->
+<method name="setInt"  public="true" final="true">
+<description>
+Set for an int
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setLong(javax.baja.sys.Property, long, javax.baja.sys.Context) -->
+<method name="setLong"  public="true" final="true">
+<description>
+Set for a long
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="long"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setFloat(javax.baja.sys.Property, float, javax.baja.sys.Context) -->
+<method name="setFloat"  public="true" final="true">
+<description>
+Set for a float
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setDouble(javax.baja.sys.Property, double, javax.baja.sys.Context) -->
+<method name="setDouble"  public="true" final="true">
+<description>
+Set for a double
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="double"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setString(javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="setString"  public="true" final="true">
+<description>
+Set for a String
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setBoolean(javax.baja.sys.Property, boolean) -->
+<method name="setBoolean"  public="true" final="true">
+<description>
+Set for a boolean with null context
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setInt(javax.baja.sys.Property, int) -->
+<method name="setInt"  public="true" final="true">
+<description>
+Set for an int with null context
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setLong(javax.baja.sys.Property, long) -->
+<method name="setLong"  public="true" final="true">
+<description>
+Set for a long with null context
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setFloat(javax.baja.sys.Property, float) -->
+<method name="setFloat"  public="true" final="true">
+<description>
+Set for a float with null context
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setDouble(javax.baja.sys.Property, double) -->
+<method name="setDouble"  public="true" final="true">
+<description>
+Set for a double with null context
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setString(javax.baja.sys.Property, java.lang.String) -->
+<method name="setString"  public="true" final="true">
+<description>
+Set for a String with null context
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.set(java.lang.String, javax.baja.sys.BValue) -->
+<method name="set"  public="true" final="true">
+<description>
+Set using a String property name.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.set(java.lang.String, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="set"  public="true" final="true">
+<description>
+Set using a String property name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.getFlags(javax.baja.sys.Slot) -->
+<method name="getFlags"  public="true" final="true">
+<description>
+Get the bitmask of flags for the specified slot.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setFlags(javax.baja.sys.Slot, int) -->
+<method name="setFlags"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;setFlags(slot, flags, null)&lt;/code&gt;.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.setFlags(javax.baja.sys.Slot, int, javax.baja.sys.Context) -->
+<method name="setFlags"  public="true" final="true">
+<description>
+Set the bitmask of flags for the specified slot.  This&#xa; method is only supported on BComponent instances.  BSimples&#xa; have no slots and BStruct properties have fixed flags&#xa; which may not be modified on a per instance basis.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Dump slots and information common to all BComplex&#x27;s.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComplex.spyRelations(javax.baja.spy.SpyWriter) -->
+<method name="spyRelations"  protected="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.spyTags(javax.baja.spy.SpyWriter) -->
+<method name="spyTags"  protected="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, javax.baja.sys.BValue, javax.baja.sys.BFacets) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, boolean, javax.baja.sys.BFacets) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="boolean"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, int, javax.baja.sys.BFacets) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, long, javax.baja.sys.BFacets) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="long"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, float, javax.baja.sys.BFacets) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="float"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, double, javax.baja.sys.BFacets) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="double"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, java.lang.String, javax.baja.sys.BFacets) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, javax.baja.sys.BValue) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, boolean) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, int) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, long) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="long"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, float) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="float"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, double) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.newProperty(int, java.lang.String) -->
+<method name="newProperty"  protected="true" static="true">
+<description/>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="defaultValue">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework support access; this method should&#xa; never be used by developers.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComplex.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComplex.IN -->
+<field name="IN"  protected="true" static="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComplex.OUT -->
+<field name="OUT"  protected="true" static="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

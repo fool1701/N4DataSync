@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="rt" qualifiedName="com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest" name="BInfinityPointDiscoverRequest" packageName="com.tridium.andoverInfinity.comm.req" public="true">
+<description>
+Point discover request for Infinity
+</description>
+<tag name="@author">cturman</tag>
+<tag name="@creation">May 1, 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="com.tridium.ddf.comm.req.BDdfDiscoveryRequest"/>
+</extends>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.Vt100Const"/>
+</implements>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.req.RequiresNetworkAccess"/>
+</implements>
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest() -->
+<constructor name="BInfinityPointDiscoverRequest" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest.processReceive(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="processReceive"  public="true">
+<description/>
+<parameter name="iDdfDataFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+</return>
+<throws>
+<type class="com.tridium.ddf.comm.rsp.DdfResponseException"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest.toByteArray() -->
+<method name="toByteArray"  public="true">
+<description>
+Return a byte array that first ensures the Infinity panel is in&#xa; command line mode, and then sends the command to change to correct device&#xa; Changing to individual view/menus is done in the processReceive processing.
+</description>
+<tag name="@returns">a  byteArray</tag>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest.parseDiscoveryObject(java.lang.String, int) -->
+<method name="parseDiscoveryObject"  public="true">
+<description>
+Parse the array of strings returned in the discovery request into &#xa; point discovery leafs
+</description>
+<tag name="@see">com.tridium.ddf.comm.rsp.BIDdfDiscoverResponse#parseDiscoveryObjects(javax.baja.sys.Context)</tag>
+<parameter name="line">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="mode">
+<type class="int"/>
+</parameter>
+<return>
+<type class="com.tridium.andoverInfinity.discover.BInfinityPointDiscoveryLeaf"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest.setNetwork(com.tridium.andoverInfinity.BInfinityNetwork) -->
+<method name="setNetwork"  public="true">
+<description>
+Implementation of RequiresNetworkAccess interface
+</description>
+<tag name="@see">com.tridium.andoverInfinity.comm.req.RequiresNetworkAccess#setNetwork(com.tridium.andoverInfinity.BInfinityNetwork)</tag>
+<parameter name="network">
+<type class="com.tridium.andoverInfinity.BInfinityNetwork"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityPointDiscoverRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

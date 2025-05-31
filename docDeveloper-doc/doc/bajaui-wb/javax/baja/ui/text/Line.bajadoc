@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.text.Line" name="Line" packageName="javax.baja.ui.text" public="true">
+<description>
+Line stores the character buffer of a logical line&#xa; in a document.  A Line is composed of a char[] which &#xa; stores the individual chars and a Segment[] with the &#xa; Line&#x27;s segment pointers.  Each segment models a run of&#xa; characters in the buffer that gets rendered uniquely.&#xa; Although the underlying char buffer and segments are &#xa; publicly exposed, the Line class should be treated as &#xa; immutable, and never modified once created.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">6 Aug 01</tag>
+<tag name="@version">$Revision: 13$ $Date: 8/12/01 1:49:25 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.ui.text.Line(char[], javax.baja.ui.text.Segment[]) -->
+<constructor name="Line" public="true">
+<parameter name="buffer">
+<type class="char" dimension="1"/>
+</parameter>
+<parameter name="segments">
+<type class="javax.baja.ui.text.Segment" dimension="1"/>
+</parameter>
+<description>
+Construct a new Line with the specified character&#xa; data, and parsed Segment runs.  The arrays passed&#xa; should be immutable and never be changed once passed&#xa; to the Line constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.text.Line(char[], int, int, java.util.List&lt;javax.baja.ui.text.Segment&gt;) -->
+<constructor name="Line" public="true">
+<parameter name="buffer">
+<type class="char" dimension="1"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="length">
+<type class="int"/>
+</parameter>
+<parameter name="segments">
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.ui.text.Segment"/>
+</args>
+</parameterizedType>
+</parameter>
+<description>
+Construct a new Line from the specified mutable buffer&#xa; and segments List, by allocating local copies.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.text.Line(javax.baja.ui.text.Line, javax.baja.ui.text.Line) -->
+<constructor name="Line" public="true">
+<parameter name="line1">
+<type class="javax.baja.ui.text.Line"/>
+</parameter>
+<parameter name="line2">
+<type class="javax.baja.ui.text.Line"/>
+</parameter>
+<description>
+Construct a Line which is a join of the two specified&#xa; lines.  Line1 must not end with a newline segment.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.text.Line.getColumnCount() -->
+<method name="getColumnCount"  public="true">
+<description>
+Get the number of logical columns in this line.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.getSegmentAt(int) -->
+<method name="getSegmentAt"  public="true">
+<description>
+Get the Segment at the specified column, or null&#xa; if the column is out of bounds for this line.
+</description>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.text.Segment"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.getSegmentIndexAt(int) -->
+<method name="getSegmentIndexAt"  public="true">
+<description>
+Get the Segment at the specified column, or -1&#xa; if the column is out of bounds for this line.
+</description>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.endsWithNewline() -->
+<method name="endsWithNewline"  public="true">
+<description>
+Does this line end with a newline character.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.getColumnCountWithoutNewline() -->
+<method name="getColumnCountWithoutNewline"  public="true">
+<description>
+Get the length of the line in logical columns&#xa; without a newline character.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.getWidth(javax.baja.gx.BFont) -->
+<method name="getWidth"  public="true">
+<description>
+Return the width of the line using the specified&#xa; font.
+</description>
+<parameter name="font">
+<type class="javax.baja.gx.BFont"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.getWidth(javax.baja.gx.BFont, int, int) -->
+<method name="getWidth"  public="true">
+<description/>
+<parameter name="font">
+<type class="javax.baja.gx.BFont"/>
+</parameter>
+<parameter name="startChar">
+<type class="int"/>
+</parameter>
+<parameter name="endChar">
+<type class="int"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.toString() -->
+<method name="toString"  public="true">
+<description>
+To string.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.Line.buffer -->
+<field name="buffer"  public="true" final="true">
+<type class="char" dimension="1"/>
+<description>
+This is the character buffer containing the chars &#xa; which compose the line.  Every line except the last &#xa; line MUST end with &#x22;\n&#x22;.  Other newline combinations &#xa; such as &#x22;\r&#x22; and &#x22;\r\n&#x22; are not supported and must be &#xa; parsed out before constructing a Line.  This array&#xa; must never be modified!
+</description>
+</field>
+
+<!-- javax.baja.ui.text.Line.segments -->
+<field name="segments"  public="true" final="true">
+<type class="javax.baja.ui.text.Segment" dimension="1"/>
+<description>
+This is the array containing the line&#x27;s segement series.&#xa; Each segment provides an offset and length into the char[] &#xa; buffer.  Each segment also has a type and subType attribute&#xa; which is used by the renderer to provide color coding.
+</description>
+</field>
+
+</class>
+</bajadoc>

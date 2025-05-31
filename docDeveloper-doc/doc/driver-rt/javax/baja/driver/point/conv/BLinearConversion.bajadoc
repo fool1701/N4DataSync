@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="driver" runtimeProfile="rt" qualifiedName="javax.baja.driver.point.conv.BLinearConversion" name="BLinearConversion" packageName="javax.baja.driver.point.conv" public="true" final="true">
+<description>
+BLinearConversion converts between device value space and&#xa; proxy value space using a linear conversion with a scale&#xa; and offset.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@version">$Revision: 2$ $Date: 1/25/08 4:04:10 PM EST$</tag>
+<tag name="@creation">9 Feb 05</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.driver.point.BProxyConversion"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.driver.point.conv.BLinearConversion.make(double, double) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a LinearConversion instance with the specified scale&#xa; and offset to use for the device to proxy linear equation.
+</description>
+<parameter name="scale">
+<type class="double"/>
+</parameter>
+<parameter name="offset">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.driver.point.conv.BLinearConversion"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.getScale() -->
+<method name="getScale"  public="true">
+<description>
+Get the scale value for the device to proxy linear equation.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.getOffset() -->
+<method name="getOffset"  public="true">
+<description>
+Get the offset value for the device to proxy linear equation.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.convertDeviceToProxy(javax.baja.driver.point.BProxyExt, javax.baja.status.BStatusValue, javax.baja.status.BStatusValue) -->
+<method name="convertDeviceToProxy"  public="true">
+<description>
+Convert using forward equation: &lt;code&gt;proxy = device*scale + offset&lt;/code&gt;.
+</description>
+<parameter name="ext">
+<type class="javax.baja.driver.point.BProxyExt"/>
+</parameter>
+<parameter name="deviceValue">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<parameter name="proxyValue">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.convertProxyToDevice(javax.baja.driver.point.BProxyExt, javax.baja.status.BStatusValue, javax.baja.status.BStatusValue) -->
+<method name="convertProxyToDevice"  public="true">
+<description>
+Convert using reverse equation: &lt;code&gt;device = (proxy-offset)/scale&lt;/code&gt;.
+</description>
+<parameter name="ext">
+<type class="javax.baja.driver.point.BProxyExt"/>
+</parameter>
+<parameter name="proxyValue">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<parameter name="deviceValue">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BLinearConversion uses its scale/offset to compute the hash code.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description/>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<description/>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<description/>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<description/>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.getType() -->
+<method name="getType"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.driver.point.conv.BLinearConversion"/>
+<description>
+This is default instance has scale of 1 and offset of 0.
+</description>
+</field>
+
+<!-- javax.baja.driver.point.conv.BLinearConversion.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

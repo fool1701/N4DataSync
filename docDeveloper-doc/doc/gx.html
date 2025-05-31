@@ -1,0 +1,419 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  2 Oct 01
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Views</title>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/jsdoc/export-ux/index.html" class="navbar">Prev</a> |  <a href="/doc/bajaui.html" class="navbar">Next</a></p>
+
+
+<!-- Title Block -->
+<h1 class='title'>Gx Graphics Toolkit</h1> 
+
+<!------------------------------------------------------------->
+<h1 id="overview">Overview</h1>
+<!------------------------------------------------------------->
+
+<p>
+The <a href='module://docDeveloper/doc/gx-rt/module-index.bajadoc'>gx</a> module defines the graphics 
+primitives used for rendering to a display device.  For example there implements for "painting" 
+to computer screens and another for "painting" a PDF file.  Many of the simple types used in 
+the rest of the stack are defined in gx including 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BColor.bajadoc'>BColor</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BFont.bajadoc'>BFont</a>, 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BPen.bajadoc'>BPen</a>, 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BBrush.bajadoc'>BBrush</a>, 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BGeom.bajadoc'>BGeom</a>, and 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BTransform.bajadoc'>BTransform</a>.  
+</p>
+
+<p>
+The gx APIs use a vector coordinate system based on x and y represented as
+doubles. The origin 0,0 is the top left hand corner with x incrementing to the
+right and y incrementing down. This coordinate system is called the logical
+coordinate space (sometimes called the user space). How the logical coordinate
+space maps to the device coordinate space is environment specific. Usually a
+logical coordinate maps directly into pixels, although transforms may alter
+this mapping.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="color">Color</h1>
+<!------------------------------------------------------------->
+
+<p>
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BColor.bajadoc'>BColor</a> stores an RGBA color.  
+It's string syntax supports a wide range of formats including most specified by CSS3:
+</p>
+
+<ul>
+<li><b>SVG Keywords</b>:  the full list of X11/SVG keywords is available by name and also 
+defined as constants on BColor.  Examples:  red, springgreen, navajowhite.</li>
+
+<li><b>RGB Function</b>:  the rgb() function may be used with the red, green, and blue components 
+specified as an integer between 0-255 or as a percent 0%-100%.  Examples: rgb(0,255,0), 
+rgb(0%,100%,0%).</li>
+
+<li><b>RGBA Function</b>:  the rgba() function works just like rgb(), but adds a fourth alpha 
+component expressed as a float between 0.0 and 1.0.  Example:  rgba(0,100,255,0.5).</li>
+
+<li><b>Hash</b>:  the following hash formats are supported #rgb, #rrggbb, and #aarrggbb.  The first 
+two follow CSS rules, and the last defines the alpha component using the highest 8 bits.  
+Examples: #0b7, #00bb77, #ff00bb77 (all are equivalent).</li>
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="font">Font</h1>
+<!------------------------------------------------------------->
+
+<p>
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BFont.bajadoc'>BFont</a> is composed of three components:
+</p>
+
+<ul>
+<li><b>Name</b>:  a font family name stored as a String.</li>
+<li><b>Size</b>: a point size stored as a double.</li>
+<li><b>Style</b>: a set of attributes including bold, italics, and underline.</li>
+</ul>
+
+<p>
+The format of fonts is "[italic || bold || underline] {size}pt {name}".  Examples:  "12pt Times New Roman", 
+"bold 11pt sans-serif", "italic underline 10pt Arial".  The <code>BFont</code> class also provides access 
+to a font's metrics such as baseline, height, ascent, descent, and for calculating character widths.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="brush">Brush</h1>
+<!------------------------------------------------------------->
+
+<p>
+The <a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BBrush.bajadoc'>BBrush</a> class encapsulates how a 
+shape is filled.  The gx brush model is based on the SVG paint model.  There are four types of brushes:
+</p>
+
+<ul>
+<li><b>Solid Color</b>:  the string format is just a standard color string such as "red"</li>
+<li><b>Inverse</b>:  uses an XOR painting mode</li>
+<li><b>Gradients</b>:  linear and radial gradients</li>
+<li><b>Image</b>: based on a bitmap image file which may tiled or untiled</li>
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="pen">Pen</h1>
+<!------------------------------------------------------------->
+
+<p>
+The <a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BPen.bajadoc'>BPen</a> class models how a 
+geometric shape is outlined.  A pen is composed of:
+</p>
+
+<ul>
+<li><b>Width</b>: as double in logical coordinates</li>
+<li><b>Cap</b>: how a pen is terminated on open subpaths - capButt, capRound, capSquare.</li>
+<li><b>Join</b>: how corners are drawn - joinMiter, joinRound, joinBevel</li>
+<li><b>Dash</b>: a pattern of doubles for on/off lengths</li>
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="coodinates">Coordinates</h1>
+<!------------------------------------------------------------->
+
+<p>
+The following set of classes is designed to work with the gx coordinate system.
+Each concept is modeled by three classes: an interface, a mutable class, and an
+immutable BSimple version that manages the string encoding.
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="point">Point</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/IPoint.bajadoc'>IPoint</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/Point.bajadoc'>Point</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BPoint.bajadoc'>BPoint</a>
+classes store an x and y location using two doubles. The string 
+format is "x, y". Example "40,20", "0.4,17.33".
+</p>
+
+
+<!------------------------------------------------------------->
+<h2 id="size">Size</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/ISize.bajadoc'>ISize</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/Size.bajadoc'>Size</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BSize.bajadoc'>BSize</a>
+classes store a width and height using two doubles. The string format is
+"width,height". Examples include "100,20", "10.5, 0.5".
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="insets">Insets</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/IInsets.bajadoc'>IInsets</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/Insets.bajadoc'>Insets</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BInsets.bajadoc'>BInsets</a>
+classes store side distances using four doubles (top, right, bottom, and
+right). The string format for insets follows CSS margin style:
+"top,right,bottom,left". If only one value is provided it applies to all four
+sides. If two values are provided the first is top/bottom and the second
+right/left. If three values are provided the first is top, second is
+right/left, and third is bottom. Four values apply to top, right, bottom, left
+respectively. Examples "4" expands to "4,4,4,4"; "2,3" expands to "2,3,2,3";
+"1,2,3" expands to "1,2,3,2".                          
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="geom">Geom</h1>
+<!------------------------------------------------------------->
+
+<p>
+The geometry classes are used to model rendering primitives. They all following
+the pattern used with Point, Size, and Insets with an interface, mutable
+class, and immutable BSimple. Geometries can be used to stroke outlines, fill
+shapes, or set clip bounds.
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="geombase">Geom</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/IGeom.bajadoc'>IGeom</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/Geom.bajadoc'>Geom</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BGeom.bajadoc'>BGeom</a>
+classes are all abstract base classes for the geometry APIs.
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="line">LineGeom</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/ILineGeom.bajadoc'>ILineGeom</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/LineGeom.bajadoc'>LineGeom</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BLineGeom.bajadoc'>BLineGeom</a>
+classes model a line between two points in the logical coordinate system. The
+string format of line is "x1,y1,x2,y2".
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="rect">RectGeom</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/IRectGeom.bajadoc'>IRectGeom</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/RectGeom.bajadoc'>RectGeom</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BRectGeom.bajadoc'>BRectGeom</a>
+classes model a rectangle in the logical coordinate system. The string format
+of rectangle is "x,y,width,height".
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="ellipse">EllipseGeom</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/IEllipseGeom.bajadoc'>IEllipseGeom</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/EllipseGeom.bajadoc'>EllipseGeom</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BEllipseGeom.bajadoc'>BEllipseGeom</a>
+classes model a ellipse bounded by a rectangle in the logical coordinate space.
+The string format is "x,y,width,height".
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="polygon">PolygonGeom</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/IPolygonGeom.bajadoc'>IPolygonGeom</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/PolygonGeom.bajadoc'>PolygonGeom</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BPolygonGeom.bajadoc'>BPolygonGeom</a>
+classes model a closed area defined by a series of line segments. The string
+format of polygon is "x1,y1 x2,y2,...".
+</p>
+
+<!------------------------------------------------------------->
+<h2 id="path">PathGeom</h2>
+<!------------------------------------------------------------->
+
+<p>
+The 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/IPathGeom.bajadoc'>IPathGeom</a>,
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/PathGeom.bajadoc'>PathGeom</a>, and
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BPathGeom.bajadoc'>BPathGeom</a>
+classes define a general path to draw or fill.  The model and string format 
+of a path is based on the SVG path element.  The format is a list of operations.  
+Each operation is denoted by a single letter. A capital letter implies absolute
+coordinates and a lowercase letter implies relative coordinates. Multiple
+operations of the same type may omit the letter after the first declaration.
+</p>
+
+<ul>
+
+<li><b>Moveto</b>: move to the specified point. "M x,y" or "m x,y".</li>
+
+<li><b>Lineto</b>: draw a line to the specified point: "L x,y" or "l x,y".</li>
+
+<li><b>Horizontal Lineto</b>: draw a horizontal line at current y coordinate: "H x" or "h x".</li>
+
+<li><b>Vertical Lineto</b>: draw a vertical line at the current x coordinate: "V y" or "v y".</li>
+
+<li><b>Close</b>: draw a straight line to close the current path: "Z" or "z".</li>
+
+<li><b>Curveto</b>: draws a Bezier curve from current point to x,y using x1,y1
+as control point of beginning of curve and x2,y2 as control point of end of
+curve: "C x1,y1 x2,y2 x,y" or "c x1,y1 x2,y2 x,y".</li>
+
+<li><b>Smooth Curveto</b>: draws a Bezier curve from current point to x,y. The
+first control point is assumed to be the reflection of the second control point
+on the previous command relative to the current point. "S x2,y2 x,y" or "s
+x2,y2 x,y".</li>
+
+<li><b>Quadratic Curveto</b>: draws a quadratic Bezier curve from current point
+to x,y using x1,y1 as control point: "Q x1,y1 x,y" or "q x1,y1 x,y".</li>
+
+<li><b>Smooth Quadratic Curveto</b>: draws a quadratic Bezier curve from
+current point to x,y with control point a reflection of previous control point:
+"T x,y" or "t x,y".</li>
+
+<li><b>Arc</b>: draws an elliptical arc from the current point to x,y: "A rx,ry
+x-axis-rotation large-arc-flag sweep-flag x y" or "a rx,ry x-axis-rotation
+large-arc-flag sweep-flag x y".</li>
+
+</ul>
+
+<p>
+Refer to the W3 SVG spec (http://www.w3.org/TR/SVG/) for the formal
+specification and examples.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="transform">Transform</h1>
+<!------------------------------------------------------------->
+
+<p>
+Transforms allow a new logical coordinate system to be derived from an existing
+coordinate system. The gx transform model is based on SVG and uses the exact
+string formatting.  <a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BTransform.bajadoc'>BTransform</a>
+stores a list of transform operations:
+</p>
+
+<ul>
+
+<li><b>Translate</b>:  moves the origin by a tx and ty distance.</li>
+<li><b>Scale</b>: scales the coordinates system by an sx and sy size.</li>
+<li><b>Skew</b>: skew may be defined along the x or y axis.</li>
+<li><b>Rotate</b>: rotate the coordinate system around the origin using a degree angle.</li>
+
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="image">Image</h1>
+<!------------------------------------------------------------->
+
+<p>
+The <a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/BImage.bajadoc'>BImage</a>
+class is used to manage bitmap images. Image's are typically loaded from a 
+list of ords which identify a list of files (GIF, PNG, and JPEG supported). 
+When more than file is specified, the image is composited using alpha 
+transparency from bottom to top (useful for "badging" icons).  Images may 
+also be created in memory and "painted" using the <code>Graphics</code> 
+API.  
+</p>  
+
+<p> 
+The framework will often load images asynchronously in a background thread
+to maintain performance.  Developers using <code>BImages</code> directly 
+can poll to see if the image is loaded via the <code>isLoaded()</code> method.
+Use the <code>sync()</code> method to block until the image is fully loaded.
+Animated GIFs require that the developer call <code>animate()</code> at a frame
+rate of 10frames/second.  Typically developers should display images using BLabel 
+which automatically handles async loading and animation.
+</p>                                                                        
+
+<p>
+The framework caches images based on their size and how recently they 
+are used.  You may use the <a href="local:|spy:/imageManager">Image Manager</a>
+spy page to review the current cache.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="graphics">Graphics</h1>
+<!------------------------------------------------------------->
+
+<p>
+Painting to a device is encapsulated by the 
+<a href='module://docDeveloper/doc/gx-rt/javax/baja/gx/Graphics.bajadoc'>Graphics</a> class.  
+The primitive paint operations are:
+</p>
+
+<ul>
+<li><b>fill(IGeom)</b>: filling a geometry involves painting a geometry's
+interior area with the current brush. Remember a brush can be a solid color, a
+gradient, or texture.</li>
+
+<li><b>stroke(IGeom)</b>: stroking a geometry is to draw its outline or line
+segments. Stroking uses the current pen to derive the "stroke geometry" based
+on the pen's width and style. Then the interior of the stroke is filled using
+the current brush.</li>
+
+<li><b>drawString()</b>: this draws a set of characters to the device. The
+shape of the characters is derived from the current font. The interior of the
+font is filled with the current brush. Note: we don't currently support
+stroking fonts like SVG.</li>
+
+<li><b>drawImage()</b>: this draws an bitmap image to the device; the image may
+be scaled depending on the parameters and/or current transform.</li>
+
+</ul>
+
+<p>
+All paint operations perform compositing and clipping. Compositing means that
+colors are combined as painting occurs bottom to top. For example drawing a GIF or
+PNG file with transparent pixels allows the pixels drawn underneath to show
+through. Alpha transparency performs color blending with the pixels underneath.
+Clipping is the processing of constraining paint operations to a specified
+geometry. Any pixels from a paint operation which would be drawn outside the
+clip geometry are ignored.  Use the <code>clip()</code> method to clip to a 
+specific region.
+</p>           
+
+<p>
+Often it is necessary to save the current state of the graphics to perform a
+temporary paint operation, and then to restore the graphics.  An example is to
+set a clip region, paint something, then restore the original clip.  The
+<code>push()</code> and <code>pop()</code> are used to accomplish this functionality
+by maintaining a stack of graphics state.  You should always call <code>pop()</code>
+in a <code>try finally</code> block to ensure that your code cleans up properly.
+</p>
+
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/jsdoc/export-ux/index.html" class="navbar">Prev</a> |  <a href="/doc/bajaui.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

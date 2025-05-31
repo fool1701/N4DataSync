@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="gx" runtimeProfile="rt" qualifiedName="javax.baja.gx.BImage" name="BImage" packageName="javax.baja.gx" public="true" final="true">
+<description>
+BImage is a representation of a raster image.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@version">$Revision: 40$ $Date: 11/13/08 4:35:32 PM EST$</tag>
+<tag name="@creation">1 Dec 00</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.gx.BImage.make(javax.baja.sys.BIcon) -->
+<method name="make"  public="true" static="true">
+<description>
+Load an image from a icon.
+</description>
+<parameter name="icon">
+<type class="javax.baja.sys.BIcon"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.make(javax.baja.naming.BOrdList) -->
+<method name="make"  public="true" static="true">
+<description>
+Load an image from a ord list.  The list is z-ordered&#xa; from bottom to top.
+</description>
+<parameter name="ordList">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.make(javax.baja.naming.BOrd) -->
+<method name="make"  public="true" static="true">
+<description>
+Load an image from a single ord.
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(BOrdList.make(ordList))&lt;/code&gt;.
+</description>
+<parameter name="ordList">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.make(byte[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Load an image from a memory buffer.  The buffer should&#xa; contain an image file in GIF, PNG, or JPEG format.
+</description>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.make(double, double) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a new image with the specified dimensions.
+</description>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="height">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getOrdList() -->
+<method name="getOrdList"  public="true">
+<description>
+Get the list of ords which reference this image&#xa; files.  The list is z-ordered from bottom to top.&#xa; This ord list is immutable regardless of any calls&#xa; to &lt;code&gt;setBaseOrd()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.naming.BOrdList"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getAbsoluteOrdList() -->
+<method name="getAbsoluteOrdList"  public="true">
+<description>
+Get the absolute ord list taking into account the&#xa; last call to &lt;code&gt;setBaseOrd()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.naming.BOrdList"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.setBaseOrd(javax.baja.naming.BOrd) -->
+<method name="setBaseOrd"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Set the base ord used to resolve the ord list into&#xa; image files.  This call results in a new absOrdList&#xa; but doesn&#x27;t alter the orginal ordList.
+</description>
+<parameter name="baseOrd">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.isLoaded() -->
+<method name="isLoaded"  public="true">
+<description>
+Return true if the image is fully loaded into memory.  If&#xa; the image is still being loaded asynchronously on a background&#xa; thread then return false.  Use the &lt;code&gt;sync()&lt;/code&gt; method&#xa; if you wish to block until the image is fully loaded.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.isDimensionsLoaded() -->
+<method name="isDimensionsLoaded"  public="true">
+<description>
+Return true if the image is fully loaded into memory.  If&#xa; thread then return false.  Use the &lt;code&gt;sync()&lt;/code&gt; method&#xa; the image is still being loaded asynchronously on a background&#xa; if you wish to block until the image is fully loaded.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.syncDimensions() -->
+<method name="syncDimensions"  public="true">
+<description>
+This method blocks the calling thread until the image&#xa; dimensions are loaded into memory.  If the image dimensions or the image itself is already&#xa; loaded into memory then this method has no effect.
+</description>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.sync() -->
+<method name="sync"  public="true">
+<description>
+This method blocks the calling thread until the image&#xa; is fully loaded into memory.  If the image is already&#xa; loaded into memory then this method has no effect.
+</description>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.animate() -->
+<method name="animate"  public="true">
+<description>
+If the widget painting the image supports animation,&#xa; then this method should be called repeatly at the&#xa; standard framerate of 10/frames per second.  If the&#xa; image is animated and a repaint is required then return&#xa; true.  If this image doesn&#x27;t support animation, or the&#xa; frame&#x27;s images hasn&#x27;t changed then return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getGraphics() -->
+<method name="getGraphics"  public="true">
+<description>
+Get a graphics context used to paint to the image.
+</description>
+<return>
+<type class="javax.baja.gx.Graphics"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getWidth() -->
+<method name="getWidth"  public="true">
+<description>
+Return the width of the image in pixels.  If&#xa; the image cannot be loaded, then return 0.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getHeight() -->
+<method name="getHeight"  public="true">
+<description>
+Return the height of the image in pixels.  If&#xa; the image cannot be loaded, then return 0.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getPixels() -->
+<method name="getPixels"  public="true">
+<description>
+Return the image data as an array of pixels. The array&#xa; is ordered [(0,0),(1,0)...(w,0),(0,1),(1,1)...], where&#xa; (x,y) represents a pixel location on the image. Each&#xa; array element represents one pixel in ARGB. A new array&#xa; is allocated and returned on each call to this method,&#xa; so it is safe to modify this array without effecting the&#xa; original image.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.setPixels(int[]) -->
+<method name="setPixels"  public="true">
+<description>
+Set the image data for this image. See getPixels()&#xa; for array format information.
+</description>
+<parameter name="pixels">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.dispose() -->
+<method name="dispose"  public="true">
+<description>
+Dispose of this image and any system&#xa; resources it might be holding.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getDisabledImage() -->
+<method name="getDisabledImage"  public="true">
+<description>
+Get this image with a disabled effect.
+</description>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.getHighlightedImage() -->
+<method name="getHighlightedImage"  public="true">
+<description>
+Get this image with a highlighted effect.
+</description>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.transform(javax.baja.gx.BTransform) -->
+<method name="transform"  public="true">
+<description>
+Return a new image which is the result of applying the&#xa; specified transform.
+</description>
+<parameter name="transform">
+<type class="javax.baja.gx.BTransform"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.isNull() -->
+<method name="isNull"  public="true">
+<description>
+Return if this is the null image.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+Starting in Niagara 3.4, the hash code returned&#xa; is based on the the list of ords which reference&#xa; this image file.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Equality.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<description>
+Serialized using writeUTF() of string encoding.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BImage.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<description>
+Unserialized using readUTF() of string encoding.
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BImage.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description>
+Serialize using OrdList syntax.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<description>
+Deserialize using OrdList syntax.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BImage.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework use only.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BImage.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BImage"/>
+<description>
+The null image.
+</description>
+</field>
+
+<!-- javax.baja.gx.BImage.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BImage"/>
+<description>
+The default image is NULL.
+</description>
+</field>
+
+<!-- javax.baja.gx.BImage.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

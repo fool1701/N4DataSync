@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="kitControl" runtimeProfile="rt" qualifiedName="com.tridium.kitControl.BInterstartDelayMaster" name="BInterstartDelayMaster" packageName="com.tridium.kitControl" public="true">
+<description>
+BInterstartDelayMaster&#xa;&#xa; This class is just a rough first hack to test the&#xa; extension mechanism.  It needs some polishing..&#xa; FIXX:  add a property display list of BComponents in&#xa; the wait list&#xa; FIXX:  this object relies on checkInterstartDelay()&#xa; from the delay ext to start timers and manage the&#xa; list.  It needs to be modified to execute periodically&#xa; If an object in the list were to have its ext&#xa; removed or no longer need to start, the&#xa; checkInterstartDelay() will never be made and the&#xa; list will not be re-evaluated.&#xa; FIXX:  Is a vector the best way to manage list of&#xa; waiting objects?  How to handle object deletion?&#xa; FIXX: dispose of schedules when done?
+</description>
+<tag name="@author">Dan Giorgis on 17 Nov 00</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="slaveLink" flags="tr">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;slaveLink&lt;/code&gt; property.&#xa; This Ord.  Used to link to slave BInterstartDelayExt&#xa; It will automatically be initialized this Ord.
+</description>
+<tag name="@see">#getSlaveLink</tag>
+<tag name="@see">#setSlaveLink</tag>
+</property>
+
+<property name="defaultDelay" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;defaultDelay&lt;/code&gt; property.&#xa; Default delay time to use per&#xa; start request.  Only used&#xa; if the object request start&#xa; permission does not specify&#xa; at delay time.
+</description>
+<tag name="@see">#getDefaultDelay</tag>
+<tag name="@see">#setDefaultDelay</tag>
+</property>
+
+<property name="activeDelay" flags="tr">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;activeDelay&lt;/code&gt; property.&#xa; true if the interstart delay is&#xa; active
+</description>
+<tag name="@see">#getActiveDelay</tag>
+<tag name="@see">#setActiveDelay</tag>
+</property>
+
+<property name="delayTime" flags="tr">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;delayTime&lt;/code&gt; property.&#xa; length of current delay
+</description>
+<tag name="@see">#getDelayTime</tag>
+<tag name="@see">#setDelayTime</tag>
+</property>
+
+<property name="delayStartTime" flags="tr">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;delayStartTime&lt;/code&gt; property.&#xa; time at which current delay&#xa; started
+</description>
+<tag name="@see">#getDelayStartTime</tag>
+<tag name="@see">#setDelayStartTime</tag>
+</property>
+
+<property name="numObjectsWaiting" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;numObjectsWaiting&lt;/code&gt; property.&#xa; number of objects currently waiting&#xa; to start
+</description>
+<tag name="@see">#getNumObjectsWaiting</tag>
+<tag name="@see">#setNumObjectsWaiting</tag>
+</property>
+
+<action name="delayTimerExpired" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;delayTimerExpired&lt;/code&gt; action.&#xa; delayTimerExpired
+</description>
+<tag name="@see">#delayTimerExpired()</tag>
+</action>
+
+</class>
+</bajadoc>

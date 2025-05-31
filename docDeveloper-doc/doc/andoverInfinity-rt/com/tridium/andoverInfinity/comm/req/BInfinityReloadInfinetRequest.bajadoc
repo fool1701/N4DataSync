@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="rt" qualifiedName="com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest" name="BInfinityReloadInfinetRequest" packageName="com.tridium.andoverInfinity.comm.req" public="true">
+<description>
+Message to put the infinity network device into reload mode
+</description>
+<tag name="@author">cturman</tag>
+<tag name="@creation">May 1, 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="com.tridium.ddf.comm.req.BDdfRequest"/>
+</extends>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.Vt100Const"/>
+</implements>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.req.RequiresNetworkAccess"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.comm.req.BIDdfCustomRequest"/>
+</implements>
+<property name="fileContents" flags="">
+<type class="javax.baja.sys.BBlob"/>
+<description>
+Slot for the &lt;code&gt;fileContents&lt;/code&gt; property.&#xa; the contents to reload, already stripped of any undesired/&#xa; unnecessary lines
+</description>
+<tag name="@see">#getFileContents</tag>
+<tag name="@see">#setFileContents</tag>
+</property>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest() -->
+<constructor name="BInfinityReloadInfinetRequest" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.getFileContents() -->
+<method name="getFileContents"  public="true">
+<description>
+Get the &lt;code&gt;fileContents&lt;/code&gt; property.&#xa; the contents to reload, already stripped of any undesired/&#xa; unnecessary lines
+</description>
+<tag name="@see">#fileContents</tag>
+<return>
+<type class="javax.baja.sys.BBlob"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.setFileContents(javax.baja.sys.BBlob) -->
+<method name="setFileContents"  public="true">
+<description>
+Set the &lt;code&gt;fileContents&lt;/code&gt; property.&#xa; the contents to reload, already stripped of any undesired/&#xa; unnecessary lines
+</description>
+<tag name="@see">#fileContents</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BBlob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.processReceive(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="processReceive"  public="true">
+<description>
+Check the screen buffer for cursor mode, and if mode is in CURSOR_IS_IN_RELOAD_INFINET_START&#xa; then return a success response BInfinityReloadStartResponse.  Further&#xa; processing is then performed on the processResponse thread.
+</description>
+<tag name="@see">com.tridium.devDriver.comm.req.BIDdfRequest#processReceive(com.tridium.devDriver.comm.IDevDataFrame)</tag>
+<parameter name="iDevDataFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+</return>
+<throws>
+<type class="com.tridium.ddf.comm.rsp.DdfResponseException"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.toByteArray() -->
+<method name="toByteArray"  public="true">
+<description>
+Send the bytes to put the Infinity panel into reload mode.  Note that&#xa; the screen buffer should report a mode of CURSOR_IS_IN_COMMAND_LINE_AREA&#xa; in order to be sucessful.  Any other mode, and &#x22;recovery&#x22; bytes will be&#xa; sent, but the panel may or may not be put into reload mode.
+</description>
+<tag name="@see">com.tridium.devDriver.comm.req.BIDdfRequest#toByteArray()</tag>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.processErrorResponse(com.tridium.ddf.comm.rsp.DdfResponseException) -->
+<method name="processErrorResponse"  public="true">
+<description>
+In the case of error, cancel the reload mode in both the station and &#xa; client side vm&#x27;s.
+</description>
+<tag name="@see">com.tridium.ddf.comm.req.BIDdfCustomRequest#processErrorResponse(com.tridium.ddf.comm.rsp.DdfResponseException)</tag>
+<parameter name="errorRsp">
+<type class="com.tridium.ddf.comm.rsp.DdfResponseException"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.processLateResponse(com.tridium.ddf.comm.rsp.BIDdfResponse) -->
+<method name="processLateResponse"  public="true">
+<description/>
+<parameter name="ddfRsp">
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.processResponse(com.tridium.ddf.comm.rsp.BIDdfResponse) -->
+<method name="processResponse"  public="true">
+<description>
+Should be the normal path to take if the request was successful at putting&#xa; the infinity panel into reload mode.  This method in turn sends a &#xa; BInfinityReloadLineRequest to send the first Line.  Subsequent lines &#xa; are sent in the processResponse method of the that request.
+</description>
+<tag name="@see">com.tridium.ddf.comm.req.BIDdfCustomRequest#processResponse(com.tridium.ddf.comm.rsp.BIDdfResponse)</tag>
+<parameter name="ddfRsp">
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.processTimeout() -->
+<method name="processTimeout"  public="true">
+<description>
+We were not sucessful in putting the panel into reload mode if we&#xa; timeout.  Cancel reload mode in both station and client side vm&#x27;s.
+</description>
+<tag name="@see">com.tridium.ddf.comm.req.BIDdfCustomRequest#processTimeout()</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.setNetwork(com.tridium.andoverInfinity.BInfinityNetwork) -->
+<method name="setNetwork"  public="true">
+<description>
+Implementation of RequiresNetworkAccess interface
+</description>
+<tag name="@see">com.tridium.andoverInfinity.comm.req.RequiresNetworkAccess#setNetwork(com.tridium.andoverInfinity.BInfinityNetwork)</tag>
+<parameter name="network">
+<type class="com.tridium.andoverInfinity.BInfinityNetwork"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.fileContents -->
+<field name="fileContents"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fileContents&lt;/code&gt; property.&#xa; the contents to reload, already stripped of any undesired/&#xa; unnecessary lines
+</description>
+<tag name="@see">#getFileContents</tag>
+<tag name="@see">#setFileContents</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityReloadInfinetRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

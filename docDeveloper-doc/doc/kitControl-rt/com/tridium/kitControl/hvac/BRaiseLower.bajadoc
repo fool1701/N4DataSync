@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="kitControl" runtimeProfile="rt" qualifiedName="com.tridium.kitControl.hvac.BRaiseLower" name="BRaiseLower" packageName="com.tridium.kitControl.hvac" public="true" final="true">
+<description>
+Raise Lower
+</description>
+<tag name="@author">Gareth Johnson</tag>
+<tag name="@creation">30 Nov 2006</tag>
+<tag name="@version">$Revision: 1$ $Date: 01/29/2007 12:20 AM$</tag>
+<tag name="@since">Niagara 3.4</tag>
+<extends>
+<type class="com.tridium.kitControl.BKitNumeric"/>
+</extends>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<implements>
+<type class="javax.baja.sys.BINumeric"/>
+</implements>
+<property name="out" flags="rtso">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;out&lt;/code&gt; property.&#xa; The output (in volts)
+</description>
+<tag name="@see">#getOut</tag>
+<tag name="@see">#setOut</tag>
+</property>
+
+<property name="in" flags="st">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;in&lt;/code&gt; property.&#xa; Control input position (percentage)
+</description>
+<tag name="@see">#getIn</tag>
+<tag name="@see">#setIn</tag>
+</property>
+
+<property name="cancelSynchronizationOfflimits" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;cancelSynchronizationOfflimits&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCancelSynchronizationOfflimits</tag>
+<tag name="@see">#setCancelSynchronizationOfflimits</tag>
+</property>
+
+<property name="lastValidIn" flags="rth">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;lastValidIn&lt;/code&gt; property.&#xa; The last moved input
+</description>
+<tag name="@see">#getLastValidIn</tag>
+<tag name="@see">#setLastValidIn</tag>
+</property>
+
+<property name="virtualPosition" flags="rt">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;virtualPosition&lt;/code&gt; property.&#xa; Current virtual position (percentage)
+</description>
+<tag name="@see">#getVirtualPosition</tag>
+<tag name="@see">#setVirtualPosition</tag>
+</property>
+
+<property name="raise" flags="rto">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;raise&lt;/code&gt; property.&#xa; output to raise
+</description>
+<tag name="@see">#getRaise</tag>
+<tag name="@see">#setRaise</tag>
+</property>
+
+<property name="lower" flags="rto">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;lower&lt;/code&gt; property.&#xa; output to lower
+</description>
+<tag name="@see">#getLower</tag>
+<tag name="@see">#setLower</tag>
+</property>
+
+<property name="function" flags="rto">
+<type class="com.tridium.kitControl.enums.BRaiseLowerFunction"/>
+<description>
+Slot for the &lt;code&gt;function&lt;/code&gt; property.&#xa; Current function
+</description>
+<tag name="@see">#getFunction</tag>
+<tag name="@see">#setFunction</tag>
+</property>
+
+<property name="deadBand" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;deadBand&lt;/code&gt; property.&#xa; The input change deadband
+</description>
+<tag name="@see">#getDeadBand</tag>
+<tag name="@see">#setDeadBand</tag>
+</property>
+
+<property name="driveTime" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;driveTime&lt;/code&gt; property.&#xa; The drive time
+</description>
+<tag name="@see">#getDriveTime</tag>
+<tag name="@see">#setDriveTime</tag>
+</property>
+
+<property name="midnightResetEnabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;midnightResetEnabled&lt;/code&gt; property.&#xa; Provide a midnight reset (just before midnight)
+</description>
+<tag name="@see">#getMidnightResetEnabled</tag>
+<tag name="@see">#setMidnightResetEnabled</tag>
+</property>
+
+<property name="midnightResetTime" flags="h">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;midnightResetTime&lt;/code&gt; property.&#xa; The reset time
+</description>
+<tag name="@see">#getMidnightResetTime</tag>
+<tag name="@see">#setMidnightResetTime</tag>
+</property>
+
+<action name="finishMoving" flags="ha">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;finishMoving&lt;/code&gt; action.&#xa; Action callback to revert the object to a static state&#xa; Use normal engine thread to execute
+</description>
+<tag name="@see">#finishMoving()</tag>
+</action>
+
+<action name="update" flags="ha">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;update&lt;/code&gt; action.&#xa; Called to update the virtual position
+</description>
+<tag name="@see">#update()</tag>
+</action>
+
+<action name="reset" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;reset&lt;/code&gt; action.&#xa; Called to reset and lower (double the the drive time)
+</description>
+<tag name="@see">#reset()</tag>
+</action>
+
+</class>
+</bajadoc>

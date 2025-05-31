@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool" name="BBacnetAddressWorkerPool" packageName="javax.baja.bacnet.util.worker" public="true">
+<description>
+BBacnetAddressWorkerPool balances incoming work across a&#xa; pool of thread pools using the BBacnetAddress hashcode() method.&#xa; &lt;p&gt;&#xa; Spreading the load by address will decrease the impact&#xa; to the system as a whole from one device.&#xa; &lt;p&gt;&#xa; This will not be an even split, and can be less than optimal depending&#xa; on the device addresses in a particular installation.&#xa; It is possible that all messages could end up getting routed&#xa; to one worker pool.
+</description>
+<tag name="@author">Joseph Chandler</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">26 Aug 2013</tag>
+<tag name="@since">Niagara 3.8 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.util.worker.IWorkerPool"/>
+</implements>
+<property name="addressPools" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;addressPools&lt;/code&gt; property.&#xa; The number of address pools should be based on the&#xa; number of bacnet devices and the desired loading factor.
+</description>
+<tag name="@see">#getAddressPools</tag>
+<tag name="@see">#setAddressPools</tag>
+</property>
+
+<property name="workersPerAddressPool" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;workersPerAddressPool&lt;/code&gt; property.&#xa; The number of workers per address pool
+</description>
+<tag name="@see">#getWorkersPerAddressPool</tag>
+<tag name="@see">#setWorkersPerAddressPool</tag>
+</property>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool() -->
+<constructor name="BBacnetAddressWorkerPool" public="true">
+<description>
+Default constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.getAddressPools() -->
+<method name="getAddressPools"  public="true">
+<description>
+Get the &lt;code&gt;addressPools&lt;/code&gt; property.&#xa; The number of address pools should be based on the&#xa; number of bacnet devices and the desired loading factor.
+</description>
+<tag name="@see">#addressPools</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.setAddressPools(int) -->
+<method name="setAddressPools"  public="true">
+<description>
+Set the &lt;code&gt;addressPools&lt;/code&gt; property.&#xa; The number of address pools should be based on the&#xa; number of bacnet devices and the desired loading factor.
+</description>
+<tag name="@see">#addressPools</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.getWorkersPerAddressPool() -->
+<method name="getWorkersPerAddressPool"  public="true">
+<description>
+Get the &lt;code&gt;workersPerAddressPool&lt;/code&gt; property.&#xa; The number of workers per address pool
+</description>
+<tag name="@see">#workersPerAddressPool</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.setWorkersPerAddressPool(int) -->
+<method name="setWorkersPerAddressPool"  public="true">
+<description>
+Set the &lt;code&gt;workersPerAddressPool&lt;/code&gt; property.&#xa; The number of workers per address pool
+</description>
+<tag name="@see">#workersPerAddressPool</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.isParentLegal(javax.baja.sys.BComponent) -->
+<method name="isParentLegal"  public="true">
+<description/>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.stopped() -->
+<method name="stopped"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.post(java.lang.Runnable) -->
+<method name="post"  public="true">
+<description/>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.addressPools -->
+<field name="addressPools"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;addressPools&lt;/code&gt; property.&#xa; The number of address pools should be based on the&#xa; number of bacnet devices and the desired loading factor.
+</description>
+<tag name="@see">#getAddressPools</tag>
+<tag name="@see">#setAddressPools</tag>
+</field>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.workersPerAddressPool -->
+<field name="workersPerAddressPool"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;workersPerAddressPool&lt;/code&gt; property.&#xa; The number of workers per address pool
+</description>
+<tag name="@see">#getWorkersPerAddressPool</tag>
+<tag name="@see">#setWorkersPerAddressPool</tag>
+</field>
+
+<!-- javax.baja.bacnet.util.worker.BBacnetAddressWorkerPool.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="neql" runtimeProfile="rt" qualifiedName="javax.baja.neql.ComparisonExpression" name="ComparisonExpression" packageName="javax.baja.neql" public="true" abstract="true">
+<description>
+ComparisonExpression is a class of expressions that compare two quantities for&#xa; equality, greater than, or less than.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:craig.gemmill@tridium.com&#x22;&gt;Craig Gemmill&lt;/a&gt;&#xa;         Date: 3/19/14&#xa;         Time: 9:30 PM</tag>
+<extends>
+<type class="javax.baja.neql.BinaryExpression"/>
+</extends>
+<!-- javax.baja.neql.ComparisonExpression(javax.baja.neql.Expression, javax.baja.neql.Expression) -->
+<constructor name="ComparisonExpression" protected="true">
+<parameter name="left">
+<type class="javax.baja.neql.Expression"/>
+</parameter>
+<parameter name="right">
+<type class="javax.baja.neql.Expression"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.neql.ComparisonExpression.evaluate(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evaluate"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.sys.BBoolean"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.neql.ComparisonExpression.compareValues(javax.baja.data.BIDataValue, javax.baja.data.BIDataValue) -->
+<method name="compareValues"  protected="true">
+<description/>
+<parameter name="left">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<parameter name="right">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.ComparisonExpression.getComparisonResult(java.lang.Integer) -->
+<method name="getComparisonResult"  protected="true" abstract="true">
+<description>
+Get the BBoolean value for this comparison operation.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<parameter name="comparison">
+<type class="java.lang.Integer"/>
+<description>
+An integer comparison value that is returned by a compareTo method
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+<description>
+BBoolean A baja boolean value that indicates if this comparison is true or false
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.ComparisonExpression.evalBoolean(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evalBoolean"  protected="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true if this expression&#x27;s isComparisonValid method returns true for any of pair of&#xa; values coming from the left and right expressions. The left and/or right expressions may&#xa; evaluate to a single value or multiple values.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+entity on which to evaluate the expression
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+context to use while evaluating the expression
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if this expression&#x27;s isComparisonValid method returns true for any of pair of&#xa;   values coming from the left and right expressions
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.ComparisonExpression.isComparisonValid(javax.baja.data.BIDataValue, javax.baja.data.BIDataValue) -->
+<method name="isComparisonValid"  protected="true" abstract="true">
+<description>
+Returns true if the ComparisonExpression is valid based on single values from the left and&#xa; right sides of the expression.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="leftValue">
+<type class="javax.baja.data.BIDataValue"/>
+<description>
+single value from the left side expression
+</description>
+</parameter>
+<parameter name="rightValue">
+<type class="javax.baja.data.BIDataValue"/>
+<description>
+single value from the right side expression
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the ComparisonExpression is valid based on single values from the left and&#xa;   right sides of the expression.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

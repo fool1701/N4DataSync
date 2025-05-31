@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.mgr.BAbstractManager" name="BAbstractManager" packageName="javax.baja.workbench.mgr" public="true" abstract="true">
+<description>
+BAbstractManager defines the basic class used to provide&#xa; views for managing driver devices, points, etc.  It provides&#xa; a consistent user experience for adding and editing objects&#xa; in batch, as well managing learns.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">15 Dec 03</tag>
+<tag name="@version">$Revision: 38$ $Date: 7/30/10 10:29:28 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.workbench.view.BWbComponentView"/>
+</extends>
+<implements>
+<type class="javax.baja.workbench.view.BIExportableTableView"/>
+</implements>
+<action name="handleLearnSelection" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;handleLearnSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleLearnSelection()</tag>
+</action>
+
+<action name="handleTagSelection" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;handleTagSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleTagSelection()</tag>
+</action>
+
+<action name="handleDbSelection" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;handleDbSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleDbSelection()</tag>
+</action>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager() -->
+<constructor name="BAbstractManager" protected="true">
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.handleLearnSelection() -->
+<method name="handleLearnSelection"  public="true">
+<description>
+Invoke the &lt;code&gt;handleLearnSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleLearnSelection</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.handleTagSelection() -->
+<method name="handleTagSelection"  public="true">
+<description>
+Invoke the &lt;code&gt;handleTagSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleTagSelection</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.handleDbSelection() -->
+<method name="handleDbSelection"  public="true">
+<description>
+Invoke the &lt;code&gt;handleDbSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleDbSelection</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.init() -->
+<method name="init"  protected="true">
+<description>
+This method is used to initialize the manager and put everything &#xa; together.  Until this method is run nothing has been initialized.&#xa; This method will automatically short circuit itself if the&#xa; manager has already been initialized.  This code is not run in &#xa; the constructor, so that subclasses may easily initialize code&#xa; in their own constructor (which run after base class constructor).
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.updateContent() -->
+<method name="updateContent"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getTarget() -->
+<method name="getTarget"  public="true" final="true">
+<description>
+Get the target component passed in doLoadValue()
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+<description>
+target BComponent
+</description>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getModel() -->
+<method name="getModel"  public="true" final="true">
+<description>
+Get the MgrModel used to manage the database components.  &#xa; This instance is initialized via &lt;code&gt;makeModel()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrModel"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.makeModel() -->
+<method name="makeModel"  protected="true">
+<description>
+This method is called once to initialize the MgrModel.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrModel"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getController() -->
+<method name="getController"  public="true" final="true">
+<description>
+Get the MgrController used to manage user input and commands.  &#xa; This instance is initialized via &lt;code&gt;makeController()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.makeController() -->
+<method name="makeController"  protected="true">
+<description>
+This method is called once to initialize the MgrController.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.isLearnable() -->
+<method name="isLearnable"  public="true" final="true">
+<description>
+Return true if this manager supports learning.  This&#xa; is a convenience for &lt;code&gt;getLearn() != null&lt;/code&gt;
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getLearn() -->
+<method name="getLearn"  public="true" final="true">
+<description>
+Get the MgrLearn used to manage the mgrTemplate process.&#xa; This instance is initialized via &lt;code&gt;makeLearn()&lt;/code&gt;.  &#xa; Return null if mgrTemplate is not supported.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrLearn"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.makeLearn() -->
+<method name="makeLearn"  protected="true">
+<description>
+This method is called once to initialize the MgrLearn.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrLearn"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.isTaggable() -->
+<method name="isTaggable"  public="true" final="true">
+<description>
+Return true if this manager supports tags.  This&#xa; is a convenience for &lt;code&gt;getMgrTagDictionary() != null&lt;/code&gt;
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.isTemplatable() -->
+<method name="isTemplatable"  public="true" final="true">
+<description>
+Return true if this manager supports templates.  This&#xa; is a convenience for &lt;code&gt;getMgrTemplate != null&lt;/code&gt;
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getMgrTemplate() -->
+<method name="getMgrTemplate"  public="true" final="true">
+<description>
+Get the MgrTemplate used to manage the tag process.&#xa; This instance is initialized via &lt;code&gt;makeDevTemplate()&lt;/code&gt;.&#xa; Return null if device templates are not supported.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrTemplate"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getMgrTagDictionary() -->
+<method name="getMgrTagDictionary"  public="true" final="true">
+<description>
+Get the MgrTagDictionary support.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrTagDictionary"/>
+<description>
+Returns the support object for tag dictionaries.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.makeTagDictionary() -->
+<method name="makeTagDictionary"  protected="true">
+<description>
+Make the support object for using tag dictionaries in&#xa; the manager view.  This feature is on my default and&#xa; may be turned off by overriding this method to return null.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrTagDictionary"/>
+<description>
+Returns the support object for tag dictionaries.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.makeTemplate() -->
+<method name="makeTemplate"  protected="true">
+<description>
+This method is called once to initialize the MgrTemplate.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrTemplate"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.setMgrEditState(int) -->
+<method name="setMgrEditState"  public="true">
+<description>
+Sets the MgrEdit state to indicate how the MgrEdit is&#xa; being used (Add, Edit, Match, New).  This is used&#xa;  to add editable tags to edit dialog.
+</description>
+<parameter name="state">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getMgrEditState() -->
+<method name="getMgrEditState"  public="true">
+<description>
+Gets the MgrEdit state which indicate how the MgrEdit is&#xa; being used (Add, Edit, Match, New).  This is used&#xa;  to add editable tags to edit dialog.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.doHandleLearnSelection() -->
+<method name="doHandleLearnSelection"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.doHandleTagSelection() -->
+<method name="doHandleTagSelection"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.doHandleDbSelection() -->
+<method name="doHandleDbSelection"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getViewToolBar() -->
+<method name="getViewToolBar"  public="true">
+<description/>
+<return>
+<type class="javax.baja.ui.BToolBar"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getViewMenus() -->
+<method name="getViewMenus"  public="true">
+<description/>
+<return>
+<type class="javax.baja.ui.BMenu" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.getExportTable() -->
+<method name="getExportTable"  public="true">
+<description/>
+<return>
+<type class="javax.baja.ui.table.BTable"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.doLoadValue(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="doLoadValue"  public="true">
+<description/>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.deactivated() -->
+<method name="deactivated"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.restoreState() -->
+<method name="restoreState"  public="true">
+<description>
+Called during load to restore state if cached.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.saveState() -->
+<method name="saveState"  public="true">
+<description>
+Called during deactivate to save cached state.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.makeState() -->
+<method name="makeState"  protected="true">
+<description>
+This callback is made during view deactivation to let&#xa; subclasses use their own MgrState subclass.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrState"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.handleComponentEvent(javax.baja.sys.BComponentEvent) -->
+<method name="handleComponentEvent"  public="true">
+<description/>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.handleLearnSelection -->
+<field name="handleLearnSelection"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;handleLearnSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleLearnSelection()</tag>
+</field>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.handleTagSelection -->
+<field name="handleTagSelection"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;handleTagSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleTagSelection()</tag>
+</field>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.handleDbSelection -->
+<field name="handleDbSelection"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;handleDbSelection&lt;/code&gt; action.
+</description>
+<tag name="@see">#handleDbSelection()</tag>
+</field>
+
+<!-- javax.baja.workbench.mgr.BAbstractManager.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

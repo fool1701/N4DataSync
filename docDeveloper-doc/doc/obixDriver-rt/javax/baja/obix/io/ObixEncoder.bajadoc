@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="obixDriver" runtimeProfile="rt" qualifiedName="javax.baja.obix.io.ObixEncoder" name="ObixEncoder" packageName="javax.baja.obix.io" public="true">
+<description>
+Serializes objects into oBIX XML documents.  Objects are encoded&#xa; to a buffer and the buffer is not written to the output stream&#xa; until flush is called.  The makes errors deep in the tree easy to&#xa; report.
+</description>
+<tag name="@author">Aaron Hansen</tag>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@creation">Sept 2005</tag>
+<tag name="@since">Niagara 3.1</tag>
+<tag name="@version">$Revision: $ $Date: $</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.obix.io.ObixEncoder(java.lang.String, java.lang.String, java.io.OutputStream) -->
+<constructor name="ObixEncoder" public="true">
+<parameter name="lobbyPath">
+<type class="java.lang.String"/>
+<description>
+Server relative path to the oBIX lobby object.
+</description>
+</parameter>
+<parameter name="docHref">
+<type class="java.lang.String"/>
+<description>
+The absolute uri of the request.
+</description>
+</parameter>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<description/>
+</constructor>
+
+<!-- javax.baja.obix.io.ObixEncoder(javax.baja.obix.io.ObixEncoder) -->
+<constructor name="ObixEncoder" protected="true">
+<parameter name="base">
+<type class="javax.baja.obix.io.ObixEncoder"/>
+</parameter>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<description>
+Allows subclasses to wrap the default encoder.
+</description>
+</constructor>
+
+<!-- javax.baja.obix.io.ObixEncoder.attributes() -->
+<method name="attributes"  public="true">
+<description>
+Mechanism to add non-oBIX attributes to the next value to be&#xa; encoded.  The attributes will be removed after they are written.&#xa; Agents will not be given a chance to modify these attributes&#xa; (common usage will be for other namespaces such as&#xa; XLink and XML Schema).
+</description>
+<return>
+<parameterizedType class="java.util.Map">
+<args>
+<type class="java.lang.String"/>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.isContract() -->
+<method name="isContract"  public="true">
+<description>
+Whether or not the next value to be encoded should be encoded as a&#xa; contract.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setContract(boolean) -->
+<method name="setContract"  public="true">
+<description>
+Whether or not the next value to be encoded should be encoded as a&#xa; contract.
+</description>
+<parameter name="contract">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.isDebug() -->
+<method name="isDebug"  public="true">
+<description>
+If true, copies contents the standard output.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setDebug(boolean) -->
+<method name="setDebug"  public="true">
+<description>
+If true, copies contents the standard output.
+</description>
+<parameter name="debug">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getEncodeIs() -->
+<method name="getEncodeIs"  public="true">
+<description>
+Whether or not to encode the &#x22;is&#x22; attribute.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setEncodeIs(boolean) -->
+<method name="setEncodeIs"  public="true">
+<description>
+Whether or not to encode the &#x22;is&#x22; attribute.
+</description>
+<parameter name="is">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getEncodeFacets() -->
+<method name="getEncodeFacets"  public="true">
+<description>
+Whether or not to encode those attributes classified as&#xa; facets in section 4.16 of the oBIX specification.  Facet&#xa; attributes are displayName, display, icon, min, max, precision,&#xa; range, status, unit and writable.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setEncodeFacets(boolean) -->
+<method name="setEncodeFacets"  public="true">
+<description>
+Whether or not to encode those attributes classified as&#xa; facets in section 4.16 of the oBIX specification.  Facet&#xa; attributes are displayName, display, icon, min, max, precision,&#xa; range, status, unit and writable.
+</description>
+<parameter name="facets">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getHref() -->
+<method name="getHref"  public="true">
+<description>
+Href of the next value to be encoded - can be null.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setHref(java.lang.String) -->
+<method name="setHref"  public="true">
+<description>
+Href of the next value to be encoded - can be null.
+</description>
+<parameter name="href">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getName() -->
+<method name="getName"  public="true">
+<description>
+The name of the next value to be encoded - can be null.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setName(java.lang.String) -->
+<method name="setName"  public="true">
+<description>
+The name of the next value to be encoded - can be null.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.isRef() -->
+<method name="isRef"  public="true">
+<description>
+Whether or not the next value to be encoded should be encoded as an&#xa; oBIX ref.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setRef(boolean) -->
+<method name="setRef"  public="true">
+<description>
+Whether or not the next value to be encoded should be encoded as an&#xa; oBIX ref.
+</description>
+<parameter name="ref">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setForceNoRef(boolean) -->
+<method name="setForceNoRef"  public="true">
+<description>
+Force no references to be used
+</description>
+<parameter name="forceNoRef">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.isForceNoRef() -->
+<method name="isForceNoRef"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getChildHref(java.lang.String, java.lang.String) -->
+<method name="getChildHref"  public="true">
+<description>
+Convenience for constructing child hrefs.  If the parent href&#xa; equals the doc href and it ends with &#x22;/&#x22;, then the child name is&#xa; returned as a relative href.  Otherwise if the parent href is non-null&#xa; the child is concatenated with an interleaving &#x22;/&#x22;.  If the child name&#xa; is null, null is returned.  Any non-null return value will end with &#x22;/&#x22;.
+</description>
+<parameter name="parentHref">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="childName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getDocHref() -->
+<method name="getDocHref"  public="true">
+<description>
+The absolute URI of the request.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getDocPath() -->
+<method name="getDocPath"  public="true">
+<description>
+The path of the of the root object of the request.  If the&#xa; request were for &#x22;http://host/obix/foo/bar&#x22;, the base path&#xa; would be &#x22;/obix/foo/bar&#x22;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getLobbyPath() -->
+<method name="getLobbyPath"  public="true">
+<description>
+The server relative path to the oBIX lobby.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.abort() -->
+<method name="abort"  public="true">
+<description>
+Clears the buffer - called when an exception is encoded.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.commit() -->
+<method name="commit"  public="true">
+<description>
+Commit is automatically called, however, there may be junctures where&#xa; committing the buffer may be desirable.  Batching uses this feature&#xa; so that individual requests won&#x27;t corrupt the entire operation.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getIndent() -->
+<method name="getIndent"  public="true">
+<description>
+Zero is the document root, one is it&#x27;s children and so forth.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getWriter() -->
+<method name="getWriter"  public="true">
+<description>
+Writes to the buffer.
+</description>
+<return>
+<type class="javax.baja.xml.XWriter"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.indent() -->
+<method name="indent"  public="true">
+<description>
+Increases indentation and returns the new value.  Does not write an&#xa; and indentation.  Agents and manual serialization should call&#xa; indent on the writer: encoder.getWriter().indent(encoder.getIndent()).
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.outdent() -->
+<method name="outdent"  public="true">
+<description>
+Decreases indentation and returns the new value;
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encode(javax.baja.sys.BComponent) -->
+<method name="encode"  public="true">
+<description>
+Testing.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encode(javax.baja.naming.OrdTarget) -->
+<method name="encode"  public="true">
+<description>
+Serializes the target to the buffer.  The target must resolve to a&#xa; Slot, BObject, BINavNode or BIObixEncodable.
+</description>
+<parameter name="tgt">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeFully(javax.baja.sys.BComponent) -->
+<method name="encodeFully"  public="true">
+<description>
+Testing.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeFully(javax.baja.naming.OrdTarget) -->
+<method name="encodeFully"  public="true">
+<description>
+Serializes the target to the buffer.  The target must resolve to a&#xa; Slot, BObject, BINavNode or BIObixEncodable.
+</description>
+<parameter name="tgt">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encode(java.lang.Throwable) -->
+<method name="encode"  public="true">
+<description>
+Aborts the buffer and encodes the exception as an obix err.
+</description>
+<parameter name="t">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeNull() -->
+<method name="encodeNull"  public="true">
+<description>
+Convenience, encodes a null object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeSimpleContracts() -->
+<method name="encodeSimpleContracts"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.isIncludeHiddenRecords() -->
+<method name="isIncludeHiddenRecords"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.setIncludeHiddenRecords(boolean) -->
+<method name="setIncludeHiddenRecords"  public="true">
+<description/>
+<parameter name="include">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.configChild(java.lang.String, javax.baja.naming.OrdTarget) -->
+<method name="configChild"  protected="true">
+<description>
+Clears all mutable config properties, then attempts to&#xa; set name, href and ref.
+</description>
+<parameter name="parentHref">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="tgt">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeTarget(javax.baja.naming.OrdTarget) -->
+<method name="encodeTarget"  protected="true">
+<description/>
+<parameter name="tgt">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeData(javax.baja.naming.OrdTarget) -->
+<method name="encodeData"  protected="true">
+<description/>
+<parameter name="tgt">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeMeta(javax.baja.tag.Taggable, javax.baja.obix.io.BIObixAgent) -->
+<method name="encodeMeta"  protected="true">
+<description/>
+<parameter name="tobj">
+<type class="javax.baja.tag.Taggable"/>
+</parameter>
+<parameter name="agent">
+<type class="javax.baja.obix.io.BIObixAgent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.encodeOp(javax.baja.naming.OrdTarget) -->
+<method name="encodeOp"  protected="true">
+<description/>
+<parameter name="tgt">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.io.ObixEncoder.getKids(javax.baja.naming.OrdTarget, javax.baja.sys.BObject) -->
+<method name="getKids"  protected="true">
+<description/>
+<parameter name="parent">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<parameter name="parentVal">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget" dimension="1"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

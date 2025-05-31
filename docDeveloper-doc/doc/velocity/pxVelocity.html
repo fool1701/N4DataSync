@@ -1,0 +1,139 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/velocity/velocity.html" class="navbar">Prev</a> |  <a href="/doc/niagaraRpc.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="velocity-px-views">Velocity Px Views</h1>
+<p>This document follows on from the core <a href="velocity.html">velocity</a> documentation.</p>
+<p>In 3.8, a new feature was added that allows non-Java programmers to create dynamic Px Views (Px Views that are created on the fly). By using the Velocity, to create Px XML, customers have new flexibility in creating graphical views. This feature is intended for advanced Niagara users who want more dynamic graphics and navigation without having to use Java.</p>
+<p><em>This feature does require the &lsquo;axvelocity&rsquo; license feature.</em></p>
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li>In a Station, create a folder.</li>
+  <li>Add some points to the folder.</li>
+  <li>Go to create a new Px View on the folder.</li>
+  <li>Click the <code>Dynamic View</code> option.</li>
+  <li>Select the <code>axvelocity:VelocityPxView</code> option and click <code>OK</code>.</li>
+  <li>Create a Px file on the file system.</li>
+  <li>Using the Px Editor, create your basic template page.</li>
+  <li>Exit the Px editor and rename the file to the extension <code>pxvm</code>.</li>
+  <li>Please note that from this point onwards, the Px File can no longer be edited using the Px Editor.</li>
+  <li>Using the Property Sheet, navigate to the newly created Velocity Px View.</li>
+  <li>Set the <code>Px Velocity Template File</code> to point to the newly created pxvm file.</li>
+  <li>Load the view and note how it&rsquo;s rendered the Px page.</li>
+  <li>Now edit the Px view and add some VTL to script the creation of the Px file. Here&rsquo;s an example&hellip;</li>
+</ul>
+<pre><code class="sunlight-highlight-xml">&lt;pre&gt;
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;!-- Niagara Presentation XML --&gt;
+  &lt;px version=&quot;1.0&quot; media=&quot;workbench:WbPxMedia&quot;&gt;
+  &lt;import&gt;
+    &lt;module name=&quot;baja&quot;/&gt;
+    &lt;module name=&quot;bajaui&quot;/&gt;
+    &lt;module name=&quot;gx&quot;/&gt;
+    &lt;module name=&quot;converters&quot;/&gt;
+  &lt;/import&gt;
+  &lt;content&gt;
+    &lt;ScrollPane&gt;
+
+      &lt;CanvasPane name=&quot;content&quot; viewSize=&quot;500.0,400.0&quot; background=&quot;#c0c0ff&quot;&gt;
+
+    #set( $kids = $util.getChildren($ax.obj, &quot;baja:Component&quot;) ) 
+
+        &lt;GridPane layout=&quot;10.0,10.0,480.0,380.0&quot; columnCount=&quot;1&quot; rowGap=&quot;20&quot;&gt;
+
+      #foreach($k in $kids)
+          &lt;Label&gt;
+            &lt;ValueBinding ord=&quot;$k.getSlotPathOrd()&quot; hyperlink=&quot;$k.getSlotPathOrd()&quot;&gt;
+              &lt;ObjectToString name=&quot;text&quot; format=&quot;%displayName%: %.%&quot;/&gt;
+           &lt;/ValueBinding&gt;
+          &lt;/Label&gt;
+      #end
+
+        &lt;/GridPane&gt;
+
+      &lt;/CanvasPane&gt;
+
+    &lt;/ScrollPane&gt;
+  &lt;/content&gt;
+  &lt;/px&gt;
+&lt;/pre&gt;
+</code></pre>
+<p>This file will now create the navigation and labels for the points dynamically.</p>
+<p>In conclusion, Velocity Px Views are very powerful but can be cumbersome without the initial use of the Px Editor to create the overall look and feel for the Px View.</p>
+<h2 id="pxincludes">PxIncludes</h2>
+<p>In order to make the page more manageable, it&rsquo;s best to use this in conjunction with PxIncludes. The PxInclude Px file can then still be edited. For example, in this example the &lsquo;include.px&rsquo; file can still be edited&hellip;</p>
+<pre><code class="sunlight-highlight-xml">&lt;pre&gt;
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;!-- Niagara Presentation XML --&gt;
+  &lt;px version=&quot;1.0&quot; media=&quot;workbench:WbPxMedia&quot;&gt;
+  &lt;import&gt;
+    &lt;module name=&quot;baja&quot;/&gt;
+    &lt;module name=&quot;bajaui&quot;/&gt;
+    &lt;module name=&quot;gx&quot;/&gt;
+    &lt;module name=&quot;converters&quot;/&gt;
+  &lt;/import&gt;
+  &lt;content&gt;
+  &lt;ScrollPane&gt;
+
+    &lt;CanvasPane name=&quot;content&quot; viewSize=&quot;500.0,400.0&quot; background=&quot;#c0c0ff&quot;&gt;
+
+      #set( $kids = $util.getChildren($ax.obj, &quot;baja:Component&quot;) ) 
+
+      &lt;GridPane layout=&quot;10.0,10.0,480.0,380.0&quot; columnCount=&quot;1&quot; rowGap=&quot;20&quot;&gt;
+
+        #foreach($k in $kids)
+          &lt;PxInclude ord=&quot;file:^px/include.px&quot; variables=&quot;val=s:$k.getName()&quot;/&gt;
+        #end
+
+      &lt;/GridPane&gt;
+
+    &lt;/CanvasPane&gt;
+
+  &lt;/ScrollPane&gt;
+  &lt;/content&gt;
+  &lt;/px&gt;
+&lt;/pre&gt;
+</code></pre>
+<h2 id="querying-the-media">Querying the Media</h2>
+<p>The Px Media being used can be queried in Velocity. This is useful for dynamically creating Px Views for a Mobile experience that may require less Widgets&hellip;</p>
+<pre><code class="sunlight-highlight-xml">&lt;pre&gt;
+  #if ($ax.pxView.isMobileMedia())  
+    &lt;Label text=&quot;Mobile Media is set!&quot;/&gt;  
+  #elseif ($ax.pxView.isHxMedia())  
+    &lt;Label text=&quot;Hx Media is set!&quot;/&gt;  
+  #elseif ($ax.pxView.isReportMedia())  
+    &lt;Label text=&quot;Report Media is set!&quot;/&gt;  
+  #elseif ($ax.pxView.isWorkbenchMedia())  
+    &lt;Label text=&quot;Workbench Media is set!&quot;/&gt; 
+  #end
+&lt;/pre&gt;
+</code></pre>
+<h2 id="why-velocity-px-views">Why Velocity Px Views?</h2>
+<p>A Px file with Velocity code in allows graphics to be created on the fly without the aid of a Java programmer. Unfortunately, any Px file with VTL code can&rsquo;t be edited by the Px Editor. That&rsquo;s why PxIncludes are recommended to make this less cumbersome. The feature is intended for advanced users and covers the following use cases&hellip;</p>
+<ul>
+  <li>Dynamically created navigation</li>
+  <li>Reports</li>
+</ul>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/velocity/velocity.html" class="navbar">Prev</a> |  <a href="/doc/niagaraRpc.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

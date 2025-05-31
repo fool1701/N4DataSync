@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.camera.BVideoZoomSlider" name="BVideoZoomSlider" packageName="com.tridium.videoDriver.ui.camera" public="true">
+<description>
+An integrator can drag a camera from a station onto a PxPage and select&#xa; this widget from the palette. This will provide the end-user with a&#xa; widget that is similar to the BVideoPanTiltJoystick except that it&#xa; allows the end-user to control the zoom factor of a camera. &#xa; &#xa; This widget places a button in a box but almost resembles a scroll bar. The&#xa; user drags the button up and down or left and right to cause the camera to&#xa; which this widget is bound to zoom in or out.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.ui.BWidget"/>
+</extends>
+<property name="background" flags="">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Slot for the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#getBackground</tag>
+<tag name="@see">#setBackground</tag>
+</property>
+
+<property name="border" flags="">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+Slot for the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#getBorder</tag>
+<tag name="@see">#setBorder</tag>
+</property>
+
+<property name="keepDownInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#getKeepDownInterval</tag>
+<tag name="@see">#setKeepDownInterval</tag>
+</property>
+
+<action name="checkMouseStillPressed" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This topic is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed()</tag>
+</action>
+
+<topic name="zoom" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</eventType><description>
+Slot for the &lt;code&gt;zoom&lt;/code&gt; topic.&#xa; This topic is fired from the graphical user interface&#xa; as the user drags this widget&#x27;s button. If this widget&#xa; has a corresponding BVideoPtzBinding then the binding&#xa; will detect this action when this action is invoked.&#xa; The binding will forward the action to the target&#xa; component on the station-side, which will control the&#xa; camera to make the camera zoom accordingly.
+</description>
+<tag name="@see">#fireZoom</tag>
+</topic>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider() -->
+<constructor name="BVideoZoomSlider" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.getBackground() -->
+<method name="getBackground"  public="true">
+<description>
+Get the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#background</tag>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.setBackground(javax.baja.gx.BBrush) -->
+<method name="setBackground"  public="true">
+<description>
+Set the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#background</tag>
+<parameter name="v">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.getBorder() -->
+<method name="getBorder"  public="true">
+<description>
+Get the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#border</tag>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.setBorder(javax.baja.ui.BBorder) -->
+<method name="setBorder"  public="true">
+<description>
+Set the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#border</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BBorder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.getKeepDownInterval() -->
+<method name="getKeepDownInterval"  public="true">
+<description>
+Get the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#keepDownInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.setKeepDownInterval(javax.baja.sys.BRelTime) -->
+<method name="setKeepDownInterval"  public="true">
+<description>
+Set the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#keepDownInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.checkMouseStillPressed() -->
+<method name="checkMouseStillPressed"  public="true">
+<description>
+Invoke the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This topic is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.fireZoom(com.tridium.videoDriver.enums.BVideoZoomEnum) -->
+<method name="fireZoom"  public="true">
+<description>
+Fire an event for the &lt;code&gt;zoom&lt;/code&gt; topic.&#xa; This topic is fired from the graphical user interface&#xa; as the user drags this widget&#x27;s button. If this widget&#xa; has a corresponding BVideoPtzBinding then the binding&#xa; will detect this action when this action is invoked.&#xa; The binding will forward the action to the target&#xa; component on the station-side, which will control the&#xa; camera to make the camera zoom accordingly.
+</description>
+<tag name="@see">#zoom</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.doCheckMouseStillPressed() -->
+<method name="doCheckMouseStillPressed"  public="true">
+<description>
+Implements the &#x27;checkMouseStillPressed&#x27; topic, which is called&#xa; by the client-side Clock Scheduler. This is synchronized because it&#xa; could change the &#x27;checkMouseStillPressedTicket&#x27; and we wouldn&#x27;t&#xa; want that to happen while the &#x27;mouseDragged&#x27; or &#x27;mouseReleased&#x27;&#xa; method was being executed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.asyncCheckMouseStillPressed() -->
+<method name="asyncCheckMouseStillPressed"  public="true" synchronized="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description>
+Compute preferred size.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.doLayout(javax.baja.ui.BWidget[]) -->
+<method name="doLayout"  public="true">
+<description>
+Layout component.
+</description>
+<parameter name="kids">
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.setSize(double, double) -->
+<method name="setSize"  public="true">
+<description/>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="height">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.paint(javax.baja.gx.Graphics) -->
+<method name="paint"  public="true">
+<description/>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeButtonCoordinates() -->
+<method name="computeButtonCoordinates"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.paintCurrentRegion(javax.baja.gx.Graphics) -->
+<method name="paintCurrentRegion"  protected="true">
+<description>
+Paints the region that the button is currently&#xa; being dragged over. The color will be&#xa; lightning blue. The color will be solid&#xa; if the speed is fast, somewhat transparent&#xa; if the speed is medium, and very much&#xa; transparent (but still somewhat lightning&#xa; blue) if the speed is slow.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+<description>
+the Gx graphics object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeSpeedBrush() -->
+<method name="computeSpeedBrush"  protected="true">
+<description>
+Computes a BBrush to be used to illustrate the pan/tilt region that maps to&#xa; the current position of the button. This method is called from the paintCurrentRegion&#xa; method. This method assumes that the speed is SPEED_SLOW, SPEED_MEDIUM, or SPEED_FAST.&#xa; &#xa; This method cannot be called unless it is predetermined that the speed is SPEED_SLOW,&#xa; SPEED_MEDIUM, or SPEED_FAST.
+</description>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.fillCurrentRegion(javax.baja.gx.Graphics) -->
+<method name="fillCurrentRegion"  protected="true">
+<description>
+Fills the region that the widget&#x27;s button is currently over top of.&#xa; &#xa; This method is called from the &#x27;paintCurrentRegion&#x27; method. This&#xa; method assumes that the direction is valid (not -1) and that the&#xa; brush for the given Gx graphics object has already been assigned&#xa; to the appropriate shade of lightning blue.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+<description>
+the Gx graphics object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeRegionCoordinates() -->
+<method name="computeRegionCoordinates"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeZoomInRegion() -->
+<method name="computeZoomInRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeZoomOutRegion() -->
+<method name="computeZoomOutRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeOrientation() -->
+<method name="computeOrientation"  protected="true">
+<description>
+Determines if the slider slides left/right or up/down based on the width and height of the slider&#xa; on the screen.&#xa; &#xa; Sets &#x27;orientation&#x27; to ORIENTATION_HORIZONTAL or ORIENTATION_VERTICAL
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeDeadRegion() -->
+<method name="computeDeadRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeSlowRegion() -->
+<method name="computeSlowRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeMediumRegion() -->
+<method name="computeMediumRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.paintButton(javax.baja.gx.Graphics) -->
+<method name="paintButton"  protected="true">
+<description/>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.mouseReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseReleased"  public="true" synchronized="true">
+<description>
+This method is called by the UI environment when the mouse button is released.&#xa; &#xa; We consider this the end of the mouse drag. This method is synchronized to&#xa; avoid concurrent modification between the UI environment and our movement&#xa; processing logic that is periodically scheduled in order to keep firing the&#xa; move topic as the user drags the mouse or holds down the mouse button during&#xa; a mouse drag operation.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.handleMouseReleased() -->
+<method name="handleMouseReleased"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.mouseDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragged"  public="true">
+<description>
+This method is called by the UI enviroment when the mouse is dragged across&#xa; this widget. From empirical analysis, this method is called when the mouse&#xa; starts dragging from within this widget&#x27;s boundaries and subsequently thereafter&#xa; as the mouse is being dragged, whether or not the mouse itself is still in&#xa; the widget.&#xa; &#xa; This method is synchronized to&#xa; avoid concurrent modification between the UI environment and our movement&#xa; processing logic that is periodically scheduled in order to keep firing the&#xa; move topic as the user drags the mouse or holds down the mouse button during&#xa; a mouse drag operation.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeZoomAction() -->
+<method name="computeZoomAction"  protected="true">
+<description>
+Computes the current BVideoZoomEnum.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeZoomActionSlow() -->
+<method name="computeZoomActionSlow"  protected="true">
+<description>
+This computeZoomAction method returns this method&#x27;s return value if the speed is currently SPEED_SLOW.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeZoomActionMedium() -->
+<method name="computeZoomActionMedium"  protected="true">
+<description>
+This computeZoomAction method returns this method&#x27;s return value if the speed is currently SPEED_MEDIUM.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeZoomActionFast() -->
+<method name="computeZoomActionFast"  protected="true">
+<description>
+This computeZoomAction method returns this method&#x27;s return value if the speed is currently SPEED_FAST.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeSpeed() -->
+<method name="computeSpeed"  protected="true">
+<description>
+Determines the pan/tilt speed based on the mouse dragged-coordinates.&#xa; &#xa; This method should only be called from the mouseDragged method because&#xa; it assumes that the mouse is currently being dragged.
+</description>
+<return>
+<type class="int"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.computeDirection() -->
+<method name="computeDirection"  protected="true">
+<description>
+Computes the zoom direction based on the button&#x27;s current coordinates. This method is&#xa; called while the mouse is being dragged.
+</description>
+<return>
+<type class="int"/>
+<description>
+a number corresponding to the DIRECTION_ZOOM_IN or DIRECTION_ZOOM_OUT
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.getIcon() -->
+<method name="getIcon"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.background -->
+<field name="background"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#getBackground</tag>
+<tag name="@see">#setBackground</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.border -->
+<field name="border"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#getBorder</tag>
+<tag name="@see">#setBorder</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.keepDownInterval -->
+<field name="keepDownInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#getKeepDownInterval</tag>
+<tag name="@see">#setKeepDownInterval</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.checkMouseStillPressed -->
+<field name="checkMouseStillPressed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This topic is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed()</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.zoom -->
+<field name="zoom"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;zoom&lt;/code&gt; topic.&#xa; This topic is fired from the graphical user interface&#xa; as the user drags this widget&#x27;s button. If this widget&#xa; has a corresponding BVideoPtzBinding then the binding&#xa; will detect this action when this action is invoked.&#xa; The binding will forward the action to the target&#xa; component on the station-side, which will control the&#xa; camera to make the camera zoom accordingly.
+</description>
+<tag name="@see">#fireZoom</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.STATE_IDLE -->
+<field name="STATE_IDLE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The joystickState will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.STATE_DRAGGING_BUTTON -->
+<field name="STATE_DRAGGING_BUTTON"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The joystickState will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.SPEED_NONE -->
+<field name="SPEED_NONE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The zoom speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.SPEED_SLOW -->
+<field name="SPEED_SLOW"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The zoom speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.SPEED_MEDIUM -->
+<field name="SPEED_MEDIUM"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The zoom speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.SPEED_FAST -->
+<field name="SPEED_FAST"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The zoom speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.DIRECTION_ZOOM_IN -->
+<field name="DIRECTION_ZOOM_IN"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The zoom direction will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.DIRECTION_ZOOM_OUT -->
+<field name="DIRECTION_ZOOM_OUT"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The zoom direction will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.ORIENTATION_HORIZONTAL -->
+<field name="ORIENTATION_HORIZONTAL"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Constant indicating that the zoom slider slides left/right
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.ORIENTATION_VERTICAL -->
+<field name="ORIENTATION_VERTICAL"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Constant indicating that the zoom slider slides up/down
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.BUTTON_DIAMETER_PERCENT -->
+<field name="BUTTON_DIAMETER_PERCENT"  public="true" static="true" final="true">
+<type class="double"/>
+<description>
+The button diameter is 95 percent of the slider&#x27;s width (in vertical layout) or of slider&#x27;s height (in horizontal layout).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.joystickState -->
+<field name="joystickState"  protected="true">
+<type class="int"/>
+<description>
+Indicates whether the joystick is being dragged or not
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.mouseX -->
+<field name="mouseX"  protected="true">
+<type class="double"/>
+<description>
+Indicates the current mouse drag coordinates
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.mouseY -->
+<field name="mouseY"  protected="true">
+<type class="double"/>
+<description>
+Indicates the current mouse drag coordinates
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.boxX -->
+<field name="boxX"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.boxY -->
+<field name="boxY"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.boxW -->
+<field name="boxW"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.boxH -->
+<field name="boxH"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.buttonX -->
+<field name="buttonX"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the button, the width and height of the button.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.buttonY -->
+<field name="buttonY"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the button, the width and height of the button.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.buttonW -->
+<field name="buttonW"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the button, the width and height of the button.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.buttonH -->
+<field name="buttonH"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the button, the width and height of the button.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.speed -->
+<field name="speed"  protected="true">
+<type class="int"/>
+<description>
+The current speed to be sent to station component to which this is bound (actually speed and direction are combined into one enum)
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.direction -->
+<field name="direction"  protected="true">
+<type class="int"/>
+<description>
+The current direction to be sent to station component to which this is bound (actually speed and direction are combined into one enum)
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.orientation -->
+<field name="orientation"  protected="true">
+<type class="int"/>
+<description>
+The current orientation (vertical / horizontal -- automatically computed based on width and height)
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.zoomAction -->
+<field name="zoomAction"  protected="true">
+<type class="com.tridium.videoDriver.enums.BVideoZoomEnum"/>
+<description>
+The ZOOM action. This encapsulates the direction (in/out) and speed. This serves as the event to the &#x27;zoom&#x27; topic
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.zoomInRegion -->
+<field name="zoomInRegion"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+These are the regions of the rectangle so that when the button is dragged into either region, the camera will be&#xa; told to zoom in or zoom out.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.zoomOutRegion -->
+<field name="zoomOutRegion"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+These are the regions of the rectangle so that when the button is dragged into either region, the camera will be&#xa; told to zoom in or zoom out.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.deadRegion -->
+<field name="deadRegion"  protected="true">
+<type class="javax.baja.gx.RectGeom"/>
+<description>
+These are the regions of the rectangle so that when the button is dragged into either region, the camera will be&#xa; told to zoom in or zoom out at the particular speed based on the region.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.slowRegion -->
+<field name="slowRegion"  protected="true">
+<type class="javax.baja.gx.RectGeom"/>
+<description>
+These are the regions of the rectangle so that when the button is dragged into either region, the camera will be&#xa; told to zoom in or zoom out at the particular speed based on the region.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.mediumRegion -->
+<field name="mediumRegion"  protected="true">
+<type class="javax.baja.gx.RectGeom"/>
+<description>
+These are the regions of the rectangle so that when the button is dragged into either region, the camera will be&#xa; told to zoom in or zoom out at the particular speed based on the region.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.checkMouseStillPressedTicket -->
+<field name="checkMouseStillPressedTicket"  public="true">
+<type class="javax.baja.sys.Clock$Ticket"/>
+<description>
+This is a reference to the ticket, if there is one, that ensures that the&#xa; &#x27;checkMouseStillPressed&#x27; action is called periodically after the mouse button&#xa; is pressed but before it is released.&#xa; &#xa; The &#x27;mousePressed&#x27; callback creates this ticket.&#xa; &#xa; The &#x27;mouseReleased&#x27; callback cancels this ticket.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.movementProcessingQueue -->
+<field name="movementProcessingQueue"  public="true" static="true">
+<type class="javax.baja.util.Queue"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.movementProcessingWorker -->
+<field name="movementProcessingWorker"  public="true" static="true">
+<type class="javax.baja.util.Worker"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.MAGNIFYING_GLASS_IMAGE -->
+<field name="MAGNIFYING_GLASS_IMAGE"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BImage"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoZoomSlider.MAGNIFYING_GLASS_DISABLED_IMAGE -->
+<field name="MAGNIFYING_GLASS_DISABLED_IMAGE"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BImage"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

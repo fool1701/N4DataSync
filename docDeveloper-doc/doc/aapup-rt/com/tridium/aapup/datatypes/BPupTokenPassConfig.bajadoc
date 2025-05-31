@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="aapup" runtimeProfile="rt" qualifiedName="com.tridium.aapup.datatypes.BPupTokenPassConfig" name="BPupTokenPassConfig" packageName="com.tridium.aapup.datatypes" public="true">
+<description>
+BPupTokenPassConfig is a folder for storing configuration properties&#xa; for token passing scheme.  It is also the parent folder for peers which&#xa; are added dynamically.
+</description>
+<tag name="@author">Clif Turman</tag>
+<tag name="@creation">8/3/2005 10:57AM</tag>
+<tag name="@version">$Revision$ $Date: 7/15/2005 9:54AM</tag>
+<tag name="@since">AX 3.0.91</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="tokenPassingEnabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;tokenPassingEnabled&lt;/code&gt; property.&#xa; set to true to enable token passing, false if this is strictly&#xa; a master/slave network
+</description>
+<tag name="@see">#getTokenPassingEnabled</tag>
+<tag name="@see">#setTokenPassingEnabled</tag>
+</property>
+
+<property name="passToDownDevices" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;passToDownDevices&lt;/code&gt; property.&#xa; should the token be passed if a device is marked as down?
+</description>
+<tag name="@see">#getPassToDownDevices</tag>
+<tag name="@see">#setPassToDownDevices</tag>
+</property>
+
+<property name="peerType" flags="r">
+<type class="com.tridium.aapup.enums.BPupPeerTypeEnum"/>
+<description>
+Slot for the &lt;code&gt;peerType&lt;/code&gt; property.&#xa; The type of token passing scheme of THIS network
+</description>
+<tag name="@see">#getPeerType</tag>
+<tag name="@see">#setPeerType</tag>
+</property>
+
+<property name="tokenRecovery" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;tokenRecovery&lt;/code&gt; property.&#xa; should the token be recovered if dropped?
+</description>
+<tag name="@see">#getTokenRecovery</tag>
+<tag name="@see">#setTokenRecovery</tag>
+</property>
+
+<property name="tokenRecoveryType" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;tokenRecoveryType&lt;/code&gt; property.&#xa; determines whether we reset the token recovery timer on token pass&#xa; messages only or on any type of message detected on the bus
+</description>
+<tag name="@see">#getTokenRecoveryType</tag>
+<tag name="@see">#setTokenRecoveryType</tag>
+</property>
+
+<property name="tokenRecoveryTimeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;tokenRecoveryTimeout&lt;/code&gt; property.&#xa; maximum time to wait before declaring the token dropped
+</description>
+<tag name="@see">#getTokenRecoveryTimeout</tag>
+<tag name="@see">#setTokenRecoveryTimeout</tag>
+</property>
+
+<property name="tokenRecoveryCount" flags="rt">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;tokenRecoveryCount&lt;/code&gt; property.&#xa; the number of times the token has been recovered
+</description>
+<tag name="@see">#getTokenRecoveryCount</tag>
+<tag name="@see">#setTokenRecoveryCount</tag>
+</property>
+
+<property name="passTokenOnTransactionCount" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;passTokenOnTransactionCount&lt;/code&gt; property.&#xa; if true, pass the token whenever the transactionsPerToken is exceeded
+</description>
+<tag name="@see">#getPassTokenOnTransactionCount</tag>
+<tag name="@see">#setPassTokenOnTransactionCount</tag>
+</property>
+
+<property name="transactionsPerToken" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;transactionsPerToken&lt;/code&gt; property.&#xa; maximum number of transactions that can be performed during ownership of the token&#xa; before having to pass the token
+</description>
+<tag name="@see">#getTransactionsPerToken</tag>
+<tag name="@see">#setTransactionsPerToken</tag>
+</property>
+
+<property name="passTokenOnTimeout" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;passTokenOnTimeout&lt;/code&gt; property.&#xa; if true, the pass the token whenever the timePerToken time expires
+</description>
+<tag name="@see">#getPassTokenOnTimeout</tag>
+<tag name="@see">#setPassTokenOnTimeout</tag>
+</property>
+
+<property name="timePerToken" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;timePerToken&lt;/code&gt; property.&#xa; maximum time token can be owned before having to pass the token
+</description>
+<tag name="@see">#getTimePerToken</tag>
+<tag name="@see">#setTimePerToken</tag>
+</property>
+
+<property name="tokenSnoop" flags="tr">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;tokenSnoop&lt;/code&gt; property.&#xa; provides a debug view of token passing taking place on the network. All token&#xa; passes are presented in the form [from,to] where &#x22;from&#x22; is the &#x22;passing&#x22; controller,&#xa; and &#x22;to&#x22; is the passed-to controller.  In addition, while this driver doesnot&#xa; have possesion, communications between the token possessor and other units is&#xa; represented by the form &lt;addr&gt; where &#x22;addr&#x22; is the destination address of the&#xa; message.&#xa; &lt;p&gt;&#xa; All token passes to this unit are terminated with a cr/lf&#xa; &lt;p&gt;&#xa; If we have the token, and message are passed between other controllers&#xa; anyways, that is an error.  This type of error will be denoted by a&#xa; &#x22;!&#x22; character inserted between the []&#x27;s or theh &lt;&gt;&#x27;s.&#xa; &lt;p&gt;&#xa; For example: &lt;p&gt;&#xa; &lt;tab&gt;&#x22;[45,98]&lt;66&gt;[98,1] is a token pass from unit 45 to unit 98, followed by&#xa; communications from 98 to unit 66, followed by a token pass from 98 to 1.&#xa; &lt;tab&gt;&#x22;[!45,98!]&lt;!66!&gt;[!98,1!] is the same conversation as above, but occurs&#xa; erroneously during a time that Niagara has the token.
+</description>
+<tag name="@see">#getTokenSnoop</tag>
+<tag name="@see">#setTokenSnoop</tag>
+</property>
+
+<property name="logTokenSnoopOnTokenRecovery" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;logTokenSnoopOnTokenRecovery&lt;/code&gt; property.&#xa; poke the snoop to the log on token recovery for debug purposes?
+</description>
+<tag name="@see">#getLogTokenSnoopOnTokenRecovery</tag>
+<tag name="@see">#setLogTokenSnoopOnTokenRecovery</tag>
+</property>
+
+<action name="resetTokenRecoveryCount" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetTokenRecoveryCount&lt;/code&gt; action.&#xa; reset the recovery count to zero.
+</description>
+<tag name="@see">#resetTokenRecoveryCount()</tag>
+</action>
+
+<action name="logTokenSnoop" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;logTokenSnoop&lt;/code&gt; action.&#xa; log the token snoop to the pup network log, if logging is enabled.
+</description>
+<tag name="@see">#logTokenSnoop()</tag>
+</action>
+
+<action name="clearTokenSnoop" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;clearTokenSnoop&lt;/code&gt; action.&#xa; clear the token snoop
+</description>
+<tag name="@see">#clearTokenSnoop()</tag>
+</action>
+
+</class>
+</bajadoc>

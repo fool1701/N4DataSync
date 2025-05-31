@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BComponentEventMask" name="BComponentEventMask" packageName="javax.baja.sys" public="true" final="true">
+<description>
+BComponentEventMaskBits is a mask for BComponentEvents.
+</description>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">8 Apr 11</tag>
+<tag name="@version">$Revision: 2$ $Date: 4/11/11 3:57:03 PM EDT$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="javax.baja.sys.BBitString"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.sys.BComponentEventMask.make() -->
+<method name="make"  public="true" static="true">
+<description>
+Returns the EMPTY mask (no bits set).
+</description>
+<return>
+<type class="javax.baja.sys.BComponentEventMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.make(int) -->
+<method name="make"  public="true" static="true">
+<description>
+Returns a mask representing the bits provided.&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa; Examples of BComponentEventMask for BComponentEvent.PROPERTY_ADDED&amp;#xa;   BComponentEventMask.make(2);&amp;#xa;   BComponentEventMask.make(0x01 &amp;lt;&amp;lt; BComponentEvent.PROPERTY_ADDED);&amp;#xa;     where BComponentEvent.PROPERTY_ADDED == 1&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<parameter name="bits">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponentEventMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.make(int[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Returns a mask with the appropriate bit settings for all of&#xa; the componentEvents in the array.&#xa; &lt;pre&gt;&#xa; Example of BComponentEventMask for BComponentEvent.PROPERTY_ADDED and BComponentEvent.PROPERTY_CHANGED&#xa;   BComponentEventMask.make(new int[] {BComponentEvent.PROPERTY_ADDED, BComponentEvent.PROPERTY_CHANGED}) &#xa; &lt;/pre&gt;
+</description>
+<parameter name="componentEvents">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponentEventMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.make(javax.baja.sys.BComponentEventMask, javax.baja.sys.BComponentEventMask, boolean) -->
+<method name="make"  public="true" static="true">
+<description>
+Returns a mask representing the result of the &#x22;set&#x22; operation.&#xa; If &#x22;set&#x22; is true, the bit patterns for the two masks are combined.&#xa; If &#x22;set&#x22; is false, the bits in the newBits mask are removed from&#xa; the oldBits mask.
+</description>
+<parameter name="oldBits">
+<type class="javax.baja.sys.BComponentEventMask"/>
+</parameter>
+<parameter name="newBits">
+<type class="javax.baja.sys.BComponentEventMask"/>
+</parameter>
+<parameter name="set">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponentEventMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.includes(int) -->
+<method name="includes"  public="true">
+<description>
+Return true if the mask includes the specified component event
+</description>
+<parameter name="componentEvent">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getBits() -->
+<method name="getBits"  public="true">
+<description>
+Return the int representing mask&#x27;s bit pattern
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getBit(int) -->
+<method name="getBit"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return if the bit specified by the given ordinal is set.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getBit(java.lang.String) -->
+<method name="getBit"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return if the bit specified by the given tag is set.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getOrdinals() -->
+<method name="getOrdinals"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get an array enumerating the list of all known&#xa; ordinal values of this bitstring instance.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.isOrdinal(int) -->
+<method name="isOrdinal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Is the specified ordinal value included in this&#xa; bitstring&#x27;s range of valid ordinals.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getTag(int) -->
+<method name="getTag"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the tag identifier for an ordinal value.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getDisplayTag(int, javax.baja.sys.Context) -->
+<method name="getDisplayTag"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the user readable tag for an ordinal value.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getInstance(int[]) -->
+<method name="getInstance"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the BBitString instance which maps to the&#xa; specified set of ordinal values.
+</description>
+<parameter name="ordinals">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBitString"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.isTag(java.lang.String) -->
+<method name="isTag"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the specified tag is contained by the range.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.tagToOrdinal(java.lang.String) -->
+<method name="tagToOrdinal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the ordinal associated with the specified tag.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.isEmpty() -->
+<method name="isEmpty"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return if true if no bits set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getEmptyTag() -->
+<method name="getEmptyTag"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+The empty tag is &#x22;none&#x22;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.isNull() -->
+<method name="isNull"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.hashCode() -->
+<method name="hashCode"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Equality is based on direct object reference
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BDaysOfWeekBits is serialized using writeInt
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BDaysOfWeekBits is unserialized using readInt()
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Text format is the bit mask in hex.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the bit mask as hex.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BComponentEventMask.PROPERTY_EVENTS -->
+<field name="PROPERTY_EVENTS"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BComponentEventMask"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComponentEventMask.SELF_EVENTS -->
+<field name="SELF_EVENTS"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BComponentEventMask"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComponentEventMask.EMPTY -->
+<field name="EMPTY"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BComponentEventMask"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComponentEventMask.ALL -->
+<field name="ALL"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BComponentEventMask"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComponentEventMask.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BComponentEventMask"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BComponentEventMask.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

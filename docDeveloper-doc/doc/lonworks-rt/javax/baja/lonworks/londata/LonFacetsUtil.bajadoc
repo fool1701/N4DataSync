@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.londata.LonFacetsUtil" name="LonFacetsUtil" packageName="javax.baja.lonworks.londata" public="true">
+<description>
+This class file contains utilities for managing BLonElementQualifiers&#xa; and BFacets on BLonData data elements.  BLonData consists of one or more&#xa; BLonPrimitives.  BLonData may be nested.  The qualifiers associated&#xa; with each data element are stored as facets on the elements property.  &#xa; The qualifiers are needed when data is read from or written to the device.&#xa; When the qualifiers are first requested the facets are converted to qualifiers&#xa; which are stored as the facets pickle.  Successives request for the qualifiers&#xa; merely retrieve the pickle from the facets.&#xa; &lt;p&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">8 Nov 01</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.lonworks.londata.LonFacetsUtil() -->
+<constructor name="LonFacetsUtil" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.getElementQualifiers(javax.baja.lonworks.londata.BLonData, javax.baja.sys.Property) -->
+<method name="getElementQualifiers"  public="true" static="true">
+<description>
+Get the BLonElementQualifiers for a primitive data element in data of a BLonComponent.&#xa; This will return BLonElementQualifiers with the byte offset correctly set.&#xa; &lt;p&gt;
+</description>
+<parameter name="londata">
+<type class="javax.baja.lonworks.londata.BLonData"/>
+<description>
+the top level BLonData containing the BLonPrimitive element of &#xa;                interest - this can be accessed by getData() on any BLonComponent.
+</description>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+<description>
+the property for the BLonPrimitive element of &#xa;                interest
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonElementQualifiers"/>
+<description>
+the BLonElementQualifiers for the primitive data element.
+</description>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.getQualifiers(javax.baja.sys.BFacets) -->
+<method name="getQualifiers"  public="true" static="true">
+<description>
+Get a BLonElementQualifiers for the specified facets.
+</description>
+<parameter name="f">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.londata.BLonElementQualifiers"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.londata.BLonElementQualifiers, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets for the specifed BLonElementQualifiers and BUnit
+</description>
+<parameter name="elemQual">
+<type class="javax.baja.lonworks.londata.BLonElementQualifiers"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets with the specified elements to qualify a BLonPrimitive.
+</description>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, int, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets with the specified elements to qualify a BLonPrimitive.
+</description>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, boolean, float, boolean, float, float, float, boolean, int, int, boolean, float, int, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;fallthrough&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Create a BFacets with the specified elements to qualify a BLonPrimitive.
+</description>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="hasMinimum">
+<type class="boolean"/>
+</parameter>
+<parameter name="minimum">
+<type class="float"/>
+</parameter>
+<parameter name="hasMaximum">
+<type class="boolean"/>
+</parameter>
+<parameter name="maximum">
+<type class="float"/>
+</parameter>
+<parameter name="resolution">
+<type class="float"/>
+</parameter>
+<parameter name="offset">
+<type class="float"/>
+</parameter>
+<parameter name="hasOffsets">
+<type class="boolean"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+</parameter>
+<parameter name="hasInvalid">
+<type class="boolean"/>
+</parameter>
+<parameter name="invalidValue">
+<type class="float"/>
+</parameter>
+<parameter name="length">
+<type class="int"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, float, float, float, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets.
+</description>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="minimum">
+<type class="float"/>
+</parameter>
+<parameter name="maximum">
+<type class="float"/>
+</parameter>
+<parameter name="resolution">
+<type class="float"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, float, float, float, int, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets.
+</description>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="minimum">
+<type class="float"/>
+</parameter>
+<parameter name="maximum">
+<type class="float"/>
+</parameter>
+<parameter name="resolution">
+<type class="float"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, float, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets.
+</description>
+<tag name="@since">Niagara 3.5.24</tag>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="minimum">
+<type class="float"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, int) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets.
+</description>
+<tag name="@since">Niagara 3.5.24</tag>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, int, int, int, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets.
+</description>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, float, float, float, float, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets with the specified elements to qualify a BLonPrimitive.
+</description>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="minimum">
+<type class="float"/>
+</parameter>
+<parameter name="maximum">
+<type class="float"/>
+</parameter>
+<parameter name="resolution">
+<type class="float"/>
+</parameter>
+<parameter name="invalidValue">
+<type class="float"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.makeFacets(javax.baja.lonworks.enums.BLonElementType, float, float, float, float, int, int, javax.baja.units.BUnit) -->
+<method name="makeFacets"  public="true" static="true">
+<description>
+Create a BFacets with the specified elements to qualify a BLonPrimitive.
+</description>
+<tag name="@since">Niagara 3.5.24</tag>
+<parameter name="elemtype">
+<type class="javax.baja.lonworks.enums.BLonElementType"/>
+</parameter>
+<parameter name="minimum">
+<type class="float"/>
+</parameter>
+<parameter name="maximum">
+<type class="float"/>
+</parameter>
+<parameter name="resolution">
+<type class="float"/>
+</parameter>
+<parameter name="invalidValue">
+<type class="float"/>
+</parameter>
+<parameter name="byteOffset">
+<type class="int"/>
+</parameter>
+<parameter name="bitOffset">
+<type class="int"/>
+</parameter>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.MIN -->
+<field name="MIN"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.MAX -->
+<field name="MAX"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.RES -->
+<field name="RES"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.OFF -->
+<field name="OFF"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.BYT -->
+<field name="BYT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.BIT -->
+<field name="BIT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.LEN -->
+<field name="LEN"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.INVLD -->
+<field name="INVLD"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.londata.LonFacetsUtil.UNITS -->
+<field name="UNITS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.util.SpyUtil" name="SpyUtil" packageName="com.tridium.ndriver.util" public="true" final="true">
+<description>
+SpyUtil contains utilities to create spy output from a Java object using&#xa; introspection. &lt;p&gt; This utility provides a convenient mechanism to collect&#xa; statistical data for display in spy pages.  A container object can declare&#xa; public variables which can be incremented as events occur.  If data must be&#xa; massaged for display remove the public declaration from the variable and&#xa; provide a public getter method that returns a String.  The &#x22;get&#x22; will be&#xa; removed from the getter method name to provide the table entry name.&#xa; &lt;p&gt;&#xa; Example:&lt;p&gt;&#xa; &lt;pre&gt;&#xa;   // Container object with startTime set when counts started and&#xa;   // sendRequest which is incremented as messages sent.&#xa;   public static class Statistics&#xa;   {&#xa;     long startTime = 0;&#xa;     public String getStartTime() { return BAbsTime.make(startTime).toLocalTime().toString(null); }&#xa;     public long sendRequest = 0;&#xa;   }&#xa;&#xa;   // Monitored objects spy()&#xa;   public void spy(SpyWriter out)&#xa;    throws Exception&#xa;   {&#xa;      SpyUtil.spy(out, &#x22;Statistics&#x22;, stats);&#xa;   }&#xa;&#xa;   // Displayed Spy table&#xa;   Statistics&#xa;    startTime      13-Jun-12 4:33 PM EDT&#xa;    sendRequest    5&#xa;  &lt;/pre&gt;
+</description>
+<tag name="@author">Robert A Adams</tag>
+<tag name="@creation">June 13, 2012</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.ndriver.util.SpyUtil.spy(javax.baja.spy.SpyWriter, java.lang.String, java.lang.Object) -->
+<method name="spy"  public="true" static="true">
+<description>
+Write a spy table for the specified object with the specified title. Table&#xa; will have entry for all public getters (method begins with &#x22;get&#x22; and takes&#xa; no arguments) and all public attributes.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="o">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

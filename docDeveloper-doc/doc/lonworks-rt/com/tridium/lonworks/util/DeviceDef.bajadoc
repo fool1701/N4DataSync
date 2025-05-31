@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="com.tridium.lonworks.util.DeviceDef" name="DeviceDef" packageName="com.tridium.lonworks.util" public="true">
+<description>
+This is a utility class used to facilitate accessing def entries in&#xa;  londevice modules.&#xa; &lt;p&gt;&#xa;  The following are example entries for module-include.xml for a class file and an xml file.&#xa;  A wild card entry can be used in which any nibble can be replaced with an &#x27;*&#x27; to indicate&#xa;  a range of programIds mapped to the same object.&#xa;  &lt;pre&gt;&#xa; &amp;lt;defs&amp;gt;&#xa;   &amp;lt;def name=&#x22;lonworks.80 00 0c 50 3c 03 04 17&#x22;  value=&#x22;cl=lonHoneywell:Q7300&#x22;  /&amp;gt;&#xa;   &amp;lt;def name=&#x22;lonworks.80 00 16 50 0a 04 04 0a&#x22;  value=&#x22;xml=lonSiebe/Mnlrv3.lnml&#x22;/&amp;gt;&#xa;   &amp;lt;def name=&#x22;lonworks.80 00 8e 10 0a 04 0* **&#x22;  value=&#x22;xml=lonTridium/dev.lnml&#x22;/&amp;gt;&#xa; &amp;lt;/defs&amp;gt;&#xa;  &lt;/pre&gt;&#xa;&#xa; &lt;p&gt;&#xa;   The following is example code using DeviceDef to create a BlonDevice for a specified program id.&#xa;&#xa;  &lt;pre&gt;&#xa;   BLonDevice getDevice (BProgramId pId)&#xa;   {&#xa;     // Create a DeviceDef instance with the&#xa;     DeviceDef def = new DeviceDef(pId);&#xa;&#xa;     // If pid maps to device the create directly&#xa;     if(def.isClass())&#xa;       return def.getDevice();&#xa;&#xa;     // If pid maps to lon xml file then add xml ord to&#xa;     // dynamic device and then import&#xa;     if(def.isXml())&#xa;     {&#xa;       ord = def.getXmlOrd();&#xa;       if(ord!=null) return null;&#xa;       BDynamicDevice dev = new BDynamicDevice();&#xa;       dev.setXmlFile(ord);&#xa;       dev.doImportXml(null);&#xa;       return dev;&#xa;     }&#xa;     return null;&#xa;   }&#xa;  &lt;/pre&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">28 Feb 05</tag>
+<tag name="@version">$Revision: 1$ $Date: 8/9/01 2:22:44 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.lonworks.util.DeviceDef(javax.baja.lonworks.datatypes.BProgramId) -->
+<constructor name="DeviceDef" public="true">
+<parameter name="pid">
+<type class="javax.baja.lonworks.datatypes.BProgramId"/>
+</parameter>
+<description>
+Create a DeviceDef which will contain mappings of all def entries for the&#xa; specified programId, including any wildcard entries which also match.
+</description>
+</constructor>
+
+<!-- com.tridium.lonworks.util.DeviceDef.wildCardMatch(javax.baja.lonworks.datatypes.BProgramId) -->
+<method name="wildCardMatch"  public="true">
+<description/>
+<parameter name="pid">
+<type class="javax.baja.lonworks.datatypes.BProgramId"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.isXml() -->
+<method name="isXml"  public="true">
+<description>
+Is entry an xml file.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.isXml(int) -->
+<method name="isXml"  public="true">
+<description>
+Is entry an xml file.
+</description>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.isClass() -->
+<method name="isClass"  public="true">
+<description>
+Is entry a class file.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.isClass(int) -->
+<method name="isClass"  public="true">
+<description>
+Is entry a class file.
+</description>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.isMultpleEntries() -->
+<method name="isMultpleEntries"  public="true">
+<description>
+Are there muliple defs for this programId.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.hasEntries() -->
+<method name="hasEntries"  public="true">
+<description>
+Are there any defs for this programId.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.entryCount() -->
+<method name="entryCount"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getXmlOrd() -->
+<method name="getXmlOrd"  public="true">
+<description/>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getXmlOrd(int) -->
+<method name="getXmlOrd"  public="true">
+<description/>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getDevice() -->
+<method name="getDevice"  public="true">
+<description/>
+<return>
+<type class="javax.baja.lonworks.BLonDevice"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getDevice(int) -->
+<method name="getDevice"  public="true">
+<description/>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.BLonDevice"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getName() -->
+<method name="getName"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getName(int) -->
+<method name="getName"  public="true">
+<description/>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getModule() -->
+<method name="getModule"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getModule(int) -->
+<method name="getModule"  public="true">
+<description/>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getTypeInfo(int) -->
+<method name="getTypeInfo"  public="true">
+<description/>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.registry.TypeInfo"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.getType(int) -->
+<method name="getType"  public="true">
+<description/>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.DeviceDef.toString() -->
+<method name="toString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

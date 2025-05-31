@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.videoStream.BPlaybackParams" name="BPlaybackParams" packageName="com.tridium.videoDriver.videoStream" public="true">
+<description>
+This class is used to request video stream from a driver BIVideoSource component.
+</description>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<property name="timeIndex" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;timeIndex&lt;/code&gt; property.&#xa; This is the time index for replay operations or BAbsTime.NULL for&#xa; live operations.
+</description>
+<tag name="@see">#getTimeIndex</tag>
+<tag name="@see">#setTimeIndex</tag>
+</property>
+
+<property name="playbackType" flags="">
+<type class="com.tridium.videoDriver.enums.BPlaybackTypeEnum"/>
+<description>
+Slot for the &lt;code&gt;playbackType&lt;/code&gt; property.&#xa; Indicates whether to stream live video or play/fastFwd/slowFwd/&#xa; fastRew/slowRew based on the time index
+</description>
+<tag name="@see">#getPlaybackType</tag>
+<tag name="@see">#setPlaybackType</tag>
+</property>
+
+<property name="playbackSpeed" flags="">
+<type class="com.tridium.videoDriver.enums.BPlaybackSpeedEnum"/>
+<description>
+Slot for the &lt;code&gt;playbackSpeed&lt;/code&gt; property.&#xa; Indicates the playback speed for any playbackType that is not &#x27;live&#x27;
+</description>
+<tag name="@see">#getPlaybackSpeed</tag>
+<tag name="@see">#setPlaybackSpeed</tag>
+</property>
+
+<property name="backgroundColor" flags="">
+<type class="javax.baja.gx.BColor"/>
+<description>
+Slot for the &lt;code&gt;backgroundColor&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackgroundColor</tag>
+<tag name="@see">#setBackgroundColor</tag>
+</property>
+
+<property name="aspectRatio" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoAspectRatioEnum"/>
+<description>
+Slot for the &lt;code&gt;aspectRatio&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAspectRatio</tag>
+<tag name="@see">#setAspectRatio</tag>
+</property>
+
+<property name="resolution" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+<description>
+Slot for the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; Identifies the requested video resolution (the amount of&#xa; compression to use), normalized to high / medium / low.&#xa; The driver decides exactly what each of these means.
+</description>
+<tag name="@see">#getResolution</tag>
+<tag name="@see">#setResolution</tag>
+</property>
+
+<property name="frameRate" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+<description>
+Slot for the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; Identifies the desired frame rate (the number of frames&#xa; per second) normalized to high / medium / low. The driver decides&#xa; the exact framerate for high / medium / low.
+</description>
+<tag name="@see">#getFrameRate</tag>
+<tag name="@see">#setFrameRate</tag>
+</property>
+
+<property name="compression" flags="">
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+<description>
+Slot for the &lt;code&gt;compression&lt;/code&gt; property.&#xa; Identifies the quality of the image that is to be rendered&#xa; in the given resolution (width by height)
+</description>
+<tag name="@see">#getCompression</tag>
+<tag name="@see">#setCompression</tag>
+</property>
+
+<property name="videoFacets" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;videoFacets&lt;/code&gt; property.&#xa; Specifies any extra, driver-specific video parameters. The driver&#xa; developer may use this to pass data from the client-side to the&#xa; server side. See the BIVideoSource.initPlaybackParams and&#xa; BIVideoSource.streamToDestination methods for more details.
+</description>
+<tag name="@see">#getVideoFacets</tag>
+<tag name="@see">#setVideoFacets</tag>
+</property>
+
+<property name="httpRspHeader" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;httpRspHeader&lt;/code&gt; property.&#xa; After establishing the video stream, the driver developer&#xa; should transfer all Http response header fields into this&#xa; set of facets. HINT: The driver developer may call&#xa; HttpResponseHeaderUtil.encodeHttpResponseHeader to do this&#xa; for him or her.
+</description>
+<tag name="@see">#getHttpRspHeader</tag>
+<tag name="@see">#setHttpRspHeader</tag>
+</property>
+
+<property name="videoSourceOrd" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;videoSourceOrd&lt;/code&gt; property.&#xa; This is the ord of the particular driver component that is mounted&#xa; in the station and is responsible for retrieving the video stream.
+</description>
+<tag name="@see">#getVideoSourceOrd</tag>
+<tag name="@see">#setVideoSourceOrd</tag>
+</property>
+
+<property name="videoSourceOrds" flags="">
+<type class="javax.baja.naming.BOrdList"/>
+<description>
+Slot for the &lt;code&gt;videoSourceOrds&lt;/code&gt; property.&#xa; This applies to BIVideoMultistreamServers only. Instead of a single videoSourceOrd, this specifies a list of video source ords.
+</description>
+<tag name="@see">#getVideoSourceOrds</tag>
+<tag name="@see">#setVideoSourceOrds</tag>
+</property>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams() -->
+<constructor name="BPlaybackParams" public="true">
+<description>
+Default, empty constructor.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams(javax.baja.gx.BColor, com.tridium.videoDriver.enums.BVideoAspectRatioEnum, com.tridium.videoDriver.enums.BVideoResolutionEnum, com.tridium.videoDriver.enums.BVideoFrameRateEnum, com.tridium.videoDriver.enums.BVideoCompressionEnum) -->
+<constructor name="BPlaybackParams" public="true">
+<parameter name="backgroundColor">
+<type class="javax.baja.gx.BColor"/>
+</parameter>
+<parameter name="aspectRatio">
+<type class="com.tridium.videoDriver.enums.BVideoAspectRatioEnum"/>
+</parameter>
+<parameter name="resoultion">
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+<description>
+the initial resolution - a BVideoResolutionEnum
+</description>
+</parameter>
+<parameter name="frameRate">
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+<description>
+the initial frame rate - a BVideoFrameRateEnum
+</description>
+</parameter>
+<parameter name="compression">
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+</parameter>
+<description>
+Constructor that specifies the initial resolution and frame rate.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams(com.tridium.videoDriver.enums.BVideoResolutionEnum, com.tridium.videoDriver.enums.BVideoFrameRateEnum, javax.baja.sys.BFacets) -->
+<constructor name="BPlaybackParams" public="true">
+<parameter name="resoultion">
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+<description>
+the initial resolution - a BVideoResolutionEnum
+</description>
+</parameter>
+<parameter name="frameRate">
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+<description>
+the initial frame rate - a BVideoFrameRateEnum
+</description>
+</parameter>
+<parameter name="videoFacets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+the initial video facets - a BFacets
+</description>
+</parameter>
+<description>
+Constructor that specifies the initial resolution, framerate, and videoFacets.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getTimeIndex() -->
+<method name="getTimeIndex"  public="true">
+<description>
+Get the &lt;code&gt;timeIndex&lt;/code&gt; property.&#xa; This is the time index for replay operations or BAbsTime.NULL for&#xa; live operations.
+</description>
+<tag name="@see">#timeIndex</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setTimeIndex(javax.baja.sys.BAbsTime) -->
+<method name="setTimeIndex"  public="true">
+<description>
+Set the &lt;code&gt;timeIndex&lt;/code&gt; property.&#xa; This is the time index for replay operations or BAbsTime.NULL for&#xa; live operations.
+</description>
+<tag name="@see">#timeIndex</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getPlaybackType() -->
+<method name="getPlaybackType"  public="true">
+<description>
+Get the &lt;code&gt;playbackType&lt;/code&gt; property.&#xa; Indicates whether to stream live video or play/fastFwd/slowFwd/&#xa; fastRew/slowRew based on the time index
+</description>
+<tag name="@see">#playbackType</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BPlaybackTypeEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setPlaybackType(com.tridium.videoDriver.enums.BPlaybackTypeEnum) -->
+<method name="setPlaybackType"  public="true">
+<description>
+Set the &lt;code&gt;playbackType&lt;/code&gt; property.&#xa; Indicates whether to stream live video or play/fastFwd/slowFwd/&#xa; fastRew/slowRew based on the time index
+</description>
+<tag name="@see">#playbackType</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BPlaybackTypeEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getPlaybackSpeed() -->
+<method name="getPlaybackSpeed"  public="true">
+<description>
+Get the &lt;code&gt;playbackSpeed&lt;/code&gt; property.&#xa; Indicates the playback speed for any playbackType that is not &#x27;live&#x27;
+</description>
+<tag name="@see">#playbackSpeed</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BPlaybackSpeedEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setPlaybackSpeed(com.tridium.videoDriver.enums.BPlaybackSpeedEnum) -->
+<method name="setPlaybackSpeed"  public="true">
+<description>
+Set the &lt;code&gt;playbackSpeed&lt;/code&gt; property.&#xa; Indicates the playback speed for any playbackType that is not &#x27;live&#x27;
+</description>
+<tag name="@see">#playbackSpeed</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BPlaybackSpeedEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getBackgroundColor() -->
+<method name="getBackgroundColor"  public="true">
+<description>
+Get the &lt;code&gt;backgroundColor&lt;/code&gt; property.
+</description>
+<tag name="@see">#backgroundColor</tag>
+<return>
+<type class="javax.baja.gx.BColor"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setBackgroundColor(javax.baja.gx.BColor) -->
+<method name="setBackgroundColor"  public="true">
+<description>
+Set the &lt;code&gt;backgroundColor&lt;/code&gt; property.
+</description>
+<tag name="@see">#backgroundColor</tag>
+<parameter name="v">
+<type class="javax.baja.gx.BColor"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getAspectRatio() -->
+<method name="getAspectRatio"  public="true">
+<description>
+Get the &lt;code&gt;aspectRatio&lt;/code&gt; property.
+</description>
+<tag name="@see">#aspectRatio</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoAspectRatioEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setAspectRatio(com.tridium.videoDriver.enums.BVideoAspectRatioEnum) -->
+<method name="setAspectRatio"  public="true">
+<description>
+Set the &lt;code&gt;aspectRatio&lt;/code&gt; property.
+</description>
+<tag name="@see">#aspectRatio</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoAspectRatioEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getResolution() -->
+<method name="getResolution"  public="true">
+<description>
+Get the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; Identifies the requested video resolution (the amount of&#xa; compression to use), normalized to high / medium / low.&#xa; The driver decides exactly what each of these means.
+</description>
+<tag name="@see">#resolution</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setResolution(com.tridium.videoDriver.enums.BVideoResolutionEnum) -->
+<method name="setResolution"  public="true">
+<description>
+Set the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; Identifies the requested video resolution (the amount of&#xa; compression to use), normalized to high / medium / low.&#xa; The driver decides exactly what each of these means.
+</description>
+<tag name="@see">#resolution</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoResolutionEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getFrameRate() -->
+<method name="getFrameRate"  public="true">
+<description>
+Get the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; Identifies the desired frame rate (the number of frames&#xa; per second) normalized to high / medium / low. The driver decides&#xa; the exact framerate for high / medium / low.
+</description>
+<tag name="@see">#frameRate</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setFrameRate(com.tridium.videoDriver.enums.BVideoFrameRateEnum) -->
+<method name="setFrameRate"  public="true">
+<description>
+Set the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; Identifies the desired frame rate (the number of frames&#xa; per second) normalized to high / medium / low. The driver decides&#xa; the exact framerate for high / medium / low.
+</description>
+<tag name="@see">#frameRate</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoFrameRateEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getCompression() -->
+<method name="getCompression"  public="true">
+<description>
+Get the &lt;code&gt;compression&lt;/code&gt; property.&#xa; Identifies the quality of the image that is to be rendered&#xa; in the given resolution (width by height)
+</description>
+<tag name="@see">#compression</tag>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setCompression(com.tridium.videoDriver.enums.BVideoCompressionEnum) -->
+<method name="setCompression"  public="true">
+<description>
+Set the &lt;code&gt;compression&lt;/code&gt; property.&#xa; Identifies the quality of the image that is to be rendered&#xa; in the given resolution (width by height)
+</description>
+<tag name="@see">#compression</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.enums.BVideoCompressionEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getVideoFacets() -->
+<method name="getVideoFacets"  public="true">
+<description>
+Get the &lt;code&gt;videoFacets&lt;/code&gt; property.&#xa; Specifies any extra, driver-specific video parameters. The driver&#xa; developer may use this to pass data from the client-side to the&#xa; server side. See the BIVideoSource.initPlaybackParams and&#xa; BIVideoSource.streamToDestination methods for more details.
+</description>
+<tag name="@see">#videoFacets</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setVideoFacets(javax.baja.sys.BFacets) -->
+<method name="setVideoFacets"  public="true">
+<description>
+Set the &lt;code&gt;videoFacets&lt;/code&gt; property.&#xa; Specifies any extra, driver-specific video parameters. The driver&#xa; developer may use this to pass data from the client-side to the&#xa; server side. See the BIVideoSource.initPlaybackParams and&#xa; BIVideoSource.streamToDestination methods for more details.
+</description>
+<tag name="@see">#videoFacets</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getHttpRspHeader() -->
+<method name="getHttpRspHeader"  public="true">
+<description>
+Get the &lt;code&gt;httpRspHeader&lt;/code&gt; property.&#xa; After establishing the video stream, the driver developer&#xa; should transfer all Http response header fields into this&#xa; set of facets. HINT: The driver developer may call&#xa; HttpResponseHeaderUtil.encodeHttpResponseHeader to do this&#xa; for him or her.
+</description>
+<tag name="@see">#httpRspHeader</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setHttpRspHeader(javax.baja.sys.BFacets) -->
+<method name="setHttpRspHeader"  public="true">
+<description>
+Set the &lt;code&gt;httpRspHeader&lt;/code&gt; property.&#xa; After establishing the video stream, the driver developer&#xa; should transfer all Http response header fields into this&#xa; set of facets. HINT: The driver developer may call&#xa; HttpResponseHeaderUtil.encodeHttpResponseHeader to do this&#xa; for him or her.
+</description>
+<tag name="@see">#httpRspHeader</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getVideoSourceOrd() -->
+<method name="getVideoSourceOrd"  public="true">
+<description>
+Get the &lt;code&gt;videoSourceOrd&lt;/code&gt; property.&#xa; This is the ord of the particular driver component that is mounted&#xa; in the station and is responsible for retrieving the video stream.
+</description>
+<tag name="@see">#videoSourceOrd</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setVideoSourceOrd(javax.baja.naming.BOrd) -->
+<method name="setVideoSourceOrd"  public="true">
+<description>
+Set the &lt;code&gt;videoSourceOrd&lt;/code&gt; property.&#xa; This is the ord of the particular driver component that is mounted&#xa; in the station and is responsible for retrieving the video stream.
+</description>
+<tag name="@see">#videoSourceOrd</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getVideoSourceOrds() -->
+<method name="getVideoSourceOrds"  public="true">
+<description>
+Get the &lt;code&gt;videoSourceOrds&lt;/code&gt; property.&#xa; This applies to BIVideoMultistreamServers only. Instead of a single videoSourceOrd, this specifies a list of video source ords.
+</description>
+<tag name="@see">#videoSourceOrds</tag>
+<return>
+<type class="javax.baja.naming.BOrdList"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.setVideoSourceOrds(javax.baja.naming.BOrdList) -->
+<method name="setVideoSourceOrds"  public="true">
+<description>
+Set the &lt;code&gt;videoSourceOrds&lt;/code&gt; property.&#xa; This applies to BIVideoMultistreamServers only. Instead of a single videoSourceOrd, this specifies a list of video source ords.
+</description>
+<tag name="@see">#videoSourceOrds</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.encodeToBogString() -->
+<method name="encodeToBogString"  public="true">
+<description>
+This method is called to convert this into a bog string. This is used to serialize this&#xa; instance and send it from a client Workbench to a station side BIVideoCamera through a fox&#xa; video channel.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the UTF-8 String representation of this object represented as a bog file.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.decodeFromBogString(java.lang.String) -->
+<method name="decodeFromBogString"  public="true">
+<description>
+This method is called to restore this instance from a bog file string.&#xa; &#xa; This is the opposite of the &lt;code&gt;<see ref="com.tridium.videoDriver.videoStream.BPlaybackParams#encodeToBogString()">#encodeToBogString()</see>&lt;/code&gt; method. This is called to de-serialize&#xa; and reconstruct an instance of BPlaybackParams on the station side. This given bog string is&#xa; intended to have been passed through a fox video channel.
+</description>
+<parameter name="bogString">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.timeIndex -->
+<field name="timeIndex"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeIndex&lt;/code&gt; property.&#xa; This is the time index for replay operations or BAbsTime.NULL for&#xa; live operations.
+</description>
+<tag name="@see">#getTimeIndex</tag>
+<tag name="@see">#setTimeIndex</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.playbackType -->
+<field name="playbackType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;playbackType&lt;/code&gt; property.&#xa; Indicates whether to stream live video or play/fastFwd/slowFwd/&#xa; fastRew/slowRew based on the time index
+</description>
+<tag name="@see">#getPlaybackType</tag>
+<tag name="@see">#setPlaybackType</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.playbackSpeed -->
+<field name="playbackSpeed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;playbackSpeed&lt;/code&gt; property.&#xa; Indicates the playback speed for any playbackType that is not &#x27;live&#x27;
+</description>
+<tag name="@see">#getPlaybackSpeed</tag>
+<tag name="@see">#setPlaybackSpeed</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.backgroundColor -->
+<field name="backgroundColor"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;backgroundColor&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBackgroundColor</tag>
+<tag name="@see">#setBackgroundColor</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.aspectRatio -->
+<field name="aspectRatio"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;aspectRatio&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAspectRatio</tag>
+<tag name="@see">#setAspectRatio</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.resolution -->
+<field name="resolution"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;resolution&lt;/code&gt; property.&#xa; Identifies the requested video resolution (the amount of&#xa; compression to use), normalized to high / medium / low.&#xa; The driver decides exactly what each of these means.
+</description>
+<tag name="@see">#getResolution</tag>
+<tag name="@see">#setResolution</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.frameRate -->
+<field name="frameRate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;frameRate&lt;/code&gt; property.&#xa; Identifies the desired frame rate (the number of frames&#xa; per second) normalized to high / medium / low. The driver decides&#xa; the exact framerate for high / medium / low.
+</description>
+<tag name="@see">#getFrameRate</tag>
+<tag name="@see">#setFrameRate</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.compression -->
+<field name="compression"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;compression&lt;/code&gt; property.&#xa; Identifies the quality of the image that is to be rendered&#xa; in the given resolution (width by height)
+</description>
+<tag name="@see">#getCompression</tag>
+<tag name="@see">#setCompression</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.videoFacets -->
+<field name="videoFacets"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;videoFacets&lt;/code&gt; property.&#xa; Specifies any extra, driver-specific video parameters. The driver&#xa; developer may use this to pass data from the client-side to the&#xa; server side. See the BIVideoSource.initPlaybackParams and&#xa; BIVideoSource.streamToDestination methods for more details.
+</description>
+<tag name="@see">#getVideoFacets</tag>
+<tag name="@see">#setVideoFacets</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.httpRspHeader -->
+<field name="httpRspHeader"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;httpRspHeader&lt;/code&gt; property.&#xa; After establishing the video stream, the driver developer&#xa; should transfer all Http response header fields into this&#xa; set of facets. HINT: The driver developer may call&#xa; HttpResponseHeaderUtil.encodeHttpResponseHeader to do this&#xa; for him or her.
+</description>
+<tag name="@see">#getHttpRspHeader</tag>
+<tag name="@see">#setHttpRspHeader</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.videoSourceOrd -->
+<field name="videoSourceOrd"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;videoSourceOrd&lt;/code&gt; property.&#xa; This is the ord of the particular driver component that is mounted&#xa; in the station and is responsible for retrieving the video stream.
+</description>
+<tag name="@see">#getVideoSourceOrd</tag>
+<tag name="@see">#setVideoSourceOrd</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.videoSourceOrds -->
+<field name="videoSourceOrds"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;videoSourceOrds&lt;/code&gt; property.&#xa; This applies to BIVideoMultistreamServers only. Instead of a single videoSourceOrd, this specifies a list of video source ords.
+</description>
+<tag name="@see">#getVideoSourceOrds</tag>
+<tag name="@see">#setVideoSourceOrds</tag>
+</field>
+
+<!-- com.tridium.videoDriver.videoStream.BPlaybackParams.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

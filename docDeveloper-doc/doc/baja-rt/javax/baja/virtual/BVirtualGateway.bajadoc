@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.virtual.BVirtualGateway" name="BVirtualGateway" packageName="javax.baja.virtual" public="true" abstract="true">
+<description>
+A virtual gateway is a component that resides in the station component space&#xa; that acts as a gateway a the virtual component space.  This means that the&#xa; Nav children for this gateway component returns the virtual components that&#xa; live in the virtual space.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">25 Oct 06</tag>
+<tag name="@version">$Revision: 15$ $Date: 7/28/10 1:40:27 PM EDT$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<!-- javax.baja.virtual.BVirtualGateway() -->
+<constructor name="BVirtualGateway" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.virtual.BVirtualGateway.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.getVirtualSpace() -->
+<method name="getVirtualSpace"  public="true" final="true">
+<description>
+Get the virtual component space associated with this gateway.&#xa; A gateway&#x27;s space is only available while the gateway is running&#xa; in a station or if the gateway is being accessed as a remote&#xa; proxy over Fox.
+</description>
+<return>
+<type class="javax.baja.space.BComponentSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.makeVirtualSpace() -->
+<method name="makeVirtualSpace"  protected="true">
+<description>
+Creates a new virtual component space to use for this virtual gateway.&#xa; Subclasses can override this method if they wish to insert their&#xa; own custom virtual component space, otherwise a default one will be used.&#xa; &lt;p&gt;&#xa; NOTE: The virtual space created should have its root component&#xa; assigned in this method.  This is done by using the makeVirtualRoot()&#xa; method.
+</description>
+<return>
+<type class="javax.baja.virtual.BVirtualComponentSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.makeVirtualRoot() -->
+<method name="makeVirtualRoot"  protected="true">
+<description>
+Returns the root component to use for this virtual gateway&#x27;s virtual space.&#xa; Subclasses can override this method if they wish to insert their&#xa; own custom virtual root component, otherwise a new virtual component will be&#xa; returned by default.
+</description>
+<return>
+<type class="javax.baja.virtual.BVirtualComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.loadVirtualSlot(javax.baja.virtual.BVirtualComponent, java.lang.String) -->
+<method name="loadVirtualSlot"  public="true">
+<description>
+This method is called by the virtual space&#x27;s LoadCallbacks when a&#xa; slot should be loaded/resolved under the given parent.&#xa; This is the time to load an individual slot, or return the existing&#xa; slot if already loaded.&#xa; &lt;p&gt;&#xa; The default implementation of this method is sufficient for most&#xa; scenarios.  By default, if the specified virtual path name does not&#xa; specify an existing slot under the given parent, then the addVirtualSlot()&#xa; callback will be made to give subclasses a chance to generate and add&#xa; the appropriate virtual slot to the the parent component.&#xa; &lt;p&gt;&#xa; NOTE:  Virtual slots added should always use a slot name that is the&#xa; escaped virtual path name ie. use VirtualPath.toSlotPathName(virtualPathName) as&#xa; the name of the virtual slot added.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possibility of a partial loaded state supported by&#xa; virtuals, subclasses should also be aware of the subscription state.&#xa; This means that a loadVirtualSlot() call for a new virtual slot&#xa; could occur while the parent is already subscribed.  So this could affect&#xa; how the new virtual slot should be handled (ie. added to a poll scheduler).&#xa; Subclasses should always be aware of this potential state.
+</description>
+<parameter name="parent">
+<type class="javax.baja.virtual.BVirtualComponent"/>
+</parameter>
+<parameter name="virtualPathName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Slot"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.addVirtualSlot(javax.baja.virtual.BVirtualComponent, java.lang.String) -->
+<method name="addVirtualSlot"  protected="true" abstract="true">
+<description>
+This method is called by the default implementation of loadVirtualSlot()&#xa; and should be implemented by subclasses to add a new&#xa; instance of a virtual component (or a BValue instance to be a property&#xa; on a virtual component).  The value added should be based on the&#xa; given virtual path name and relative to the parent virtual component.&#xa; The contract is that the new slot added for the generated virtual&#xa; instance MUST be named by the escaped virtual path name&#xa; (ie. always use VirtualPath.toSlotPathName(virtualPathName) as the name of the slot added&#xa; to the parent).  This method should return the property for the slot added.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possibility of a partial loaded state supported by&#xa; virtuals, subclasses should also be aware of the subscription state.&#xa; This means that an addVirtualSlot() call for a new virtual slot&#xa; could occur while the parent is already subscribed.  So this could affect&#xa; how the new virtual slot should be handled (ie. added to a poll scheduler).&#xa; Subclasses should always be aware of this potential state.
+</description>
+<parameter name="parent">
+<type class="javax.baja.virtual.BVirtualComponent"/>
+</parameter>
+<parameter name="virtualPathName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.loadVirtualSlots(javax.baja.virtual.BVirtualComponent) -->
+<method name="loadVirtualSlots"  public="true" abstract="true">
+<description>
+This method is called by the virtual space&#x27;s LoadCallbacks when&#xa; it is time for a virtual component to lazy load all of its dynamic&#xa; slots.  Subclasses should implement this method to&#xa; &#x22;discover&#x22; and dynamically add the direct children of the parent&#xa; virtual component instance provided.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possiblity of a &#x22;partial&#x22; loaded state, this&#xa; method may be called when the parent instance already has some&#xa; of its dynamic child slots loaded, but not all.  So this means&#xa; that it is important to check for existing slots on the parent&#xa; before adding any new dynamic slots of the same name.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possibility of a partial loaded state supported by&#xa; virtuals, subclasses should also be aware of the subscription state.&#xa; This means that a loadVirtualSlots() call&#xa; could occur while the parent is already subscribed.  So this could affect&#xa; how any new virtual slots added should be handled (ie. added to a poll scheduler).&#xa; Subclasses should always be aware of this potential state.
+</description>
+<parameter name="parent">
+<type class="javax.baja.virtual.BVirtualComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.ensureVirtualsLoaded(javax.baja.naming.BOrd[]) -->
+<method name="ensureVirtualsLoaded"  public="true">
+<description>
+This method is called when a batch of virtual Ords are&#xa; pending resolution.  For example, when a Px graphic is first&#xa; loaded that contains a bunch of virtual Ord bindings, these&#xa; virtual Ords are bundled into a single request, so that they&#xa; can be &#x22;pre-loaded&#x22; in batch.  Subclasses may wish to override&#xa; this method to pre-load the virtual objects for the given virtual&#xa; Ords, especially if they can be resolved in batch for efficiency.&#xa; By default, this method doesn&#x27;t do anything, which will lead to&#xa; each virtual Ord being resolved individually, causing individual&#xa; loadVirtualSlot() callbacks, which could be less efficient.&#xa; &lt;p&gt;&#xa; NOTE:  Due to the possiblity of a &#x22;partial&#x22; loaded state, this&#xa; method may be called with virtual Ords that resolve to existing&#xa; virtual components.  So this means that it is important to check&#xa; for existing slots on the resolved virtuals before adding any new&#xa; dynamic slots of the same name.
+</description>
+<parameter name="virtualOrds">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.getNavOrd() -->
+<method name="getNavOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to return the nav ord of the virtual space&#x27;s root component.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.hasNavChildren() -->
+<method name="hasNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to return the nav children state in the virtual space.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to return the nav child in the virtual space.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.resolveNavChild(java.lang.String) -->
+<method name="resolveNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to resolve the nav child in the virtual space.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to return the nav children of the virtual space.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Override the agent list to remove the pxEditor, since&#xa; px views are not allowed on virtual gateways.  Also&#xa; removes the Wiresheet and LinkSheet views since linking&#xa; is not allowed for virtual components, and Tag Manager&#xa; as tags are not allowed on virtual components.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to be sure to include spy info about the virtual gateway&#x27;s&#xa; corresponding virtual space.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework use only.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualGateway.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

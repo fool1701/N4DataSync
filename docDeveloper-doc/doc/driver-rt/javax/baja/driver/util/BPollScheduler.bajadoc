@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="driver" runtimeProfile="rt" qualifiedName="javax.baja.driver.util.BPollScheduler" name="BPollScheduler" packageName="javax.baja.driver.util" public="true" abstract="true">
+<description>
+BPollScheduler is used to configure and manage a group&#xa; of BComponents to be polled.  The BPollScheduler provides&#xa; a flexible polling algorthim based on four &#x22;buckets&#x22;.&#xa; &lt;p&gt;&#xa; Each BIPollable assigned to a BPollScheduler is configured&#xa; in one of three buckets: fast, normal, or slow.  In addition&#xa; there is a forth bucket called the &#x22;dibs stack&#x22;.  Whenever&#xa; a BIPollable is subscribed it immediately gets &#x22;first dibs&#x22;&#xa; and goes on the top of the dibs stack.  The poll scheduler&#xa; always polls the dibs before doing anything else.  The dibs&#xa; stack is polled last-in, first-out (LIFO).  As long as entries&#xa; are in the dibs stack they are polled as fast as possible&#xa; with no artificial delays.&#xa; &lt;p&gt;&#xa; When the dibs stack is empty the scheduler attempts to&#xa; poll the components in each bucket using an algorthim&#xa; designed to create uniform network traffic.  For example&#xa; if the fast rate is configured to 10sec and there are 5&#xa; components currently subscribed in the fast bucket, then&#xa; the scheduler will attempt to poll one component every 2sec.&#xa; &lt;p&gt;&#xa; Every ten seconds the poll scheduler rechecks the buckets&#xa; for configuration changes.  So if a BIPollable&#x27;s configuration&#xa; is changed from slow to fast, it takes at most ten seconds&#xa; for the change to take effect.  Statistics are also updated&#xa; every ten seconds.  Statistics may be manually reset using&#xa; the resetStatistics action.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">21 Jan 02</tag>
+<tag name="@version">$Revision: 26$ $Date: 4/14/11 9:38:34 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.driver.util.BAbstractPollService"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<property name="fastRate" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;fastRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to fast.
+</description>
+<tag name="@see">#getFastRate</tag>
+<tag name="@see">#setFastRate</tag>
+</property>
+
+<property name="normalRate" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;normalRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to normal.
+</description>
+<tag name="@see">#getNormalRate</tag>
+<tag name="@see">#setNormalRate</tag>
+</property>
+
+<property name="slowRate" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;slowRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to slow.
+</description>
+<tag name="@see">#getSlowRate</tag>
+<tag name="@see">#setSlowRate</tag>
+</property>
+
+<property name="statisticsStart" flags="rt">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;statisticsStart&lt;/code&gt; property.&#xa; Last reset time of statistics.
+</description>
+<tag name="@see">#getStatisticsStart</tag>
+<tag name="@see">#setStatisticsStart</tag>
+</property>
+
+<property name="averagePoll" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;averagePoll&lt;/code&gt; property.&#xa; Average time spent in each poll.
+</description>
+<tag name="@see">#getAveragePoll</tag>
+<tag name="@see">#setAveragePoll</tag>
+</property>
+
+<property name="busyTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;busyTime&lt;/code&gt; property.&#xa; Percentage of time spent busy doing polls.
+</description>
+<tag name="@see">#getBusyTime</tag>
+<tag name="@see">#setBusyTime</tag>
+</property>
+
+<property name="totalPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;totalPolls&lt;/code&gt; property.&#xa; Total number of polls made and time&#xa; spent waiting for polls to execute.
+</description>
+<tag name="@see">#getTotalPolls</tag>
+<tag name="@see">#setTotalPolls</tag>
+</property>
+
+<property name="dibsPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;dibsPolls&lt;/code&gt; property.&#xa; Total number of polls made processing the dibs stack.
+</description>
+<tag name="@see">#getDibsPolls</tag>
+<tag name="@see">#setDibsPolls</tag>
+</property>
+
+<property name="fastPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fastPolls&lt;/code&gt; property.&#xa; Total number of polls made processing fast queue.
+</description>
+<tag name="@see">#getFastPolls</tag>
+<tag name="@see">#setFastPolls</tag>
+</property>
+
+<property name="normalPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;normalPolls&lt;/code&gt; property.&#xa; Total number of polls made processing normal queue.
+</description>
+<tag name="@see">#getNormalPolls</tag>
+<tag name="@see">#setNormalPolls</tag>
+</property>
+
+<property name="slowPolls" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;slowPolls&lt;/code&gt; property.&#xa; Total number of polls made processing slow queue.
+</description>
+<tag name="@see">#getSlowPolls</tag>
+<tag name="@see">#setSlowPolls</tag>
+</property>
+
+<property name="dibsCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;dibsCount&lt;/code&gt; property.&#xa; Current and average number of components in dibs stack.
+</description>
+<tag name="@see">#getDibsCount</tag>
+<tag name="@see">#setDibsCount</tag>
+</property>
+
+<property name="fastCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fastCount&lt;/code&gt; property.&#xa; Current and average number of components in fast queue.
+</description>
+<tag name="@see">#getFastCount</tag>
+<tag name="@see">#setFastCount</tag>
+</property>
+
+<property name="normalCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;normalCount&lt;/code&gt; property.&#xa; Current and average number of components in normal queue.
+</description>
+<tag name="@see">#getNormalCount</tag>
+<tag name="@see">#setNormalCount</tag>
+</property>
+
+<property name="slowCount" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;slowCount&lt;/code&gt; property.&#xa; Current and average number of components in slow queue.
+</description>
+<tag name="@see">#getSlowCount</tag>
+<tag name="@see">#setSlowCount</tag>
+</property>
+
+<property name="fastCycleTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;fastCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the fast queue.
+</description>
+<tag name="@see">#getFastCycleTime</tag>
+<tag name="@see">#setFastCycleTime</tag>
+</property>
+
+<property name="normalCycleTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;normalCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the normal queue.
+</description>
+<tag name="@see">#getNormalCycleTime</tag>
+<tag name="@see">#setNormalCycleTime</tag>
+</property>
+
+<property name="slowCycleTime" flags="rt">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;slowCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the slow queue.
+</description>
+<tag name="@see">#getSlowCycleTime</tag>
+<tag name="@see">#setSlowCycleTime</tag>
+</property>
+
+<action name="resetStatistics" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetStatistics&lt;/code&gt; action.&#xa; Reset all the statistics properties.
+</description>
+<tag name="@see">#resetStatistics()</tag>
+</action>
+
+<!-- javax.baja.driver.util.BPollScheduler() -->
+<constructor name="BPollScheduler" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.driver.util.BPollScheduler.getFastRate() -->
+<method name="getFastRate"  public="true">
+<description>
+Get the &lt;code&gt;fastRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to fast.
+</description>
+<tag name="@see">#fastRate</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setFastRate(javax.baja.sys.BRelTime) -->
+<method name="setFastRate"  public="true">
+<description>
+Set the &lt;code&gt;fastRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to fast.
+</description>
+<tag name="@see">#fastRate</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getNormalRate() -->
+<method name="getNormalRate"  public="true">
+<description>
+Get the &lt;code&gt;normalRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to normal.
+</description>
+<tag name="@see">#normalRate</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setNormalRate(javax.baja.sys.BRelTime) -->
+<method name="setNormalRate"  public="true">
+<description>
+Set the &lt;code&gt;normalRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to normal.
+</description>
+<tag name="@see">#normalRate</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getSlowRate() -->
+<method name="getSlowRate"  public="true">
+<description>
+Get the &lt;code&gt;slowRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to slow.
+</description>
+<tag name="@see">#slowRate</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setSlowRate(javax.baja.sys.BRelTime) -->
+<method name="setSlowRate"  public="true">
+<description>
+Set the &lt;code&gt;slowRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to slow.
+</description>
+<tag name="@see">#slowRate</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getStatisticsStart() -->
+<method name="getStatisticsStart"  public="true">
+<description>
+Get the &lt;code&gt;statisticsStart&lt;/code&gt; property.&#xa; Last reset time of statistics.
+</description>
+<tag name="@see">#statisticsStart</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setStatisticsStart(javax.baja.sys.BAbsTime) -->
+<method name="setStatisticsStart"  public="true">
+<description>
+Set the &lt;code&gt;statisticsStart&lt;/code&gt; property.&#xa; Last reset time of statistics.
+</description>
+<tag name="@see">#statisticsStart</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getAveragePoll() -->
+<method name="getAveragePoll"  public="true">
+<description>
+Get the &lt;code&gt;averagePoll&lt;/code&gt; property.&#xa; Average time spent in each poll.
+</description>
+<tag name="@see">#averagePoll</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setAveragePoll(java.lang.String) -->
+<method name="setAveragePoll"  public="true">
+<description>
+Set the &lt;code&gt;averagePoll&lt;/code&gt; property.&#xa; Average time spent in each poll.
+</description>
+<tag name="@see">#averagePoll</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getBusyTime() -->
+<method name="getBusyTime"  public="true">
+<description>
+Get the &lt;code&gt;busyTime&lt;/code&gt; property.&#xa; Percentage of time spent busy doing polls.
+</description>
+<tag name="@see">#busyTime</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setBusyTime(java.lang.String) -->
+<method name="setBusyTime"  public="true">
+<description>
+Set the &lt;code&gt;busyTime&lt;/code&gt; property.&#xa; Percentage of time spent busy doing polls.
+</description>
+<tag name="@see">#busyTime</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getTotalPolls() -->
+<method name="getTotalPolls"  public="true">
+<description>
+Get the &lt;code&gt;totalPolls&lt;/code&gt; property.&#xa; Total number of polls made and time&#xa; spent waiting for polls to execute.
+</description>
+<tag name="@see">#totalPolls</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setTotalPolls(java.lang.String) -->
+<method name="setTotalPolls"  public="true">
+<description>
+Set the &lt;code&gt;totalPolls&lt;/code&gt; property.&#xa; Total number of polls made and time&#xa; spent waiting for polls to execute.
+</description>
+<tag name="@see">#totalPolls</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getDibsPolls() -->
+<method name="getDibsPolls"  public="true">
+<description>
+Get the &lt;code&gt;dibsPolls&lt;/code&gt; property.&#xa; Total number of polls made processing the dibs stack.
+</description>
+<tag name="@see">#dibsPolls</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setDibsPolls(java.lang.String) -->
+<method name="setDibsPolls"  public="true">
+<description>
+Set the &lt;code&gt;dibsPolls&lt;/code&gt; property.&#xa; Total number of polls made processing the dibs stack.
+</description>
+<tag name="@see">#dibsPolls</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getFastPolls() -->
+<method name="getFastPolls"  public="true">
+<description>
+Get the &lt;code&gt;fastPolls&lt;/code&gt; property.&#xa; Total number of polls made processing fast queue.
+</description>
+<tag name="@see">#fastPolls</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setFastPolls(java.lang.String) -->
+<method name="setFastPolls"  public="true">
+<description>
+Set the &lt;code&gt;fastPolls&lt;/code&gt; property.&#xa; Total number of polls made processing fast queue.
+</description>
+<tag name="@see">#fastPolls</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getNormalPolls() -->
+<method name="getNormalPolls"  public="true">
+<description>
+Get the &lt;code&gt;normalPolls&lt;/code&gt; property.&#xa; Total number of polls made processing normal queue.
+</description>
+<tag name="@see">#normalPolls</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setNormalPolls(java.lang.String) -->
+<method name="setNormalPolls"  public="true">
+<description>
+Set the &lt;code&gt;normalPolls&lt;/code&gt; property.&#xa; Total number of polls made processing normal queue.
+</description>
+<tag name="@see">#normalPolls</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getSlowPolls() -->
+<method name="getSlowPolls"  public="true">
+<description>
+Get the &lt;code&gt;slowPolls&lt;/code&gt; property.&#xa; Total number of polls made processing slow queue.
+</description>
+<tag name="@see">#slowPolls</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setSlowPolls(java.lang.String) -->
+<method name="setSlowPolls"  public="true">
+<description>
+Set the &lt;code&gt;slowPolls&lt;/code&gt; property.&#xa; Total number of polls made processing slow queue.
+</description>
+<tag name="@see">#slowPolls</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getDibsCount() -->
+<method name="getDibsCount"  public="true">
+<description>
+Get the &lt;code&gt;dibsCount&lt;/code&gt; property.&#xa; Current and average number of components in dibs stack.
+</description>
+<tag name="@see">#dibsCount</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setDibsCount(java.lang.String) -->
+<method name="setDibsCount"  public="true">
+<description>
+Set the &lt;code&gt;dibsCount&lt;/code&gt; property.&#xa; Current and average number of components in dibs stack.
+</description>
+<tag name="@see">#dibsCount</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getFastCount() -->
+<method name="getFastCount"  public="true">
+<description>
+Get the &lt;code&gt;fastCount&lt;/code&gt; property.&#xa; Current and average number of components in fast queue.
+</description>
+<tag name="@see">#fastCount</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setFastCount(java.lang.String) -->
+<method name="setFastCount"  public="true">
+<description>
+Set the &lt;code&gt;fastCount&lt;/code&gt; property.&#xa; Current and average number of components in fast queue.
+</description>
+<tag name="@see">#fastCount</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getNormalCount() -->
+<method name="getNormalCount"  public="true">
+<description>
+Get the &lt;code&gt;normalCount&lt;/code&gt; property.&#xa; Current and average number of components in normal queue.
+</description>
+<tag name="@see">#normalCount</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setNormalCount(java.lang.String) -->
+<method name="setNormalCount"  public="true">
+<description>
+Set the &lt;code&gt;normalCount&lt;/code&gt; property.&#xa; Current and average number of components in normal queue.
+</description>
+<tag name="@see">#normalCount</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getSlowCount() -->
+<method name="getSlowCount"  public="true">
+<description>
+Get the &lt;code&gt;slowCount&lt;/code&gt; property.&#xa; Current and average number of components in slow queue.
+</description>
+<tag name="@see">#slowCount</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setSlowCount(java.lang.String) -->
+<method name="setSlowCount"  public="true">
+<description>
+Set the &lt;code&gt;slowCount&lt;/code&gt; property.&#xa; Current and average number of components in slow queue.
+</description>
+<tag name="@see">#slowCount</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getFastCycleTime() -->
+<method name="getFastCycleTime"  public="true">
+<description>
+Get the &lt;code&gt;fastCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the fast queue.
+</description>
+<tag name="@see">#fastCycleTime</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setFastCycleTime(java.lang.String) -->
+<method name="setFastCycleTime"  public="true">
+<description>
+Set the &lt;code&gt;fastCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the fast queue.
+</description>
+<tag name="@see">#fastCycleTime</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getNormalCycleTime() -->
+<method name="getNormalCycleTime"  public="true">
+<description>
+Get the &lt;code&gt;normalCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the normal queue.
+</description>
+<tag name="@see">#normalCycleTime</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setNormalCycleTime(java.lang.String) -->
+<method name="setNormalCycleTime"  public="true">
+<description>
+Set the &lt;code&gt;normalCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the normal queue.
+</description>
+<tag name="@see">#normalCycleTime</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getSlowCycleTime() -->
+<method name="getSlowCycleTime"  public="true">
+<description>
+Get the &lt;code&gt;slowCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the slow queue.
+</description>
+<tag name="@see">#slowCycleTime</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.setSlowCycleTime(java.lang.String) -->
+<method name="setSlowCycleTime"  public="true">
+<description>
+Set the &lt;code&gt;slowCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the slow queue.
+</description>
+<tag name="@see">#slowCycleTime</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.resetStatistics() -->
+<method name="resetStatistics"  public="true">
+<description>
+Invoke the &lt;code&gt;resetStatistics&lt;/code&gt; action.&#xa; Reset all the statistics properties.
+</description>
+<tag name="@see">#resetStatistics</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.poll(javax.baja.driver.util.BIPollable) -->
+<method name="poll"  public="true" final="true">
+<description>
+Invoke the poll callback and log any errors.  We&#xa; also keep stats on the time taken for each poll.
+</description>
+<parameter name="p">
+<type class="javax.baja.driver.util.BIPollable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.doPoll(javax.baja.driver.util.BIPollable) -->
+<method name="doPoll"  public="true" abstract="true">
+<description>
+Poll the specified point synchronously, blocking&#xa; until polled successfully or an failure is encountered.&#xa; Failures should throw an exception.
+</description>
+<parameter name="p">
+<type class="javax.baja.driver.util.BIPollable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.started() -->
+<method name="started"  public="true">
+<description>
+Default for started() is to call startThread().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.stationStarted() -->
+<method name="stationStarted"  public="true">
+<description>
+Overridden starting in Niagara 3.4 in order to delay&#xa; the polling until after the station has started
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.stopped() -->
+<method name="stopped"  public="true">
+<description>
+Default for stopped() is to call stopThread().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.startThread() -->
+<method name="startThread"  public="true">
+<description>
+Start the poll scheduler on its own thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.stopThread() -->
+<method name="stopThread"  public="true">
+<description>
+Stop the poll scheduler thread.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.run() -->
+<method name="run"  public="true">
+<description>
+Main loop of poll scheduler.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.doResetStatistics() -->
+<method name="doResetStatistics"  public="true">
+<description>
+Action implementation for resetStatistics().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.subscribe(javax.baja.driver.util.BIPollable) -->
+<method name="subscribe"  public="true">
+<description>
+Subscribe the pollable and start polling it&#xa; until it is unsubscrbed.
+</description>
+<parameter name="p">
+<type class="javax.baja.driver.util.BIPollable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.unsubscribe(javax.baja.driver.util.BIPollable) -->
+<method name="unsubscribe"  public="true">
+<description>
+Unsubscribe the pollable and stop polling it.
+</description>
+<parameter name="p">
+<type class="javax.baja.driver.util.BIPollable"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the pollable point was subscribed,&#xa;          false if the point was not in any buckets.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.driver.util.BPollScheduler.fastRate -->
+<field name="fastRate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fastRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to fast.
+</description>
+<tag name="@see">#getFastRate</tag>
+<tag name="@see">#setFastRate</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.normalRate -->
+<field name="normalRate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;normalRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to normal.
+</description>
+<tag name="@see">#getNormalRate</tag>
+<tag name="@see">#setNormalRate</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.slowRate -->
+<field name="slowRate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;slowRate&lt;/code&gt; property.&#xa; The frequency used to poll components set to slow.
+</description>
+<tag name="@see">#getSlowRate</tag>
+<tag name="@see">#setSlowRate</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.statisticsStart -->
+<field name="statisticsStart"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;statisticsStart&lt;/code&gt; property.&#xa; Last reset time of statistics.
+</description>
+<tag name="@see">#getStatisticsStart</tag>
+<tag name="@see">#setStatisticsStart</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.averagePoll -->
+<field name="averagePoll"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;averagePoll&lt;/code&gt; property.&#xa; Average time spent in each poll.
+</description>
+<tag name="@see">#getAveragePoll</tag>
+<tag name="@see">#setAveragePoll</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.busyTime -->
+<field name="busyTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;busyTime&lt;/code&gt; property.&#xa; Percentage of time spent busy doing polls.
+</description>
+<tag name="@see">#getBusyTime</tag>
+<tag name="@see">#setBusyTime</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.totalPolls -->
+<field name="totalPolls"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;totalPolls&lt;/code&gt; property.&#xa; Total number of polls made and time&#xa; spent waiting for polls to execute.
+</description>
+<tag name="@see">#getTotalPolls</tag>
+<tag name="@see">#setTotalPolls</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.dibsPolls -->
+<field name="dibsPolls"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;dibsPolls&lt;/code&gt; property.&#xa; Total number of polls made processing the dibs stack.
+</description>
+<tag name="@see">#getDibsPolls</tag>
+<tag name="@see">#setDibsPolls</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.fastPolls -->
+<field name="fastPolls"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fastPolls&lt;/code&gt; property.&#xa; Total number of polls made processing fast queue.
+</description>
+<tag name="@see">#getFastPolls</tag>
+<tag name="@see">#setFastPolls</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.normalPolls -->
+<field name="normalPolls"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;normalPolls&lt;/code&gt; property.&#xa; Total number of polls made processing normal queue.
+</description>
+<tag name="@see">#getNormalPolls</tag>
+<tag name="@see">#setNormalPolls</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.slowPolls -->
+<field name="slowPolls"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;slowPolls&lt;/code&gt; property.&#xa; Total number of polls made processing slow queue.
+</description>
+<tag name="@see">#getSlowPolls</tag>
+<tag name="@see">#setSlowPolls</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.dibsCount -->
+<field name="dibsCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;dibsCount&lt;/code&gt; property.&#xa; Current and average number of components in dibs stack.
+</description>
+<tag name="@see">#getDibsCount</tag>
+<tag name="@see">#setDibsCount</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.fastCount -->
+<field name="fastCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fastCount&lt;/code&gt; property.&#xa; Current and average number of components in fast queue.
+</description>
+<tag name="@see">#getFastCount</tag>
+<tag name="@see">#setFastCount</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.normalCount -->
+<field name="normalCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;normalCount&lt;/code&gt; property.&#xa; Current and average number of components in normal queue.
+</description>
+<tag name="@see">#getNormalCount</tag>
+<tag name="@see">#setNormalCount</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.slowCount -->
+<field name="slowCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;slowCount&lt;/code&gt; property.&#xa; Current and average number of components in slow queue.
+</description>
+<tag name="@see">#getSlowCount</tag>
+<tag name="@see">#setSlowCount</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.fastCycleTime -->
+<field name="fastCycleTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fastCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the fast queue.
+</description>
+<tag name="@see">#getFastCycleTime</tag>
+<tag name="@see">#setFastCycleTime</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.normalCycleTime -->
+<field name="normalCycleTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;normalCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the normal queue.
+</description>
+<tag name="@see">#getNormalCycleTime</tag>
+<tag name="@see">#setNormalCycleTime</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.slowCycleTime -->
+<field name="slowCycleTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;slowCycleTime&lt;/code&gt; property.&#xa; Average cycle time of the slow queue.
+</description>
+<tag name="@see">#getSlowCycleTime</tag>
+<tag name="@see">#setSlowCycleTime</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.resetStatistics -->
+<field name="resetStatistics"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;resetStatistics&lt;/code&gt; action.&#xa; Reset all the statistics properties.
+</description>
+<tag name="@see">#resetStatistics()</tag>
+</field>
+
+<!-- javax.baja.driver.util.BPollScheduler.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.job.BJobService" name="BJobService" packageName="javax.baja.job" public="true">
+<description>
+BJobService is used to manage all the BJobs in a station VM.&#xa; Refer to BJob class header for details.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">30 Apr 03</tag>
+<tag name="@version">$Revision: 7$ $Date: 12/15/06 3:49:33 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<implements>
+<type class="javax.baja.job.BIJobService"/>
+</implements>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<action name="submitAction" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.job.BJob"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitAction&lt;/code&gt; action.
+</description>
+<tag name="@see">#submitAction(BJob parameter)</tag>
+</action>
+
+<topic name="notification" flags="h">
+<eventType>
+<type class="javax.baja.util.BNotification"/>
+</eventType><description>
+Slot for the &lt;code&gt;notification&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireNotification</tag>
+</topic>
+
+<!-- javax.baja.job.BJobService() -->
+<constructor name="BJobService" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.job.BJobService.submitAction(javax.baja.job.BJob) -->
+<method name="submitAction"  public="true">
+<description>
+Invoke the &lt;code&gt;submitAction&lt;/code&gt; action.
+</description>
+<tag name="@see">#submitAction</tag>
+<parameter name="parameter">
+<type class="javax.baja.job.BJob"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.fireNotification(javax.baja.util.BNotification) -->
+<method name="fireNotification"  public="true">
+<description>
+Fire an event for the &lt;code&gt;notification&lt;/code&gt; topic.
+</description>
+<tag name="@see">#notification</tag>
+<parameter name="event">
+<type class="javax.baja.util.BNotification"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.getService() -->
+<method name="getService"  public="true" static="true">
+<description>
+Get the JobService or throw ServiceNotFoundException.
+</description>
+<return>
+<type class="javax.baja.job.BIJobService"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.getJobs() -->
+<method name="getJobs"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get all the child jobs under this service.
+</description>
+<return>
+<type class="javax.baja.job.BJob" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.submit(javax.baja.job.BJob, javax.baja.sys.Context) -->
+<method name="submit"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Submit a job and run it!
+</description>
+<parameter name="job">
+<type class="javax.baja.job.BJob"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.naming.BOrd">BOrd</see>&lt;/code&gt; is the ORD to the BJob that is created
+</description>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.doSubmitAction(javax.baja.job.BJob, javax.baja.sys.Context) -->
+<method name="doSubmitAction"  public="true">
+<description>
+Submit action implementation, do not use directly.
+</description>
+<parameter name="job">
+<type class="javax.baja.job.BJob"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.serviceStopped() -->
+<method name="serviceStopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.checkParentForRestrictedComponent(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="checkParentForRestrictedComponent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Only one allowed to live under the station&#x27;s BServiceContainer.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.job.BJobService.getExecutor() -->
+<method name="getExecutor"  public="true">
+<description>
+Get the search executor.
+</description>
+<return>
+<type class="java.util.concurrent.ForkJoinPool"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.startThreadPool(int) -->
+<method name="startThreadPool"  protected="true">
+<description/>
+<parameter name="threads">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.stopThreadPool() -->
+<method name="stopThreadPool"  protected="true">
+<description>
+Shut down the thread pool and monitor.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJobService.submitAction -->
+<field name="submitAction"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;submitAction&lt;/code&gt; action.
+</description>
+<tag name="@see">#submitAction(BJob parameter)</tag>
+</field>
+
+<!-- javax.baja.job.BJobService.notification -->
+<field name="notification"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;notification&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireNotification</tag>
+</field>
+
+<!-- javax.baja.job.BJobService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.job.BJobService.executor -->
+<field name="executor"  protected="true">
+<type class="java.util.concurrent.ForkJoinPool"/>
+<description/>
+</field>
+
+<!-- javax.baja.job.BJobService.monitorWorker -->
+<field name="monitorWorker"  protected="true">
+<type class="javax.baja.job.BJobService$MonitorWorker"/>
+<description/>
+</field>
+
+<!-- javax.baja.job.BJobService.exceptionHandler -->
+<field name="exceptionHandler"  protected="true">
+<type class="javax.baja.job.BJobService$UncaughtJobExceptionHandler"/>
+<description/>
+</field>
+
+<!-- javax.baja.job.BJobService.DEFAULT_THREAD_MONITOR_INTERVAL_MS -->
+<field name="DEFAULT_THREAD_MONITOR_INTERVAL_MS"  protected="true" static="true" final="true">
+<type class="long"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.mgr.MgrController" name="MgrController" packageName="javax.baja.workbench.mgr" public="true">
+<description>
+MgrController is used to manage the Commands of BAbstractManager.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">15 Dec 03</tag>
+<tag name="@version">$Revision: 51$ $Date: 7/27/10 7:11:31 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.workbench.mgr.MgrSupport"/>
+</extends>
+<!-- javax.baja.workbench.mgr.MgrController(javax.baja.workbench.mgr.BAbstractManager) -->
+<constructor name="MgrController" public="true">
+<parameter name="manager">
+<type class="javax.baja.workbench.mgr.BAbstractManager"/>
+</parameter>
+<description>
+Construct an MColumn.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.mgr.MgrController.init() -->
+<method name="init"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Init is called once from &lt;code&gt;BAbstractManager.init()&lt;/code&gt;&#xa; Must call &lt;code&gt;super.init()&lt;/code&gt; if overridden.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeToolBar() -->
+<method name="makeToolBar"  public="true">
+<description>
+Make the toolbar to merge into the workbench shell.  The&#xa; default implementation builds a toolbar using the result&#xa; of getCommands() for each command which has the TOOL_BAR&#xa; flag set.
+</description>
+<return>
+<type class="javax.baja.ui.BToolBar"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeMenus() -->
+<method name="makeMenus"  public="true">
+<description>
+Make the menus to merge into the workbench shell.  The&#xa; default implementation builds a menu using the result&#xa; of getCommands() for each command which has the MENU_BAR&#xa; flag set.
+</description>
+<return>
+<type class="javax.baja.ui.BMenu" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeActionBar() -->
+<method name="makeActionBar"  public="true">
+<description>
+Make the action bar to display along bottom of manager.&#xa; The default implementation builds a menu using the result&#xa; of getCommands() for each command which has the ACTION_BAR&#xa; flag set.
+</description>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeActionPane(javax.baja.workbench.mgr.MgrController.IMgrCommand[]) -->
+<method name="makeActionPane"  protected="true">
+<description>
+Layout action pane with buttons for each of the specified&#xa; commands which has the ACTION_BAR flag set.
+</description>
+<parameter name="cmds">
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getDropDownCommands(javax.baja.workbench.mgr.MgrController.IMgrCommand) -->
+<method name="getDropDownCommands"  public="true">
+<description>
+This is used by makeToolbar and makeActionBar to&#xa; get subcommands for the specified commands.  These&#xa; subcommands are added as a drop down the primary&#xa; command button.  Return null for no drop down.
+</description>
+<parameter name="command">
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getCommands() -->
+<method name="getCommands"  public="true" final="true">
+<description>
+Get the list of commands for the manager.  These commands&#xa; are used for the menu, toolbar, action bar, and popups.&#xa; This list is initialized by the makeCommands() method.&#xa; This method returns a copy of the commands, not the actual&#xa; command array.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getCommandCount() -->
+<method name="getCommandCount"  public="true" final="true">
+<description>
+Get the number of commands for the manager.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getCommand(int) -->
+<method name="getCommand"  public="true" final="true">
+<description>
+Get the commands at the specified index.  Returns&#xa; the actual command, not a copy.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeCommands() -->
+<method name="makeCommands"  protected="true">
+<description>
+Initialize the list of commands for the manager.  These&#xa; commands are used for the menu, toolbar, action bar,&#xa; and popups.  The default list includes all the commands&#xa; declared on MgrController as public fields.  Use the&#xa; append() method to safely add to the base class list.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeTagCommands() -->
+<method name="makeTagCommands"  protected="true">
+<description>
+Initialize the list of commands for the manager used for tagging.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeTemplateCommands() -->
+<method name="makeTemplateCommands"  protected="true">
+<description>
+Initialize the list of commands for the manager used for templates.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.append(javax.baja.workbench.mgr.MgrController.IMgrCommand[], javax.baja.workbench.mgr.MgrController.IMgrCommand[]) -->
+<method name="append"  public="true" static="true">
+<description>
+Create a new array of commands by appending b to a.
+</description>
+<parameter name="a">
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</parameter>
+<parameter name="b">
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController$IMgrCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.setQuickCommandsEnabled(boolean) -->
+<method name="setQuickCommandsEnabled"  public="true">
+<description>
+Explicitly disable quick commands (those with a non-modified accelerator).&#xa; This is used to prevent quick commands from being fired when a text box has focus
+</description>
+<parameter name="enabled">
+<type class="boolean"/>
+<description>
+The new enabled value for quick commands
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.updateCommands() -->
+<method name="updateCommands"  public="true">
+<description>
+This callback is made when commands should update&#xa; their enable/disable state based on current conditions.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeEdit(java.lang.String) -->
+<method name="makeEdit"  public="true">
+<description>
+Make an instance of MgrEdit to use.
+</description>
+<parameter name="label">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrEdit"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getTable() -->
+<method name="getTable"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;getManager().getModel().getTable()&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.BMgrTable"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getLearnTable() -->
+<method name="getLearnTable"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;getManager().getLearn().getTable()&lt;/code&gt;.&#xa; Return null if learn not supported.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.BLearnTable"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getDevTemplateTable() -->
+<method name="getDevTemplateTable"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;getManager().getDevTemplate().getTable()&lt;/code&gt;.&#xa; Return null if templates are not supported in this manager.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.BTemplateTable"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getSelectedRows() -->
+<method name="getSelectedRows"  public="true" final="true">
+<description>
+public final BTemplateTable getDevTemplateTable()&#xa;    return manager.template.table;&#xa; Convenience for &lt;code&gt;getTable().getSelection().getRows()&lt;/code&gt;
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.learnSelectionChanged() -->
+<method name="learnSelectionChanged"  public="true">
+<description>
+Callback when the selection has been modified in the learn table.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getLearnSelectedRows() -->
+<method name="getLearnSelectedRows"  public="true">
+<description>
+Convenience for &lt;code&gt;getLearnTable().getSelection().getRows()&lt;/code&gt;&#xa; Return array of length 0 if learn not supported.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.tagSelectionChanged() -->
+<method name="tagSelectionChanged"  public="true">
+<description>
+Callback when the selection has been modified in the&#xa; tag dictionary table.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.dbSelectionChanged() -->
+<method name="dbSelectionChanged"  public="true">
+<description>
+Callback when the selection has been modified in the&#xa; db table.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.getSelectedComponents() -->
+<method name="getSelectedComponents"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;getTable().getSelectedComponents()&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makePopup(javax.baja.workbench.mgr.BMgrTable, javax.baja.workbench.component.table.ComponentTableSubject, javax.baja.ui.BMenu) -->
+<method name="makePopup"  public="true">
+<description>
+This is a hook for building the popup menu used by the BMgrTable.&#xa; New commands should be appended to the default menu.  The default&#xa; implementation adds all commands with the POPUP flag set.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BMgrTable"/>
+</parameter>
+<parameter name="subject">
+<type class="javax.baja.workbench.component.table.ComponentTableSubject"/>
+</parameter>
+<parameter name="menu">
+<type class="javax.baja.ui.BMenu"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makePopup(javax.baja.workbench.mgr.BLearnTable, javax.baja.ui.treetable.TreeTableSubject, javax.baja.ui.BMenu) -->
+<method name="makePopup"  public="true">
+<description>
+This is a hook for building the popup menu used by the BLearnTable.&#xa; New commands should be appended to the default menu.  The default&#xa; implementation adds all commands with the LEARN_POPUP flag set.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BLearnTable"/>
+</parameter>
+<parameter name="subject">
+<type class="javax.baja.ui.treetable.TreeTableSubject"/>
+</parameter>
+<parameter name="menu">
+<type class="javax.baja.ui.BMenu"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.cellDoubleClicked(javax.baja.workbench.mgr.BMgrTable, javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellDoubleClicked"  public="true">
+<description>
+Handle a double click on the manager table.  Default implementation&#xa; opens edit dialog for specified row.  Note the column index is the&#xa; visible column index, not necessarily the MgrColumn index, see&#xa; BMgrTable.columnIndexToMgrColumn().
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BMgrTable"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.cellDoubleClicked(javax.baja.workbench.mgr.BLearnTable, javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellDoubleClicked"  public="true">
+<description>
+Handle a double click on the discovery table.  Default implementation&#xa; performs an add.  Note the column index is the visible column index, not&#xa; necessarily the MgrColumn index, see BLearnTable.columnIndexToMgrColumn().
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BLearnTable"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.cellDoubleClicked(javax.baja.ui.treetable.BTreeTable, javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellDoubleClicked"  public="true">
+<description>
+Handle a double click on the tag table.  Default implementation&#xa; will tag the selected database component.
+</description>
+<parameter name="table">
+<type class="javax.baja.ui.treetable.BTreeTable"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.cellDoubleClicked(javax.baja.workbench.mgr.BTemplateTable, javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellDoubleClicked"  public="true">
+<description>
+Handle a double click on the device template table.  Default implementation&#xa; will add the selected device template to the station.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BTemplateTable"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeOptionsMenu(javax.baja.workbench.mgr.BMgrTable, javax.baja.ui.BMenu) -->
+<method name="makeOptionsMenu"  public="true">
+<description>
+This is a hook for building the options menu used by the BMgrTable.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BMgrTable"/>
+</parameter>
+<parameter name="menu">
+<type class="javax.baja.ui.BMenu"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeOptionsMenu(javax.baja.workbench.mgr.BLearnTable, javax.baja.ui.BMenu) -->
+<method name="makeOptionsMenu"  public="true">
+<description>
+This is a hook for building the options menu used by the BLearnTable.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BLearnTable"/>
+</parameter>
+<parameter name="menu">
+<type class="javax.baja.ui.BMenu"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.makeOptionsMenu(javax.baja.workbench.mgr.BTemplateTable, javax.baja.ui.BMenu) -->
+<method name="makeOptionsMenu"  public="true">
+<description>
+This is a hook for building the options menu used by the BTemplateTable.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BTemplateTable"/>
+</parameter>
+<parameter name="menu">
+<type class="javax.baja.ui.BMenu"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.drop(javax.baja.workbench.mgr.BMgrTable, javax.baja.ui.transfer.TransferContext) -->
+<method name="drop"  public="true">
+<description>
+Process a drop on the MgrTable.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BMgrTable"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doLearnMode(boolean) -->
+<method name="doLearnMode"  public="true">
+<description>
+This is the callback when the learn mode is changed.
+</description>
+<parameter name="learnMode">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doTagMode(boolean) -->
+<method name="doTagMode"  public="true">
+<description>
+This is the callback when the tag mode is changed.
+</description>
+<parameter name="tagMode">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doTemplateMode(boolean) -->
+<method name="doTemplateMode"  public="true">
+<description>
+This is the callback when the tag mode is changed.
+</description>
+<parameter name="templateMode">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doDiscover(javax.baja.sys.Context) -->
+<method name="doDiscover"  public="true">
+<description>
+This is the callback when the discover command is invoked.&#xa; Discovery should always set the manager into learn mode.&#xa; If discovery options are available, then convention is to&#xa; prompt the user with a dialog for the options before kicking&#xa; off the discovery.  Standard practice is to use a Job to run&#xa; the discovery in the background by submiting the job via an&#xa; action that returns an BOrd and then calling MgrLearn.setJob().
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doCancel(javax.baja.sys.Context) -->
+<method name="doCancel"  public="true">
+<description>
+This is the callback when the cancel command is invoked.  The&#xa; default implementation will call cancel on MgrLearn.getJob().
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doNew(javax.baja.sys.Context) -->
+<method name="doNew"  public="true">
+<description>
+This is the callback when the new command is invoked.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.promptForNew(javax.baja.sys.Context) -->
+<method name="promptForNew"  public="true">
+<description>
+Prompt the user with the list of new types returned by&#xa; BAbstractManager.getNewTypes() and return a MgrEdit&#xa; with the default instances.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrEdit"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doEdit(javax.baja.sys.Context) -->
+<method name="doEdit"  public="true">
+<description>
+This is the callback when the edit command is invoked.  The&#xa; default implementation prompts the user with a MgrEdit of&#xa; all the selected rows in the database table.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doAdd(javax.baja.sys.Context) -->
+<method name="doAdd"  public="true">
+<description>
+This is the callback when the add command is invoked.&#xa; This routes to doAdd(Object[] sel, cx).
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doAdd(java.lang.Object[], javax.baja.sys.Context) -->
+<method name="doAdd"  protected="true">
+<description>
+This is called from doAdd() to add the discovered objects&#xa; to the station database.  The default implementation method&#xa; calls &lt;code&gt;BAbstractManager.discoveryToTypes()&lt;/code&gt; and&#xa; &lt;code&gt;BAbstractManager.discoveryToRow&lt;/code&gt; and then prompts&#xa; the user with MgrEdit dialog.
+</description>
+<parameter name="discovery">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doAddTemplates(java.lang.Object[], javax.baja.sys.Context) -->
+<method name="doAddTemplates"  protected="true">
+<description/>
+<parameter name="templates">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doMatch(javax.baja.sys.Context) -->
+<method name="doMatch"  public="true">
+<description>
+This is the callback when the match command is invoked, it&#xa; routes to &lt;code&gt;doMatch(Object, BComponent, Context)&lt;/code&gt;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doMatch(java.lang.Object, javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="doMatch"  public="true">
+<description>
+Perform the match between the discovered object and&#xa; the existing database object.  The default implementation&#xa; calls &lt;code&gt;BAbstractManager.discoveryToRow()&lt;/code&gt; and&#xa; then prompts the user with MgrEdit dialog.
+</description>
+<parameter name="discovery">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="database">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doTagIt(javax.baja.sys.Context) -->
+<method name="doTagIt"  public="true">
+<description>
+This is the callback when the TagIt command is invoked, it&#xa; routes to &lt;code&gt;MgrTagDictionary.doTagIt()&lt;/code&gt;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doDeploy(javax.baja.sys.Context) -->
+<method name="doDeploy"  public="true">
+<description>
+This is the callback when the Deploy command is invoked, it&#xa; routes to &lt;code&gt;doDeploy(Object, Context)&lt;/code&gt;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.doDeploy(java.lang.Object, javax.baja.sys.Context) -->
+<method name="doDeploy"  protected="true">
+<description>
+Called when a drag from templateTable to MgrTable is performed.  Subclasses should override.
+</description>
+<parameter name="discovery">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.headerPopup(javax.baja.workbench.mgr.BTemplateTable, javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerPopup"  public="true">
+<description>
+Handle a header menu on the device template table. Default implementation does nothing,&#xa; DeviceController implementation enables bulk device template deployment.
+</description>
+<parameter name="table">
+<type class="javax.baja.workbench.mgr.BTemplateTable"/>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrController.MENU_BAR -->
+<field name="MENU_BAR"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Makes the command be available in the main menu
+</description>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.TOOL_BAR -->
+<field name="TOOL_BAR"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Makes the command be available in the main toolbar
+</description>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.ACTION_BAR -->
+<field name="ACTION_BAR"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Makes the command be available in the action bar
+</description>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.POPUP -->
+<field name="POPUP"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Makes the command be available in the table popup menu
+</description>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.LEARN_POPUP -->
+<field name="LEARN_POPUP"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Makes the command be available in the learn table popup menu
+</description>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.BARS -->
+<field name="BARS"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Convenience for &lt;code&gt;MENU_BAR | TOOL_BAR | ACTION_BAR&lt;/code&gt;
+</description>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.quickContext -->
+<field name="quickContext"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.newCommand -->
+<field name="newCommand"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.edit -->
+<field name="edit"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.learnMode -->
+<field name="learnMode"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrToggleCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.tagMode -->
+<field name="tagMode"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrToggleCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.templateMode -->
+<field name="templateMode"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrToggleCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.discover -->
+<field name="discover"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.cancel -->
+<field name="cancel"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.add -->
+<field name="add"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.match -->
+<field name="match"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.quickAdd -->
+<field name="quickAdd"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.quickMatch -->
+<field name="quickMatch"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.tagIt -->
+<field name="tagIt"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.mgr.MgrController.deploy -->
+<field name="deploy"  public="true" final="true">
+<type class="javax.baja.workbench.mgr.MgrController$MgrCommand"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

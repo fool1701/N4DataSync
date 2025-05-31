@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.Cursor" name="Cursor" packageName="javax.baja.sys" public="true" interface="true" abstract="true" category="interface">
+<description>
+Cursors are used to iterate through a collection of objects.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:jsublett@tridium.com&#x22;&gt;John Sublett&lt;/a&gt;</tag>
+<tag name="@author">&lt;a href=&#x22;mailto:mgiannini@tridium.com&#x22;&gt;Matthew Giannini&lt;/a&gt;</tag>
+<implements>
+<type class="java.lang.AutoCloseable"/>
+</implements>
+<typeParameters>
+<typeVariable class="E">
+</typeVariable>
+</typeParameters>
+<!-- javax.baja.sys.Cursor.getContext() -->
+<method name="getContext"  public="true" abstract="true">
+<description>
+If there is a context associated with the Cursor, then&#xa; return the Context instance.  Otherwise return null.
+</description>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Cursor.next() -->
+<method name="next"  public="true" abstract="true">
+<description>
+The cursor is initially placed before the first object.  next() must be called first before calling get()&#xa; Calling next() advances the cursor to the next object, and&#xa; returns true if it is positioned on a valid object, or&#xa; false if the cursor has reached the end of the iteration.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Cursor.get() -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get the object at the current cursor position.
+</description>
+<return>
+<typeVariable class="E"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Cursor.close() -->
+<method name="close"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Cursor implements &lt;code&gt;<see ref="java.lang.AutoCloseable">AutoCloseable</see>&lt;/code&gt;, but its implementation of &lt;code&gt;<see ref="java.lang.AutoCloseable#close()">AutoCloseable#close()</see>&lt;/code&gt;&#xa; should not throw a checked exception. If the close fails, then you should throw a &lt;code&gt;<see ref="java.lang.RuntimeException">RuntimeException</see>&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

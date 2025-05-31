@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride" name="BTypeOverride" packageName="com.tridiumx.jsonToolkit.outbound.schema.program" public="true">
+<description>
+At the core of the jsonToolkit is a method which maps &lt;code&gt;<see ref="javax.baja.sys.BObject">javax.baja.sys.BObject</see>&lt;/code&gt;&#xa; Types to Json. This determines, for example, how &lt;code&gt;<see ref="javax.baja.sys.BRelTime">javax.baja.sys.BRelTime</see>&lt;/code&gt;,&#xa; &lt;code&gt;<see ref="javax.baja.sys.BFacets">BFacets</see>&lt;/code&gt; and so on should be encoded in the output. &lt;br/&gt;&#xa;&#xa; There may be times this &lt;code&gt;<see ref="javax.baja.sys.Type">Type</see>&lt;/code&gt; encoding must vary from the default&#xa; to meet integration needs. &lt;br/&gt;&#xa; To accommodate this the Schema checks every encoding against the Type Override&#x27;s&#xa; stored below it&#x27;s config/overrides folder. This means substitutions can be made&#xa; where required. &lt;br/&gt;&#xa;&#xa; One off cases can be handled using a Type Override with a Program Object below,&#xa; per the example shipped in the palette file. &lt;br/&gt;&#xa;&#xa; For situations where the Program Object would be replicated either many times&#xa; in the same station, or across many stations, this class should be extended&#xa; so the override logic can be more easily maintained.
+</description>
+<tag name="@author">Jason Woollard</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<action name="override" flags="A">
+<parameter name="parameter">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<description>
+Slot for the &lt;code&gt;override&lt;/code&gt; action.
+</description>
+<tag name="@see">#override(BValue parameter)</tag>
+</action>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride() -->
+<constructor name="BTypeOverride" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.override(javax.baja.sys.BValue) -->
+<method name="override"  public="true">
+<description>
+Invoke the &lt;code&gt;override&lt;/code&gt; action.
+</description>
+<tag name="@see">#override</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.doOverride(javax.baja.sys.BValue) -->
+<method name="doOverride"  public="true" final="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.overrideValueEncoding(javax.baja.sys.BValue) -->
+<method name="overrideValueEncoding"  public="true">
+<description>
+This method can be overridden to hard code type mapping changes without&#xa; the need for Program Objects.&#xa;&#xa; By default it calls considerPrograms, which could be reused in any subclasses.
+</description>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.considerPrograms(javax.baja.sys.BValue) -->
+<method name="considerPrograms"  protected="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;WeakerAccess&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Iterates over BProgram added below this object allowing&#xa; customization of Type to JSON mapping.&#xa;&#xa; Example of program:&#xa;&#xa; &lt;code&gt;public BValue onOverride(final BValue input)&amp;#xa; {&amp;#xa;   if (input instanceof BStatus)&amp;#xa;   {&amp;#xa;      // assume a desire to remove the { } framing characters from Status input&amp;#xa;      String reduced = input.toString();&amp;#xa;      reduced = reduced.substring(1, reduced.length()-1);&amp;#xa;      return BString.make(reduced);&amp;#xa;    }&amp;#xa;&amp;#xa;    // If we can&amp;#x27;t override the value then just return it as we found it&amp;#xa;    return input;&amp;#xa;  }&amp;#xa; &lt;/code&gt;
+</description>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+<description>
+The BValue to consider changing
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+A String representing the input
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.override -->
+<field name="override"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;override&lt;/code&gt; action.
+</description>
+<tag name="@see">#override(BValue parameter)</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.program.BTypeOverride.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

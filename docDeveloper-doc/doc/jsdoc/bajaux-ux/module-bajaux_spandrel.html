@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>bajaux Module: bajaux/spandrel</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">bajaux</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-bajaux_commands_Command.html">bajaux/commands/Command</a></li><li><a href="module-bajaux_commands_CommandGroup.html">bajaux/commands/CommandGroup</a></li><li><a href="module-bajaux_commands_ToggleCommand.html">bajaux/commands/ToggleCommand</a></li><li><a href="module-bajaux_commands_ToggleCommandGroup.html">bajaux/commands/ToggleCommandGroup</a></li><li><a href="module-bajaux_container_wb_Clipboard.html">bajaux/container/wb/Clipboard</a></li><li><a href="module-bajaux_container_wb_StringList.html">bajaux/container/wb/StringList</a></li><li><a href="module-bajaux_dragdrop_dragDropUtils.html">bajaux/dragdrop/dragDropUtils</a></li><li><a href="module-bajaux_dragdrop_Envelope.html">bajaux/dragdrop/Envelope</a></li><li><a href="module-bajaux_dragdrop_NavNodeEnvelope.html">bajaux/dragdrop/NavNodeEnvelope</a></li><li><a href="module-bajaux_dragdrop_StringEnvelope.html">bajaux/dragdrop/StringEnvelope</a></li><li><a href="module-bajaux_events.html">bajaux/events</a></li><li><a href="module-bajaux_icon_iconUtils.html">bajaux/icon/iconUtils</a></li><li><a href="module-bajaux_lifecycle_WidgetManager.html">bajaux/lifecycle/WidgetManager</a></li><li><a href="module-bajaux_mixin_batchLoadMixin.html">bajaux/mixin/batchLoadMixin</a></li><li><a href="module-bajaux_mixin_batchSaveMixin.html">bajaux/mixin/batchSaveMixin</a></li><li><a href="module-bajaux_mixin_responsiveMixIn.html">bajaux/mixin/responsiveMixIn</a></li><li><a href="module-bajaux_mixin_subscriberMixIn.html">bajaux/mixin/subscriberMixIn</a></li><li><a href="module-bajaux_Properties.html">bajaux/Properties</a></li><li><a href="module-bajaux_registry_Registry.html">bajaux/registry/Registry</a></li><li><a href="module-bajaux_registry_RegistryEntry.html">bajaux/registry/RegistryEntry</a></li><li><a href="module-bajaux_spandrel.html">bajaux/spandrel</a></li><li><a href="module-bajaux_spandrel_jsx.html">bajaux/spandrel/jsx</a></li><li><a href="module-bajaux_util_CommandButton.html">bajaux/util/CommandButton</a></li><li><a href="module-bajaux_util_CommandButtonGroup.html">bajaux/util/CommandButtonGroup</a></li><li><a href="module-bajaux_util_SaveCommand.html">bajaux/util/SaveCommand</a></li><li><a href="module-bajaux_Validators.html">bajaux/Validators</a></li><li><a href="module-bajaux_Widget.html">bajaux/Widget</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-bajaux_commands_Command-Undoable.html">bajaux/commands/Command~Undoable</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-10-mfw-gettingStarted.html">Getting Started - MyFirstWidget</a></li><li><a href="tutorial-20-mfw-modifying.html">Saving Modifications to Station</a></li><li><a href="tutorial-30-mfw-dashboarding.html">Making your Widget Dashboardable</a></li><li><a href="tutorial-40-tipsAndTricks.html">Tips and Tricks</a></li><li><a href="tutorial-50-spandrel.html">Building Composite Widgets With spandrel</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	<h1 class="page-title">Module: bajaux/spandrel</h1>
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>API Status: <strong>Development</strong></p></div>
+        
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="module:bajaux/spandrel"><span class="type-signature"></span>(require("bajaux/spandrel"))(arg [, params])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>The purpose of <code>spandrel</code> is to provide a reasonably pure-functional,<br>
+diffable method of defining a nested structure of bajaux Widgets and<br>
+supporting HTML. Rather than require Widget implementors to manually code<br>
+calls to <code>initialize()</code> or <code>buildFor()</code>, <code>spandrel</code> allows you to provide<br>
+your desired structure of HTML elements and their associated Widget<br>
+instances, and handle the work of updating the document as that structure<br>
+may change over time.</p>
+<p>See <a href="tutorial-50-spandrel.html">Building Composite Widgets With spandrel</a> for in-depth information.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arg</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module:bajaux/spandrel~SpandrelData</span>
+|
+
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {}
+                
+                </td>
+            
+
+            <td class="description last"><p>params</p>
+                <h6 class="method-params-label method-subparams-label">Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>extends</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>optionally specify a Widget superclass to extend</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>strategy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>optionally specify a known lookup strategy<br>
+for dynamically building widgets. Currently, the only accepted value is<br>
+<code>niagara</code>, which will instruct <code>spandrel</code> to use the Niagara registry to<br>
+perform widget lookups (introducing a dependency on the <code>webEditors</code><br>
+module). If included, it overrides the <code>manager</code> parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>manager</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-bajaux_lifecycle_WidgetManager.html">module:bajaux/lifecycle/WidgetManager</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>optionally provide your own WidgetManager to manage Widget lifecycle</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+	<dt class="tag-since method-doc-label method-doc-details-label">Since:</dt>
+	<dd class="tag-since">
+		<ul class="dummy">
+			<li>Niagara 4.10</li>
+		</ul>
+	</dd>
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>a Widget constructor</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Examples</h5>
+        
+        <p class="code-caption">Generate a static widget</p>
+    
+    <pre class="sunlight-highlight-javascript">const StaticWidget = spandrel([
+  &#x27;&lt;label&gt;Name: &lt;/label&gt;&#x27;,
+  &#x27;&lt;input type=&quot;text&quot; value=&quot;{{ props.name }}&quot;&gt;&#x27;,
+  {
+    dom: &#x27;&lt;span&gt;&lt;/span&gt;&#x27;,
+    value: false,
+    properties: &#x27;inherit&#x27;
+  }
+]);
+return fe.buildFor({
+  dom: $(&#x27;#myStaticWidget&#x27;),
+  type: StaticWidget,
+  properties: { name: &#x27;Logan&#x27;, trueText: &#x27;Good&#x27;, falseText: &#x27;Not So Good&#x27; }
+});</pre>
+
+        <p class="code-caption">Generate a dynamic widget with a field editor for each slot</p>
+    
+    <pre class="sunlight-highlight-javascript">const DynamicWidget = spandrel(comp =&gt; comp.getSlots().toArray().map(slot =&gt; ({
+  dom: &#x27;&lt;div class=&quot;componentSlot&quot;/&gt;&#x27;,
+  kids: [
+    &#x60;&lt;label&gt;${ slot.getName() }: &lt;/label&gt;&#x60;,
+    { dom: &#x27;&lt;span/&gt;&#x27;, complex: comp, slot: slot }
+  ]
+})));
+
+return fe.buildFor({
+  dom: $(&#x27;#myDynamicWidget&#x27;),
+  type: DynamicWidget,
+  value: myComponent
+});</pre>
+
+        <p class="code-caption">Subclass an existing dynamic spandrel widget, making changes
+before rendering.</p>
+    
+    <pre class="sunlight-highlight-javascript">// our superclass will render a &lt;label&gt; element, with a background
+// determined by a widget property.
+const LabelWidget = spandrel((value, { properties }) =&gt; {
+  const label = document.createElement(&#x27;label&#x27;);
+  label.innerText = value;
+  label.style.background = properties.background || &#x27;&#x27;;
+  return label;
+});
+
+const RedLabelWidget = spandrel((value, { renderSuper }) =&gt; {
+
+  // renderSuper will call back to the superclass, allowing your subclass
+  // to edit the data before spandrel renders it to the page.
+  //
+  // you can optionally pass a function to renderSuper that will tweak the
+  // widget state before the superclass renders its data. if no tweaking is
+  // desired, just renderSuper() is fine.
+  //
+  return renderSuper((state) =&gt; {
+    state.properties.background = &#x27;lightpink&#x27;;
+
+    // remember to return the new state.
+    return state;
+  })
+    .then((label) =&gt; {
+      // renderSuper will resolve the data exactly as rendered by the
+      // superclass.
+      label.style.color = &#x27;red&#x27;;
+      return label;
+    });
+}, { extends: LabelWidget });</pre>
+
+
+    
+</dd>
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<hr>
+<dt class="name" id=".jsx">
+    <h4 id=".jsx"><span class="type-signature">&lt;static> </span>jsx<span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Use <code>spandrel.jsx</code> as your JSX pragma to convert your JSX into spandrel<br>
+config.</p>
+    </div>
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+	<dt class="tag-see method-doc-label method-doc-details-label">See:</dt>
+	<dd class="tag-see">
+		<ul>
+			<li><a href="module-bajaux_spandrel_jsx.html">module:bajaux/spandrel/jsx</a></li>
+			</ul>
+	</dd>
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	bajaux Copyright © 2024 Tridium. DocStrap Copyright © 2012-2013 the contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
+	
+		on 2024-05-03T00:28:54+00:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

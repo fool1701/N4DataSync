@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.DdfAgentInfo" name="DdfAgentInfo" packageName="com.tridium.ddf" public="true">
+<description>
+This is used to rename the Ddf Device Manager and the Ddf Point Manager based on the name&#xa; of the driver that is built off of this framework.&#xa;&#xa; For example, instead of being named &#x27;Ddf Device Manager&#x27;, the device manager is named&#xa; &#x27;Your Driver Device Manager&#x27; &#x27;Your Driver&#x27; is the name of a driver that inherits from&#xa; this framework.&#xa;&#xa; This basically wraps another AgentInfo object but provides its own implementation of&#xa; the &#x27;getDisplayName&#x27; method.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.AgentInfo"/>
+</implements>
+<!-- com.tridium.ddf.DdfAgentInfo(javax.baja.agent.AgentInfo, java.lang.String, java.lang.String, java.lang.String) -->
+<constructor name="DdfAgentInfo" public="true">
+<parameter name="nAgentInfo">
+<type class="javax.baja.agent.AgentInfo"/>
+<description>
+the default instance of AgentInfo for a BComponet
+</description>
+</parameter>
+<parameter name="driverModuleName">
+<type class="java.lang.String"/>
+<description>
+the name of the driver that builds off of this framework
+</description>
+</parameter>
+<parameter name="displayNameKey">
+<type class="java.lang.String"/>
+<description>
+the name of the key in the driver&#x27;s Lexicon from which to lookup&#xa; the text for &#x27;Device Manager&#x27;
+</description>
+</parameter>
+<parameter name="displayNameDefault">
+<type class="java.lang.String"/>
+<description>
+the default text to use for the String &#x27;Device Manager&#x27; in&#xa; the event that the driver&#x27;s Lexicon does not define the &#x27;displayNameKey&#x27;
+</description>
+</parameter>
+<description>
+Creates an instance of this class, that wraps the given AgentInfo, yet provides&#xa; its own implementation of the &#x27;getDisplayName(Context)&#x27; method.
+</description>
+</constructor>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getAgentId() -->
+<method name="getAgentId"  public="true">
+<description>
+Get the agent id which is used to uniquely&#xa; identify it in AgentLists.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getAgentOn() -->
+<method name="getAgentOn"  public="true">
+<description>
+Get an array of the TypeInfos which this&#xa; agent is directly registered on.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getAgentType() -->
+<method name="getAgentType"  public="true">
+<description>
+Get the TypeInfo for the instance which would be&#xa; returned by the &lt;code&gt;getInstance()&lt;code&gt;.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true">
+<description>
+Customized the &#x27;displayName&#x27; as described in the Java Doc for the class&#xa; definition.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getIcon(javax.baja.sys.Context) -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon for the agent.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getInstance() -->
+<method name="getInstance"  public="true">
+<description>
+Create an instance of the agent.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getRequiredPermissions() -->
+<method name="getRequiredPermissions"  public="true">
+<description>
+Get the permissions required to use this agent.
+</description>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getAgentsHelp(javax.baja.agent.AgentList, java.lang.String, java.lang.String, java.lang.String, java.lang.String) -->
+<method name="getAgentsHelp"  public="true" static="true">
+<description>
+The BDdfCommNetwork.getAgents method calls this to rename the ddf&#xa; device manager to be the &#x22;Your Driver&#x22; Device Manager where &#x22;Your Driver&#x22;&#xa; is the name of the driver that extends the ddf.
+</description>
+<parameter name="agents">
+<type class="javax.baja.agent.AgentList"/>
+<description>
+The result of calling super.getAgents(cx) on the component that calls this method.
+</description>
+</parameter>
+<parameter name="driverModuleName">
+<type class="java.lang.String"/>
+<description>
+The name of the module that inherits from the ddf.
+</description>
+</parameter>
+<parameter name="mgrTypeSpec">
+<type class="java.lang.String"/>
+<description>
+the type spec of the ddf manager whose name will be changed
+</description>
+</parameter>
+<parameter name="mgrSuffixKey">
+<type class="java.lang.String"/>
+<description>
+the lexicon key to look up for the suffix, for example, &#x22;DeviceManager&#x22;,&#xa;        in case the driver developer wishes to customize the manager&#x27;s name (he or she can do&#xa;        so from his or her driver&#x27;s Lexicon)
+</description>
+</parameter>
+<parameter name="mgrSuffixDefault">
+<type class="java.lang.String"/>
+<description>
+the default suffix. This is used if the driver developer does not&#xa;        provide a &#x27;mgrSuffixKey&#x27; in his or her driver&#x27;s Lexicon to customize the manager&#x27;s&#xa;        name (for example, &#x22;Device Manager&#x22;)
+</description>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+<description>
+the AgentList with the one particular agent renamed as prescribed.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.getAppName() -->
+<method name="getAppName"  public="true">
+<description>
+This method is required for AgentInfo in baja 3.1. For backwards compatibility,&#xa; it simply returns null.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.DdfAgentInfo.nAgentInfo -->
+<field name="nAgentInfo"  protected="true">
+<type class="javax.baja.agent.AgentInfo"/>
+<description>
+This is the AgentInfo object that this object wraps. See the Java Doc with the&#xa; class description for more details.
+</description>
+</field>
+
+<!-- com.tridium.ddf.DdfAgentInfo.driverModuleName -->
+<field name="driverModuleName"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the driverModuleName that is passed to the constructor.
+</description>
+</field>
+
+<!-- com.tridium.ddf.DdfAgentInfo.displayNameKey -->
+<field name="displayNameKey"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the displayNameKey that is passed to the constructor.&#xa;&#xa; This is used to look up text in the Lexicon for a driver that is built&#xa; on this framework.
+</description>
+</field>
+
+<!-- com.tridium.ddf.DdfAgentInfo.displayNameDefault -->
+<field name="displayNameDefault"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the displayNameKey that is passed to the constructor.&#xa;&#xa; This is used by default, if the driver that is built on this framework&#xa; does not define a displayNameKey in its lexicon.
+</description>
+</field>
+
+</class>
+</bajadoc>

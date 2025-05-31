@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>bajaux Tutorial: Building Composite Widgets With spandrel</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">bajaux</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-bajaux_commands_Command.html">bajaux/commands/Command</a></li><li><a href="module-bajaux_commands_CommandGroup.html">bajaux/commands/CommandGroup</a></li><li><a href="module-bajaux_commands_ToggleCommand.html">bajaux/commands/ToggleCommand</a></li><li><a href="module-bajaux_commands_ToggleCommandGroup.html">bajaux/commands/ToggleCommandGroup</a></li><li><a href="module-bajaux_container_wb_Clipboard.html">bajaux/container/wb/Clipboard</a></li><li><a href="module-bajaux_container_wb_StringList.html">bajaux/container/wb/StringList</a></li><li><a href="module-bajaux_dragdrop_dragDropUtils.html">bajaux/dragdrop/dragDropUtils</a></li><li><a href="module-bajaux_dragdrop_Envelope.html">bajaux/dragdrop/Envelope</a></li><li><a href="module-bajaux_dragdrop_NavNodeEnvelope.html">bajaux/dragdrop/NavNodeEnvelope</a></li><li><a href="module-bajaux_dragdrop_StringEnvelope.html">bajaux/dragdrop/StringEnvelope</a></li><li><a href="module-bajaux_events.html">bajaux/events</a></li><li><a href="module-bajaux_icon_iconUtils.html">bajaux/icon/iconUtils</a></li><li><a href="module-bajaux_lifecycle_WidgetManager.html">bajaux/lifecycle/WidgetManager</a></li><li><a href="module-bajaux_mixin_batchLoadMixin.html">bajaux/mixin/batchLoadMixin</a></li><li><a href="module-bajaux_mixin_batchSaveMixin.html">bajaux/mixin/batchSaveMixin</a></li><li><a href="module-bajaux_mixin_responsiveMixIn.html">bajaux/mixin/responsiveMixIn</a></li><li><a href="module-bajaux_mixin_subscriberMixIn.html">bajaux/mixin/subscriberMixIn</a></li><li><a href="module-bajaux_Properties.html">bajaux/Properties</a></li><li><a href="module-bajaux_registry_Registry.html">bajaux/registry/Registry</a></li><li><a href="module-bajaux_registry_RegistryEntry.html">bajaux/registry/RegistryEntry</a></li><li><a href="module-bajaux_spandrel.html">bajaux/spandrel</a></li><li><a href="module-bajaux_spandrel_jsx.html">bajaux/spandrel/jsx</a></li><li><a href="module-bajaux_util_CommandButton.html">bajaux/util/CommandButton</a></li><li><a href="module-bajaux_util_CommandButtonGroup.html">bajaux/util/CommandButtonGroup</a></li><li><a href="module-bajaux_util_SaveCommand.html">bajaux/util/SaveCommand</a></li><li><a href="module-bajaux_Validators.html">bajaux/Validators</a></li><li><a href="module-bajaux_Widget.html">bajaux/Widget</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-bajaux_commands_Command-Undoable.html">bajaux/commands/Command~Undoable</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-10-mfw-gettingStarted.html">Getting Started - MyFirstWidget</a></li><li><a href="tutorial-20-mfw-modifying.html">Saving Modifications to Station</a></li><li><a href="tutorial-30-mfw-dashboarding.html">Making your Widget Dashboardable</a></li><li><a href="tutorial-40-tipsAndTricks.html">Tips and Tricks</a></li><li><a href="tutorial-50-spandrel.html">Building Composite Widgets With spandrel</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>Building Composite Widgets With spandrel</h2>
+</header>
+
+<article>
+    <blockquote>
+<p>The <code>spandrel</code> API is new in Niagara 4.10. Its API status is Development.</p>
+</blockquote>
+<p>In many cases, Widgets will consist of several child UI controls. For instance, imagine an editor for a User object that looks like this:</p>
+<pre class="prettyprint source lang-javascript"><code>    class User {
+      /**
+       * @param {string} name
+       * @param {boolean} enabled
+       */
+      constructor(name, enabled) {
+        this.name = name;
+        this.enabled = enabled;
+      }
+    }
+</code></pre>
+<p>You'd most likely want a text editor for the user's name, and a checkbox for whether it's enabled or not. You could implement your Widget in pure HTML:</p>
+<pre class="prettyprint source lang-javascript"><code>class UserEditor extends Widget {
+  doInitialize(dom) {
+    dom.html('Name: &lt;input type=&quot;text&quot;> Enabled: &lt;input type=&quot;checkbox&quot;>');
+  }
+  getTextInput() { return this.jq().find('input[type=text]'); }
+  getCheckbox() { return this.jq().find('input[type=checkbox]'); }
+
+  doLoad(user) {
+    this.getTextInput().val(user.name);
+    this.getCheckbox().prop('checked', user.enabled);
+  }
+
+  doRead() {
+    return new User(this.getTextInput().val(), this.getCheckbox().prop('checked'));
+  }
+}
+</code></pre>
+<p>But when developing a more complex user interface, you'll need to edit strings and booleans quite often, and you probably won't want to re-implement this logic each and every time. It would be much easier to implement a fully-featured String editor, and a fully-featured Boolean editor, and then build your UserEditor by simply putting those together. As your UI grows more complex, you can easily reuse these individual Widgets and re-assemble them into a wide variety of composite Widgets.</p>
+<p>You could always do that in pure <code>bajaux</code> by manually instantiating and loading Widgets. In addition, the <code>fe</code> module in <code>webEditors</code> provided a way of looking up Widgets and managing the workflow of building those Widgets. In Niagara 4.10, bajaux itself now contains a number of APIs to make the process of building dynamic, composite Widgets easy.</p>
+<h2>Defining a Widget Workflow</h2>
+<p>The process of building a Widget to show a particular piece of data can be broken down into a series of questions:</p>
+<ul>
+<li><strong>Do I need to edit a particular data value?</strong> (Is it a String? A Boolean? A Baja Component?)</li>
+<li><strong>What kind of Widget do I need to show?</strong> (Do I know ahead of time what kind of Widget I need? Or do I need to dynamically choose the right kind of Widget for the data I'm editing?)</li>
+<li><strong>How should the Widget be configured?</strong> (Should I assign Properties to it? Should it be readonly? What form factor should it have - large or small?)</li>
+<li><strong>Where should I put the Widget?</strong> (Do I have a jQuery element to put it in? A raw HTMLElement?)</li>
+</ul>
+<p>We could actually define the answers (or lack of answers) to all of these questions in the form of a JavaScript object.</p>
+<pre class="prettyprint source lang-javascript"><code>const buildParams = {
+  value: user, // I want to edit this User object,
+  type: UserEditor, // using an instance of UserEditor,
+  properties: { caseSensitive: true }, // with these Properties,
+  dom: $('#userGoesHere'), // and putting it in this DOM element.
+};
+
+const Ctor = buildParams.type;
+const widget = new Ctor({ properties: buildParams.properties });
+return widget.initialize(buildParams.dom)
+  .then(() => widget.load(buildParams.value));
+</code></pre>
+<p>This should look pretty familiar if you've previously used the <code>fe</code> module. This workflow and its configuration are now defined in bajaux itself using the <a href="module-bajaux_lifecycle_WidgetManager.html"><code>WidgetManager</code></a> API.</p>
+<pre class="prettyprint source lang-javascript"><code>const manager = new WidgetManager();
+return manager.buildFor(buildParams)
+  .then((widget) => { /* widget is initialized and loaded */ });
+</code></pre>
+<p>One of <code>WidgetManager</code>'s jobs is to dynamically look up what kind of Widget to build based purely on what value is getting loaded. For instance, if <code>value</code> is a String, then I want a <code>StringEditor</code>; if it's a Boolean I want a <code>BooleanEditor</code> etc. In Niagara world this is handled via agent registration lookups in the station registry, and the <code>webEditors</code> module has its own <code>WidgetManager</code> implemented to perform these lookups. But bajaux itself provides all the APIs needed for you to implement your own widget lookup logic.</p>
+<p><code>WidgetManager</code> itself is fairly simple, but it's what underpins the next API we'll examine: <code>spandrel</code>.</p>
+<h2>Building Composite Widgets With <code>spandrel</code></h2>
+<p><code>spandrel</code> allows you to define your Widgets as a structure of context objects as described above. Rather than manually implementing the <em>how</em> in JavaScript by managing your child widgets by hand, it allows you to declare the <em>what</em> and let it manage everything behind the scenes. Let's start with an example: I want a Widget that just creates a label with the text Hello. First, the existing way:</p>
+<pre class="prettyprint source lang-javascript"><code>class HelloWidget extends Widget {
+  doInitialize(dom) {
+    dom.html('&lt;label>Hello&lt;/label>');
+  }
+}
+</code></pre>
+<p>We would have had to <em>imperatively</em> call the <code>.html()</code> method to set the HTML contents of the Widget's DOM element to our desired HTML. But with <code>spandrel</code>, we do it <em>declaratively</em> by just telling it what we want the contents of our Widget to be.</p>
+<pre class="prettyprint source lang-javascript"><code>const dom = document.createElement('div');
+
+const HelloWidget = spandrel('&lt;label>Hello&lt;/label>');
+
+new WidgetManager().buildFor({ type: HelloWidget, dom })
+  .then(() => {
+    console.log(dom);
+    // &lt;div>
+    //   &lt;label>Hello&lt;label>
+    // &lt;/div>
+  });
+</code></pre>
+<p><code>spandrel</code> accepts an argument that indicates what you want the structure of your Widget to be. For this case, we give it a string defining what we want the contents of our Widget to be: a single label. <code>spandrel</code> can accept simple strings of HTML, which it will treat the same as a Widget config. If we want the Widget to contain more than one child element, we can return an array as well.</p>
+<p>Because the structure of this widget will be the same every time, we will refer to it as a <em>static</em> widget.</p>
+<p>For our next example, we'll add a child Widget, into which we load the String value 'World'.</p>
+<pre class="prettyprint source lang-javascript"><code>const dom = document.createElement('div');
+
+const HelloStringWidget = spandrel([
+  '&lt;label>Hello&lt;/label>',
+  { dom: '&lt;span>&lt;/span>', value: 'World' }
+]);
+
+new WidgetManager().buildFor({ type: HelloStringWidget, dom })
+  .then((w) => {
+    console.log(dom);
+    // &lt;div>
+    //   &lt;label>Hello&lt;/label>
+    //   &lt;span>World&lt;/span>
+    // &lt;/div>
+    console.log(w.queryWidget(1).value()); // 'World'
+  });
+</code></pre>
+<p>When the argument to <code>spandrel</code> is an array, each element indicates a child of your widget. The first argument is still simply a label, but now the second argument is a build context: I want a widget to show the value 'World', and put it in a <code>span</code>.  By default, if you don't specify a widget type, <code>spandrel</code> will use a <code>ToStringWidget</code>, which simply shows the value as a string.</p>
+<p>Take a look at <code>queryWidget(1)</code>: what is happening there? Well, Spandrel keeps track of all its child widgets by <em>key</em>. When built using an array, those keys are array indices. So <code>queryWidget(1)</code> gets us the Widget at index 1 in the array: our 'World' widget, which has the value <code>World</code> loaded into it.</p>
+<p>Speaking of widget keys: the argument to <code>spandrel</code> can also be an object literal, where the keys map to your widget's children. This makes it much more intuitive to query the widgets back out:</p>
+<pre class="prettyprint source lang-javascript"><code>const dom = document.createElement('div');
+
+const HelloStringWidget = spandrel({
+  hello: '&lt;label>Hello&lt;/label>',
+  world: { dom: '&lt;span>&lt;/span>', value: 'World' }
+});
+
+new WidgetManager().buildFor({ type: HelloStringWidget, dom })
+  .then((w) => {
+    console.log(w.queryWidget('world').value()); // 'World'
+  });
+</code></pre>
+<p>The argument to <code>spandrel</code> can also be a function that returns your config:</p>
+<pre class="prettyprint source lang-javascript"><code>const HelloStringWidget = spandrel(() => {
+  return {
+    hello: '&lt;label>Hello&lt;/label>',
+    world: { dom: '&lt;span>&lt;/span>', value: 'World' }
+  };
+});
+</code></pre>
+<p>This, in and of itself, is not interesting - until you consider that the argument to that function is the value being loaded. Therefore, your widget can dynamically define its own structure depending on the value! The easy example here is a Niagara Component.</p>
+<pre class="prettyprint source lang-javascript"><code>const dom = document.createElement('div');
+const user = baja.$('baja:User');
+
+const SlotListWidget = spandrel((component) => {
+  const spandrelConfig = {};
+  component.getSlots().each((slot) => {
+    spandrelConfig[slot] = { dom: '&lt;div>&lt;/div>', value: slot };
+  });
+
+  // our argument to spandrel is an object literal as in the previous
+  // example, with the slot names as the spandrel keys.
+  return spandrelConfig;
+});
+
+new WidgetManager().buildFor({ type: SlotListWidget, value: user, dom })
+  .then((w) => {
+    console.log(dom);
+    // &lt;div>
+    //   &lt;div>fullName&lt;/div>
+    //   &lt;div>enabled&lt;/div>
+    //   &lt;div>expiration&lt;/div>
+    //   ...
+    console.log(w.queryWidget('fullName').value()); // fullName Slot
+  });
+</code></pre>
+<p>We're already creating dynamic, composite widgets. But consider that <code>spandrel</code> widgets can be nested, too. This can be done using the <code>kids</code> property on a config object, as shown below. (We'll also split the function out to a reusable function, for clarity.)</p>
+<pre class="prettyprint source lang-javascript"><code>function componentToSpandrelConfig(component) {
+  const spandrelConfig = {};
+  component.getSlots().properties().each((slot) => {
+    // again, each slot name is a spandrel key. at that key we have a div,
+    // with four child widgets underneath it.
+    spandrelConfig[slot] = {
+      dom: '&lt;div>&lt;/div>',
+      kids: {
+        nameLabel: '&lt;span> Name: &lt;/span>',
+        nameValue: { dom: '&lt;span>&lt;/span>', value: slot.getName() },
+        typeLabel: '&lt;span> Type: &lt;/span>',
+        typeValue: { dom: '&lt;span>&lt;/span>', value: slot.getType() }
+      }
+    };
+  });
+  return spandrelConfig;
+}
+
+const PropertyInfoWidget = spandrel(componentToSpandrelConfig);
+
+new WidgetManager().buildFor({ type: PropertyInfoWidget, value: user, dom })
+  .then((w) => {
+    console.log(w.queryWidget('enabled/typeValue').value()); // baja:Boolean
+  });
+</code></pre>
+<p>As you can see, the <code>queryWidget</code> function works on nested keys, separated by slashes. It and its plural counterpart, <code>queryWidgets</code>, also support wildcards, which makes reading out the info you want a snap:</p>
+<pre class="prettyprint source lang-javascript"><code>class PropertyInfoWidget extends spandrel(componentToSpandrelConfig) {
+  /**
+   * @returns {Array.&lt;string>} an array of all the slot names
+   */
+  doRead() {
+    return this.queryWidgets('*/nameValue').map((w) => w.value());
+  }
+}
+</code></pre>
+<p>In the example above, note the <code>class extends spandrel()</code> - this will be a common way to define spandrel-derived Widget constructors with their own read/save behavior.</p>
+<h3>Performing dynamic widget lookups</h3>
+<p>One of the core values of the <code>WidgetManager</code> API is the ability to perform a dynamic lookup of a widget that's compatible with a particular piece of data. For instance, if you were implementing a Property Sheet, you wouldn't want to manually import every possible field editor, and manually choose one for each slot based on a giant if-else. You'd just ask the framework: for each slot on my component, find me a field editor that's compatible with the value at that slot.</p>
+<p><code>spandrel</code> supports this as well, because it uses the <code>WidgetManager</code> API to build out its widget structures. You can specify what kind of <code>WidgetManager</code> your <code>spandrel</code> widget should use by passing it as a <code>manager</code> parameter:</p>
+<pre class="prettyprint source lang-javascript"><code>    class MySpecialWidgetManager extends WidgetManager {}
+    const MySpecialWidget = spandrel((component) => {
+      return buildMyDomStructure(component);
+    }, { manager: new MySpecialWidgetManager() });
+</code></pre>
+<p><code>spandrel</code> can also support pre-baked widget lookup strategies, so you don't have to manually inject one of the Niagara-specific widget managers. If your widget needs to use the Niagara registry to find widgets and field editors for Niagara types, you can pass <code>strategy: 'niagara'</code> to let <code>spandrel</code> inject that behavior. Note that this will introduce a dependency on the <code>webEditors-ux</code> module.</p>
+<pre class="prettyprint source lang-javascript"><code>    const MySpecialWidget = spandrel((component) => {
+      return buildMyDomStructureWithNiagaraFieldEditors(component);
+    }, { strategy: 'niagara' });
+</code></pre>
+<h3>How <code>spandrel</code> renders and updates your widgets</h3>
+<p>When implementing a vanilla <code>bajaux</code> Widget, it's up to you to work directly with the DOM. When initializing or loading a value, your Widget has to update its own DOM: adding classes, creating or removing elements, or arming event handlers. Compare this with other libraries like React, where you would create a virtual DOM, and React itself would diff that virtual DOM against the real DOM, applying changes only where needed.</p>
+<p><code>spandrel</code> walks a middle ground. We have a huge library of first- and third-party Widgets that are already built on the paradigm of direct DOM manipulation, so it's not feasible to completely switch over to a virtual-DOM-based approach. But direct DOM manipulation can still result in convoluted, inefficient code. <code>spandrel</code>'s approach is to diff the <em>configuration</em>, not the DOM itself. You declare your DOM structure, and where you want other bajaux Widgets within that structure; <code>spandrel</code> will tweak the DOM in-place where possible, changing the Properties, readonly, and enabled states of Widgets, and load new values in where they are different. It may destroy or create new Widgets over time as your <code>spandrel</code> structure changes. <code>spandrel</code> minimizes the amount of DOM manipulation you, as the developer, need to worry about, even through <code>bajaux</code> won't ever get completely out of the DOM manipulation business itself.</p>
+<p>Although you won't need to worry about it most of the time, keep in mind the fact that the DOM you create might sometimes get tweaked in-place instead of being rebuilt. <code>&lt;img&gt;</code> tags, if given an <code>onerror</code>, might need a corresponding <code>onsuccess</code> - that sort of thing. But the vast majority of the time, <code>spandrel</code> and our existing library of <code>bajaux</code> Widgets should handle these sorts of details for you.</p>
+<h4>Details about <code>spandrel</code>'s diffing process</h4>
+<p>When a <code>spandrel</code> widget updates itself, it tries to follow a unidirectional data flow. The widget will generate an intermediate representation of what it should look like - what DOM elements and Widgets should make up its structure. Then <code>spandrel</code> will diff that against its actual current structure, and make whatever changes are necessary to bring it up to date.</p>
+<p>This may sound similar to React's approach. But React's intermediate representation of itself takes the form of a virtual DOM, while <code>spandrel</code>'s consists of a tree of JSON objects which define a structure of DOM elements and Widgets. Each of these JSON objects has a number of properties which may change over time. <code>spandrel</code>'s response to changes in these properties are described below. (Note that static widgets do not change their structure, so this applies only to dynamic widgets.)</p>
+<ul>
+<li><strong><code>dom</code></strong>: If the element's tag name changes (e.g. from a <code>div</code> to a <code>span</code>), the whole Widget will be destroyed and rebuilt. Otherwise, the element's classes, styles, and attributes will be updated in-place.</li>
+<li><strong><code>enabled</code></strong>: The Widget will be enabled or disabled, and it will be re-rendered.</li>
+<li><strong><code>formFactor</code></strong>: The Widget's form factor will be changed, and it will be re-rendered.</li>
+<li><strong><code>properties</code></strong>: The Widget's Properties will be updated, and it will be re-rendered.</li>
+<li><strong><code>readonly</code></strong>: The Widget will be set readonly or writable, and it will be re-rendered.</li>
+<li><strong><code>type</code></strong>: The old Widget will be destroyed, and a new Widget instance of the new type will be constructed in its place.</li>
+<li><strong><code>value</code></strong>: The new value will be loaded into the Widget, and it will be re-rendered.</li>
+</ul>
+<h3>Usage of state in <code>spandrel</code></h3>
+<p>Widgets themselves have state: what Properties does this Widget have? Is it currently readonly or disabled? What form factor is it set to? This information can also be described in an object: WidgetState.</p>
+<p>As <code>spandrel</code> is dynamically constructing the configuration for a Widget, the Widget's own state is passed as the second argument to the <code>spandrel</code> function. This allows you to change the widget structure in response to the current state of the widget. In most cases, you'd want the enabled/readonly state of the parent widget to propagate to the children. For instance, if UserEditor is readonly, then you also want the editors for user.name and user.enabled to be readonly:</p>
+<pre class="prettyprint source lang-javascript"><code>const UserEditor = spandrel((user, state) => {
+  const { enabled, readonly } = state;
+  return {
+    name: { dom: '&lt;span/>', value: user.name, enabled, readonly },
+    enabled: { dom: '&lt;span/>', value: user.enabled, enabled, readonly },
+  };
+});
+</code></pre>
+<p>But because this is such a common use case, <code>spandrel</code> will <em>default</em> the child widgets to inherit the readonly/enabled state from the parent. So if you're only using enabled/readonly to propagate them down, you can leave them out! The below example is completely equivalent to the one above.</p>
+<pre class="prettyprint source lang-javascript"><code>const UserEditor = spandrel((user) => {
+  return {
+    // these will be enabled/readonly based on the parent
+    name: { dom: '&lt;span/>', value: user.name },
+    enabled: { dom: '&lt;span/>', value: user.enabled },
+  };
+});
+</code></pre>
+<p>You can also make explicit that <code>readonly</code> and <code>enabled</code> are inherited from their parents by setting them to the string <code>inherit</code>. This is only for readability purposes, and this example is functionally equivalent to the two above:</p>
+<pre class="prettyprint source lang-javascript"><code>const UserEditor = spandrel((user) => {
+  return {
+    name: { dom: '&lt;span/>', value: user.name, readonly: 'inherit', enabled: 'inherit' },
+    enabled: { dom: '&lt;span/>', value: user.enabled, readonly: 'inherit', enabled: 'inherit' },
+  };
+});
+</code></pre>
+<p>You can also set <code>properties</code> to <code>'inherit'</code>! This will cause the child widget to inherit the properties from its parent, with one notable exception: a <code>uxFieldEditor</code> property will never be inherited. If it did, then if you specified a <code>uxFieldEditor</code> slot facet to choose a particular editor type, that would then propagate down and cause all of your child editors to be set to the same type, and you'd get caught in an infinite loop.</p>
+<p>Please note: when setting <code>properties</code>, <code>readonly</code>, or <code>enabled</code> to <code>'inherit'</code>, their values will inherit from the <em>owner</em> (the widget who's rendering the <code>spandrel</code> data) - not necessarily the widget directly above it in the tree. In this example, they inherit from <code>UserEditor</code>, no matter how deep in the tree <code>'inherit'</code> is declared.</p>
+<p>One notable attribute of the state object is <code>self</code>. This is passed so that your <code>spandrel</code> function can still reference your own Widget instance and call methods on it, while still being implemented as an arrow function.</p>
+<h3><code>spandrel.jsx</code></h3>
+<p><code>spandrel</code> provides a custom JSX pragma that will let you use JSX to make it even easier to define your Widget structures. Simply insert the pragma:</p>
+<pre class="prettyprint source lang-jsx"><code>    /** @jsx spandrel.jsx */
+</code></pre>
+<p>and you can use JSX to define your HTML and widget structures.</p>
+<p>It's important to understand that <em>JSX is not React</em> and the use of <code>spandrel.jsx</code> does not incorporate React into your application. It does not make use of a virtual DOM. It simply provides a more intuitive way of defining your HTML and Widget structure than a tree of JSON objects.</p>
+<p>Please note that JSX requires Babel transpilation to function. The easiest way to incorporate Babel into your module will be to use grunt-niagara version 2 or higher.</p>
+<h4>Using <code>spandrel.jsx</code> to create Widgets</h4>
+<p>Let's take a look at the simplest example: a Widget that consists only of HTML - no child Widgets.</p>
+<pre class="prettyprint source lang-jsx"><code>const HelloWorldWidget = spandrel(&lt;span>Hello world!&lt;/span>);
+</code></pre>
+<p>The contents of the Widget will now be a <code>span</code> containing the string &quot;Hello World&quot;. At build time, the JSX itself will be compiled out, and the <code>spandrel.jsx</code> function will convert it into valid <code>spandrel</code> data. You can consider the example above to be roughly equivalent to:</p>
+<pre class="prettyprint source lang-jsx"><code>const HelloWorldWidget = spandrel([ {
+  dom: '&lt;span>Hello world!&lt;/span>'
+} ]);
+</code></pre>
+<p>One difference between <code>bajaux</code> Widgets and React components is that React components generate their own top-level DOM element, while <code>bajaux</code> Widgets are mounted in an existing, empty DOM element and generate the contents of that element. As such, the <code>spandrel</code> render function can actually return an array of elements - the children of your Widget's own element.</p>
+<pre class="prettyprint source lang-jsx"><code>const HelloWorldWithLabelWidget = spandrel(() => [
+  &lt;label>My message is...&lt;/label>,
+  &lt;span>Hello world!&lt;/span>
+]);
+</code></pre>
+<p>Defining the attributes of a DOM element works much the same as in React. Use <code>className</code> instead of <code>class</code>. <code>style</code> can be either a string, or an object literal. If using an object literal, then the values can be either strings or numbers. Any non-numeric falsy values will be ignored. Using JavaScript values instead of strings can be done by surrounding them with curly braces.</p>
+<pre class="prettyprint source lang-jsx"><code>const StyledHelloWorldWidget = spandrel(() => (
+  &lt;label className=&quot;helloWorldLabel&quot; style=&quot;padding: 5px;&quot;>
+    &lt;span style={{ color: 'red', backgroundColor: calculateBackground(), opacity: calculateOpacity() }}>
+      Hello world!
+    &lt;/span>
+  &lt;/label>
+));
+function calculateBackground() { return 'yellow'; }
+function calculateOpacity() { return 0; }
+</code></pre>
+<p>In this example, note that the child elements of a DOM element can be denoted as a JavaScript array of JSX elements, using curly braces.</p>
+<pre class="prettyprint source lang-jsx"><code>const SlotList = spandrel((component) => (
+  &lt;table className=&quot;slot-list-table&quot;>
+    &lt;tr>&lt;td>Slot Name&lt;/td>&lt;td>Slot Display&lt;/td>&lt;/tr>
+    {
+      component.getSlots().toArray().map((slot) => {
+        return &lt;tr>
+          &lt;td>{ slot.getName() }&lt;/td>
+          &lt;td>{ component.getDisplay(slot) }&lt;/td>
+        &lt;/tr>;
+      })
+    }
+  &lt;/table>
+));
+</code></pre>
+<p>Each element doesn't only have to be a DOM element though - it can be a Widget! You can embed <code>bajaux</code> Widgets right into your JSX alongside your DOM elements. The tag name of the element just needs to correspond to a Widget constructor available in your code. The configuration of the Widget element will look very similar to what gets passed to <code>WidgetManager</code> or <code>fe.buildFor</code> - it supports <code>properties</code>, <code>enabled</code>, <code>formFactor</code>, etc. <code>className</code> and <code>style</code> are supported too - they will be applied to the DOM element created to house the Widget. By default, the element will be a <code>div</code> - but you can specify what kind of element you want with the <code>tagName</code> attribute.</p>
+<p>(If <code>value</code> is omitted and your widget is a dynamic <code>spandrel</code> widget, it will still render with a value of <code>null</code>.)</p>
+<pre class="prettyprint source lang-jsx"><code>const NumberInput = spandrel((number, { properties }) => {
+  const { min = '', max = '' } = properties;
+  return &lt;input type=&quot;number&quot; min={ min } max={ max } value={ number } />;
+});
+
+const PercentageInput = spandrel((percent) => {
+  return [
+    &lt;NumberInput
+     tagName=&quot;span&quot;
+     value={ percent }
+     properties={{ min: 0, max: 100 }}
+     formFactor=&quot;mini&quot; />,
+    &lt;span>%&lt;/span>
+  ];
+});
+</code></pre>
+<p>When adding a Widget as an element as above, it requires you to have already imported or defined that widget's constructor. But what about one of <code>spandrel</code>'s core functions: dynamically looking up a widget based on the value? This can be achieved with the special <code>&lt;any&gt;</code> tag. When <code>spandrel</code> encounters the <code>&lt;any&gt;</code> tag, it will perform a dynamic lookup based on the tag's <code>value</code> and other properties, find the appropriate Widget constructor, and construct an instance in its place.</p>
+<p>Be sure to specify a lookup strategy, or provide a WidgetManager instance, so that <code>spandrel</code> will know how to perform the dynamic lookup.</p>
+<pre><code>const UserProperties = spandrel((user) =&gt; {
+  return &lt;table&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Username:&lt;/td&gt;
+      &lt;td&gt;
+        &lt;any value={ user.username } /&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Enabled:&lt;/td&gt;
+      &lt;td&gt;
+        &lt;any value={ user.enabled } /&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;;
+}, { strategy: 'niagara' });
+</code></pre>
+<p>Remember how each member of a <code>spandrel</code> config has a <em>key</em> (an array index or a property name on an object literal)? The key can be explicitly provided using the <code>spandrelKey</code> attribute as well. This makes the process of querying widgets quite straightforward:</p>
+<pre class="prettyprint source lang-jsx"><code>class UserEditor extends spandrel((user) => (
+  &lt;div class=&quot;userEditor-wrapper&quot; spandrelKey=&quot;wrapper&quot;>
+    &lt;StringEditor value={ user.name } spandrelKey=&quot;name&quot; />,
+    &lt;BooleanEditor value={ user.enabled } spandrelKey=&quot;enabled&quot; />
+  &lt;/div>
+)) {
+  doRead() {
+    // without the explicit keys, we'd query &quot;0/0&quot; and &quot;0/1&quot;.
+    return Promise.all([
+      this.queryWidget('wrapper/name').read(),
+      this.queryWidget('wrapper/enabled').read()
+    ])
+      .then(([ name, enabled ]) => ({ name, enabled }));
+  }
+}
+</code></pre>
+<p>Remember - your JSX data is not an actual DOM element, but it will be used to create an actual DOM element. Sometimes you will want to make changes to the actual DOM element before it is finally rendered and inserted into the actual document. This can be done using the <code>$init</code> attribute, which is a function that receives a real live <code>HTMLElement</code> and may make changes to it before it is inserted. (Note that <code>$init</code> must be synchronous.)</p>
+<pre class="prettyprint source lang-jsx"><code>const StyledLabel = spandrel((string, { properties }) => {
+  const { background } = properties;
+  return (
+    &lt;label $init={ (el) => background.applyBackgroundToElement(el) }>
+      { string }
+    &lt;/label>
+  );
+});
+
+return new WidgetManager().buildFor({
+  dom: $('#labelGoesHere'),
+  type: StyledLabel,
+  value: 'Hello World',
+  properties: { background: Brush.make('yellow') }
+});
+</code></pre>
+<h4>Incorporating event handlers (new in Niagara 4.12)</h4>
+<p>Event handlers can be included directly in your JSX. There are several ways this can be done:</p>
+<h5>DOM Events</h5>
+<p>Standard DOM events can be listened for using <code>onclick</code>, <code>onchange</code>, etc.</p>
+<pre class="prettyprint source lang-jsx"><code>const ButtonClicker = spandrel(() => {
+  return &lt;button type=&quot;button&quot; onclick={() => alert('click')}>Click me&lt;/button>;
+});
+</code></pre>
+<h5><code>bajaux</code> events</h5>
+<p><code>bajaux</code> events like <code>LOAD_EVENT</code> and <code>MODIFY_EVENT</code> can be armed using <code>onUxLoad</code>, <code>onUxModify</code>, etc. The names of these event handlers start with <code>onUx</code>, and the rest of the name is derived from the actual event name. See <a href="module-bajaux_events.html">module:bajaux/events</a> for a listing of all available <code>bajaux</code> events. <code>ENABLE_EVENT</code> can be listened for with <code>onUxEnable</code>; <code>LOAD_FAIL_EVENT</code> can be listened for with <code>onUxLoadFail</code>, and so on.</p>
+<pre class="prettyprint source lang-jsx"><code>const AlwaysValidating = spandrel((value) => {
+  return &lt;any value={value} onUxModify={(e, ed) => ed.validate()} />;
+}, { strategy: 'niagara' });
+</code></pre>
+<p>The handlers for these events will receive the event as the first argument and the Widget that triggered the event as the second argument. Certain events will cause a third argument or more to be included; for instance <code>onUxLoadFail</code> will get the error that caused the failure as the third argument.</p>
+<p>There is one special event handler included to solve a very common use case. When a child widget is modified, often we want to do something with the newly entered value. <code>onUxModifiedValue</code> will receive the new value as the <em>first</em> argument, saving us a call to <code>read()</code>.</p>
+<pre class="prettyprint source lang-jsx"><code>const ModificationLogger = spandrel((value) => {
+  return &lt;any value={value} onUxModifiedValue={(newValue) => log(newValue)} />;
+}, { strategy: 'niagara' });
+</code></pre>
+<h5>Arbitrary events</h5>
+<p>Certain other events may have special characters in their names that make them impossible to translate to an HTML attribute like <code>onclick</code> or <code>onUxLoad</code>. Or you may want to refer to them by variable name instead of remember their actual event name. For these, you can use the generic <code>on</code> attribute and pass it handlers for events with arbitrary names.</p>
+<p>One way to do this is via an object literal. The keys of the object are the event names, and the values are the event handlers. Again, the arguments to the handler are the event, the Widget that triggered the event, and any additional arguments to the event.</p>
+<pre class="prettyprint source lang-jsx"><code>const { CELL_ACTIVATED_EVENT } = Table;
+
+const TableContentViewer = spandrel((tableModel) => {
+  return &lt;Table value={tableModel}
+                on={{
+                  [CELL_ACTIVATED_EVENT]: (e, table, row) => showDetailsDialog(row.getSubject())
+                }} />;
+});
+</code></pre>
+<p>If you need to add a selector to perform event delegation, you can set the value of <code>on</code> to an array with three members: the event name, the <code>spandrel</code> selector, and the event handler function. (If you need more than one of these delegated handlers, set <code>on</code> to an array of these arrays.)</p>
+<pre class="prettyprint source lang-jsx"><code>const DelegatedButtonListener = spandrel((component) => {
+  const EVENT_NAME = 'click';
+  
+  // note that the selector is a *spandrel* selector as used in queryWidget(), not a CSS selector.
+  return &lt;div on={[ EVENT_NAME, '*/slotDisplay', (e, ed) => alert('slot value: ' + ed.value()) ]}>
+    {
+      component.getSlots().properties().toArray()
+        .map((prop, i) => (
+          &lt;div spandrelKey={ `row${ i }`}>
+            &lt;label spandrelKey=&quot;slotDisplay&quot; value={component.get(prop)}>{prop.getName()}&lt;/label>
+          &lt;/div>
+        ))
+    }
+    &lt;/div>;
+});
+</code></pre>
+<h5>Notes on <code>spandrel</code> event handlers</h5>
+<p><code>spandrel</code> event handlers look similar to jQuery event handlers at first glance, but they are not the same.</p>
+<p>jQuery event handlers are synchronous, which means that they cannot respond to a returned promise. Any asynchronous error handling in a jQuery event handler must be done manually:</p>
+<pre class="prettyprint source lang-jsx"><code>dom.on('click', () => {
+  doSomethingAsync()
+    .catch((err) => logSevere(err));
+});
+</code></pre>
+<p>The only thing that can be meaningfully returned from a jQuery event handler is <code>false</code>, which indicates that the event should be cancelled.</p>
+<p>When performing async work in a <code>spandrel</code> event handler, you can return a Promise. <code>spandrel</code> will wait for the promise to be settled, and it will log any rejections to the <code>bajaux.spandrel</code> log.</p>
+<pre class="prettyprint source lang-jsx"><code>spandrel(() => {
+  return &lt;div onclick={() => doSomethingAsync()} />;
+});
+</code></pre>
+<p>A <code>spandrel</code> event handler will also respect a <code>return false</code> and cancel the event, the same way jQuery does.</p>
+<h4>Inline validation (new in Niagara 4.13)</h4>
+<p>A <code>spandrel</code> widget will often place constraints on its child widgets, like so:</p>
+<pre class="prettyprint source lang-jsx"><code>class PercentPicker extends spandrel((number) => {
+  return &lt;any value={number} properties={{ min: 0, max: 100 }}/>;
+}) {}
+</code></pre>
+<p>But by default, <code>spandrel</code> will not just automatically validate every child widget in its whole structure. Before inline validation, you would need to manually specify a validator function:</p>
+<pre class="prettyprint source lang-jsx"><code>class PercentPicker extends spandrel((number) => {
+  return &lt;any spandrelKey=&quot;number&quot; value={number} properties={{ min: 0, max: 100 }}/>;
+}) {
+  constructor() {
+    super(...arguments);
+    this.validators().add(() => this.queryWidget('number').validate());
+  }
+}
+</code></pre>
+<p>As of 4.13, you can simply add the <code>validate</code> keyword to child widgets that you wish to validate. This can simply be a boolean <code>validate</code> property, which will tell <code>spandrel</code> that the child widget must validate using its own built-in validation behavior. For example, a numeric editor will typically validate against the <code>min</code> and <code>max</code> properties:</p>
+<pre class="prettyprint source lang-jsx"><code>class PercentPicker extends spandrel((number) => {
+  return &lt;any value={number} validate properties={{ min: 0, max: 100 }}/>;
+}) {}
+</code></pre>
+<p>Or, you can set <code>validate</code> to a validator function. This will both indicate to <code>spandrel</code> that this editor must be validated, and adds additional validation. This can throw an error or return a rejected Promise to fail validation. Please note that this function will not replace any existing validation on the widget - it only adds additional validation.</p>
+<pre class="prettyprint source lang-jsx"><code>class EvenPercentPicker extends spandrel((number) => {
+  return &lt;any value={number}
+              properties={{ min: 0, max: 100 }}
+              validate={(val) => {
+                // the 0-100 check is already handled by the editor's built-in validation
+                // that respects the min/max properties.
+                if (val % 2) {
+                  return Promise.reject(new Error(val + ' must be an even number'));
+                }
+              }} />;
+}) {}
+</code></pre>
+<h3>Extending a <code>spandrel</code> superclass</h3>
+<p>The general wisdom is that composition is preferable to inheritance, notably when it comes to UI elements. This also holds true for <code>spandrel</code>. However, you may sometimes need to inherit from a <code>spandrel</code> class. A couple of possible reasons why:</p>
+<ul>
+<li>Since the Widget-based mechanics of <code>bajaux</code> are different from many other front-end frameworks, it may sometimes be difficult to use composition without introducing unnecessary DOM elements.</li>
+<li>You might be implementing Widgets to mirror a Java-based class hierarchy, and inheritance makes it easier to reason about that one-to-one relationship between <code>bajaux</code> and <code>bajaui</code> Widgets.</li>
+</ul>
+<p>There are two reasons to extend a <code>spandrel</code> superclass: to <em>render</em> differently, or to <em>override methods</em>.</p>
+<p>To extend a <code>spandrel</code> class for the purposes of overriding methods, there's no magic here - simply extend the class the JavaScript way.</p>
+<pre class="prettyprint source lang-jsx"><code>class Button extends spandrel((text, { self }) => {
+  return &lt;button type=&quot;button&quot; onClick={() => self.handleClick()}>{ text }&lt;/button>;
+}) {
+  handleClick() {
+    alert('you clicked it!');
+  }
+}
+
+class SuperButton extends Button {
+  handleClick() {
+    alert('you SUPER clicked it!');
+  }
+}
+</code></pre>
+<p>But sometimes you might want to extend a <code>spandrel</code> class in such a way that causes it to render differently. In this case, <code>spandrel</code> needs to get the superclass baked into its render process, and simply extending the class isn't quite enough. As part of the second argument to <code>spandrel</code> itself - the same object that receives other configuration like <code>manager</code> and <code>strategy</code> described above - you'll need to add the <code>extends</code> property, with the superclass constructor:</p>
+<pre class="prettyprint source lang-jsx"><code>const Label = spandrel(myLabelRenderFunction);
+const SpecialLabel = spandrel(mySpecialLabelRenderFunction, {
+  extends: Label
+});
+</code></pre>
+<p>By extending it in this way, you'll get the ability to actually tweak the superclass's render function. As part of the state parameter (the second parameter passed to the <code>spandrel</code> function), you'll receive a <code>renderSuper</code> function, which renders the <code>spandrel</code> data as implemented by the superclass. As a parameter to <code>renderSuper</code>, you can pass a function that will receive the widget state. You can make tweaks to this state and return a new state to cause the superclass to render differently. Here's an example:</p>
+<pre class="prettyprint source lang-jsx"><code>const StyledLabel = spandrel((text, { properties }) => {
+  const { background } = properties;
+  return &lt;label style={{ background }}>
+    { text }
+  &lt;/label>;
+});
+
+const YellowLabel = spandrel((text, { renderSuper }) => {
+  return renderSuper((state) => {
+    state.properties.background = 'yellow';
+    return state;
+  });
+}, { extends: StyledLabel });
+</code></pre>
+<p>In addition, <code>renderSuper</code> will resolve the actual <code>spandrel</code> data as rendered by the superclass, so you can change it directly. In general, this is not recommended - if you need to customize the actual HTML as rendered by the superclass, it's better to add support for more <code>properties</code> in the superclass so that the behavior can be configured purely through widget state.</p>
+<h3>Customized Widget State (New in Niagara 4.12)</h3>
+<p>Dynamic <code>spandrel</code> widgets are designed to update themselves whenever new data is available through a <em>re-rendering</em> process. This process can be severely simplified and described with the following code snippet:</p>
+<pre class="prettyprint source lang-jsx"><code>spandrelWidget.read()
+  .then((currentValue) => spandrelWidget.render(currentValue));
+</code></pre>
+<p>The current value is read out, then fed directly back into the widget's render process to cause it regenerate all of its <code>spandrel</code> data and to update itself in its entirety.</p>
+<p>But in many cases, the currently loaded value is <em>not enough information</em> to fully update the widget. For example, take a look at the field editor for a <code>gx:Font</code>. If you load in the font <code>12pt Arial bold</code>, the field editor knows enough to load Arial into the name field, 12 into the size field, and to check the Bold checkbox. Now, take a look at the Null checkbox. If you check that, it indicates you've chosen the null font (that is, no font specified at all). This causes the name, size, bold, italic, and underline checkboxes to blank themselves out, and the field editor to read out the font <code>null</code>. So far so good.</p>
+<p>Now, uncheck the Null checkbox. What happens now? Because we blanked everything out in the previous step, if we simply read out the current font and passed it directly back into the rerender process, as described above, <code>spandrel</code> would have <em>forgotten</em> your previous entries (Arial, 12, bold). This is because during the rerender, after reading out <code>Font.NULL</code>, when it got passed back in, <em>nowhere</em> in that value is Arial, 12, or Bold.  The editor would have to start over with some default settings. This would be irritating to your user if, out of curiosity, they checked and unchecked Null - they'd lose all their work. To get around this, there needs to be some other place than &quot;the currently loaded value&quot; to store the state of the widget.</p>
+<p>Niagara 4.12 introduces the concept of <code>state</code> to store additional, current information about the widget, <em>on top of</em> the currently loaded value. State binding can be done regardless of what kind of data you are returning from the <code>spandrel</code> function (whether array, object literal, or JSX) - but it's easiest to reason about when using JSX, so all the following examples will use JSX.</p>
+<p>Take another look at the second argument to the <code>spandrel</code> function - the one that includes information about the widget itself:</p>
+<pre class="prettyprint source lang-jsx"><code>const UserEditor = spandrel((user, { readonly, properties, formFactor }) => {
+  const { trueText, falseText } = properties;
+  return [
+    &lt;StringEditor readonly={ readonly } value={ user.value } />,
+    &lt;BooleanEditor readonly={ readonly } value={ user.enabled } properties={{ trueText, falseText }} />
+  ]
+});
+</code></pre>
+<p>As described above, this argument provides information about the current state of the widget - its readonly status, Properties, form factor, etc. But with the State API, you can define and store any kind of state data you want! The widget state is a great place to store information about what values are currently loaded into child widgets, because the state persists across new values as they are loaded, and across rerenders as well. If the user makes a change to a child widget, and you store the newly entered value in the state, and then a rerender causes that child widget to disappear or be overwritten - that value remains stored in the state for you to use later.</p>
+<p>The <code>Font</code> editor uses the state exactly for this purpose. If you type Arial into the name field, then <code>name: 'Arial'</code> goes into the widget state, and stays there even if the Null checkbox causes it to be blanked out. When Null is unchecked, <code>name: 'Arial'</code> comes back out of the widget state, so the user can pick up where they left off.</p>
+<p>Updating the state can be done manually, as shown below:</p>
+<pre class="prettyprint source lang-jsx"><code>const { MODIFY_EVENT } = events; // bajaux/events
+class FontEditor extends spandrel((font, { name, enabled, properties }) => {
+  // note the &quot;name&quot; property is not part of core widget state - this is specific to FontEditor.
+  return /* some html */;
+}) {
+  doInitialize(dom) {
+    dom.on(MODIFY_EVENT, '.name-editor', (e, ed) => {
+      ed.read()
+        .then((name) => {
+          // store the name the user typed in state.
+          // now we have it for reference even if the
+          // &quot;null&quot; checkbox wipes out the name editor.
+          return this.state({ name });
+        })
+        .then(() => this.rerender())
+        .catch(logSevere);
+    });
+  }
+}
+</code></pre>
+<p>But <code>spandrel</code> provides some built-in API for automatically binding child widgets to state, so you have much less code to think about.</p>
+<h4>State Binding</h4>
+<p>By applying state binding to a child widget, you are asking <code>spandrel</code> to continually keep the current value of that widget in state. As the user makes changes to that child widget, its current value will be applied to state, even as they are typing and clicking. As the widget then rerenders itself in response to changes in data, the most up-to-date changes from the user will be known (even if they are hidden or overwritten in the UI itself).</p>
+<p>Another way to think about this: if a widget will change the way it renders itself in response to new values that the user enters into child widgets, then bind those child widgets to state, and the most recently entered values will always be known (and entered into state) at render time. (Otherwise, you'd have to manually call read() on every widget whose value you care about!)</p>
+<p>For an example, let's consider a highly simplified version of the <code>Font</code> field editor - one that only has the font name and the Null checkbox.</p>
+<pre class="prettyprint source lang-jsx"><code>class FontEditor extends spandrel((font) => {
+  const isNull = font.isNull();
+  return [
+    &lt;StringEditor value={ isNull ? '' : font.getName() } enabled={ !isNull } spandrelKey=&quot;name&quot; />,
+    &lt;BooleanEditor className=&quot;nullEditor&quot; value={ isNull } spandrelKey=&quot;isNull&quot; />
+  ];
+}) {
+  doInitialize(dom) {
+    dom.on(MODIFY_EVENT, '.nullEditor', () => {
+      this.rerender();
+    });
+  }
+  doRead() {
+    return Promise.all([
+      this.queryWidget('name').read(),
+      this.queryWidget('isNull').read()
+    ])
+      .then(([ name, isNull ]) => isNull ? Font.NULL : Font.make({ name }));
+  }
+}
+</code></pre>
+<p>This has the problem of immediately forgetting the user-entered font name as soon as the Null checkbox is checked. In addition, we have to manually rerender whenever the Null checkbox is checked or unchecked. By using state binding, we can solve both of these problems.</p>
+<p>With state binding, we can <em>bind</em> both child editors to values that live in the widget state. This means that changes to either bound editors will result in the widget state being updated, and then the widget being rerendered.</p>
+<pre class="prettyprint source lang-jsx"><code>class FontEditor extends spandrel((font, { name, isNull }) => {
+  return [
+    &lt;StringEditor value={ isNull ? '' : font.getName() } enabled={ !isNull } bind spandrelKey=&quot;name&quot; />,
+    &lt;BooleanEditor value={ isNull } bind spandrelKey=&quot;isNull&quot; />
+  ];
+}) {
+  doRead() {
+    return Promise.all([
+      this.queryWidget('name').read(),
+      this.queryWidget('isNull').read()
+    ])
+      .then(([ name, isNull ]) => isNull ? Font.NULL : Font.make({ name }));
+  }
+}
+</code></pre>
+<p>Observe the <code>bind</code> keyword on each child editor. By itself, <code>bind</code> tells <code>spandrel</code> to set the state value to the same key as <code>spandrelKey</code>. Because the StringEditor has <code>bind spandrelKey=&quot;name&quot;</code>, the <code>name</code> property of the widget state will get set every time it is modified. If you wished to use a different state key than the <code>spandrelKey</code>, you could specify <code>bindKey</code> instead.</p>
+<p>However, this editor still won't work. Remember, the widget state is an entirely separate data structure than the value that gets loaded in (in this case, the <code>Font</code>). So as it is, the state will be unpopulated on first render, and we'll just get a blank/broken editor! How can we initialize the widget state so we can render correctly the first time?</p>
+<p>The answer is the <code>toState</code> function. This function receives the value being loaded in (the <code>Font</code>) and returns the initial state of the widget based on that value. It will automatically be called for you as part of the <code>spandrel</code> lifecycle - all you need to do is implement it.</p>
+<p>Similarly, we're doing a significant amount of extra work with <code>doRead</code>. We shouldn't need to query the widgets out and read their values - we already know those values from the state (because the widgets are bound!). Can't we just read the widget's current info out of the state? You guessed it - <code>fromState</code> is the callback to go in the opposite direction. It takes the widget's current state and allows you to build the value to resolve <code>doRead</code> with. Again, just implement it - if you do, it takes the place of <code>doRead</code>.</p>
+<p>All together:</p>
+<pre class="prettyprint source lang-jsx"><code>class FontEditor extends spandrel((font, { name, isNull }) => {
+  return [
+    &lt;StringEditor value={ isNull ? '' : name } enabled={ !isNull } bind spandrelKey=&quot;name&quot; />,
+    &lt;BooleanEditor value={ isNull } bind spandrelKey=&quot;isNull&quot; />
+  ];
+}) {
+  toState(font) {
+    return { name: font.getName(), isNull: font.isNull() };
+  }
+
+  fromState({ name, isNull }) {
+    return isNull ? Font.NULL : Font.make({ name });
+  }
+}
+</code></pre>
+<p>Now you have a Font editor that is impervious to data loss as the string editor gets wiped out, and has the current data values always at hand in the widget state!</p>
+<p>Note that you may want to avoid the <code>bind</code> keyword on some child widgets if that widget requires a network request on <code>load</code>. In those cases, it is better to override doRead() and avoid those extra network requests that would come with a widget modification when the <code>bind</code> keyword is present.</p>
+<h4>Modified widgets, dirty changes, and the <code>lax</code> keyword</h4>
+<p>So here's a problem: <code>spandrel</code> widgets are very likely to continually rerender themselves as the user makes changes. As rerenders occur, new data values get loaded into your <code>spandrel</code> widget's children. If the user is currently typing in one of those child widgets, what happens if a new value gets loaded in? The user would lose their changes right at the moment they were typing, which would be extremely annoying!</p>
+<p>Because of this, there are two cases where <code>spandrel</code> will decline to load a new value into a widget.</p>
+<p>The first case: if a widget has focus - i.e., the user's cursor is currently in this widget, and they're in the process of typing something. <code>spandrel</code> will not overwrite the value of a modified, focused widget - no matter what. (Otherwise, a user could be <em>actively in the process of typing</em> and see their changes get immediately wiped out, which would be a terrible experience.)</p>
+<p>The second case: if the widget is modified. By default, <code>spandrel</code> will not load a new value into a widget that has user-entered changes, as in most cases, the user will not want to see those changes overwritten.</p>
+<p>However, there are many cases where you <em>will</em> want changes to apply even if the target widget is modified. For instance, in our FontEditor above: if the user types in a font name, but then checks the Null checkbox, we <em>still</em> want that font name editor to blank out, even though it's modified! Fortunately, we as developers have several ways to make that happen.</p>
+<p><strong>Call <code>load()</code></strong>. <code>spandrel</code> only skips loading modified widgets during a rerender. If you have a brand-new value to load into your <code>spandrel</code> widget, just call <code>yourSpandrelWidget.load(newValue)</code> and that value will be loaded in - even if the user has made changes.</p>
+<p><strong>Make a &quot;dirty change.&quot;</strong> To update state, you don't always have to use state binding: you can also just set the state yourself by calling the <code>state()</code> function.</p>
+<pre class="prettyprint source lang-jsx"><code>this.state({ foo: 'bar' });
+</code></pre>
+<p>By manually setting the state like this, it's like you, as the developer, are saying &quot;I want the widget bound to this state key to receive this value - even if it's modified.&quot; This marks that particular state key as &quot;dirty.&quot; On the next re-render (which will be triggered automatically by the call to <code>this.state()</code>), the widget bound to that key is going to get that new value, modifications or no. This applies for <em>one</em> rerender exactly - so if you want to overwrite that modified widget a second time, you'll have to call <code>this.state()</code> again.</p>
+<p>(Note that this only works for bound state keys. If &quot;foo&quot; were not bound to a widget, this would still set the state, but wouldn't overwrite any widgets or trigger a rerender.)</p>
+<p><strong>Mark it <code>lax</code>.</strong></p>
+<p>This is a little more &quot;shotgun&quot; approach than the previous, but works in many circumstances. Simply add the <code>lax</code> attribute to your JSX widgets (or <code>lax: true</code> if building the <code>spandrel</code> data by hand). This will mark that widget as open for overwriting, regardless of whether it's modified or not:</p>
+<pre class="prettyprint source lang-jsx"><code>class FontEditor extends spandrel((font, { name, isNull }) => {
+  return [
+    &lt;StringEditor value={ isNull ? '' : name } lax bind spandrelKey=&quot;name&quot; />,
+    &lt;BooleanEditor value={ isNull } bind spandrelKey=&quot;isNull&quot; />
+  ];
+}) { /* ... */}
+</code></pre>
+<p><strong>Mark it unmodified.</strong></p>
+<p>If neither of the above approaches works for you, your use case may call for child widgets to be overwritten if modified... some times, and not others. In this case, you will simply need to explicitly mark the widgets as unmodified at the appropriate time by calling <code>setModified(false)</code> on them.</p>
+<p>(If you have other use cases that you feel <code>spandrel</code> could do a better job of handling, please let us know!)</p>
+<h4>Broken state: when widgets fail to read</h4>
+<p>When you bind a child widget to state, it's possible for that widget to completely fail to read out a value. For instance, the user might type &quot;hello world&quot; into a numeric editor - there's no way to read a numeric value from &quot;hello world&quot;, so <code>spandrel</code> will fail to propagate that value into state, and your state will become inconsistent.</p>
+<p>In this case, state will still work - but if you attempt to read that bound value from the state object, an error will be thrown. Just be aware of this, in case you want to completely ignore the value of certain widgets on read. If you try to pull that bound value out of state when you don't really need it, your widget might fail to read out a value when it might otherwise work.</p>
+<pre class="prettyprint source lang-jsx"><code>class AgePrompt extends spandrel((user, { age, sharesAge }) => {
+  return &lt;div>
+    &lt;div>
+      &lt;span>I wish to share my age:&lt;/span>
+      &lt;BooleanEditor bind spandrelKey=&quot;sharesAge&quot;
+                     value={ sharesAge }
+                     properties={{ trueText: 'Yes', falseText: 'No' }} />
+    &lt;/div>
+    &lt;div>
+      &lt;span>My age is:&lt;/span>
+      &lt;NumericEditor bind spandrelKey=&quot;age&quot; value={ age } enabled={ sharesAge } />
+    &lt;/div>
+  &lt;/div>;
+}) {
+ toState(user) {
+   // data structure of a user object: { sharesAge: [boolean], age: [number] }
+   return user;
+ }
+ fromState(state) {
+   const { sharesAge } = state;
+   const user = { sharesAge };
+
+   // if the user typed &quot;hello world&quot; into the numeric field,
+   // then accessing state.age here will throw an error.
+   // if they choose not to share their age, we don't want to
+   // force them to type a valid number for it anyway.
+   user.age = sharesAge ? state.age : null;
+   return user;
+ }
+}
+</code></pre>
+<h4>Do I really need to use state?</h4>
+<p>In many cases, no. If the currently loaded value is enough information to fully capture the state of your widget, then the regular rerender process will do just fine. But if the widget keeps more information than can be captured in the loaded value, then state is a great place to store it.</p>
+<p>A typical, prominent use case for when state will come in handy is:</p>
+<ol>
+<li>Your widget has multiple child widgets.</li>
+<li>A change to one child widget will also cause changes to other child widgets.</li>
+<li>You do not want to lose any user-entered changes to those other child widgets that would be overwritten by those changes.</li>
+</ol>
+<p>Those other user-entered changes can then be socked away in state to persist across rerenders.</p>
+<h3>Frequently Asked Questions</h3>
+<h4>Is the old <code>bajaux</code> API going away?</h4>
+<p>Not at all. <code>spandrel</code> is just an additional API, on top of <code>bajaux</code> itself, that eases the construction and updates of nested trees of Widgets. Your existing Widgets will continue to function with no changes.</p>
+<h4>How can I debug what <code>spandrel</code> is doing under the covers?</h4>
+<p>Turn up the <code>bajaux.spandrel</code> log to FINEST. (Set the DebugService's Remote Logging property to true to apply this setting in the browser.) You will start getting debug information in the browser.</p>
+<h4>Can I use React components in conjunction with <code>spandrel</code>?</h4>
+<p>At the moment, <code>spandrel</code> only supports <code>bajaux</code> Widgets. But it is completely possible to create a &quot;wrapper&quot; Widget that mounts your React component inside of its own DOM element, and that wrapper Widget will work with <code>spandrel</code>.</p>
+<h4>Why is my <code>spandrel</code> widget not rendering anything at all?</h4>
+<p>Remember a dynamic widget renders itself according to the value that is loaded. Therefore, until <code>load()</code> is called, it will not render anything. Ensure you are calling <code>load()</code>, or providing a defined <code>value</code> argument to <code>buildFor()</code>.</p>
+<h4>I'm manually modifying the DOM after rendering. Why doesn't a rerender wipe my changes?</h4>
+<p><code>spandrel</code>'s diffing process compares the DOM as returned by the first call to the render function, against the DOM as returned by the second call to the render function. It figures out what the differences are, and applies those differences to the real DOM.</p>
+<p>If you apply your own manual modifications to the DOM, independent of the render process, then <code>spandrel</code> won't know you've made them. Your manual modifications will persist, unless the render process's own changes overwrite them.</p>
+<p>The best way to address this is to perform your manual modifications in the <code>doLayout</code> callback, and to ensure that they are consistently applied regardless of whether <code>spandrel</code> applies any changes to the DOM or not. <code>doLayout</code> will be called after each render.</p>
+<p>(Note: This behavior was introduced in 4.11. In 4.10 and previous, <code>spandrel</code> would often completely remove the <code>style</code> and/or <code>class</code> of DOM elements, regardless of what individual changes were made, so manual modifications would often be wiped on a rerender. This caused a number of problems with child widgets, so now only the results of the render function are diffed.)</p>
+<h4>I'm rerendering, but widgets won't update if they've been modified by the user.</h4>
+<p>This is by design. Due to the asynchronous nature of <code>bajaux</code> Widgets, widgets that have been modified by the user can't be re-rendered on every modification (attempting to do so results in some very jumpy and/or broken behavior). Therefore, by default, any modified widgets (such as string editors you're currently typing in) won't respond to re-render requests.</p>
+<p>To address this, see the <code>lax</code> property and other approaches, as described in the State Binding section.</p>
+<h4>Some of my HTML attributes aren't applying correctly!</h4>
+<p>When using JSX to create DOM elements, <code>spandrel</code> does not apply the attributes all at once: it applies them one after another. Therefore, in some situations, the order of attributes matters, even when it would make no difference when parsing a simple HTML string.</p>
+<p>Here's an example:</p>
+<p><code>&lt;input type=&quot;range&quot; min=&quot;0&quot; max=&quot;1000&quot; value=&quot;500&quot;/&gt;</code></p>
+<p>In both regular HTML and <code>spandrel</code>'s JSX implementation, this works fine. Now compare it with this:</p>
+<p><code>&lt;input type=&quot;range&quot; min=&quot;0&quot; value=&quot;500&quot; max=&quot;1000&quot;/&gt;</code></p>
+<p>Because <code>spandrel</code> sets attributes sequentially, when the <code>value</code> attribute is set, the <code>min</code> attribute has been set but <code>max</code> has not. An <code>input</code> tag with a <code>min</code> but no <code>max</code> will default the max to 100 (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range">MDN</a>). So the value gets set to 100, not 500! This is a case where ordering matters: the <code>max</code> must be set first.</p>
+<h4>I'm calling <code>load()</code> with new data, but <code>spandrel</code> is not actually loading my new values.</h4>
+<p>When deciding whether values have changed, <code>spandrel</code> will diff &quot;the value returned by the previous render&quot; against &quot;the value returned by this render.&quot; Most of the time this is straightforward:</p>
+<pre class="prettyprint source lang-jsx"><code>const NumberEditor = spandrel((num) => &lt;span>
+  &lt;label>Enter number:&lt;/label>&lt;any value={num} />
+&lt;/span>);
+
+numberEditor.load(1)
+  .then(() => numberEditor.load(2));
+</code></pre>
+<p>The first time it renders, the value being loaded into the child editor will be 1, and the second time it renders, it will be 2 - so <code>spandrel</code> knows that the new value is different and needs to be reloaded into the child editor.</p>
+<p>Where it can get dicey is when objects are instance-equal. Consider this example, in which our intention is to load up a user with a <code>name</code> property, change their name, and reload to reflect the new values.</p>
+<pre class="prettyprint source lang-jsx"><code>// the implementation of NameEditor is not interesting.
+const NameEditor = spandrel((name) => &lt;span>
+  &lt;label>First name:&lt;/label>&lt;any value={name.first} />
+  &lt;label>Last name:&lt;/label>&lt;any value={name.last} />
+&lt;/span>);
+
+// examine the behavior of UserEditor.
+const UserEditor = spandrel((user) => &lt;span>
+  &lt;NameEditor value={user.name} />
+&lt;/span>);
+
+const user = { name: { first: 'Moe', last: 'Howard' } };
+return userEditor.load(user)
+  .then(() => {
+    user.name.first = 'Larry';
+    user.name.last = 'Fine';
+    return userEditor.load(user);
+  });
+</code></pre>
+<p>It sure looks like it should reload the editor with the new values, but it won't! When the <code>UserEditor</code> does the diff to see if the value to load into the <code>NameEditor</code> has changed, remember it is checking &quot;the value returned by the previous render&quot; against &quot;the value returned by the current render.&quot; They're the same value - in this example, <code>user.name</code> is always instance-equal. When we set the <code>first</code> and <code>last</code> properties of <code>user.name</code>, we're not just changing &quot;the value returned by the current render&quot; - we're also changing &quot;the value returned by the previous render&quot;! So when <code>spandrel</code> does the diff, the values are the same, and it will not see any reason to load anything into the <code>NameEditor</code>.</p>
+<p>Any one of the following approaches will work instead:</p>
+<pre class="prettyprint source lang-jsx"><code>// we could ensure that user.name refers to a brand new instance when passing it to UserEditor.
+return userEditor.load(user)
+  .then(() => {
+    user.name = { first: 'Larry', last: 'Fine' };
+    return userEditor.load(user);
+  });
+
+// even better, we could pass a fresh user altogether (think &quot;stateless&quot;):
+return userEditor.load({ name: { first: 'Moe', last: 'Howard' } })
+  .then(() => {
+    return userEditor.load({ name: { first: 'Larry', last: 'Fine' } });
+  });
+
+// we could even make it UserEditor's job to ensure that NameEditor receives fresh values
+// no matter what happens to the user object externally.
+const UserEditor = spandrel((user) => {
+  const { first, last } = user.name;
+  return &lt;span>&lt;NameEditor value={{ first, last }} />&lt;/span>;
+});
+</code></pre>
+<h4>I'm calling <code>value()</code> from within <code>doRead()</code>, and it's breaking my rerendering!</h4>
+<p>When you call <code>load()</code> on a <code>bajaux</code> Widget to load in a new value, <code>this.value()</code> starts to immediately return that new value - even before any of the loading work is done! If your <code>spandrel</code> widget is calling <code>this.value()</code> inside of <code>doRead()</code>, your diffing process may not work correctly when a new value is loaded in.</p>
+<p>Instead of referencing &quot;static&quot; parts of the widget's value by calling <code>this.value()</code>, consider storing that information in state instead. This way, when you load a new value, the widget knows its previous values when it rerenders, and the diffing process will work correctly.</p>
+<h3>Definitions</h3>
+<p><strong>Dynamic <code>spandrel</code> Widget</strong>: a <code>spandrel</code> Widget whose structure is determined by its current properties, and what value is loaded in. Its structure will be built in <code>doLoad</code> because it changes based on the value.</p>
+<p><strong>JSX</strong>: a library that converts HTML in .js files into JavaScript code. It works at compile time. <code>spandrel</code> uses it to convert HTML strings into <code>spandrel</code> data.</p>
+<p><strong>render</strong>: describes the full cycle of a <code>spandrel</code> widget, from when it generates <code>spandrel</code> data (either statically, or dynamically, in response to a value being loaded), to when <code>spandrel</code> itself uses that data to update the document.</p>
+<p><strong>re-render</strong>: when a dynamic widget changes (such as when a new value is loaded in, or its Properties change), its render function will be called again to generate an updated set of <code>spandrel</code> data, and <code>spandrel</code> will update the document itself, so the user sees the newest changes. Note that if the newly-generated <code>spandrel</code> data is exactly equal to the previous <code>spandrel</code> data, no changes will be made to the document at all.</p>
+<pre><code>const Span = spandrel((string) =&gt; {
+  // my render function
+  return &lt;span&gt;{ string }&lt;/span&gt;;
+});
+
+new WidgetManager.buildFor({ type: Span, value: 'hello' })
+  .then((ed) =&gt; {
+    // when we load a new value, it triggers a re-render, which re-runs the
+    // render function and updates the DOM.
+    return ed.load('world');
+  });
+</code></pre>
+<p><strong>render function</strong>: the function passed to <code>spandrel</code> that defines a dynamic widget. It will be called whenever a value is loaded in. It must resolve valid <code>spandrel</code> data, which <code>spandrel</code> itself will use to update the actual document.</p>
+<pre><code>const Label = spandrel((string) =&gt; {
+  // this is the _render function_
+  return &lt;label&gt;{ string }&lt;/label&gt;;
+});
+</code></pre>
+<p><strong><code>spandrel</code> data</strong>: describes the data returned from a render function. It defines a tree or array of Widgets and the DOM elements in which they should be initialized. This structure closely resembles the data passed to <code>fe.buildFor</code>, but allows for nesting.</p>
+<pre><code>const Label = spandrel((string) =&gt; {
+  // this is the _spandrel data_ being returned from the _render function_
+  const spandrelData = {
+    dom: '&lt;label&gt;&lt;/label&gt;',
+    kids: [ `&lt;span&gt;${ string }&lt;/span&gt;` ]
+  };
+  return spandrelData;
+});
+</code></pre>
+<p><strong>Static <code>spandrel</code> Widget</strong>: a <code>spandrel</code> Widget whose structure is the same in every single instance. It is not determined by a value loaded in. Its structure will be built in <code>doInitialize</code> because it never needs to change.</p>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	bajaux Copyright © 2024 Tridium. DocStrap Copyright © 2012-2013 the contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
+	
+		on 2024-05-03T00:28:54+00:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Robert Adams
+   @creation  15 Jan 05
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Lon Markup Language</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/lonworks.html" class="navbar">Prev</a> |  <a href="/doc/build.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+
+<!-- Header Navbar -->
+<!-- Title Block -->
+<h1 class='title'>Lon Markup Language</h1> 
+
+<!------------------------------------------------------------->
+<h1 id="overview">Overview</h1>
+<!------------------------------------------------------------->
+
+<p>
+This document defines the content of a lon XML interface file. Basic syntax:
+The xml interface file represents a collection of objects. These objects may
+contain predefined elements and/or undefined elements. LonDevice contains the
+predefined element deviceData and any number of undefined NetworkVariables. As
+a general rule, elements which are not a defined element of the parent must
+have a type attribute. Defined elements must provide a value "v" attribute or
+contain defined elements.
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;name  type="XLonXmlType"&gt;
+&lt;name  v="value"&gt;
+  </code>
+</pre>
+
+<p>
+Example:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;T7300h type="XLonDevice"&gt;
+ &lt;!-- Defined element deviceData with no type specified --&gt;
+ &lt;deviceData
+  &lt;!-- Defined element with value --&gt;
+  &lt;programID v="80 0 c 50 3c 3 4 17"/&gt;
+  . . .
+ &lt;/deviceData&gt;
+ 
+ &lt;!-- Undefined element with specified type --&gt;
+ &lt;nviRequest type="XNetworkVariable"&gt; 
+  &lt;index v="0"/&gt;
+ &lt;/nviRequest&gt;
+&lt;T7300h type="XLonDevice"&gt;
+  </code>
+</pre>
+
+<p>
+The set of valid LonXmlTypes are: XLonXMLInterfaceFile, XLonDevice, XEnumDef,
+XTypeDef, XNetworkVariable, XNetworkConfig, XConfigProperty, XMessageTag
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="lonXmlInterfaceFile">LonXMLInterfaceFile</h1>
+<!------------------------------------------------------------->
+
+<p>
+The root type is LonXMLInterfaceFile. It may contain EnumDefs, TypeDefs, and
+LonDevices. It may also reference other LonXMLInterfaceFiles to allow for
+EnumDefs, and TypeDefs to be shared. The file attribute indicates the element
+is an included file
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;!-- Example with reference to other interface files. --&gt;
+&lt;T7300h type="XLonXMLInterfaceFile"&gt;
+ &lt;HwTherm file="datatypes\HwTherm.lnml"/&gt;
+ &lt;HwCommon file="datatypes\HwCommon.lnml"/&gt;
+ &lt;T7300h type="XlonDevice"&gt;
+&lt;/T7300h&gt;
+
+&lt;!-- Example with enumDefs and typeDefs included in single file. --&gt;
+&lt;T7300h type="XLonXMLInterfaceFile"&gt;
+ &lt;HwThermAlarmEnum type="XenumDef"&gt; . . . &lt;/HwThermAlarmEnum&gt;
+ &lt;HwThermAlarm type="XTypeDef"&gt; . . . &lt;/HwThermAlarm&gt;
+ &lt;T7300h type="XLonDevice"&gt; . . . &lt;/T7300h&gt;
+&lt;/T7300h&gt;     
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="typeDefs">TypeDefs</h1>
+<!------------------------------------------------------------->
+
+<p>
+EnumDefs and TypeDefs elements are needed to define the data portion of nvs,
+ncis, and config properties. An EnumDef contains a set of tag/id pairs where
+the name of the element is the tag and the value is the id.
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;HwThermAlarmEnum type="XEnumDef"&gt;
+ &lt;NoAlarm v="0"/&gt;
+ &lt;T7300CommFailed v="2"/&gt;
+ &lt;AlarmNotifyDisabled v="255"/&gt;
+ &lt;/HwThermAlarmEnum&gt;
+  </code>
+</pre>
+
+<p>
+A TypeDef contains a set of data elements. Each data element contains a name
+and set of qualifiers. The "qual" attribute contains a type field(u8, s8, b8,
+e8 ..), type restrictions (min,max) and encoding (resolution, byteOffset,
+bitOffset, len) information. For a description of valid element values see
+Appendix B. If an element is an enumeration then the enumDef attribute must be
+included to specify the name of the EnumDef used.
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;HwThermAlarm type="XTypeDef"&gt;
+ &lt; elem n="subnet" qual="u8 res=1.0 off=0.0"/&gt;
+ &lt; elem n="type" qual="e8" enumDef="HwThermAlarmEnum"/&gt;
+&lt;/HwThermAlarm&gt;
+  </code>
+</pre>
+
+<p>
+A TypeDef element may also include "default" and "engUnit" attributes.
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;HwThermConfig type="XTypeDef"&gt;
+ &lt;TODOffset qual="u8 byt=0 bit=0 len=4 min=0.0 max=15.0 "
+    default="0" engUnit="F"/&gt;
+ &lt;DeadBand qual="ub byt=0 bit=4 len=4 min=2.0 max=10.0 "
+    default="2" engUnit="F"/&gt;
+&lt;/HwThermConfig&gt;   
+  </code>
+</pre>
+
+<p>
+A TypeDef may have nonstandard features which require a software implementation.
+This is the case for typedefs with unions. Unions are not currently supported. A <code>typeSpec</code>
+attribute can be used to specify a class file in a baja module as the implementation of the 
+TypeDef.  The class must be a subclass of 
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonData.bajadoc'>BLonData</a></code> 
+and provide overrides to <code> byte[] toNetBytes()</code> and 
+<code>fromNetBytes(byte[] netBytes)</code>. 
+<!-- 
+and provide overrides <code>toOutputStream(LonOutputStream out)</code> and 
+<code>fromInputStream(LonInputStream in)</code>. 
+-->
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;FileStatus type="XTypeDef"&gt;
+ &lt; typeSpec v="lonworks:LonFileStatus"/&gt;
+&lt;/FileStatus&gt;
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="lonDevice">LonDevice</h1>
+<!------------------------------------------------------------->
+
+<p>
+A LonDevice consists of a defined element deviceData and sets of 0 or more of
+each XNetworkVariable, XNetworkConfig, XConfigProperty, and XMessageTag type
+elements.
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;T7300h type="XLonDevice"&gt;
+ &lt;deviceData&gt; . . . &lt;/deviceData&gt;
+ &lt;nviRequest type="XNetworkVariable"&gt; . . . &lt;/nviRequest&gt;
+ &lt;nvoAlarmLog type="XNetworkVariable"&gt; . . . &lt;/nvoAlarmLog&gt;
+  &lt;nciApplVer type="XNetworkConfig"&gt; . . . &lt;/nciApplVe&gt;
+ &lt;ScheduleFile type="XConfigProperty"&gt; . . . &lt;/ScheduleFile&gt;
+ &lt;fx_explicit_tag type="XMessageTag"&gt; . . . &lt;/fx_explicit_tag&gt;
+&lt;/T7300h&gt;
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="deviceData">DeviceData</h1>
+<!------------------------------------------------------------->
+
+<p>
+DeviceData is a defined set of values need to describe or qualify a lonworks
+device.  A complete list of elements and their default values provided later.
+</p>
+
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;deviceData&gt;
+ &lt;majorVersion v="4"/&gt;
+ &lt;programID v="80 0 c 50 3c 3 4 17"/&gt;
+ &lt;addressTableEntries v="15"/&gt;
+ . . .
+&lt;/deviceData&gt;
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="nv">NVs, NCIs, ConfigProps</h1>
+<!------------------------------------------------------------->
+
+<p>
+NetworkVariable, NetworkConfig (nci), and ConfigProperty elements share a
+common structure. Each one consists of a set of defined elements and a data
+definition. See Appendix A for a complete list of defined elements and their
+default values.
+</p>
+
+<p>
+The data definition can take one of three forms: 
+</p>
+
+<ol>
+<li>for standard types a snvtType(for nv/nci) or scptType(for nci/cp) element</li>
+<li>a typeDef element to specify the XTypeDef containing the data elements</li> 
+<li>a set of elem entries contained in the nv,nci,cp with the same definition as used for TypeDef</li>  
+</ol>
+
+<pre>
+  <code class="sunlight-highlight-xml"> 
+&lt;nvoAlarmLog type="XNetworkVariable&gt;
+ &lt;index v="38"/&gt;
+ &lt;direction v="output"/&gt;
+ &lt;typeDef="HwThermAlarmLog"/&gt;
+&lt;/nvoAlarmLog&gt;
+
+&lt;nviRequest type="XNetworkVariable"&gt;
+ &lt;index v="0"/&gt;
+ &lt;snvtType v="objRequest"/&gt;
+ . . .
+&lt;/nviRequest&gt;
+
+&lt;nciSetpoints type="XNetworkConfig"&gt;
+ &lt;index v="17"/&gt;
+ &lt;snvtType v="tempSetpt"/&gt;
+ . . .
+&lt;/nciSetpoints&gt;
+
+&lt;bypassTime type="XConfigProperty"&gt;
+  &lt;scptType v="CpBypassTime"/&gt;
+ &lt;scope v="object"/&gt;
+ &lt;select v="0"/&gt;
+ . . .
+  &lt;/bypassTime&gt;
+  </code>
+</pre> 
+
+<!------------------------------------------------------------->
+<h1 id="fileAttribute">File Attribute</h1>
+<!------------------------------------------------------------->
+
+<p>
+There will be cases where it is desirable to nest interface files. This will
+provide a means to share type definitions between multiple device interface
+files. It may also ease the process of auto generating the files when the data
+is contained in multiple forms (i.e. xif files, resource files, ...).
+</p>
+
+<p>
+To include a file an element with the "file" attribute is included in the root.
+The path in the file attribute entry is specified relative to the containing
+file.
+</p>
+
+<p>
+The following is an example of nested files. File #1 contains enum definitions,
+File #2 contains type definitions which use the enumDefs and file #3 contains
+the device definition which may use both.
+</p>
+
+File #1  ..\honeywell\enum\ HwThermEnum.xml
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;HwThermEnum type="XLonXMLInterfaceFile"&gt;
+ &lt;HwThermAlarmEnum type="XEnumDef"&gt;
+  &lt;NoAlarm v="0"/&gt;
+  &lt;InvalidSetPtAlrm v="1"/&gt;
+  . . .
+ &lt;/HwThermAlarmEnum&gt;
+ . . .
+&lt;/HwThermEnum&gt;
+  </code>
+</pre>
+
+File #2  ..\honeywell\datatypes\ HwTherm.xml
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;HwTherm type="XLonXMLInterfaceFile"&gt;
+ &lt;HwThermEnum  file="..\enum\HwThermEnum.xml"/&gt;
+ &lt;HwThermAlarm  type="XTypeDef"&gt;
+  &lt;elem n="subnet" qual="us res=1.0 off=0.0 "/&gt;
+  &lt;elem n="node" qual="us res=1.0 off=0.0 "/&gt;
+  &lt;elem n="alarmType" qual="en " enumDef="HwThermAlarmEnum"/&gt;
+ &lt;/HwThermAlarm&gt;
+ . . .
+&lt;/HwTherm&gt;
+  </code>
+</pre>
+
+File #3  ..\honeywell\
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;T7300h type="XLonXMLInterfaceFile"&gt;
+ &lt;HwTherm  file="..\datatypes\HwTherm.xml"/&gt;
+ &lt;T7300h type="XLonDevice"&gt; 
+   &lt;nvoAlarm type="XNetworkVariable" &gt;
+   &lt;typeDef="HwThermAlarm"/&gt
+   &lt;index v="36"/&gt;
+   &lt;direction v="output"/&gt;
+...
+  &lt;/nvoAlarm&gt;
+ &lt;/T7300h&gt;
+&lt;/T7300h&gt;
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="xDeviceDataDefinition">XDeviceData  Definition</h1>
+<!------------------------------------------------------------->
+
+<p>
+XDeviceData  definition: see  LonMark External Interface File Reference Guide 4.0B
+</p>
+
+<table border='1'>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Valid Values</th></tr>
+<tr><td>int</td><td>majorVersion</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>minorVersion</td><td>0</td><td>-</td></tr> 
+
+<tr><td>byte[]</td><td>programID</td><td>0 0 0 0 0 0 0 0</td><td>-</td></tr> 
+   
+<tr><td>int</td><td>domains</td><td>2</td><td>-</td></tr> 
+<tr><td>int</td><td>addressTableEntries</td><td>0</td><td>-</td></tr> 
+<tr><td>boolean</td><td>handlesIncomingExplicitMessages</td><td>false</td><td>-</td></tr> 
+<tr><td>int</td><td>numNvDeclarations</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>numExplicitMessageTags</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>networkInputBuffers</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>networkOutputBuffers</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>priorityNetworkOutputBuffers</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>priorityApplicationOutputBuffers</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>applicationOutputBuffers</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>applicationInputBuffers</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>sizeNetworkInputBuffer</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>sizeNetworkOutputBuffer</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>sizeAppOutputBuffer</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>sizeAppInputBuffer</td><td>0</td><td>-</td></tr> 
+<tr><td>String</td><td>applicationType</td><td>unknown</td><td>unknown,mip,neuron,hostSelect,hostNISelect</td></tr>
+<tr><td>int</td><td>numNetworkVariablesNISelect</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rcvTransactionBuffers</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>aliasCount</td><td>0</td><td>-</td></tr> 
+<tr><td>boolean</td><td>bindingII</td><td>false</td><td>-</td></tr> 
+<tr><td>boolean</td><td>allowStatRelativeAddressing</td><td>false</td><td>-</td></tr> 
+<tr><td>int</td><td>maxSizeWrite</td><td>11</td><td>-</td></tr> 
+<tr><td>int</td><td>maxNumNvSupported</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>neuronChipType</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>clockRate</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>firmwareRevision</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rcvTransactionBlockSize</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>transControlBlockSize</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>neuronFreeRam</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>domainTableEntrySize</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>addressTableEntrySize</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>nvConfigTableEntrySize</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>domainToUserSize</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>nvAliasTableEntrySize</td><td>0</td><td>-</td></tr> 
+   
+<tr><td>boolean</td><td>standardTransceiverTypeUsed</td><td>true</td><td>-</td></tr> 
+<tr><td>int</td><td>standardTransceiverTypeId</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>transceiverType</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>transceiverInterfaceRate</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>numPrioritySlots</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>minimumClockRate</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>averagePacketSize</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>oscillatorAccuracy</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>oscillatorWakeupTime</td><td>0</td><td>-</td></tr> 
+   
+<tr><td>int</td><td>channelBitRate</td><td>0</td><td>-</td></tr> 
+<tr><td>boolean</td><td>specialBitRate</td><td>false</td><td>-</td></tr> 
+<tr><td>boolean</td><td>specialPreambleControl</td><td>false</td><td>-</td></tr> 
+<tr><td>String</td><td>specialWakeupDirection</td><td>input</td><td>input,output</td></tr>
+<tr><td>boolean</td><td>overridesGenPurposeData</td><td>false</td><td>-</td></tr> 
+<tr><td>int</td><td>generalPurposeData1</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>generalPurposeData2</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>generalPurposeData3</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>generalPurposeData4</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>generalPurposeData5</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>generalPurposeData6</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>generalPurposeData7</td><td>0</td><td>-</td></tr> 
+   
+<tr><td>int</td><td>rcvStartDelay</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rcvEndDelay</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>indeterminateTime</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>minInterpacketTime</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>preambleLength</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>turnaroundTime</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>missedPreambleTime</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>packetQualificationTime</td><td>0</td><td>-</td></tr> 
+<tr><td>boolean</td><td>rawDataOverrides</td><td>false</td><td>-</td></tr> 
+<tr><td>int</td><td>rawDataClockRate</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rawData1</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rawData2</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rawData3</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rawData4</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>rawData5</td><td>0</td><td>-</td></tr> 
+   
+<tr><td>String</td><td>nodeSelfID</td><td>""</td><td>-</td></tr> 
+</table>
+
+<p>
+NetworkVariable and Network Config common elements
+</p>
+
+<table border='1'>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Valid Values</th></tr>
+<tr><td>String</td><td>snvtType</td><td>"xxx"</td><td>from SNVT Master List."SNVT_angle_vel" becomes "angleVel".</td></tr>
+<tr><td>int</td><td>index</td><td>-1</td><td>-</td></tr>  
+<tr><td>int</td><td>averateRate</td><td>0</td><td>-</td></tr>  
+<tr><td>int</td><td>maximumRate</td><td>0</td><td>-</td></tr> 
+<tr><td>int</td><td>arraySize</td><td>1</td><td>-</td></tr> 
+<tr><td>boolean</td><td>offline</td><td>false</td><td>-</td></tr> 
+<tr><td>boolean</td><td>bindable</td><td>true</td><td>-</td></tr> 
+<tr><td>String</td><td>direction</td><td>"input"</td><td>input,output</td></tr> 
+<tr><td>String</td><td>serviceType</td><td>"unacked"</td><td>acked, repeat, unacked, unackedRpt</td></tr>          
+<tr><td>boolean</td><td>serviceTypeConfigurable</td><td>true</td><td>-</td></tr>     
+<tr><td>boolean</td><td>authenticated</td><td>false</td><td>-</td></tr> 
+<tr><td>boolean</td><td>authenticatedConfigurable</td><td>true</td><td>-</td></tr> 
+<tr><td>boolean</td><td>priority</td><td>false</td><td>-</td></tr> 
+<tr><td>boolean</td><td>priorityConfigurable</td><td>true</td><td>-</td></tr> 
+</table>
+
+<p>
+NetworkVariable only elements
+</p>
+<table border='1'>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Valid Values</th></tr>
+<tr><td>String</td><td>objectIndex</td><td>""</td><td>-</td></tr>  
+<tr><td>int</td><td>memberIndex</td><td>-1</td><td>-</td></tr>  
+<tr><td>int</td><td>memberArraySize</td><td>1</td><td>-</td></tr>  
+<tr><td>boolean</td><td>mfgMember</td><td>false</td><td>-</td></tr>  
+<tr><td>boolean</td><td>changeType</td><td>false</td><td>-</td></tr>  
+</table>
+
+<p>
+NetworkConfig only elements
+</p>     
+
+<table border='1'>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Valid Values</th></tr>
+<tr><td>String</td><td>scptType</td><td>""</td><td>-</td></tr>   
+<tr><td>String</td><td>scope</td><td>"node"</td><td>node,object,nv</td></tr>
+<tr><td>String</td><td>select</td><td>""</td><td>If for node select=-1. Possible formates are n n~m n-m n.m n/m</td></tr>
+<tr><td>String</td><td>modifyFlag</td><td>"anytime"</td><td>anytime, mfgOnly, reset, constant, offline, objDisable, deviceSpecific</td></tr>
+<tr><td>float</td><td>max</td><td>Float.NaN</td><td>-</td></tr>   
+<tr><td>float</td><td>min</td><td>Float.NaN</td><td>-</td></tr>   
+<tr><td>boolean</td><td>changeType</td><td>false</td><td>-</td></tr>  
+</table>
+
+<p>
+ConfigParameter elements
+</p>
+
+<table border='1'>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Valid Values</th></tr>
+<tr><td>String</td><td>scptType</td><td>""</td><td>-</td></tr>   
+<tr><td>String</td><td>scope</td><td>"node"</td><td>node,object,nv</td></tr>   
+<tr><td>String</td><td>select</td><td>""</td><td>If for node select=-1. Possible formates are n n~m n-m n.m n/m</td></tr>   
+<tr><td>String</td><td>modifyFlag</td><td>"anytime"</td><td>anytime, mfgOnly, reset, constant, offline, objDisable, deviceSpecific</td></tr>   
+<tr><td>int</td><td>length</td><td>0</td><td>-</td></tr>    
+<tr><td>int</td><td>dimension</td><td>1</td><td>-</td></tr>   
+<tr><td>float</td><td>max</td><td>Float.NaN</td><td>-</td></tr>   
+<tr><td>float</td><td>min</td><td>Float.NaN</td><td>-</td></tr>   
+<tr><td>String</td><td>principalNv</td><td>""</td><td>if the scope is object and the scpt is inherited then this specifies the memberNumber of the principalNv in the selected object. Prefixed with '#' if mfgDefined member '|' if standard member.</td></tr>   
+</table>
+
+ 
+<!------------------------------------------------------------->
+<h1 id="elementQualifier">Element Qualifier</h1>
+<!------------------------------------------------------------->
+
+<p>
+The format for an element attribute is:
+</p> 
+
+<pre>
+qual="Type [qualifier=xx]"
+example: qual="u8 res=0.1 min=5 max=12"
+</pre>
+
+<table border='1'>
+<tr><th>Type</th><th>Device Data Type</th><th>Valid Qualifiers</th></tr>
+<tr><td>c8</td><td>character - 1 byte</td><td>-</td></tr>   
+<tr><td>s8</td><td>signed short - 1 byte</td><td>res, off, min, max, invld</td></tr>   
+<tr><td>u8</td><td>unsigned short - 1 byte</td><td>res, off, min, max, invld</td></tr>   
+<tr><td>s16</td><td>signed long - 2 byte</td><td>res, off, min, max, invld</td></tr>   
+<tr><td>u16</td><td>unsigned lon - 2 byte</td><td>res, off, min, max, invld</td></tr>   
+<tr><td>f32</td><td>float - 4 byte</td><td>res, off, min, max, invld</td></tr>   
+<tr><td>s32</td><td>signed int - 4 bytes</td><td>res, off, min, max, invld</td></tr>   
+<tr><td>b8</td><td>boolean - 1 byte</td><td>-</td></tr>    
+<tr><td>e8</td><td>enumeration - 1 byte</td><td>-</td></tr>   
+<tr><td>bb</td><td>boolean in bit field</td><td>byt, bit, len</td></tr>   
+<tr><td>eb</td><td>enumeration in bit field</td><td>byt, bit, len</td></tr>   
+<tr><td>ub</td><td>unsigned int in bit field</td><td>byt, bit, len, min, max, invld</td></tr>   
+<tr><td>sb</td><td>signed int in bit field</td><td>byt, bit, len, min, max, invld</td></tr>   
+<tr><td>st</td><td>string</td><td>len</td></tr>   
+<tr><td>na</td><td>no type - byte array</td><td>len</td></tr>   
+</table>
+
+<table border='1'>
+<tr><th>Qualifier Code</th><th>Description</th><th>Default</th></tr>
+<tr><td>res</td><td>resolution  float</td><td>1.0</td></tr>   
+<tr><td>off</td><td>Offset</td><td>0.0</td></tr>   
+<tr><td>min</td><td>Minimum legal value</td><td>Not specified</td></tr>   
+<tr><td>max</td><td>Maximum legal value</td><td>Not specified</td></tr>   
+<tr><td>invld</td><td>Invalid value</td><td>Not specified</td></tr>   
+<tr><td>byt</td><td>Byte offset - 0 based</td><td>-1</td></tr>   
+<tr><td>bit</td><td>Bit offset - 0 based, 7 for msb, 0 for lsb</td><td>0</td></tr>   
+<tr><td>len</td><td>Number of bytes(na), char(st) or bits(bb,eb,ub)</td><td>1</td></tr>   
+</table>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/lonworks.html" class="navbar">Prev</a> |  <a href="/doc/build.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>
+

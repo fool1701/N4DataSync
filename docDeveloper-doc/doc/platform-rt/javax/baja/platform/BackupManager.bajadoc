@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platform" runtimeProfile="rt" qualifiedName="javax.baja.platform.BackupManager" name="BackupManager" packageName="javax.baja.platform" public="true" interface="true" abstract="true" category="interface">
+<description>
+Interface for performing online or offline backups.&#xa; &#xa; Instances of BackupManager can be obtained by calling &#xa; getOfflineBackupManager() on the PlatformDaemon object for &#xa; a host with no running stations
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">13 Dec 05</tag>
+<tag name="@version">$Revision: 2$ $Date: 6/1/07 11:56:30 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.platform.BackupManager.backup(javax.baja.file.BIFile, javax.baja.platform.IPlatformOperationListener) -->
+<method name="backup"  public="true" abstract="true">
+<description>
+Write a backup of the connected host to the given file.  &#xa; &#xa; The host can be restored to the state it was in when the file &#xa; was successfully written using the InstallManager.install() and&#xa; InstallOperation.installDistribution() methods.&#xa; &#xa; An exception will be thrown if any stations are running on the &#xa; remote host.
+</description>
+<parameter name="backupFile">
+<type class="javax.baja.file.BIFile"/>
+<description>
+file to which the backup will be written.   It should&#xa; have the &#x22;.dist&#x22; extension.
+</description>
+</parameter>
+<parameter name="listener">
+<type class="javax.baja.platform.IPlatformOperationListener"/>
+<description>
+can be used to cancel the request, or receive status while &#xa; the backup is in progress
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

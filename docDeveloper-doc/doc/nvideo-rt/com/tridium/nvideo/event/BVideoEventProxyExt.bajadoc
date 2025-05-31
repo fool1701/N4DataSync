@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="rt" qualifiedName="com.tridium.nvideo.event.BVideoEventProxyExt" name="BVideoEventProxyExt" packageName="com.tridium.nvideo.event" public="true" abstract="true">
+<description>
+Video driver developers should treat events similar to ordinary&#xa; dev driver data points, except that the read response should&#xa; return an instance of BVideoEventStatus.
+</description>
+<tag name="@see">BVideoEventStatus</tag>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver) on 25 Jan 2012</tag>
+<extends>
+<type class="javax.baja.driver.point.BProxyExt"/>
+</extends>
+<implements>
+<type class="com.tridium.videoDriver.event.BIVideoEventSource"/>
+</implements>
+<implements>
+<type class="com.tridium.videoDriver.event.BIVideoEventDetection"/>
+</implements>
+<property name="mostRecentEvent" flags="r">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+<description>
+Slot for the &lt;code&gt;mostRecentEvent&lt;/code&gt; property.
+</description>
+<tag name="@see">#getMostRecentEvent</tag>
+<tag name="@see">#setMostRecentEvent</tag>
+</property>
+
+<property name="autoExpiration" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;autoExpiration&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAutoExpiration</tag>
+<tag name="@see">#setAutoExpiration</tag>
+</property>
+
+<property name="autoExpirationInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;autoExpirationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAutoExpirationInterval</tag>
+<tag name="@see">#setAutoExpirationInterval</tag>
+</property>
+
+<action name="enableDetection" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;enableDetection&lt;/code&gt; action.
+</description>
+<tag name="@see">#enableDetection()</tag>
+</action>
+
+<action name="disableDetection" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;disableDetection&lt;/code&gt; action.
+</description>
+<tag name="@see">#disableDetection()</tag>
+</action>
+
+<action name="eventExpired" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;eventExpired&lt;/code&gt; action.
+</description>
+<tag name="@see">#eventExpired()</tag>
+</action>
+
+<topic name="videoEventOccurred" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;videoEventOccurred&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireVideoEventOccurred</tag>
+</topic>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt() -->
+<constructor name="BVideoEventProxyExt" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getMostRecentEvent() -->
+<method name="getMostRecentEvent"  public="true">
+<description>
+Get the &lt;code&gt;mostRecentEvent&lt;/code&gt; property.
+</description>
+<tag name="@see">#mostRecentEvent</tag>
+<return>
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.setMostRecentEvent(com.tridium.videoDriver.event.BVideoEvent) -->
+<method name="setMostRecentEvent"  public="true">
+<description>
+Set the &lt;code&gt;mostRecentEvent&lt;/code&gt; property.
+</description>
+<tag name="@see">#mostRecentEvent</tag>
+<parameter name="v">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getAutoExpiration() -->
+<method name="getAutoExpiration"  public="true">
+<description>
+Get the &lt;code&gt;autoExpiration&lt;/code&gt; property.
+</description>
+<tag name="@see">#autoExpiration</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.setAutoExpiration(boolean) -->
+<method name="setAutoExpiration"  public="true">
+<description>
+Set the &lt;code&gt;autoExpiration&lt;/code&gt; property.
+</description>
+<tag name="@see">#autoExpiration</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getAutoExpirationInterval() -->
+<method name="getAutoExpirationInterval"  public="true">
+<description>
+Get the &lt;code&gt;autoExpirationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#autoExpirationInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.setAutoExpirationInterval(javax.baja.sys.BRelTime) -->
+<method name="setAutoExpirationInterval"  public="true">
+<description>
+Set the &lt;code&gt;autoExpirationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#autoExpirationInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.enableDetection() -->
+<method name="enableDetection"  public="true">
+<description>
+Invoke the &lt;code&gt;enableDetection&lt;/code&gt; action.
+</description>
+<tag name="@see">#enableDetection</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.disableDetection() -->
+<method name="disableDetection"  public="true">
+<description>
+Invoke the &lt;code&gt;disableDetection&lt;/code&gt; action.
+</description>
+<tag name="@see">#disableDetection</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.eventExpired() -->
+<method name="eventExpired"  public="true">
+<description>
+Invoke the &lt;code&gt;eventExpired&lt;/code&gt; action.
+</description>
+<tag name="@see">#eventExpired</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.fireVideoEventOccurred(com.tridium.videoDriver.event.BVideoEvent) -->
+<method name="fireVideoEventOccurred"  public="true">
+<description>
+Fire an event for the &lt;code&gt;videoEventOccurred&lt;/code&gt; topic.
+</description>
+<tag name="@see">#videoEventOccurred</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.started() -->
+<method name="started"  public="true" final="true">
+<description>
+Descendant classes are not allowed to override this method directly.&#xa; However, this method calls &lt;code&gt;<see ref="com.tridium.nvideo.event.BVideoEventProxyExt#videoProxyExtStarted()">#videoProxyExtStarted()</see>&lt;/code&gt;, which may&#xa; be overridden.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.videoProxyExtStarted() -->
+<method name="videoProxyExtStarted"  public="true">
+<description>
+The default behavior of this method is to clear the stale flag&#xa; since video event points are really just showing events as they&#xa; occur. Descendants should probably call super.videoProxyExtStarted()&#xa; if they override this.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getMode() -->
+<method name="getMode"  public="true">
+<description/>
+<return>
+<type class="javax.baja.driver.point.BReadWriteMode"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getVideoDvr() -->
+<method name="getVideoDvr"  public="true">
+<description>
+This looks up the Niagara AX Nav Tree ancestry and finds the&#xa; most immediate BIVideoDvr ancestor.
+</description>
+<return>
+<type class="com.tridium.videoDriver.dvr.BIVideoDvr"/>
+<description>
+the most immediate BIVideoDvr niagara AX nav tree ancestor or&#xa; null if this event proxy&#x27;s is not under a dvr.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getVideoCamera() -->
+<method name="getVideoCamera"  public="true">
+<description>
+This looks up the Niagara AX Nav Tree ancestry and finds the&#xa; most immediate BIVideoCamera ancestor.
+</description>
+<return>
+<type class="com.tridium.videoDriver.camera.BIVideoCamera"/>
+<description>
+the most immediate BIVideoCamera niagara AX nav tree ancestor or&#xa; null if this event proxy&#x27;s is not under a camera.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getEventTypeEnum() -->
+<method name="getEventTypeEnum"  public="true">
+<description/>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoEventTypesEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getVideoEventTopic() -->
+<method name="getVideoEventTopic"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Topic"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.doEventExpired() -->
+<method name="doEventExpired"  public="true">
+<description>
+Implements the &#x27;eventExpired&#x27; action.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.isEventNormal(com.tridium.videoDriver.event.BVideoEvent) -->
+<method name="isEventNormal"  public="true">
+<description/>
+<parameter name="videoEvent">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.isEventOffnormal(com.tridium.videoDriver.event.BVideoEvent) -->
+<method name="isEventOffnormal"  public="true">
+<description/>
+<parameter name="videoEvent">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.isAutomaticExpiration(com.tridium.videoDriver.event.BVideoEvent) -->
+<method name="isAutomaticExpiration"  public="true">
+<description>
+Indicates whether the given event should automatically expire.
+</description>
+<parameter name="videoEvent">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+by default, true always. Driver developers may override this&#xa; and return false if their camera system can notify when the event&#xa; is no longer occurring.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.getAutomaticExpirationInterval(com.tridium.videoDriver.event.BVideoEvent) -->
+<method name="getAutomaticExpirationInterval"  public="true">
+<description>
+If the &#x27;isAutomaticExpiration(BVideoEvent) method returns true then&#xa; any BooleanPoint for a BVideoProxyExt will be set back to false&#xa; after this interval of time expires.
+</description>
+<parameter name="videoEvent">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+by default, the value of the autoExpirationInterval property
+</description>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.readOk(javax.baja.status.BStatusValue) -->
+<method name="readOk"  public="true">
+<description/>
+<parameter name="newValue">
+<type class="javax.baja.status.BStatusValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.doEnableDetection() -->
+<method name="doEnableDetection"  public="true">
+<description>
+Implementation of the &#x27;enableDetection&#x27; action.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.doDisableDetection() -->
+<method name="doDisableDetection"  public="true">
+<description>
+Implementation of the &#x27;disableDetection&#x27; action.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.implEnableDetection(boolean) -->
+<method name="implEnableDetection"  protected="true" abstract="true">
+<description/>
+<parameter name="on">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.DEFAULT_EVENT_EXPIRATION -->
+<field name="DEFAULT_EVENT_EXPIRATION"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BRelTime"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.mostRecentEvent -->
+<field name="mostRecentEvent"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;mostRecentEvent&lt;/code&gt; property.
+</description>
+<tag name="@see">#getMostRecentEvent</tag>
+<tag name="@see">#setMostRecentEvent</tag>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.autoExpiration -->
+<field name="autoExpiration"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;autoExpiration&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAutoExpiration</tag>
+<tag name="@see">#setAutoExpiration</tag>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.autoExpirationInterval -->
+<field name="autoExpirationInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;autoExpirationInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAutoExpirationInterval</tag>
+<tag name="@see">#setAutoExpirationInterval</tag>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.enableDetection -->
+<field name="enableDetection"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;enableDetection&lt;/code&gt; action.
+</description>
+<tag name="@see">#enableDetection()</tag>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.disableDetection -->
+<field name="disableDetection"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;disableDetection&lt;/code&gt; action.
+</description>
+<tag name="@see">#disableDetection()</tag>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.eventExpired -->
+<field name="eventExpired"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;eventExpired&lt;/code&gt; action.
+</description>
+<tag name="@see">#eventExpired()</tag>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.videoEventOccurred -->
+<field name="videoEventOccurred"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;videoEventOccurred&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireVideoEventOccurred</tag>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.CONTEXT_PROXY_UPDATE -->
+<field name="CONTEXT_PROXY_UPDATE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BasicContext"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.eventExpirationTicket -->
+<field name="eventExpirationTicket"  protected="true">
+<type class="javax.baja.sys.Clock$Ticket"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.event.BVideoEventProxyExt.currentOffNormalEvent -->
+<field name="currentOffNormalEvent"  protected="true">
+<type class="com.tridium.videoDriver.event.BVideoEvent"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

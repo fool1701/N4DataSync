@@ -1,0 +1,1268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BFacets" name="BFacets" packageName="javax.baja.sys" public="true" final="true">
+<description>
+BFacets is a map of name/value pairs used to annotate a&#xa; BComplex&#x27;s Slot or to just provide additional metadata&#xa; about something.  The values of facets may only be&#xa; BIDataValues which are a predefined subset of simples.&#xa; The encoding BNF:&#xa;&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa;   facets    := pairs&amp;#xa;   pairs     := pair { &amp;#x22;|&amp;#x22; pairs }&amp;#xa;   pair      := SlotPath::name &amp;#x22;=&amp;#x22; typeValue&amp;#xa;   dataValue := DataUtil.marshal &amp;amp; unmarshal&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">23 Jan 01</tag>
+<tag name="@version">$Revision: 92$ $Date: 7/15/11 11:42:15 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.Context"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.sys.BFacets.makeBoolean(javax.baja.sys.BString, javax.baja.sys.BString) -->
+<method name="makeBoolean"  public="true" static="true">
+<description>
+Make a facets for a boolean: TRUE_TEXT, FALSE_TEXT.
+</description>
+<parameter name="trueText">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<parameter name="falseText">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeBoolean(java.lang.String, java.lang.String) -->
+<method name="makeBoolean"  public="true" static="true">
+<description>
+Make a facets for a boolean: TRUE_TEXT, FALSE_TEXT.
+</description>
+<parameter name="trueText">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="falseText">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeBoolean() -->
+<method name="makeBoolean"  public="true" static="true">
+<description>
+Make a facets for a boolean.&#xa; Default true text to &#x22;true&#x22; and false test to &#x22;false&#x22;.
+</description>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeNumeric(javax.baja.units.BUnit, javax.baja.sys.BInteger, javax.baja.sys.BNumber, javax.baja.sys.BNumber) -->
+<method name="makeNumeric"  public="true" static="true">
+<description>
+Make a facets for a numeric: UNITS, PRECISION, MIN, and MAX.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<parameter name="precision">
+<type class="javax.baja.sys.BInteger"/>
+</parameter>
+<parameter name="min">
+<type class="javax.baja.sys.BNumber"/>
+</parameter>
+<parameter name="max">
+<type class="javax.baja.sys.BNumber"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeNumeric() -->
+<method name="makeNumeric"  public="true" static="true">
+<description>
+Make a facets for a float.&#xa; Default units to null, precision to 1, min to -inf and&#xa; max to +inf.
+</description>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeNumeric(int) -->
+<method name="makeNumeric"  public="true" static="true">
+<description>
+Make a facets for a float: PRECISION.&#xa; Default min to -inf and max to +inf, and units to null.
+</description>
+<parameter name="precision">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeNumeric(javax.baja.units.BUnit, int) -->
+<method name="makeNumeric"  public="true" static="true">
+<description>
+Make a facets for a float: UNITS, PRECISION.&#xa; Default min to -inf and max to +inf.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<parameter name="precision">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeNumeric(javax.baja.units.BUnit, javax.baja.sys.BNumber, javax.baja.sys.BNumber) -->
+<method name="makeNumeric"  public="true" static="true">
+<description>
+Make a facets for a float: UNITS, MIN, and MAX.&#xa; Default precision to 1.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<parameter name="min">
+<type class="javax.baja.sys.BNumber"/>
+</parameter>
+<parameter name="max">
+<type class="javax.baja.sys.BNumber"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeNumeric(javax.baja.units.BUnit, int, double, double) -->
+<method name="makeNumeric"  public="true" static="true">
+<description>
+Make a facets for a float: UNITS, PRECISION, MIN, and MAX.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<parameter name="precision">
+<type class="int"/>
+</parameter>
+<parameter name="min">
+<type class="double"/>
+</parameter>
+<parameter name="max">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeInt(javax.baja.units.BUnit, int, int, int) -->
+<method name="makeInt"  public="true" static="true">
+<description>
+Make a facets for an int: UNITS, MIN, MAX, and RADIX.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<parameter name="min">
+<type class="int"/>
+</parameter>
+<parameter name="max">
+<type class="int"/>
+</parameter>
+<parameter name="radix">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeInt(javax.baja.units.BUnit, int, int) -->
+<method name="makeInt"  public="true" static="true">
+<description>
+Make a facets for an int: UNITS, MIN and MAX.&#xa; Use default radix of base 10.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<parameter name="min">
+<type class="int"/>
+</parameter>
+<parameter name="max">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeInt(javax.baja.units.BUnit) -->
+<method name="makeInt"  public="true" static="true">
+<description>
+Make a facets for an int: UNITS, MIN and MAX.&#xa; Default min to MIN_VALUE and max to MAX_VALUE.&#xa; Use default radix of base 10.
+</description>
+<parameter name="units">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeInt(int, int) -->
+<method name="makeInt"  public="true" static="true">
+<description>
+Make a facets for an int: UNITS, MIN and MAX.&#xa; Default units to null.  Use default radix of base 10.
+</description>
+<parameter name="min">
+<type class="int"/>
+</parameter>
+<parameter name="max">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeInt() -->
+<method name="makeInt"  public="true" static="true">
+<description>
+Make a facets for an int: UNITS, MIN and MAX.  Default&#xa; units to null, min to MIN_VALUE and max to MAX_VALUE.&#xa; Use default radix of base 10.
+</description>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeEnum(javax.baja.sys.BEnumRange) -->
+<method name="makeEnum"  public="true" static="true">
+<description>
+Make a facets for an enum: RANGE.
+</description>
+<parameter name="range">
+<type class="javax.baja.sys.BEnumRange"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeEnum() -->
+<method name="makeEnum"  public="true" static="true">
+<description>
+Make a facets for an enum: RANGE.&#xa; Default range to null.
+</description>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String, boolean) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with one key/value pair.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String, int) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with one key/value pair.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String, long) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with one key/value pair.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="long"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String, java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with one key/value pair.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String, javax.baja.data.BIDataValue) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with one key/value pair.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String, javax.baja.data.BIDataValue, java.lang.String, javax.baja.data.BIDataValue) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with two key/value pairs.&#xa; Caution: if key1.equals(key2), there will be duplicate keys in the resulting BFacets
+</description>
+<parameter name="key1">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value1">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<parameter name="key2">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value2">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String, javax.baja.data.BIDataValue, java.lang.String, javax.baja.data.BIDataValue, java.lang.String, javax.baja.data.BIDataValue) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with three key/value pairs.&#xa; Caution: if any of the keys are equal, there will be duplicate keys in the resulting BFacets
+</description>
+<parameter name="key1">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value1">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<parameter name="key2">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value2">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<parameter name="key3">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value3">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance from its string encoding.&#xa; Caution: if encoding contains duplicate keys, the resulting BFacets object will contain&#xa; duplicate keys.
+</description>
+<parameter name="encoding">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BFacets.tryMake(java.lang.String) -->
+<method name="tryMake"  public="true" static="true">
+<description>
+Trys to create a BFacets instance from its string encoding using&#xa; &lt;code&gt;<see ref="javax.baja.sys.BFacets#make(java.lang.String)">BFacets.make(String)</see>&lt;/code&gt;. However, if that method throws an IOException,&#xa; it will be caught and &lt;code&gt;BFacets.NULL&lt;/code&gt; will be returned instead.&#xa; Caution: if encoding contains duplicate keys, the resulting BFacets object will contain&#xa; duplicate keys.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="encoding">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.util.Map&lt;java.lang.String, ? extends javax.baja.data.BIDataValue&gt;) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with the key/value pairs stored in the specified Map.  The keys&#xa; must be valid String names and each value must be a non-null BIDataValue.
+</description>
+<parameter name="map">
+<parameterizedType class="java.util.Map">
+<args>
+<type class="java.lang.String"/>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.data.BIDataValue"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(java.lang.String[], javax.baja.data.BIDataValue[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a BFacets instance with the key/value pairs stored in the two arrays.  The keys must&#xa; be valid String names.&#xa; Caution: duplicate values in keys will result in duplicate keys in the resulting BFacets&#xa; object.
+</description>
+<parameter name="keys">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="values">
+<type class="javax.baja.data.BIDataValue" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(javax.baja.sys.BFacets, java.lang.String, javax.baja.data.BIDataValue) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a facets which is the same as the original, except ensure that the specified name/value&#xa; pair is contained. If the original already contains the specified name/value pair then the&#xa; original is returned.  Otherwise a new instance is created.
+</description>
+<parameter name="orig">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeRemove(javax.baja.sys.BFacets, java.lang.String) -->
+<method name="makeRemove"  public="true" static="true">
+<description>
+Make a facets but insure the specified key is removed. If the orig facets doesn&#x27;t contain&#xa; the specified key then return the original instance.
+</description>
+<parameter name="orig">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makeRemove(javax.baja.sys.BFacets, java.lang.String[]) -->
+<method name="makeRemove"  public="true" static="true">
+<description>
+Make a facets but insure the specified keys are removed.&#xa; If the orig facets doesn&#x27;t contain any of the specified keys&#xa; then return the original instance.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="orig">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="keys">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(javax.baja.sys.BFacets, javax.baja.sys.BFacets) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a facets that is the result of merging the keys from the toAdd instance into the&#xa; original facets. If toAdd contains any keys that already exist in orig, then the orig values&#xa; are overwritten.
+</description>
+<parameter name="orig">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="toAdd">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.make(javax.baja.sys.BFacets) -->
+<method name="make"  public="true" static="true">
+<description>
+If the facets is null return BFacets.NULL, otherwise return the facets instance.
+</description>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.makePickle(javax.baja.sys.BFacets, java.lang.Object) -->
+<method name="makePickle"  public="true" static="true">
+<description>
+Starting in Niagara 3.4, interning for BFacets was&#xa; introduced to take advantage of commonly used BFacet&#xa; instances.  As a result, since BFacets is not completely&#xa; immutable (due to pickles), it may be necessary&#xa; to retrieve a new (non-interned) copy of a BFacets instance&#xa; when using pickles.  So this method was&#xa; added to retrieve such a non-interned copy with the&#xa; given pickle object applied to the BFacets instance returned.&#xa;&#xa; This method should be used in place of the deprecated&#xa; method &lt;code&gt;setPickle(Object pickle)&lt;/code&gt;
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="pickle">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.size() -->
+<method name="size"  public="true">
+<description>
+Get the number of facets in this instance.
+</description>
+<return>
+<type class="int"/>
+<description>
+Returns the number of facet keys in this instance.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.isEmpty() -->
+<method name="isEmpty"  public="true">
+<description>
+Test whether this instance has 0 facets defined.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the instance is empty, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.list() -->
+<method name="list"  public="true">
+<description>
+Get the list of key names.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.get(java.lang.String) -->
+<method name="get"  public="true">
+<description>
+Get a facet value by name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.get(java.lang.String, javax.baja.sys.BObject) -->
+<method name="get"  public="true">
+<description>
+Get a facet value by name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getb(java.lang.String, boolean) -->
+<method name="getb"  public="true">
+<description>
+If the facet specified by name is a BBoolean then return&#xa; its value as a boolean.  Otherwise return def.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.geti(java.lang.String, int) -->
+<method name="geti"  public="true">
+<description>
+If the facet specified by name is a BNumber then return it as&#xa; an int.  If the facet is an BEnum then return it&#x27;s ordinal.&#xa; Otherwise return def.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getl(java.lang.String, long) -->
+<method name="getl"  public="true">
+<description>
+If the facet specified by name is a BNumber then return it as&#xa; a long.  If the facet is an BEnum then return it&#x27;s ordinal.&#xa; Otherwise return def.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="long"/>
+</parameter>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getf(java.lang.String, float) -->
+<method name="getf"  public="true">
+<description>
+If the facet specified by name is a BNumber then return&#xa; its value as a float.  Otherwise return def.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="float"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getd(java.lang.String, double) -->
+<method name="getd"  public="true">
+<description>
+If the facet specified by name is a BNumber then return&#xa; its value as a double.  Otherwise return def.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="double"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.gets(java.lang.String, java.lang.String) -->
+<method name="gets"  public="true">
+<description>
+If the facet specified by name is found then return it as a string.&#xa; If not found return def.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getBase() -->
+<method name="getBase"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Always return null.
+</description>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getUser() -->
+<method name="getUser"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Always return null.
+</description>
+<return>
+<type class="javax.baja.user.BUser"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getFacet(java.lang.String) -->
+<method name="getFacet"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;get(name)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getLanguage() -->
+<method name="getLanguage"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Always return Sys.getLanguage().
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getFacets() -->
+<method name="getFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return this.
+</description>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.isNull() -->
+<method name="isNull"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+if this is the NULL instance.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+BFacets are equal if their name/value pairs are equal.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return string.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BFacets uses its encodeToString() value&#x27;s hash code.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BFacets is encoded using writeUTF().
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BFacets.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BFacets is decoded using readUTF().
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BFacets.toDataValue() -->
+<method name="toDataValue"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Convert this instance to a data value.  This&#xa; returns encodeToString() as a BString.
+</description>
+<return>
+<type class="javax.baja.data.BIDataValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode according to grammar.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BFacets.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode according to grammar.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BFacets.getPickle() -->
+<method name="getPickle"  public="true" final="true">
+<description>
+The pickle is an arbitrary Java object which has been&#xa; cached on this instance of BFacets.  It is never serialized,&#xa; but rather has a lifetime only within the current VM.&#xa; When using this API be mindful that as a BSimple this&#xa; instance will be returned from &lt;code&gt;newCopy()&lt;/code&gt; and&#xa; could get propagated in unexpected ways.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.setPickle(java.lang.Object) -->
+<method name="setPickle"  public="true" final="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+As of Niagara 3.4, this method is deprecated.  Use&#xa; &lt;code&gt;makePickle(BFacets facets, Object pickle)&lt;/code&gt; instead.&#xa;&#xa; Sets the pickle instance.  See the &lt;code&gt;<see ref="javax.baja.sys.BFacets#getPickle()">#getPickle()</see>&lt;/code&gt;&#xa; method for details about how to use the pickle.
+</description>
+<tag name="@deprecated">As of Niagara 3.4, use &lt;code&gt;<see ref="javax.baja.sys.BFacets#makePickle(javax.baja.sys.BFacets, java.lang.Object)">#makePickle(BFacets facets, Object pickle)</see>&lt;/code&gt; instead.</tag>
+<parameter name="pickle">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BFacets.MIN -->
+<field name="MIN"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with certain types (such as numerics, enums, Strings, RelTimes, etc) to specify&#xa; inclusive min [BNumber]. This particular facet is enforced on both the client&#xa; and server (station) sides during value changes.
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.MAX -->
+<field name="MAX"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with certain types (such as numerics, enums, Strings, RelTimes, etc) to specify&#xa; inclusive max [BNumber]. This particular facet is enforced on both the client&#xa; and server (station) sides during value changes.
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.TRUE_TEXT -->
+<field name="TRUE_TEXT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with booleans to define text to display when true.&#xa;      The value is a String evaluated as a baja:Format. [BString]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.FALSE_TEXT -->
+<field name="FALSE_TEXT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with booleans to define text to display when false.&#xa;      The value is a String evaluated as a baja:Format [BString]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.PRECISION -->
+<field name="PRECISION"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with floats to define number of digits after decimal [BInteger]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.UNITS -->
+<field name="UNITS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with integers and floats to units for quantity [BUnit]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.RADIX -->
+<field name="RADIX"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with integers to qualify base radix [BInteger]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.RANGE -->
+<field name="RANGE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with enums to define enum range [BEnumRange]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SHOW_DATE -->
+<field name="SHOW_DATE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with abs time to show date [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SHOW_TIME -->
+<field name="SHOW_TIME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with abs time to show time [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SHOW_SECONDS -->
+<field name="SHOW_SECONDS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with abs time to show seconds [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SHOW_MILLISECONDS -->
+<field name="SHOW_MILLISECONDS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with abs and rel time to show milliseconds [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SHOW_TIME_ZONE -->
+<field name="SHOW_TIME_ZONE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with abs time to show timezone [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.TIME_ZONE -->
+<field name="TIME_ZONE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with abs time to specify display timezone [BTimeZone]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.MULTI_LINE -->
+<field name="MULTI_LINE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with strings to support a multiline editor [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.FIELD_WIDTH -->
+<field name="FIELD_WIDTH"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with strings to specify the number of columns in a text field [BInteger]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.ALLOW_NULL -->
+<field name="ALLOW_NULL"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used simples to allow/disallow null [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.ORD_RELATIVIZE -->
+<field name="ORD_RELATIVIZE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with ords to indicate if ord should be relativized to&#xa;      session during save, default is true [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.FIELD_EDITOR -->
+<field name="FIELD_EDITOR"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+This key is used to provide the type spec of&#xa;      the field editor to use for editing a property&#xa;      value.  It overrides the default field editor&#xa;      registered for the property&#x27;s value.  [BString]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.UX_FIELD_EDITOR -->
+<field name="UX_FIELD_EDITOR"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+This key allows a slot to specify which JS field editor should be used&#xa; to edit this slot (in applications that support dynamic selection of&#xa; field editors, such as Multisheet). This should provide the type spec of a&#xa; &lt;code&gt;web:IJavaScript&lt;/code&gt; implementation. Alternatively, it can provide&#xa; a RequireJS module ID directly. [BString]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.INPLACE_EDITOR -->
+<field name="INPLACE_EDITOR"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+This key is used to provide the type spec of&#xa;      the inplace editor to use for editing a property&#xa;      value.  It overrides the default inplace editor&#xa;      registered for the property&#x27;s value.  [BString]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.CELL_EDITOR -->
+<field name="CELL_EDITOR"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+This key is used to provide the type spec of&#xa;      the cell editor to use for editing a property&#xa;      value.  It overrides the default cell editor&#xa;      registered for the property&#x27;s value.  [BString]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.TARGET_TYPE -->
+<field name="TARGET_TYPE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Specifies a target type. [BString formatted as a TypeSpec]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.UNIT_CONVERSION -->
+<field name="UNIT_CONVERSION"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Specifies a the desired unit system to use for user display.&#xa;      If none then no conversion should take place, otherwise the&#xa;      system attempts to convert to the most suitable unit.&#xa;      [DynamicEnum for UnitConversion]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.REALMS -->
+<field name="REALMS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+A semicolon separated list of realm names.  See BStation&#xa;      for more details on realms.
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SHOW_UNITS -->
+<field name="SHOW_UNITS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with numerics to enable/disable displaying units [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SHOW_SEPARATORS -->
+<field name="SHOW_SEPARATORS"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with numerics to enable/disable displaying of separators&#xa;      between every 3 digits (i.e. 10,000 vs 10000) [BBoolean]
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.FORCE_SIGN -->
+<field name="FORCE_SIGN"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used with numerics to indicate if the sign of the number (+/-) should&#xa; always be displayed or not. When false or unspecified, only the &#x27;-&#x27;&#xa; sign will be displayed for negative numbers. This facet only applies&#xa; to numbers with a base radix of 10. [BBoolean]&#xa; &lt;p&gt;
+</description>
+<tag name="@since">Niagara 3.5</tag>
+</field>
+
+<!-- javax.baja.sys.BFacets.ENCODER_FILE -->
+<field name="ENCODER_FILE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used on BComplex object when child slots are to be persisted to/from a&#xa; location different from that specified when calling ValueDocEncoder.&#xa; The value of this facet is an ORD string.&#xa; &lt;p&gt;&#xa; Any ORD that resolves to a BIDataFile can be used.&#xa; &lt;p&gt;
+</description>
+<tag name="@since">Niagara 4.0</tag>
+</field>
+
+<!-- javax.baja.sys.BFacets.MAX_OVERRIDE_DURATION -->
+<field name="MAX_OVERRIDE_DURATION"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used on control point facets or the station&#x27;s sysInfo facets,&#xa; this optional BRelTime facet specifies the maximum duration allowed&#xa; for an override action on the applicable control point(s) [BRelTime]
+</description>
+<tag name="@since">Niagara 3.8</tag>
+</field>
+
+<!-- javax.baja.sys.BFacets.NAMESPACE -->
+<field name="NAMESPACE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used in entity queries to set a default namespace for tags and relations&#xa; that would otherwise be global.
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.SECURITY -->
+<field name="SECURITY"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Indicates that a slot is security related and changes should be&#xa; logged to the security history [BBoolean]
+</description>
+<tag name="@since">Niagara 4.9</tag>
+</field>
+
+<!-- javax.baja.sys.BFacets.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+The null instance.
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Get default constant is &lt;code&gt;NULL&lt;/code&gt;
+</description>
+</field>
+
+<!-- javax.baja.sys.BFacets.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BFacets.SKIP_INTERN_PICKLE -->
+<field name="SKIP_INTERN_PICKLE"  public="true" static="true" final="true">
+<type class="java.lang.Object"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

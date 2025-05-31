@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BIcon" name="BIcon" packageName="javax.baja.sys" public="true" final="true">
+<description>
+BIcon is used to represent the iconic image of an object.&#xa; Icons are identified via an ord, and their contents are&#xa; 16x16 raster images, preferably PNG files.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">12 Mar 03</tag>
+<tag name="@version">$Revision: 13$ $Date: 7/30/08 10:53:54 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.sys.BIcon.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(BOrdList.make(ordList))&lt;/code&gt;
+</description>
+<parameter name="ordList">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.make(javax.baja.naming.BOrd) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(BOrdList.make(ord))&lt;/code&gt;
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.make(javax.baja.naming.BOrdList) -->
+<method name="make"  public="true" static="true">
+<description>
+Make an icon for the specified ord list.
+</description>
+<parameter name="ordList">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.std(java.lang.String) -->
+<method name="std"  public="true" static="true">
+<description>
+Make an icon for a file found in the standard icons &#xa; module.  The ord will be &#x22;module://icons/x16/&#x22; + fileName.
+</description>
+<parameter name="fileName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.make(javax.baja.sys.BIcon, javax.baja.sys.BIcon) -->
+<method name="make"  public="true" static="true">
+<description>
+Badge the base icon with the badge icon.
+</description>
+<parameter name="bottom">
+<type class="javax.baja.sys.BIcon"/>
+</parameter>
+<parameter name="top">
+<type class="javax.baja.sys.BIcon"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.getOrdList() -->
+<method name="getOrdList"  public="true">
+<description>
+Get the icon&#x27;s ord list.
+</description>
+<return>
+<type class="javax.baja.naming.BOrdList"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return the ord as a String.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+Hash is based on ord list hash.&#xa; Added override for this method in Niagara 3.4.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Equality is based on ord list equality.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode using OrdList string format.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BIcon.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode using OrdList string format.
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BIcon.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode using OrdList string format.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BIcon.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode using OrdList string format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BIcon.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BIcon.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.sys.BIcon"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.BIcon.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

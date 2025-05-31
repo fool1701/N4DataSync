@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="wb" qualifiedName="com.tridium.ndriver.ui.point.BINPointMgrAgent" name="BINPointMgrAgent" packageName="com.tridium.ndriver.ui.point" public="true" interface="true" abstract="true" category="interface">
+<description/>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- com.tridium.ndriver.ui.point.BINPointMgrAgent.getUiName() -->
+<method name="getUiName"  public="true" abstract="true">
+<description>
+This name can be either just a name or a lexicon key that defines the&#xa; button text and the optional button label.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.ui.point.BINPointMgrAgent.doInvoke(com.tridium.ndriver.ui.point.BNPointManager, com.tridium.ndriver.BNNetwork, javax.baja.driver.BDevice, com.tridium.ndriver.point.BNPointDeviceExt) -->
+<method name="doInvoke"  public="true" abstract="true">
+<description>
+This method is called when the user clicks the corresponding button on the&#xa; point manager for this agent. The developer may define any functionality&#xa; here.&#xa; &lt;p&gt;&#xa; NOTE: This will execute on the client-side proxy&#x27;s virtual machine. Any&#xa; access to the server-side host will therefore have to be through&#xa; properties, actions, etc.
+</description>
+<parameter name="deviceManager">
+<type class="com.tridium.ndriver.ui.point.BNPointManager"/>
+<description>
+a reference to the point manager
+</description>
+</parameter>
+<parameter name="network">
+<type class="com.tridium.ndriver.BNNetwork"/>
+<description>
+a reference to the network that is above the point&#xa;                      device extension that the point manager is operating&#xa;                      upon.
+</description>
+</parameter>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+<description>
+a reference to the device that is above the point&#xa;                      device ext that the point manager is operating upon
+</description>
+</parameter>
+<parameter name="ptDevExt">
+<type class="com.tridium.ndriver.point.BNPointDeviceExt"/>
+<description>
+a reference to the point-device-ext that the point&#xa;                      manager is operating upon.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+<description>
+an undo/redo command artifact or null
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.ui.point.BINPointMgrAgent.getFlags() -->
+<method name="getFlags"  public="true" abstract="true">
+<description>
+This method is called when the point manager is created. It allows the&#xa; developer to specify the MGR_CONTROLLER flags that govern whether a button,&#xa; menu item, toolbar item, etc. is created for this agent.
+</description>
+<return>
+<type class="int"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.ui.point.BINPointMgrAgent.update(com.tridium.ndriver.ui.point.BNPointManager, com.tridium.ndriver.ui.NMgrControllerUtil.NPointMgrAgentCommand) -->
+<method name="update"  public="true" abstract="true">
+<description>
+The developer should review the given BNPointManager and consider updating&#xa; (eg. enable/disable) the given agentCommand and/or any other commands on&#xa; the manager&#x27;s controller. The method is called anytime there is a change of&#xa; state on the point manager (eg. discovery list selection change, database&#xa; list selection change, database component event, learn mode changed, etc.)&#xa; &lt;p&gt;&#xa; For example (to enable the agent&#x27;s UI widget(s) if one database item is&#xa; selected): agentCommand.setEnabled(pointManager.getController().getSelectedRows().length&#xa; == 1);&#xa; &lt;p&gt;&#xa; For example (to enable the agent&#x27;s UI widget(s) if one or more database&#xa; items are selected): agentCommand.setEnabled(pointManager.getController().getSelectedRows().length&#xa; &gt; 0);&#xa; &lt;p&gt;&#xa; For example (to enable the agent&#x27;s UI widget(s) if zero database items are&#xa; selected): agentCommand.setEnabled(pointManager.getController().getSelectedRows().length&#xa; == 0);
+</description>
+<parameter name="pointManager">
+<type class="com.tridium.ndriver.ui.point.BNPointManager"/>
+<description>
+point manager to update
+</description>
+</parameter>
+<parameter name="agentCommand">
+<type class="com.tridium.ndriver.ui.NMgrControllerUtil$NPointMgrAgentCommand"/>
+<description>
+this is a special instance of IMgrCommand. It is a&#xa;                     reference to the corresponding GUI command (button,&#xa;                     menu item, and/or toolbar button) on the device&#xa;                     manager.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.ui.point.BINPointMgrAgent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

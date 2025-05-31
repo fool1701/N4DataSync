@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devHttpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse" name="BDdfHttpInspectReadResponse" packageName="com.tridium.ddfHttp.comm.rsp" public="true">
+<description/>
+<extends>
+<type class="com.tridium.ddf.comm.rsp.BDdfResponse"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.comm.rsp.BIDdfReadResponse"/>
+</implements>
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse() -->
+<constructor name="BDdfHttpInspectReadResponse" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse(com.tridium.ddf.comm.IDdfDataFrame, java.lang.String) -->
+<constructor name="BDdfHttpInspectReadResponse" public="true">
+<parameter name="httpResponseData">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<parameter name="urlAddress">
+<type class="java.lang.String"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.parseReadValue(com.tridium.ddf.comm.req.IDdfReadable) -->
+<method name="parseReadValue"  public="true">
+<description>
+Implementing this method is fundamental to the ddf&#x27;s&#xa; auto-poll feature for driver points. When one or more driver points&#xa; under a device need polled that share the equivalent read parameters,&#xa; the ddf will instantiate the read request type that&#xa; is identified by the read parameters, assign the read parameters to the&#xa; read request, assign all points that share the read parameters to the&#xa; request, and transmit the read request. Upon receiving a successful&#xa; read response (an instance that implements this interface), the ddf&#xa; driver framework will loop through all of the points under the device&#xa; that shared the same read parameters, cast each point to IDdfReadable,&#xa; and pass each point successively to this method. The developer driver&#xa; framework will take the return value from this method and pass it&#xa; to the readOk method on the point, thereby updating its value in Niagara.&#xa;&#xa; When implementing this interface, driver developers must implement this&#xa; method and parse a BStatusValue from the response data for the given&#xa; readableSource. If necessary, we suggest that the driver developer can&#xa; check if the readableSource object is an instance of their driver&#x27;s proxy&#xa; extension class. If so, the driver developer can cast the readableSource&#xa; object to their driver&#x27;s proxy extension class and then access the point&#x27;s&#xa; pointId property. The driver developer should design the pointId property&#xa; in such a way that it provides the information necessary to parse the&#xa; particular point&#x27;s value from the read response.
+</description>
+<parameter name="readableSource">
+<type class="com.tridium.ddf.comm.req.IDdfReadable"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+a BStatusValue to pass to the readOk method of the readableSource
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.parseNumericValue(java.lang.String) -->
+<method name="parseNumericValue"  protected="true">
+<description/>
+<parameter name="sRawValue">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.getReadValue(com.tridium.ddf.point.BDdfProxyExt, com.tridium.ddfHttp.identify.BIDdfHttpInspectExpression) -->
+<method name="getReadValue"  protected="true">
+<description>
+This private method is called from the parseReadValue method.&#xa; It is not required by the developer driver framework, instead,&#xa; this method exists in order to shorten the parseReadValue method.
+</description>
+<parameter name="proxy">
+<type class="com.tridium.ddf.point.BDdfProxyExt"/>
+</parameter>
+<parameter name="inspectResult">
+<type class="com.tridium.ddfHttp.identify.BIDdfHttpInspectExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+a BStatusNumeric, BStatusBoolean, BStatusEnum, or&#xa; BStatusString that appropriately matches the proxy&#x27;s control&#xa; point type. If the proxy&#x27;s control point is a BNumericWritable&#xa; or BNumericPoint then this will return a BStatusNumeric that&#xa; represents the present value of the point. If the proxy&#x27;s&#xa; control point is a BBooleanWritable or a BBooleanPoint then&#xa; this returns a BStatusBoolean that represents the current value&#xa; of the point. If the proxy&#x27;s control point is a BEnumWritable&#xa; or BEnumPoint then this returns BStatusEnum that represents the&#xa; current value of the point. If this proxy&#x27;s control point is a&#xa; BStringPoint or BStringWritable then this returns a BStatusString&#xa; that represents the current value of the point.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.inspectHtml(com.tridium.ddf.point.BDdfProxyExt, com.tridium.ddfHttp.identify.BIDdfHttpInspectExpression) -->
+<method name="inspectHtml"  protected="true">
+<description/>
+<parameter name="proxy">
+<type class="com.tridium.ddf.point.BDdfProxyExt"/>
+</parameter>
+<parameter name="pointInspectInfo">
+<type class="com.tridium.ddfHttp.identify.BIDdfHttpInspectExpression"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.htmlText -->
+<field name="htmlText"  protected="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.rsp.BDdfHttpInspectReadResponse.urlAddress -->
+<field name="urlAddress"  protected="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

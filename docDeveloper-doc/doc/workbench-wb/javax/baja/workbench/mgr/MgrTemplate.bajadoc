@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.mgr.MgrTemplate" name="MgrTemplate" packageName="javax.baja.workbench.mgr" public="true" abstract="true">
+<description>
+MgrTemplate manages the logical model and visualization of the&#xa; Template Directory as well as the match processing.
+</description>
+<tag name="@author">Andy Saunders</tag>
+<tag name="@creation">16 Dec 13</tag>
+<tag name="@since">Baja 4.0</tag>
+<extends>
+<type class="javax.baja.workbench.mgr.MgrSupport"/>
+</extends>
+<!-- javax.baja.workbench.mgr.MgrTemplate(javax.baja.workbench.mgr.BAbstractManager) -->
+<constructor name="MgrTemplate" public="true">
+<parameter name="manager">
+<type class="javax.baja.workbench.mgr.BAbstractManager"/>
+</parameter>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.init() -->
+<method name="init"  public="true">
+<description>
+Init is called once from &lt;code&gt;BAbstractManager.init()&lt;/code&gt;&#xa; Must call &lt;code&gt;super.init()&lt;/code&gt; if overridden.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.updateTemplateTable(javax.baja.sys.Type, java.lang.Object[]) -->
+<method name="updateTemplateTable"  public="true" abstract="true">
+<description/>
+<parameter name="addType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="learnSelObj">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getTable() -->
+<method name="getTable"  public="true" final="true">
+<description>
+Get the TreeTable used to display the template data.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.BTemplateTable"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getColumns() -->
+<method name="getColumns"  public="true" final="true">
+<description>
+Get the columns to display for the template table.  These&#xa; columns are initialized by the makeColumns() method.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrColumn" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.updateTable() -->
+<method name="updateTable"  public="true">
+<description>
+This method is called when the template table&#xa; should be updated against the logical model.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getRootCount() -->
+<method name="getRootCount"  public="true" final="true">
+<description>
+Get the current number of root objects.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getRoot(int) -->
+<method name="getRoot"  public="true" final="true">
+<description>
+Get root object at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getRoots() -->
+<method name="getRoots"  public="true" final="true">
+<description>
+Get a copy of the current root objects.
+</description>
+<return>
+<type class="java.lang.Object" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.updateRoots(java.lang.Object[]) -->
+<method name="updateRoots"  public="true" final="true">
+<description>
+Update the root template objects and call &lt;code&gt;updateTable()&lt;/code&gt;.
+</description>
+<parameter name="roots">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.learnSelected() -->
+<method name="learnSelected"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.makePane() -->
+<method name="makePane"  public="true">
+<description>
+Make the pane used to display the template data.&#xa; The default implementation uses makeTableTitle(),&#xa; makeTable(), and makeJobBar().
+</description>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.makeTableTitle() -->
+<method name="makeTableTitle"  public="true">
+<description>
+Get the title for the template table.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.makeTable() -->
+<method name="makeTable"  protected="true">
+<description>
+This method is called once to initalize the template table.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.BTemplateTable"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.hasDynamicColumns() -->
+<method name="hasDynamicColumns"  protected="true">
+<description>
+Return if the template table&#x27;s columns should be&#xa; re-initialized when the template data is updated.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.makeColumns() -->
+<method name="makeColumns"  protected="true" abstract="true">
+<description>
+This is method is called to initialize the&#xa; columns used for the template table.  If&#xa; hasDynamicColumns() returns false, than makeColumns()&#xa; is only called once; otherwise it is called each time&#xa; the mgrTemplate table is updated.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrColumn" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.isDepthExpandable(int) -->
+<method name="isDepthExpandable"  public="true">
+<description>
+Return if the specified depth is expandable.  If the&#xa; template model supports expansion, this method must&#xa; be overridden to return true for applicable levels.&#xa; Default returns false.
+</description>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.isGroup(java.lang.Object) -->
+<method name="isGroup"  public="true">
+<description>
+Return if the template object should be rendered&#xa; as group in the TreeTable.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.hasChildren(java.lang.Object) -->
+<method name="hasChildren"  public="true">
+<description>
+Return if the specified template object has children.  This&#xa; method is only applicable if &lt;code&gt;isDepthExpandable()&lt;/code&gt;&#xa; returns true for the given object&#x27;s depth.  Default returns true.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getChildren(java.lang.Object) -->
+<method name="getChildren"  public="true">
+<description>
+If &lt;code&gt;isDepthExpandable()&lt;/code&gt; and &lt;code&gt;hasChildren()&lt;/code&gt;&#xa; return true for the specified object then this method is the&#xa; hook to get the expanded children.  Return an empty array if&#xa; no children available.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getIcon(java.lang.Object) -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon for the specified template object.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.getExisting(java.lang.Object) -->
+<method name="getExisting"  public="true">
+<description>
+If the specified template object is already mapped into&#xa; the station database as an existing component then return&#xa; it, otherwise return null.  Subclasses should override&#xa; &lt;code&gt;isExisting(Object, BComponent)&lt;/code&gt;.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.isExisting(java.lang.Object, javax.baja.sys.BComponent) -->
+<method name="isExisting"  public="true">
+<description>
+Return if the specified component is an existing representation&#xa; of the template object which has already been mapped into the&#xa; station database.  The default implementation always returns false.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="component">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.isTaggable(java.lang.Object, javax.baja.sys.BComponent) -->
+<method name="isTaggable"  public="true">
+<description>
+Return if the specified discovered object and the existing&#xa; component can be matched.  If so then this combination must&#xa; be supported by &lt;code&gt;toRow()&lt;/code&gt;.  The default implementation&#xa; returns true if any of the MgrTypeInfos from &lt;code&gt;toTypes()&lt;/code&gt;&#xa; return true for &lt;code&gt;isMatchable(database)&lt;/code&gt;.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="database">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.toTypes(java.lang.Object) -->
+<method name="toTypes"  public="true">
+<description>
+Given a template row object, return a list of the types&#xa; which may be used to model it as a BComponent in the&#xa; station database.  This method is used by the tag command.&#xa; The type at index 0 in the array should be the type which&#xa; provides the best mapping.  Return an empty array if the&#xa; template cannot be mapped.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.mgr.MgrTypeInfo" dimension="1"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.toRow(java.lang.Object, javax.baja.workbench.mgr.MgrEditRow) -->
+<method name="toRow"  public="true">
+<description>
+Map the configuration of template object to the specified&#xa; MgrEditRow.  Configuration changes should be made to the row,&#xa; not the component (so that the changes aren&#x27;t applied until&#xa; the user commits).&#xa; &lt;p&gt;&#xa; This method is used by the add and match commands.  For the&#xa; match command the row maps to the component already in the&#xa; database.  For the add command the component is not created&#xa; until commit time.
+</description>
+<parameter name="template">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="row">
+<type class="javax.baja.workbench.mgr.MgrEditRow"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.mgr.MgrTemplate.templateIcon -->
+<field name="templateIcon"  protected="true" static="true" final="true">
+<type class="javax.baja.sys.BIcon"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.text.TextController" name="TextController" packageName="javax.baja.ui.text" public="true">
+<description>
+TextController is responsible for processing all&#xa; user input on a BTextWidget.  All focus, keyboard&#xa; and mouse events are routed to this class.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">5 Aug 01</tag>
+<tag name="@version">$Revision: 28$ $Date: 8/6/09 6:32:40 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.text.BTextEditor$TextSupport"/>
+</extends>
+<!-- javax.baja.ui.text.TextController() -->
+<constructor name="TextController" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.text.TextController.isFocusTraversable() -->
+<method name="isFocusTraversable"  public="true">
+<description>
+Return if the BTextEditor is focus traversable.&#xa; Default returns true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.focusGained(javax.baja.ui.event.BFocusEvent) -->
+<method name="focusGained"  public="true">
+<description>
+Callback when focusGained() on BTextEditor.  The&#xa; default implementation starts the caret blinking.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BFocusEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.focusLost(javax.baja.ui.event.BFocusEvent) -->
+<method name="focusLost"  public="true">
+<description>
+Callback when focusLost() on BTextEditor.  The&#xa; default implementation stops the caret blinking&#xa; and deselects.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BFocusEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.keyPressed(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyPressed"  public="true">
+<description>
+Callback when keyPressed() on BTextEditor.  The&#xa; default implementation attempts to map the key event&#xa; to a command using the installed BKeyBindings and&#xa; TextCommandFactory.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.keyReleased(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyReleased"  public="true">
+<description>
+Callback when keyReleased() on BTextEditor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.keyTyped(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyTyped"  public="true">
+<description>
+Callback when keyTyped() on BTextEditor.  The default&#xa; implement is to insert the character into the document.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.doInsertText(java.lang.String) -->
+<method name="doInsertText"  protected="true">
+<description>
+Insert the given text (if possible). The underlying InsertText command&#xa; will have its doInvoke method called, meaning it is up to the caller to&#xa; register the resulting artifact with the UndoManager if needed.
+</description>
+<parameter name="text">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+<description>
+InsertText command artifact
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.validateTextToInsert(java.lang.String) -->
+<method name="validateTextToInsert"  protected="true">
+<description>
+Will inserting this text result in text that is valid for this controller?
+</description>
+<parameter name="text">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the text is okay to insert
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.columnForNewline() -->
+<method name="columnForNewline"  protected="true">
+<description>
+This method is called before a newline is inserted&#xa; entered.  It positions the caret under the first&#xa; non-whitepace character from the line above.  If&#xa; no non-whitspace characters are found, then it&#xa; positions the caret at its last column.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.caretPositionChanged(javax.baja.ui.event.BInputMethodEvent) -->
+<method name="caretPositionChanged"  public="true">
+<description>
+Callback when inputMethodEvent.caretPositionChanged() on BTextEditor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BInputMethodEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.imTextChanged(javax.baja.ui.event.BInputMethodEvent) -->
+<method name="imTextChanged"  public="true">
+<description>
+Callback when inputMethodEvent.imTextChanged() on BTextEditor.&#xa; Handles changes to the text entered through an input method.&#xa; Committed text contained in the event is appended to the&#xa; committed text of the text component. Composed text contained&#xa; in the event replaces any existing composed text in the text&#xa; component.&#xa; The caret defined in the event is saved and will&#xa; be returned by getCaret if there is composed text. The&#xa; component is redrawn.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BInputMethodEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getText(java.text.AttributedCharacterIterator) -->
+<method name="getText"  protected="true">
+<description>
+Extract the raw text from an ACI.
+</description>
+<parameter name="aci">
+<type class="java.text.AttributedCharacterIterator"/>
+<description>
+ACI to inspect
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the extracted text
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.clearMatchHighlight() -->
+<method name="clearMatchHighlight"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.mousePressed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePressed"  public="true">
+<description>
+Callback when mousePressed() on BTextEditor.  The&#xa; default implementation requestsFocus, clears the&#xa; selection, and moves the caret position.  If the&#xa; click count is two then the current word is selected.&#xa; If the click count is three then the entire line is&#xa; selected.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.mouseReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseReleased"  public="true">
+<description>
+Callback when mouseReleased() on BTextEditor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.mouseEntered(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseEntered"  public="true">
+<description>
+Callback when mouseEntered() on BTextEditor.  The&#xa; default implementation is to change the cursor to&#xa; the text cursor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.mouseExited(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseExited"  public="true">
+<description>
+Callback when mouseExited() on BTextEditor.  The&#xa; default implementation is to change the cursor to&#xa; the normal cursor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.mouseMoved(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseMoved"  public="true">
+<description>
+Callback when mouseMoved() on BTextEditor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.mouseDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragged"  public="true">
+<description>
+Callback when mouseDragged() on BTextEditor.  The&#xa; default implementation selects the drag from the&#xa; anchor position set at mouse press.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.mousePulsed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePulsed"  public="true">
+<description>
+Callback when mousePulsed() on BTextEditor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.cancelLatestCommittedText(java.text.AttributedCharacterIterator.Attribute[]) -->
+<method name="cancelLatestCommittedText"  public="true">
+<description/>
+<parameter name="attributes">
+<type class="java.text.AttributedCharacterIterator$Attribute" dimension="1"/>
+</parameter>
+<return>
+<type class="java.text.AttributedCharacterIterator"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getCommittedText(int, int, java.text.AttributedCharacterIterator.Attribute[]) -->
+<method name="getCommittedText"  public="true">
+<description/>
+<parameter name="beginIndex">
+<type class="int"/>
+</parameter>
+<parameter name="endIndex">
+<type class="int"/>
+</parameter>
+<parameter name="attributes">
+<type class="java.text.AttributedCharacterIterator$Attribute" dimension="1"/>
+</parameter>
+<return>
+<type class="java.text.AttributedCharacterIterator"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getCommittedTextLength() -->
+<method name="getCommittedTextLength"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getInsertPositionOffset() -->
+<method name="getInsertPositionOffset"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getLocationOffset(int, int) -->
+<method name="getLocationOffset"  public="true">
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="y">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getSelectedText(java.text.AttributedCharacterIterator.Attribute[]) -->
+<method name="getSelectedText"  public="true">
+<description/>
+<parameter name="attributes">
+<type class="java.text.AttributedCharacterIterator$Attribute" dimension="1"/>
+</parameter>
+<return>
+<type class="java.text.AttributedCharacterIterator"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getTextLocation(java.lang.Object) -->
+<method name="getTextLocation"  public="true">
+<description/>
+<parameter name="offset">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getTextBeginIndex() -->
+<method name="getTextBeginIndex"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getTextEndIndex() -->
+<method name="getTextEndIndex"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.setTextBeginIndex(int) -->
+<method name="setTextBeginIndex"  public="true">
+<description/>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.setTextEndIndex(int) -->
+<method name="setTextEndIndex"  public="true">
+<description/>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.getComposedPosition() -->
+<method name="getComposedPosition"  public="true">
+<description/>
+<return>
+<type class="javax.baja.ui.text.Position"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.setComposedPosition(javax.baja.ui.text.Position) -->
+<method name="setComposedPosition"  public="true">
+<description/>
+<parameter name="pos">
+<type class="javax.baja.ui.text.Position"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.text.TextController.impl -->
+<field name="impl"  protected="true" final="true">
+<type class="javax.baja.ui.text.TextController$ITextControllerImpl"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

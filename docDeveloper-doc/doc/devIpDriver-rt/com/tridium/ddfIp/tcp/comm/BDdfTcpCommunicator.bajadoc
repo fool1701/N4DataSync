@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devIpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator" name="BDdfTcpCommunicator" packageName="com.tridium.ddfIp.tcp.comm" public="true">
+<description/>
+<extends>
+<type class="com.tridium.ddfIp.comm.BDdfIpCommunicator"/>
+</extends>
+<property name="tcpIpComm" flags="">
+<type class="com.tridium.ddfIp.tcp.comm.BDdfTcpHelper"/>
+<description>
+Slot for the &lt;code&gt;tcpIpComm&lt;/code&gt; property.&#xa; The Tcp/Ip settings for this communicator.
+</description>
+<tag name="@see">#getTcpIpComm</tag>
+<tag name="@see">#setTcpIpComm</tag>
+</property>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator() -->
+<constructor name="BDdfTcpCommunicator" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.getTcpIpComm() -->
+<method name="getTcpIpComm"  public="true">
+<description>
+Get the &lt;code&gt;tcpIpComm&lt;/code&gt; property.&#xa; The Tcp/Ip settings for this communicator.
+</description>
+<tag name="@see">#tcpIpComm</tag>
+<return>
+<type class="com.tridium.ddfIp.tcp.comm.BDdfTcpHelper"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.setTcpIpComm(com.tridium.ddfIp.tcp.comm.BDdfTcpHelper) -->
+<method name="setTcpIpComm"  public="true">
+<description>
+Set the &lt;code&gt;tcpIpComm&lt;/code&gt; property.&#xa; The Tcp/Ip settings for this communicator.
+</description>
+<tag name="@see">#tcpIpComm</tag>
+<parameter name="v">
+<type class="com.tridium.ddfIp.tcp.comm.BDdfTcpHelper"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.getLog() -->
+<method name="getLog"  public="true">
+<description>
+Adds the IP address and port to the communicator log name.
+</description>
+<return>
+<type class="javax.baja.log.Log"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.startTcpCommunicating() -->
+<method name="startTcpCommunicating"  protected="true">
+<description>
+This method is called by the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator#startCommunicating()">#startCommunicating()</see>&lt;/code&gt;&#xa; method to encapsulate the start-up logic for this class.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.startCommunicating() -->
+<method name="startCommunicating"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.ipCommunicatorStarted() -->
+<method name="ipCommunicatorStarted"  public="true" final="true">
+<description>
+Although this method is declared as final, descendants may&#xa; override the &lt;i&gt;tcpCommunicatorStarted&lt;/i&gt; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.ipCommunicatorStopped() -->
+<method name="ipCommunicatorStopped"  public="true" final="true">
+<description>
+Although this method is declared as final, descendants may&#xa; override the &lt;i&gt;tcpCommunicatorStopped&lt;/i&gt; method.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.makeSocketManager() -->
+<method name="makeSocketManager"  protected="true">
+<description>
+Developers may override this method to plug-in a customized&#xa; version of the TcpSocketManager. &#xa; &#xa; Prior to Niagara AX 3.5, this logic was encapsulated in source code with&#xa; private access modifiers.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<return>
+<type class="com.tridium.ddfIp.tcp.comm.TcpSocketManager"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.makeSocketManagerThread(com.tridium.ddfIp.tcp.comm.TcpSocketManager) -->
+<method name="makeSocketManagerThread"  protected="true">
+<description>
+Allocates the dedicated thread for the socket manager.&#xa; &#xa; Prior to Niagara AX 3.5, this logic was encapsulated in source code with&#xa; private access modifiers.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+<parameter name="socketManager">
+<type class="com.tridium.ddfIp.tcp.comm.TcpSocketManager"/>
+<description>
+the TcpSocketManager to run in the&#xa; dedicated thread
+</description>
+</parameter>
+<return>
+<type class="java.lang.Thread"/>
+<description>
+the new, unstarted, dedicated thread for the socket manager.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.initSocketManager() -->
+<method name="initSocketManager"  protected="true">
+<description>
+Initializes the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator#socketManager">#socketManager</see>&lt;/code&gt; and the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator#socketManagerThread">#socketManagerThread</see>&lt;/code&gt;.&#xa; &#xa; Starts the &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator#socketManagerThread">#socketManagerThread</see>&lt;/code&gt;.&#xa; &#xa; Prior to Niagara AX 3.5, this logic was encapsulated in source code with&#xa; private access modifiers.
+</description>
+<tag name="@since">Niagara AX 3.5.</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.getTcpSocketManager() -->
+<method name="getTcpSocketManager"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddfIp.tcp.comm.TcpSocketManager"/>
+<description>
+TcpSocketManager
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.tcpCommunicatorStarted() -->
+<method name="tcpCommunicatorStarted"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.tcpCommunicatorStopped() -->
+<method name="tcpCommunicatorStopped"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.tcpIpComm -->
+<field name="tcpIpComm"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;tcpIpComm&lt;/code&gt; property.&#xa; The Tcp/Ip settings for this communicator.
+</description>
+<tag name="@see">#getTcpIpComm</tag>
+<tag name="@see">#setTcpIpComm</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.transmitter -->
+<field name="transmitter"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;transmitter&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTransmitter</tag>
+<tag name="@see">#setTransmitter</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.receiver -->
+<field name="receiver"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;receiver&lt;/code&gt; property.
+</description>
+<tag name="@see">#getReceiver</tag>
+<tag name="@see">#setReceiver</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.socketManager -->
+<field name="socketManager"  protected="true">
+<type class="com.tridium.ddfIp.tcp.comm.TcpSocketManager"/>
+<description>
+This is a direct reference to the internal socket manager. In&#xa; general, it is probably better to access this through its public&#xa; getter method &lt;code&gt;<see ref="com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator#getTcpSocketManager()">#getTcpSocketManager()</see>&lt;/code&gt;.&#xa; &#xa; Prior to Niagara AX 3.5 access was restricted to private access.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+<!-- com.tridium.ddfIp.tcp.comm.BDdfTcpCommunicator.socketManagerThread -->
+<field name="socketManagerThread"  protected="true">
+<type class="java.lang.Thread"/>
+<description>
+This is a direct reference to the thread for the internal socket&#xa; manager.&#xa; &#xa; Prior to Niagara AX 3.5 access was restricted to private access.
+</description>
+<tag name="@since">Niagara AX 3.5</tag>
+</field>
+
+</class>
+</bajadoc>

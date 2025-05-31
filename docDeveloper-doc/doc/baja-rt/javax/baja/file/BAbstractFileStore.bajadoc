@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.file.BAbstractFileStore" name="BAbstractFileStore" packageName="javax.baja.file" public="true" abstract="true">
+<description>
+BAbstractFileStore provides a default base class upon &#xa; which to build BIFileStore implementations.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">24 Jan 03</tag>
+<tag name="@version">$Revision: 10$ $Date: 8/14/09 10:37:46 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<implements>
+<type class="javax.baja.file.BIFileStore"/>
+</implements>
+<!-- javax.baja.file.BAbstractFileStore(javax.baja.file.BFileSpace, javax.baja.file.FilePath) -->
+<constructor name="BAbstractFileStore" public="true">
+<parameter name="space">
+<type class="javax.baja.file.BFileSpace"/>
+</parameter>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<description>
+Construct a file in the specified space.
+</description>
+</constructor>
+
+<!-- javax.baja.file.BAbstractFileStore.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getFileSpace() -->
+<method name="getFileSpace"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return the space passed to the constructor.
+</description>
+<return>
+<type class="javax.baja.file.BFileSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getFilePath() -->
+<method name="getFilePath"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the file path passed to the constructor.
+</description>
+<return>
+<type class="javax.baja.file.FilePath"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getFileName() -->
+<method name="getFileName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &lt;code&gt;getFilePath().getName()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getExtension() -->
+<method name="getExtension"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to &lt;code&gt;FileUtil.getExtension(getFileName())&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.isDirectory() -->
+<method name="isDirectory"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getSize() -->
+<method name="getSize"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to return -1.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getLastModified() -->
+<method name="getLastModified"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to return BAbsTime.NULL.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.setLastModified(javax.baja.sys.BAbsTime) -->
+<method name="setLastModified"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Sets file&#x27;s lastModified absTime to nearest second.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="absTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.doSetLastModified(javax.baja.sys.BAbsTime) -->
+<method name="doSetLastModified"  protected="true">
+<description>
+Sets file&#x27;s lastModified absTime.&#xa; &#xa; Defaults to &lt;code&gt;throw new IOException&lt;/code&gt;
+</description>
+<parameter name="absTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getInputStream() -->
+<method name="getInputStream"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to &lt;code&gt;throw new IOException()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.read() -->
+<method name="read"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to &lt;code&gt;FileUtil.read(this)&lt;/code&gt;
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getOutputStream() -->
+<method name="getOutputStream"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to &lt;code&gt;throw new IOException()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.io.OutputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.write(byte[]) -->
+<method name="write"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Defaults to &lt;code&gt;FileUtil.write(this, content)&lt;/code&gt;
+</description>
+<parameter name="content">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getPermissions(javax.baja.file.BIFile, javax.baja.sys.Context) -->
+<method name="getPermissions"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If there is a user associated with the specified context then&#xa; return &lt;code&gt;cx.getUser().getPermissionsFor(file)&lt;/code&gt;.  This&#xa; method automatically always takes into account the current&#xa; value of &lt;code&gt;isReadonly()&lt;/code&gt;.
+</description>
+<parameter name="file">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.security.BPermissions"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To string.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.getCrc() -->
+<method name="getCrc"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return calculated CRC&#xa; &#xa; Defaults to return -1
+</description>
+<return>
+<type class="long"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BAbstractFileStore.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

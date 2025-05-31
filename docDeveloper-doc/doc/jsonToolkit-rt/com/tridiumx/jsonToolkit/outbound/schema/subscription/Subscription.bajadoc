@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription" name="Subscription" packageName="com.tridiumx.jsonToolkit.outbound.schema.subscription" public="true">
+<description>
+Immutable properties of a subscription to a binding target, along with event filtering logic.
+</description>
+<tag name="@author">Nicholas Dodd</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<parameterizedType class="java.util.function.Predicate">
+<args>
+<type class="javax.baja.sys.BComponentEvent"/>
+</args>
+</parameterizedType>
+</implements>
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.addSubscriptionTarget(javax.baja.sys.BComponent) -->
+<method name="addSubscriptionTarget"  public="true">
+<description>
+Register a component we will subscribe to
+</description>
+<parameter name="subscriptionTarget">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+the component we will actually subscribe to
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.getSubscriptionTargets() -->
+<method name="getSubscriptionTargets"  public="true">
+<description/>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.getDepth() -->
+<method name="getDepth"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.getPropertyPathInComponent() -->
+<method name="getPropertyPathInComponent"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.getFilters() -->
+<method name="getFilters"  public="true">
+<description/>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.subscription.SubscriptionEventFilter"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.withFilter(com.tridiumx.jsonToolkit.outbound.schema.subscription.SubscriptionEventFilter) -->
+<method name="withFilter"  public="true">
+<description>
+filters used to wheedle out events which will have no affect on the json string (for efficiency)
+</description>
+<parameter name="newFilter">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.subscription.SubscriptionEventFilter"/>
+</parameter>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.test(javax.baja.sys.BComponentEvent) -->
+<method name="test"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Runs each filter in order and then uses the filter result as:&#xa;&#xa; PROPAGATE = do not run any more filters - just request a schema generation&#xa; IGNORE = do not run any more filters - and do not request a schema generation&#xa; CONTINUE = request a schema generation if all other filters agree
+</description>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+<description>
+a subscription event
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the given subscription event should trigger a schema output generation.
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.getLiveBindingValue(com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember, javax.baja.sys.BComponentEvent) -->
+<method name="getLiveBindingValue"  public="true">
+<description>
+Extract the live value of the members ord binding without doing a resolve (as the live value is already there in the&#xa; subscription event). This is a bit complex as we sometimes subscribe to the parent of the members ord and also&#xa; sometimes subscribe with depth 1.&#xa;&#xa; Comparisons are performed by slot rather than absolute paths in this logic as a single subscription could be used in a relative schema&#xa; Simply comparing the event slot to the member ord and walking up the tree is not possible either as the member ord could be just &#x27;slot:&#x27;
+</description>
+<parameter name="member">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember"/>
+<description>
+the schema member for which the binding exists
+</description>
+</parameter>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+<description>
+the subscription event containing the latest value for the binding
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+the value of the binding
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.Subscription.filters -->
+<field name="filters"  protected="true" final="true">
+<parameterizedType class="java.util.List">
+<args>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.subscription.SubscriptionEventFilter"/>
+</args>
+</parameterizedType>
+<description/>
+</field>
+
+</class>
+</bajadoc>

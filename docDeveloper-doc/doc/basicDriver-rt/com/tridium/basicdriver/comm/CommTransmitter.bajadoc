@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="basicDriver" runtimeProfile="rt" qualifiedName="com.tridium.basicdriver.comm.CommTransmitter" name="CommTransmitter" packageName="com.tridium.basicdriver.comm" public="true">
+<description>
+CommTransmitter is the basic driver for access (writing)&#xa; to the output stream.  Only one transaction can be&#xa; processed at a time.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">26 Mar 02</tag>
+<tag name="@version">$Revision: 1$ $Date: 03/26/02 12:47:14 PM$</tag>
+<tag name="@since">Niagara 3.0 basicdriver 1.0</tag>
+<extends>
+<type class="com.tridium.basicdriver.comm.Comm$CommSupport"/>
+</extends>
+<!-- com.tridium.basicdriver.comm.CommTransmitter() -->
+<constructor name="CommTransmitter" public="true">
+<description>
+Default Constructor
+</description>
+</constructor>
+
+<!-- com.tridium.basicdriver.comm.CommTransmitter.setOutputStream(java.io.OutputStream) -->
+<method name="setOutputStream"  public="true">
+<description>
+Sets the output stream associated with this&#xa; transmit driver for sending messages.
+</description>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.comm.CommTransmitter.getOutputStream() -->
+<method name="getOutputStream"  protected="true">
+<description>
+Gets the output stream associated with this&#xa; transmit driver for sending messages.
+</description>
+<return>
+<type class="java.io.OutputStream"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.comm.CommTransmitter.writeMessage(com.tridium.basicdriver.message.Message) -->
+<method name="writeMessage"  public="true">
+<description>
+Provides support to write a Message&#xa; to the output stream.  Calls&#xa; Message.write(OutputStream out) with&#xa; the current output stream.
+</description>
+<parameter name="message">
+<type class="com.tridium.basicdriver.message.Message"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.comm.CommTransmitter.writeBytesStart(java.io.OutputStream) -->
+<method name="writeBytesStart"  public="true">
+<description>
+Method to be called if special processing&#xa; is required at the start of sending bytes to the output stream.&#xa; Should be overridden by subclasses as needed.  The default&#xa; is to do nothing.
+</description>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.comm.CommTransmitter.writeBytesEnd(java.io.OutputStream) -->
+<method name="writeBytesEnd"  public="true">
+<description>
+Method to be called if special processing&#xa; is required at the end of sending bytes to the output stream.&#xa; Should be overridden by subclasses as needed.  The default&#xa; is to do nothing.
+</description>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.comm.CommTransmitter.writeBytes(byte[]) -->
+<method name="writeBytes"  public="true">
+<description>
+Method to send a byte array to the output stream.
+</description>
+<parameter name="a">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.comm.CommTransmitter.writeByte(int) -->
+<method name="writeByte"  public="true">
+<description>
+Method to write a single byte (expressed as an integer parameter) to the output stream.
+</description>
+<parameter name="value">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

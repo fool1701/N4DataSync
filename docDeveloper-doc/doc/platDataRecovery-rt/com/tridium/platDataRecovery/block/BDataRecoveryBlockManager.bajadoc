@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platDataRecovery" runtimeProfile="rt" qualifiedName="com.tridium.platDataRecovery.block.BDataRecoveryBlockManager" name="BDataRecoveryBlockManager" packageName="com.tridium.platDataRecovery.block" public="true" abstract="true">
+<description>
+BDataRecoveryBlockManager manages free, used, and pending blocks of data recovery that&#xa; exist on a persistent storage device. The manager abstracts the allocation and de-allocation&#xa; of these blocks and allows access via the append and update commands.
+</description>
+<tag name="@author">Mike James on June 15, 2009</tag>
+<tag name="@since">Baja 3.5</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="maxCapacity" flags="rt">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxCapacity&lt;/code&gt; property.&#xa; The maximum amount of data, in bytes, that this manager can backup.&#xa; Attempting to store more data than this amount will result in a&#xa; BDataRecoveryTooLargeException
+</description>
+<tag name="@see">#getMaxCapacity</tag>
+<tag name="@see">#setMaxCapacity</tag>
+</property>
+
+<property name="currentManagerStatus" flags="rt">
+<type class="com.tridium.platDataRecovery.block.BDataRecoveryBlockManagerStatus"/>
+<description>
+Slot for the &lt;code&gt;currentManagerStatus&lt;/code&gt; property.&#xa; The current status of this manager, i.e. active, idle, purging, flushing.
+</description>
+<tag name="@see">#getCurrentManagerStatus</tag>
+<tag name="@see">#setCurrentManagerStatus</tag>
+</property>
+
+<action name="dumpRecoveryData" flags="h">
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+<description>
+Slot for the &lt;code&gt;dumpRecoveryData&lt;/code&gt; action.&#xa; Dump the contents of the data recovery blocks to station output for debugging.
+</description>
+<tag name="@see">#dumpRecoveryData()</tag>
+</action>
+
+<topic name="blockFlushed" flags="">
+<eventType>
+<type class="com.tridium.platDataRecovery.block.BDataRecoveryFlushEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;blockFlushed&lt;/code&gt; topic.&#xa; Fired when flushDataRecovery() successfully completes.
+</description>
+<tag name="@see">#fireBlockFlushed</tag>
+</topic>
+
+<topic name="sizesUpdated" flags="">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;sizesUpdated&lt;/code&gt; topic.&#xa; Fired when internal size attributes are modified and this&#xa; object has a subscriber (meaning a view)
+</description>
+<tag name="@see">#fireSizesUpdated</tag>
+</topic>
+
+</class>
+</bajadoc>

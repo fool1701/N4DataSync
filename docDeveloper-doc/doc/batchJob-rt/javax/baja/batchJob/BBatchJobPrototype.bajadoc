@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.BBatchJobPrototype" name="BBatchJobPrototype" packageName="javax.baja.batchJob" public="true" abstract="true">
+<description>
+Component that holds a configured prototype of a batch job, can submit copies of that&#xa; job to the batch job service, and manages the retention of the execution history for&#xa; the submitted jobs.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">05 February 2008</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.4</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.retention.BIRetentionPolicyDomain"/>
+</implements>
+<property name="retentionPolicy" flags="">
+<type class="javax.baja.retention.BRetentionPolicy"/>
+<description>
+Slot for the &lt;code&gt;retentionPolicy&lt;/code&gt; property.&#xa; Determines how long the job will be saved on the supervisor&#xa; before being disposed.
+</description>
+<tag name="@see">#getRetentionPolicy</tag>
+<tag name="@see">#setRetentionPolicy</tag>
+</property>
+
+<property name="retentionPolicyCheckFrequency" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;retentionPolicyCheckFrequency&lt;/code&gt; property.&#xa; Frequency of housekeeping task which enforces job retention policies
+</description>
+<tag name="@see">#getRetentionPolicyCheckFrequency</tag>
+<tag name="@see">#setRetentionPolicyCheckFrequency</tag>
+</property>
+
+<property name="jobPrototype" flags="h">
+<type class="javax.baja.batchJob.BBatchJob"/>
+<description>
+Slot for the &lt;code&gt;jobPrototype&lt;/code&gt; property.&#xa; Prototype for job to be triggered when submitJob is&#xa; invoked.  Each submitted job is a clone of the prototype.
+</description>
+<tag name="@see">#getJobPrototype</tag>
+<tag name="@see">#setJobPrototype</tag>
+</property>
+
+<action name="submitJob" flags="s">
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitJob&lt;/code&gt; action.
+</description>
+<tag name="@see">#submitJob()</tag>
+</action>
+
+<action name="enforceRetentionPolicy" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;enforceRetentionPolicy&lt;/code&gt; action.
+</description>
+<tag name="@see">#enforceRetentionPolicy()</tag>
+</action>
+
+<topic name="jobComplete" flags="">
+<eventType>
+<type class="javax.baja.naming.BOrd"/>
+</eventType><description>
+Slot for the &lt;code&gt;jobComplete&lt;/code&gt; topic.&#xa; Fires when a job submitted from this prototype completes, and returns the job&#x27;s Ord
+</description>
+<tag name="@see">#fireJobComplete</tag>
+</topic>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype() -->
+<constructor name="BBatchJobPrototype" public="true">
+<description>
+Default constructor.   Caller must use setJobPrototype()
+</description>
+</constructor>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype(javax.baja.batchJob.BBatchJob) -->
+<constructor name="BBatchJobPrototype" public="true">
+<parameter name="jobProto">
+<type class="javax.baja.batchJob.BBatchJob"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.getRetentionPolicy() -->
+<method name="getRetentionPolicy"  public="true">
+<description>
+Get the &lt;code&gt;retentionPolicy&lt;/code&gt; property.&#xa; Determines how long the job will be saved on the supervisor&#xa; before being disposed.
+</description>
+<tag name="@see">#retentionPolicy</tag>
+<return>
+<type class="javax.baja.retention.BRetentionPolicy"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.setRetentionPolicy(javax.baja.retention.BRetentionPolicy) -->
+<method name="setRetentionPolicy"  public="true">
+<description>
+Set the &lt;code&gt;retentionPolicy&lt;/code&gt; property.&#xa; Determines how long the job will be saved on the supervisor&#xa; before being disposed.
+</description>
+<tag name="@see">#retentionPolicy</tag>
+<parameter name="v">
+<type class="javax.baja.retention.BRetentionPolicy"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.getRetentionPolicyCheckFrequency() -->
+<method name="getRetentionPolicyCheckFrequency"  public="true">
+<description>
+Get the &lt;code&gt;retentionPolicyCheckFrequency&lt;/code&gt; property.&#xa; Frequency of housekeeping task which enforces job retention policies
+</description>
+<tag name="@see">#retentionPolicyCheckFrequency</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.setRetentionPolicyCheckFrequency(javax.baja.sys.BRelTime) -->
+<method name="setRetentionPolicyCheckFrequency"  public="true">
+<description>
+Set the &lt;code&gt;retentionPolicyCheckFrequency&lt;/code&gt; property.&#xa; Frequency of housekeeping task which enforces job retention policies
+</description>
+<tag name="@see">#retentionPolicyCheckFrequency</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.getJobPrototype() -->
+<method name="getJobPrototype"  public="true">
+<description>
+Get the &lt;code&gt;jobPrototype&lt;/code&gt; property.&#xa; Prototype for job to be triggered when submitJob is&#xa; invoked.  Each submitted job is a clone of the prototype.
+</description>
+<tag name="@see">#jobPrototype</tag>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.setJobPrototype(javax.baja.batchJob.BBatchJob) -->
+<method name="setJobPrototype"  public="true">
+<description>
+Set the &lt;code&gt;jobPrototype&lt;/code&gt; property.&#xa; Prototype for job to be triggered when submitJob is&#xa; invoked.  Each submitted job is a clone of the prototype.
+</description>
+<tag name="@see">#jobPrototype</tag>
+<parameter name="v">
+<type class="javax.baja.batchJob.BBatchJob"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.submitJob() -->
+<method name="submitJob"  public="true">
+<description>
+Invoke the &lt;code&gt;submitJob&lt;/code&gt; action.
+</description>
+<tag name="@see">#submitJob</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.enforceRetentionPolicy() -->
+<method name="enforceRetentionPolicy"  public="true">
+<description>
+Invoke the &lt;code&gt;enforceRetentionPolicy&lt;/code&gt; action.
+</description>
+<tag name="@see">#enforceRetentionPolicy</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.fireJobComplete(javax.baja.naming.BOrd) -->
+<method name="fireJobComplete"  public="true">
+<description>
+Fire an event for the &lt;code&gt;jobComplete&lt;/code&gt; topic.&#xa; Fires when a job submitted from this prototype completes, and returns the job&#x27;s Ord
+</description>
+<tag name="@see">#jobComplete</tag>
+<parameter name="event">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.submit() -->
+<method name="submit"  public="true">
+<description/>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.jobComplete(javax.baja.batchJob.BBatchJob, javax.baja.file.BIFile) -->
+<method name="jobComplete"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedParameters&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Framework use only
+</description>
+<parameter name="job">
+<type class="javax.baja.batchJob.BBatchJob"/>
+</parameter>
+<parameter name="logFile">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.listBatchJobSummaries() -->
+<method name="listBatchJobSummaries"  public="true">
+<description/>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.batchJob.BIBatchJobSummary"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.doSubmitJob(javax.baja.sys.Context) -->
+<method name="doSubmitJob"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.createJobInstance(javax.baja.sys.Context) -->
+<method name="createJobInstance"  protected="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedParameters&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Create a new job from the prototype that&#x27;s ready to be submitted.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.doEnforceRetentionPolicy() -->
+<method name="doEnforceRetentionPolicy"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.getRetainables() -->
+<method name="getRetainables"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<wildcardType class="?">
+<bounds kind="extends">
+<type class="javax.baja.retention.BIRetainable"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.atSteadyState() -->
+<method name="atSteadyState"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.retentionPolicy -->
+<field name="retentionPolicy"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;retentionPolicy&lt;/code&gt; property.&#xa; Determines how long the job will be saved on the supervisor&#xa; before being disposed.
+</description>
+<tag name="@see">#getRetentionPolicy</tag>
+<tag name="@see">#setRetentionPolicy</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.retentionPolicyCheckFrequency -->
+<field name="retentionPolicyCheckFrequency"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;retentionPolicyCheckFrequency&lt;/code&gt; property.&#xa; Frequency of housekeeping task which enforces job retention policies
+</description>
+<tag name="@see">#getRetentionPolicyCheckFrequency</tag>
+<tag name="@see">#setRetentionPolicyCheckFrequency</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.jobPrototype -->
+<field name="jobPrototype"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;jobPrototype&lt;/code&gt; property.&#xa; Prototype for job to be triggered when submitJob is&#xa; invoked.  Each submitted job is a clone of the prototype.
+</description>
+<tag name="@see">#getJobPrototype</tag>
+<tag name="@see">#setJobPrototype</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.submitJob -->
+<field name="submitJob"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;submitJob&lt;/code&gt; action.
+</description>
+<tag name="@see">#submitJob()</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.enforceRetentionPolicy -->
+<field name="enforceRetentionPolicy"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;enforceRetentionPolicy&lt;/code&gt; action.
+</description>
+<tag name="@see">#enforceRetentionPolicy()</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.jobComplete -->
+<field name="jobComplete"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;jobComplete&lt;/code&gt; topic.&#xa; Fires when a job submitted from this prototype completes, and returns the job&#x27;s Ord
+</description>
+<tag name="@see">#fireJobComplete</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJobPrototype.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

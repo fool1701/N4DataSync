@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.Sys" name="Sys" packageName="javax.baja.sys" public="true" final="true">
+<description>
+Sys provides a single location for accessing &#xa; singletons and framework functionality.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">9 Mar 00</tag>
+<tag name="@version">$Revision: 102$ $Date: 12/19/08 5:42:01 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.sys.Sys() -->
+<constructor name="Sys" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.Sys.getLanguage() -->
+<method name="getLanguage"  public="true" static="true">
+<description>
+Get the system&#x27;s default lexicon language, which is &#xa; initialized to &lt;code&gt;Locale.getDefault().getLanguage()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.setLanguage(java.lang.String) -->
+<method name="setLanguage"  public="true" static="true">
+<description>
+Set the system&#x27;s default lexicon language.
+</description>
+<parameter name="language">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getNiagaraUserHome() -->
+<method name="getNiagaraUserHome"  public="true" static="true">
+<description>
+Get the default directory to use for user files.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.io.File"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getNiagaraSharedUserHome() -->
+<method name="getNiagaraSharedUserHome"  public="true" static="true">
+<description>
+Get the default shared directory to use for user files,&#xa; which can be accessed by any module.
+</description>
+<return>
+<type class="java.io.File"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getNiagaraDevHome() -->
+<method name="getNiagaraDevHome"  public="true" static="true">
+<description>
+Get the home directory for development files.
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<return>
+<type class="java.io.File"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getCredentialsHome() -->
+<method name="getCredentialsHome"  public="true" static="true">
+<description>
+Get the default directory to use for user files.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.io.File"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getStationHome() -->
+<method name="getStationHome"  public="true" static="true">
+<description>
+Get the station&#x27;s shared home directory or null if this&#xa; VM is not running a station application.
+</description>
+<return>
+<type class="java.io.File"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getProtectedStationHome() -->
+<method name="getProtectedStationHome"  public="true" static="true">
+<description>
+Get the station&#x27;s protected home directory or null if this&#xa; VM is not running a station application.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.io.File"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getLocalHost() -->
+<method name="getLocalHost"  public="true" static="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Get the default local host for this platform.
+</description>
+<tag name="@deprecated">In &#x22;multihomed&#x22; environments (multiple IP adapters) this&#xa;             function may return an InetAddress object defining an&#xa;             address that is not reachable for a particular network segment.&#xa;&#xa;             For example, if connected to 192.168.1.0/24 and 192.168.2.0/24,&#xa;             using 192.168.1.X to describe ourselves to 192.168.2.X network&#xa;             segment will result in error.&#xa;&#xa;             Use Sys.getLocalHost(InetAddress hintAddress) where hintAddress&#xa;             is the remote address requesting our local host address to ensure&#xa;             the appropriate local host definition is returned.</tag>
+<return>
+<type class="java.net.InetAddress"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getLocalHost(java.net.InetAddress) -->
+<method name="getLocalHost"  public="true" static="true">
+<description>
+Get the local host address (IPv4 or IPv6) for this platform&#xa; that is on the same subnet as the provided value. If no addresses&#xa; for this platform are on the same subnet as the provided value,&#xa; return the default local host address (getLocalHost())&#xa;&#xa; If hintAddress is null, return default local host address (getLocalHost())&#xa;&#xa; Useful if platform has multiple internet protocol interfaces.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<parameter name="hintAddress">
+<type class="java.net.InetAddress"/>
+</parameter>
+<return>
+<type class="java.net.InetAddress"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getHostName() -->
+<method name="getHostName"  public="true" static="true">
+<description>
+Get the host name for this platform.&#xa;&#xa; Host domain will be included if this host is a part of a domain.&#xa;&#xa; This method should generally be considered more reliable than&#xa; getLocalHost().getHostName() as not all InetAddress objects registered&#xa; to this platform will include a host name.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getStation() -->
+<method name="getStation"  public="true" static="true">
+<description>
+Get the local station component, or null if the station has not yet been&#xa; fully decoded from the BOG file (or if a non-Station environment, like&#xa; Workbench).
+</description>
+<return>
+<type class="javax.baja.sys.BStation"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.isStation() -->
+<method name="isStation"  public="true" static="true">
+<description>
+Return true if the VM is running a Station application. Note that this will&#xa; still return &lt;code&gt;false&lt;/code&gt; if the station has not yet been fully decoded&#xa; from the BOG file.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if running a Station.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.isStationStarted() -->
+<method name="isStationStarted"  public="true" static="true">
+<description>
+Return if the VM&#x27;s current station has recursively &#xa; completed starting its entire component tree.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.atSteadyState() -->
+<method name="atSteadyState"  public="true" static="true">
+<description>
+Return if the station VM has completed it&#x27;s steady state&#xa; wait period.  This is a built-in timer that allows the&#xa; station to reach steady state after station startup.  If the&#xa; VM is not running a station then always return false.&#xa; (Note default behavior for non-Stations changed as part of NCCB-15399)
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getRegistry() -->
+<method name="getRegistry"  public="true" static="true">
+<description>
+Get the registry which provides the ability to &#xa; interrogate what is installed on the system.
+</description>
+<return>
+<type class="javax.baja.registry.Registry"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getLicenseManager() -->
+<method name="getLicenseManager"  public="true" static="true">
+<description>
+Get the system&#x27;s license manager which provides&#xa; access to the license database.
+</description>
+<return>
+<type class="javax.baja.license.LicenseManager"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getHostId() -->
+<method name="getHostId"  public="true" static="true">
+<description>
+Get the host identifier string which uniquely &#xa; identifies the machine running this VM.
+</description>
+<tag name="@since">Niagara 3.2</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getHsmManager() -->
+<method name="getHsmManager"  public="true" static="true">
+<description>
+Returns a reference to the Hsm Manager which can be used to determine&#xa; if there is a supported Hsm implementation.
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<return>
+<type class="javax.baja.nre.security.HsmManager"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getBajaModule() -->
+<method name="getBajaModule"  public="true" static="true">
+<description>
+Get the BModule for the core &#x22;baja&#x22; module.
+</description>
+<return>
+<type class="javax.baja.sys.BModule"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getBajaVersion() -->
+<method name="getBajaVersion"  public="true" static="true">
+<description>
+Get the version for the core &#x22;baja&#x22; module.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="javax.baja.util.Version"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getBajaVendor() -->
+<method name="getBajaVendor"  public="true" static="true">
+<description>
+Get the vendor for the core &#x22;baja&#x22; module.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getModuleForClass(java.lang.Class&lt;?&gt;) -->
+<method name="getModuleForClass"  public="true" static="true">
+<description>
+Get the module which was used to load the&#xa; specified class.  If the class was loaded&#xa; by the system classloader and not included&#xa; in the baja module, then return null.
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="javax.baja.sys.BModule"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.loadModule(java.lang.String) -->
+<method name="loadModule"  public="true" static="true">
+<description>
+Load a module into the VM.  This loads the latest&#xa; and (hopefully) greatest module available for the&#xa; specified name.
+</description>
+<parameter name="moduleName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BModule"/>
+</return>
+<throws>
+<type class="javax.baja.sys.ModuleNotFoundException"/>
+<description>
+if a suitable module&#xa;    is not found.
+</description>
+</throws>
+<throws>
+<type class="javax.baja.sys.ModuleException"/>
+<description>
+if there was an error loading&#xa;    the module into the VM.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.loadClass(java.lang.String, java.lang.String) -->
+<method name="loadClass"  public="true" static="true">
+<description>
+Dynamically load the specified class from the &#xa; given module.
+</description>
+<parameter name="module">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="classname">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.ClassNotFoundException"/>
+<description>
+if the class was&#xa;    not found in the specified module.
+</description>
+</throws>
+<throws>
+<type class="javax.baja.sys.ModuleException"/>
+<description>
+if there was an error loading&#xa;    the module into the VM.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.newInstance(java.lang.String, java.lang.String) -->
+<method name="newInstance"  public="true" static="true">
+<description>
+This is a convenience for loadClass().newInstance().
+</description>
+<parameter name="module">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="classname">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+<throws>
+<type class="java.lang.ClassNotFoundException"/>
+</throws>
+<throws>
+<type class="javax.baja.sys.ModuleException"/>
+</throws>
+<throws>
+<type class="java.lang.InstantiationException"/>
+</throws>
+<throws>
+<type class="java.lang.IllegalAccessException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.getService(javax.baja.sys.Type) -->
+<method name="getService"  public="true" static="true">
+<description>
+Get the service registered for the specified class.&#xa; If more than one service is registered then return&#xa; the first one registered.  The reference to the&#xa; service should never be stored, but rather looked up&#xa; everytime it is needed.  This allows services to be&#xa; unregistered and re-registered cleanly.&#xa; &lt;p&gt;&#xa; This method only returns services registered in the&#xa; local VM.  To lookup a service in a remote session&#xa; use the &#x22;service&#x22; ord scheme.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+<throws>
+<type class="javax.baja.sys.ServiceNotFoundException"/>
+<description>
+if no service has&#xa;    been registered for the specified type.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.findService(javax.baja.sys.Type) -->
+<method name="findService"  public="true" static="true">
+<description/>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.sys.BIService"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getServices(javax.baja.sys.Type) -->
+<method name="getServices"  public="true" static="true">
+<description>
+Get all the services registered for the specified class.&#xa; The references to the services should never be stored, &#xa; but rather looked up everytime they are needed.  This &#xa; allows services to be unregistered and re-registered &#xa; cleanly.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+<throws>
+<type class="javax.baja.sys.ServiceNotFoundException"/>
+<description>
+if no service has&#xa;    been registered for the specified type.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.getType(int) -->
+<method name="getType"  public="true" static="true">
+<description>
+Get a Type by its integer identifer.
+</description>
+<parameter name="id">
+<type class="int"/>
+<description>
+int identifier for Type
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+Type for id
+</description>
+</return>
+<throws>
+<type class="javax.baja.sys.TypeNotFoundException"/>
+<description>
+if no type registered for id
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.getType(java.lang.Class&lt;?&gt;) -->
+<method name="getType"  public="true" static="true">
+<description>
+Get a Type by an implementation class.
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+<description>
+Class for type implementation
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+Type for cls
+</description>
+</return>
+<throws>
+<type class="javax.baja.sys.TypeNotFoundException"/>
+<description>
+if no type registered for class
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.getType(java.lang.String) -->
+<method name="getType"  public="true" static="true">
+<description>
+A type by its type spec &#x22;module:typename&#x22;.
+</description>
+<parameter name="typeSpec">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+<throws>
+<type class="javax.baja.sys.ModuleException"/>
+</throws>
+<throws>
+<type class="javax.baja.sys.TypeException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.Sys.getTypes() -->
+<method name="getTypes"  public="true" static="true">
+<description>
+Get a list of all the registered types.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.loadType(java.lang.Class&lt;?&gt;) -->
+<method name="loadType"  public="true" static="true">
+<description>
+Load a type for the given class.
+</description>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+<description>
+Class to use for slot introspection.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+Type which tags the Class with Baja slot meta-data.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getAuditor() -->
+<method name="getAuditor"  public="true" static="true">
+<description>
+Get the VM auditor.
+</description>
+<return>
+<type class="javax.baja.security.Auditor"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.setAuditor(javax.baja.security.Auditor) -->
+<method name="setAuditor"  public="true" static="true">
+<description>
+Set the VM auditor.
+</description>
+<parameter name="auditor">
+<type class="javax.baja.security.Auditor"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Sys.getSecurityAuditor() -->
+<method name="getSecurityAuditor"  public="true" static="true">
+<description>
+Get the VM SecurityAuditor
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<return>
+<type class="javax.baja.security.SecurityAuditor"/>
+<description>
+the SecurityAuditor
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

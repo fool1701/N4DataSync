@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.discover.BNDiscoveryJob" name="BNDiscoveryJob" packageName="com.tridium.ndriver.discover" public="true">
+<description>
+BNDiscoveryJob is the discover job for auto manager views.&#xa; &lt;p&gt;&#xa; A  BINDiscoveryHost instance is passed in the constructor to this object. The&#xa; discoveryHost is responsible for executing the discovery process in its&#xa; implementation of the getDiscoveryObjects() callback.&#xa; &lt;p&gt;&#xa; The discoveryPreferences are set before the job is submitted.  The preference&#xa; is passed in the callback to getDiscoveryObjects().  Access to this job is&#xa; provided through getJob() on the discoveryPreferences.&#xa; &lt;p&gt;&#xa; Discovery objects are placed as children on this object unless another folder&#xa; is specified.
+</description>
+<tag name="@author">lperkins (Original ddf code)</tag>
+<tag name="@author">Robert Adams (rework for ndriver)</tag>
+<tag name="@creation">25 Jan 2012</tag>
+<extends>
+<type class="javax.baja.job.BJob"/>
+</extends>
+<property name="discoveryFolder" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects&#xa; if not stored on the job
+</description>
+<tag name="@see">#getDiscoveryFolder</tag>
+<tag name="@see">#setDiscoveryFolder</tag>
+</property>
+
+<property name="discoveryPreferences" flags="">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; Discovery preferences, passed in by the manager.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</property>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob() -->
+<constructor name="BNDiscoveryJob" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob(com.tridium.ndriver.discover.BINDiscoveryHost) -->
+<constructor name="BNDiscoveryJob" public="true">
+<parameter name="databaseParent">
+<type class="com.tridium.ndriver.discover.BINDiscoveryHost"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.getDiscoveryFolder() -->
+<method name="getDiscoveryFolder"  public="true">
+<description>
+Get the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects&#xa; if not stored on the job
+</description>
+<tag name="@see">#discoveryFolder</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.setDiscoveryFolder(javax.baja.naming.BOrd) -->
+<method name="setDiscoveryFolder"  public="true">
+<description>
+Set the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects&#xa; if not stored on the job
+</description>
+<tag name="@see">#discoveryFolder</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.getDiscoveryPreferences() -->
+<method name="getDiscoveryPreferences"  public="true">
+<description>
+Get the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; Discovery preferences, passed in by the manager.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<return>
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.setDiscoveryPreferences(com.tridium.ndriver.discover.BNDiscoveryPreferences) -->
+<method name="setDiscoveryPreferences"  public="true">
+<description>
+Set the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; Discovery preferences, passed in by the manager.
+</description>
+<tag name="@see">#discoveryPreferences</tag>
+<parameter name="v">
+<type class="com.tridium.ndriver.discover.BNDiscoveryPreferences"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.doRun(javax.baja.sys.Context) -->
+<method name="doRun"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Launch a background thread which calls &lt;code&gt;run()&lt;/code&gt;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.doCancel(javax.baja.sys.Context) -->
+<method name="doCancel"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the state to canceling, and call interrupt on the background thread.&#xa; Note that Thread.interrupt usually only works on threads blocked on IO or&#xa; in a sleep.  Subclasses should also periodically check isAlive() in case&#xa; they don&#x27;t receive the InterruptedException.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Override to return name for job bar
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.end() -->
+<method name="end"  protected="true">
+<description>
+Complete the job.  If there was an error end in failed state if canceled&#xa; end in canceled state else end in success state.
+</description>
+<tag name="@since">3.8.38.1</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.isCanceled() -->
+<method name="isCanceled"  public="true">
+<description>
+Convenience method to check if jobState is canceled or canceling
+</description>
+<tag name="@since">3.8.38.1</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.discoverFail(java.lang.String) -->
+<method name="discoverFail"  public="true">
+<description>
+Call if discover fails for any reason.
+</description>
+<parameter name="reason">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.discoverOk(com.tridium.ndriver.discover.BINDiscoveryObject[]) -->
+<method name="discoverOk"  public="true">
+<description>
+Process array of discovery objects.
+</description>
+<parameter name="discoveryObjects">
+<type class="com.tridium.ndriver.discover.BINDiscoveryObject" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.addDiscoveryObject(com.tridium.ndriver.discover.BINDiscoveryObject) -->
+<method name="addDiscoveryObject"  public="true">
+<description>
+Add specified discoveryObject to table.  Check for duplicates.
+</description>
+<tag name="@since">3.8.38.1</tag>
+<parameter name="discoveryObject">
+<type class="com.tridium.ndriver.discover.BINDiscoveryObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.getRootDiscoveryObjects() -->
+<method name="getRootDiscoveryObjects"  public="true">
+<description>
+Gets the root-level BIDiscoveryObjects that this job discovered.
+</description>
+<return>
+<type class="com.tridium.ndriver.discover.BINDiscoveryObject" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.clearRootDiscoveryObjects() -->
+<method name="clearRootDiscoveryObjects"  protected="true">
+<description>
+Removes all dynamic properties from under the discovery folder.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.discoveryFolder() -->
+<method name="discoveryFolder"  public="true">
+<description>
+Get the BComponent used to store discovery objects. This will be the&#xa; BComponent whose ord is specified in discoveryFolder or, if that is null,&#xa; this object.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.discoveryFolder -->
+<field name="discoveryFolder"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryFolder&lt;/code&gt; property.&#xa; This references the BFolder that contains the discovery objects&#xa; if not stored on the job
+</description>
+<tag name="@see">#getDiscoveryFolder</tag>
+<tag name="@see">#setDiscoveryFolder</tag>
+</field>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.discoveryPreferences -->
+<field name="discoveryPreferences"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;discoveryPreferences&lt;/code&gt; property.&#xa; Discovery preferences, passed in by the manager.
+</description>
+<tag name="@see">#getDiscoveryPreferences</tag>
+<tag name="@see">#setDiscoveryPreferences</tag>
+</field>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ndriver.discover.BNDiscoveryJob.LEX -->
+<field name="LEX"  public="true" static="true" final="true">
+<type class="javax.baja.util.Lexicon"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

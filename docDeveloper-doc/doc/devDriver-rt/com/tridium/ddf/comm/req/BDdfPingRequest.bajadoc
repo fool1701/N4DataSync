@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.BDdfPingRequest" name="BDdfPingRequest" packageName="com.tridium.ddf.comm.req" public="true" abstract="true">
+<description>
+This is a default, base class that implements BIDdfPingRequest.&#xa; &#xa; While defining the toByteArray method, the driver developer should&#xa; use the pingParameters and the deviceId structures as the source of&#xa; the data that will be in the byte array.
+</description>
+<tag name="@see">BIDdfPingRequest</tag>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.ddf.comm.req.BDdfRequest"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.comm.req.BIDdfPingRequest"/>
+</implements>
+<property name="pingParameters" flags="">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+Slot for the &lt;code&gt;pingParameters&lt;/code&gt; property.&#xa; This is extra information about the device to ping.&#xa; NOTE: During auto-ping, the device&#x27;s pingParameters value is&#xa; passed to this property. During auto-discovery, this&#xa; property remains at its default. Therefore, driver developers&#xa; are encouraged to redefine this property and specify a&#xa; reasonable, default value.
+</description>
+<tag name="@see">#getPingParameters</tag>
+<tag name="@see">#setPingParameters</tag>
+</property>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest() -->
+<constructor name="BDdfPingRequest" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest(com.tridium.ddf.BDdfDevice) -->
+<constructor name="BDdfPingRequest" public="true">
+<parameter name="ddfDevice">
+<type class="com.tridium.ddf.BDdfDevice"/>
+<description/>
+</parameter>
+<description>
+This is a convenience contstructor to help a developer extend BDdfPingRequest&#xa; and pass his or her device to this constructor. This will&#xa; set the deviceId, pingableSource, and pingParameters based on the given ddfDevice.
+</description>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest(javax.baja.sys.BRelTime, int, com.tridium.ddf.BDdfDevice) -->
+<constructor name="BDdfPingRequest" public="true">
+<parameter name="responseTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+a custom time out for this request only
+</description>
+</parameter>
+<parameter name="maxRetryCount">
+<type class="int"/>
+<description>
+a custom retry count for this request only
+</description>
+</parameter>
+<parameter name="ddfDevice">
+<type class="com.tridium.ddf.BDdfDevice"/>
+<description>
+the deviceId, pingableSource, and pingParameters based on the given ddfDevice.
+</description>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest(com.tridium.ddf.identify.BDdfIdParams, com.tridium.ddf.identify.BIDdfPingParams) -->
+<constructor name="BDdfPingRequest" public="true">
+<parameter name="deviceId">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+the device id to &#x22;ping&#x22;
+</description>
+</parameter>
+<parameter name="pingParams">
+<type class="com.tridium.ddf.identify.BIDdfPingParams"/>
+<description>
+the extra &#x22;ping&#x22; parameters necessary to constuct the byte array.
+</description>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest(javax.baja.sys.BRelTime, int, com.tridium.ddf.identify.BDdfIdParams, com.tridium.ddf.identify.BIDdfPingParams) -->
+<constructor name="BDdfPingRequest" public="true">
+<parameter name="responseTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+a custom time out for this request only
+</description>
+</parameter>
+<parameter name="maxRetryCount">
+<type class="int"/>
+<description>
+a custom retry count for this request only
+</description>
+</parameter>
+<parameter name="deviceId">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+the device id to &#x22;ping&#x22;
+</description>
+</parameter>
+<parameter name="pingParams">
+<type class="com.tridium.ddf.identify.BIDdfPingParams"/>
+<description>
+the extra &#x22;ping&#x22; parameters necessary to constuct the byte array.
+</description>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getPingParameters() -->
+<method name="getPingParameters"  public="true">
+<description>
+Get the &lt;code&gt;pingParameters&lt;/code&gt; property.&#xa; This is extra information about the device to ping.&#xa; NOTE: During auto-ping, the device&#x27;s pingParameters value is&#xa; passed to this property. During auto-discovery, this&#xa; property remains at its default. Therefore, driver developers&#xa; are encouraged to redefine this property and specify a&#xa; reasonable, default value.
+</description>
+<tag name="@see">#pingParameters</tag>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.setPingParameters(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setPingParameters"  public="true">
+<description>
+Set the &lt;code&gt;pingParameters&lt;/code&gt; property.&#xa; This is extra information about the device to ping.&#xa; NOTE: During auto-ping, the device&#x27;s pingParameters value is&#xa; passed to this property. During auto-discovery, this&#xa; property remains at its default. Therefore, driver developers&#xa; are encouraged to redefine this property and specify a&#xa; reasonable, default value.
+</description>
+<tag name="@see">#pingParameters</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getAutoPingFailOnTimeout() -->
+<method name="getAutoPingFailOnTimeout"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getAutoPingOk() -->
+<method name="getAutoPingOk"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getAutoPingOkLate() -->
+<method name="getAutoPingOkLate"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getPingableSource() -->
+<method name="getPingableSource"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddf.comm.req.IDdfPingable" dimension="1"/>
+<description>
+the IDdfPingable[] that was most recently passed to the&#xa; &#x27;setPingableSource&#x27; method.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.setPingableSource(com.tridium.ddf.comm.req.IDdfPingable[]) -->
+<method name="setPingableSource"  public="true">
+<description/>
+<parameter name="pingableSource">
+<type class="com.tridium.ddf.comm.req.IDdfPingable" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getAutoPingFailOnError() -->
+<method name="getAutoPingFailOnError"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.getReadParameters() -->
+<method name="getReadParameters"  public="true">
+<description>
+This method allows developers to use their ping&#xa; requests as read requests too. To do this, developers&#xa; may make a class that extends BDdfPingRequest and&#xa; implements BIDdfReadRequest.&#xa; &#xa; Drivers such as Modbus often read an arbitrary value&#xa; from the field-device as the &lt;i&gt;ping&lt;/i&gt; mechanism&#xa; for the device.&#xa; &#xa; This method satisfies the BIDdfReadRequest interface&#xa; to allow for the aforementioned shortcut.
+</description>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+getPingParameters();
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.setReadParameters(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setReadParameters"  public="true">
+<description>
+This method allows developers to use their ping&#xa; requests as read requests too. To do this, developers&#xa; may make a class that extends BDdfPingRequest and&#xa; implements BIDdfReadRequest.&#xa; &#xa; Drivers such as Modbus often read an arbitrary value&#xa; from the field-device as the &lt;i&gt;ping&lt;/i&gt; mechanism&#xa; for the device.&#xa; &#xa; This method satisfies the BIDdfReadRequest interface&#xa; to allow for the aforementioned shortcut.
+</description>
+<parameter name="readParameters">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+<description>
+getPingParameters();
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.pingParameters -->
+<field name="pingParameters"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pingParameters&lt;/code&gt; property.&#xa; This is extra information about the device to ping.&#xa; NOTE: During auto-ping, the device&#x27;s pingParameters value is&#xa; passed to this property. During auto-discovery, this&#xa; property remains at its default. Therefore, driver developers&#xa; are encouraged to redefine this property and specify a&#xa; reasonable, default value.
+</description>
+<tag name="@see">#getPingParameters</tag>
+<tag name="@see">#setPingParameters</tag>
+</field>
+
+<!-- com.tridium.ddf.comm.req.BDdfPingRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

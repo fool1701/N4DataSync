@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.defaultComm.BDdfReceiver" name="BDdfReceiver" packageName="com.tridium.ddf.comm.defaultComm" public="true" abstract="true">
+<description>
+BDdfReceiver - Provides a default implementation. Everything in&#xa; this class is customizable.&#xa;&#xa; However, this framework intends that for most cases the descendant class&#xa; should simply have to implement the readByte, isStartOfFrame and&#xa; isCompleteFrame methods.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 17, 2006</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.comm.BIDdfReceiver"/>
+</implements>
+<property name="responseTimeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Descendants should redefine this property appropriately.&#xa; This defines the amount of time, after transmitting a request,&#xa; to wait for the response before possibly retrying. This is flagged&#xa; as MGR_INCLUDE so that it can show up in the device manager for&#xa; Ip Devices that define their own &#x27;communicator&#x27; propery with the&#xa; slot facet dfFacets.MGR_INCLUDE
+</description>
+<tag name="@see">#getResponseTimeout</tag>
+<tag name="@see">#setResponseTimeout</tag>
+</property>
+
+<property name="numFramesReceived" flags="r">
+<type class="long"/>
+<description>
+Slot for the &lt;code&gt;numFramesReceived&lt;/code&gt; property.&#xa; This is the elapsed, statistical number of frames that have been received from the field-bus.
+</description>
+<tag name="@see">#getNumFramesReceived</tag>
+<tag name="@see">#setNumFramesReceived</tag>
+</property>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver() -->
+<constructor name="BDdfReceiver" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.getResponseTimeout() -->
+<method name="getResponseTimeout"  public="true">
+<description>
+Get the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Descendants should redefine this property appropriately.&#xa; This defines the amount of time, after transmitting a request,&#xa; to wait for the response before possibly retrying. This is flagged&#xa; as MGR_INCLUDE so that it can show up in the device manager for&#xa; Ip Devices that define their own &#x27;communicator&#x27; propery with the&#xa; slot facet dfFacets.MGR_INCLUDE
+</description>
+<tag name="@see">#responseTimeout</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.setResponseTimeout(javax.baja.sys.BRelTime) -->
+<method name="setResponseTimeout"  public="true">
+<description>
+Set the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Descendants should redefine this property appropriately.&#xa; This defines the amount of time, after transmitting a request,&#xa; to wait for the response before possibly retrying. This is flagged&#xa; as MGR_INCLUDE so that it can show up in the device manager for&#xa; Ip Devices that define their own &#x27;communicator&#x27; propery with the&#xa; slot facet dfFacets.MGR_INCLUDE
+</description>
+<tag name="@see">#responseTimeout</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.getNumFramesReceived() -->
+<method name="getNumFramesReceived"  public="true">
+<description>
+Get the &lt;code&gt;numFramesReceived&lt;/code&gt; property.&#xa; This is the elapsed, statistical number of frames that have been received from the field-bus.
+</description>
+<tag name="@see">#numFramesReceived</tag>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.setNumFramesReceived(long) -->
+<method name="setNumFramesReceived"  public="true">
+<description>
+Set the &lt;code&gt;numFramesReceived&lt;/code&gt; property.&#xa; This is the elapsed, statistical number of frames that have been received from the field-bus.
+</description>
+<tag name="@see">#numFramesReceived</tag>
+<parameter name="v">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.receiveFrame() -->
+<method name="receiveFrame"  public="true">
+<description>
+The BIDdfReceiver interface requires that this method be implemented.&#xa;&#xa; Descendants should really only consider overwriting the doReceiveFrame&#xa; method instead.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.startReceiver() -->
+<method name="startReceiver"  public="true">
+<description>
+This is called when the receive thread starts. Note that the receive thread&#xa; itself is in the BDdfTransactionMgr class to make it easier for the receive&#xa; thread to work with the transaction manager thread.&#xa;&#xa; If a subclass extends this method then it needs to call super.startReceiver().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.stopReceiver() -->
+<method name="stopReceiver"  public="true">
+<description>
+This is called when the receive thread stops. Note that the receive thread&#xa; itself is in the BDdfTransactionMgr class to make it easier for the receive&#xa; thread to work with the transaction manager thread.&#xa;&#xa; If a subclass extends this method then it needs to call super.stopReceiver().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.isStartOfFrame(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="isStartOfFrame"  protected="true" abstract="true">
+<description>
+Descendants should override this method, and check the data received so far. If the data&#xa; received so far indicates that this is the beginning of a data frame then the subclass&#xa; should return BDdfReceiver.YES. If the data cannot possibly be the beginning of the&#xa; frame for the driver then the subclass should return BDdfReceiver.NO. If the descendant&#xa; needs more data before making a decision then it should return BDdfReciver.MAYBE.&#xa;&#xa; This is called by the default implementation of the safeDdfReceiveFrame method.
+</description>
+<parameter name="frameSoFar">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+<description>
+is the IDdfDataFrame that this object is building up.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+BDdfReciver.YES if the bytes that are in the given frameSoFar are the start of a&#xa; frame. Or BDdfReceiver.NO if the bytes in the given frameSoFar cannot possibly be the start&#xa; of a frame. Or BDdfReciver.MAYBE if the bytes in the given frameSoFar could be the start&#xa; of a frame but more bytes would be required to make a definite determination.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.isCompleteFrame(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="isCompleteFrame"  protected="true" abstract="true">
+<description>
+Descendants should override this method, and check the data received so far. If the data&#xa; received so far indicates that this is a completed frame then the subclass&#xa; should return true. Otherwise, this method should return false so that the receiver&#xa; can keep receiving and buffering data.
+</description>
+<parameter name="frameSoFar">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.checkFrame(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="checkFrame"  protected="true" abstract="true">
+<description>
+This method is called by the receiver after the isCompleteFrame message&#xa; returns true.
+</description>
+<parameter name="completeFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+<description>
+the complete IDdfDataFrame received
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the completeFrame passes check sum tests, or if no check sum&#xa; test is necessary (data in TCP/IP messages, for example, do not alwasy require&#xa; a separate check sum test since checking is built into TCP/IP). False if a check&#xa; is necessary and the check fails.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.readByte() -->
+<method name="readByte"  protected="true" abstract="true">
+<description>
+Subclasses should override this method and return the next byte that is received&#xa; from the field bus. If the particular implementation does not efficiently read&#xa; bytes then the subclass should cache incoming data into a stream or array and&#xa; then return data through this method one byte at a time.
+</description>
+<return>
+<type class="int"/>
+<description>
+the next byte received from the field bus (upgraded to a java int to avoid&#xa; problems with the sign bit).
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.doReceiveFrame() -->
+<method name="doReceiveFrame"  protected="true">
+<description>
+This method must be implemented to recognize and receive a frame of data from the field-bus.&#xa;&#xa; If overridden then this method must block and only return once a frame of data is received.&#xa;&#xa; Hopefully, the default implementation of this method will suffice. It would allow the descendant&#xa; to simply implement the abstract isCompleteFrame and isStartOfFrame methods.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+<description>
+An object that implements the IDdfDataFrame interface that represents some data that was&#xa; just received from the field-bus.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.resetStatistics() -->
+<method name="resetStatistics"  public="true">
+<description>
+This method is called by the parent communicator&#x27;s &#x22;resetStatistics&#x22;&#xa; action.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true">
+<description>
+Returns a reference to the BIDdfCommunicator that owns this receiver. This&#xa; will be the Niagara AX Nav parent cast to BIDdfCommunicator.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.readByteToBuffer() -->
+<method name="readByteToBuffer"  protected="true">
+<description>
+Reads a byte into the internal buffer. By default, this calls readByte&#xa; and adds the result to this object&#x27;s internal buffer.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.getResponseTimeout(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="getResponseTimeout"  public="true">
+<description>
+Determines the response timeout for a request.
+</description>
+<parameter name="ddfRequest">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+<description>
+a request to determine the response timeout&#xa; for.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+if the request&#x27;s responseTimeout returns a millisecond&#xa; count of BIDdfRequest.USE_DEFAULT_RESPONSE_TIMEOUT then this&#xa; return the response timeout from the receiver&#x27;s property sheet.&#xa; Otherwise, this returns the response timeout from the given&#xa; request&#x27;s slot map.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.resetReceiveBuffer() -->
+<method name="resetReceiveBuffer"  protected="true">
+<description>
+The descendants may customize if they wish. Hopefully the default implementation will&#xa; suffice though.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.getInternalBuffer() -->
+<method name="getInternalBuffer"  protected="true">
+<description>
+Returns the internal buffer for this object. Hopefully the default implementation will&#xa; suffice. That would make it easier for descendants. However, descendants may customize&#xa; this if they wish.
+</description>
+<return>
+<type class="com.tridium.ddf.comm.defaultComm.BDdfReceiver$DdfReceiveFrame"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.computeTag(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="computeTag"  protected="true">
+<description>
+This method is called immediately after the call to isCompleteFrame(...) on this object&#xa; returns true.&#xa;&#xa; Descendants should override this method if it is possible to construct a BSimple tag for&#xa; the bytes inside the given frame. The BDdfCommunicator uses the tag to optimally feed&#xa; frames to the request to which the receive frame applies. If no tag is defined then the&#xa; BDdfCommunicator will have no choice but to pass all received frames to the request.
+</description>
+<parameter name="iDdfDataFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.responseTimeout -->
+<field name="responseTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Descendants should redefine this property appropriately.&#xa; This defines the amount of time, after transmitting a request,&#xa; to wait for the response before possibly retrying. This is flagged&#xa; as MGR_INCLUDE so that it can show up in the device manager for&#xa; Ip Devices that define their own &#x27;communicator&#x27; propery with the&#xa; slot facet dfFacets.MGR_INCLUDE
+</description>
+<tag name="@see">#getResponseTimeout</tag>
+<tag name="@see">#setResponseTimeout</tag>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.numFramesReceived -->
+<field name="numFramesReceived"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;numFramesReceived&lt;/code&gt; property.&#xa; This is the elapsed, statistical number of frames that have been received from the field-bus.
+</description>
+<tag name="@see">#getNumFramesReceived</tag>
+<tag name="@see">#setNumFramesReceived</tag>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.YES -->
+<field name="YES"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Descendants may return this value from the isStartOfFrame method&#xa; to answer with an affirmative response.
+</description>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.NO -->
+<field name="NO"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Descendants may return this value from the isStartOfFrame method&#xa; to answer with a negative response.
+</description>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.MAYBE -->
+<field name="MAYBE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Descendants may return this value from the isStartOfFrame methods&#xa; to answer with an ambiguous response.
+</description>
+</field>
+
+<!-- com.tridium.ddf.comm.defaultComm.BDdfReceiver.stopped -->
+<field name="stopped"  protected="true">
+<type class="boolean"/>
+<description>
+Indicates whether the startReciever method or stopReceiver&#xa; method was last called.
+</description>
+</field>
+
+</class>
+</bajadoc>

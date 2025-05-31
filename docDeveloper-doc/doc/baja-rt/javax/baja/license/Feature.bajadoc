@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.license.Feature" name="Feature" packageName="javax.baja.license" public="true" interface="true" abstract="true" category="interface">
+<description>
+Feature encapsulates a feature specification for the &#xa; licensing framework.  A feature is uniquely identified&#xa; by a vendor and feature name.  It contains an expiration&#xa; and a set of optional properties.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">3 Nov 01</tag>
+<tag name="@version">$Revision: 3$ $Date: 3/28/05 9:22:59 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.license.Feature.getVendorName() -->
+<method name="getVendorName"  public="true" abstract="true">
+<description>
+Get the vendor name of the feature.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.getFeatureName() -->
+<method name="getFeatureName"  public="true" abstract="true">
+<description>
+Get the feature name of the feature.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.isExpired() -->
+<method name="isExpired"  public="true" abstract="true">
+<description>
+Return if this feature is actively licensed.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.check() -->
+<method name="check"  public="true" abstract="true">
+<description>
+If this Feature returns true for &lt;code&gt;isExpired()&lt;/code&gt;&#xa; then throw &lt;code&gt;FeatureNotLicensedException&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.license.FeatureNotLicensedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.license.Feature.getExpiration() -->
+<method name="getExpiration"  public="true" abstract="true">
+<description>
+Get the expiration time for this feature in millis since &#xa; the epoch.  If the feature has no expiration date, then&#xa; return Long.MAX_VALUE.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.list() -->
+<method name="list"  public="true" abstract="true">
+<description>
+Get the list of property keys of this feature.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.get(java.lang.String) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get a feature property, or return null if not found&#xa; in the license database.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.get(java.lang.String, java.lang.String) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get a license property, or return def if not found&#xa; in the license database.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.getb(java.lang.String, boolean) -->
+<method name="getb"  public="true" abstract="true">
+<description>
+Get a feature property as a boolean or return def is &#xa; not found.  The boolean must be true or false (case &#xa; insensitive) or an exception is thrown.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.license.Feature.geti(java.lang.String, int) -->
+<method name="geti"  public="true" abstract="true">
+<description>
+Get a feature property as an int or return def &#xa; is not found.  If the value is not a properly&#xa; formatted integer than an exception is thrown.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

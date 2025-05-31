@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bql" runtimeProfile="rt" qualifiedName="javax.baja.bql.BIBqlFilter" name="BIBqlFilter" packageName="javax.baja.bql" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIBqlFilter is a BIFilter that can provide a predicate for&#xa; a BQL query.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">16 Oct 2003</tag>
+<tag name="@version">$Revision: 5$ $Date: 8/22/07 4:23:49 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<!-- javax.baja.bql.BIBqlFilter.init(javax.baja.sys.BObject) -->
+<method name="init"  public="true" abstract="true">
+<description>
+Initialize the filter for objects of the same type&#xa; as the specified object.  This allows subclass specific&#xa; behavior for classes
+</description>
+<parameter name="o">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bql.BIBqlFilter.getPredicate(java.lang.String) -->
+<method name="getPredicate"  public="true" abstract="true">
+<description>
+Get the predicate text for this filter using the&#xa; specified column name.&#xa; &lt;p&gt;&#xa; Example:&#xa;   For a float value filter and a column name of &#x22;x&#x22;:&#xa;   &lt;code&gt;&amp;#x22;x &amp;gt;= 0 and x &amp;lt;= 100&amp;#x22;&lt;/code&gt;
+</description>
+<parameter name="columnName">
+<type class="java.lang.String"/>
+<description>
+The name of the column to use in the&#xa;   predicate expression.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bql.BIBqlFilter.accept(javax.baja.sys.BObject) -->
+<method name="accept"  public="true" abstract="true">
+<description>
+Test an object to see if it falls within the range of this filter.
+</description>
+<parameter name="o">
+<type class="javax.baja.sys.BObject"/>
+<description>
+The object to be tested.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bql.BIBqlFilter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.BWebServlet" name="BWebServlet" packageName="javax.baja.web" public="true" abstract="true">
+<description>
+BWebServlet is a server side plugin into BWebService which&#xa; process HTTP requests to a URIs with a specified prefix.  It is &#xa; the Baja wrapper for the &lt;code&gt;javax.servlet.http.HttpServlet&lt;/code&gt; API.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">6 Dec 01</tag>
+<tag name="@version">$Revision: 9$ $Date: 8/2/07 12:37:03 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BAbstractService"/>
+</extends>
+<implements>
+<type class="javax.baja.web.BINiagaraWebServlet"/>
+</implements>
+<property name="servletName" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;servletName&lt;/code&gt; property.&#xa; The servlet name is used to register the servlet&#xa; into the servers URI namespace.  For example set&#xa; this property to &#x22;foo&#x22; to register the servlet&#xa; to receive requests for anything starting with&#xa; &#x22;/foo&#x22;.
+</description>
+<tag name="@see">#getServletName</tag>
+<tag name="@see">#setServletName</tag>
+</property>
+
+<!-- javax.baja.web.BWebServlet() -->
+<constructor name="BWebServlet" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.web.BWebServlet.getServletName() -->
+<method name="getServletName"  public="true">
+<description>
+Get the &lt;code&gt;servletName&lt;/code&gt; property.&#xa; The servlet name is used to register the servlet&#xa; into the servers URI namespace.  For example set&#xa; this property to &#x22;foo&#x22; to register the servlet&#xa; to receive requests for anything starting with&#xa; &#x22;/foo&#x22;.
+</description>
+<tag name="@see">#servletName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServlet.setServletName(java.lang.String) -->
+<method name="setServletName"  public="true">
+<description>
+Set the &lt;code&gt;servletName&lt;/code&gt; property.&#xa; The servlet name is used to register the servlet&#xa; into the servers URI namespace.  For example set&#xa; this property to &#x22;foo&#x22; to register the servlet&#xa; to receive requests for anything starting with&#xa; &#x22;/foo&#x22;.
+</description>
+<tag name="@see">#servletName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServlet.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServlet.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<description>
+Default implementation returns { web:WebServlet }.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServlet.resolve(javax.baja.web.WebOp) -->
+<method name="resolve"  public="true">
+<description>
+Resolve to a target inside the scope of this servlet.&#xa; By default this returns the base OrdTarget from the op.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServlet.service(javax.baja.web.WebOp) -->
+<method name="service"  public="true">
+<description>
+This method is called on the servlet to process&#xa; a HTTP request.  The WebOp wraps up the Servlet &#xa; request and response instances.  &#xa; &lt;p&gt;&#xa; The default implementation of the service()&#xa; method is to dispatch to one of doXXX() methods&#xa; based on the request method type.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServlet.doGet(javax.baja.web.WebOp) -->
+<method name="doGet"  public="true">
+<description>
+Service an HTTP &#x22;get&#x22; request.
+</description>
+<parameter name="c">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServlet.doDelete(javax.baja.web.WebOp) -->
+<method name="doDelete"  public="true">
+<description>
+Service an HTTP &#x22;delete&#x22; request.
+</description>
+<parameter name="c">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServlet.doPost(javax.baja.web.WebOp) -->
+<method name="doPost"  public="true">
+<description>
+Service a HTTP &#x22;post&#x22; request.  The default &#xa; implementation responds with an error.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServlet.doPut(javax.baja.web.WebOp) -->
+<method name="doPut"  public="true">
+<description/>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.web.BWebServlet.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework use only.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServlet.setValidServletName(boolean) -->
+<method name="setValidServletName"  public="true" final="true">
+<description>
+Set/clear fault condition if invalid servlet name.
+</description>
+<parameter name="valid">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServlet.getHttpServlet() -->
+<method name="getHttpServlet"  public="true" final="true">
+<description>
+Return the HttpServlet associated with this BWebServlet instance.
+</description>
+<return>
+<type class="javax.servlet.http.HttpServlet"/>
+<description>
+The HttpServlet instance.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.BWebServlet.servletName -->
+<field name="servletName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;servletName&lt;/code&gt; property.&#xa; The servlet name is used to register the servlet&#xa; into the servers URI namespace.  For example set&#xa; this property to &#x22;foo&#x22; to register the servlet&#xa; to receive requests for anything starting with&#xa; &#x22;/foo&#x22;.
+</description>
+<tag name="@see">#getServletName</tag>
+<tag name="@see">#setServletName</tag>
+</field>
+
+<!-- javax.baja.web.BWebServlet.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

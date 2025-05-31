@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="control" runtimeProfile="rt" qualifiedName="javax.baja.control.trigger.TriggerScheduler" name="TriggerScheduler" packageName="javax.baja.control.trigger" public="true" abstract="true">
+<description>
+A TriggerScheduler schedules the firing of a trigger according&#xa; to a trigger mode.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">12 Feb 2004</tag>
+<tag name="@version">$Revision: 2$ $Date: 4/4/06 11:52:56 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.control.trigger.TriggerScheduler(javax.baja.control.trigger.BTimeTrigger) -->
+<constructor name="TriggerScheduler" public="true">
+<parameter name="trigger">
+<type class="javax.baja.control.trigger.BTimeTrigger"/>
+</parameter>
+<description>
+Create a scheduler for the specified trigger.
+</description>
+</constructor>
+
+<!-- javax.baja.control.trigger.TriggerScheduler.getTrigger() -->
+<method name="getTrigger"  public="true" final="true">
+<description>
+Get the trigger for this scheduler.
+</description>
+<return>
+<type class="javax.baja.control.trigger.BTimeTrigger"/>
+</return>
+</method>
+
+<!-- javax.baja.control.trigger.TriggerScheduler.start() -->
+<method name="start"  public="true" abstract="true">
+<description>
+Start checking the time.  Typically, this method will schedule the&#xa; checkTime action for the TimeTrigger.&#xa; &lt;p&gt;&#xa; For example:&#xa; &lt;code&gt;&#xa; ticket = Clock.schedulePeriodically(getTrigger(), BRelTime.makeMinutes(5), BTimeTrigger.checkTime, null);&#xa; &lt;/code&gt;&#xa; When the checkTime is invoked, the isTriggerTime() method will be called.&#xa; The TriggerTime should schedule the checkTime action to be invoked often enough&#xa; to catch all trigger times.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.trigger.TriggerScheduler.stop() -->
+<method name="stop"  public="true" abstract="true">
+<description>
+Stop checking the time.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.control.trigger.TriggerScheduler.isTriggerTime(javax.baja.sys.BAbsTime) -->
+<method name="isTriggerTime"  public="true" abstract="true">
+<description>
+Does the specified time indicate that it is time to fire the trigger?
+</description>
+<parameter name="time">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.control.trigger.TriggerScheduler.getNextTriggerTime(javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime) -->
+<method name="getNextTriggerTime"  public="true" abstract="true">
+<description>
+Get the next trigger time after the specified time.
+</description>
+<parameter name="after">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="previous">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

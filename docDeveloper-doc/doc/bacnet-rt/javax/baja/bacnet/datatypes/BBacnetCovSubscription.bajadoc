@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.datatypes.BBacnetCovSubscription" name="BBacnetCovSubscription" packageName="javax.baja.bacnet.datatypes" public="true" final="true">
+<description>
+BBacnetCovSubscription represents information about a client subscription&#xa; for change-of-value notification on a Bacnet server object in this device.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">06 May 02</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.datatypes.BIBacnetDataType"/>
+</implements>
+<property name="recipient" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetRecipientProcess"/>
+<description>
+Slot for the &lt;code&gt;recipient&lt;/code&gt; property.&#xa; the recipient process information.
+</description>
+<tag name="@see">#getRecipient</tag>
+<tag name="@see">#setRecipient</tag>
+</property>
+
+<property name="monitoredPropertyReference" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectPropertyReference"/>
+<description>
+Slot for the &lt;code&gt;monitoredPropertyReference&lt;/code&gt; property.&#xa; the object property reference.
+</description>
+<tag name="@see">#getMonitoredPropertyReference</tag>
+<tag name="@see">#setMonitoredPropertyReference</tag>
+</property>
+
+<property name="issueConfirmedNotifications" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;issueConfirmedNotifications&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIssueConfirmedNotifications</tag>
+<tag name="@see">#setIssueConfirmedNotifications</tag>
+</property>
+
+<property name="subscriptionEndTime" flags="">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;subscriptionEndTime&lt;/code&gt; property.&#xa; the time at which this subscriber&#x27;s subscription will end.  This is&#xa; an estimate; the actual timing is handled through an internal timer.
+</description>
+<tag name="@see">#getSubscriptionEndTime</tag>
+<tag name="@see">#setSubscriptionEndTime</tag>
+</property>
+
+<property name="covIncrement" flags="">
+<type class="float"/>
+<description>
+Slot for the &lt;code&gt;covIncrement&lt;/code&gt; property.&#xa; the Cov increment requested for this subscription.&#xa; NOT USED for Subscribe-Cov support.
+</description>
+<tag name="@see">#getCovIncrement</tag>
+<tag name="@see">#setCovIncrement</tag>
+</property>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription() -->
+<constructor name="BBacnetCovSubscription" public="true">
+<description>
+Default constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription(javax.baja.bacnet.datatypes.BBacnetAddress, long, javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, boolean) -->
+<constructor name="BBacnetCovSubscription" public="true">
+<parameter name="subscriberAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</parameter>
+<parameter name="subscriberProcessId">
+<type class="long"/>
+<description/>
+</parameter>
+<parameter name="monitoredObjectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<parameter name="issueConfirmedNotifications">
+<type class="boolean"/>
+<description/>
+</parameter>
+<description>
+Constructor for use with SubscribeCOV-Request.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription(javax.baja.bacnet.datatypes.BBacnetAddress, long, javax.baja.bacnet.datatypes.BBacnetObjectIdentifier, javax.baja.bacnet.io.PropertyReference, boolean, javax.baja.sys.BNumber) -->
+<constructor name="BBacnetCovSubscription" public="true">
+<parameter name="subscriberAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</parameter>
+<parameter name="subscriberProcessId">
+<type class="long"/>
+<description/>
+</parameter>
+<parameter name="monitoredObjectId">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectIdentifier"/>
+<description/>
+</parameter>
+<parameter name="monitoredPropertyId">
+<type class="javax.baja.bacnet.io.PropertyReference"/>
+<description/>
+</parameter>
+<parameter name="issueConfirmedNotifications">
+<type class="boolean"/>
+<description/>
+</parameter>
+<parameter name="covIncr">
+<type class="javax.baja.sys.BNumber"/>
+</parameter>
+<description>
+Constructor for use with SubscribeCOVProperty-Request.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getRecipient() -->
+<method name="getRecipient"  public="true">
+<description>
+Get the &lt;code&gt;recipient&lt;/code&gt; property.&#xa; the recipient process information.
+</description>
+<tag name="@see">#recipient</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetRecipientProcess"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setRecipient(javax.baja.bacnet.datatypes.BBacnetRecipientProcess) -->
+<method name="setRecipient"  public="true">
+<description>
+Set the &lt;code&gt;recipient&lt;/code&gt; property.&#xa; the recipient process information.
+</description>
+<tag name="@see">#recipient</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetRecipientProcess"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getMonitoredPropertyReference() -->
+<method name="getMonitoredPropertyReference"  public="true">
+<description>
+Get the &lt;code&gt;monitoredPropertyReference&lt;/code&gt; property.&#xa; the object property reference.
+</description>
+<tag name="@see">#monitoredPropertyReference</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectPropertyReference"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setMonitoredPropertyReference(javax.baja.bacnet.datatypes.BBacnetObjectPropertyReference) -->
+<method name="setMonitoredPropertyReference"  public="true">
+<description>
+Set the &lt;code&gt;monitoredPropertyReference&lt;/code&gt; property.&#xa; the object property reference.
+</description>
+<tag name="@see">#monitoredPropertyReference</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetObjectPropertyReference"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getIssueConfirmedNotifications() -->
+<method name="getIssueConfirmedNotifications"  public="true">
+<description>
+Get the &lt;code&gt;issueConfirmedNotifications&lt;/code&gt; property.
+</description>
+<tag name="@see">#issueConfirmedNotifications</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setIssueConfirmedNotifications(boolean) -->
+<method name="setIssueConfirmedNotifications"  public="true">
+<description>
+Set the &lt;code&gt;issueConfirmedNotifications&lt;/code&gt; property.
+</description>
+<tag name="@see">#issueConfirmedNotifications</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getSubscriptionEndTime() -->
+<method name="getSubscriptionEndTime"  public="true">
+<description>
+Get the &lt;code&gt;subscriptionEndTime&lt;/code&gt; property.&#xa; the time at which this subscriber&#x27;s subscription will end.  This is&#xa; an estimate; the actual timing is handled through an internal timer.
+</description>
+<tag name="@see">#subscriptionEndTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setSubscriptionEndTime(javax.baja.sys.BAbsTime) -->
+<method name="setSubscriptionEndTime"  public="true">
+<description>
+Set the &lt;code&gt;subscriptionEndTime&lt;/code&gt; property.&#xa; the time at which this subscriber&#x27;s subscription will end.  This is&#xa; an estimate; the actual timing is handled through an internal timer.
+</description>
+<tag name="@see">#subscriptionEndTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getCovIncrement() -->
+<method name="getCovIncrement"  public="true">
+<description>
+Get the &lt;code&gt;covIncrement&lt;/code&gt; property.&#xa; the Cov increment requested for this subscription.&#xa; NOT USED for Subscribe-Cov support.
+</description>
+<tag name="@see">#covIncrement</tag>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setCovIncrement(float) -->
+<method name="setCovIncrement"  public="true">
+<description>
+Set the &lt;code&gt;covIncrement&lt;/code&gt; property.&#xa; the Cov increment requested for this subscription.&#xa; NOT USED for Subscribe-Cov support.
+</description>
+<tag name="@see">#covIncrement</tag>
+<parameter name="v">
+<type class="float"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getLastValue() -->
+<method name="getLastValue"  public="true">
+<description>
+Get the last value that was sent to this COV subscriber.
+</description>
+<return>
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+the value that last caused a COV notification.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setLastValue(javax.baja.status.BStatusValue) -->
+<method name="setLastValue"  public="true">
+<description>
+Set the last value sent to this COV subscriber.  Called when&#xa; we notify this subscriber of a change of value.
+</description>
+<parameter name="newValue">
+<type class="javax.baja.status.BStatusValue"/>
+<description>
+the COV value.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getLastPropValue() -->
+<method name="getLastPropValue"  public="true">
+<description>
+Get the last value that was sent to this COV Property subscriber.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+the value that last caused a COV notification.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setLastPropValue(javax.baja.sys.BValue) -->
+<method name="setLastPropValue"  public="true">
+<description>
+Set the last value sent to this COV Property subscriber.  Called&#xa; when we notify this subscriber of a change of value.
+</description>
+<parameter name="newValue">
+<type class="javax.baja.sys.BValue"/>
+<description>
+the COV value.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getLastPropertyValue() -->
+<method name="getLastPropertyValue"  public="true">
+<description>
+Get the last encoded PropertyValue that was sent to this COV Property subscriber.
+</description>
+<return>
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the ASN encoded property that last caused a COV notification.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setLastPropertyValue(javax.baja.bacnet.io.PropertyValue) -->
+<method name="setLastPropertyValue"  public="true">
+<description>
+Set the last value sent to this COV Property subscriber.  Called&#xa; when we notify this subscriber of a change of value.
+</description>
+<parameter name="lastPropertyValue">
+<type class="javax.baja.bacnet.io.PropertyValue"/>
+<description>
+the asn.1 encoded COV value.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getTicket() -->
+<method name="getTicket"  public="true">
+<description>
+Get the ticket that represents the scheduled termination of this&#xa; subscription.
+</description>
+<return>
+<type class="javax.baja.sys.Clock$Ticket"/>
+<description>
+the ticket.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setTicket(javax.baja.sys.Clock.Ticket) -->
+<method name="setTicket"  public="true">
+<description>
+Set the ticket representing the scheduled termination of this subscription.
+</description>
+<parameter name="ticket">
+<type class="javax.baja.sys.Clock$Ticket"/>
+<description>
+the termination ticket.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getTimeRemaining() -->
+<method name="getTimeRemaining"  public="true">
+<description>
+Get the remaining life of this subscription in seconds.&#xa; This estimated calculation is done by determining the time&#xa; until the end time, which is set at the time when the termination&#xa; ticket is generated.
+</description>
+<return>
+<type class="int"/>
+<description>
+the estimated remaining lifetime in seconds.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description>
+To String.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.isCovIncrementUsed() -->
+<method name="isCovIncrementUsed"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.isCovProperty() -->
+<method name="isCovProperty"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setCovProperty(boolean) -->
+<method name="setCovProperty"  public="true">
+<description/>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getLastStatusBits() -->
+<method name="getLastStatusBits"  public="true">
+<description/>
+<return>
+<type class="int"/>
+<description>
+the lastStatusBits
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setLastStatusBits(int) -->
+<method name="setLastStatusBits"  public="true">
+<description/>
+<parameter name="lastStatusBits">
+<type class="int"/>
+<description>
+the lastStatusBits to set
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.setLastStatusFlags(javax.baja.status.BStatus) -->
+<method name="setLastStatusFlags"  public="true">
+<description/>
+<parameter name="lastStatusFlags">
+<type class="javax.baja.status.BStatus"/>
+<description>
+the lastStatusFlags to set
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.getLastStatusFlags() -->
+<method name="getLastStatusFlags"  public="true">
+<description/>
+<return>
+<type class="javax.baja.status.BStatus"/>
+<description>
+the lastStatusFlags PropertyValue
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.writeAsn(javax.baja.bacnet.io.AsnOutput) -->
+<method name="writeAsn"  public="true">
+<description>
+Write the value to the Asn output stream.
+</description>
+<parameter name="out">
+<type class="javax.baja.bacnet.io.AsnOutput"/>
+<description>
+the AsnOutput stream.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.readAsn(javax.baja.bacnet.io.AsnInput) -->
+<method name="readAsn"  public="true">
+<description>
+Read the value from the Asn input stream.
+</description>
+<parameter name="in">
+<type class="javax.baja.bacnet.io.AsnInput"/>
+<description>
+the AsnInput stream.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.recipient -->
+<field name="recipient"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;recipient&lt;/code&gt; property.&#xa; the recipient process information.
+</description>
+<tag name="@see">#getRecipient</tag>
+<tag name="@see">#setRecipient</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.monitoredPropertyReference -->
+<field name="monitoredPropertyReference"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;monitoredPropertyReference&lt;/code&gt; property.&#xa; the object property reference.
+</description>
+<tag name="@see">#getMonitoredPropertyReference</tag>
+<tag name="@see">#setMonitoredPropertyReference</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.issueConfirmedNotifications -->
+<field name="issueConfirmedNotifications"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;issueConfirmedNotifications&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIssueConfirmedNotifications</tag>
+<tag name="@see">#setIssueConfirmedNotifications</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.subscriptionEndTime -->
+<field name="subscriptionEndTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;subscriptionEndTime&lt;/code&gt; property.&#xa; the time at which this subscriber&#x27;s subscription will end.  This is&#xa; an estimate; the actual timing is handled through an internal timer.
+</description>
+<tag name="@see">#getSubscriptionEndTime</tag>
+<tag name="@see">#setSubscriptionEndTime</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.covIncrement -->
+<field name="covIncrement"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;covIncrement&lt;/code&gt; property.&#xa; the Cov increment requested for this subscription.&#xa; NOT USED for Subscribe-Cov support.
+</description>
+<tag name="@see">#getCovIncrement</tag>
+<tag name="@see">#setCovIncrement</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.RECIPIENT_TAG -->
+<field name="RECIPIENT_TAG"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+BacnetCovSubscription Asn Context Tags&#xa; See Bacnet Clause 21.
+</description>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.MONITORED_PROPERTY_REFERENCE_TAG -->
+<field name="MONITORED_PROPERTY_REFERENCE_TAG"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.ISSUE_CONFIRMED_NOTIFICATIONS_TAG -->
+<field name="ISSUE_CONFIRMED_NOTIFICATIONS_TAG"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.TIME_REMAINING_TAG -->
+<field name="TIME_REMAINING_TAG"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.COV_INCREMENT_TAG -->
+<field name="COV_INCREMENT_TAG"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetCovSubscription.MAX_ENCODED_SIZE -->
+<field name="MAX_ENCODED_SIZE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="wb" qualifiedName="com.tridium.alarm.ui.portal.BAlarmPortalTool" name="BAlarmPortalTool" packageName="com.tridium.alarm.ui.portal" public="true">
+<description>
+BAlarmPortalTool is the component which serves as place&#xa; holder in the tools menu and declares the actual views.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">24 Jan 02</tag>
+<tag name="@version">$Revision: 93$ $Date: 7/12/11 12:12:23 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.workbench.tool.BWbService"/>
+</extends>
+<implements>
+<type class="com.tridium.alarm.ui.TrayIconListener"/>
+</implements>
+<implements>
+<type class="javax.baja.nav.NavListener"/>
+</implements>
+<implements>
+<type class="com.tridium.fox.sys.BFoxClientConnection$Interest"/>
+</implements>
+<property name="alarmPortalConsoleRecipient" flags="h">
+<type class="com.tridium.alarm.BConsoleRecipient"/>
+<description>
+Slot for the &lt;code&gt;alarmPortalConsoleRecipient&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlarmPortalConsoleRecipient</tag>
+<tag name="@see">#setAlarmPortalConsoleRecipient</tag>
+</property>
+
+<action name="connect" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;connect&lt;/code&gt; action.&#xa; Connect to alarm servers
+</description>
+<tag name="@see">#connect(BWidget parameter)</tag>
+</action>
+
+<action name="routeAlarm" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;routeAlarm&lt;/code&gt; action.&#xa; Route an alarm record
+</description>
+<tag name="@see">#routeAlarm(BAlarmRecord parameter)</tag>
+</action>
+
+<action name="updateConnectionStatus" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;updateConnectionStatus&lt;/code&gt; action.
+</description>
+<tag name="@see">#updateConnectionStatus()</tag>
+</action>
+
+<action name="scanForReconnect" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;scanForReconnect&lt;/code&gt; action.
+</description>
+<tag name="@see">#scanForReconnect()</tag>
+</action>
+
+<topic name="newUnackedAlarm" flags="">
+<eventType>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</eventType><description>
+Slot for the &lt;code&gt;newUnackedAlarm&lt;/code&gt; topic.&#xa; Fired when a new unacked alarm is encountered
+</description>
+<tag name="@see">#fireNewUnackedAlarm</tag>
+</topic>
+
+</class>
+</bajadoc>

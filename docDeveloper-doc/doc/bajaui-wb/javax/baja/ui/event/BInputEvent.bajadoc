@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.event.BInputEvent" name="BInputEvent" packageName="javax.baja.ui.event" public="true" abstract="true">
+<description>
+BInputEvent is the base class for widget&#xa; events which are triggered by user input.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">21 Nov 00</tag>
+<tag name="@version">$Revision: 7$ $Date: 3/3/09 10:19:17 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</extends>
+<!-- javax.baja.ui.event.BInputEvent(int, javax.baja.ui.BWidget, int) -->
+<constructor name="BInputEvent" public="true">
+<parameter name="id">
+<type class="int"/>
+<description>
+integer indicating the type of event
+</description>
+</parameter>
+<parameter name="source">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+The BWidget that originated the event
+</description>
+</parameter>
+<parameter name="modifiers">
+<type class="int"/>
+<description>
+The modifier keys down during event (shift, ctrl, alt, meta). Zero value means that no modifiers were passed&#xa;                  Starting in Niagara 4.12, either an extended _DOWN_MASK or old _MASK modifiers can be used,&#xa;                  however do not mix models in the one event.
+</description>
+</parameter>
+<description>
+Construct a new widget event for the specified source widget.
+</description>
+<tag name="@see">java.awt.event.InputEvent</tag>
+</constructor>
+
+<!-- javax.baja.ui.event.BInputEvent(int, javax.baja.ui.BWidget, long, int) -->
+<constructor name="BInputEvent" public="true">
+<parameter name="id">
+<type class="int"/>
+</parameter>
+<parameter name="source">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="when">
+<type class="long"/>
+</parameter>
+<parameter name="modifiers">
+<type class="int"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.event.BInputEvent() -->
+<constructor name="BInputEvent" public="true">
+<description>
+No arg constructor
+</description>
+</constructor>
+
+<!-- javax.baja.ui.event.BInputEvent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.setNewModifiers() -->
+<method name="setNewModifiers"  protected="true">
+<description>
+Sets the new modifiers by the old ones.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.setOldModifiers() -->
+<method name="setOldModifiers"  protected="true">
+<description>
+Sets the old modifiers by the new ones.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.getModifiers() -->
+<method name="getModifiers"  public="true">
+<description>
+Get the modifier mask for this event.&#xa;&#xa; It is recommended that extended modifier keys and&#xa;             &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.getModifiersEx() -->
+<method name="getModifiersEx"  public="true">
+<description>
+Returns the extended modifier mask for this event.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.getWhen() -->
+<method name="getWhen"  public="true">
+<description>
+Get the timestamp in millis when the event occurred
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.isAltDown() -->
+<method name="isAltDown"  public="true">
+<description>
+Returns whether the alt modifier is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.isAltGraphDown() -->
+<method name="isAltGraphDown"  public="true">
+<description>
+Returns whether the alt graph modifier is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.isControlDown() -->
+<method name="isControlDown"  public="true">
+<description>
+Returns whether the control modifier is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.isMetaDown() -->
+<method name="isMetaDown"  public="true">
+<description>
+Returns whether the meta modifier is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.isShiftDown() -->
+<method name="isShiftDown"  public="true">
+<description>
+Returns whether the shift modifier is set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.modifiersToString() -->
+<method name="modifiersToString"  public="true">
+<description>
+Get a debug string for the modifiers set.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.isConsumed() -->
+<method name="isConsumed"  public="true">
+<description>
+Return true if this key event was consumed.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.consume() -->
+<method name="consume"  public="true">
+<description>
+This method is called to consume the key event&#xa; so that it is not propogated to other controls &#xa; such as focus traversal, accelerators, or &#xa; default buttons.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.event.BInputEvent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.ALT_MASK -->
+<field name="ALT_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Alt key modifier constant.&#xa;&#xa; It is recommended that ALT_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.ALT_GRAPH_MASK -->
+<field name="ALT_GRAPH_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The AltGraph key modifier constant.&#xa;&#xa; It is recommended that ALT_GRAPH_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.BUTTON1_MASK -->
+<field name="BUTTON1_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Mouse Button1 modifier constant.&#xa;&#xa; It is recommended that BUTTON1_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.BUTTON2_MASK -->
+<field name="BUTTON2_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Mouse Button2 modifier constant.&#xa;&#xa; It is recommended that BUTTON2_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.BUTTON3_MASK -->
+<field name="BUTTON3_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Mouse Button3 modifier constant.&#xa;&#xa; It is recommended that BUTTON3_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.CTRL_MASK -->
+<field name="CTRL_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Control key modifier constant.&#xa;&#xa; It is recommended that CTRL_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.META_MASK -->
+<field name="META_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Meta key modifier constant.&#xa;&#xa; It is recommended that META_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.SHIFT_MASK -->
+<field name="SHIFT_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Shift key modifier constant.&#xa;&#xa; It is recommended that SHIFT_DOWN_MASK and &lt;code&gt;<see ref="javax.baja.ui.event.BInputEvent#getModifiersEx()">#getModifiersEx()</see>&lt;/code&gt; be used instead.
+</description>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.SHIFT_DOWN_MASK -->
+<field name="SHIFT_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Shift key extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.CTRL_DOWN_MASK -->
+<field name="CTRL_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Control key extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.META_DOWN_MASK -->
+<field name="META_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Meta key extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.ALT_DOWN_MASK -->
+<field name="ALT_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Alt key extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.BUTTON1_DOWN_MASK -->
+<field name="BUTTON1_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Mouse Button1 extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.BUTTON2_DOWN_MASK -->
+<field name="BUTTON2_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Mouse Button2 extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.BUTTON3_DOWN_MASK -->
+<field name="BUTTON3_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The Mouse Button3 extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+<!-- javax.baja.ui.event.BInputEvent.ALT_GRAPH_DOWN_MASK -->
+<field name="ALT_GRAPH_DOWN_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The AltGraph key extended modifier constant.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+</field>
+
+</class>
+</bajadoc>

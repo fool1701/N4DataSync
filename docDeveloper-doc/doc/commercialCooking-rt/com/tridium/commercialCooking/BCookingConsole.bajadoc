@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="commercialCooking" runtimeProfile="rt" qualifiedName="com.tridium.commercialCooking.BCookingConsole" name="BCookingConsole" packageName="com.tridium.commercialCooking" public="true">
+<description>
+BCookingConsole - represents a Commercial Cooking Oven network
+</description>
+<tag name="@author">Sam Barrow original code on 18 Nov 2004</tag>
+<tag name="@author">Sam Barrow converted to AX on 01 Nov 2005</tag>
+<tag name="@since">Niagara 3.0 commercialCooking 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="com.tridium.commercialCooking.messages.CcMessageConst"/>
+</implements>
+<implements>
+<type class="com.tridium.commercialCooking.messages.LangMessageConst"/>
+</implements>
+<property name="stationNameWebSupervisor" flags="d">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;stationNameWebSupervisor&lt;/code&gt; property.&#xa; When CookingConsole first dropped in under /drivers&#xa; set this property to Web Supervisor station name
+</description>
+<tag name="@see">#getStationNameWebSupervisor</tag>
+<tag name="@see">#setStationNameWebSupervisor</tag>
+</property>
+
+<property name="mostRecentSupervisorDlParams" flags="r">
+<type class="com.tridium.commercialCooking.datatypes.BOvenRecipesDlParams"/>
+<description>
+Slot for the &lt;code&gt;mostRecentSupervisorDlParams&lt;/code&gt; property.
+</description>
+<tag name="@see">#getMostRecentSupervisorDlParams</tag>
+<tag name="@see">#setMostRecentSupervisorDlParams</tag>
+</property>
+
+<property name="lastCsMgrCommFailureCause" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lastCsMgrCommFailureCause&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLastCsMgrCommFailureCause</tag>
+<tag name="@see">#setLastCsMgrCommFailureCause</tag>
+</property>
+
+<property name="maxDownloadAttempts" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;maxDownloadAttempts&lt;/code&gt; property.
+</description>
+<tag name="@see">#getMaxDownloadAttempts</tag>
+<tag name="@see">#setMaxDownloadAttempts</tag>
+</property>
+
+<property name="downloadAttemptRescheduleInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;downloadAttemptRescheduleInterval&lt;/code&gt; property.
+</description>
+<tag name="@see">#getDownloadAttemptRescheduleInterval</tag>
+<tag name="@see">#setDownloadAttemptRescheduleInterval</tag>
+</property>
+
+<action name="startDlOvenRecipesList" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;startDlOvenRecipesList&lt;/code&gt; action.&#xa; this will initiate a download of the current dlOvenRecipesList&#xa; as specified by the dlOvenRecipesOvrFlag
+</description>
+<tag name="@see">#startDlOvenRecipesList()</tag>
+</action>
+
+<action name="addRecipeToDlOvenRecipesList" flags="c">
+<parameter name="parameter">
+<type class="com.tridium.commercialCooking.datatypes.BCookerProductEntry"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;addRecipeToDlOvenRecipesList&lt;/code&gt; action.&#xa; test aid... add a product recipe to download list
+</description>
+<tag name="@see">#addRecipeToDlOvenRecipesList(BCookerProductEntry parameter)</tag>
+</action>
+
+<action name="delRecipeFrDlOvenRecipesList" flags="c">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;delRecipeFrDlOvenRecipesList&lt;/code&gt; action.&#xa; test aid... del a product recipe from download list
+</description>
+<tag name="@see">#delRecipeFrDlOvenRecipesList(BString parameter)</tag>
+</action>
+
+<action name="submitCsReqCmd" flags="s">
+<parameter name="parameter">
+<type class="com.tridium.csmgrbase.datatypes.BCsReqCmd"/>
+</parameter>
+<return>
+<type class="com.tridium.csmgrbase.datatypes.BCsRspValue"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitCsReqCmd&lt;/code&gt; action.&#xa; Kicks off a job generally from the Web Supervisor... but&#xa; eventually could be from another station&#xa; to download recipes to the child oven controller&#xa; to instruct a station to configure itself for comm with other stations
+</description>
+<tag name="@see">#submitCsReqCmd(BCsReqCmd parameter)</tag>
+</action>
+
+</class>
+</bajadoc>

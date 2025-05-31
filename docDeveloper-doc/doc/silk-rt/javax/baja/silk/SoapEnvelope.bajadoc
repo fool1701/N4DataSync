@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="silk" runtimeProfile="rt" qualifiedName="javax.baja.silk.SoapEnvelope" name="SoapEnvelope" packageName="javax.baja.silk" public="true" abstract="true">
+<description>
+Version independent SOAP message.
+</description>
+<tag name="@author">Aaron Hansen</tag>
+<tag name="@creation">Sept 2005</tag>
+<tag name="@version">$Revision: $ $Date: $</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.silk.SoapEnvelope() -->
+<constructor name="SoapEnvelope" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.silk.SoapEnvelope.addEntry(javax.baja.xml.XElem) -->
+<method name="addEntry"  public="true">
+<description>
+Adds a child to the body element.
+</description>
+<parameter name="child">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.addHeader(javax.baja.xml.XElem) -->
+<method name="addHeader"  public="true">
+<description>
+Adds a child to the header element.
+</description>
+<parameter name="child">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.asFault() -->
+<method name="asFault"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.silk.SoapFault"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getContentType() -->
+<method name="getContentType"  public="true" abstract="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getBody() -->
+<method name="getBody"  public="true">
+<description>
+The body element, or null.
+</description>
+<return>
+<type class="javax.baja.xml.XElem"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getEntries() -->
+<method name="getEntries"  public="true">
+<description>
+All children of the body element.
+</description>
+<return>
+<type class="javax.baja.xml.XElem" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getEntry(java.lang.String) -->
+<method name="getEntry"  public="true">
+<description>
+Return the first child of the body element with the given name, or null.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getEnvelopeNs() -->
+<method name="getEnvelopeNs"  public="true">
+<description>
+The namespace of the root Envelope element.
+</description>
+<return>
+<type class="javax.baja.xml.XNs"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getHeader() -->
+<method name="getHeader"  public="true">
+<description>
+The header element, or null.
+</description>
+<return>
+<type class="javax.baja.xml.XElem"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getHeaders() -->
+<method name="getHeaders"  public="true">
+<description>
+All header blocks in the message.
+</description>
+<return>
+<type class="javax.baja.xml.XElem" dimension="1"/>
+<description>
+Never null, but possibly a zero length array.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getRoot() -->
+<method name="getRoot"  public="true">
+<description>
+The root Envelope element.
+</description>
+<return>
+<type class="javax.baja.xml.XElem"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.isFault() -->
+<method name="isFault"  public="true">
+<description>
+True if the body contains a soap fault element.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.make(javax.baja.silk.SoapEnvelope.Version) -->
+<method name="make"  public="true" static="true">
+<description>
+Factory method for making new soap envelopes.
+</description>
+<parameter name="v">
+<type class="javax.baja.silk.SoapEnvelope$Version"/>
+</parameter>
+<return>
+<type class="javax.baja.silk.SoapEnvelope"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.newEnvelope() -->
+<method name="newEnvelope"  public="true" abstract="true">
+<description>
+Creates a new envelope with the same envelope namespace.
+</description>
+<return>
+<type class="javax.baja.silk.SoapEnvelope"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.newFault(java.lang.String, java.lang.String, java.lang.String, javax.baja.xml.XContent) -->
+<method name="newFault"  public="true" abstract="true">
+<description>
+Creates a fault with the same envelope namespace.
+</description>
+<parameter name="code">
+<type class="java.lang.String"/>
+<description>
+Required.
+</description>
+</parameter>
+<parameter name="subcode">
+<type class="java.lang.String"/>
+<description>
+Optional
+</description>
+</parameter>
+<parameter name="reason">
+<type class="java.lang.String"/>
+<description>
+Required.
+</description>
+</parameter>
+<parameter name="detail">
+<type class="javax.baja.xml.XContent"/>
+<description>
+Optional.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.silk.SoapFault"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.newReceiverFault(java.lang.String, java.lang.String, java.lang.Throwable) -->
+<method name="newReceiverFault"  public="true" abstract="true">
+<description>
+A Server fault in SOAP 1.1.
+</description>
+<parameter name="subcode">
+<type class="java.lang.String"/>
+<description>
+Optional
+</description>
+</parameter>
+<parameter name="reason">
+<type class="java.lang.String"/>
+<description>
+Required.
+</description>
+</parameter>
+<parameter name="detail">
+<type class="java.lang.Throwable"/>
+<description>
+Optional.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.silk.SoapFault"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.newSenderFault(java.lang.String, java.lang.String, java.lang.Throwable) -->
+<method name="newSenderFault"  public="true" abstract="true">
+<description>
+A Client fault in SOAP 1.1.
+</description>
+<parameter name="subcode">
+<type class="java.lang.String"/>
+<description>
+Optional.
+</description>
+</parameter>
+<parameter name="reason">
+<type class="java.lang.String"/>
+<description>
+Required.
+</description>
+</parameter>
+<parameter name="detail">
+<type class="java.lang.Throwable"/>
+<description>
+Optional.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.silk.SoapFault"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.setRoot(javax.baja.xml.XElem) -->
+<method name="setRoot"  public="true">
+<description>
+The root Envelope element.
+</description>
+<parameter name="root">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.toString() -->
+<method name="toString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.toXml(java.lang.Throwable) -->
+<method name="toXml"  public="true" static="true">
+<description>
+Convenience method which converts an exception into an xml text&#xa; node.
+</description>
+<parameter name="t">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="javax.baja.xml.XText"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.write(java.io.OutputStream) -->
+<method name="write"  public="true">
+<description>
+Serializes the message.
+</description>
+<parameter name="out">
+<type class="java.io.OutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.elemBody(boolean) -->
+<method name="elemBody"  protected="true">
+<description/>
+<parameter name="create">
+<type class="boolean"/>
+<description>
+True automatically creates and adds the element if needed.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+<description>
+Possibly null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.elemFault(boolean) -->
+<method name="elemFault"  protected="true">
+<description/>
+<parameter name="create">
+<type class="boolean"/>
+<description>
+True automatically creates and adds the element if needed.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+<description>
+Possibly null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.elemHeader(boolean) -->
+<method name="elemHeader"  protected="true">
+<description/>
+<parameter name="create">
+<type class="boolean"/>
+<description>
+True automatically creates and adds the element if needed.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+<description>
+Possibly null.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getBodyTag() -->
+<method name="getBodyTag"  protected="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getEnvelopeTag() -->
+<method name="getEnvelopeTag"  protected="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getFaultTag() -->
+<method name="getFaultTag"  protected="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.getHeaderTag() -->
+<method name="getHeaderTag"  protected="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.silk.SoapEnvelope.SOAP_11 -->
+<field name="SOAP_11"  public="true" static="true" final="true">
+<type class="javax.baja.silk.SoapEnvelope$Version"/>
+<description/>
+</field>
+
+<!-- javax.baja.silk.SoapEnvelope.SOAP_12 -->
+<field name="SOAP_12"  public="true" static="true" final="true">
+<type class="javax.baja.silk.SoapEnvelope$Version"/>
+<description/>
+</field>
+
+<!-- javax.baja.silk.SoapEnvelope.envelope -->
+<field name="envelope"  protected="true">
+<type class="javax.baja.xml.XElem"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

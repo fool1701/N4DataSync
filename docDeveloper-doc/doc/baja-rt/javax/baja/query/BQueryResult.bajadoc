@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.query.BQueryResult" name="BQueryResult" packageName="javax.baja.query" public="true" final="true">
+<description>
+QueryResult is the result of a query processed against a query scope by a QueryHandler.&#xa; It is a container for all of the elements required to get a query result, that is, an&#xa; OrdTarget representing the query scope, the query itself, and the query handler.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">01/15/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<implements>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+<type class="javax.baja.tag.BIEntity"/>
+</args>
+</parameterizedType>
+</implements>
+<!-- javax.baja.query.BQueryResult(javax.baja.naming.OrdQuery, javax.baja.naming.OrdTarget, javax.baja.query.BIQueryHandler) -->
+<constructor name="BQueryResult" public="true">
+<parameter name="query">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<parameter name="scope">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<parameter name="queryHandler">
+<type class="javax.baja.query.BIQueryHandler"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.query.BQueryResult.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.getQuery() -->
+<method name="getQuery"  public="true">
+<description>
+Get the query for this result.
+</description>
+<return>
+<type class="javax.baja.naming.OrdQuery"/>
+<description>
+Returns the OrdQuery that defines the set of objects in the result.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.getScope() -->
+<method name="getScope"  public="true">
+<description>
+Get the OrdTarget the defines the scope of the query.  The scope is an object&#xa; that represents the total set of objects that the query will be processed against.
+</description>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.getQueryHandler() -->
+<method name="getQueryHandler"  public="true">
+<description>
+Get the query handler.  A query handler processes the specific query type for the&#xa; specified scope.
+</description>
+<return>
+<type class="javax.baja.query.BIQueryHandler"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.getResults() -->
+<method name="getResults"  public="true">
+<description>
+Get a CloseableIterator for the results of the query.
+</description>
+<return>
+<parameterizedType class="javax.baja.util.CloseableIterator">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.stream() -->
+<method name="stream"  public="true">
+<description>
+Get a Stream for the results of the query.
+</description>
+<return>
+<parameterizedType class="java.util.stream.Stream">
+<args>
+<type class="javax.baja.tag.Entity"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.cursor() -->
+<method name="cursor"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+For BQueryResult support of the &lt;code&gt;BITable&lt;/code&gt; interface, returns a cursor of&#xa; &lt;code&gt;BIEntity&lt;/code&gt; query results.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<return>
+<parameterizedType class="javax.baja.collection.TableCursor">
+<args>
+<type class="javax.baja.tag.BIEntity"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.getColumns() -->
+<method name="getColumns"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+For BQueryResult support of the &lt;code&gt;BITable&lt;/code&gt; interface, returns a column list containing&#xa; a single ORD column for the Entity ORDs of the query results.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<return>
+<type class="javax.baja.collection.ColumnList"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.getTableFacets() -->
+<method name="getTableFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+For BQueryResult support of the &lt;code&gt;BITable&lt;/code&gt; interface, always returns &lt;code&gt;BFacets.NULL&lt;/code&gt;&#xa; for the table facets.
+</description>
+<tag name="@since">Niagara 4.4</tag>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.query.BQueryResult.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

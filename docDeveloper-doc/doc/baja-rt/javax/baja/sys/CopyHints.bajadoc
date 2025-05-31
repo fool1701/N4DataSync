@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.CopyHints" name="CopyHints" packageName="javax.baja.sys" public="true">
+<description>
+CopyHints provides instructions for &lt;code&gt;BValue.newCopy()&lt;/code&gt;.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">7 Dec 04</tag>
+<tag name="@version">$Revision: 2$ $Date: 12/8/04 3:46:41 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.sys.CopyHints() -->
+<constructor name="CopyHints" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.CopyHints.toString() -->
+<method name="toString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.CopyHints.defaultOnClone -->
+<field name="defaultOnClone"  public="true">
+<type class="boolean"/>
+<description>
+If this flag is true, then properties marked with the&#xa; &lt;code&gt;Flag.DEFAULT_ON_CLONE&lt;/code&gt; flag are not copied&#xa; and remain in the default state.  The default for this&#xa; value is true.
+</description>
+</field>
+
+<!-- javax.baja.sys.CopyHints.defaultStatus -->
+<field name="defaultStatus"  public="true">
+<type class="boolean"/>
+<description>
+The copy process will regard properties with the&#xa; &lt;code&gt;Flag.READ_ONLY&lt;/code&gt; flag to be status properties and&#xa; all others to be configuration properties.&#xa;&#xa; If this flag is true, then status properties marked with&#xa; the &lt;code&gt;Flag.DEFAULT_ON_CLONE&lt;/code&gt; flag are not copied&#xa; and remain in the default state. Configuration properties&#xa; with this flag are copied. The default for this value is&#xa; false.
+</description>
+<tag name="@since">Niagara 4.7</tag>
+</field>
+
+<!-- javax.baja.sys.CopyHints.swizzleHandles -->
+<field name="swizzleHandles"  public="true">
+<type class="boolean"/>
+<description>
+If this flag is true, then all the handles in the graph&#xa; being copied are swizzled.  For example if the handle&#xa; was originally &#x22;foo&#x22;, it might be converted to &#x22;copy-foo&#x22;.&#xa; The actual swizzle algorithm used is opaque and you&#xa; should not count on the format remaining constant.  Swizzling&#xa; occurs on both BComponent handles and any BOrds inside&#xa; the graph using the handle &#x22;h:&#x22; scheme.  Components with&#xa; swizzled handles receive special treatment to maintain&#xa; internal consistency when using the &lt;code&gt;Mark.copyTo&lt;/code&gt;&#xa; API.  If this flag is false, then handles are governed by&#xa; the &lt;code&gt;keepHandles&lt;/code&gt; flag. When both this flag and the&#xa; &lt;code&gt;keepHandles&lt;/code&gt; flag are false, then any Component in&#xa; the copy will have a null handle and any ords will remain&#xa; untouched.&#xa; The default for this flag is false.
+</description>
+</field>
+
+<!-- javax.baja.sys.CopyHints.keepHandles -->
+<field name="keepHandles"  public="true">
+<type class="boolean"/>
+<description>
+If this flag is true, then all the handles in the graph&#xa; being copied are kept in the copy. If this flag is false,&#xa; then handles are governed by the &lt;code&gt;swizzleHandles&lt;/code&gt;&#xa; flag. When both this flag and the &lt;code&gt;swizzleHandles&lt;/code&gt;&#xa; flag are false, then any Component in the copy will have&#xa; a null handle and any ords will remain untouched.&#xa; The default for this flag is false.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+</field>
+
+<!-- javax.baja.sys.CopyHints.cx -->
+<field name="cx"  public="true">
+<type class="javax.baja.sys.Context"/>
+<description>
+The context to be used for permissions checking during&#xa; the copy process.
+</description>
+</field>
+
+</class>
+</bajadoc>

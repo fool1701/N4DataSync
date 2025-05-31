@@ -1,0 +1,546 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/securityManager.html" class="navbar">Prev</a> |  <a href="/doc/security/authentication.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="requesting-permissions">Requesting Permissions</h1>
+<h1 id="1-overview">1 Overview</h1>
+<p>Niagara 4 introduced the use of Java’s Security Manager. The Security Manager improves security by restricting who can run certain sections of code – if a section of code is protected, only modules granted the required <code>Permission</code>s will be able to run it without triggering an <code>AccessControlException</code>. This allows us to protect sensitive methods that could affect core functionality or reveal sensitive data from being improperly used.</p>
+<p>Some examples of actions that are restricted by the Security Manager are:</p>
+<ul>
+  <li>File access</li>
+  <li>Reading from and writing to system properties</li>
+  <li>Loading native libraries</li>
+  <li>Managing Niagara sessions</li>
+</ul>
+<p>The Policy determines what permissions each module has. In Niagara 4.0 and Niagara 4.1, the Policy is determined by policy files located in &ldquo;{niagara.home}/security/policy&rdquo;. This Policy is static, and third party modules have no way to modify it to request the permissions they need to get past <code>AccessControlException</code>s they might encounter. For example, a third party module has no way to write to system properties.</p>
+<p>In Niagara 4.2, the Policy is determined by the contents of a module’s &ldquo;module.xml&rdquo; file, in which the module can request which permissions it needs. This allows third party modules to request and be granted permissions that they would otherwise not have.</p>
+<p>This document describes the process of requesting additional permissions: how to request a permission, which permissions can be requested, required vs. optional permissions, and how to request permissions for program modules. In addition, we describe how an end user can view which permissions a module has been granted.</p>
+<h1 id="2-requesting-permissions">2 Requesting Permissions</h1>
+<p>This section is aimed at developers creating modules for Niagara. It describes how to request additional permissions for a module, and what permissions can be requested. In addition, it discusses how to turn off console messages during development, and how to localize the user facing content of a permission request.</p>
+<h2 id="21-how-to-request-permissions">2.1 How To Request Permissions</h2>
+<p>When creating a Niagara module, a developer may run into <code>AccessControlException</code>s if they are trying to access restricted functionality. In these situations, it may be possible to have their module request additional permissions. This section described the process for requesting permissions for standard Niagara modules as well as for program modules.</p>
+<h3 id="211-standard-modules">2.1.1 Standard Modules</h3>
+<p>When developing a standard Niagara module, the process for requesting additional permissions is simple. The first step is to create a file named ‘module-permissions.xml’ in your module’s development directory; this is the same directory the ‘module-include.xml’ file is in.</p>
+<p>Figure 2-1 shows an example ‘module-permissions.xml’ file. Details about the various elements are given below.</p>
+<pre><code>&lt;permissions&gt;
+  &lt;niagara-permission-groups type=&quot;station&quot;&gt; //Type can be &quot;station&quot; or &quot;workbench&quot;
+    &lt;req-permission&gt; // Required permission
+      &lt;name&gt;NETWORK_COMMUNICATION&lt;/name&gt;
+      &lt;purposeKey&gt;This module needs to communicate with devices on port 1234.&lt;/purposeKey&gt;
+      &lt;parameters&gt;
+        &lt;parameter name=&quot;hosts&quot; value=&quot;*&quot;/&gt;
+        &lt;parameter name=&quot;ports&quot; value=&quot;1234&quot;/&gt;
+      &lt;/parameters&gt;
+    &lt;/req-permission&gt;
+    &lt;opt-permission&gt; // Optional permission
+      &lt;name&gt;SET_SYSTEM_TIME&lt;/name&gt;
+      &lt;purposeKey&gt;To do task X, this module needs to be able to set the system time.&lt;/purposeKey&gt;
+    &lt;/opt-permission&gt;
+  &lt;/niagara-permission-groups&gt;
+&lt;/permissions&gt;
+</code></pre>
+<p><em>Figure 2-1: A sample module-permissions.xml</em></p>
+<p>Important elements to note are:</p>
+<ul>
+  <li>The <code>&lt;permissions&gt;</code> element. This is the root element of the permission request format.</li>
+  <li>The <code>&lt;niagara-permission-groups type=&quot;station&quot;&gt;</code> element indicates that you are about to begin a block of permission requests. The ‘type’ attribute indicates which type of application to which to grant the permissions:
+    <ul>
+      <li><strong>‘station</strong>’ is used for permissions required by a running station.</li>
+      <li><strong>‘workbench’</strong>  is used for permissions required by Workbench.</li>
+      <li><strong>‘all’</strong> can be used if a permission is required by both.</li>
+    </ul>
+    <p>You can have multiple <code>&lt;niagara-permission-groups&gt;</code> blocks.</p>
+  </li>
+  <li>The <code>&lt;req-permission&gt;</code> and <code>&lt;opt-permission&gt;</code> elements represent a request for one specific required or optional permission, respectively. The difference between required and optional permissions is described in section 2.1.3. Each permission request has a number of children:
+    <ul>
+      <li>The <code>&lt;name&gt;</code> element. <strong>Required</strong>. This is the name of permission group being requested. This determines which permission will be granted to the module.</li>
+      <li>The <code>&lt;purposeKey&gt;</code> element. <strong>Required</strong>. This describes why the module needs this permission. Its goal is to help the end user determine if they are comfortable with the module having the requested permissions. The ‘purposeKey’ can be a lexicon key - it should correspond to an entry in the lexicon of the module requesting the permission. If the text in the <code>&lt;purposeKey&gt;</code> element doesn&rsquo;t correspond to a lexicon entry, the text will be used as-is as a non-localizable description.</li>
+      <li>The <code>&lt;parameters&gt;</code> element. <strong>Optional</strong>. Certain permission groups accept parameters to narrow down the permission being requested. For example, when requesting to read or write system properties, you can specify which system properties you want access to.
+        <ul>
+          <li>Each parameter is represented by a <code>&lt;parameter name=&quot;hosts&quot; value=&quot;*&quot;/&gt;</code> element. The ‘name’ attribute is the parameter’s name, and the ‘value’ attribute is its value. The parameters for each permission group is documented in           section 2.2.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h3 id="212-program-modules">2.1.2 Program Modules</h3>
+<p>Program modules are subject to the same restrictions as standard modules. In order to be able to perform certain tasks, they may also need to request additional permissions. The program module builder offers an interface for adding permission requests to a program module before building it. This section describes the steps to follow to add a permission request to a program module.</p>
+<ol>
+  <li>
+    <p>In the ProgramModuleBuilder view, go to the “Permissions” tab (see Figure 2-2).</p>
+    <p><img src="perm-programModule-tab.png" alt="The Permissions Request Tab" title="Permissions Request Tab" /></p>
+    <p><em>Figure 2-2: The ‘Permission Requests’ tab</em> <br><br></p>
+  </li>
+  <li>
+    <p>To add permission request, click on the ‘Add Permission’ button, as shown in Figure 2-3.</p>
+    <p><img src="perm-programModule-add.png" alt="Add Permission Button" title="Add Permission Button" /></p>
+    <p><em>Figure 2-3: The &lsquo;Add Permission&rsquo; button</em> <br><br></p>
+  </li>
+  <li>
+    <p>A dialog will appear (see Figure 2-4). Edit it as appropriate for the desired permission.</p>
+    <p><img src="perm-programModule-add-dialog.png" alt="Add Permission Dialog" title="Add Permission Dialog" /></p>
+    <p><em>Figure 2-4: The permission request dialog</em> <br><br></p>
+    <ol>
+      <li>Select the type of permission required via the ‘Type’ drop down menu.</li>
+      <li>Select the application type this request applies to via the ‘Policy Type’ drop down.</li>
+      <li>Enter a purpose describing why this module needs this permission.</li>
+      <li>If appropriate, enter the parameters for this permission. The parameters will be pre-filled so that only the values         need to be entered. A permission with no parametrization will have a read-only text field displaying “N/A”.</li>
+      <li>Select whether the permission is optional or required (see section 2.1.3)</li>
+    </ol>
+  </li>
+  <li>
+    <p>If any changes are required, a permission request can be added or removed using the ‘Edit Permission’ or ‘Remove Permissions’ command (see Figure 2-5). Although multiple permissions may be removed at once, only one can be edited at a     time.</p>
+    <p><img src="perm-programModule-edit_remove.png" alt="Edit/Remove Permissions" title="Edit/Remove Permissions" /></p>
+    <p><em>Figure 2-5: Editing or removing permissions</em> <br><br></p>
+  </li>
+</ol>
+<h3 id="213-required-vs-optional-permissions">2.1.3 Required vs. Optional Permissions</h3>
+<p>Permission request specify whether the permission is required or optional.</p>
+<ul>
+  <li>A <strong>required permission</strong> is a permission that is necessary for the module to either run or perform its primary function. For example, a module providing a new authentication scheme requires the ‘AUTHENTICATION’ permission; otherwise, it will not be able to complete the authentication, which is its primary function.</li>
+  <li>An <strong>optional permission</strong> is a permission that the module can use to perform certain functions, but if the permission is not granted, the error is handled gracefully and the module’s primary function is not affected. For example, a module may use an environment variable to initialize certain fields. This requires the ‘GET_ENVIRONMENT_VARIABLES’ permission. However, if not granted that permission, the module could check a system property for the value instead. Figure 2-6 shows a code snippet properly handling a section of code requiring an optional permission.</li>
+</ul>
+<pre><code>private static void initEnvironment()
+{
+  try
+  {
+    myField = System.getenv(&quot;my_env_variable&quot;);
+  }
+  catch(AccessControlException e)
+  {
+    myField = System.getProperty(&quot;my.system.property&quot;);
+  }
+}
+
+private static String myField;
+</code></pre>
+<p><em>Figure 2-6: Properly handling an optional permission</em></p>
+<p>In Niagara 4.2, all permissions requested by a module are automatically granted. As a result, the ‘optional’ vs ‘required’ settings has no real effect other than informing the end user how the permission is being used. In future iterations, however, end users may be given the option to accept or refuse to install a module when presented with its permission requests. In this situation, a user could choose to install a module, granting all required permissions but not granting certain optional permissions.</p>
+<h2 id="22-permission-groups">2.2 Permission Groups</h2>
+<p>This section describes the permission groups that can be requested by a module. For each permission group, we give the permission name and severity, the underlying Java permissions that the group corresponds to, a description of what this permission allows, the parameters that can be associated with the permission, and the risk of granting that permission.</p>
+<p><strong>ACCESS_CLASS</strong><br />
+Since Niagara 4.9. Requires the module requesting this permission group to be signed. Allows a module to access Java classes (code) in packages to which the module normally does not have access.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.RuntimePermission &quot;accessClassInPackage.[packageName]&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: SEVERE</li>
+  <li>Risk: Granting this permission could allow malicious code to access Java classes (code) in packages to which it normally does not have access. Malicious code could use these classes to aid in compromising security of the system.</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>packages (required)</strong>: A comma separated list with the names of the Java packages whose classes should be made accessible. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>AUTHENTICATION</strong><br />
+Allows a module to modify the principals associated with a subject.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission javax.security.auth.AuthPermission &quot;modifyPrincipals&quot;;</code></li>
+      <li><code>permission com.tridium.nre.security.NiagaraBasicPermission &quot;MODIFY_SESSION_IDS&quot;</code></li>
+      <li><code>permission com.tridium.nre.security.NiagaraBasicPermission &quot;GET_AUTHENTICATED_USER&quot;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MILD</li>
+  <li>Risk: Malicious code could use this permission to log you in as any user.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>BACKUPS</strong><br />
+Since Niagara 4.4.  Allows a module to read and manage backup files as well as restore a system from a backup.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.io.FilePermission &quot;${niagara.user.home}${/}backups&quot;, &quot;read,write&quot;;</code></li>
+      <li><code>permission java.io.FilePermission &quot;${niagara.user.home}${/}backups${/}-&quot;, &quot;read,write,delete&quot;;</code></li>
+      <li><code>permission com.tridium.nre.security.NiagaraBasicPermission &quot;RESTORE_BACKUP&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: SEVERE</li>
+  <li>Risk: Malicious code could use this permission modify or delete your backups files or restore your system from a malicious backup file.</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>actions (required)</strong>: Can be any combination of &ldquo;read&rdquo;, &ldquo;write&rdquo;, &ldquo;delete&rdquo; or &ldquo;restore&rdquo;. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>DIAGNOSTICS</strong><br />
+This allows a module to control runtime characteristics and monitor runtime information about the Java Virtual Machine. This could allow a module to enable various &lsquo;verbose&rsquo; modes to access information about the class loading or memory systems, or view a list of all loaded class names, etc&hellip;</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.management.ManagementPermission &quot;control&quot;;</code></li>
+      <li><code>permission java.lang.management.ManagementPermission &quot;monitor&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: SEVERE</li>
+  <li>Risk: This is an extremely sensitive permission and could allow malicious code to control the runtime characteristics of the JVM and cause it to behave unexpectedly, or allow it to monitor sensitive information that help it discover vulnerabilities.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>GET_ENVIRONMENT_VARIABLES</strong><br />
+Allows a module to read the value of an environment variable.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.RuntimePermission &quot;getenv.[variableName]&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MILD</li>
+  <li>Risk: This could be a risk if the environment variable in question contains sensitive data</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>variables (required)</strong>: A comma separated list of the names of the environment variables to be read. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>LOAD_LIBRARIES</strong><br />
+Allows a module to dynamically load a native code library. This allows the module to make use of pre-existing, well-tested libraries, or other external libraries.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.RuntimePermission &quot;loadLibrary.[libraryName]&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: SEVERE</li>
+  <li>Risk: The Java Security Manager is not designed to handle native code, so loading a native library could allow a module to run malicious code.</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>libraries (required)</strong>: A comma separated list with the names of the libraries to be loaded. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>LOGGING</strong><br />
+Allows a module to change the logging/debug settings, either by changing what severity of message is displayed or formatting the output.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.io.FilePermission &quot;${niagara.user.home}${/}logging&quot;, &quot;read,write&quot;;</code></li>
+      <li><code>permission java.io.FilePermission &quot;${niagara.user.home}${/}logging${/}-&quot;, &quot;read,write&quot;;</code></li>
+      <li><code>permission java.util.logging.LoggingPermission &quot;control&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MODERATE</li>
+  <li>Risk: Some of the more verbose log settings may contain sensitive information that should only be used for debugging purposes. A malicious application could use this permission to set the log/debug settings and access information it shouldn&rsquo;t have.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>MANAGE_EXECUTION</strong><br />
+Allows a module to modify the behaviour of any thread in the system, including system threads. This could include stopping, starting, renaming, setting the priority, getting the class loader for a particular class, setting the context class loader, override methods used to get or set the context class loader, etc&hellip;</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.RuntimePermission &quot;modifyThread&quot;;</code></li>
+      <li><code>permission java.lang.RuntimePermission &quot;modifyThreadGroup&quot;;</code></li>
+      <li><code>permission java.lang.RuntimePermission &quot;setContextClassLoader&quot;;</code></li>
+      <li><code>permission java.lang.RuntimePermission &quot;enableContextClassLoaderOverride&quot;;</code> (since Niagara 4.9)</li>
+      <li><code>permission java.lang.RuntimePermission &quot;getClassLoader&quot;;</code> (since Niagara 4.9)</li>
+    </ul>
+  </li>
+  <li>Risk Level: MODERATE</li>
+  <li>Risk: Stopping system threads.  Hogging resources by lowering the priority on important threads. Getting the class loader for a particular class. Changing context class loader of any thread, including system threads.  Allow a subclass of Thread to override the methods that are used to get or set the context class loader for a particular thread.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>MBEAN_PERMISSION</strong><br />
+Since Niagara 4.9. Requires the module requesting this permission group to be signed. Provides for MBeanPermission, MBeanTrustPermission, and MBeanServerPermission.  These permissions control access to MBeanServer operations. The Niagara Security Manager requires operations on an MBean Server to have the caller&rsquo;s permissions imply an MBeanPermission appropriate for the operation. This is described in detail in the documentation for the Java MBeanServer interface. The MBeanTrustPermission controls access to registering MBeans on an MBean Server.  Creating an MBeanServer requires the &ldquo;createMBeanServer&rdquo; or &ldquo;newMBeanServer&rdquo; permission of the MBeanServerPermission.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.MBeanPermission;</code></li>
+      <li><code>permission java.lang.MBeanTrustPermission;</code></li>
+      <li><code>permission java.lang.MBeanServerPermission;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: SEVERE</li>
+  <li>Risks:
+    <ul>
+      <li>MBeanServerPermission (The following subset of permissions are allowed)
+        <ul>
+          <li>newMBeanServer: Malicious code can create MBeanServer instances.</li>
+          <li>createMBeanServer: Malicious code can create and register MBeanServer instances.</li>
+          <li>releaseMBeanServer: Malicious code can remove existing MBeanServer instances.</li>
+        </ul>
+      </li>
+      <li>MBeanTrustPermission
+        <ul>
+          <li>register: If a signer, or codesource is granted this permission, then it is considered a trusted source for MBeans.</li>
+        </ul>
+      </li>
+      <li>MBeanPermission (The following subset of permissions are allowed)
+        <ul>
+          <li>addNotificationListener: Listeners, filters and handbacks can contain malicious code.</li>
+          <li>getAttribute: Malicious code can find out the value of security-sensitive attributes.</li>
+          <li>getMBeanInfo: Malicious code can find out the classname, constructors, operations, attributes and notifications of the MBean.</li>
+          <li>getObjectInstance: Malicious code can find out the classname of the MBean.</li>
+          <li>instantiate: Malicious code can add new classes to the JVM and retrieve MBean object references.</li>
+          <li>invoke: Malicious code can invoke operations on the MBean (for example start/stop a service, etc).</li>
+          <li>isInstanceOf: Malicious code can find out the class type of the MBean.</li>
+          <li>isRegistered: Malicious code can find out if an MBean with a certain ObjectName is registered.</li>
+          <li>queryMBeans: Malicious code can find out the MBeans registered in the MBeanServer.</li>
+          <li>queryNames: Malicious code can find out the MBeans registered in the MBeanServer.</li>
+          <li>registerMBean:The registered MBean can contain malicious code.</li>
+          <li>removeNotificationListener: Modify the behavior of MBeans that registered as listeners of another MBeans.</li>
+          <li>setAttribute: Malicious code can modify the value of security-sensitive attributes.</li>
+          <li>unregisterMBean: Modify the behavior of applications that rely on the presence of MBeans.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Parameters:
+    <ul>
+      <li><strong>type (optional)</strong>: Can be &ldquo;trust&rdquo;, &ldquo;server&rdquo;, or &ldquo;bean&rdquo;, and defaults to &ldquo;bean&rdquo; if not provided. A value of &ldquo;trust&rdquo; grants the &ldquo;register&rdquo; MBeanTrustPermission. A value of &ldquo;server&rdquo; grants the &ldquo;createMBeanServer&rdquo; MBeanServerPermission, which also implies the &ldquo;newMBeanServer&rdquo; MBeanServerPermission. A value of &ldquo;bean&rdquo; grants MBeanPermission, configured by additional parameters listed below.</li>
+      <li><strong>className (optional)</strong>: The class name of the MBean. Valid MBean wildcards can be used.  Defaults to null (i.e. &ldquo;-&rdquo; in the context of MBeanPermission).</li>
+      <li><strong>member (optional))</strong>: A member name of the MBean. Valid MBean wildcards can be used.  Defaults to null (i.e. &ldquo;-&rdquo; in the context of MBeanPermission).</li>
+      <li><strong>objectName (optional)</strong>: The object name (i.e. Java ObjectName) of the MBean. Valid MBean/ObjectName wildcards can be used.  Defaults to null (i.e. &ldquo;-&rdquo; in the context of MBeanPermission).</li>
+      <li><strong>actions (required)</strong>: A comma separated list of actions defined by MBeanPermission. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>MODIFY_IO_STREAMS</strong><br />
+Allows a module to modify the standard input, output and error streams used by the system, redirecting the input/output to another location.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.RuntimePermission &quot;setIO&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MODERATE</li>
+  <li>Risk: A malicious application could use this permissions to modify the system input to monitor and steal user input, or modify the system output and error streams to hide important error messages and warnings.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>NETWORK_COMMUNICATION</strong><br />
+Allows a module to open connections to and accept connections from the specified host on the specified ports. In addition, the URLPermission is a convenience for HTTP(S) connections. It allows access to all HTTP(S) resources recursively at the specified host on the specified ports, as well as all HTTP actions and request headers.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission com.tridium.nre.security.NiagaraSocketPermission &quot;[host1:ports]&quot; &quot;[type]&quot;;</code></li>
+      <li><code>permission com.tridium.nre.security.NiagaraSocketPermission &quot;[host2:ports]&quot; &quot;[type]&quot;;</code></li>
+      <li>&hellip;</li>
+      <li><code>permission java.net.NetPermissions &quot;getProxySelector&quot;</code> (since Niagara 4.3)</li>
+      <li><code>permission java.net.NetPermissions &quot;getNetworkInformation&quot;</code> (since Niagara 4.3)</li>
+      <li><code>permission org.bouncycastle.crypto.CryptoServicesPermission &quot;exportPrivateKey&quot;</code> (since Niagara 4.6)</li>
+      <li>&hellip;</li>
+      <li><code>permission java.net.URLPermission &quot;[http://&lt;host&gt;:&lt;port&gt;]&quot; &quot;[*:*]&quot;;</code>  (since Niagara 4.9)</li>
+      <li><code>permission java.net.URLPermission &quot;[https://&lt;host&gt;:&lt;port&gt;]&quot; &quot;[*:*]&quot;;</code>  (since Niagara 4.9)</li>
+      <li><code>permission java.net.URLPermission &quot;[http://&lt;host&gt;:&lt;port&gt;/-]&quot; &quot;[*:*]&quot;;</code>  (since Niagara 4.9)</li>
+      <li><code>permission java.net.URLPermission &quot;[https://&lt;host&gt;:&lt;port&gt;/-]&quot; &quot;[*:*]&quot;;</code>  (since Niagara 4.9)</li>
+    </ul>
+  </li>
+  <li>Risk Level: MODERATE</li>
+  <li>Risk: A malicious application could use this permission to open a connection and transfer confidential data to other parties. If the &lsquo;getProxySelector&rsquo; option is selected, this could also allow an attacker to discover proxy hosts and ports, to better target an attack. If the &lsquo;getNetworkInformation&rsquo; option is selected, this could also allow an attacker to read information about network hardware such as MAC addresses, which could be used to construct local IPv6 addresses.</li>
+  <li>Parameters:
+    <ul>
+      <li>
+        <p><strong>hosts (required)</strong>: The hosts to/from which we can open/accept a connection.<br><br />
+        This should be a comma-separated list, each item of which should follow the format described in the <a href="https://docs.oracle.com/javase/8/docs/api/java/net/SocketPermission.html">Java SocketPermission documentation</a>. Although wildcard domains (&ldquo;<code>*</code>&rdquo; or &ldquo;<code>*.something</code>&rdquo;) are permitted, the security best practice is to be as specific as possible when specifying your host. If access to a single host is required, only that host should be included in the request.<br><br />
+        In some cases, specifying a domain <em>other than</em> a wildcard can cause performance issues, due to the way Java SocketPermission does DNS lookups. In this situation, setting the &ldquo;niagara.socketPermission.noDns&rdquo; system property to &ldquo;true&rdquo; can help performance, but in certain situations can cause a valid SocketPermission request to be rejected.<br><br />
+        Because of the security impact, wildcard domains should only be used if required, or if it has been determined that non-wildcard domains are causing issues.</p>
+      </li>
+      <li>
+        <p><strong>ports (required)</strong>: A comma-separated list of the ports over which we can connect to the host. This should be a comma-separated list, each item of which should follow the format describe in [Java SocketPermission documentation] (https://docs.oracle.com/javase/8/docs/api/java/net/SocketPermission.html).</p>
+      </li>
+      <li><strong>type (optional)</strong>: Can be &ldquo;client&rdquo;, &ldquo;server&rdquo;, or &ldquo;all&rdquo;. Default to &ldquo;all&rdquo; if nothing is entered.</li>
+      <li><strong>proxySelector (optional) (since Niagara 4.3)</strong>: If set to &ldquo;get&rdquo;, grants the &ldquo;getProxySelector&rdquo; NetPermission.</li>
+      <li><strong>getNetworkInformation (optional) (since Niagara 4.3)</strong>: If set to &ldquo;true&rdquo;, grants the &ldquo;getNetworkInformation&rdquo; NetPermission.</li>
+      <li><strong>SSLSockets (optional) (since Niagara 4.6)</strong>: If set to &ldquo;true&rdquo;, grants the &ldquo;exportPrivateKey&rdquo; org.bouncycastle.crypto.CryptoServicesPermission. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>REFLECTION</strong> Allows a module to use reflection. Adds the suppressAccessChecks named permission group, which is described in the Java API under java.lang.reflect.ReflectPermission. * Java Permissions: * <code>permission java.lang.reflect.ReflectPermission</code> * Risk Level: SEVERE * Risk: Granting this permission could allow an attacker to gain access to and modify private areas of the code. This can allow the attacker to gain access to private information, or alter data, which could cause the user to see incorrect data, or could even cause the system to become unstable or shut down. * Parameters: None.</p>
+<p><strong>RUNTIME_EXECUTION</strong> Allows a module to execute files at runtime.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.io.FilePermission</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: SEVERE</li>
+  <li>Risk: This permission could allow modules to run malicious code.</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>files (required)</strong>: A list of files to be executed at runtime, separated by the operating system&rsquo;s file path separator. Each file path may contain one or more system properties, in the format <code>${system.property.name}</code>. The system property must be present at startup. File separators can be specified with the special key <code>${/}</code>. File path separators can be specified with the special key <code>${:}</code>. Examples:
+        <ul>
+          <li><code>c:\path\to\file1.ext;d:\path\to\file2.ext;c:\path\to\file3.ext</code> (Windows)</li>
+          <li><code>path/to/file1.ext:path/to/file2.ext:path/to/file3.ext</code> (Linux and QNX)</li>
+          <li><code>${java.io.tmp}${/}file1.ext${:}${java.io.tmp}${/}file2.ext</code> (cross platform)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<p><br><br></p>
+<p><strong>SET_SYSTEM_TIME</strong><br />
+Allows a module to modify the system time.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission com.tridium.nre.security.NiagaraBasicPermission &quot;SET_TIME&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MILD</li>
+  <li>Risk: Many functions in a system may depend on the set system time, such as scheduling. Malicious code could use this permission to set the time and cause the system to behave unexpectedly.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>SHUTDOWN_HOOKS</strong> Allows a module to execute special code when the JVM is shutting down. This could be special cleanup operations, code to send out a warning message to an administrator, saving the state of the application, etc&hellip;</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.lang.RuntimePermission &quot;shutdownHooks&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MILD</li>
+  <li>Risk: A malicious application could use this permission to create a shutdown hook that would interfere with the clean shutdown of the system.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>SIGNING</strong> Permission group to be declared by any 3rd party module wishing to make certificate signing requests to the Signing Service from their codebase. Implementing <em>IRequesterComponent</em> will enable a components child <em>BAbstractSigningRequester</em> to interact with the signing service. Part of this process is providing your certificate passwords in <em>IRequesterComponent#supplyCertificatePassword()</em>. To protect access to the password returned from this method, perform the following:</p>
+<p>Declare this permission group with the <em>moduleName</em> parameter populated with your modules name:</p>
+<pre><code class="xml">     &lt;req-permission&gt;
+       &lt;name&gt;SIGNING&lt;/name&gt;
+       &lt;purposeKey&gt;Protect my signed certificate passwords&lt;/purposeKey&gt;
+       &lt;parameters&gt;
+         &lt;parameter name=&quot;moduleName&quot; value=&quot;foo&quot;/&gt;
+       &lt;/parameters&gt;
+     &lt;/req-permission&gt;
+</code></pre>
+<p>You will then need to make the following permission check in <em>IRequesterComponent#supplyCertificatePassword()</em>:</p>
+<pre><code class="java"> SecurityManager sm = System.getSecurityManager();
+ if (sm != null)
+ {
+   sm.checkPermission(new SigningPasswordPermission(TYPE.getTypeSpec().getModuleName()));
+ }
+</code></pre>
+<p>Now only the framework itself, and modules declaring a moduleName parameter value of &lsquo;foo&rsquo; can invoke <em>supplyCertificatePassword();</em> and gain access to the certificate password value. <br><br></p>
+<p><strong>SYSTEM_PROPERTIES</strong><br />
+Allows a module to read or write the value of system properties. This could be used to make decisions based on OS information, or other information stored in the system properties.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.util.PropertyPermission &quot;[propertyName]&quot;, &quot;read,write&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MILD</li>
+  <li>Risk: Malicious code could use this permission to gather information about the system or user, for example by reading the &ldquo;java.home&rdquo; or &ldquo;user.home&rdquo; properties.</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>properties (required)</strong>: A comma separated list of the system property names.</li>
+      <li><strong>actions (required)</strong>: Can be &ldquo;read&rdquo;, &ldquo;write&rdquo; or &ldquo;read,write&rdquo;. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>THIRD_PARTY_PERMISSION</strong><br />
+Since Niagara 4.9. Requires the module requesting this permission group to be signed. This permission allows code to access an arbitrary, third-party permission that is not in Java, Niagara, or BouncyCastle.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li>Any third-party permission that is not in Java, Niagara, or BouncyCastle</li>
+    </ul>
+  </li>
+  <li>Risk Level: SEVERE</li>
+  <li>Risk: Granting an arbitrary, third-party permission could allow malicious code to use third-party code in potentially unwanted ways.</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>className (required)</strong>: The third-party permission class name.</li>
+      <li><strong>targetName (optional)</strong>: An optional target name to use when constructing the third-party permission.</li>
+      <li><strong>actions (optional)</strong>: An optional comma separated list of actions to use when constructing the third-party permission. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>UI</strong><br />
+Allows a module to perform various UI related tasks, such as creating a system tray icon, or creating a window that always displays on top.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.awt.AWTPermission &quot;accessClipboard&quot;;</code></li>
+      <li><code>permission java.awt.AWTPermission &quot;accessSystemTray&quot;;</code></li>
+      <li><code>permission java.awt.AWTPermission &quot;fullScreenExclusive&quot;;</code></li>
+      <li><code>permission java.awt.AWTPermission &quot;setWindowAlwaysOnTop&quot;;</code></li>
+      <li><code>permission java.awt.AWTPermission &quot;showWindowWithoutWarningBanner&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MILD</li>
+  <li>Risk: Malicious code could use these permissions to: spoof the system tray icon of another program to trick a user into entering sensitive data, or fill up the system tray; share or steal confidential information from the AWT clipboard; pretend to be a full desktop to capture data from the user.</li>
+  <li>Parameters: None. <br><br></li>
+</ul>
+<p><strong>KEY_STORE</strong><br />
+Allows a module to read or write keys and certificates in the Niagara key stores. Note: All modules are granted read permission to userTrustStore and systemTrustStore by default.</p>
+<ul>
+  <li>Java Permissions:
+    <ul>
+      <li><code>permission java.util.PropertyPermission &quot;[keystore]&quot;, &quot;read,write&quot;;</code></li>
+    </ul>
+  </li>
+  <li>Risk Level: MODERATE</li>
+  <li>Risk: Malicious code could use this permission to steal keys from the key store, or inject malicious certificates into the trust store.</li>
+  <li>Parameters:
+    <ul>
+      <li><strong>keystores (required)</strong>: A comma separated list of keystore names, or &lsquo;*&rsquo; for all keystores. Valid keystore names are userTrustStore, userUntrustedStore, systemTrustStore, userKeyStore.</li>
+      <li><strong>actions (required)</strong>: Can be &ldquo;read&rdquo;, &ldquo;write&rdquo;, &ldquo;read,write&rdquo;, or &ldquo;all&rdquo;. <br><br></li>
+    </ul>
+  </li>
+</ul>
+<h2 id="23-tips-and-tricks">2.3 Tips and Tricks</h2>
+<p>In this section, we discuss various things you can do to improve the development process, or improve the experience of your end users.</p>
+<h3 id="231-turning-off-console-output">2.3.1 Turning Off Console Output</h3>
+<p>As described in section 3.1, if the registry has changed, the user will be notified of any additional permissions that a module has requested in the console output. During development, this can mean a lot of output every time a change is made and the application restarted.</p>
+<p>To suppress this output, you can set the “niagara.security.logPermissionGroups” system property to “false”. This must be present on startup, so it should be included in the “system.properties” file or added to the command line when starting the application. This only works if the “developer” license feature is present.</p>
+<h3 id="232-localization">2.3.2 Localization</h3>
+<p>Permission requests are fully localizable. As a developer of a new module, the main concern is ensuring that any permission requests created are localizable. This means that the <code>&lt;purposeKey&gt;</code> element for each permission request in the “module-permissions.xml” file should, ideally, correspond to a lexicon entry in the module’s “module.lexicon” file (see Figure 2‑7 and Figure 2‑8). If the text in the <code>&lt;purposeKey&gt;</code> element doesn&rsquo;t correspond to a lexicon entry, the text will be used as-is as a non-localizable description.</p>
+<pre><code>...
+&lt;req-permission&gt;
+  &lt;name&gt;NETWORK_COMMUNICATION&lt;/name&gt;
+  &lt;purposeKey&gt;networkComm.purpose&lt;/purposeKey&gt;
+  &lt;parameters&gt;
+    &lt;parameter name=&quot;hosts&quot; value=&quot;*.domain.net&quot;/&gt;
+    &lt;parameter name=&quot;ports&quot; value=&quot;25,465&quot;/&gt;
+  &lt;/parameters&gt;
+&lt;/req-permission&gt;
+...
+</code></pre>
+<p><em>Figure 2‑7: Example of a lexicon key reference in module-permissions.xml</em> <br><br></p>
+<pre><code>...
+networkComm.purpose=This module communicates with *.domain.net servers on ports 25 and 465.
+...
+</code></pre>
+<p><em>Figure 2‑8: Example module.lexicon entry</em> <br><br></p>
+<p>The <code>&lt;purposeKey&gt;</code> is the only field whose localization is handled by the module itself. All other text associated with permission requests are localized by entries in the “baja” module’s lexicon. Some examples of user facing text that can be localized are:</p>
+<ul>
+  <li>The various labels, such as “Type”, “Module Name”, “Purpose”, “Parameters”, etc…</li>
+  <li>The risk levels: “MILD”, “MODERATE”, “SEVERE”</li>
+  <li>The names of each permission type’s parameters</li>
+  <li>The description of what risks a permission entails</li>
+</ul>
+<p>All of these can be found in the baja lexicon, and start with “permissions.”.</p>
+<h1 id="3-verifying-permissions">3 Verifying Permissions</h1>
+<p>Starting in Niagara 4, the Java Security Manager was turned on in order to protect core functionality and sensitive files. Starting in Niagara 4.2, modules can request additional permissions to perform actions that the Niagara Policy does not allow by default. When installing a new Niagara system, or when installing new modules to an existing Niagara system, it is important to ensure that the permissions that modules are requesting are consistent with their functionality.</p>
+<p>There are two ways for an end user to check what permissions are being requested by a module: console output, and the new Policy spy page.</p>
+<h2 id="31-console-logging">3.1 Console Logging</h2>
+<p>When starting up an application, such as Workbench or a station, we check whether the registry has changed. This can happened when starting up a fresh installation for the first time, or when installing a new module to an existing installation. If the registry has changed, all permissions requested by all modules will be printed to the console/application director output, along with the severity of the permission, associated parameters and the reason the module needs the permission, as shown in Figure 3‑1.</p>
+<p><img src="perm-console.png" alt="Console Output" title="Console Output" /></p>
+<p><em>Figure 3‑1: Permission requests printed out to the console</em></p>
+<h2 id="32-policy-spy">3.2 Policy Spy</h2>
+<p>In addition to the console output, the permissions granted to a module may be viewed via the Policy spy page (see Figure 3‑2). The Policy spy can be viewed at any time, and gives more detailed information that the console output, including a description of the risks associated with each permissions. The Policy spy page can be found at Spy &gt; securityInfo &gt; Policy Spy.</p>
+<p><img src="perm-spy.png" alt="Policy Spy" title="Policy Spy" /></p>
+<p><em>Figure 3‑2: The Policy spy page</em></p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/securityManager.html" class="navbar">Prev</a> |  <a href="/doc/security/authentication.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.Flags" name="Flags" packageName="javax.baja.sys" public="true" final="true">
+<description>
+Flags are boolean values which are stored as&#xa; a bitmask on each slot in a BComplex.  Some&#xa; flags apply to all slot types, while some only&#xa; have meaning for certain slot types.&#xa; &lt;p&gt;&#xa; &lt;table border=&#x22;1&#x22; summary=&#x22;Description of the different flags and their uses&#x22;&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;Flag&lt;/th&gt;&lt;th&gt;Char&lt;/th&gt;&#xa; &lt;th&gt;Applies&lt;/th&gt;&#xa; &lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;readonly&lt;/th&gt;&lt;td&gt;r&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; The &lt;code&gt;readonly&lt;/code&gt; flag is used to indicate&#xa; slots which are not accessible to users.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;transient&lt;/th&gt;&lt;td&gt;t&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; Transient properties do not get persisted when saving&#xa; an object graph to the file system.  Transient properties&#xa; are usually also readonly, unless they are designed to&#xa; be a linkable input slot.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;hidden&lt;/th&gt;&lt;td&gt;h&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;&#xa; Hidden slots are designed to be invisible to the user,&#xa; and exist only for Java developers.  User interfaces&#xa; should rarely display hidden slots.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;summary&lt;/th&gt;&lt;td&gt;s&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; Summary properties are the focal points of any given BComponent.&#xa; This flag is used by user interface tools to indicate primary&#xa; properties for display.  This might be as a column in a table,&#xa; or as a glyph in a graphical programming tool.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;async&lt;/th&gt;&lt;td&gt;a&lt;/td&gt;&#xa; &lt;td&gt;A&lt;/td&gt;&lt;td&gt;&#xa; By default action are invoked synchronously on the caller&#x27;s&#xa; thread.  By using the &lt;code&gt;async&lt;/code&gt; flag on an action,&#xa; invocations are coalesced and executed asynchronously at some&#xa; point in the near future on the engine&#x27;s thread.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;noRun&lt;/th&gt;&lt;td&gt;n&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; NoRun properties prevent start/stop from recursing on&#xa; properties with this flag set.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;defaultOnClone&lt;/th&gt;&lt;td&gt;d&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; Specifies that when an object is cloned via the newCopy()&#xa; method these properties revert to their default value, not&#xa; the clone source&#x27;s value. Copy hints for newCopy() can&#xa; control how this flag affects the copy in three ways:&#xa; (1) Revert all properties with this flag;&#xa; (2) Revert all read-only properties with this flag;&#xa; (3) Ignore this flag, retain all non-default values.&#xa; See &lt;code&gt;CopyHints&lt;/code&gt; for details.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;confirmRequired&lt;/th&gt;&lt;td&gt;c&lt;/td&gt;&#xa; &lt;td&gt;A&lt;/td&gt;&lt;td&gt;&#xa; When the action is invoked by a user, a confirmation&#xa; dialog must be acknowledged before proceeding.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;operator&lt;/th&gt;&lt;td&gt;c&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;&#xa; This makes a slot an operator security level.  By default&#xa; when this flag is clear, the slot is an admin security level.&#xa; Note that a BStruct slot marked with the operator flag applies&#xa; to all of the BStruct&#x27;s child slots, regardless of whether&#xa; the BStruct child slots have the operator flag set or not.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;executeOnChange&lt;/th&gt;&lt;td&gt;x&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; Many objects such as the program object use this flag to&#xa; indicate that the component should be executed when this&#xa; property is changed.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;fanIn&lt;/th&gt;&lt;td&gt;f&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; By default only one link may tied into a Property.  Setting&#xa; this flag allows multiple links to tie into a Property.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;noAudit&lt;/th&gt;&lt;td&gt;A&lt;/td&gt;&#xa; &lt;td&gt;P,A&lt;/td&gt;&lt;td&gt;&#xa; Setting this flag prevents property changes and action&#xa; invocations from being audited.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;composite&lt;/th&gt;&lt;td&gt;p&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;&#xa; This flag is set and used internally to designate that&#xa; a slot was created using the composite feature.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;removeOnClone&lt;/th&gt;&lt;td&gt;R&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;&#xa; When an object is cloned via the newCopy()&#xa; method, any dynamic Slots that have this flag set are&#xa; removed from the clone.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;metadata&lt;/th&gt;&lt;td&gt;m&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; The metadata flag is simply used to mark properties&#xa; as metadata for the parent object.  It is simply used&#xa; to query objects by its metadata properties.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;linkTarget&lt;/th&gt;&lt;td&gt;L&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;&#xa; The linkTarget flag is simply used to mark slots that&#xa; are targeted by active link(s).  It should never be set directly,&#xa; as the linkTarget flag will be set by the framework.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;nonCritical&lt;/th&gt;&lt;td&gt;N&lt;/td&gt;&#xa; &lt;td&gt;P&lt;/td&gt;&lt;td&gt;&#xa; The nonCritical flag is used to mark properties that shouldn&#x27;t&#xa; be persisted in the BIDataRecoveryService store (for battery-less JACE support).&#xa; Any events for a property marked with this flag will not be recorded&#xa; in the BIDataRecoveryService store.  Similarly, a component marked with&#xa; this flag means that any events for any of its direct child properties&#xa; will not be recorded in the BIDataRecoveryService store.&#xa; &lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;userDefined1&lt;/th&gt;&lt;td&gt;1&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;User defined.&lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;userDefined2&lt;/th&gt;&lt;td&gt;2&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;User defined.&lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;userDefined3&lt;/th&gt;&lt;td&gt;3&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;User defined.&lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;tr&gt;&lt;th align=&#x22;left&#x22;&gt;userDefined4&lt;/th&gt;&lt;td&gt;4&lt;/td&gt;&#xa; &lt;td&gt;P,A,T&lt;/td&gt;&lt;td&gt;User defined.&lt;/td&gt;&lt;/tr&gt;&#xa;&#xa; &lt;/table&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">8 Mar 00</tag>
+<tag name="@version">$Revision: 42$ $Date: 8/3/10 1:04:04 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.sys.Flags() -->
+<constructor name="Flags" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.Flags.getFlags() -->
+<method name="getFlags"  public="true" static="true">
+<description>
+Get the list of flags.
+</description>
+<return>
+<type class="javax.baja.sys.Flags$Flag" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.getByBit(int) -->
+<method name="getByBit"  public="true" static="true">
+<description>
+Get a Flag by its bit.  Excactly one bit must&#xa; be set in the specified bit parameter.  Return&#xa; null if not found.
+</description>
+<parameter name="bit">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Flags$Flag"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.getByName(java.lang.String) -->
+<method name="getByName"  public="true" static="true">
+<description>
+Get a Flag by name.  Return null if not found.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Flags$Flag"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.getBySymbol(char) -->
+<method name="getBySymbol"  public="true" static="true">
+<description>
+Get a Flag by symbol.  Return null if not found.
+</description>
+<parameter name="symbol">
+<type class="char"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Flags$Flag"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.has(javax.baja.sys.BComplex, javax.baja.sys.Slot, int) -->
+<method name="has"  public="true" static="true">
+<description/>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="comp">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+complex
+</description>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+<description>
+slot on complex
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+<description>
+flags to check
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the complex has the specified slot flags on the given slot
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.hasAny(javax.baja.sys.BComplex, javax.baja.sys.Slot, int...) -->
+<method name="hasAny"  public="true" static="true" isVarargs="true">
+<description/>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="comp">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+complex
+</description>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+<description>
+slot on complex
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int" dimension="1"/>
+<description>
+flags to check
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the complex has any of the given slot flags. If no flags&#xa; are given to the method, returns true.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.hasAll(javax.baja.sys.BComplex, javax.baja.sys.Slot, int...) -->
+<method name="hasAll"  public="true" static="true" isVarargs="true">
+<description/>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="comp">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+complex
+</description>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+<description>
+slot on complex
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int" dimension="1"/>
+<description>
+flags to check
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the complex has all of the given slot flags. If no flags&#xa; are given to the method, returns true.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.add(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Context, int...) -->
+<method name="add"  public="true" static="true" isVarargs="true">
+<description>
+Add the specified flags.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="comp">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+component
+</description>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+<description>
+slot on component
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+security context
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int" dimension="1"/>
+<description>
+flags to add
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.add(int, int...) -->
+<method name="add"  public="true" static="true" isVarargs="true">
+<description/>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="flags">
+<type class="int"/>
+<description>
+starting flags
+</description>
+</parameter>
+<parameter name="flagsToAdd">
+<type class="int" dimension="1"/>
+<description>
+flags to add
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+a new integer with the specified flags added
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.remove(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.Context, int...) -->
+<method name="remove"  public="true" static="true" isVarargs="true">
+<description>
+Remove the specified flags.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="comp">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+component
+</description>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+<description>
+slot on component
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+security context
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int" dimension="1"/>
+<description>
+flags to remove
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.remove(int, int...) -->
+<method name="remove"  public="true" static="true" isVarargs="true">
+<description/>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="flags">
+<type class="int"/>
+<description>
+starting flag
+</description>
+</parameter>
+<parameter name="flagsToRemove">
+<type class="int" dimension="1"/>
+<description>
+flags to remove
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+a new integer with the specified flags removed
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isTransient(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isTransient"  public="true" static="true">
+<description>
+Return true if the transient flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isReadonly(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isReadonly"  public="true" static="true">
+<description>
+Return true if the readonly flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isHidden(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isHidden"  public="true" static="true">
+<description>
+Return true if the hidden flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isSummary(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isSummary"  public="true" static="true">
+<description>
+Return true if the summary flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isAsync(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isAsync"  public="true" static="true">
+<description>
+Return true if the async flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isNoRun(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isNoRun"  public="true" static="true">
+<description>
+Return true if the no run flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isDefaultOnClone(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isDefaultOnClone"  public="true" static="true">
+<description>
+Return true if the default on clone flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isConfirmRequired(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isConfirmRequired"  public="true" static="true">
+<description>
+Return true if the confirm required flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isOperator(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isOperator"  public="true" static="true">
+<description>
+Return true if the operator flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isAdmin(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isAdmin"  public="true" static="true">
+<description>
+Return true if the operator flag is clear for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isExecuteOnChange(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isExecuteOnChange"  public="true" static="true">
+<description>
+Return true if the execute on change flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isFanIn(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isFanIn"  public="true" static="true">
+<description>
+Return true if the fan in flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isNoAudit(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isNoAudit"  public="true" static="true">
+<description>
+Return true if the no audit flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isComposite(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isComposite"  public="true" static="true">
+<description>
+Return true if the composite flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isRemoveOnClone(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isRemoveOnClone"  public="true" static="true">
+<description>
+Return true if the removeOnClone flag is set for the slot.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isMetadata(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isMetadata"  public="true" static="true">
+<description>
+Return true if the metadata flag is set for the slot.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isLinkTarget(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isLinkTarget"  public="true" static="true">
+<description>
+Return true if the linkTarget flag is set for the slot.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isNonCritical(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isNonCritical"  public="true" static="true">
+<description>
+Return true if the nonCritical flag is set for the slot.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isUserDefined1(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isUserDefined1"  public="true" static="true">
+<description>
+Return true if the user defined 1 flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isUserDefined2(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isUserDefined2"  public="true" static="true">
+<description>
+Return true if the user defined 2 flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isUserDefined3(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isUserDefined3"  public="true" static="true">
+<description>
+Return true if the user defined 3 flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.isUserDefined4(javax.baja.sys.BComplex, javax.baja.sys.Slot) -->
+<method name="isUserDefined4"  public="true" static="true">
+<description>
+Return true if the user defined 4 flag is set for the slot.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.setAllReadonly(javax.baja.sys.BComponent, boolean, javax.baja.sys.Context) -->
+<method name="setAllReadonly"  public="true" static="true">
+<description>
+Set or clear the readonly flag for all the properties&#xa; which store a non-BComponent.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="readonly">
+<type class="boolean"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.encodeToString(int) -->
+<method name="encodeToString"  public="true" static="true">
+<description>
+Encode a flags bitmask into its String&#xa; encoding using the char code for each set bit.
+</description>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true" static="true">
+<description>
+Decode the flags String which is a series&#xa; of flag char codes into its flags bitmask.&#xa; Characters which aren&#x27;t known are ignored.
+</description>
+<parameter name="flagsStr">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.toDisplayString(int, javax.baja.sys.Context) -->
+<method name="toDisplayString"  public="true" static="true">
+<description>
+Get a human readable, localized string for the specified flags.
+</description>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Flags.READONLY -->
+<field name="READONLY"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.TRANSIENT -->
+<field name="TRANSIENT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.HIDDEN -->
+<field name="HIDDEN"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.SUMMARY -->
+<field name="SUMMARY"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.ASYNC -->
+<field name="ASYNC"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.NO_RUN -->
+<field name="NO_RUN"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.DEFAULT_ON_CLONE -->
+<field name="DEFAULT_ON_CLONE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.CONFIRM_REQUIRED -->
+<field name="CONFIRM_REQUIRED"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.OPERATOR -->
+<field name="OPERATOR"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.EXECUTE_ON_CHANGE -->
+<field name="EXECUTE_ON_CHANGE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.FAN_IN -->
+<field name="FAN_IN"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.NO_AUDIT -->
+<field name="NO_AUDIT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.COMPOSITE -->
+<field name="COMPOSITE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.REMOVE_ON_CLONE -->
+<field name="REMOVE_ON_CLONE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.METADATA -->
+<field name="METADATA"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.LINK_TARGET -->
+<field name="LINK_TARGET"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.NON_CRITICAL -->
+<field name="NON_CRITICAL"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.USER_DEFINED_1 -->
+<field name="USER_DEFINED_1"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.USER_DEFINED_2 -->
+<field name="USER_DEFINED_2"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.USER_DEFINED_3 -->
+<field name="USER_DEFINED_3"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.sys.Flags.USER_DEFINED_4 -->
+<field name="USER_DEFINED_4"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

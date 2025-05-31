@@ -1,0 +1,215 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/distribution.html" class="navbar">Prev</a> |  <a href="/doc/virtualComponents.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="niagara-4-automated-testing-with-testng">Niagara 4 Automated Testing with TestNG</h1>
+<h2 id="overview">Overview</h2>
+<p>The Niagara Framework uses the TestNG test framework for executing unit tests within the Niagara Framework. TestNG is a well-known tool in the Java community, and in addition to creating basic unit tests, it supports the following functionality:</p>
+<ul>
+  <li>Flexible annotation-based test configuration (setup/teardown)</li>
+  <li>Automatic reporting of test results</li>
+  <li>Dependencies and sequencing</li>
+  <li>Data-driven testing and parameterized test methods</li>
+  <li>Parallel testing</li>
+</ul>
+<p>Niagara&rsquo;s gradle-based build system supports co-located test source code (that is, source code and test code are contained in the same module development folder). More information on TestNG can be found in the <a href="http://testng.org/doc/documentation-main.html">TestNG Documentation</a></p>
+<h2 id="basic-test-case">Basic Test Case</h2>
+<h3 id="test-package-class-and-methods">Test Package, Class, and Methods</h3>
+<p>Create a &ldquo;srcTest&rdquo; folder in the module, and add all your test source code there. Here is an example of a module with a test class:</p>
+<p><img src="test1.png" alt="Module containing a test class" /></p>
+<p>Each test class should extend <strong>javax.baja.test.BTestNg</strong> and should include the standard Baja code to declare the Type. TestNg will treat each test method as a single test case. A test method is defined by annotating it with the @Test annotation:</p>
+<pre><code class="sunlight-highlight-java">package com.acme.myModule.test;
+
+import javax.baja.nre.annotations.NiagaraType;
+import javax.baja.sys.Sys;
+import javax.baja.sys.Type;
+import javax.baja.test.BTestNg;
+import com.acme.myModule.BFunctionType;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+@NiagaraType
+public class BFunctionTypeTest extends BTestNg
+{
+/*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
+/*@ $com.acme.myModule.test.BFunctionTypeTest(2979906276)1.0$ @*/
+/* Generated Mon Mar 28 07:19:53 EDT 2016 by Slot-o-Matic (c) Tridium, Inc. 2012 */
+
+////////////////////////////////////////////////////////////////
+// Type
+////////////////////////////////////////////////////////////////
+  
+  @Override
+  public Type getType() { return TYPE; }
+  public static final Type TYPE = Sys.loadType(BFunctionTypeTest.class);
+
+/*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+  
+  @Test
+  public void addTest()
+  {
+    Assert.assertEquals(BFunctionType.make(BFunctionType.ADD), BFunctionType.add);
+  }
+}
+</code></pre>
+<p>There are several assert*() methods available in TestNG to test equality, null, true/false, etc. See the <a href="http://testng.org/javadocs/org/testng/Assert.html">TestNG Javadocs</a> for the complete list.</p>
+<h3 id="gradle-build-script">gradle build script</h3>
+<p>There should be no changes necessary to the default build.gradle/&lt;moduleName&gt;.gradle scripts to compile unit test cases. If the unit tests require non-Java resources (BOG files, images, input files, etc), gradle will need to be configured to include them in the resulting test jar. For example, if there is an &ldquo;rc&rdquo; folder in the &ldquo;srcTest&rdquo; folder with the necessary test resources:</p>
+<pre><code class="sunlight-highlight-plaintext">tasks.named&lt;Jar&gt;(&quot;moduleTestJar&quot;) {
+  from(&quot;srcTest&quot;) {
+    include(&quot;rc/**&quot;)
+  }
+}
+</code></pre>
+<h3 id="moduletest-includexml">moduleTest-include.xml</h3>
+<p>Types for unit tests must be declared, but this should be generated automatically when tests are compiled (see below)</p>
+<h3 id="compile-and-execute">Compile and execute</h3>
+<p>There is a &ldquo;moduleTestJar&rdquo; gradle task which will build a test module containing all the unit tests for a given module:</p>
+<pre><code class="sunlight-highlight-bash">gradlew moduleTestJar
+</code></pre>
+<p>Once the module test jar has been generated, the test command is used to run the tests defined for a given module. The test command can take one of three arguments:</p>
+<ul>
+  <li>all, which will run all tests found</li>
+  <li>&lt;moduleName&gt;, which will run all tests for that module</li>
+  <li>&lt;moduleName&gt;:&lt;typeName&gt;, which will run all tests in a given test class</li>
+</ul>
+<p>Single-method execution is not currently supported. Test output will look something like this:</p>
+<pre><code class="sunlight-highlight-text">C:\Users\user\Niagara4.2\tridium\myModule\myModule-rt&gt; test myModule
+[TestNG] Running:
+  Command line suite
+
+===============================================
+myModuleTest_FunctionTypeTest
+Total tests run: 5, Failures: 0, Skips: 0
+===============================================
+</code></pre>
+<p>Output verbosity can be set using the option <strong>v:&lt;n&gt;</strong>, where n is an integer from 1 to 10. The higher the number, the more output provided by TestNG.</p>
+<h2 id="additional-testng-capabilities">Additional TestNG Capabilities</h2>
+<h3 id="test-setupteardown">Test Setup/Teardown</h3>
+<p>One big advantage of TestNG is its flexible test configuration options. As with specifying tests, these configurations are also specified with annotations. Setup and teardown methods can be established to run once per method, per class, per test group, or per test suite. The example below shows how to initialize and destroy a test station once for all test methods in a class, calling methods from BTest.</p>
+<pre><code class="sunlight-highlight-java">private TestStationHandler handler;
+private BStation station;
+
+@BeforeClass(alwaysRun=true)
+public void setup()
+  throws Exception
+{
+  handler = BTest.createTestStation();
+  handler.startStation();
+  station = handler.getStation();
+}
+
+@AfterClass(alwaysRun=true)
+public void cleanup()
+  throws Exception
+{
+  handler.stopStation();
+  handler.releaseStation();
+  handler = null;
+}
+</code></pre>
+<h3 id="groups-dependencies-and-sequencing">Groups, Dependencies, and Sequencing</h3>
+<p>A set of tests may be grouped together with the <strong>groups</strong> annotation attribute. Groups naming is currently up to the developer. One use of groups is to identify a collection of tests to execute in a Continuous Integration (CI) environment. Note that CI is not provided by Niagara; see <a href="http://en.wikipedia.org/wiki/Continuous_integration">this link</a> for more information.</p>
+<p>An example of the group attribute is below:</p>
+<pre><code class="sunlight-highlight-java">@Test(groups={&quot;ci&quot;})
+public void ngTestSimple()
+{
+  Assert.assertEquals(Lexicon.make(&quot;test&quot;).getText(&quot;fee.text&quot;), &quot;Fee&quot;);
+}
+</code></pre>
+<p>You may declare dependencies between test methods and groups using <b>dependsOn*</b> annotation attributes. For example, if you have a group of tests that should run after other sets, just attach the dependsOnGroups attribute for each method in the group.</p>
+<p>If you want to explicitly define a sequence of test method execution, use the <strong>priority</strong> annotation attribute. The value is a positive integer, and lower priorities will be scheduled first. See the TestNG documentation for additional information.</p>
+<p><strong>Important</strong>: If you implement <strong>groups</strong> and also use <strong>BeforeClass/AfterClass</strong> methods, be sure to attach the <strong>alwaysRun=true</strong> attribute to the BeforeClass/AfterClass annotations</p>
+<h3 id="parameterized-tests">Parameterized Tests</h3>
+<p>A set of similar test cases can be parameterized with a data source class that generates input to the test method. Again, the relationship is designated with parameterized annotations. First, you declare a data provider that creates an object array containing test method arguments for for each instance of the test execution. In the example below, the test method takes two arguments, and each entry in the data provider array contains instances of those two argument types.</p>
+<pre><code class="sunlight-highlight-java">@DataProvider(name=&quot;operation&quot;)
+public Object[][] createColumnData()
+{
+  return new Object[][] {
+    { Integer.valueOf(BFunctionType.ADD),      BFunctionType.add },
+    { Integer.valueOf(BFunctionType.SUBTRACT), BFunctionType.subtract },
+    { Integer.valueOf(BFunctionType.MULTIPLY), BFunctionType.multiply },
+    { Integer.valueOf(BFunctionType.DIVIDE),   BFunctionType.divide }
+  };
+}
+  
+@Test(dataProvider = &quot;operation&quot;)
+public void testOperation(Integer i, BFunctionType ft)
+{ 
+  Assert.assertEquals(BFunctionType.make(i.intValue()), ft); 
+}
+</code></pre>
+<p>Note that data provider argument types must be Java Objects (they cannot be primitives such as boolean on int).</p>
+<h3 id="exception-testing">Exception Testing</h3>
+<p>If your code can generate exceptions and you want to test those execution paths, you can tell a test method to expect particular exception types by using the <strong>expectedExceptions</strong> attribute with a list of exception classes. In the following test, an occurrence of a NullPointerException will successfully pass the test. Any other exception type will fail the test.</p>
+<pre><code class="sunlight-highlight-java">@Test(expectedExceptions={java.lang.NullPointerException.class})
+public void ngTestException()
+  throws Exception
+{
+  a = BExportSourceInfo.make(BOrd.make(&quot;station:|slot:/a&quot;), BOrd.make(&quot;station:|slot:/b&quot;), new BGridToText());
+  BExportSourceInfo.make(&quot;foo:bar&quot;);
+  a.decodeFromString(&quot;foo:bar&quot;);
+}
+</code></pre>
+<h3 id="reporting">Reporting</h3>
+<p>TestNG will generate XML and HTML reports each time it runs. By default, it creates these in a <strong>&lt;niagara.user.home&gt;/reports/testng</strong> folder. The HTML report <strong>index.html</strong> contains detailed information about the test results. There is also a static XML report and an email-able static HTML report. The report location can be changed using the command line option <strong>-output:&lt;path&gt;</strong></p>
+<p><img src="test2.png" alt="Example Test Output" /></p>
+<h3 id="additional-test-execution-options">Additional Test Execution Options</h3>
+<p>The Niagara test executable offers several options for tailoring the execution of tests to your needs. The usage and options are outlined below:</p>
+<pre><code class="sunlight-highlight-text">usage:
+  test &lt;target&gt; [target ... target] [testng options]
+target:
+  all
+  &lt;module&gt;
+  &lt;module-runtimeProfile&gt;
+  &lt;module&gt;:&lt;type&gt;
+  &lt;module&gt;:&lt;type&gt;.&lt;method&gt;
+  &lt;com.package&gt;.&lt;BTestClass&gt;
+  &lt;com.package&gt;.&lt;BTestClass&gt;.&lt;method&gt;
+  /&lt;regex to match against the com.package.BTestClass#method format&gt;/
+testng options:
+  -v:&lt;n&gt;                  Set TestNG output verbosity level (1 - 10)
+  -output:&lt;path&gt;          Set the location for TestNG output
+  -groups:&lt;a,b,c&gt;         Comma-separated list of TestNG group names to test
+  -excludegroups:&lt;a,b,c&gt;  Comma-separated list of TestNG group names to skip
+  -skipHtmlReport         Flag to disable HTML report generation
+  -generateJunitReport    Flag to enable JUnit XML report generation
+  -benchmark              Print the 50 highest duration tests and test suites on exit
+  -loopCount:&lt;n&gt;          Run target(s) in a loop n times (1 - 1000000)
+</code></pre>
+<h2 id="testing-with-code-coverage">Testing with Code Coverage</h2>
+<p>In addition to running your tests with the <code>test</code> command; you can also run them via Gradle. Running your tests with Grade enables the use of the <a href="https://www.jacoco.org/jacoco/">JaCoCo</a> code coverage tool. JaCoCo gives you a report of how much of your code was actually exercised by your tests. While this is not in and of itself an indicator of test quality, it can be a useful tool to see areas of your code that your tests do not cover sufficiently.</p>
+<h3 id="running-tests-with-coverage">Running tests with coverage</h3>
+<p>To run your module&rsquo;s tests with coverage, run the tests via Gradle:</p>
+<pre><code class="sunlight-highlight-text">gradlew :jacocoExample-rt:niagaraTest
+</code></pre>
+<p>This will produce a JaCoCo test coverage data file at <code>jacocoExample-rt/build/jacoco/niagaraTest.exec</code>. This file in and of itself doesn&rsquo;t do much; you&rsquo;ll want to generate an HTML report as well. This can be done with the following Gradle command:</p>
+<pre><code class="sunlight-highlight-text">gradlew :jacocoExample-rt:jacocoNiagaraTestReport
+</code></pre>
+<p>This will produce an HTML report in <code>jacocoExample-rt/build/reports/jacoco/niagaraTest/html</code>. You can open this report in any web browser to get a view of the test coverage for your module:</p>
+<p><img src="jacoco.png" alt="Example JaCoCo report" /></p>
+<!--  LocalWords:  TestNG
+ -->
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/distribution.html" class="navbar">Prev</a> |  <a href="/doc/virtualComponents.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

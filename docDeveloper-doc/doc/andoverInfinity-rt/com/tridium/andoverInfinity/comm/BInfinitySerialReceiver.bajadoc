@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="rt" qualifiedName="com.tridium.andoverInfinity.comm.BInfinitySerialReceiver" name="BInfinitySerialReceiver" packageName="com.tridium.andoverInfinity.comm" public="true">
+<description>
+Infinity driver implementation of a BDdfSerialReceiver, uses a &#xa; BVt100ScreenBuffer to store characters read from the input stream.
+</description>
+<tag name="@author">cturman</tag>
+<tag name="@creation">May 1, 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="com.tridium.ddfSerial.comm.BDdfSerialNullReceiver"/>
+</extends>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.Vt100Const"/>
+</implements>
+<property name="elapsedTimeForEndOfMessage" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  On Cx9000, it may be&#xa; as little as 200ms, on CMX240 it may be 600ms or more.   You need&#xa; to make this as small as possible for performance, while having&#xa; making it long enough to not have any receive timeouts&#xa; or errors.  This timeout needs to be longer than the longest&#xa; delay that may occur &#x22;between characters&#x22; in a response from an&#xa; Infinity panel.  If not, then the response will be pre-maturely&#xa; declared as complete, and an incomplete response will be returned.&#xa; The most common indication of this is a fault condition on a point,&#xa; and the &#x22;Raw Response&#x22; for that point indicates that the answer was&#xa; for another point.  Extend this value longer (suggest increments&#xa; of 25ms) until the faults disappear.
+</description>
+<tag name="@see">#getElapsedTimeForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeForEndOfMessage</tag>
+</property>
+
+<property name="elapsedTimeAfterPromptForEndOfMessage" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeAfterPromptForEndOfMessage&lt;/code&gt; property.&#xa; An optimization, this is the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  This item is similar&#xa; to &#x22;elapsedTimeForEndOfMessage&#x22;, except is is an optimization that&#xa; allows a much faster timeout if the Infinity network device is&#xa; in a command line mode (normal polling/pinging uses command line&#xa; mode).  We can do this because after a prompt is received, then&#xa; typically the only characters left to be received are cursor moves&#xa; which typically don&#x27;t have any delay between characters.  This in&#xa; turn allows a much faster poll cycle time than having to wait for&#xa; &#x22;elapsedTimeForEndOfMessage&#x22;).
+</description>
+<tag name="@see">#getElapsedTimeAfterPromptForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeAfterPromptForEndOfMessage</tag>
+</property>
+
+<property name="elapsedTimeWhileInBackupModeForEndOfMessage" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeWhileInBackupModeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message if in backup mode,&#xa; this is an idle time that if no characters is are received, the&#xa; message reception is artificially declared complete. A message is&#xa; defined a single line of a multi-line reload file that is being&#xa; transmitted from the controller to the driver. This value&#xa; needs to be longer than the longest pause that might occur during&#xa; receiving of data after a &#x22;SAVE INFINET&#x22; command has been issued.&#xa; For example, the Infinity system tends to &#x22;pause&#x22; for a matter of&#xa; seconds between controllers when saving a multi-controller system,&#xa; and tends to have large gaps when starting to send program objects.&#xa; You should make this as small as possible for performance, while&#xa; making it long enough to not have any receive timeouts&#xa; or errors.
+</description>
+<tag name="@see">#getElapsedTimeWhileInBackupModeForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeWhileInBackupModeForEndOfMessage</tag>
+</property>
+
+<property name="elapsedTimeWhileInBuildingListForEndOfMessage" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeWhileInBuildingListForEndOfMessage&lt;/code&gt; property.&#xa; Point learns and device learns use the Infinity menus &#x22;View/Points&#x22;&#xa; and &#x22;View/Infinet Controllers&#x22;.  While the controller is forming&#xa; up the response, it displays &#x22;Building list - please wait&#x22; on the&#xa; status line of the VT100 interface.  This property needs to be set&#xa; longer than the longest time that this message is displayed by the&#xa; controller&#x27;s VT100 interface, to allow the driver extra time to&#xa; wait for lists to appear.  This is only applicable to discover&#xa; operations, so its setting does not affect normal driver operation.
+</description>
+<tag name="@see">#getElapsedTimeWhileInBuildingListForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeWhileInBuildingListForEndOfMessage</tag>
+</property>
+
+<property name="trackBufferUtilization" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;trackBufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTrackBufferUtilization</tag>
+<tag name="@see">#setTrackBufferUtilization</tag>
+</property>
+
+<property name="bufferUtilization" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;bufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBufferUtilization</tag>
+<tag name="@see">#setBufferUtilization</tag>
+</property>
+
+<property name="bufferUtilizationMax" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;bufferUtilizationMax&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBufferUtilizationMax</tag>
+<tag name="@see">#setBufferUtilizationMax</tag>
+</property>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver() -->
+<constructor name="BInfinitySerialReceiver" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getElapsedTimeForEndOfMessage() -->
+<method name="getElapsedTimeForEndOfMessage"  public="true">
+<description>
+Get the &lt;code&gt;elapsedTimeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  On Cx9000, it may be&#xa; as little as 200ms, on CMX240 it may be 600ms or more.   You need&#xa; to make this as small as possible for performance, while having&#xa; making it long enough to not have any receive timeouts&#xa; or errors.  This timeout needs to be longer than the longest&#xa; delay that may occur &#x22;between characters&#x22; in a response from an&#xa; Infinity panel.  If not, then the response will be pre-maturely&#xa; declared as complete, and an incomplete response will be returned.&#xa; The most common indication of this is a fault condition on a point,&#xa; and the &#x22;Raw Response&#x22; for that point indicates that the answer was&#xa; for another point.  Extend this value longer (suggest increments&#xa; of 25ms) until the faults disappear.
+</description>
+<tag name="@see">#elapsedTimeForEndOfMessage</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.setElapsedTimeForEndOfMessage(javax.baja.sys.BRelTime) -->
+<method name="setElapsedTimeForEndOfMessage"  public="true">
+<description>
+Set the &lt;code&gt;elapsedTimeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  On Cx9000, it may be&#xa; as little as 200ms, on CMX240 it may be 600ms or more.   You need&#xa; to make this as small as possible for performance, while having&#xa; making it long enough to not have any receive timeouts&#xa; or errors.  This timeout needs to be longer than the longest&#xa; delay that may occur &#x22;between characters&#x22; in a response from an&#xa; Infinity panel.  If not, then the response will be pre-maturely&#xa; declared as complete, and an incomplete response will be returned.&#xa; The most common indication of this is a fault condition on a point,&#xa; and the &#x22;Raw Response&#x22; for that point indicates that the answer was&#xa; for another point.  Extend this value longer (suggest increments&#xa; of 25ms) until the faults disappear.
+</description>
+<tag name="@see">#elapsedTimeForEndOfMessage</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getElapsedTimeAfterPromptForEndOfMessage() -->
+<method name="getElapsedTimeAfterPromptForEndOfMessage"  public="true">
+<description>
+Get the &lt;code&gt;elapsedTimeAfterPromptForEndOfMessage&lt;/code&gt; property.&#xa; An optimization, this is the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  This item is similar&#xa; to &#x22;elapsedTimeForEndOfMessage&#x22;, except is is an optimization that&#xa; allows a much faster timeout if the Infinity network device is&#xa; in a command line mode (normal polling/pinging uses command line&#xa; mode).  We can do this because after a prompt is received, then&#xa; typically the only characters left to be received are cursor moves&#xa; which typically don&#x27;t have any delay between characters.  This in&#xa; turn allows a much faster poll cycle time than having to wait for&#xa; &#x22;elapsedTimeForEndOfMessage&#x22;).
+</description>
+<tag name="@see">#elapsedTimeAfterPromptForEndOfMessage</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.setElapsedTimeAfterPromptForEndOfMessage(javax.baja.sys.BRelTime) -->
+<method name="setElapsedTimeAfterPromptForEndOfMessage"  public="true">
+<description>
+Set the &lt;code&gt;elapsedTimeAfterPromptForEndOfMessage&lt;/code&gt; property.&#xa; An optimization, this is the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  This item is similar&#xa; to &#x22;elapsedTimeForEndOfMessage&#x22;, except is is an optimization that&#xa; allows a much faster timeout if the Infinity network device is&#xa; in a command line mode (normal polling/pinging uses command line&#xa; mode).  We can do this because after a prompt is received, then&#xa; typically the only characters left to be received are cursor moves&#xa; which typically don&#x27;t have any delay between characters.  This in&#xa; turn allows a much faster poll cycle time than having to wait for&#xa; &#x22;elapsedTimeForEndOfMessage&#x22;).
+</description>
+<tag name="@see">#elapsedTimeAfterPromptForEndOfMessage</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getElapsedTimeWhileInBackupModeForEndOfMessage() -->
+<method name="getElapsedTimeWhileInBackupModeForEndOfMessage"  public="true">
+<description>
+Get the &lt;code&gt;elapsedTimeWhileInBackupModeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message if in backup mode,&#xa; this is an idle time that if no characters is are received, the&#xa; message reception is artificially declared complete. A message is&#xa; defined a single line of a multi-line reload file that is being&#xa; transmitted from the controller to the driver. This value&#xa; needs to be longer than the longest pause that might occur during&#xa; receiving of data after a &#x22;SAVE INFINET&#x22; command has been issued.&#xa; For example, the Infinity system tends to &#x22;pause&#x22; for a matter of&#xa; seconds between controllers when saving a multi-controller system,&#xa; and tends to have large gaps when starting to send program objects.&#xa; You should make this as small as possible for performance, while&#xa; making it long enough to not have any receive timeouts&#xa; or errors.
+</description>
+<tag name="@see">#elapsedTimeWhileInBackupModeForEndOfMessage</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.setElapsedTimeWhileInBackupModeForEndOfMessage(javax.baja.sys.BRelTime) -->
+<method name="setElapsedTimeWhileInBackupModeForEndOfMessage"  public="true">
+<description>
+Set the &lt;code&gt;elapsedTimeWhileInBackupModeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message if in backup mode,&#xa; this is an idle time that if no characters is are received, the&#xa; message reception is artificially declared complete. A message is&#xa; defined a single line of a multi-line reload file that is being&#xa; transmitted from the controller to the driver. This value&#xa; needs to be longer than the longest pause that might occur during&#xa; receiving of data after a &#x22;SAVE INFINET&#x22; command has been issued.&#xa; For example, the Infinity system tends to &#x22;pause&#x22; for a matter of&#xa; seconds between controllers when saving a multi-controller system,&#xa; and tends to have large gaps when starting to send program objects.&#xa; You should make this as small as possible for performance, while&#xa; making it long enough to not have any receive timeouts&#xa; or errors.
+</description>
+<tag name="@see">#elapsedTimeWhileInBackupModeForEndOfMessage</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getElapsedTimeWhileInBuildingListForEndOfMessage() -->
+<method name="getElapsedTimeWhileInBuildingListForEndOfMessage"  public="true">
+<description>
+Get the &lt;code&gt;elapsedTimeWhileInBuildingListForEndOfMessage&lt;/code&gt; property.&#xa; Point learns and device learns use the Infinity menus &#x22;View/Points&#x22;&#xa; and &#x22;View/Infinet Controllers&#x22;.  While the controller is forming&#xa; up the response, it displays &#x22;Building list - please wait&#x22; on the&#xa; status line of the VT100 interface.  This property needs to be set&#xa; longer than the longest time that this message is displayed by the&#xa; controller&#x27;s VT100 interface, to allow the driver extra time to&#xa; wait for lists to appear.  This is only applicable to discover&#xa; operations, so its setting does not affect normal driver operation.
+</description>
+<tag name="@see">#elapsedTimeWhileInBuildingListForEndOfMessage</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.setElapsedTimeWhileInBuildingListForEndOfMessage(javax.baja.sys.BRelTime) -->
+<method name="setElapsedTimeWhileInBuildingListForEndOfMessage"  public="true">
+<description>
+Set the &lt;code&gt;elapsedTimeWhileInBuildingListForEndOfMessage&lt;/code&gt; property.&#xa; Point learns and device learns use the Infinity menus &#x22;View/Points&#x22;&#xa; and &#x22;View/Infinet Controllers&#x22;.  While the controller is forming&#xa; up the response, it displays &#x22;Building list - please wait&#x22; on the&#xa; status line of the VT100 interface.  This property needs to be set&#xa; longer than the longest time that this message is displayed by the&#xa; controller&#x27;s VT100 interface, to allow the driver extra time to&#xa; wait for lists to appear.  This is only applicable to discover&#xa; operations, so its setting does not affect normal driver operation.
+</description>
+<tag name="@see">#elapsedTimeWhileInBuildingListForEndOfMessage</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getTrackBufferUtilization() -->
+<method name="getTrackBufferUtilization"  public="true">
+<description>
+Get the &lt;code&gt;trackBufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#trackBufferUtilization</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.setTrackBufferUtilization(boolean) -->
+<method name="setTrackBufferUtilization"  public="true">
+<description>
+Set the &lt;code&gt;trackBufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#trackBufferUtilization</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getBufferUtilization() -->
+<method name="getBufferUtilization"  public="true">
+<description>
+Get the &lt;code&gt;bufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#bufferUtilization</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.setBufferUtilization(int) -->
+<method name="setBufferUtilization"  public="true">
+<description>
+Set the &lt;code&gt;bufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#bufferUtilization</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getBufferUtilizationMax() -->
+<method name="getBufferUtilizationMax"  public="true">
+<description>
+Get the &lt;code&gt;bufferUtilizationMax&lt;/code&gt; property.
+</description>
+<tag name="@see">#bufferUtilizationMax</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.setBufferUtilizationMax(int) -->
+<method name="setBufferUtilizationMax"  public="true">
+<description>
+Set the &lt;code&gt;bufferUtilizationMax&lt;/code&gt; property.
+</description>
+<tag name="@see">#bufferUtilizationMax</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.resetStatistics() -->
+<method name="resetStatistics"  public="true">
+<description>
+This method is called by the parent communicator&#x27;s &#x22;resetStatistics&#x22;&#xa; action.  This is an override from BDdfReceiver to also reset buffer utilization
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.doReceiveFrame() -->
+<method name="doReceiveFrame"  protected="true">
+<description>
+Infinity bypasses the build in receive frame, and instead implements&#xa; a String[] based buffer for holding screen content and screen formatting&#xa; information.  In addition, because there is no definable end-of-message, &#xa; end of message is declared only when characters stop coming in (after&#xa; a timeout - see properties elapsedTime....EndOfMessage).  These configurable&#xa; timeouts allow us to use optimum timeouts if the screen buffer cursor mode&#xa; is determined to be in certain contexts, such as when &#x22;building list - &#xa; please wait&#x22; is being displayed, or we are in a special terminal mode (reload,&#xa; backup, or interactive mode).&#xa; &#xa; Note that we still return the &#x22;internal buffer&#x22; but it is only used for framework&#xa; management and statistics in this driver.
+</description>
+<tag name="@see">com.tridium.devDriver.comm.defaultComm.BDdfReceiver#doReceiveFrame()</tag>
+<return>
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.readByte() -->
+<method name="readByte"  protected="true">
+<description>
+Override the readByte() method to read a single byte
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.readByteToBuffer() -->
+<method name="readByteToBuffer"  protected="true">
+<description>
+Reads a byte into the internal buffer. By default, this calls readByte&#xa; and adds the result to this object&#x27;s internal buffer.   For Infinity,&#xa; the byte gets written to the screen buffer as well.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.responseTimeout -->
+<field name="responseTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Redefined from BDdfReceiver to set appropriate default and facets&#xa; This is flagged as summary so that it&#xa; Can appear in the device manager, if the device communicates on&#xa; Its own.
+</description>
+<tag name="@see">#getResponseTimeout</tag>
+<tag name="@see">#setResponseTimeout</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.elapsedTimeForEndOfMessage -->
+<field name="elapsedTimeForEndOfMessage"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  On Cx9000, it may be&#xa; as little as 200ms, on CMX240 it may be 600ms or more.   You need&#xa; to make this as small as possible for performance, while having&#xa; making it long enough to not have any receive timeouts&#xa; or errors.  This timeout needs to be longer than the longest&#xa; delay that may occur &#x22;between characters&#x22; in a response from an&#xa; Infinity panel.  If not, then the response will be pre-maturely&#xa; declared as complete, and an incomplete response will be returned.&#xa; The most common indication of this is a fault condition on a point,&#xa; and the &#x22;Raw Response&#x22; for that point indicates that the answer was&#xa; for another point.  Extend this value longer (suggest increments&#xa; of 25ms) until the faults disappear.
+</description>
+<tag name="@see">#getElapsedTimeForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeForEndOfMessage</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.elapsedTimeAfterPromptForEndOfMessage -->
+<field name="elapsedTimeAfterPromptForEndOfMessage"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeAfterPromptForEndOfMessage&lt;/code&gt; property.&#xa; An optimization, this is the time used to declare an end of message, this is an&#xa; idle time that if no characters is are received, the message&#xa; reception is artificially declared complete.  This item is similar&#xa; to &#x22;elapsedTimeForEndOfMessage&#x22;, except is is an optimization that&#xa; allows a much faster timeout if the Infinity network device is&#xa; in a command line mode (normal polling/pinging uses command line&#xa; mode).  We can do this because after a prompt is received, then&#xa; typically the only characters left to be received are cursor moves&#xa; which typically don&#x27;t have any delay between characters.  This in&#xa; turn allows a much faster poll cycle time than having to wait for&#xa; &#x22;elapsedTimeForEndOfMessage&#x22;).
+</description>
+<tag name="@see">#getElapsedTimeAfterPromptForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeAfterPromptForEndOfMessage</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.elapsedTimeWhileInBackupModeForEndOfMessage -->
+<field name="elapsedTimeWhileInBackupModeForEndOfMessage"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeWhileInBackupModeForEndOfMessage&lt;/code&gt; property.&#xa; the time used to declare an end of message if in backup mode,&#xa; this is an idle time that if no characters is are received, the&#xa; message reception is artificially declared complete. A message is&#xa; defined a single line of a multi-line reload file that is being&#xa; transmitted from the controller to the driver. This value&#xa; needs to be longer than the longest pause that might occur during&#xa; receiving of data after a &#x22;SAVE INFINET&#x22; command has been issued.&#xa; For example, the Infinity system tends to &#x22;pause&#x22; for a matter of&#xa; seconds between controllers when saving a multi-controller system,&#xa; and tends to have large gaps when starting to send program objects.&#xa; You should make this as small as possible for performance, while&#xa; making it long enough to not have any receive timeouts&#xa; or errors.
+</description>
+<tag name="@see">#getElapsedTimeWhileInBackupModeForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeWhileInBackupModeForEndOfMessage</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.elapsedTimeWhileInBuildingListForEndOfMessage -->
+<field name="elapsedTimeWhileInBuildingListForEndOfMessage"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;elapsedTimeWhileInBuildingListForEndOfMessage&lt;/code&gt; property.&#xa; Point learns and device learns use the Infinity menus &#x22;View/Points&#x22;&#xa; and &#x22;View/Infinet Controllers&#x22;.  While the controller is forming&#xa; up the response, it displays &#x22;Building list - please wait&#x22; on the&#xa; status line of the VT100 interface.  This property needs to be set&#xa; longer than the longest time that this message is displayed by the&#xa; controller&#x27;s VT100 interface, to allow the driver extra time to&#xa; wait for lists to appear.  This is only applicable to discover&#xa; operations, so its setting does not affect normal driver operation.
+</description>
+<tag name="@see">#getElapsedTimeWhileInBuildingListForEndOfMessage</tag>
+<tag name="@see">#setElapsedTimeWhileInBuildingListForEndOfMessage</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.trackBufferUtilization -->
+<field name="trackBufferUtilization"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;trackBufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTrackBufferUtilization</tag>
+<tag name="@see">#setTrackBufferUtilization</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.bufferUtilization -->
+<field name="bufferUtilization"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;bufferUtilization&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBufferUtilization</tag>
+<tag name="@see">#setBufferUtilization</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.bufferUtilizationMax -->
+<field name="bufferUtilizationMax"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;bufferUtilizationMax&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBufferUtilizationMax</tag>
+<tag name="@see">#setBufferUtilizationMax</tag>
+</field>
+
+<!-- com.tridium.andoverInfinity.comm.BInfinitySerialReceiver.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

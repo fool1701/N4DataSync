@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.px.BPxMedia" name="BPxMedia" packageName="javax.baja.ui.px" public="true" abstract="true">
+<description>
+BPxMedia is used to define environments where PX &#xa; customization is required while using the PxEditor.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">14 Oct 04</tag>
+<tag name="@version">$Revision: 1$ $Date: 10/14/04 12:06:26 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSingleton"/>
+</extends>
+<!-- javax.baja.ui.px.BPxMedia() -->
+<constructor name="BPxMedia" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.px.BPxMedia.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.isWidgetSupported(javax.baja.registry.TypeInfo) -->
+<method name="isWidgetSupported"  public="true">
+<description>
+Return if the specified widget type is supported &#xa; by the target media.  Default is to return true.
+</description>
+<parameter name="type">
+<type class="javax.baja.registry.TypeInfo"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.isBindingSupported(javax.baja.registry.TypeInfo) -->
+<method name="isBindingSupported"  public="true">
+<description>
+Return if the specified widget type is supported &#xa; by the target media.  Default is to return true.
+</description>
+<parameter name="type">
+<type class="javax.baja.registry.TypeInfo"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.validateWidget(javax.baja.ui.BWidget, javax.baja.sys.Context) -->
+<method name="validateWidget"  public="true">
+<description>
+Return a non-null Localized String if something in the widget&#x27;s configuration is not configured correctly&#xa; to work with the target media. To show multiple warnings separate them with a newline character for best display&#xa; results.
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<parameter name="widget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.validateBinding(javax.baja.ui.BBinding, javax.baja.sys.Context) -->
+<method name="validateBinding"  public="true">
+<description>
+Return a non-null Localized String if something in the binding&#x27;s configuration is not configured correctly&#xa; to work with the target media. To show multiple warnings separate them with a newline character for best display&#xa; results.
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<parameter name="binding">
+<type class="javax.baja.ui.BBinding"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.getChildWidgetsToValidate(javax.baja.ui.BWidget, javax.baja.sys.Context) -->
+<method name="getChildWidgetsToValidate"  public="true">
+<description>
+Return the child widgets that require validation. Usually this returns all the widgets, but&#xa; if the media doesn&#x27;t render the widget children for this media, then return a subset of the widgets.
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<parameter name="widget">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.isChildWidgetValidationRequired(javax.baja.sys.BComponent, javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="isChildWidgetValidationRequired"  public="true">
+<description>
+Return false to skip validation of a child. Usually this returns true for all widgets, but&#xa; if the media doesn&#x27;t render the widget child, then return false. This method only gets calls for the&#xa; children that have returned from `getChildWidgetsToValidate()`. This `isChildWidgetValidationRequired` method allows modules&#xa; without knowledge of BWidget to provide input into the validation process.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="widget">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="childWidget">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.isBindingValidationRequired(javax.baja.sys.BComponent, javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="isBindingValidationRequired"  public="true">
+<description>
+Return false to skip validation of a binding. Usually this returns true for all bindings, but&#xa; if the media doesn&#x27;t require the binding to work, then return false.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="widget">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="binding">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.getPxFileOrd() -->
+<method name="getPxFileOrd"  public="true">
+<description>
+Return the file that is used to create &#xa; new PX drawings.  Default returns&#xa; BOrd.make(&#x22;file:!defaults/workbench/newfiles/PxFile.px&#x22;).
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.BPxMedia.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.BPxMedia.DEFAULT_PX_FILE -->
+<field name="DEFAULT_PX_FILE"  public="true" static="true" final="true">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="rt" qualifiedName="com.tridium.videoDriver.alarm.BIVideoAlarmRecorder" name="BIVideoAlarmRecorder" packageName="com.tridium.videoDriver.alarm" public="true" interface="true" abstract="true" category="interface">
+<description>
+Video Driver Components that wish to take special action when a Niagara&#xa; AX alarm occurs should implement this class.&#xa; &#xa; Here is how this class plugs in the overall grand scheme of things:&#xa; 1.) An integrator adds a BVideoAlarmRecipient to the station under the&#xa; alarm service.&#xa; 2.) The integrator links the BVideoAlarmRecipient to the appropriate&#xa; alarm class(es).&#xa; 3.) On the property sheet of the BVideoAlarmRecipient, the integrator&#xa;  chooses a component in the station to serve as the &#x27;video responder&#x27;.&#xa; 4.) The component in the station that he or she chooses will be a&#xa; component from a video driver.&#xa; 5.) The component from a video driver will also implement this interface.&#xa; 6.) The component&#x27;s &#x27;handleAlarm(BAlarmRecord) method will be called whenever&#xa; the BVideoAlarmRecipient receives an alarm from the alarm service.&#xa; 7.) The particular video driver component that implements this interface will&#xa; take special action, such as to ask a video camera to start recording.
+</description>
+<tag name="@see">BVideoAlarmRecipient</tag>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- com.tridium.videoDriver.alarm.BIVideoAlarmRecorder.startRecordingAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="startRecordingAlarm"  public="true" abstract="true">
+<description>
+Defines a method that will be called on the station-side VM to&#xa; process an alarm record. This method will be called by BVideoAlarmRecipient.&#xa; &#xa; A video driver should use this callback to ask a camera to start&#xa; recording as a result of some alarm condition that has occurred within&#xa; the Niagara AX framework but outside of the camera system&#x27;s realm.
+</description>
+<parameter name="alarmRecord">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+- This is the alarm record from the Niagara AX alarm&#xa; service.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.alarm.BIVideoAlarmRecorder.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="obixDriver" runtimeProfile="rt" qualifiedName="javax.baja.obix.driver.BObixNetwork" name="BObixNetwork" packageName="javax.baja.obix.driver" public="true">
+<description>
+ObixNetwork represents a tree of oBIX clients and ancillary objects.&#xa; The network object is a framework convention that has no physical&#xa; correspondence to any oBIX systems.&#xa; &lt;p&gt;&#xa; ObixNetwork is a &#x22;network-level&#x22; component in the NiagaraAX architecture.&#xa; It has the standard network component properties such as status and enabled&#xa; (see &#x22;Driver Architecture / Common network components&#x22; in the NiagaraAX User&#xa; Guide for more information).&#xa; &lt;p&gt;&#xa; In addition, the following properties are unique or have special importance&#xa; to the ObixNetwork:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;Thread Pool - This controls the number of threads used to execute all&#xa; actions of all oBIX objects in the network. This includes most&#xa; communications with remote devices, which can be multi-threaded, so if&#xa; there are performance issues, the number threads can be increased.&lt;/li&gt;&#xa; &lt;li&gt;Status - Will be fault if the obixDriver module has not been licensed.&#xa; The license feature is &#x22;obixDriver&#x22;.&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<tag name="@author">Aaron Hansen, Craig Gemmill on Apr 2006</tag>
+<tag name="@since">Niagara 3.1</tag>
+<extends>
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<property name="threadPool" flags="">
+<type class="javax.baja.obix.driver.util.BObixThreadPool"/>
+<description>
+Slot for the &lt;code&gt;threadPool&lt;/code&gt; property.
+</description>
+<tag name="@see">#getThreadPool</tag>
+<tag name="@see">#setThreadPool</tag>
+</property>
+
+<property name="tuningPolicies" flags="">
+<type class="javax.baja.driver.point.BTuningPolicyMap"/>
+<description>
+Slot for the &lt;code&gt;tuningPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTuningPolicies</tag>
+<tag name="@see">#setTuningPolicies</tag>
+</property>
+
+<property name="server" flags="">
+<type class="javax.baja.obix.driver.BObixServer"/>
+<description>
+Slot for the &lt;code&gt;server&lt;/code&gt; property.
+</description>
+<tag name="@see">#getServer</tag>
+<tag name="@see">#setServer</tag>
+</property>
+
+<property name="exports" flags="">
+<type class="javax.baja.obix.driver.export.BObixExportFolder"/>
+<description>
+Slot for the &lt;code&gt;exports&lt;/code&gt; property.
+</description>
+<tag name="@see">#getExports</tag>
+<tag name="@see">#setExports</tag>
+</property>
+
+<property name="historyPolicies" flags="">
+<type class="javax.baja.driver.history.BHistoryNetworkExt"/>
+<description>
+Slot for the &lt;code&gt;historyPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#getHistoryPolicies</tag>
+<tag name="@see">#setHistoryPolicies</tag>
+</property>
+
+<action name="println" flags="">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;println&lt;/code&gt; action.
+</description>
+<tag name="@see">#println(BString parameter)</tag>
+</action>
+
+<!-- javax.baja.obix.driver.BObixNetwork() -->
+<constructor name="BObixNetwork" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getThreadPool() -->
+<method name="getThreadPool"  public="true">
+<description>
+Get the &lt;code&gt;threadPool&lt;/code&gt; property.
+</description>
+<tag name="@see">#threadPool</tag>
+<return>
+<type class="javax.baja.obix.driver.util.BObixThreadPool"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.setThreadPool(javax.baja.obix.driver.util.BObixThreadPool) -->
+<method name="setThreadPool"  public="true">
+<description>
+Set the &lt;code&gt;threadPool&lt;/code&gt; property.
+</description>
+<tag name="@see">#threadPool</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.util.BObixThreadPool"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getTuningPolicies() -->
+<method name="getTuningPolicies"  public="true">
+<description>
+Get the &lt;code&gt;tuningPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#tuningPolicies</tag>
+<return>
+<type class="javax.baja.driver.point.BTuningPolicyMap"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.setTuningPolicies(javax.baja.driver.point.BTuningPolicyMap) -->
+<method name="setTuningPolicies"  public="true">
+<description>
+Set the &lt;code&gt;tuningPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#tuningPolicies</tag>
+<parameter name="v">
+<type class="javax.baja.driver.point.BTuningPolicyMap"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getServer() -->
+<method name="getServer"  public="true">
+<description>
+Get the &lt;code&gt;server&lt;/code&gt; property.
+</description>
+<tag name="@see">#server</tag>
+<return>
+<type class="javax.baja.obix.driver.BObixServer"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.setServer(javax.baja.obix.driver.BObixServer) -->
+<method name="setServer"  public="true">
+<description>
+Set the &lt;code&gt;server&lt;/code&gt; property.
+</description>
+<tag name="@see">#server</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.BObixServer"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getExports() -->
+<method name="getExports"  public="true">
+<description>
+Get the &lt;code&gt;exports&lt;/code&gt; property.
+</description>
+<tag name="@see">#exports</tag>
+<return>
+<type class="javax.baja.obix.driver.export.BObixExportFolder"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.setExports(javax.baja.obix.driver.export.BObixExportFolder) -->
+<method name="setExports"  public="true">
+<description>
+Set the &lt;code&gt;exports&lt;/code&gt; property.
+</description>
+<tag name="@see">#exports</tag>
+<parameter name="v">
+<type class="javax.baja.obix.driver.export.BObixExportFolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getHistoryPolicies() -->
+<method name="getHistoryPolicies"  public="true">
+<description>
+Get the &lt;code&gt;historyPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#historyPolicies</tag>
+<return>
+<type class="javax.baja.driver.history.BHistoryNetworkExt"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.setHistoryPolicies(javax.baja.driver.history.BHistoryNetworkExt) -->
+<method name="setHistoryPolicies"  public="true">
+<description>
+Set the &lt;code&gt;historyPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#historyPolicies</tag>
+<parameter name="v">
+<type class="javax.baja.driver.history.BHistoryNetworkExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.println(javax.baja.sys.BString) -->
+<method name="println"  public="true">
+<description>
+Invoke the &lt;code&gt;println&lt;/code&gt; action.
+</description>
+<tag name="@see">#println</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.doPrintln(javax.baja.sys.BString) -->
+<method name="doPrintln"  public="true" final="true">
+<description>
+Display a line on the output.
+</description>
+<parameter name="arg">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.enqueue(java.lang.Runnable) -->
+<method name="enqueue"  public="true">
+<description>
+Enqueues a runnable in the thread pool.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getDeviceFolderType() -->
+<method name="getDeviceFolderType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getDeviceType() -->
+<method name="getDeviceType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getLicenseFeature() -->
+<method name="getLicenseFeature"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+tridium, obixDriver
+</description>
+<return>
+<type class="javax.baja.license.Feature"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Includes the export folder.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Enqueues an invocation in the thread pool.
+</description>
+<parameter name="a">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.serviceStopped() -->
+<method name="serviceStopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.started() -->
+<method name="started"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Ensures that only one ObixNetwork is running in the station.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.networkStarted() -->
+<method name="networkStarted"  protected="true">
+<description>
+Network started.&#xa; Override point for subclasses.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.checkObixLimit(java.lang.String) -->
+<method name="checkObixLimit"  public="true" final="true">
+<description>
+Increment the limit counter and return null if the specified&#xa; limit is ok, otherwise return the fault cause message.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.BObixNetwork.alarmSourceInfo -->
+<field name="alarmSourceInfo"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlarmSourceInfo</tag>
+<tag name="@see">#setAlarmSourceInfo</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.health -->
+<field name="health"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;health&lt;/code&gt; property.
+</description>
+<tag name="@see">#getHealth</tag>
+<tag name="@see">#setHealth</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.threadPool -->
+<field name="threadPool"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;threadPool&lt;/code&gt; property.
+</description>
+<tag name="@see">#getThreadPool</tag>
+<tag name="@see">#setThreadPool</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.tuningPolicies -->
+<field name="tuningPolicies"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;tuningPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTuningPolicies</tag>
+<tag name="@see">#setTuningPolicies</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.server -->
+<field name="server"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;server&lt;/code&gt; property.
+</description>
+<tag name="@see">#getServer</tag>
+<tag name="@see">#setServer</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.exports -->
+<field name="exports"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;exports&lt;/code&gt; property.
+</description>
+<tag name="@see">#getExports</tag>
+<tag name="@see">#setExports</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.historyPolicies -->
+<field name="historyPolicies"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;historyPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#getHistoryPolicies</tag>
+<tag name="@see">#setHistoryPolicies</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.println -->
+<field name="println"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;println&lt;/code&gt; action.
+</description>
+<tag name="@see">#println(BString parameter)</tag>
+</field>
+
+<!-- javax.baja.obix.driver.BObixNetwork.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

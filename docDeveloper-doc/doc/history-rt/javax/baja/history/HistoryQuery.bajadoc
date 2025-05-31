@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.HistoryQuery" name="HistoryQuery" packageName="javax.baja.history" public="true">
+<description>
+A HistoryQuery is the OrdQuery for histories.  The grammar for the body is:&#xa;&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa; history    := path [&amp;#x22;?&amp;#x22; params]&amp;#xa; path       := absolute | relative&amp;#xa; params     := param ( &amp;#x22;;&amp;#x22; param )*&amp;#xa; param      := &amp;#x22;period=&amp;#x22; periodId | &amp;#x22;start=&amp;#x22; time | &amp;#x22;end=&amp;#x22; time | &amp;#x22;delta=&amp;#x22; boolean&amp;#xa;&amp;#xa; absolute         := fullAbs | localDeviceAbs | folderAbs | defaultFolderAbs&amp;#xa; fullAbs          := &amp;#x22;/&amp;#x22; deviceName &amp;#x22;/&amp;#x22; historyName&amp;#xa; defaultFolderAbs := &amp;#x22;///&amp;#x22; deviceName &amp;#x22;/&amp;#x22; historyName&amp;#xa; folderAbs        := &amp;#x22;//&amp;#x22; [folderNames] &amp;#x22;//&amp;#x22; deviceName &amp;#x22;/&amp;#x22; historyName&amp;#xa; localDeviceAbs   := &amp;#x22;^&amp;#x22; historyName&amp;#xa; parentNiagaraStation := &amp;#x22;@&amp;#x22; historyName&amp;#xa;&amp;#xa; relative  := historyName&amp;#xa;&amp;#xa; deviceName  := name&amp;#xa; historyName := name&amp;#xa;&amp;#xa; folderNames    := folderName [ &amp;#x22;/&amp;#x22; folderNames ]&amp;#xa; folderName     := folderNameChar (folderNameChar)*&amp;#xa; folderNameChar := nameChar | specials&amp;#xa; specials       := space | . | - | _ | + | ( | ) | &amp;amp; | ` | &amp;#x27; | [ | ]&amp;#xa;&amp;#xa; name       := nameChar (nameChar)*&amp;#xa; nameChar   := (a-z) | (A-Z) | (0-9) | _&amp;#xa; periodId   := today | yesterday | lastWeek | last7Days | monthToDate | lastMonth | yearToDate | lastYear&amp;#xa; time       := string formatted timestamp&amp;#xa;&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">24 Mar 2003</tag>
+<tag name="@version">$Revision: 21$ $Date: 8/18/09 4:28:34 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.naming.BasicQuery"/>
+</extends>
+<!-- javax.baja.history.HistoryQuery(java.lang.String, java.lang.String) -->
+<constructor name="HistoryQuery" public="true">
+<parameter name="scheme">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="body">
+<type class="java.lang.String"/>
+</parameter>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+</throws>
+<description/>
+</constructor>
+
+<!-- javax.baja.history.HistoryQuery(java.lang.String) -->
+<constructor name="HistoryQuery" public="true">
+<parameter name="body">
+<type class="java.lang.String"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.history.HistoryQuery.getQueryString() -->
+<method name="getQueryString"  public="true">
+<description>
+Get the substring of the body that appears after the last &#x27;?&#x27;.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Returns the query string or null if no query string is present.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.isSpaceQuery() -->
+<method name="isSpaceQuery"  public="true">
+<description>
+Is this a space query?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.isDeviceQuery() -->
+<method name="isDeviceQuery"  public="true">
+<description>
+Is this a device query?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.isHistoryQuery() -->
+<method name="isHistoryQuery"  public="true">
+<description>
+Is this a history query?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.isHistoryFolderQuery() -->
+<method name="isHistoryFolderQuery"  public="true">
+<description>
+Is this a history folder query?
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getDeviceName() -->
+<method name="getDeviceName"  public="true">
+<description>
+Get the device name.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Returns the name of the device that was specified&#xa;   in the query or null if no device was specified.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getHistoryName() -->
+<method name="getHistoryName"  public="true">
+<description>
+Get the history name.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+Returns the name of the history that was specified&#xa;   in the query or null if no history was specified.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getHistoryFolderPath() -->
+<method name="getHistoryFolderPath"  public="true">
+<description>
+Get the history folder path names.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+Returns the String array of folder names that make up the folder path.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getHistoryId() -->
+<method name="getHistoryId"  public="true">
+<description>
+Get the history id that was specified in the body.&#xa; If the body is not a history id, null is returned.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryId"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.hasTimeRange() -->
+<method name="hasTimeRange"  public="true">
+<description>
+Does the query include a time range specification?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.isDelta() -->
+<method name="isDelta"  public="true">
+<description>
+Does the query ask for a delta log?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getStartTime(javax.baja.sys.BAbsTime) -->
+<method name="getStartTime"  public="true">
+<description>
+Get the start time for this query based on the current time.&#xa; The current time is necessary because the time range&#xa; may be based on the current time (e.g. today, yesterday, etc.).
+</description>
+<parameter name="currentTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getEndTime(javax.baja.sys.BAbsTime) -->
+<method name="getEndTime"  public="true">
+<description>
+Get the end time for this query based on the current time.&#xa; The current time is necessary because the time range&#xa; may be based on the current time (e.g. today, yesterday, etc.).
+</description>
+<parameter name="currentTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getParameterNames() -->
+<method name="getParameterNames"  public="true">
+<description>
+Get the names of all parameters in the parameter list.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getParameter(java.lang.String) -->
+<method name="getParameter"  public="true">
+<description>
+Get the parameter with the specified name.
+</description>
+<parameter name="paramName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getParameter(java.lang.String, java.lang.String) -->
+<method name="getParameter"  public="true">
+<description>
+Get the parameter with the specified name.  If the&#xa; parameter is not found, return the specified value as&#xa; the default.
+</description>
+<parameter name="paramName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.isHost() -->
+<method name="isHost"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.isSession() -->
+<method name="isSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.normalize(javax.baja.naming.OrdQueryList, int) -->
+<method name="normalize"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This method is called during BOrd.normalize() to give&#xa; each query the ability to normalize itself.  The&#xa; index specifies the location of this query in the&#xa; parsed queries list.  This method allows OrdQueries to&#xa; merge or truncate relative ords.
+</description>
+<parameter name="list">
+<type class="javax.baja.naming.OrdQueryList"/>
+</parameter>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.makeExcludeArchiveDataContext(javax.baja.sys.Context) -->
+<method name="makeExcludeArchiveDataContext"  public="true" static="true">
+<description>
+Convenience method to generate a Context instance that contains a special&#xa; facet (named &#x22;excludeArchiveHistoryData&#x22;) to signify that archive history&#xa; data (e.g. history data archived to the cloud or some other archive provider)&#xa; should be excluded from queries for any history connections that&#xa; subsequently use the returned Context.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context that will be used as a base for generating the result.&#xa;           This parameter can be null.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context instance generated from the given base Context argument&#xa; enhanced with one additional special facet called&#xa; &#x22;excludeArchiveHistoryData&#x22; that has a boolean value of true.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.excludeArchiveData(javax.baja.sys.Context) -->
+<method name="excludeArchiveData"  public="true" static="true">
+<description>
+Convenience method that checks the given Context argument for the presence&#xa; of a special &#x22;excludeArchiveHistoryData&#x22; facet, and if found, returns its&#xa; boolean value.  This value is used to signify that archive history data&#xa; (e.g. history data archived to the cloud or some other archive provider)&#xa; should be excluded from queries against a Niagara history.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The Context instance to check
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the &#x22;excludeArchiveHistoryData&#x22; facet is present on the&#xa; Context argument and it has a boolean true value.  Otherwise false is&#xa; returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.makeArchiveQueryLimitContext(javax.baja.sys.Context, int) -->
+<method name="makeArchiveQueryLimitContext"  public="true" static="true">
+<description>
+Convenience method to generate a Context instance that contains a special&#xa; facet (named &#x22;archiveHistoryQueryLimit&#x22;) to specify a positive limit on the&#xa; maximum number of history records that should be read from an archive&#xa; history provider (see &lt;code&gt;<see ref="javax.baja.history.db.BArchiveHistoryProvider">BArchiveHistoryProvider</see>&lt;/code&gt;) for queries from any&#xa; history connections that subsequently use the returned Context. If a non-&#xa; positive integer value is passed in for the archiveLimit argument, then&#xa; the original context argument will be returned. The archive history&#xa; provider has its own configurable limit (see&#xa; &lt;code&gt;<see ref="javax.baja.history.db.BArchiveHistoryProvider#getMaxArchiveResultsPerQuery()">BArchiveHistoryProvider#getMaxArchiveResultsPerQuery()</see>&lt;/code&gt;), so any&#xa; limit specified in this Context will only be recognized by the framework if&#xa; it is lower than the configured limit on the archive history provider&#xa; itself, otherwise it will be disregarded and the limit configured on the&#xa; archive history provider will take precedence.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context that will be used as a base for generating the result.&#xa;           This parameter can be null.
+</description>
+</parameter>
+<parameter name="archiveLimit">
+<type class="int"/>
+<description>
+Specifies a positive limit on the maximum number of&#xa;                     history records that will be read from an archive history&#xa;                     provider for any queries submitted to it. If this&#xa;                     argument is less than or equal to zero, then it will&#xa;                     be disregarded and the original context argument will&#xa;                     be returned (unaltered).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context instance generated from the given base Context argument&#xa; enhanced with one additional special facet called &#x22;archiveHistoryQueryLimit&#x22;&#xa; that has an integer value set to the archiveLimit argument.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryQuery.getArchiveQueryLimit(javax.baja.sys.Context, int) -->
+<method name="getArchiveQueryLimit"  public="true" static="true">
+<description>
+Convenience method that checks the given Context argument for the presence&#xa; of a special &#x22;archiveHistoryQueryLimit&#x22; facet, and if found, returns its&#xa; integer value as long as its greater than zero. If not found or less than&#xa; or equal to zero, the defaultArchiveLimit argument is returned instead.&#xa; This value is used to specify a limit on the maximum number of history&#xa; records that should be read from an archive history provider (see&#xa; &lt;code&gt;<see ref="javax.baja.history.db.BArchiveHistoryProvider">BArchiveHistoryProvider</see>&lt;/code&gt;) at query time. The archive history&#xa; provider has its own configurable limit (see&#xa; &lt;code&gt;<see ref="javax.baja.history.db.BArchiveHistoryProvider#getMaxArchiveResultsPerQuery()">BArchiveHistoryProvider#getMaxArchiveResultsPerQuery()</see>&lt;/code&gt;), so any&#xa; limit specified in the Context will only be recognized by the framework if&#xa; it is lower than the configured limit on the archive history provider&#xa; itself (the limit configured on the archive history provider takes&#xa; precedence).
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The Context instance to check
+</description>
+</parameter>
+<parameter name="defaultArchiveLimit">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the integer value specified in the Context when the&#xa; &#x22;archiveHistoryQueryLimit&#x22; facet is present and has a positive integer&#xa; value. Otherwise the defaultArchiveLimit argument is returned.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

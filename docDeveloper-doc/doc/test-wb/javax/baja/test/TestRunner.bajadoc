@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="test" runtimeProfile="wb" qualifiedName="javax.baja.test.TestRunner" name="TestRunner" packageName="javax.baja.test" public="true">
+<description>
+TestRunner is used to run a set of BTests.
+</description>
+<tag name="@author">Brian Frank on 3 Oct 06</tag>
+<tag name="@version">$Revision: 8$ $Date: 6/15/11 11:00:00 AM EDT$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;FieldMayBeFinal&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;MethodMayBeStatic&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<!-- javax.baja.test.TestRunner() -->
+<constructor name="TestRunner" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.test.TestRunner.run(java.lang.String) -->
+<method name="run"  public="true">
+<description>
+Run the target formatted as:&#xa;   - all&#xa;   - {module}&#xa;   - {module-runtimeProfile}&#xa;   - {module}:{type}&#xa;   - {module}:{type}.{method}&#xa;   - {com.package}.{BTestClass}&#xa;   - {com.package}.{BTestClass}#{method}&#xa;   - /regex to match against the com.package.BTestClass#method format/
+</description>
+<parameter name="target">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.NoSuchMethodException"/>
+</throws>
+</method>
+
+<!-- javax.baja.test.TestRunner.runAll() -->
+<method name="runAll"  public="true">
+<description>
+Run all the tests on installed on this VM.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.runMatching(java.util.regex.Pattern) -->
+<method name="runMatching"  public="true">
+<description>
+Run all TestNg tests matching the given regex, using the format&#xa; &lt;code&gt;com.package.ClassName#methodName&lt;/code&gt;.
+</description>
+<parameter name="pattern">
+<type class="java.util.regex.Pattern"/>
+<description>
+pattern to match
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.run(javax.baja.registry.ModuleInfo) -->
+<method name="run"  public="true">
+<description>
+Run all the tests in the specified module.
+</description>
+<parameter name="moduleInfo">
+<type class="javax.baja.registry.ModuleInfo"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.run(javax.baja.registry.ModuleInfo[]) -->
+<method name="run"  public="true">
+<description>
+Run all the tests in the specified module set.
+</description>
+<parameter name="moduleInfos">
+<type class="javax.baja.registry.ModuleInfo" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.run(javax.baja.sys.Type) -->
+<method name="run"  public="true">
+<description>
+Run all the methods of the specified test type.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.run(javax.baja.sys.Type, java.lang.reflect.Method) -->
+<method name="run"  public="true">
+<description>
+Run the specified test method.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="method">
+<type class="java.lang.reflect.Method"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.run(javax.baja.sys.Type, java.util.regex.Pattern) -->
+<method name="run"  public="true">
+<description>
+Run all methods matching &lt;code&gt;pattern&lt;/code&gt; on the specified type
+</description>
+<tag name="@since">Niagara 4.10U8, Niagara 4.13U3, Niagara 4.14</tag>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+Type to run
+</description>
+</parameter>
+<parameter name="pattern">
+<type class="java.util.regex.Pattern"/>
+<description>
+Pattern to match methods against
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.run(java.lang.String...) -->
+<method name="run"  public="true" isVarargs="true">
+<description>
+Run the targets specified in order.
+</description>
+<parameter name="targets">
+<type class="java.lang.String" dimension="1"/>
+<description>
+List of targets accepted by &lt;code&gt;<see ref="javax.baja.test.TestRunner#run(java.lang.String)">#run(String)</see>&lt;/code&gt;
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.NoSuchMethodException"/>
+<description>
+If any of &lt;code&gt;targets&lt;/code&gt; is invalid
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.test.TestRunner.usage() -->
+<method name="usage"  public="true" static="true">
+<description>
+Dump command line usage.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.main(java.lang.String[]) -->
+<method name="main"  public="true" static="true">
+<description>
+Command line entry point.
+</description>
+<parameter name="rawArgs">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.runTests(com.tridium.util.CommandLineArguments) -->
+<method name="runTests"  public="true" static="true">
+<description/>
+<parameter name="args">
+<type class="com.tridium.util.CommandLineArguments"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.TestRunner.runTests(com.tridium.util.CommandLineArguments, boolean) -->
+<method name="runTests"  public="true" static="true" synchronized="true">
+<description/>
+<parameter name="args">
+<type class="com.tridium.util.CommandLineArguments"/>
+</parameter>
+<parameter name="watchMode">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

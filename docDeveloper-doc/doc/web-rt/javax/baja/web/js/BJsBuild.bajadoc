@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.js.BJsBuild" name="BJsBuild" packageName="javax.baja.web.js" public="true" abstract="true">
+<description>
+&lt;p&gt;&#xa; This class declares one particular bundle of JavaScript, optimized by the&#xa; r.js optimizer (and probably minified as well).&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; If webdev is turned off for this build&#x27;s ID, then any built files it declares&#xa; should be downloaded first, before any individual modules it contains are&#xa; loaded. If webdev is turned on, the built files should be skipped so that&#xa; the raw, unminified modules are loaded.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; Most commonly, there will be one &lt;code&gt;BJsBuild&lt;/code&gt; per Niagara module,&#xa; declaring a single builtfile containing all the JS in that module. Consider&#xa; using &lt;code&gt;grunt-niagara&lt;/code&gt; to easily create that builtfile as part of the&#xa; module build process.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; Additionally, &lt;code&gt;<see ref="javax.baja.web.js.BCssResource">BCssResource</see>&lt;/code&gt;s may be declared as dependencies&#xa; of a JsBuild to specify all the CSS files used by that module.&#xa; &lt;/p&gt;
+</description>
+<tag name="@author">Logan Byam</tag>
+<tag name="@since">Niagara 4.0</tag>
+<tag name="@see">&lt;a href=&#x22;https://github.com/tridium/grunt-niagara&#x22;&gt;grunt-niagara&lt;/a&gt;</tag>
+<tag name="@see">&lt;a href=&#x22;https://github.com/tridium/grunt-init-niagara&#x22;&gt;grunt-init-niagara&lt;/a&gt;</tag>
+<extends>
+<type class="javax.baja.sys.BSingleton"/>
+</extends>
+<implements>
+<type class="javax.baja.web.js.BIWebResource"/>
+</implements>
+<implements>
+<type class="javax.baja.web.js.BIJavaScript"/>
+</implements>
+<!-- javax.baja.web.js.BJsBuild(java.lang.String, javax.baja.naming.BOrd[]) -->
+<constructor name="BJsBuild" protected="true">
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+string to uniquely identify this build
+</description>
+</parameter>
+<parameter name="builtFiles">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+<description>
+array of built/minified files
+</description>
+</parameter>
+<description>
+Create an instance with a string ID and array of built/minified Javascript&#xa; files. This instance will not register dependencies on any other builds,&#xa; so avoid this constructor unless you are certain your build has no&#xa; dependencies on any other JS builds.
+</description>
+</constructor>
+
+<!-- javax.baja.web.js.BJsBuild(java.lang.String, javax.baja.naming.BOrd) -->
+<constructor name="BJsBuild" protected="true">
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+string to uniquely identify this build
+</description>
+</parameter>
+<parameter name="builtFile">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+built/minified file
+</description>
+</parameter>
+<description>
+Create an instance with a string ID and a single built/minified Javascript&#xa; file. This instance will not register dependencies on any other builds,&#xa; so avoid this constructor unless you are certain your build has no&#xa; dependencies on any other JS builds.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+</constructor>
+
+<!-- javax.baja.web.js.BJsBuild(java.lang.String, javax.baja.naming.BOrd, java.lang.String...) -->
+<constructor name="BJsBuild" protected="true" isVarargs="true">
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+string to uniquely identify this build
+</description>
+</parameter>
+<parameter name="builtFile">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+built/minified file
+</description>
+</parameter>
+<parameter name="dependentBuildIds">
+<type class="java.lang.String" dimension="1"/>
+<description>
+array of IDs of builds this build depends on
+</description>
+</parameter>
+<description>
+Create an instance with a string ID and a single built/minified Javascript&#xa; file.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+</constructor>
+
+<!-- javax.baja.web.js.BJsBuild(java.lang.String, javax.baja.naming.BOrd, javax.baja.sys.Type...) -->
+<constructor name="BJsBuild" protected="true" isVarargs="true">
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+string to uniquely identify this build
+</description>
+</parameter>
+<parameter name="builtFile">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+built/minified file
+</description>
+</parameter>
+<parameter name="dependentBuilds">
+<type class="javax.baja.sys.Type" dimension="1"/>
+<description>
+array of Types of builds this build depends on
+</description>
+</parameter>
+<description>
+Create an instance with a string ID and a single built/minified Javascript&#xa; file.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+</constructor>
+
+<!-- javax.baja.web.js.BJsBuild(java.lang.String, javax.baja.naming.BOrd[], java.lang.String...) -->
+<constructor name="BJsBuild" protected="true" isVarargs="true">
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+string to uniquely identify this build
+</description>
+</parameter>
+<parameter name="builtFiles">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+<description>
+array of built/minified files
+</description>
+</parameter>
+<parameter name="dependentBuildIds">
+<type class="java.lang.String" dimension="1"/>
+<description>
+array of ID of builds this build depends on
+</description>
+</parameter>
+<description>
+Create an instance with a string ID and array of built/minified Javascript&#xa; files.
+</description>
+</constructor>
+
+<!-- javax.baja.web.js.BJsBuild(java.lang.String, javax.baja.naming.BOrd[], javax.baja.sys.Type[]) -->
+<constructor name="BJsBuild" protected="true">
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+string to uniquely identify this build
+</description>
+</parameter>
+<parameter name="builtFiles">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+<description>
+array of built/minified files
+</description>
+</parameter>
+<parameter name="dependentTypes">
+<type class="javax.baja.sys.Type" dimension="1"/>
+<description>
+array of Types of builds this build depends on
+</description>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.web.js.BJsBuild.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.forId(java.lang.String) -->
+<method name="forId"  public="true" static="true">
+<description/>
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+the ID to search for
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.web.js.BJsBuild"/>
+</args>
+</parameterizedType>
+<description>
+the BJsBuild instance with the given ID, or empty if not found
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.getId() -->
+<method name="getId"  public="true">
+<description>
+Get a string to uniquely identify this build file.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+this build&#x27;s ID
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.getBuiltFiles() -->
+<method name="getBuiltFiles"  public="true">
+<description>
+Get the array of built/minified files represented by this build.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+<description>
+array of built/minified files
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.getFiles() -->
+<method name="getFiles"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+<description>
+array of built/minified files
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.getDependentBuilds() -->
+<method name="getDependentBuilds"  public="true">
+<description>
+Get the other builds this build directly depends on.
+</description>
+<return>
+<type class="javax.baja.web.js.BJsBuild" dimension="1"/>
+<description>
+array of BJsBuilds
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.getDependencies() -->
+<method name="getDependencies"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get all web resource dependencies of BJsBuild
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<return>
+<parameterizedType class="java.util.Set">
+<args>
+<type class="javax.baja.web.js.BIWebResource"/>
+</args>
+</parameterizedType>
+<description>
+a set of web resources dependencies either defined by type or id,&#xa; or an empty set if none are found
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.isWebDevEnabled() -->
+<method name="isWebDevEnabled"  public="true">
+<description>
+Check to see if webdev is enabled for this build. If it is disabled,&#xa; ensure that RequireJS loads the built files before the actual modules;&#xa; otherwise, download the raw/unminified modules.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if webdev is enabled for this build
+</description>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.getJsInfo(javax.baja.sys.Context) -->
+<method name="getJsInfo"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.web.js.JsInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.web.js.BJsBuild.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

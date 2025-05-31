@@ -1,0 +1,115 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/autoLogoffWb.html" class="navbar">Prev</a> |  <a href="/doc/servlets/servletViews.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="niagara-web-modules">Niagara Web Modules</h1>
+<p>In Niagara 4 standard Java Web Server technology can be used.</p>
+<p>The Web Server currently being used is <a href="http://eclipse.org/jetty/">Jetty</a>. Jetty is built around the standard Java Servlet Specification.</p>
+<p>Currently, the Jetty supports version 3 of the Java Servlet Specification. Currently we&rsquo;re not supporting the newer Servlet annotations; a Web XML descriptor must be used instead.</p>
+<p>In Niagara AX, there are two other ways of creating Java Servlets. These are still supported in Niagara 4&hellip;</p>
+<ul>
+  <li><a href="servletViews.html">Servlet Views</a>: create a view that is also a Servlet.</li>
+  <li><a href="webServlets.html">Web Servlet Components</a>: create a component that&rsquo;s also a Servlet.</li>
+</ul>
+<h2 id="niagara-4">Niagara 4</h2>
+<p>Please note that applications using <a href="webServlets.html">BWebServlet</a> and <a href="servletViews.html">BServletView</a> are still and will continue to be supported. From Niagara 4, we&rsquo;ve additionally added support for adding standard Java Servlets that extend <a href="http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServlet.html">javax.servlet.http.HttpServlet</a>.</p>
+<p>Please click <a href="http://www.oracle.com/technetwork/java/index-jsp-135475.html">here</a> for more information on using Java Servlets.</p>
+<h3 id="my-first-niagara-web-module">My First Niagara Web Module</h3>
+<p>Here&rsquo;s how you can create a Niagara Module that extends a standard <code>javax.servlet.http.HttpServlet</code> class&hellip;</p>
+<ul>
+  <li>In your Niagara Module, add a class that extends <code>javax.servlet.http.HttpServlet</code>.</li>
+  <li>Override <code>doGet</code> or any other HTTP verb related methods to handle implementation.</li>
+  <li>There&rsquo;s no WebOp. If this Servlet is using Niagara Security, you can call the following HttpServletRequest methods&hellip;
+    <ul>
+      <li><code>getUserPrincipal()</code>: cast this to a BUser.</li>
+      <li><code>getLocale()</code>: returns a java.util.Locale object. Use the forLanguageTag and toLanguageTag methods to get the Locale to and from a String. Please note that javax.baja.util.Lexicon has a make method that takes a Locale object. Use a combination of these two methods to create an instance of javax.baja.sys.BasicContext. Please note, NCCB-7051 will address some of the issues concerning country and variant.</li>
+    </ul>
+  </li>
+  <li>In your module&rsquo;s src directory, add a directory called <code>WEB-INF</code>.</li>
+  <li>In this folder, create a file called <code>web.xml</code>.</li>
+  <li>In your module&rsquo;s gradle file, remember to add an entry to pick up the .xml files that will be created. For example&hellip;</li>
+</ul>
+<pre><code>jar {
+  from('src') {
+    ...
+    include 'WEB-INF/*.xml'
+  }
+}
+</code></pre>
+<ul>
+  <li>Here&rsquo;s a sample web.xml file that plugs a Servlet into our new Web architecture&hellip;</li>
+</ul>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;testServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;mypackage.TestServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;testServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/test/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<ul>
+  <li>The Servlet java class is plugged into the specified URL pattern. It&rsquo;s a URL pattern and not just a servlet name like in Niagara AX. This gives developers far more flexibility.</li>
+  <li>The <code>*</code> in the pattern means that anything after /test/&hellip; will also be picked up by this Servlet. This is very useful if you&rsquo;re making a RESTful API. The XML listed here is all part of the J2EE standard. There&rsquo;s nothing specific to the Jetty implementation.</li>
+</ul>
+<p>Now try building your module and starting up a Station. On Station start up, the Servlets will be automatically installed into the Web Server. No more configuration is required. Once the Station has started, the URL to access the Servlet would be in the following format&hellip;</p>
+<pre><code>http://localhost/moduleName/test
+</code></pre>
+<p>Or as we&rsquo;re also using a <code>*</code> in the URI pattern&hellip;</p>
+<pre><code>http://localhost/moduleName/test/whatever/foobar
+</code></pre>
+<ul>
+  <li>By default, the name of the module is used for the Context Path.</li>
+  <li>The Servlet Path is specified in the web.xml file. In this case it&rsquo;s &lsquo;test&rsquo;. The path after the Servlet Path is known as the Path Info. Typically this is what you use in your Servlet. Please never call <code>HttpServletRequest#getRequestURI()</code> (as is typically done in AX). Servlets should be relative and reusable. Most of the time they really don&rsquo;t need to know about their precise plug point within a Web Server!</li>
+</ul>
+<h3 id="changing-the-context-path">Changing the Context Path</h3>
+<p>To change the Context Path of the Servlet we need to add one more XML file alongside <code>web.xml</code> called <code>jetty-web.xml</code>. This file configures functionality specific to the Jetty Web Server that can&rsquo;t be done via <code>web.xml</code>. By default, using the Niagara Module name is used for Context Path. This is a sound way to try and create a unique path mapping for a web application. This can be changed with the following <code>jetty-web.xml</code> file&hellip;</p>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot;  encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;!DOCTYPE Configure PUBLIC &quot;-//Jetty//Configure//EN&quot; &quot;http://www.eclipse.org/jetty/configure.dtd&quot;&gt;
+&lt;Configure id=&quot;webApp&quot; class=&quot;org.eclipse.jetty.webapp.WebAppContext&quot;&gt;
+  &lt;!-- Change the Context Path from the module name to something else --&gt;
+  &lt;Set name=&quot;contextPath&quot;&gt;/somethingelse&lt;/Set&gt;
+&lt;/Configure&gt;
+</code></pre>
+<ul>
+  <li>Note the <code>contextPath</code> has been added to the file.</li>
+  <li>Once built, the URI would change to <code>http://localhost/somethingelse/test/whatever</code>.</li>
+</ul>
+<h2 id="filters">Filters</h2>
+<p>As well as Servlets, developers can now use <code>javax.servlet.Filter</code>.</p>
+<ul>
+  <li>A class that implements the <code>Filter</code> interface can intercept HTTP Requests before they get to their <code>Servlet</code>.</li>
+  <li>They can also process the responses out of a Servlet.</li>
+  <li>They can have initialization parameters.</li>
+  <li>They can be plugged in via some web.xml.</li>
+  <li>They&rsquo;re also great for monitoring and profiling Web Server performance.</li>
+</ul>
+<p>Click <a href="http://www.oracle.com/technetwork/java/filters-137243.html">here</a> for more information on using Java Filters.</p>
+<h2 id="how-can-i-use-a-proper-war-file">How can I use a proper WAR file?</h2>
+<p>This isn&rsquo;t currently supported in Niagara 4.0.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/autoLogoffWb.html" class="navbar">Prev</a> |  <a href="/doc/servlets/servletViews.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.Type" name="Type" packageName="javax.baja.sys" public="true" interface="true" abstract="true" category="interface">
+<description>
+Type defines the typing information associated&#xa; with a BObject class.  Type is loaded by the framework&#xa; using the Sys.loadType() method.  Every BObject type&#xa; must load their type and store it in a static variable&#xa; which is access via the type() method.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">1 Feb 00</tag>
+<tag name="@version">$Revision: 42$ $Date: 6/28/11 12:27:04 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.sys.Type.getSuperType() -->
+<method name="getSuperType"  public="true" abstract="true">
+<description>
+Get the Type which is used to represent the&#xa; type meta-data for this type class&#x27;s superclass.&#xa; &lt;p&gt;&#xa; If the type is &#x22;baja.Object&#x22; return null.  &#xa; &lt;p&gt;&#xa; If this type is an interface return null.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getInterfaces() -->
+<method name="getInterfaces"  public="true" abstract="true">
+<description>
+Get the list of BInterface Types which are implemented&#xa; by this Type.  If this type is a subclass of BObject,&#xa; then this is all the BInterfaces which the&#xa; BObject directly implements.  If this is an interface&#xa; type, then this is all the interface types that this&#xa; interface directly extends.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getVendorVersion() -->
+<method name="getVendorVersion"  public="true" default="true">
+<description>
+Return the vendor version for the module JAR that supports&#xa; this Type.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="javax.baja.util.Version"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getVendor() -->
+<method name="getVendor"  public="true" default="true">
+<description>
+Return the vendor for the module JAR that supports&#xa; this Type.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getId() -->
+<method name="getId"  public="true" abstract="true">
+<description>
+Get a unique integer identifier for this type.  This&#xa; identifier is not persistent, and is only good for the&#xa; life of the VM.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getModule() -->
+<method name="getModule"  public="true" abstract="true">
+<description>
+Get the module which was used to load &#xa; this type&#x27;s implementation class.
+</description>
+<return>
+<type class="javax.baja.sys.BModule"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getRuntimeProfile() -->
+<method name="getRuntimeProfile"  public="true" abstract="true">
+<description>
+Get the runtime profile for which this type is registered.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getTypeClass() -->
+<method name="getTypeClass"  public="true" abstract="true">
+<description>
+Get the class which implements this type.  The&#xa; implementation class is the class which was passed&#xa; to &lt;code&gt;Sys.loadType()&lt;/code&gt;.
+</description>
+<return>
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getTypeName() -->
+<method name="getTypeName"  public="true" abstract="true">
+<description>
+Get the type name.  The type name is an abreviated&#xa; String key for the Type to use for serialization and&#xa; scripting.  The type name is always the class name&#xa; minus the package and any leading &#x27;B&#x27; character.&#xa; These type names are mapped to classnames by the&#xa; &#x22;type&#x22; elements in the modules&#x27;s &#x22;meta-inf/module.xml&#x22;&#xa; file.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getTypeInfo().getDisplayName(cx)&lt;/code&gt;.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.isAbstract() -->
+<method name="isAbstract"  public="true" abstract="true">
+<description>
+Return true if this Type&#x27;s implementation class is&#xa; abstract.  If this is an abstract type, then many&#xa; operations will throw the AbstractTypeException.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.isInterface() -->
+<method name="isInterface"  public="true" abstract="true">
+<description>
+Return true if this Type&#x27;s implementation class is&#xa; an interface.  If this is an interface, then many&#xa; operations will throw the InterfaceTypeException.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.isDataType() -->
+<method name="isDataType"  public="true" abstract="true">
+<description>
+Return if this Type is one of the predefined types&#xa; defined in DataTypes and used by the Baja Data APIs.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.isTransient() -->
+<method name="isTransient"  public="true" abstract="true">
+<description>
+Return if values of this Type should not be persisted to&#xa; the station bog.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getDataTypeSymbol() -->
+<method name="getDataTypeSymbol"  public="true" abstract="true">
+<description>
+If this Type returns true for &lt;code&gt;isDataType&lt;/code&gt;&#xa; then return the unique ASCII character that identifies&#xa; this data type.  Otherwise return 0.
+</description>
+<return>
+<type class="char"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getInstance() -->
+<method name="getInstance"  public="true" abstract="true">
+<description>
+Get an instance of the type&#x27;s implementation class.&#xa; What this method returns is dependent on the semantics&#xa; of the BObject type.  In general:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;BSingleton: returns INSTANCE;&lt;/li&gt;&#xa; &lt;li&gt;BSimple: returns DEFAULT;&lt;/li&gt;&#xa; &lt;li&gt;BFrozenEnum: returns first value in range;&lt;/li&gt;&#xa; &lt;li&gt;BComplex: returns new instance using no arg constructor;&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getTypeInfo() -->
+<method name="getTypeInfo"  public="true" abstract="true">
+<description>
+Get the TypeInfo for this Type which provides access &#xa; for registry interrogation.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.is(javax.baja.registry.TypeInfo) -->
+<method name="is"  public="true" abstract="true">
+<description>
+Return if this type supports the specified type via&#xa; inheritance.  If this method returns true, then any&#xa; instance of this type may be cast into the specified&#xa; type.
+</description>
+<parameter name="type">
+<type class="javax.baja.registry.TypeInfo"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.is(javax.baja.sys.Type) -->
+<method name="is"  public="true" abstract="true">
+<description>
+Return if this type supports the specified type via&#xa; inheritance.  If this method returns true, then any&#xa; instance of this type may be cast into the specified&#xa; type.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.getTypeSpec() -->
+<method name="getTypeSpec"  public="true" abstract="true">
+<description>
+Get the BTypeSpec used to represent this Type.
+</description>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Type.toString() -->
+<method name="toString"  public="true" abstract="true">
+<description>
+Return the type as a type spec &#x22;module:typename&#x22;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

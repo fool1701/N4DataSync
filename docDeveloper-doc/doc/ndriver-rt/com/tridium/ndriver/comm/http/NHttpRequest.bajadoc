@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.comm.http.NHttpRequest" name="NHttpRequest" packageName="com.tridium.ndriver.comm.http" public="true">
+<description>
+NHttpRequest is the base http request message.
+</description>
+<tag name="@author">Robert A Adams</tag>
+<tag name="@creation">Nov 15, 2011</tag>
+<extends>
+<type class="com.tridium.ndriver.comm.http.NHttpMessage"/>
+</extends>
+<!-- com.tridium.ndriver.comm.http.NHttpRequest(com.tridium.ndriver.datatypes.BIpAddress) -->
+<constructor name="NHttpRequest" public="true">
+<parameter name="address">
+<type class="com.tridium.ndriver.datatypes.BIpAddress"/>
+</parameter>
+<description>
+Constructor
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest(com.tridium.ndriver.datatypes.BIpAddress, java.lang.String, java.lang.String) -->
+<constructor name="NHttpRequest" public="true">
+<parameter name="address">
+<type class="com.tridium.ndriver.datatypes.BIpAddress"/>
+</parameter>
+<parameter name="method">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Constructor
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.getMethod() -->
+<method name="getMethod"  public="true">
+<description>
+Get the method Sting.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.getUri() -->
+<method name="getUri"  public="true">
+<description>
+Get the URI String.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.setUsernamePassword(javax.baja.security.BUsernameAndPassword) -->
+<method name="setUsernamePassword"  public="true">
+<description>
+Set the username password
+</description>
+<parameter name="up">
+<type class="javax.baja.security.BUsernameAndPassword"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.getUsernamePassword() -->
+<method name="getUsernamePassword"  public="true">
+<description>
+Get the username password
+</description>
+<return>
+<type class="javax.baja.security.BUsernameAndPassword"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.closeConn() -->
+<method name="closeConn"  public="true">
+<description>
+Return true to close connection after response received.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.addBasicAuthorization(java.lang.String, java.lang.String) -->
+<method name="addBasicAuthorization"  public="true">
+<description>
+Add basic access authentication per rfc 2617.  This adds an &#x22;Authorization&#x22;&#xa; header with base64 encoded userName and password.
+</description>
+<parameter name="userName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="password">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.isValidResponse(int) -->
+<method name="isValidResponse"  public="true">
+<description>
+Check if the specified HTTP response code is a valid response for this&#xa; message.  HttpComm will return an error response for any response code&#xa; other than SC_OK(200) which does not pass this test.  Override to direct&#xa; HttpComm to change default test which passes codes 201-206.&#xa; &lt;p&gt;
+</description>
+<parameter name="rc">
+<type class="int"/>
+<description>
+is a HTTP response code (find constant defs in&#xa;           javax.baja.net.HTTP) see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html&#xa;           for code descriptions
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+default returns true for (rc&gt;=201 &amp;&amp; rc&lt;=206) for all others return&#xa; false
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.toTraceString() -->
+<method name="toTraceString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.http.NHttpRequest.setData(java.lang.String) -->
+<method name="setData"  public="true">
+<description>
+Set message data.
+</description>
+<tag name="@since">3.8.38.1</tag>
+<parameter name="data">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

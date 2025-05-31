@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.view.BWbComponentView" name="BWbComponentView" packageName="javax.baja.workbench.view" public="true">
+<description>
+BWbComponentView is a BWbView designed to view/edit BComponents.  &#xa; It provides built-in support to automatically register for component &#xa; events and handle the callbacks.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">7 Jan 01</tag>
+<tag name="@version">$Revision: 12$ $Date: 10/1/09 3:02:25 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.workbench.view.BWbView"/>
+</extends>
+<!-- javax.baja.workbench.view.BWbComponentView() -->
+<constructor name="BWbComponentView" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.view.BWbComponentView.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.isAutoRegisterForComponentEvents() -->
+<method name="isAutoRegisterForComponentEvents"  public="true" final="true">
+<description>
+Get the autoRegisterForComponentEvents flag.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.isRegisteredForComponentEvents(javax.baja.sys.BComponent) -->
+<method name="isRegisteredForComponentEvents"  public="true" final="true">
+<description>
+Is this editor registered to receive component &#xa; events from the specified source.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.registerForComponentEvents(javax.baja.sys.BComponent) -->
+<method name="registerForComponentEvents"  public="true" final="true">
+<description>
+Register for component events on the specified &#xa; source by creating a link from its componentEvent&#xa; topic to my own handleComponentEvent action. &#xa; The link created is an indirect link which requires&#xa; the source to be mounted.  Using an indirect link&#xa; ensures that it gets removed automatically if the&#xa; source becomes unmounted.  If the source component is&#xa; not mounted, then this call is silently ignored.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.registerForComponentEvents(javax.baja.sys.BComponent, int) -->
+<method name="registerForComponentEvents"  public="true" final="true">
+<description>
+This is a recursive method of registerForComponent events, which&#xa; registers the source, plus children of the source.  If depth is&#xa; zero then only the source is registered.  If depth is 1 then &#xa; the source&#x27;s children are registered too.  If depth is 2 then&#xa; the source&#x27;s children and grandchildren.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.registerForComponentEvents(javax.baja.sys.BComponent[], int) -->
+<method name="registerForComponentEvents"  public="true" final="true">
+<description>
+This is method is a batch version of registerForComponent events.&#xa; It provides higher performance when many different components&#xa; need to be subscribed.
+</description>
+<parameter name="sources">
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.registerForComponentEvents(javax.baja.space.BComponentSpace, javax.baja.naming.BOrd[], int) -->
+<method name="registerForComponentEvents"  public="true" final="true">
+<description>
+This is method is a batch version of registerForComponent events&#xa; using a list of ords.  The resolved list of BComponents is returned.
+</description>
+<parameter name="space">
+<type class="javax.baja.space.BComponentSpace"/>
+</parameter>
+<parameter name="sources">
+<type class="javax.baja.naming.BOrd" dimension="1"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.unregisterForComponentEvents(javax.baja.sys.BComponent) -->
+<method name="unregisterForComponentEvents"  public="true" final="true">
+<description>
+Register for component events on the specified &#xa; target by creating a link from its componentEvent&#xa; topic to my own handleComponentEvent action.
+</description>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.unregisterForAllComponentEvents() -->
+<method name="unregisterForAllComponentEvents"  public="true" final="true">
+<description>
+Unregister all component events this editor is &#xa; currently registered on.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.handleComponentEvent(javax.baja.sys.BComponentEvent) -->
+<method name="handleComponentEvent"  public="true">
+<description>
+This is the built in callback for handling a &#xa; component event, usually from a proxy component&#xa; subscribed to by registerForComponentEvents().  Note&#xa; that if this view is composited into a px page&#xa; you may receive events for components not explicitly &#xa; registered by yourself.  As a general rule check &#xa; the event source component before processing.
+</description>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.getAttached() -->
+<method name="getAttached"  public="true">
+<description>
+Get the list of current Attachables bound to &#xa; this view using the attach() method.
+</description>
+<return>
+<type class="javax.baja.workbench.view.BWbComponentView$Attachable" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.attach(javax.baja.workbench.view.BWbComponentView.Attachable) -->
+<method name="attach"  public="true">
+<description>
+Bind the specified object to receive my component event callbacks.
+</description>
+<parameter name="a">
+<type class="javax.baja.workbench.view.BWbComponentView$Attachable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.unattach(javax.baja.workbench.view.BWbComponentView.Attachable) -->
+<method name="unattach"  public="true">
+<description>
+Unbind the specified object from my component event callbacks.
+</description>
+<parameter name="a">
+<type class="javax.baja.workbench.view.BWbComponentView$Attachable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Framework support access; this method should&#xa; never be used by developers.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.view.BWbComponentView.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.view.BWbComponentView.autoRegisterForComponentEvents -->
+<field name="autoRegisterForComponentEvents"  protected="true">
+<type class="boolean"/>
+<description>
+If set to true in the constructor, then a call to load() &#xa; with a BComponent automatically registers for component &#xa; events.  If the view does it own registration then set false.  &#xa; The default is true.
+</description>
+</field>
+
+</class>
+</bajadoc>

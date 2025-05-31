@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="eibnetIp" runtimeProfile="rt" qualifiedName="com.tridium.eibnetIp.point.BKnxProxyExt" name="BKnxProxyExt" packageName="com.tridium.eibnetIp.point" public="true" abstract="true">
+<description>
+Konnex implementation of BProxyExt
+</description>
+<tag name="@author">Clif Turman</tag>
+<tag name="@creation">13 Jun 06</tag>
+<tag name="@version">$Revision: 1$ $Date: 9/28/2004 11:35:43 AM$</tag>
+<tag name="@since">Niagara 3.1</tag>
+<extends>
+<type class="javax.baja.driver.point.BProxyExt"/>
+</extends>
+<implements>
+<type class="com.tridium.basicdriver.util.BIBasicPollable"/>
+</implements>
+<implements>
+<type class="com.tridium.eibnetIp.EibnetConst"/>
+</implements>
+<property name="pollEnable" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pollEnable&lt;/code&gt; property.&#xa; used to inhibit or enable suscription to the poll scheduler
+</description>
+<tag name="@see">#getPollEnable</tag>
+<tag name="@see">#setPollEnable</tag>
+</property>
+
+<property name="pollOnceOnSubscribed" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pollOnceOnSubscribed&lt;/code&gt; property.&#xa; used to force a poll whenever the point enters a subscribed state, such&#xa; as when a user views it on a point list.&#xa; If enabled, the resulting poll is independent, and will occur in spite&#xa; of any other poll setting (for instance, it will occur even if&#xa; pollEnabled is false, or PollScheduler rate is 0 or disabled.)&#xa; Behavior can be modifed by the &#x22;pollUntilAnswerReceivedOnPollOnce&#x22;&#xa; property defined below.
+</description>
+<tag name="@see">#getPollOnceOnSubscribed</tag>
+<tag name="@see">#setPollOnceOnSubscribed</tag>
+</property>
+
+<property name="pollOnceOnOperational" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pollOnceOnOperational&lt;/code&gt; property.&#xa; used to force a poll whenever the point status changes from&#xa; disabled-enabled, or down-up, or fault-noFault.&#xa; If enabled, the resulting poll is independent, and will occur in spite&#xa; of any other poll setting (for instance, it will occur even if&#xa; pollEnabled is false, or PollScheduler rate is 0 or disabled.&#xa; Behavior can be modifed by the &#x22;pollUntilAnswerReceivedOnPollOnce&#x22;&#xa; property defined below.
+</description>
+<tag name="@see">#getPollOnceOnOperational</tag>
+<tag name="@see">#setPollOnceOnOperational</tag>
+</property>
+
+<property name="pollUntilAnswerReceivedOnPollOnce" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pollUntilAnswerReceivedOnPollOnce&lt;/code&gt; property.&#xa; if pollOnceOnSubscribed or pollOnceOnOperational are set to true,&#xa; then if this value is also set to true, the poll once behavior&#xa; is modified to &#x22;poll until one valid value is received&#x22; instead&#xa; of &#x22;poll once and forget&#x22;.  This has the effect of subscribing the&#xa; point to the poll scheduler until such time as the point receives&#xa; a LDataInd message addressed to the first group address in the list,&#xa; and the a value is a valid value for this point type.  When these&#xa; conditions are satified, the point is unregistered from the poll&#xa; scheduler.
+</description>
+<tag name="@see">#getPollUntilAnswerReceivedOnPollOnce</tag>
+<tag name="@see">#setPollUntilAnswerReceivedOnPollOnce</tag>
+</property>
+
+<property name="pollAfterWrite" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;pollAfterWrite&lt;/code&gt; property.&#xa; independent of pollEnable property above.  Used to enable or disable&#xa; a poll for value after a write.
+</description>
+<tag name="@see">#getPollAfterWrite</tag>
+<tag name="@see">#setPollAfterWrite</tag>
+</property>
+
+<property name="pollFrequency" flags="">
+<type class="javax.baja.driver.util.BPollFrequency"/>
+<description>
+Slot for the &lt;code&gt;pollFrequency&lt;/code&gt; property.&#xa; Poll frequency bucket
+</description>
+<tag name="@see">#getPollFrequency</tag>
+<tag name="@see">#setPollFrequency</tag>
+</property>
+
+<property name="groupAddresses" flags="">
+<type class="com.tridium.eibnetIp.BGroupAddressFolder"/>
+<description>
+Slot for the &lt;code&gt;groupAddresses&lt;/code&gt; property.&#xa; Container for dynamically added groups&#xa; to which this object belongs
+</description>
+<tag name="@see">#getGroupAddresses</tag>
+<tag name="@see">#setGroupAddresses</tag>
+</property>
+
+<property name="dataType" flags="">
+<type class="com.tridium.eibnetIp.enums.BKnxDimensionEnum"/>
+<description>
+Slot for the &lt;code&gt;dataType&lt;/code&gt; property.&#xa; The datatype used for data conversions
+</description>
+<tag name="@see">#getDataType</tag>
+<tag name="@see">#setDataType</tag>
+</property>
+
+<property name="hideDynamicActions" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;hideDynamicActions&lt;/code&gt; property.&#xa; used to hide or unhide actions that are added dynamically
+</description>
+<tag name="@see">#getHideDynamicActions</tag>
+<tag name="@see">#setHideDynamicActions</tag>
+</property>
+
+<action name="pollNow" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;pollNow&lt;/code&gt; action.
+</description>
+<tag name="@see">#pollNow()</tag>
+</action>
+
+<action name="writeNow" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;writeNow&lt;/code&gt; action.
+</description>
+<tag name="@see">#writeNow()</tag>
+</action>
+
+<action name="dump" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;dump&lt;/code&gt; action.
+</description>
+<tag name="@see">#dump()</tag>
+</action>
+
+<topic name="busDataReceived" flags="">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;busDataReceived&lt;/code&gt; topic.&#xa; fired whenever a telegram is received from the bus containing&#xa; data and the dest address matches this objects first group address
+</description>
+<tag name="@see">#fireBusDataReceived</tag>
+</topic>
+
+</class>
+</bajadoc>

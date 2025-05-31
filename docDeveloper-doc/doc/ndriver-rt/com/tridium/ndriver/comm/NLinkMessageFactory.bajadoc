@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.comm.NLinkMessageFactory" name="NLinkMessageFactory" packageName="com.tridium.ndriver.comm" public="true">
+<description>
+NLinkMessageFactory is a utility class to create a pool of LinkMessage for&#xa; use by ILinkLayer implementations.  To use custom subclasses of NLinkMessage&#xa; create subclass of NLinkMessageFactory and override createLinkMessage().
+</description>
+<tag name="@author">Robert A Adams</tag>
+<tag name="@creation">Oct 23, 2011</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.ndriver.comm.NLinkMessageFactory(int) -->
+<constructor name="NLinkMessageFactory" public="true">
+<parameter name="linkMaxLength">
+<type class="int"/>
+</parameter>
+<description>
+Constructor specifying maximum linkMessage length.
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.NLinkMessageFactory(int, int) -->
+<constructor name="NLinkMessageFactory" public="true">
+<parameter name="maxPool">
+<type class="int"/>
+</parameter>
+<parameter name="linkMaxLength">
+<type class="int"/>
+</parameter>
+<description>
+Constructor specifying the max size message pool and maximum linkMessage&#xa; length.
+</description>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.NLinkMessageFactory.getLinkMessage() -->
+<method name="getLinkMessage"  public="true" final="true">
+<description>
+Get a LinkMessage from the pool.  Create new on if needed.
+</description>
+<return>
+<type class="com.tridium.ndriver.comm.LinkMessage"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NLinkMessageFactory.releaseLinkMessage(com.tridium.ndriver.comm.LinkMessage) -->
+<method name="releaseLinkMessage"  public="true" final="true">
+<description>
+Release the LinkMessage to the pool.
+</description>
+<parameter name="lm">
+<type class="com.tridium.ndriver.comm.LinkMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NLinkMessageFactory.createLinkMessage() -->
+<method name="createLinkMessage"  protected="true">
+<description>
+Override point for subclasses to create subclass of LinkMessage.
+</description>
+<return>
+<type class="com.tridium.ndriver.comm.LinkMessage"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NLinkMessageFactory.getLinkMaxLength() -->
+<method name="getLinkMaxLength"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.NLinkMessageFactory.linkMaxLength -->
+<field name="linkMaxLength"  protected="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

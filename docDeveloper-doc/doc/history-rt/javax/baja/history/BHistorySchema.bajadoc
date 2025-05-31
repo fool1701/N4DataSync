@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.BHistorySchema" name="BHistorySchema" packageName="javax.baja.history" public="true" final="true">
+<description>
+BHistorySchema is the set of name-type pairs that describe a single&#xa; record in a history.  This can be used to guarantee that a history&#xa; can be read in an environment where the original record type class&#xa; is not available.&#xa;&#xa; Like all simples, BHistorySchema is immutable.  However, for convenience&#xa; its immutability does not begin until it is accessed for reading the first&#xa; time. So an instance can be modified using the addColumn() method until&#xa; any of the getters are called.  An instance also becomes immutable when the&#xa; BHistorySchema(String[], BTypeSpec[]) constructor is used or when it&#xa; is created using decode() or decodeFromString().
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">24 Jun 2003</tag>
+<tag name="@version">$Revision: 3$ $Date: 7/30/08 10:53:55 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.history.BHistorySchema() -->
+<constructor name="BHistorySchema" public="true">
+<description>
+Default constructor.  Creates a schema with no columns.
+</description>
+</constructor>
+
+<!-- javax.baja.history.BHistorySchema(java.lang.String[], javax.baja.util.BTypeSpec[]) -->
+<constructor name="BHistorySchema" public="true">
+<parameter name="newNames">
+<type class="java.lang.String" dimension="1"/>
+<description>
+The list of column names.
+</description>
+</parameter>
+<parameter name="newTypes">
+<type class="javax.baja.util.BTypeSpec" dimension="1"/>
+<description>
+The list of column types.
+</description>
+</parameter>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.history.BHistorySchema.getColumnCount() -->
+<method name="getColumnCount"  public="true">
+<description>
+Get the number of columns in the schema.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.getColumnName(int) -->
+<method name="getColumnName"  public="true">
+<description>
+Get the name of the specified column.
+</description>
+<parameter name="colIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.getColumnType(int) -->
+<method name="getColumnType"  public="true">
+<description>
+Get the type of the specified column.
+</description>
+<parameter name="colIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+Hashcode implementation.&#xa; Added override for this method in Niagara 3.4.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Compare two schemas for equality.  Two schemas are equal&#xa; if the have the same names and types for their columns&#xa; in the same order.
+</description>
+<parameter name="o">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode this instance to the specified output.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode an instance from the specified input.
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Encode this instance into a string representation.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Decode an instance from the specified string.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.addColumn(java.lang.String, javax.baja.util.BTypeSpec) -->
+<method name="addColumn"  public="true" synchronized="true">
+<description>
+Add a column to the schema.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+of the new column.
+</description>
+</parameter>
+<parameter name="type">
+<type class="javax.baja.util.BTypeSpec"/>
+<description>
+of the new column.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.IllegalStateException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistorySchema.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.history.BHistorySchema"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.BHistorySchema.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

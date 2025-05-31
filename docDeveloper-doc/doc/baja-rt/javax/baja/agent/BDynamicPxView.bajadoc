@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.agent.BDynamicPxView" name="BDynamicPxView" packageName="javax.baja.agent" public="true" abstract="true">
+<description>
+BDynamicPxView is a BAbstractPxView which dynamically&#xa; generates Presentation XML on demand.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">18 Dec 06</tag>
+<tag name="@version">$Revision: 5$ $Date: 6/11/07 12:41:23 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.agent.BAbstractPxView"/>
+</extends>
+<!-- javax.baja.agent.BDynamicPxView(javax.baja.sys.BIcon, javax.baja.security.BPermissions, javax.baja.util.BTypeSpec) -->
+<constructor name="BDynamicPxView" protected="true">
+<parameter name="icon">
+<type class="javax.baja.sys.BIcon"/>
+</parameter>
+<parameter name="permissions">
+<type class="javax.baja.security.BPermissions"/>
+</parameter>
+<parameter name="media">
+<type class="javax.baja.util.BTypeSpec"/>
+</parameter>
+<description>
+Constructor with all fields.
+</description>
+</constructor>
+
+<!-- javax.baja.agent.BDynamicPxView() -->
+<constructor name="BDynamicPxView" protected="true">
+<description>
+No argument constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.agent.BDynamicPxView.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.BDynamicPxView.generateXml(java.lang.Object, javax.baja.sys.Context) -->
+<method name="generateXml"  public="true" abstract="true">
+<description>
+&lt;p&gt;&#xa; Generate the Presentation XML for this view.&#xa; &lt;/p&gt;&#xa;&#xa; &lt;p&gt;&#xa; If you are overriding this method, add the following annotation&#xa; above the implemented version of this method:&#xa; &lt;/p&gt;&#xa;&#xa; &lt;pre&gt;&#xa; &amp;#64;NiagaraRpc(&#xa;   transports = @Transport(type = TransportType.fox),&#xa;   permissions = &#x22;r&#x22;&#xa; )&#xa; &lt;/pre&gt;
+</description>
+<parameter name="arg">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.BDynamicPxView.getUniqueId(javax.baja.naming.OrdTarget) -->
+<method name="getUniqueId"  public="true">
+<description>
+Return an unique id string for this instance of PxView. &#xa; This string is used to cache the widget tree produced&#xa; from the XML returned by &lt;code&gt;generateXml()&lt;/code&gt;.&#xa; So the id returned here must always match up to the&#xa; correct XML for this target.  The default implementation&#xa; returns the ord of the target.
+</description>
+<parameter name="target">
+<type class="javax.baja.naming.OrdTarget"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.agent.BDynamicPxView.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

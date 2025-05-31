@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.options.OptionsManager" name="OptionsManager" packageName="javax.baja.ui.options" public="true" interface="true" abstract="true" category="interface">
+<description>
+OptionsManager is used to manage BOptions for a the &#xa; current user.  Access to the OptionsManager is via &#xa; &lt;code&gt;BWidget.getApplication().getOptionsManager()&lt;/code&gt; or&#xa; &lt;code&gt;BOptions.getOptionsManager()&lt;/code&gt;.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">26 Nov 01</tag>
+<tag name="@version">$Revision: 8$ $Date: 11/17/04 9:39:25 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.ui.options.OptionsManager.load(javax.baja.registry.TypeInfo) -->
+<method name="load"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;load(typeInfo.getTypeSpec().getResolvedType())&lt;/code&gt;.
+</description>
+<parameter name="typeInfo">
+<type class="javax.baja.registry.TypeInfo"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.options.BOptions"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.options.OptionsManager.load(javax.baja.sys.Type) -->
+<method name="load"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;load(type.toString(), type)&lt;/code&gt;.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.options.BOptions"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.options.OptionsManager.load(java.lang.String, javax.baja.sys.Type) -->
+<method name="load"  public="true" abstract="true">
+<description>
+Get the options by key for the current user.  If the specified &#xa; options haven&#x27;t been accessed yet, then create a new instance &#xa; using the specified type.  If the type is a BUserOptions, then &#xa; key MUST be &lt;code&gt;type.toString()&lt;/code&gt;.&#xa;&#xa; In Niagara 4.4 and later, BOptions.loaded() should be called before returning.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.options.BOptions"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.options.OptionsManager.save(javax.baja.ui.options.BOptions) -->
+<method name="save"  public="true" abstract="true">
+<description>
+Save the specified options.
+</description>
+<parameter name="options">
+<type class="javax.baja.ui.options.BOptions"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.options.OptionsManager.saveAll() -->
+<method name="saveAll"  public="true" abstract="true">
+<description>
+Save all the options.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

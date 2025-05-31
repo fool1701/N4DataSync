@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.fieldeditor.BWbFieldEditor" name="BWbFieldEditor" packageName="javax.baja.workbench.fieldeditor" public="true" abstract="true">
+<description>
+BWbFieldEditor is an editor designed to view and edit a BObject on a field&#xa; sheet. Field editors are designed to be laid out on BPanes and are built with&#xa; standard widgets like BButtons, BTextFields, BCheckBoxes, etc.&#xa; &lt;p&gt;&#xa; Beginning in Niagara 3.5, the field editor will check the context used during&#xa; &lt;code&gt;<see ref="javax.baja.workbench.fieldeditor.BWbFieldEditor#loadValue(javax.baja.sys.BObject, javax.baja.sys.Context)">#loadValue(BObject, Context)</see>&lt;/code&gt; to see if any&#xa; &lt;code&gt;<see ref="javax.baja.util.BIValidator">BIValidators</see>&lt;/code&gt; were declared. When&#xa; &lt;code&gt;<see ref="javax.baja.workbench.fieldeditor.BWbFieldEditor#saveValue(javax.baja.sys.BObject, javax.baja.sys.Context)">#saveValue(BObject, Context)</see>&lt;/code&gt; is called, the validators will be&#xa; invoked on the saved value to check and see if the saved value is valid.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">16 May 02</tag>
+<tag name="@version">$Revision: 14$ $Date: 7/19/10 8:38:37 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.workbench.BWbEditor"/>
+</extends>
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor() -->
+<constructor name="BWbFieldEditor" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.makeFor(javax.baja.sys.BObject) -->
+<method name="makeFor"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;makeFor(obj, null)&lt;/code&gt;.
+</description>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.fieldeditor.BWbFieldEditor"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.makeFor(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="makeFor"  public="true" static="true">
+<description>
+Return the registered BWbFieldEditor agent for the&#xa; specified obj, or throw NoSuchAgentException.  If&#xa; the context contains the the facet FIELD_EDITOR, then&#xa;  use that type explicitly.
+</description>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.fieldeditor.BWbFieldEditor"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.makeFor(javax.baja.sys.BObject, javax.baja.sys.Context, javax.baja.workbench.BWbShell) -->
+<method name="makeFor"  public="true" static="true">
+<description/>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="shell">
+<type class="javax.baja.workbench.BWbShell"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.fieldeditor.BWbFieldEditor"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.dialog(javax.baja.ui.BWidget, java.lang.String, javax.baja.sys.BObject) -->
+<method name="dialog"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;dialog(parent, title, target, null)&lt;/code&gt;.
+</description>
+<parameter name="parent">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.dialog(javax.baja.ui.BWidget, java.lang.String, javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="dialog"  public="true" static="true">
+<description>
+Create a field editor to edit the specified target &#xa; object in a dialog.
+</description>
+<parameter name="parent">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<parameter name="title">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="loadContext">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+<description>
+null if the user cancels the dialog, or the&#xa;    object (potentially modified) if they hit OK.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.getAgentFilter(javax.baja.workbench.BWbShell) -->
+<method name="getAgentFilter"  public="true" static="true">
+<description>
+Static method returns the Profile Agent filter which checks that the editor agent declares an&#xa; app name suitable for the current profile. In cases where the agent does not declare an app&#xa; name, the editor will be used for any profile.
+</description>
+<parameter name="shell">
+<type class="javax.baja.workbench.BWbShell"/>
+<description>
+- &lt;code&gt;<see ref="javax.baja.workbench.BWbShell">BWbShell</see>&lt;/code&gt; to use to retrieve our current profile.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentFilter"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.agent.AgentFilter">AgentFilter</see>&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- javax.baja.workbench.fieldeditor.BWbFieldEditor.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

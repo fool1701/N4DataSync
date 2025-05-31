@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="eibnetIp" runtimeProfile="rt" qualifiedName="com.tridium.eibnetIp.BEibnetIpNetwork" name="BEibnetIpNetwork" packageName="com.tridium.eibnetIp" public="true">
+<description>
+BEibnetIpNetwork is the base container for EIB IP communications.&#xa; &lt;p&gt;&#xa; It contains the EIB IP communications stack,&#xa; and manages the worker queues for requests and writes.&#xa; &lt;p&gt;&#xa; All EibnetIp devices must be contained under this network container.
+</description>
+<tag name="@author">Clif Turman on 30 May 06</tag>
+<tag name="@since">Niagara 3.1</tag>
+<extends>
+<type class="javax.baja.driver.loadable.BLoadableNetwork"/>
+</extends>
+<implements>
+<type class="com.tridium.eibnetIp.EibnetConst"/>
+</implements>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<property name="worker" flags="h">
+<type class="com.tridium.eibnetIp.util.BEibnetWorker"/>
+<description>
+Slot for the &lt;code&gt;worker&lt;/code&gt; property.&#xa; the worker for managing asynchronous tasks like device&#xa; and object discovery, pings, etc.
+</description>
+<tag name="@see">#getWorker</tag>
+<tag name="@see">#setWorker</tag>
+</property>
+
+<property name="writeWorker" flags="h">
+<type class="com.tridium.eibnetIp.util.BEibnetWorker"/>
+<description>
+Slot for the &lt;code&gt;writeWorker&lt;/code&gt; property.&#xa; the worker for managing writes.
+</description>
+<tag name="@see">#getWriteWorker</tag>
+<tag name="@see">#setWriteWorker</tag>
+</property>
+
+<property name="tuningPolicies" flags="">
+<type class="javax.baja.driver.point.BTuningPolicyMap"/>
+<description>
+Slot for the &lt;code&gt;tuningPolicies&lt;/code&gt; property.&#xa; the map of tuning policies governing reads and writes.
+</description>
+<tag name="@see">#getTuningPolicies</tag>
+<tag name="@see">#setTuningPolicies</tag>
+</property>
+
+<property name="pollScheduler" flags="">
+<type class="javax.baja.driver.util.BPollScheduler"/>
+<description>
+Slot for the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; The basic poll scheduler
+</description>
+<tag name="@see">#getPollScheduler</tag>
+<tag name="@see">#setPollScheduler</tag>
+</property>
+
+<property name="interMessageDelay" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;interMessageDelay&lt;/code&gt; property.&#xa; Specifies the minimum amount of time to wait after a response message is&#xa; received before sending the next request message.
+</description>
+<tag name="@see">#getInterMessageDelay</tag>
+<tag name="@see">#setInterMessageDelay</tag>
+</property>
+
+<property name="linkLayer" flags="">
+<type class="com.tridium.eibnetIp.stack.BEibnetIpLinkLayer"/>
+<description>
+Slot for the &lt;code&gt;linkLayer&lt;/code&gt; property.&#xa; the Link layer for eibnetIp comm stack.
+</description>
+<tag name="@see">#getLinkLayer</tag>
+<tag name="@see">#setLinkLayer</tag>
+</property>
+
+<property name="tunnelLayer" flags="">
+<type class="com.tridium.eibnetIp.stack.BEibnetIpTunnelLayer"/>
+<description>
+Slot for the &lt;code&gt;tunnelLayer&lt;/code&gt; property.&#xa; the Tunnel processing layer for eibnetIp comm stack.
+</description>
+<tag name="@see">#getTunnelLayer</tag>
+<tag name="@see">#setTunnelLayer</tag>
+</property>
+
+<action name="submitDeviceDiscoveryJob" flags="h">
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitDeviceDiscoveryJob&lt;/code&gt; action.&#xa; action to submit a device discovery job to the job service.
+</description>
+<tag name="@see">#submitDeviceDiscoveryJob()</tag>
+</action>
+
+<action name="disconnectAll" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;disconnectAll&lt;/code&gt; action.
+</description>
+<tag name="@see">#disconnectAll()</tag>
+</action>
+
+</class>
+</bajadoc>

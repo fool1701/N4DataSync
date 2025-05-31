@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.io.ValueDocDecoder" name="ValueDocDecoder" packageName="javax.baja.io" public="true">
+<description>
+ValueDocDecoder creates an in-memory graph of BObjects from&#xa; serialized document representation.&#xa; &lt;p&gt;&#xa; The format of the document can vary (XMLB and JSON) by implementing&#xa; IDecoderPlugin&#xa; &lt;p&gt;&#xa; This class is designed to supersede BogDecoder which is constrained to just&#xa; decoding BOG XML
+</description>
+<tag name="@see">IDecoderPlugin</tag>
+<tag name="@see">ValueDocEncoder</tag>
+<tag name="@author">Gareth Johnson&#xa; creation  07 Jan 11</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="java.lang.AutoCloseable"/>
+</implements>
+<!-- javax.baja.io.ValueDocDecoder(javax.baja.io.ValueDocDecoder.IDecoderPlugin) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="plugin">
+<type class="javax.baja.io.ValueDocDecoder$IDecoderPlugin"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a decoder with the given decoder plug-in
+</description>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder(javax.baja.io.ValueDocDecoder.IDecoderPlugin, javax.baja.sys.Context) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="plugin">
+<type class="javax.baja.io.ValueDocDecoder$IDecoderPlugin"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a decoder with the given decoder plug-in and context
+</description>
+<tag name="@since">Niagara 4.0</tag>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder(javax.baja.naming.BOrd) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a BOG XML Decoder to read from a BIFile&#xa; resolved by the given BOrd.
+</description>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder(javax.baja.file.BIFile) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="file">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a BOG XML Decoder to read from the specified file.
+</description>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder(javax.baja.file.BIFile, javax.baja.sys.Context) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="file">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a BOG XML Decoder to read from the specified file.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder(java.io.File) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="file">
+<type class="java.io.File"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a BOG XML Decoder to read from the specified file.
+</description>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder(java.io.InputStream) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="in">
+<type class="java.io.InputStream"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a BOG XML Decoder from the given input stream.
+</description>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder(java.io.InputStream, javax.baja.sys.Context) -->
+<constructor name="ValueDocDecoder" public="true">
+<parameter name="in">
+<type class="java.io.InputStream"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a BOG XML Decoder from the given input stream.
+</description>
+</constructor>
+
+<!-- javax.baja.io.ValueDocDecoder.unmarshal(java.lang.String) -->
+<method name="unmarshal"  public="true" static="true">
+<description>
+Unmarshal the a value from an XML string.&#xa; The XML is not a full XML document, but rather a&#xa; single element - see decode().
+</description>
+<parameter name="xml">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.unmarshal(java.lang.String, javax.baja.sys.Context) -->
+<method name="unmarshal"  public="true" static="true">
+<description>
+Unmarshal the a value from an XML string.&#xa; The XML is not a full XML document, but rather a&#xa; single element - see decode().
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="xml">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.unmarshal(java.lang.String, javax.baja.io.ValueDocDecoder.ITypeResolver) -->
+<method name="unmarshal"  public="true" static="true">
+<description>
+Unmarshal the a value from an XML string.&#xa; The XML is not a full XML document, but rather a&#xa; single element - see decode().  This method also&#xa; has a ITypeResolver parameter which specifies an alternate&#xa; way to resolve types during the decode process.
+</description>
+<tag name="@see">ITypeResolver</tag>
+<parameter name="xml">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="typeResolver">
+<type class="javax.baja.io.ValueDocDecoder$ITypeResolver"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.unmarshal(java.lang.String, javax.baja.io.ValueDocDecoder.ITypeResolver, javax.baja.sys.Context) -->
+<method name="unmarshal"  public="true" static="true">
+<description>
+Unmarshal the a value from an XML string.&#xa; The XML is not a full XML document, but rather a&#xa; single element - see decode().  This method also&#xa; has a ITypeResolver parameter which specifies an alternate&#xa; way to resolve types during the decode process.
+</description>
+<tag name="@see">ITypeResolver</tag>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="xml">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="typeResolver">
+<type class="javax.baja.io.ValueDocDecoder$ITypeResolver"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.getTypeResolver() -->
+<method name="getTypeResolver"  public="true" final="true">
+<description>
+Returns the TypeResolver instance used to take String attribute&#xa; elements parsed from the bog file and determine how to&#xa; resolve the module/type.
+</description>
+<return>
+<type class="javax.baja.io.ValueDocDecoder$ITypeResolver"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.setTypeResolver(javax.baja.io.ValueDocDecoder.ITypeResolver) -->
+<method name="setTypeResolver"  public="true" final="true">
+<description>
+Set the type resolver.
+</description>
+<parameter name="typeResolver">
+<type class="javax.baja.io.ValueDocDecoder$ITypeResolver"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.decodeDocument() -->
+<method name="decodeDocument"  public="true">
+<description>
+Convenience for &lt;code&gt;decodeDocument(true)&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.decodeDocument(boolean) -->
+<method name="decodeDocument"  public="true">
+<description>
+Decode the document into a BValue.
+</description>
+<parameter name="close">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.decode() -->
+<method name="decode"  public="true">
+<description>
+Decode the current element into a BValue.  The&#xa; parser must currently be positioned on a &#x22;p&#x22; element.&#xa; When this method completes it is positioned on the&#xa; node following the &#x22;p&#x22; element.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.getPlugin() -->
+<method name="getPlugin"  public="true" final="true">
+<description/>
+<return>
+<type class="javax.baja.io.ValueDocDecoder$IDecoderPlugin"/>
+<description>
+the decoder plug-in
+</description>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.elem() -->
+<method name="elem"  public="true" final="true">
+<description/>
+<return>
+<type class="com.tridium.nre.util.IElement"/>
+<description>
+the current element
+</description>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.next() -->
+<method name="next"  public="true" final="true">
+<description>
+Advance the parser to the next node and return the node type.&#xa; If no more data to parse then return EOF.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.skip() -->
+<method name="skip"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;skip(depth())&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.skip(int) -->
+<method name="skip"  public="true" final="true">
+<description>
+Skip parses all the content until reaching the end tag&#xa; of the specified depth.  When this method returns, the&#xa; next call to &lt;code&gt;next()&lt;/code&gt; will return the element&#xa; or text immediately following the end tag.
+</description>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.type() -->
+<method name="type"  public="true" final="true">
+<description>
+Get the current node type constant which is always the&#xa; result of the last call to next().  This constant may be&#xa; ELEM_START, ELEM_END, TEXT, or EOF.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.line() -->
+<method name="line"  public="true" final="true">
+<description/>
+<return>
+<type class="int"/>
+<description>
+the line number the decoder is at
+</description>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.column() -->
+<method name="column"  public="true" final="true">
+<description/>
+<return>
+<type class="int"/>
+<description>
+the column number the decoder is at
+</description>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.close() -->
+<method name="close"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Close the decoder
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.depth() -->
+<method name="depth"  public="true" final="true">
+<description>
+Get the depth of the current element with the document&#xa; root being a depth of one.  A depth of 0 indicates&#xa; a position before or after the root element.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.getEncoding() -->
+<method name="getEncoding"  public="true" final="true">
+<description>
+Get the character encoding of the underlying input stream.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.getVersion() -->
+<method name="getVersion"  public="true" final="true">
+<description>
+Get the bog version.  Supported versions are:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;1.0 - original implementation&lt;/li&gt;&#xa; &lt;li&gt;4.0 - Niagara 4.0&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<return>
+<type class="javax.baja.util.Version"/>
+<description>
+the &lt;code&gt;<see ref="javax.baja.util.Version">javax.baja.util.Version</see>&lt;/code&gt; used in this bog.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.isZipped() -->
+<method name="isZipped"  public="true" final="true">
+<description>
+Return if the stream was zipped.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.parse() -->
+<method name="parse"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;parse(true)&lt;/code&gt;.
+</description>
+<return>
+<type class="com.tridium.nre.util.IElement"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.parse(boolean) -->
+<method name="parse"  public="true">
+<description>
+Parse the entire next element into memory as a tree&#xa; of elements and optionally close the underlying input&#xa; stream.
+</description>
+<parameter name="close">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="com.tridium.nre.util.IElement"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.parseCurrent() -->
+<method name="parseCurrent"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;parseCurrent(false)&lt;/code&gt;.
+</description>
+<return>
+<type class="com.tridium.nre.util.IElement"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.parseCurrent(boolean) -->
+<method name="parseCurrent"  public="true" final="true">
+<description>
+Parse the entire current element into memory as a tree&#xa; of elements and optionally close the underlying input&#xa; stream.
+</description>
+<parameter name="close">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="com.tridium.nre.util.IElement"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.err(java.lang.String, java.lang.Throwable) -->
+<method name="err"  public="true" final="true">
+<description>
+Create an error exception and return it
+</description>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cause">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="java.lang.RuntimeException"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.err(java.lang.String) -->
+<method name="err"  public="true" final="true">
+<description>
+Create an error exception and return it
+</description>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.RuntimeException"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.warningAndSkip(java.lang.String) -->
+<method name="warningAndSkip"  public="true" final="true">
+<description>
+Log and warning and skip the next element
+</description>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.RuntimeException"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.warning(java.lang.String) -->
+<method name="warning"  public="true" final="true">
+<description>
+Log a warning
+</description>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.getLog() -->
+<method name="getLog"  public="true" final="true">
+<description>
+Get the log installed on this decoder for&#xa; reporting warnings and errors.
+</description>
+<return>
+<type class="java.util.logging.Logger"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.setLog(java.util.logging.Logger) -->
+<method name="setLog"  public="true" final="true">
+<description>
+Set the log installed on this decoder for&#xa; reporting warnings and errors.
+</description>
+<parameter name="log">
+<type class="java.util.logging.Logger"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.getWarningCount() -->
+<method name="getWarningCount"  public="true" final="true">
+<description>
+Get the number of warnings logged during decoding.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.decodingComponent(javax.baja.sys.BComponent) -->
+<method name="decodingComponent"  protected="true">
+<description>
+This callback is invoked whenever the start tag of an&#xa; unknown child element is encountered under a BComponent&#xa; encoding.  If this method is overridden it is required&#xa; that upon completion the parser is positioned on the start&#xa; tag of the element immediately following the current&#xa; element; see skip().
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.parsingSlots(javax.baja.sys.BComponent) -->
+<method name="parsingSlots"  protected="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnusedParameters&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Called after parsing the slots of a BComponent. Allows subclasses to&#xa; augment the parent object in whatever way is needed.&#xa; &lt;p&gt;&#xa; One use case is to allow reading in the slots from another file given a&#xa; file name in the &#x22;encoderFile&#x22; facet.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.decodeSimple(javax.baja.sys.BObject, java.lang.String) -->
+<method name="decodeSimple"  protected="true">
+<description>
+Decode the string value of a simple.
+</description>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.isTypeBlackListed(javax.baja.sys.Type) -->
+<method name="isTypeBlackListed"  public="true">
+<description>
+Return true if the specified Type is black listed and shouldn&#x27;t be decoded.&#xa; &lt;p&gt;&#xa; Currently this is limited to Simple Types.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+the Type to check.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the Type is black listed and should never be decoded.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.getBogEncodingInfo(java.io.File) -->
+<method name="getBogEncodingInfo"  public="true" static="true">
+<description/>
+<parameter name="file">
+<type class="java.io.File"/>
+</parameter>
+<return>
+<type class="com.tridium.nre.security.io.BogPasswordObjectEncoder"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.typeResolverNewInstance(com.tridium.sys.module.NModule, java.lang.String) -->
+<method name="typeResolverNewInstance"  public="true" static="true">
+<description/>
+<parameter name="module">
+<type class="com.tridium.sys.module.NModule"/>
+</parameter>
+<parameter name="typeName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.plugin -->
+<field name="plugin"  protected="true" final="true">
+<type class="javax.baja.io.ValueDocDecoder$IDecoderPlugin"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

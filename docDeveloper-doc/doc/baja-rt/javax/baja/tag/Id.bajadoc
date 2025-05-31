@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.tag.Id" name="Id" packageName="javax.baja.tag" public="true" final="true">
+<description>
+An id is an immutable &lt;code&gt;(dictionary, name)&lt;/code&gt; pair. An id uniquely identifies&#xa; &lt;code&gt;<see ref="javax.baja.tag.Tag">Tag</see>&lt;/code&gt;s and &lt;code&gt;<see ref="javax.baja.tag.Relation">Relation</see>&lt;/code&gt;s.&#xa; &lt;p&gt;&#xa; The dictionary name can be used to &#x22;namespace&#x22; or &#x22;bind&#x22; a particular tag or relation to a&#xa; tag dictionary. For example, the id &lt;code&gt;(&#x22;d1&#x22;, &#x22;temp&#x22;)&lt;/code&gt; is in dictionary &lt;code&gt;d1&lt;/code&gt; and&#xa; is different than id &lt;code&gt;(&#x22;d2&#x22;, &#x22;temp&#x22;)&lt;/code&gt; which has the same name, but is in dictionary&#xa; &lt;code&gt;d2&lt;/code&gt;.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:mgiannini@tridium.com&#x22;&gt;Matthew Giannini&lt;/a&gt;</tag>
+<tag name="@see">Tag</tag>
+<tag name="@see">Relation</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<parameterizedType class="java.lang.Comparable">
+<args>
+<type class="javax.baja.tag.Id"/>
+</args>
+</parameterizedType>
+</implements>
+<!-- javax.baja.tag.Id.newId(java.lang.String) -->
+<method name="newId"  public="true" static="true">
+<description>
+Creates a new id by parsing the given qname.
+</description>
+<tag name="@see">#getQName()</tag>
+<parameter name="qname">
+<type class="java.lang.String"/>
+<description>
+the qualified name of the id. May not be &lt;code&gt;null&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.tag.Id"/>
+<description>
+an Id with a qualified name eqivalent to qname
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.newId(java.lang.String, java.lang.String) -->
+<method name="newId"  public="true" static="true">
+<description>
+Create an id with the given dictionary and name.
+</description>
+<tag name="@see">#verifyTagId(String, String)</tag>
+<parameter name="dictionary">
+<type class="java.lang.String"/>
+<description>
+the dictionary the id is in. May not be &lt;code&gt;null&lt;/code&gt;.
+</description>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the name of the id. May not be &lt;code&gt;null&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.tag.Id"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.verifyTagId(java.lang.String, java.lang.String) -->
+<method name="verifyTagId"  public="true" static="true">
+<description>
+Checks if the given dictionary and tag meet the specification for a valid id.&#xa; If they do not, an exception is thrown.&#xa; &lt;p&gt;&#xa; A valid dictionary&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Must not be &lt;code&gt;null&lt;/code&gt;&lt;/li&gt;&#xa; &lt;li&gt;Must not contain &lt;code&gt;<see ref="javax.baja.tag.Id#DICT_SEP">#DICT_SEP</see>&lt;/code&gt;&lt;/li&gt;&#xa; &lt;/ol&gt;&#xa; &lt;p&gt;&#xa; A valid name&#xa; &lt;ol&gt;&#xa; &lt;li&gt;Must not be &lt;code&gt;null&lt;/code&gt;&lt;/li&gt;&#xa; &lt;li&gt;Must not be zero-length&lt;/li&gt;&#xa; &lt;li&gt;Must not contain &lt;code&gt;<see ref="javax.baja.tag.Id#DICT_SEP">#DICT_SEP</see>&lt;/code&gt;&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<parameter name="dictionary">
+<type class="java.lang.String"/>
+<description>
+the dictionary to verify
+</description>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the name to verify
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.getDictionary() -->
+<method name="getDictionary"  public="true">
+<description>
+Get the dictionary for the id.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the dictionary for the id
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.hasDictionary() -->
+<method name="hasDictionary"  public="true">
+<description>
+An id has a dictionary if it the dictionary is not &lt;code&gt;<see ref="javax.baja.tag.Id#NO_DICT">#NO_DICT</see>&lt;/code&gt;.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the id has a dictionary
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.getName() -->
+<method name="getName"  public="true">
+<description>
+Get the id name.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the id name
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.getQName() -->
+<method name="getQName"  public="true">
+<description>
+Get the qualified name (qname) for this id.&#xa; &lt;p&gt;&#xa; If the id does not have a dictionary, the qname is simply the value&#xa; returned by &lt;code&gt;<see ref="javax.baja.tag.Id#getName()">#getName()</see>&lt;/code&gt;&#xa; &lt;p&gt;&#xa; If the id is in a dictionary the qname is&#xa; &#x22;&lt;code&gt;<see ref="javax.baja.tag.Id#getDictionary()">#getDictionary()</see>&lt;/code&gt;&#x22; + &#x22;&lt;code&gt;<see ref="javax.baja.tag.Id#DICT_SEP">#DICT_SEP</see>&lt;/code&gt;&#x22; + &#x22;&lt;code&gt;<see ref="javax.baja.tag.Id#getName()">#getName()</see>&lt;/code&gt;&#x22;
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the qname of the id
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.toString() -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.String"/>
+<description>
+&lt;code&gt;<see ref="javax.baja.tag.Id#getQName()">#getQName()</see>&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Two Ids are equal &lt;i&gt;iff&lt;/i&gt; they have the same dictionary and name.
+</description>
+<parameter name="o">
+<type class="java.lang.Object"/>
+<description>
+the object to test for equality
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if this id equals the given object
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.hashCode() -->
+<method name="hashCode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.compareTo(javax.baja.tag.Id) -->
+<method name="compareTo"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Compares this Id to another. Ids are ordered lexicographically first by dictionary, then by name.
+</description>
+<parameter name="o">
+<type class="javax.baja.tag.Id"/>
+<description>
+the id to compare against. Must not be &lt;code&gt;null&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+negative if this id is less than &lt;code&gt;o&lt;/code&gt;, zero if they are equal, positive&#xa; if this id is greater than the &lt;code&gt;o&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.idToFacetKey(javax.baja.tag.Id) -->
+<method name="idToFacetKey"  public="true" static="true">
+<description/>
+<parameter name="id">
+<type class="javax.baja.tag.Id"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.idToFacetKey(java.lang.String) -->
+<method name="idToFacetKey"  public="true" static="true">
+<description/>
+<parameter name="id">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.facetKeyToId(java.lang.String) -->
+<method name="facetKeyToId"  public="true" static="true">
+<description/>
+<parameter name="facetKey">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.tag.Id"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.Id.NO_DICT -->
+<field name="NO_DICT"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+The empty string indicates that an id is not in a dictionary.
+</description>
+</field>
+
+<!-- javax.baja.tag.Id.DICT_SEP -->
+<field name="DICT_SEP"  public="true" static="true" final="true">
+<type class="char"/>
+<description>
+When an id has a dictionary, the qname will separate the dictionary from the name with this&#xa; character.
+</description>
+<tag name="@see">#getQName()</tag>
+</field>
+
+</class>
+</bajadoc>

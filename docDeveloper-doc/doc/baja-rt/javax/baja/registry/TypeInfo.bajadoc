@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.registry.TypeInfo" name="TypeInfo" packageName="javax.baja.registry" public="true" interface="true" abstract="true" category="interface">
+<description>
+TypeInfo provides summary information about a type &#xa; available in an installed module.
+</description>
+<tag name="@author">Brian Frank&#xa; creation  5 Dec 02</tag>
+<tag name="@version">$Revision: 19$ $Date: 7/6/11 2:08:45 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.registry.TypeInfo.getModuleName() -->
+<method name="getModuleName"  public="true" abstract="true">
+<description>
+Get the module name which implements this type.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getRuntimeProfile() -->
+<method name="getRuntimeProfile"  public="true" abstract="true">
+<description>
+Get the runtime profile for the module part with this type.
+</description>
+<return>
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getTypeName() -->
+<method name="getTypeName"  public="true" abstract="true">
+<description>
+Get the type name.  The type name is an abreviated&#xa; String key for the Type to use for serialization and&#xa; scripting.  The type name is always the class name&#xa; minus the package and any leading &#x27;B&#x27; character.&#xa; These type names are mapped to classnames by the&#xa; &#x22;type&#x22; elements in the modules&#x27;s &#x22;meta-inf/module.xml&#x22;&#xa; file.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getTypeSpec() -->
+<method name="getTypeSpec"  public="true" abstract="true">
+<description>
+Get the BTypeSpec used to represent this Type.
+</description>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getInstance() -->
+<method name="getInstance"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;getTypeSpec().getInstance()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getSuperType() -->
+<method name="getSuperType"  public="true" abstract="true">
+<description>
+Get the TypeInfo for the super type.  If this is an &#xa; interface or this is &#x22;baja:Object&#x22; then return null.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getInterfaces() -->
+<method name="getInterfaces"  public="true" abstract="true">
+<description>
+Get an array of TypeInfos for BInterfaces which this&#xa; type directly implements.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getTypeClassName() -->
+<method name="getTypeClassName"  public="true" abstract="true">
+<description>
+Get the class name which implements this type.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.isAbstract() -->
+<method name="isAbstract"  public="true" abstract="true">
+<description>
+Return true if the type class is abstract or is an interface.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.isFinal() -->
+<method name="isFinal"  public="true" abstract="true">
+<description>
+Return true if the type class is final.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.isInterface() -->
+<method name="isInterface"  public="true" abstract="true">
+<description>
+Return true if the type class an interface.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.isTransient() -->
+<method name="isTransient"  public="true" abstract="true">
+<description>
+Return true if all instances of the type are transient.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.is(javax.baja.registry.TypeInfo) -->
+<method name="is"  public="true" abstract="true">
+<description>
+Return if this type supports the specified type via&#xa; inheritance.  If this method returns true, then any&#xa; instance of this type may be cast into the specified&#xa; type.
+</description>
+<parameter name="typeInfo">
+<type class="javax.baja.registry.TypeInfo"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.is(javax.baja.sys.Type) -->
+<method name="is"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;is(type.getTypeInfo())&lt;/code&gt;.
+</description>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getAgentInfo() -->
+<method name="getAgentInfo"  public="true" abstract="true">
+<description>
+If this type is an agent type, then return additional&#xa; agent information.  Otherwise throw RegistryException.
+</description>
+<return>
+<type class="javax.baja.agent.AgentInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getAgents() -->
+<method name="getAgents"  public="true" abstract="true">
+<description>
+Return an AgentList of AgentInfos representing types which&#xa; are registered as an agent on this type.
+</description>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getLexicon(javax.baja.sys.Context) -->
+<method name="getLexicon"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;Lexicon.make(getModuleName(), cx)&lt;/code&gt;
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.Lexicon"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" abstract="true">
+<description>
+Get the display name specified using the lexicon for &#xa; this type&#x27;s module and the given context.  The key &#xa; is &#x22;{typename}.displayName&#x22;.  Return the result of&#xa; &lt;code&gt;TextUtil.toFriendlyName(typeName)&lt;/code&gt; if not lexicon&#xa; key is not found.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.getIcon(javax.baja.sys.Context) -->
+<method name="getIcon"  public="true" abstract="true">
+<description>
+Get the icon specified using the lexicon for this &#xa; type&#x27;s module and the given context.  The key &#xa; is &#x22;{typename}.icon&#x22;.  If not found, then return the&#xa; icon of the super type.  Return null if no icon is&#xa; found in this or any super type.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.registry.TypeInfo.toString() -->
+<method name="toString"  public="true" abstract="true">
+<description>
+Return this TypeInfo as a type spec &#x22;moduleName:typeName&#x22;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

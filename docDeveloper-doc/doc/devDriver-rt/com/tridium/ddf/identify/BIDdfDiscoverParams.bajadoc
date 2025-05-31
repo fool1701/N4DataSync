@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.identify.BIDdfDiscoverParams" name="BIDdfDiscoverParams" packageName="com.tridium.ddf.identify" public="true" interface="true" abstract="true" category="interface">
+<description>
+The BDdfAutoDiscoveryJob makes use of this class to allow&#xa; it to automatically, yet generically loop through all possible&#xa; combinations of a driver&#x27;s discovery request in order to&#xa; retrieve all discovery objects for a driver&#x27;s Ddf Device&#xa; Manager or Ddf Point Manager
+</description>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.getDiscoveryLeafType() -->
+<method name="getDiscoveryLeafType"  public="true" abstract="true">
+<description>
+The implementing class needs to return a Type that will be the&#xa; discovery leaves in the ddf manager.&#xa;&#xa; The discovery children could hypothetically be an array of discovery&#xa; groups. The discovery groups could contain other discovery groups or&#xa; ultimately, discovery leaves. The columns that are automatically&#xa; generated in the discovery table for the user interface manager will&#xa; be introspect&#x27;ed from this type.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.getDiscoverRequestType() -->
+<method name="getDiscoverRequestType"  public="true" abstract="true">
+<description>
+The implementing class needs to return a Type that represents&#xa; the discover request from the driver whose discoveryParams can be an&#xa; instance of this object&#x27;s class. If the class supports more than&#xa; one discover request type, then this should return the type that is&#xa; the most appropriate for the particular instance of the implementing&#xa; class.&#xa;&#xa; This is fundamental to developer driver framework&#x27;s auto-discovery features.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+review method description.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.getDiscoverRequestTypes() -->
+<method name="getDiscoverRequestTypes"  public="true" abstract="true">
+<description>
+This method is included for future extensibility. We recommend&#xa; that the developer return an array of size one, with the one item&#xa; being the same Type that is returned by the getDdfDiscoverRequestType&#xa; method.&#xa;&#xa; This method is used in the driver&#x27;s auto-discovery feature. It allows&#xa; the auto-discovery mechanism to transmit multiple different discover messages&#xa; for the same hypothetical discovery i.d. We envision that the&#xa; multiple flavors of discover messages might be used for different sub-device&#xa; types.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+<description>
+review method description.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.getFirst() -->
+<method name="getFirst"  public="true" abstract="true">
+<description>
+The implementing class must return an instance of itself&#xa; that makes sense to be the &#x22;first&#x22; identifiable entity&#xa; of the BDdfIdParams class.&#xa;&#xa; In the most simple scenario where an entity is identified&#xa; by a number between 0 and 9, an instance of BDdfIdParams&#xa; that represents zero would be a good example.
+</description>
+<return>
+<type class="com.tridium.ddf.identify.BIDdfDiscoverParams"/>
+<description>
+a member of the implementing class representing the&#xa; first identifiable instance of the class.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.getLast() -->
+<method name="getLast"  public="true" abstract="true">
+<description>
+The implementing class must return an instance of itself&#xa; that makes sense to be the &#x22;last&#x22; identifiable entity&#xa; of the BDdfIdParams class.&#xa;&#xa; In the most simple scenario where an entity is identified&#xa; by a number between 0 and 9, an instance of BDdfIdParams&#xa; that represents nine would be a good example.
+</description>
+<return>
+<type class="com.tridium.ddf.identify.BIDdfDiscoverParams"/>
+<description>
+a member of the implementing class representing the&#xa; last identifiable instance of the class.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.getNext() -->
+<method name="getNext"  public="true" abstract="true">
+<description>
+The implementing class must return the next instance of itself.&#xa; The developer needs to determine what this would be.&#xa;&#xa; If the current instance is already the logical &#x22;last&#x22; entity&#xa; then this method should act in a circular fashion and return&#xa; the first entity.&#xa;&#xa; In the most simple scenario where an entity is identified&#xa; by a number between 0 and 9, an instance of BDdfIdParams&#xa; that represents five would return another instance that represents&#xa; six from this method. Furthermore an instance that represents&#xa; nine should return another instance that represents zero.
+</description>
+<return>
+<type class="com.tridium.ddf.identify.BIDdfDiscoverParams"/>
+<description>
+a member of the implementing class representing the&#xa; first identifiable instance of the class.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.isAfter(com.tridium.ddf.identify.BIDdfDiscoverParams) -->
+<method name="isAfter"  public="true" abstract="true">
+<description>
+The implementing class must evaluate the current instance of itself&#xa; against the given instance of its class and determine whether the&#xa; current instance is before the given instance.&#xa;&#xa; In other words, this method tests if the current instance&#xa; is logically &#x22;after&#x22; the given instance.&#xa;&#xa; In the most simple scenario where an entity is identified&#xa; by a number between 0 and 9, an instance of BDdfIdParams&#xa; that represents five would return true if passed another instance&#xa; that represents four. Conversely, the instance that represents&#xa; five should return false if this method is passed an instance&#xa; that represents six. The border scenario of an instance that&#xa; represents 0 should return false if passed an instance that&#xa; represents nine. In fact, the instance representing zero should&#xa; return false for any instance passed to this method.
+</description>
+<parameter name="anotherId">
+<type class="com.tridium.ddf.identify.BIDdfDiscoverParams"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the current instance is logically after the&#xa; given instance.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.countTo(com.tridium.ddf.identify.BIDdfDiscoverParams) -->
+<method name="countTo"  public="true" abstract="true">
+<description>
+This method needs to loop from this instance to the given instance&#xa; of the driver&#x27;s device discover parameters, count the number of&#xa; iterations, and return that value.&#xa; &#xa; Implementations may return a hard-coded value if the protocol&#xa; dictates a fixed number of requests.
+</description>
+<parameter name="to">
+<type class="com.tridium.ddf.identify.BIDdfDiscoverParams"/>
+<description/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+the number of iterations through the getNext method from&#xa; this instance to the given instance. The value return should be&#xa; inclusive -- meaning that it includes a count for this item and&#xa; for the given &#x27;to&#x27; item. If the protocol makes this unclear at&#xa; compile time then this should return Integer.MAX_VALUE.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.identify.BIDdfDiscoverParams.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

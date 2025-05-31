@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.IDdfPingable" name="IDdfPingable" packageName="com.tridium.ddf.comm.req" public="true" interface="true" abstract="true" category="interface">
+<description>
+IDdfPingable is the interface that ddf values implement if they are&#xa; pingable (such as some devices and networks that extend BDdfNetwork and BDdfDevice)
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Oct 9, 2006</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.comm.req.IDdfPingable.getDeviceId() -->
+<method name="getDeviceId"  public="true" abstract="true">
+<description>
+Returns the readableSource objects that this message can&#xa; update. The ddf will automatically call&#xa; this method after it instantiates an instance of particular&#xa; type of request. The ddf will pass in an&#xa; array of all database and/or discovery items to be updated.
+</description>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.IDdfPingable.setDeviceId(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setDeviceId"  public="true" abstract="true">
+<description/>
+<parameter name="deviceId">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.IDdfPingable.pingOk() -->
+<method name="pingOk"  public="true" abstract="true">
+<description>
+Called when &lt;code&gt;doPing()&lt;/code&gt; is successful.  May also&#xa; be called when any successful communication occurs.  This&#xa; method is routed to &lt;code&gt;getHealth().pingOk()&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.IDdfPingable.pingFail(java.lang.String) -->
+<method name="pingFail"  public="true" abstract="true">
+<description>
+Called when &lt;code&gt;doPing()&lt;/code&gt; fails.  This method is&#xa; routed to &lt;code&gt;getHealth().pingFail()&lt;/code&gt;.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

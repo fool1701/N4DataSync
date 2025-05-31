@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.LonMessage" name="LonMessage" packageName="javax.baja.lonworks" public="true">
+<description>
+LonMessage is the superclass for all messages&#xa;  to be passed from and to &lt;code&gt;LonComm&lt;/code&gt;.  &lt;p&gt;&#xa;&#xa;  Subclasses should override &lt;code&gt;fromInputStream&lt;/code&gt;&#xa;  and &lt;code&gt;toOutputStream&lt;/code&gt; as needed.&lt;p&gt;&#xa;&#xa;  If a subclass is a request message which&#xa;  will be sent using LonComm.sendRequest()&#xa;  then the &lt;code&gt;toResponse&lt;/code&gt; method must also&#xa;  be overridden.&lt;p&gt;&#xa;&#xa;  Example implementation for Query SNVT.  This is a&#xa;  request/response message.&lt;p&gt;&#xa;  &lt;pre&gt;&#xa;  public class QuerySNVTRequest&#xa;    extends LonMessage&#xa;  {&#xa;    public QuerySNVTRequest(LonInputStream in)&#xa;    {&#xa;      code = QUERY_SNVT_REQUEST;&#xa;      fromInputStream(inputStream);&#xa;    }&#xa;    public void toOutputStream(LonOutputStream out)&#xa;    {&#xa;      out.writeUnsigned8(QUERY_SNVT_REQUEST);&#xa;      out.writeUnsigned16(offset);&#xa;      out.writeUnsigned8(count);&#xa;    }&#xa;    public void fromInputStream(LonInputStream in)&#xa;    {&#xa;      int code = in.readUnsigned8();&#xa;      if(code!=QUERY_SNVT_REQUEST) throw new InvalidResponseException(code);&#xa;&#xa;      offset = in.readUnsigned16();&#xa;      count = in.readUnsigned8();&#xa;    }&#xa;&#xa;    public LonMessage toResponse(LonInputStream in)&#xa;      throws LonException&#xa;    {&#xa;      int code = in.readUnsigned8();&#xa;&#xa;      if (code == QUERY_SNVT_SUCCESS)&#xa;        in.reset();&#xa;        return new QuerySNVTResponse(in);&#xa;      else if (code == QUERY_SNVT_FAILED)&#xa;        throw new FailedResponseException();&#xa;      else&#xa;        throw new InvalidResponseException(code);&#xa;    }&#xa;&#xa;    private int     offset;&#xa;    private int     count;&#xa;&#xa;  }&#xa;&#xa;  public class QuerySNVTResponse&#xa;    extends LonMessage&#xa;  {&#xa;    public QuerySNVTResponse(LonInputStream in)&#xa;    {&#xa;      code = QUERY_SNVT_SUCCESS;&#xa;      fromInputStream(in);&#xa;    }&#xa;    public void fromInputStream(LonInputStream in)&#xa;    {&#xa;      if(inputStream.readUnsigned8()!=QUERY_SNVT_SUCCESS)&#xa;        invalidMsgCodeException();&#xa;&#xa;      data = in.readByteArray();&#xa;    }&#xa;    private byte[] data;&#xa;  }&#xa;  &lt;/pre&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">14 Feb 02</tag>
+<tag name="@version">$Revision: 4$ $Date: 10/18/01 2:56:44 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.lonworks.LonMessage() -->
+<constructor name="LonMessage" public="true">
+<description>
+Empty constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.lonworks.LonMessage(javax.baja.lonworks.io.LonInputStream) -->
+<constructor name="LonMessage" public="true">
+<parameter name="in">
+<type class="javax.baja.lonworks.io.LonInputStream"/>
+</parameter>
+<description>
+Construct a LonMessage with the specified message&#xa; code and message data supplied by reading all bytes&#xa; from the &lt;code&gt;LonInputStream&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.lonworks.LonMessage.getMessageCode() -->
+<method name="getMessageCode"  public="true">
+<description>
+Get the message code. This will be the value of the first&#xa;  byte of a received message. This is the LonTalk message type&#xa;  code.  See Appendix B of the Neuron Chip Data Book for details.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setMessageCode(int) -->
+<method name="setMessageCode"  public="true">
+<description>
+Set the message code.  This is the LonTalk message type&#xa;  code.  See Appendix B of the Neuron Chip Data Book for details.
+</description>
+<parameter name="code">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setFarSide() -->
+<method name="setFarSide"  public="true">
+<description>
+Make this message a far side message for accessing the&#xa;  far side of an lonworks router.  This will cause a&#xa;  FAR_SIDE_ESCAPE_CODE to be place in the first byte of&#xa;  the message.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.isFarSide() -->
+<method name="isFarSide"  public="true">
+<description>
+Has this message been marked as a farside message.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setRequest(boolean) -->
+<method name="setRequest"  public="true">
+<description>
+For Internal use only.&lt;p&gt; Set flag to indicate if this&#xa; was received using request/response service type.&lt;p&gt;
+</description>
+<parameter name="req">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.isRequest() -->
+<method name="isRequest"  public="true">
+<description>
+Was this message received using request/response service type.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setPriority(boolean) -->
+<method name="setPriority"  public="true">
+<description>
+Set flag to indicate if this is a priority message.
+</description>
+<parameter name="priority">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.isPriority() -->
+<method name="isPriority"  public="true">
+<description>
+Is this a priority message.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setAuthenticate(boolean) -->
+<method name="setAuthenticate"  public="true">
+<description>
+Set flag to indicate if this message should be authenticated message.
+</description>
+<parameter name="authenticate">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.isAuthenticate() -->
+<method name="isAuthenticate"  public="true">
+<description>
+Is this an authenticated message.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setSourceAddress(javax.baja.lonworks.datatypes.LonAddress) -->
+<method name="setSourceAddress"  public="true">
+<description>
+For Internal use only.
+</description>
+<parameter name="a">
+<type class="javax.baja.lonworks.datatypes.LonAddress"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.getSourceAddress() -->
+<method name="getSourceAddress"  public="true">
+<description>
+The source address of a received message.
+</description>
+<return>
+<type class="javax.baja.lonworks.datatypes.LonAddress"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setTag(int) -->
+<method name="setTag"  public="true">
+<description>
+For Internal use only.
+</description>
+<parameter name="t">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.getTag() -->
+<method name="getTag"  public="true">
+<description>
+For Internal use only.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setMessageData(byte[]) -->
+<method name="setMessageData"  public="true">
+<description>
+Set the message data.  This does not include the message code.
+</description>
+<parameter name="m">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.getMessageData() -->
+<method name="getMessageData"  public="true">
+<description>
+Get the message data.  This does not include the message code.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setRetryCount(int) -->
+<method name="setRetryCount"  public="true">
+<description>
+Set the number of retries if the message is sent&#xa; using req/resp, ackd, or unackRpt service types.&#xa; Valid values are 0-15. If value is set greater&#xa; than 15 then 15 will be used.&#xa; This will override the default retryCount.
+</description>
+<parameter name="retryCount">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.getRetryCount() -->
+<method name="getRetryCount"  public="true">
+<description>
+Return the number of retryCount or -1 if not set.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setTransmitTimer(javax.baja.lonworks.enums.BLonRepeatTimer) -->
+<method name="setTransmitTimer"  public="true">
+<description>
+Set the transmit timer to use for this message if&#xa; different from value configured in LonCommConfig.&#xa; This is the time interval between retries of&#xa; an outgoing message using req/resp or acknowledged service.
+</description>
+<parameter name="t">
+<type class="javax.baja.lonworks.enums.BLonRepeatTimer"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.getTransmitTimer() -->
+<method name="getTransmitTimer"  public="true">
+<description>
+Return the transmit timer to use for this message.&#xa;  If not set the return value is null.
+</description>
+<return>
+<type class="javax.baja.lonworks.enums.BLonRepeatTimer"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setRepeatTimer(javax.baja.lonworks.enums.BLonRepeatTimer) -->
+<method name="setRepeatTimer"  public="true">
+<description>
+Set the repeat timer to use for this message if&#xa; different from value configured in LonCommConfig.&#xa; This is the time interval between repetitions of&#xa; an outgoing message using repeat service.
+</description>
+<parameter name="t">
+<type class="javax.baja.lonworks.enums.BLonRepeatTimer"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.getRepeatTimer() -->
+<method name="getRepeatTimer"  public="true">
+<description>
+Return the repeat timer to use for this message.&#xa;  If not set the return value is null.
+</description>
+<return>
+<type class="javax.baja.lonworks.enums.BLonRepeatTimer"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.setDomainIndex(int) -->
+<method name="setDomainIndex"  public="true">
+<description/>
+<parameter name="ndx">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.getDomainIndex() -->
+<method name="getDomainIndex"  public="true">
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.fromInputStream(javax.baja.lonworks.io.LonInputStream) -->
+<method name="fromInputStream"  public="true">
+<description>
+Read this message&#x27;s data from the given input stream.&#xa; &lt;p&gt;&#xa; The default implementation will read the first byte to&#xa; message code and the remaining data in the inputStream&#xa; to messageData.
+</description>
+<parameter name="in">
+<type class="javax.baja.lonworks.io.LonInputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.toOutputStream(javax.baja.lonworks.io.LonOutputStream) -->
+<method name="toOutputStream"  public="true">
+<description>
+Write this message in network byte format to the&#xa;  out stream. This should include the message code.&#xa;  Subclasses should override this method if they&#xa;  contain data other than the message code.  The&#xa;  default implementation is to write the message code&#xa;  and messageData to the the output stream.
+</description>
+<parameter name="out">
+<type class="javax.baja.lonworks.io.LonOutputStream"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.toResponse(javax.baja.lonworks.io.LonInputStream) -->
+<method name="toResponse"  public="true">
+<description>
+This method is used by LonComm to convert a response&#xa;  message to the appropriate type response. Subclasses&#xa;  which are request messages should override this method&#xa;  to process the data from the supplied LonInputStream.&#xa;  If invalid or failed message data is supplied a&#xa;  LonException should be thrown.&lt;p&gt;&#xa;&#xa;  The default implementation will throw a&#xa;  BajaRuntimeException(&#x22;Not a request message.&#x22;)&lt;p&gt;
+</description>
+<parameter name="in">
+<type class="javax.baja.lonworks.io.LonInputStream"/>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.LonMessage"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.invalidMsgCodeException(int) -->
+<method name="invalidMsgCodeException"  protected="true" final="true">
+<description>
+Utility to throw exception to indicate invalid&#xa;  message code encountered in message stream.
+</description>
+<parameter name="code">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.LonMessage.code -->
+<field name="code"  protected="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.LonMessage.MAX_NETMSG_DATA -->
+<field name="MAX_NETMSG_DATA"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Maximum number of bytes in the data portion of an explicit message
+</description>
+</field>
+
+<!-- javax.baja.lonworks.LonMessage.MAX_MSG_DATA -->
+<field name="MAX_MSG_DATA"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Maximum number of bytes in explicit message for Niagara architecture
+</description>
+</field>
+
+<!-- javax.baja.lonworks.LonMessage.FAR_SIDE_ESCAPE_CODE -->
+<field name="FAR_SIDE_ESCAPE_CODE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Far side escape code - used to indicate network management messages destined&#xa;  for far side of router
+</description>
+</field>
+
+</class>
+</bajadoc>

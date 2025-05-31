@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.driver.BNetworkBatchAgent" name="BNetworkBatchAgent" packageName="javax.baja.batchJob.driver" public="true">
+<description>
+Utility for identifying devices in a network that allow batch job&#xa; processing, for getting device identifiers, and for finding&#xa; devices by id.&#xa; &#xa; Subtypes should be registered as agents on the specific device&#xa; network types they work for.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">11 Jul 07</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSingleton"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NiagaraSingleton"/>
+</annotation>
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent() -->
+<constructor name="BNetworkBatchAgent" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.get(javax.baja.driver.BDeviceNetwork, javax.baja.sys.Context) -->
+<method name="get"  public="true" static="true">
+<description>
+Return an agent suitable for use with the given network.
+</description>
+<parameter name="nw">
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.driver.BNetworkBatchAgent"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.get(javax.baja.driver.BDevice) -->
+<method name="get"  public="true" static="true">
+<description/>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.driver.BNetworkBatchAgent"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.get(javax.baja.sys.Type) -->
+<method name="get"  public="true" static="true">
+<description/>
+<parameter name="nwType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.driver.BNetworkBatchAgent"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.listBatchDevices(javax.baja.driver.BDeviceNetwork) -->
+<method name="listBatchDevices"  public="true">
+<description>
+Return a list of devices in the given network for which batch &#xa; job processing is allowed
+</description>
+<parameter name="nw">
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</parameter>
+<return>
+<type class="javax.baja.driver.BDevice" dimension="1"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.isBatchDevice(javax.baja.driver.BDevice) -->
+<method name="isBatchDevice"  public="true">
+<description>
+Return true if batch processing is allowed for the given device
+</description>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.getBatchDeviceId(javax.baja.driver.BDevice) -->
+<method name="getBatchDeviceId"  public="true">
+<description>
+Return an identifier for the given device which is unique within the&#xa; device&#x27;s network
+</description>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.getDeviceNetwork(javax.baja.driver.BDevice) -->
+<method name="getDeviceNetwork"  public="true">
+<description>
+Return the network for the given device.&#xa; &#xa; This is necessary because BDevice.getNetwork() throws an exception&#xa; if the device object is remote.
+</description>
+<parameter name="device">
+<type class="javax.baja.driver.BDevice"/>
+</parameter>
+<return>
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.getBatchDevice(javax.baja.driver.BDeviceNetwork, javax.baja.sys.BSimple) -->
+<method name="getBatchDevice"  public="true">
+<description>
+Return the device in the given network whose id matches the given&#xa; argument, or null if the device is not found.
+</description>
+<parameter name="nw">
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</parameter>
+<parameter name="id">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.driver.BDevice"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.getBatchDevice(javax.baja.sys.BObject, javax.baja.registry.TypeInfo, javax.baja.sys.BSimple) -->
+<method name="getBatchDevice"  public="true">
+<description>
+Return the device resolved from the given base whose id matches the&#xa; given argument, or null if the device is not found
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="networkType">
+<type class="javax.baja.registry.TypeInfo"/>
+</parameter>
+<parameter name="id">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.driver.BDevice"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.INSTANCE -->
+<field name="INSTANCE"  public="true" static="true" final="true">
+<type class="javax.baja.batchJob.driver.BNetworkBatchAgent"/>
+<description/>
+</field>
+
+<!-- javax.baja.batchJob.driver.BNetworkBatchAgent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

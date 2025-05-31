@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.px.PxDecoder" name="PxDecoder" packageName="javax.baja.ui.px" public="true">
+<description>
+PxDecoder decodes a Presentation XML file into &#xa; its widget tree with associated bindings.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">14 May 04</tag>
+<tag name="@version">$Revision: 22$ $Date: 6/8/10 1:11:57 PM EDT$</tag>
+<tag name="@since">Baja 3.0</tag>
+<extends>
+<type class="javax.baja.xml.XParser"/>
+</extends>
+<!-- javax.baja.ui.px.PxDecoder(javax.baja.file.BIFile) -->
+<constructor name="PxDecoder" public="true">
+<parameter name="file">
+<type class="javax.baja.file.BIFile"/>
+<description/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a PxEncoder to read from the specified file.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.px.PxDecoder(javax.baja.file.BIFile, javax.baja.sys.Context) -->
+<constructor name="PxDecoder" public="true">
+<parameter name="file">
+<type class="javax.baja.file.BIFile"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct a PxEncoder to read from the specified file and Context.&#xa; &lt;p&gt;&#xa; The Context is passed in primarily due to PxIncludes. PxIncludes are unique&#xa; because they don&#x27;t have any associated bindings to use for checking&#xa; file load security permissions.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.px.PxDecoder(javax.baja.naming.BOrd, java.io.InputStream) -->
+<constructor name="PxDecoder" public="true">
+<parameter name="baseOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</parameter>
+<parameter name="in">
+<type class="java.io.InputStream"/>
+<description/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct an PxDecoder from the given input stream.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.px.PxDecoder(javax.baja.naming.BOrd, java.io.InputStream, javax.baja.sys.Context) -->
+<constructor name="PxDecoder" public="true">
+<parameter name="baseOrd">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</parameter>
+<parameter name="in">
+<type class="java.io.InputStream"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</parameter>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+<description>
+Construct an PxDecoder from the given input stream and Context.&#xa; &lt;p&gt;&#xa; The Context is passed in primarily due to PxIncludes. PxIncludes are unique&#xa; because they don&#x27;t have any associated bindings to use for checking&#xa; file load security permissions.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.px.PxDecoder.decodeDocument() -->
+<method name="decodeDocument"  public="true">
+<description>
+Convenience for &lt;code&gt;decodeDocument(true)&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.decodeDocument(boolean) -->
+<method name="decodeDocument"  public="true">
+<description>
+Decode the XML document into a BWidget, and&#xa; optionally close the input stream.
+</description>
+<parameter name="close">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.getMedia() -->
+<method name="getMedia"  public="true">
+<description>
+Get the PxMedia of the decoded px document or null if&#xa; not specified.
+</description>
+<return>
+<type class="javax.baja.registry.TypeInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.getModules() -->
+<method name="getModules"  public="true">
+<description>
+Get the modules which the PX file is dependant  on.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.decodeHeader(javax.baja.xml.XElem) -->
+<method name="decodeHeader"  protected="true">
+<description>
+Decode the import section.
+</description>
+<parameter name="root">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.decodeImport(javax.baja.xml.XElem) -->
+<method name="decodeImport"  protected="true">
+<description>
+Decode the import section.
+</description>
+<parameter name="root">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.decodeLayers(javax.baja.xml.XElem) -->
+<method name="decodeLayers"  protected="true">
+<description>
+Decode the layers section.
+</description>
+<parameter name="root">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.getContentElem(javax.baja.xml.XElem) -->
+<method name="getContentElem"  protected="true">
+<description/>
+<parameter name="root">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="javax.baja.xml.XElem"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.toType(javax.baja.xml.XElem) -->
+<method name="toType"  protected="true">
+<description>
+Map the element name to a type using import modules.
+</description>
+<parameter name="x">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="javax.baja.registry.TypeInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.err(java.lang.String, javax.baja.xml.XElem, java.lang.Throwable) -->
+<method name="err"  protected="true">
+<description/>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="elem">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<parameter name="cause">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="javax.baja.xml.XException"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.err(java.lang.String, javax.baja.xml.XElem) -->
+<method name="err"  protected="true">
+<description/>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="elem">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="javax.baja.xml.XException"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.warning(java.lang.String, javax.baja.xml.XElem) -->
+<method name="warning"  protected="true">
+<description/>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="elem">
+<type class="javax.baja.xml.XElem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.getPxProperties() -->
+<method name="getPxProperties"  public="true">
+<description>
+return a shallow copy of the PxProperties
+</description>
+<return>
+<type class="javax.baja.ui.px.PxProperty" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.getPxLayers() -->
+<method name="getPxLayers"  public="true">
+<description>
+return a shallow copy of the PxLayers
+</description>
+<return>
+<type class="javax.baja.ui.px.PxLayer" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.px.PxDecoder.modules -->
+<field name="modules"  protected="true">
+<type class="java.lang.String" dimension="1"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.PxDecoder.props -->
+<field name="props"  protected="true">
+<type class="javax.baja.ui.px.PxProperty" dimension="1"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.PxDecoder.layers -->
+<field name="layers"  protected="true">
+<type class="javax.baja.ui.px.PxLayer" dimension="1"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.PxDecoder.types -->
+<field name="types"  protected="true">
+<parameterizedType class="java.util.HashMap">
+<args>
+<type class="java.lang.String"/>
+<type class="javax.baja.registry.TypeInfo"/>
+</args>
+</parameterizedType>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.PxDecoder.baseOrd -->
+<field name="baseOrd"  protected="true">
+<type class="javax.baja.naming.BOrd"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.PxDecoder.media -->
+<field name="media"  protected="true">
+<type class="javax.baja.registry.TypeInfo"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.PxDecoder.cx -->
+<field name="cx"  protected="true">
+<type class="javax.baja.sys.Context"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.px.PxDecoder.log -->
+<field name="log"  protected="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

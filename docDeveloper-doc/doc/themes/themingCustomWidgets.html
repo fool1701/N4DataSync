@@ -1,0 +1,144 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/themes/themeCreation.html" class="navbar">Prev</a> |  <a href="/doc/loginScreen.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="theming-custom-widgets-overview">Theming Custom Widgets Overview</h1>
+<p>This document describes how to incorporate Niagara Themes into your custom developed widgets.</p>
+<h2 id="bajaux-widgets">bajaux Widgets</h2>
+<h3 id="what-theme-is-being-used-here">What theme is being used here?</h3>
+<p>You can find the theme name currently being applied to an HTML view by looking at the <code>class</code> field of the <code>body</code> tag.</p>
+<pre><code class="sunlight-highlight-plaintext">&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body class=&quot;Zebra&quot;&gt;
+     ...
+  &lt;/body&gt;
+&lt;/html&gt; 
+</code></pre>
+<h3 id="styling-your-widgets-for-different-themes">Styling your widgets for different themes</h3>
+<pre><code class="sunlight-highlight-css">body.Zebra .myWidget {
+  background-color: gray;
+}
+body.Lucid .myWidget {
+  background-color: beige;
+}
+</code></pre>
+<h2 id="bajaui-widgets">bajaui Widgets</h2>
+<h3 id="tags-to-bvalues">Tags to BValues</h3>
+<!-- TODO: Looks like the content is aligned as justified (fill width), which
+makes a few lines that wrap because of a really long single word look terrible.
+For example, the following text. Left justified may be better for whole doc? -->
+<p>The NSS parser will attempt to parse the values depending on the tag&rsquo;s name. This is done in <code>com.tridium.ui.theme.custom.nss.NSSUtils#makeValueByTag(String, Object)</code>.</p>
+<table>
+  <thead>
+    <tr><th> If your tag name ends with&hellip; </th><th> The value will be parsed as&hellip; </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> <code>color</code>, <code>outline</code>, <code>highlight</code>, <code>shadow</code> </td><td> BBrush </td></tr>
+    <tr><td> <code>font</code> </td><td> BFont </td></tr>
+    <tr><td> <code>padding</code> </td><td> BInsets </td></tr>
+    <tr><td> <code>image</code> </td><td> BImage </td></tr>
+    <tr><td> <code>height</code>, <code>width</code> </td><td> Double </td></tr>
+    <tr><td> anything else </td><td> String </td></tr>
+  </tbody>
+</table>
+<h3 id="java-methods-and-their-corresponding-selectors">Java methods and their corresponding selectors</h3>
+<p>Below is a listing of some of the available methods from the classes in the com.tridium.ui.theme package and their corresponding NSS selectors. Unless otherwise noted, these methods belong to the WidgetTheme interface and thus are available from all theme classes.</p>
+<p>NOTE: In order for a widget to take advantage of the custom theming, it needs to pass itself along to requests for info from the theme. For instance, Theme.label().getTextBrush(myWidget).</p>
+<table>
+  <thead>
+    <tr><th> Theme method </th><th> NSS tag </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> <code>.getBoldText(myWidget)</code> </td><td> <code>bold-font</code> </td></tr>
+    <tr><td> <code>.getControlAuxiliary(myWidget)</code> </td><td> <code>auxiliary-color</code> </td></tr>
+    <tr><td> <code>.getControlBackground(myWidget)</code> </td><td> <code>background-color</code> </td></tr>
+    <tr><td> <code>.getControlForeground(myWidget)</code> </td><td> <code>outline</code> </td></tr>
+    <tr><td> <code>.getControlHighlight(myWidget)</code> </td><td> <code>highlight</code> </td></tr>
+    <tr><td> <code>.getControlShadow(myWidget)</code> </td><td> <code>shadow</code> </td></tr>
+    <tr><td> <code>.getDropOkBackground(myWidget)</code> </td><td> <code>drop-ok-background-color</code> </td></tr>
+    <tr><td> <code>.getDropOkForeground(myWidget)</code> </td><td> <code>drop-ok-color</code> </td></tr>
+    <tr><td> <code>.getFixedWidthBoldFont(myWidget)</code> </td><td> <code>fixed-bold-font</code> </td></tr>
+    <tr><td> <code>.getFixedWidthFont(myWidget)</code> </td><td> <code>fixed-font</code> </td></tr>
+    <tr><td> <code>.getFocusBrush(myWidget)</code> </td><td> <code>focus-color</code> </td></tr>
+    <tr><td> <code>.getLargeBoldFont(myWidget)</code> </td><td> <code>large-bold-font</code> </td></tr>
+    <tr><td> <code>.getLargeFont(myWidget)</code> </td><td> <code>large-font</code> </td></tr>
+    <tr><td> <code>.getPlainText(myWidget)</code> </td><td> <code>font</code> </td></tr>
+    <tr><td> <code>.getSelectionBackground(myWidget)</code> </td><td> <code>selection-background-color</code> </td></tr>
+    <tr><td> <code>.getSelectionForeground(myWidget)</code> </td><td> <code>selection-color</code> </td></tr>
+    <tr><td> <code>.getTextBrush(myWidget)</code> </td><td> <code>color</code> </td></tr>
+    <tr><td> <code>.getTextDisabled(myWidget)</code> </td><td> <code>.disabled color</code> </td></tr>
+    <tr><td> <code>.getTextFont(myWidget)</code> </td><td> <code>font</code> </td></tr>
+    <tr><td> <code>.getWindowBackground(myWidget)</code> </td><td> <code>window-background-color</code> </td></tr>
+    <tr><td> <code>.getWindowForeground(myWidget)</code> </td><td> <code>window-color</code> </td></tr>
+  </tbody>
+</table>
+<h3 id="mapping-nss-to-your-widget">Mapping NSS to your Widget</h3>
+<p>Each BWidget has a String method, <code>.getStyleSelector()</code>, that specifies where in the NSS it should look for properties. If it does not have its own <code>.getStyleSelector()</code> method defined (or in the absence of a widget, period), each individual theme has its own default selector to use. NSS tags will still propagate to these nodes as normal.</p>
+<p>This provides a simple way for the themes to return common properties for different widgets by using the many methods on <code>com.tridium.ui.theme.custom.CustomWidgetTheme</code> and its subclasses. The <code>.getTextBrush(IStylable)</code> method, for instance, would check the NSS <code>label color</code> when passed in a BLabel and <code>path-bar color</code> when passed in a BPathBar.</p>
+<p>Widget-based selection takes into account any style classes or IDs assigned to that widget.</p>
+<table>
+  <thead>
+    <tr><th> Theme object </th><th> Default NSS tag </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> <code>Theme.borderPane()</code> </td><td> <code>pane border-pane</code> </td></tr>
+    <tr><td> <code>Theme.button()</code> </td><td> <code>button</code> </td></tr>
+    <tr><td> <code>Theme.checkBox()</code> </td><td> <code>button checkbox</code> </td></tr>
+    <tr><td> <code>Theme.dropDown()</code> </td><td> <code>drop-down</code> </td></tr>
+    <tr><td> <code>Theme.expandablePane()</code> </td><td> <code>pane expandable-pane</code> </td></tr>
+    <tr><td> <code>Theme.gridPane()</code> </td><td> <code>pane grid-pane</code> </td></tr>
+    <tr><td> <code>Theme.label()</code> </td><td> <code>label</code> </td></tr>
+    <tr><td> <code>Theme.menu()</code> </td><td> <code>menu</code> </td></tr>
+    <tr><td> <code>Theme.menuBar()</code> </td><td> <code>menu-bar</code> </td></tr>
+    <tr><td> <code>Theme.menuItem()</code> </td><td> <code>menu-item</code> </td></tr>
+    <tr><td> <code>Theme.pane()</code> </td><td> <code>pane</code> </td></tr>
+    <tr><td> <code>Theme.pathBar()</code> </td><td> <code>path-bar</code> </td></tr>
+    <tr><td> <code>Theme.progressBar()</code> </td><td> <code>progress-bar</code> </td></tr>
+    <tr><td> <code>Theme.propertySheetTree()</code> </td><td> <code>tree property-sheet</code> </td></tr>
+    <tr><td> <code>Theme.radioButton()</code> </td><td> <code>button radio</code> </td></tr>
+    <tr><td> <code>Theme.scrollBar()</code> </td><td> <code>scroll-bar</code> </td></tr>
+    <tr><td> <code>Theme.scrollPane()</code> </td><td> <code>pane scroll-pane</code> </td></tr>
+    <tr><td> <code>Theme.separator()</code> </td><td> <code>separator</code> </td></tr>
+    <tr><td> <code>Theme.slider()</code> </td><td> <code>slider</code> </td></tr>
+    <tr><td> <code>Theme.spinner()</code> </td><td> <code>button spinner</code> </td></tr>
+    <tr><td> <code>Theme.splitPane()</code> </td><td> <code>pane split-pane</code> </td></tr>
+    <tr><td> <code>Theme.tabbedPane()</code> </td><td> <code>pane tabbed-pane</code> </td></tr>
+    <tr><td> <code>Theme.table()</code> </td><td> <code>table</code> </td></tr>
+    <tr><td> <code>Theme.textEditor()</code> </td><td> <code>text-editor</code> </td></tr>
+    <tr><td> <code>Theme.textEditorPane()</code> </td><td> <code>text-editor</code> </td></tr>
+    <tr><td> <code>Theme.textField()</code> </td><td> <code>text-field</code> </td></tr>
+    <tr><td> <code>Theme.titlePane()</code> </td><td> <code>pane title</code> </td></tr>
+    <tr><td> <code>Theme.toggleButton()</code> </td><td> <code>button</code> </td></tr>
+    <tr><td> <code>Theme.toolBar()</code> </td><td> <code>toolbar</code> </td></tr>
+    <tr><td> <code>Theme.toolPane()</code> </td><td> <code>pane tool-pane</code> </td></tr>
+    <tr><td> <code>Theme.tree()</code> </td><td> <code>tree</code> </td></tr>
+    <tr><td> <code>Theme.treeTable()</code> </td><td> <code>table tree-table</code> </td></tr>
+    <tr><td> <code>Theme.widget()</code> </td><td> <code>(none - will always look for properties in NSS root)</code> </td></tr>
+    <tr><td> <code>Theme.wiresheet()</code> </td><td> <code>wire-sheet</code> </td></tr>
+  </tbody>
+</table>
+<p>For example, <code>Theme.treeTable().getTextBrush()</code> would return the results of selector <code>table tree-table color</code>, while <code>Theme.widget().getTextBrush()</code> would return the results of the simple selector <code>color</code>.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/themes/themeCreation.html" class="navbar">Prev</a> |  <a href="/doc/loginScreen.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

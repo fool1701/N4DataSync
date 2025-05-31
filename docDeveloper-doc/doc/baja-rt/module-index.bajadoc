@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<module name="baja" runtimeProfile="rt" bajaVersion="0" vendor="Tridium" vendorVersion="4.13.3.48">
+<description>Niagara Framework</description>
+<package name="javax.baja.license"><description>This package contains classes used to access the licensing framework.</description></package>
+<package name="javax.baja.virtual"><description>This package provides core support for virtual (transient, on-demand) components.</description></package>
+<package name="javax.baja.authn"/>
+<package name="javax.baja.tag"/>
+<package name="javax.baja.tag.io"/>
+<package name="javax.baja.tag.util"/>
+<package name="javax.baja.registry"><description>&lt;p&gt;Classes used to interrogate the system for what is currently installed.</description></package>
+<package name="javax.baja.timezone"><description>&lt;p&gt;Package used to manage time zones.</description></package>
+<package name="javax.baja.space"><description>&lt;p&gt;Spaces are containers used to group objects under a session.</description></package>
+<package name="javax.baja.units"><description>This package contains the APIs used to model and work with units of &#xa;measurement.</description></package>
+<package name="javax.baja.sys"><description>This package provides the core definitions of the Baja object model.</description></package>
+<package name="javax.baja.job"><description>&lt;p&gt;Jobs are used to manage tasks which run asynchronously in &#xa;the background but require user visiblity.</description></package>
+<package name="javax.baja.security"><description>This package provide security APIs for Baja.</description></package>
+<package name="javax.baja.security.dashboard"/>
+<package name="javax.baja.security.kerberos"/>
+<package name="javax.baja.security.crypto"/>
+<package name="javax.baja.security.crypto.se"/>
+<package name="javax.baja.category"><description>&lt;p&gt;Classes for categorizing objects.</description></package>
+<package name="javax.baja.session"/>
+<package name="javax.baja.dataRecovery"/>
+<package name="javax.baja.rpc"/>
+<package name="javax.baja.naming"><description>&lt;p&gt;Classes used for object naming and resolution.</description></package>
+<package name="javax.baja.io"><description>The io package contains Baja input/output support.</description></package>
+<package name="javax.baja.status"><description>&lt;p&gt;The element package provides the standard types used&#xa;for component to component interfacing</description></package>
+<package name="javax.baja.role"/>
+<package name="javax.baja.firewall"/>
+<package name="javax.baja.nav"><description>&lt;p&gt;Standard APIs to expose navigation structure.</description></package>
+<package name="javax.baja.log"><description>This package contains the standard Baja logging APIs.</description></package>
+<package name="javax.baja.sync"><description>The sync package contains APIs used to cache component changes.</description></package>
+<package name="javax.baja.transform"/>
+<package name="javax.baja.spy"><description>&lt;p&gt;The spy package is used to build diagnostics tools.</description></package>
+<package name="javax.baja.file"><description>&lt;p&gt;APIs for access to local and remote file systems.</description></package>
+<package name="javax.baja.file.zip"><description>&lt;p&gt;APIs for access to expose zip files as a file system.</description></package>
+<package name="javax.baja.collection"><description>&lt;p&gt;Classes used to store collections.</description></package>
+<package name="javax.baja.data"><description>&lt;p&gt;Support for core primitive data types.</description></package>
+<package name="javax.baja.query"/>
+<package name="javax.baja.agent"><description>&lt;p&gt;Contains classes used to interrogate for agents.</description></package>
+<package name="javax.baja.util"><description>This package contains Baja utility classes.</description></package>
+<package name="javax.baja.user"><description>This package contains the user model.</description></package>
+<class packageName="javax.baja.collection" name="AbstractCursor"><description>A general purpose implementation of the &lt;code&gt;<see ref="javax.baja.sys.Cursor">Cursor</see>&lt;/code&gt; interface that enforces closed semantics.</description></class>
+<class packageName="javax.baja.collection" name="AbstractReverseCursor"><description>A general purpose implementation of the &lt;code&gt;<see ref="javax.baja.sys.Cursor">Cursor</see>&lt;/code&gt; interface that enforces closed semantics.</description></class>
+<class packageName="javax.baja.collection" name="AbstractRow"></class>
+<class packageName="javax.baja.collection" name="AbstractTableCursor"><description>A general implementation of a &lt;code&gt;<see ref="javax.baja.collection.TableCursor">TableCursor</see>&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.sys" name="AbstractTypeException" category="exception"><description>The AbstractTypeException is thrown on operations&#xa; which require a concrete class.</description></class>
+<class packageName="javax.baja.security" name="AccessSlotCursor"><description>&lt;p&gt;&#xa; AccessSlotCursor wraps a SlotCursor to provide access&#xa; control checking.</description></class>
+<class packageName="javax.baja.sys" name="Action" category="interface"><description>Action is a Slot that defines a behavior which can&#xa; be invoked on a BComponent.</description></class>
+<class packageName="javax.baja.sys" name="ActionInvokeException" category="exception"><description>The ActionInvokeException is an unchecked exception that&#xa; wraps an exception raised during an action invocation.</description></class>
+<class packageName="javax.baja.sync" name="AddKnobOp"><description>AddKnobOp maps to the knob added component event.</description></class>
+<class packageName="javax.baja.sync" name="AddOp"><description>AddOp is the implementation of SyncOp for a property add.</description></class>
+<class packageName="javax.baja.sync" name="AddRelationKnobOp"><description>AddRelationKnobOp maps to the relationknob added component event.</description></class>
+<class packageName="javax.baja.agent" name="AgentFilter"><description>AgentFilter is used to filter an AgentList.</description></class>
+<class packageName="javax.baja.agent" name="AgentInfo" category="interface"><description>AgentInfo provides summary information for an &#xa; agent within an AgentList.</description></class>
+<class packageName="javax.baja.agent" name="AgentList" category="interface"><description>AgentList encapsulates an ordered list of agent AgentInfos.</description></class>
+<class packageName="javax.baja.sys" name="AlreadyParentedException" category="exception"><description>The AlreadyParentedException is thrown when&#xa; an attempt is made to set or add a BComplex&#xa; value which is already contained by another&#xa; object.</description></class>
+<class packageName="javax.baja.security" name="AuditEvent"><description>AuditEvent is the event sent to the system Auditor&#xa; when users make component modifications and invoke&#xa; actions.</description></class>
+<class packageName="javax.baja.space" name="AuditableSpace" category="annotation"><description>AuditableSpace is a marker annotation to identify subclasses of &lt;code&gt;<see ref="javax.baja.space.BComponentSpace">BComponentSpace</see>&lt;/code&gt;&#xa; that are intended to be audited in &lt;code&gt;<see ref="com.tridium.sys.schema.ComplexSlotMap">com.tridium.sys.schema.ComplexSlotMap</see>&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.security" name="Auditor" category="interface"><description>Auditor is the interface registered with Sys.setAuditor() &#xa; for the system wide auditor.</description></class>
+<class packageName="javax.baja.security" name="AuthenticationException" category="exception"><description>AuthenticationException is thrown when an operation fails&#xa; due to invalid authentication credentials.</description></class>
+<class packageName="javax.baja.security" name="AuthenticationRealm" category="interface"><description>AuthenticationRealm is implemented by objects which&#xa; throw AuthenticationException.</description></class>
+<class packageName="javax.baja.authn" name="AuthenticationUtil"><description>This utility class offers support for authentication&#xa; related tasks.</description></class>
+<class packageName="javax.baja.sys" name="BAbsTime"><description>BAbsTime encapsulates an absolute point in time&#xa; relative to a given time zone.</description></class>
+<class packageName="javax.baja.util" name="BAbsTimeRange"><description>BAbsTimeRange is a range of absolute times defining a period of&#xa; time.</description></class>
+<class packageName="javax.baja.security" name="BAbstractAes256PasswordEncoder"></class>
+<class packageName="javax.baja.security" name="BAbstractAuthenticator"><description>Contains authentication data for users.</description></class>
+<class packageName="javax.baja.category" name="BAbstractCategory"><description>BAbstractCategory contains properties for all category types.</description></class>
+<class packageName="javax.baja.file" name="BAbstractFile"><description>BAbstractFile provides a default base class upon which &#xa; to build BIFile implementations.</description></class>
+<class packageName="javax.baja.file" name="BAbstractFileStore"><description>BAbstractFileStore provides a default base class upon &#xa; which to build BIFileStore implementations.</description></class>
+<class packageName="javax.baja.security" name="BAbstractPasswordEncoder"><description>A BAbstractPasswordEncoder provides a way for passwords&#xa; to be encoded using different encoding methods, such as&#xa; hashing or encryption.</description></class>
+<class packageName="javax.baja.agent" name="BAbstractPxView"><description>BAbstractPxView is a dynamic view which may be added to BComponents&#xa; as a property or by overriding getAgents().</description></class>
+<class packageName="javax.baja.role" name="BAbstractRole"><description>BAbstractRole is role base class.</description></class>
+<class packageName="javax.baja.sys" name="BAbstractService"><description>BAbstractService provides a basic template for building&#xa; consistent service components.</description></class>
+<class packageName="javax.baja.sys" name="BAction"><description>The BAction is the object type used to add&#xa; new actions to a BComponent.</description></class>
+<class packageName="javax.baja.role" name="BAdminRole"><description>BAdminRole is the super user role.</description></class>
+<class packageName="javax.baja.security" name="BAes256CbcPasswordEncoder"><description>AES-CBC password encoder to be used for legacy support.</description></class>
+<class packageName="javax.baja.security" name="BAes256PasswordEncoder"></class>
+<class packageName="javax.baja.security" name="BAliasedAes256CbcPasswordEncoder"><description>Aliased AES-CBC password encoder to be used for legacy support.</description></class>
+<class packageName="javax.baja.security" name="BAliasedAes256PasswordEncoder"><description>Password encoder that encrypts with a key of a given alias.</description></class>
+<class packageName="javax.baja.user" name="BAllowConcurrentSessionsMergeMode"><description>Enum to determine user prototype allowConcurrentSession merge policy.</description></class>
+<class packageName="javax.baja.authn" name="BAuthenticationScheme"><description>Base class for all authentication schemes to be added to the&#xa; Authentication Service.</description></class>
+<class packageName="javax.baja.user" name="BAutoLogoffSettings"></class>
+<class packageName="javax.baja.user" name="BAutoLogoffSettingsMergeMode"><description>/**&#xa; Enum to determine user prototype autoLogoffSettings merge policy.</description></class>
+<class packageName="javax.baja.util" name="BBitSet"><description>BBitSet is an array of bits.</description></class>
+<class packageName="javax.baja.sys" name="BBitString"><description>BBitString is the super class for simples which are&#xa; composed of a set of boolean flags usually packed&#xa; as bits into an integer mask.</description></class>
+<class packageName="javax.baja.sys" name="BBitString.Support"><description>BBitString.Support is used to aid in creating a &#xa; BBitString&#x27;s int/value pair mapping.</description></class>
+<class packageName="javax.baja.security" name="BBlankAuthenticator"><description>A Blank Authenticator with no data for remote schemes.</description></class>
+<class packageName="javax.baja.sys" name="BBlob"><description>The BBlob is the wrapper class for Java&#xa; raw byte array objects.</description></class>
+<class packageName="javax.baja.sys" name="BBoolean"><description>The BBoolean is the wrapper class for primitive&#xa; boolean objects.</description></class>
+<class packageName="javax.baja.category" name="BCategory"><description>BCategory models a category.</description></class>
+<class packageName="javax.baja.category" name="BCategoryMask"><description>BCategoryMask is a bitmask of category numbers.</description></class>
+<class packageName="javax.baja.category" name="BCategoryMode"><description>BCategoryMode defines how a category is mapped into permissions&#xa; for an object.</description></class>
+<class packageName="javax.baja.category" name="BCategoryService"><description>BCategoryService maps BCategoryMasks bits to BCategory components.</description></class>
+<class packageName="javax.baja.security" name="BCertificateAliasAndPassword"><description>BCertificateAliasAndPassword holds a certificate alias and the BPassword for retrieving&#xa; it from the user key store.</description></class>
+<class packageName="javax.baja.security" name="BCertificateAliasCredential"><description>A SeedInfo file for ClientCert Authentication.</description></class>
+<class packageName="javax.baja.util" name="BClassSpec"><description>BClassSpec is a Baja simple which stores a module name&#xa; and class name pair.</description></class>
+<class packageName="javax.baja.security" name="BClientCredentials"><description>BClientCredentials holds another BIUserCredentials in an encoded form.</description></class>
+<class packageName="javax.baja.sys" name="BComplex"><description>BComplex is the BValue which is defined by one or more&#xa; property slots.</description></class>
+<class packageName="javax.baja.sys" name="BComponent"><description>BComponent is the required base class for all&#xa; Baja component classes.</description></class>
+<class packageName="javax.baja.sys" name="BComponentEvent"><description>BComponentEvent encapsulates the information associated&#xa; with a modification to a BComponent.</description></class>
+<class packageName="javax.baja.sys" name="BComponentEventMask"><description>BComponentEventMaskBits is a mask for BComponentEvents.</description></class>
+<class packageName="javax.baja.space" name="BComponentSpace"><description>BComponentSpace is a space which contains a slot tree of&#xa; BComponents.</description></class>
+<class packageName="javax.baja.util" name="BCompositeAction"><description>BCompositeAction is an implementation of BAction&#xa; which maps to another action as the knob of a link.</description></class>
+<class packageName="javax.baja.util" name="BCompositeAction.Mirror"><description>Class returned from &lt;code&gt;BCompositeAction.getMirror()&lt;/code&gt;</description></class>
+<class packageName="javax.baja.util" name="BCompositeTopic"><description>BCompositeTopic is an implementation of BTopic&#xa; which maps to an action or topic through a link.</description></class>
+<class packageName="javax.baja.util" name="BCompositeTopic.Mirror"><description>Class returned from &lt;code&gt;BCompositeTopic.getMirror()&lt;/code&gt;</description></class>
+<class packageName="javax.baja.sys" name="BConversionLink"><description>BConversionLink defines a special type of BLink where &#xa; the propagated value must undergo conversion as it&#xa; is set on the target.</description></class>
+<class packageName="javax.baja.util" name="BConverter"><description>BConverter is used to convert from one BObject type&#xa; to another BObject type.</description></class>
+<class packageName="javax.baja.file" name="BDataFile"><description>BDataFile is a BIFile used when no specified file &#xa; type is known.</description></class>
+<class packageName="javax.baja.util" name="BDataSet"><description>A naive implementation of an immutable set of &lt;code&gt;<see ref="javax.baja.data.BIDataValue">BIDataValue</see>&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.sys" name="BDate"><description>BDate represents a specific day, month, and year.</description></class>
+<class packageName="javax.baja.util" name="BDaysOfWeekBits"><description>BDaysOfWeekBits is an bit string containing one bit&#xa; for each day of the week.</description></class>
+<class packageName="javax.baja.units" name="BDimension"><description>BDimension encapsulates a ratio of the seven base SI &#xa; units plus an extra currency dimension based on the &#xa; dollar.</description></class>
+<class packageName="javax.baja.file" name="BDirectory"><description>BDirectory is the BIFile type used to represent directories &#xa; in file space implementations.</description></class>
+<class packageName="javax.baja.sys" name="BDouble"><description>The BDouble is the class interface for primitive double objects.</description></class>
+<class packageName="javax.baja.sys" name="BDynamicEnum"><description>BDynamicEnum stores an ordinal state variable as &#xa; a 32-bit integer.</description></class>
+<class packageName="javax.baja.agent" name="BDynamicPxView"><description>BDynamicPxView is a BAbstractPxView which dynamically&#xa; generates Presentation XML on demand.</description></class>
+<class packageName="javax.baja.sys" name="BEnum"><description>The BEnum is the abstract base class of BSimples which&#xa; have a discrete range of values represented by a BEnumRange.</description></class>
+<class packageName="javax.baja.sys" name="BEnumRange"><description>BEnumRange stores a range of ordinal/name pairs:</description></class>
+<class packageName="javax.baja.util" name="BEnumSet"><description>The BEnumSet is a dynamic list of enum ordinals, which may&#xa; customized with an EnumRange.</description></class>
+<class packageName="javax.baja.util" name="BExecutionState"><description>A generic enum that can be used for monitoring the execution state of a&#xa; (typically long-running) operation.</description></class>
+<class packageName="javax.baja.user" name="BExpirationMergeMode"><description>Enum to determine user prototype expiration merge policy.</description></class>
+<class packageName="javax.baja.file" name="BExporter"><description>BExporter is a component designed to export a BObject to&#xa; a file stream.</description></class>
+<class packageName="javax.baja.sys" name="BFacets"><description>BFacets is a map of name/value pairs used to annotate a&#xa; BComplex&#x27;s Slot or to just provide additional metadata&#xa; about something.</description></class>
+<class packageName="javax.baja.util" name="BFacetsMap"><description>The BFacetsMap, modeled after baja:NameMap, is a map of String names &#xa; to BFacets values:</description></class>
+<class packageName="javax.baja.file" name="BFileScheme"><description>BFileScheme manages the &#x22;file&#x22; scheme with a FilePath query.</description></class>
+<class packageName="javax.baja.file" name="BFileSpace"><description>BFileSpace defines a tree of BIFiles using a specific&#xa; implementation of BIFilesStore.</description></class>
+<class packageName="javax.baja.file" name="BFileSystem"><description>BFileSystem is a BFileSpace for the local machine&#x27;s&#xa; file system.</description></class>
+<class packageName="javax.baja.sys" name="BFloat"><description>The BFloat is the class interface for primitive float objects.</description></class>
+<class packageName="javax.baja.util" name="BFolder"><description>BFolder is the standard BComponent used as a &#xa; container for other BComponents.</description></class>
+<class packageName="javax.baja.util" name="BFormat"><description>BFormat is used to format Objects into Strings using&#xa; a standardized formatting pattern language.</description></class>
+<class packageName="javax.baja.util" name="BFormat.Call"></class>
+<class packageName="javax.baja.util" name="BFormat.ReflectCall"></class>
+<class packageName="javax.baja.sys" name="BFrozenEnum"><description>The BFrozenEnum is the base class of strong typed enums&#xa; defined at compile time.</description></class>
+<class packageName="javax.baja.space" name="BHandleScheme"><description>The BHandleScheme is identified via scheme id of &#x22;h&#x22;.</description></class>
+<class packageName="javax.baja.naming" name="BHost"><description>BHost is the navigation node used to organize navigation &#xa; by hosts.</description></class>
+<class packageName="javax.baja.security" name="BHttpFoxCredentials"></class>
+<class packageName="javax.baja.agent" name="BIAgent" category="interface"><description>BIAgent is the interface implemented by agent types.</description></class>
+<class packageName="javax.baja.naming" name="BIAlias" category="interface"></class>
+<class packageName="javax.baja.sys" name="BIBoolean" category="interface"><description>BIBoolean is the interface implemented by BObjects &#xa; which primarily represent a boolean value.</description></class>
+<class packageName="javax.baja.category" name="BICategorizable" category="interface"><description>BICategorizable is implemented by BObjects which can be assigned to&#xa; one or more categories through the use of a BCategoryMask.</description></class>
+<class packageName="javax.baja.sys" name="BIComparable" category="interface"><description>This interface imposes a total ordering on the objects of each &#xa; class that implements it.</description></class>
+<class packageName="javax.baja.file" name="BIComponentFile" category="interface"><description>BIComponentFile should be implemented by file type objects that&#xa; may be move/copied to a BComponent space but first require conversion&#xa; to a BComponent.</description></class>
+<class packageName="javax.baja.io" name="BIContextEncodable" category="interface"><description>BIEncodable is implemented by BObjects which can be&#xa; serialized and unserialized into both a binary and&#xa; String format, and can accept a context to their&#xa; encodeToString method</description></class>
+<class packageName="javax.baja.security" name="BICredentials" category="interface"><description>BICredentials is used for types which store authentication&#xa; credentials.</description></class>
+<class packageName="javax.baja.file" name="BIDataFile" category="interface"><description>BIDataFile is a BIFile that contains data.</description></class>
+<class packageName="javax.baja.tag" name="BIDataPolicy" category="interface"><description>A DataPolicyRef provides reference to a DataPolicy.</description></class>
+<class packageName="javax.baja.dataRecovery" name="BIDataRecoveryService" category="interface"><description>BIDataRecoveryService defines the behavior that all data recovery&#xa; services, that is providers of data recovery storage, should demonstrate.</description></class>
+<class packageName="javax.baja.dataRecovery" name="BIDataRecoverySource" category="interface"><description>BIDataRecoverySource defines the contract that all data recovery&#xa; sources, that is clients of data recovery storage, must obey.</description></class>
+<class packageName="javax.baja.dataRecovery" name="BIDataRecoverySourceService" category="interface"><description>BIDataRecoverySourceService should be implemented by any service that&#xa; supports data recovery.</description></class>
+<class packageName="javax.baja.data" name="BIDataTable" category="interface"><description>A BIDataTable is a &lt;code&gt;<see ref="javax.baja.collection.BITable">BITable</see>&lt;/code&gt; with &lt;code&gt;<see ref="javax.baja.data.BIDataValue">BIDataValue</see>&lt;/code&gt; values for all cell values.</description></class>
+<class packageName="javax.baja.data" name="BIDataValue" category="interface"><description>BIDataValue is the interface implemented by BSimples that&#xa; are one of the predefined data types in &lt;code&gt;<see ref="javax.baja.data.DataTypes">DataTypes</see>&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.sys" name="BIDate" category="interface"><description>BIDate represents a specific day, month, and year.</description></class>
+<class packageName="javax.baja.security" name="BIDeferOwnership" category="interface"><description>BIDeferOwnership is a marker interface that BComplexes can implement to signify that any child&#xa; passwords should not be owned by that types module, but rather the module of the type of its parent.</description></class>
+<class packageName="javax.baja.file" name="BIDeployable" category="interface"><description>BIDeployable should be implemented by objects that can be deployed&#xa; to a BSpace in multiple copy operations.</description></class>
+<class packageName="javax.baja.file" name="BIDeployable.Step"></class>
+<class packageName="javax.baja.file" name="BIDirectory" category="interface"><description>BIDirectory is a container of BIFiles</description></class>
+<class packageName="javax.baja.io" name="BIEncodable" category="interface"><description>BIEncodable is implemented by BObjects which can be&#xa; serialized and unserialized into both a binary and&#xa; String format.</description></class>
+<class packageName="javax.baja.tag" name="BIEntity" category="interface"><description>BIEntity</description></class>
+<class packageName="javax.baja.tag" name="BIEntitySpace" category="interface"><description>EntitySpace</description></class>
+<class packageName="javax.baja.sys" name="BIEnum" category="interface"><description>BIEnum is the interface implemented by BObjects &#xa; which primarily represent an enumerated value.</description></class>
+<class packageName="javax.baja.security" name="BIExtraAttributesCredentials" category="interface"><description>BICredentials that specifies a map of extra attributes to be included in the&#xa; username message.</description></class>
+<class packageName="javax.baja.file" name="BIFile" category="interface"><description>&lt;p&gt;&#xa; BIFile is the interface implemented by BObjects which&#xa; have file like semantics.</description></class>
+<class packageName="javax.baja.file" name="BIFileSpace" category="interface"><description>File space interface.</description></class>
+<class packageName="javax.baja.file" name="BIFileStore" category="interface"><description>BIFileStore is a pluggable implementation of file storage.</description></class>
+<class packageName="javax.baja.util" name="BIFormatPropertyHandler" category="interface"><description>BIFormatPropertyHandler &#xa;&#xa; Used in BFormat to retrieve Properties from components that handle the Slot names differently</description></class>
+<class packageName="javax.baja.nav" name="BIIndirectNavNode" category="interface"><description>BIIndirectNavNode is a nav node that may target an entity at a different location.</description></class>
+<class packageName="javax.baja.job" name="BIJobService" category="interface"><description>IJobService provides a common interface used for managing jobs&#xa; consistently in both a station and workbench environment.</description></class>
+<class packageName="javax.baja.license" name="BILicensed" category="interface"><description>BILicensed is the interface used to represent object&#xa; that are licensed using the standard licensing&#xa; mechanism.</description></class>
+<class packageName="javax.baja.sys" name="BIMixIn" category="interface"><description>BIMixIn is implemented by BValues which are designed to be &#x22;mixed in&#x22;&#xa; with another class.</description></class>
+<class packageName="javax.baja.nav" name="BINavContainer" category="interface"><description>BINavContainer is a interface that allows mounting,&#xa; unmounting, and reordering of other arbitrary BINavNodes.</description></class>
+<class packageName="javax.baja.nav" name="BINavNode" category="interface"><description>BINavNode is the interface implemented by BObjects which are &#xa; mounted into the navigation tree under BNavRoot.INSTANCE.</description></class>
+<class packageName="javax.baja.nav" name="BINavNode.NavDescendantsIterator"></class>
+<class packageName="javax.baja.sys" name="BINumeric" category="interface"><description>BINumeric is the interface implemented by BObjects &#xa; which primarily represent a numeric value stored&#xa; as a double.</description></class>
+<class packageName="javax.baja.sys" name="BIObject" category="interface"><description>BIObject is the super type of all Baja types in the Niagara Framework.</description></class>
+<class packageName="javax.baja.security" name="BIPasswordValidator" category="interface"></class>
+<class packageName="javax.baja.security" name="BIPreconnectCredentials" category="interface"><description>An interface to mark a &lt;code&gt;<see ref="javax.baja.security.BIUserCredentials">BIUserCredentials</see>&lt;/code&gt; that should be used prior to the&#xa; usual credential gathering workflow.</description></class>
+<class packageName="javax.baja.sys" name="BIPropertyContainer" category="interface"><description>This interface is implemented by objects that contain dynamic properties.</description></class>
+<class packageName="javax.baja.sys" name="BIPropertySpace" category="interface"><description>BIPropertySpace is an interface implemented by spaces that contain&#xa; BIPropertyContainer objects.</description></class>
+<class packageName="javax.baja.security" name="BIProtected" category="interface"><description>BIProtected is implemented by BObjects which are should&#xa; be protected via the security architecture.</description></class>
+<class packageName="javax.baja.query" name="BIQueryHandler" category="interface"><description>A BIQueryHandler processes a query on a specific target scope.</description></class>
+<class packageName="javax.baja.collection" name="BIRandomAccessTable" category="interface"><description>A &lt;code&gt;<see ref="javax.baja.collection.BITable">BITable</see>&lt;/code&gt; that supports random access to its cells.</description></class>
+<class packageName="javax.baja.util" name="BIRestrictedComponent" category="interface"><description>Defines an interface for station components (especially services)&#xa; that should be restricted to a certain location in a station and&#xa; also restricted based on the presence of other restricted components (ie.</description></class>
+<class packageName="javax.baja.role" name="BIRole" category="interface"><description>BIRole represents a group of permissions in the Baja framework.</description></class>
+<class packageName="javax.baja.role" name="BIRoleListener" category="interface"><description>A BIRoleListener will receive notifications when &#xa; a peer BIRoleSource service removes or adds a role.</description></class>
+<class packageName="javax.baja.role" name="BIRoleService" category="interface"><description>A BIRoleSource can resolve BIRoles based on UUIDs.</description></class>
+<class packageName="javax.baja.file" name="BIScopedFileSpace" category="interface"><description>File space that encompasses only the files within a certain scope.</description></class>
+<class packageName="javax.baja.security.dashboard" name="BISecurityDashboardItemProvider" category="interface"><description>Interface for a BIObject that provides SecurityDashboardItems to a section of the security&#xa; dashboard.</description></class>
+<class packageName="javax.baja.security.dashboard" name="BISecurityDashboardProvider" category="interface"><description>Interface for implementation of the Niagara Security Dashboard</description></class>
+<class packageName="javax.baja.security.dashboard" name="BISecurityDashboardProviderAgent" category="interface"><description>Interface for implementation of the Niagara Security Dashboard.</description></class>
+<class packageName="javax.baja.sys" name="BIService" category="interface"><description>BIService is the interface implemented by BComponents which&#xa; wish to be managed by the framework&#x27;s service registry.</description></class>
+<class packageName="javax.baja.naming" name="BISession" category="interface"><description>BISession is implemented by BObjects which &#xa; represent a session within a host.</description></class>
+<class packageName="javax.baja.space" name="BISpace" category="interface"><description>Interface for Spaces.</description></class>
+<class packageName="javax.baja.space" name="BISpaceContainer" category="interface"><description>BISpaceContainer is the interface implemented by BObjects which can &#xa; contain spaces.</description></class>
+<class packageName="javax.baja.space" name="BISpaceNode" category="interface"><description>BISpaceNode</description></class>
+<class packageName="javax.baja.status" name="BIStatus" category="interface"><description>BIStatus is the interface implemented by BObjects &#xa; which can return status information as BStatus.</description></class>
+<class packageName="javax.baja.status" name="BIStatusValue" category="interface"><description>BIStatusValue which can return themselves as a BStatusValue.</description></class>
+<class packageName="javax.baja.collection" name="BITable" category="interface"><description>BITable is a collection members are accessible by&#xa; row and whose members&#x27; elements are accessible by column.</description></class>
+<class packageName="javax.baja.file" name="BITemplate" category="interface"><description>BITemplate is implemented by template files.</description></class>
+<class packageName="javax.baja.sys" name="BITime" category="interface"><description>BITime represents a time of day which is independent &#xa; of any date in the past or future.</description></class>
+<class packageName="javax.baja.transform" name="BITransformer" category="interface"><description>A Transformer is essentially an object-to-InputStream mapping function.</description></class>
+<class packageName="javax.baja.sys" name="BIUnlinkable" category="interface"><description>A marker interface that can be used by Niagara Types that can never be the source or target of a&#xa; link in Niagara.</description></class>
+<class packageName="javax.baja.sys" name="BIUnlinkableSlotsContainer" category="interface"><description>An interface that can be optionally implemented by &lt;code&gt;<see ref="javax.baja.sys.BComponent">BComponent</see>&lt;/code&gt; subclasses&#xa; that wish to declare certain &lt;code&gt;<see ref="javax.baja.sys.Slot">Slot</see>&lt;/code&gt; children that can never be the source&#xa; and/or target of a link in Niagara.</description></class>
+<class packageName="javax.baja.sys" name="BIUnlinkableSource" category="interface"><description>A marker interface that can be used by Niagara Types that can never be the source of a link&#xa; in Niagara.</description></class>
+<class packageName="javax.baja.sys" name="BIUnlinkableTarget" category="interface"><description>A marker interface that can be used by Niagara Types that can never be the target of a link&#xa; in Niagara.</description></class>
+<class packageName="javax.baja.security" name="BIUserCredentials" category="interface"><description>BIUserCredentials is a type of &lt;code&gt;<see ref="javax.baja.security.BICredentials">BICredentials</see>&lt;/code&gt; object that enforces&#xa; the association of a Username with the credentials.</description></class>
+<class packageName="javax.baja.util" name="BIValidator" category="interface"><description>Defines an interface for validating BObjects.</description></class>
+<class packageName="javax.baja.sys" name="BIcon"><description>BIcon is used to represent the iconic image of an object.</description></class>
+<class packageName="javax.baja.collection" name="BInMemoryTable"><description>An in memory table stores all rows of the table in memory as a list.</description></class>
+<class packageName="javax.baja.sys" name="BInteger"><description>The BInteger is the wrapper class for Java primitive&#xa; int objects.</description></class>
+<class packageName="javax.baja.sys" name="BInterface" category="interface"><description>The BInterface is the super type of all Baja typed interfaces.</description></class>
+<class packageName="javax.baja.naming" name="BIpHost"><description>BIpHost is used to represent a host machine that is identified&#xa; with an IP address.</description></class>
+<class packageName="javax.baja.firewall" name="BIpProtocolEnum"></class>
+<class packageName="javax.baja.naming" name="BIpScheme"><description>BIpScheme is used to identify BIpHosts as &#x22;&lt;code&gt;ip:&amp;lt;hostname&amp;gt;&lt;/code&gt;&#x22;.</description></class>
+<class packageName="javax.baja.job" name="BJob"><description>BJob is used to manage tasks which run asynchronously in &#xa; the background but require user visibility.</description></class>
+<class packageName="javax.baja.job" name="BJobLogSequence"><description>Struct encapsulating a number of encoded JobLogItems and associated sequence numbers&#xa; for the first and last log items in the contained sequence of items.</description></class>
+<class packageName="javax.baja.job" name="BJobService"><description>BJobService is used to manage all the BJobs in a station VM.</description></class>
+<class packageName="javax.baja.job" name="BJobService.MonitorWorker"><description>Monitor the thread pool</description></class>
+<class packageName="javax.baja.job" name="BJobService.UncaughtJobExceptionHandler"><description>Handle ForkJoinPool uncaught exceptions</description></class>
+<class packageName="javax.baja.job" name="BJobState"><description>BJobState enumerates the state machine of a Job&#x27;s lifecycle.</description></class>
+<class packageName="javax.baja.security.kerberos" name="BKerberosCredentials"></class>
+<class packageName="javax.baja.sys" name="BLink"><description>BLink defines an event propagation relationship between&#xa; two slots of two components.</description></class>
+<class packageName="javax.baja.file" name="BLocalFileStore"><description>BLocalStore is a BIFileStore implementation for&#xa; local files using java.io.File.</description></class>
+<class packageName="javax.baja.naming" name="BLocalHost"><description>BLocalHost is the BHost for the local machine.</description></class>
+<class packageName="javax.baja.naming" name="BLocalScheme"><description>BLocalScheme is the ord scheme represented as &#x22;local:&#x22;.</description></class>
+<class packageName="javax.baja.file" name="BLocalizedFileSpace"><description>Abstract for a file space that can translate paths to a localized file system.</description></class>
+<class packageName="javax.baja.sys" name="BLong"><description>The BLong stores a Java long primitive.</description></class>
+<class packageName="javax.baja.sys" name="BMarker"><description>A marker value is used primarily with the tagging API in order to represent the&#xa; presence of a named tag that has no meaningful value.</description></class>
+<class packageName="javax.baja.file" name="BMemoryFileStore"><description>BMemoryStore is a BIFileStore implementation which uses&#xa; a memory buffer for reading and writing.</description></class>
+<class packageName="javax.baja.sys" name="BModule"><description>BModule encapsulates a Baja software module which&#xa; is packaged and delivered as a JAR file with a &#xa; &#x22;meta-inf/module.xml&#x22; description.</description></class>
+<class packageName="javax.baja.sys" name="BModuleDirectory"></class>
+<class packageName="javax.baja.naming" name="BModuleScheme"><description>BModuleScheme is used to resolve modules and their contents&#xa; using a ModuleQuery.</description></class>
+<class packageName="javax.baja.sys" name="BModuleSpace"><description>BModuleSpace is a FileSpace used to manage the files&#xa; stored in module jars.</description></class>
+<class packageName="javax.baja.sys" name="BMonth"><description>BMonth is an enum for the months of the year.</description></class>
+<class packageName="javax.baja.util" name="BNameList"><description>The BNameList is a Baja simple which contains a list&#xa; of names separated by a semicolon.</description></class>
+<class packageName="javax.baja.util" name="BNameMap"><description>The BNameMap is a map of String names to BFormat values:</description></class>
+<class packageName="javax.baja.sys" name="BNamespace"><description>A namespace that holds only simple values.</description></class>
+<class packageName="javax.baja.nav" name="BNavContainer"><description>BNavContainer is a generic BINavNode that allows mounting&#xa; and unmounting of other arbitary BINavNodes.</description></class>
+<class packageName="javax.baja.nav" name="BNavFileNode"><description>BNavFileNode is a BINavNode loaded from a nav file using NavFileDecoder.</description></class>
+<class packageName="javax.baja.nav" name="BNavFileSpace"><description>BNavFileSpace contains a tree of BNavFileNodes and their associated&#xa; lookup data structures.</description></class>
+<class packageName="javax.baja.nav" name="BNavFolder"><description>BNavFolder is general purpose BNavContainer with localization support.</description></class>
+<class packageName="javax.baja.nav" name="BNavRoot"><description>BNavRoot is the root of the navigation tree.</description></class>
+<class packageName="javax.baja.nav" name="BNavScheme"><description>BNavScheme can traverse a BINavNode further down by providing&#xa; the names of the desired descendants.</description></class>
+<class packageName="javax.baja.util" name="BNotification"><description>BNotifications are used to broadcast events in a station&#xa; to a single workbench instance or all currently connected&#xa; workbench instances.</description></class>
+<class packageName="javax.baja.util" name="BNullConverter"><description>The BNullConverter is used to represent no conversion.</description></class>
+<class packageName="javax.baja.security" name="BNullPasswordEncoder"><description>Password encoder for BPassword.DEFAULT, whose validate() method always returns false.</description></class>
+<class packageName="javax.baja.sys" name="BNumber"><description>The BNumber is the abstract super class of numeric&#xa; simples:  BInteger and BFloat.</description></class>
+<class packageName="javax.baja.sys" name="BObject"><description>BObject is the base class required for all &#xa; objects which conform to the Baja model.</description></class>
+<class packageName="javax.baja.util" name="BObjectArrayCursor"><description>A cursor that presents an array of BObjects as a Cursor.</description></class>
+<class packageName="javax.baja.naming" name="BOrd"><description>BOrd is an &#x22;Object Resolution Descriptor&#x22;.</description></class>
+<class packageName="javax.baja.naming" name="BOrdList"><description>BOrdList stores zero or more BOrds.</description></class>
+<class packageName="javax.baja.naming" name="BOrdScheme"><description>BOrdSchemes provide management of a registered ord scheme ID.</description></class>
+<class packageName="javax.baja.category" name="BOrdToCategoryMap"><description>BOrdToCategoryMap stores a table mapping BOrds to BCategoryMasks.</description></class>
+<class packageName="javax.baja.security" name="BPassword"><description>The BPassword is a string containing secret data.</description></class>
+<class packageName="javax.baja.authn" name="BPasswordAuthenticationScheme"></class>
+<class packageName="javax.baja.security" name="BPasswordAuthenticator"></class>
+<class packageName="javax.baja.security" name="BPasswordCache"></class>
+<class packageName="javax.baja.security" name="BPasswordHistory"><description>A history for storing and managing hashed password values.</description></class>
+<class packageName="javax.baja.user" name="BPasswordStrength"></class>
+<class packageName="javax.baja.security" name="BPbkdf2HmacSha256PasswordEncoder"></class>
+<class packageName="javax.baja.security" name="BPermissions"><description>BPermissions encapsulates a set of permissions for a given &#xa; security domain.</description></class>
+<class packageName="javax.baja.security" name="BPermissionsMap"><description>BPermissionsMap is used to grant permissions to categories.</description></class>
+<class packageName="javax.baja.security" name="BPlainPasswordEncoder"></class>
+<class packageName="javax.baja.sync" name="BProxyComponentSpace"><description>BProxyComponentSpace is a BComponentSpace which uses the sync&#xa; framework to keep itself synchronized with a remote master&#xa; BComponentSpace.</description></class>
+<class packageName="javax.baja.agent" name="BPxView"><description>BPxView is a BAbstractPxView which stores &#xa; the view contents in an XML file with a px extension.</description></class>
+<class packageName="javax.baja.query" name="BQueryResult"><description>QueryResult is the result of a query processed against a query scope by a QueryHandler.</description></class>
+<class packageName="javax.baja.query" name="BQueryScheme"><description>A BQueryScheme is an ord scheme whose body is a query syntax and when resolved, processes&#xa;  the query against a Niagara space.</description></class>
+<class packageName="javax.baja.sys" name="BRelTime"><description>BRelTime is a BSimple type for managing&#xa; a relative amount of time.</description></class>
+<class packageName="javax.baja.sys" name="BRelation"><description>EntitySpace</description></class>
+<class packageName="javax.baja.naming" name="BResolveScheme"></class>
+<class packageName="javax.baja.security" name="BReversiblePasswordEncoder"><description>Base class for password encoders that use reversible encryption algorithms</description></class>
+<class packageName="javax.baja.role" name="BRole"><description>BRole is the component which represents &#xa; a group of permissions in the Baja framework.</description></class>
+<class packageName="javax.baja.role" name="BRoleService"><description>BRoleService is the service used to manage &#xa; Security Roles.</description></class>
+<class packageName="javax.baja.user" name="BRolesMergeMode"><description>Enum to determine user prototype roles merge policy.</description></class>
+<class packageName="javax.baja.nav" name="BRootScheme"><description>BRootScheme is the ord for &#x22;root:&#x22; which always maps&#xa; to BNavRoot.INSTANCE.</description></class>
+<class packageName="javax.baja.job" name="BRunnableJob"><description>BRunnableJob provides a simple job implementations &#xa; for executing runnable tasks in the job framework.</description></class>
+<class packageName="javax.baja.authn" name="BSSOAuthenticationScheme"><description>This is the base class for &lt;code&gt;<see ref="javax.baja.authn.BAuthenticationScheme">BAuthenticationScheme</see>&lt;/code&gt;s that can&#xa; perform Single Sign On.</description></class>
+<class packageName="javax.baja.file" name="BScopedFileSpace"><description>BScopedFileSpace is a file space for the local machine&#x27;s&#xa; file system which is scoped down to a particular directory.</description></class>
+<class packageName="javax.baja.security.dashboard" name="BSecurityItemStatus"><description>Enum for SecurityDashboardAlert status</description></class>
+<class packageName="javax.baja.firewall" name="BServerPort"></class>
+<class packageName="javax.baja.util" name="BServiceContainer"><description>BServiceContainer is used by convention to store all&#xa; the BIServices (except drivers) in a station database.</description></class>
+<class packageName="javax.baja.naming" name="BServiceScheme"><description>BServiceScheme is used to lookup a service by &#xa; type &#x22;service:baja:UserService&#x22;.</description></class>
+<class packageName="javax.baja.naming" name="BServiceScheme.ServiceSession" category="interface"><description>This interface is implemented by BISessions which &#xa; can lookup a service by type.</description></class>
+<class packageName="javax.baja.naming" name="BSession"><description>BSession</description></class>
+<class packageName="javax.baja.sys" name="BSimple"><description>BSimple is the required base class for primitive types &#xa; in the Baja object model.</description></class>
+<class packageName="javax.baja.job" name="BSimpleJob"><description>BSimpleJob provides a base class to use for simple &#xa; implementations which just launch a new background&#xa; thread for processing.</description></class>
+<class packageName="javax.baja.sys" name="BSingleton"><description>BSingleton is a BObject which allocates exactly one &#xa; instance per VM.</description></class>
+<class packageName="javax.baja.naming" name="BSlotScheme"><description>BSlotScheme is used to navigate the slot tree.</description></class>
+<class packageName="javax.baja.space" name="BSpace"><description>BSpace defines a group of BObjects which share common&#xa; strategies for loading, caching, lifecycle, naming, and&#xa; navigation.</description></class>
+<class packageName="javax.baja.space" name="BSpaceScheme"><description>BSpaceScheme is an abstract scheme used for space ord&#xa; schemes which have different implementations based on&#xa; the ord base.</description></class>
+<class packageName="javax.baja.spy" name="BSpy"><description>BSpy is a BObject wrapper for an instance of Spy.</description></class>
+<class packageName="javax.baja.spy" name="BSpyScheme"><description>BSpyScheme is used to lookup Spy with a FilePath.</description></class>
+<class packageName="javax.baja.spy" name="BSpySpace"><description>BSpySpace contains the set of spys in a VM.</description></class>
+<class packageName="javax.baja.security.crypto" name="BSslTlsEnum"><description>BSslTlsEnum is a list of the supported ssl protocols</description></class>
+<class packageName="javax.baja.sys" name="BStation"><description>BStation is always the root component of a running station.</description></class>
+<class packageName="javax.baja.util" name="BStationNameValidator"><description>Validates a String to ensure it meets the requirements for a Station name</description></class>
+<class packageName="javax.baja.naming" name="BStationSessionScheme"></class>
+<class packageName="javax.baja.status" name="BStatus"><description>BStatus provides a bit mask for various standardized &#xa; status flags in the Baja control architecture.</description></class>
+<class packageName="javax.baja.status" name="BStatusBoolean"><description>BStatusBoolean represents a two state binary value.</description></class>
+<class packageName="javax.baja.status" name="BStatusEnum"><description>BStatusEnum is the normalized class for enumerated values.</description></class>
+<class packageName="javax.baja.status" name="BStatusNumeric"><description>BStatusNumeric defines a tuple representing a numeric value &#xa; with a 64-bit double.</description></class>
+<class packageName="javax.baja.status" name="BStatusString"><description>BStatusString defines a tuple representing &#xa; an String value and status flags.</description></class>
+<class packageName="javax.baja.status" name="BStatusValue"><description>BStatusValue is the base class for all status-value &#xa; pairs in the Baja control architecture.</description></class>
+<class packageName="javax.baja.util" name="BStreetAddress"><description>BStreetAddress contains the information for a site location&#xa; by mailing address.</description></class>
+<class packageName="javax.baja.sys" name="BString"><description>The BString is the wrapper interface for Java&#xa; java.lang.String objects.</description></class>
+<class packageName="javax.baja.sys" name="BStruct"><description>BStruct is the base class for a BObject which has&#xa; one or more properties.</description></class>
+<class packageName="javax.baja.file" name="BSubSpaceFile"><description>BSubSpaceFile is a data file that contains a sub-space with&#xa; its own object hierarchy and navigation scheme.</description></class>
+<class packageName="javax.baja.util" name="BThreadPoolWorker"><description>BThreadPoolWorker is a BComponent wrapper for ThreadPoolWorker</description></class>
+<class packageName="javax.baja.sys" name="BTime"><description>BTime stores a time of day which is independent &#xa; of any date in the past or future.</description></class>
+<class packageName="javax.baja.util" name="BTimeRange"><description>A time range within any given day, with inclusive endpoints.</description></class>
+<class packageName="javax.baja.timezone" name="BTimeZone"><description>BTimeZone is the definition of a time zone.</description></class>
+<class packageName="javax.baja.security.crypto" name="BTlsCipherSuiteGroup"></class>
+<class packageName="javax.baja.sys" name="BTopic"><description>The BTopic is the object type used to add&#xa; new topics to a BComponent.</description></class>
+<class packageName="javax.baja.util" name="BTypeConfig"><description>BTypeConfig is used to store both a TypeSpec and additional&#xa; configuration.</description></class>
+<class packageName="javax.baja.util" name="BTypeConfig.IConfigurable" category="interface"><description>IConfigurable may be implemented by TypeConfig target&#xa; instances to provide a standard mechanism to use for&#xa; syncTo() and syncFrom().</description></class>
+<class packageName="javax.baja.naming" name="BTypeScheme"><description>An ORD scheme that resolves a type spec (moduleName:typeName)&#xa; to a &lt;code&gt;<see ref="javax.baja.util.BTypeSpec">javax.baja.util.BTypeSpec</see>&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.util" name="BTypeSpec"><description>BTypeSpec is a Baja simple which stores a module name&#xa; and type name pair.</description></class>
+<class packageName="javax.baja.units" name="BUnit"><description>BUnit encapsulates a unit of measurement.</description></class>
+<class packageName="javax.baja.units" name="BUnitConversion"><description>BUnitConversion defines a desired unit system for display.</description></class>
+<class packageName="javax.baja.units" name="BUnitConversion.Entry"><description>A single entry in the unit conversion database, defining a relationship&#xa; between a metric unit and an English unit.</description></class>
+<class packageName="javax.baja.util" name="BUnrestrictedFolder"><description>BUnrestrictedFolder is a folder which by-passes normal &#xa; BComponent.isParentLegal() checks.</description></class>
+<class packageName="javax.baja.user" name="BUser"><description>BUser is the component which represents a  user in the Baja framework.</description></class>
+<class packageName="javax.baja.user" name="BUserEvent"><description>BUserEvent is fired when a user is added, removed, or modified.</description></class>
+<class packageName="javax.baja.user" name="BUserPrototype"></class>
+<class packageName="javax.baja.user" name="BUserPrototypeMergePolicy"><description>This class describes a policy for merging user prototypes (&lt;code&gt;<see ref="javax.baja.user.BUser">BUser</see>&lt;/code&gt; or &lt;code&gt;<see ref="javax.baja.user.BUserPrototype">BUserPrototype</see>&lt;/code&gt;)&#xa; when a remote user specifies multiple possible prototypes.</description></class>
+<class packageName="javax.baja.user" name="BUserPrototypeProperty"></class>
+<class packageName="javax.baja.user" name="BUserPrototypes"><description>BUserPrototypes is the container for prototype users in&#xa; the user service.</description></class>
+<class packageName="javax.baja.user" name="BUserService"><description>BUserService is the service used to manage &#xa; SecurityDomains, Profiles, and Users.</description></class>
+<class packageName="javax.baja.security" name="BUsernameAndPassword"><description>BUsernameAndPassword is a simple implementation of &#xa; BICredentials that stores a username and password.</description></class>
+<class packageName="javax.baja.security" name="BUsernameCredential"><description>A simple credential containing only a username.</description></class>
+<class packageName="javax.baja.security" name="BUsernameSchemeCredentials"><description>Credentials that specify a username and authentication scheme name</description></class>
+<class packageName="javax.baja.util" name="BUuid"><description>Baja simple for a Universal Unique Identifier.</description></class>
+<class packageName="javax.baja.sys" name="BValue"><description>BValue is a BObject which may be used as the value &#xa; of a property slot.</description></class>
+<class packageName="javax.baja.sys" name="BVector"><description>BVector is a special BComponent used as a &#x22;dynamic BStruct&#x22;.</description></class>
+<class packageName="javax.baja.util" name="BVersionValidator"><description>Validates that a BString value can be parsed as a Version.</description></class>
+<class packageName="javax.baja.naming" name="BViewScheme"><description>BViewScheme is a passive scheme that annotates an existing&#xa; ord with a view typespec.</description></class>
+<class packageName="javax.baja.virtual" name="BVirtualComponent"><description>Captures information about a virtual component.</description></class>
+<class packageName="javax.baja.virtual" name="BVirtualComponentSpace"><description>BVirtualComponentSpace is a space which contains a slot tree of &#xa; BVirtualComponents.</description></class>
+<class packageName="javax.baja.virtual" name="BVirtualGateway"><description>A virtual gateway is a component that resides in the station component space&#xa; that acts as a gateway a the virtual component space.</description></class>
+<class packageName="javax.baja.virtual" name="BVirtualScheme"><description>BVirtualScheme provides management of the registered &#x22;virtual&#x22; ord scheme ID.</description></class>
+<class packageName="javax.baja.sys" name="BWeekday"><description>BWeekday is an enum for the weekdays of the week.</description></class>
+<class packageName="javax.baja.util" name="BWorker"><description>BWorker is a BComponent wrapper for Worker</description></class>
+<class packageName="javax.baja.util" name="BWsAnnotation"><description>BWsAnnotation is a Niagara specific BSimple designed to &#xa; store the WireSheet annotations for a component&#x27;s &#xa; placement on the WireSheet.</description></class>
+<class packageName="javax.baja.util" name="BWsTextBlock"><description>BWsTextBlock is a Niagara specific component used to visualize&#xa; text blocks on a WireSheet.</description></class>
+<class packageName="javax.baja.security" name="BX509Certificate"><description>BX509Certificate is a BSimple container for a standard X509Certificate.</description></class>
+<class packageName="javax.baja.security" name="BX509CertificateCredential"><description>BX509CertificateCredential is a simple implementation of a BIUserCredential&#xa; for storing an x509 certificate with the username being defined as the first&#xa; CN field found in the dname or null.</description></class>
+<class packageName="javax.baja.file.zip" name="BZipFile"><description>BZipFile is a BIFile that stores its own file space&#xa; addressed using the &#x22;zip&#x22; ord scheme.</description></class>
+<class packageName="javax.baja.file.zip" name="BZipFileDirectory"><description>BZipFileDirectory is an in-memory file store of a &#xa; directory within a zip file.</description></class>
+<class packageName="javax.baja.file.zip" name="BZipFileEntry"><description>BZipFileEntry is a BIFileStore implementation for &#xa; local files using java.util.zip.ZipEntry.</description></class>
+<class packageName="javax.baja.file.zip" name="BZipScheme"><description>BZipScheme manages the &#x22;zip&#x22; scheme with a ZipPath query.</description></class>
+<class packageName="javax.baja.file.zip" name="BZipSpace"><description>BZipSpace is a BFileSpace for a directory tree within BZipFile.</description></class>
+<class packageName="javax.baja.file.zip" name="BZipZipSpace"><description>BZipZipSpace - space for a zip file in a zip file.</description></class>
+<class packageName="javax.baja.sys" name="BajaException" category="exception"><description>BajaException is the root exception for checked&#xa; exceptions in the Baja architecture.</description></class>
+<class packageName="javax.baja.file" name="BajaFileUtil"><description>FileUtil provides handy utility methods for&#xa; implementation of BIFile.</description></class>
+<class packageName="javax.baja.file" name="BajaFileUtil.BajaFileWriter" category="interface"><description>Public interface for file system operations.</description></class>
+<class packageName="javax.baja.io" name="BajaIOException" category="exception"><description>BajaIOException is the root exception for checked&#xa; IOExceptions in the Baja architecture.</description></class>
+<class packageName="javax.baja.sys" name="BajaRuntimeException" category="exception"><description>BajaRuntimeException is the root exception for &#xa; unchecked exceptions in the Baja architecture.</description></class>
+<class packageName="javax.baja.security.crypto.se" name="BajaSSLSocketFactory"></class>
+<class packageName="javax.baja.sys" name="BasicContext"><description>BasicContext is a simple implementation of the &#xa; Context interface.</description></class>
+<class packageName="javax.baja.tag.util" name="BasicEntity"><description>A basic implementation of the &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; interface.</description></class>
+<class packageName="javax.baja.naming" name="BasicQuery"><description>BasicQuery is a simple implementation of OrdQuery &#xa; that stores the scheme and body as fields.</description></class>
+<class packageName="javax.baja.tag" name="BasicRelation"><description>A relation is an immutable (&lt;code&gt;<see ref="javax.baja.tag.Id">Id</see>&lt;/code&gt;, &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;) pair.</description></class>
+<class packageName="javax.baja.naming" name="BatchResolve"><description>BatchResolve is used to resolve a list of ords together.</description></class>
+<class packageName="javax.baja.sys" name="BatchSetException" category="exception"><description>A BatchSetException is thrown when a failure occurs during a batch&#xa; &lt;code&gt;set()&lt;/code&gt; operation on a BComplex instance.</description></class>
+<class packageName="javax.baja.security" name="CancelledAuthenticationException" category="exception"><description>This &lt;code&gt;<see ref="javax.baja.security.AuthenticationException">AuthenticationException</see>&lt;/code&gt;&#xa; indicates that authentication failed due to the user cancelling the&#xa; authentication process.</description></class>
+<class packageName="javax.baja.util" name="CannotValidateException" category="exception"><description>A CannotValidateException is thrown by a BIValidator or an IPropertyValidator&#xa; if validation fails.</description></class>
+<class packageName="javax.baja.security.crypto" name="CertManagerFactory"><description>CryptoManagerFactory is a simple factory for gaining access to&#xa; crypto components like keystores and socket factories.</description></class>
+<class packageName="javax.baja.security" name="ChangeUserAuthenticationException" category="exception"><description>An exception indicating that authentication failed because&#xa; the user decided to change the login username.</description></class>
+<class packageName="javax.baja.sys" name="Clock"><description>Clock provides access to the system clock.</description></class>
+<class packageName="javax.baja.sys" name="Clock.Ticket" category="interface"><description>Ticket is returned from the timer scheduling methods.</description></class>
+<class packageName="javax.baja.sys" name="CloseableCursor" category="interface"><description>CloseableCursors are Cursors which have an internal&#xa; resource, such as a database connection, that can be released&#xa; by calling the close() method.</description></class>
+<class packageName="javax.baja.util" name="CloseableIterator" category="interface"><description>An auto-closeable Iterator interface that is returned by BIQueryHandler.</description></class>
+<class packageName="javax.baja.util" name="CloseableIteratorWrapper"><description>A basic AutoCloseableIterator that wraps an iterator which doesn&#x27;t need a close method</description></class>
+<class packageName="javax.baja.util" name="CoalesceQueue"><description>CoalesceQueue is a specialization of Queue designed to &#xa; coalesce duplicate entries using the ICoalesceable interface.</description></class>
+<class packageName="javax.baja.collection" name="Column" category="interface"><description>Column is a handle to a column in a BITable.</description></class>
+<class packageName="javax.baja.collection" name="ColumnList" category="interface"><description>A list of columns for a &lt;code&gt;<see ref="javax.baja.collection.BITable">BITable</see>&lt;/code&gt;</description></class>
+<class packageName="javax.baja.collection" name="CompoundIterator"><description>A CompoundIterator concatentates two iterators.</description></class>
+<class packageName="javax.baja.util" name="ConcurrencyUtil"><description>Methods in this utility class may be useful when using the java.util.concurrent API.</description></class>
+<class packageName="javax.baja.log" name="ConsoleLogHandler"><description>DefaultLogHandler provides a simple implementation&#xa; of the LogHandler to dump log messages to standard&#xa; output.</description></class>
+<class packageName="javax.baja.sys" name="Context" category="interface"><description>The Context interface is used in operations which&#xa; may perform differently depending on their context.</description></class>
+<class packageName="javax.baja.sys" name="CopyHints"><description>CopyHints provides instructions for &lt;code&gt;BValue.newCopy()&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.session" name="CsrfException" category="exception"></class>
+<class packageName="javax.baja.sys" name="Cursor" category="interface"><description>Cursors are used to iterate through a collection of objects.</description></class>
+<class packageName="javax.baja.sys" name="CursorException" category="exception"><description>CursorException is used to indicate invalid usage of a Cursor.</description></class>
+<class packageName="javax.baja.collection" name="CursorIterator"><description>Wraps a Cursor in an Iterator implementation.</description></class>
+<class packageName="javax.baja.sys" name="Cursorable" category="interface"><description>Objects implementing this interface can return a cursor over elements of type E.</description></class>
+<class packageName="javax.baja.tag" name="DataPolicy" category="interface"><description>A DetaPolicy provides information about collection of data of an object.</description></class>
+<class packageName="javax.baja.dataRecovery" name="DataRecoveryException" category="exception"><description>Base exception class for data recovery.</description></class>
+<class packageName="javax.baja.dataRecovery" name="DataRecoveryInvalidKeyException" category="exception"><description>DataRecoveryInvalidKeyException is thrown whenever the key provided by&#xa; the source was invalid (NULL, error while encoding)</description></class>
+<class packageName="javax.baja.dataRecovery" name="DataRecoveryServiceInFaultException" category="exception"><description>DataRecoveryServiceInFaultException is thrown whenever a source&#xa; attempts to use the BIDataRecoveryService interface but the&#xa; service is in an invalid state for the request.</description></class>
+<class packageName="javax.baja.dataRecovery" name="DataRecoveryTooLargeException" category="exception"><description>DataRecoveryException thrown when data recovery Service is asked to store&#xa; an amount of data for which it would never have enough space for.</description></class>
+<class packageName="javax.baja.data" name="DataTypeException" category="exception"><description>DataTypeException is thrown when a non-DataType type is&#xa; used where a DataType is expected.</description></class>
+<class packageName="javax.baja.data" name="DataTypes"><description>DataTypes define the types used by the Baja Data API.</description></class>
+<class packageName="javax.baja.data" name="DataUtil"><description>DataUtil provides utility methods for the Data API.</description></class>
+<class packageName="javax.baja.registry" name="DependencyInfo" category="interface"><description>DependencyInfo provides information on a module dependency.</description></class>
+<class packageName="javax.baja.security" name="DigestFactory" category="interface"><description>DigestFactory provides the standard interface used&#xa; to convert credentials into a digest.</description></class>
+<class packageName="javax.baja.timezone" name="DstRule"><description>DstRule is a rule for determining the start or end time for daylight&#xa; savings time in a timezone.</description></class>
+<class packageName="javax.baja.sys" name="DuplicateSlotException" category="exception"><description>The DuplicateSlotException is used to indicate an&#xa; attempt to add a slot which already exists.</description></class>
+<class packageName="javax.baja.tag" name="Entity" category="interface"><description>An entity is an object that can be tagged and related to other entities.</description></class>
+<class packageName="javax.baja.tag.io" name="EntityDecoder" category="interface"><description>EntityDecoder&#xa; This interface defines the APIs for decoding Niagara &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; objects,&#xa; which contain &lt;code&gt;<see ref="javax.baja.tag.Tag">javax.baja.tag.Tag</see>&lt;/code&gt; and &lt;code&gt;<see ref="javax.baja.tag.Relation">javax.baja.tag.Relation</see>&lt;/code&gt; objects providing metadata about Niagara&#xa; nodes, points, and objects, as well as their relationships with other objects.</description></class>
+<class packageName="javax.baja.tag.io" name="EntityEncoder" category="interface"><description>EntityEncoder&#xa; This interface defines the APIs for encoding Niagara &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt; objects,&#xa; which contain &lt;code&gt;<see ref="javax.baja.tag.Tag">javax.baja.tag.Tag</see>&lt;/code&gt; and &lt;code&gt;<see ref="javax.baja.tag.Relation">javax.baja.tag.Relation</see>&lt;/code&gt; objects providing metadata about Niagara&#xa; nodes, points, and objects, as well as their relationships with other objects.</description></class>
+<class packageName="javax.baja.tag" name="EntityWrapper"><description>EntityWrapper wraps an Entity and a BFacets instance exposing both the entity&#x27;s tags&#xa; and the facets as tags.</description></class>
+<class packageName="javax.baja.util" name="ExecutorUtil"><description>Java concurrency &lt;code&gt;<see ref="java.util.concurrent.Executor">java.util.concurrent.Executor</see>&lt;/code&gt; utilities.</description></class>
+<class packageName="javax.baja.sys" name="ExpiredTicketException" category="exception"><description>ExpiredTicketException indicates an attempt to access&#xa; the properties of a ticket which has already expired.</description></class>
+<class packageName="javax.baja.file" name="ExportOp"><description>ExportOp encapsulates all the information needed to process&#xa; a source BObject accessed via &lt;code&gt;get()&lt;/code&gt; into a file&#xa; using &lt;code&gt;getOutputStream()&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.license" name="Feature" category="interface"><description>Feature encapsulates a feature specification for the &#xa; licensing framework.</description></class>
+<class packageName="javax.baja.license" name="FeatureLicenseExpiredException" category="exception"><description>FeatureLicenseExpiredException indicates an attempt to use&#xa; a feature which has expired.</description></class>
+<class packageName="javax.baja.license" name="FeatureNotLicensedException" category="exception"><description>FeatureNotLicensedException indicates an attempt to use&#xa; a feature which not currently licensed for this machine.</description></class>
+<class packageName="javax.baja.file" name="FilePath"><description>FilePath is a specialization of OrdScheme for file queries.</description></class>
+<class packageName="javax.baja.collection" name="FilteredIterator"><description>A FilteredIterator wraps an existing Iterator and filters the results&#xa; using a predicate.</description></class>
+<class packageName="javax.baja.sync" name="FireTopicOp"><description>FireTopicOp maps to the knob topic fired component event.</description></class>
+<class packageName="javax.baja.sys" name="Flags"><description>Flags are boolean values which are stored as&#xa; a bitmask on each slot in a BComplex.</description></class>
+<class packageName="javax.baja.sys" name="Flags.Flag"><description>Flag represents a single flag bit.</description></class>
+<class packageName="javax.baja.sys" name="FrozenSlotException" category="exception"><description>The FrozenSlotException is thrown when attempts&#xa; are made to modify slots which are statically&#xa; defined by the class.</description></class>
+<class packageName="javax.baja.io" name="HtmlWriter"><description>HtmlWriter is used to generate HTML code with common tags.</description></class>
+<class packageName="javax.baja.util" name="ICoalesceable" category="interface"><description>ICoalesceable is implemented by objects which may &#xa; coalesced into a single object.</description></class>
+<class packageName="javax.baja.util" name="IContextFilter" category="interface"><description>IContextFilter is a filter that can yield different results&#xa; based on context.</description></class>
+<class packageName="javax.baja.security.crypto" name="ICryptoManager" category="interface"><description>ICrytptoManager is the type of object returned from &#xa; CryptoManagerFactory.</description></class>
+<class packageName="javax.baja.dataRecovery" name="IDataRecoveryRecord" category="interface"><description>IDataRecoveryRecord defines the contract that all restored&#xa; data recovery must obey.</description></class>
+<class packageName="javax.baja.file" name="IExtFileFilter" category="interface"><description>An interface for file filters that support filtering based on one or more file extensions.</description></class>
+<class packageName="javax.baja.file" name="IFileFilter" category="interface"><description>IFileFilter.</description></class>
+<class packageName="javax.baja.util" name="IFormat" category="interface"><description>IFormat formats an object into a string.</description></class>
+<class packageName="javax.baja.util" name="IFuture" category="interface"><description>IFuture is marker interface for managing pending async &#xa; actions that will complete in the future.</description></class>
+<class packageName="javax.baja.user" name="IHasPrototypeMergePolicy" category="interface"><description>An interface to indicate that the object supports merging user prototypes.</description></class>
+<class packageName="javax.baja.security.crypto" name="IKeyStore" category="interface"><description>IKeyStore is the type of object returned from &#xa; a call to getTrustStore or getUserTrustStore from an&#xa; ICryptoManager.</description></class>
+<class packageName="javax.baja.session" name="INiagaraSuperSession" category="interface"><description>Provides a public interface to methods in a Niagara&#xa; Super Session that need to be part of the public API.</description></class>
+<class packageName="javax.baja.sys" name="IPropertyValidator" category="interface"><description>Defines an interface for validating a pending property set &#xa; on a BComplex instance.</description></class>
+<class packageName="javax.baja.spy" name="ISpyDir" category="interface"><description>ISpyDir is implemented by Spy pages which contain&#xa; child Spy pages.</description></class>
+<class packageName="javax.baja.security.crypto" name="ITrustStore" category="interface"><description>ITrustStore is the type of object returned from&#xa; a call to getSystemTrustStore or getUserTrustStore from an&#xa; ICryptoManager.</description></class>
+<class packageName="javax.baja.tag" name="Id"><description>An id is an immutable &lt;code&gt;(dictionary, name)&lt;/code&gt; pair.</description></class>
+<class packageName="javax.baja.sys" name="IllegalChildException" category="exception"><description>The IllegalChildException is thrown when an attempt&#xa; is made to add a new property to a component where&#xa; the child type is invalid.</description></class>
+<class packageName="javax.baja.sys" name="IllegalNameException" category="exception"><description>The IllegalNameException is thrown when an attempt&#xa; is made to add or rename a new property with an &#xa; invalid name.</description></class>
+<class packageName="javax.baja.sys" name="IllegalParentException" category="exception"><description>The IllegalParentException is thrown when an attempt&#xa; is made to add a new property where the child type&#xa; requires a different parent type.</description></class>
+<class packageName="javax.baja.tag.util" name="ImpliedRelations"><description>ImpliedRelations is a Relations implementation that is lazily loaded by&#xa; delegating to the TagDictionaryService and the set of SmartTagDictionaries.</description></class>
+<class packageName="javax.baja.tag.util" name="ImpliedTags"><description>ImpliedTags is a Tags implementation that is lazily loaded by delegating&#xa; to the TagDictionaryService and the set of SmartTagDictionaries.</description></class>
+<class packageName="javax.baja.sys" name="InterfaceTypeException" category="exception"><description>The InterfaceTypeException is thrown on operations&#xa; which require a concrete class.</description></class>
+<class packageName="javax.baja.sys" name="InvalidEnumException" category="exception"><description>The InvalidEnumException is used to indicate an&#xa; attempt to access an enum with an invalid name&#xa; or ordinal value.</description></class>
+<class packageName="javax.baja.naming" name="InvalidOrdBaseException" category="exception"><description>InvalidOrdBaseException is thrown when the base for&#xa; a query is not valid for the query scheme.</description></class>
+<class packageName="javax.baja.naming" name="InvalidRootSchemeException" category="exception"><description>InvalidRootSchemeException is thrown when a non-root scheme&#xa; is used as the first scheme in an ord.</description></class>
+<class packageName="javax.baja.util" name="Invocation"><description>Invocation stores an action invocation.</description></class>
+<class packageName="javax.baja.sys" name="IterableCursor" category="interface"><description>An iterable Cursor that&#x27;s used to iterate through a collection of objects.</description></class>
+<class packageName="javax.baja.job" name="JobCancelException" category="exception"><description>JobCancelException is the desired exception to used to &#xa; exit out of a method during a BJob.cancel.</description></class>
+<class packageName="javax.baja.job" name="JobLog"><description>JobLog is a list of JobLogItems which provide a &#xa; detailed account of a Job&#x27;s execution.</description></class>
+<class packageName="javax.baja.job" name="JobLogItem"><description>JobLogItem is a record within a JobLog.</description></class>
+<class packageName="javax.baja.sys" name="Knob" category="interface"><description>Knob is the mirror of a link which may be accessed &#xa; on the source component.</description></class>
+<class packageName="javax.baja.util" name="Lexicon"><description>Lexicon is a map of name/value pairs for a specific locale.</description></class>
+<class packageName="javax.baja.util" name="Lexicon.ConcatenatedInputStream"></class>
+<class packageName="javax.baja.util" name="Lexicon.InputStreamExceptionSupplier" category="interface"><description>Looks like a &lt;code&gt;Supplier&amp;lt;InputStream&amp;gt;&lt;/code&gt; except that the get method can&#xa; throw IOException</description></class>
+<class packageName="javax.baja.security.dashboard" name="LexiconFormatInfo"><description>Collects the module name, lexicon key, and (optionally) format args to construct a localized&#xa; String.</description></class>
+<class packageName="javax.baja.registry" name="LexiconInfo" category="interface"></class>
+<class packageName="javax.baja.util" name="LexiconModule"><description>LexiconModule is similar to a Lexicon and LexiconText, but it is most useful for when only the module name is known at the&#xa; time of construction.</description></class>
+<class packageName="javax.baja.util" name="LexiconText"><description>LexiconText is a place holder for a module name and &#xa; lexicon property name used to provide context sensitive &#xa; text.</description></class>
+<class packageName="javax.baja.license" name="LicenseDatabaseException" category="exception"><description>LicenseDatabaseException indicates that the machine&#xa; has an invalid license database.</description></class>
+<class packageName="javax.baja.license" name="LicenseException" category="exception"><description>LicenseException indicates a licensing problem.</description></class>
+<class packageName="javax.baja.license" name="LicenseManager" category="interface"><description>LicenseManager is used to access the Baja licensing framework.</description></class>
+<class packageName="javax.baja.sys" name="LinkCheck"><description>LinkCheck is the result of a call to BComponent.checkLink().</description></class>
+<class packageName="javax.baja.space" name="LoadCallbacks"><description>LoadCallbacks provides a BComponentSpace the hooks to&#xa; lazy load components into its space as needed.</description></class>
+<class packageName="javax.baja.sync" name="LoadOp"><description>LoadOp is a passive operation used to load a &#xa; BComponent into a BComponentSpace.</description></class>
+<class packageName="javax.baja.sys" name="Localizable" category="interface"><description>Localizable is the interface implemented by classes which &#xa; can describe themselves as a localized, user friendly string.</description></class>
+<class packageName="javax.baja.sys" name="LocalizableException" category="exception"><description>LocalizableException is an exception which uses a &#xa; lexicon key to derive a localized message.</description></class>
+<class packageName="javax.baja.sys" name="LocalizableRuntimeException" category="exception"><description>LocalizableRuntimeException is an exception which uses a &#xa; lexicon key to derive a localized message.</description></class>
+<class packageName="javax.baja.log" name="Log"><description>Log is used to log system events.</description></class>
+<class packageName="javax.baja.log" name="LogHandler" category="interface"><description>LogHandler is implemented by objects which&#xa; wish to receive log callbacks.</description></class>
+<class packageName="javax.baja.log" name="LogRecord"><description>LogRecord contains the information&#xa; associated with a logged message.</description></class>
+<class packageName="javax.baja.space" name="Mark"><description>Mark is a wrapper for a set of BObjects which serve as the&#xa; source for space operations: copy, move, rename, delete.</description></class>
+<class packageName="javax.baja.security" name="MissingEncodingKeyException" category="exception"><description>Exception that indicates that password encoding requires a&#xa; key, but none is available</description></class>
+<class packageName="javax.baja.sys" name="ModuleException" category="exception"><description>ModuleException is thrown when an problem is&#xa; encountered loading or accessing a module.</description></class>
+<class packageName="javax.baja.sys" name="ModuleIncompatibleException" category="exception"><description>ModuleIncompatibleException indicates an incompatible&#xa; vendor name or version number.</description></class>
+<class packageName="javax.baja.registry" name="ModuleInfo" category="interface"><description>ModuleInfo provides summary information about an installed module.</description></class>
+<class packageName="javax.baja.sys" name="ModuleNotFoundException" category="exception"><description>ModuleNotFoundException indicates an attempt to load&#xa; a module failed because a compatible module cannot&#xa; be found.</description></class>
+<class packageName="javax.baja.nav" name="NavEvent"><description>NavEvent indicates a change in the navigation tree.</description></class>
+<class packageName="javax.baja.nav" name="NavFileDecoder"><description>NavFileDecoder decodes a nav XML file into a tree of BNavFileNodes.</description></class>
+<class packageName="javax.baja.nav" name="NavListener" category="interface"><description>NavListener is used to receive NavEvent callbacks.</description></class>
+<class packageName="javax.baja.rpc" name="NiagaraRpc" category="annotation"><description>Defines a method that can be invoked remotely through either&#xa; Box (and BajaScript), Fox or as a RESTful Web Service.</description></class>
+<class packageName="javax.baja.agent" name="NoSuchAgentException" category="exception"><description>NoSuchAgentException is thrown when expecting a specific&#xa; agent, but one is not found.</description></class>
+<class packageName="javax.baja.sys" name="NoSuchSlotException" category="exception"><description>The NoSuchSlotException is used to indicate an&#xa; attempt to access a slot which does not exist.</description></class>
+<class packageName="javax.baja.sys" name="NotRunningException" category="exception"><description>The NotRunningException indicates an attempt&#xa; to perform an operation which only makes sense&#xa; in a running graph.</description></class>
+<class packageName="javax.baja.naming" name="NullOrdException" category="exception"><description>NullOrdException is thrown when attempting a BOrd&#xa; operation on the null ord.</description></class>
+<class packageName="javax.baja.spy" name="ObjectSpy"><description>ObjectSpy is used to dump &lt;code&gt;BObject.spy()&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.naming" name="OrdQuery" category="interface"><description>OrdQuery encapsulates a single query within a BOrd.</description></class>
+<class packageName="javax.baja.naming" name="OrdQueryList"><description>OrdQueryList is used to manipulate a list of OrdQueries.</description></class>
+<class packageName="javax.baja.naming" name="OrdTarget"><description>OrdTarget is the result of resolving a BOrd.</description></class>
+<class packageName="javax.baja.naming" name="OrdUtil"></class>
+<class packageName="javax.baja.security" name="PasswordEncodingContext"><description>Context that provides encoding instructions for BPassword values.</description></class>
+<class packageName="javax.baja.naming" name="Path" category="interface"><description>Path is the interface implemented by OrdQueries that contain a path in a hierarchical naming&#xa; system.</description></class>
+<class packageName="javax.baja.util" name="PatternFilter"><description>PatternFileFilter provides simple DOS like pattern&#xa; file matching where * represents zero or more wildcard&#xa; characters and ? represents one wildcard character.</description></class>
+<class packageName="javax.baja.security" name="PermissionException" category="exception"><description>PermissionException indicates an attempt to perform&#xa; an operation which a BUser is not authorized to&#xa; perform.</description></class>
+<class packageName="javax.baja.user" name="PermissionsManager" category="interface"><description>PermissionsManager is an interface for providing an alternate&#xa; permissions map for a user accessing a protected object.</description></class>
+<class packageName="javax.baja.sys" name="Property" category="interface"><description>Property defines a Slot which is a storage location&#xa; for a variable in a BComplex.</description></class>
+<class packageName="javax.baja.collection" name="PropertyMap"><description>PropertyMap represents a BComplex instance as a Map of Property to BValue.</description></class>
+<class packageName="javax.baja.collection" name="PropertyMap.PropertySet"></class>
+<class packageName="javax.baja.rpc" name="Protected" category="annotation"><description>A protected security target that must be resolved and checked before&#xa; a &lt;code&gt;<see ref="javax.baja.rpc.NiagaraRpc">NiagaraRpc</see>&lt;/code&gt; can be invoked.</description></class>
+<class packageName="javax.baja.sync" name="ProxyBroker"><description>ProxyBroker is used to buffer up changes made to a component&#xa; space to forward to a BProxyComponentSpace for synchronization.</description></class>
+<class packageName="javax.baja.sync" name="ProxyBroker.IProxyBrokerPlugin" category="interface"></class>
+<class packageName="javax.baja.naming" name="Queryable" category="interface"><description>A Queryable object knows how to provide a cursor for iterating&#xa; through objects that satisfy a query.</description></class>
+<class packageName="javax.baja.util" name="Queue"><description>Queue is a linked list of objects designed for FIFO access.</description></class>
+<class packageName="javax.baja.util" name="QueueFullException" category="exception"><description>Checked exception for queue full.</description></class>
+<class packageName="javax.baja.io" name="RandomAccessFileInputStream"><description>RandomAccessFileInputStream is an input stream for reading from&#xa; a RandomAccessFile.</description></class>
+<class packageName="javax.baja.io" name="RandomAccessFileOutputStream"><description>RandomAccessFileOutputStream is an output stream for writing to&#xa; a RandomAccessFile.</description></class>
+<class packageName="javax.baja.registry" name="Registry" category="interface"><description>The registry may be used to interrogate the system for summary&#xa; information about the modules, types, ord schemes, and agents &#xa; installed without loading modules into memory.</description></class>
+<class packageName="javax.baja.registry" name="RegistryException" category="exception"><description>RegistryException indicates a registry problem.</description></class>
+<class packageName="javax.baja.tag" name="Relation" category="interface"><description>A relation is an immutable (&lt;code&gt;<see ref="javax.baja.tag.Id">Id</see>&lt;/code&gt;, &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;) pair.</description></class>
+<class packageName="javax.baja.tag" name="RelationInfo" category="interface"><description>RelationInfo is a definition of a Relation in a TagDictionary.</description></class>
+<class packageName="javax.baja.sys" name="RelationKnob" category="interface"><description>RelationKnob is the mirror of a relation which may be accessed&#xa; on the relation endpoint component.</description></class>
+<class packageName="javax.baja.tag.util" name="RelationSet"><description>A basic &lt;code&gt;<see ref="javax.baja.tag.Relations">Relations</see>&lt;/code&gt; implementation.</description></class>
+<class packageName="javax.baja.tag" name="Relations" category="interface"><description>Relations is used to store a collection of &lt;code&gt;<see ref="javax.baja.tag.Relation">Relation</see>&lt;/code&gt; objects.</description></class>
+<class packageName="javax.baja.naming" name="RemoteQueryable" category="interface"><description>A RemoteQueryable object is an object that can take a BQL ord,&#xa; process the query remotely and return the result.</description></class>
+<class packageName="javax.baja.sync" name="RemoveKnobOp"><description>RemoveKnobOp maps to the knob removed component event.</description></class>
+<class packageName="javax.baja.sync" name="RemoveOp"><description>RemoveOp is the implementation of SyncOp for a property remove.</description></class>
+<class packageName="javax.baja.sync" name="RemoveRelationKnobOp"><description>RemoveRelationKnobOp maps to the relation knob removed component event.</description></class>
+<class packageName="javax.baja.sync" name="RenameOp"><description>RenameOp is the implementation of SyncOp for a property rename.</description></class>
+<class packageName="javax.baja.sync" name="ReorderOp"><description>ReorderOp is the implementation of SyncOp for a properties reorder.</description></class>
+<class packageName="javax.baja.security" name="ReportCauseAuthenticationException" category="interface"><description>This interface indicates that the implementing &lt;code&gt;<see ref="javax.baja.security.AuthenticationException">AuthenticationException</see>&lt;/code&gt;&#xa; is meant to report its cause back to the user.</description></class>
+<class packageName="javax.baja.collection" name="Row" category="interface"></class>
+<class packageName="javax.baja.security" name="SecurityAuditEvent"><description>SecurityAuditEvent to be logged to the SecurityAuditor when security related&#xa; actions occur in the station.</description></class>
+<class packageName="javax.baja.security" name="SecurityAuditor" category="interface"><description>Auditor for security events</description></class>
+<class packageName="javax.baja.security.dashboard" name="SecurityDashboardConstants"><description>SecurityDashboardConstants used throughout the security dashboard.</description></class>
+<class packageName="javax.baja.security.dashboard" name="SecurityDashboardItem"><description>The SecurityDashboardItem class contains security dashboard item</description></class>
+<class packageName="javax.baja.security.dashboard" name="SecurityDashboardItemBuilder"><description>Convenience API for building SecurityDashboardItems.</description></class>
+<class packageName="javax.baja.security.dashboard" name="SecurityDashboardItemBuilder.ItemBuild"><description>Builder to create a SecurityDashboardItem.</description></class>
+<class packageName="javax.baja.sys" name="ServiceNotFoundException" category="exception"><description>ServiceNotFoundException indicates an attempt to lookup&#xa; a service which is not registered.</description></class>
+<class packageName="javax.baja.session" name="SessionUtil"></class>
+<class packageName="javax.baja.sync" name="SetCategoryMaskOp"><description>SetCategoryMaskOp is the implementation of SyncOp for a BCategoryMask change.</description></class>
+<class packageName="javax.baja.sync" name="SetFacetsOp"><description>SetFacetsOp is the implementation of SyncOp for a facets change.</description></class>
+<class packageName="javax.baja.sync" name="SetFlagsOp"><description>SetFlagsOp is the implementation of SyncOp for a flags change.</description></class>
+<class packageName="javax.baja.sync" name="SetOp"><description>SetOp is the implementation of SyncOp for a property set.</description></class>
+<class packageName="javax.baja.sys" name="Slot" category="interface"><description>Slot is the base interface for the Baja slot types:&#xa; Property, Action, or Topic.</description></class>
+<class packageName="javax.baja.sys" name="SlotCursor" category="interface"><description>Cursor are used to iterate through a BObject&#x27;s &#xa; slots, properties, actions, or topics.</description></class>
+<class packageName="javax.baja.collection" name="SlotCursorIterator"><description>Iterates property values in a SlotCursor</description></class>
+<class packageName="javax.baja.naming" name="SlotPath"><description>SlotPath is a ord scheme for resolving BValues&#xa; using slot names.</description></class>
+<class packageName="javax.baja.tag.util" name="SmartRelationSet"><description>A SmartRelationSet is an implementation of the Relations interface.</description></class>
+<class packageName="javax.baja.tag" name="SmartRelations" category="interface"><description>SmartRelations is a set of relations made of up the set of direct relations&#xa; on an Entity plus the set of smart relations added through a smart tagging&#xa; mechanism.</description></class>
+<class packageName="javax.baja.tag" name="SmartTagDictionary" category="interface"><description>A SmartTagDictionary is a TagDictionary that can provide additional tags for an Entity based on&#xa; retrievable information about the Entity.</description></class>
+<class packageName="javax.baja.tag.util" name="SmartTagSet"><description>A SmartTagSet is an implementation of the SmartTags interface.</description></class>
+<class packageName="javax.baja.tag" name="SmartTags" category="interface"><description>SmartTags is a set of tags made of up the set of direct tags on a Taggable&#xa; object plus the set of smart tags added through a smart tagging mechanism.</description></class>
+<class packageName="javax.baja.spy" name="Spy"><description>Spy is a single HTML page of diagnostics information.</description></class>
+<class packageName="javax.baja.spy" name="SpyDir"><description>SpyDir is a subclass of Spy which implements the ISpyDir&#xa; interface.</description></class>
+<class packageName="javax.baja.spy" name="SpyWriter"><description>&lt;p&gt;SpyWriter is used to generate the HTML content of Spy pages.</description></class>
+<class packageName="javax.baja.util" name="StringToIntMap"><description>StringToIntMap is an optimized hashtable for hashing &#xa; Strings to an integer.</description></class>
+<class packageName="javax.baja.space" name="SubscribeCallbacks"><description>SubscribeCallbacks provides a BComponentSpace the hooks &#xa; to trap the subscription of its BComponents.</description></class>
+<class packageName="javax.baja.sys" name="Subscriber"><description>Subscriber is a listener for ComponentEvents on zero or more&#xa; BComponents.</description></class>
+<class packageName="javax.baja.sync" name="SyncBuffer"><description>Batch stores a collection of cached changes to a set of &#xa; components including support for coalescing of property &#xa; changes.</description></class>
+<class packageName="javax.baja.sync" name="SyncDecoder"><description>ValueDocDecoder used for SyncBuffer decoding.</description></class>
+<class packageName="javax.baja.sync" name="SyncEncoder"><description>ValueDocEncoder used for SyncBuffer encoding.</description></class>
+<class packageName="javax.baja.sync" name="SyncOp"><description>SyncOp is the base class for a record describing a &#xa; operation to make for synchronization.</description></class>
+<class packageName="javax.baja.naming" name="SyntaxException" category="exception"><description>SyntaxException indicates an invalid ord or query syntax.</description></class>
+<class packageName="javax.baja.sys" name="Sys"><description>Sys provides a single location for accessing &#xa; singletons and framework functionality.</description></class>
+<class packageName="javax.baja.collection" name="TableCursor" category="interface"><description>TableCursor is a cursor for iterating through the rows in a table.</description></class>
+<class packageName="javax.baja.collection" name="Tables"><description>Utilities for working with a &lt;code&gt;<see ref="javax.baja.collection.BITable">BITable</see>&lt;/code&gt;.</description></class>
+<class packageName="javax.baja.tag" name="Tag"><description>A Tag is an immutable (&lt;code&gt;<see ref="javax.baja.tag.Id">Id</see>&lt;/code&gt;, &lt;code&gt;<see ref="javax.baja.data.BIDataValue">BIDataValue</see>&lt;/code&gt;) pair.</description></class>
+<class packageName="javax.baja.tag" name="TagDictionary" category="interface"><description>A TagDictionary is a collection of tags and defined relationships.</description></class>
+<class packageName="javax.baja.tag" name="TagDictionaryService" category="interface"><description>TagDictionaryService</description></class>
+<class packageName="javax.baja.tag" name="TagGroupInfo" category="interface"><description>TagGroupInfo defines a group of tags within the same namespace.</description></class>
+<class packageName="javax.baja.tag" name="TagInfo" category="interface"><description>TagInfo is a definition of a Tag in a TagDictionary.</description></class>
+<class packageName="javax.baja.naming" name="TagPath"><description>TagPath is a tag scheme for resolving tag values.</description></class>
+<class packageName="javax.baja.tag.util" name="TagSet"><description>A basic &lt;code&gt;<see ref="javax.baja.tag.Tags">Tags</see>&lt;/code&gt; implementation.</description></class>
+<class packageName="javax.baja.tag" name="Taggable" category="interface"><description>A taggable object maintains a collection of tags on itself.</description></class>
+<class packageName="javax.baja.tag" name="Tags" category="interface"><description>Tags is used to store a collection of &lt;code&gt;<see ref="javax.baja.tag.Tag">Tag</see>&lt;/code&gt; objects.</description></class>
+<class packageName="javax.baja.util" name="ThreadPoolWorker"><description>ThreadPoolWorker is a Worker which processes its work&#xa; concurrently using a pool of threads.</description></class>
+<class packageName="javax.baja.timezone" name="TimeZoneDatabase"><description>TimeZoneDatabase is responsible for creating, returning and caching timezones.</description></class>
+<class packageName="javax.baja.timezone" name="TimeZoneException" category="exception"><description>TimeZoneException is the base class for exceptions related to time zones.</description></class>
+<class packageName="javax.baja.sys" name="Topic" category="interface"><description>Topic defines a Slot which indicates an event that&#xa; is fired on a BComponent.</description></class>
+<class packageName="javax.baja.sync" name="Transaction"><description>Transaction is a special Context type used to trap&#xa; BComponent modifications into a SyncBuffer.</description></class>
+<class packageName="javax.baja.rpc" name="Transport" category="annotation"><description>Defines a transport layer and its facets for a Niagara RPC.</description></class>
+<class packageName="javax.baja.rpc" name="TransportType" category="enum"><description>A &lt;code&gt;<see ref="javax.baja.rpc.NiagaraRpc">NiagaraRpc</see>&lt;/code&gt; transport type.</description></class>
+<class packageName="javax.baja.space" name="TrapCallbacks"><description>TrapCallbacks provides a BComponentSpace the hooks to&#xa; trap all changes to its BComponents.</description></class>
+<class packageName="javax.baja.sync" name="TrapToSyncBuffer"><description>TrapToSyncBuffer provides an implementation of&#xa; BComponentSpace TrapCallbacks which traps everything&#xa; to a SyncBuffer.</description></class>
+<class packageName="javax.baja.sys" name="Type" category="interface"><description>Type defines the typing information associated&#xa; with a BObject class.</description></class>
+<class packageName="javax.baja.sys" name="TypeException" category="exception"><description>TypeException is thrown when an problem is&#xa; encountered loading or accessing a Type.</description></class>
+<class packageName="javax.baja.registry" name="TypeInfo" category="interface"><description>TypeInfo provides summary information about a type &#xa; available in an installed module.</description></class>
+<class packageName="javax.baja.sys" name="TypeIntrospectionException" category="exception"><description>The TypeIntrospectionException indicates a BObject &#xa; class type which does not follow the Baja specification &#xa; rules for introspection of slots.</description></class>
+<class packageName="javax.baja.data" name="TypeMismatchException" category="exception"><description>TypeMismatchException is thrown when one type is encountered when&#xa; a different type is expected.</description></class>
+<class packageName="javax.baja.sys" name="TypeNotFoundException" category="exception"><description>TypeNotFoundException indicates an attempt to &#xa; load a type from a module failed because the&#xa; type is not listed in the &#x22;module.xml&#x22; manifest.</description></class>
+<class packageName="javax.baja.sys" name="TypeSubscriber"></class>
+<class packageName="javax.baja.units" name="UnitDatabase"><description>UnitDatabase encapsulates the database of built-in units&#xa; provided framework.</description></class>
+<class packageName="javax.baja.units" name="UnitDatabase.Quantity"><description>The Quantity class is used to group a set of&#xa; BUnits which measure a like quantity.</description></class>
+<class packageName="javax.baja.units" name="UnitDifferentialConverter"><description>UnitDifferentialConverter provides a mapping&#xa; between the differential and absolute versions&#xa; of a unit.</description></class>
+<class packageName="javax.baja.units" name="UnitException" category="exception"><description>UnitException is the base class of unit exceptions.</description></class>
+<class packageName="javax.baja.naming" name="UnknownSchemeException" category="exception"><description>UnknownSchemeException is thrown when an unregistered&#xa; scheme is encountered in parsing a BOrd.</description></class>
+<class packageName="javax.baja.naming" name="UnresolvedException" category="exception"><description>The UnresolvedException is thrown when attempting &#xa; to resolve the source object of a BOrd.</description></class>
+<class packageName="javax.baja.util" name="UserFileRepositoryCopy"><description>Copies the files over from &lt;code&gt;&amp;lt;niagara_home&amp;gt;/userFileRepo&lt;/code&gt; to&#xa; &lt;code&gt;&amp;lt;niagara_user_home&amp;gt;/fileRepo&lt;/code&gt;</description></class>
+<class packageName="javax.baja.user" name="UserMonitor"><description>Detects and fires User Events on User related Components.</description></class>
+<class packageName="javax.baja.sys" name="Validatable"><description>A Validatable is a data structure created during property set validation&#xa; that wraps a BComplex and provides a mechanism for validator implementations&#xa; to interrogate the existing and proposed state of a BComplex.</description></class>
+<class packageName="javax.baja.collection" name="ValueCollection"><description>ValueCollection represents the property values of a BComplex instance as&#xa; a Collection.</description></class>
+<class packageName="javax.baja.io" name="ValueDocDecoder"><description>ValueDocDecoder creates an in-memory graph of BObjects from&#xa; serialized document representation.</description></class>
+<class packageName="javax.baja.io" name="ValueDocDecoder.BogDecoderPlugin"><description>BOG (Baja Object Graph) XML decoder plug-in</description></class>
+<class packageName="javax.baja.io" name="ValueDocDecoder.BogElement"><description>A BOG document element</description></class>
+<class packageName="javax.baja.io" name="ValueDocDecoder.BogTypeResolver"><description>BOG Type Resolver</description></class>
+<class packageName="javax.baja.io" name="ValueDocDecoder.IDecoderPlugin" category="interface"><description>A value document&#x27;s format can vary (XML or JSON).</description></class>
+<class packageName="javax.baja.io" name="ValueDocDecoder.ITypeResolver" category="interface"><description>The ITypeResolver interface is used to take String attribute&#xa; elements parsed from the document and determine how to&#xa; resolve a module/type/instance.</description></class>
+<class packageName="javax.baja.io" name="ValueDocEncoder"><description>ValueDocEncoder is used to encode a BValue tree to a document</description></class>
+<class packageName="javax.baja.io" name="ValueDocEncoder.BogEncoderPlugin"></class>
+<class packageName="javax.baja.io" name="ValueDocEncoder.IEncoderPlugin" category="interface"><description>The document format can vary by objects implementing this interface</description></class>
+<class packageName="javax.baja.util" name="Version"><description>Encapsulation of a dewey decimal version string.</description></class>
+<class packageName="javax.baja.naming" name="ViewQuery"><description>ViewQuery defines user agent information.</description></class>
+<class packageName="javax.baja.virtual" name="VirtualCacheCallbacks"><description>VirtualCacheCallbacks provides a BVirtualComponentSpace the hooks to&#xa; manage how virtual components are cached in the space.</description></class>
+<class packageName="javax.baja.virtual" name="VirtualPath"><description>VirtualPath is a ord scheme (subclasses SlotPath) for resolving BVirtualComponents&#xa; using unescaped slot names.</description></class>
+<class packageName="javax.baja.util" name="Worker"><description>Worker is used to asynchronously perform &#x22;work&#x22; on a &#xa; background thread.</description></class>
+<class packageName="javax.baja.util" name="Worker.ITodo" category="interface"><description>ITodo is used to provide work as Runnables to a Worker.</description></class>
+<class packageName="javax.baja.security.crypto" name="X509CertificateFactory"></class>
+<class packageName="javax.baja.file.zip" name="ZipPath"><description>Specialized FilePath which refers to a single entry in a zip file</description></class>
+</module>
+</bajadoc>

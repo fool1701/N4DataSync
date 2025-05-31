@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.commands.LinkCommand" name="LinkCommand" packageName="javax.baja.workbench.commands" public="true">
+<description>
+LinkCommand manages the creation of a link between&#xa; two components.  If both slots are known then no&#xa; dialog is needed (but the link should already be&#xa; validated).  If either side is unknown then we pop&#xa; up our link dialog.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">16 Aug 01</tag>
+<tag name="@version">$Revision: 17$ $Date: 11/2/09 3:51:39 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.Command"/>
+</extends>
+<!-- javax.baja.workbench.commands.LinkCommand(javax.baja.ui.BWidgetShell, javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.BComponent, javax.baja.sys.Slot) -->
+<constructor name="LinkCommand" public="true">
+<parameter name="shell">
+<type class="javax.baja.ui.BWidgetShell"/>
+</parameter>
+<parameter name="source">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="sourceSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="targetSlot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<description>
+Construct a LinkCommand.  The sourceSlot and targetSlot&#xa; may be unspecified using null. If they are null, then a &#xa; dialog is raised to allow the user to choose the link.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.commands.LinkCommand(javax.baja.ui.BWidgetShell, javax.baja.sys.BComponent[], java.lang.String, javax.baja.sys.BComponent[], java.lang.String) -->
+<constructor name="LinkCommand" public="true">
+<parameter name="shell">
+<type class="javax.baja.ui.BWidgetShell"/>
+</parameter>
+<parameter name="sources">
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</parameter>
+<parameter name="sourceSlotName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="targets">
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</parameter>
+<parameter name="targetSlotName">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Construct a LinkCommand. Same as above except multiple&#xa; sources can be linked to multiple targets
+</description>
+<tag name="@since">Niagara 3.5</tag>
+</constructor>
+
+<!-- javax.baja.workbench.commands.LinkCommand.doInvoke() -->
+<method name="doInvoke"  public="true">
+<description>
+Invoke the command.
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.BLocalOrionDatabase" name="BLocalOrionDatabase" packageName="com.tridium.orion" public="true">
+<description>
+BLocalOrionDatabase is the persistent storage for Orion objects and types.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">24 Sep 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="com.tridium.orion.BOrionDatabase"/>
+</extends>
+<!-- com.tridium.orion.BLocalOrionDatabase() -->
+<constructor name="BLocalOrionDatabase" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.init(com.tridium.orion.BOrionService, javax.baja.rdb.BRdbms) -->
+<method name="init"  public="true">
+<description>
+Initialize the database for use with the specified service.
+</description>
+<parameter name="service">
+<type class="com.tridium.orion.BOrionService"/>
+</parameter>
+<parameter name="rdb">
+<type class="javax.baja.rdb.BRdbms"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getId() -->
+<method name="getId"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getOrionSpace() -->
+<method name="getOrionSpace"  public="true">
+<description/>
+<return>
+<type class="com.tridium.orion.BOrionSpace"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.boot() -->
+<method name="boot"  public="true">
+<description>
+Boot the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.close() -->
+<method name="close"  public="true">
+<description>
+Close the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.registerApp(com.tridium.orion.BIOrionApp) -->
+<method name="registerApp"  public="true">
+<description>
+Register an app with this database.  Registered apps&#xa; will receive a callback when the database is opened&#xa; so that they can register their types.
+</description>
+<parameter name="app">
+<type class="com.tridium.orion.BIOrionApp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.isRegistered(com.tridium.orion.BIOrionApp) -->
+<method name="isRegistered"  public="true">
+<description>
+Is the specified app registered in this database?
+</description>
+<parameter name="app">
+<type class="com.tridium.orion.BIOrionApp"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.unregisterApp(com.tridium.orion.BIOrionApp) -->
+<method name="unregisterApp"  public="true">
+<description>
+Unregister the specified app.
+</description>
+<parameter name="app">
+<type class="com.tridium.orion.BIOrionApp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getApps() -->
+<method name="getApps"  public="true">
+<description/>
+<return>
+<type class="com.tridium.orion.BIOrionApp" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getNameFactory(com.tridium.orion.OrionType) -->
+<method name="getNameFactory"  public="true">
+<description>
+Return the BNameFactory associated with the given type.&#xa; &lt;p&gt;&#xa; If there is a BNameFactory registered on the BIOrionApp&#xa; that is associated with the type, then that factory is used.&#xa; &lt;p&gt;&#xa; If there is no BIOrionApp associated with the type,&#xa; then if there is a BNameFactory registered on BOrionDatabase,&#xa; then that is used instead.&#xa; &lt;p&gt;&#xa; Otherwise, if the type is dynamic, then BNameFactory.INSTANCE is returned.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BNameFactory"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.registerType(com.tridium.orion.OrionType, com.tridium.orion.BIOrionApp) -->
+<method name="registerType"  public="true">
+<description>
+Register a new type in the model.
+</description>
+<parameter name="newType">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+A type to be added to the master model.
+</description>
+</parameter>
+<parameter name="owner">
+<type class="com.tridium.orion.BIOrionApp"/>
+<description>
+The app that owns the type.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getTypes() -->
+<method name="getTypes"  public="true">
+<description>
+Get the list of all types defined in the database.
+</description>
+<return>
+<type class="com.tridium.orion.BOrionType" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getType(javax.baja.util.BTypeSpec) -->
+<method name="getType"  public="true">
+<description>
+Get the orion type for the specified type spec.
+</description>
+<parameter name="typeSpec">
+<type class="javax.baja.util.BTypeSpec"/>
+<description>
+The type spec of the desired type.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.BOrionType"/>
+<description>
+Returns the BOrionType for this database or null&#xa;   if the type is not found in the database.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getType(com.tridium.orion.BOrionTypeId) -->
+<method name="getType"  public="true">
+<description>
+Get a type by id.
+</description>
+<parameter name="id">
+<type class="com.tridium.orion.BOrionTypeId"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionType"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getDependentTypes(com.tridium.orion.OrionType) -->
+<method name="getDependentTypes"  public="true">
+<description>
+Get the list of types that are dependent on the specified type.&#xa; Dependent types have a ref property that references the specified&#xa; type.
+</description>
+<parameter name="baseType">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BTypeDependency" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.createTables() -->
+<method name="createTables"  public="true">
+<description>
+Generate the DDL commands&#xa; to create all of tables in this database.&#xa; &lt;p&gt;&#xa; These statements must be invoked in-order &#xa; to succesfully create the tables.
+</description>
+<return>
+<type class="javax.baja.rdb.ddl.DdlCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.dropTables() -->
+<method name="dropTables"  public="true">
+<description>
+Generate the DDL commands&#xa; to drop all of the tables in this database.&#xa; &lt;p&gt;&#xa; These statements must be invoked in-order &#xa; to succesfully drop the tables.
+</description>
+<return>
+<type class="javax.baja.rdb.ddl.DdlCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.createTable(com.tridium.orion.OrionType) -->
+<method name="createTable"  public="true">
+<description>
+Generate the Ddl commands needed to create the table&#xa; (plus all its indexes, sequences, etc).&#xa; &lt;p&gt;&#xa; These statements must be invoked in-order &#xa; to succesfully create the table.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.DdlCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.dropTable(com.tridium.orion.OrionType) -->
+<method name="dropTable"  public="true">
+<description>
+Generate the Ddl commands needed to drop the table&#xa; (plus all its indexes, sequences, etc).&#xa; &lt;p&gt;&#xa; These statements must be invoked in-order &#xa; to succesfully drop the table.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.DdlCommand" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.createSession(javax.baja.sys.Context) -->
+<method name="createSession"  public="true">
+<description>
+Create a new session.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionSession"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.makeSession(javax.baja.sys.Context) -->
+<method name="makeSession"  protected="true">
+<description>
+Subclass hook to create a new session to the database.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionSession"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.sessionOpened(com.tridium.orion.OrionSession) -->
+<method name="sessionOpened"  public="true">
+<description>
+Callback indicating that a new session has been opened.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.sessionClosed(com.tridium.orion.OrionSession) -->
+<method name="sessionClosed"  public="true">
+<description>
+Callback indicating that a session has been closed.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getOrionService() -->
+<method name="getOrionService"  public="true">
+<description>
+Get the OrionService that owns this database.
+</description>
+<return>
+<type class="com.tridium.orion.BOrionService"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.getRdbms() -->
+<method name="getRdbms"  public="true">
+<description>
+Get the rdbms instance used by this database.
+</description>
+<return>
+<type class="javax.baja.rdb.BRdbms"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework support access; this method should&#xa; never be used by developers.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.setCategoryMask(javax.baja.category.BCategoryMask, javax.baja.sys.Context) -->
+<method name="setCategoryMask"  public="true">
+<description/>
+<parameter name="catMask">
+<type class="javax.baja.category.BCategoryMask"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.orion.BLocalOrionDatabase.log -->
+<field name="log"  public="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

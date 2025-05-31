@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sync.SyncBuffer" name="SyncBuffer" packageName="javax.baja.sync" public="true">
+<description>
+Batch stores a collection of cached changes to a set of &#xa; components including support for coalescing of property &#xa; changes.  Batches are used for bi-directional synchronization &#xa; between two BComponentSpaces.
+</description>
+<tag name="@author">Brian Frank&#xa; creation  11 Nov 03</tag>
+<tag name="@version">$Revision: 21$ $Date: 1/14/11 3:31:38 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.sync.SyncBuffer(javax.baja.space.BComponentSpace, boolean) -->
+<constructor name="SyncBuffer" public="true">
+<parameter name="space">
+<type class="javax.baja.space.BComponentSpace"/>
+</parameter>
+<parameter name="coalesce">
+<type class="boolean"/>
+</parameter>
+<description>
+Constructor with component space.
+</description>
+</constructor>
+
+<!-- javax.baja.sync.SyncBuffer.getSpace() -->
+<method name="getSpace"  public="true">
+<description>
+Get the component space this batch maps changes for.
+</description>
+<return>
+<type class="javax.baja.space.BComponentSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.isCoalesced() -->
+<method name="isCoalesced"  public="true">
+<description>
+Return true if this buffer is coalescing operations.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.encode(javax.baja.sync.SyncEncoder) -->
+<method name="encode"  public="true">
+<description>
+Encode this batch of operations to the encoder.
+</description>
+<parameter name="out">
+<type class="javax.baja.sync.SyncEncoder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.decode(javax.baja.sync.SyncDecoder) -->
+<method name="decode"  public="true">
+<description>
+Decode a batch of operations.
+</description>
+<parameter name="in">
+<type class="javax.baja.sync.SyncDecoder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.commit() -->
+<method name="commit"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;commit(null)&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.startCommit(javax.baja.sync.SyncOp[], javax.baja.sys.Context) -->
+<method name="startCommit"  protected="true">
+<description>
+Start the commit process.  This is a subclass hook&#xa; for two purposes.  First, to set up transaction&#xa; boundaries and second, to manipulate the ops to&#xa; be committed if necessary. It is guaranteed that&#xa; either endCommit() or abortCommit() will be called&#xa; after a call to startCommit();
+</description>
+<parameter name="ops">
+<type class="javax.baja.sync.SyncOp" dimension="1"/>
+<description>
+The list of ops to be committed.  If the&#xa;   subclass does not wish to manipulate the ops, the&#xa;   original list must be returned.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sync.SyncOp" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.endCommit() -->
+<method name="endCommit"  protected="true">
+<description>
+End the commit process.  This is a subclass hook&#xa; to mark the end of a successful commit. It is&#xa; guaranteed that either endCommit() or abortCommit()&#xa; will be called after a call to startCommit();
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.abortCommit(java.lang.Exception) -->
+<method name="abortCommit"  protected="true">
+<description>
+Abort the commit process.  This is a subclass hook&#xa; to mark the end of an aborted commit.  It is&#xa; guaranteed that either endCommit() or abortCommit()&#xa; will be called after a call to startCommit();
+</description>
+<parameter name="cause">
+<type class="java.lang.Exception"/>
+<description>
+The exception, if any, that caused the&#xa;   abort.  This may be null.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.commit(javax.baja.sys.Context) -->
+<method name="commit"  public="true">
+<description>
+Commit all the changes stored up in this batch to &#xa; the component space.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.commitOp(javax.baja.sync.SyncOp, javax.baja.sys.Context) -->
+<method name="commitOp"  protected="true">
+<description/>
+<parameter name="op">
+<type class="javax.baja.sync.SyncOp"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.checkAutoStart(javax.baja.sys.BValue) -->
+<method name="checkAutoStart"  protected="true">
+<description>
+Check if value is a BComponent which requires auto start.
+</description>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.findByHandle(java.lang.Object, boolean) -->
+<method name="findByHandle"  protected="true">
+<description>
+Find a component by handle in this buffer&#x27;s component space.
+</description>
+<parameter name="handle">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="autoLoad">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.set(javax.baja.sys.BComponent, javax.baja.sys.Property[], javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="set"  public="true">
+<description>
+Add new SetOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="propertyPath">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.add(javax.baja.sys.BComponent, java.lang.String, javax.baja.sys.BValue, int, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="add"  public="true">
+<description>
+Add new AddOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.remove(javax.baja.sys.BComponent, javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="remove"  public="true">
+<description>
+Add new RemoveOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.rename(javax.baja.sys.BComponent, javax.baja.sys.Property, java.lang.String, javax.baja.sys.Context) -->
+<method name="rename"  public="true">
+<description>
+Add new RenameOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.reorder(javax.baja.sys.BComponent, javax.baja.sys.Property[], javax.baja.sys.Context) -->
+<method name="reorder"  public="true">
+<description>
+Add new ReorderOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="order">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.setFlags(javax.baja.sys.BComponent, javax.baja.sys.Slot, int, javax.baja.sys.Context) -->
+<method name="setFlags"  public="true">
+<description>
+Add new SetFlagsOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.setFacets(javax.baja.sys.BComponent, javax.baja.sys.Slot, javax.baja.sys.BFacets, javax.baja.sys.Context) -->
+<method name="setFacets"  public="true">
+<description>
+Add new SetFacetsOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.setCategoryMask(javax.baja.sys.BComponent, javax.baja.category.BCategoryMask, javax.baja.sys.Context) -->
+<method name="setCategoryMask"  public="true">
+<description>
+Add new SetCategoryMaskOp to buffer.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="mask">
+<type class="javax.baja.category.BCategoryMask"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.setId(int) -->
+<method name="setId"  public="true">
+<description>
+Give the buffer an id number (used when encoding).
+</description>
+<parameter name="id">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.getId() -->
+<method name="getId"  public="true">
+<description>
+Return the id for the buffer.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.list() -->
+<method name="list"  public="true" synchronized="true">
+<description>
+Get a list of all the pending changes.
+</description>
+<return>
+<type class="javax.baja.sync.SyncOp" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.add(javax.baja.sync.SyncOp) -->
+<method name="add"  public="true" synchronized="true">
+<description>
+Add a change into the batch.  If the change is a property&#xa; change then this overwrites any previous property changes.
+</description>
+<parameter name="op">
+<type class="javax.baja.sync.SyncOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sync.SyncBuffer.fw(java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework support access; this method &#xa; should never be used by developers.
+</description>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

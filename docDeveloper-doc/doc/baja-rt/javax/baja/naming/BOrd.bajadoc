@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.naming.BOrd" name="BOrd" packageName="javax.baja.naming" public="true" final="true">
+<description>
+BOrd is an &#x22;Object Resolution Descriptor&#x22;.  An ord is Baja&#x27;s&#xa; universal identification system for integratating heteregeneous&#xa; naming systems into a single String.  An ord is composed of&#xa; one or more queries.  Each query has a scheme which identifies&#xa; how to parse and resolve the query into a BObject.&#xa;&#xa; &lt;pre&gt;&#xa; ord      := query (ws &#x22;|&#x22; ws query)*&#xa; query    := scheme ws &#x22;:&#x22; ws body&#xa; scheme   := alpha (alpha | digit)*&#xa; body     := bodyChar (bodyChar)*&#xa; alpha    := &#x22;a&#x22;-&#x22;z&#x22; | &#x22;A&#x22;-&#x22;Z&#x22;&#xa; digit    := &#x22;0&#x22;-&#x22;9&#x22;&#xa; bodyChar := 32 - 127 except &#x22;|&#x22;&#xa; ws       := (space)*&#xa; &lt;/pre&gt;&#xa;&#xa; &lt;p&gt;&#xa; Ords can be relative or absolute.  An absolute ord usually&#xa; takes the general format of &lt;code&gt;host|session|space&lt;/code&gt;.&#xa; The host query identifies a machine usually by an IP address&#xa; such as &#x22;ip:hostname&#x22;.  The session is used to identify a&#xa; protocol being used to communicate with the host.  For example&#xa; &#x22;fox:&#x22; indicates a fox session to the host.  The space query&#xa; is used to identify a particular type of object.  Common spaces&#xa; are &#x22;module:&#x22;, &#x22;file:&#x22;, &#x22;station:&#x22;, &#x22;spy:&#x22;, or &#x22;history:&#x22;.&#xa; &lt;p&gt;&#xa; The local VM is a special case identified by &#x22;local:&#x22; which&#xa; always resolves to BLocalHost.INSTANCE.  The local host is both&#xa; a host and a session (since no communication protocols are&#xa; required for access).&#xa; &lt;p&gt;&#xa; Components within a ComponentSpace can be named by both a slot&#xa; path and a handle.  So ords to a component usually involve both&#xa; a space query and a path/handle query.&#xa; &lt;p&gt;&#xa; Examples of ords:&#xa; &lt;pre&gt;&#xa; ip:somehost|fox:|station:|slot:/MyService&#xa; ip:somehost|fox:|station:|h:42&#xa; ip:somehost|fox:|file:/C:/dir/file.txt&#xa; local:|file:~etc/log.properties&#xa; local:|module://icons/x16/cloud.png&#xa; local:|spy:/&#xa; &lt;/pre&gt;&#xa;&#xa; &lt;p&gt;&#xa; In Niagara you may view the complete list of installed ord&#xa; schemes at &#x22;spy:/sysManagers/registryManager/ordSchemes&#x22;.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">15 Nov 02</tag>
+<tag name="@version">$Revision: 53$ $Date: 1/24/11 4:38:21 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIComparable"/>
+</implements>
+<implements>
+<type class="javax.baja.naming.BIAlias"/>
+</implements>
+<implements>
+<type class="javax.baja.data.BIDataValue"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.naming.BOrd.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a BOrd from the specified string.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.make(javax.baja.naming.BOrd, javax.baja.naming.BOrd) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a new ord composed of the child appended to the base ord.
+</description>
+<parameter name="base">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<parameter name="child">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.make(javax.baja.naming.BOrd, java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a new ord composed of the child appended to the base ord.
+</description>
+<parameter name="base">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<parameter name="child">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.make(javax.baja.naming.BOrd, javax.baja.naming.OrdQuery) -->
+<method name="make"  public="true" static="true">
+<description>
+Create a new ord composed of the child appended to the base ord.
+</description>
+<parameter name="base">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<parameter name="child">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.make(javax.baja.naming.OrdQuery) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(new OrdQuery[] { query })&lt;/code&gt;.
+</description>
+<parameter name="query">
+<type class="javax.baja.naming.OrdQuery"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.make(javax.baja.naming.OrdQuery[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(queries, 0, queries.length)&lt;/code&gt;.
+</description>
+<parameter name="queries">
+<type class="javax.baja.naming.OrdQuery" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.make(javax.baja.naming.OrdQuery[], int, int) -->
+<method name="make"  public="true" static="true">
+<description>
+Get a ord from query list which spans the specified&#xa; start and end indices.
+</description>
+<parameter name="queries">
+<type class="javax.baja.naming.OrdQuery" dimension="1"/>
+</parameter>
+<parameter name="start">
+<type class="int"/>
+<description>
+the beginning index, inclusive.
+</description>
+</parameter>
+<parameter name="end">
+<type class="int"/>
+<description>
+the ending index, exclusive.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.get() -->
+<method name="get"  public="true">
+<description>
+Convenience for &lt;code&gt;resolve(BLocalHost.INSTANCE, null).get()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.get(javax.baja.sys.BObject) -->
+<method name="get"  public="true">
+<description>
+Convenience for &lt;code&gt;resolve(base, null).get()&lt;/code&gt;.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.get(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="get"  public="true">
+<description>
+Convenience for &lt;code&gt;resolve(base, cx).get()&lt;/code&gt;.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.resolve() -->
+<method name="resolve"  public="true">
+<description>
+Convenience for &lt;code&gt;resolve(BLocalHost.INSTANCE, null)&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.resolve(javax.baja.sys.BObject) -->
+<method name="resolve"  public="true">
+<description>
+Convenience for &lt;code&gt;resolve(base, null)&lt;/code&gt;.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.resolve(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="resolve"  public="true">
+<description>
+Attempt to resolve this BOrd to a BObject.  This&#xa; method recursively resolves the queries, passing&#xa; the result of one query to the next as the base.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+<throws>
+<type class="javax.baja.naming.NullOrdException"/>
+<description>
+if this is the null ord
+</description>
+</throws>
+<throws>
+<type class="javax.baja.naming.UnknownSchemeException"/>
+<description>
+if the ord contains&#xa;   a query scheme not registered in this system
+</description>
+</throws>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+<description>
+if the ord or a scheme specific&#xa;   query cannot be parsed due to invalid syntax
+</description>
+</throws>
+<throws>
+<type class="javax.baja.naming.UnresolvedException"/>
+<description>
+if the ord cannot be&#xa;   resolved to a BObject
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrd.resolve(javax.baja.sys.BObject, javax.baja.sys.Context, com.tridium.authn.AuthenticationClient) -->
+<method name="resolve"  public="true">
+<description/>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="client">
+<type class="com.tridium.authn.AuthenticationClient"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+<throws>
+<type class="javax.baja.naming.NullOrdException"/>
+</throws>
+<throws>
+<type class="javax.baja.naming.UnknownSchemeException"/>
+</throws>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+</throws>
+<throws>
+<type class="javax.baja.naming.UnresolvedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrd.toHost(javax.baja.sys.BObject) -->
+<method name="toHost"  public="true" static="true">
+<description>
+Attempt to get the host of the specified object&#xa; or return null if not applicable:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if object instanceof Host, return object&lt;/li&gt;&#xa; &lt;li&gt;if object instanceof Session, return object.getHost()&lt;/li&gt;&#xa; &lt;li&gt;if object instanceof Space, return object.getHost()&lt;/li&gt;&#xa; &lt;li&gt;if object instanceof ISpaceNode, return object.getHost()&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BHost"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.toSession(javax.baja.sys.BObject) -->
+<method name="toSession"  public="true" static="true">
+<description>
+Attempt to get the session of the specified object&#xa; or return null if not applicable:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if object instanceof Session, return object&lt;/li&gt;&#xa; &lt;li&gt;if object instanceof Space, return object.getSession()&lt;/li&gt;&#xa; &lt;li&gt;if object instanceof ISpaceNode, return object.getSession()&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BISession"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.toSpace(javax.baja.sys.BObject) -->
+<method name="toSpace"  public="true" static="true">
+<description>
+Attempt to get the space of the specified object&#xa; or return null if not applicable:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;if object instanceof Space, return object&lt;/li&gt;&#xa; &lt;li&gt;if object instanceof ISpaceNode, return object.getSpace()&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.space.BSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.parse() -->
+<method name="parse"  public="true">
+<description>
+Parse the ord to return the list of queries.&#xa; &lt;p&gt;&#xa; Note that the parsed queries are *not* cached.  Therefore&#xa; this is a fairly expensive operation.  If resolving the&#xa; ord, then the queries are cached on the OrdTarget.
+</description>
+<return>
+<type class="javax.baja.naming.OrdQuery" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.parse(java.lang.String, java.lang.String) -->
+<method name="parse"  public="true" static="true">
+<description>
+Given a scheme and body instaniate an OrdQuery.  If the&#xa; given scheme can be mapped into a valid BOrdScheme then&#xa; this return &lt;code&gt;BOrdScheme.parse()&lt;/code&gt;.  Otherwise&#xa; an instance of BasicQuery is returned.  Throws SyntaxException&#xa; if a ord scheme was found, but could not parse the query.
+</description>
+<parameter name="scheme">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="body">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdQuery"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.getParent() -->
+<method name="getParent"  public="true">
+<description>
+Get this&#x27;s ord parent in a hierarchical naming system.&#xa; If the last query is a Path, then Path.getParentPath()&#xa; is used to construct the parent ord.  If a parent ord&#xa; cannot be determined then return null.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.normalize() -->
+<method name="normalize"  public="true">
+<description>
+Normalize reformats the BOrd into its standardized form:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;&#xa; This method recursively calls &lt;code&gt;OrdQuery.normalize()&lt;/code&gt;&#xa; until no queries can normalize further.  This process allows&#xa; absolute and relative paths to be merged and truncated as&#xa; necessary.&lt;/li&gt;&#xa; &lt;li&gt;&#xa; Whitespace is normalized so that no space is left between&#xa; pipes nor between schemes and bodies.&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.relativizeToHost() -->
+<method name="relativizeToHost"  public="true">
+<description>
+Relativize is used to extract the relative portion&#xa; of this ord within a host:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;&#xa; First the ord is normalized.&lt;/li&gt;&#xa; &lt;li&gt;&#xa; Starting from the left to right, if any queries are&#xa; found which return true for isHost(), then remove&#xa; everything from that query to the left.&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.relativizeToSession() -->
+<method name="relativizeToSession"  public="true">
+<description>
+Relativize is used to extract the relative portion&#xa; of this ord within an session:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;&#xa; First the ord is normalized.&lt;/li&gt;&#xa; &lt;li&gt;&#xa; Starting from the left to right, if any queries are&#xa; found which return true for isSession(), then remove&#xa; everything from that query to the left.&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.substitute(javax.baja.sys.BFacets) -->
+<method name="substitute"  public="true">
+<description>
+Return a new BOrd by substituting the given variable map&#xa; into this BOrd.  Those parts of this ord to be replaced&#xa; are marked with the format $(&lt;code&gt;varName&lt;/code&gt;), where&#xa; &lt;code&gt;varName&lt;/code&gt; contains any letter or digit.&#xa; &lt;p&gt;&#xa; Examples:&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa; $(foo)|slot:/a/b/c&amp;#xa;    -&amp;gt; foo = &amp;#x22;station:&amp;#x22;&amp;#xa;    -&amp;gt; station:|slot:/a/b/c&amp;#xa;&amp;#xa; $(foo)|slot:/a/b/c&amp;#xa;    -&amp;gt; foo = &amp;#x22;ip:somehost|fox:|station:&amp;#x22;&amp;#xa;    -&amp;gt; ip:somehost|fox:|station:|slot:/a/b/c&amp;#xa;&amp;#xa; slot:$(Vav1)/points/OATemp&amp;#xa;    -&amp;gt; Vav1 = &amp;#x22;/a/b/c&amp;#x22;&amp;#xa;    -&amp;gt; slot:/a/b/c/points/OATemp&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<parameter name="varMap">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrd.hasVariables() -->
+<method name="hasVariables"  public="true">
+<description>
+Return whether these ord contains any variables.&#xa; Variables are marked with the format $(&lt;code&gt;varName&lt;/code&gt;),&#xa; where &lt;code&gt;varName&lt;/code&gt; contains any letter or digit.
+</description>
+<tag name="@since">Niagara 3.3</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.getVariables() -->
+<method name="getVariables"  public="true">
+<description>
+Return the names of all the variables contained in this ord,&#xa; or an empty array if there are no variables.
+</description>
+<tag name="@since">Niagara 3.3</tag>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.getSubOrd(int) -->
+<method name="getSubOrd"  public="true" final="true">
+<description>
+Get a sub-ord from this BOrd which spans from&#xa; the specified start query index to the end of&#xa; the ord.  This is a convenience method for&#xa; &lt;code&gt;make(this, start, getQueryDepth())&lt;/code&gt;.
+</description>
+<parameter name="start">
+<type class="int"/>
+<description>
+the beginning index, inclusive.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.getSubOrd(int, int) -->
+<method name="getSubOrd"  public="true" final="true">
+<description>
+Get a sub-ord from this BOrd which spans the specified&#xa; start and end indices.  This is a convenience method for&#xa; &lt;code&gt;make(this, start, end)&lt;/code&gt;.
+</description>
+<parameter name="start">
+<type class="int"/>
+<description>
+the beginning index, inclusive.
+</description>
+</parameter>
+<parameter name="end">
+<type class="int"/>
+<description>
+the ending index, exclusive.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.getOrd() -->
+<method name="getOrd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.isNull() -->
+<method name="isNull"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return if this is the null BOrd.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.hashCode() -->
+<method name="hashCode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BOrd uses its lower case version of the String&#x27;s hash code.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BOrd equality is based on String value equality.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.compareTo(java.lang.Object) -->
+<method name="compareTo"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Comparision is based on value of String.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To string method.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BOrd is encoded as using writeUTF().
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrd.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BOrd is decoded using readUTF().
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrd.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Write the simple in text format.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the simple from text format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BOrd.toDataValue() -->
+<method name="toDataValue"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.data.BIDataValue"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BOrd.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+The null BOrd is encoded as &#x22;null&#x22;.
+</description>
+</field>
+
+<!-- javax.baja.naming.BOrd.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+The default is NULL.
+</description>
+</field>
+
+<!-- javax.baja.naming.BOrd.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.rpc.NiagaraRpc" name="NiagaraRpc" packageName="javax.baja.rpc" public="true" abstract="true" category="annotation">
+<description>
+Defines a method that can be invoked remotely through either&#xa; Box (and BajaScript), Fox or as a RESTful Web Service. The annotation is&#xa; declared on a method.&#xa; &lt;p&gt;&#xa; If the method is non-static then it must be declared on a protected target&#xa; (i.e. a Component running in a Station), the permissions attribute is used to&#xa; determine whether the user has access. In order to invoke a method on an instance,&#xa; the ORD must resolve to a target (i.e. &#x27;station:|slot:/MyComponent&#x27;).&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; If the method is static, one can use a type ORD to resolve the class (i.e. &#x27;type:myModule:MyType&#x27;)&#xa; For the static case, at least one protected target must be provided unless the&#xa; permissions are set to &#x27;unrestricted&#x27;.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; The data passed in and returned from an RPC will be encoded in JSON. Null values as method arguments&#xa; are not supported. &lt;strong&gt;Important&lt;/strong&gt;: the arguments for a RPC must use these data types...&#xa; &lt;/p&gt;&#xa; &lt;ul&gt;&#xa;   &lt;li&gt;&lt;strong&gt;JSON Object&lt;/strong&gt;: encodes to &lt;code&gt;<see ref="java.util.Map">java.util.Map</see>&lt;/code&gt;. Any nested JSON objects&#xa;   will also be a Map.&lt;/li&gt;&#xa;   &lt;li&gt;&lt;strong&gt;JSON Array&lt;/strong&gt;: encodes to &lt;code&gt;<see ref="java.util.List">java.util.List</see>&lt;/code&gt;. Any nested JSON arrays&#xa;   will also be a List.&lt;/li&gt;&#xa;   &lt;li&gt;&lt;strong&gt;Number&lt;/strong&gt;: &lt;strong&gt;all&lt;/strong&gt; numbers encode to double.&lt;/li&gt;&#xa;   &lt;li&gt;&lt;strong&gt;Boolean&lt;/strong&gt;: encodes to boolean.&lt;/li&gt;&#xa;   &lt;li&gt;&lt;strong&gt;String&lt;/strong&gt;: encodes to String.&lt;/li&gt;&#xa;   &lt;li&gt;&lt;strong&gt;&lt;code&gt;<see ref="javax.baja.sys.Context">javax.baja.sys.Context</see>&lt;/code&gt;&lt;/strong&gt;: must be the final argument in an RPC.&#xa;   This object contains information relevant to the RPC call being made.&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; &lt;p&gt;&#xa; Method return arguments can be any of the above data types. Additionally &lt;code&gt;<see ref="com.tridium.json.JSONObject">com.tridium.json.JSONObject</see>&lt;/code&gt;&#xa; and &lt;code&gt;<see ref="com.tridium.json.JSONArray">com.tridium.json.JSONArray</see>&lt;/code&gt; can be returned.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; The final argument in any declared RPC method must be of &lt;code&gt;<see ref="javax.baja.sys.Context">javax.baja.sys.Context</see>&lt;/code&gt;.&#xa; This Context provides both user and language information. Although a user must be authenticated&#xa; before an RPC is invoked, it should be assumed the user still requires further security&#xa; checks using &lt;code&gt;<see ref="javax.baja.user.BUser#getCurrentAuthenticatedUser()">javax.baja.user.BUser#getCurrentAuthenticatedUser()</see>&lt;/code&gt;.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; RPC calls can be limited to a particular &lt;code&gt;<see ref="javax.baja.rpc.Transport">Transport</see>&lt;/code&gt; layer. All &lt;code&gt;<see ref="javax.baja.rpc.TransportType">TransportType</see>&lt;/code&gt;&#xa; channels must be declared when using the annotation.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; Extra protected targets can be specified with permissions. This provides an extra layer of security&#xa; when invoking an RPC.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; If the &#x27;isSecure&#x27; attribute is true, an RPC call can only be called if the underlying&#xa; transport layer is encrypted. Additionally, the &lt;code&gt;<see ref="javax.baja.sys.Context">javax.baja.sys.Context</see>&lt;/code&gt; passed&#xa; into the RPC as the final argument will always contain an &#x27;isSecure&#x27; boolean facet that&#xa; indicates whether the transport is secure or not.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; A &#x27;remoteAddr&#x27; key and value is passed into the Context&#x27;s facets. The value contains the&#xa; fully qualified name or last proxy that invoked the RPC.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; Since Niagara 4.6, a &#x27;transportType&#x27; key and value is passed into the Context&#x27;s facets. The value&#xa; contains the calling transport type. The values map to the tag names defined in &lt;code&gt;<see ref="javax.baja.rpc.TransportType">TransportType</see>&lt;/code&gt;.&#xa; &lt;/p&gt;&#xa;&#xa; &lt;pre&gt;&lt;code&gt;&#xa; // The method is declared on a Component running in a Station. The user must be admin read, write&#xa; // and invoke permissions on the Component in order to invoke the method.&#xa; // The method can be invoked from a web servlet, box and fox.&#xa;  @NiagaraRpc(&#xa;   permissions = &#x22;RWI&#x22;,&#xa;   transports = {&#xa;      @Transport(type = web),&#xa;      @Transport(type = box),&#xa;      @Transport(type = fox)&#xa;   }&#xa; )&#xa; public void firstRpcCallWithNoArguments(Context cx)&#xa; {&#xa;   ...&#xa; }&#xa;&#xa; // Limit the RPC call to be invoked through a Web Servlet and Box. Fox is&#xa; // not supported. Unrestricted is needed unless protected targets are provided.&#xa;  @NiagaraRpc(&#xa;   permissions = &#x22;unrestricted&#x22;,&#xa;   transports = {&#xa;      @Transport(type = web),&#xa;      @Transport(type = box)&#xa;   }&#xa; )&#xa; public static void rpcCallWithStringArg(String arg, Context cx)&#xa; {&#xa;   ...&#xa; }&#xa;&#xa; // The &#x27;isSecure&#x27; attribute enforces whether this method can only be&#xa; // called over an encrypted channel.&#xa;  @NiagaraRpc(&#xa;   isSecure = true,&#xa;   permissions = &#x22;unrestricted&#x22;,&#xa;   transports = {&#xa;      @Transport(type = web)&#xa;   }&#xa; })&#xa; public static void rpcCallWithWithAStringAndMap(String arg0,&#xa;                                                 Map &amp;lt;String, Object &amp;gt;map,&#xa;                                                 Context cx)&#xa; {&#xa;   ...&#xa; }&#xa;&#xa;  @NiagaraRpc(&#xa;   permissions = &#x22;unrestricted&#x22;,&#xa;   transports = {&#xa;      @Transport(type = web),&#xa;      @Transport(type = box),&#xa;      @Transport(type = fox)&#xa;   }&#xa; )&#xa; public static List &amp;lt;Object &amp;gt; rpcCallThatReturnsACollection(Context cx)&#xa; {&#xa;   ...&#xa; }&#xa;&#xa; // For a static method, no unrestricted is required as at least one&#xa; // protected target has been provided.&#xa;  @NiagaraRpc(&#xa;   protectedTargets = {&#xa;      @Protected(&#xa;       ord = &#x22;service:baja:UserService&#x22;,&#xa;       permissions = &#x22;I&#x22;&#xa;     )&#xa;   },&#xa;   transports = {&#xa;      @Transport(type = web),&#xa;      @Transport(type = box),&#xa;      @Transport(type = fox)&#xa;   }&#xa; )&#xa; public static List &amp;lt;Object &amp;gt; rpcCallThatRequestsUserServiceInvokePermissions(Context cx)&#xa; {&#xa;   ...&#xa; }&#xa; &lt;/code&gt;&lt;/pre&gt;&#xa; &lt;p&gt;&#xa; For more information regarding how to invoke the different transport types, please&#xa; see the documentation for BajaScript, &#x27;javax.baja.web.servlets.NiagaraRpcServlet&#x27;&#xa; and &#x27;javax.baja.fox.BFoxProxySession&#x27;.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">Transport</tag>
+<tag name="@see">TransportType</tag>
+<tag name="@see">Protected</tag>
+<tag name="@author">Gareth Johnson on 15/09/2015.</tag>
+<tag name="@since">Niagara 4.1</tag>
+<implements>
+<type class="java.lang.annotation.Annotation"/>
+</implements>
+<!-- javax.baja.rpc.NiagaraRpc.transports() -->
+<annotationElement name="transports"  public="true">
+<description>
+The transports this RPC call can use.
+</description>
+<return>
+<type class="javax.baja.rpc.Transport" dimension="1"/>
+<description>
+The available transports to use.
+</description>
+</return>
+</annotationElement>
+
+<!-- javax.baja.rpc.NiagaraRpc.permissions() -->
+<annotationElement name="permissions"  public="true">
+<description>
+The permissions necessary in order to invoke the RPC.&#xa; For example, admin read, write and invoke permissions would be &#x27;RWI&#x27;.&#xa; &lt;p&gt;&#xa; These permissions won&#x27;t be used if the target method is static. For static&#xa; methods, please consider using &#x27;protectedTargets&#x27;.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; If no permissions are to be used, the user can use the &#x27;unrestricted&#x27; keyword.&#xa; &lt;/p&gt;
+</description>
+<tag name="@see">javax.baja.security.BPermissions</tag>
+<return>
+<type class="java.lang.String"/>
+<description>
+The permissions.
+</description>
+</return>
+<defaultValue>
+<annotationValue kind="expr">
+<expression>&#x22;I&#x22;</expression>
+</annotationValue>
+</defaultValue>
+</annotationElement>
+
+<!-- javax.baja.rpc.NiagaraRpc.protectedTargets() -->
+<annotationElement name="protectedTargets"  public="true">
+<description>
+The protected security targets that must be resolved&#xa; and checked before the RPC can be invoked. Please note, all permissions&#xa; must be validated before the method can be invoked.&#xa; &lt;p&gt;&#xa; If the RPC call is a static method, there must be at least one protected target&#xa; specified unless &#x27;permissions&#x27; is set to &#x27;unrestricted&#x27;.&#xa; &lt;/p&gt;
+</description>
+<return>
+<type class="javax.baja.rpc.Protected" dimension="1"/>
+<description>
+The protected security targets.
+</description>
+</return>
+<defaultValue>
+<annotationValue kind="array">
+<elementArray>
+</elementArray>
+</annotationValue>
+</defaultValue>
+</annotationElement>
+
+<!-- javax.baja.rpc.NiagaraRpc.isSecure() -->
+<annotationElement name="isSecure"  public="true">
+<description>
+Should the RPC call only be called from a secure transport layer?
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Return true if the specified transport layer should be encrypted.
+</description>
+</return>
+<defaultValue>
+<annotationValue kind="expr">
+<expression>false</expression>
+</annotationValue>
+</defaultValue>
+</annotationElement>
+
+<annotation><type class="java.lang.annotation.Target"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="enum">
+<enumField name="METHOD"/>
+<type class="java.lang.annotation.ElementType"/>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.annotation.Retention"/>
+<elementValue name="value">
+<annotationValue kind="enum">
+<enumField name="RUNTIME"/>
+<type class="java.lang.annotation.RetentionPolicy"/>
+</annotationValue>
+</elementValue>
+</annotation>
+</class>
+</bajadoc>

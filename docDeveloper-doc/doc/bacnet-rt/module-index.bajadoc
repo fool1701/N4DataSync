@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<module name="bacnet" runtimeProfile="rt" bajaVersion="0" vendor="Tridium" vendorVersion="4.13.3.48">
+<description>Niagara BACnet Driver</description>
+<package name="javax.baja.bacnet"/>
+<package name="javax.baja.bacnet.virtual"/>
+<package name="javax.baja.bacnet.export"/>
+<package name="javax.baja.bacnet.export.extensions"/>
+<package name="javax.baja.bacnet.datatypes"/>
+<package name="javax.baja.bacnet.datatypes.security"/>
+<package name="javax.baja.bacnet.datatypes.access"/>
+<package name="javax.baja.bacnet.alarm"/>
+<package name="javax.baja.bacnet.enums"/>
+<package name="javax.baja.bacnet.enums.security"/>
+<package name="javax.baja.bacnet.enums.access"/>
+<package name="javax.baja.bacnet.enums.lighting"/>
+<package name="javax.baja.bacnet.device"/>
+<package name="javax.baja.bacnet.device.overrides"/>
+<package name="javax.baja.bacnet.io"/>
+<package name="javax.baja.bacnet.listeners"/>
+<package name="javax.baja.bacnet.point"/>
+<package name="javax.baja.bacnet.util"/>
+<package name="javax.baja.bacnet.util.worker"/>
+<package name="javax.baja.bacnet.config"/>
+<package name="com.tridium.bacnet.history"/>
+<package name="com.tridium.bacnet.datatypes"/>
+<package name="com.tridium.bacnet"/>
+<package name="com.tridium.bacnet.enums"/>
+<package name="com.tridium.bacnet.schedule"/>
+<package name="com.tridium.bacnet.job"/>
+<package name="com.tridium.bacnet.stack.transport"/>
+<package name="com.tridium.bacnet.stack"/>
+<package name="com.tridium.bacnet.stack.network"/>
+<package name="com.tridium.bacnet.stack.link"/>
+<package name="com.tridium.bacnet.stack.link.ethernet"/>
+<package name="com.tridium.bacnet.stack.link.mstp"/>
+<package name="com.tridium.bacnet.stack.link.ip"/>
+<package name="com.tridium.bacnet.stack.client"/>
+<package name="com.tridium.bacnet.stack.server"/>
+<package name="com.tridium.bacnet.stack.server.cov"/>
+<class packageName="javax.baja.bacnet.io" name="AbortException" category="exception"><description>AbortExceptions are thrown when an error is encountered that&#xa; should result in a transaction being aborted.</description></class>
+<class packageName="javax.baja.bacnet.device.overrides" name="ApduSizeOverride" category="interface"><description>Allow manual and persistent definition&#xa; APDU sizes that will be observed while&#xa; communicating with a device.</description></class>
+<class packageName="javax.baja.bacnet.io" name="AsnDataTypeNotSupportedException" category="exception"><description>A AsnDataTypeNotSupportedException is thrown whenever an&#xa; a provided data type is not in the set of supported data types&#xa; for a selected field.</description></class>
+<class packageName="javax.baja.bacnet.io" name="AsnException" category="exception"><description>An AsnException is thrown whenever a error is&#xa; detected in encoding or decoding an Asn production.</description></class>
+<class packageName="javax.baja.bacnet.io" name="AsnInput" category="interface"><description>This interface specifies the methods for decoding Niagara&#xa; quantities from BACnet ASN.1 primitives.</description></class>
+<class packageName="javax.baja.bacnet.io" name="AsnOutput" category="interface"><description>This interface specifies the methods for encoding Niagara&#xa; quantities into BACnet ASN.1 primitives.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BAbstractBacnetHistory"><description>BAbstractBacnetHistory defines an archive action for transferring&#xa; one trend log from a remote Bacnet source to the local&#xa; destination.</description></class>
+<class packageName="com.tridium.bacnet.enums" name="BAcknowledgmentFilter"><description>BAcknowledgmentFilter represents the enumeration for restricting the types&#xa; of event-initiating objects that shall be included in a response to a&#xa; GetEnrollmentSummary-Request, based on their acknowledgement state.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BAddArrayElementAction"><description>BAddArrayElementAction is used to create the dynamic action&#xa; for adding elements to a BBacnetArray.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BAddListElementAction"><description>BAddListElementAction is used to create the dynamic action&#xa; for adding list elements to a BBacnetListOf.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetAbortReason"><description>BBacnetAbortReason represents the Bacnet Abort Reason&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAccessAuthenticationFactorDisable"><description>BBacnetAccessAuthenticationFactorDisable represents the Bacnet&#xa; Access Authentication Factor Disable enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAccessCredentialDisable"><description>BBacnetAccessCredentialDisable represents the Bacnet&#xa; Access Credential Disable enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAccessCredentialDisableReason"><description>BBacnetAccessCredentialDisableReason represents the&#xa; Bacnet Access Credential Disable Reason enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAccessEvent"><description>BBacnetAccessEvent represents the Bacnet&#xa; Access Event enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAccessPassbackMode"><description>BBacnetAccessZoneOccupancyState represents the Bacnet&#xa; Access Zone Occupancy State enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetAccessRule"><description>BBacnetAccessRule represents the BACnetAccessRule sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetAccessThreatLevel"><description>BBacnetAccessThreatLevel represents the BBacnetAccessThreatLevel&#xa; unsigned value where 0 is the lowest threat, and 100 represents&#xa; the highest (most dangerous) threat level.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAccessUserType"><description>BBacnetAccessUserType represents the Bacnet&#xa; Access User Type enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAccessZoneOccupancyState"><description>BBacnetAccessZoneOccupancyState represents the Bacnet&#xa; Access Zone Occupancy State enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetAction"><description>BBacnetAction represents the BACnetAction enumeration.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetActivePeriod"><description>BBacnetActivePeriod defines when trend log&#xa; collection is active based on absolute date/time range.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetAddress"><description>This class represents the BacnetAddress data structure,&#xa; containing a fixed 16-bit network number and a variable&#xa; length MAC address.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetAddressBinding"><description>BBacnetAddressBinding represents the BacnetAddressBinding&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.util.worker" name="BBacnetAddressWorkerPool"><description>BBacnetAddressWorkerPool balances incoming work across a&#xa; pool of thread pools using the BBacnetAddress hashcode() method.</description></class>
+<class packageName="javax.baja.bacnet.alarm" name="BBacnetAlarmDeviceExt"><description>BBacnetAlarmDeviceExt.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetAnalog"></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetAnalogInput"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetAnalogInputDescriptor"><description>BBacnetAnalogInputDescriptor exposes a ControlPoint as a Bacnet&#xa; Analog Input Object.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetAnalogOutput"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetAnalogOutputDescriptor"><description>BBacnetAnalogOutputDescriptor exposes a ControlPoint as a Bacnet&#xa; Analog Output Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetAnalogPointDescriptor"><description>BBacnetAnalogPointDescriptor is the superclass for analog-type&#xa; point extensions exposing NumericPoints to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetAnalogValue"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetAnalogValueDescriptor"><description>BBacnetAnalogValueDescriptor exposes a ControlPoint as a Bacnet&#xa; Analog Value Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetAnalogValuePrioritizedDescriptor"><description>BBacnetAnalogValuePrioritizedDescriptor exposes a ControlPoint as a writable (non-commandable) Bacnet&#xa; Analog Value Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetAnalogWritableDescriptor"><description>BBacnetAnalogWritableDescriptor exposes a ControlPoint as a&#xa; commandable analog point.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetAny"><description>BBacnetAny represents the Bacnet ANY type.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetArray"><description>BBacnetArray represents a Bacnet Array, which contains an indexed&#xa; sequence of objects of a particular Bacnet data type.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetAssignedAccessRights"><description>BBacnetAssignedAccessRights represents the BACnetAssignedAccessRights&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetAuthenticationFactor"><description>BBacnetAssignedAccessRights represents the BACnetAssignedAccessRights&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetAuthenticationFactorFormat"><description>BBacnetAuthenticationFactorFormat represents the BBacnetAuthenticationFactorFormat&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAuthenticationFactorType"><description>BBacnetAccessCredentialDisable represents the Bacnet&#xa; Access Credential Disable enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetAuthenticationPolicy"><description>BBacnetAuthenticationPolicy represents the BBacnetAuthenticationPolicy&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetAuthenticationPolicyEntry"><description>BBacnetAuthenticationPolicy represents the BBacnetAuthenticationPolicy&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAuthenticationStatus"><description>BBacnetAccessCredentialDisable represents the Bacnet&#xa; Access Credential Disable enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAuthorizationExemption"><description>BBacnetAuthorizationExemption represents the&#xa; BACnetAuthorizationExemption enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetAuthorizationMode"><description>BBacnetAccessCredentialDisable represents the Bacnet&#xa; Access Credential Disable enumeration.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetAveraging"></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetBackupState"><description>BBacnetBackupState represents the possible states&#xa; of a BACnet device with respect to backup and restore&#xa; procedures.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetBinary"></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetBinaryInput"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetBinaryInputDescriptor"><description>BBacnetBinaryInputDescriptor exposes a ControlPoint as a Bacnet&#xa; Binary Input Object.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetBinaryOutput"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetBinaryOutputDescriptor"><description>BBacnetBinaryOutputDescriptor exposes a ControlPoint as a Bacnet&#xa; Binary Output Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetBinaryPointDescriptor"><description>BBacnetBinaryPointDescriptor is the superclass for binary-type&#xa; point extensions exposing BooleanPoints to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetBinaryPv"><description>BBacnetBinaryPv represents the Bacnet Binary present value&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetBinaryValue"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetBinaryValueDescriptor"><description>BBacnetBinaryValueDescriptor exposes a ControlPoint as a Bacnet&#xa; Binary Value Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetBinaryValuePrioritizedDescriptor"><description>BBacnetBinaryValuePrioritizedDescriptor exposes a ControlPoint as a non-commandable&#xa; Bacnet Binary Value Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetBinaryWritableDescriptor"><description>BBacnetBinaryWritableDescriptor exposes a ControlPoint as a&#xa; commandable binary point.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetBitString"><description>BBacnetBitString represents a bit string value in a Bacnet property.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBitStringTrendLogExt"><description>&lt;code&gt; BBacnetBitStringTrendLogExt &lt;/code&gt; represents the extension for trending bacnet bit string</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBitStringTrendLogRemoteExt"></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBitStringTrendRecord"><description>&lt;code&gt;BBacnetBitStringTrendRecord&lt;/code&gt; is a Bacnet trend record&#xa; with BITSTRING value type.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBooleanCovTrendLogExt"><description>An extension for collecting a Bacnet trend log of a boolean control value.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBooleanIntervalTrendLogExt"><description>An extension for collecting a Bacnet trend log of a boolean control value.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetBooleanProxyExt"><description>BBacnetBooleanProxyExt maps a BACnet value to a BooleanPoint.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetBooleanScheduleDescriptor"><description>BBacnetBooleanScheduleDescriptor exposes a Niagara schedule to Bacnet.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBooleanTrendLogExt"><description>Created by Sandipan Aich on 6/14/2017.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBooleanTrendLogRemoteExt"></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetBooleanTrendRecord"><description>&lt;code&gt;BBacnetBooleanTrendRecord&lt;/code&gt; is a Bacnet trend record&#xa; with a boolean value.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetCalendar"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetCalendarDescriptor"><description>BBacnetCalendarDescriptor is the extension that exposes Bacnet Calendar capability.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetCalendarEntry"><description>This class represents the Bacnet CalendarEntry Choice.</description></class>
+<class packageName="com.tridium.bacnet.schedule" name="BBacnetChangeTypeParm"><description>BBacnetChangeTypeParm is container for schedule properties that&#xa; might need to change to modify the schedule datatype.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetChannelValue"><description>BBacnetChannelValue represents the BACnetChannelValue&#xa; choice.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetCharacterStringDescriptor"><description>BBacnetCharacterStringDescriptor is the extension that exposes&#xa; Bacnet CharacterString capability.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetClientCov"><description>BBacnetClientCov represents the choice for the COV increment to&#xa; be used in acquiring data for a trend log via COV.</description></class>
+<class packageName="com.tridium.bacnet.stack.client" name="BBacnetClientLayer"><description>Tridium Client Application Layer Implementation.</description></class>
+<class packageName="javax.baja.bacnet.io" name="BBacnetComm"><description>BBacnetComm is the object that exposes the communications&#xa; stack.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetCommControl"><description>BBacnetCommControl represents the communication control enumeration&#xa; defined in the DeviceCommunicationControl-Request definition.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetConfigDeviceExt"><description>BBacnetConfigDeviceExt represents the configuration representation of a&#xa; Bacnet device.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetConfigFolder"><description>BBacnetConfigFolder is the standard container to use&#xa; under BBacnetConfigDeviceExt to organize BBacnetObjects.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetCovSubscription"><description>BBacnetCovSubscription represents information about a client subscription&#xa; for change-of-value notification on a Bacnet server object in this device.</description></class>
+<class packageName="com.tridium.bacnet.stack.server.cov" name="BBacnetCovWorker"><description>The BBacnetCovWorker multithreads Change of Value(COV) notifications.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetCreatableObject"></class>
+<class packageName="javax.baja.bacnet.datatypes.access" name="BBacnetCredentialAuthenticationFactor"><description>BBacnetAssignedAccessRights represents the BACnetAssignedAccessRights&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetDailySchedule"><description>BBacnetDailySchedule represents the BacnetDailySchedule sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetDate"><description>BBacnetDate represents a date value in a Bacnet property.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetDateRange"><description>BBacnetDateRange represents a BacnetDateRange value in a Bacnet property.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetDateTime"><description>BBacnetDateTime represents a BacnetDateTime value in a Bacnet property.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetDestination"><description>BBacnetDestination represents the Bacnet Destination&#xa; sequence, used in the Recipient_List of Notification&#xa; Class objects.</description></class>
+<class packageName="javax.baja.bacnet" name="BBacnetDevice"><description>BBacnetDevice represents the Baja shadow object for a Bacnet device.</description></class>
+<class packageName="javax.baja.bacnet" name="BBacnetDeviceFolder"><description>BBacnetDeviceFolder.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetDeviceObject"></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetDeviceObjectPropertyReference"><description>This class represents the BBacnetDeviceObjectPropertyReference sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetDeviceObjectReference"><description>This class represents the BBacnetDeviceObjectReference sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetDeviceStatus"><description>BBacnetDeviceStatus represents the BACnetDeviceStatus&#xa; enumeration.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BBacnetDiscoverConfigJob"><description>BBacnetDiscoverConfigJob is the task that manages discovery of BACnet objects&#xa; for the Config Manager.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BBacnetDiscoverDevicesJob"><description>BBacnetDiscoverDevicesJob queries the connected network for&#xa; undiscovered devices.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BBacnetDiscoverJob"><description>BBacnetDiscoverJob is the task that manages&#xa; discovery in a remote BACnet device.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BBacnetDiscoverPointsJob"><description>BBacnetDiscoverPointsJob represents a request from Niagara to&#xa; read the Object_List property of a remote device and create BBacnetObjects&#xa; for any objects that are not currently mapped in the Niagara database.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BBacnetDiscoverSchedulesJob"><description>BBacnetDiscoverSchedulesJob is the task that manages calendar and schedule&#xa; discovery in a remote BACnet device.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BBacnetDiscoverTrendLogsJob"><description>BBacnetDiscoverTrendLogsJob is the task that manages history&#xa; discovery in a remote BACnet device.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetDoorAlarmState"><description>BBacnetDoorAlarmState represents the Bacnet&#xa; Bacnet Door Alarm State enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetDoorSecuredStatus"><description>BBacnetDoorValue represents the Bacnet&#xa; Bacnet Door Value enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetDoorStatus"><description>BBacnetDoorStatus represents the Bacnet&#xa; Bacnet Door Status enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetDoorValue"><description>BBacnetDoorValue represents the Bacnet&#xa; Bacnet Door Value enumeration.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetDynamicScheduleDescriptor"><description>BBacnetDynamicScheduleDescriptor represents an intermediate descriptor that&#xa; gets created during dynamic schedule object creation in bacnet when actual type&#xa; of the schedule to be created cannot be inferred using the initial values.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetEngineeringUnits"><description>BBacnetEngineeringUnits represents the Bacnet&#xa; Engineering Units enumeration.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetEnumCovTrendLogExt"><description>An extension for collecting a Bacnet trend log of a multistate control value.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetEnumIntervalTrendLogExt"><description>An extension for collecting a Bacnet trend log of a multistate control value.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetEnumProxyExt"><description>BBacnetEnumProxyExt handles the point configuration&#xa; of a point of type BOOLEAN, UNSIGNED, or ENUMERATED&#xa; in a Bacnet device.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetEnumScheduleDescriptor"><description>BBacnetEnumScheduleDescriptor exposes a Niagara schedule to Bacnet.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetEnumTrendLogExt"><description>Generic trend log extension for Enum which takes care of both&#xa; change of value and interval based logging.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetEnumTrendLogRemoteExt"></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetEnumTrendRecord"><description>&lt;code&gt;BBacnetEnumTrendRecord&lt;/code&gt; is a Bacnet trend record&#xa; with an enumerated value.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetErrorClass"><description>BBacnetErrorClass represents the error-class portion of the&#xa; BACnet Error sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetErrorCode"><description>BBacnetErrorCode represents the error-code portion of the&#xa; BACnet Error sequence.</description></class>
+<class packageName="com.tridium.bacnet.stack.link.ethernet" name="BBacnetEthernetLinkLayer"><description>Tridium Bacnet Ethernet Virtual Link Layer Implementation.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetEventEnrollment"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetEventEnrollmentDescriptor"><description>BBacnetEventEnrollmentDescriptor exposes a Niagara event to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetEventParameter"><description>BBacnetEventParameter represents the BACnetEventParameter&#xa; choice.</description></class>
+<class packageName="javax.baja.bacnet.alarm" name="BBacnetEventProcessor"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetEventSource"><description>BBacnetEventSource is the base class for all BACnet export descriptors&#xa; that represent event-initiating BACnet objects.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetEventState"><description>BBacnetEventState represents the Bacnet Event State&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetEventType"><description>BBacnetEventType represents the Bacnet Event Type&#xa; enumeration.</description></class>
+<class packageName="com.tridium.bacnet.stack.server" name="BBacnetExportFolder"><description>BBacnetExportFolder is the standard container to use&#xa; under BBacnetExportTable to organize BIBacnetExportObjects.</description></class>
+<class packageName="com.tridium.bacnet.stack.server" name="BBacnetExportTable"><description>BBacnetExportTable manages the objects exported to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetFaultParameter"><description>Created by Sandipan Aich on 3/24/2017.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetFaultType"><description>BBacnetFaultType represents the BACnetFaultType&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetFile"></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetFileAccessMethod"><description>BBacnetFileAccessMethod represents the BacnetFileAccessMethod&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetFileDescriptor"><description>BBacnetFileDescriptor exposes a BIFile to Bacnet as a File object.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetGroup"></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetGroupChannelValue"><description>BBacnetGroupChannelValue represents the BACnetGroupChannelValue&#xa; sequence.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetHistoryDeviceExt"><description>BHistoryDeviceExt is the base class for mapping historical&#xa; data in a device to Baja history databases.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetHistoryImport"><description>BBacnetHistoryImport defines an archive action for transferring&#xa; one trend log from a remote Bacnet source to the local&#xa; destination.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetIntegerValueDescriptor"><description>BBacnetIntegerValueDescriptor exposes a ControlPoint as a Bacnet&#xa; Integer Value Descriptor.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetIntegerValuePrioritizedDescriptor"><description>BBacnetLargeAnalogValueDescriptor exposes a ControlPoint as a writable (non-commandable) Bacnet&#xa; Analog Value Object.</description></class>
+<class packageName="com.tridium.bacnet.stack.link.ip" name="BBacnetIpLinkLayer"><description>Tridium Bacnet IP Virtual Link Layer Implementation.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.security" name="BBacnetKeyIdentifier"><description>BBacnetKeyIdentifier represents the BACnetKeyIdentifier&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetLargeAnalogValueDescriptor"><description>BBacnetLargeAnalogValueDescriptor exposes a ControlPoint as a Bacnet&#xa; Large Analog Value Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetLargeAnalogValuePrioritizedDescriptor"><description>BBacnetLargeAnalogValueDescriptor exposes a ControlPoint as a writable (non-commandable) Bacnet&#xa; Analog Value Object.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetLifeSafetyMode"><description>BBacnetLifeSafetyMode represents the Bacnet Life Safety Mode&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetLifeSafetyOperation"><description>BBacnetLifeSafetyOperation represents the Bacnet Life Safety Operation&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetLifeSafetyState"><description>BBacnetLifeSafetyState represents the Bacnet Life Safety State&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetLightingCommand"><description>Recipient for an alarm to be exported to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.enums.lighting" name="BBacnetLightingInProgress"><description>BBacnetLightingInProgress represents the&#xa; BACnet Lighting In Progress enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.lighting" name="BBacnetLightingOperation"><description>BBacnetLightingOperation represents the&#xa; BACnet Lighting Operation enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.lighting" name="BBacnetLightingTransition"><description>BBacnetLightingTransition represents the&#xa; BACnet Lighting Transition enumeration.</description></class>
+<class packageName="com.tridium.bacnet.stack.link" name="BBacnetLinkLayer"><description>Tridium Bacnet Data Link Layer Implementation.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetListOf"><description>BBacnetListOf represents a Bacnet ListOf sequence, which contains a non-indexed&#xa; sequence of objects of a particular Bacnet data type.</description></class>
+<class packageName="javax.baja.bacnet.enums.access" name="BBacnetLockStatus"><description>BBacnetDoorStatus represents the Bacnet&#xa; Bacnet Door Status enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetLogMultipleRecord"><description>BBacnetLogRecord represents the BacnetLogRecord sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetLogRecord"><description>BBacnetLogRecord represents the BacnetLogRecord sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetLoggingType"><description>BBacnetLoggingType represents the BACnetLoggingType&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetLoop"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetLoopDescriptor"><description>BBacnetLoopDescriptor is the extension that allows a kitControl&#xa; BLoopPoint to be exposed to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetMaintenance"><description>BBacnetMaintenance represents the Bacnet Maintenance&#xa; enumeration.</description></class>
+<class packageName="com.tridium.bacnet.enums" name="BBacnetMstpBaudRate"><description>BBacnetMstpBaudRate represents the possible baud rate choices&#xa; for a comm port.</description></class>
+<class packageName="com.tridium.bacnet.stack.link.mstp" name="BBacnetMstpLinkLayer"><description>Tridium Bacnet MS/TP Virtual Link Layer Implementation.</description></class>
+<class packageName="com.tridium.bacnet.enums" name="BBacnetMstpUsageTimeout"><description>BBacnetMstpBaudRate represents the possible baud rate choices&#xa; for a comm port.</description></class>
+<class packageName="com.tridium.bacnet.stack" name="BBacnetMultiPoll"><description>BBacnetMultiPoll is the subclass of BBacnetPoll that handles multithreaded&#xa; polling.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetMultiStateInputDescriptor"><description>BBacnetMultiStateInputDescriptor exposes a ControlPoint as a Bacnet&#xa; MultiState Input Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetMultiStateOutputDescriptor"><description>BBacnetMultiStateOutputDescriptor exposes a ControlPoint as a Bacnet&#xa; Multi State Output Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetMultiStatePointDescriptor"><description>BBacnetMultiStatePointDescriptor is the superclass for multi-state&#xa; point extensions exposing MultiStatePoints to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetMultiStateValueDescriptor"><description>BBacnetMultiStateValueDescriptor exposes a ControlPoint as a Bacnet&#xa; MultiState Value Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetMultiStateValuePrioritizedDescriptor"><description>BBacnetMultiStateValuePrioritizedDescriptor exposes a ControlPoint as a non-commandable Bacnet&#xa; Multi State Value Object.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetMultiStateWritableDescriptor"><description>BBacnetMultiStateWritableDescriptor exposes a ControlPoint as a&#xa; commandable MultiState point.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetMultistate"></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetMultistateInput"></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetMultistateOutput"></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetMultistateValue"></class>
+<class packageName="javax.baja.bacnet" name="BBacnetNetwork"><description>BBacnetNetwork is the base container for Bacnet communications.</description></class>
+<class packageName="com.tridium.bacnet.stack.network" name="BBacnetNetworkLayer"><description>Tridium Network Layer Implementation.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.security" name="BBacnetNetworkSecurityKeySet"><description>BBacnetNetworkSecurityKeySet represents the BACnetNetworkSecurityKeySet&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes.security" name="BBacnetNetworkSecurityPolicy"><description>BBacnetNetworkSecurityPolicy represents the BACnetNetworkSecurityPolicy&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetNiagaraHistoryDescriptor"><description>BBacnetNiagaraHistoryDescriptor is the archive component which exposes&#xa; a Niagara history to Bacnet as a trend log.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetNodeType"><description>BBacnetNodeType represents the BACnetNodeType enumeration.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetNotificationClass"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetNotificationClassDescriptor"><description>BBacnetNotificationClassDescriptor is the extension that allows a BAlarmClass&#xa; to be exposed to Bacnet as a Notification_Class object.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetNotifyType"><description>BBacnetNotifyType represents the Bacnet Notify Type&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetNull"><description>BBacnetNull represents a null value in a Bacnet property.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetNumericCovTrendLogExt"><description>An extension for collecting a Bacnet trend log of a float control value.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetNumericIntervalTrendLogExt"><description>An extension for collecting a Bacnet trend log of a float control value.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetNumericProxyExt"><description>BBacnetNumericProxyExt handles the point configuration&#xa; of a point of type UNSIGNED, INTEGER, REAL, DOUBLE, or ENUMERATED&#xa; in a Bacnet device.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetNumericScheduleDescriptor"><description>BBacnetNumericScheduleDescriptor exposes a Niagara schedule to Bacnet.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetNumericTrendLogExt"><description>Created by Sandipan Aich on 5/23/2017.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetNumericTrendLogRemoteExt"></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetNumericTrendRecord"><description>&lt;code&gt;BBacnetNumericTrendRecord&lt;/code&gt; is a Bacnet trend record&#xa; with a float value.</description></class>
+<class packageName="javax.baja.bacnet" name="BBacnetObject"></class>
+<class packageName="javax.baja.bacnet" name="BBacnetObject.BacnetPropertyData"></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetObjectIdentifier"><description>BBacnetObjectIdentifier represents an object-identifier value in a Bacnet property.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetObjectPropertyReference"><description>This class represents the BBacnetObjectPropertyReference sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetObjectType"><description>BBacnetObjectType represents the BACnetObjectType&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetOctetString"><description>BBacnetOctetString represents an octet string (byte array).</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetOptionalCharacterString"><description>Recipient for an alarm to be exported to Bacnet.</description></class>
+<class packageName="com.tridium.bacnet" name="BBacnetOrdScheme"><description>BBacnetOrdScheme is used to name and reference Bacnet objects&#xa; by BacnetObjectIdentifier.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetPointDescriptor"><description>BBacnetPointDescriptor is the extension that allows a normal Baja&#xa; ControlPoint to be exposed to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetPointDeviceExt"><description>BBacnetPointDeviceExt.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetPointFolder"><description>BBacnetPointFolder.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetPolarity"><description>BBacnetPolarity represents the Bacnet Polarity&#xa; enumeration.</description></class>
+<class packageName="com.tridium.bacnet.stack" name="BBacnetPoll"><description>BBacnetPoll is a subclass of BAbstractPollService specifically&#xa; customized for BACnet polling.</description></class>
+<class packageName="com.tridium.bacnet.stack" name="BBacnetPollOrder"><description>BBacnetPollOrder provides an override hook allowing&#xa; different strategies of poll ordering.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetPositiveIntegerValueDescriptor"><description>BBacnetPositiveIntegerValueDescriptor exposes a ControlPoint as a Bacnet&#xa; Positive Integer Value Descriptor.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetPositiveIntegerValuePrioritizedDescriptor"><description>BBacnetPositiveIntegerValuePrioritizedDescriptor exposes a ControlPoint as a Bacnet&#xa; Positive Integer Value Prioritized Descriptor.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetPrescale"><description>BBacnetPrescale represents the Bacnet Prescale&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetPriorityValue"><description>BBacnetPriorityValue represents the BacnetPriorityValue&#xa; choice.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetProgram"></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetProgramError"><description>BBacnetProgramError represents the Bacnet Program Error&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetProgramRequest"><description>BBacnetProgramRequest represents the BACnetProgramRequest&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetProgramState"><description>BBacnetProgramState represents the BACnetProgramState&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetPropertyAccessResult"><description>This class represents the ReadPropertyResult sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetPropertyIdentifier"><description>BBacnetPropertyIdentifier represents the BACnetPropertyIdentifier&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetPropertyReference"><description>This class represents the BacnetPropertyReference sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetPropertyStates"><description>BBacnetPropertyStates represents the BACnetPropertyStates&#xa; choice.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetPropertyValue"><description>This class represents the BacnetPropertyValue sequence.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetProxyExt"><description>BBacnetProxyExt contains all of the information necessary&#xa; to access a data value from a Bacnet device.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetRecipient"><description>Recipient for an alarm to be exported to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetRecipientProcess"><description>BBacnetRecipientProcess represents the Bacnet RecipientProcess&#xa; sequence, used in Cov notifications.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetReinitializedDeviceState"><description>BBacnetReinitializedDeviceState represents the state of a device after&#xa; receiving a ReinitializeDevice-Request.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetRejectReason"><description>BBacnetRejectReason represents the Bacnet Abort Reason&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetReliability"><description>BBacnetReliability represents the BACnetReliability&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.export.extensions" name="BBacnetRemoteUnsignedPropertyExt"><description>Point extension for BACnet Remote Unsigned Properties.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetRestartReason"><description>BBacnetRestartReason represents the BACnetRestartReason&#xa; enumeration.</description></class>
+<class packageName="com.tridium.bacnet.stack.network" name="BBacnetRouterEntry"><description>BBacnetRouterEntry represents an entry in the&#xa; router table of the Bacnet network layer.</description></class>
+<class packageName="com.tridium.bacnet.stack.network" name="BBacnetRouterTable"><description>BBacnetRouterTable stores the table of known routers to&#xa; Bacnet networks.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetScale"><description>BBacnetScale represents the BACnetScale data type.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetSchedule"></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetScheduleDescriptor"><description>BBacnetScheduleDescriptor exposes a Niagara schedule to Bacnet.</description></class>
+<class packageName="com.tridium.bacnet.schedule" name="BBacnetScheduleDeviceExt"><description>BBacnetScheduleDeviceExt.</description></class>
+<class packageName="com.tridium.bacnet.schedule" name="BBacnetScheduleExport"><description>BBacnetScheduleExport is a child extension of a schedule that&#xa; is being exported to a BACnet device.</description></class>
+<class packageName="com.tridium.bacnet.schedule" name="BBacnetScheduleImportExt"><description>BBacnetScheduleImportExt is a child extension of a schedule that&#xa; is being imported from a BACnet device.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BBacnetScheduleTypeChangeJob"><description>BBacnetScheduleTypeChangeJob makes changes to a schedule object needed to&#xa; change the type of objects scheduled or cleanup inconsistent properties</description></class>
+<class packageName="javax.baja.bacnet.enums.security" name="BBacnetSecurityLevel"><description>BBacnetSecurityLevel represents the&#xa; BACnet Security Level enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums.security" name="BBacnetSecurityPolicy"><description>BBacnetSecurityPolicy represents the Bacnet&#xa; BBacnet Security Policy  enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetSegmentation"><description>BBacnetSegmentation represents the Bacnet Segmentation&#xa; enumeration.</description></class>
+<class packageName="com.tridium.bacnet.stack.server" name="BBacnetServerLayer"><description>Tridium Server Application Layer Implementation.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetSetpointReference"><description>BBacnetSetpointReference represents the BacnetSetpointReference&#xa; sequence.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetShedState"><description>BBacnetShedState represents the Bacnet Shed State&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetSilencedState"><description>BBacnetSilencedState represents the Bacnet Silenced State&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetSpecialEvent"><description>BBacnetSpecialEvent represents the BacnetSpecialEvent sequence.</description></class>
+<class packageName="com.tridium.bacnet.stack" name="BBacnetStack"><description>BBacnetStack provides the protocol stack for Bacnet communications.</description></class>
+<class packageName="javax.baja.bacnet.alarm" name="BBacnetStatusAlgorithm"><description>BBacnetStatusAlgorithm defines the offnormal algorithm&#xa; for the &lt;code&gt; BacnetBitStringUtil.BACNET_STATUS_FLAGS &lt;/code&gt; bits of a point.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetStringCovTrendLogExt"><description>An extension for collecting a Bacnet trend log of a String control value.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetStringIntervalTrendLogExt"><description>An extension for collecting a Bacnet trend log of a String control value.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetStringProxyExt"><description>BBacnetStringProxyExt handles the point configuration&#xa; of a point of generic type in a Bacnet device.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetStringScheduleDescriptor"><description>BBacnetStringScheduleDescriptor exposes a Niagara schedule to Bacnet.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetStringTrendLogExt"><description>Created by Sandipan Aich on 6/6/2017.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetStringTrendLogRemoteExt"></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetStringTrendRecord"><description>&lt;code&gt;BBacnetStringTrendRecord&lt;/code&gt; is a Bacnet trend record with&#xa; a string value.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetTime"><description>BBacnetTime represents a date value in a Bacnet property.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetTimeStamp"><description>This class represents the Bacnet Timestamp Choice.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetTimeValue"><description>BBacnetTimeValue represents a BacnetTimeValue pair.</description></class>
+<class packageName="com.tridium.bacnet.stack.transport" name="BBacnetTransportLayer"><description>Tridium Transport Layer Implementation.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetTrendLog"></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetTrendLogAlarmSourceExt"><description>BBacnetTrendLogAlarmSourceExt defines the intrinsic alarming/notification&#xa; for a server-side trend log exposed to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BBacnetTrendLogDescriptor"><description>BBacnetTrendLogDescriptor exports a Bacnet trend log extension to Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BBacnetTrendLogMultiple"><description>BBacnetTrendLogMultiple augments BBacnetTrendLog.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetTrendLogMultipleImport"><description>BBacnetTrendLogMultipleImport defines an archive action for transferring&#xa; one trend log from a remote Bacnet source to the local&#xa; destination.</description></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetTrendLogRemoteExt"></class>
+<class packageName="com.tridium.bacnet.history" name="BBacnetTrendRecord"><description>BBacnetTrendRecord is a Bacnet history record that includes special&#xa; semantics for histories that track a single data point&#xa; like the histories generated by a history extension&#xa; on a control point.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetTuningPolicy"><description>BBacnetTuningPolicy.</description></class>
+<class packageName="javax.baja.bacnet.point" name="BBacnetTuningPolicyMap"><description>BBacnetTuningPolicyMap.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BBacnetUnsigned"><description>BBacnetUnsigned represents an unsigned value in a Bacnet property.</description></class>
+<class packageName="javax.baja.bacnet.export.extensions" name="BBacnetUnsignedPropertyExt"><description>Point extension for BACnet Unsigned Properties.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="BBacnetVirtualArray"></class>
+<class packageName="javax.baja.bacnet.virtual" name="BBacnetVirtualComponent"><description>BBacnetVirtualComponent is the implementation of BVirtualComponent for the&#xa; BACnet driver.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="BBacnetVirtualGateway"><description>BBacnetVirtualGateway is the gateway to the BACnet virtual component&#xa; space.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="BBacnetVirtualObject"><description>BBacnetVirtualObject is the virtual representation of a BACnet&#xa; object.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="BBacnetVirtualProperty"><description>BBacnetVirtualProperty is the virtual representation of one&#xa; property of a BBacnetVirtualObject.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetVtClass"><description>BBacnetVtClass represents the Bacnet VT Class&#xa; enumeration.</description></class>
+<class packageName="javax.baja.bacnet.util" name="BBacnetWorker"><description>BBacnetWorker is the implementation of BWorker for Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.util.worker" name="BBacnetWorkerPool"><description>BBacnetWorkerPool is a thin wrapper around&#xa; a ThreadPoolWorker, that can be added as a child&#xa; to any IWorkerPoolAware BComponent (e.g.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BBacnetWriteStatus"><description>BBacnetWriteStatus represents the BACnetWriteStatus&#xa; enumeration.</description></class>
+<class packageName="com.tridium.bacnet.stack.link.ip" name="BBdtEntry"><description>BBdtEntry represents an entry in the&#xa; Broadcast Distribution Table (BDT) of a Bacnet Broadcast Management&#xa; Device (BBMD).</description></class>
+<class packageName="com.tridium.bacnet.stack.link.ip" name="BBroadcastDistributionTable"><description>BBroadcastDistributionTable represents the Broadcast&#xa; Distribution Table (BDT) of a Bacnet Broadcast Management&#xa; Device (BBMD).</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BChangeDeviceIdConfig"></class>
+<class packageName="com.tridium.bacnet.job" name="BChangeDeviceIdJob"></class>
+<class packageName="javax.baja.bacnet.enums" name="BCharacterSetEncoding"><description>BCharacterSetEncoding represents the enumeration of character sets&#xa; defined by Bacnet for string encoding.</description></class>
+<class packageName="com.tridium.bacnet.stack.client" name="BClientDebugListener"></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BDeviceDiscoveryConfig"><description>This class file specifies parameters to constrain a&#xa; network device discovery request.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BDeviceManagerJob"><description>BDeviceManagerJob is the base class for jobs submitted by the&#xa; device manager GUI.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BDiscoveryConfig"><description>BDiscoveryConfig.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BDiscoveryDevice"><description>BDiscoveryDevice.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BDiscoveryLog"><description>BDiscoveryLog.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BDiscoveryNetworks"><description>Networks to be interrogated in a device discovery command.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BDiscoveryPoint"><description>BDiscoveryPoint.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BDiscoveryPointTable"><description>BDiscoveryPointTable.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BDiscoverySchedule"><description>BDiscoverySchedule.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BErrorType"><description>BErrorType represents the Error sequence.</description></class>
+<class packageName="com.tridium.bacnet.stack.server" name="BEventHandler"><description>The BEventHandler handles event notification messages,&#xa; and the acknowledgment of those messages, including&#xa; ConfirmedEventNotification, UnconfirmedEventNotification,&#xa; and AcknowledgeAlarm.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BEventSaver"></class>
+<class packageName="com.tridium.bacnet.enums" name="BEventStateFilter"><description>BEventStateFilter represents the enumeration for restricting the types&#xa; of event-initiating objects that shall be included in a response to a&#xa; GetEnrollmentSummary-Request, based on their event state.</description></class>
+<class packageName="javax.baja.bacnet.enums" name="BExtensibleEnumList"><description>BExtensibleEnumList is a container for managing a device&#x27;s knowledge of&#xa; any proprietary extensions to any of the extensible enumerations&#xa; are defined by Bacnet.</description></class>
+<class packageName="com.tridium.bacnet.stack.link.ip" name="BFdtEntry"><description>BFdtEntry represents an entry in the&#xa; Foreign Device Table (FDT) of a Bacnet Broadcast Management&#xa; Device (BBMD).</description></class>
+<class packageName="com.tridium.bacnet.stack.link.ip" name="BForeignDeviceRegistration"><description>The BForeignDeviceRegistration class exposes the ability to&#xa; more finely control foreign device registrations with BBMD devices.</description></class>
+<class packageName="com.tridium.bacnet.stack.link.ip" name="BForeignDeviceTable"><description>BForeignDeviceTable represents the Foreign&#xa; Device Table (FDT) of a Bacnet Broadcast Management&#xa; Device (BBMD).</description></class>
+<class packageName="com.tridium.bacnet.stack.server" name="BHashedEventBuffer"><description>BHashedEventBuffer.</description></class>
+<class packageName="javax.baja.bacnet.config" name="BIBacnetConfigFolder" category="interface"><description>BIBacnetConfigFolder is the common interface for&#xa; BLocalBacnetDevice and BIBacnetConfigFolder.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BIBacnetCovSource" category="interface"><description>BIBacnetCovSource is the interface implemented by all export&#xa; descriptors that support object-level COV subscription.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BIBacnetDataType" category="interface"><description>BIBacnetDataType is the interface implemented by Bacnet constructed data types.</description></class>
+<class packageName="com.tridium.bacnet.stack.server" name="BIBacnetExportFolder" category="interface"><description>BIBacnetExportFolder is the common interface for&#xa; BLocalBacnetDevice and BBacnetExportFolder.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BIBacnetExportObject" category="interface"><description>BIBacnetExportObject is the interface implemented by all objects&#xa; that export Niagara objects as Bacnet objects.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BIBacnetExportObject.ObjectSubscriber"></class>
+<class packageName="javax.baja.bacnet" name="BIBacnetObjectContainer" category="interface"><description>BIBacnetObjectContainer resolves a triplet of object identifier,&#xa; property identifier, and property array index to a Bacnet point.</description></class>
+<class packageName="javax.baja.bacnet.util" name="BIBacnetPollable" category="interface"><description>BIBacnetPollable</description></class>
+<class packageName="com.tridium.bacnet.history" name="BIBacnetTrendLogExt" category="interface"><description>BIBacnetTrendLogExt is the interface which all BACnet Trend Log extensions&#xa; must implement.</description></class>
+<class packageName="com.tridium.bacnet.enums" name="BIpDeviceType"><description>BIpDeviceType represents the possible types of BVLL interaction Niagara&#xa; can use.</description></class>
+<class packageName="com.tridium.bacnet.stack.link" name="BLinkLayerChoice"><description>BLinkLayerChoice represents the choices for the implementation&#xa; of the Data Link Layer in the OSI 7-layer model used by Bacnet.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BLocalBacnetDevice"><description>BLocalBacnetDevice is the representation of Niagara as a Bacnet&#xa; device on the Bacnet internetwork.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="BLocalBacnetVirtualGateway"></class>
+<class packageName="javax.baja.bacnet.virtual" name="BLocalBacnetVirtualObject"></class>
+<class packageName="javax.baja.bacnet.virtual" name="BLocalBacnetVirtualProperty"></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BNcRecipientList"></class>
+<class packageName="com.tridium.bacnet.stack.network" name="BNetworkPort"><description>Handles sending and receiving messages to and from the&#xa; link layer.</description></class>
+<class packageName="com.tridium.bacnet.stack.network" name="BNetworkPriority"><description>BNetworkPriority represents the choice of priority level&#xa; at the Network layer.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BNextInstArgs"><description>This class file specifies parameters to an invocation&#xa; of the BBacnetExportTable.getNextInst Action.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BOutOfServiceExt"></class>
+<class packageName="com.tridium.bacnet.stack.server" name="BOverrideMode"><description>BOverrideMode determines when the BACnet overridden flag.</description></class>
+<class packageName="javax.baja.bacnet.util" name="BPriorityArrayDetector"><description>The PriorityArrayDetector enables stations engineered offline&#xa;  to properly detect the presence or absence of a Priority Array once&#xa;  the station has been installed.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BPriorityFilter"><description>BPriorityFilter represents the structure for restricting the types&#xa; of event-initiating objects that shall be included in a response to a&#xa; GetEnrollmentSummary-Request, based on their priority.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BReadAccessResult"><description>BReadAccessResult represents the ReadAccessResult sequence.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BReadAccessSpecification"><description>BReadAccessSpecification represents the ReadAccessSpecification sequence.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BReadFileConfig"><description>This class file specifies parameters to constrain a&#xa; read file request.</description></class>
+<class packageName="javax.baja.bacnet.datatypes" name="BReadPropertyResult"><description>This class represents the ReadPropertyResult sequence.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BReliabilityAlarmSourceExt"><description>BReliabilityAlarmSourceExt defines the intrinsic alarming/notification&#xa; for the change of reliability property.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BRemoveArrayElementAction"><description>BRemoveArrayElementAction is used to create the dynamic action&#xa; for removing elements from a BBacnetArray.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BRemoveListElementAction"><description>BRemoveListElementAction is used to create the dynamic action&#xa; for removing list elements from a BBacnetListOf.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BRequestConfig"><description>This class file specifies parameters to constrain a&#xa; network device request.</description></class>
+<class packageName="com.tridium.bacnet.stack.network" name="BRouterStatus"><description>BRouterStatus represents the various health states&#xa; that a router connection can take.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BSvoSubordinate"></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BTimeSynchConfig"><description>BTimeSynchConfig represents the choices for the&#xa; user in manually issuing a TimeSynch-Request to a device.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BTimeSynchJob"><description>BTimeSynchJob sends a one-shot time synch message to the network.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BTrendEvent"><description>BTrendEvent is the wrapper class for expressing trend log events&#xa; (such as failures, time changes, log status) as Java primitive&#xa; long objects.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="BVirtualPropertyWrite"></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BWhoHasConfig"><description>This class file specifies parameters to constrain a&#xa; Who-Has request.</description></class>
+<class packageName="com.tridium.bacnet.job" name="BWhoHasJob"><description>BWhoHasJob queries the connected network for devices that&#xa; contain objects with the specified objectId or objectName.</description></class>
+<class packageName="com.tridium.bacnet.datatypes" name="BWriteFileConfig"><description>This class file specifies parameters to constrain a&#xa; read file request.</description></class>
+<class packageName="javax.baja.bacnet" name="BacnetAlarmConst" category="interface"><description>Standard keys for the AlarmData portion of a&#xa; BAlarmRecord referencing a Bacnet alarm.</description></class>
+<class packageName="javax.baja.bacnet.util" name="BacnetBitStringUtil"><description>BacnetBitStringUtil.</description></class>
+<class packageName="javax.baja.bacnet" name="BacnetConfirmedServiceChoice" category="interface"><description>This interface contains constants which represent the values&#xa; of the BacnetConfirmedServiceChoice iteration.</description></class>
+<class packageName="javax.baja.bacnet" name="BacnetConst" category="interface"><description>BacnetConst contains all constants needed for use in the&#xa; javax.baja.bacnet module.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BacnetDescriptorUtil"><description>A collection of methods for interacting with BacnetDescriptor instances.</description></class>
+<class packageName="javax.baja.bacnet" name="BacnetException" category="exception"><description>BacnetException is the base class for exceptions that&#xa; occur while performing any Bacnet operations.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BacnetPropertyList"><description>Every BACnetObject in devices &amp;gt; PR 14&#xa; will include a PropertyList.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BacnetPropertyListProvider" category="interface"></class>
+<class packageName="javax.baja.bacnet.io" name="BacnetServiceListener" category="interface"><description>BacnetServiceListener is the root interface for all Listener&#xa; interfaces that listen for BACnet service requests.</description></class>
+<class packageName="javax.baja.bacnet" name="BacnetUnconfirmedServiceChoice" category="interface"><description>This interface contains constants which represent the values&#xa; of the BacnetUnconfirmedServiceChoice enumeration.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="BacnetVirtualUtil"><description>BacnetVirtualUtil provides common utility functions used by&#xa; the BACnet virtual point framework.</description></class>
+<class packageName="javax.baja.bacnet.export" name="BacnetWritableDescriptor" category="interface"><description>Marker interface so the UI can tell if a descriptor can be written from BACnet.</description></class>
+<class packageName="javax.baja.bacnet.io" name="ChangeListError" category="interface"><description>The ChangeListError sequence is returned in response to&#xa; AddListElement and RemoveListElement requests when the&#xa; request cannot be executed.</description></class>
+<class packageName="javax.baja.bacnet.export" name="Cov"><description>BacnetCovSubscriber handles sending a Cov notification to any&#xa; Cov subscribers when the point&#x27;s value changes.</description></class>
+<class packageName="javax.baja.bacnet.io" name="DataTypeNotSupportedException" category="exception"><description>A DataTypeNotSupportedException is thrown whenever an&#xa; a provided data type is not in the set of supported data types&#xa; for a selected field.</description></class>
+<class packageName="javax.baja.bacnet.device.overrides" name="DeviceOverride" category="interface"><description>Marker interface to support DeviceOverrideAware&#xa; components.</description></class>
+<class packageName="javax.baja.bacnet.device.overrides" name="DeviceOverrideAware" category="interface"><description>Device overrides must add themselves to the override&#xa; list of each desired device.</description></class>
+<class packageName="javax.baja.bacnet.listeners" name="DynamicIAmListener"><description>DynamicIAmListener: As a part of the AMEV AS-B implementations, since we are&#xa; supporting Dynamic Device Binding mainly for Trending, Alarming and&#xa; Scheduling, we do a lot of RP and CoVs to remote device.</description></class>
+<class packageName="javax.baja.bacnet.listeners" name="DynamicIAmListener.IAmHandler"></class>
+<class packageName="javax.baja.bacnet.util" name="EnumRangeWrapper"><description>Wrap the BEnumRange and potential ErrorType while&#xa; creating the enum range</description></class>
+<class packageName="javax.baja.bacnet.io" name="ErrorException" category="exception"><description>ErrorExceptions are thrown when an error is encountered during&#xa; a Bacnet transaction.</description></class>
+<class packageName="javax.baja.bacnet.io" name="ErrorType" category="interface"><description>ErrorType is an interface representing the Bacnet Error sequence.</description></class>
+<class packageName="javax.baja.bacnet.io" name="EventNotificationListener" category="interface"><description>EventNotificationListener is the interface that classes must implement&#xa; to be notified when BACnet event notifications are received by the Niagara&#xa; BACnet comm stack.</description></class>
+<class packageName="javax.baja.bacnet.io" name="FileData" category="interface"><description>FileData contains information about data that is either read from&#xa; or written to a BACnet File object using the AtomicReadFile or&#xa; AtomicWriteFile service requests.</description></class>
+<class packageName="javax.baja.bacnet.util" name="GrandchildChangedContext"></class>
+<class packageName="javax.baja.bacnet.util.worker" name="IBacnetAddress" category="interface"><description>The IBacnetAddress interface allows&#xa; a WorkerPool to distribute work&#xa; across a worker pool based on BBacnetAddress.</description></class>
+<class packageName="javax.baja.bacnet.util.worker" name="IWorkerPool" category="interface"><description>IBacnetWorker provides a mechanism inject a customized&#xa; worker implementation to the BBacnetServerLayer.</description></class>
+<class packageName="javax.baja.bacnet.util.worker" name="IWorkerPoolAware" category="interface"><description>IWorkerAware is an interface&#xa; to allow services to have child&#xa; IBacnetWorkers dynamically added / removed.</description></class>
+<class packageName="javax.baja.bacnet.io" name="IllegalActionInitiationError" category="exception"></class>
+<class packageName="javax.baja.bacnet.device" name="LatencyRecorder" category="interface"><description>The LatencyRecorder interface can&#xa; be implemented to receive latency events&#xa; for interactions with BBacnetDevices.</description></class>
+<class packageName="javax.baja.bacnet.device" name="LatencyRecorderAware" category="interface"><description>The LatencyRecorderAware interface&#xa; provides the mechanism to register&#xa; for latency events from BBacnetDevices.</description></class>
+<class packageName="javax.baja.bacnet.util" name="LocalBacnetPoll"><description>LocalBacnetPoll&#xa; This base class provides a mechanism for performing local polls of BACnet&#xa; properties from BACnet export objects in Niagara&#x27;s export table.</description></class>
+<class packageName="javax.baja.bacnet.virtual" name="LocalBacnetVirtualPoll"><description>LocalBacnetVirtualPoll&#xa; This class is used for polling local virtual properties pointing to local&#xa; BACnet export properties.</description></class>
+<class packageName="javax.baja.bacnet.util" name="MetaDataContext"></class>
+<class packageName="javax.baja.bacnet.io" name="OutOfRangeException" category="exception"><description>An OutOfRangeException is thrown whenever an&#xa; out of range error is detected in encoding or&#xa; decoding an Asn production.</description></class>
+<class packageName="javax.baja.bacnet.point" name="PointCmd"></class>
+<class packageName="javax.baja.bacnet.util" name="PollList"><description>PollList.</description></class>
+<class packageName="javax.baja.bacnet.util" name="PollListEntry"></class>
+<class packageName="javax.baja.bacnet.io" name="PrivateTransferListener" category="interface"><description>PrivateTransferListener is the interface objects use to identify that they&#xa; need to be informed of incoming PrivateTransfer requests.</description></class>
+<class packageName="javax.baja.bacnet.util" name="PropertyInfo"><description>PropertyInfo provides information about a Bacnet property.</description></class>
+<class packageName="javax.baja.bacnet.io" name="PropertyReference" category="interface"><description>PropertyReference contains information to reference&#xa; a property to be read.</description></class>
+<class packageName="javax.baja.bacnet.io" name="PropertyValue" category="interface"><description>PropertyValue contains the results of reading a property value,&#xa; or the value to be written to a property.</description></class>
+<class packageName="javax.baja.bacnet.io" name="RangeData" category="interface"><description>RangeReference contains information to reference&#xa; a range of values in a compound property.</description></class>
+<class packageName="javax.baja.bacnet.io" name="RangeReference" category="interface"><description>RangeReference contains information to request&#xa; a range of values in a compound property.</description></class>
+<class packageName="javax.baja.bacnet.io" name="RejectException" category="exception"><description>RejectExceptions are thrown when an error is encountered that&#xa; should result in a transaction being rejected.</description></class>
+<class packageName="javax.baja.bacnet.device.overrides" name="SegmentationOverride" category="interface"><description>Some devices claim SegementationSupport, but really do not&#xa; segment well, or the network conditions cause continuous&#xa; out-of-order packet delivery.</description></class>
+<class packageName="javax.baja.bacnet.device.overrides" name="ServiceOverride" category="interface"><description>Allow the creation of components to&#xa; prevent the use of certain services&#xa; to certain devices.</description></class>
+<class packageName="javax.baja.bacnet.util" name="SpecialEventDetails"></class>
+</module>
+</bajadoc>

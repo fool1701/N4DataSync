@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.sql.BExtentProjection" name="BExtentProjection" packageName="com.tridium.orion.sql" public="true" final="true">
+<description>
+A BExtentProjection can be used to query for all the properties of an&#xa; OrionType.  An extent projection is only valid when it is parented by&#xa; a BQuery that has a BTypedExtent set.  The extent projection is a convenience&#xa; for referencing all the persistent properties of the OrionType returned by&#xa; &lt;p&gt;&#xa; &lt;code&gt;((BQuery) getParent()).getExtent.asTypedExtent().listTypes()[0]&lt;/code&gt;&#xa; &lt;p&gt;&#xa; Further, when a BExtentProjection is used as the projection for a query that&#xa; is used in an OrionSession query(BQuery) method call, the OrionType of the cursor&#xa; that is returned will be the same as the extent.&#xa; &lt;p&gt;&#xa; &lt;pre&gt;&#xa; OrionSession session = getAnOrionSession();&#xa; BQuery query = BSqlQuery.make(BCar.ORION_TYPE)&#xa;   .where(Predicates.eq(&#x22;moonroof&#x22;, BBoolean.TRUE));&#xa; OrionCursor cursor = session.query(query);&#xa; while (cursor.next()) {&#xa;  BCar car = (BCar) cursor.get();&#xa;  ...&#xa; }&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Matthew Giannini</tag>
+<tag name="@creation">Jun 26, 2008</tag>
+<tag name="@version">$Revision$ $Date: $</tag>
+<tag name="@since">Baja 3.4</tag>
+<tag name="@see">com.tridium.orion.sql.BSqlQuery#make(OrionType, String)</tag>
+<tag name="@see">com.tridium.orion.OrionSession#select(BQuery)</tag>
+<tag name="@see">javax.baja.query.BTypedExtent</tag>
+<extends>
+<type class="javax.baja.query.BProjection"/>
+</extends>
+<!-- com.tridium.orion.sql.BExtentProjection() -->
+<constructor name="BExtentProjection" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.orion.sql.BExtentProjection.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BExtentProjection.add(javax.baja.query.BProjectionColumn) -->
+<method name="add"  public="true">
+<description>
+A BExtentProjection does not allow adding of projection columns since&#xa; it has a fixed, predefined set of projection columns based on the extent&#xa; that is used in the parent BQuery. &lt;font color=&#x27;red&#x27;&gt;Therefore, this method&#xa; always throws an OrionException.&lt;/font&gt;
+</description>
+<parameter name="column">
+<type class="javax.baja.query.BProjectionColumn"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BProjection"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BExtentProjection.getProjectionColumns() -->
+<method name="getProjectionColumns"  public="true">
+<description>
+A BExtentProjection will only return projection columns if it is&#xa; parented in a BQuery, and the parent BQuery has a BTypedExtent.  The &#xa; projection columns are created by creating projection columns for the&#xa; persistent properties of the the first extent returned by listTypes().&#xa; &lt;p&gt;&#xa; The BProjectionColumns generated will have column expressions of type&#xa; BSqlField, and the sql fields will be aliased if the extent is an aliased&#xa; BSqlExtent.
+</description>
+<return>
+<type class="javax.baja.query.BProjectionColumn" dimension="1"/>
+<description>
+a BProjectionColumn[] of the persistent properties of the first&#xa; extent in the parent query&#x27;s extent.  A zero-length array will be returned&#xa; if the conditions described above are not met.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BExtentProjection.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

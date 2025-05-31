@@ -1,0 +1,402 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  10 Jul 03
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Workbench</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/bajaui.html" class="navbar">Prev</a> |  <a href="/doc/web.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Workbench</h1> 
+
+<!------------------------------------------------------------->
+<h1 id="overview">Overview</h1>
+<!------------------------------------------------------------->
+
+<p>
+The <a href='module://docDeveloper/doc/workbench-wb/module-index.bajadoc'>workbench</a> module 
+defines the framework for building standardized user interfaces.  The workbench 
+provides enhancements to the <a href='bajaui.html'>bajaui</a> widget toolkit:
+</p>                                                
+
+<ul> 
+<li>Standard layout with menu, toolbar, sidebars, and view;</li>
+<li>Standard browser based navigation model with an active ord, back, and forward;</li>
+<li>Bookmarking;</li>
+<li>Tabbed browsing;</li>
+<li>Options management;</li>
+<li>Plugin APIs;</li>
+<li>Ability to customize using WbProfiles;</li>
+<li>Enables both desktop and browser based applications;</li>
+</ul>              
+
+<p class='note'>
+Note: The term <i>workbench</i> applies both to the actual application itself 
+as well as the underlying technology used to build customized applications.  
+As you will see, all apps are really just different veneers of 
+the same workbench customized using WbProfiles.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="layout">Layout</h1>
+<!------------------------------------------------------------->
+
+<p>
+<img src='workbench.png'/>
+</p>
+
+<p>
+The illustration aboves shows the key components of the Workbench layout:
+</p>                                                                     
+
+<ul>
+<li><b>MenuBar</b>: The bar of standard and view specific pulldown menus;</li>
+<li><b>ToolbarBar</b>: The bar of standard and view specific toolbar buttons;</li>
+<li><b>LocatorBar</b>: Visualization and controls for active ord;</li>
+<li><b>SideBar</b>: Pluggable auxiliary bars including navigation and palette;</li>
+<li><b>View</b>: The main tool currently being used to view or edit the active object;</li>
+<li><b>Console</b>: Used to run command line programs such as the Java compiler;</li>
+<li><b>StatusBar</b>: Standard location to display status messages;</li>
+</ul>          
+
+<p>
+The <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/BWbShell.bajadoc'><code>BWbShell</code></a>
+class is used to model the entire workbench window.
+The <code>getActiveOrd()</code> method provides access
+to the current location, and <code>hyperlink()</code> is used to hyperlink
+to a new ord.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="browserBasedNavigation">Browser Based Navigation</h1>
+<!------------------------------------------------------------->
+
+<p>                            
+The fundamental navigation model of workbench is like a web browser. A web
+browser always has a current URL. As the current URL is changed, it
+fetches and displays the contents of that URL. A history of URLs is remembered
+allowing back and forward navigation. Most web browsers also allow the user to
+bookmark URLs for quick retrieval.
+</p>             
+
+<p>
+The workbench follows the same model.  Instead of a URL to identity
+current location, the workbench uses an <a href='naming.html'>ord<a>.  
+The ord currently being viewed is called the <i>active ord</i>. Every ord
+resolves to a <code>BObject</code>. The target of the active ord is
+called the <i>active object</i>.
+</p>                               
+
+<p>
+<a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/view/BWbView.bajadoc'><code>BWbViews</code></a>
+are the plugins used to work with the active object.  Views are the primary
+content of the workbench and provide a user interface to view or edit
+the active object.  The workbench discovers the available views by searching 
+the registry for <code>WbViews</code> registered on the active object.
+</p>                                                                 
+
+<p>
+The workbench provides a ready to use bookmark system that allows
+users to save and organize ords as bookmarks.  Bookmarks are also used
+to store NavSideBar and FileDialog favorites.  The bookmark 
+system provides a public API via the 
+<a href='module://docDeveloper/doc/bajaui-wb/javax/baja/ui/bookmark/package-index.bajadoc'>javax.baja.ui.bookmark</a> 
+package.
+</p>
+
+<p>
+Workbench also provides tab based browsing similar to modern browsers
+such as Mozilla and FireFox.  Most places in the interface which
+allow double clicking to hyperlink support Ctrl+double click to
+open the object in a new tab.  Also see the File menu for the menu
+items and shortcuts used to manipulate and navigate open tabs.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="plugins">WbPlugins</h1>
+<!------------------------------------------------------------->
+
+<p>
+The workbench is fundamentally a command and navigation shell, with all of it's
+functionality provided by plugins. The plugins available to the workbench are
+discovered by searching the registry for the appropriate type (WbProfiles allow
+further customization). This means that installing a new workbench plugin is as
+simple as dropping in a module.
+</p>                
+
+<p>
+All plugins subclass <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/BWbPlugin.bajadoc'><code>BWbPlugin</code></a>,
+which is itself a <code>BWidget</code>.  The following common plugins are 
+discussed in the following sections:
+</p>                                
+
+<ul> 
+<li>WbViews</li>
+<li>WbFieldEditor</li>
+<li>WbSideBars</li>
+<li>WbTools</li>
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="wbView">WbView</h1>
+<!------------------------------------------------------------->
+                                      
+<p>                               
+Views are the workhorses of the workbench.  Views provide the content
+viewers and editors for working with the active objects.  Views also
+have the unique ability to do menu and toolbar merging.  To implementing 
+a new view plugin follow these rules:
+</p>
+
+<ul> 
+
+<li>
+Create a subclass of <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/view/BWbView.bajadoc'><code>BWbView</code></a>, 
+or if your view is on a <code>BComponent</code>, then subclass
+<a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/view/BWbComponentView.bajadoc'><code>BWbComponentView</code></a>;
+</li>
+
+<li>
+Override <code>doLoadValue(BObject, Context)</code> to update
+the user interface with the active object.
+</li>
+
+<li>
+If your view allows editing of the object, then call <code>setModified()</code>
+when the user makes a change which requires a save.
+</li>
+
+<li>
+If your view allows editing and <code>setModified()</code> has been
+called, override <code>doSaveValue(BObject, Context)</code> to
+save the changes from the user interface back to the active object.
+</li>
+
+<li>
+Register your view as an agent on the appropriate object type (or types):
+<pre>
+  <code class="sunlight-highlight-xml">
+  &lt;type name="AlarmConsole" class="com.tridium.alarm.ui.BAlarmConsole"&gt;
+    &lt;agent requiredPermissions="r"&gt;&lt;on type="alarm:ConsoleRecipient"/&gt;&lt;/agent&gt;
+  &lt;/type&gt;
+  </code>
+</pre>
+</li>
+
+</ul>
+
+<p>
+Writing a view for a <code>BIFile</code> typically involved reading the file's
+content for display on <code>doLoadValue()</code>, and writing back the
+contents on <code>doSaveValue()</code>.
+</p>
+
+<p>
+Writing a <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/view/BWbComponentView.bajadoc'><code>BWbComponentView</code></a>
+for a <code>BComponent</code> typically involves subscribing to the necessary
+component or components on <code>doLoadValue()</code>, and saving back changes
+on <code>doSaveValue()</code>. The <code>WbComponentView</code> class provides
+a series of <code>registerX()</code> methods for managing the view's
+subscriptions. Remember that if working with remote components, batching
+resolves, subscribes, and transactions can make significant performance
+improvements. Refer to <a href='remoteProgramming.html'>Remote Programming</a>
+for more information.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="wbFieldEditor">WbFieldEditor</h1>
+<!------------------------------------------------------------->
+                                      
+<p> 
+Field editors are similar to views, except they typically are smaller 
+editors used to edit a <code>BSimple</code> or <code>BStruct</code>.
+Unlike views, a field editor never fills the view content area, but
+rather is used inside views like the PropertySheet.
+</p>                                               
+
+<p>
+The rules for building a field editor are very similar to views:
+</p>
+
+<ul> 
+
+<li>
+Create a subclass of <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/fieldeditor/BWbFieldEditor.bajadoc'><code>BWbFieldEditor</code></a>.
+</li>
+
+<li>
+Override <code>doLoadValue(BObject, Context)</code> to update UI from object.
+</li>
+
+<li>
+Fire <code>setModified()</code> when the user makes a change.
+</li>
+
+<li>
+Override <code>doSaveValue(BObject, Context)</code> to update the object from the UI.
+</li>
+
+<li>
+Register your view as an agent on the appropriate object type (or type).
+</li>         
+
+</ul>
+
+<p>
+<code>BWbFieldEditor</code> also provides some convenience methods
+for displaying a dialog to input a specific <code>BObject</code> type.
+For example to prompt the user input a street address:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+BStreetAddress addr = new BStreetAddress();
+addr = (BStreetAddress)BWbFieldEditor.dialog(null, "Enter Address", addr);
+if (addr != null) { /* do something! */ }
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="wbSideBar">WbSideBar</h1>
+<!------------------------------------------------------------->
+                                      
+<p> 
+Sidebars are auxiliary tools designed to be used in conjunction
+with the active view.  Sidebars are displayed along the left edge
+of the view.  Multiple sidebars can be open at one time.  Unlike
+views, sidebars are independent of the active ord.
+</p>
+
+<p>
+The rules for building a sidebar:
+</p>
+
+<ul>
+
+<li>
+Create a subclass of <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/sidebar/BWbSideBar.bajadoc'><code>BWbSideBar</code></a>.
+</li>
+
+<li>
+Provide display name and icon in your lexicon according to 
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/registry/TypeInfo.bajadoc'><code>TypeInfo</code></a> rules:
+<pre> 
+BookmarkSideBar.displayName=Bookmarks
+BookmarkSideBar.icon=module://icons/x16/bookmark.png
+</pre>
+</li>
+
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="wbTool">WbTool</h1>
+<!------------------------------------------------------------->
+                                      
+<p> 
+Tools are plugins to the workbench Tools menu.  Tools provide functionality
+independent of the active ord.  Typically tools are dialogs or wizards 
+used to accomplish a task.  There are three types of tools: 
+</p>    
+
+<ul>
+
+<li>
+<a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/tool/BWbTool.bajadoc'><code>BWbTool</code></a>:
+is the base class of all tools.  It provides a single <code>invoke(BWbShell shell)</code> 
+callback when the tool is selected from the Tools menu.  Often invoke is used to launch
+a dialog or wizard.
+</li>
+
+<li>
+<a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/tool/BWbNavNodeTool.bajadoc'><code>BWbNavNodeTool</code></a>:
+is a tool which gets mounted into the ord namespace as "tool:{typespec}|slot:/".
+Selecting the tool from the Tools menu hyperlinks as the tool's ord and then 
+standard <code>WbViews</code> are used to interact with the tool.  Typically 
+in this scenario the tool itself is just a dummy component used to register one 
+or more views.
+</li>
+
+<li>
+<a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/tool/BWbService.bajadoc'><code>BWbService</code></a>:
+is the most sophisticated type of tool.  Services are <code>WbNavNodeTools</code>,
+so selecting them hyperlinks to the tool's ord.  Services also provide the
+ability to run continuously in the background independent of the active ord.
+This is useful for monitoring tools or to run drivers locally inside the
+workbench VM.  Services can be configured to start, stop, and auto start via
+the WbServiceManager.
+</li>
+
+</ul>
+
+<p>
+The rules for building a tool:
+</p>
+
+<ul>
+
+<li>
+Create a subclass of <code>BWbTool</code>, <code>BWbNavNodeTool</code>, or <code>BWbService</code>.
+</li>
+
+<li>
+Provide display name and icon in your lexicon according to 
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/registry/TypeInfo.bajadoc'><code>TypeInfo</code></a> rules:
+<pre> 
+NewModuleTool.displayName=New Module
+NewModuleTool.icon=module://icons/x16/newModule.png
+</pre>
+</li>       
+
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="wbProfiles">WbProfiles</h1>
+<!------------------------------------------------------------->
+
+<p>
+The <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/BWbProfile.bajadoc'><code>BWbProfile</code></a>
+class provides the ability to create new customized versions of the workbench.
+WbProfile provides hooks to replace all of the standard layout components 
+such as the MenuBar, ToolBar, LocatorBar, and StatusBar.  Plus it provides
+the ability to customize which views, sidebars, and tools are available.
+Using WbProfiles you can quickly create custom applications that provide
+just the functionality needed for your domain.
+</p>                                          
+
+<p>
+You can launch workbench with a specific profile via a command parameter:
+<code>wb -profile:{typespec}</code>.
+</p>
+
+<p class='note'>
+Note that if you wish to create an application that runs in the web browser
+you will need to subclass <a href='module://docDeveloper/doc/workbench-wb/javax/baja/workbench/web/BWbWebProfile.bajadoc'><code>BWbWebProfile</code></a>.
+</p>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/bajaui.html" class="navbar">Prev</a> |  <a href="/doc/web.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

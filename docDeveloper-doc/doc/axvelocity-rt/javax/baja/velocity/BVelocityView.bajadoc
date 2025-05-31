@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="axvelocity" runtimeProfile="rt" qualifiedName="javax.baja.velocity.BVelocityView" name="BVelocityView" packageName="javax.baja.velocity" public="true" abstract="true">
+<description>
+BVelocityView is a servlet view based on an Apache Velocity template. The view&#xa; may work in conjunction with a BIVelocityWebProfile.
+</description>
+<tag name="@see">BIVelocityWebProfile</tag>
+<tag name="@see">&lt;a href=&#x22;http://velocity.apache.org/&#x22;&gt;the Apache Velocity homepage&lt;/a&gt;</tag>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">14 Jun 2011</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="javax.baja.web.BServletView"/>
+</extends>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<!-- javax.baja.velocity.BVelocityView() -->
+<constructor name="BVelocityView" protected="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.velocity.BVelocityView.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.doGet(javax.baja.web.WebOp) -->
+<method name="doGet"  public="true">
+<description/>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.doPost(javax.baja.web.WebOp) -->
+<method name="doPost"  public="true">
+<description/>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.getTemplateFileOrd(javax.baja.web.WebOp) -->
+<method name="getTemplateFileOrd"  public="true" abstract="true">
+<description>
+Return the ORD to the template file for this view.&#xa; &lt;p&gt;&#xa; Normally the ORD returned is to a file embedded in a Niagara module.&#xa; For example...&#xa; &lt;pre&gt;&#xa;   module://myModule/res/myFile.vm&#xa; &lt;/pre&gt;
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+<description>
+the WebOp for the current request.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the template ORD
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.makeVelocityContext(javax.baja.web.WebOp, javax.baja.web.BIWebProfile) -->
+<method name="makeVelocityContext"  public="true">
+<description>
+Make the VelocityContext.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+<description>
+the WebOp for the current request.
+</description>
+</parameter>
+<parameter name="profile">
+<type class="javax.baja.web.BIWebProfile"/>
+<description>
+the Web Profile for the current request.
+</description>
+</parameter>
+<return>
+<type class="org.apache.velocity.VelocityContext"/>
+<description>
+a new Velocity Context with default elements attached.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.initVelocityContext(org.apache.velocity.VelocityContext, javax.baja.web.WebOp, javax.baja.web.BIWebProfile) -->
+<method name="initVelocityContext"  protected="true">
+<description>
+Initialize the VelocityContext that will be provided to the template generator.
+</description>
+<parameter name="context">
+<type class="org.apache.velocity.VelocityContext"/>
+<description>
+the VelocityContext to add too.
+</description>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+<description>
+the WebOp for the current request.
+</description>
+</parameter>
+<parameter name="profile">
+<type class="javax.baja.web.BIWebProfile"/>
+<description>
+the Web Profile for the current request.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.useProfile(javax.baja.web.BIWebProfile, javax.baja.web.WebOp) -->
+<method name="useProfile"  protected="true">
+<description>
+Return true if the profile should be allowed to write part of the page.&#xa; &lt;p&gt;&#xa; If false is returned, the view will write the entire page. If the view needs to &#xa; enforce a special Web Profile then an InvalidProfileException should be thrown.&#xa; &lt;p&gt;&#xa; Please note, if true is returned the view must implement the BIVelocityWebProfile interface.
+</description>
+<tag name="@see">InvalidProfileException</tag>
+<tag name="@see">BIVelocityWebProfile</tag>
+<parameter name="profile">
+<type class="javax.baja.web.BIWebProfile"/>
+<description>
+the web profile.
+</description>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+<description>
+the WebOp for the current request.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+If true, the profile is allowed to&#xa;  write the page content, delegating the main content&#xa;  to the view.  If false, the view is responsible&#xa;  for the entire page content.  Returns true by default.
+</description>
+</return>
+<throws>
+<type class="javax.baja.velocity.BVelocityView$InvalidProfileException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.getMimeType(javax.baja.web.WebOp) -->
+<method name="getMimeType"  public="true">
+<description>
+Return the MIME Type for the Velocity View.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+<description/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+mime type
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.makeDefaultVelocityContext(javax.baja.web.WebOp, javax.baja.web.BIWebProfile) -->
+<method name="makeDefaultVelocityContext"  public="true" static="true">
+<description>
+Make the VelocityContext.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+<description>
+the WebOp for the current request.
+</description>
+</parameter>
+<parameter name="profile">
+<type class="javax.baja.web.BIWebProfile"/>
+<description>
+the Web Profile for the current request.
+</description>
+</parameter>
+<return>
+<type class="org.apache.velocity.VelocityContext"/>
+<description>
+a new Velocity Context with default elements attached.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.makeDefaultVelocityContext(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="makeDefaultVelocityContext"  public="true" static="true">
+<description>
+Make the VelocityContext.
+</description>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+<description>
+the object used in the current request.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+the Context being used in the current request.
+</description>
+</parameter>
+<return>
+<type class="org.apache.velocity.VelocityContext"/>
+<description>
+a new Velocity Context with default elements attached.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.getVelocityEngine() -->
+<method name="getVelocityEngine"  protected="true">
+<description>
+Return a VelocityEngine to use for a request.
+</description>
+<return>
+<type class="org.apache.velocity.app.VelocityEngine"/>
+<description>
+VelocityEngine.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.makeVelocityEngine() -->
+<method name="makeVelocityEngine"  public="true" static="true">
+<description>
+Return a new VelocityEngine instance.
+</description>
+<return>
+<type class="org.apache.velocity.app.VelocityEngine"/>
+<description>
+VelocityEngine.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.getVelocityEngineInstance() -->
+<method name="getVelocityEngineInstance"  public="true" static="true">
+<description>
+Return an instance of a VelocityEngine.
+</description>
+<return>
+<type class="org.apache.velocity.app.VelocityEngine"/>
+<description>
+VelocityEngine
+</description>
+</return>
+</method>
+
+<!-- javax.baja.velocity.BVelocityView.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

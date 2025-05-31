@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.tag.Relation" name="Relation" packageName="javax.baja.tag" public="true" interface="true" abstract="true" category="interface">
+<description>
+A relation is an immutable (&lt;code&gt;<see ref="javax.baja.tag.Id">Id</see>&lt;/code&gt;, &lt;code&gt;<see ref="javax.baja.tag.Entity">Entity</see>&lt;/code&gt;) pair.&#xa; &lt;p&gt;&#xa; A relation is best understood as a &lt;i&gt;tail-less&lt;/i&gt;, labeled edge in a directed graph, where&#xa; the &lt;code&gt;<see ref="javax.baja.tag.Relation#getId()">id</see>&lt;/code&gt; is the label for the edge, and the head of the edge is the&#xa; &lt;code&gt;<see ref="javax.baja.tag.Relation#getEndpoint()">endpoint</see>&lt;/code&gt; entity. The fact that a relation is tail-less is a nice property&#xa; since it allows relations to be easily constructed independently of their endpoint (i.e. tail) Entity.&#xa; Further, they can be reused and shared among multiple &lt;code&gt;<see ref="javax.baja.tag.Relations">Relations</see>&lt;/code&gt;.&#xa; &lt;p&gt;&#xa; A relation also extends &lt;code&gt;<see ref="javax.baja.tag.Taggable">Taggable</see>&lt;/code&gt; which can be useful for attaching additional&#xa; metadata to the relation. But note that a relation&#x27;s tags are &lt;strong&gt;ignored&lt;/strong&gt;&#xa; when testing for equality (see &lt;code&gt;<see ref="javax.baja.tag.Relation#equals(java.lang.Object)">equals</see>&lt;/code&gt;).&#xa; &lt;p&gt;&#xa; The following example demonstrates how to relate two entities.&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa;   Entity manager = getManagerEntity();&amp;#xa;   Entity bob = getEmployeeEntity(&amp;#x22;bob&amp;#x22;);&amp;#xa;   Id managesId = Id.newId(&amp;#x22;mydict:manages&amp;#x22;);&amp;#xa;&amp;#xa;   // Add a &amp;#x22;manages&amp;#x22; relation between the manager and bob&amp;#xa;   //&amp;#xa;   manager.relations().add(managesId, bob);&amp;#xa;&amp;#xa;   // Conceptually, we now have the following graph:&amp;#xa;   //&amp;#xa;   // [manager] -- mydict:manages --&amp;gt; [bob]&amp;#xa;&amp;#xa;   // A manager usually manages more than one employee&amp;#xa;   //&amp;#xa;   manager.relations().add(managesId, getEmployeeEntity(&amp;#x22;jane&amp;#x22;));&amp;#xa;&amp;#xa;   // Now our graph is&amp;#xa;   //&amp;#xa;   //                              --&amp;gt; [bob]&amp;#xa;   // [manager] -- mydict:manages -|&amp;#xa;   //                              --&amp;gt; [jane]&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:mgiannini@tridium.com&#x22;&gt;Matthew Giannini&lt;/a&gt;</tag>
+<tag name="@see">Entity</tag>
+<tag name="@see">Relations</tag>
+<implements>
+<type class="javax.baja.tag.Taggable"/>
+</implements>
+<!-- javax.baja.tag.Relation.getId() -->
+<method name="getId"  public="true" abstract="true">
+<description>
+Get the relations&#x27; id.
+</description>
+<return>
+<type class="javax.baja.tag.Id"/>
+<description>
+the relation&#x27;s id
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.isInbound() -->
+<method name="isInbound"  public="true" abstract="true">
+<description>
+Test for inbound relation relative to entity where the&#xa;   relation is stored
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if relation is an inbound relation
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.isOutbound() -->
+<method name="isOutbound"  public="true" abstract="true">
+<description>
+Test for outbound relation relative to entity where the&#xa;   relation is stored
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if relation is an outbound relation
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.getEndpoint() -->
+<method name="getEndpoint"  public="true" abstract="true">
+<description>
+Get the endpoint entity for this relation.
+</description>
+<return>
+<type class="javax.baja.tag.Entity"/>
+<description>
+the endpoint entity for this relation
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.getEndpointOrd() -->
+<method name="getEndpointOrd"  public="true" abstract="true">
+<description>
+Get the endpointOrd to the entity for this relation.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+<description>
+the endpoint entity for this relation
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.tags() -->
+<method name="tags"  public="true" abstract="true">
+<description>
+Get the tags for this relation.
+</description>
+<return>
+<type class="javax.baja.tag.Tags"/>
+<description>
+the tags for this relation
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.equals(java.lang.Object) -->
+<method name="equals"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Two relations are equal &lt;i&gt;iff&lt;/i&gt; they have the same id and endpoint. (The equality of&#xa; BComplex subclasses, however, cannot override &lt;code&gt;<see ref="java.lang.Object#equals(java.lang.Object)">Object#equals(Object)</see>&lt;/code&gt;). Tags are&#xa; &lt;i&gt;NOT&lt;/i&gt; taken into account when testing for equality.
+</description>
+<parameter name="o">
+<type class="java.lang.Object"/>
+<description>
+the object to test for equality with
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if this relation is equal to the given object
+</description>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.hashCode() -->
+<method name="hashCode"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.tag.Relation.INBOUND -->
+<field name="INBOUND"  public="true" static="true" final="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- javax.baja.tag.Relation.OUTBOUND -->
+<field name="OUTBOUND"  public="true" static="true" final="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

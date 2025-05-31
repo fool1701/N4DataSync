@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="chart" runtimeProfile="wb" qualifiedName="javax.baja.chart.BChartPane" name="BChartPane" packageName="javax.baja.chart" public="true">
+<description>
+BChartPane is the container widget for displaying a chart.  All charts must&#xa; be contained in a chart pane.  The chart pane provides the axes, canvas, legend,&#xa; and zooming capabilities for all contained charts.&#xa; &lt;p&gt;&#xa; Each chart has its own model.  A chart model is a set of chart specs.  Each&#xa; chart spec contains a series and specifies zero or more axes.  If the same&#xa; axis instance is specified in multiple chart specs, that axis is shared by&#xa; the associated series.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">07 Jun 2004</tag>
+<tag name="@version">$Revision: 27$ $Date: 2/19/08 9:57:38 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.pane.BPane"/>
+</extends>
+<property name="border" flags="">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+Slot for the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border around the outer edge of the chart.&#xa; The header, legend, canvas, and axes are all inside the&#xa; border.
+</description>
+<tag name="@see">#getBorder</tag>
+<tag name="@see">#setBorder</tag>
+</property>
+
+<property name="background" flags="">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Slot for the &lt;code&gt;background&lt;/code&gt; property.&#xa; The brush used to paint the background behind the entire&#xa; chart
+</description>
+<tag name="@see">#getBackground</tag>
+<tag name="@see">#setBackground</tag>
+</property>
+
+<property name="header" flags="">
+<type class="javax.baja.chart.BChartHeader"/>
+<description>
+Slot for the &lt;code&gt;header&lt;/code&gt; property.&#xa; The header includes the title and subtitle for the chart.
+</description>
+<tag name="@see">#getHeader</tag>
+<tag name="@see">#setHeader</tag>
+</property>
+
+<property name="canvas" flags="">
+<type class="javax.baja.chart.BChartCanvas"/>
+<description>
+Slot for the &lt;code&gt;canvas&lt;/code&gt; property.&#xa; The canvas where all of the charts are drawn.
+</description>
+<tag name="@see">#getCanvas</tag>
+<tag name="@see">#setCanvas</tag>
+</property>
+
+<property name="legend" flags="">
+<type class="javax.baja.chart.BChartLegend"/>
+<description>
+Slot for the &lt;code&gt;legend&lt;/code&gt; property.&#xa; The legend that displays the mapping of colors to series.
+</description>
+<tag name="@see">#getLegend</tag>
+<tag name="@see">#setLegend</tag>
+</property>
+
+<property name="zoomEnabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;zoomEnabled&lt;/code&gt; property.&#xa; Indicates whether the zoom feature is enabled for&#xa; this chart.  If enabled, the mouse can be used&#xa; to drag and select an area in the chart display.&#xa; On mouse release, the chart display is zoomed&#xa; to only display the selected area.
+</description>
+<tag name="@see">#getZoomEnabled</tag>
+<tag name="@see">#setZoomEnabled</tag>
+</property>
+
+<property name="leftAxes" flags="ht">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+Slot for the &lt;code&gt;leftAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLeftAxes</tag>
+<tag name="@see">#setLeftAxes</tag>
+</property>
+
+<property name="rightAxes" flags="ht">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+Slot for the &lt;code&gt;rightAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRightAxes</tag>
+<tag name="@see">#setRightAxes</tag>
+</property>
+
+<property name="topAxes" flags="ht">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+Slot for the &lt;code&gt;topAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTopAxes</tag>
+<tag name="@see">#setTopAxes</tag>
+</property>
+
+<property name="bottomAxes" flags="ht">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+Slot for the &lt;code&gt;bottomAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBottomAxes</tag>
+<tag name="@see">#setBottomAxes</tag>
+</property>
+
+<action name="showPanControl" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;showPanControl&lt;/code&gt; action.&#xa; This action responds to the chart&#x27;s request to show the pan control&#xa; Only the pan control object that the chart pane itself manages will&#xa; respond to this action.
+</description>
+<tag name="@see">#showPanControl()</tag>
+</action>
+
+<action name="hidePanControl" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;hidePanControl&lt;/code&gt; action.&#xa; This action responds to the chart&#x27;s request to hide the pan control.&#xa; Only the pan control object that the chart pane itself manages will&#xa; respond to this action.
+</description>
+<tag name="@see">#hidePanControl()</tag>
+</action>
+
+<topic name="showPanRequested" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;showPanRequested&lt;/code&gt; topic.&#xa; The BChartPane will fire this event when it detects a condition where&#xa; the pan control object should be shown.
+</description>
+<tag name="@see">#fireShowPanRequested</tag>
+</topic>
+
+<topic name="hidePanRequested" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;hidePanRequested&lt;/code&gt; topic.&#xa; The BChartPane will fire this event when it detects a condition where&#xa; the pan control object should be hidden.
+</description>
+<tag name="@see">#fireHidePanRequested</tag>
+</topic>
+
+<!-- javax.baja.chart.BChartPane() -->
+<constructor name="BChartPane" public="true">
+<description>
+Default constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.chart.BChartPane(javax.baja.chart.BChart) -->
+<constructor name="BChartPane" public="true">
+<parameter name="chart">
+<type class="javax.baja.chart.BChart"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.chart.BChartPane.getBorder() -->
+<method name="getBorder"  public="true">
+<description>
+Get the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border around the outer edge of the chart.&#xa; The header, legend, canvas, and axes are all inside the&#xa; border.
+</description>
+<tag name="@see">#border</tag>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setBorder(javax.baja.ui.BBorder) -->
+<method name="setBorder"  public="true">
+<description>
+Set the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border around the outer edge of the chart.&#xa; The header, legend, canvas, and axes are all inside the&#xa; border.
+</description>
+<tag name="@see">#border</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BBorder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getBackground() -->
+<method name="getBackground"  public="true">
+<description>
+Get the &lt;code&gt;background&lt;/code&gt; property.&#xa; The brush used to paint the background behind the entire&#xa; chart
+</description>
+<tag name="@see">#background</tag>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setBackground(javax.baja.gx.BBrush) -->
+<method name="setBackground"  public="true">
+<description>
+Set the &lt;code&gt;background&lt;/code&gt; property.&#xa; The brush used to paint the background behind the entire&#xa; chart
+</description>
+<tag name="@see">#background</tag>
+<parameter name="v">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getHeader() -->
+<method name="getHeader"  public="true">
+<description>
+Get the &lt;code&gt;header&lt;/code&gt; property.&#xa; The header includes the title and subtitle for the chart.
+</description>
+<tag name="@see">#header</tag>
+<return>
+<type class="javax.baja.chart.BChartHeader"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setHeader(javax.baja.chart.BChartHeader) -->
+<method name="setHeader"  public="true">
+<description>
+Set the &lt;code&gt;header&lt;/code&gt; property.&#xa; The header includes the title and subtitle for the chart.
+</description>
+<tag name="@see">#header</tag>
+<parameter name="v">
+<type class="javax.baja.chart.BChartHeader"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getCanvas() -->
+<method name="getCanvas"  public="true">
+<description>
+Get the &lt;code&gt;canvas&lt;/code&gt; property.&#xa; The canvas where all of the charts are drawn.
+</description>
+<tag name="@see">#canvas</tag>
+<return>
+<type class="javax.baja.chart.BChartCanvas"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setCanvas(javax.baja.chart.BChartCanvas) -->
+<method name="setCanvas"  public="true">
+<description>
+Set the &lt;code&gt;canvas&lt;/code&gt; property.&#xa; The canvas where all of the charts are drawn.
+</description>
+<tag name="@see">#canvas</tag>
+<parameter name="v">
+<type class="javax.baja.chart.BChartCanvas"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getLegend() -->
+<method name="getLegend"  public="true">
+<description>
+Get the &lt;code&gt;legend&lt;/code&gt; property.&#xa; The legend that displays the mapping of colors to series.
+</description>
+<tag name="@see">#legend</tag>
+<return>
+<type class="javax.baja.chart.BChartLegend"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setLegend(javax.baja.chart.BChartLegend) -->
+<method name="setLegend"  public="true">
+<description>
+Set the &lt;code&gt;legend&lt;/code&gt; property.&#xa; The legend that displays the mapping of colors to series.
+</description>
+<tag name="@see">#legend</tag>
+<parameter name="v">
+<type class="javax.baja.chart.BChartLegend"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getZoomEnabled() -->
+<method name="getZoomEnabled"  public="true">
+<description>
+Get the &lt;code&gt;zoomEnabled&lt;/code&gt; property.&#xa; Indicates whether the zoom feature is enabled for&#xa; this chart.  If enabled, the mouse can be used&#xa; to drag and select an area in the chart display.&#xa; On mouse release, the chart display is zoomed&#xa; to only display the selected area.
+</description>
+<tag name="@see">#zoomEnabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setZoomEnabled(boolean) -->
+<method name="setZoomEnabled"  public="true">
+<description>
+Set the &lt;code&gt;zoomEnabled&lt;/code&gt; property.&#xa; Indicates whether the zoom feature is enabled for&#xa; this chart.  If enabled, the mouse can be used&#xa; to drag and select an area in the chart display.&#xa; On mouse release, the chart display is zoomed&#xa; to only display the selected area.
+</description>
+<tag name="@see">#zoomEnabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getLeftAxes() -->
+<method name="getLeftAxes"  public="true">
+<description>
+Get the &lt;code&gt;leftAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#leftAxes</tag>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setLeftAxes(javax.baja.ui.BWidget) -->
+<method name="setLeftAxes"  public="true">
+<description>
+Set the &lt;code&gt;leftAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#leftAxes</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getRightAxes() -->
+<method name="getRightAxes"  public="true">
+<description>
+Get the &lt;code&gt;rightAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#rightAxes</tag>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setRightAxes(javax.baja.ui.BWidget) -->
+<method name="setRightAxes"  public="true">
+<description>
+Set the &lt;code&gt;rightAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#rightAxes</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getTopAxes() -->
+<method name="getTopAxes"  public="true">
+<description>
+Get the &lt;code&gt;topAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#topAxes</tag>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setTopAxes(javax.baja.ui.BWidget) -->
+<method name="setTopAxes"  public="true">
+<description>
+Set the &lt;code&gt;topAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#topAxes</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getBottomAxes() -->
+<method name="getBottomAxes"  public="true">
+<description>
+Get the &lt;code&gt;bottomAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#bottomAxes</tag>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setBottomAxes(javax.baja.ui.BWidget) -->
+<method name="setBottomAxes"  public="true">
+<description>
+Set the &lt;code&gt;bottomAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#bottomAxes</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BWidget"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.showPanControl() -->
+<method name="showPanControl"  public="true">
+<description>
+Invoke the &lt;code&gt;showPanControl&lt;/code&gt; action.&#xa; This action responds to the chart&#x27;s request to show the pan control&#xa; Only the pan control object that the chart pane itself manages will&#xa; respond to this action.
+</description>
+<tag name="@see">#showPanControl</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.hidePanControl() -->
+<method name="hidePanControl"  public="true">
+<description>
+Invoke the &lt;code&gt;hidePanControl&lt;/code&gt; action.&#xa; This action responds to the chart&#x27;s request to hide the pan control.&#xa; Only the pan control object that the chart pane itself manages will&#xa; respond to this action.
+</description>
+<tag name="@see">#hidePanControl</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.fireShowPanRequested(javax.baja.ui.event.BWidgetEvent) -->
+<method name="fireShowPanRequested"  public="true">
+<description>
+Fire an event for the &lt;code&gt;showPanRequested&lt;/code&gt; topic.&#xa; The BChartPane will fire this event when it detects a condition where&#xa; the pan control object should be shown.
+</description>
+<tag name="@see">#showPanRequested</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.fireHidePanRequested(javax.baja.ui.event.BWidgetEvent) -->
+<method name="fireHidePanRequested"  public="true">
+<description>
+Fire an event for the &lt;code&gt;hidePanRequested&lt;/code&gt; topic.&#xa; The BChartPane will fire this event when it detects a condition where&#xa; the pan control object should be hidden.
+</description>
+<tag name="@see">#hidePanRequested</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getCharts() -->
+<method name="getCharts"  public="true" final="true">
+<description>
+Get the list of child charts.
+</description>
+<return>
+<type class="javax.baja.chart.BChart" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getAllSeries() -->
+<method name="getAllSeries"  public="true">
+<description>
+Get the list of all series.
+</description>
+<return>
+<type class="javax.baja.chart.Series" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getAxes(javax.baja.chart.BAxisDimension) -->
+<method name="getAxes"  public="true">
+<description>
+Get all axes for the specified dimension.
+</description>
+<parameter name="dim">
+<type class="javax.baja.chart.BAxisDimension"/>
+</parameter>
+<return>
+<type class="javax.baja.chart.BAxis" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.getController() -->
+<method name="getController"  public="true">
+<description>
+Get the controller.
+</description>
+<return>
+<type class="javax.baja.chart.ChartController"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.setController(javax.baja.chart.ChartController) -->
+<method name="setController"  public="true">
+<description>
+Set the controller.
+</description>
+<parameter name="newController">
+<type class="javax.baja.chart.ChartController"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.doShowPanControl() -->
+<method name="doShowPanControl"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.doHidePanControl() -->
+<method name="doHidePanControl"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.zoomIn(javax.baja.chart.BAxisDimension, double, double) -->
+<method name="zoomIn"  public="true">
+<description>
+Zoom in on the horizontal.
+</description>
+<parameter name="dim">
+<type class="javax.baja.chart.BAxisDimension"/>
+</parameter>
+<parameter name="v1">
+<type class="double"/>
+</parameter>
+<parameter name="v2">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.isZoomed(javax.baja.chart.BAxisDimension) -->
+<method name="isZoomed"  public="true">
+<description>
+Test the zoomed state in the specified dimension.
+</description>
+<parameter name="dim">
+<type class="javax.baja.chart.BAxisDimension"/>
+<description>
+The dimension to test.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the chart has been zoomed in the specified&#xa;   dimension, false otherwise.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.zoomOut() -->
+<method name="zoomOut"  public="true">
+<description>
+Undo the most recent zoom action.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.noZoom() -->
+<method name="noZoom"  public="true">
+<description>
+Cancel all current zoom actions.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.panLeft() -->
+<method name="panLeft"  public="true">
+<description>
+Pan the display to the left when zoomed horizontally.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.panRight() -->
+<method name="panRight"  public="true">
+<description>
+Pan the display to the right when zoomed horizontally.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.panUp() -->
+<method name="panUp"  public="true">
+<description>
+Pan the display up when zoom vertically.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.panDown() -->
+<method name="panDown"  public="true">
+<description>
+Pan the display down when zoom vertically.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.childAt(javax.baja.gx.Point) -->
+<method name="childAt"  public="true">
+<description>
+Make sure the canvas gets precedence over any charts.
+</description>
+<parameter name="pt">
+<type class="javax.baja.gx.Point"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BWidget"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description>
+Compute the preferred size of the chart.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.refresh() -->
+<method name="refresh"  public="true" synchronized="true">
+<description>
+Refresh the chart.  This will update the chart for any changes&#xa; in series values.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.animate() -->
+<method name="animate"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.rebuild() -->
+<method name="rebuild"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.build() -->
+<method name="build"  public="true" synchronized="true">
+<description>
+Build the chart.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.findAxis(javax.baja.chart.BAxis) -->
+<method name="findAxis"  public="true">
+<description>
+Find an axis in one of the charts that is equivalent to the specified axis.
+</description>
+<parameter name="axis">
+<type class="javax.baja.chart.BAxis"/>
+</parameter>
+<return>
+<type class="javax.baja.chart.BAxis"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.doLayout(javax.baja.ui.BWidget[]) -->
+<method name="doLayout"  public="true" synchronized="true">
+<description>
+Layout the chart.
+</description>
+<parameter name="kids">
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.paint(javax.baja.gx.Graphics) -->
+<method name="paint"  public="true" synchronized="true">
+<description>
+Paint the chart.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.export() -->
+<method name="export"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<return>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mousePressed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePressed"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mouseReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseReleased"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mouseEntered(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseEntered"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mouseExited(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseExited"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mouseMoved(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseMoved"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mouseDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragged"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mouseWheel(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseWheel"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mousePulsed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePulsed"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.mouseHover(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseHover"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<description/>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.prepare() -->
+<method name="prepare"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChartPane.border -->
+<field name="border"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border around the outer edge of the chart.&#xa; The header, legend, canvas, and axes are all inside the&#xa; border.
+</description>
+<tag name="@see">#getBorder</tag>
+<tag name="@see">#setBorder</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.background -->
+<field name="background"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;background&lt;/code&gt; property.&#xa; The brush used to paint the background behind the entire&#xa; chart
+</description>
+<tag name="@see">#getBackground</tag>
+<tag name="@see">#setBackground</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.header -->
+<field name="header"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;header&lt;/code&gt; property.&#xa; The header includes the title and subtitle for the chart.
+</description>
+<tag name="@see">#getHeader</tag>
+<tag name="@see">#setHeader</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.canvas -->
+<field name="canvas"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;canvas&lt;/code&gt; property.&#xa; The canvas where all of the charts are drawn.
+</description>
+<tag name="@see">#getCanvas</tag>
+<tag name="@see">#setCanvas</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.legend -->
+<field name="legend"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;legend&lt;/code&gt; property.&#xa; The legend that displays the mapping of colors to series.
+</description>
+<tag name="@see">#getLegend</tag>
+<tag name="@see">#setLegend</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.zoomEnabled -->
+<field name="zoomEnabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;zoomEnabled&lt;/code&gt; property.&#xa; Indicates whether the zoom feature is enabled for&#xa; this chart.  If enabled, the mouse can be used&#xa; to drag and select an area in the chart display.&#xa; On mouse release, the chart display is zoomed&#xa; to only display the selected area.
+</description>
+<tag name="@see">#getZoomEnabled</tag>
+<tag name="@see">#setZoomEnabled</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.leftAxes -->
+<field name="leftAxes"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;leftAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLeftAxes</tag>
+<tag name="@see">#setLeftAxes</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.rightAxes -->
+<field name="rightAxes"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;rightAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRightAxes</tag>
+<tag name="@see">#setRightAxes</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.topAxes -->
+<field name="topAxes"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;topAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTopAxes</tag>
+<tag name="@see">#setTopAxes</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.bottomAxes -->
+<field name="bottomAxes"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;bottomAxes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBottomAxes</tag>
+<tag name="@see">#setBottomAxes</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.showPanControl -->
+<field name="showPanControl"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;showPanControl&lt;/code&gt; action.&#xa; This action responds to the chart&#x27;s request to show the pan control&#xa; Only the pan control object that the chart pane itself manages will&#xa; respond to this action.
+</description>
+<tag name="@see">#showPanControl()</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.hidePanControl -->
+<field name="hidePanControl"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;hidePanControl&lt;/code&gt; action.&#xa; This action responds to the chart&#x27;s request to hide the pan control.&#xa; Only the pan control object that the chart pane itself manages will&#xa; respond to this action.
+</description>
+<tag name="@see">#hidePanControl()</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.showPanRequested -->
+<field name="showPanRequested"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;showPanRequested&lt;/code&gt; topic.&#xa; The BChartPane will fire this event when it detects a condition where&#xa; the pan control object should be shown.
+</description>
+<tag name="@see">#fireShowPanRequested</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.hidePanRequested -->
+<field name="hidePanRequested"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;hidePanRequested&lt;/code&gt; topic.&#xa; The BChartPane will fire this event when it detects a condition where&#xa; the pan control object should be hidden.
+</description>
+<tag name="@see">#fireHidePanRequested</tag>
+</field>
+
+<!-- javax.baja.chart.BChartPane.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.chart.BChartPane.DEFAULT_COLORS -->
+<field name="DEFAULT_COLORS"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BColor" dimension="1"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

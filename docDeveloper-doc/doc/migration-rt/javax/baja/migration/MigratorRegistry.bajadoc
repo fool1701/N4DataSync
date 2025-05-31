@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="migration" runtimeProfile="rt" qualifiedName="javax.baja.migration.MigratorRegistry" name="MigratorRegistry" packageName="javax.baja.migration" public="true">
+<description>
+MigratorRegistry handles the management of &lt;code&gt;<see ref="javax.baja.migration.BIFileMigrator">javax.baja.migration.BIFileMigrator</see>&lt;/code&gt;s using&#xa; the Niagara Type Registry.  Instances of &lt;code&gt;<see ref="javax.baja.migration.BIFileMigrator">javax.baja.migration.BIFileMigrator</see>&lt;/code&gt; are retrieved&#xa; from the Registry, and used to initialize a migrator map.  The &lt;code&gt;<see ref="javax.baja.migration.MigratorRegistry#lookup(java.io.File)">#lookup(java.io.File)</see>&lt;/code&gt; method&#xa; attempts to first match the filename exactly by the migrate types assigned for each migrator.  If&#xa; no match is found, the migratorsByFile&#x27; migrate types are used as a regex to match patterns, like&#xa; *.bog. If nothing matches, the default &lt;code&gt;<see ref="javax.baja.migration.BFileMigrator">javax.baja.migration.BFileMigrator</see>&lt;/code&gt; is returned.&#xa; The migrator types are loaded from a migrator.properties file with a fallback of the types claimed&#xa; by each migrator class. The migrator properties file allows 3rd party developers to migrate&#xa; niagara files which have names that are different than the standard niagara file names.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:craig.gemmill@tridium.com&#x22;&gt;Craig Gemmill&lt;/a&gt;&#xa;         Date: 6/11/14&#xa;         Time: 4:03 PM</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.migration.MigratorRegistry() -->
+<constructor name="MigratorRegistry" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.migration.MigratorRegistry.initialize() -->
+<method name="initialize"  public="true" static="true">
+<description>
+Initialize our registry of migrators with the migrator.properties file.&#xa; The file is located at &lt;code&gt;&amp;lt;niagara user home&amp;gt;/etc&lt;/code&gt;&#xa; If the file is not found, the registry is initialized with the default&#xa; file patterns defined in each migrator class.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.MigratorRegistry.initialize(java.io.InputStream) -->
+<method name="initialize"  public="true" static="true">
+<description>
+Initialize our registry of migrators from an InputStream of properties.
+</description>
+<parameter name="inputStream">
+<type class="java.io.InputStream"/>
+<description>
+an input stream from which to load the migrator properties or null to&#xa;                    load the default migrator patterns defined in each migrator class.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.MigratorRegistry.lookup(java.io.File) -->
+<method name="lookup"  public="true" static="true">
+<description>
+Lookup a &lt;code&gt;<see ref="javax.baja.migration.BIFileMigrator">javax.baja.migration.BIFileMigrator</see>&lt;/code&gt; that can handle a given AX file type.&#xa; &lt;p&gt;&#xa; &lt;b&gt;NOTE:&lt;/b&gt; Only a single migrator is allowed for a particular type.&#xa; Possible future improvement is to allow for dealing with&#xa; multiple migratorsByFile that claim to migrate a single type.
+</description>
+<parameter name="f">
+<type class="java.io.File"/>
+<description>
+a Niagara file to be migrated
+</description>
+</parameter>
+<return>
+<type class="javax.baja.migration.BIFileMigrator"/>
+<description>
+the appropriate migrator for this file type.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.MigratorRegistry.main(java.lang.String...) -->
+<method name="main"  public="true" static="true" isVarargs="true">
+<description>
+Command line check for the list of available migrators, and to identify the migrator&#xa; for a particular file.&#xa; If invoked with no arguments, this will list all the migrators registered along with the&#xa; files they claim to migrate.&#xa; If invoked with one or more arguments, each argument is interpreted as a file name&#xa; to be used to lookup a migrator, and the migrator for that name is displayed.
+</description>
+<parameter name="args">
+<type class="java.lang.String" dimension="1"/>
+<description>
+list of file names.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.BDdfWorker" name="BDdfWorker" packageName="com.tridium.ddf" public="true" final="true">
+<description>
+This is a default implementation of BWorker that uses&#xa; and infinite length queue, bound only by available memory&#xa; in the station, to process items.
+</description>
+<extends>
+<type class="javax.baja.util.BWorker"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.BDdfWorker() -->
+<constructor name="BDdfWorker" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.BDdfWorker.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfWorker.startWorker() -->
+<method name="startWorker"  protected="true">
+<description>
+Starts the worker thread provided that the closest Nav ancestor network&#xa; or device is neither in fatalFault nor disabled.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfWorker.getWorker() -->
+<method name="getWorker"  public="true">
+<description>
+Provides the Worker (which is essentially a Thread wrapper) for&#xa; this object.
+</description>
+<return>
+<type class="javax.baja.util.Worker"/>
+<description>
+a direct reference to the &#x27;communicationWorker&#x27;
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfWorker.processInBackground(java.lang.Runnable) -->
+<method name="processInBackground"  public="true">
+<description>
+Places the given Runnable on the worker&#x27;s queue. The worker&#x27;s&#xa; thread will pull the Runnable off the the worker&#x27;s queue in the&#xa; order that it was placed on the queue and call the &#x27;run&#x27; method&#xa; on the worker&#x27;s thread.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+<description>
+a Runnable to place on the worker&#x27;s queue to be processed&#xa; as soon as possible on the worker&#x27;s thread.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.BDdfWorker.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

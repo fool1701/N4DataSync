@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.collection.SlotCursorIterator" name="SlotCursorIterator" packageName="javax.baja.collection" public="true">
+<description>
+Iterates property values in a SlotCursor
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">01/27/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<parameterizedType class="java.util.Iterator">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</implements>
+<typeParameters>
+<typeVariable class="T">
+<bounds>
+<type class="javax.baja.sys.BValue"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<!-- javax.baja.collection.SlotCursorIterator(javax.baja.sys.SlotCursor&lt;javax.baja.sys.Property&gt;, java.lang.Class&lt;T&gt;) -->
+<constructor name="SlotCursorIterator" public="true">
+<parameter name="cursor">
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+<description>
+cursor to iterate
+</description>
+</parameter>
+<parameter name="filterClass">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+<description>
+type of property
+</description>
+</parameter>
+<description>
+Constructor&#xa; &lt;p&gt;&#xa; NOTE: if T is a parameterized type, you&#x27;ll have trouble using this constructor, because you can&#x27;t&#xa; use ClassName.class with a parameterized ClassName.  An alternative is to do something like the following,&#xa; and suppress the unchecked warning it generates:&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa; SlotCursorIterator.stream(cursor, ClassName.class)&amp;#xa;   .map(v -&amp;gt; (ClassName&amp;lt;ParamType&amp;gt;) v)&amp;#xa;   .iterator();&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<tag name="@since">Niagara 4.2</tag>
+</constructor>
+
+<!-- javax.baja.collection.SlotCursorIterator(javax.baja.sys.SlotCursor&lt;javax.baja.sys.Property&gt;) -->
+<constructor name="SlotCursorIterator" public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<parameter name="cursor">
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+</parameter>
+<description>
+Constructor supporting Niagara 4.1 and earlier.  Constructing SlotCursorIterator this way will perform&#xa; unchecked casts, and may result in ClassCastException being thrown at runtime.
+</description>
+<tag name="@deprecated">use &lt;code&gt;<see ref="javax.baja.collection.SlotCursorIterator#SlotCursorIterator(javax.baja.sys.SlotCursor&lt;javax.baja.sys.Property&gt;, java.lang.Class&lt;T&gt;)">#SlotCursorIterator(SlotCursor, Class)</see>&lt;/code&gt; or a static utility method instead</tag>
+</constructor>
+
+<!-- javax.baja.collection.SlotCursorIterator.hasNext() -->
+<method name="hasNext"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.SlotCursorIterator.next() -->
+<method name="next"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<typeVariable class="T"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.SlotCursorIterator.iterator(javax.baja.sys.SlotCursor&lt;javax.baja.sys.Property&gt;) -->
+<method name="iterator"  public="true" static="true">
+<description>
+Utility method that returns an Iterator of Property values
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<parameter name="cursor">
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<type class="javax.baja.sys.BValue"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.collection.SlotCursorIterator.&lt;T&gt;iterator(javax.baja.sys.SlotCursor&lt;javax.baja.sys.Property&gt;, java.lang.Class&lt;T&gt;) -->
+<method name="iterator"  public="true" static="true">
+<typeParameters>
+<typeVariable class="T">
+</typeVariable>
+</typeParameters>
+<description>
+Utility method that returns a Stream of Property values having a given type.
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<parameter name="cursor">
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+</parameter>
+<parameter name="filterClass">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<parameterizedType class="java.util.Iterator">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.collection.SlotCursorIterator.stream(javax.baja.sys.SlotCursor&lt;javax.baja.sys.Property&gt;) -->
+<method name="stream"  public="true" static="true">
+<description>
+Utility method that returns a Stream of Property values.
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<parameter name="cursor">
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+<description>
+a cursor of Properties
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.stream.Stream">
+<args>
+<type class="javax.baja.sys.BValue"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.collection.SlotCursorIterator.&lt;T&gt;stream(javax.baja.sys.SlotCursor&lt;javax.baja.sys.Property&gt;, java.lang.Class&lt;T&gt;) -->
+<method name="stream"  public="true" static="true">
+<typeParameters>
+<typeVariable class="T">
+<description>
+Desired result type
+</description>
+</typeVariable>
+</typeParameters>
+<description>
+Utility method that returns a Stream of Property values having a given type.
+</description>
+<tag name="@since">Niagara 4.2</tag>
+<parameter name="cursor">
+<parameterizedType class="javax.baja.sys.SlotCursor">
+<args>
+<type class="javax.baja.sys.Property"/>
+</args>
+</parameterizedType>
+<description>
+a cursor of Properties
+</description>
+</parameter>
+<parameter name="filterClass">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+<description>
+class of the desired result type, which will be used for filtering results.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.stream.Stream">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+</class>
+</bajadoc>

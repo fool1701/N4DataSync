@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.BOrionSpace" name="BOrionSpace" packageName="com.tridium.orion" public="true">
+<description>
+BOrionSpace is the interface to the Orion database.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">20 Oct 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.space.BComponentSpace"/>
+</extends>
+<annotation><type class="javax.baja.space.AuditableSpace"/>
+</annotation>
+<!-- com.tridium.orion.BOrionSpace() -->
+<constructor name="BOrionSpace" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.orion.BOrionSpace.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getComponentCount() -->
+<method name="getComponentCount"  public="true">
+<description>
+Most components in an Orion space will not show up in&#xa; this count.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getAllComponents() -->
+<method name="getAllComponents"  public="true">
+<description>
+Most components in an Orion space will not show up in&#xa; this list.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.findByHandle(java.lang.Object, boolean) -->
+<method name="findByHandle"  public="true">
+<description>
+Get a BComponent within this space by handle,&#xa; or return null if not found.
+</description>
+<parameter name="handle">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="autoLoad">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.isMixinSpace() -->
+<method name="isMixinSpace"  public="true">
+<description>
+Mixins are not supported for Orion objects.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.mount(java.lang.Object) -->
+<method name="mount"  protected="true" synchronized="true">
+<description/>
+<parameter name="support">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.unmount(java.lang.Object) -->
+<method name="unmount"  protected="true" synchronized="true">
+<description/>
+<parameter name="support">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getOrionDatabase(java.lang.String) -->
+<method name="getOrionDatabase"  public="true">
+<description>
+Get a database by id.
+</description>
+<parameter name="dbId">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BOrionDatabase"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getOrionDatabaseForApp(javax.baja.naming.BOrd) -->
+<method name="getOrionDatabaseForApp"  public="true">
+<description>
+Get the orion database for the app identified by the specified ord.
+</description>
+<parameter name="appOrd">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BOrionDatabase"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getOrionDatabaseForApp(com.tridium.orion.BIOrionApp) -->
+<method name="getOrionDatabaseForApp"  public="true">
+<description>
+Get the orion database for the specified app.
+</description>
+<parameter name="app">
+<type class="com.tridium.orion.BIOrionApp"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BOrionDatabase"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getOrionDatabase(javax.baja.rdb.BRdbms) -->
+<method name="getOrionDatabase"  public="true">
+<description>
+Get the Orion database for the specified rdbms.
+</description>
+<parameter name="rdbms">
+<type class="javax.baja.rdb.BRdbms"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BOrionDatabase"/>
+<description>
+Returns the Orion database that uses the specified rdbms&#xa;   for its underlying database.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getOrionDatabases() -->
+<method name="getOrionDatabases"  public="true">
+<description>
+Get the list of databases managed by this space.
+</description>
+<return>
+<type class="com.tridium.orion.BOrionDatabase" dimension="1"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.listModules(com.tridium.orion.BOrionDatabase) -->
+<method name="listModules"  public="true">
+<description>
+List the modules that have registered types in&#xa; the specified database.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BOrionModule" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.listTypes(com.tridium.orion.BOrionDatabase, com.tridium.orion.BOrionModule) -->
+<method name="listTypes"  public="true">
+<description>
+List the types for the specified database.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<parameter name="module">
+<type class="com.tridium.orion.BOrionModule"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BOrionType" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getSessionFromContext(javax.baja.sys.Context) -->
+<method name="getSessionFromContext"  public="true" static="true">
+<description>
+If a session can be extracted from the specified context,&#xa; get the session.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionSession"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.findSessionInContext(javax.baja.sys.Context) -->
+<method name="findSessionInContext"  public="true" static="true">
+<description>
+If a session can be extracted from the specified context,&#xa; get the session.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionSession"/>
+<description>
+Returns the session or null if no OrionSession&#xa;   is available.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.newTransaction(javax.baja.sys.Context) -->
+<method name="newTransaction"  public="true">
+<description>
+Make a new transaction for this space.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sync.Transaction"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.makeSyncBuffer(boolean) -->
+<method name="makeSyncBuffer"  public="true">
+<description>
+Make a SyncBuffer that commits changes to this space.
+</description>
+<parameter name="coalesce">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.sync.SyncBuffer"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.createDynamicType(javax.baja.sys.Property[]) -->
+<method name="createDynamicType"  public="true" static="true">
+<description>
+Create a dynamic OrionType from the given properties
+</description>
+<parameter name="properties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionType"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.createProperty(java.lang.String, javax.baja.sys.Type, javax.baja.sys.BValue, javax.baja.sys.BFacets, int) -->
+<method name="createProperty"  public="true" static="true">
+<description>
+Create a new property.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+The property name.
+</description>
+</parameter>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+The type of the property value.
+</description>
+</parameter>
+<parameter name="def">
+<type class="javax.baja.sys.BValue"/>
+<description>
+The default value for the property.
+</description>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+The metadata for the property.
+</description>
+</parameter>
+<parameter name="flags">
+<type class="int"/>
+<description>
+The property flags.  Ex: readonly, hidden, etc.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.createProperty(java.lang.String, javax.baja.sys.Type) -->
+<method name="createProperty"  public="true" static="true">
+<description>
+Create a new property.  This method is a convenience for &#xa; &lt;code&gt;createProperty(name, type, (BValue) type.getInstance(), BFacets.NULL, 0)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+The property name.
+</description>
+</parameter>
+<parameter name="type">
+<type class="javax.baja.sys.Type"/>
+<description>
+The type of the property value.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getNavOrd() -->
+<method name="getNavOrd"  public="true">
+<description>
+The nav ord is the absolute ord for the space.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getOrdInSession() -->
+<method name="getOrdInSession"  public="true">
+<description>
+Get the ord relative to the session.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.getIcon() -->
+<method name="getIcon"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BOrionSpace.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

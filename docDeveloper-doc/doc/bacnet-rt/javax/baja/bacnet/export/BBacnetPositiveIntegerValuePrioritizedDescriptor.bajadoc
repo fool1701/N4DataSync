@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor" name="BBacnetPositiveIntegerValuePrioritizedDescriptor" packageName="javax.baja.bacnet.export" public="true">
+<description>
+BBacnetPositiveIntegerValuePrioritizedDescriptor exposes a ControlPoint as a Bacnet&#xa; Positive Integer Value Prioritized Descriptor.
+</description>
+<tag name="@author">Joseph Chandler on 19 Feb 02</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.bacnet.export.BBacnetAnalogWritableDescriptor"/>
+</extends>
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor() -->
+<constructor name="BBacnetPositiveIntegerValuePrioritizedDescriptor" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.validate() -->
+<method name="validate"  protected="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the BACnet status flags to fault if the Niagara&#xa; value is disallowed for the exposed BACnet object type.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.asnType() -->
+<method name="asnType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.convertToAsn(double) -->
+<method name="convertToAsn"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This is a loss-y conversion
+</description>
+<parameter name="value">
+<type class="double"/>
+<description>
+double value to convert to asn.1
+</description>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+truncated and asn.1 encoded integer
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.convertFromAsn(byte[]) -->
+<method name="convertFromAsn"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read a bacnet integer and convert into a double&#xa; ~precise up to +/- 2^53
+</description>
+<parameter name="value">
+<type class="byte" dimension="1"/>
+<description>
+asn.1 byte array containing a number
+</description>
+</parameter>
+<return>
+<type class="double"/>
+<description>
+converted double value
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.appendToAsn(com.tridium.bacnet.asn.AsnOutputStream, double) -->
+<method name="appendToAsn"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="com.tridium.bacnet.asn.AsnOutputStream"/>
+<description>
+asn.1 byte stream to append the numeric value
+</description>
+</parameter>
+<parameter name="value">
+<type class="double"/>
+<description>
+asn.1 byte array containing a number
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.readFromAsn(com.tridium.bacnet.asn.AsnInputStream) -->
+<method name="readFromAsn"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="in">
+<type class="com.tridium.bacnet.asn.AsnInputStream"/>
+<description>
+asn.1 byte stream read a numeric value from
+</description>
+</parameter>
+<return>
+<type class="double"/>
+<description>
+bacnet integer truncated to java double
+</description>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+<description>
+if an unexpected ASN_TYPE is encountered
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.addRequiredProps(java.util.Vector) -->
+<method name="addRequiredProps"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Subclass override method to add required properties.&#xa; outOfService property is required for AnalogPointDescriptor but not for IntegerValue commendable&#xa; Remove those optional properties from required
+</description>
+<parameter name="v">
+<parameterizedType class="java.util.Vector">
+<args>
+</args>
+</parameterizedType>
+<description>
+Vector containing required propertyIds.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.addOptionalProps(java.util.Vector) -->
+<method name="addOptionalProps"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;rawtypes&#x22;</expression>
+</annotationValue>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Subclass override method to add optional properties.&#xa; NOTE: You MUST call super.addOptionalProps(v) first!
+</description>
+<parameter name="v">
+<parameterizedType class="java.util.Vector">
+<args>
+</args>
+</parameterizedType>
+<description>
+Vector containing optional propertyIds.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="s">
+<type class="javax.baja.sys.Slot"/>
+<description>
+the
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+<description>
+the appropriate slot facets.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.objectId -->
+<field name="objectId"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;objectId&lt;/code&gt; property.&#xa; objectId is the identifier by which this point is known&#xa; to the Bacnet world.
+</description>
+<tag name="@see">#getObjectId</tag>
+<tag name="@see">#setObjectId</tag>
+</field>
+
+<!-- javax.baja.bacnet.export.BBacnetPositiveIntegerValuePrioritizedDescriptor.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

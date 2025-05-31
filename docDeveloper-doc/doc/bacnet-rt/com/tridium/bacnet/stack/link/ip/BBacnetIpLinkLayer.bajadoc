@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="com.tridium.bacnet.stack.link.ip.BBacnetIpLinkLayer" name="BBacnetIpLinkLayer" packageName="com.tridium.bacnet.stack.link.ip" public="true">
+<description>
+Tridium Bacnet IP Virtual Link Layer Implementation.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision: 6$ $Date: 12/19/01 4:35:21 PM$</tag>
+<tag name="@creation">7 Aug 00</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="com.tridium.bacnet.stack.link.BBacnetLinkLayer"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<implements>
+<type class="com.tridium.bacnet.stack.link.ip.BvllConst"/>
+</implements>
+<property name="adapter" flags="d">
+<type class="javax.baja.sys.BEnum"/>
+<description>
+Slot for the &lt;code&gt;adapter&lt;/code&gt; property.&#xa; the adapter name.  This is a name chosen by the manufacturer of the Ethernet adapter card.&#xa; The user selects the adapter to use by this name.
+</description>
+<tag name="@see">#getAdapter</tag>
+<tag name="@see">#setAdapter</tag>
+</property>
+
+<property name="adapterId" flags="hrd">
+<type class="javax.baja.sys.BEnum"/>
+<description>
+Slot for the &lt;code&gt;adapterId&lt;/code&gt; property.&#xa; the adapter id as used by the TcpIpAdapterSettings.  This is a GUID on Win32&#xa; platforms.  In QNX, this is a pathname.
+</description>
+<tag name="@see">#getAdapterId</tag>
+<tag name="@see">#setAdapterId</tag>
+</property>
+
+<property name="ipAddress" flags="rd">
+<type class="javax.baja.sys.BEnum"/>
+<description>
+Slot for the &lt;code&gt;ipAddress&lt;/code&gt; property.&#xa; the IP address of the adapter.
+</description>
+<tag name="@see">#getIpAddress</tag>
+<tag name="@see">#setIpAddress</tag>
+</property>
+
+<property name="udpPort" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;udpPort&lt;/code&gt; property.&#xa; The UDP port on the local host to which the Bacnet/IP&#xa; link layer is connected.
+</description>
+<tag name="@see">#getUdpPort</tag>
+<tag name="@see">#setUdpPort</tag>
+</property>
+
+<property name="ipDeviceType" flags="">
+<type class="com.tridium.bacnet.enums.BIpDeviceType"/>
+<description>
+Slot for the &lt;code&gt;ipDeviceType&lt;/code&gt; property.&#xa; The type of BACnet/IP device that Niagara will act as.
+</description>
+<tag name="@see">#getIpDeviceType</tag>
+<tag name="@see">#setIpDeviceType</tag>
+</property>
+
+<property name="bbmdAddress" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;bbmdAddress&lt;/code&gt; property.&#xa; The IP address of the BBMD with which the local device will&#xa; register as a Foreign Device, if there is no BBMD on our subnet.&#xa; The udpPort is used to form the full address.
+</description>
+<tag name="@see">#getBbmdAddress</tag>
+<tag name="@see">#setBbmdAddress</tag>
+</property>
+
+<property name="registrationLifetime" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;registrationLifetime&lt;/code&gt; property.&#xa; The duration of the registration with the BBMD.&#xa; The device will re-register periodically before this time expires.
+</description>
+<tag name="@see">#getRegistrationLifetime</tag>
+<tag name="@see">#setRegistrationLifetime</tag>
+</property>
+
+<property name="broadcastDistributionTable" flags="">
+<type class="com.tridium.bacnet.stack.link.ip.BBroadcastDistributionTable"/>
+<description>
+Slot for the &lt;code&gt;broadcastDistributionTable&lt;/code&gt; property.&#xa; The BDT if we are acting as a BBMD.
+</description>
+<tag name="@see">#getBroadcastDistributionTable</tag>
+<tag name="@see">#setBroadcastDistributionTable</tag>
+</property>
+
+<property name="foreignDeviceTable" flags="">
+<type class="com.tridium.bacnet.stack.link.ip.BForeignDeviceTable"/>
+<description>
+Slot for the &lt;code&gt;foreignDeviceTable&lt;/code&gt; property.&#xa; The FDT if we are acting as a BBMD.
+</description>
+<tag name="@see">#getForeignDeviceTable</tag>
+<tag name="@see">#setForeignDeviceTable</tag>
+</property>
+
+<property name="adapterDebug" flags="h">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;adapterDebug&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAdapterDebug</tag>
+<tag name="@see">#setAdapterDebug</tag>
+</property>
+
+<property name="bbmdDebug" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;bbmdDebug&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBbmdDebug</tag>
+<tag name="@see">#setBbmdDebug</tag>
+</property>
+
+<property name="autoPollEnabled" flags="rh">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;autoPollEnabled&lt;/code&gt; property.&#xa; This flag helps to keep track of the reason why the polling was enabled automatically.&#xa; It helps to decide if the polling should be stopped once the problem like disconnected cable&#xa; during station restart is addressed.
+</description>
+<tag name="@see">#getAutoPollEnabled</tag>
+<tag name="@see">#setAutoPollEnabled</tag>
+</property>
+
+<property name="adapterPollInterval" flags="h">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;adapterPollInterval&lt;/code&gt; property.&#xa; The amount of time between 2 adapter polls.&#xa; Changing this property will not stop a currently running poll schedule.&#xa; This interval will come into effect once the next polling schedule begins.
+</description>
+<tag name="@see">#getAdapterPollInterval</tag>
+<tag name="@see">#setAdapterPollInterval</tag>
+</property>
+
+<action name="dump" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;dump&lt;/code&gt; action.
+</description>
+<tag name="@see">#dump()</tag>
+</action>
+
+<action name="readBroadcastDistributionTable" flags="">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;readBroadcastDistributionTable&lt;/code&gt; action.&#xa; Read the BDT from another BBMD.
+</description>
+<tag name="@see">#readBroadcastDistributionTable(BString parameter)</tag>
+</action>
+
+<action name="writeBroadcastDistributionTable" flags="">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;writeBroadcastDistributionTable&lt;/code&gt; action.&#xa; Write the BDT to another BBMD.
+</description>
+<tag name="@see">#writeBroadcastDistributionTable(BString parameter)</tag>
+</action>
+
+<action name="updateAllBDTs" flags="ha">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;updateAllBDTs&lt;/code&gt; action.&#xa; Write our BDT to all BBMDs in our table.
+</description>
+<tag name="@see">#updateAllBDTs()</tag>
+</action>
+
+<action name="queryForAdapters" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;queryForAdapters&lt;/code&gt; action.&#xa; determine the available BACnet/IP adapter choices.
+</description>
+<tag name="@see">#queryForAdapters()</tag>
+</action>
+
+</class>
+</bajadoc>

@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="net" runtimeProfile="rt" qualifiedName="javax.baja.net.HttpConnection" name="HttpConnection" packageName="javax.baja.net" public="true">
+<description>
+HttpConnection allows client applications to submit requests to&#xa; an HTTP server.
+</description>
+<tag name="@author">John Sublett on 20 Sep 2000</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.net.HttpConnection(javax.baja.naming.BHost, int, java.lang.String) -->
+<constructor name="HttpConnection" public="true">
+<parameter name="host">
+<type class="javax.baja.naming.BHost"/>
+</parameter>
+<parameter name="port">
+<type class="int"/>
+</parameter>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.net.HttpConnection(javax.baja.naming.BHost, int) -->
+<constructor name="HttpConnection" public="true">
+<parameter name="host">
+<type class="javax.baja.naming.BHost"/>
+</parameter>
+<parameter name="port">
+<type class="int"/>
+</parameter>
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.net.HttpConnection.post(javax.baja.naming.BHost, int, java.lang.String, java.lang.String, byte[]) -->
+<method name="post"  public="true" static="true">
+<description>
+Post the specified buffer to the server.
+</description>
+<parameter name="host">
+<type class="javax.baja.naming.BHost"/>
+<description>
+The destination host.
+</description>
+</parameter>
+<parameter name="port">
+<type class="int"/>
+<description>
+The destination port.
+</description>
+</parameter>
+<parameter name="uri">
+<type class="java.lang.String"/>
+<description>
+The uri for the posted resource.
+</description>
+</parameter>
+<parameter name="contentType">
+<type class="java.lang.String"/>
+<description>
+The mime type of the posted resource.
+</description>
+</parameter>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+<description>
+The content buffer.
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setDefaultUserAgent(java.lang.String) -->
+<method name="setDefaultUserAgent"  public="true" static="true">
+<description>
+Set the default user agent to use for all connections.
+</description>
+<parameter name="defUserAgent">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setUserAgent(java.lang.String) -->
+<method name="setUserAgent"  public="true">
+<description>
+Set the user agent to use for this connection.
+</description>
+<parameter name="userAgent">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setTimeout(int) -->
+<method name="setTimeout"  public="true">
+<description>
+Set the SO_TIMEOUT option on the connection.  If&#xa; this is set to 0 or never set, there is no timeout.
+</description>
+<parameter name="timeout">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.net.SocketException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getTimeout() -->
+<method name="getTimeout"  public="true">
+<description>
+Get the current SO_TIMEOUT option on the connection.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setConnectionTimeout(int) -->
+<method name="setConnectionTimeout"  public="true">
+<description>
+Set the connection timeout.  This timer will be use for&#xa; socket connection unless the connect(int timeout) api is used.&#xa; Default value is 0.
+</description>
+<tag name="@since">4.3.42</tag>
+<parameter name="conTimeout">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getConnectionTimeout() -->
+<method name="getConnectionTimeout"  public="true">
+<description>
+Get the connectionTimeout for this connection.
+</description>
+<tag name="@since">4.3.42</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getUri() -->
+<method name="getUri"  public="true">
+<description>
+Get the URI for the first resource retrieved with&#xa; this connection.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getRemoteHost() -->
+<method name="getRemoteHost"  public="true">
+<description>
+Get the hostname for this connection
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getRequestMethod() -->
+<method name="getRequestMethod"  public="true">
+<description>
+Get the request method.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setRequestMethod(java.lang.String) -->
+<method name="setRequestMethod"  public="true">
+<description>
+Set the request method for this connection.&#xa; The value is a string indicating the HTTP request&#xa; type (e.g. GET, POST, HEAD, etc.). Constants for&#xa; common values are defined on the class.
+</description>
+<parameter name="method">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setRequestHeader(java.lang.String, java.lang.String) -->
+<method name="setRequestHeader"  public="true">
+<description>
+Set the specified  request header field to the&#xa; specified value.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setRequestHeader(java.lang.String, int) -->
+<method name="setRequestHeader"  public="true">
+<description>
+Set the specified  request header field to the&#xa; specified value.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setRequestHeader(java.lang.String, long) -->
+<method name="setRequestHeader"  public="true">
+<description>
+Set the specified  request header field to the&#xa; specified value.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setRequestHeader(java.lang.String, boolean) -->
+<method name="setRequestHeader"  public="true">
+<description>
+Set the specified  request header field to the&#xa; specified value.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.removeRequestHeader(java.lang.String) -->
+<method name="removeRequestHeader"  public="true">
+<description>
+Remove the request header field with the&#xa; specified name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setFollowRedirects(boolean) -->
+<method name="setFollowRedirects"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated"/>
+<parameter name="follow">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.isRedirected() -->
+<method name="isRedirected"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description/>
+<tag name="@deprecated"/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.connect() -->
+<method name="connect"  public="true" synchronized="true">
+<description>
+Open the connection.  If doAuthenticate is&#xa; true, authentication requests will result&#xa; in an automatic retry using the userName and&#xa; password.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.createSocket(int) -->
+<method name="createSocket"  protected="true">
+<description/>
+<parameter name="timeout">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.connect(long, java.io.InputStream) -->
+<method name="connect"  public="true" synchronized="true">
+<description>
+Send a new request over a new connection, with the specified request&#xa; body.  If doAuthenticate is true, authentication requests will result&#xa; in an automatic retry using the userName and password.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="contentLength">
+<type class="long"/>
+</parameter>
+<parameter name="stream">
+<type class="java.io.InputStream"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.connect(int) -->
+<method name="connect"  public="true" synchronized="true">
+<description>
+Send a new request over a new connection.  If doAuthenticate is true,&#xa; authentication requests will result in an automatic retry using&#xa; the userName and password.
+</description>
+<parameter name="timeout">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.newRequest(java.lang.String) -->
+<method name="newRequest"  public="true" synchronized="true">
+<description>
+Send a new request, reusing an existing connection if available.
+</description>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.newRequest(java.lang.String, byte[]) -->
+<method name="newRequest"  public="true" synchronized="true">
+<description>
+Send a new request, reusing an existing connection if available.
+</description>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="post">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.newRequest(java.lang.String, long, java.io.InputStream) -->
+<method name="newRequest"  public="true" synchronized="true">
+<description>
+Send a new request, reusing an existing connection if available.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="contentLength">
+<type class="long"/>
+</parameter>
+<parameter name="stream">
+<type class="java.io.InputStream"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.post(java.lang.String, java.lang.String, long, java.io.InputStream) -->
+<method name="post"  public="true" synchronized="true">
+<description>
+Initiate a POST request with the specified body content.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="contentType">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="contentLength">
+<type class="long"/>
+</parameter>
+<parameter name="stream">
+<type class="java.io.InputStream"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.post(java.lang.String, java.lang.String, byte[]) -->
+<method name="post"  public="true" synchronized="true">
+<description>
+Initiate a POST request with the specified body content.
+</description>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="contentType">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.put(java.lang.String, java.lang.String, byte[]) -->
+<method name="put"  public="true" synchronized="true">
+<description>
+Initiate a PUT request with the specified body content.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="contentType">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="buf">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.put(java.lang.String, java.lang.String, long, java.io.InputStream) -->
+<method name="put"  public="true" synchronized="true">
+<description>
+Initiate a PUT request with the specified body content.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="uri">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="contentType">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="contentLength">
+<type class="long"/>
+</parameter>
+<parameter name="contents">
+<type class="java.io.InputStream"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.postComplete() -->
+<method name="postComplete"  public="true">
+<description>
+Read the POST response, and return the response status code.&#xa; &lt;p&gt;&#xa; The status code returned from the original&#xa; POST should be used instead. POST requests are no&#xa; longer a two round trip transaction.
+</description>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.putComplete() -->
+<method name="putComplete"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;DeprecatedIsStillUsed&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Read the PUT response, and return the response status code.
+</description>
+<tag name="@deprecated">The status code returned from the original&#xa; PUT should be used instead.  PUT requests are no&#xa; longer a two round trip transaction.</tag>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.readResponse(java.io.InputStream) -->
+<method name="readResponse"  protected="true">
+<description/>
+<parameter name="in">
+<type class="java.io.InputStream"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.readResponse(java.io.InputStream, boolean) -->
+<method name="readResponse"  protected="true">
+<description>
+Read the response from the input. Make sure&#xa; that we correctly handle unexpected EOF, i.e.&#xa; propagate the exception.
+</description>
+<parameter name="in">
+<type class="java.io.InputStream"/>
+</parameter>
+<parameter name="retry">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.handleProxyAuth(long) -->
+<method name="handleProxyAuth"  protected="true">
+<description/>
+<parameter name="contentLength">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getResponseVersion() -->
+<method name="getResponseVersion"  public="true">
+<description>
+Get the version of the HTTP response.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getStatusCode() -->
+<method name="getStatusCode"  public="true">
+<description>
+Get the HTTP response status code.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getStatusMessage() -->
+<method name="getStatusMessage"  public="true">
+<description>
+Get the HTTP response status message.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getContentType() -->
+<method name="getContentType"  public="true">
+<description>
+Get the content type.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getContentLength() -->
+<method name="getContentLength"  public="true">
+<description>
+Get the content length.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.readContent() -->
+<method name="readContent"  public="true">
+<description>
+Read the content of the current response from the input.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getRequestHeader(java.lang.String) -->
+<method name="getRequestHeader"  public="true">
+<description>
+Get the value of the specified request header.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getResponseHeader(java.lang.String) -->
+<method name="getResponseHeader"  public="true">
+<description>
+Get the specified header field value.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getResponseHeaders(java.lang.String) -->
+<method name="getResponseHeaders"  public="true">
+<description>
+Get a list of all response headers matching the given name, ignoring case.
+</description>
+<tag name="@since">Niagara 4.10</tag>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+header name
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+list of header values
+</description>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getResponseHeaderNames() -->
+<method name="getResponseHeaderNames"  public="true">
+<description>
+Get a list of the response header fields.
+</description>
+<return>
+<parameterizedType class="java.util.Enumeration">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getResponseHeaderInt(java.lang.String) -->
+<method name="getResponseHeaderInt"  public="true">
+<description>
+Get the specified header field value as an int.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getResponseHeaderDate(java.lang.String) -->
+<method name="getResponseHeaderDate"  public="true">
+<description>
+Get the specified header field value as a date.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getInputStream() -->
+<method name="getInputStream"  public="true">
+<description>
+Get an input stream for reading from this connection.
+</description>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getOutputStream() -->
+<method name="getOutputStream"  public="true">
+<description>
+Get an output stream for writing to this connection.
+</description>
+<return>
+<type class="java.io.OutputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.isTransferChunked() -->
+<method name="isTransferChunked"  public="true">
+<description>
+Is the connection chunked?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.isOpen() -->
+<method name="isOpen"  public="true">
+<description>
+Is the connection open?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.shouldClose() -->
+<method name="shouldClose"  public="true">
+<description>
+Should this connection be closed after a single&#xa; request?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.close() -->
+<method name="close"  public="true">
+<description>
+Close the connection.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.dumpResponseHeader() -->
+<method name="dumpResponseHeader"  public="true">
+<description>
+Dump the response header.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.checkOk() -->
+<method name="checkOk"  public="true">
+<description>
+Make sure the returned status code is was OK (200).
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.net.HttpException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.checkStatus(int) -->
+<method name="checkStatus"  public="true">
+<description>
+Make sure the returned status code is what&#xa; was expected.  If the actual status is&#xa; unexpected, the connection is closed and&#xa; an HttpException is thrown.
+</description>
+<parameter name="expectedStatus">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.net.HttpException"/>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.checkError() -->
+<method name="checkError"  protected="true">
+<description>
+This method is called after the connection has completed (successfully or unsuccessfully), and gives&#xa; a chance to throw an exception if anything went wrong
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.net.ssl.SSLException"/>
+<description>
+if the TLS connection fails (HTTPS sub-classes only).
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getStatusLine() -->
+<method name="getStatusLine"  protected="true">
+<description/>
+<return>
+<type class="javax.baja.net.HttpConnection$StatusLine"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.setStatusLine(javax.baja.net.HttpConnection.StatusLine) -->
+<method name="setStatusLine"  protected="true">
+<description/>
+<parameter name="sl">
+<type class="javax.baja.net.HttpConnection$StatusLine"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getSocket() -->
+<method name="getSocket"  public="true">
+<description/>
+<return>
+<type class="java.net.Socket"/>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getSocketInputStream() -->
+<method name="getSocketInputStream"  protected="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.io.InputStream"/>
+<description>
+a BufferedInputStream that wraps the Socket&#x27;s InputStream
+</description>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getSocketOutputStream() -->
+<method name="getSocketOutputStream"  protected="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.io.OutputStream"/>
+<description>
+a BufferedOutputStream that wraps the Socket&#x27;s OutputStream
+</description>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getPrintWriter() -->
+<method name="getPrintWriter"  protected="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.io.PrintWriter"/>
+<description>
+a PrinterWriter that wraps the SocketOutputStream.  Note that this&#xa; PrintWriter does not auto-flush.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.getHostAuthority() -->
+<method name="getHostAuthority"  public="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="java.lang.String"/>
+<description>
+the authority string of the BInternetAddress created from&#xa; the hostname and port
+</description>
+</return>
+</method>
+
+<!-- javax.baja.net.HttpConnection.HTTP_VERSION -->
+<field name="HTTP_VERSION"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

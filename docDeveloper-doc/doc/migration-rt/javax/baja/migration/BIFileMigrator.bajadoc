@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="migration" runtimeProfile="rt" qualifiedName="javax.baja.migration.BIFileMigrator" name="BIFileMigrator" packageName="javax.baja.migration" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIFileMigrator manages the migration of a specific file type (identified&#xa; by the file extension) from Niagara AX format to Niagara 4 format.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:craig.gemmill@tridium.com&#x22;&gt;Craig Gemmill&lt;/a&gt;&#xa; creation    June 11 2014</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.migration.BIFileMigrator.getMigrateDirs() -->
+<method name="getMigrateDirs"  public="true" default="true">
+<description>
+Get the directory names that this Migrator handles.&#xa; This is used first, for exact directory name matches.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+an array of String with the directory names handled by this &lt;code&gt;BIFileMigrator&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.getMigrateFiles() -->
+<method name="getMigrateFiles"  public="true" default="true">
+<description>
+Get the file names that this Migrator handles.&#xa; This is used first, for exact filename matches.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+an array of String with the file names handled by this &lt;code&gt;BIFileMigrator&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.getMigratePatterns() -->
+<method name="getMigratePatterns"  public="true" default="true">
+<description>
+Get the file name patterns that this Migrator handles.&#xa; This is used second, to match filename patterns.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+an array of String with the file name patterns handled by this &lt;code&gt;BIFileMigrator&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.getMigrateTypes() -->
+<method name="getMigrateTypes"  public="true" default="true">
+<description>
+Get the file types that this Migrator handles.&#xa; This is used third, to match by extension.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+<description>
+an array of String with the file extension types handled by this &lt;code&gt;BIFileMigrator&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.initialize(java.io.File, java.io.File, java.util.function.Supplier&lt;javax.baja.security.BPassword&gt;, com.tridium.install.installable.DistributionManifest) -->
+<method name="initialize"  public="true" abstract="true">
+<description>
+Initialize this &lt;code&gt;BIFileMigrator&lt;/code&gt;.&#xa; &lt;p&gt;&#xa; Most implementations will need to cache the&#xa; source and target, as these will be needed in most&#xa; cases to perform the migration.
+</description>
+<parameter name="source">
+<type class="java.io.File"/>
+<description>
+the source file to be migrated.
+</description>
+</parameter>
+<parameter name="target">
+<type class="java.io.File"/>
+<description>
+the target file location for the migrated file.
+</description>
+</parameter>
+<parameter name="passPhraseSupplier">
+<parameterizedType class="java.util.function.Supplier">
+<args>
+<type class="javax.baja.security.BPassword"/>
+</args>
+</parameterizedType>
+<description>
+supplies a pass phrase that can be used for decoding the source and&#xa;                         encoding the target
+</description>
+</parameter>
+<parameter name="distManifest">
+<type class="com.tridium.install.installable.DistributionManifest"/>
+<description>
+the &lt;code&gt;<see ref="com.tridium.install.installable.DistributionManifest">com.tridium.install.installable.DistributionManifest</see>&lt;/code&gt; containing version information for the source station.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.migrate() -->
+<method name="migrate"  public="true" abstract="true">
+<description>
+Migrate the file associated with this migrator.&#xa; &lt;p&gt;
+</description>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+a failure message if something went wrong, or an empty message if the migration succeeded.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.setLogLevel(java.util.logging.Level) -->
+<method name="setLogLevel"  public="true" abstract="true">
+<description>
+Set the log level on this migrator.
+</description>
+<parameter name="level">
+<type class="java.util.logging.Level"/>
+<description>
+desired logging level
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.mayContainOrds() -->
+<method name="mayContainOrds"  public="true" default="true">
+<description>
+Check made during station migration for converters that desire to receive call to&#xa; updateOrds once other files are processed.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true to indicate files may contain ords. Default returns false.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.updateOrds(javax.baja.migration.IOrdConverter, boolean) -->
+<method name="updateOrds"  public="true" default="true">
+<description>
+Update any ords which need to be changed during station migration.  This call is made&#xa; during migration after all files are converted if mayContainOrds() returned true.
+</description>
+<parameter name="dat">
+<type class="javax.baja.migration.IOrdConverter"/>
+<description>
+is OrdConverter containing data needed to resolve ords.
+</description>
+</parameter>
+<parameter name="setZipped">
+<type class="boolean"/>
+<description>
+flag to indicate whether the file should be zipped.
+</description>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+a failure message if something went wrong, or an empty message if the migration succeeded.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.addCompletionMessage(java.util.List&lt;java.lang.String&gt;) -->
+<method name="addCompletionMessage"  public="true" default="true">
+<description>
+Upon the completion of the migration tool, important messages like removed modules&#xa; are displayed.  This provides the ability for file migrators to provide important high-level&#xa; messages at the end.
+</description>
+<parameter name="messages">
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+the message list.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.migration.BIFileMigrator.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

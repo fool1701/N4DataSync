@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.BIJobStepSummary" name="BIJobStepSummary" packageName="javax.baja.batchJob" public="true" interface="true" abstract="true" category="interface">
+<description>
+Summary information about a completed BJobStep
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">05 February 2008</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.4</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.batchJob.BIJobStepSummary.getJobStartTime() -->
+<method name="getJobStartTime"  public="true" abstract="true">
+<description>
+Time when the step&#x27;s job started, using caller&#x27;s time zone
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getLocalJobStartTime() -->
+<method name="getLocalJobStartTime"  public="true" abstract="true">
+<description>
+Time when the step&#x27;s job started, using time zone effective where the job executed
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getDetailsType() -->
+<method name="getDetailsType"  public="true" abstract="true">
+<description>
+Type of BJobStepDetails which holds the step&#x27;s details in the job.
+</description>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getStepType() -->
+<method name="getStepType"  public="true" abstract="true">
+<description>
+Type of job step.
+</description>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getStepDescription() -->
+<method name="getStepDescription"  public="true" abstract="true">
+<description>
+Description of the job step.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getStepState() -->
+<method name="getStepState"  public="true" abstract="true">
+<description>
+The final disposition of the completed step.
+</description>
+<return>
+<type class="javax.baja.job.BJobState"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getStartTime() -->
+<method name="getStartTime"  public="true" abstract="true">
+<description>
+Time when the step started execution, using caller&#x27;s time zone.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getLocalStartTime() -->
+<method name="getLocalStartTime"  public="true" abstract="true">
+<description>
+Time when the step started execution, using time zone effective where the step executed.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getEndTime() -->
+<method name="getEndTime"  public="true" abstract="true">
+<description>
+Time when the step completed execution.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getDisposed() -->
+<method name="getDisposed"  public="true" abstract="true">
+<description>
+Return true if the step has been disposed and is awaiting cleanup.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getJob(javax.baja.sys.BObject) -->
+<method name="getJob"  public="true" abstract="true">
+<description>
+Return the job object that contains the step described by this summary.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+<description>
+Object on the station where the step executed.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.update(javax.baja.batchJob.BJobStepDetails) -->
+<method name="update"  public="true" abstract="true">
+<description>
+Update the summary object using data from the given job step details.
+</description>
+<parameter name="details">
+<type class="javax.baja.batchJob.BJobStepDetails"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.getStepDetails(javax.baja.sys.BObject) -->
+<method name="getStepDetails"  public="true" abstract="true">
+<description>
+Locate the step details in the same session as &#x22;base&#x22; that corresponds to this&#xa; summary and return it if found.   If not found, an exception is thrown.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BJobStepDetails"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.JOB_START_TIME -->
+<field name="JOB_START_TIME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Implementing components/structs will use JOB_START_TIME as the name of the property&#xa; that getJobStartTime() returns the value for.&#xa; &#xa; The value of this constant can safely be used as a property name when building Predicate &#xa; objects for BIJobQueryManager.listStepSummaries().
+</description>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, String propName, BSimple propValue, BObject base)</tag>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, BExpression predicate, BObject base)</tag>
+</field>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.DETAILS_TYPE -->
+<field name="DETAILS_TYPE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Implementing components/structs will use DETAILS_TYPE as the name of the property&#xa; that getStepDescription() returns the value for.&#xa; &#xa; The value of this constant can safely be used as a property name when building Predicate &#xa; objects for BIJobQueryManager.listStepSummaries().
+</description>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, String propName, BSimple propValue, BObject base)</tag>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, BExpression predicate, BObject base)</tag>
+</field>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.STEP_TYPE -->
+<field name="STEP_TYPE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Implementing components/structs will use STEP_TYPE as the name of the property&#xa; that getStepType() returns the value for.&#xa; &#xa; The value of this constant can safely be used as a property name when building Predicate &#xa; objects for BIJobQueryManager.listStepSummaries().
+</description>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, String propName, BSimple propValue, BObject base)</tag>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, BExpression predicate, BObject base)</tag>
+</field>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.STEP_STATE -->
+<field name="STEP_STATE"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Implementing components/structs will use STEP_STATE as the name of the property&#xa; that getStepState() returns the value for.&#xa; &#xa; The value of this constant can safely be used as a property name when building Predicate &#xa; objects for BIJobQueryManager.listStepSummaries().
+</description>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, String propName, BSimple propValue, BObject base)</tag>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, BExpression predicate, BObject base)</tag>
+</field>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.START_TIME -->
+<field name="START_TIME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Implementing components/structs will use START_TIME as the name of the property&#xa; that getStartTime() returns the value for.&#xa; &#xa; The value of this constant can safely be used as a property name when building Predicate &#xa; objects for BIJobQueryManager.listStepSummaries().
+</description>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, String propName, BSimple propValue, BObject base)</tag>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, BExpression predicate, BObject base)</tag>
+</field>
+
+<!-- javax.baja.batchJob.BIJobStepSummary.END_TIME -->
+<field name="END_TIME"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Implementing components/structs will use END_TIME as the name of the property&#xa; that getEndTime() returns the value for.&#xa; &#xa; The value of this constant can safely be used as a property name when building Predicate &#xa; objects for BIJobQueryManager.listStepSummaries().
+</description>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, String propName, BSimple propValue, BObject base)</tag>
+<tag name="@see">BIJobQueryManager#listStepSummaries(Type stepType, BExpression predicate, BObject base)</tag>
+</field>
+
+</class>
+</bajadoc>

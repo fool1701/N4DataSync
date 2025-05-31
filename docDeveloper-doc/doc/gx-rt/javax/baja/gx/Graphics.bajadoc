@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="gx" runtimeProfile="rt" qualifiedName="javax.baja.gx.Graphics" name="Graphics" packageName="javax.baja.gx" public="true" interface="true" abstract="true" category="interface">
+<description>
+Graphics is used to access and paint to a graphics device.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">30 Dec 02</tag>
+<tag name="@version">$Revision: 21$ $Date: 6/10/11 10:09:00 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.gx.Graphics.useAntiAliasing(boolean) -->
+<method name="useAntiAliasing"  public="true" abstract="true">
+<description>
+Specify whether this context should attempt to&#xa; use anti-aliasing for rendering text and shapes.
+</description>
+<parameter name="b">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.useFractionalFontMetrics(boolean) -->
+<method name="useFractionalFontMetrics"  public="true" default="true">
+<description>
+Specify whether this context should attempt to use fractional font metrics&#xa; when rendering text. This can change the actual rendered dimensions of&#xa; text, so if you need to measure the dimensions of the rendered text, ensure&#xa; that you are also measuring them with a context with fractional font&#xa; metrics enabled.&#xa; &lt;p&gt;&#xa; By default, this will do nothing. Fractional font metrics support must be&#xa; explicitly enabled with the &lt;code&gt;gx.fractionalFontMetrics&lt;/code&gt; system&#xa; property.
+</description>
+<tag name="@see">BFont#fractionalWidth(String)</tag>
+<tag name="@since">Niagara 4.12</tag>
+<parameter name="useFractionalFontMetrics">
+<type class="boolean"/>
+<description>
+whether to use fractional font metrics
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.getBrush() -->
+<method name="getBrush"  public="true" abstract="true">
+<description>
+Gets the current brush.
+</description>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.setBrush(javax.baja.gx.BBrush) -->
+<method name="setBrush"  public="true" abstract="true">
+<description>
+Set the current brush.
+</description>
+<parameter name="b">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.setBrush(javax.baja.gx.BColor) -->
+<method name="setBrush"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;setBrush(c.toBrush())&lt;/code&gt;.
+</description>
+<parameter name="c">
+<type class="javax.baja.gx.BColor"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.getPen() -->
+<method name="getPen"  public="true" abstract="true">
+<description>
+Gets the current pen.
+</description>
+<return>
+<type class="javax.baja.gx.BPen"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.setPen(javax.baja.gx.BPen) -->
+<method name="setPen"  public="true" abstract="true">
+<description>
+Set the current stroke.
+</description>
+<parameter name="p">
+<type class="javax.baja.gx.BPen"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.getFont() -->
+<method name="getFont"  public="true" abstract="true">
+<description>
+Gets the current font.
+</description>
+<return>
+<type class="javax.baja.gx.BFont"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.setFont(javax.baja.gx.BFont) -->
+<method name="setFont"  public="true" abstract="true">
+<description>
+Sets the current font.
+</description>
+<parameter name="font">
+<type class="javax.baja.gx.BFont"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.transform(javax.baja.gx.BTransform) -->
+<method name="transform"  public="true" abstract="true">
+<description>
+Translate the logical coordinate system using&#xa; the specified transformation.
+</description>
+<parameter name="transform">
+<type class="javax.baja.gx.BTransform"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.translate(double, double) -->
+<method name="translate"  public="true" abstract="true">
+<description>
+Translate the graphics by the specified x and y distance.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.getClip() -->
+<method name="getClip"  public="true" abstract="true">
+<description>
+Get the clip geometry relative to the &#xa; current logical coordinate space.
+</description>
+<return>
+<type class="javax.baja.gx.IGeom"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.getClipBounds() -->
+<method name="getClipBounds"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;getClip().bounds()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.gx.IRectGeom"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.clip(javax.baja.gx.IGeom) -->
+<method name="clip"  public="true" abstract="true">
+<description>
+Intersects the current clip with the specified rectangle.
+</description>
+<parameter name="geom">
+<type class="javax.baja.gx.IGeom"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.clip(double, double, double, double) -->
+<method name="clip"  public="true" abstract="true">
+<description>
+Convenience for &lt;code&gt;clip(IGeom)&lt;/code&gt; with a rectangle.  &#xa; Intersect the current clip with the specified rectangle.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<parameter name="w">
+<type class="double"/>
+</parameter>
+<parameter name="h">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.stroke(javax.baja.gx.IGeom) -->
+<method name="stroke"  public="true" abstract="true">
+<description>
+Strokes the outline or path of the specified &#xa; geom using the current pen and current brush.
+</description>
+<parameter name="geom">
+<type class="javax.baja.gx.IGeom"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.fill(javax.baja.gx.IGeom) -->
+<method name="fill"  public="true" abstract="true">
+<description>
+Fills the specified geom using current brush.
+</description>
+<parameter name="geom">
+<type class="javax.baja.gx.IGeom"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.strokeLine(double, double, double, double) -->
+<method name="strokeLine"  public="true" abstract="true">
+<description>
+Draws a line between the two points using the current pen and brush.
+</description>
+<parameter name="x1">
+<type class="double"/>
+</parameter>
+<parameter name="y1">
+<type class="double"/>
+</parameter>
+<parameter name="x2">
+<type class="double"/>
+</parameter>
+<parameter name="y2">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.strokeRect(double, double, double, double) -->
+<method name="strokeRect"  public="true" abstract="true">
+<description>
+Draws the outline of the rectangle using current pen and brush.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="height">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.fillRect(double, double, double, double) -->
+<method name="fillRect"  public="true" abstract="true">
+<description>
+Fills the specified rectangle using current brush.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="height">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.drawString(java.lang.String, double, double) -->
+<method name="drawString"  public="true" abstract="true">
+<description>
+Draws the text given by the specified string, using this &#xa; graphics context&#x27;s current font and brush. The baseline of the &#xa; leftmost character is at position &lt;code&gt;x,y&lt;/code&gt; in this &#xa; graphics context&#x27;s coordinate system.
+</description>
+<parameter name="str">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.drawString(char[], int, int, double, double) -->
+<method name="drawString"  public="true" abstract="true">
+<description>
+Draws the text given by the specified character array, using this &#xa; graphics context&#x27;s current font and brush. The baseline of the &#xa; first character is at position &lt;code&gt;x,y&lt;/code&gt; in this &#xa; graphics context&#x27;s coordinate system.
+</description>
+<parameter name="data">
+<type class="char" dimension="1"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+</parameter>
+<parameter name="length">
+<type class="int"/>
+</parameter>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.drawImage(javax.baja.gx.BImage, double, double) -->
+<method name="drawImage"  public="true" abstract="true">
+<description>
+Draws as much of the specified image as is currently available.&#xa; The image is drawn with its top-left corner at &lt;code&gt;x,y&lt;/code&gt; &#xa; in this graphics context&#x27;s coordinate space. Transparent pixels &#xa; in the image do not affect whatever pixels are already there.
+</description>
+<parameter name="img">
+<type class="javax.baja.gx.BImage"/>
+</parameter>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.push() -->
+<method name="push"  public="true" abstract="true">
+<description>
+Push a copy of the current graphics state onto a stack.  This &#xa; method should always be called with a matching pop() within a &#xa; try-finally block:&#xa;&#xa; &lt;pre&gt;&#xa;  g.push();&#xa;  try&#xa;  {&#xa;    // paint code&#xa;  }&#xa;  finally&#xa;  {&#xa;    g.pop();&#xa;  }&#xa; &lt;/pre&gt;
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.pop() -->
+<method name="pop"  public="true" abstract="true">
+<description>
+Replace current graphics state with last pushed() state. This &#xa; method should always be called with a matching push() within a &#xa; try-finally block:&#xa;&#xa; &lt;pre&gt;&#xa;  g.push();&#xa;  try&#xa;  {&#xa;    // paint code&#xa;  }&#xa;  finally&#xa;  {&#xa;    g.pop();&#xa;  }&#xa; &lt;/pre&gt;
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.Graphics.dispose() -->
+<method name="dispose"  public="true" abstract="true">
+<description>
+Disposes of this graphics context and releases any system &#xa; resources that it is using.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

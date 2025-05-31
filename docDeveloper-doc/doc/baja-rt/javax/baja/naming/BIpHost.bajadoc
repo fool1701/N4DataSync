@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.naming.BIpHost" name="BIpHost" packageName="javax.baja.naming" public="true">
+<description>
+BIpHost is used to represent a host machine that is identified&#xa; with an IP address.  The hostname of an BIpHost is either a&#xa; a name resolvable via DNS or is a raw numeric IP address.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">15 May 03</tag>
+<tag name="@version">$Revision: 28$ $Date: 10/1/10 10:55:28 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.naming.BHost"/>
+</extends>
+<!-- javax.baja.naming.BIpHost(java.lang.String) -->
+<constructor name="BIpHost" public="true">
+<parameter name="hostname">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Construct an BIpHost with the specified hostname,&#xa; raw numeric IPv4 address or raw IPv6 address.
+</description>
+</constructor>
+
+<!-- javax.baja.naming.BIpHost.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BIpHost.isNumericAddress() -->
+<method name="isNumericAddress"  public="true">
+<description>
+Return true if this hostname is specified as a raw&#xa; numeric IP address or false if this IpHost is specified&#xa; as hostname which requires DNS resolution.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BIpHost.getNumericAddress(boolean) -->
+<method name="getNumericAddress"  public="true">
+<description>
+If this address is a raw numeric IP address then&#xa; return it as is.&#xa;&#xa; Otherwise if the address is a hostname and resolve is false, this method will return&#xa; the numeric address resolved by the most recent call to &lt;code&gt;<see ref="javax.baja.naming.BIpHost#getInetAddress()">#getInetAddress()</see>&lt;/code&gt;&#xa; or null if no previous calls to &lt;code&gt;<see ref="javax.baja.naming.BIpHost#getInetAddress()">#getInetAddress()</see>&lt;/code&gt; were made.&#xa;&#xa; If the address is a hostname and resolve is true, this method will call &lt;code&gt;<see ref="javax.baja.naming.BIpHost#getInetAddress()">#getInetAddress()</see>&lt;/code&gt;&#xa; to obtain the address.
+</description>
+<parameter name="resolve">
+<type class="boolean"/>
+<description>
+false if no attempt should be made to lookup the IP address using DNS. true if DNS&#xa;                may be used (note: even if true, this method may returned a cached address)
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a string representation of the numeric address of this BIpHost
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if resolve was true, and the DNS lookup failed
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BIpHost.getInetAddress() -->
+<method name="getInetAddress"  public="true">
+<description>
+Get the java.net.InetAddress for this host.  This&#xa; call might result in an DNS resolution which will&#xa; block the calling thread an indeterminate amount&#xa; of time.&#xa;&#xa; The result of the address lookup is cached for use&#xa; by &lt;code&gt;<see ref="javax.baja.naming.BIpHost#getNumericAddress(boolean)">#getNumericAddress(boolean)</see>&lt;/code&gt; when it&#xa; is called with resolve = false.
+</description>
+<return>
+<type class="java.net.InetAddress"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if the DNS lookup failed
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BIpHost.getAbsoluteOrd() -->
+<method name="getAbsoluteOrd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return &#x22;ip:hostname&#x22;
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BIpHost.openSocket(int) -->
+<method name="openSocket"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Open a TCP socket to this host on the specified port.
+</description>
+<parameter name="port">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.net.Socket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BIpHost.openSocket(int, int) -->
+<method name="openSocket"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Open a TCP socket to this host on the specified port.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="port">
+<type class="int"/>
+</parameter>
+<parameter name="timeout">
+<type class="int"/>
+<description>
+in milliseconds
+</description>
+</parameter>
+<return>
+<type class="java.net.Socket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BIpHost.openSocket(int, javax.net.SocketFactory) -->
+<method name="openSocket"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Open a TCP socket to this host on the specified port&#xa; using the provided socket factory.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="port">
+<type class="int"/>
+</parameter>
+<parameter name="socketFactory">
+<type class="javax.net.SocketFactory"/>
+</parameter>
+<return>
+<type class="java.net.Socket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BIpHost.openSocket(int, javax.net.SocketFactory, int) -->
+<method name="openSocket"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Open a TCP socket to this host on the specified port.  Subclasses&#xa; should override this method with implementation specific timeout&#xa; behavior.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="port">
+<type class="int"/>
+</parameter>
+<parameter name="socketFactory">
+<type class="javax.net.SocketFactory"/>
+</parameter>
+<parameter name="timeout">
+<type class="int"/>
+<description>
+in milliseconds
+</description>
+</parameter>
+<return>
+<type class="java.net.Socket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BIpHost.openDatagramSocket(int) -->
+<method name="openDatagramSocket"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Open a UDP socket to this host on the specified port.
+</description>
+<parameter name="port">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.net.DatagramSocket"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.naming.BIpHost.getDefaultNavDisplayName(javax.baja.sys.Context) -->
+<method name="getDefaultNavDisplayName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the nav display name.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.BIpHost.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

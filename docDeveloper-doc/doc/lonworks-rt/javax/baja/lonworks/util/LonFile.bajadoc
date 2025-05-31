@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="javax.baja.lonworks.util.LonFile" name="LonFile" packageName="javax.baja.lonworks.util" public="true" abstract="true">
+<description>
+This abstract class defines an api for accessing&#xa;  files in lonworks devices.  &#xa; &lt;p&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">25 June 01</tag>
+<tag name="@version">$Revision: 3$ $Date: 10/18/01 2:56:45 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.lonworks.util.LonFile() -->
+<constructor name="LonFile" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.lonworks.util.LonFile.createFile(javax.baja.lonworks.BLonDevice) -->
+<method name="createFile"  public="true" static="true">
+<description>
+Factory method for lonfiles. &lt;p&gt;
+</description>
+<parameter name="dev">
+<type class="javax.baja.lonworks.BLonDevice"/>
+<description>
+the londevice containing file(s).
+</description>
+</parameter>
+<return>
+<type class="javax.baja.lonworks.util.LonFile"/>
+<description>
+the appropriate file type for the dev.
+</description>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.copy() -->
+<method name="copy"  public="true" abstract="true">
+<description>
+Create a copy of this file. This will copy the appropriate nv&#xa;  references and the template file.
+</description>
+<return>
+<type class="javax.baja.lonworks.util.LonFile"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.open(int, boolean, boolean) -->
+<method name="open"  public="true" abstract="true">
+<description>
+Open will do any initial processing required&#xa;  to make a file in and lonworks device accessible.&#xa; &lt;p&gt;
+</description>
+<parameter name="file">
+<type class="int"/>
+<description>
+the index of the file in the lon&#xa;                    device
+</description>
+</parameter>
+<parameter name="newFile">
+<type class="boolean"/>
+<description>
+if true then create a zeroed file&#xa;                     which can then be modified as needed.
+</description>
+</parameter>
+<parameter name="randomAccess">
+<type class="boolean"/>
+<description>
+set false when the entire file is to&#xa;                        be updated.  This will allow more&#xa;                        efficient handling of files using&#xa;                        fileXfer access.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.read(int, int) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read length bytes from an opened file at the&#xa;  specified offset. &lt;p&gt;
+</description>
+<parameter name="offset">
+<type class="int"/>
+<description>
+offset from beginning of file to&#xa;                   first byte to read
+</description>
+</parameter>
+<parameter name="length">
+<type class="int"/>
+<description>
+number of bytes to read
+</description>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.read(int) -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read length bytes from an opened file beginning&#xa;  atthe byte following the last byte read.&#xa; &lt;p&gt;
+</description>
+<parameter name="length">
+<type class="int"/>
+<description>
+number of bytes to read
+</description>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.read() -->
+<method name="read"  public="true" abstract="true">
+<description>
+Read the entire file.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.write(byte[], int) -->
+<method name="write"  public="true" abstract="true">
+<description>
+Write the given byte array to an opened file at the&#xa;  specified offset.&#xa; &lt;p&gt;
+</description>
+<parameter name="data">
+<type class="byte" dimension="1"/>
+</parameter>
+<parameter name="offset">
+<type class="int"/>
+<description>
+offset from beginning of file to&#xa;                   position of first byte to write
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.write(byte[]) -->
+<method name="write"  public="true" abstract="true">
+<description>
+Write the given byte array to an opened file &#xa;  beginning at the position following the last&#xa;  byte written to the file.
+</description>
+<parameter name="data">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.close() -->
+<method name="close"  public="true" abstract="true">
+<description>
+Do any post processing to finalize any access&#xa;  to a file in a lonworks device.  If data was&#xa;  written to the file which has not been committed&#xa;  in the physical device then complete the update.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.flush() -->
+<method name="flush"  public="true" abstract="true">
+<description>
+Write any data to the device which has not &#xa;  already been written to the physical device.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.getDirectoryString() -->
+<method name="getDirectoryString"  public="true" abstract="true">
+<description>
+Get a string discribing the files available&#xa;  for access.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="javax.baja.lonworks.LonException"/>
+</throws>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.findFileNum(int) -->
+<method name="findFileNum"  public="true" abstract="true">
+<description>
+Find the first file of the specified type.&#xa; &lt;p&gt;
+</description>
+<parameter name="type">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+The index of the first file of specified type or -1 if none.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.findFileNum(int, int) -->
+<method name="findFileNum"  public="true" abstract="true">
+<description>
+Find the first file of the specified type begining&#xa; at &#x22;lastFile&#x22;.  This allows discovery of index for multiple&#xa; files of the same type.&#xa; &lt;p&gt;
+</description>
+<parameter name="type">
+<type class="int"/>
+</parameter>
+<parameter name="lastFile">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+<description>
+The index of the next file of specified type or -1 if none.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.isOpen() -->
+<method name="isOpen"  public="true" abstract="true">
+<description>
+Is the file already opened.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.supportsRandomAccess() -->
+<method name="supportsRandomAccess"  public="true">
+<description>
+return true if the files supports random access.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.lonworks.util.LonFile.ALLOW_RANDOM_ACCESS -->
+<field name="ALLOW_RANDOM_ACCESS"  public="true" static="true" final="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.NO_RANDOM_ACCESS -->
+<field name="NO_RANDOM_ACCESS"  public="true" static="true" final="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.CREATE_FILE -->
+<field name="CREATE_FILE"  public="true" static="true" final="true">
+<type class="boolean"/>
+<description>
+Static used in open(). Create a blank copy of file.
+</description>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.ACCESS_FILE -->
+<field name="ACCESS_FILE"  public="true" static="true" final="true">
+<type class="boolean"/>
+<description>
+Static used in open(). Read copy of before making changes.
+</description>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.CONFIG_TEMPLATE_FILE -->
+<field name="CONFIG_TEMPLATE_FILE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Index of config template file.
+</description>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.READ_WRITE_CONFIG_FILE -->
+<field name="READ_WRITE_CONFIG_FILE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Index of read write config parameter file.
+</description>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.READ_ONLY_CONFIG_FILE -->
+<field name="READ_ONLY_CONFIG_FILE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Index of read only config parameter file if it exists in device.
+</description>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.CONFIG_PARAM_TEMPLATE_FILE -->
+<field name="CONFIG_PARAM_TEMPLATE_FILE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Comfig parameter template file type.
+</description>
+</field>
+
+<!-- javax.baja.lonworks.util.LonFile.CONFIG_PARAM_VALUE_FILE -->
+<field name="CONFIG_PARAM_VALUE_FILE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Comfig parameter vale file type.
+</description>
+</field>
+
+</class>
+</bajadoc>

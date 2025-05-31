@@ -1,0 +1,109 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Andy Frank
+   @creation  28 Mar 05
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Hx - HxProfile</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/hx-hxOp.html" class="navbar">Prev</a> |  <a href="/doc/hx-events.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Hx - HxProfile</h1> 
+
+<!------------------------------------------------------------->
+<h1 id="hxProfiles">HxProfiles</h1>
+<!------------------------------------------------------------->
+
+<p>
+The <a href='module://docDeveloper/doc/hx-wb/javax/baja/hx/BHxProfile.bajadoc'><code>BHxProfile</code></a>
+is used to customize the HTML page around the current <code>HxView</code>.  
+The profile is responsible for writing out the outer HTML tags (
+<code>html</code>, <code>head</code>, and <code>body</code>), any custom 
+markup, and the current view.  It is important that your profile respect the 
+order <code>HxOps</code> are created in these methods: 
+<code>writeDocument, updateDocument, processDocument,</code> and 
+<code>saveDocument</code>.  If any <code>HxView</code> uses the auto name 
+constructor of <code>HxOp</code> to create a unique path name, it must be 
+called in the exact same order in order to resolve correctly. 
+</p>
+
+<p>
+<code>HxProfile</code> exposes customization hooks through convenience
+methods, so there is no need to handle the boilerplate code:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+  public class BMyProfile
+    extends BHxProfile
+  {  
+    public static final BMyProfile INSTANCE = new BMyProfile();
+    
+    public Type getType() { return TYPE; }
+    public static final Type TYPE = Sys.loadType(BMyProfile.class);
+    
+    protected BMyProfile() {}  
+  
+    public void doBody(BHxView view, HxOp op) 
+      throws Exception
+    {
+      BHxPathBar.INSTANCE.write(makePathBarOp(op));
+      view.write(op);
+      displayError(op);
+    }
+    
+    public void updateDocument(BHxView view, HxOp op) 
+      throws Exception
+    {
+      BHxPathBar.INSTANCE.update(makePathBarOp(op));
+      view.update(op);
+    }  
+    
+    public boolean processDocument(BHxView view, HxOp op) 
+      throws Exception
+    {
+      if (BHxPathBar.INSTANCE.process(makePathBarOp(op)))
+        return true;
+      return view.process(op);
+    }
+    
+    public void saveDocument(BHxView view, HxOp op)
+      throws Exception
+    {
+      BHxPathBar.INSTANCE.save(makePathBarOp(op));
+      view.save(op);
+    }
+    
+    protected HxOp makePathBarOp(HxOp op)
+    {
+      return op.make("pathbar", op);
+    }
+  } 
+  </code>
+</pre>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/hx-hxOp.html" class="navbar">Prev</a> |  <a href="/doc/hx-events.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

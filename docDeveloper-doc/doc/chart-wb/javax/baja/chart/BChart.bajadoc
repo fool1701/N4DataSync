@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="chart" runtimeProfile="wb" qualifiedName="javax.baja.chart.BChart" name="BChart" packageName="javax.baja.chart" public="true" abstract="true">
+<description>
+A BChart defines a single chart type.  It must&#xa; must be a direct child of a BChartPane to function&#xa; properly.&#xa; &lt;p&gt;&#xa; Each chart has its own model.  A chart model is a set of chart specs.  Each&#xa; chart spec contains a series and specifies zero or more axes.  If the same&#xa; axis instance is specified in multiple chart specs, that axis is shared by&#xa; the associated series.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">28 Jun 2004</tag>
+<tag name="@version">$Revision: 15$ $Date: 11/14/06 3:52:22 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.BWidget"/>
+</extends>
+<!-- javax.baja.chart.BChart() -->
+<constructor name="BChart" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.chart.BChart(javax.baja.chart.ChartModel) -->
+<constructor name="BChart" public="true">
+<parameter name="model">
+<type class="javax.baja.chart.ChartModel"/>
+<description>
+The model to be rendered in the chart.
+</description>
+</parameter>
+<description>
+Create a BChart with the specified model.&#xa; This constructor is intended for charts with no axes.
+</description>
+</constructor>
+
+<!-- javax.baja.chart.BChart.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.getPane() -->
+<method name="getPane"  public="true">
+<description>
+Get the parent ChartPane.
+</description>
+<return>
+<type class="javax.baja.chart.BChartPane"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.setModel(javax.baja.chart.ChartModel) -->
+<method name="setModel"  public="true">
+<description>
+Set the model that this spec belongs to.  This is called&#xa; by ChartModel when a spec is added.
+</description>
+<parameter name="model">
+<type class="javax.baja.chart.ChartModel"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.getModel() -->
+<method name="getModel"  public="true">
+<description>
+Get the model that this spec belongs to.  A BChart can only be part&#xa; of one model.
+</description>
+<return>
+<type class="javax.baja.chart.ChartModel"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.modelModified(javax.baja.chart.ChartModelEvent) -->
+<method name="modelModified"  public="true">
+<description>
+Receive notification that the model has been modified.
+</description>
+<parameter name="evt">
+<type class="javax.baja.chart.ChartModelEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.usesXAxis() -->
+<method name="usesXAxis"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.usesYAxis() -->
+<method name="usesYAxis"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.bindingsChanged() -->
+<method name="bindingsChanged"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.added(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="added"  public="true">
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.removed(javax.baja.sys.Property, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="removed"  public="true">
+<description/>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="oldValue">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.syncBindings() -->
+<method name="syncBindings"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.animate() -->
+<method name="animate"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.rebuild() -->
+<method name="rebuild"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.paint(javax.baja.gx.Graphics) -->
+<method name="paint"  public="true" final="true">
+<description/>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.doPaint(javax.baja.gx.Graphics) -->
+<method name="doPaint"  public="true">
+<description/>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.updateAxes() -->
+<method name="updateAxes"  public="true">
+<description>
+Update the range of each axis based on the series ranges.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.join(int) -->
+<method name="join"  public="true">
+<description>
+Join the series in this spec using the specified column&#xa; as the key.
+</description>
+<parameter name="keyColumn">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.chart.JoinTable"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.receiveInputEvents() -->
+<method name="receiveInputEvents"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.chart.BChart.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

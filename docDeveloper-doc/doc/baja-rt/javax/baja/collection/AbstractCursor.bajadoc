@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.collection.AbstractCursor" name="AbstractCursor" packageName="javax.baja.collection" public="true" abstract="true">
+<description>
+A general purpose implementation of the &lt;code&gt;<see ref="javax.baja.sys.Cursor">Cursor</see>&lt;/code&gt; interface that enforces closed semantics.&#xa; Subclasses only need to provide implementations for &lt;code&gt;<see ref="javax.baja.collection.AbstractCursor#advanceCursor()">#advanceCursor()</see>&lt;/code&gt; and &lt;code&gt;<see ref="javax.baja.collection.AbstractCursor#doGet()">#doGet()</see>&lt;/code&gt;.
+</description>
+<tag name="@author">&lt;a href=&#x22;mailto:mgiannini@tridium.com&#x22;&gt;Matthew Giannini&lt;/a&gt;</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<parameterizedType class="javax.baja.sys.IterableCursor">
+<args>
+<typeVariable class="E"/>
+</args>
+</parameterizedType>
+</implements>
+<typeParameters>
+<typeVariable class="E">
+</typeVariable>
+</typeParameters>
+<!-- javax.baja.collection.AbstractCursor() -->
+<constructor name="AbstractCursor" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.collection.AbstractCursor.getContext() -->
+<method name="getContext"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Default implementation returns &lt;code&gt;<see ref="javax.baja.sys.Context#NULL">Context#NULL</see>&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.AbstractCursor.next() -->
+<method name="next"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.AbstractCursor.advanceCursor() -->
+<method name="advanceCursor"  protected="true" abstract="true">
+<description>
+&lt;code&gt;<see ref="javax.baja.collection.AbstractCursor#next()">#next()</see>&lt;/code&gt; is final to enforce closed semantics. If the cursor is not closed,&#xa; then this method is called to advance the cursor to the next item.
+</description>
+<tag name="@see">Cursor#next()</tag>
+<return>
+<type class="boolean"/>
+<description>
+true if cursor has advanced and is positioned on a valid item.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.collection.AbstractCursor.get() -->
+<method name="get"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<typeVariable class="E"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.AbstractCursor.doGet() -->
+<method name="doGet"  protected="true" abstract="true">
+<description>
+&lt;code&gt;<see ref="javax.baja.collection.AbstractCursor#get()">#get()</see>&lt;/code&gt; is final to enforce closed semantics. If the cursor is not closed then&#xa; this method is called to get the item at the current cursor position.
+</description>
+<tag name="@see">Cursor#get()</tag>
+<return>
+<typeVariable class="E"/>
+<description>
+the item at the current cursor position.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.collection.AbstractCursor.close() -->
+<method name="close"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.AbstractCursor.closeCursor() -->
+<method name="closeCursor"  protected="true">
+<description>
+Callback just before cursor is closed. Default implementation does nothing. When this&#xa; method returns the &lt;code&gt;<see ref="javax.baja.collection.AbstractCursor#closed">#closed</see>&lt;/code&gt; field will be set to &lt;code&gt;true&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.collection.AbstractCursor.closed -->
+<field name="closed"  protected="true" volatile="true">
+<type class="boolean"/>
+<description>
+If true, then &lt;code&gt;<see ref="javax.baja.collection.AbstractCursor#next()">#next()</see>&lt;/code&gt;, and &lt;code&gt;<see ref="javax.baja.collection.AbstractCursor#get()">#get()</see>&lt;/code&gt; will throw CursorExceptions
+</description>
+</field>
+
+</class>
+</bajadoc>

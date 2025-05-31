@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="rt" qualifiedName="com.tridium.andoverInfinity.comm.BVt100" name="BVt100" packageName="com.tridium.andoverInfinity.comm" public="true">
+<description>
+Contains a screen buffer to maintain both the content and state&#xa;  of a screen as VT100 commands and control sequences are received.&#xa;  The screen buffer wraps two string buffers for current screen display.&#xa;  &#xa;  The first buffer is an array of 24 StringBuffers containing the actual&#xa;  display text:  &#xa;  &#xa; View                    Edit                     Connect                Logout  :0&#xa; |----------------------Command Window - INFINITY1 panel1-----------------------|:1&#xa; |  CD panel1                                                                   |:2&#xa; |R&gt;                                                                            |:3&#xa; |                                                                              |:4&#xa; |                                                                              |:5&#xa; |                                                                              |:6&#xa; |                                                                              |:7&#xa; |                                                                              |:8&#xa; |                                                                              |:9&#xa; |                                                                              |:10&#xa; |                                                                              |:11&#xa; |                                                                              |:12&#xa; |                                                                              |:13&#xa; |                                                                              |:14&#xa; |                                                                              |:15&#xa; |                                                                              |:16&#xa; |                                                                              |:17&#xa; |                                                                              |:18&#xa; |                                                                              |:19&#xa; |                                                                              |:20&#xa; |------------------------------------------------------------------------------|:21&#xa;                                                                                 :22&#xa;                                                                                 :23&#xa;&#xa;  &#xa;  The second buffer is an array of 24 StringBuffers containing the graphical&#xa;  rendering information for each character in the display text, where each&#xa;  character represents a character attribute, or replaces a VT100 graphics character:&#xa;  &#x27;N&#x27;=NORMAL, &#x27;R&#x27;=REVERSE, &#x27;B&#x27;=BOLD,&#xa;  &#x27;|&#x27;=vertical graphic (translated from graphics mode &#x27;x&#x27;)&#xa;  &#x27;-&#x27;=horizontal graphic (translated from graphics mode &#x27;q&#x27;) &#xa;  (char)0x11; lower right corner, translated from graphics mode &#x27;j&#x27; (0x6a), displays as left-pointing triangle in screen dumps&#xa;  (char)0x12; upper right corner, translated from graphics mode &#x27;k&#x27; (0x6b), displays as double-tipped vertical arrow in screen dumps&#xa;  (char)0x13; upper left corner, translated from graphics mode &#x27;l&#x27; (0x6c), displays as double &#x27;!!&#x27; character in screen dumps&#xa;  (char)0x14; lower left corner, translated from graphics mode &#x27;m&#x27; (0x6d), displays as paragraph symbol character in screen dumps&#xa;  (Note the translated characters for the corners 0x11,0x12,0x13,0x14&#xa;  are not printable, and thus are replaced with the above non-translated characters jklm in below diagram.)&#xa;  &#xa; BRRRRRRRRRRRRRRRRRRRRRRRBRRRRRRRRRRRRRRRRRRRRRRRRBRRRRRRRRRRRRRRRRRRRRRRBRRRRRRR:0&#xa; l-------------------------BBBBBBBBBBBBBBBBBBBBBBBBBBB--------------------------k:1&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:2&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:3&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:4&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:5&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:6&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:7&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:8&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:9&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:10&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:11&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:12&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:13&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:14&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:15&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:16&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:17&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:18&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:19&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:20&#xa; m------------------------------------------------------------------------------j:21&#xa; NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN:22&#xa; RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRN:23&#xa; Cursor:[3:3]&#xa; Mode:CURSOR_IS_IN_COMMAND_LINE_AREA
+</description>
+<tag name="@author">cturman</tag>
+<tag name="@creation">May 1, 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.Vt100Const"/>
+</implements>
+<!-- com.tridium.andoverInfinity.comm.BVt100() -->
+<constructor name="BVt100" public="true">
+<description>
+Default constructor initializes the processing state and creates a &#xa; new &lt;code&gt;ScreenBuffer&lt;/code&gt; to store content and formatting. See&#xa; &lt;code&gt;doDumpScreen()&lt;/code&gt; for a description of the &lt;code&gt;ScreenBuffer&lt;/code&gt;&#xa; contents.
+</description>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getNetwork() -->
+<method name="getNetwork"  public="true">
+<description>
+Convenience to get the BInfinityNetwork.  Returns the BInfinityNetwork&#xa; network, or null if &lt;code&gt;setNetwork&lt;/code&gt; has not been called.
+</description>
+<return>
+<type class="com.tridium.andoverInfinity.BInfinityNetwork"/>
+<description>
+the network
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.setNetwork(com.tridium.andoverInfinity.BInfinityNetwork) -->
+<method name="setNetwork"  public="true">
+<description>
+Set the BInfinityNetwork this belongs to.  The nework must be set before&#xa; before &lt;code&gt;processByte&lt;/code&gt; is called with the first byte received.
+</description>
+<parameter name="network">
+<type class="com.tridium.andoverInfinity.BInfinityNetwork"/>
+<description>
+the network to set
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getCursorPosition() -->
+<method name="getCursorPosition"  public="true">
+<description>
+Get the current &lt;Code&gt;ScreenBuffer&lt;/Code&gt; cursor position
+</description>
+<return>
+<type class="com.tridium.andoverInfinity.comm.CursorPosition"/>
+<description>
+a &lt;CursorPosition&gt;
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getBackupBytes() -->
+<method name="getBackupBytes"  public="true">
+<description>
+During backup mode (ie, an Infinity &#x22;SAVE&#x22; opertion), all bytes received&#xa; are written to an underlying &lt;code&gt;StringBuffer&lt;/code&gt;.  This method returns&#xa; the contents of that StringBuffer.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+all characters collected as a result of an Infinity SAVE command&#xa;    opertation
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.initializeBackupBuffer() -->
+<method name="initializeBackupBuffer"  public="true">
+<description>
+Create a new backup buffer to recieve a SAVE INFINET response
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.isBackupmodeNewLine() -->
+<method name="isBackupmodeNewLine"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+the backupmodeNewLine
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.processByte(char) -->
+<method name="processByte"  public="true">
+<description>
+Process a new byte of data received.  This puts the character into the screen&#xa; buffer at the current cursor postion, or move the cursor if the character&#xa; is part of an escape sequence that defines a cursor move, or modifies the &#xa; character to an underline or bar if the character is a graphics character.&#xa; It also updates the format buffer portion with a new format at the current&#xa; cursor position if the character received was part of a formatting escape &#xa; sequence or a change to/from graphics.&#xa; &lt;para&gt;&#xa; See &lt;code&gt;doDumpScreen()&lt;/code&gt; for a description of the &lt;code&gt;ScreenBuffer&lt;/code&gt;&#xa; contents.
+</description>
+<parameter name="newByte">
+<type class="char"/>
+<description>
+a character received from the field panel
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.isStateReadingText() -->
+<method name="isStateReadingText"  public="true">
+<description>
+Returns if the &lt;code&gt;ScreenBuffer&lt;/code&gt; is currently in a state where&#xa; it is reading text or not.  It is reading text if it is not decoding&#xa; an escape sequence.  Both reading graphics characters and reading in non-&#xa; escape sequence characters are considered READING_TEXT.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if not decoding an escape sequence
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getFullLine(int) -->
+<method name="getFullLine"  public="true">
+<description>
+Get a content line from the screen buffer, including the border characters.&#xa; The characters returned are from position 0 to 79 (0 and 79 are not omitted).&#xa; The line is not trimmed of any whitespace.  If &lt;code&gt;line &lt;/code&gt; is &#xa; less than 0 or greater than 23, return the empty string &#x22;&#x22;.
+</description>
+<parameter name="line">
+<type class="int"/>
+<description>
+number from 0 to 23 inclusive
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the content line from characters 0 thru 79 (chars 0 and 79 included)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getTextLine(int) -->
+<method name="getTextLine"  public="true">
+<description>
+Get a content line from the screen buffer, not including the border characters.&#xa; The characters returned are from position 1 to 78 (0 and 79 are omitted)&#xa; and are trimmed of any whitespace. If &lt;code&gt;line &lt;/code&gt; is &#xa; less than 0 or greater than 23, return the empty string &#x22;&#x22;
+</description>
+<parameter name="line">
+<type class="int"/>
+<description>
+number from 0 to 23 inclusive
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the content line from characters 1 thru 78 (chars 0 and 79 omitted)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getFormatLine(int) -->
+<method name="getFormatLine"  public="true">
+<description>
+Get a format line from the screen buffer.&#xa; The characters returned are from position 0 to 79 (0 and 79 are included),&#xa; and all characters are from the set &#x27;N&#x27;(normal),&#x27;R&#x27;(reverse),&#x27;B&#x27;(bold),&#xa; &#x27;|&#x27;(vertical graphics), or &#x27;-&#x27;(horizontal graphics).&#xa;  If &lt;code&gt;line &lt;/code&gt; is less than 0 or greater than 23, return the&#xa;  empty string &#x22;&#x22;
+</description>
+<parameter name="line">
+<type class="int"/>
+<description>
+number from 0 to 23 inclusive
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the format line from characters 0 thru 79
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getCursorLine() -->
+<method name="getCursorLine"  public="true">
+<description>
+Convenience for getCursorPosition().getLine()
+</description>
+<return>
+<type class="int"/>
+<description>
+the line the cursor is currently on
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getCursorCol() -->
+<method name="getCursorCol"  public="true">
+<description>
+Convenience for getCursorPosition().getCol()
+</description>
+<return>
+<type class="int"/>
+<description>
+the column the cursor is currently on
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.lastNonBlankLine() -->
+<method name="lastNonBlankLine"  public="true">
+<description>
+In the content buffer region of lines 2 thru 20, return the &#xa; last non-blank line, or return 20 if all lines are non-blank.&#xa; Return 2 if all lines are blank.  Ignore the first and last&#xa; characters of all lines, since these are graphics characters.&#xa; This is useful to tell how many lines need to be erased in &#xa; command line mode to optimize response sizes.
+</description>
+<return>
+<type class="int"/>
+<description>
+the last line which is not blank, excluding columns 0 and 79
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.findLastPromptLine() -->
+<method name="findLastPromptLine"  public="true">
+<description>
+Similar to &lt;code&gt;lastNonBlankLine()&lt;/code&gt; except look for the last&#xa; line in the content buffer command line region that has a &#x22;R&gt;&#x22; prompt&#xa; at the beginning.
+</description>
+<return>
+<type class="int"/>
+<description>
+the last line with an R&gt; prompt, or -1 if no prompt found within&#xa;  the command line area
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.isCursorOnPrompt() -->
+<method name="isCursorOnPrompt"  public="true">
+<description>
+Return whether the &lt;code&gt;ScreenBuffer&lt;/code&gt; reports the cursor&#xa; is positioned directly after an &#x22;R&gt;&#x22; prompt.  Useful to determine&#xa; if the response to a command line command is completed.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if cursor line is length 2, starts with &#x22;R&gt;&#x22;,&#xa; and the cursor is at column 4
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.isLineEmpty(int) -->
+<method name="isLineEmpty"  public="true">
+<description>
+Return wheter or not the given content line is empty, excluding&#xa; the graphics columns of 0 and 79.
+</description>
+<parameter name="lineNum">
+<type class="int"/>
+<description>
+the line to check for non white space
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if line is empty
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.doDumpScreen() -->
+<method name="doDumpScreen"  public="true">
+<description>
+Dump the contents of the screen buffer and format buffer to stdOut&#xa; in the following format&#xa; &#xa;  The first buffer is an array of 24 StringBuffers containing the actual&#xa;  display text:  &#xa;  &#xa; View                    Edit                     Connect                Logout  :0&#xa; |----------------------Command Window - INFINITY1 panel1-----------------------|:1&#xa; |  CD panel1                                                                   |:2&#xa; |R&gt;                                                                            |:3&#xa; |                                                                              |:4&#xa; |                                                                              |:5&#xa; |                                                                              |:6&#xa; |                                                                              |:7&#xa; |                                                                              |:8&#xa; |                                                                              |:9&#xa; |                                                                              |:10&#xa; |                                                                              |:11&#xa; |                                                                              |:12&#xa; |                                                                              |:13&#xa; |                                                                              |:14&#xa; |                                                                              |:15&#xa; |                                                                              |:16&#xa; |                                                                              |:17&#xa; |                                                                              |:18&#xa; |                                                                              |:19&#xa; |                                                                              |:20&#xa; |------------------------------------------------------------------------------|:21&#xa;                                                                                 :22&#xa;                                                                                 :23&#xa;&#xa;  &#xa;  The second buffer is an array of 24 StringBuffers containing the graphical&#xa;  rendering information for each character in the display text,&#xa;  (N=NORMAL, R=REVERSE, B=BOLD, &#x27;|&#x27;=vertical or corner graphic, or &#x27;-&#x27;=horizontal graphic&#xa;  NOTE: the &#x22;corners&#x22; have been artifically replaced with &#x27;\&#x27; in the below  graph&#xa;  because the normal corners 0x11,0x12,0x13,0x14 will not display in this source file.&#xa;  &#xa; BRRRRRRRRRRRRRRRRRRRRRRRBRRRRRRRRRRRRRRRRRRRRRRRRBRRRRRRRRRRRRRRRRRRRRRRBRRRRRRR:0&#xa; \----------------------BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB-----------------------\:1&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:2&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:3&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:4&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:5&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:6&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:7&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:8&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:9&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:10&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:11&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:12&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:13&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:14&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:15&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:16&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:17&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:18&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:19&#xa; |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN|:20&#xa; \------------------------------------------------------------------------------\:21&#xa; NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN:22&#xa; RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRN:23&#xa; Cursor:3:3
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getMode() -->
+<method name="getMode"  public="true">
+<description>
+The &lt;code&gt;ScreenBuffer&lt;/code&gt; can be examined to determine the current&#xa; &#x22;mode&#x22; of the VT100 interface on the infinity controller.  This can be &#xa; used to determine, for instance, if the cursor is in a dialog box, in the&#xa; command line area, is viewing a point list, etc.  An attempt was made to&#xa; capture as many modes as possible, because the mode is used to&#xa; &#x22;recover&#x22; from a user leaving the terminal in an unknown state, either &#xa; through an external tool, or through the Vt100 terminal manager view &#xa; on the network of this driver.  Mode is checked before every message&#xa; is sent by the driver to aid in recovery, and as again checked at every&#xa; response to verify proper response.  &#xa; &lt;para&gt;&#xa; A list of modes  can be found in the &lt;code&gt;Vt100Const&lt;/code&gt; interface class.&#xa; &lt;para&gt;&#xa; A nmemonic for the code can be obtained by &lt;code&gt;Vt100Const.cursorModes[mode]&lt;/code&gt;
+</description>
+<return>
+<type class="int"/>
+<description>
+an integer representing the current Vt100 mode as maintained by the&#xa;   &lt;code&gt;ScreenBuffer&lt;/code&gt;
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.setContentLine(int, java.lang.String) -->
+<method name="setContentLine"  public="true">
+<description>
+Set a content line of the screen buffer.
+</description>
+<parameter name="line">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="contents">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.setFormatLine(int, java.lang.String) -->
+<method name="setFormatLine"  public="true">
+<description>
+Set a format line of the screen buffer
+</description>
+<parameter name="line">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="contents">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.setPosition(com.tridium.andoverInfinity.comm.CursorPosition) -->
+<method name="setPosition"  public="true">
+<description>
+Set the cursor position of the screen buffer
+</description>
+<parameter name="pos">
+<type class="com.tridium.andoverInfinity.comm.CursorPosition"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.screenBufferToString() -->
+<method name="screenBufferToString"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.integrityCheck() -->
+<method name="integrityCheck"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.screenBuffer() -->
+<method name="screenBuffer"  public="true">
+<description>
+Get the screen buffer
+</description>
+<return>
+<type class="com.tridium.andoverInfinity.comm.BVt100$ScreenBuffer"/>
+<description>
+this class instance of ScreenBuffer
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.parseInfinetControllerNameFromLine1() -->
+<method name="parseInfinetControllerNameFromLine1"  public="true">
+<description>
+Find the name of the field panel device command line mode is operating on.  Return null&#xa; if not in command line mode or name cannot be determined, return empty string &#xa; if line 1 of the VT100 indicates that we are not at an &#x22;infinet&#x22; level&#xa; panel (operating at infinity network device level),&#xa; or return infinet device name if operating at an infinet device level.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+String infinet controller name, or null if can&#x27;t be determined, or &#xa;   the empty string if not operating at infinet level on command line
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.parseNetworkControllerNameFromLine1() -->
+<method name="parseNetworkControllerNameFromLine1"  public="true">
+<description>
+Find the name of the Infinity network controller device (top level)&#xa; as reported on the line one of the Vt100 interface while in command &#xa; line mode.  Return null if not in command line mode or name cannot be&#xa; determined.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+String network controller name, or null if can&#x27;t be determined
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.isRootController() -->
+<method name="isRootController"  public="true">
+<description>
+Determine if the command line window indicates we are talking to the &#xa; main (network) controller or a subordinate (infinet) controller.&#xa; Look at the command window header for text &#x22;Command Window - &#x22; and then count&#xa; the tokens afterwards.  If only one, then return true, if more than 1 then&#xa; we must not be at the root level, so return false.  If can&#x27;t tell, or not in&#xa; command line mode, throw exception.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if we are at a network controller level
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description>
+if not in command line mode, or name cannot be determined
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getRecovery() -->
+<method name="getRecovery"  public="true">
+<description>
+Convenience for getRecovery(getMode())
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+recovery string to return cursor to command line
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.getRecovery(int) -->
+<method name="getRecovery"  public="true">
+<description>
+Return a string which when sent to the controller, will return&#xa; the VT100&#x27;s cursor to the command line
+</description>
+<parameter name="mode">
+<type class="int"/>
+<description>
+is the current ScreenBuffer mode as reported by the &lt;code&gt;getMode()&lt;/code&gt; method
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+recovery string to return cursor to command line from the current mode
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.isInsertMode() -->
+<method name="isInsertMode"  public="true">
+<description>
+Sometimes the Infinity controller will get put into an &#x22;insert&#x22; mode whereby&#xa; command characters sent to it will try to &#x22;insert&#x22; into a position on the &#xa; screen as opposed to &#x22;overwriting&#x22; the position on the screen.   This results&#xa; in a greatly increased number of characters tranmitted in response because the&#xa; Infinity panel inserts cursor move command between every echo&#x27;d character.&#xa; There is special code in the &lt;code&gt;processByte&lt;/code&gt; method that detects&#xa; when responses are using this mode.  If the insert mode is true, then a &#xa; recovery string of ESC-i  can return the Infinity panel to non-insert mode.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the ScreenBuffer has determined that the Infinity panel is&#xa; in insert mode.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.resetInsertMode() -->
+<method name="resetInsertMode"  public="true">
+<description>
+Allows a way to reset the detected insert mode of the ScreenBuffer&#xa; as insert recovery characters are transmitted to the controller.&#xa; Usually called from an outgoing request class.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.clearScreenBuffer() -->
+<method name="clearScreenBuffer"  public="true">
+<description>
+Empty the screen buffer.  Useful if comm is lost and you are not&#xa; sure where the cursor is anymore.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.isBell() -->
+<method name="isBell"  public="true">
+<description>
+If a bell (0x07) was the last char recieved, then we may need to do&#xa; some special recovery.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+if bell was last character recieved
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.BVt100.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

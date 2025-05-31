@@ -1,0 +1,31 @@
+<html>
+<head>
+</head>
+<body style="background: transparent;">
+    <script src="scripts/docstrap.lib.js"></script>
+    <script src="scripts/lunr.min.js"></script>
+    <script src="scripts/fulltext-search.js"></script>
+
+    <script type="text/x-docstrap-searchdb">
+    {"modules.list.html":{"id":"modules.list.html","title":"Modules","body":" converters Modules nmodule/converters/rc/Converter Modules Classes module:nmodule/converters/rc/Converter × Search results Close "},"index.html":{"id":"index.html","title":"Index","body":" converters Modules nmodule/converters/rc/Converter converters-ux This module contains BajaScript implementations of the Converter API. These converters are especially useful in UxMedia, where Niagara values from the station are converted into usable properties to apply to Widgets. If you have any custom implementations of BConverter and you wish to use them in UxMedia, you will have to provide Type Extensions for them that extend Converter. × Search results Close "},"module-nmodule_converters_rc_Converter.html":{"id":"module-nmodule_converters_rc_Converter.html","title":"Module: nmodule/converters/rc/Converter","body":" converters Modules nmodule/converters/rc/Converter Module: nmodule/converters/rc/Converter A base class for converters to extend from and override. API Status: Development &lt;abstract&gt; new (require(\"nmodule/converters/rc/Converter\"))() Extends: baja.Struct Methods &lt;abstract&gt; convert(from, to, cx) Convert the first object to the second object's type. Parameters: Name Type Description from baja.Object to baja.Object cx Object Returns: Type baja.Object | Promise.&lt;baja.Object&gt; | * init(from, to) Gives the converter an opportunity to initialize itself based upon from and to types. Parameters: Name Type Description from baja.Object to baja.Object × Search results Close "}}
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Searcher.init();
+        });
+
+        $(window).on("message", function(msg) {
+            var msgData = msg.originalEvent.data;
+
+            if (msgData.msgid != "docstrap.quicksearch.start") {
+                return;
+            }
+
+            var results = Searcher.search(msgData.searchTerms);
+
+            window.parent.postMessage({"results": results, "msgid": "docstrap.quicksearch.done"}, "*");
+        });
+    </script>
+</body>
+</html>

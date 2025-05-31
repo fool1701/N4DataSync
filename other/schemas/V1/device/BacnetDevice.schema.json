@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://mitsubishielectricaustralia.com/schemas/device/BacnetDevice.schema.json",
+    "version": "1.0.0",
+    "title": "Bacnet Device Schema",
+    "description": "Schema for a Bacnet device",
+    "type": "object",
+    "properties": {
+        "name": { "$ref": "https://example.com/schemas/common/ComponentName.schema.json" },
+        "type": { "const": "BacnetDevice" },
+        "config": {
+            "type": "object",
+            "allOf": [
+                { "$ref": "https://mitsubishielectricaustralia.com/schemas/device/BacnetDeviceConfigBase.schema.json" }
+            ]
+        },
+        "BacnetPoints": { "$ref": "https://example.com/schemas/points.schema.json" }
+    }
+}

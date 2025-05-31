@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema" name="BRelativeJsonSchema" packageName="com.tridiumx.jsonToolkit.outbound.schema.relative" public="true">
+<description>
+BRelativeJsonSchema allows base objects to be passed down through the schema&#xa; members (typically by bql in the &lt;code&gt;<see ref="com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseQuery">BBaseQuery</see>&lt;/code&gt; which can then be resolved&#xa; using relative ords like slot: or slot:../&#xa;&#xa; This concept should allow for greater scalability than regular JsonSchema,&#xa; and dynamic selection of data to export based on query result.
+</description>
+<tag name="@author">Jason Woollard</tag>
+<extends>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+</extends>
+<property name="baseQuery" flags="">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseQuery"/>
+<description>
+Slot for the &lt;code&gt;baseQuery&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBaseQuery</tag>
+<tag name="@see">#setBaseQuery</tag>
+</property>
+
+<action name="unregisterAndUnsubscribeAll" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;unregisterAndUnsubscribeAll&lt;/code&gt; action.
+</description>
+<tag name="@see">#unregisterAndUnsubscribeAll()</tag>
+</action>
+
+<action name="enqueueBase" flags="hA">
+<parameter name="parameter">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;enqueueBase&lt;/code&gt; action.
+</description>
+<tag name="@see">#enqueueBase(BComponent parameter)</tag>
+</action>
+
+<topic name="currentBase" flags="">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;currentBase&lt;/code&gt; topic.&#xa; Exposes the current base, allows generation of dynamic mqtt topics (for example)
+</description>
+<tag name="@see">#fireCurrentBase</tag>
+</topic>
+
+<topic name="currentBaseAndOutput" flags="">
+<eventType>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseAndOutputPair"/>
+</eventType><description>
+Slot for the &lt;code&gt;currentBaseAndOutput&lt;/code&gt; topic.&#xa; Exposes the current base and new schema output, allows generation of dynamic mqtt topics (for example)
+</description>
+<tag name="@see">#fireCurrentBaseAndOutput</tag>
+</topic>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema() -->
+<constructor name="BRelativeJsonSchema" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.getBaseQuery() -->
+<method name="getBaseQuery"  public="true">
+<description>
+Get the &lt;code&gt;baseQuery&lt;/code&gt; property.
+</description>
+<tag name="@see">#baseQuery</tag>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseQuery"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.setBaseQuery(com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseQuery) -->
+<method name="setBaseQuery"  public="true">
+<description>
+Set the &lt;code&gt;baseQuery&lt;/code&gt; property.
+</description>
+<tag name="@see">#baseQuery</tag>
+<parameter name="v">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseQuery"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.unregisterAndUnsubscribeAll() -->
+<method name="unregisterAndUnsubscribeAll"  public="true">
+<description>
+Invoke the &lt;code&gt;unregisterAndUnsubscribeAll&lt;/code&gt; action.
+</description>
+<tag name="@see">#unregisterAndUnsubscribeAll</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.enqueueBase(javax.baja.sys.BComponent) -->
+<method name="enqueueBase"  public="true">
+<description>
+Invoke the &lt;code&gt;enqueueBase&lt;/code&gt; action.
+</description>
+<tag name="@see">#enqueueBase</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.fireCurrentBase(javax.baja.sys.BValue) -->
+<method name="fireCurrentBase"  public="true">
+<description>
+Fire an event for the &lt;code&gt;currentBase&lt;/code&gt; topic.&#xa; Exposes the current base, allows generation of dynamic mqtt topics (for example)
+</description>
+<tag name="@see">#currentBase</tag>
+<parameter name="event">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.fireCurrentBaseAndOutput(com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseAndOutputPair) -->
+<method name="fireCurrentBaseAndOutput"  public="true">
+<description>
+Fire an event for the &lt;code&gt;currentBaseAndOutput&lt;/code&gt; topic.&#xa; Exposes the current base and new schema output, allows generation of dynamic mqtt topics (for example)
+</description>
+<tag name="@see">#currentBaseAndOutput</tag>
+<parameter name="event">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.relative.BBaseAndOutputPair"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.doGenerateJson(javax.baja.sys.Context) -->
+<method name="doGenerateJson"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.doForceGenerateJson(javax.baja.sys.Context) -->
+<method name="doForceGenerateJson"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.isChildLegal(javax.baja.sys.BComponent) -->
+<method name="isChildLegal"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="child">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.queryIntervalIsSet() -->
+<method name="queryIntervalIsSet"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.doEnqueueBase(javax.baja.sys.BComponent) -->
+<method name="doEnqueueBase"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Allow for irregular situations - like finding history extensions above export markers
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BComponent"/>
+<description>
+An item to be processed against this schema
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.unregister(com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember) -->
+<method name="unregister"  public="true">
+<description/>
+<parameter name="binding">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.doUnregisterAndUnsubscribeAll() -->
+<method name="doUnregisterAndUnsubscribeAll"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.getOrdTarget(com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember, javax.baja.sys.BObject) -->
+<method name="getOrdTarget"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="member">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember"/>
+</parameter>
+<parameter name="overrideBase">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.OrdTarget"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.doExecuteQueries(javax.baja.sys.Context) -->
+<method name="doExecuteQueries"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.processQueries(javax.baja.sys.Context, boolean) -->
+<method name="processQueries"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<parameter name="runSynchronously">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.startQueryExecutionTimer(javax.baja.sys.Context) -->
+<method name="startQueryExecutionTimer"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.getCurrentBasePath() -->
+<method name="getCurrentBasePath"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.getBaseObject() -->
+<method name="getBaseObject"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.isRelative() -->
+<method name="isRelative"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.disableAll() -->
+<method name="disableAll"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Dump debug information.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.getQueueSize() -->
+<method name="getQueueSize"  public="true">
+<description/>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.baseQuery -->
+<field name="baseQuery"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;baseQuery&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBaseQuery</tag>
+<tag name="@see">#setBaseQuery</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.forceGenerateJson -->
+<field name="forceGenerateJson"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;forceGenerateJson&lt;/code&gt; action.&#xa; Hide inherited action
+</description>
+<tag name="@see">#forceGenerateJson()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.unregisterAndUnsubscribeAll -->
+<field name="unregisterAndUnsubscribeAll"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;unregisterAndUnsubscribeAll&lt;/code&gt; action.
+</description>
+<tag name="@see">#unregisterAndUnsubscribeAll()</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.enqueueBase -->
+<field name="enqueueBase"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;enqueueBase&lt;/code&gt; action.
+</description>
+<tag name="@see">#enqueueBase(BComponent parameter)</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.currentBase -->
+<field name="currentBase"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;currentBase&lt;/code&gt; topic.&#xa; Exposes the current base, allows generation of dynamic mqtt topics (for example)
+</description>
+<tag name="@see">#fireCurrentBase</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.currentBaseAndOutput -->
+<field name="currentBaseAndOutput"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;currentBaseAndOutput&lt;/code&gt; topic.&#xa; Exposes the current base and new schema output, allows generation of dynamic mqtt topics (for example)
+</description>
+<tag name="@see">#fireCurrentBaseAndOutput</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.relative.BRelativeJsonSchema.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

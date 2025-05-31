@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter" name="BQueryResultWriter" packageName="com.tridiumx.jsonToolkit.outbound.schema.query.style" public="true" abstract="true">
+<description>
+Base class for all query result writers.&#xa;&#xa; Extend this class and make that class an agent upon &lt;code&gt;<see ref="com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaBoundQueryResult">BJsonSchemaBoundQueryResult</see>&lt;/code&gt;&#xa; to register your own developed json style.
+</description>
+<tag name="@author">Nick Dodd</tag>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter() -->
+<constructor name="BQueryResultWriter" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.previewText() -->
+<method name="previewText"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BString"/>
+<description>
+a preview string so that the client can display a hint of this&#xa; output style to the user.
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.appendJson(com.tridium.json.JSONWriter, com.tridiumx.jsonToolkit.outbound.schema.query.QueryResultHolder) -->
+<method name="appendJson"  public="true" abstract="true">
+<description>
+Write the query result to the current location in the json stream.
+</description>
+<parameter name="json">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+the json writer to use for appending the query result output.
+</description>
+</parameter>
+<parameter name="result">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.QueryResultHolder"/>
+<description>
+a cache of the latest query result.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.initialize(com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema, com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaBoundQueryResult) -->
+<method name="initialize"  public="true">
+<description/>
+<parameter name="schema">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+</parameter>
+<parameter name="queryResult">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaBoundQueryResult"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.getSchema() -->
+<method name="getSchema"  public="true">
+<description/>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchema"/>
+<description>
+the json schema to which we are writing the output
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.getBoundQueryResult() -->
+<method name="getBoundQueryResult"  public="true">
+<description/>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.BJsonSchemaBoundQueryResult"/>
+<description>
+the bound query result instance in the schema component tree
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.processChildJsonMembers(com.tridium.json.JSONWriter, boolean) -->
+<method name="processChildJsonMembers"  protected="true">
+<description>
+Append the content of the query results nested children into the supplied json builder.
+</description>
+<parameter name="json">
+<type class="com.tridium.json.JSONWriter"/>
+<description>
+the existing json.
+</description>
+</parameter>
+<parameter name="jsonKeysValid">
+<type class="boolean"/>
+<description>
+true if we are currently inside an object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.writeHeaderArray(com.tridium.json.JSONWriter, com.tridiumx.jsonToolkit.outbound.schema.query.QueryResultHolder) -->
+<method name="writeHeaderArray"  protected="true">
+<description>
+writes the query column headers as a json array to the current json stream.
+</description>
+<parameter name="json">
+<type class="com.tridium.json.JSONWriter"/>
+</parameter>
+<parameter name="result">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.QueryResultHolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.columnCountCheck(com.tridiumx.jsonToolkit.outbound.schema.query.QueryResultHolder) -->
+<method name="columnCountCheck"  public="true">
+<description>
+Check that the supplied query result contains sufficient columns to fulfill&#xa; the query result style.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="queryResult">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.query.QueryResultHolder"/>
+<description>
+the result of the query
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.minColumnsRequired() -->
+<method name="minColumnsRequired"  protected="true">
+<description>
+Defines the styles minimum required columns to process a query.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="int"/>
+<description>
+the bare minimum for all styles is 1 column.
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.query.style.BQueryResultWriter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

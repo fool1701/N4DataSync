@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.job.BJob" name="BJob" packageName="javax.baja.job" public="true" abstract="true">
+<description>
+BJob is used to manage tasks which run asynchronously in &#xa; the background but require user visibility.  Jobs can be&#xa; monitored and canceled by users via standard tools in&#xa; the workbench.  A job lifecycle is composed of:&#xa;&#xa; &lt;ol&gt;&#xa;&#xa; &lt;li&gt;To kick off a new job, a concrete instance of BJob is passed&#xa; to JobService.submit() (or you may use BJob.submit()).  This mounts &#xa; the job as a dynamic slot under the JobService.&lt;/li&gt;&#xa;&#xa; &lt;li&gt;The doSubmit() callback is used to initialize the job to begin &#xa; its execution.  The job is reset to enter the running state.&lt;/li&gt;&#xa;&#xa; &lt;li&gt;The doRun() callback is invoked for the job to begin running &#xa; in the background. Subclasses should do all their work on another&#xa; thread - never block the caller&#x27;s thread.&lt;/li&gt;&#xa;&#xa; &lt;li&gt;While running it is up to the subclass to provide progress&#xa; on the job to the user.  If the job can determine a percentage&#xa; complete, then it should call progress() periodically to update &#xa; its percent complete.  If the job cannot determine it&#x27;s progress &#xa; as a percentage, then it should perdiocally call heartbeat() to &#xa; let the framework know it is still alive.  The subclass can also &#xa; maintain details in its JobLog.&lt;/li&gt;&#xa;&#xa; &lt;li&gt;The doCancel() callback is invoked if the user manually cancels &#xa; the job while it is running.  It is up to the subclass to use&#xa; that callback to terminate work in the background thread.&lt;/li&gt;   &#xa;&#xa; &lt;li&gt;When the job completes it is up to the subclass to inform&#xa; the framework of its completion status via the success(), canceled(),&#xa; failure(), or completed() method.&#xa;&#xa; &lt;li&gt;doDispose() is called when the job is complete, and&#xa; the user no longer wishes to visualize it.  During this &#xa; callback the job is removed from the database.&lt;/li&gt;&#xa;&#xa; &lt;/ol&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">30 Apr 03</tag>
+<tag name="@version">$Revision: 10$ $Date: 9/23/10 10:32:53 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="jobState" flags="tr">
+<type class="javax.baja.job.BJobState"/>
+<description>
+Slot for the &lt;code&gt;jobState&lt;/code&gt; property.&#xa; Stores the current state of this job&#x27;s lifecycle
+</description>
+<tag name="@see">#getJobState</tag>
+<tag name="@see">#setJobState</tag>
+</property>
+
+<property name="progress" flags="tr">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;progress&lt;/code&gt; property.&#xa; The percentage (0-100) of the task that has been completed.&#xa; If the job is unable to calculate its progress then this&#xa; value should be set to -1.
+</description>
+<tag name="@see">#getProgress</tag>
+<tag name="@see">#setProgress</tag>
+</property>
+
+<property name="startTime" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;startTime&lt;/code&gt; property.&#xa; Time when job was submitted to begin execution.
+</description>
+<tag name="@see">#getStartTime</tag>
+<tag name="@see">#setStartTime</tag>
+</property>
+
+<property name="heartbeatTime" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;heartbeatTime&lt;/code&gt; property.&#xa; This is the last time when heartbeat() was called.  It&#xa; is used to detect that a job is still running even when&#xa; progress is not being computed.
+</description>
+<tag name="@see">#getHeartbeatTime</tag>
+<tag name="@see">#setHeartbeatTime</tag>
+</property>
+
+<property name="endTime" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;endTime&lt;/code&gt; property.&#xa; Time when job completed.
+</description>
+<tag name="@see">#getEndTime</tag>
+<tag name="@see">#setEndTime</tag>
+</property>
+
+<action name="cancel" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;cancel&lt;/code&gt; action.&#xa; Cancel the job.
+</description>
+<tag name="@see">#cancel()</tag>
+</action>
+
+<action name="dispose" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;dispose&lt;/code&gt; action.&#xa; Dispose removes the job from the service and cleans up&#xa; any log data.  This action may not be used while the&#xa; job is running, you must explicitly cancel first.
+</description>
+<tag name="@see">#dispose()</tag>
+</action>
+
+<action name="readLog" flags="">
+<return>
+<type class="javax.baja.sys.BString"/>
+</return>
+<description>
+Slot for the &lt;code&gt;readLog&lt;/code&gt; action.&#xa; Read the current contents of the log via JobLog.encode().
+</description>
+<tag name="@see">#readLog()</tag>
+</action>
+
+<action name="readLogFrom" flags="hA">
+<parameter name="parameter">
+<type class="javax.baja.sys.BLong"/>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobLogSequence"/>
+</return>
+<description>
+Slot for the &lt;code&gt;readLogFrom&lt;/code&gt; action.&#xa; Read the most recent contents of the log starting at the given&#xa; sequence number (inclusive). If the log has a fixed size and&#xa; has overwritten items, the returned sequence will begin at&#xa; the first item at or greater than the requested number.&#xa; The returned log items will be encoded as a newline delimited&#xa; string using JobLogItem.encode(). The highest and lowest sequence&#xa; numbers of the items can be found as properties on the returned&#xa; BJobLogSequence object. Sequence numbers of -1 and an empty item array&#xa; will be returned if the log is empty, or if an attempt is made to read&#xa; a sequence starting from beyond the end of the log.
+</description>
+<tag name="@see">#readLogFrom(BLong parameter)</tag>
+</action>
+
+<!-- javax.baja.job.BJob() -->
+<constructor name="BJob" protected="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.job.BJob.getJobState() -->
+<method name="getJobState"  public="true">
+<description>
+Get the &lt;code&gt;jobState&lt;/code&gt; property.&#xa; Stores the current state of this job&#x27;s lifecycle
+</description>
+<tag name="@see">#jobState</tag>
+<return>
+<type class="javax.baja.job.BJobState"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.setJobState(javax.baja.job.BJobState) -->
+<method name="setJobState"  public="true">
+<description>
+Set the &lt;code&gt;jobState&lt;/code&gt; property.&#xa; Stores the current state of this job&#x27;s lifecycle
+</description>
+<tag name="@see">#jobState</tag>
+<parameter name="v">
+<type class="javax.baja.job.BJobState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.getProgress() -->
+<method name="getProgress"  public="true">
+<description>
+Get the &lt;code&gt;progress&lt;/code&gt; property.&#xa; The percentage (0-100) of the task that has been completed.&#xa; If the job is unable to calculate its progress then this&#xa; value should be set to -1.
+</description>
+<tag name="@see">#progress</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.setProgress(int) -->
+<method name="setProgress"  public="true">
+<description>
+Set the &lt;code&gt;progress&lt;/code&gt; property.&#xa; The percentage (0-100) of the task that has been completed.&#xa; If the job is unable to calculate its progress then this&#xa; value should be set to -1.
+</description>
+<tag name="@see">#progress</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.getStartTime() -->
+<method name="getStartTime"  public="true">
+<description>
+Get the &lt;code&gt;startTime&lt;/code&gt; property.&#xa; Time when job was submitted to begin execution.
+</description>
+<tag name="@see">#startTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.setStartTime(javax.baja.sys.BAbsTime) -->
+<method name="setStartTime"  public="true">
+<description>
+Set the &lt;code&gt;startTime&lt;/code&gt; property.&#xa; Time when job was submitted to begin execution.
+</description>
+<tag name="@see">#startTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.getHeartbeatTime() -->
+<method name="getHeartbeatTime"  public="true">
+<description>
+Get the &lt;code&gt;heartbeatTime&lt;/code&gt; property.&#xa; This is the last time when heartbeat() was called.  It&#xa; is used to detect that a job is still running even when&#xa; progress is not being computed.
+</description>
+<tag name="@see">#heartbeatTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.setHeartbeatTime(javax.baja.sys.BAbsTime) -->
+<method name="setHeartbeatTime"  public="true">
+<description>
+Set the &lt;code&gt;heartbeatTime&lt;/code&gt; property.&#xa; This is the last time when heartbeat() was called.  It&#xa; is used to detect that a job is still running even when&#xa; progress is not being computed.
+</description>
+<tag name="@see">#heartbeatTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.getEndTime() -->
+<method name="getEndTime"  public="true">
+<description>
+Get the &lt;code&gt;endTime&lt;/code&gt; property.&#xa; Time when job completed.
+</description>
+<tag name="@see">#endTime</tag>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.setEndTime(javax.baja.sys.BAbsTime) -->
+<method name="setEndTime"  public="true">
+<description>
+Set the &lt;code&gt;endTime&lt;/code&gt; property.&#xa; Time when job completed.
+</description>
+<tag name="@see">#endTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.cancel() -->
+<method name="cancel"  public="true">
+<description>
+Invoke the &lt;code&gt;cancel&lt;/code&gt; action.&#xa; Cancel the job.
+</description>
+<tag name="@see">#cancel</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.dispose() -->
+<method name="dispose"  public="true">
+<description>
+Invoke the &lt;code&gt;dispose&lt;/code&gt; action.&#xa; Dispose removes the job from the service and cleans up&#xa; any log data.  This action may not be used while the&#xa; job is running, you must explicitly cancel first.
+</description>
+<tag name="@see">#dispose</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.readLog() -->
+<method name="readLog"  public="true">
+<description>
+Invoke the &lt;code&gt;readLog&lt;/code&gt; action.&#xa; Read the current contents of the log via JobLog.encode().
+</description>
+<tag name="@see">#readLog</tag>
+<return>
+<type class="javax.baja.sys.BString"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.readLogFrom(javax.baja.sys.BLong) -->
+<method name="readLogFrom"  public="true">
+<description>
+Invoke the &lt;code&gt;readLogFrom&lt;/code&gt; action.&#xa; Read the most recent contents of the log starting at the given&#xa; sequence number (inclusive). If the log has a fixed size and&#xa; has overwritten items, the returned sequence will begin at&#xa; the first item at or greater than the requested number.&#xa; The returned log items will be encoded as a newline delimited&#xa; string using JobLogItem.encode(). The highest and lowest sequence&#xa; numbers of the items can be found as properties on the returned&#xa; BJobLogSequence object. Sequence numbers of -1 and an empty item array&#xa; will be returned if the log is empty, or if an attempt is made to read&#xa; a sequence starting from beyond the end of the log.
+</description>
+<tag name="@see">#readLogFrom</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BLong"/>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobLogSequence"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.submit(javax.baja.sys.Context) -->
+<method name="submit"  public="true">
+<description>
+Convenience for &lt;code&gt;BJobService.getService().submit(this, cx)&lt;/code&gt;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.doSubmit(javax.baja.sys.Context) -->
+<method name="doSubmit"  public="true">
+<description>
+This callback is invoked to kick off the job run.  The job state &#xa; is set to running; startTime is set to the current time; progress &#xa; is set to -1; and the log is reset.  Then the &lt;code&gt;doRun()&lt;/code&gt; &#xa; method is called.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.isAlive() -->
+<method name="isAlive"  public="true">
+<description>
+Return if the job&#x27;s current state is running.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.doRun(javax.baja.sys.Context) -->
+<method name="doRun"  public="true" abstract="true">
+<description>
+This is the callback to begin the job.  All work should be done&#xa; on a background thread - never block the callers thread.  During&#xa; the job execution, subclasses should periodically update progress&#xa; via the &lt;code&gt;progress()&lt;/code&gt; or &lt;code&gt;heartbeat()&lt;/code&gt; method.  &#xa; Diagnostics information may be dumped via the log() method.  Once&#xa; the run finishes, the subclass must invoke one of the completion&#xa; methods (success, canceled, failed, or complete).
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.job.BJob.doCancel(javax.baja.sys.Context) -->
+<method name="doCancel"  public="true" abstract="true">
+<description>
+This callback is invoked when the user manually cancels a &#xa; running job.  It is up to the subclass to terminate the job on &#xa; the background thread.  Typically the state should be set to&#xa; canceling while waiting for the background thread to terminate.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.job.BJob.doDispose(javax.baja.sys.Context) -->
+<method name="doDispose"  public="true">
+<description>
+Dispose is called when a completed job expires or the user&#xa; manually calls dispose.  The job is removed from the database.&#xa; It is illegal to call dispose() on a running job.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.progress(int) -->
+<method name="progress"  public="true">
+<description>
+Update the progress property with the percent complete.&#xa; This method automatically updates the heartbeatTime.
+</description>
+<parameter name="percent">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.heartbeat() -->
+<method name="heartbeat"  public="true">
+<description>
+Update the heartbeat time so that we know this job is still &#xa; alive and kicking.  Note this method is automatically called&#xa; by progress() calls.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.success() -->
+<method name="success"  public="true">
+<description>
+This method is called to indicate successful completion&#xa; of the job.  It sets the job state to success.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.canceled() -->
+<method name="canceled"  public="true">
+<description>
+This method is called to indicate that the job was&#xa; canceled.  It sets the job state to canceled.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.failed(java.lang.Throwable) -->
+<method name="failed"  public="true">
+<description>
+This method is called to indicate that the job failed.  If&#xa; an non-null exception is passed it is automatically dumped&#xa; to the log.  If the current status is canceling or the exception &#xa; is InterruptedException or JobCancelException, then we assume &#xa; the failure is actually a cancel.
+</description>
+<parameter name="cause">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.complete(javax.baja.job.BJobState) -->
+<method name="complete"  public="true">
+<description>
+Call this method when the job completes with a state of &#xa; success, canceled, or failed.  It updates the job state, &#xa; progress and endTime.
+</description>
+<parameter name="state">
+<type class="javax.baja.job.BJobState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.log() -->
+<method name="log"  public="true">
+<description>
+Get the JobLog to use for generating a list of job items.
+</description>
+<return>
+<type class="javax.baja.job.JobLog"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.doReadLog() -->
+<method name="doReadLog"  public="true">
+<description>
+Return the &lt;code&gt;log().encode()&lt;/code&gt; as BString.
+</description>
+<return>
+<type class="javax.baja.sys.BString"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.doReadLogFrom(javax.baja.sys.BLong) -->
+<method name="doReadLogFrom"  public="true">
+<description>
+Return a BJobLogSequence containing the items in the log&#xa; with sequence numbers greater or equal to the requested&#xa; number.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<parameter name="num">
+<type class="javax.baja.sys.BLong"/>
+<description>
+the minimum value for the sequence numbers of the returned items.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobLogSequence"/>
+<description>
+a BJobLogSequence with the items encoded as a String.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.resetLog() -->
+<method name="resetLog"  public="true">
+<description>
+Clear the log of all items.  Note this method is &#xa; called automatically by &lt;code&gt;doSubmit()&lt;/code&gt;.&#xa;&#xa; If the log contained one or more items, the&#xa; &lt;code&gt;logCleared&lt;/code&gt; topic will be fired.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.job.BJob.getIcon() -->
+<method name="getIcon"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.job.BJob.jobState -->
+<field name="jobState"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;jobState&lt;/code&gt; property.&#xa; Stores the current state of this job&#x27;s lifecycle
+</description>
+<tag name="@see">#getJobState</tag>
+<tag name="@see">#setJobState</tag>
+</field>
+
+<!-- javax.baja.job.BJob.progress -->
+<field name="progress"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;progress&lt;/code&gt; property.&#xa; The percentage (0-100) of the task that has been completed.&#xa; If the job is unable to calculate its progress then this&#xa; value should be set to -1.
+</description>
+<tag name="@see">#getProgress</tag>
+<tag name="@see">#setProgress</tag>
+</field>
+
+<!-- javax.baja.job.BJob.startTime -->
+<field name="startTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;startTime&lt;/code&gt; property.&#xa; Time when job was submitted to begin execution.
+</description>
+<tag name="@see">#getStartTime</tag>
+<tag name="@see">#setStartTime</tag>
+</field>
+
+<!-- javax.baja.job.BJob.heartbeatTime -->
+<field name="heartbeatTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;heartbeatTime&lt;/code&gt; property.&#xa; This is the last time when heartbeat() was called.  It&#xa; is used to detect that a job is still running even when&#xa; progress is not being computed.
+</description>
+<tag name="@see">#getHeartbeatTime</tag>
+<tag name="@see">#setHeartbeatTime</tag>
+</field>
+
+<!-- javax.baja.job.BJob.endTime -->
+<field name="endTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;endTime&lt;/code&gt; property.&#xa; Time when job completed.
+</description>
+<tag name="@see">#getEndTime</tag>
+<tag name="@see">#setEndTime</tag>
+</field>
+
+<!-- javax.baja.job.BJob.cancel -->
+<field name="cancel"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;cancel&lt;/code&gt; action.&#xa; Cancel the job.
+</description>
+<tag name="@see">#cancel()</tag>
+</field>
+
+<!-- javax.baja.job.BJob.dispose -->
+<field name="dispose"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;dispose&lt;/code&gt; action.&#xa; Dispose removes the job from the service and cleans up&#xa; any log data.  This action may not be used while the&#xa; job is running, you must explicitly cancel first.
+</description>
+<tag name="@see">#dispose()</tag>
+</field>
+
+<!-- javax.baja.job.BJob.readLog -->
+<field name="readLog"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;readLog&lt;/code&gt; action.&#xa; Read the current contents of the log via JobLog.encode().
+</description>
+<tag name="@see">#readLog()</tag>
+</field>
+
+<!-- javax.baja.job.BJob.readLogFrom -->
+<field name="readLogFrom"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;readLogFrom&lt;/code&gt; action.&#xa; Read the most recent contents of the log starting at the given&#xa; sequence number (inclusive). If the log has a fixed size and&#xa; has overwritten items, the returned sequence will begin at&#xa; the first item at or greater than the requested number.&#xa; The returned log items will be encoded as a newline delimited&#xa; string using JobLogItem.encode(). The highest and lowest sequence&#xa; numbers of the items can be found as properties on the returned&#xa; BJobLogSequence object. Sequence numbers of -1 and an empty item array&#xa; will be returned if the log is empty, or if an attempt is made to read&#xa; a sequence starting from beyond the end of the log.
+</description>
+<tag name="@see">#readLogFrom(BLong parameter)</tag>
+</field>
+
+<!-- javax.baja.job.BJob.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

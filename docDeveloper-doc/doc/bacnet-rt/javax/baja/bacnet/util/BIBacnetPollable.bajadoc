@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.util.BIBacnetPollable" name="BIBacnetPollable" packageName="javax.baja.bacnet.util" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIBacnetPollable
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">12 Jun 02</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<implements>
+<type class="javax.baja.driver.util.BIPollable"/>
+</implements>
+<!-- javax.baja.bacnet.util.BIBacnetPollable.device() -->
+<method name="device"  public="true" abstract="true">
+<description>
+Get the containing device object which will poll this object.
+</description>
+<return>
+<type class="javax.baja.bacnet.BBacnetDevice"/>
+<description>
+the containing BBacnetDevice
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.getPollableType() -->
+<method name="getPollableType"  public="true" abstract="true">
+<description>
+Get the pollable type of this object.
+</description>
+<return>
+<type class="int"/>
+<description>
+one of the pollable types defined in BIBacnetPollable.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.poll() -->
+<method name="poll"  public="true" abstract="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Poll the node.
+</description>
+<tag name="@deprecated">As of 3.2</tag>
+<return>
+<type class="boolean"/>
+<description>
+true if a poll was attempted to this node, or&#xa; false if the poll was skipped due to device down, out of service, etc.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.readFail(java.lang.String) -->
+<method name="readFail"  public="true" abstract="true">
+<description>
+Indicate a failure polling this object.
+</description>
+<parameter name="failureMsg">
+<type class="java.lang.String"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.fromEncodedValue(byte[], javax.baja.status.BStatus, javax.baja.sys.Context) -->
+<method name="fromEncodedValue"  public="true" abstract="true">
+<description>
+Normalize the encoded data into the pollable&#x27;s data structure.
+</description>
+<parameter name="encodedValue">
+<type class="byte" dimension="1"/>
+<description/>
+</parameter>
+<parameter name="status">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+must be a PollListEntry.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.getPollListEntries() -->
+<method name="getPollListEntries"  public="true" abstract="true">
+<description>
+Get the list of poll list entries for this pollable.&#xa; The first entry for points must be the configured property.
+</description>
+<return>
+<type class="javax.baja.bacnet.util.PollListEntry" dimension="1"/>
+<description>
+the list of poll list entries.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.BACNET_POLLABLE_DEVICE -->
+<field name="BACNET_POLLABLE_DEVICE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.BACNET_POLLABLE_PROXY_EXT -->
+<field name="BACNET_POLLABLE_PROXY_EXT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.BACNET_POLLABLE_OBJECT -->
+<field name="BACNET_POLLABLE_OBJECT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.BACNET_POLLABLE_VIRTUAL -->
+<field name="BACNET_POLLABLE_VIRTUAL"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.BACNET_POLLABLE_ENROLLMENT -->
+<field name="BACNET_POLLABLE_ENROLLMENT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.BACNET_POLLABLE_REMOTE_EXT -->
+<field name="BACNET_POLLABLE_REMOTE_EXT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.util.BIBacnetPollable.BACNET_POLLABLE_OTHER -->
+<field name="BACNET_POLLABLE_OTHER"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

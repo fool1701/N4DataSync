@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="gx" runtimeProfile="rt" qualifiedName="javax.baja.gx.BPen" name="BPen" packageName="javax.baja.gx" public="true" final="true">
+<description>
+BPen encapsulates how to stroke the outlines and paths of geometries.&#xa;&#xa; &lt;pre&gt; &#xa;  pen   := [width] || [cap] || [join] || [dash]&#xa;  width := num                                (1 is default)&#xa;  cap   := capButt | capSquare | capRound     (butt is default&#xa;  join  := joinMiter | joinRound | joinBevel  (miter is default)&#xa;  dash  := &#x22;dash(&#x22; num (&#x22;,&#x22; num)* &#x22;)&#x22;&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">2 Apr 04</tag>
+<tag name="@version">$Revision: 6$ $Date: 9/30/08 5:09:01 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.gx.BPen.make(double) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a solid, butt, miter pen of the specified width.
+</description>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BPen"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.make(double, double[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a butt, miter pen of the specified width and dash pattern.
+</description>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="dash">
+<type class="double" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BPen"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.make(double, int, int, double[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a pen of the specified width, cap, join, and dash pattern.
+</description>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="cap">
+<type class="int"/>
+</parameter>
+<parameter name="join">
+<type class="int"/>
+</parameter>
+<parameter name="dash">
+<type class="double" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BPen"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Make from a string encoding.  See class header for format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BPen"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.getWidth() -->
+<method name="getWidth"  public="true">
+<description>
+Return the width of the pen.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.getCap() -->
+<method name="getCap"  public="true">
+<description>
+Get cap constant: CAP_BUTT, CAP_SQUARE, CAP_ROUND
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.getJoin() -->
+<method name="getJoin"  public="true">
+<description>
+Get join constant: JOIN_MITER, JOIN_ROUND, JOIN_BEVEL
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.getDash() -->
+<method name="getDash"  public="true">
+<description>
+Get dash pattern as an array of opaque and &#xa; transparent segment lengths.
+</description>
+<return>
+<type class="double" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BPen hash code.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Return if the specified object is an equivalent BPen.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<description>
+Serialized using writeUTF() of string encoding.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BPen.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<description>
+Unserialized using readUTF() of string encoding.
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BPen.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description>
+Encode to string format.  See class header for format.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BPen.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<description>
+Encode from string format.  See class header for format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BPen.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework use only.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BPen.CAP_BUTT -->
+<field name="CAP_BUTT"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Cap option
+</description>
+</field>
+
+<!-- javax.baja.gx.BPen.CAP_SQUARE -->
+<field name="CAP_SQUARE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Cap option
+</description>
+</field>
+
+<!-- javax.baja.gx.BPen.CAP_ROUND -->
+<field name="CAP_ROUND"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Cap option
+</description>
+</field>
+
+<!-- javax.baja.gx.BPen.JOIN_MITER -->
+<field name="JOIN_MITER"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Join option
+</description>
+</field>
+
+<!-- javax.baja.gx.BPen.JOIN_ROUND -->
+<field name="JOIN_ROUND"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Join option
+</description>
+</field>
+
+<!-- javax.baja.gx.BPen.JOIN_BEVEL -->
+<field name="JOIN_BEVEL"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Join option
+</description>
+</field>
+
+<!-- javax.baja.gx.BPen.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BPen"/>
+<description>
+The default pen is solid width of 1.
+</description>
+</field>
+
+<!-- javax.baja.gx.BPen.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

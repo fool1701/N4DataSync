@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="driver" runtimeProfile="rt" qualifiedName="javax.baja.driver.point.BTuningPolicy" name="BTuningPolicy" packageName="javax.baja.driver.point" public="true">
+<description>
+BTuningPolicy stores configuration to determine how &#xa; and when proxy points are read and written.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">23 Jun 04</tag>
+<tag name="@version">$Revision: 9$ $Date: 3/29/06 4:24:56 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="minWriteTime" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;minWriteTime&lt;/code&gt; property.&#xa; Min amount of time between writes.  This value&#xa; provides the ability to throttle rapidly changing&#xa; data so that only the last value is written.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#getMinWriteTime</tag>
+<tag name="@see">#setMinWriteTime</tag>
+</property>
+
+<property name="maxWriteTime" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;maxWriteTime&lt;/code&gt; property.&#xa; Max amount of time to allow before a rewrite is&#xa; issued if nothing else has trigged a write.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#getMaxWriteTime</tag>
+<tag name="@see">#setMaxWriteTime</tag>
+</property>
+
+<property name="writeOnStart" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;writeOnStart&lt;/code&gt; property.&#xa; If true then a write is issued when the station&#xa; reaches steady state.
+</description>
+<tag name="@see">#getWriteOnStart</tag>
+<tag name="@see">#setWriteOnStart</tag>
+</property>
+
+<property name="writeOnUp" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;writeOnUp&lt;/code&gt; property.&#xa; If true then a write is issued when the containing&#xa; device transitions its status from down to up.
+</description>
+<tag name="@see">#getWriteOnUp</tag>
+<tag name="@see">#setWriteOnUp</tag>
+</property>
+
+<property name="writeOnEnabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;writeOnEnabled&lt;/code&gt; property.&#xa; If true then a write is issued when the point transitions&#xa; its status from disabled to enabled.
+</description>
+<tag name="@see">#getWriteOnEnabled</tag>
+<tag name="@see">#setWriteOnEnabled</tag>
+</property>
+
+<property name="staleTime" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;staleTime&lt;/code&gt; property.&#xa; This property is used to configure when point data&#xa; becomes stale.  If set to non-zero then points become&#xa; stale if the configured time elapses without a successful&#xa; read (indicated by readOk).  If set to zero then the&#xa; stale timer is disabled, and points are set to stale&#xa; immediately when unsubscribed.
+</description>
+<tag name="@see">#getStaleTime</tag>
+<tag name="@see">#setStaleTime</tag>
+</property>
+
+<!-- javax.baja.driver.point.BTuningPolicy(javax.baja.sys.BRelTime, javax.baja.sys.BRelTime, boolean, boolean, boolean, javax.baja.sys.BRelTime) -->
+<constructor name="BTuningPolicy" public="true">
+<parameter name="minWriteTime">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<parameter name="maxWriteTime">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<parameter name="writeOnStart">
+<type class="boolean"/>
+</parameter>
+<parameter name="writeOnUp">
+<type class="boolean"/>
+</parameter>
+<parameter name="writeOnEnabled">
+<type class="boolean"/>
+</parameter>
+<parameter name="staleTime">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<description>
+Construct a fully specified BTuningPolicy.
+</description>
+</constructor>
+
+<!-- javax.baja.driver.point.BTuningPolicy() -->
+<constructor name="BTuningPolicy" public="true">
+<description>
+No arg constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getMinWriteTime() -->
+<method name="getMinWriteTime"  public="true">
+<description>
+Get the &lt;code&gt;minWriteTime&lt;/code&gt; property.&#xa; Min amount of time between writes.  This value&#xa; provides the ability to throttle rapidly changing&#xa; data so that only the last value is written.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#minWriteTime</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.setMinWriteTime(javax.baja.sys.BRelTime) -->
+<method name="setMinWriteTime"  public="true">
+<description>
+Set the &lt;code&gt;minWriteTime&lt;/code&gt; property.&#xa; Min amount of time between writes.  This value&#xa; provides the ability to throttle rapidly changing&#xa; data so that only the last value is written.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#minWriteTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getMaxWriteTime() -->
+<method name="getMaxWriteTime"  public="true">
+<description>
+Get the &lt;code&gt;maxWriteTime&lt;/code&gt; property.&#xa; Max amount of time to allow before a rewrite is&#xa; issued if nothing else has trigged a write.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#maxWriteTime</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.setMaxWriteTime(javax.baja.sys.BRelTime) -->
+<method name="setMaxWriteTime"  public="true">
+<description>
+Set the &lt;code&gt;maxWriteTime&lt;/code&gt; property.&#xa; Max amount of time to allow before a rewrite is&#xa; issued if nothing else has trigged a write.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#maxWriteTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getWriteOnStart() -->
+<method name="getWriteOnStart"  public="true">
+<description>
+Get the &lt;code&gt;writeOnStart&lt;/code&gt; property.&#xa; If true then a write is issued when the station&#xa; reaches steady state.
+</description>
+<tag name="@see">#writeOnStart</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.setWriteOnStart(boolean) -->
+<method name="setWriteOnStart"  public="true">
+<description>
+Set the &lt;code&gt;writeOnStart&lt;/code&gt; property.&#xa; If true then a write is issued when the station&#xa; reaches steady state.
+</description>
+<tag name="@see">#writeOnStart</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getWriteOnUp() -->
+<method name="getWriteOnUp"  public="true">
+<description>
+Get the &lt;code&gt;writeOnUp&lt;/code&gt; property.&#xa; If true then a write is issued when the containing&#xa; device transitions its status from down to up.
+</description>
+<tag name="@see">#writeOnUp</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.setWriteOnUp(boolean) -->
+<method name="setWriteOnUp"  public="true">
+<description>
+Set the &lt;code&gt;writeOnUp&lt;/code&gt; property.&#xa; If true then a write is issued when the containing&#xa; device transitions its status from down to up.
+</description>
+<tag name="@see">#writeOnUp</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getWriteOnEnabled() -->
+<method name="getWriteOnEnabled"  public="true">
+<description>
+Get the &lt;code&gt;writeOnEnabled&lt;/code&gt; property.&#xa; If true then a write is issued when the point transitions&#xa; its status from disabled to enabled.
+</description>
+<tag name="@see">#writeOnEnabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.setWriteOnEnabled(boolean) -->
+<method name="setWriteOnEnabled"  public="true">
+<description>
+Set the &lt;code&gt;writeOnEnabled&lt;/code&gt; property.&#xa; If true then a write is issued when the point transitions&#xa; its status from disabled to enabled.
+</description>
+<tag name="@see">#writeOnEnabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getStaleTime() -->
+<method name="getStaleTime"  public="true">
+<description>
+Get the &lt;code&gt;staleTime&lt;/code&gt; property.&#xa; This property is used to configure when point data&#xa; becomes stale.  If set to non-zero then points become&#xa; stale if the configured time elapses without a successful&#xa; read (indicated by readOk).  If set to zero then the&#xa; stale timer is disabled, and points are set to stale&#xa; immediately when unsubscribed.
+</description>
+<tag name="@see">#staleTime</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.setStaleTime(javax.baja.sys.BRelTime) -->
+<method name="setStaleTime"  public="true">
+<description>
+Set the &lt;code&gt;staleTime&lt;/code&gt; property.&#xa; This property is used to configure when point data&#xa; becomes stale.  If set to non-zero then points become&#xa; stale if the configured time elapses without a successful&#xa; read (indicated by readOk).  If set to zero then the&#xa; stale timer is disabled, and points are set to stale&#xa; immediately when unsubscribed.
+</description>
+<tag name="@see">#staleTime</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.getIcon() -->
+<method name="getIcon"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.started() -->
+<method name="started"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.point.BTuningPolicy.minWriteTime -->
+<field name="minWriteTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;minWriteTime&lt;/code&gt; property.&#xa; Min amount of time between writes.  This value&#xa; provides the ability to throttle rapidly changing&#xa; data so that only the last value is written.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#getMinWriteTime</tag>
+<tag name="@see">#setMinWriteTime</tag>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.maxWriteTime -->
+<field name="maxWriteTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;maxWriteTime&lt;/code&gt; property.&#xa; Max amount of time to allow before a rewrite is&#xa; issued if nothing else has trigged a write.  If&#xa; the value is zero then this feature is disabled.
+</description>
+<tag name="@see">#getMaxWriteTime</tag>
+<tag name="@see">#setMaxWriteTime</tag>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.writeOnStart -->
+<field name="writeOnStart"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;writeOnStart&lt;/code&gt; property.&#xa; If true then a write is issued when the station&#xa; reaches steady state.
+</description>
+<tag name="@see">#getWriteOnStart</tag>
+<tag name="@see">#setWriteOnStart</tag>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.writeOnUp -->
+<field name="writeOnUp"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;writeOnUp&lt;/code&gt; property.&#xa; If true then a write is issued when the containing&#xa; device transitions its status from down to up.
+</description>
+<tag name="@see">#getWriteOnUp</tag>
+<tag name="@see">#setWriteOnUp</tag>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.writeOnEnabled -->
+<field name="writeOnEnabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;writeOnEnabled&lt;/code&gt; property.&#xa; If true then a write is issued when the point transitions&#xa; its status from disabled to enabled.
+</description>
+<tag name="@see">#getWriteOnEnabled</tag>
+<tag name="@see">#setWriteOnEnabled</tag>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.staleTime -->
+<field name="staleTime"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;staleTime&lt;/code&gt; property.&#xa; This property is used to configure when point data&#xa; becomes stale.  If set to non-zero then points become&#xa; stale if the configured time elapses without a successful&#xa; read (indicated by readOk).  If set to zero then the&#xa; stale timer is disabled, and points are set to stale&#xa; immediately when unsubscribed.
+</description>
+<tag name="@see">#getStaleTime</tag>
+<tag name="@see">#setStaleTime</tag>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.maxWriteTimeContext -->
+<field name="maxWriteTimeContext"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description>
+This context is passed to ITunable.write() if the write&#xa; is called because of elapsed maxWriteTime.
+</description>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.writeOnStartContext -->
+<field name="writeOnStartContext"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description>
+This context is passed to ITunable.write() if the write&#xa; is called because of the onStart transition.
+</description>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.writeOnUpContext -->
+<field name="writeOnUpContext"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description>
+This context is passed to ITunable.write() if the write&#xa; is called because of the onUp transition.
+</description>
+</field>
+
+<!-- javax.baja.driver.point.BTuningPolicy.writeOnEnabledContext -->
+<field name="writeOnEnabledContext"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Context"/>
+<description>
+This context is passed to ITunable.write() if the write&#xa; is called because of the onEnabled transition.
+</description>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="neql" runtimeProfile="rt" qualifiedName="javax.baja.neql.GetTagExpression" name="GetTagExpression" packageName="javax.baja.neql" public="true">
+<description>
+GetTagExpression gets a tag from the evaluated entity.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">01/16/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.neql.Expression"/>
+</extends>
+<!-- javax.baja.neql.GetTagExpression(java.lang.String, java.lang.String) -->
+<constructor name="GetTagExpression" public="true">
+<parameter name="namespace">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="key">
+<type class="java.lang.String"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.neql.GetTagExpression.getNodeType() -->
+<method name="getNodeType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the node type.
+</description>
+<return>
+<type class="int"/>
+<description>
+AST_GET_TAG
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetTagExpression.getNodeDisplay() -->
+<method name="getNodeDisplay"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetTagExpression.getNamespace() -->
+<method name="getNamespace"  public="true">
+<description>
+Get the namespace for the tag or null if it is a global tag.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetTagExpression.getKey() -->
+<method name="getKey"  public="true">
+<description>
+Get the tag key.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetTagExpression.toRelation() -->
+<method name="toRelation"  public="true">
+<description>
+Convert this expression to a GetRelationExpression with the same&#xa; namespace and key.
+</description>
+<return>
+<type class="javax.baja.neql.GetRelationExpression"/>
+<description>
+Returns a GetRelationExpression with the same namespace and key&#xa;   as this expression.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetTagExpression.evaluate(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evaluate"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<type class="javax.baja.data.BIDataValue"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.neql.GetTagExpression.evalBoolean(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evalBoolean"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true if the entity contains a tag with this expression&#x27;s tag id and that tag&#x27;s value is&#xa; not BBoolean.FALSE.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+entity on which to search for the expression&#x27;s tag id
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+context that may contain the default namespace to form the tag id
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the entity contains a tag with this expression&#x27;s tag id and that tag&#x27;s value is&#xa;   not BBoolean.FALSE
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

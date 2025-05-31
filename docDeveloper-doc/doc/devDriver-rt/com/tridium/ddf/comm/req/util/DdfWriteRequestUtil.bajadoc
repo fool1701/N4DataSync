@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.util.DdfWriteRequestUtil" name="DdfWriteRequestUtil" packageName="com.tridium.ddf.comm.req.util" public="true">
+<description/>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.comm.req.util.DdfWriteRequestUtil() -->
+<constructor name="DdfWriteRequestUtil" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.util.DdfWriteRequestUtil.processResponse(com.tridium.ddf.comm.req.BIDdfWriteRequest, com.tridium.ddf.comm.rsp.BIDdfResponse) -->
+<method name="processResponse"  public="true" static="true">
+<description>
+This is a callback method that the BDdfCommunicator calls when it pairs up a write response&#xa; with a write request.&#xa; &#xa; This loops through all writableSource objects for the ddfReq and calls writeOk on &#xa; each of them, passing in the result of calling getWriteValue on writable source object.
+</description>
+<parameter name="ddfReq">
+<type class="com.tridium.ddf.comm.req.BIDdfWriteRequest"/>
+</parameter>
+<parameter name="ddfRsp">
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfWriteRequestUtil.processTimeout(com.tridium.ddf.comm.req.BIDdfWriteRequest) -->
+<method name="processTimeout"  public="true" static="true">
+<description>
+This is a callback method that the BDdfCommunicator calls when it decides to give up on receiving&#xa; a response message for this message.&#xa; &#xa; This loops through all writableSource objects for the ddfReq and calls writeFail on &#xa; each of them. After that, this calls DdfRequestUtil.processTimeout.
+</description>
+<parameter name="ddfReq">
+<type class="com.tridium.ddf.comm.req.BIDdfWriteRequest"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfWriteRequestUtil.processLateResponse(com.tridium.ddf.comm.req.BIDdfWriteRequest, com.tridium.ddf.comm.rsp.BIDdfResponse) -->
+<method name="processLateResponse"  public="true" static="true">
+<description>
+This is a callback method that the BDdfCommunicator calls when it pairs up a write response&#xa; with a write request, late, after the write request has alwritey timed out.&#xa; &#xa; If the getAutoWriteOkLate method of the ddfRsp returns true then this loops through all&#xa; writableSource objects for the ddfReq and calls writeOk on each of them, passing in the&#xa; result of calling getWriteValue on the writableSource object.
+</description>
+<parameter name="ddfReq">
+<type class="com.tridium.ddf.comm.req.BIDdfWriteRequest"/>
+</parameter>
+<parameter name="ddfRsp">
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfWriteRequestUtil.processErrorResponse(com.tridium.ddf.comm.req.BIDdfWriteRequest, com.tridium.ddf.comm.rsp.DdfResponseException) -->
+<method name="processErrorResponse"  public="true" static="true">
+<description>
+This is a callback method that DdfRequestUtil calls when it pairs up the received&#xa; frame(s) with a request message but the frames indicate that an error condition exists&#xa; in the device preventing it from responding successfully.
+</description>
+<parameter name="ddfReq">
+<type class="com.tridium.ddf.comm.req.BIDdfWriteRequest"/>
+</parameter>
+<parameter name="errorRsp">
+<type class="com.tridium.ddf.comm.rsp.DdfResponseException"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfWriteRequestUtil.doWrite(com.tridium.ddf.point.BIDdfWritable, javax.baja.status.BStatusValue) -->
+<method name="doWrite"  public="true" static="true">
+<description>
+This method is called by the doWrite method of BDdfProxyExt to write itself in a generic fashion. This&#xa; generic fashion can hopefully be applied to phantom points, when they are ready for prime-time in release 3.2.
+</description>
+<parameter name="writable">
+<type class="com.tridium.ddf.point.BIDdfWritable"/>
+<description/>
+</parameter>
+<parameter name="out">
+<type class="javax.baja.status.BStatusValue"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfWriteRequestUtil.doAuto(com.tridium.ddf.point.BIDdfWritable) -->
+<method name="doAuto"  public="true" static="true">
+<description>
+This method is called by the doWrite method of BDdfProxyExt to write itself in a generic fashion. This&#xa; generic fashion can hopefully be applied to phantom points, when they are ready for prime-time in release 3.2.
+</description>
+<parameter name="writable">
+<type class="com.tridium.ddf.point.BIDdfWritable"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

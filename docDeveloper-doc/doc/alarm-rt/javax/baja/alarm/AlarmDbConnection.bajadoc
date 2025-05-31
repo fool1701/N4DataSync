@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="alarm" runtimeProfile="rt" qualifiedName="javax.baja.alarm.AlarmDbConnection" name="AlarmDbConnection" packageName="javax.baja.alarm" public="true" abstract="true">
+<description>
+AlarmDbConnection provides access to an Alarm Database. All reads, writes,&#xa; and deletes are done through the AlarmDbConnection.&#xa;&#xa; Access methods from BAlarmDatabase in NiagaraAX have been moved &#xa; to AlarmDbConnection for Niagara4.
+</description>
+<tag name="@author">Blake Puhak</tag>
+<tag name="@creation">11 June 2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.alarm.AlarmSpaceConnection"/>
+</implements>
+<!-- javax.baja.alarm.AlarmDbConnection() -->
+<constructor name="AlarmDbConnection" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.alarm.AlarmDbConnection.getAlarmDatabase() -->
+<method name="getAlarmDatabase"  public="true" abstract="true">
+<description>
+return a reference to the Alarm Database that we&#x27;re connected to.
+</description>
+<return>
+<type class="javax.baja.alarm.BAlarmDatabase"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.doBqlQuery(javax.baja.bql.BqlQuery) -->
+<method name="doBqlQuery"  public="true" synchronized="true">
+<description>
+Handle the specified query.  The returned cursor doesn&#x27;t necessarily&#xa; contain the exact result of the query.  The query engine will&#xa; filter any records that don&#x27;t meet the query parameters.  This&#xa; method should not be called directly, but instead should&#xa; be called by the BQL query engine.&#xa; &lt;p&gt;&#xa; The AlarmRefrence may be reused so to store a copy of the BAlarmRecord, you must use newCopy().
+</description>
+<parameter name="query">
+<type class="javax.baja.bql.BqlQuery"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.alarm.AlarmException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.flush() -->
+<method name="flush"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Commit any outstanding changes.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.close() -->
+<method name="close"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Close the connection.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.append(javax.baja.alarm.BAlarmRecord) -->
+<method name="append"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Archive alarm callback.&#xa; Also update the totalAlarmCount, unackedAlarmCount, openAlarmCount,&#xa; and inAlarmCount properties on the record&#x27;s BAlarmClass.
+</description>
+<parameter name="ar">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+The alarm record to store.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.alarm.AlarmException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.update(javax.baja.alarm.BAlarmRecord) -->
+<method name="update"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Update an alarm with new information.&#xa; Also update the totalAlarmCount, unackedAlarmCount, openAlarmCount,&#xa; and inAlarmCount properties on the record&#x27;s BAlarmClass.
+</description>
+<parameter name="record">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.alarm.AlarmException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.getRecordCount() -->
+<method name="getRecordCount"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the number of records in the database.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.getRecord(javax.baja.util.BUuid) -->
+<method name="getRecord"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a record by uuid.
+</description>
+<parameter name="uuid">
+<type class="javax.baja.util.BUuid"/>
+<description>
+The uuid of the record to retrieve.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+<description>
+Returns the target record or null if no&#xa;   record is found with a matching uuid.
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.getOpenAlarmSources() -->
+<method name="getOpenAlarmSources"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the list of alarm sources that currently have open alarms.&#xa; The result is a Cursor whose elements are of type BAlarmSource.
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.alarm.BAlarmSource"/>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.getOpenAlarms() -->
+<method name="getOpenAlarms"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the open alarms in the database.  An alarm is considered open when:&#xa; &lt;p&gt;&#xa; not (acked and normal) and not (acked and alert)&#xa; &lt;p&gt;&#xa; The AlarmRefrence may be reused so to store a copy of the BAlarmRecord, you must use newCopy().
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.getAckPendingAlarms() -->
+<method name="getAckPendingAlarms"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the ackPending alarms in the database.&#xa; &lt;p&gt;&#xa; The AlarmRefrence may be reused so to store a copy of the BAlarmRecord, you must use newCopy().
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.getAlarmsForSource(javax.baja.naming.BOrdList) -->
+<method name="getAlarmsForSource"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get all alarms for the specified source.  The result will be sorted in timestamp order&#xa; &lt;p&gt;&#xa; The AlarmRefrence may be reused so to store a copy of the BAlarmRecord, you must use newCopy().
+</description>
+<parameter name="alarmSource">
+<type class="javax.baja.naming.BOrdList"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.scan() -->
+<method name="scan"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a cursor for iterating through all record in the database.&#xa; &lt;p&gt;&#xa; The AlarmRefrence may be reused so to store a copy of the BAlarmRecord, you must use newCopy().
+</description>
+<return>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.alarm.AlarmException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.timeQuery(javax.baja.sys.BAbsTime, javax.baja.sys.BAbsTime) -->
+<method name="timeQuery"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a cursor for iterating through all records between&#xa; the specified start and end times inclusive.&#xa; &lt;p&gt;&#xa; The AlarmRefrence may be reused so to store a copy of the BAlarmRecord, you must use newCopy().
+</description>
+<parameter name="start">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+The earliest timestamp that will be included&#xa;   in the result.
+</description>
+</parameter>
+<parameter name="end">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+The latest timestamp that will be included in&#xa;  the result.
+</description>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.sys.Cursor">
+<args>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.alarm.AlarmException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.clearAllRecords(javax.baja.sys.Context) -->
+<method name="clearAllRecords"  public="true" abstract="true">
+<description>
+Clear all records from the database.&#xa; Also update the totalAlarmCount, unackedAlarmCount, openAlarmCount,&#xa; and inAlarmCount properties all BAlarmClasses.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.clearOldRecords(javax.baja.sys.BAbsTime, javax.baja.sys.Context) -->
+<method name="clearOldRecords"  public="true" abstract="true">
+<description>
+Clear all records with a timestamp before the specified time.&#xa; Also update the totalAlarmCount, unackedAlarmCount, openAlarmCount,&#xa; and inAlarmCount properties all BAlarmClasses.
+</description>
+<parameter name="before">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+The earliest time to keep in the result.  Records&#xa;   before this time will be removed.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.alarm.AlarmDbConnection.clearRecord(javax.baja.util.BUuid, javax.baja.sys.Context) -->
+<method name="clearRecord"  public="true" abstract="true">
+<description>
+Clear the record with the given uuid.&#xa; Also update the totalAlarmCount, unackedAlarmCount, openAlarmCount,&#xa; and inAlarmCount properties all BAlarmClasses.
+</description>
+<parameter name="uuid">
+<type class="javax.baja.util.BUuid"/>
+<description>
+the Uuid of the Alarm Record to remove from the database.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

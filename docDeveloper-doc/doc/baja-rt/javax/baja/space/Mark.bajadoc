@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.space.Mark" name="Mark" packageName="javax.baja.space" public="true">
+<description>
+Mark is a wrapper for a set of BObjects which serve as the&#xa; source for space operations: copy, move, rename, delete.  There&#xa; is always exactly one mark current in a VM (although it could&#xa; be null).  The current mark acts as the clipboard.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">25 Aug 01</tag>
+<tag name="@version">$Revision: 21$ $Date: 11/21/06 12:24:18 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.space.Mark(javax.baja.sys.BObject[], java.lang.String[]) -->
+<constructor name="Mark" public="true">
+<parameter name="values">
+<type class="javax.baja.sys.BObject" dimension="1"/>
+</parameter>
+<parameter name="names">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<description>
+Construct a Mark for the specified array of source&#xa; objects and their matching suggested names.
+</description>
+</constructor>
+
+<!-- javax.baja.space.Mark(javax.baja.sys.BObject, java.lang.String) -->
+<constructor name="Mark" public="true">
+<parameter name="value">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<description>
+Convenience for &lt;code&gt;this(new BObject[] { value }, new String[] { name })&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.space.Mark(javax.baja.sys.BObject) -->
+<constructor name="Mark" public="true">
+<parameter name="value">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<description>
+Convenience for &lt;code&gt;this(new BObject[] { value }, new String[] { makeName(value) })&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.space.Mark(javax.baja.sys.BObject[]) -->
+<constructor name="Mark" public="true">
+<parameter name="values">
+<type class="javax.baja.sys.BObject" dimension="1"/>
+</parameter>
+<description>
+Convenience for &lt;code&gt;this(values, makeNames(values))&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.space.Mark.getCurrent() -->
+<method name="getCurrent"  public="true" static="true">
+<description>
+Get the current mark for the VM.  Return null&#xa; if no mark is currently set.
+</description>
+<return>
+<type class="javax.baja.space.Mark"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.setCurrent(javax.baja.space.Mark) -->
+<method name="setCurrent"  public="true" static="true">
+<description>
+Set the current mark for the VM.  Pass null&#xa; to clear the mark.
+</description>
+<parameter name="mark">
+<type class="javax.baja.space.Mark"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.getValue(int) -->
+<method name="getValue"  public="true">
+<description>
+Get the transfer value at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.getValues() -->
+<method name="getValues"  public="true">
+<description>
+Get the array of source values to transfer.
+</description>
+<return>
+<type class="javax.baja.sys.BObject" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.getValues(java.lang.Object[]) -->
+<method name="getValues"  public="true">
+<description>
+Get the array of source values to transfer.
+</description>
+<parameter name="array">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.Object" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.getName(int) -->
+<method name="getName"  public="true">
+<description>
+Get the suggested name at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.getNames() -->
+<method name="getNames"  public="true">
+<description>
+Get the list of suggested names to use in a move&#xa; or copy transfer.  These may be modified if duplicate&#xa; names are encountered during an actual transfer.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.size() -->
+<method name="size"  public="true">
+<description>
+Return the number of values to transfer.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.areAllValuesComponents() -->
+<method name="areAllValuesComponents"  public="true">
+<description>
+Return if every value is an instance of BComponent.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.toStringFormat() -->
+<method name="toStringFormat"  public="true">
+<description>
+Get the Mark in String format.  The default&#xa; implementation is to return the first value&#x27;s&#xa; ord in space.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.isPendingMove() -->
+<method name="isPendingMove"  public="true">
+<description>
+Is the pending move flag set.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.setPendingMove(boolean) -->
+<method name="setPendingMove"  public="true">
+<description>
+Set the pending move flag.  This allows cut operations&#xa; to be marked, but not actually moved until the paste&#xa; operation.  While the mark is set pendingMove all the&#xa; BComponents within the mark will return true for their&#xa; isPendingMove() methods.  This method should be used to&#xa; paint cut components differently to illustrate their&#xa; pending move operation.
+</description>
+<parameter name="pendingMove">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.copyTo(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="copyTo"  public="true">
+<description>
+Copy this mark to the specified target object.
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="com.tridium.sys.transfer.TransferResult"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.space.Mark.copyTo(javax.baja.sys.BObject, javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="copyTo"  public="true">
+<description>
+Copy this mark to the specified target object.
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="params">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="com.tridium.sys.transfer.TransferResult"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.space.Mark.moveTo(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="moveTo"  public="true">
+<description>
+Move this mark to the specified target object.
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="com.tridium.sys.transfer.TransferResult"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.space.Mark.dump(java.io.PrintWriter) -->
+<method name="dump"  public="true">
+<description>
+Dump the contents of the Mark.
+</description>
+<parameter name="out">
+<type class="java.io.PrintWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.dump() -->
+<method name="dump"  public="true">
+<description>
+Dump to standard out.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.makeName(javax.baja.sys.BObject) -->
+<method name="makeName"  public="true" static="true">
+<description>
+Get a suggested name for the object.  By default this is&#xa; BISpaceNode.getNavName(), or as a fallback the type name is&#xa; used.
+</description>
+<parameter name="object">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.space.Mark.makeNames(javax.baja.sys.BObject[]) -->
+<method name="makeNames"  public="true" static="true">
+<description>
+Get an array of suggested names using the method&#xa; &lt;code&gt;makeName(BObject object)&lt;/code&gt;.
+</description>
+<parameter name="values">
+<type class="javax.baja.sys.BObject" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

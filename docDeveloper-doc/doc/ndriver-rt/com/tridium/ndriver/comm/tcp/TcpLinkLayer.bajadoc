@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.comm.tcp.TcpLinkLayer" name="TcpLinkLayer" packageName="com.tridium.ndriver.comm.tcp" public="true">
+<description>
+LinkLayer implementation for TCP interface.  Send and receive messages using&#xa; tcp sockets.
+</description>
+<tag name="@author">Robert A Adams</tag>
+<tag name="@creation">Oct 23, 2011</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="com.tridium.ndriver.comm.ILinkLayer"/>
+</implements>
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer(com.tridium.ndriver.comm.NComm, com.tridium.ndriver.datatypes.BTcpCommConfig) -->
+<constructor name="TcpLinkLayer" public="true">
+<parameter name="comm">
+<type class="com.tridium.ndriver.comm.NComm"/>
+</parameter>
+<parameter name="comCfg">
+<type class="com.tridium.ndriver.datatypes.BTcpCommConfig"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.start() -->
+<method name="start"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Start linklayer
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.stop() -->
+<method name="stop"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Stop linklayer
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.verifySettings(com.tridium.ndriver.datatypes.BCommConfig) -->
+<method name="verifySettings"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Called when comm config parameter changes.  Recreate ServerSocket if port&#xa; changed.
+</description>
+<parameter name="comCfg">
+<type class="com.tridium.ndriver.datatypes.BCommConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.sendMessage(com.tridium.ndriver.comm.LinkMessage) -->
+<method name="sendMessage"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Entry point for NComm to send message to link layer
+</description>
+<parameter name="msg">
+<type class="com.tridium.ndriver.comm.LinkMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.createSession(com.tridium.ndriver.datatypes.BIpAddress) -->
+<method name="createSession"  public="true">
+<description>
+Create a session for the specified address and return a unique&#xa; sessionId.&lt;p&gt; Messages can be sent to this session by setting the sessionId&#xa; on BIpAddress of outgoing messages.&#xa; &lt;p&gt;Call &lt;code&gt;closeSession(int sessionId)&lt;/code&gt; when the&#xa; session is no longer needed.
+</description>
+<parameter name="tcpAdr">
+<type class="com.tridium.ndriver.datatypes.BIpAddress"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.closeSession(int) -->
+<method name="closeSession"  public="true">
+<description>
+Close a session created by a call to &lt;code&gt;createSession()&lt;/code&gt; and&#xa; cleanup associated resources.
+</description>
+<parameter name="sessionId">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.registerTcpEvenListener(com.tridium.ndriver.comm.tcp.ITcpEventListener) -->
+<method name="registerTcpEvenListener"  public="true">
+<description>
+Register an &lt;code&gt;ITcpEventListener&lt;/code&gt; to receive event callbacks.
+</description>
+<parameter name="listener">
+<type class="com.tridium.ndriver.comm.tcp.ITcpEventListener"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.unregisterTcpEvenListener(com.tridium.ndriver.comm.tcp.ITcpEventListener) -->
+<method name="unregisterTcpEvenListener"  public="true">
+<description>
+Unregister an &lt;code&gt;ITcpEventListener&lt;/code&gt;.
+</description>
+<parameter name="listener">
+<type class="com.tridium.ndriver.comm.tcp.ITcpEventListener"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Provide some spy debug
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.resetStats() -->
+<method name="resetStats"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Clear all statistics counts. Called when user invokes resetStats action on&#xa; commConfig object.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.tcp.TcpLinkLayer.log() -->
+<method name="log"  public="true" final="true">
+<description/>
+<return>
+<type class="java.util.logging.Logger"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

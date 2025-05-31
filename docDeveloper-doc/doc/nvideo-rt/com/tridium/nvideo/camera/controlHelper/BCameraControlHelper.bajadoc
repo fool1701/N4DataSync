@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nvideo" runtimeProfile="rt" qualifiedName="com.tridium.nvideo.camera.controlHelper.BCameraControlHelper" name="BCameraControlHelper" packageName="com.tridium.nvideo.camera.controlHelper" public="true" abstract="true">
+<description/>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper() -->
+<constructor name="BCameraControlHelper" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper(com.tridium.nvideo.camera.BVideoCamera, java.lang.Object) -->
+<constructor name="BCameraControlHelper" public="true">
+<parameter name="camera">
+<type class="com.tridium.nvideo.camera.BVideoCamera"/>
+</parameter>
+<parameter name="doneReference">
+<type class="java.lang.Object"/>
+<description/>
+</parameter>
+<description>
+Creates a CameraControlHelper helper that will cease its current adjustment&#xa; by sending the doneReference to the control request.
+</description>
+</constructor>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.doReevaluate() -->
+<method name="doReevaluate"  public="true">
+<description>
+Callback from scheduled reevaluation
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.controlCamera(java.lang.Object) -->
+<method name="controlCamera"  public="true">
+<description>
+Changes the &#x27;controlReference&#x27; that is passed to the control request.&#xa; Re-initiates the control sequence in the background processor if&#xa; necessary.
+</description>
+<parameter name="controlReference">
+<type class="java.lang.Object"/>
+<description/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.run() -->
+<method name="run"  public="true">
+<description>
+This method is called in a stateful fashion on the background processor.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.keepAlive() -->
+<method name="keepAlive"  public="true">
+<description>
+Keeps the CameraControlHelper process running.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.isDone() -->
+<method name="isDone"  public="true">
+<description>
+Checks if the CameraControlHelper process has finished normally&#xa; or if it has expired / timed-out.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.stopControlling() -->
+<method name="stopControlling"  public="true">
+<description>
+Stops the CameraControlHelper process as soon as possible.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.getResendInterval() -->
+<method name="getResendInterval"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.getWatchdogTimeout() -->
+<method name="getWatchdogTimeout"  public="true" abstract="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.onStopControlling() -->
+<method name="onStopControlling"  protected="true" abstract="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.onControlling() -->
+<method name="onControlling"  protected="true" abstract="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.controlReference -->
+<field name="controlReference"  protected="true">
+<type class="java.lang.Object"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.doneReference -->
+<field name="doneReference"  protected="true" final="true">
+<type class="java.lang.Object"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.keepAliveTimeStamp -->
+<field name="keepAliveTimeStamp"  protected="true">
+<type class="long"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.done -->
+<field name="done"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.beenDone -->
+<field name="beenDone"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.scheduled -->
+<field name="scheduled"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.camera -->
+<field name="camera"  protected="true">
+<type class="com.tridium.nvideo.camera.BVideoCamera"/>
+<description/>
+</field>
+
+<!-- com.tridium.nvideo.camera.controlHelper.BCameraControlHelper.inQ -->
+<field name="inQ"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

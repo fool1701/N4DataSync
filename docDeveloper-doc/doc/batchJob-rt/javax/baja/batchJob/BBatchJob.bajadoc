@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="batchJob" runtimeProfile="rt" qualifiedName="javax.baja.batchJob.BBatchJob" name="BBatchJob" packageName="javax.baja.batchJob" public="true">
+<description>
+Job class whose work is divided into a sequence of stages, and which is&#xa; submitted using a BBatchJobService
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">15 Dec 05</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.job.BJob"/>
+</extends>
+<implements>
+<type class="javax.baja.retention.BILastModifiedRetainable"/>
+</implements>
+<property name="submitUser" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;submitUser&lt;/code&gt; property.&#xa; name of the user who submitted the job
+</description>
+<tag name="@see">#getSubmitUser</tag>
+<tag name="@see">#setSubmitUser</tag>
+</property>
+
+<property name="alertOnStepFailure" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;alertOnStepFailure&lt;/code&gt; property.&#xa; if true, an alert will be raised for every step execution&#xa; that fails or is canceled
+</description>
+<tag name="@see">#getAlertOnStepFailure</tag>
+<tag name="@see">#setAlertOnStepFailure</tag>
+</property>
+
+<property name="alertOnJobSuccess" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;alertOnJobSuccess&lt;/code&gt; property.&#xa; if true, an alert will be raised when the job terminates successfully
+</description>
+<tag name="@see">#getAlertOnJobSuccess</tag>
+<tag name="@see">#setAlertOnJobSuccess</tag>
+</property>
+
+<property name="stages" flags="r">
+<type class="javax.baja.util.BFolder"/>
+<description>
+Slot for the &lt;code&gt;stages&lt;/code&gt; property.&#xa; vector of BJobStage objects, to be run in order
+</description>
+<tag name="@see">#getStages</tag>
+<tag name="@see">#setStages</tag>
+</property>
+
+<property name="prototypeOrd" flags="rd">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;prototypeOrd&lt;/code&gt; property.&#xa; Ord to the protype this job was created from, if any
+</description>
+<tag name="@see">#getPrototypeOrd</tag>
+<tag name="@see">#setPrototypeOrd</tag>
+</property>
+
+<!-- javax.baja.batchJob.BBatchJob() -->
+<constructor name="BBatchJob" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.BBatchJob(javax.baja.batchJob.BJobStage[]) -->
+<constructor name="BBatchJob" public="true">
+<parameter name="stages">
+<type class="javax.baja.batchJob.BJobStage" dimension="1"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.BBatchJob(javax.baja.batchJob.BJobStage) -->
+<constructor name="BBatchJob" public="true">
+<parameter name="stage">
+<type class="javax.baja.batchJob.BJobStage"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.batchJob.BBatchJob.getSubmitUser() -->
+<method name="getSubmitUser"  public="true">
+<description>
+Get the &lt;code&gt;submitUser&lt;/code&gt; property.&#xa; name of the user who submitted the job
+</description>
+<tag name="@see">#submitUser</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setSubmitUser(java.lang.String) -->
+<method name="setSubmitUser"  public="true">
+<description>
+Set the &lt;code&gt;submitUser&lt;/code&gt; property.&#xa; name of the user who submitted the job
+</description>
+<tag name="@see">#submitUser</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getAlertOnStepFailure() -->
+<method name="getAlertOnStepFailure"  public="true">
+<description>
+Get the &lt;code&gt;alertOnStepFailure&lt;/code&gt; property.&#xa; if true, an alert will be raised for every step execution&#xa; that fails or is canceled
+</description>
+<tag name="@see">#alertOnStepFailure</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setAlertOnStepFailure(boolean) -->
+<method name="setAlertOnStepFailure"  public="true">
+<description>
+Set the &lt;code&gt;alertOnStepFailure&lt;/code&gt; property.&#xa; if true, an alert will be raised for every step execution&#xa; that fails or is canceled
+</description>
+<tag name="@see">#alertOnStepFailure</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getAlertOnJobSuccess() -->
+<method name="getAlertOnJobSuccess"  public="true">
+<description>
+Get the &lt;code&gt;alertOnJobSuccess&lt;/code&gt; property.&#xa; if true, an alert will be raised when the job terminates successfully
+</description>
+<tag name="@see">#alertOnJobSuccess</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setAlertOnJobSuccess(boolean) -->
+<method name="setAlertOnJobSuccess"  public="true">
+<description>
+Set the &lt;code&gt;alertOnJobSuccess&lt;/code&gt; property.&#xa; if true, an alert will be raised when the job terminates successfully
+</description>
+<tag name="@see">#alertOnJobSuccess</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getStages() -->
+<method name="getStages"  public="true">
+<description>
+Get the &lt;code&gt;stages&lt;/code&gt; property.&#xa; vector of BJobStage objects, to be run in order
+</description>
+<tag name="@see">#stages</tag>
+<return>
+<type class="javax.baja.util.BFolder"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setStages(javax.baja.util.BFolder) -->
+<method name="setStages"  public="true">
+<description>
+Set the &lt;code&gt;stages&lt;/code&gt; property.&#xa; vector of BJobStage objects, to be run in order
+</description>
+<tag name="@see">#stages</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFolder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getPrototypeOrd() -->
+<method name="getPrototypeOrd"  public="true">
+<description>
+Get the &lt;code&gt;prototypeOrd&lt;/code&gt; property.&#xa; Ord to the protype this job was created from, if any
+</description>
+<tag name="@see">#prototypeOrd</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setPrototypeOrd(javax.baja.naming.BOrd) -->
+<method name="setPrototypeOrd"  public="true">
+<description>
+Set the &lt;code&gt;prototypeOrd&lt;/code&gt; property.&#xa; Ord to the protype this job was created from, if any
+</description>
+<tag name="@see">#prototypeOrd</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.findMounted(javax.baja.sys.BAbsTime, javax.baja.sys.BObject) -->
+<method name="findMounted"  public="true" static="true">
+<description>
+Return the BBatchJob with the given start time, on the same&#xa; host as base
+</description>
+<parameter name="startTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.find(javax.baja.sys.BAbsTime, javax.baja.sys.BObject) -->
+<method name="find"  public="true" static="true">
+<description/>
+<parameter name="startTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.find(javax.baja.sys.Type, javax.baja.sys.BAbsTime, javax.baja.sys.BObject) -->
+<method name="find"  public="true" static="true">
+<description/>
+<parameter name="jobType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="startTime">
+<type class="javax.baja.sys.BAbsTime"/>
+</parameter>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BBatchJob"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getOrdBase() -->
+<method name="getOrdBase"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getLastModified() -->
+<method name="getLastModified"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.addStage(javax.baja.batchJob.BJobStage) -->
+<method name="addStage"  public="true">
+<description>
+Add an new stage to the job
+</description>
+<parameter name="stage">
+<type class="javax.baja.batchJob.BJobStage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getStage(java.lang.String) -->
+<method name="getStage"  public="true">
+<description/>
+<parameter name="stageName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BJobStage"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getAllStages() -->
+<method name="getAllStages"  public="true">
+<description>
+Return all of the stages for this job
+</description>
+<return>
+<type class="javax.baja.batchJob.BJobStage" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getJobStepDetails() -->
+<method name="getJobStepDetails"  public="true">
+<description/>
+<return>
+<type class="javax.baja.batchJob.BJobStepDetails" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.makeOp(javax.baja.sys.Context) -->
+<method name="makeOp"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getDispatcher() -->
+<method name="getDispatcher"  public="true">
+<description>
+Return the dispatcher responsible for deciding when to invoke&#xa; doRun() once it&#x27;s submitted to the Job Service
+</description>
+<return>
+<type class="javax.baja.batchJob.IJobDispatcher"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.prepareJob(javax.baja.sys.BObject) -->
+<method name="prepareJob"  public="true">
+<description>
+Makes any changes necessary to the job and its stages to run on the&#xa; VM where &#x22;target&#x22; exists.&#xa; &#xa; The client is responsible for invoking prepareJob before sending&#xa; the job to the target host for submitting
+</description>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.isCanceled() -->
+<method name="isCanceled"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.doSubmit(javax.baja.sys.Context) -->
+<method name="doSubmit"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.doCancel(javax.baja.sys.Context) -->
+<method name="doCancel"  public="true" final="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.doRun(javax.baja.sys.Context) -->
+<method name="doRun"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.doDispose(javax.baja.sys.Context) -->
+<method name="doDispose"  public="true">
+<description>
+Clean up any files that belong to this job
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.complete(javax.baja.job.BJobState) -->
+<method name="complete"  public="true">
+<description/>
+<parameter name="state">
+<type class="javax.baja.job.BJobState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.doReadLog() -->
+<method name="doReadLog"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BString"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setLogFile(javax.baja.file.BIFile) -->
+<method name="setLogFile"  public="true">
+<description/>
+<parameter name="value">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getLogFile() -->
+<method name="getLogFile"  public="true">
+<description/>
+<return>
+<type class="javax.baja.file.BIFile"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getIcon() -->
+<method name="getIcon"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.checkCanceled() -->
+<method name="checkCanceled"  public="true">
+<description>
+Utility method for bailing from the &lt;code&gt;run()&lt;/code&gt; method&#xa; when externally canceled
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setDisplayTimeZone(javax.baja.timezone.BTimeZone) -->
+<method name="setDisplayTimeZone"  public="true">
+<description>
+Set the time zone to use for the start, end, and heartbeat times.&#xa; &#xa; If this job object was deserialized from a bog file using BLocalTimeUtil,&#xa; its timestamps will use time zones created for the job&#x27;s local time zone,&#xa; which may be different from the time zone the client wants to use when&#xa; displaying them.
+</description>
+<parameter name="displayTz">
+<type class="javax.baja.timezone.BTimeZone"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.setStartTimeLocalZone(javax.baja.timezone.BTimeZone) -->
+<method name="setStartTimeLocalZone"  public="true">
+<description/>
+<parameter name="localTz">
+<type class="javax.baja.timezone.BTimeZone"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.getLocalStartTime() -->
+<method name="getLocalStartTime"  public="true">
+<description>
+Return the job&#x27;s start time using a BAbsTime object that has the local&#xa; time zone, if it&#x27;s available.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.batchJob.BBatchJob.submitUser -->
+<field name="submitUser"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;submitUser&lt;/code&gt; property.&#xa; name of the user who submitted the job
+</description>
+<tag name="@see">#getSubmitUser</tag>
+<tag name="@see">#setSubmitUser</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJob.alertOnStepFailure -->
+<field name="alertOnStepFailure"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alertOnStepFailure&lt;/code&gt; property.&#xa; if true, an alert will be raised for every step execution&#xa; that fails or is canceled
+</description>
+<tag name="@see">#getAlertOnStepFailure</tag>
+<tag name="@see">#setAlertOnStepFailure</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJob.alertOnJobSuccess -->
+<field name="alertOnJobSuccess"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alertOnJobSuccess&lt;/code&gt; property.&#xa; if true, an alert will be raised when the job terminates successfully
+</description>
+<tag name="@see">#getAlertOnJobSuccess</tag>
+<tag name="@see">#setAlertOnJobSuccess</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJob.stages -->
+<field name="stages"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;stages&lt;/code&gt; property.&#xa; vector of BJobStage objects, to be run in order
+</description>
+<tag name="@see">#getStages</tag>
+<tag name="@see">#setStages</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJob.prototypeOrd -->
+<field name="prototypeOrd"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;prototypeOrd&lt;/code&gt; property.&#xa; Ord to the protype this job was created from, if any
+</description>
+<tag name="@see">#getPrototypeOrd</tag>
+<tag name="@see">#setPrototypeOrd</tag>
+</field>
+
+<!-- javax.baja.batchJob.BBatchJob.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,102 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Andy Frank
+   @creation  28 Mar 05
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Hx - Dialogs</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/hx-events.html" class="navbar">Prev</a> |  <a href="/doc/hx-theming.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Hx - Dialogs</h1> 
+
+<!------------------------------------------------------------->
+<h1 id="dialogs">Dialogs</h1>
+<!------------------------------------------------------------->
+<p>
+Support for modal dialog boxes is provided with 
+<a href='module://docDeveloper/doc/hx-wb/javax/baja/hx/Dialog.bajadoc'><code>Dialog</code></a>
+and is typically used from an <a href='module://docDeveloper/doc/hx-wb/javax/baja/hx/Event.bajadoc'>
+<code>Command</code></a>:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+  class EditCommand extends Command
+  { 
+    public EditCommand(BHxView view) 
+    { 
+      super(view);
+      dlg = new EditDialog(this);
+    }
+      
+    public void handle(HxOp op) throws Exception
+    {
+      if (!dlg.isSubmit(op)) dlg.open(op);
+      else
+      {
+        String name = op.getFormValue("name");
+        String age  = op.getFormValue("age");
+          
+        BDude dude = (BDude)op.get();
+        dude.setName(name);
+        dude.setAge(Integer.parseInt(age));
+              
+        refresh(op);
+      }
+    }
+      
+    private EditDialog dlg;
+  }    
+  
+  class EditDialog extends Dialog
+  {
+    public EditDialog(Command handler) { super("Edit", handler); }
+    protected void writeContent(HxOp op) throws Exception
+    {
+      BDude dude = (BDude)op.get();
+      HtmlWriter out = op.getHtmlWriter();    
+        
+      out.w("&lt;table&gt;");
+      out.w("&lt;tr&gt;");
+      out.w(" &lt;td&gt;Name&lt;/td&gt;");
+      out.w(" &lt;td&gt;&lt;input type='text' name='").w(op.scope("name"));
+      out.w("' value='").w(dude.getName()).w("'/&gt;&lt;/td&gt;");
+      out.w("&lt;/tr&gt;");
+      out.w("&lt;tr&gt;");
+      out.w(" &lt;td&gt;Age&lt;/td&gt;");
+      out.w(" &lt;td&gt;&lt;input type='text' name='").w(op.scope("age"));
+      out.w("' value='").w(dude.getAge()).w("'/&gt;&lt;/td&gt;");
+      out.w("&lt;/tr&gt;");
+      out.w("&lt;/table&gt;");
+    }
+  }
+  </code>
+</pre>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/hx-events.html" class="navbar">Prev</a> |  <a href="/doc/hx-theming.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>
+

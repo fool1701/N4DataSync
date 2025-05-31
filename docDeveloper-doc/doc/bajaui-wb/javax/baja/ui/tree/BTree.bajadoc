@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.tree.BTree" name="BTree" packageName="javax.baja.ui.tree" public="true">
+<description>
+BTree is a widget for displaying a tree structure.&#xa; This is not a reference to the B-Tree data structure.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">04 Dec 2000</tag>
+<tag name="@version">$Revision: 63$ $Date: 6/20/11 9:34:25 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.transfer.BTransferWidget"/>
+</extends>
+<property name="multipleSelection" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;multipleSelection&lt;/code&gt; property.&#xa; If true then multiple rows may be selected, or if&#xa; false then only row at a time may be selected.
+</description>
+<tag name="@see">#getMultipleSelection</tag>
+<tag name="@see">#setMultipleSelection</tag>
+</property>
+
+<topic name="actionPerformed" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;actionPerformed&lt;/code&gt; topic.&#xa; Event fired when the user presses the Enter key&#xa; or selects a row with the mouse.
+</description>
+<tag name="@see">#fireActionPerformed</tag>
+</topic>
+
+<topic name="cancelled" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;cancelled&lt;/code&gt; topic.&#xa; Fired when the user presses the Esc key.
+</description>
+<tag name="@see">#fireCancelled</tag>
+</topic>
+
+<topic name="treeModified" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;treeModified&lt;/code&gt; topic.&#xa; Fired when the tree contents are modified.
+</description>
+<tag name="@see">#fireTreeModified</tag>
+</topic>
+
+<topic name="selectionModified" flags="">
+<eventType>
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</eventType><description>
+Slot for the &lt;code&gt;selectionModified&lt;/code&gt; topic.&#xa; Fired when the table selection is modified.
+</description>
+<tag name="@see">#fireSelectionModified</tag>
+</topic>
+
+<!-- javax.baja.ui.tree.BTree() -->
+<constructor name="BTree" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.tree.BTree(javax.baja.ui.tree.TreeModel) -->
+<constructor name="BTree" public="true">
+<parameter name="model">
+<type class="javax.baja.ui.tree.TreeModel"/>
+<description>
+The data model that specifies the structure&#xa;   of the tree.
+</description>
+</parameter>
+<description>
+Create a tree with the specified model.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.tree.BTree(javax.baja.ui.tree.TreeModel, javax.baja.ui.tree.TreeController) -->
+<constructor name="BTree" public="true">
+<parameter name="model">
+<type class="javax.baja.ui.tree.TreeModel"/>
+<description>
+The data model that specifies the structure&#xa;   of the tree.
+</description>
+</parameter>
+<parameter name="controller">
+<type class="javax.baja.ui.tree.TreeController"/>
+<description>
+The input handler for the tree.
+</description>
+</parameter>
+<description>
+Create a tree with the specified model and controller.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.tree.BTree.getMultipleSelection() -->
+<method name="getMultipleSelection"  public="true">
+<description>
+Get the &lt;code&gt;multipleSelection&lt;/code&gt; property.&#xa; If true then multiple rows may be selected, or if&#xa; false then only row at a time may be selected.
+</description>
+<tag name="@see">#multipleSelection</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.setMultipleSelection(boolean) -->
+<method name="setMultipleSelection"  public="true">
+<description>
+Set the &lt;code&gt;multipleSelection&lt;/code&gt; property.&#xa; If true then multiple rows may be selected, or if&#xa; false then only row at a time may be selected.
+</description>
+<tag name="@see">#multipleSelection</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.fireActionPerformed(javax.baja.ui.event.BWidgetEvent) -->
+<method name="fireActionPerformed"  public="true">
+<description>
+Fire an event for the &lt;code&gt;actionPerformed&lt;/code&gt; topic.&#xa; Event fired when the user presses the Enter key&#xa; or selects a row with the mouse.
+</description>
+<tag name="@see">#actionPerformed</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.fireCancelled(javax.baja.ui.event.BWidgetEvent) -->
+<method name="fireCancelled"  public="true">
+<description>
+Fire an event for the &lt;code&gt;cancelled&lt;/code&gt; topic.&#xa; Fired when the user presses the Esc key.
+</description>
+<tag name="@see">#cancelled</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.fireTreeModified(javax.baja.ui.event.BWidgetEvent) -->
+<method name="fireTreeModified"  public="true">
+<description>
+Fire an event for the &lt;code&gt;treeModified&lt;/code&gt; topic.&#xa; Fired when the tree contents are modified.
+</description>
+<tag name="@see">#treeModified</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.fireSelectionModified(javax.baja.ui.event.BWidgetEvent) -->
+<method name="fireSelectionModified"  public="true">
+<description>
+Fire an event for the &lt;code&gt;selectionModified&lt;/code&gt; topic.&#xa; Fired when the table selection is modified.
+</description>
+<tag name="@see">#selectionModified</tag>
+<parameter name="event">
+<type class="javax.baja.ui.event.BWidgetEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getModel() -->
+<method name="getModel"  public="true">
+<description>
+Get the model for this tree.
+</description>
+<return>
+<type class="javax.baja.ui.tree.TreeModel"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.setModel(javax.baja.ui.tree.TreeModel) -->
+<method name="setModel"  public="true">
+<description>
+Set the model for this tree.
+</description>
+<parameter name="model">
+<type class="javax.baja.ui.tree.TreeModel"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getController() -->
+<method name="getController"  public="true">
+<description>
+Get the controller for this tree.
+</description>
+<return>
+<type class="javax.baja.ui.tree.TreeController"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.setController(javax.baja.ui.tree.TreeController) -->
+<method name="setController"  public="true">
+<description>
+Set the controller for this tree.
+</description>
+<parameter name="controller">
+<type class="javax.baja.ui.tree.TreeController"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getNodeRenderer() -->
+<method name="getNodeRenderer"  public="true">
+<description>
+Get the renderer for the nodes in this tree.
+</description>
+<return>
+<type class="javax.baja.ui.tree.TreeNodeRenderer"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.setNodeRenderer(javax.baja.ui.tree.TreeNodeRenderer) -->
+<method name="setNodeRenderer"  public="true">
+<description>
+Set the node renderer for this tree.
+</description>
+<parameter name="r">
+<type class="javax.baja.ui.tree.TreeNodeRenderer"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getSelection() -->
+<method name="getSelection"  public="true">
+<description>
+Get the selection model for this tree.
+</description>
+<return>
+<type class="javax.baja.ui.tree.TreeSelection"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.setSelection(javax.baja.ui.tree.TreeSelection) -->
+<method name="setSelection"  public="true">
+<description>
+Set the selection model for this tree.
+</description>
+<parameter name="selModel">
+<type class="javax.baja.ui.tree.TreeSelection"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description>
+Compute the preferred size of the tree.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.doLayout(javax.baja.ui.BWidget[]) -->
+<method name="doLayout"  public="true">
+<description>
+Layout the tree.
+</description>
+<parameter name="children">
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.doLayout(javax.baja.ui.BWidget[], javax.baja.gx.Size) -->
+<method name="doLayout"  public="true">
+<description>
+Layout the tree and compute the preferred size at the&#xa; same time.
+</description>
+<parameter name="children">
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</parameter>
+<parameter name="prefSize">
+<type class="javax.baja.gx.Size"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.Size"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getRowHeight() -->
+<method name="getRowHeight"  public="true">
+<description>
+Get the height of a row in the tree.  This is fixed for all tree rows.
+</description>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getRow(double) -->
+<method name="getRow"  public="true">
+<description>
+Get the row the contains the specified y location.
+</description>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.yToTreeNode(double) -->
+<method name="yToTreeNode"  public="true">
+<description>
+Get the TreeNode that contains the specified y location.
+</description>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.tree.TreeNode"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getPrevious(javax.baja.ui.tree.TreeNode) -->
+<method name="getPrevious"  public="true">
+<description>
+Get the node before the specified start node in the layout.
+</description>
+<parameter name="startNode">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.tree.TreeNode"/>
+<description>
+Returns the node above the specified start node in&#xa;   the current layout.  If the node is the first child, the&#xa;   parent is returned.  Otherwise, the previous sibling is&#xa;   is returned.  If the node is the first root, null is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getNext(javax.baja.ui.tree.TreeNode) -->
+<method name="getNext"  public="true">
+<description>
+Get the node after the specified start node in the layout.
+</description>
+<parameter name="startNode">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.tree.TreeNode"/>
+<description>
+Returns the node below the specified start node in&#xa;   the current layout.  If the node is the last child, the&#xa;   next sibling of the parent is returned.  Otherwise, the &#xa;   next sibling of the start node is returned.&#xa;   If the node is the last node in the layout, null is returned.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.paint(javax.baja.gx.Graphics) -->
+<method name="paint"  public="true">
+<description>
+Paint the tree.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getStyleSelector() -->
+<method name="getStyleSelector"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.toggleExpanded(javax.baja.ui.tree.TreeNode) -->
+<method name="toggleExpanded"  public="true" final="true">
+<description>
+Toggle the expansion state of the specified node.
+</description>
+<parameter name="node">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.setExpanded(javax.baja.ui.tree.TreeNode, boolean) -->
+<method name="setExpanded"  public="true">
+<description>
+Set the expanded state of the specified node.
+</description>
+<parameter name="node">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<parameter name="exp">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.expandToNode(javax.baja.ui.tree.TreeNode) -->
+<method name="expandToNode"  public="true">
+<description>
+Expand the tree to the specified node.
+</description>
+<parameter name="node">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.expandPath(javax.baja.ui.tree.TreeNode[]) -->
+<method name="expandPath"  public="true">
+<description>
+Expand all nodes in the specified path except for the last one.
+</description>
+<parameter name="path">
+<type class="javax.baja.ui.tree.TreeNode" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.scrollNodeToVisible(javax.baja.ui.tree.TreeNode) -->
+<method name="scrollNodeToVisible"  public="true">
+<description/>
+<parameter name="node">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.scrollPathToVisible(javax.baja.ui.tree.TreeNode[]) -->
+<method name="scrollPathToVisible"  public="true">
+<description/>
+<parameter name="path">
+<type class="javax.baja.ui.tree.TreeNode" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.widgetSupport(java.lang.Object) -->
+<method name="widgetSupport"  public="true">
+<description/>
+<parameter name="arg">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.isFocusTraversable() -->
+<method name="isFocusTraversable"  public="true">
+<description>
+Route to TreeController.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.focusGained(javax.baja.ui.event.BFocusEvent) -->
+<method name="focusGained"  public="true">
+<description>
+Route to TreeController.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BFocusEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.focusLost(javax.baja.ui.event.BFocusEvent) -->
+<method name="focusLost"  public="true">
+<description>
+Route to TreeController.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BFocusEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mousePressed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePressed"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mouseReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseReleased"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mouseEntered(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseEntered"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mouseExited(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseExited"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mousePulsed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePulsed"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mouseMoved(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseMoved"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mouseDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragged"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.mouseWheel(javax.baja.ui.event.BMouseWheelEvent) -->
+<method name="mouseWheel"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BMouseWheelEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.keyPressed(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyPressed"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.keyReleased(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyReleased"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.keyTyped(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyTyped"  public="true">
+<description/>
+<parameter name="evt">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getTransferData() -->
+<method name="getTransferData"  public="true">
+<description>
+Throw UnsupportedOperationException
+</description>
+<return>
+<type class="javax.baja.ui.transfer.TransferEnvelope"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.insertTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="insertTransferData"  public="true">
+<description>
+Throw UnsupportedOperationException
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.removeTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="removeTransferData"  public="true">
+<description>
+Throw UnsupportedOperationException
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.dragOver(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragOver"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.getVisibleNodes() -->
+<method name="getVisibleNodes"  public="true">
+<description>
+Get the list of all currently visible nodes.
+</description>
+<return>
+<type class="javax.baja.ui.tree.TreeNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.tree.BTree.multipleSelection -->
+<field name="multipleSelection"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;multipleSelection&lt;/code&gt; property.&#xa; If true then multiple rows may be selected, or if&#xa; false then only row at a time may be selected.
+</description>
+<tag name="@see">#getMultipleSelection</tag>
+<tag name="@see">#setMultipleSelection</tag>
+</field>
+
+<!-- javax.baja.ui.tree.BTree.actionPerformed -->
+<field name="actionPerformed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;actionPerformed&lt;/code&gt; topic.&#xa; Event fired when the user presses the Enter key&#xa; or selects a row with the mouse.
+</description>
+<tag name="@see">#fireActionPerformed</tag>
+</field>
+
+<!-- javax.baja.ui.tree.BTree.cancelled -->
+<field name="cancelled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;cancelled&lt;/code&gt; topic.&#xa; Fired when the user presses the Esc key.
+</description>
+<tag name="@see">#fireCancelled</tag>
+</field>
+
+<!-- javax.baja.ui.tree.BTree.treeModified -->
+<field name="treeModified"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;treeModified&lt;/code&gt; topic.&#xa; Fired when the tree contents are modified.
+</description>
+<tag name="@see">#fireTreeModified</tag>
+</field>
+
+<!-- javax.baja.ui.tree.BTree.selectionModified -->
+<field name="selectionModified"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;selectionModified&lt;/code&gt; topic.&#xa; Fired when the table selection is modified.
+</description>
+<tag name="@see">#fireSelectionModified</tag>
+</field>
+
+<!-- javax.baja.ui.tree.BTree.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

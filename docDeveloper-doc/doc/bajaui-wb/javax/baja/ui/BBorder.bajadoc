@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.BBorder" name="BBorder" packageName="javax.baja.ui" public="true" final="true">
+<description>
+BBorder defines a border style for the four sides &#xa; of a border. Each side may have a width, style and&#xa; a BBrush to define how it is rendered.&#xa;&#xa; &lt;pre&gt;&#xa;  border := all | sides&#xa;  all    := [style] || [width] || [brush]&#xa;  sides  := [top] || [right] || [bottom] || [left]&#xa;  top    := &#x22;top(&#x22; all &#x22;)&#x22;&#xa;  right  := &#x22;right(&#x22; all &#x22;)&#x22;&#xa;  bottom := &#x22;bottom(&#x22; all &#x22;)&#x22;&#xa;  left   := &#x22;left(&#x22; all &#x22;)&#x22; &#xa;  width  := double&#xa;  style  := &#x22;none&#x22; | &#x22;solid&#x22; | &#x22;dotted&#x22; | &#x22;dashed&#x22; | &#xa;            &#x22;groove&#x22; | &#x22;ridge&#x22; | &#x22;inset&#x22; | &#x22;outset&#x22; &#xa;  brush  := any BBrush format&#xa;&#xa; Examples:&#xa;  blue&#xa;  2 blue&#xa;  groove&#xa;  5 dashed red&#xa;  top(1 solid black) bottom(1 solid green)&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Andy Frank</tag>
+<tag name="@creation">25 Mar 04</tag>
+<tag name="@version">$Revision: 10$ $Date: 6/22/10 2:39:14 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.ui.BBorder.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.make(int) -->
+<method name="make"  public="true" static="true">
+<description>
+Set all sides to &lt;code&gt;style&lt;/code&gt;, using a width of 1, and &#xa; a brush of &lt;code&gt;BColor.black&lt;/code&gt;.
+</description>
+<parameter name="style">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.make(javax.baja.ui.BBorder, javax.baja.gx.BBrush) -->
+<method name="make"  public="true" static="true">
+<description>
+Modify an existing border to use the specified brush
+</description>
+<parameter name="border">
+<type class="javax.baja.ui.BBorder"/>
+</parameter>
+<parameter name="brush">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.make(double, int, javax.baja.gx.BBrush) -->
+<method name="make"  public="true" static="true">
+<description>
+Set all sides &lt;code&gt;width, style, brush&lt;/code&gt;.
+</description>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="style">
+<type class="int"/>
+</parameter>
+<parameter name="brush">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.make(double, int, javax.baja.gx.BBrush, double, int, javax.baja.gx.BBrush, double, int, javax.baja.gx.BBrush, double, int, javax.baja.gx.BBrush) -->
+<method name="make"  public="true" static="true">
+<description>
+Set each side &lt;code&gt;width, style, brush&lt;/code&gt;.
+</description>
+<parameter name="topWidth">
+<type class="double"/>
+</parameter>
+<parameter name="topStyle">
+<type class="int"/>
+</parameter>
+<parameter name="topBrush">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<parameter name="rightWidth">
+<type class="double"/>
+</parameter>
+<parameter name="rightStyle">
+<type class="int"/>
+</parameter>
+<parameter name="rightBrush">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<parameter name="bottomWidth">
+<type class="double"/>
+</parameter>
+<parameter name="bottomStyle">
+<type class="int"/>
+</parameter>
+<parameter name="bottomBrush">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<parameter name="leftWidth">
+<type class="double"/>
+</parameter>
+<parameter name="leftStyle">
+<type class="int"/>
+</parameter>
+<parameter name="leftBrush">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Make border from string encoding.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.paint(javax.baja.gx.Graphics, double, double, double, double) -->
+<method name="paint"  public="true">
+<description>
+Paint the border.  The border will fit exactly&#xa; inside the bounds given to this method.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="height">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.paint(javax.baja.gx.Graphics, double, double, double, double, double, double) -->
+<method name="paint"  public="true">
+<description>
+Paint the border.  If &lt;code&gt;gapX &amp;gt;= 0&lt;/code&gt;, allow for a gap across&#xa; the top border.  The border will fit exactly inside the&#xa; bounds given to this method.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<parameter name="width">
+<type class="double"/>
+</parameter>
+<parameter name="height">
+<type class="double"/>
+</parameter>
+<parameter name="gapX">
+<type class="double"/>
+</parameter>
+<parameter name="gapWidth">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.isNull() -->
+<method name="isNull"  public="true">
+<description>
+Is this the null border.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BBorder hash code.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Return if the specified object is an equivalent BInsets.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<description>
+Encode using writeUTF
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.BBorder.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<description>
+Decode using readUTF
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.BBorder.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description>
+Encode to string.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.BBorder.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<description>
+Decode from string.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.ui.BBorder.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework use only.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.BBorder.NONE -->
+<field name="NONE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.SOLID -->
+<field name="SOLID"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.DOTTED -->
+<field name="DOTTED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.DASHED -->
+<field name="DASHED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.GROOVE -->
+<field name="GROOVE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.RIDGE -->
+<field name="RIDGE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.INSET -->
+<field name="INSET"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.OUTSET -->
+<field name="OUTSET"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Ordinal value for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.none -->
+<field name="none"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for none.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.solid -->
+<field name="solid"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for solid.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.dotted -->
+<field name="dotted"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for dotted.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.dashed -->
+<field name="dashed"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for dashed.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.groove -->
+<field name="groove"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for groove.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.ridge -->
+<field name="ridge"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for ridge.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.inset -->
+<field name="inset"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for inset.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.outset -->
+<field name="outset"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+BBorder constant for outset.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+The default border is 1 width solid black.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+The null instance.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.ui.BBorder.topWidth -->
+<field name="topWidth"  public="true" final="true">
+<type class="double"/>
+<description>
+Border width of top border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.leftWidth -->
+<field name="leftWidth"  public="true" final="true">
+<type class="double"/>
+<description>
+Border width of left border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.bottomWidth -->
+<field name="bottomWidth"  public="true" final="true">
+<type class="double"/>
+<description>
+Border width of bottom border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.rightWidth -->
+<field name="rightWidth"  public="true" final="true">
+<type class="double"/>
+<description>
+Border width of right border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.topStyle -->
+<field name="topStyle"  public="true" final="true">
+<type class="int"/>
+<description>
+Style used for top of border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.leftStyle -->
+<field name="leftStyle"  public="true" final="true">
+<type class="int"/>
+<description>
+Style used for left of border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.bottomStyle -->
+<field name="bottomStyle"  public="true" final="true">
+<type class="int"/>
+<description>
+Style used for bottom of border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.rightStyle -->
+<field name="rightStyle"  public="true" final="true">
+<type class="int"/>
+<description>
+Style used for right of border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.topBrush -->
+<field name="topBrush"  public="true" final="true">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Brush used for top of border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.leftBrush -->
+<field name="leftBrush"  public="true" final="true">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Brush used for left of border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.bottomBrush -->
+<field name="bottomBrush"  public="true" final="true">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Brush used for bottom of border.
+</description>
+</field>
+
+<!-- javax.baja.ui.BBorder.rightBrush -->
+<field name="rightBrush"  public="true" final="true">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Brush used for right of border.
+</description>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.table.TableController" name="TableController" packageName="javax.baja.ui.table" public="true">
+<description>
+TableController is used to respond to user input on BTable.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">4 Aug 01</tag>
+<tag name="@version">$Revision: 44$ $Date: 6/28/11 9:45:51 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.table.BTable$TableSupport"/>
+</extends>
+<!-- javax.baja.ui.table.TableController() -->
+<constructor name="TableController" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.table.TableController.isFocusTraversable() -->
+<method name="isFocusTraversable"  public="true">
+<description>
+Return if the BTable is focus traversable.  &#xa; Default returns true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.focusGained(javax.baja.ui.event.BFocusEvent) -->
+<method name="focusGained"  public="true">
+<description>
+Callback when focusGained() on BTable.  The default&#xa; implementation is to select the first row if no rows&#xa; are currently selected.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BFocusEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.focusLost(javax.baja.ui.event.BFocusEvent) -->
+<method name="focusLost"  public="true">
+<description>
+Callback when focusLost() on BTable.  The default&#xa; implementation is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BFocusEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.keyPressed(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyPressed"  public="true">
+<description>
+Callback when keyPressed() on BTable.  The default&#xa; implementation is to process the up, down, pageup&#xa; and pagedown keys.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.getTextSearchColumn() -->
+<method name="getTextSearchColumn"  public="true">
+<description>
+Specify which column should be used for text searches initiated &#xa; by user key presses.  Since text searches require iterating through&#xa; all table rows, care should be taken to to enable this for large tables.
+</description>
+<return>
+<type class="int"/>
+<description>
+The column index, or -1 if disabled (the default).
+</description>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.keyReleased(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyReleased"  public="true">
+<description>
+Callback when keyReleased() on BTable.  The default&#xa; implementation is to process the Enter and Esc keys.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.keyTyped(javax.baja.ui.event.BKeyEvent) -->
+<method name="keyTyped"  public="true">
+<description>
+Callback when keyTyped() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.handleEnter(javax.baja.ui.event.BKeyEvent) -->
+<method name="handleEnter"  protected="true">
+<description>
+Default implementation is to fire actionPerformed.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.handleEscape(javax.baja.ui.event.BKeyEvent) -->
+<method name="handleEscape"  protected="true">
+<description>
+Default implementation is to fire cancelled.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BKeyEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mousePressed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePressed"  public="true">
+<description>
+Callback when mousePressed() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mouseReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseReleased"  public="true">
+<description>
+Callback when mouseReleased() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mouseEntered(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseEntered"  public="true">
+<description>
+Callback when mouseEntered() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mouseExited(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseExited"  public="true">
+<description>
+Callback when mouseExited() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mouseMoved(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseMoved"  public="true">
+<description>
+Callback when mouseMoved() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mouseDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragged"  public="true">
+<description>
+Callback when mouseDragged() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mousePulsed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePulsed"  public="true">
+<description>
+Callback when mousePulsed() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mouseWheel(javax.baja.ui.event.BMouseWheelEvent) -->
+<method name="mouseWheel"  public="true">
+<description>
+Callback when mouseWheel() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseWheelEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.mouseHover(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseHover"  public="true">
+<description>
+Callback when mouseHover() on BTable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.getMouseOverHeader() -->
+<method name="getMouseOverHeader"  public="true">
+<description>
+If the cursor is currently over a column header &#xa; return the column index, otherwise return -1.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.getMouseOverColumn() -->
+<method name="getMouseOverColumn"  public="true">
+<description>
+If the cursor is currently over a table column, then&#xa; return the column index, otherwise return -1.  Note&#xa; that if the cursor is over a header, this method&#xa; will return -1.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.getMouseOverRow() -->
+<method name="getMouseOverRow"  public="true">
+<description>
+If the cursor is currently over a table row, then&#xa; return row index, otherwise return -1.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.getMouseOverResizeColumn() -->
+<method name="getMouseOverResizeColumn"  public="true">
+<description>
+If the cursor is currently over a column resize hotspot&#xa; return return the column index of the column to the right&#xa; of the hotspot.  If the cursor is not currently over a &#xa; resize hotspot then return -1.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerEntered(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerEntered"  protected="true">
+<description>
+Callback when the mouse enters a column header.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerExited(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerExited"  protected="true">
+<description>
+Callback when the mouse exits a column header.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerPressed(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerPressed"  protected="true">
+<description>
+Callback when the mouse is pressed over a column header.  &#xa; The default implementation is to sort the column if&#xa; the model supports sorting on the specified column.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerReleased(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerReleased"  protected="true">
+<description>
+Callback when the mouse is released over a column header.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerMoved(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerMoved"  protected="true">
+<description>
+Callback when the mouse is moved over a column header.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerDragged(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerDragged"  protected="true">
+<description>
+Callback when the mouse is dragged over a column header.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerPulsed(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerPulsed"  protected="true">
+<description>
+Callback when the mouse is pulsed over a column header.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerPopup(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerPopup"  protected="true">
+<description>
+Call for popup trigger over header.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.headerHover(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="headerHover"  protected="true">
+<description>
+Callback when the mouse is hovering over a column header.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellEntered(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellEntered"  protected="true">
+<description>
+Callback when the mouse enters a cell.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellExited(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellExited"  protected="true">
+<description>
+Callback when the mouse exits a cell.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellPressed(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellPressed"  protected="true">
+<description>
+Callback when the mouse is pressed over a cell.  &#xa; The default implementation of this method is to&#xa; select or deselect the specified row.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellReleased(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellReleased"  protected="true">
+<description>
+Callback when the mouse is released over a cell.  &#xa; The default is to check selection.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellMoved(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellMoved"  protected="true">
+<description>
+Callback when the mouse is moved over a cell.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellDragged(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellDragged"  protected="true">
+<description>
+Callback when the mouse is dragged over a cell.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellPulsed(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellPulsed"  protected="true">
+<description>
+Callback when the mouse is pulsed over a cell.  &#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellDoubleClicked(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellDoubleClicked"  protected="true">
+<description>
+Call for double click over cell.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellHover(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellHover"  protected="true">
+<description>
+Callback when the mouse is hovering over a cell.&#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.resizeHotspotPressed(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="resizeHotspotPressed"  protected="true">
+<description>
+Callback when mouse is pressed over resize hotspot.&#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.resizeHotspotReleased(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="resizeHotspotReleased"  protected="true">
+<description>
+Callback when mouse is released over resize hotspot.&#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.resizeHotspotEntered(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="resizeHotspotEntered"  protected="true">
+<description>
+This callback is invoked when the mouse enters a &#xa; potential column resize hotspot.  The specified column&#xa; index is the index of the column to the right of the&#xa; hotspot.  So a column index of 3 would indicate a resize&#xa; between columns 2 and 3.&#xa; &lt;p&gt;&#xa; The default implementation is to change the cursor&#xa; to the east/west resize cursor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.resizeHotspotExited(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="resizeHotspotExited"  protected="true">
+<description>
+This callback is invoked when the mouse exits a &#xa; potential column resize hotspot.  The specified column&#xa; index is the index of the column to the right of the&#xa; border.  So a column index of 3 would indicate a resize&#xa; between columns 2 and 3.&#xa; &lt;p&gt;&#xa; The default implementation is to change the cursor back&#xa; to the default cursor.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.resizeHotspotMoved(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="resizeHotspotMoved"  protected="true">
+<description>
+Callback when mouse is moved over resize hotspot.&#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.resizeHotspotDragged(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="resizeHotspotDragged"  protected="true">
+<description>
+Callback when mouse is dragged over resize hotspot.&#xa; The default is to update the table with a call&#xa; to setColumnPosition().
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.resizeHotspotPulsed(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="resizeHotspotPulsed"  protected="true">
+<description>
+Callback when mouse is pulsed over resize hotspot.&#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundEntered(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundEntered"  protected="true">
+<description>
+Callback when the mouse enters background (below rows).
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundExited(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundExited"  protected="true">
+<description>
+Callback when the mouse exits background (below rows).
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundPressed(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundPressed"  protected="true">
+<description>
+Callback when the mouse is pressed over background (below rows).
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundReleased"  protected="true">
+<description>
+Callback when the mouse is released over background (below rows).
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundMoved(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundMoved"  protected="true">
+<description>
+Callback when the mouse is moved over background (below rows).
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundDragged"  protected="true">
+<description>
+Callback when the mouse is dragged over background (below rows).
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundPulsed(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundPulsed"  protected="true">
+<description>
+Callback when the mouse is pulsed over background (below rows).
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundHover(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundHover"  protected="true">
+<description>
+Callback when the mouse is hovering over background (below rows).&#xa; The default is to do nothing.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.cellPopup(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="cellPopup"  protected="true">
+<description>
+This callback is made when the user triggers a popup over a cell.  &#xa; This method routes to &lt;code&gt;popup(event, row, column)&lt;/code&gt;
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="column">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.backgroundPopup(javax.baja.ui.event.BMouseEvent) -->
+<method name="backgroundPopup"  protected="true">
+<description>
+This callback is made when the user triggers a popup &#xa; in the background space where no cells are visible.  &#xa; This method routes to &lt;code&gt;popup(event, -1, -1)&lt;/code&gt;
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.popup(javax.baja.ui.event.BMouseEvent, int, int) -->
+<method name="popup"  protected="true">
+<description>
+Callback when a mouse event triggers a popup menu.  The&#xa; row and col specifies the cell the user clicked over, or&#xa; -1 if the user clicked over the background.  This method&#xa; routes to makePopup() and opens the popup.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.makePopup(javax.baja.ui.table.TableSubject) -->
+<method name="makePopup"  protected="true">
+<description>
+Make a popup menu for the specified subject &#xa; selection or return null to display no popup menu.
+</description>
+<parameter name="subject">
+<type class="javax.baja.ui.table.TableSubject"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.doOptions() -->
+<method name="doOptions"  public="true">
+<description>
+Callback for when the option button is invoked.&#xa; The default implement builds a drop down with the&#xa; a command to auto resize the columns.  If the&#xa; model is an instance of DynamicTableModel then&#xa; provide a toggle for each of the columns.  The&#xa; default implementation routes to makeOptionsMenu()&#xa; to allow customization.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.makeOptionsMenu() -->
+<method name="makeOptionsMenu"  protected="true">
+<description>
+Build the options menu which displays with the &#xa; options button is displayed.
+</description>
+<return>
+<type class="javax.baja.ui.BMenu"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.table.TableController.checkSelection(javax.baja.ui.event.BMouseEvent, int) -->
+<method name="checkSelection"  protected="true">
+<description>
+Check if the selection should be changed.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

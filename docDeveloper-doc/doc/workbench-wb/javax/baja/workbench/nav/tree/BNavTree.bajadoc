@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.nav.tree.BNavTree" name="BNavTree" packageName="javax.baja.workbench.nav.tree" public="true">
+<description>
+BNavTree is a BTree designed to display a tree &#xa; modeled using the BINavNode API.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">14 Jan 03</tag>
+<tag name="@version">$Revision: 31$ $Date: 6/20/11 9:34:25 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.tree.BTree"/>
+</extends>
+<implements>
+<type class="javax.baja.nav.NavListener"/>
+</implements>
+<!-- javax.baja.workbench.nav.tree.BNavTree(javax.baja.workbench.nav.tree.NavTreeModel) -->
+<constructor name="BNavTree" public="true">
+<parameter name="model">
+<type class="javax.baja.workbench.nav.tree.NavTreeModel"/>
+</parameter>
+<description>
+Constructor with specified model.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree(javax.baja.nav.BINavNode) -->
+<constructor name="BNavTree" public="true">
+<parameter name="root">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<description>
+Convenience for &lt;code&gt;this(new DefaultNavTreeModel(root)&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree() -->
+<constructor name="BNavTree" public="true">
+<description>
+Convenience for &lt;code&gt;this(BNavRoot.INSTANCE)&lt;/code&gt;.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.getSelectedObject() -->
+<method name="getSelectedObject"  public="true">
+<description>
+Get the selected nav node or return null if not selected.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.getSelectedObjects() -->
+<method name="getSelectedObjects"  public="true">
+<description>
+Get the selected nav nodes or empty array if nothing selected.
+</description>
+<return>
+<type class="javax.baja.sys.BObject" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.getSelectionParent() -->
+<method name="getSelectionParent"  public="true">
+<description>
+Get the parent object of the selection. Returns null&#xa; if a common parent does not exist, or if there is no &#xa; selection.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.setReadonly(boolean) -->
+<method name="setReadonly"  public="true">
+<description>
+Set navTree to read only.
+</description>
+<parameter name="b">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.getReadonly() -->
+<method name="getReadonly"  public="true">
+<description>
+Return true if read only, false otherwise.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.expandToOrd(javax.baja.sys.BObject, javax.baja.naming.BOrd) -->
+<method name="expandToOrd"  public="true">
+<description>
+Expand to this ord.
+</description>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.expandToNavNode(javax.baja.nav.BINavNode) -->
+<method name="expandToNavNode"  public="true">
+<description>
+Expand to this nav node.
+</description>
+<parameter name="node">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.setExpanded(javax.baja.ui.tree.TreeNode, boolean) -->
+<method name="setExpanded"  public="true">
+<description/>
+<parameter name="node">
+<type class="javax.baja.ui.tree.TreeNode"/>
+</parameter>
+<parameter name="exp">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.started() -->
+<method name="started"  public="true">
+<description>
+Register for NavEvents.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.stopped() -->
+<method name="stopped"  public="true">
+<description>
+Unregister for NavEvents.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.navEvent(javax.baja.nav.NavEvent) -->
+<method name="navEvent"  public="true">
+<description>
+Route to the event to the NavTreeModel.
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.getTransferData() -->
+<method name="getTransferData"  public="true">
+<description>
+Return an envelope for the currently selected node as a Mark.
+</description>
+<return>
+<type class="javax.baja.ui.transfer.TransferEnvelope"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.insertTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="insertTransferData"  public="true">
+<description>
+Insert the data.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.removeTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="removeTransferData"  public="true">
+<description>
+Do nothing, we rely on nav event callbacks&#xa; to keep the tree synchronized.  Return null.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.doDuplicate() -->
+<method name="doDuplicate"  public="true">
+<description>
+Duplicate currently selected node.
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.doDelete() -->
+<method name="doDelete"  public="true">
+<description>
+Delete currently selected node.
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.doRename() -->
+<method name="doRename"  public="true">
+<description>
+Rename currently selected nodes.
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.mouseDragStarted(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragStarted"  public="true">
+<description>
+If the drag is over a tree node with a non-null&#xa; component, then call startDrag with the a &#xa; MarkTransferable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.dragOver(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragOver"  public="true">
+<description>
+Check if the drop is over a valid node.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.dragExit(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragExit"  public="true">
+<description>
+Check if the drop is over a valid node.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.drop(javax.baja.ui.transfer.TransferContext) -->
+<method name="drop"  public="true">
+<description>
+Handle a drop.  If the drop node has a non-null &#xa; component then use insertDynamicProperties().
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.BNavTree.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

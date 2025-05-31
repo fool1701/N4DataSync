@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://mitsubishielectricaustralia.com/schemas/device/MekiIoDevice.schema.json",
+    "version": "1.0.0",
+    "title": "MekiIo Device Schema",
+    "description": "Schema for a MekiIo device",
+    "type": "object",
+    "properties": {
+        "name": { "$ref": "https://example.com/schemas/common/ComponentName.schema.json" },
+        "type": { "const": "MekiIoDevice" },
+        "config": {
+            "type": "object",
+            "allOf": [
+                { "$ref": "https://mitsubishielectricaustralia.com/schemas/device/MekiIoDeviceConfigBase.schema.json" }
+            ]
+        },
+        "MekiIoPoints": { "$ref": "https://example.com/schemas/points.schema.json" }
+    }
+}

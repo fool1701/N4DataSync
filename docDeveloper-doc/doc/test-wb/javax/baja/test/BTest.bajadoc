@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="test" runtimeProfile="wb" qualifiedName="javax.baja.test.BTest" name="BTest" packageName="javax.baja.test" public="true" abstract="true">
+<description>
+BTest is the base class for all unit tests.  All tests must&#xa; have a public no argument constructor.  Each method which&#xa; begins with &#x22;test&#x22; will be invoked as a test using a fresh&#xa; instance.  You may use the setup() and cleanup() callbacks&#xa; to setup the BTest instance being used for a specific test.
+</description>
+<tag name="@author">Brian Frank on 3 Oct 06</tag>
+<tag name="@version">$Revision: 12$ $Date: 6/25/10 2:12:45 PM EDT$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<!-- javax.baja.test.BTest() -->
+<constructor name="BTest" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.test.BTest.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.setup() -->
+<method name="setup"  public="true">
+<description>
+Callback to setup an instance of test.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.test.BTest.cleanup() -->
+<method name="cleanup"  public="true">
+<description>
+Callback to cleanup an instance of test.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.test.BTest.list() -->
+<method name="list"  public="true">
+<description>
+Get the list the test methods to use for this BTest&#xa; class.  This list is generated using reflection by&#xa; finding all the methods which begin with &#x22;test&#x22;.
+</description>
+<return>
+<type class="java.lang.reflect.Method" dimension="1"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.test.BTest.verify(boolean) -->
+<method name="verify"  public="true">
+<description>
+Verify the specified condition is true.
+</description>
+<parameter name="condition">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verify(boolean, java.lang.String) -->
+<method name="verify"  public="true">
+<description>
+Verify the specified conition is true.
+</description>
+<parameter name="condition">
+<type class="boolean"/>
+</parameter>
+<parameter name="failureMessage">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.fail() -->
+<method name="fail"  public="true">
+<description>
+Fail the current test.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyEq(java.lang.Object, java.lang.Object) -->
+<method name="verifyEq"  public="true">
+<description>
+Verify that &lt;code&gt;a.equals(b)&lt;/code&gt; and&#xa; &lt;code&gt;a.hashCode() == b.hashCode()&lt;/code&gt;.  This method&#xa; will handle a or b being null.
+</description>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.&lt;T&gt;verifyEq(T, T, java.util.Comparator&lt;T&gt;) -->
+<method name="verifyEq"  public="true">
+<typeParameters>
+<typeVariable class="T">
+</typeVariable>
+</typeParameters>
+<description>
+Verify that &lt;code&gt;comp.compare(a, b) == 0&lt;/code&gt;.  This method&#xa; will handle a or b being null.
+</description>
+<parameter name="a">
+<typeVariable class="T"/>
+</parameter>
+<parameter name="b">
+<typeVariable class="T"/>
+</parameter>
+<parameter name="comp">
+<parameterizedType class="java.util.Comparator">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyEquivalent(javax.baja.sys.BObject, javax.baja.sys.BObject) -->
+<method name="verifyEquivalent"  public="true">
+<description>
+Verify that &lt;code&gt;a.equivalent(b)&lt;/code&gt;.  This method&#xa; will handle a or b being null.
+</description>
+<parameter name="a">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="b">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifySame(java.lang.Object, java.lang.Object) -->
+<method name="verifySame"  public="true">
+<description>
+Verify reference equality: &lt;code&gt;a == b&lt;/code&gt;.
+</description>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyValuesEq(java.lang.Object[], java.lang.Object[]) -->
+<method name="verifyValuesEq"  public="true">
+<description>
+Verify the two arrays have the exact same contents&#xa; as defined by Object.equals().  This method will&#xa; handle a or b being null or any value within a or&#xa; b being null.
+</description>
+<parameter name="a">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyValuesSame(java.lang.Object[], java.lang.Object[]) -->
+<method name="verifyValuesSame"  public="true">
+<description>
+Verify the two arrays have the exact same contents&#xa; as defined by reference eqality.  This method&#xa; will handle a or b being null.
+</description>
+<parameter name="a">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyValuesEquivalent(javax.baja.sys.BComplex[], javax.baja.sys.BComplex[]) -->
+<method name="verifyValuesEquivalent"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unused&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Verify the two arrays have the exact same contents&#xa; as defined by BComplex.equivalent().  This method will&#xa; handle a or b being null or any value within a or&#xa; b being null.
+</description>
+<parameter name="a">
+<type class="javax.baja.sys.BComplex" dimension="1"/>
+</parameter>
+<parameter name="b">
+<type class="javax.baja.sys.BComplex" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyValuesSame(int[], int[]) -->
+<method name="verifyValuesSame"  public="true">
+<description>
+Verify the two arrays have the exact same contents&#xa; as defined by reference eqality.  This method&#xa; will handle a or b being null.
+</description>
+<parameter name="a">
+<type class="int" dimension="1"/>
+</parameter>
+<parameter name="b">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyEq(boolean, boolean) -->
+<method name="verifyEq"  public="true">
+<description>
+Verify boolean equality: &lt;code&gt;a == b&lt;/code&gt;.
+</description>
+<parameter name="a">
+<type class="boolean"/>
+</parameter>
+<parameter name="b">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyEq(int, int) -->
+<method name="verifyEq"  public="true">
+<description>
+Verify int equality: &lt;code&gt;a == b&lt;/code&gt;.
+</description>
+<parameter name="a">
+<type class="int"/>
+</parameter>
+<parameter name="b">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyEq(long, long) -->
+<method name="verifyEq"  public="true">
+<description>
+Verify long equality: &lt;code&gt;a == b&lt;/code&gt;.
+</description>
+<parameter name="a">
+<type class="long"/>
+</parameter>
+<parameter name="b">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyEq(float, float) -->
+<method name="verifyEq"  public="true">
+<description>
+Verify float equality: &lt;code&gt;BFloat.equals(a, b)&lt;/code&gt;.
+</description>
+<parameter name="a">
+<type class="float"/>
+</parameter>
+<parameter name="b">
+<type class="float"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.verifyEq(double, double) -->
+<method name="verifyEq"  public="true">
+<description>
+Verify double equality: &lt;code&gt;BDouble.equals(a, b)&lt;/code&gt;.
+</description>
+<parameter name="a">
+<type class="double"/>
+</parameter>
+<parameter name="b">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.createTestStation(java.lang.String) -->
+<method name="createTestStation"  public="true" static="true">
+<description>
+Create a station handler with the supplied xml definition.
+</description>
+<parameter name="bog">
+<type class="java.lang.String"/>
+<description>
+xml string that represents a station
+</description>
+</parameter>
+<return>
+<type class="javax.baja.test.BTest$TestStationHandler"/>
+<description>
+a station handler mounted as &#x22;local:|station:&#x22;, which may used to simulate running in a&#xa; station environment.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.test.BTest.createTestStation(javax.baja.naming.BOrd) -->
+<method name="createTestStation"  public="true" static="true">
+<description>
+Create a station handler with the xml definition in the file pointed to by supplied file ord.
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+file ord to the xml definition of a station
+</description>
+</parameter>
+<return>
+<type class="javax.baja.test.BTest$TestStationHandler"/>
+<description>
+a station handler mounted as &#x22;local:|station:&#x22;, which may used to simulate running in a&#xa; station environment.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.test.BTest.createTestStation() -->
+<method name="createTestStation"  public="true" static="true">
+<description>
+Creates an empty station handler.
+</description>
+<return>
+<type class="javax.baja.test.BTest$TestStationHandler"/>
+<description>
+a station handler mounted as &#x22;local:|station:&#x22;, which may used to simulate running in a&#xa; station environment.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.test.BTest.getTestStation() -->
+<method name="getTestStation"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+This method returns an empty BStation mounted as &#x22;local:|station:&#x22;,&#xa; which may used to simulate running in a station environment.&#xa; Every test method gets its own fresh BStation which lasts the&#xa; lifetime of the test method.  The station is not started by default -&#xa; use &lt;code&gt;startTestStation()&lt;/code&gt; and &lt;code&gt;stopTestStation()&lt;/code&gt;&#xa; to run through station startup and shutdown.
+</description>
+<tag name="@deprecated">Use createTestStation(...)</tag>
+<return>
+<type class="javax.baja.sys.BStation"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.startTestStation() -->
+<method name="startTestStation"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Start the test station.  Starting a station includes calling&#xa; serviceStarted and started, but excludes the steady state&#xa; callback.
+</description>
+<tag name="@deprecated">Use a TestStation object returned from createTestStation(...)</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.stopTestStation() -->
+<method name="stopTestStation"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Stop the test station.  Starting a station includes calling&#xa; serviceStopped and stopped, but leaves the station mounted&#xa; as currently configured.
+</description>
+<tag name="@deprecated">Use a TestStation object returned from createTestStation(...)</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.clearTestStation() -->
+<method name="clearTestStation"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description/>
+<tag name="@deprecated">Use a TestStation object returned from createTestStation(...)</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.toString(java.lang.Object[]) -->
+<method name="toString"  public="true" static="true">
+<description>
+Print an array to a string.
+</description>
+<parameter name="a">
+<type class="java.lang.Object" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.isJunit() -->
+<method name="isJunit"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.setJunit(boolean) -->
+<method name="setJunit"  public="true">
+<description/>
+<parameter name="value">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.test.BTest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.test.BTest.station -->
+<field name="station"  protected="true">
+<type class="javax.baja.sys.BStation"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

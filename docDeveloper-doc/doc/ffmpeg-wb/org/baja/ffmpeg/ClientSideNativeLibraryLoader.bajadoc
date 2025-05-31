@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ffmpeg" runtimeProfile="wb" qualifiedName="org.baja.ffmpeg.ClientSideNativeLibraryLoader" name="ClientSideNativeLibraryLoader" packageName="org.baja.ffmpeg" public="true">
+<description>
+Loads FFMPEG native libraries on the client-side (Workbench or WbApplet running&#xa; in a web browser).&#xa;&#xa; The native FFmpeg library is licensed under terms of GNU LGPL v2.1. &#xa; See the text files in the docs directory of the ffmpeg.jar module&#xa; for licensing details.
+</description>
+<tag name="@author">lperkins</tag>
+<tag name="@creation">Aug 20, 2009</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader() -->
+<constructor name="ClientSideNativeLibraryLoader" public="true">
+<description/>
+</constructor>
+
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader.findNreBin() -->
+<method name="findNreBin"  protected="true" static="true">
+<description>
+Determines &lt;code&gt;<see ref="org.baja.ffmpeg.ClientSideNativeLibraryLoader#bajaBinDir">#bajaBinDir</see>&lt;/code&gt; and &lt;code&gt;<see ref="org.baja.ffmpeg.ClientSideNativeLibraryLoader#bajaBinDirStr">#bajaBinDirStr</see>&lt;/code&gt;&#xa;&#xa;  This will be the bin folder for the workbench installation or a folder&#xa;  in the web browser&#x27;s cache if this is running as a WbApplet.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader.loadLibraryFromThisModule(java.lang.String) -->
+<method name="loadLibraryFromThisModule"  protected="true" static="true">
+<description>
+Loads a library (Win32 &#x27;dll&#x27; file, Linux &#x27;so&#x27; file, etc.) that is stored&#xa; as a resource in this class&#x27;s jar file.
+</description>
+<parameter name="libName">
+<type class="java.lang.String"/>
+<description>
+the name of the library (minus the extension)
+</description>
+</parameter>
+<return>
+<type class="java.lang.Boolean"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader.extractLibraryFromThisModule(java.lang.String) -->
+<method name="extractLibraryFromThisModule"  protected="true" static="true">
+<description>
+Extracts a library from this class&#x27;s module into the Niagara bin directory.&#xa;&#xa; This method is called by &lt;code&gt;<see ref="org.baja.ffmpeg.ClientSideNativeLibraryLoader#loadLibraryFromThisModule(java.lang.String)">#loadLibraryFromThisModule(String)</see>&lt;/code&gt;
+</description>
+<parameter name="libName">
+<type class="java.lang.String"/>
+<description>
+the name of the libarary, including extension
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the full, absolute path the the extracted library
+</description>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader.extractLibraryFromThisModule(java.io.File, java.lang.String) -->
+<method name="extractLibraryFromThisModule"  protected="true" static="true">
+<description/>
+<parameter name="destDir">
+<type class="java.io.File"/>
+</parameter>
+<parameter name="libName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader.log -->
+<field name="log"  protected="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description>
+The Niagara 4 log for reporting debug messages during the execution&#xa; of the various methods in this class.
+</description>
+</field>
+
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader.bajaBinDirStr -->
+<field name="bajaBinDirStr"  protected="true" static="true">
+<type class="java.lang.String"/>
+<description>
+The location of the Niagara 4 binaries as a Java String object.
+</description>
+</field>
+
+<!-- org.baja.ffmpeg.ClientSideNativeLibraryLoader.bajaBinDir -->
+<field name="bajaBinDir"  protected="true" static="true">
+<type class="java.io.File"/>
+<description>
+The location of the Niagara 4 binaries as a Java File object.
+</description>
+</field>
+
+</class>
+</bajadoc>

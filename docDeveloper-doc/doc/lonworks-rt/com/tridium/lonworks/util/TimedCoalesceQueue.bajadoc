@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="lonworks" runtimeProfile="rt" qualifiedName="com.tridium.lonworks.util.TimedCoalesceQueue" name="TimedCoalesceQueue" packageName="com.tridium.lonworks.util" public="true">
+<description>
+This class provides a timed queuing service.&#xa; &lt;p&gt;
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@creation">28 July 05</tag>
+<tag name="@version">$Revision: 1$ $Date: 8/9/01 2:22:44 PM$</tag>
+<tag name="@since">Niagara 3.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.util.Worker$ITodo"/>
+</implements>
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue(int) -->
+<constructor name="TimedCoalesceQueue" public="true">
+<parameter name="maxSize">
+<type class="int"/>
+</parameter>
+<description>
+Create a new TimedCoalesceQueue with the specified max number&#xa; of entries.  Attempts to enqueue more than maxSize &#xa; will result in QueueFullException.
+</description>
+</constructor>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue() -->
+<constructor name="TimedCoalesceQueue" public="true">
+<description>
+Construct a new TimedCoalesceQueue with a max size of Integer.MAX_VALUE.
+</description>
+</constructor>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.size() -->
+<method name="size"  public="true">
+<description>
+Get the number of entries currently in the queue.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.maxSize() -->
+<method name="maxSize"  public="true">
+<description>
+Get the max number of entries this queue will&#xa; access before throwing QueueFullException.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.isEmpty() -->
+<method name="isEmpty"  public="true">
+<description>
+Return true if this queue has a size of 0.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.isFull() -->
+<method name="isFull"  public="true">
+<description>
+Return true if this queue has a size of maxSize.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.peek() -->
+<method name="peek"  public="true" synchronized="true">
+<description>
+Peek at the oldest object on the queue,&#xa; but don&#x27;t actually dequeue it.
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest queue element, or null&#xa;    if the queue is empty.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.dequeue() -->
+<method name="dequeue"  public="true" synchronized="true">
+<description>
+Read off the oldest object from the queue.
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest queue element, or null&#xa;    if the queue is empty.
+</description>
+</return>
+<throws>
+<type class="java.lang.InterruptedException"/>
+</throws>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.dequeue(int) -->
+<method name="dequeue"  public="true" synchronized="true">
+<description>
+Read off the oldest object from the queue.  If&#xa; no objects exist on the queue, then wait for&#xa; up to timeout milliseconds before returning
+</description>
+<parameter name="timeout">
+<type class="int"/>
+<description>
+number of milliseconds to wait&#xa;    before timing out or -1 to wait forever.
+</description>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+<description>
+oldest TimedCoalesceQueue element, or null&#xa;    if the queue is empty and the timeout&#xa;    expired.
+</description>
+</return>
+<throws>
+<type class="java.lang.InterruptedException"/>
+</throws>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.enqueue(com.tridium.lonworks.util.TimedCoalesceQueue.ITimed) -->
+<method name="enqueue"  public="true" synchronized="true">
+<description>
+Adds an entry to the end of the TimedCoalesceQueue.
+</description>
+<parameter name="value">
+<type class="com.tridium.lonworks.util.TimedCoalesceQueue$ITimed"/>
+<description>
+Object to append to the&#xa;    end of the queue.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if object was enqueued.
+</description>
+</return>
+<throws>
+<type class="javax.baja.util.QueueFullException"/>
+<description>
+if the queue&#xa;    is already at max size.
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.toArray() -->
+<method name="toArray"  public="true" synchronized="true">
+<description>
+Get a snapshot of the queue&#x27;s list.
+</description>
+<return>
+<type class="java.lang.Object" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.clear() -->
+<method name="clear"  public="true" synchronized="true">
+<description>
+Remove all the enqueued entries.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.todo(int) -->
+<method name="todo"  public="true">
+<description>
+If this queue is being with with a Worker, then dequeue&#xa; the top entry as a Runnable with the specified timeout.
+</description>
+<parameter name="timeout">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Runnable"/>
+</return>
+<throws>
+<type class="java.lang.InterruptedException"/>
+</throws>
+</method>
+
+<!-- com.tridium.lonworks.util.TimedCoalesceQueue.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true" synchronized="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

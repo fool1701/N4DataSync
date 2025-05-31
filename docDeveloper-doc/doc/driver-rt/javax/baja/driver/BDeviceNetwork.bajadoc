@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="driver" runtimeProfile="rt" qualifiedName="javax.baja.driver.BDeviceNetwork" name="BDeviceNetwork" packageName="javax.baja.driver" public="true" abstract="true">
+<description>
+BDeviceNetwork is the abstract base class for drivers&#xa; which model a network of BDevices.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">17 Oct 01</tag>
+<tag name="@version">$Revision: 67$ $Date: 5/19/10 5:06:21 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.driver.BIDeviceFolder"/>
+</implements>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<implements>
+<type class="javax.baja.driver.ping.BIPingable"/>
+</implements>
+<implements>
+<type class="javax.baja.license.BILicensed"/>
+</implements>
+<property name="status" flags="trd">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the entire network.  This property&#xa; should never be set directly.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</property>
+
+<property name="enabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to set the entire network out of service and&#xa; disable all communication with child devices.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</property>
+
+<property name="faultCause" flags="trd">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a short message why the network is in fault.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</property>
+
+<property name="health" flags="rd">
+<type class="javax.baja.driver.ping.BPingHealth"/>
+<description>
+Slot for the &lt;code&gt;health&lt;/code&gt; property.&#xa; Manages the ping status.
+</description>
+<tag name="@see">#getHealth</tag>
+<tag name="@see">#setHealth</tag>
+</property>
+
+<property name="alarmSourceInfo" flags="">
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+<description>
+Slot for the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlarmSourceInfo</tag>
+<tag name="@see">#setAlarmSourceInfo</tag>
+</property>
+
+<property name="monitor" flags="">
+<type class="javax.baja.driver.ping.BPingMonitor"/>
+<description>
+Slot for the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each device&#xa; to monitor communication health.
+</description>
+<tag name="@see">#getMonitor</tag>
+<tag name="@see">#setMonitor</tag>
+</property>
+
+<action name="ping" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;ping&lt;/code&gt; action.&#xa; Perform a ping test of the network.
+</description>
+<tag name="@see">#ping()</tag>
+</action>
+
+<action name="ackAlarm" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+<description>
+Slot for the &lt;code&gt;ackAlarm&lt;/code&gt; action.
+</description>
+<tag name="@see">#ackAlarm(BAlarmRecord parameter)</tag>
+</action>
+
+<!-- javax.baja.driver.BDeviceNetwork() -->
+<constructor name="BDeviceNetwork" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.driver.BDeviceNetwork.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Get the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the entire network.  This property&#xa; should never be set directly.
+</description>
+<tag name="@see">#status</tag>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.setStatus(javax.baja.status.BStatus) -->
+<method name="setStatus"  public="true">
+<description>
+Set the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the entire network.  This property&#xa; should never be set directly.
+</description>
+<tag name="@see">#status</tag>
+<parameter name="v">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getEnabled() -->
+<method name="getEnabled"  public="true">
+<description>
+Get the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to set the entire network out of service and&#xa; disable all communication with child devices.
+</description>
+<tag name="@see">#enabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.setEnabled(boolean) -->
+<method name="setEnabled"  public="true">
+<description>
+Set the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to set the entire network out of service and&#xa; disable all communication with child devices.
+</description>
+<tag name="@see">#enabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getFaultCause() -->
+<method name="getFaultCause"  public="true">
+<description>
+Get the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a short message why the network is in fault.
+</description>
+<tag name="@see">#faultCause</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.setFaultCause(java.lang.String) -->
+<method name="setFaultCause"  public="true">
+<description>
+Set the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a short message why the network is in fault.
+</description>
+<tag name="@see">#faultCause</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getHealth() -->
+<method name="getHealth"  public="true">
+<description>
+Get the &lt;code&gt;health&lt;/code&gt; property.&#xa; Manages the ping status.
+</description>
+<tag name="@see">#health</tag>
+<return>
+<type class="javax.baja.driver.ping.BPingHealth"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.setHealth(javax.baja.driver.ping.BPingHealth) -->
+<method name="setHealth"  public="true">
+<description>
+Set the &lt;code&gt;health&lt;/code&gt; property.&#xa; Manages the ping status.
+</description>
+<tag name="@see">#health</tag>
+<parameter name="v">
+<type class="javax.baja.driver.ping.BPingHealth"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getAlarmSourceInfo() -->
+<method name="getAlarmSourceInfo"  public="true">
+<description>
+Get the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.
+</description>
+<tag name="@see">#alarmSourceInfo</tag>
+<return>
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.setAlarmSourceInfo(javax.baja.alarm.BAlarmSourceInfo) -->
+<method name="setAlarmSourceInfo"  public="true">
+<description>
+Set the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.
+</description>
+<tag name="@see">#alarmSourceInfo</tag>
+<parameter name="v">
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getMonitor() -->
+<method name="getMonitor"  public="true">
+<description>
+Get the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each device&#xa; to monitor communication health.
+</description>
+<tag name="@see">#monitor</tag>
+<return>
+<type class="javax.baja.driver.ping.BPingMonitor"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.setMonitor(javax.baja.driver.ping.BPingMonitor) -->
+<method name="setMonitor"  public="true">
+<description>
+Set the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each device&#xa; to monitor communication health.
+</description>
+<tag name="@see">#monitor</tag>
+<parameter name="v">
+<type class="javax.baja.driver.ping.BPingMonitor"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.ping() -->
+<method name="ping"  public="true">
+<description>
+Invoke the &lt;code&gt;ping&lt;/code&gt; action.&#xa; Perform a ping test of the network.
+</description>
+<tag name="@see">#ping</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.ackAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="ackAlarm"  public="true">
+<description>
+Invoke the &lt;code&gt;ackAlarm&lt;/code&gt; action.
+</description>
+<tag name="@see">#ackAlarm</tag>
+<parameter name="parameter">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getDeviceType() -->
+<method name="getDeviceType"  public="true" abstract="true">
+<description>
+Get the Type which all devices for this&#xa; network must extend.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getDeviceFolderType() -->
+<method name="getDeviceFolderType"  public="true" abstract="true">
+<description>
+Get the Type for DeviceFolders for this network.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getNetwork() -->
+<method name="getNetwork"  public="true" final="true">
+<description>
+Return this.
+</description>
+<return>
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getNetworkExts() -->
+<method name="getNetworkExts"  public="true" final="true">
+<description>
+Get an array containing all the BNetworkExt&#xa; children of this device.
+</description>
+<return>
+<type class="javax.baja.driver.BNetworkExt" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getDevices() -->
+<method name="getDevices"  public="true">
+<description>
+Get an array containing all the BDevice&#xa; descendants of this network component.
+</description>
+<return>
+<type class="javax.baja.driver.BDevice" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getBDeviceList() -->
+<method name="getBDeviceList"  public="true">
+<description>
+Get a List containing all the BDevice&#xa; descendants of this network component.
+</description>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.driver.BDevice"/>
+</args>
+</parameterizedType>
+<description>
+List of BDevice descendants.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.isDescendantsStarted() -->
+<method name="isDescendantsStarted"  public="true" final="true">
+<description>
+Return true if all the descendant components are started.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.isDown() -->
+<method name="isDown"  public="true" final="true">
+<description>
+Return true if the entire network is down.  A network&#xa; is down when &lt;code&gt;pingFail()&lt;/code&gt; has been called&#xa; more recently than &lt;code&gt;pinkOk()&lt;/code&gt;.  Refer to&#xa; &lt;code&gt;health.lastFailCause&lt;/code&gt; for the down reason.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.isDisabled() -->
+<method name="isDisabled"  public="true" final="true">
+<description>
+Return true if the entire network is disabled.  A&#xa; network is disabled if the user has manually set&#xa; the enabled property to false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.isFault() -->
+<method name="isFault"  public="true" final="true">
+<description>
+Return true if the entire network is in fault.  A network&#xa; is in fault if either a fatal fault was detected or if&#xa; &lt;code&gt;configFail()&lt;/code&gt; has been called more recently&#xa; than &lt;code&gt;configOk()&lt;/code&gt;.  Refer to &lt;code&gt;faultCause&lt;/code&gt;&#xa; for the fault reason.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.updateStatus() -->
+<method name="updateStatus"  public="true" final="true">
+<description>
+Recompute the network status and let child&#xa; devices know if something has changed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.isFatalFault() -->
+<method name="isFatalFault"  public="true" final="true">
+<description>
+Return true if the network detected a fatal fault.&#xa; Fatal faults cannot be recovered until the network&#xa; is restarted.  Fatal faults trump config faults.&#xa; Fatal network faults include licensing failures.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.configOk() -->
+<method name="configOk"  public="true" final="true">
+<description>
+Clear the configuration fault status.  If there are no fatal&#xa; faults then clear the entire network&#x27;s fault status, otherwise&#xa; the network remains in fault.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.configFail(java.lang.String) -->
+<method name="configFail"  public="true" final="true">
+<description>
+Set the network into configuration fault.  If the network was&#xa; previously not in fault, then this sets the entire network&#xa; into fault.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.configFatal(java.lang.String) -->
+<method name="configFatal"  public="true" final="true">
+<description>
+Set the network into the fatal fault condition.  Unlike&#xa; configFail(), the fatal fault condition cannot be cleared&#xa; until station restart.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getLicenseFeature() -->
+<method name="getLicenseFeature"  public="true">
+<description>
+If this driver is to be licensed using the standard licensing&#xa; mechanism then override this method to return the Feature or&#xa; return null for no license checks.  Convention is that the&#xa; vendor and feature name matches the declaring module.
+</description>
+<return>
+<type class="javax.baja.license.Feature"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.postPing() -->
+<method name="postPing"  protected="true">
+<description>
+Callback to post an asynchronous ping request.
+</description>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.doPing() -->
+<method name="doPing"  public="true">
+<description>
+Implementation of ping.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.pingOk() -->
+<method name="pingOk"  public="true">
+<description>
+Called when &lt;code&gt;doPing()&lt;/code&gt; is successful.  May also&#xa; be called when any successful communication occurs.  This&#xa; method is routed to &lt;code&gt;getHealth().pingOk()&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.pingFail(java.lang.String) -->
+<method name="pingFail"  public="true">
+<description>
+Called when &lt;code&gt;doPing()&lt;/code&gt; fails.  This method is&#xa; routed to &lt;code&gt;getHealth().pingFail()&lt;/code&gt;.
+</description>
+<parameter name="cause">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.doAckAlarm(javax.baja.alarm.BAlarmRecord) -->
+<method name="doAckAlarm"  public="true">
+<description>
+Called on alarm acknowledge.  This method is routed&#xa; to &lt;code&gt;getHealth().doAckAlarm(ackRequest)&lt;/code&gt;
+</description>
+<parameter name="ackRequest">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<description>
+Callback to post an async action.  Subclasses should call super.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true" final="true">
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getLog() -->
+<method name="getLog"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+Get the log for the network, the name of this log&#xa; is used for naming many of the sublogs such as&#xa; &lt;code&gt;BDevice.getLog()&lt;/code&gt;.
+</description>
+<tag name="@deprecated">As of Niagara 4.0, replaced by &lt;code&gt;<see ref="javax.baja.driver.BDeviceNetwork#getLogger()">#getLogger()</see>&lt;/code&gt;</tag>
+<return>
+<type class="javax.baja.log.Log"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getLogger() -->
+<method name="getLogger"  public="true">
+<description>
+Get the logger for the network, the name of this log&#xa; is used for naming many of the sublogs such as&#xa; &lt;code&gt;BDevice.getLog()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.util.logging.Logger"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<description>
+Filter out frozen slots which tend to be support objects&#xa; and not useful to display in the navigation tree.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.initAlarmSourceInfo() -->
+<method name="initAlarmSourceInfo"  protected="true" static="true">
+<description/>
+<return>
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description>
+Get the agent list.  Add DeviceManager if one&#xa; not already registered.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.driver.BDeviceNetwork.status -->
+<field name="status"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;status&lt;/code&gt; property.&#xa; Status of the entire network.  This property&#xa; should never be set directly.
+</description>
+<tag name="@see">#getStatus</tag>
+<tag name="@see">#setStatus</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.enabled -->
+<field name="enabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;enabled&lt;/code&gt; property.&#xa; Used to set the entire network out of service and&#xa; disable all communication with child devices.
+</description>
+<tag name="@see">#getEnabled</tag>
+<tag name="@see">#setEnabled</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.faultCause -->
+<field name="faultCause"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;faultCause&lt;/code&gt; property.&#xa; Provides a short message why the network is in fault.
+</description>
+<tag name="@see">#getFaultCause</tag>
+<tag name="@see">#setFaultCause</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.health -->
+<field name="health"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;health&lt;/code&gt; property.&#xa; Manages the ping status.
+</description>
+<tag name="@see">#getHealth</tag>
+<tag name="@see">#setHealth</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.alarmSourceInfo -->
+<field name="alarmSourceInfo"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;alarmSourceInfo&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAlarmSourceInfo</tag>
+<tag name="@see">#setAlarmSourceInfo</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.monitor -->
+<field name="monitor"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;monitor&lt;/code&gt; property.&#xa; The ping monitor periodically pings each device&#xa; to monitor communication health.
+</description>
+<tag name="@see">#getMonitor</tag>
+<tag name="@see">#setMonitor</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.ping -->
+<field name="ping"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;ping&lt;/code&gt; action.&#xa; Perform a ping test of the network.
+</description>
+<tag name="@see">#ping()</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.ackAlarm -->
+<field name="ackAlarm"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;ackAlarm&lt;/code&gt; action.
+</description>
+<tag name="@see">#ackAlarm(BAlarmRecord parameter)</tag>
+</field>
+
+<!-- javax.baja.driver.BDeviceNetwork.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

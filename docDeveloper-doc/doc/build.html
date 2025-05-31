@@ -1,0 +1,828 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/lonml.html" class="navbar">Prev</a> |  <a href="/doc/js/buildingJS.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!---
+   @author     Tim Urenda
+   @creation   7 May 2015
+   @since      Niagara 4
+--->
+<h1 class='title'>Building Niagara</h1>
+<ul>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#gradle-configuration">Gradle Configuration</a></li>
+  <li><a href="#project-setup">Project Setup</a>
+    <ul>
+      <li><a href="#module-project-configuration-files">Module Project Configuration Files</a></li>
+      <li><a href="#module-project-source-code-layout">Module Project Source Code Layout</a>
+        <ul>
+          <li><a href="#example-multi-project-file-tree">Example Multi-project file tree</a></li>
+        </ul>
+      </li>
+      <li><a href="#running-gradle">Running Gradle</a>
+        <ul>
+          <li><a href="#gradle-task-resolution">Gradle Task Resolution</a></li>
+          <li><a href="#common-gradle-tasks">Common Gradle Tasks</a></li>
+        </ul>
+      </li>
+      <li><a href="#additional-gradle-options">Additional Gradle Options</a>
+        <ul>
+          <li><a href="#dependencies">Dependencies</a></li>
+        </ul>
+      </li>
+      <li><a href="#gradle-ide-integration">Gradle IDE Integration</a></li>
+    </ul>
+  </li>
+  <li><a href="#gradle-build-scripts">Gradle Build Scripts</a>
+    <ul>
+      <li><a href="#gradle-wrapper-script-gradlewbatgradlew">Gradle Wrapper Script - gradlew.bat/gradlew</a></li>
+      <li><a href="#build-script-elements-buildgradlekts">Build Script Elements: build.gradle.kts</a>
+        <ul>
+          <li><a href="#available-gradle-plugins">Available Gradle Plugins</a></li>
+          <li><a href="#modulemanifest-extension"><code>moduleManifest</code> extension</a></li>
+          <li><a href="#convert-niagara-ax-buildxml-to-niagara-4-buildgradle">Convert Niagara AX build.xml to Niagara 4 build.gradle</a></li>
+          <li><a href="#mapping-summary">Mapping Summary</a></li>
+          <li><a href="#example-conversion">Example Conversion</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#other-module-files">Other Module Files</a>
+    <ul>
+      <li><a href="#module-includexml">module-include.xml</a></li>
+      <li><a href="#module-permissionsxml">module-permissions.xml</a></li>
+      <li><a href="#modulepalette">module.palette</a></li>
+      <li><a href="#modulelexicon">module.lexicon</a></li>
+      <li><a href="#moduletest-includexml">moduleTest-include.xml</a></li>
+    </ul>
+  </li>
+  <li><a href="#example-gradle-scripts">Example Gradle Scripts</a>
+    <ul>
+      <li><a href="#buildgradlekts">build.gradle.kts</a></li>
+      <li><a href="#settingsgradlekts">settings.gradle.kts</a></li>
+      <li><a href="#niagara-modulexml">niagara-module.xml</a></li>
+      <li><a href="#module-rtgradlekts">module-rt.gradle.kts</a></li>
+      <li><a href="#module-uxgradlekts">module-ux.gradle.kts</a></li>
+    </ul>
+  </li>
+  <li><a href="#updating-from-an-older-niagara-version">Updating from an Older Niagara Version</a></li>
+</ul>
+<h1 id="overview">Overview</h1>
+<p>Niagara 4 contains many architecture and functionality improvements. One area Tridium is improving on is the Niagara system&rsquo;s support for standard software development tools. The intent is that there will be minimal changes required in your development environment to compile modules in Niagara 4, while providing a better and more standard user experience for our Java developer customers.</p>
+<p>One change being made is to incorporate Gradle into our build tool chain and migrate away from the proprietary build system used in Niagara AX. This should enable a more standard setup of development projects and provide more standard integration with Java IDEs (specifically Eclipse or IntelliJ).</p>
+<p>Additional information on Gradle can be found by following the links below. It is not expected that Niagara developers become experts in Gradle, but there is a lot of information available on the web, as well as several books available for those who wish to learn more.</p>
+<p><a href="http://www.gradle.org">Gradle home page</a><br />
+<a href="http://www.gradle.org/docs/current/userguide/userguide.html">Gradle user guide</a><br />
+<a href="http://www.gradle.org/docs/current/dsl/index.html">Gradle language reference</a></p>
+<h1 id="gradle-configuration">Gradle Configuration</h1>
+<p>There is some configuration required to run Gradle to compile module source code, build a module jar file, and assemble a module javadoc jar file. The Niagara build system assumes a multi-project Gradle layout; a single set of common configurations will build any number of modules. A multi-project layout consists of one &ldquo;root project&rdquo; and any number of child projects, referred to as &ldquo;subprojects&rdquo;. In general, there is a one-to-one relationship between a Gradle subproject and a Niagara module part.</p>
+<p>Each Gradle project (both root and subprojects) is defined in a Gradle build script. This file is typically called <code>build.gradle.kts</code> for the root project, and <code>projectName.gradle.kts</code> for subprojects. For Niagara modules, by convention, the project name is the module part name; so for the &ldquo;rt&rdquo; module part of the &ldquo;myModule&rdquo; module, the conventional Gradle project name is &ldquo;myModule-rt&rdquo;, and the associated Gradle build script is <code>myModule-rt.gradle.kts</code>. The default Niagara build environment imposes the additional restriction that subprojects must live in a subfolder with the same name as the project. This means that <code>myModule/myModule-rt.gradle.kts</code> will not be detected as a subproject; the correct path will be <code>myModule/myModule-rt/myModule-rt.gradle.kts</code> For the sake of this document, references to <code>build.gradle.kts</code> may refer to either the root project <code>build.gradle.kts</code> or any subproject&rsquo;s build script, named as outlined above.</p>
+<p>Note that older versions of Niagara used <code>build.gradle</code> and <code>projectName.gradle</code> &ndash; without the <code>.kts</code> extension. This is because older versions of Gradle used the Groovy language for their build scripts, while newer versions use the Kotlin language. The Gradle documentation explains this in far more detail. Any references to the non-<code>.kts</code> <code>build.gradle.kts</code> likely apply equally to both, with some minor syntax differences as might be expected between different languages.</p>
+<p>The root project folder contains some additional files, besides the <code>build.gradle.kts</code> script for the root build. <code>settings.gradle.kts</code> configures the Gradle build itself, including what subproject(s) to include in a build and where to look for the custom Gradle plugins that enable Gradle to build Niagara modules. Build scripts should be executed with the <code>gradlew.bat</code> or <code>gradlew</code> script in the root project folder. The first time it is run it will download and install Gradle for you, so there is no installation required by the developer. It also sets up the build environment (Java classpath, etc.) for a Gradle project to use during execution.</p>
+<p>The <code>build.gradle.kts</code> script contains the actual Domain Specific Language (DSL) code used by Gradle to run the module build task. It contains the same basic information as a build.xml file has for Niagara AX modules, like the module name, version, vendor, and dependencies. More details of the elements defined in the <code>build.gradle.kts</code> and a mapping of build.xml elements to a <code>build.gradle.kts</code> script are located in the <a href="#build-script-elements-buildgradlekts">Build Script Elements</a> section below.</p>
+<p>The default build environment generated by the New Module Wizard or New Driver Wizard uses the value of <code>%niagara_user_home%</code>, typically <code>C:\Users\USERNAME\Niagara4.X\BRAND</code>, as the default Gradle project root.</p>
+<p>Note: Certain network configurations may require setting proxy information in the <code>gradle.properties</code> file in the user&rsquo;s home folder. More information on how this is configured can be found on the <a href="http://www.gradle.org/docs/current/userguide/build_environment.html#sec:accessing_the_web_via_a_proxy">Gradle web site</a>.</p>
+<h1 id="project-setup">Project Setup</h1>
+<h2 id="module-project-configuration-files">Module Project Configuration Files</h2>
+<p>The Niagara build system assumes that your projects are organized on disk in a particular way: A <code>module</code> folder containing <code>module-modulePart</code> folders, which themselves contain your source code and the supporting build script.</p>
+<p>In the <code>module</code> folder, in addition to the <code>module-modulePart</code> subfolders, you must have a <code>niagara-module.xml</code> file. This file defines what module parts your module has, as well as some common definitions shared by all module parts.</p>
+<p>In the <code>module-modulePart</code> subfolders, in addition to the <code>myModule-modulePart.gradle.kts</code> file, a <code>module-include.xml</code> file is required, and the <code>module.palette</code> and <code>module.lexicon</code> files are optional. If you have test classes for your module, a <code>moduleTest-include.xml</code> is needed. The contents of these files are described in a later section of this document. Note that the Niagara AX <code>build.xml</code> file is no longer needed to build Niagara 4 modules.</p>
+<h2 id="module-project-source-code-layout">Module Project Source Code Layout</h2>
+<p>Gradle locates source code through a configuration called sourceSets. The default source set configuration for Niagara projects is for the source code to be in a folder called <code>src</code> and for test source code to be in <code>srcTest</code>. This folder structure is used during compile to allow Gradle to locate source code and during module jar creation to enable Gradle to locate any files to include in the module. See the build script for examples of include files for main and test modules - the from(&hellip;) syntax. More details on setting up tests can be found in the <a href="test.html">TestNG Support in Niagara 4</a> document.</p>
+<h3 id="example-multi-project-file-tree">Example Multi-project file tree</h3>
+<p><code>\&lt;some folder name&gt; - Top level directory</code><br />
+<code>|- build.gradle.kts - Root Project Gradle script file</code><br />
+<code>|- settings.gradle.kts - Gradle script containing the names of all modules or folders containing modules</code><br />
+<code>|- &lt;module 1 name&gt;\ - Folder containing Module 1</code><br />
+<code>| |- niagara-module.xml - File defining shared configuration for all parts of module 1</code><br />
+<code>| |- &lt;module 1 name&gt;-rt\ - Folder containing Module 1's rt part</code><br />
+<code>| | |- &lt;module 1 name&gt;-rt.gradle.kts - Module 1 rt part Gradle script file</code><br />
+<code>| | |- module.lexicon - Default lexicon file for module 1</code><br />
+<code>| | |- module.palette - Defines Palette information for module 1</code><br />
+<code>| | |- module-include.xml - Declares Types, Defs, etc. for module 1</code><br />
+<code>| | |- module-permissions.xml - Declares permissions for module 1</code><br />
+<code>| | |- moduleTest-include.xml - Declares Types, Defs, etc. for test module 1</code><br />
+<code>| | |- src\ - Folder containing module 1 rt packages, source files, and resource files</code><br />
+<code>| | |- srcTest\ - Folder containing test 1 packages, source files, and resource files</code><br />
+<code>| |- &lt;module 1 name&gt;-wb\ - Folder containing Module 1's wb part</code><br />
+<code>| | |- &lt;module 1 name&gt;-wb.gradle.kts - Module 1 wb part Gradle script file</code><br />
+<code>| | |- module.lexicon - Default lexicon file for module 1</code><br />
+<code>| | |- module.palette - Defines Palette information for module 1</code><br />
+<code>| | |- module-include.xml - Declares Types, Defs, etc. for module 1</code><br />
+<code>| | |- module-permissions.xml - Declares permissions for module 1</code><br />
+<code>| | |- moduleTest-include.xml - Declares Types, Defs, etc. for test module 1</code><br />
+<code>| | |- src\ - Folder containing module 1 wb packages, source files, and resource files</code><br />
+<code>| | |- srcTest\ - Folder containing test 1 packages, source files, and resource files</code><br />
+<code>|- &lt;module 2 name&gt;\ - Folder containing Module 2</code><br />
+<code>| |- niagara-module.xml - File defining shared configuration for all parts of module 2</code><br />
+<code>| |- &lt;module 2 name&gt;-rt\ - Folder containing Module 2's rt part</code><br />
+<code>| | |- &lt;module 2 name&gt;-rt.gradle.kts - Module 2 Gradle script file</code><br />
+<code>...</code></p>
+<h2 id="running-gradle">Running Gradle</h2>
+<h3 id="gradle-task-resolution">Gradle Task Resolution</h3>
+<p>Part of the reason for using Gradle is that it includes a DSL (Domain Specific Language) for building Java projects. A small amount of script configuration results in a powerful set of tasks for compiling, assembling, testing, and publishing software. When you run <code>gradlew &lt;taskName&gt;</code>, Gradle will apply that task to all projects that declare that task. For example, <code>gradlew clean</code> will clean all modules in a multi-project configuration. If you want to execute a task against a specific project, use the <code>gradlew :path:to:project:&lt;taskName&gt;</code> syntax. If your multi-project module set is organized as described above, you can run Gradle tasks for a single module using <code>gradlew :&lt;moduleName&gt;:&lt;taskName&gt;</code>. For example, to clean the <code>componentLinks</code> module in the developer examples under the dev folder, run <code>gradlew :componentLinks:clean</code>. When you execute <code>gradlew</code> for the first time, it will download the Gradle framework required to complete task execution. This will take a few moments, but will only be needed once.</p>
+<p>Note that all <code>gradlew</code> commands must be run from the root project directory.</p>
+<h3 id="common-gradle-tasks">Common Gradle Tasks</h3>
+<p><code>gradlew tasks</code> - List the Gradle tasks available for execution<br />
+<code>gradlew jar</code> - Compile module source code, assemble the module jar, and copy it to the installation location<br />
+<code>gradlew javadocJar</code> - Generate javadoc files and assemble them into a jar file<br />
+<code>gradlew moduleTestJar</code> - Compile, jar, and install test module code<br />
+<code>gradlew clean</code> - Clean compiled artifacts from the module folder<br />
+<code>gradlew :&lt;moduleName&gt;:jar</code> - Compile, jar, and install a single &lt;moduleName&gt;<br />
+<code>gradlew :&lt;moduleName&gt;:slotomatic</code> - Run <a href="module://docDeveloper/doc/slot-o-matic.html">Slot-o-matic</a> on a single &lt;moduleName&gt;<br />
+<code>gradlew :&lt;moduleName&gt;:niagaraTest</code> - Run tests with code coverage on a single &lt;moduleName&gt;</p>
+<h2 id="additional-gradle-options">Additional Gradle Options</h2>
+<h3 id="dependencies">Dependencies</h3>
+<p>Gradle supports a very expressive dependency declaration syntax, which allows you to depend on other projects in your build, other modules in your Niagara installation, or external libraries. Gradle also separates dependencies by source set; for example, you can declare additional dependencies used to write tests for your module.</p>
+<p>Gradle provides a large number of configurations used to declare dependencies by default, and additional ones are provided by the Niagara plugins. The following table shows what dependencies are supported by Niagara builds and when you would use them.</p>
+<table>
+  <thead>
+    <tr><th> Configuration              </th><th> Use                                               </th><th> Examples                                                 </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> <code>api</code>                      </td><td> Dependencies on other Niagara modules             </td><td> <code>api(&quot;Tridium:baja&quot;)</code> or <code>api(&quot;Acme:myDriver-rt&quot;)</code>       </td></tr>
+    <tr><td> <code>api</code>                      </td><td> Dependencies on other modules in your build       </td><td> <code>api(project(&quot;:myOtherDriver-rt&quot;))</code>                      </td></tr>
+    <tr><td> <code>nre</code>                      </td><td> Dependencies on jars in <code>!bin/ext</code>                </td><td> <code>nre(&quot;org.bouncycastle:bcprov-jdk18on&quot;)</code>                 </td></tr>
+    <tr><td> <code>uberjar</code>                  </td><td> Dependencies on external modules (see below)      </td><td> <code>uberjar(&quot;org.apache.commons:commons-collections4:4.3&quot;)</code> </td></tr>
+    <tr><td> <code>moduleTestImplementation</code> </td><td> Test dependencies on other Niagara modules        </td><td> <code>moduleTestImplementation(&quot;Tridium:baja&quot;)</code>               </td></tr>
+    <tr><td> <code>moduleTestImplementation</code> </td><td> Test dependencies on other modules in your build  </td><td> <code>moduleTestImplementation(project(&quot;:myTestUtils-wb&quot;))</code>   </td></tr>
+    <tr><td> <code>testNre</code>                  </td><td> Test dependencies on jars in <code>!bin/ext</code>           </td><td> <code>testNre(&quot;org.bouncycastle:bcprov-jdk18on&quot;)</code>             </td></tr>
+    <tr><td> <code>testUberjar</code>              </td><td> Test dependencies on external modules (see below) </td><td> <code>testUberjar(&quot;org.mockito:mockito-inline:4.5.1&quot;)</code>        </td></tr>
+  </tbody>
+</table>
+<p>In general, you should only use the configurations listed above. Other Gradle configurations may not interact correctly with the Niagara build environment. Also note that it is not required to specify version numbers for dependencies provided by a Niagara installation; as these versions are fixed by the choice of Niagara to compile against, specifying versions for these dependencies is not relevant and may well cause confusion.</p>
+<h4 id="external-dependencies">External Dependencies</h4>
+<p>In Niagara AX, if you had an external dependency on a third-party jar (like Apache commons-pool) and choose not to convert it to a module, then you included it in the <code>ext</code> directory of your module source and <code>build.jar</code> would take care of including it in your generated module. This process is typically called creating an &ldquo;uberjar&rdquo; or &ldquo;fatjar&rdquo;.</p>
+<p>In Niagara 4, using Gradle we take a slightly different approach. You declare all your external dependencies in your Gradle script using a special uberjar dependency configuration as shown above. Any dependencies declared against the uberjar configuration will be automatically included in the generated module. Also, in Niagara 4 we are moving towards pulling external dependencies from a central repository. Gradle includes support for the central Maven repository, which is a commonly used repository for software artifacts. Gradle will download the dependency automatically from the central Maven repository and include it in the generated module. The Gradle build scripts will no longer look for dependencies in the ext directory of your module.</p>
+<p>NOTE: Internet connectivity is required for accessing the central Maven repository.</p>
+<h2 id="gradle-ide-integration">Gradle IDE Integration</h2>
+<p>Gradle projects can be automatically imported into both IntelliJ and Eclipse. Simply open your project&rsquo;s <code>build.gradle.kts</code> with either and it will import your project automatically.</p>
+<p class="warning">
+Warning: While the JRE that comes with Niagara is sufficient to build with Gradle, you
+will need a Java 8 JDK to use IDE integration. Oracle no longer provides Java 8
+JDKs, but several vendors now offer OpenJDK 8 builds. Any Java 8 compatible JDK will work for Niagara.
+</p>
+<p>In previous versions of Niagara, the <code>gradlew idea</code> and <code>gradlew eclipse</code> commands were used. These are now removed and will not work. See <a href="local:|module://docDeveloper/doc/upgradingBuild.html">Upgrading build environments from prior versions of Niagara</a> if you are using a project layout from Niagara 4.12 or earlier.</p>
+<h1 id="gradle-build-scripts">Gradle Build Scripts</h1>
+<p>The Gradle script files contain elements similar to those in the Niagara AX build.xml file, configured for Gradle.</p>
+<h2 id="gradle-wrapper-script-gradlewbatgradlew">Gradle Wrapper Script - gradlew.bat/gradlew</h2>
+<p>A gradle wrapper file is available in the bin folder of the Niagara installation. It sets up the build environment for compiling Niagara modules, including Java class paths and Gradle configuration settings. The first time it is used to compile a module, it will download the Gradle runtime libraries and any external dependencies needed to compile. It should be used every time modules are compiled, as it enables a Gradle daemon to improve compile efficiency.</p>
+<p>Additional information about the Gradle wrapper is available on the <a href="http://www.gradle.org/docs/current/userguide/gradle_wrapper.html">Gradle web site</a>. More advanced users may choose to modify the wrapper script as needed, but it is likely that this will not be necessary.</p>
+<h2 id="build-script-elements-buildgradlekts">Build Script Elements: build.gradle.kts</h2>
+<p>Several Gradle properties must be declared in the appropriate script file in order for the module to compile, jar, and test correctly. The examples shown later in this document and the source examples in the <code>dev</code> folder contain the commonly used properties that will need to be defined for each module. Use them as templates if you are not using the New Module Wizard. There are other elements in these examples that should be left as they are; these are noted by comments in the Gradle scripts. Some common elements used in Gradle build scripts are described below.</p>
+<p><code>plugins {}</code> - Configures the plugins used by your project. Several plugins are available as part of your Niagara 4 environment, in addition to the many plugins available on the Gradle plugin portal. <code>repositories {}</code> - Gradle uses these to resolve and download dependency artifacts. The default configurations for Niagara 4 projects uses Maven and local flat file repositories for providing dependencies.<br />
+<code>dependencies {}</code> - Specific artifacts required by particular phases of the build sequence (e.g. compile, test, etc.).<br />
+<code>tasks.named&lt;Jar&gt;(&quot;jar&quot;) {}</code> - Enables the jar task to locate additional files to include in the jar file.<br />
+apply - Include shared Gradle code into the current project.<br />
+<code>sourceSets {}</code> - Configurations for source file locations.<br />
+<code>moduleManifest {}</code> - Provided by the niagara-module plugin to enable construction of the module.xml Niagara Module Manifest for your module.<br />
+<code>niagaraSigning {}</code> - Provided by the niagara-signing plugin to enable <a href="local:|module://docDeveloper/doc/security/codeSigning.html">jar signing</a><br />
+<code>tasks.named&lt;Jar&gt;(&quot;moduleTestJar&quot;)</code> - Provided by the niagara-module plugin to enable construction of a Niagara 4 compliant test jar file.</p>
+<h3 id="available-gradle-plugins">Available Gradle Plugins</h3>
+<p>In addition to the default Gradle plugins, some Niagara-specific plugins are available. The default <code>settings.gradle.kts</code> configures your build to make these plugins available. You can see the code that does this <a href="#settingsgradlekts">in the full settings.gradle.kts file</a></p>
+<p>The following plugins are available:</p>
+<table>
+  <thead>
+    <tr><th> Plugin                        </th><th> Description                                                                                                                                                     </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> <code>com.tridium.niagara-module</code>  </td><td> The basic Niagara module plugin, which configures Niagara-specific Gradle tasks. This plugin is applied automatically when using the default build environment. </td></tr>
+    <tr><td> <code>com.tridium.niagara-grunt</code>   </td><td> Grunt/Javascript tasks for Gradle. See <a href="js/buildingJS.html">Building Javascript</a>  for more details                                                              </td></tr>
+    <tr><td> <code>com.tridium.niagara-signing</code> </td><td> Module signing configuration. See <a href="security/codeSigning.html">Code Signing</a> for more details                                                                    </td></tr>
+    <tr><td> <code>com.tridium.bajadoc</code>         </td><td> Produce bajadoc for your module                                                                                                                                 </td></tr>
+    <tr><td> <code>com.tridium.niagara-jacoco</code>  </td><td> Enable JaCoCo test coverage report for the <code>niagaraTest</code> task                                                                                                   </td></tr>
+  </tbody>
+</table>
+<h3 id="modulemanifest-extension"><code>moduleManifest</code> extension</h3>
+<p>The <code>moduleManifest</code> extension provides access for configuring the contents of the module manifest <code>module.xml</code> file. In addition to configuring the attributes of your module, it also allows configuring many elements that were previously only configurable in <code>module-include.xml</code>.</p>
+<h4 id="modulemanifest-attributes"><code>moduleManifest</code> attributes</h4>
+<p>The following attributes are available for you to configure:</p>
+<table>
+  <thead>
+    <tr><th> Attribute      </th><th> Description                                                                                                                             </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> moduleName     </td><td> (Required) The name of the module (not module part).                                                                                    </td></tr>
+    <tr><td> runtimeProfile </td><td> (Required) The runtime profile of this module part.                                                                                     </td></tr>
+    <tr><td> vendor         </td><td> (Required) The vendor for the module. Typically set by the <code>vendor</code> extension in the root buildscript, but can be overridden per-module </td></tr>
+    <tr><td> vendorVersion  </td><td> (Required) The version of the module. As with <code>vendor</code>, typically set by the <code>vendor</code> extension                                         </td></tr>
+    <tr><td> description    </td><td> (Required) A description of the module. Set to the Gradle project <code>description</code> if not specified                                        </td></tr>
+  </tbody>
+</table>
+<h4 id="dependencies-configuration"><code>dependencies</code> configuration</h4>
+<p>The <code>dependencies</code> block inside a <code>moduleManifest</code> block allows finer-grained control over the <code>&lt;dependencies&gt;</code> element of the generated <code>module.xml</code> manifest. For example, this snippet will add a &lsquo;brand&rsquo; dependency on &lsquo;Acme&rsquo;:</p>
+<pre><code class="sunlight-highlight-java">moduleManifest {
+  ...
+  (dependencies) {
+    create(&quot;brand&quot;) {
+      dependency {
+        name.set(&quot;Acme&quot;)
+      }
+    }
+  }
+  ...
+}
+</code></pre>
+<p>This maps directly to the following in <code>module.xml</code>:</p>
+<pre><code class="sunlight-highlight-xml">&lt;module name=&quot;acmeDriver-rt&quot;&gt;
+  ...
+  &lt;dependencies&gt;
+    ...
+    &lt;brand name=&quot;Acme&quot;/&gt;
+    ...
+  &lt;/dependencies&gt;
+  ...
+&lt;/module&gt;
+</code></pre>
+<p>Each call to <code>create(NAME)</code> creates a set of elements with the same tag (<code>&lt;brand&gt;</code>, <code>&lt;part&gt;</code>, etc). Within that block, each call to <code>dependency {}</code> creates and configures a new dependency of that type. Each dependency can be configured with any of the following attributes, all of which map directly to XML attributes:</p>
+<table>
+  <thead>
+    <tr><th> Attribute      </th><th> XML Attribute </th><th> Description                                                                    </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> name           </td><td> name          </td><td> Name to match for dependency resolution                                        </td></tr>
+    <tr><td> vendor         </td><td> vendor        </td><td> Vendor to match for dependency resolution                                      </td></tr>
+    <tr><td> version        </td><td> version       </td><td> Version to match for dependency resolution, as per <code>dependencyRule</code>            </td></tr>
+    <tr><td> description    </td><td> desc          </td><td> Description of this dependency                                                 </td></tr>
+    <tr><td> dependencyRule </td><td> rel           </td><td> The rule to determine how to match <code>version</code>: &ldquo;minimum&rdquo;, &ldquo;exact&rdquo;, or &ldquo;maximum&rdquo; </td></tr>
+    <tr><td> solvers        </td><td> solvers       </td><td> Solvers that can be used to resolve this dependency                            </td></tr>
+    <tr><td> installable    </td><td> installable   </td><td> Is this dependency installable by the software manager?                        </td></tr>
+  </tbody>
+</table>
+<p>Note that while there are no individual mandatory attributes for dependencies, creating a dependency with no attributes is unlikely to accomplish anything meaningful. Additionally, the <code>solvers</code> and <code>installable</code> attributes are unlikely to be useful for modules.</p>
+<h4 id="installation-configuration"><code>installation</code> configuration</h4>
+<p>The <code>installation</code> block inside a <code>moduleManifest</code> block allows adding an <code>&lt;installation&gt;</code> element to the generated <code>module.xml</code> manifest.</p>
+<p>The primary use for module developers will be to set the <code>isNoRunningStation</code> attribute to <code>true</code>. This will force a station restart if a module is installed, which may be required for your module to function correctly.</p>
+<p>Additionally, <code>dependencies {}</code> and <code>excludes {}</code> blocks are provided for advanced use cases. These blocks can be used to define dependencies and exclusions using the same data structures as the <code>dependencies {}</code> block above. However, while the <code>moduleManifest.dependencies {}</code> block is used to determine <em>runtime</em> dependencies, <code>moduleManifest.installation.dependencies {}</code> and <code>moduleManifest.installation.exclusions {}</code> are used to gate <em>installation</em> of a module before it is pushed down to a device.</p>
+<h4 id="defines-configuration"><code>defines</code> configuration</h4>
+<p>The <code>defines</code> block inside a <code>moduleManifest</code> block allows adding registry definitions to the generated <code>module.xml</code> manifest:</p>
+<pre><code class="sunlight-highlight-java">moduleManifest {
+  ...
+  defines {
+    define(&quot;foo&quot;, &quot;bar&quot;)
+    define(&quot;foo&quot;, &quot;baz&quot;)
+  }
+  ...
+}
+</code></pre>
+<p>This maps directly to the following in <code>module.xml</code>:</p>
+<pre><code class="sunlight-highlight-xml">&lt;module name=&quot;acmeDriver-rt&quot;&gt;
+  ...
+  &lt;defs&gt;
+    &lt;def name=&quot;foo&quot; value=&quot;bar&quot;/&gt;
+    &lt;def name=&quot;foo&quot; value=&quot;baz&quot;/&gt;
+  &lt;/defs&gt;
+  ...
+&lt;/module&gt;
+</code></pre>
+<h4 id="lexicons-configuration"><code>lexicons</code> configuration</h4>
+<p>The <code>lexicons</code> block inside a <code>moduleManifest</code> block allows adding lexicon definitions to the generated <code>module.xml</code> manifest. This can be used to indicate that your module can provide lexicon entries for other modules for any given language.</p>
+<p>The <code>lexicons {}</code> block allows configuring attributes that apply to all lexicons in the module:</p>
+<table>
+  <thead>
+    <tr><th> Attribute       </th><th> Description                                                                                                                                          </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> brand           </td><td> A brand for this Lexicon module, if required. Defaults to none                                                                                       </td></tr>
+    <tr><td> defaultLanguage </td><td> The default language for all lexicons in this module. If not specified, must be given for each lexicon resource entry                                </td></tr>
+    <tr><td> providesDefault </td><td> If specified, this will control the &lsquo;default&rsquo; flag for all lexicons in this module. If not specified, must be given for each lexicon resource entry </td></tr>
+  </tbody>
+</table>
+<p>For the typical case of a lexicon module that provides translations for a single language, configuration is simple:</p>
+<pre><code class="sunlight-highlight-java">moduleManifest {
+  ...
+  lexicons {
+    defaultLanguage.set(&quot;en&quot;)
+    providesDefault.set(true)
+    lexicon(&quot;myDriver&quot;)
+    lexicon(&quot;myDashboard&quot;)
+  }
+  ...
+}
+</code></pre>
+<p>This maps directly to the following in <code>module.xml</code>:</p>
+<pre><code class="sunlight-highlight-xml">&lt;module name=&quot;acmeDriver-rt&quot;&gt;
+  ...
+  &lt;lexicons&gt;
+    &lt;lexicon module=&quot;myDriver&quot; resource=&quot;myDriver.lexicon&quot; language=&quot;en&quot; default=&quot;true&quot;/&gt;
+    &lt;lexicon module=&quot;myDashboard&quot; resource=&quot;myDashboard.lexicon&quot; language=&quot;en&quot; default=&quot;true&quot;/&gt;
+  &lt;/lexicons&gt;
+  ...
+&lt;/module&gt;
+</code></pre>
+<p>For more complex cases, you can control the behavior of each lexicon resource individually:</p>
+<table>
+  <thead>
+    <tr><th> Attribute      </th><th> Description                                                                   </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> resource       </td><td> Name of the file containing lexicon entries. Defaults to &lsquo;<module>.lexicon&rsquo;   </td></tr>
+    <tr><td> language       </td><td> The language for this file                                                    </td></tr>
+    <tr><td> defaultLexicon </td><td> Should this resource be the default for <code>module</code> when <code>langauge</code> is requested </td></tr>
+  </tbody>
+</table>
+<p>For example, for a single lexicon module that provides multiple languages for a given module would be configured as follows:</p>
+<pre><code class="sunlight-highlight-java">moduleManifest {
+  ...
+  lexicons {
+    lexicon(&quot;myDriver&quot;) {
+      resource.set(&quot;myDriver-en.lexicon&quot;)
+      language.set(&quot;en&quot;)
+      providesDefault.set(false)
+    }
+    lexicon(&quot;myDriver&quot;) {
+      resource.set(&quot;myDriver-es.lexicon&quot;)
+      language.set(&quot;es&quot;)
+      providesDefault.set(true)
+    }
+  }
+  ...
+}
+</code></pre>
+<p>This maps directly to the following in <code>module.xml</code>:</p>
+<pre><code class="sunlight-highlight-xml">&lt;module name=&quot;acmeDriver-rt&quot;&gt;
+  ...
+  &lt;lexicons&gt;
+    &lt;lexicon module=&quot;myDriver&quot; resource=&quot;myDriver-en.lexicon&quot; language=&quot;en&quot; default=&quot;false&quot;/&gt;
+    &lt;lexicon module=&quot;myDriver&quot; resource=&quot;myDriver-es.lexicon&quot; language=&quot;es&quot; default=&quot;true&quot;/&gt;
+  &lt;/lexicons&gt;
+  ...
+&lt;/module&gt;
+</code></pre>
+<h3 id="convert-niagara-ax-buildxml-to-niagara-4-buildgradle">Convert Niagara AX build.xml to Niagara 4 build.gradle</h3>
+<p>In the Niagara AX Developer Guide, the section on Build provides an overview of the elements available for inclusion in the <code>build.xml</code> file. This includes a definition of XML element and attributes that can be used in <code>build.xml</code>. There are four XML elements described in the documentation: module (the root element), dependency, package, and resources. Most of the element and attribute mappings from <code>build.xml</code> to the Gradle script are straightforward. Pay particular attention to the dependency declarations. Gradle contains a more sophisticated approach to dependency resolution described above, and has a standard way of declaring and resolving dependencies that has been adopted in Niagara 4.</p>
+<p>Also note that due to the split of modules into module parts in Niagara 4, a new module-level declaration is found in <code>niagara-module.xml</code>. Some <code>build.xml</code> elements map here, while most have been pushed down into the module part&rsquo;s <code>build.gradle.kts</code>.</p>
+<h3 id="mapping-summary">Mapping Summary</h3>
+<p>The table below contains a mapping of common elements used in the <code>build.xml</code> to declarations in a corresponding Gradle script.</p>
+<h4 id="niagara-modulexml">niagara-module.xml</h4>
+<p>Some attributes in <code>&lt;module&gt;</code> directly map to attributes in <code>&lt;niagara-module&gt;</code>:</p>
+<table>
+  <thead>
+    <tr><th> build.xml                </th><th> niagara-module.xml       </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> name = &ldquo;myModule&rdquo;        </td><td> moduleName = &ldquo;myModule&rdquo;  </td></tr>
+    <tr><td> preferredSymbol = &ldquo;mmod&rdquo; </td><td> preferredSymbol = &ldquo;mmod&rdquo; </td></tr>
+  </tbody>
+</table>
+<h4 id="mymodule-modulepartgradlekts">myModule-modulePart.gradle.kts</h4>
+<p>The remaining elements in <code>build.xml</code> map to <code>myModule-modulePart.gradle.kts</code>:</p>
+<table>
+  <thead>
+    <tr><th> build.xml                                            </th><th> myModule-modulePart.gradle.kts                                                              </th></tr>
+  </thead>
+  <tbody>
+    <tr><td> vendor = &ldquo;X&rdquo;                                         </td><td> <code>moduleManifest { vendor.set(&quot;X&quot;) }</code>                                                        </td></tr>
+    <tr><td> vendorVersion = &ldquo;X&rdquo;                                  </td><td> <code>version = &quot;X&quot;</code>                                                                             </td></tr>
+    <tr><td> bajaVersion = &ldquo;0&rdquo;                                    </td><td> <code>moduleManifest { bajaVersion.set(&quot;0&quot;) }</code> (optional)                                        </td></tr>
+    <tr><td> <strong>&lt;dependency&gt; tag</strong>                               </td><td> <strong>dependencies Elements</strong>                                                                   </td></tr>
+    <tr><td> name=&ldquo;bar&rdquo; vendor=&ldquo;X&rdquo; vendorVersion = &ldquo;4.0&rdquo;          </td><td> <code>dependencies { api(&quot;X:bar&quot;) }</code>                                                             </td></tr>
+    <tr><td> <strong>&lt;resources&gt; tag</strong>                                </td><td> <strong>jar task configuration</strong>                                                                  </td></tr>
+    <tr><td> name=&quot;/com/example/icons/*.png                      </td><td> <code>tasks.named&lt;Jar&gt;(&quot;jar&quot;) { from(&quot;src&quot;) { include(&quot;/com/example/icons/*.png&quot;) }</code>             </td></tr>
+    <tr><td> <strong>&lt;dependency&gt; tag for test</strong>                      </td><td> <strong>dependencies Elements</strong>                                                                   </td></tr>
+    <tr><td> name=&ldquo;baz&rdquo; vendor=&ldquo;X&rdquo; vendorVersion=&ldquo;4.0&rdquo; test=&quot;true </td><td> <code>dependencies { moduleTestImplementation(&quot;X:baz&quot;) }</code>                                        </td></tr>
+    <tr><td> <strong>&lt;resources&gt; tag for test</strong>                       </td><td> <strong>jar task configuration</strong>                                                                  </td></tr>
+    <tr><td> name=&ldquo;com/example/test/*.bog&rdquo; test=&ldquo;true&rdquo;           </td><td> <code>tasks.named&lt;Jar&gt;(&quot;moduleTestJar&quot;) { from(&quot;srcTest&quot;) { include(&quot;com/example/test/*.bog&quot;) }</code> </td></tr>
+  </tbody>
+</table>
+<h3 id="example-conversion">Example Conversion</h3>
+<h4 id="buildxml">build.xml</h4>
+<pre><code class="sunlight-highlight-xml">&lt;module 
+  name = &quot;componentLinks&quot; 
+  bajaVersion = &quot;0&quot; 
+  preferredSymbol = &quot;cl&quot; 
+  description = &quot;Example of checking and creating Links programmatically&quot; 
+  vendor = &quot;Tridium&quot; 
+&gt;  
+  &lt;dependency name=&quot;baja&quot; vendor=&quot;Tridium&quot; vendorVersion=&quot;4.0&quot; /&gt; 
+  &lt;dependency name=&quot;kitControl&quot; vendor=&quot;Tridium&quot; vendorVersion=&quot;4.0&quot; /&gt; 
+  &lt;dependency name=&quot;control&quot; vendor=&quot;Tridium&quot; vendorVersion=&quot;4.0&quot; /&gt; 
+  &lt;dependency name=&quot;bajaui&quot; vendor=&quot;Tridium&quot; vendorVersion=&quot;4.0&quot; test=&quot;true&quot; /&gt;
+
+  &lt;package name=&quot;com.examples.componentLinks&quot; /&gt;
+
+  &lt;resources name=&quot;com/examples/icons/*.png&quot; /&gt; 
+  &lt;resources name=&quot;com/examples/test/bogs/*.bog&quot; test=&quot;true&quot; /&gt; 
+&lt;/module&gt;
+</code></pre>
+<p>NOTE: The module version is retrieved from the devkit.properties file</p>
+<h4 id="niagara-modulexml">niagara-module.xml</h4>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;niagara-module moduleName=&quot;componentLinks&quot; preferredSymbol=&quot;cl&quot; runtimeProfiles=&quot;rt&quot;/&gt;
+</code></pre>
+<p>Note that <code>runtimeProfiles</code> is a comma-separated list; for a module with &lsquo;rt&rsquo;, &lsquo;ux&rsquo;, and &lsquo;wb&rsquo; parts, it would instead be:</p>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;niagara-module moduleName=&quot;multiPartModule&quot; preferredSymbol=&quot;mpm&quot; runtimeProfiles=&quot;rt,ux,wb&quot;/&gt;
+</code></pre>
+<h4 id="componentlinks-rtgradlekts">componentLinks-rt.gradle.kts</h4>
+<pre><code class="sunlight-highlight-java">import com.tridium.gradle.plugins.module.util.ModulePart.RuntimeProfile.*
+
+plugins {
+  // The Niagara Module plugin configures the &quot;moduleManifest&quot; extension and the
+  // &quot;jar&quot; and &quot;moduleTestJar&quot; tasks.
+  id(&quot;com.tridium.niagara-module&quot;)
+
+  // The signing plugin configures the correct signing of modules. It requires
+  // that the plugin also be applied to the root project.
+  id(&quot;com.tridium.niagara-signing&quot;)
+
+  // The bajadoc plugin configures the generation of Bajadoc for a module.
+  id(&quot;com.tridium.bajadoc&quot;)
+
+  // Configures JaCoCo for the &quot;niagaraTest&quot; task of this module.
+  id(&quot;com.tridium.niagara-jacoco&quot;)
+
+  // The Annotation processors plugin adds default dependencies on &quot;Tridium:nre&quot;
+  // for the &quot;annotationProcessor&quot; and &quot;moduleTestAnnotationProcessor&quot;
+  // configurations by creating a single &quot;niagaraAnnotationProcessor&quot;
+  // configuration they extend from. This value can be overridden by explicitly
+  // declaring a dependency for the &quot;niagaraAnnotationProcessor&quot; configuration.
+  id(&quot;com.tridium.niagara-annotation-processors&quot;)
+
+  // The niagara_home repositories convention plugin configures !bin/ext and
+  // !modules as flat-file Maven repositories so that projects in this build can
+  // depend on already-installed Niagara modules.
+  id(&quot;com.tridium.convention.niagara-home-repositories&quot;)
+}
+
+description = &quot;Example Niagara Module&quot;
+
+moduleManifest {
+  moduleName.set(&quot;componentLinks&quot;)
+  // The runtime profile indicates the minimum Java runtime support required for this module jar
+  runtimeProfile.set(rt)
+}
+
+dependencies {
+  // NRE dependencies
+  nre(&quot;Tridium:nre&quot;)
+
+  // Niagara module dependencies
+  api(&quot;Tridium:baja&quot;)
+  api(&quot;Tridium:kitControl-rt&quot;)
+
+  // Test Niagara module dependencies
+  moduleTestImplementation(&quot;Tridium:test-wb&quot;)
+  moduleTestImplementation(&quot;Tridium:bajaui-wb&quot;)
+  moduleTestImplementation(&quot;Tridium:control-rt&quot;)
+}
+
+
+// Include additional files in module jar with the following configuration.
+//tasks.named&lt;Jar&gt;(&quot;jar&quot;) {
+//  from(&quot;src&quot;) {
+//    include(&quot;com/tridium/history/hx/*.js&quot;)
+//    include(&quot;com/tridium/history/ui/icons/*.png&quot;)
+//  }
+//}
+
+// Include files in the test jar with the following configuration.
+//tasks.named&lt;Jar&gt;(&quot;moduleTestJar&quot;) {
+//  from(&quot;srcTest&quot;) {
+//    include(&quot;test/bogs/*.bog&quot;)
+//  }
+//}
+</code></pre>
+<h1 id="other-module-files">Other Module Files</h1>
+<h2 id="module-includexml">module-include.xml</h2>
+<p>This file is placed directly under the module part&rsquo;s root directory. If it is declared, then the build tools automatically include it in the module&rsquo;s manifest as <code>META-INF/module.xml</code>. It should not be edited by hand. The <code>type</code> elements are generated automatically by the build process; you should not edit them or add new ones by hand. Any type annotated with <code>@NiagaraType</code> will be written to <code>module-include.xml</code> automatically; see <a href="slot-o-matic.html#niagaratype">the Niagara Annotations documentation</a> for more details. Other elements such as <code>defs</code>, <code>lexicons</code>, and <code>installation</code> are now configured in <code>build.gradle.kts</code>; see the section on <code>moduleManifest</code> for more information.</p>
+<h2 id="module-permissionsxml">module-permissions.xml</h2>
+<p>This file contains any <a href="module://docDeveloper/doc/security/requestingPermissions.html">permissions</a> your module requests.</p>
+<h2 id="modulepalette">module.palette</h2>
+<p>The <code>module.palette</code> file is an optional file that is placed directly under the module part&rsquo;s root directory. If included it is automatically inserted into the module jar file, and accessible in the module as <code>/module.palette</code>. The <code>module.palette</code> file should contain the standard palette of public components provided by the module. The format of the file is the same as a standard .bog file.</p>
+<h2 id="modulelexicon">module.lexicon</h2>
+<p>The <code>module.lexicon</code> file is an optional file that is placed directly under the module part&rsquo;s root directory. However, it is strongly encouraged that you use lexicons to enable localization of your module. If included it is automatically inserted into the module jar file. The lexicon file defines the name/value pairs accessed via the <a href="module://docDeveloper/doc/baja-rt/javax/baja/util/Lexicon.bajadoc">Lexicon API</a>. It is best practice to only use the &lsquo;lowest&rsquo; module part to store all lexicon keys for all module parts. This makes it easier to maintain lexicon entries.</p>
+<h2 id="moduletest-includexml">moduleTest-include.xml</h2>
+<p>Put any Niagara <code>def</code> and <code>lexicon</code> elements used in your test classes in this file. As with the main <code>module-include.xml</code>, <code>type</code> elements for any correctly annotated test type will be added automatically.</p>
+<h1 id="example-gradle-scripts">Example Gradle Scripts</h1>
+<h2 id="buildgradlekts">build.gradle.kts</h2>
+<pre><code class="sunlight-highlight-java">/*
+ * Copyright 2022 Acme. All Rights Reserved.
+ */
+
+plugins {
+  // Base Niagara plugin
+  id(&quot;com.tridium.niagara&quot;)
+
+  // The vendor plugin provides the vendor {} extension to set the default group
+  // for Maven publishing; the default vendor attribute for installable
+  // manifests; and the default module and dist version for their respective
+  // manifests
+  id(&quot;com.tridium.vendor&quot;)
+
+  // The signing plugin configures signing of all executables, modules, and
+  // dists. It also registers a factory only on the root project to avoid
+  // overhead from managing signing profiles on all subprojects
+  id(&quot;com.tridium.niagara-signing&quot;)
+
+  // The niagara_home repositories convention plugin configures !bin/ext and
+  // !modules as flat-file Maven repositories to allow modules to compile against
+  // Niagara
+  id(&quot;com.tridium.convention.niagara-home-repositories&quot;)
+}
+
+
+vendor {
+  // defaultVendor sets the &quot;vendor&quot; attribute on module and dist files; it's
+  // what's shown in Niagara when viewing a module or dist.
+  defaultVendor(&quot;Acme&quot;)
+
+  // defaultModuleVersion sets the &quot;vendorVersion&quot; attribute on all modules
+  defaultModuleVersion(&quot;1.0&quot;)
+}
+
+
+////////////////////////////////////////////////////////////////
+// Dependencies and configurations... configuration
+////////////////////////////////////////////////////////////////
+
+subprojects {
+  repositories {
+    mavenCentral()
+  }
+}
+
+</code></pre>
+<h2 id="settingsgradlekts">settings.gradle.kts</h2>
+<p>Note: A large amount of this code is debugging intended to provide useful error messages if the Gradle plugins cannot be loaded</p>
+<pre><code class="sunlight-highlight-java">/*
+ * Copyright 2022 Acme. All Rights Reserved.
+ */
+
+import com.tridium.gradle.plugins.settings.MultiProjectExtension
+import com.tridium.gradle.plugins.settings.LocalSettingsExtension
+
+pluginManagement {
+  val niagaraHome: Provider&lt;String&gt; = providers.gradleProperty(&quot;niagara_home&quot;).orElse(
+    providers.systemProperty(&quot;niagara_home&quot;).orElse(
+      providers.environmentVariable(&quot;NIAGARA_HOME&quot;).orElse(
+        providers.environmentVariable(&quot;niagara_home&quot;)
+      )
+    )
+  )
+
+  val gradlePluginHome: String = providers.gradleProperty(&quot;gradlePluginHome&quot;).orElse(
+    providers.environmentVariable(&quot;GRADLE_PLUGIN_HOME&quot;).orElse (
+      niagaraHome.map { &quot;$it/etc/m2/repository&quot; }
+    )
+  ).orNull ?: throw InvalidUserDataException(buildString {
+    val isWindows = providers.systemProperty(&quot;os.name&quot;).map { it.toLowerCase(java.util.Locale.ENGLISH) }.get().contains(&quot;windows&quot;)
+    val propsFile = File(rootDir, &quot;gradle.properties&quot;)
+
+    appendLine(&quot;************************************************************&quot;)
+    appendLine(&quot;ERROR: Invalid project configuration: Cannot derive value of 'gradlePluginHome'.&quot;)
+    appendLine()
+    if (propsFile.exists()) {
+      appendLine(&quot;You can set it by editing the properties file at:&quot;)
+    } else {
+      appendLine(&quot;You can set it by creating a properties file at:&quot;)
+    }
+    appendLine()
+    appendLine(&quot;  $propsFile&quot;)
+    appendLine()
+    appendLine(&quot;and adding 'gradlePluginHome':&quot;)
+    appendLine()
+    if (isWindows) {
+      appendLine(&quot;  gradlePluginHome=C:\\\\path\\\\to\\\\plugins&quot;)
+    } else {
+      appendLine(&quot;  gradlePluginHome=/path/to/plugins&quot;)
+    }
+    appendLine()
+    appendLine(&quot;You can also set it by defining the 'GRADLE_PLUGIN_HOME' environment varaible:&quot;)
+    appendLine()
+    if (isWindows) {
+      appendLine(&quot;  set GRADLE_PLUGIN_HOME=C:\\\\path\\\\to\\\\plugins&quot;)
+    } else {
+      appendLine(&quot;  export GRADLE_PLUGIN_HOME=/path/to/plugins&quot;)
+    }
+    appendLine()
+    appendLine(&quot;------------------------------------------------------------&quot;)
+    appendLine()
+    append(&quot;If you are using the plugins shipped with the version of Niagara you are building against, &quot;)
+    if (propsFile.exists()) {
+      appendLine(&quot;you can edit the properties file at:&quot;)
+    } else {
+      appendLine(&quot;you can create a properties file at:&quot;)
+    }
+    appendLine()
+    appendLine(&quot;  $propsFile&quot;)
+    appendLine()
+    appendLine(&quot;and add 'niagara_home':&quot;)
+    appendLine()
+    if (isWindows) {
+      appendLine(&quot;  niagara_home=C:\\\\Niagara\\\\Niagara-4.x.y.z&quot;)
+    } else {
+      appendLine(&quot;  niagara_home=/opt/Niagara-4.x.y.z&quot;)
+    }
+    appendLine()
+    appendLine(&quot;You can also set it by defining the 'NIAGARA_HOME' environment variable:&quot;)
+    appendLine()
+    if (isWindows) {
+      appendLine(&quot;  set NIAGARA_HOME=C:\\\\Niagara\\\\Niagara-4.x.y.z&quot;)
+    } else {
+      appendLine(&quot;  export NIAGARA_HOME=/opt/Niagara-4.x.y.z&quot;)
+    }
+    appendLine()
+    appendLine(&quot;************************************************************&quot;)
+  })
+
+  val gradlePluginRepoUrl = &quot;file:///${gradlePluginHome.replace('\\', '/')}&quot;
+
+  val gradlePluginVersion: String = &quot;7.3.40&quot;
+  val settingsPluginVersion: String = &quot;7.3.0&quot;
+
+  repositories {
+    maven(url = &quot;$gradlePluginRepoUrl&quot;)
+    gradlePluginPortal()
+  }
+
+  plugins {
+    id(&quot;com.tridium.settings.multi-project&quot;) version (settingsPluginVersion)
+    id(&quot;com.tridium.settings.local-settings-convention&quot;) version (settingsPluginVersion)
+
+    id(&quot;com.tridium.niagara&quot;) version (gradlePluginVersion)
+    id(&quot;com.tridium.vendor&quot;) version (gradlePluginVersion)
+    id(&quot;com.tridium.niagara-module&quot;) version (gradlePluginVersion)
+    id(&quot;com.tridium.niagara-signing&quot;) version (gradlePluginVersion)
+
+    id(&quot;com.tridium.convention.niagara-home-repositories&quot;) version (gradlePluginVersion)
+  }
+}
+
+plugins {
+  // Discover all subprojects in this build
+  id(&quot;com.tridium.settings.multi-project&quot;)
+
+  // Apply local settings from local/my-niagara.gradle(.kts) if they
+  // are present
+  id(&quot;com.tridium.settings.local-settings-convention&quot;)
+}
+
+configure&lt;LocalSettingsExtension&gt; {
+  loadLocalSettings()
+}
+
+configure&lt;MultiProjectExtension&gt; {
+  // Note: If you have specific subfolder(s) to include, you can pass their relative
+  // path as an argument:
+  //
+  //   findProjects(&quot;folder1&quot;)
+  //   findProjects(&quot;folder2&quot;)
+  //
+  // Otherwise, this will find all projects under the root directory with the following layout:
+  //
+  //    project-rt/project-rt.gradle.kts
+  //    project-rt/project-rt.gradle
+  //    project-rt/build.gradle.kts
+  //    project-rt/build.gradle
+  findProjects()
+}
+
+rootProject.name = &quot;myModule&quot;
+</code></pre>
+<h2 id="niagara-modulexml">niagara-module.xml</h2>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;niagara-module moduleName=&quot;myModule&quot; preferredSymbol=&quot;mmod&quot; runtimeProfiles=&quot;rt,ux&quot;/&gt;
+</code></pre>
+<h2 id="module-rtgradlekts">module-rt.gradle.kts</h2>
+<pre><code class="sunlight-highlight-java">/*
+ * Copyright 2022 Acme. All Rights Reserved.
+ */
+
+import com.tridium.gradle.plugins.module.util.ModulePart.RuntimeProfile.*
+
+plugins {
+  // The Niagara Module plugin configures the &quot;moduleManifest&quot; extension and the
+  // &quot;jar&quot; and &quot;moduleTestJar&quot; tasks.
+  id(&quot;com.tridium.niagara-module&quot;)
+
+  // The signing plugin configures the correct signing of modules. It requires
+  // that the plugin also be applied to the root project.
+  id(&quot;com.tridium.niagara-signing&quot;)
+
+  // The bajadoc plugin configures the generation of Bajadoc for a module.
+  id(&quot;com.tridium.bajadoc&quot;)
+
+  // Configures JaCoCo for the &quot;niagaraTest&quot; task of this module.
+  id(&quot;com.tridium.niagara-jacoco&quot;)
+
+  // The Annotation processors plugin adds default dependencies on &quot;Tridium:nre&quot;
+  // for the &quot;annotationProcessor&quot; and &quot;moduleTestAnnotationProcessor&quot;
+  // configurations by creating a single &quot;niagaraAnnotationProcessor&quot;
+  // configuration they extend from. This value can be overridden by explicitly
+  // declaring a dependency for the &quot;niagaraAnnotationProcessor&quot; configuration.
+  id(&quot;com.tridium.niagara-annotation-processors&quot;)
+
+  // The niagara_home repositories convention plugin configures !bin/ext and
+  // !modules as flat-file Maven repositories so that projects in this build can
+  // depend on already-installed Niagara modules.
+  id(&quot;com.tridium.convention.niagara-home-repositories&quot;)
+}
+
+description = &quot;My Module&quot;
+
+moduleManifest {
+  moduleName.set(&quot;myModule&quot;)
+  runtimeProfile.set(rt)
+}
+
+// See documentation in local:|module://docDeveloper/doc/build.html for the supported
+// dependency types
+dependencies {
+  // NRE dependencies
+  nre(&quot;Tridium:nre&quot;)
+
+  // Niagara module dependencies
+  api(&quot;Tridium:baja&quot;)
+
+  // Test Niagara module dependencies
+  moduleTestImplementation(&quot;Tridium:test-wb&quot;)
+}
+</code></pre>
+<h2 id="module-uxgradlekts">module-ux.gradle.kts</h2>
+<pre><code class="sunlight-highlight-java">/*
+ * Copyright 2022 Acme. All Rights Reserved.
+ */
+
+import com.tridium.gradle.plugins.grunt.task.GruntBuildTask
+import com.tridium.gradle.plugins.module.util.ModulePart.RuntimeProfile.*
+
+plugins {
+  // The Niagara Module plugin configures the &quot;moduleManifest&quot; extension and the
+  // &quot;jar&quot; and &quot;moduleTestJar&quot; tasks.
+  id(&quot;com.tridium.niagara-module&quot;)
+
+  // The signing plugin configures the correct signing of modules. It requires
+  // that the plugin also be applied to the root project.
+  id(&quot;com.tridium.niagara-signing&quot;)
+
+  // The bajadoc plugin configures the generation of Bajadoc for a module.
+  id(&quot;com.tridium.bajadoc&quot;)
+
+  // Configures JaCoCo for the &quot;niagaraTest&quot; task of this module.
+  id(&quot;com.tridium.niagara-jacoco&quot;)
+
+  // The Annotation processors plugin adds default dependencies on &quot;Tridium:nre&quot;
+  // for the &quot;annotationProcessor&quot; and &quot;moduleTestAnnotationProcessor&quot;
+  // configurations by creating a single &quot;niagaraAnnotationProcessor&quot;
+  // configuration they extend from. This value can be overridden by explicitly
+  // declaring a dependency for the &quot;niagaraAnnotationProcessor&quot; configuration.
+  id(&quot;com.tridium.niagara-annotation-processors&quot;)
+
+  // The niagara_home repositories convention plugin configures !bin/ext and
+  // !modules as flat-file Maven repositories so that projects in this build can
+  // depend on already-installed Niagara modules.
+  id(&quot;com.tridium.convention.niagara-home-repositories&quot;)
+
+  id(&quot;com.tridium.niagara-grunt&quot;)
+}
+
+description = &quot;My Module&quot;
+
+moduleManifest {
+  moduleName.set(&quot;myModule&quot;)
+  runtimeProfile.set(ux)
+}
+
+// See documentation in local:|module://docDeveloper/doc/build.html for the supported
+// dependency types
+dependencies {
+  // NRE dependencies
+  nre(&quot;Tridium:nre&quot;)
+
+  // Niagara module dependencies
+  api(&quot;Tridium:baja&quot;)
+
+  // Test Niagara module dependencies
+  moduleTestImplementation(&quot;Tridium:test-wb&quot;)
+}
+
+tasks.named&lt;GruntBuildTask&gt;(&quot;gruntBuild&quot;) {
+  tasks(&quot;babel:dist&quot;, &quot;copy:dist&quot;, &quot;requirejs&quot;)
+}
+</code></pre>
+<h1 id="updating-from-an-older-niagara-version">Updating from an Older Niagara Version</h1>
+<p>See the <a href="upgradingBuild.html">full upgrade guide</a></p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/lonml.html" class="navbar">Prev</a> |  <a href="/doc/js/buildingJS.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

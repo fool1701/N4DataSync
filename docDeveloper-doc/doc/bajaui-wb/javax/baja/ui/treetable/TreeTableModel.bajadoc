@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.treetable.TreeTableModel" name="TreeTableModel" packageName="javax.baja.ui.treetable" public="true" abstract="true">
+<description>
+TreeTableModel is the TableModel used by BTreeTable
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">7 Jan 04</tag>
+<tag name="@version">$Revision: 10$ $Date: 5/4/05 8:11:16 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.table.TableModel"/>
+</extends>
+<!-- javax.baja.ui.treetable.TreeTableModel() -->
+<constructor name="TreeTableModel" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.getTreeTable() -->
+<method name="getTreeTable"  public="true" final="true">
+<description>
+Get the table as a BTreeTable.
+</description>
+<return>
+<type class="javax.baja.ui.treetable.BTreeTable"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.getRootCount() -->
+<method name="getRootCount"  public="true" abstract="true">
+<description>
+Get the number of root nodes in the table.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.getRoot(int) -->
+<method name="getRoot"  public="true" abstract="true">
+<description>
+Get the specified root node.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.rowToNode(int) -->
+<method name="rowToNode"  public="true">
+<description>
+Map a row index into a TreeTableNode instance.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.nodeToRow(javax.baja.ui.treetable.TreeTableNode) -->
+<method name="nodeToRow"  public="true">
+<description>
+Map a TreeTableNode into a row index or -1 if &#xa; not currently expanded as a row in the table.
+</description>
+<parameter name="node">
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.isNodeVisibleRow(javax.baja.ui.treetable.TreeTableNode) -->
+<method name="isNodeVisibleRow"  public="true">
+<description>
+Return if the TreeTableNode is currently a &#xa; visible row in the table.
+</description>
+<parameter name="node">
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.isDepthExpandable(int) -->
+<method name="isDepthExpandable"  public="true">
+<description>
+Return if the specified depth is expandable.  If true then &#xa; the renderer will always leave space for an expansion button &#xa; for nodes at the specified depth.  Default returns true&#xa; assuming that all depths of the table are expandable.
+</description>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.updateTreeTable(boolean) -->
+<method name="updateTreeTable"  public="true">
+<description>
+Update the node to row mapping either becauses &#xa; rows have been added or nodes have been collapsed&#xa; or expanded.
+</description>
+<parameter name="resizeColumns">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.needsInitialization() -->
+<method name="needsInitialization"  public="true">
+<description>
+access to whether or not the TreeTable Model has been initalized
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.getRowCount() -->
+<method name="getRowCount"  public="true">
+<description>
+Computed from roots and current expansion state.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.getValueAt(int, int) -->
+<method name="getValueAt"  public="true">
+<description>
+Call &lt;code&gt;rowToNode(row).getValueAt(col)&lt;/code&gt;
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.getSubject(int) -->
+<method name="getSubject"  public="true">
+<description>
+Call &lt;code&gt;rowToNode(row).getSubject()&lt;/code&gt;
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableModel.getRowIcon(int) -->
+<method name="getRowIcon"  public="true">
+<description>
+Call &lt;code&gt;rowToNode(row).getIcon()&lt;/code&gt;
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

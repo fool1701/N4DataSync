@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.db.BHistoryDatabase" name="BHistoryDatabase" packageName="javax.baja.history.db" public="true" abstract="true">
+<description>
+BHistoryDatabase manages the storage of and access to historical&#xa; data.  It is a local implementation of BHistorySpace.
+</description>
+<tag name="@author">John Sublett</tag>
+<extends>
+<type class="javax.baja.history.BHistorySpace"/>
+</extends>
+<implements>
+<parameterizedType class="javax.baja.bql.BIRelational">
+<args>
+<type class="javax.baja.sys.BIObject"/>
+</args>
+</parameterizedType>
+</implements>
+<implements>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+<type class="javax.baja.history.BHistoryConfig"/>
+</args>
+</parameterizedType>
+</implements>
+<!-- javax.baja.history.db.BHistoryDatabase() -->
+<constructor name="BHistoryDatabase" protected="true">
+<description>
+Create a database with a default load balancer.
+</description>
+</constructor>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getConnection(javax.baja.sys.Context) -->
+<method name="getConnection"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.history.HistorySpaceConnection"/>
+</return>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getDbConnection(javax.baja.sys.Context) -->
+<method name="getDbConnection"  public="true" abstract="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.history.db.HistoryDatabaseConnection"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getDbConnection(boolean, javax.baja.sys.Context) -->
+<method name="getDbConnection"  public="true" final="true">
+<description>
+Create a connection to the history database, specifying whether or not&#xa; to exclude archive history data (e.g. history data archived to the cloud&#xa; or some other archive provider) during any subsequent queries run by the&#xa; connection.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="excludeArchiveData">
+<type class="boolean"/>
+<description>
+When true, archive history data will not be used&#xa;                          by any queries run by the returned connection&#xa;                          (only local history data will be considered). When&#xa;                          false, archive history data will be used to&#xa;                          supplement local data for any queries run by the&#xa;                          returned connection.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The Context to use in association with the connection.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.history.db.HistoryDatabaseConnection"/>
+<description>
+A connection to the history database.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getRelation(java.lang.String, javax.baja.sys.Context) -->
+<method name="getRelation"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the relation with the specified identifier.
+</description>
+<parameter name="id">
+<type class="java.lang.String"/>
+<description>
+A string identifier for the relation.  The format&#xa;   of the string is implementation specific.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The Context associated with this request.&#xa;   This parameter was added starting in Niagara 4.
+</description>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+<type class="javax.baja.sys.BIObject"/>
+</args>
+</parameterizedType>
+<description>
+Returns the relation identified by the id or null&#xa;   if the relation cannot be found.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getTableFacets() -->
+<method name="getTableFacets"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.isOpen() -->
+<method name="isOpen"  public="true" synchronized="true">
+<description>
+Is this database open?
+</description>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the database is open, false otherwise.  The&#xa;   open state of the database and its segments are independent, so&#xa;   an open database may have segments that are closed.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.checkOpen() -->
+<method name="checkOpen"  protected="true">
+<description>
+Make sure that the database is open.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.history.DatabaseClosedException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.open() -->
+<method name="open"  public="true" final="true" synchronized="true">
+<description>
+Open the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.doOpen() -->
+<method name="doOpen"  protected="true" abstract="true">
+<description>
+Subclass open.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.close() -->
+<method name="close"  public="true" final="true">
+<description>
+Close the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.doClose() -->
+<method name="doClose"  protected="true" abstract="true">
+<description>
+Subclass close.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.flush() -->
+<method name="flush"  public="true" final="true">
+<description>
+Flush all uncommited changes to histories in this database.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+<throws>
+<type class="javax.baja.history.HistoryException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.doFlush() -->
+<method name="doFlush"  protected="true" abstract="true">
+<description>
+Subclass flush.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getDeviceName() -->
+<method name="getDeviceName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the name of the device that contains the histories&#xa; in this space.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.setConfig(javax.baja.history.BHistoryConfig) -->
+<method name="setConfig"  public="true" abstract="true">
+<description>
+Set the configuration of an existing history.
+</description>
+<parameter name="newConfig">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getSystemTable(java.lang.String) -->
+<method name="getSystemTable"  public="true">
+<description>
+Get the system table with the specified id.
+</description>
+<parameter name="id">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+<type class="javax.baja.history.BHistoryConfig"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getSystemTable(java.lang.String, javax.baja.sys.Context) -->
+<method name="getSystemTable"  public="true">
+<description>
+Get the system table with the specified id with Context parameter.
+</description>
+<parameter name="id">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="javax.baja.collection.BITable">
+<args>
+<type class="javax.baja.history.BHistoryConfig"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getHistories() -->
+<method name="getHistories"  public="true">
+<description>
+Get all the histories associated with this database.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="javax.baja.history.BIHistory" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.hasHistoryEventListeners() -->
+<method name="hasHistoryEventListeners"  public="true">
+<description>
+Returns true only if there are any registered HistoryEventListeners
+</description>
+<tag name="@since">Niagara 3.4.47</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getHistoryEventListeners() -->
+<method name="getHistoryEventListeners"  public="true">
+<description>
+Get a list of the current HistoryEventListeners.
+</description>
+<tag name="@since">Niagara 3.4.47</tag>
+<return>
+<type class="javax.baja.history.HistoryEventListener" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.addHistoryEventListener(javax.baja.history.HistoryEventListener) -->
+<method name="addHistoryEventListener"  public="true">
+<description>
+Add a history event listener.
+</description>
+<tag name="@since">Niagara 3.4.47</tag>
+<parameter name="listener">
+<type class="javax.baja.history.HistoryEventListener"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.removeHistoryEventListener(javax.baja.history.HistoryEventListener) -->
+<method name="removeHistoryEventListener"  public="true">
+<description>
+Remove a history event listener.
+</description>
+<tag name="@since">Niagara 3.4.47</tag>
+<parameter name="listener">
+<type class="javax.baja.history.HistoryEventListener"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.fireHistoryEvent(javax.baja.history.BHistoryEvent) -->
+<method name="fireHistoryEvent"  public="true">
+<description>
+Fire a BHistoryEvent to all the current listeners.
+</description>
+<tag name="@since">Niagara 3.4.47</tag>
+<parameter name="event">
+<type class="javax.baja.history.BHistoryEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.history.db.BHistoryDatabase.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.db.BHistoryDatabase.log -->
+<field name="log"  public="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

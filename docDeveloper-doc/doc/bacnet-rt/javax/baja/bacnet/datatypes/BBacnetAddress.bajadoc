@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.datatypes.BBacnetAddress" name="BBacnetAddress" packageName="javax.baja.bacnet.datatypes" public="true" final="true">
+<description>
+This class represents the BacnetAddress data structure,&#xa; containing a fixed 16-bit network number and a variable&#xa; length MAC address.  A Bacnet device is uniquely identified by&#xa; the combination of network number and MAC address.&#xa; &lt;p&gt;&#xa; Each field can have special values.  Zero in the network&#xa; number field indicates the local network.  The GLOBAL_BROADCAST&#xa; value (0xFFFF) is used for messages which should be broadcast&#xa; on all Bacnet networks.  A null MAC address represents a&#xa; broadcast message.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@version">$Revision: 5$ $Date: 11/20/01 9:19:57 AM$</tag>
+<tag name="@creation">21 Jul 00</tag>
+<tag name="@since">Niagara 3 Bacnet 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<implements>
+<type class="javax.baja.bacnet.datatypes.BIBacnetDataType"/>
+</implements>
+<property name="addressType" flags="h">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;addressType&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAddressType</tag>
+<tag name="@see">#setAddressType</tag>
+</property>
+
+<property name="networkNumber" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;networkNumber&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNetworkNumber</tag>
+<tag name="@see">#setNetworkNumber</tag>
+</property>
+
+<property name="macAddress" flags="">
+<type class="javax.baja.bacnet.datatypes.BBacnetOctetString"/>
+<description>
+Slot for the &lt;code&gt;macAddress&lt;/code&gt; property.
+</description>
+<tag name="@see">#getMacAddress</tag>
+<tag name="@see">#setMacAddress</tag>
+</property>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress() -->
+<constructor name="BBacnetAddress" public="true">
+<description>
+Empty constructor.&#xa; Uses local network and null (broadcast) MAC address.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress(int, byte[]) -->
+<constructor name="BBacnetAddress" public="true">
+<parameter name="networkNumber">
+<type class="int"/>
+<description>
+0 for local,&#xa;                      GLOBAL_BROADCAST for global broadcast,&#xa;                      1 to 65534 for network number.
+</description>
+</parameter>
+<parameter name="macAddress">
+<type class="byte" dimension="1"/>
+<description>
+null for broadcast,&#xa;                      non-null for directed.
+</description>
+</parameter>
+<description>
+Fully specified constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress(int, javax.baja.bacnet.datatypes.BBacnetOctetString) -->
+<constructor name="BBacnetAddress" public="true">
+<parameter name="networkNumber">
+<type class="int"/>
+<description>
+0 for local,&#xa;                      GLOBAL_BROADCAST for global broadcast,&#xa;                      1 to 65534 for network number.
+</description>
+</parameter>
+<parameter name="macAddress">
+<type class="javax.baja.bacnet.datatypes.BBacnetOctetString"/>
+<description>
+null for broadcast,&#xa;                      non-null for directed.
+</description>
+</parameter>
+<description>
+Fully specified constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.getAddressType() -->
+<method name="getAddressType"  public="true">
+<description>
+Get the &lt;code&gt;addressType&lt;/code&gt; property.
+</description>
+<tag name="@see">#addressType</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.setAddressType(int) -->
+<method name="setAddressType"  public="true">
+<description>
+Set the &lt;code&gt;addressType&lt;/code&gt; property.
+</description>
+<tag name="@see">#addressType</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.getNetworkNumber() -->
+<method name="getNetworkNumber"  public="true">
+<description>
+Get the &lt;code&gt;networkNumber&lt;/code&gt; property.
+</description>
+<tag name="@see">#networkNumber</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.setNetworkNumber(int) -->
+<method name="setNetworkNumber"  public="true">
+<description>
+Set the &lt;code&gt;networkNumber&lt;/code&gt; property.
+</description>
+<tag name="@see">#networkNumber</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.getMacAddress() -->
+<method name="getMacAddress"  public="true">
+<description>
+Get the &lt;code&gt;macAddress&lt;/code&gt; property.
+</description>
+<tag name="@see">#macAddress</tag>
+<return>
+<type class="javax.baja.bacnet.datatypes.BBacnetOctetString"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.setMacAddress(javax.baja.bacnet.datatypes.BBacnetOctetString) -->
+<method name="setMacAddress"  public="true">
+<description>
+Set the &lt;code&gt;macAddress&lt;/code&gt; property.
+</description>
+<tag name="@see">#macAddress</tag>
+<parameter name="v">
+<type class="javax.baja.bacnet.datatypes.BBacnetOctetString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.setMac(byte[], javax.baja.sys.Context) -->
+<method name="setMac"  public="true">
+<description>
+Set the mac address from a byte array.
+</description>
+<parameter name="mac">
+<type class="byte" dimension="1"/>
+<description>
+a byte array containing the mac address.
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+context.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.hash() -->
+<method name="hash"  public="true">
+<description>
+The hash for a &lt;code&gt;BBacnetAddress&lt;/code&gt; is&#xa; &lt;code&gt;(networkNumber &amp;lt;&amp;lt; 16) | (macAddress.hashCode())&lt;/code&gt;.&#xa; This does not use the addressType field, because that is really just&#xa; metadata about the address.  This hash is used in place of that&#xa; returned by &lt;code&gt;hashCode()&lt;/code&gt; to allow distinct objects with the&#xa; same values to return the same hash.
+</description>
+<return>
+<type class="int"/>
+<description>
+the hash code.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description>
+To string.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+a descriptive string.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.writeAsn(javax.baja.bacnet.io.AsnOutput) -->
+<method name="writeAsn"  public="true">
+<description>
+Write the value to the Asn output stream.
+</description>
+<parameter name="out">
+<type class="javax.baja.bacnet.io.AsnOutput"/>
+<description>
+the AsnOutput stream.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.readAsn(javax.baja.bacnet.io.AsnInput) -->
+<method name="readAsn"  public="true">
+<description>
+Read the value from the Asn input stream.
+</description>
+<parameter name="in">
+<type class="javax.baja.bacnet.io.AsnInput"/>
+<description>
+the AsnInput stream.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.bacnet.io.AsnException"/>
+</throws>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.equals(int, byte[]) -->
+<method name="equals"  public="true">
+<description>
+Returns true if the given network number and MAC address&#xa; are equivalent to this object&#x27;s network and address.
+</description>
+<parameter name="networkNumber">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="macAddress">
+<type class="byte" dimension="1"/>
+<description/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the network and address match.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.macEquals(byte[]) -->
+<method name="macEquals"  public="true">
+<description>
+Compare this &lt;code&gt;BBacnetAddress&lt;/code&gt;&#x27;s MAC address with&#xa; the given MAC address for equality.
+</description>
+<parameter name="macAddress">
+<type class="byte" dimension="1"/>
+<description>
+the comparison mac address.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the given MAC address matches this MAC address.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.bytesToString(int, byte[]) -->
+<method name="bytesToString"  public="true" static="true" final="true">
+<description/>
+<parameter name="type">
+<type class="int"/>
+</parameter>
+<parameter name="mac">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.stringToBytes(int, int, java.lang.String) -->
+<method name="stringToBytes"  public="true" static="true" final="true">
+<description/>
+<parameter name="type">
+<type class="int"/>
+</parameter>
+<parameter name="len">
+<type class="int"/>
+</parameter>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.addressType -->
+<field name="addressType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;addressType&lt;/code&gt; property.
+</description>
+<tag name="@see">#getAddressType</tag>
+<tag name="@see">#setAddressType</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.networkNumber -->
+<field name="networkNumber"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;networkNumber&lt;/code&gt; property.
+</description>
+<tag name="@see">#getNetworkNumber</tag>
+<tag name="@see">#setNetworkNumber</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.macAddress -->
+<field name="macAddress"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;macAddress&lt;/code&gt; property.
+</description>
+<tag name="@see">#getMacAddress</tag>
+<tag name="@see">#setMacAddress</tag>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.LOCAL_NETWORK -->
+<field name="LOCAL_NETWORK"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.BROADCAST_NETWORK -->
+<field name="BROADCAST_NETWORK"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.NETWORK_NUMBER_MASK -->
+<field name="NETWORK_NUMBER_MASK"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.MAC_TYPE_UNKNOWN -->
+<field name="MAC_TYPE_UNKNOWN"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.MAC_TYPE_ETHERNET -->
+<field name="MAC_TYPE_ETHERNET"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.MAC_TYPE_IP -->
+<field name="MAC_TYPE_IP"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.MAC_TYPE_MSTP -->
+<field name="MAC_TYPE_MSTP"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.MAC_TYPE_SC -->
+<field name="MAC_TYPE_SC"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.GLOBAL_BROADCAST_ADDRESS -->
+<field name="GLOBAL_BROADCAST_ADDRESS"  public="true" static="true" final="true">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.LOCAL_BROADCAST_ADDRESS -->
+<field name="LOCAL_BROADCAST_ADDRESS"  public="true" static="true" final="true">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</field>
+
+<!-- javax.baja.bacnet.datatypes.BBacnetAddress.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.bacnet.datatypes.BBacnetAddress"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.file.BIFile" name="BIFile" packageName="javax.baja.file" public="true" interface="true" abstract="true" category="interface">
+<description>
+&lt;p&gt;&#xa; BIFile is the interface implemented by BObjects which&#xa; have file like semantics.  Some files are directories&#xa; which organize a BFileSpace into a tree.  Some files&#xa; contain data which can streamed, read, and written.  A&#xa; BIFile doesn&#x27;t necessarily exclude the possibility that&#xa; a file is both a directory and a data container.  In&#xa; general directory/data semantics should be defined by&#xa; implementing BIDataFile and/or BIDirectory.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; The class hierarchy of BIFile is used to define file&#xa; content types such as BTextFile, BHtmlFile, etc.  This&#xa; provides the ability to use the registry for discovery&#xa; of user agents.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; Every BIFile has a matching implementation of BIFileStore&#xa; which provides pluggable functionality for file I/O.  All&#xa; the methods which are implementated by BIFileStore are also&#xa; provided on BIFile as a convenience.&#xa; &lt;/p&gt;
+</description>
+<tag name="@author">Brian Frank on 24 Jan 03</tag>
+<tag name="@version">$Revision: 16$ $Date: 9/17/07 3:23:22 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="javax.baja.nav.BINavNode"/>
+</implements>
+<implements>
+<type class="javax.baja.space.BISpaceNode"/>
+</implements>
+<implements>
+<type class="javax.baja.sys.BIComparable"/>
+</implements>
+<implements>
+<type class="javax.baja.category.BICategorizable"/>
+</implements>
+<implements>
+<type class="javax.baja.security.BIProtected"/>
+</implements>
+<!-- javax.baja.file.BIFile.getStore() -->
+<method name="getStore"  public="true" abstract="true">
+<description>
+Get the file&#x27;s backing store.
+</description>
+<return>
+<type class="javax.baja.file.BIFileStore"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.setStore(javax.baja.file.BIFileStore) -->
+<method name="setStore"  public="true" abstract="true">
+<description>
+Set the file&#x27;s backing store.
+</description>
+<parameter name="store">
+<type class="javax.baja.file.BIFileStore"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getFileSpace() -->
+<method name="getFileSpace"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getFileSpace()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.file.BFileSpace"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getFilePath() -->
+<method name="getFilePath"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getFilePath()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.file.FilePath"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getFileName() -->
+<method name="getFileName"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getFileName()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getExtension() -->
+<method name="getExtension"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getExtension()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.isDirectory() -->
+<method name="isDirectory"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().isDirectory()&lt;/code&gt;.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getMimeType() -->
+<method name="getMimeType"  public="true" abstract="true">
+<description>
+Get the mime type string for this file.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getSize() -->
+<method name="getSize"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getSize()&lt;/code&gt;.
+</description>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getLastModified() -->
+<method name="getLastModified"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getLastModified()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.sys.BAbsTime"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.isReadonly() -->
+<method name="isReadonly"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().isReadonly()&lt;/code&gt;.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.getInputStream() -->
+<method name="getInputStream"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getInputStream()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.io.InputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFile.read() -->
+<method name="read"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().read()&lt;/code&gt;.
+</description>
+<return>
+<type class="byte" dimension="1"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFile.delete() -->
+<method name="delete"  public="true" abstract="true">
+<description>
+Call &lt;code&gt;getFileSpace().delete(getFilePath())&lt;/code&gt;.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFile.getOutputStream() -->
+<method name="getOutputStream"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().getOutputStream()&lt;/code&gt;.
+</description>
+<return>
+<type class="java.io.OutputStream"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFile.write(byte[]) -->
+<method name="write"  public="true" abstract="true">
+<description>
+Call &lt;code&gt;getStore().write()&lt;/code&gt;.
+</description>
+<parameter name="content">
+<type class="byte" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.file.BIFile.equals(java.lang.Object) -->
+<method name="equals"  public="true" abstract="true">
+<description>
+Return &lt;code&gt;getStore().equals()&lt;/code&gt;.
+</description>
+<parameter name="object">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.compareTo(java.lang.Object) -->
+<method name="compareTo"  public="true" default="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return comparison of file name with directories&#xa; taking precedence over data files.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<parameter name="other">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.file.BIFile.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

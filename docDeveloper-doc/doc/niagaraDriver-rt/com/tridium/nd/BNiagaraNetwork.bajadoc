@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="niagaraDriver" runtimeProfile="rt" qualifiedName="com.tridium.nd.BNiagaraNetwork" name="BNiagaraNetwork" packageName="com.tridium.nd" public="true" final="true">
+<description>
+BNiagaraNetwork models the list of BNiagaraDevices a&#xa; given station can communicate with.
+</description>
+<tag name="@author">Brian Frank on 1 Dec 01</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.driver.BDeviceNetwork"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<implements>
+<type class="com.tridium.fox.sys.NiagaraNetwork"/>
+</implements>
+<implements>
+<type class="javax.baja.nd.BINiagaraNetwork"/>
+</implements>
+<implements>
+<type class="com.tridium.fox.sys.BFoxService$FoxServerConnectionListener"/>
+</implements>
+<implements>
+<type class="com.tridium.nd.point.BINiagaraPointContainer"/>
+</implements>
+<property name="localStation" flags="">
+<type class="com.tridium.nd.sysdef.BLocalSysDefStation"/>
+<description>
+Slot for the &lt;code&gt;localStation&lt;/code&gt; property.
+</description>
+<tag name="@see">#getLocalStation</tag>
+<tag name="@see">#setLocalStation</tag>
+</property>
+
+<property name="sysDefProvider" flags="">
+<type class="com.tridium.nd.sysdef.BSysDefProvider"/>
+<description>
+Slot for the &lt;code&gt;sysDefProvider&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSysDefProvider</tag>
+<tag name="@see">#setSysDefProvider</tag>
+</property>
+
+<property name="tuningPolicies" flags="">
+<type class="com.tridium.nd.point.BNiagaraTuningPolicyMap"/>
+<description>
+Slot for the &lt;code&gt;tuningPolicies&lt;/code&gt; property.
+</description>
+<tag name="@see">#getTuningPolicies</tag>
+<tag name="@see">#setTuningPolicies</tag>
+</property>
+
+<property name="historyPolicies" flags="">
+<type class="javax.baja.driver.history.BHistoryNetworkExt"/>
+<description>
+Slot for the &lt;code&gt;historyPolicies&lt;/code&gt; property.&#xa; The rules used to determine the configuration of histories&#xa; that are pushed in to this device.
+</description>
+<tag name="@see">#getHistoryPolicies</tag>
+<tag name="@see">#setHistoryPolicies</tag>
+</property>
+
+<property name="workers" flags="">
+<type class="com.tridium.nd.BCyclicThreadPoolWorker"/>
+<description>
+Slot for the &lt;code&gt;workers&lt;/code&gt; property.&#xa; Defines a shared thread pool used by various&#xa; workers (ie. StationWorker, AlarmWorker, ClientWorker, ServerWorker)&#xa; since Niagara 3.3
+</description>
+<tag name="@see">#getWorkers</tag>
+<tag name="@see">#setWorkers</tag>
+</property>
+
+<property name="virtualPolicies" flags="">
+<type class="com.tridium.nd.virtual.BNiagaraVirtualNetworkExt"/>
+<description>
+Slot for the &lt;code&gt;virtualPolicies&lt;/code&gt; property.&#xa; The rules and configuration parameters for Niagara Virtuals
+</description>
+<tag name="@see">#getVirtualPolicies</tag>
+<tag name="@see">#setVirtualPolicies</tag>
+</property>
+
+<property name="persistFetchedTags" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;persistFetchedTags&lt;/code&gt; property.&#xa; When true, fetched remote tags for remote NiagaraStation points will be stored as&#xa; properties on the local Niagara proxy point.&#xa; since Niagara 4.2
+</description>
+<tag name="@see">#getPersistFetchedTags</tag>
+<tag name="@see">#setPersistFetchedTags</tag>
+</property>
+
+<action name="resetAllConnections" flags="ac">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetAllConnections&lt;/code&gt; action.
+</description>
+<tag name="@see">#resetAllConnections()</tag>
+</action>
+
+<action name="submitStationDiscoveryJob" flags="">
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitStationDiscoveryJob&lt;/code&gt; action.
+</description>
+<tag name="@see">#submitStationDiscoveryJob()</tag>
+</action>
+
+<action name="rebuildStationMap" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;rebuildStationMap&lt;/code&gt; action.
+</description>
+<tag name="@see">#rebuildStationMap()</tag>
+</action>
+
+<action name="forceUpdateNiagaraProxyPoints" flags="c">
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;forceUpdateNiagaraProxyPoints&lt;/code&gt; action.&#xa; Kicks off a job to call the Force Update action on all descendant&#xa; Niagara proxy extensions that are operational&#xa; since Niagara 4.2
+</description>
+<tag name="@see">#forceUpdateNiagaraProxyPoints()</tag>
+</action>
+
+</class>
+</bajadoc>

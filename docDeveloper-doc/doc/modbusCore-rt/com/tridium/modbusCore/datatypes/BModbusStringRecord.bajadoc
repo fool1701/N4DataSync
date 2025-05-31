@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="modbusCore" runtimeProfile="rt" qualifiedName="com.tridium.modbusCore.datatypes.BModbusStringRecord" name="BModbusStringRecord" packageName="com.tridium.modbusCore.datatypes" public="true" abstract="true">
+<description>
+BModbusStringRecord is a component for reading/writing Modbus file records (both server and client sides).&#xa; The input and output is a String converted to/from a byte array.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">28 Feb 05</tag>
+<tag name="@version">$Revision: 1$ $Date: 02/28/05 12:47:14 PM$</tag>
+<tag name="@since">Niagara 3.0 modbusCore 1.0</tag>
+<extends>
+<type class="com.tridium.modbusCore.datatypes.BModbusFileRecord"/>
+</extends>
+<property name="writeOnInputChange" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;writeOnInputChange&lt;/code&gt; property.&#xa; When true, a change to the input will cause the&#xa; write action to be fired.  When false, the write action&#xa; must be explicitly triggered.
+</description>
+<tag name="@see">#getWriteOnInputChange</tag>
+<tag name="@see">#setWriteOnInputChange</tag>
+</property>
+
+<property name="padding" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;padding&lt;/code&gt; property.&#xa; If true or Pad with nulls, write values that do not reach&#xa; the record length will be padded with null (00) values when a write&#xa; occurs. If false or Pad with spaces (default), write values that do&#xa; not reach the record length will be padded with space characters&#xa; when a write occurs.
+</description>
+<tag name="@see">#getPadding</tag>
+<tag name="@see">#setPadding</tag>
+</property>
+
+<property name="input" flags="s">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;input&lt;/code&gt; property.&#xa; The String to write to the data byte array.
+</description>
+<tag name="@see">#getInput</tag>
+<tag name="@see">#setInput</tag>
+</property>
+
+<property name="output" flags="orts">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;output&lt;/code&gt; property.&#xa; The String read from the data byte array.
+</description>
+<tag name="@see">#getOutput</tag>
+<tag name="@see">#setOutput</tag>
+</property>
+
+<action name="write" flags="as">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;write&lt;/code&gt; action.
+</description>
+<tag name="@see">#write()</tag>
+</action>
+
+<topic name="writeSuccessful" flags="s">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;writeSuccessful&lt;/code&gt; topic.
+</description>
+<tag name="@see">#fireWriteSuccessful</tag>
+</topic>
+
+</class>
+</bajadoc>

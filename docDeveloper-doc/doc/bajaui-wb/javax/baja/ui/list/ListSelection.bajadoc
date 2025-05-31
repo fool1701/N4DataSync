@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.list.ListSelection" name="ListSelection" packageName="javax.baja.ui.list" public="true">
+<description>
+ListSelection is responsible for storing the currently&#xa; selected items.  The default implementation supports both&#xa; single or muliple item index selection.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">9 Jul 02</tag>
+<tag name="@version">$Revision: 9$ $Date: 6/11/07 12:41:33 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.list.BList$ListSupport"/>
+</extends>
+<!-- javax.baja.ui.list.ListSelection() -->
+<constructor name="ListSelection" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.ui.list.ListSelection.isSelected(int) -->
+<method name="isSelected"  public="true">
+<description>
+Is the specified item index selected.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.selectAll() -->
+<method name="selectAll"  public="true">
+<description>
+Select all the items.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.select(int) -->
+<method name="select"  public="true">
+<description>
+Convenience for &lt;code&gt;select(index, false)&lt;/code&gt;.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.select(int, boolean) -->
+<method name="select"  public="true">
+<description>
+Add the specified index to the current selection.  &#xa; Both the lead and anchor become the specified index.&#xa; If clear flag is true then deselect all first.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<parameter name="clear">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.select(int, int) -->
+<method name="select"  public="true">
+<description>
+Convenience for &lt;code&gt;select(anchor, lead, false)&lt;/code&gt;.
+</description>
+<parameter name="anchor">
+<type class="int"/>
+</parameter>
+<parameter name="lead">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.select(int, int, boolean) -->
+<method name="select"  public="true">
+<description>
+Add the items between start and end inclusively&#xa; to the current selection.  The first index&#xa; becomes the new anchor, and the second new&#xa; lead.  If the clear flag is true then deselect all&#xa; first.
+</description>
+<parameter name="anchor">
+<type class="int"/>
+</parameter>
+<parameter name="lead">
+<type class="int"/>
+</parameter>
+<parameter name="clear">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.select(int[]) -->
+<method name="select"  public="true">
+<description>
+Select the specified indices.  The first one is &#xa; used as the selection anchor.
+</description>
+<parameter name="indices">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.deselect(int) -->
+<method name="deselect"  public="true">
+<description>
+Deselect the specified index, and set both the&#xa; anchor and lead to the new index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.deselectAll() -->
+<method name="deselectAll"  public="true">
+<description>
+Deselect all the rows.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.isEmpty() -->
+<method name="isEmpty"  public="true">
+<description>
+Return true if item count is zero.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.getItemCount() -->
+<method name="getItemCount"  public="true">
+<description>
+Get the number of items that are currently selected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.getItem() -->
+<method name="getItem"  public="true">
+<description>
+Get the index of the first selected item, or &#xa; return -1 if no items are currently selected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.getItems() -->
+<method name="getItems"  public="true">
+<description>
+Get indices of the selected items, or return an&#xa; empty array if no items currently selected.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.getSubject() -->
+<method name="getSubject"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;getSubject(lead)&lt;/code&gt;
+</description>
+<return>
+<type class="javax.baja.ui.list.ListSubject"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.getSubject(int) -->
+<method name="getSubject"  public="true">
+<description>
+Return the selected items as a Subject.
+</description>
+<parameter name="activeIndex">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.list.ListSubject"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.getAnchor() -->
+<method name="getAnchor"  public="true">
+<description>
+Get the selection anchor index, or -1 if no&#xa; anchor is active.  The anchor selection is &#xa; the usually the first item index selected or &#xa; unselected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.getLead() -->
+<method name="getLead"  public="true">
+<description>
+Get the selection lead row index, or -1 if no &#xa; lead is active.  The lead selection is &#xa; the last item index selected or unselected.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.list.ListSelection.updateList() -->
+<method name="updateList"  public="true">
+<description>
+Call this method to update the table whenever the &#xa; selection is modified.  It automatically fires&#xa; the selectionModified event.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

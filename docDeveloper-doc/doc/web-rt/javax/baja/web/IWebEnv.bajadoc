@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="web" runtimeProfile="rt" qualifiedName="javax.baja.web.IWebEnv" name="IWebEnv" packageName="javax.baja.web" public="true" interface="true" abstract="true" category="interface">
+<description>
+IWebEnv is used to model the user agent environment so that&#xa; we can tailor which pieces of the framework (such as views)&#xa; make sense to apply.
+</description>
+<tag name="@author">gjohnson</tag>
+<tag name="@creation">3 Aug 2011</tag>
+<tag name="@version">1</tag>
+<tag name="@since">Niagara 3.7</tag>
+<!-- javax.baja.web.IWebEnv.getView(javax.baja.agent.AgentList, java.lang.String) -->
+<method name="getView"  public="true" abstract="true">
+<description>
+This hook allows a WebEnv to map a viewId into the &#xa; AgentInfo to use the specified view id.
+</description>
+<parameter name="allViews">
+<type class="javax.baja.agent.AgentList"/>
+</parameter>
+<parameter name="viewId">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.getDefaultView(javax.baja.web.WebOp, javax.baja.agent.AgentList) -->
+<method name="getDefaultView"  public="true" abstract="true">
+<description>
+Get the default view to use for the environment.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<parameter name="hasViews">
+<type class="javax.baja.agent.AgentList"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.translate(javax.baja.agent.AgentInfo) -->
+<method name="translate"  public="true" default="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+This hook allows a WebEnv to translate a view into&#xa; another agent type.&#xa; The default does no translation and if you override this method, make sure not to return null.
+</description>
+<tag name="@deprecated">As of Niagara 4.4, this function can take a WebOp as well.</tag>
+<tag name="@see">javax.baja.web.IWebEnv#translate(WebOp, AgentInfo)</tag>
+<parameter name="viewInfo">
+<type class="javax.baja.agent.AgentInfo"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.translate(javax.baja.web.WebOp, javax.baja.agent.AgentInfo) -->
+<method name="translate"  public="true" default="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+This hook allows a WebEnv to translate a view into&#xa; another agent type and take the WebOp&#x27;s Profile into account.&#xa; The default does no translation and if you override this method, make sure not to return null.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<parameter name="viewInfo">
+<type class="javax.baja.agent.AgentInfo"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.getViews(javax.baja.web.WebOp) -->
+<method name="getViews"  public="true" abstract="true">
+<description>
+Return the full list of views supported by the environment &#xa; on the target object (not including security checks).
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.getWebProfile(javax.baja.web.WebOp) -->
+<method name="getWebProfile"  public="true" abstract="true">
+<description>
+Return the Web Profile for the given WebOp.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.web.BIWebProfile"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.getWebProfileConfig(javax.baja.user.BUser) -->
+<method name="getWebProfileConfig"  public="true" abstract="true">
+<description>
+Get the WebProfileConfig for this environment from the user.  Typically&#xa; the profile config is a mixin on the user.
+</description>
+<parameter name="user">
+<type class="javax.baja.user.BUser"/>
+</parameter>
+<return>
+<type class="javax.baja.web.BWebProfileConfig"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.makeWebProfileConfig() -->
+<method name="makeWebProfileConfig"  public="true" abstract="true">
+<description>
+Make a default WebProfileConfig for this environment.
+</description>
+<return>
+<type class="javax.baja.web.BWebProfileConfig"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.getHxProfileConfig(javax.baja.web.BWebProfileConfig) -->
+<method name="getHxProfileConfig"  public="true" default="true">
+<description>
+Get the Hx specific WebProfileConfig for this environment from the standard WebProfileConfig.
+</description>
+<tag name="@since">Niagara 4.6</tag>
+<parameter name="config">
+<type class="javax.baja.web.BWebProfileConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.web.BWebProfileConfig"/>
+</return>
+</method>
+
+<!-- javax.baja.web.IWebEnv.getHomePage(javax.baja.web.WebOp) -->
+<method name="getHomePage"  public="true" abstract="true">
+<description>
+Return the home page from the specified WebOp.
+</description>
+<parameter name="op">
+<type class="javax.baja.web.WebOp"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

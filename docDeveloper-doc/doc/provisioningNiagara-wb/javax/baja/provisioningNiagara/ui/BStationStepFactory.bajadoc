@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="provisioningNiagara" runtimeProfile="wb" qualifiedName="javax.baja.provisioningNiagara.ui.BStationStepFactory" name="BStationStepFactory" packageName="javax.baja.provisioningNiagara.ui" public="true" abstract="true">
+<description>
+Base class for a factory that creates steps that run in a BNiagaraNetworkJob&#x27;s&#xa; &#x22;for each station&#x22; stage.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">20 Feb 06</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.batchJob.ui.BJobStepFactory"/>
+</extends>
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory() -->
+<constructor name="BStationStepFactory" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory.getStageTypes() -->
+<method name="getStageTypes"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory.isValidFor(javax.baja.batchJob.BBatchJob, javax.baja.sys.BObject, javax.baja.sys.Type, javax.baja.sys.BObject) -->
+<method name="isValidFor"  public="true">
+<description/>
+<parameter name="currentBatchJob">
+<type class="javax.baja.batchJob.BBatchJob"/>
+</parameter>
+<parameter name="jobTarget">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="stageType">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="factoryArg">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory.editStep(javax.baja.ui.BWidget, javax.baja.batchJob.BBatchJob, javax.baja.sys.BObject, javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="editStep"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns a fully configured Job Step, or returns a null if not overridden in child classes, or&#xa; throws an exception if something goes wrong with editStep implementation in children
+</description>
+<parameter name="owner">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+widget owner for any windows to be created by the&#xa;   factory
+</description>
+</parameter>
+<parameter name="currentBatchJob">
+<type class="javax.baja.batchJob.BBatchJob"/>
+<description>
+batch job being edited that&#x27;s mounted in the same&#xa;   component space as the batch service that will run the job, or&#xa;   null if a mounted job isn&#x27;t available
+</description>
+</parameter>
+<parameter name="jobTarget">
+<type class="javax.baja.sys.BObject"/>
+<description>
+the object the target is working on - for example&#xa;   if the factory is for steps that work on a device network, is&#xa;   the specific network it would work on
+</description>
+</parameter>
+<parameter name="factoryArg">
+<type class="javax.baja.sys.BObject"/>
+<description>
+object which may be used to choose or configure the&#xa;   job step
+</description>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+context
+</description>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BJobStep"/>
+<description>
+a default value of null
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory.STAGE_TYPES -->
+<field name="STAGE_TYPES"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type" dimension="1"/>
+<description/>
+</field>
+
+<!-- javax.baja.provisioningNiagara.ui.BStationStepFactory.LEX -->
+<field name="LEX"  public="true" static="true" final="true">
+<type class="javax.baja.util.Lexicon"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

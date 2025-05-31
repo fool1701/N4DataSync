@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platform" runtimeProfile="rt" qualifiedName="javax.baja.platform.FileTransferOperation" name="FileTransferOperation" packageName="javax.baja.platform" public="true" final="true">
+<description>
+Configuration options for file transfers performed by PlatformDaemon
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">07 Feb 05</tag>
+<tag name="@version">$Revision: 6$ $Date: 3/20/06 11:15:09 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.platform.FileTransferOperation.makeRename(javax.baja.file.FilePath, java.lang.String) -->
+<method name="makeRename"  public="true" static="true">
+<description>
+Create an operation which will rename a remote file or directory
+</description>
+<parameter name="remoteSource">
+<type class="javax.baja.file.FilePath"/>
+<description>
+FilePath for the remote file/directory to rename.
+</description>
+</parameter>
+<parameter name="newName">
+<type class="java.lang.String"/>
+<description>
+new name to give the file/directory.&#xa; The file that is created will have the same name as the source file.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makeGet(javax.baja.file.FilePath, javax.baja.file.FilePath) -->
+<method name="makeGet"  public="true" static="true">
+<description>
+Create an operation which will copy remote files and/or directories&#xa; to a specified directory on the local filesystem&#xa; &#xa; Local directories will be created as necessary.
+</description>
+<parameter name="remoteSource">
+<type class="javax.baja.file.FilePath"/>
+<description>
+FilePath for the remote file/directory to get.
+</description>
+</parameter>
+<parameter name="localDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the remote file is to be copied.&#xa; The file that is created will have the same name as the source file.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makeGet(javax.baja.file.FilePath[], javax.baja.file.FilePath) -->
+<method name="makeGet"  public="true" static="true">
+<description>
+Create an operation which will copy remote files and/or directories&#xa; to a specified directory on the local filesystem&#xa; &#xa; Local directories will be created as necessary.
+</description>
+<parameter name="remoteSource">
+<type class="javax.baja.file.FilePath" dimension="1"/>
+<description>
+FilePaths for the remote files/directories to get.
+</description>
+</parameter>
+<parameter name="localDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the remote files are to be copied.&#xa; The files that are created will have the same names as the source files.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makeGet(javax.baja.file.FilePath, javax.baja.file.FilePath, boolean, javax.baja.platform.BOverwritePolicy) -->
+<method name="makeGet"  public="true" static="true">
+<description>
+Create an operation which will copy remote files and/or directories&#xa; to a specified directory on the local filesystem&#xa; &#xa; Local directories will be created as necessary.
+</description>
+<parameter name="remoteSource">
+<type class="javax.baja.file.FilePath"/>
+<description>
+FilePathfor the remote file/directory to get
+</description>
+</parameter>
+<parameter name="localDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the remote file is to be copied.&#xa; The file that is created will have the same name as the source file.
+</description>
+</parameter>
+<parameter name="recurseDirs">
+<type class="boolean"/>
+<description>
+if true, subdirectories of the source directory will&#xa; be included in the copy, otherwise only the file children of a directory&#xa; are copied.
+</description>
+</parameter>
+<parameter name="overwritePolicy">
+<type class="javax.baja.platform.BOverwritePolicy"/>
+<description>
+specifies how the transfer should handle existing&#xa; local files having the same names as copied remote files.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makeGet(javax.baja.file.FilePath[], javax.baja.file.FilePath, boolean, javax.baja.platform.BOverwritePolicy) -->
+<method name="makeGet"  public="true" static="true">
+<description>
+Create an operation which will copy remote files and/or directories&#xa; to a specified directory on the local filesystem&#xa; &#xa; Local directories will be created as necessary.
+</description>
+<parameter name="remoteSource">
+<type class="javax.baja.file.FilePath" dimension="1"/>
+<description>
+FilePaths for the remote files/directories to get
+</description>
+</parameter>
+<parameter name="localDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the remote files are to be copied.&#xa; The files that are created will have the same names as the source files.
+</description>
+</parameter>
+<parameter name="recurseDirs">
+<type class="boolean"/>
+<description>
+if true, subdirectories of any source directories will&#xa; be included in the copy, otherwise only the file children of a directory&#xa; are copied.
+</description>
+</parameter>
+<parameter name="overwritePolicy">
+<type class="javax.baja.platform.BOverwritePolicy"/>
+<description>
+specifies how the transfer should handle existing&#xa; local files having the same names as copied remote files.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makePut(javax.baja.file.FilePath, javax.baja.file.FilePath) -->
+<method name="makePut"  public="true" static="true">
+<description>
+Create an operation which will copy files and/or directories from&#xa; the local filesystem to a specified remote directory&#xa; &#xa; Remote directories will be created as necessary.
+</description>
+<parameter name="localSource">
+<type class="javax.baja.file.FilePath"/>
+<description>
+FilePath for the local file/directory to be sent&#xa; to the remote host
+</description>
+</parameter>
+<parameter name="remoteDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the local file is to be copied.&#xa; The file that is created will have the same name as the source file.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makePut(javax.baja.file.FilePath[], javax.baja.file.FilePath) -->
+<method name="makePut"  public="true" static="true">
+<description>
+Create an operation which will copy files and/or directories from&#xa; the local filesystem to a specified remote directory&#xa; &#xa; Remote directories will be created as necessary.
+</description>
+<parameter name="localSource">
+<type class="javax.baja.file.FilePath" dimension="1"/>
+<description>
+FilePaths for the local files/directories to be sent&#xa; to the remote host
+</description>
+</parameter>
+<parameter name="remoteDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the local files are to be copied.&#xa; The files that are created will have the same names as the source files.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makePut(javax.baja.file.FilePath, javax.baja.file.FilePath, boolean, javax.baja.platform.BOverwritePolicy) -->
+<method name="makePut"  public="true" static="true">
+<description>
+Create an operation which will copy files and/or directories from&#xa; the local filesystem to a specified remote directory&#xa; &#xa; Remote directories will be created as necessary.
+</description>
+<parameter name="localSource">
+<type class="javax.baja.file.FilePath"/>
+<description>
+FilePath for the local file/directory to be sent&#xa; to the remote host
+</description>
+</parameter>
+<parameter name="remoteDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the local file is to be copied.&#xa; The file that is created will have the same name as the source file.
+</description>
+</parameter>
+<parameter name="recurseDirs">
+<type class="boolean"/>
+</parameter>
+<parameter name="overwritePolicy">
+<type class="javax.baja.platform.BOverwritePolicy"/>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makePut(javax.baja.file.FilePath[], javax.baja.file.FilePath, boolean, javax.baja.platform.BOverwritePolicy) -->
+<method name="makePut"  public="true" static="true">
+<description>
+Create an operation which will copy files and/or directories from&#xa; the local filesystem to a specified remote directory&#xa; &#xa; Remote directories will be created as necessary.
+</description>
+<parameter name="localSource">
+<type class="javax.baja.file.FilePath" dimension="1"/>
+<description>
+FilePaths for the local files/directories to be sent&#xa; to the remote host
+</description>
+</parameter>
+<parameter name="remoteDestDir">
+<type class="javax.baja.file.FilePath"/>
+<description>
+directory to which the local files are to be copied.&#xa; The files that are created will have the same names as the source files.
+</description>
+</parameter>
+<parameter name="recurseDirs">
+<type class="boolean"/>
+</parameter>
+<parameter name="overwritePolicy">
+<type class="javax.baja.platform.BOverwritePolicy"/>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.makeDelete(javax.baja.file.FilePath[]) -->
+<method name="makeDelete"  public="true" static="true">
+<description>
+Create an operation that will delete files from the remote filesystem
+</description>
+<parameter name="remoteFiles">
+<type class="javax.baja.file.FilePath" dimension="1"/>
+<description>
+FilePaths of the remote files and/or directories&#xa; to be deleted
+</description>
+</parameter>
+<return>
+<type class="javax.baja.platform.FileTransferOperation"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.close() -->
+<method name="close"  public="true">
+<description>
+Removes the passphrase supplier and other encryption related temporary information.&#xa; Is invoked by &lt;code&gt;<see ref="javax.baja.platform.FileManager#transfer(javax.baja.platform.FileTransferOperation, javax.baja.platform.IPlatformOperationListener)">FileManager#transfer(FileTransferOperation, IPlatformOperationListener)</see>&lt;/code&gt;&#xa; after the transfer is complete.&#xa;&#xa; Note: this may mean that when a single FileTransferOperation object is used with more than one&#xa; invocation of FileTransferOperation, it can succeed the first time and fail in the subsequent&#xa; invocations unless &lt;code&gt;<see ref="javax.baja.platform.FileTransferOperation#setPassPhraseSupplier(java.util.function.Supplier&lt;char[]&gt;)">#setPassPhraseSupplier(Supplier)</see>&lt;/code&gt; is used to restore the passphrase&#xa; supplier beforehand.
+</description>
+<tag name="@since">Niagara 4.1</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.setPassPhraseSupplier(java.util.function.Supplier&lt;char[]&gt;) -->
+<method name="setPassPhraseSupplier"  public="true">
+<description>
+Provides the operation with a way to obtain a file passphrase value if needed.  Not&#xa; used with Niagara AX files.
+</description>
+<tag name="@since">Niagara 4.1</tag>
+<parameter name="value">
+<parameterizedType class="java.util.function.Supplier">
+<args>
+<type class="char" dimension="1"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.setPBEEncodingInfo(com.tridium.nre.security.PBEEncodingInfo) -->
+<method name="setPBEEncodingInfo"  public="true">
+<description>
+Framework use only
+</description>
+<tag name="@since">Niagara 4.1</tag>
+<parameter name="value">
+<type class="com.tridium.nre.security.PBEEncodingInfo"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.initializeFileTransferMessage(com.tridium.platform.daemon.BDaemonSession, com.tridium.platform.daemon.message.FileTransferMessage) -->
+<method name="initializeFileTransferMessage"  public="true">
+<description>
+Framework use only
+</description>
+<tag name="@since">Niagara 4.1</tag>
+<parameter name="session">
+<type class="com.tridium.platform.daemon.BDaemonSession"/>
+</parameter>
+<parameter name="message">
+<type class="com.tridium.platform.daemon.message.FileTransferMessage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.platform.FileTransferOperation.operation -->
+<field name="operation"  public="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.source -->
+<field name="source"  public="true">
+<type class="javax.baja.file.FilePath" dimension="1"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.destinationDir -->
+<field name="destinationDir"  public="true">
+<type class="javax.baja.file.FilePath"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.recurseDirs -->
+<field name="recurseDirs"  public="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.overwritePolicy -->
+<field name="overwritePolicy"  public="true">
+<type class="javax.baja.platform.BOverwritePolicy"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.FILE_TRANSFER_OPER_GET -->
+<field name="FILE_TRANSFER_OPER_GET"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.FILE_TRANSFER_OPER_PUT -->
+<field name="FILE_TRANSFER_OPER_PUT"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.FILE_TRANSFER_OPER_DELETE -->
+<field name="FILE_TRANSFER_OPER_DELETE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.platform.FileTransferOperation.FILE_TRANSFER_OPER_RENAME -->
+<field name="FILE_TRANSFER_OPER_RENAME"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences" name="BDdfAutoDiscoveryPreferences" packageName="com.tridium.ddf.discover.auto" public="true">
+<description>
+This class is used to customize the &#x22;Discover&#x22; dialog that the user sees when he or she&#xa; clicks the &#x22;Discover&#x22; button on the Ddf Device Manager and/or the Ddf Point Manager.&#xa;&#xa; Drivers will typically need to define two classes that each extend this class. One for&#xa; the Ddf Device Manager and one for the Ddf Point Manager.&#xa;&#xa; In the one for the Ddf Device Manager, the default min and max needs to be a special&#xa; instance of BDdfIdParams created for the device discovery process. Sometimes the&#xa; driver&#x27;s device id can be re-used as the min and max. If not, then the driver will&#xa; define a special class extending BDdfIdParams for the device discovery process.&#xa;&#xa; In the one for the Ddf Point Manager, the default min and max needs to be a special&#xa; instance of BDdfIdParams created for the point discovery process. Sometimes the&#xa; drivers&#x27;s read parameters structure can be re-used as the min and max. If not, then&#xa; the driver will define a special class extending BDdfIdParams for the point discovery&#xa; process.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.ddf.discover.BDdfDiscoveryPreferences"/>
+</extends>
+<property name="timeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;timeout&lt;/code&gt; property.&#xa; This is the amount of time to wait per field-bus request before timing out&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#getTimeout</tag>
+<tag name="@see">#setTimeout</tag>
+</property>
+
+<property name="retryCount" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; This is the number of discovery field-message retransmissions&#xa; per request.&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#getRetryCount</tag>
+<tag name="@see">#setRetryCount</tag>
+</property>
+
+<property name="min" flags="">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+Slot for the &lt;code&gt;min&lt;/code&gt; property.&#xa; This identifies the &#x22;lowest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#getMin</tag>
+<tag name="@see">#setMin</tag>
+</property>
+
+<property name="max" flags="">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+Slot for the &lt;code&gt;max&lt;/code&gt; property.&#xa; This identifies the &#x22;highest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#getMax</tag>
+<tag name="@see">#setMax</tag>
+</property>
+
+<property name="doNotAskAgain" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;doNotAskAgain&lt;/code&gt; property.&#xa; If set to true, then the ddf device/point manager will not display&#xa; The dialog that prompts the integrator for discovery parameters on&#xa; Subsequent discovery attempts.
+</description>
+<tag name="@see">#getDoNotAskAgain</tag>
+<tag name="@see">#setDoNotAskAgain</tag>
+</property>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences() -->
+<constructor name="BDdfAutoDiscoveryPreferences" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getTimeout() -->
+<method name="getTimeout"  public="true">
+<description>
+Get the &lt;code&gt;timeout&lt;/code&gt; property.&#xa; This is the amount of time to wait per field-bus request before timing out&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#timeout</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.setTimeout(javax.baja.sys.BRelTime) -->
+<method name="setTimeout"  public="true">
+<description>
+Set the &lt;code&gt;timeout&lt;/code&gt; property.&#xa; This is the amount of time to wait per field-bus request before timing out&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#timeout</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getRetryCount() -->
+<method name="getRetryCount"  public="true">
+<description>
+Get the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; This is the number of discovery field-message retransmissions&#xa; per request.&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#retryCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.setRetryCount(int) -->
+<method name="setRetryCount"  public="true">
+<description>
+Set the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; This is the number of discovery field-message retransmissions&#xa; per request.&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#retryCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getMin() -->
+<method name="getMin"  public="true">
+<description>
+Get the &lt;code&gt;min&lt;/code&gt; property.&#xa; This identifies the &#x22;lowest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#min</tag>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.setMin(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setMin"  public="true">
+<description>
+Set the &lt;code&gt;min&lt;/code&gt; property.&#xa; This identifies the &#x22;lowest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#min</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getMax() -->
+<method name="getMax"  public="true">
+<description>
+Get the &lt;code&gt;max&lt;/code&gt; property.&#xa; This identifies the &#x22;highest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#max</tag>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.setMax(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setMax"  public="true">
+<description>
+Set the &lt;code&gt;max&lt;/code&gt; property.&#xa; This identifies the &#x22;highest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#max</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getDoNotAskAgain() -->
+<method name="getDoNotAskAgain"  public="true">
+<description>
+Get the &lt;code&gt;doNotAskAgain&lt;/code&gt; property.&#xa; If set to true, then the ddf device/point manager will not display&#xa; The dialog that prompts the integrator for discovery parameters on&#xa; Subsequent discovery attempts.
+</description>
+<tag name="@see">#doNotAskAgain</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.setDoNotAskAgain(boolean) -->
+<method name="setDoNotAskAgain"  public="true">
+<description>
+Set the &lt;code&gt;doNotAskAgain&lt;/code&gt; property.&#xa; If set to true, then the ddf device/point manager will not display&#xa; The dialog that prompts the integrator for discovery parameters on&#xa; Subsequent discovery attempts.
+</description>
+<tag name="@see">#doNotAskAgain</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getDiscoveryLeafType() -->
+<method name="getDiscoveryLeafType"  public="true">
+<description>
+Calls getMin, casts the result to BIDdfDiscoverParams, and&#xa; returns whatever its getDiscoveryLeafType method returns.
+</description>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.getNeedsJob() -->
+<method name="getNeedsJob"  public="true">
+<description>
+Developers may override this method if they would prefer that&#xa; the corrsponding user interface manager not actually submit&#xa; a discovery job when the &#x27;Discover&#x27; button is clicked.&#xa; &#xa; By default, this method returns true if the value for the &#x27;min&#x27;&#xa; property is not of type BDdfIdParams.TYPE. The idea here&#xa; is that a discovery job will only be kicked off if the developer&#xa; re-definies the &#x27;min&#x27; property with a class for their own&#xa; driver that extends BDdfIdParams.&#xa; &#xa; &#xa; However, if this is&#xa; overridden to return false then when clicked, the &#x27;Discover&#x27;&#xa; button will simply place the user interface manager into&#xa; learn mode.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if the corresponding user interface manager should submit&#xa; a discovery job in the background of the station. False if the&#xa; corresponding user interface should not submit a discovery job&#xa; in the background of the station at all (in this case, the manager&#xa; will still be placed into &#x27;learn mode&#x27; to display any frozen&#xa; discovery objects in the discovery host&#x27;s discovery folder)
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.timeout -->
+<field name="timeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timeout&lt;/code&gt; property.&#xa; This is the amount of time to wait per field-bus request before timing out&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#getTimeout</tag>
+<tag name="@see">#setTimeout</tag>
+</field>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.retryCount -->
+<field name="retryCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; This is the number of discovery field-message retransmissions&#xa; per request.&#xa; TODO: The descendant should consider overriding this property and&#xa; at least change the default value!
+</description>
+<tag name="@see">#getRetryCount</tag>
+<tag name="@see">#setRetryCount</tag>
+</field>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.min -->
+<field name="min"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;min&lt;/code&gt; property.&#xa; This identifies the &#x22;lowest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#getMin</tag>
+<tag name="@see">#setMin</tag>
+</field>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.max -->
+<field name="max"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;max&lt;/code&gt; property.&#xa; This identifies the &#x22;highest&#x22; entity to attempt to learn.&#xa; TODO: The descendant should override this property!&#xa; The default MUST implement BIDdfDiscoverParams
+</description>
+<tag name="@see">#getMax</tag>
+<tag name="@see">#setMax</tag>
+</field>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.doNotAskAgain -->
+<field name="doNotAskAgain"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;doNotAskAgain&lt;/code&gt; property.&#xa; If set to true, then the ddf device/point manager will not display&#xa; The dialog that prompts the integrator for discovery parameters on&#xa; Subsequent discovery attempts.
+</description>
+<tag name="@see">#getDoNotAskAgain</tag>
+<tag name="@see">#setDoNotAskAgain</tag>
+</field>
+
+<!-- com.tridium.ddf.discover.auto.BDdfAutoDiscoveryPreferences.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

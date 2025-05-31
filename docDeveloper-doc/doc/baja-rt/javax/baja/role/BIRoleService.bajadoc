@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.role.BIRoleService" name="BIRoleService" packageName="javax.baja.role" public="true" interface="true" abstract="true" category="interface">
+<description>
+A BIRoleSource can resolve BIRoles based on UUIDs.
+</description>
+<tag name="@author">Joseph Chandler</tag>
+<tag name="@creation">30 Aug 2014</tag>
+<tag name="@version">4.0</tag>
+<tag name="@since">Baja 4.0</tag>
+<implements>
+<type class="javax.baja.sys.BIPropertyContainer"/>
+</implements>
+<!-- javax.baja.role.BIRoleService.getSourceIdentifier() -->
+<method name="getSourceIdentifier"  public="true" abstract="true">
+<description>
+Get the namespace of this RoleSource
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the namespace of roleIdentifiers from this source
+</description>
+</return>
+</method>
+
+<!-- javax.baja.role.BIRoleService.getRole(java.lang.String) -->
+<method name="getRole"  public="true" abstract="true">
+<description>
+Locate a BIRole
+</description>
+<parameter name="roleIdentifier">
+<type class="java.lang.String"/>
+<description>
+the identifier of the role being located
+</description>
+</parameter>
+<return>
+<type class="javax.baja.role.BIRole"/>
+<description>
+a BIRole that matches the identifier or &#xa;         null if no Role can be located from this source
+</description>
+</return>
+</method>
+
+<!-- javax.baja.role.BIRoleService.getRoleIds() -->
+<method name="getRoleIds"  public="true" abstract="true">
+<description>
+Returns the list of Role identifiers that this&#xa; role source can resolve.
+</description>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+List of available roles
+</description>
+</return>
+</method>
+
+<!-- javax.baja.role.BIRoleService.getEnabledRoleIds() -->
+<method name="getEnabledRoleIds"  public="true" abstract="true">
+<description>
+Returns the list of enabled Role identifiers that this&#xa; role source can resolve.
+</description>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+List of available roles
+</description>
+</return>
+</method>
+
+<!-- javax.baja.role.BIRoleService.clearPermissionsCache() -->
+<method name="clearPermissionsCache"  public="true" abstract="true">
+<description>
+Notify the BIRoleService when the permissions of&#xa; child roles are altered so that caches can be&#xa; properly invalidated when needed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.role.BIRoleService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

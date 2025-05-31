@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="aapup" runtimeProfile="rt" qualifiedName="com.tridium.aapup.BPupDevice" name="BPupDevice" packageName="com.tridium.aapup" public="true">
+<description>
+Models a PUP device
+</description>
+<tag name="@author">Clif Turman</tag>
+<tag name="@creation">7/14/2005 4:07PM</tag>
+<tag name="@version">$Revision: 2$ $Date: 10/4/2004 2:14PM$</tag>
+<tag name="@since">Niagara 3.0 aapup 1.0</tag>
+<extends>
+<type class="com.tridium.basicdriver.BBasicDevice"/>
+</extends>
+<implements>
+<type class="com.tridium.aapup.AaPupConst"/>
+</implements>
+<implements>
+<type class="javax.baja.alarm.BIAlarmSource"/>
+</implements>
+<property name="unitNumber" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;unitNumber&lt;/code&gt; property.&#xa; The value of the controller&#x27;s &#x22;ID&#x22; attribute in the System Channel (channel FF00).&#xa; Specifies the controller&#x27;s identification number.  The value of the id defaults&#xa; to the last four digits of the unit&#x27;s serial number.
+</description>
+<tag name="@see">#getUnitNumber</tag>
+<tag name="@see">#setUnitNumber</tag>
+</property>
+
+<property name="manufacturer" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;manufacturer&lt;/code&gt; property.&#xa; The value of the controller&#x27;s &#x22;CM&#x22; attribute in the System Channel (channel FF00).&#xa; Indicates the factory-set manufacturer number for the controller.  &#x22;CM&#x22; for&#xa; American Auto-Matrix controllers is always 255.  This value is read from the&#xa; device during device discovery, and along with controllerType (&#x22;CT&#x22;) defines a&#xa; universally unique controller type.&#xa; &lt;p&gt;&#xa; NOTE:  a value of -1 indicates that the controller type has not been successfully read.
+</description>
+<tag name="@see">#getManufacturer</tag>
+<tag name="@see">#setManufacturer</tag>
+</property>
+
+<property name="controllerType" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;controllerType&lt;/code&gt; property.&#xa; The value of the controller&#x27;s &#x22;CT&#x22; attribute in the System Channel (channel FF00).&#xa; This is the factory-set controller type number for the controller.  This value is read from the&#xa; device during device discovery, and along with manufacturer (&#x22;CM&#x22;) defines a&#xa; universally unique controller type.&#xa; &lt;p&gt;&#xa; NOTE:  a value of 0 indicates that the controller type has not been successfully read.
+</description>
+<tag name="@see">#getControllerType</tag>
+<tag name="@see">#setControllerType</tag>
+</property>
+
+<property name="serialNumber" flags="r">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;serialNumber&lt;/code&gt; property.&#xa; The value ofthe controller&#x27;s &#x22;SN&#x22; attribute in the System Channel (channel FF00).&#xa; This is the factory-set controller type number for the controller.  This value is read from the&#xa; device during device discovery.&#xa; &lt;p&gt;&#xa; NOTE:  a value of 0 indicates that the serial number has not been successfully read.
+</description>
+<tag name="@see">#getSerialNumber</tag>
+<tag name="@see">#setSerialNumber</tag>
+</property>
+
+<property name="controllerDescription" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;controllerDescription&lt;/code&gt; property.&#xa; A text description of the controller.  The manufacturer(CM) and controllerType(CT) properties&#xa; are used to look up the description from the device types file (default file&#xa; is deviceTypes.xml, located in the module)
+</description>
+<tag name="@see">#getControllerDescription</tag>
+<tag name="@see">#setControllerDescription</tag>
+</property>
+
+<property name="peerType" flags="r">
+<type class="com.tridium.aapup.enums.BPupPeerTypeEnum"/>
+<description>
+Slot for the &lt;code&gt;peerType&lt;/code&gt; property.&#xa; Defines whether the device is a peer, irresponsible peer, or slave.  This value is read&#xa; from the controller&#x27;s &#x22;TP&#x22; attribute of the System Channel (channel FF00) during device&#xa; discovery.&#xa; &lt;p&gt;NOTE:  If the controller does not have a &#x22;TP&#x22; attribute, this value will be set to &#x22;slave&#x22;.
+</description>
+<tag name="@see">#getPeerType</tag>
+<tag name="@see">#setPeerType</tag>
+</property>
+
+<property name="allowTokenPassingToThisDevice" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;allowTokenPassingToThisDevice&lt;/code&gt; property.&#xa; determines whether or not the device will be added to the network&#x27;s&#xa; peer list folder, to be included in any token passing.  This setting&#xa; has no effect if the peerType is BPupPeerTypeEnum.slave.
+</description>
+<tag name="@see">#getAllowTokenPassingToThisDevice</tag>
+<tag name="@see">#setAllowTokenPassingToThisDevice</tag>
+</property>
+
+<property name="version" flags="r">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;version&lt;/code&gt; property.&#xa; defines whether or not version 8 PUP protocol is supported.  This is determined from the&#xa; ACK response to the &#x22;identify&#x22; command sent out during device discovery.
+</description>
+<tag name="@see">#getVersion</tag>
+<tag name="@see">#setVersion</tag>
+</property>
+
+<property name="pingMessageType" flags="">
+<type class="com.tridium.aapup.enums.BPingMessageSelectionEnum"/>
+<description>
+Slot for the &lt;code&gt;pingMessageType&lt;/code&gt; property.&#xa; determines which type of message to use for ping
+</description>
+<tag name="@see">#getPingMessageType</tag>
+<tag name="@see">#setPingMessageType</tag>
+</property>
+
+<property name="nativeAlarmSourceInfo" flags="">
+<type class="javax.baja.alarm.BAlarmSourceInfo"/>
+<description>
+Slot for the &lt;code&gt;nativeAlarmSourceInfo&lt;/code&gt; property.&#xa; Some PUP controllers are able to generate exceptions.  These exceptions are treated as&#xa; alarms in the Niagara framework, and can be routed and acknowleged.  This property&#xa; configures the alarm handling parameters for this PUP controller.
+</description>
+<tag name="@see">#getNativeAlarmSourceInfo</tag>
+<tag name="@see">#setNativeAlarmSourceInfo</tag>
+</property>
+
+<property name="regions" flags="ht">
+<type class="com.tridium.aapup.BPupRegionsFolder"/>
+<description>
+Slot for the &lt;code&gt;regions&lt;/code&gt; property.&#xa; A special folder that contains an records of regions in the device.  This folder can only&#xa; be populated with region records, and only by the discover regions manager job.  Regions&#xa; special memory locations for storing and executing items such as SPL programs.  The&#xa; &#x22;Region Manager&#x22; on this device can querry for regions on the device, and upload/download&#xa; SPL programs to the device.
+</description>
+<tag name="@see">#getRegions</tag>
+<tag name="@see">#setRegions</tag>
+</property>
+
+<property name="points" flags="">
+<type class="com.tridium.aapup.point.BPupPointDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; A special folder to contain proxy points representing data values on this device.  A single&#xa; attribute in a channel is modeled as one data value.
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</property>
+
+<property name="splFile" flags="h">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;splFile&lt;/code&gt; property.&#xa; This remembers the location of the SPL file download file that was most recently&#xa; sent to a controller region using the Region Manager.
+</description>
+<tag name="@see">#getSplFile</tag>
+<tag name="@see">#setSplFile</tag>
+</property>
+
+<property name="allowTimeSync" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;allowTimeSync&lt;/code&gt; property.&#xa; Allow a directed (not broadcast) time sync to be sent to this device.  If true, then&#xa; time sync messages are sent to this device whenever the device transitions from&#xa; off-line to on-line (down-to-up) or upon action invokation by a user.
+</description>
+<tag name="@see">#getAllowTimeSync</tag>
+<tag name="@see">#setAllowTimeSync</tag>
+</property>
+
+<action name="submitPointDiscoveryJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.aapup.datatypes.BPupPointDiscoveryConfig"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitPointDiscoveryJob&lt;/code&gt; action.&#xa; launches the point learn process
+</description>
+<tag name="@see">#submitPointDiscoveryJob(BPupPointDiscoveryConfig parameter)</tag>
+</action>
+
+<action name="submitLearnRegionsJob" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BInteger"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitLearnRegionsJob&lt;/code&gt; action.&#xa; launches the learn regions process.  Invoked from the RegionManager view of the device.
+</description>
+<tag name="@see">#submitLearnRegionsJob(BInteger parameter)</tag>
+</action>
+
+<action name="submitDownloadSplJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.aapup.datatypes.BDownloadRegionParams"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitDownloadSplJob&lt;/code&gt; action.&#xa; launches a job to download an SPL program (int the form of a&#xa; plb file) to a region in a device.  Uses the region name to&#xa; determine what region to load.  If the region does not exist, it&#xa; will be created.  Invoked from the RegionManager view of the device.
+</description>
+<tag name="@see">#submitDownloadSplJob(BDownloadRegionParams parameter)</tag>
+</action>
+
+<action name="submitUploadRegionJob" flags="h">
+<parameter name="parameter">
+<type class="com.tridium.aapup.datatypes.BUploadRegionParams"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;submitUploadRegionJob&lt;/code&gt; action.&#xa; launches a upload from a region in a device and stores the result in a .plb file.&#xa; Invoked from the RegionManager view of the device.
+</description>
+<tag name="@see">#submitUploadRegionJob(BUploadRegionParams parameter)</tag>
+</action>
+
+<action name="genTestAlm" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;genTestAlm&lt;/code&gt; action.
+</description>
+<tag name="@see">#genTestAlm()</tag>
+</action>
+
+<action name="syncTime" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;syncTime&lt;/code&gt; action.&#xa; Send a directed (not broadcast) time sync command to this device.  To send&#xa; a broadcast time sync, the syncTime action on the PupNetwork should be invoked.
+</description>
+<tag name="@see">#syncTime()</tag>
+</action>
+
+<action name="freeRegion" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BInteger"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;freeRegion&lt;/code&gt; action.&#xa; Free a the region specified by regionNum.  If regionNum is -1, do nothing.  This&#xa; clears memory locations used for SPL Program stores. Invoked from the RegionManager
+</description>
+<tag name="@see">#freeRegion(BInteger parameter)</tag>
+</action>
+
+<action name="unlockRegion" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BInteger"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;unlockRegion&lt;/code&gt; action.&#xa; Unlock a the region specified by regionNum.  If regionNum is -1, do nothing.  A region&#xa; may remain locked as the result of an incomplete SPL download, and will need to be&#xa; unlocked before it can be used (reloaded).  Invoked from the RegionManager view of the device.
+</description>
+<tag name="@see">#unlockRegion(BInteger parameter)</tag>
+</action>
+
+<action name="readDeviceValues" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;readDeviceValues&lt;/code&gt; action.&#xa; read things like sn, controller type, firmware version
+</description>
+<tag name="@see">#readDeviceValues()</tag>
+</action>
+
+<topic name="regionChanged" flags="">
+<eventType>
+<type class="javax.baja.sys.BValue"/>
+</eventType><description>
+Slot for the &lt;code&gt;regionChanged&lt;/code&gt; topic.&#xa; a region has changed, and the region list needs to be re-learned.
+</description>
+<tag name="@see">#fireRegionChanged</tag>
+</topic>
+
+</class>
+</bajadoc>

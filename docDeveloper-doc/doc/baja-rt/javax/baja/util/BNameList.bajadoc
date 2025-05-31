@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.BNameList" name="BNameList" packageName="javax.baja.util" public="true" final="true">
+<description>
+The BNameList is a Baja simple which contains a list&#xa; of names separated by a semicolon.  Names are escaped&#xa; using SlotPath.  It provides a standard way to config &#xa; simple name based groups.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">19 Mar 02</tag>
+<tag name="@version">$Revision: 6$ $Date: 8/26/08 4:23:13 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.util.BNameList.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a BNameList with one name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BNameList"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.make(java.lang.String[]) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a BNameList with the specified array of names.
+</description>
+<parameter name="names">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BNameList"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.union(javax.baja.util.BNameList, javax.baja.util.BNameList) -->
+<method name="union"  public="true" static="true">
+<description>
+Create a new BNameList which is the union of &#xa; the two name lists with no duplicates.
+</description>
+<parameter name="a">
+<type class="javax.baja.util.BNameList"/>
+</parameter>
+<parameter name="b">
+<type class="javax.baja.util.BNameList"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BNameList"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.intersection(javax.baja.util.BNameList, javax.baja.util.BNameList) -->
+<method name="intersection"  public="true" static="true">
+<description>
+Create a new BNameList which is the intersection &#xa; of the two name lists.
+</description>
+<parameter name="a">
+<type class="javax.baja.util.BNameList"/>
+</parameter>
+<parameter name="b">
+<type class="javax.baja.util.BNameList"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BNameList"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.difference(javax.baja.util.BNameList, javax.baja.util.BNameList) -->
+<method name="difference"  public="true" static="true">
+<description>
+Create a new BNameList which has all the names in &lt;code&gt;a&lt;/code&gt; &#xa; that are not in &lt;code&gt;b&lt;/code&gt;. In set theory notation, the result&#xa; is equivalent to &lt;code&gt;(a - b)&lt;/code&gt;.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<parameter name="a">
+<type class="javax.baja.util.BNameList"/>
+</parameter>
+<parameter name="b">
+<type class="javax.baja.util.BNameList"/>
+</parameter>
+<return>
+<type class="javax.baja.util.BNameList"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.getNames() -->
+<method name="getNames"  public="true">
+<description>
+Get the array of names.
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.contains(java.lang.String) -->
+<method name="contains"  public="true">
+<description>
+Does this name list contain the specified name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.isNull() -->
+<method name="isNull"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the list has a length of zero.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BNameList uses its encodeToString() value&#x27;s hash code.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+BNameList equality is based on both BNameLists &#xa; containing the same names, but not necessarily &#xa; in the same order.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To string method.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BNameList is encoded as using writeUTF(encodeToString()).
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BNameList.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+BNameList is decoded using decodeFromString(readUTF()).
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BNameList.encodeToString() -->
+<method name="encodeToString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Write the simple in text format.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Read the simple from text format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.util.BNameList.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BNameList.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="javax.baja.util.BNameList"/>
+<description>
+Null is the empty list.
+</description>
+</field>
+
+<!-- javax.baja.util.BNameList.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.util.BNameList"/>
+<description>
+The default name list is NULL.
+</description>
+</field>
+
+<!-- javax.baja.util.BNameList.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

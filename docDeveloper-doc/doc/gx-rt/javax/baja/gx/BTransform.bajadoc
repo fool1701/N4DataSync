@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="gx" runtimeProfile="rt" qualifiedName="javax.baja.gx.BTransform" name="BTransform" packageName="javax.baja.gx" public="true" final="true">
+<description>
+BTransforms encapsulates a set of Transform operations &#xa; which create a new logical coordinate space.&#xa;&#xa; &lt;pre&gt; &#xa;  transform  := ( translate | scale | rotate | skewX | skeyY )*&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank on 2 Apr 04</tag>
+<tag name="@version">$Revision: 7$ $Date: 9/30/08 5:09:01 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BSimple"/>
+</extends>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.gx.BTransform.make(javax.baja.gx.BTransform.Transform...) -->
+<method name="make"  public="true" static="true" isVarargs="true">
+<description>
+Make with a list of Transform operations.
+</description>
+<parameter name="transforms">
+<type class="javax.baja.gx.BTransform$Transform" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.make(javax.baja.gx.BTransform.Transform) -->
+<method name="make"  public="true" static="true">
+<description>
+Make with a single Transform operation.
+</description>
+<parameter name="transform">
+<type class="javax.baja.gx.BTransform$Transform"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.makeTranslate(double, double) -->
+<method name="makeTranslate"  public="true" static="true">
+<description>
+Make with a translate transformation.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.makeScale(double, double) -->
+<method name="makeScale"  public="true" static="true">
+<description>
+Make with a scale transformation.
+</description>
+<parameter name="x">
+<type class="double"/>
+</parameter>
+<parameter name="y">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.makeRotate(double) -->
+<method name="makeRotate"  public="true" static="true">
+<description>
+Make with a rotate transformation with an angle in degrees.
+</description>
+<parameter name="angle">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.makeSkewX(double) -->
+<method name="makeSkewX"  public="true" static="true">
+<description>
+Make with a skew x transformation.
+</description>
+<parameter name="angle">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.makeSkewY(double) -->
+<method name="makeSkewY"  public="true" static="true">
+<description>
+Make with a skew y transformation.
+</description>
+<parameter name="angle">
+<type class="double"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.make(java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Make from a string encoding.  See class header for format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.size() -->
+<method name="size"  public="true">
+<description>
+Get the number of transform steps.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.getTransform(int) -->
+<method name="getTransform"  public="true">
+<description>
+Get the transform step at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BTransform$Transform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.getTransforms() -->
+<method name="getTransforms"  public="true">
+<description>
+Return the list of transform operations.
+</description>
+<return>
+<type class="javax.baja.gx.BTransform$Transform" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.getInverse() -->
+<method name="getInverse"  public="true">
+<description>
+Get the inverse of this tranform.
+</description>
+<return>
+<type class="javax.baja.gx.BTransform"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.transform(javax.baja.gx.IPoint, javax.baja.gx.Point) -->
+<method name="transform"  public="true">
+<description>
+Transform the specified point and store the result in&#xa; the specified result point (or if null create new point).&#xa; Return result point.
+</description>
+<parameter name="point">
+<type class="javax.baja.gx.IPoint"/>
+</parameter>
+<parameter name="result">
+<type class="javax.baja.gx.Point"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.Point"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+BTransform hash code.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Return if the specified object is an equivalent BTransform.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<description>
+Serialized using writeUTF() of string encoding.
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BTransform.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<description>
+Unserialized using readUTF() of string encoding.
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BTransform.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description>
+Encode to string format.  See class header for format.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BTransform.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<description>
+Encode from string format.  See class header for format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.gx.BTransform.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework use only.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.gx.BTransform.TRANSLATE -->
+<field name="TRANSLATE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.gx.BTransform.SCALE -->
+<field name="SCALE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.gx.BTransform.ROTATE -->
+<field name="ROTATE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.gx.BTransform.SKEW_X -->
+<field name="SKEW_X"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.gx.BTransform.SKEW_Y -->
+<field name="SKEW_Y"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.gx.BTransform.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BTransform"/>
+<description>
+The default transform is the identity transform.
+</description>
+</field>
+
+<!-- javax.baja.gx.BTransform.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

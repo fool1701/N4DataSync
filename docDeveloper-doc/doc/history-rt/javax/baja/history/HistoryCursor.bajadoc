@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.HistoryCursor" name="HistoryCursor" packageName="javax.baja.history" public="true" abstract="true">
+<description>
+HistoryCursor is a cursor for iterating through history records.
+</description>
+<tag name="@author">John Sublett</tag>
+<extends>
+<parameterizedType class="javax.baja.collection.AbstractCursor">
+<args>
+<type class="javax.baja.history.BHistoryRecord"/>
+</args>
+</parameterizedType>
+</extends>
+<!-- javax.baja.history.HistoryCursor(javax.baja.history.BHistoryConfig, javax.baja.history.BHistoryRecord, javax.baja.sys.Context) -->
+<constructor name="HistoryCursor" protected="true">
+<parameter name="config">
+<type class="javax.baja.history.BHistoryConfig"/>
+</parameter>
+<parameter name="iteratorRec">
+<type class="javax.baja.history.BHistoryRecord"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.history.HistoryCursor.setConnectionContext(javax.baja.sys.Context) -->
+<method name="setConnectionContext"  public="true">
+<description>
+Sets the Context from the history database connection using this history&#xa; cursor.  This Context is not necessarily the same Context instance passed&#xa; into the constructor for this class.  Instead it is the Context&#xa; subsequently determined by a history connection utilizing this history&#xa; cursor instance.  By default, this method is a no-op, but subclasses can&#xa; use this callback to be notified about the connection Context.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="connectionCx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The Context associated with a history database&#xa;                     connection utilizing the history cursor.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.getConfig() -->
+<method name="getConfig"  public="true">
+<description>
+Get the configuration for the history that this cursor&#xa; is iterating through.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryConfig"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.getContext() -->
+<method name="getContext"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the context for this cursor.
+</description>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.advanceCursor() -->
+<method name="advanceCursor"  protected="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Advance the cursor to the next record and read the record contents&#xa; into the iterator record.  The same instance of BHistoryRecord&#xa; will be returned from every call to get(), but the values will&#xa; be updated on every call to next().  If the records returned&#xa; from get() need to be stored, they must be cloned first.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.doNext(javax.baja.history.BHistoryRecord) -->
+<method name="doNext"  protected="true" abstract="true">
+<description>
+Advance the cursor to the next record and read the record contents&#xa; into the iterator record.
+</description>
+<parameter name="iteratorRec">
+<type class="javax.baja.history.BHistoryRecord"/>
+<description>
+A record used to iterate through the records in the&#xa;   history.  This instance will be returned from every call to get(), but&#xa;   the values will be updated on every call to next().  If the records&#xa;   returned from get() need to be stored, they must be cloned first.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.doGet() -->
+<method name="doGet"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the current record.
+</description>
+<return>
+<type class="javax.baja.history.BHistoryRecord"/>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.makeBoundaryRecordFacets(javax.baja.history.BHistoryRecord, javax.baja.history.BHistoryRecord) -->
+<method name="makeBoundaryRecordFacets"  public="true" static="true">
+<description>
+Convenience method which takes the pre and post history records&#xa; (assumed to be the history records just prior to and just after&#xa; the starting record and ending record respectively in a&#xa; history cursor) and generates a BFacets instance containing&#xa; these records.  This is typically used to populate the context&#xa; of the history cursor so that callers can determine the&#xa; previous/subsequent records surrounding a history&#xa; time query. Note that either the preRec or postRec can be null,&#xa; if one is not applicable. The resulting facets will only contain&#xa; the non-null records. Also note that if both parameters are non-null,&#xa; they are assumed to be the same history record type.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="preRec">
+<type class="javax.baja.history.BHistoryRecord"/>
+</parameter>
+<parameter name="postRec">
+<type class="javax.baja.history.BHistoryRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.extractPreRecord(javax.baja.sys.BFacets) -->
+<method name="extractPreRecord"  public="true" static="true">
+<description>
+Convenience method which takes a BFacets instance and extracts&#xa; the special &#x22;historyCursorPreRec&#x22; history record, if it exists in&#xa; the facets instance (otherwise null is returned).  This is typically&#xa; used to aid callers that need to know the preceding record just prior&#xa; to the starting record of a history time query.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryRecord"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.extractPostRecord(javax.baja.sys.BFacets) -->
+<method name="extractPostRecord"  public="true" static="true">
+<description>
+Convenience method which takes a BFacets instance and extracts&#xa; the special &#x22;historyCursorPostRec&#x22; history record, if it exists in&#xa; the facets instance (otherwise null is returned).  This is typically&#xa; used to aid callers that need to know the subsequent record just after&#xa; the ending record of a history time query.
+</description>
+<tag name="@since">Niagara 3.7</tag>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.history.BHistoryRecord"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.makeArchiveLimitExceededContext(javax.baja.sys.Context) -->
+<method name="makeArchiveLimitExceededContext"  public="true" static="true">
+<description>
+Convenience method to generate a Context instance that contains a special&#xa; facet (named &#x22;archiveHistoryLimitExceeded&#x22;) to signify that a limit was&#xa; exceeded while gathering archive history data (e.g. history data archived to&#xa; the cloud or some other archive provider). When this special Context facet&#xa; is set to true, it informs consumers that the limit was exceeded at history&#xa; query time and the query results contain only partial matching records up&#xa; to the limit.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context that will be used as a base for generating the result.&#xa;           This parameter can be null.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.Context"/>
+<description>
+A Context instance generated from the given base Context argument&#xa; enhanced with one additional special facet called&#xa; &#x22;archiveHistoryLimitExceeded&#x22; that has a boolean value of true.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.HistoryCursor.archiveLimitExceeded(javax.baja.sys.Context) -->
+<method name="archiveLimitExceeded"  public="true" static="true">
+<description>
+Convenience method that checks the given Context argument for the presence&#xa; of a special &#x22;archiveHistoryLimitExceeded&#x22; facet, and if found, returns its&#xa; boolean value.  This value is used to signify whether a limit was exceeded&#xa; while gathering archive history data (e.g. history data archived to the&#xa; cloud or some other archive provider). When true, it informs consumers that&#xa; a limit was exceeded at history query time and the query result contains&#xa; only partial matching records up to the limit.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The Context instance to check
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the &#x22;archiveHistoryLimitExceeded&#x22; facet is present on the&#xa; Context argument and it has a boolean true value.  Otherwise false is&#xa; returned.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

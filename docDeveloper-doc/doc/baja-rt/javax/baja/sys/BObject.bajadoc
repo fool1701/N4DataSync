@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BObject" name="BObject" packageName="javax.baja.sys" public="true" abstract="true">
+<description>
+BObject is the base class required for all &#xa; objects which conform to the Baja model.
+</description>
+<tag name="@author">Brian Frank</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIObject"/>
+</implements>
+<!-- javax.baja.sys.BObject() -->
+<constructor name="BObject" protected="true">
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.sys.BObject.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.isValue() -->
+<method name="isValue"  public="true" final="true">
+<description>
+Does this BObject extend from BValue.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.isSimple() -->
+<method name="isSimple"  public="true" final="true">
+<description>
+Does this BObject extend from BSimple.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.isComplex() -->
+<method name="isComplex"  public="true" final="true">
+<description>
+Does this BObject extend from BComplex.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.isStruct() -->
+<method name="isStruct"  public="true" final="true">
+<description>
+Does this BObject extend from BStruct.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.isComponent() -->
+<method name="isComponent"  public="true" final="true">
+<description>
+Does this BObject extend from BComponent.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.&lt;T extends javax.baja.sys.BIObject&gt;as(java.lang.Class&lt;T&gt;) -->
+<method name="as"  public="true" final="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<typeParameters>
+<typeVariable class="T">
+<bounds>
+<type class="javax.baja.sys.BIObject"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<description/>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<typeVariable class="T"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<typeVariable class="T"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.asObject() -->
+<method name="asObject"  public="true" final="true">
+<description>
+Return this.
+</description>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.asValue() -->
+<method name="asValue"  public="true" final="true">
+<description>
+Get the BObject narrowed to BValue.
+</description>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.asSimple() -->
+<method name="asSimple"  public="true" final="true">
+<description>
+Get the BObject narrowed to BSimple.
+</description>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.asComplex() -->
+<method name="asComplex"  public="true" final="true">
+<description>
+Get the BObject narrowed to BComplex.
+</description>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.asStruct() -->
+<method name="asStruct"  public="true" final="true">
+<description>
+Get the BObject narrowed to BStruct.
+</description>
+<return>
+<type class="javax.baja.sys.BStruct"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.asComponent() -->
+<method name="asComponent"  public="true" final="true">
+<description>
+Get the BObject narrowed to BComponent.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+All BObjects should support an implementation of equals.&#xa; BSimples are equal by comparing their value.  BComplexes &#xa; are equal using the &#x22;==&#x22; operator.  If you wish to compare&#xa; value equality use &lt;code&gt;<see ref="javax.baja.sys.BObject#equivalent(java.lang.Object)">#equivalent(Object)</see>&lt;/code&gt;.  The default&#xa; implementation of this method is to return reference equality&#xa; using the == operator.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.equivalent(java.lang.Object) -->
+<method name="equivalent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.isNull() -->
+<method name="isNull"  public="true">
+<description>
+Some types of BObject&#x27;s are used to indicate&#xa; a null value.  This method allows those types to&#xa; declare their null status by overriding this common&#xa; method.  The default is to return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.toDataValue() -->
+<method name="toDataValue"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.data.BIDataValue"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.getAgents() -->
+<method name="getAgents"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;<see ref="javax.baja.sys.BObject#getAgents(javax.baja.sys.Context)">getAgents(null)</see>&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description>
+Get the list of agents for this BObject.  The &#xa; default implementation of this method returns&#xa; &lt;code&gt;<see ref="javax.baja.registry.Registry#getAgents(javax.baja.registry.TypeInfo)">Registry.getAgents(getType().getTypeInfo())</see>&lt;/code&gt;.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.getLexicon() -->
+<method name="getLexicon"  public="true">
+<description>
+Convenience for &lt;code&gt;getType().getModule().getLexicon()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.util.Lexicon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.getTypeDisplayName(javax.baja.sys.Context) -->
+<method name="getTypeDisplayName"  public="true">
+<description>
+Get the Object&#x27;s type as a localized displayable string.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Get the BIcon used to represent this object.  The&#xa; general pattern for overriding this method is:&#xa; &lt;pre&gt;&#xa;   public BIcon getIcon() { return icon; }&#xa;    private static final BIcon icon = BIcon.std(&#x22;object.png&#x22;);&#xa; &lt;/pre&gt;
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.toString() -->
+<method name="toString"  public="true" final="true">
+<description>
+All BObject&#x27;s should implement toString(Context)&#xa; to return a possibly localized string summary of&#xa; their object.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.toDebugString() -->
+<method name="toDebugString"  public="true">
+<description>
+Get a debug string for the obect.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description>
+Dump diagnostics for this object in HTML format&#xa; using the specified SpyWriter.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BObject.fw(int) -->
+<method name="fw"  public="true" final="true">
+<description>
+Framework support access; this method should&#xa; never be used by developers.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework support access; this method should&#xa; never be used by developers.
+</description>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BObject.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

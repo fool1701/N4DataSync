@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nre" runtimeProfile="rt" qualifiedName="javax.baja.xml.XPathElem" name="XPathElem" packageName="javax.baja.xml" public="true">
+<description>
+Represents an entry in an XPath. Each XPathEntry can match an XML element by&#xa; name and/or by the values of the attributes of the element. In addition, an&#xa; element may match just the current element, or the current element and any&#xa; children of that element. (i.e. the W3C XPath &#x22;descendant-or-self::node()&#x22;&#xa; (i.e. &#x22;//&#x22; operator).&#xa; &lt;p&gt;&#xa; Several constructors are provided that allow different matching criteria to&#xa; be specified.
+</description>
+<tag name="@author">Hugh Eaves</tag>
+<tag name="@since">Niagara 4.6</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.xml.XPathElem() -->
+<constructor name="XPathElem" public="true">
+<description>
+Instantiates a new XPathElem. This constructor creates an XPathElem that will&#xa; match an element with any name, and any attributes.
+</description>
+</constructor>
+
+<!-- javax.baja.xml.XPathElem(boolean) -->
+<constructor name="XPathElem" public="true">
+<parameter name="matchChildren">
+<type class="boolean"/>
+<description>
+If true, then this XPathElem will match an element, or any of the&#xa;                      children of the element.
+</description>
+</parameter>
+<description>
+Instantiates a new XPathElem.
+</description>
+</constructor>
+
+<!-- javax.baja.xml.XPathElem(java.lang.String) -->
+<constructor name="XPathElem" public="true">
+<parameter name="elementName">
+<type class="java.lang.String"/>
+<description>
+Matches the name of the element, or if set to XPathElem.ANY, matches&#xa;                    any name.
+</description>
+</parameter>
+<description>
+Instantiates a new XPathElem.
+</description>
+</constructor>
+
+<!-- javax.baja.xml.XPathElem(java.lang.String, boolean) -->
+<constructor name="XPathElem" public="true">
+<parameter name="elementName">
+<type class="java.lang.String"/>
+<description>
+Matches the name of the element, or if set to XPathElem.ANY, matches&#xa;                      any name.
+</description>
+</parameter>
+<parameter name="matchChildren">
+<type class="boolean"/>
+<description>
+If true, then this XPathElem will match an element, or any of the&#xa;                      children of the element.
+</description>
+</parameter>
+<description>
+Instantiates a new XPathElem.
+</description>
+</constructor>
+
+<!-- javax.baja.xml.XPathElem(java.lang.String, java.util.Map&lt;java.lang.String, java.lang.String&gt;, boolean) -->
+<constructor name="XPathElem" public="true">
+<parameter name="elementName">
+<type class="java.lang.String"/>
+<description>
+Matches the name of the element, or if set to XPathElem.ANY, matches&#xa;                        any name.
+</description>
+</parameter>
+<parameter name="attributeValues">
+<parameterizedType class="java.util.Map">
+<args>
+<type class="java.lang.String"/>
+<type class="java.lang.String"/>
+</args>
+</parameterizedType>
+<description>
+A map of required attribute names and values. Matches an element&#xa;                        only if all attributes are present, and have the specified values.&#xa;                        Setting attributeValues to null or empty will match all attributes.
+</description>
+</parameter>
+<parameter name="matchChildren">
+<type class="boolean"/>
+<description>
+If true, then this XPathElem will match an element, or any of the&#xa;                        children of the element.
+</description>
+</parameter>
+<description>
+Instantiates a new XPathElem.
+</description>
+</constructor>
+
+<!-- javax.baja.xml.XPathElem.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<tag name="@see">java.lang.Object#equals(java.lang.Object)</tag>
+<parameter name="o">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.xml.XPathElem.getName() -->
+<method name="getName"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.xml.XPathElem.hashCode() -->
+<method name="hashCode"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<tag name="@see">java.lang.Object#hashCode()</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.xml.XPathElem.isMatchChildren() -->
+<method name="isMatchChildren"  public="true">
+<description>
+Checks if this XPathElem also matches child elements.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true, if is match children
+</description>
+</return>
+</method>
+
+<!-- javax.baja.xml.XPathElem.matches(javax.baja.xml.XElem) -->
+<method name="matches"  public="true">
+<description>
+Returns true of this XPathElem matches the given XElem.
+</description>
+<parameter name="element">
+<type class="javax.baja.xml.XElem"/>
+<description>
+the element
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true, if successful
+</description>
+</return>
+</method>
+
+<!-- javax.baja.xml.XPathElem.toString() -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<tag name="@see">java.lang.Object#toString()</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.xml.XPathElem.withAttr(java.lang.String, java.lang.String) -->
+<method name="withAttr"  public="true">
+<description>
+Adds a required attribute value to this XPathElem. The&#xa; attribute must be present, and have the specified value.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the name of the required attribute
+</description>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+<description>
+the required value of the attribute
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XPathElem"/>
+<description>
+this XPathElem to allow method chaining.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.xml.XPathElem.withAttr(java.lang.String) -->
+<method name="withAttr"  public="true">
+<description>
+Adds a required attribute value to this XPathElem. The&#xa; attribute must be present, but can have any value.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+the name of the required attribute
+</description>
+</parameter>
+<return>
+<type class="javax.baja.xml.XPathElem"/>
+<description>
+this XPathElem to allow method chaining.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

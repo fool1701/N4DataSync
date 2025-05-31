@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.nav.tree.NavTreeModel" name="NavTreeModel" packageName="javax.baja.workbench.nav.tree" public="true" abstract="true">
+<description>
+NavTreeModel is the TreeModel for a BNavTree.  The model works &#xa; in tandem with NavTreeNode to provide support for mapping&#xa; BINavNodes to NavTreeNodes using a NavMap.  This allows fast &#xa; lookups from NavEvents to NavTreeNodes for synchronization.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">7 Mar 02</tag>
+<tag name="@version">$Revision: 15$ $Date: 11/15/06 1:10:30 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.tree.TreeModel"/>
+</extends>
+<!-- javax.baja.workbench.nav.tree.NavTreeModel() -->
+<constructor name="NavTreeModel" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.lookup(javax.baja.naming.BOrd) -->
+<method name="lookup"  public="true">
+<description>
+Given an ord, map it to a NavTreeNode if we have&#xa; expanded to that node.  Ords are mapped via the&#xa; ord returned from &lt;code&gt;BINavNode.getNavOrd()&lt;/code&gt;.&#xa; Return null if no mapping.
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.add(javax.baja.workbench.nav.tree.NavTreeNode) -->
+<method name="add"  public="true">
+<description>
+Add the tree node to the node map.  This happens&#xa; automatically in the NavTreeNode constructor.
+</description>
+<parameter name="node">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.remove(javax.baja.workbench.nav.tree.NavTreeNode) -->
+<method name="remove"  public="true">
+<description>
+Remove the tree node from the node map.  This &#xa; happens automatically in NavTreeNode.removeChild().
+</description>
+<parameter name="node">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.navEvent(javax.baja.nav.NavEvent) -->
+<method name="navEvent"  public="true">
+<description>
+Callback for NavEvents.  The BNavTree automatically&#xa; registers and unregisters for these events.  This&#xa; calls routes to added and removed.
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.added(javax.baja.nav.NavEvent) -->
+<method name="added"  protected="true">
+<description>
+Called from navEvent() when id is NavEvent.ADDED.&#xa; The default implementations attempts to lookup the&#xa; parent node.  If it has been mapped to a tree node&#xa; then we create a new node using makeNavTreeNode()&#xa; and add it using parent.addChild(child).
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.removed(javax.baja.nav.NavEvent) -->
+<method name="removed"  protected="true">
+<description>
+Called from navEvent() when id is NavEvent.REMOVED.&#xa; The default implementations attempts to lookup the&#xa; child node.  If it has been mapped to a tree node &#xa; then we call parent.removeChild(child).
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.renamed(javax.baja.nav.NavEvent) -->
+<method name="renamed"  protected="true">
+<description>
+Called from navEvent() when id is NavEvent.RENAMED.  The&#xa; default implementation calls refresh on the parent node.
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.reordered(javax.baja.nav.NavEvent) -->
+<method name="reordered"  protected="true">
+<description>
+Called from navEvent() when id is NavEvent.REORDERED.  The&#xa; default implementation calls refresh on the parent node.
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.replaced(javax.baja.nav.NavEvent) -->
+<method name="replaced"  protected="true">
+<description>
+Called from navEvent() when id is NavEvent.REPLACED.&#xa; Attempt to map child to a tree node.  If it has been&#xa; mapped, then remove from parent node, and then refresh &#xa; the parent.
+</description>
+<parameter name="event">
+<type class="javax.baja.nav.NavEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.nav.tree.NavTreeModel.makeNavTreeNode(javax.baja.workbench.nav.tree.NavTreeNode, javax.baja.nav.BINavNode) -->
+<method name="makeNavTreeNode"  public="true">
+<description>
+This is the factory method called when new NavTreeNodes &#xa; are required either thru expansion or eventing.
+</description>
+<parameter name="parent">
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</parameter>
+<parameter name="navNode">
+<type class="javax.baja.nav.BINavNode"/>
+</parameter>
+<return>
+<type class="javax.baja.workbench.nav.tree.NavTreeNode"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

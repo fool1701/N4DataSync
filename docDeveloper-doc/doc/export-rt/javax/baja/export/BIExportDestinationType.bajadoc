@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="export" runtimeProfile="rt" qualifiedName="javax.baja.export.BIExportDestinationType" name="BIExportDestinationType" packageName="javax.baja.export" public="true" interface="true" abstract="true" category="interface">
+<description>
+A destination type describes where a transform operation may send its output.&#xa; Examples include: the file system; the clipboard; the cloud; an external&#xa; application.&#xa; &lt;p&gt;&#xa; API Status: **Development**
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<typeParameters>
+<typeVariable class="C">
+<description>
+the type of export context in which this destination can be used.&#xa;           Certain destinations may only be valid in certain contexts.
+</description>
+<bounds>
+<type class="javax.baja.sys.Context"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<!-- javax.baja.export.BIExportDestinationType.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" abstract="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.export.BIExportDestinationType.&lt;T, X extends C&gt;transform(javax.baja.export.BITransformOperation&lt;T, ? super X&gt;, X) -->
+<method name="transform"  public="true" abstract="true">
+<typeParameters>
+<typeVariable class="T">
+</typeVariable>
+<typeVariable class="X">
+<bounds>
+<typeVariable class="C"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<description>
+Perform the entire transformation operation: execute the transform&#xa; to obtain the transformed data, and send that data to this destination.
+</description>
+<parameter name="transformOperation">
+<parameterizedType class="javax.baja.export.BITransformOperation">
+<args>
+<typeVariable class="T"/>
+<wildcardType class="?">
+<bounds kind="super">
+<typeVariable class="X"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+<description>
+the transformation operation
+</description>
+</parameter>
+<parameter name="cx">
+<typeVariable class="X"/>
+<description>
+the export context
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+<description>
+if the data could not be transformed
+</description>
+</throws>
+<throws>
+<type class="javax.baja.export.ExportException"/>
+<description>
+if the transformed data could not be written
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.export.BIExportDestinationType.checkValid(C) -->
+<method name="checkValid"  public="true" default="true">
+<description>
+Check to see if this destination is valid for the current context and&#xa; environment.
+</description>
+<parameter name="cx">
+<typeVariable class="C"/>
+<description>
+the export context. May not be fully usable, or the same context&#xa;           given to &lt;code&gt;transform()&lt;/code&gt;. It is up to the framework to&#xa;           provide enough of a context to determine if the destination is&#xa;           valid.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="javax.baja.export.ExportException"/>
+<description>
+if this destination is not valid in the current&#xa; runtime environment, or with the given context (e.g. a station-only&#xa; exporter should not work in Workbench and vice versa).
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.export.BIExportDestinationType.&lt;X extends javax.baja.sys.Context&gt;isValid(javax.baja.export.BIExportDestinationType&lt;? super X&gt;, X) -->
+<method name="isValid"  public="true" static="true">
+<typeParameters>
+<typeVariable class="X">
+<bounds>
+<type class="javax.baja.sys.Context"/>
+</bounds>
+</typeVariable>
+</typeParameters>
+<description/>
+<parameter name="destination">
+<parameterizedType class="javax.baja.export.BIExportDestinationType">
+<args>
+<wildcardType class="?">
+<bounds kind="super">
+<typeVariable class="X"/>
+</bounds>
+</wildcardType>
+</args>
+</parameterizedType>
+<description>
+destination type to check
+</description>
+</parameter>
+<parameter name="cx">
+<typeVariable class="X"/>
+<description>
+export context
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if the destination is valid for the current environment&#xa; (i.e., &lt;code&gt;checkValid()&lt;/code&gt; did not throw an exception)
+</description>
+</return>
+</method>
+
+<!-- javax.baja.export.BIExportDestinationType.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

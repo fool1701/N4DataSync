@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString" name="BBFormatString" packageName="com.tridiumx.jsonToolkit.outbound.schema.alarm.property" public="true">
+<description>
+&lt;p&gt;&#xa; BBFormatString Holds a format such as %alarmData.sourceName% which will be extracted from an&#xa; AlarmRecord passed in by the parent Alarm Recipient.&#xa; &lt;/p&gt;&#xa;&#xa; &lt;p&gt;&#xa; BFormat only returns String object, this presents an issue for integer properties like&#xa; priority, or boolean sourceState, where 100% valid JSON cannot be created without inspecting&#xa; the returned String and matching they type eg &#x22;2&#x22; -&gt; 2; &#x22;true&#x22; -&gt; true. The attempt type&#xa; conversion property attempts to convert boolean or numeric cases.&#xa; &lt;/p&gt;&#xa;&#xa; &lt;p&gt;&#xa; The BFormat object also present a risk for validation, as the user can enter free format&#xa; text using this Schema member.&#xa; &lt;/p&gt;&#xa;&#xa; Examples of BFormat relevant to an AlarmRecord:&#xa;  %timestamp%&#xa;  %sourceState%&#xa;  %ackState%&#xa;  %alarmData.sourceName%&#xa;  %alarmData.alarmValue%
+</description>
+<tag name="@author">Jason Woollard</tag>
+<extends>
+<parameterizedType class="com.tridiumx.jsonToolkit.outbound.schema.property.BJsonSchemaProperty">
+<args>
+<type class="java.lang.Object"/>
+</args>
+</parameterizedType>
+</extends>
+<implements>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BIJsonAlarmDataResolver"/>
+</implements>
+<property name="format" flags="s">
+<type class="javax.baja.util.BFormat"/>
+<description>
+Slot for the &lt;code&gt;format&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFormat</tag>
+<tag name="@see">#setFormat</tag>
+</property>
+
+<property name="attemptTypeConversion" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;attemptTypeConversion&lt;/code&gt; property.&#xa; Convert strings &#x22;true&#x22; or &#x22;0&#x22; to a boolean or number where possible.
+</description>
+<tag name="@see">#getAttemptTypeConversion</tag>
+<tag name="@see">#setAttemptTypeConversion</tag>
+</property>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString() -->
+<constructor name="BBFormatString" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.getFormat() -->
+<method name="getFormat"  public="true">
+<description>
+Get the &lt;code&gt;format&lt;/code&gt; property.
+</description>
+<tag name="@see">#format</tag>
+<return>
+<type class="javax.baja.util.BFormat"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.setFormat(javax.baja.util.BFormat) -->
+<method name="setFormat"  public="true">
+<description>
+Set the &lt;code&gt;format&lt;/code&gt; property.
+</description>
+<tag name="@see">#format</tag>
+<parameter name="v">
+<type class="javax.baja.util.BFormat"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.getAttemptTypeConversion() -->
+<method name="getAttemptTypeConversion"  public="true">
+<description>
+Get the &lt;code&gt;attemptTypeConversion&lt;/code&gt; property.&#xa; Convert strings &#x22;true&#x22; or &#x22;0&#x22; to a boolean or number where possible.
+</description>
+<tag name="@see">#attemptTypeConversion</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.setAttemptTypeConversion(boolean) -->
+<method name="setAttemptTypeConversion"  public="true">
+<description>
+Set the &lt;code&gt;attemptTypeConversion&lt;/code&gt; property.&#xa; Convert strings &#x22;true&#x22; or &#x22;0&#x22; to a boolean or number where possible.
+</description>
+<tag name="@see">#attemptTypeConversion</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.getErrorSubstitute() -->
+<method name="getErrorSubstitute"  public="true">
+<description>
+Get the &lt;code&gt;ErrorSubstitute&lt;/code&gt; property.&#xa; Select the value to be used in the event that BFormat cannot be resolved.
+</description>
+<tag name="@see">#ErrorSubstitute</tag>
+<return>
+<type class="com.tridiumx.jsonToolkit.util.format.BBFormatErrorSubstituteValue"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.setErrorSubstitute(com.tridiumx.jsonToolkit.util.format.BBFormatErrorSubstituteValue) -->
+<method name="setErrorSubstitute"  public="true">
+<description>
+Set the &lt;code&gt;ErrorSubstitute&lt;/code&gt; property.&#xa; Select the value to be used in the event that BFormat cannot be resolved.
+</description>
+<tag name="@see">#ErrorSubstitute</tag>
+<parameter name="v">
+<type class="com.tridiumx.jsonToolkit.util.format.BBFormatErrorSubstituteValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.getJsonValue() -->
+<method name="getJsonValue"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Note BFormat will always returns a String, which may limits the usefulness of&#xa; our result for correct JSON encoding
+</description>
+<return>
+<type class="java.lang.Object"/>
+<description>
+String result of BFormat
+</description>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.resolve(javax.baja.alarm.BAlarmRecord) -->
+<method name="resolve"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="r">
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.format -->
+<field name="format"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;format&lt;/code&gt; property.
+</description>
+<tag name="@see">#getFormat</tag>
+<tag name="@see">#setFormat</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.attemptTypeConversion -->
+<field name="attemptTypeConversion"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;attemptTypeConversion&lt;/code&gt; property.&#xa; Convert strings &#x22;true&#x22; or &#x22;0&#x22; to a boolean or number where possible.
+</description>
+<tag name="@see">#getAttemptTypeConversion</tag>
+<tag name="@see">#setAttemptTypeConversion</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.ErrorSubstitute -->
+<field name="ErrorSubstitute"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ErrorSubstitute&lt;/code&gt; property.&#xa; Select the value to be used in the event that BFormat cannot be resolved.
+</description>
+<tag name="@see">#getErrorSubstitute</tag>
+<tag name="@see">#setErrorSubstitute</tag>
+</field>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.alarm.property.BBFormatString.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

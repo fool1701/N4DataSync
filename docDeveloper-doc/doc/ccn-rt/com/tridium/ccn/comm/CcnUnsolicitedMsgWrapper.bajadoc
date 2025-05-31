@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ccn" runtimeProfile="rt" qualifiedName="com.tridium.ccn.comm.CcnUnsolicitedMsgWrapper" name="CcnUnsolicitedMsgWrapper" packageName="com.tridium.ccn.comm" public="true">
+<description>
+Special &#x22;instance&#x22; of basicDriver ReceivedMessage for wrapping a &lt;code&gt;<see ref="com.tridium.platCcn.CcnUnsolicitedMsg">CcnUnsolicitedMsg</see>&lt;/code&gt;&#xa; in such a way that it can be passed around the basicDriver framework&#x27;s typed functions.&#xa; The typical extension of ReceivedMessage for the CCN driver can be found in the class&#xa; &lt;code&gt;<see ref="com.tridium.ccn.messages.CcnReceivedMessage">com.tridium.ccn.messages.CcnReceivedMessage</see>&lt;/code&gt;.&#xa;&#xa; This version of the class may no longer be necessary as the original dependency issue may&#xa; have been resolved when this class was moved out of the com.tridium.platCcn namespace&#xa; and into the com.tridium.ccn.comm namespace. To avoid disrupting functioning unsolicited&#xa; receive stack code that utilizes this wrapper, but to accommodate testing requirements,&#xa; the class was simply renamed from CcnReceivedMessage to CcnUnsolicitedMsgWrapper by&#xa; Mike James on May 27, 2021. See HAREMB-1330 for further context and Pull Requests.&#xa;&#xa; An alternative solution may be to &#x22;bolt on&#x22; the CcnUnsolicitedMsg to the existing&#xa; &#x22;real&#x22; CcnReceivedMessage as an alternative constructor.&#xa;&#xa; Original comment:&#xa;&#xa;   CCN Wrapper for ReceivedMessage. Required b/c platCcn cannot depend on&#xa;   com.tridium.basicdriver
+</description>
+<tag name="@author">Dan Giorgis on Aug 20, 2009</tag>
+<extends>
+<type class="com.tridium.basicdriver.message.ReceivedMessage"/>
+</extends>
+<!-- com.tridium.ccn.comm.CcnUnsolicitedMsgWrapper(com.tridium.platCcn.CcnUnsolicitedMsg) -->
+<constructor name="CcnUnsolicitedMsgWrapper" public="true">
+<parameter name="msg">
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ccn.comm.CcnUnsolicitedMsgWrapper.getUnsolicitedMsg() -->
+<method name="getUnsolicitedMsg"  public="true">
+<description/>
+<return>
+<type class="com.tridium.platCcn.CcnUnsolicitedMsg"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

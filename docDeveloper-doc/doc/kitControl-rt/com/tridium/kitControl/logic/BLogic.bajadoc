@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="kitControl" runtimeProfile="rt" qualifiedName="com.tridium.kitControl.logic.BLogic" name="BLogic" packageName="com.tridium.kitControl.logic" public="true" abstract="true">
+<description>
+BLogic is the superclass of all Baja objects that&#xa; perform logical operations on a set of input&#xa; values.  The result is written to the out element. &#xa; &lt;p&gt;&#xa; By convention, input values with invalid status &#xa; (down, fault or null) bit set are ignored (not &#xa; used in the logic operation).  However, the &#xa; status bits set on the output are the logical &#xa; OR of the status bits set on the input, with&#xa; one exception. If the null bit is set, any&#xa; other bits (status, in_alarm, etc) are ignored.&#xa; &lt;p&gt;&#xa; By default, all &#x27;in&#x27; property slots have the null &#xa; bit set, therefore unlinked values are ignored. &#xa; If all inputs have the null bit set, the output&#xa; will have the null bit set.  &#xa; &lt;p&gt;&#xa; Each logic object requires a minimum number of &#xa; inputs. If less than the minimum number of inputs &#xa; are non-null, the output will be false and the&#xa; null bit set.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">5 Nov 00</tag>
+<tag name="@version">$Revision: 21$ $Date: 11/5/2003 5:12:11 PM$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.control.BBooleanPoint"/>
+</extends>
+<property name="nullOnInactive" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;nullOnInactive&lt;/code&gt; property.&#xa; When set to true, the points out property will be set to null&#xa; when result of the logic point is inactive.
+</description>
+<tag name="@see">#getNullOnInactive</tag>
+<tag name="@see">#setNullOnInactive</tag>
+</property>
+
+<property name="propagateFlags" flags="">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;propagateFlags&lt;/code&gt; property.&#xa; defines which input status flags will be propagated from&#xa; input to output.
+</description>
+<tag name="@see">#getPropagateFlags</tag>
+<tag name="@see">#setPropagateFlags</tag>
+</property>
+
+</class>
+</bajadoc>

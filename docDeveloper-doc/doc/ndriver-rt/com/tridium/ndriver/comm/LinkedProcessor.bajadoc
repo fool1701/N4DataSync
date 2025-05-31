@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="ndriver" runtimeProfile="rt" qualifiedName="com.tridium.ndriver.comm.LinkedProcessor" name="LinkedProcessor" packageName="com.tridium.ndriver.comm" public="true" abstract="true">
+<description>
+LinkedProcessor is a utility class that provides a queue and thread to&#xa; process ILinkables.  APIs are provided to start and stop the thread, enqueue&#xa; ILinkables and a process() override point to process ILinkables.
+</description>
+<tag name="@author">Robert Adams</tag>
+<tag name="@version">$Revision:$ $Date:$</tag>
+<tag name="@creation">22 Feb 2012</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<!-- com.tridium.ndriver.comm.LinkedProcessor() -->
+<constructor name="LinkedProcessor" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ndriver.comm.LinkedProcessor.start(java.lang.String) -->
+<method name="start"  public="true">
+<description>
+Start the processing thread. Use the specified name.
+</description>
+<parameter name="threadName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.LinkedProcessor.stop() -->
+<method name="stop"  public="true">
+<description>
+Start the processing thread and clear the queue.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.LinkedProcessor.run() -->
+<method name="run"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.LinkedProcessor.enqueue(com.tridium.ndriver.util.LinkedQueue.ILinkable) -->
+<method name="enqueue"  public="true">
+<description>
+Add and ILinkable to the queue for processing.
+</description>
+<parameter name="lmsg">
+<type class="com.tridium.ndriver.util.LinkedQueue$ILinkable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ndriver.comm.LinkedProcessor.process(java.lang.Object) -->
+<method name="process"  public="true" abstract="true">
+<description>
+Subclasses must implement to process enqueued objects.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

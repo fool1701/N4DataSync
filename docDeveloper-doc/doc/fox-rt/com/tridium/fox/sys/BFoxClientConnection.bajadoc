@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="fox" runtimeProfile="rt" qualifiedName="com.tridium.fox.sys.BFoxClientConnection" name="BFoxClientConnection" packageName="com.tridium.fox.sys" public="true">
+<description>
+BFoxClientConnection encapsulates a FoxSession connection initiated&#xa; by this VM.  It is used as the client connection in a station VM&#xa; by NiagaraStation and in workbench by FoxSession.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">3 Apr 01</tag>
+<tag name="@version">$Revision: 60$ $Date: 7/12/11 3:08:02 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="com.tridium.fox.sys.BFoxConnection"/>
+</extends>
+<implements>
+<type class="com.tridium.authn.AuthenticationClient"/>
+</implements>
+<property name="port" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;port&lt;/code&gt; property.&#xa; TCP port for the connection
+</description>
+<tag name="@see">#getPort</tag>
+<tag name="@see">#setPort</tag>
+</property>
+
+<property name="useFoxs" flags="rh">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useFoxs&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUseFoxs</tag>
+<tag name="@see">#setUseFoxs</tag>
+</property>
+
+<property name="lastFailureTime" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;lastFailureTime&lt;/code&gt; property.&#xa; The last time a connection attempt failed.
+</description>
+<tag name="@see">#getLastFailureTime</tag>
+<tag name="@see">#setLastFailureTime</tag>
+</property>
+
+<property name="lastFailureCause" flags="r">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lastFailureCause&lt;/code&gt; property.&#xa; The reason for the last connection attempt failure.
+</description>
+<tag name="@see">#getLastFailureCause</tag>
+<tag name="@see">#setLastFailureCause</tag>
+</property>
+
+<property name="retryPeriod" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;retryPeriod&lt;/code&gt; property.&#xa; Time to wait before retrying a connection attempt&#xa; after a failure.
+</description>
+<tag name="@see">#getRetryPeriod</tag>
+<tag name="@see">#setRetryPeriod</tag>
+</property>
+
+<property name="nextAttemptTime" flags="r">
+<type class="javax.baja.sys.BAbsTime"/>
+<description>
+Slot for the &lt;code&gt;nextAttemptTime&lt;/code&gt; property.&#xa; The next time we will attempt a connection after&#xa; a failure.
+</description>
+<tag name="@see">#getNextAttemptTime</tag>
+<tag name="@see">#setNextAttemptTime</tag>
+</property>
+
+<property name="credentialStore" flags="">
+<type class="javax.baja.security.BClientCredentials"/>
+<description>
+Slot for the &lt;code&gt;credentialStore&lt;/code&gt; property.
+</description>
+<tag name="@see">#getCredentialStore</tag>
+<tag name="@see">#setCredentialStore</tag>
+</property>
+
+<action name="manualConnect" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;manualConnect&lt;/code&gt; action.&#xa; Manually force a connection
+</description>
+<tag name="@see">#manualConnect()</tag>
+</action>
+
+<action name="manualDisconnect" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;manualDisconnect&lt;/code&gt; action.&#xa; Manually force a disconnect
+</description>
+<tag name="@see">#manualDisconnect()</tag>
+</action>
+
+<action name="lingerTimeout" flags="ah">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;lingerTimeout&lt;/code&gt; action.
+</description>
+<tag name="@see">#lingerTimeout()</tag>
+</action>
+
+</class>
+</bajadoc>

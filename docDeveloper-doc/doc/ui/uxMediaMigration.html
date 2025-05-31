@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+</head>
+<body>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="pxmediamigration">PxMediaMigration</h1>
+<p>To use, place an instance of <code>PxMediaMigration</code> from the <code>pxEditor</code> palette in your station, and edit its configuration using the Property Sheet. Then, invoke the <code>Dry Run</code> Action (recommended first) to show what changes will be applied, or <code>Execute</code> to actually write those changes to the station.</p>
+<p><code>PxMediaMigration</code> will process a Component containing Px views and/or a directory containing Px files. It will validate the Px data against a specified <code>PxMedia</code> type. If the Px data is compatible, it will update the view or file to the new media. It is strongly recommended that you back up your station, including all Px files, before running it.</p>
+<h2 id="configuration-options">Configuration Options</h2>
+<h3 id="dry-run-mode">Dry Run Mode</h3>
+<p>We recommend invoking the <code>Dry Run</code> Action at least once. This will list out all the matching Px views and files and log whether they will be converted to the target media. (This information will be logged to the <code>com.tridium.px.editor.util</code> log, so use Logger Configuration to turn up that particular log level if needed.)</p>
+<h3 id="process-files">Process Files</h3>
+<p>If this is set to true, the Px files themselves will have the target media written into them. The media type written directly to the file only applies when viewing the Px file directly. When viewing the Px page as a view on a component, the media configured in the Px View will take precedence.</p>
+<h3 id="file-path">File Path</h3>
+<p>This can be a <code>.px</code> file directly (to update only that one file), or a directory containing <code>.px</code> files (to update all files). The processed files can be filtered further by using the regex.</p>
+<h3 id="file-path-regex">File Path Regex</h3>
+<p>Only files whose file path matches this regex will be updated to the target media. The default value matches all files.</p>
+<h3 id="preserve-identities">Preserve Identities</h3>
+<p>This is equivalent to the Preserve Identities setting under the Px Editor section in Workbench Options. If true, the names of the widgets in your Px pages will be preserved in the Px file. If false, they will be left out. In general, this should be set to the same value with which the Px pages were originally saved. Note that any pages that include Px Properties will automatically have identities preserved. If unsure, leave set to false.</p>
+<h3 id="process-views">Process Views</h3>
+<p>If this is set to true, a query will run to find all Px Views in the given root component, and convert them to the target media if applicable.</p>
+<h3 id="root-view-ord">Root View ORD</h3>
+<p>When processing Px views, a query will run to find all instances of Px Views within this component.</p>
+<h3 id="skip-frozen-views">Skip Frozen Views</h3>
+<p>When true, any Px Views that are frozen Slots (i.e. they are compile-time properties of a Component, not added by a user using New View) will be skipped. Most of the time, this should be set to true.</p>
+<h3 id="on-validation-error">On Validation Error</h3>
+<p><code>Abort</code> will stop the entire migration if an error is found, and process no more Px pages. <code>Skip File</code> will keep trying to migrate more Px views even after an error is found. <code>Set Media Anyway</code> will set the media type on all views whether validation errors are found or not.</p>
+<h3 id="media-type">Media Type</h3>
+<p>The target media to set on all discovered Px views.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+</body>
+</html>

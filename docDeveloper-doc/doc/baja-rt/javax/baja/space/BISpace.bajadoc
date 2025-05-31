@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.space.BISpace" name="BISpace" packageName="javax.baja.space" public="true" interface="true" abstract="true" category="interface">
+<description>
+Interface for Spaces.  A Space defines a group of BObjects which share common&#xa; strategies for loading, caching, lifecycle, and naming.  &#xa; Entries in a space implement the BISpaceNode&#xa; interface.  Spaces are typically mounted under BIAuthorities &#xa; in the naming and nav hierarchies.
+</description>
+<tag name="@author">Andrew Saunders</tag>
+<tag name="@creation">25 Aug 2013</tag>
+<tag name="@since">Baja 4.0</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.space.BISpace.getLexiconText() -->
+<method name="getLexiconText"  public="true" abstract="true">
+<description>
+Get a LexiconText that provides the localized display name of this space.
+</description>
+<return>
+<type class="javax.baja.util.LexiconText"/>
+<description>
+Return a LexiconText for the space display name.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getDisplayName(javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" default="true">
+<description>
+Get the display name for this space.  The default implementation&#xa; resolves the LexiconText using the context.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+<description>
+The context for localizing the display name.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+Returns a localized display name for this space.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.isMounted() -->
+<method name="isMounted"  public="true" default="true">
+<description>
+Return true if this space is mounted under an host.&#xa; Default implementation is &lt;code&gt;getHost() != null&lt;/code&gt;.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getHost() -->
+<method name="getHost"  public="true" abstract="true">
+<description>
+If this space is mounted, then return its parent &#xa; host, otherwise return null.
+</description>
+<return>
+<type class="javax.baja.naming.BHost"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getSpaceContainer() -->
+<method name="getSpaceContainer"  public="true" abstract="true">
+<description>
+If this space is mounted, then return its parent &#xa; BISpaceContainer, otherwise return null.
+</description>
+<return>
+<type class="javax.baja.space.BISpaceContainer"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.setSpaceContainer(javax.baja.space.BISpaceContainer) -->
+<method name="setSpaceContainer"  public="true" abstract="true">
+<description>
+Sets the parent space container.  &#xa; Note: This method should only be invoked when a space is mounted and unmounted its parent BISpaceContainer.
+</description>
+<parameter name="spaceParent">
+<type class="javax.baja.space.BISpaceContainer"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getSession() -->
+<method name="getSession"  public="true" abstract="true">
+<description>
+If this space is mounted, then return its parent &#xa; session, otherwise return null.
+</description>
+<return>
+<type class="javax.baja.naming.BISession"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getAbsoluteOrd() -->
+<method name="getAbsoluteOrd"  public="true" abstract="true">
+<description>
+Get an host absolute ord which identifies this&#xa; space.  If not mounted return null.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getOrdInHost() -->
+<method name="getOrdInHost"  public="true" abstract="true">
+<description>
+Get the ord of this space relative to its host.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getOrdInSession() -->
+<method name="getOrdInSession"  public="true" abstract="true">
+<description>
+Get the ord of this space relative to its session.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.getOrdInSpaceContainer() -->
+<method name="getOrdInSpaceContainer"  public="true" abstract="true">
+<description>
+Get the ord of this space relative to its space container.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.space.BISpace.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

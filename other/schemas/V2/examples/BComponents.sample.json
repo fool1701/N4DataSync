@@ -1,0 +1,90 @@
+[
+    {
+      "name": "MainStation",
+      "type": "station",
+      "config": {
+        "location": "Building A",
+        "description": "Primary BAS station"
+      },
+      "components": [
+        {
+          "name": "BACnetNetwork",
+          "type": "network",
+          "config": {
+            "protocol": "BACnet/IP",
+            "address": "192.168.1.50"
+          },
+          "components": [
+            {
+              "name": "ChillerDevice",
+              "type": "device",
+              "config": {
+                "deviceId": 1001,
+                "manufacturer": "Niagara"
+              },
+              "components": [
+                {
+                  "name": "SupplyTemp",
+                  "type": "point",
+                  "config": {
+                    "pointType": "temperature",
+                    "units": "°C",
+                    "readOnly": false
+                  },
+                  "components": [
+                    {
+                      "name": "OffsetCalibration",
+                      "type": "extension",
+                      "config": {
+                        "offset": -0.2
+                      },
+                      "components": []
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnTemp",
+                  "type": "point",
+                  "config": {
+                    "pointType": "temperature",
+                    "units": "°C",
+                    "readOnly": true
+                  },
+                  "components": []
+                }
+              ]
+            },
+            {
+              "name": "PumpDevice",
+              "type": "device",
+              "config": {
+                "deviceId": 1002,
+                "manufacturer": "Niagara"
+              },
+              "components": [
+                {
+                  "name": "FlowRate",
+                  "type": "point",
+                  "config": {
+                    "pointType": "flow",
+                    "units": "L/s"
+                  },
+                  "components": [
+                    {
+                      "name": "AlarmExtension",
+                      "type": "extension",
+                      "config": {
+                        "highLimit": 5.0,
+                        "lowLimit": 0.5
+                      },
+                      "components": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]

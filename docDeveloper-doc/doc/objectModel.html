@@ -1,0 +1,191 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  2 Oct 01
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Object Model</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/modules.html" class="navbar">Prev</a> |  <a href="/doc/componentModel.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Object Model</h1> 
+
+<!------------------------------------------------------------->
+<h1>Niagara Types</h1>
+<!------------------------------------------------------------->
+
+<p>
+The heart of Niagara is its type system layered above Java type 
+system.  Niagara Types are monikers to a Java class in a specific 
+module.  The interface <code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/Type.bajadoc'>javax.baja.sys.Type</a>
+</code> is used to represent Types in the Niagara Framework.  Every Type is
+globally identified by its <i>module name</i> and its 
+<i>type name</i>.  As previously discussed, a <i>module name</i>
+globally identifies a Niagara software module.  The <i>type name</i>
+is a simple String name which is mapped to a Java class name
+by the "module.xml" manifest file.  Type's are commonly identified 
+using a format of:
+</p>
+<pre>
+{module name}:{type name}
+
+Examples:
+  baja:AbsTime
+  bajaui:TextField
+</pre>
+
+<p class='note'>
+Note:  to avoid confusion with the various uses of the word <i>type</i>,
+we will use capitalization when talking about a Niagara Type.
+</p>
+
+<!------------------------------------------------------------->
+<h1>BObject</h1>
+<!------------------------------------------------------------->
+
+<p>
+All Java classes which implement a Niagara Type are subclassed from <code>
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BObject.bajadoc'>BObject</a>
+</code>.  It is useful to compare <code>
+<a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/Type.bajadoc'>Type</a></code> and 
+<code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BObject.bajadoc'>BObject</a></code> 
+to their low level Java counter parts:
+</p>
+
+<p><table border='1' cellspacing='0'>
+<tr>
+  <th>Java</th><th>Niagara</th>
+  </tr>
+<tr>
+  <td align='left'><code>java.lang.Object</code></td>
+  <td align='left'><code>javax.baja.sys.BObject</code></td>
+</tr>
+<tr>
+  <td align='left'><code>java.lang.Class</code></td>
+  <td align='left'><code>javax.baja.sys.Type</code></td>
+</tr>
+<tr>
+  <td align='left'><code>java.lang.reflect.Member</code></td>
+  <td align='left'><code>javax.baja.sys.Slot</code> (discussed <a href='componentModel.html'>later</a>)</td>
+</tr>
+</table></p>
+
+<p>
+<code>Type</code> and <code>Slot</code> capture the concepts of 
+meta-data, while <code>BObject</code> provides the base class
+of Niagara object instances themselves.
+</p>
+
+<!------------------------------------------------------------->
+<h1>BInterface</h1>
+<!------------------------------------------------------------->
+
+<p>
+Java interfaces may be mapped into the Niagara type system by extending 
+<code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BInterface.bajadoc'>BInterface</a></code>.
+You can query whether a <code>Type</code> maps to a class or an interface using the
+method <code>isInterface()</code>.
+</p>
+
+<p class='note'>
+Classes which implement <code>BInterface</code> must also extent <code>BObject</code>.
+All <code>BInterfaces</code> class names should be prefixed with "BI".
+</p>
+
+<!------------------------------------------------------------->
+<h1>BObject Semantics</h1>
+<!------------------------------------------------------------->
+
+<p>
+Subclassing from BObject provides some common semantics that all
+instances of Niagara Types share:
+</p>
+
+<ul>
+
+<li>
+They all support a <code>getType()</code> method.
+</li>
+
+<li>
+Types installed on a system can be extensively queried using
+the <a href='registry.html'>registry</a>.
+</li>
+
+<li>
+All <code>BObjects</code> have an icon accessed via <code>getIcon()</code>.
+</li>
+
+<li>
+All <code>BObjects</code> have a set of agents accessed via <code>getAgents()</code>.
+Most agents are user agents which provide some visualization or configuration 
+mechanism for the <code>BObject</code>.
+</li>
+
+</ul>
+
+<a name='buildingObjects'></a>
+
+<!------------------------------------------------------------->
+<h1>Building BObject</h1>
+<!------------------------------------------------------------->
+
+<p>
+By subclassing <code>BObject</code> you make an ordinary Java class
+into a Niagara Type. You must obey the following rules when creating 
+a Type:
+</p>
+
+<ul>
+
+<li>Types must declare a mapping between their type name and their
+qualified Java class name in "module.xml".  The Java class name
+must always be prefixed with 'B', but the type name doesn't include
+this leading 'B'.  For example:
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;type name="FooBar" class="javax.baja.control.BFooBar"/&gt;
+  </code>
+</pre>
+</li>
+
+<li>
+All Types must override the <code>getType()</code> method to return
+a statically cached <code>Type</code> instance created by the
+<code>Sys.loadType()</code> method:
+<pre>
+  <code class="sunlight-highlight-java">
+public Type getType() { return TYPE; }
+public static final Type TYPE = Sys.loadType(BFooBar.class);
+  </code>
+</pre>
+</li>
+
+</ul>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/modules.html" class="navbar">Prev</a> |  <a href="/doc/componentModel.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</hmtl>

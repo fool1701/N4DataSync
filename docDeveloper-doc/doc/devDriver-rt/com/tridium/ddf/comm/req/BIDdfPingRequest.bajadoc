@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.BIDdfPingRequest" name="BIDdfPingRequest" packageName="com.tridium.ddf.comm.req" public="true" interface="true" abstract="true" category="interface">
+<description>
+Driver developers who want ddf driver support&#xa; for ping requests but do not wish to extend&#xa; BDdfPingRequest may implement this interface&#xa; instead.
+</description>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+</implements>
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.getReadParameters() -->
+<method name="getReadParameters"  public="true" abstract="true">
+<description>
+The read parameters are extra information, in addition to the deviceId,&#xa; that the ping request may use to construct its byte array, etc.&#xa;&#xa; We call this readParameters instead of a pingParameterss in order to allow&#xa; read requests to more easily act also as ping requests whenever necessary.
+</description>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.setReadParameters(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setReadParameters"  public="true" abstract="true">
+<description>
+The read parameters are extra information, in addition to the deviceId,&#xa; that the ping request may use to construct its byte array, etc.&#xa;&#xa; During the auto-ping feature, the device&#x27;s pingParams will be passed here. During&#xa; auto-discovery, this method is not called.
+</description>
+<parameter name="requestParams">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.getAutoPingOk() -->
+<method name="getAutoPingOk"  public="true" abstract="true">
+<description>
+If this method returns true then the ddf driver&#xa; framework will call pingOk on all pingable sources&#xa; for this message upon receipt of the response message.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.getAutoPingOkLate() -->
+<method name="getAutoPingOkLate"  public="true" abstract="true">
+<description>
+If the method returns true then the ddf driver&#xa; framework will call pingOk on all pingable sources&#xa; for this message upon receipt of a response after&#xa; the request timesout. This is sometimes useful&#xa; for multiple outstanding transaction protocols.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.getAutoPingFailOnTimeout() -->
+<method name="getAutoPingFailOnTimeout"  public="true" abstract="true">
+<description>
+If this method returns true then the ddf driver&#xa; framework will call pingFail on all pingable sources&#xa; for this message upon request timeout.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.getAutoPingFailOnError() -->
+<method name="getAutoPingFailOnError"  public="true" abstract="true">
+<description>
+If this method returns true then the ddf driver&#xa; framework will call pingFail on all pingable sources&#xa; for this message upon receipt of a response that&#xa; indicates an error condition.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.getPingableSource() -->
+<method name="getPingableSource"  public="true" abstract="true">
+<description>
+Returns the pingableSources upon which to call pingOk&#xa; or pingFail for the request. Typically these will be&#xa; passed to the concrete descendant&#x27;s constructor. If the&#xa; message only pings one item then the array may be of length&#xa; one!
+</description>
+<return>
+<type class="com.tridium.ddf.comm.req.IDdfPingable" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.setPingableSource(com.tridium.ddf.comm.req.IDdfPingable[]) -->
+<method name="setPingableSource"  public="true" abstract="true">
+<description>
+Allows the pingableSource array to be assigned after construction.
+</description>
+<parameter name="pingableSource">
+<type class="com.tridium.ddf.comm.req.IDdfPingable" dimension="1"/>
+<description>
+an array of IDdfPingable objects that&#xa; this request can ping.&#xa;&#xa; I wanted to move this out of the request and to a static table in&#xa; the ddf, however, being on the request itself&#xa; helps eliminate garbage-collection concerns of leaving stale references.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BIDdfPingRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="kitControl" runtimeProfile="rt" qualifiedName="com.tridium.kitControl.BLoopPoint" name="BLoopPoint" packageName="com.tridium.kitControl" public="true">
+<description>
+The BLoopPoint class implements a simple PID control loop.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@version">$Revision: 23$ $Date: 5/11/2004 11:30:46 AM$</tag>
+<tag name="@creation">25 May 01</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.control.BNumericPoint"/>
+</extends>
+<property name="loopEnable" flags="">
+<type class="javax.baja.status.BStatusBoolean"/>
+<description>
+Slot for the &lt;code&gt;loopEnable&lt;/code&gt; property.&#xa; Loop Enable
+</description>
+<tag name="@see">#getLoopEnable</tag>
+<tag name="@see">#setLoopEnable</tag>
+</property>
+
+<property name="inputFacets" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;inputFacets&lt;/code&gt; property.&#xa; These facets are applied against the controlledVariable and setpoint properties.
+</description>
+<tag name="@see">#getInputFacets</tag>
+<tag name="@see">#setInputFacets</tag>
+</property>
+
+<property name="controlledVariable" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;controlledVariable&lt;/code&gt; property.&#xa; Controlled Variable
+</description>
+<tag name="@see">#getControlledVariable</tag>
+<tag name="@see">#setControlledVariable</tag>
+</property>
+
+<property name="setpoint" flags="">
+<type class="javax.baja.status.BStatusNumeric"/>
+<description>
+Slot for the &lt;code&gt;setpoint&lt;/code&gt; property.&#xa; The target for the process variable,&#xa; meaning the value at the setpoint input.
+</description>
+<tag name="@see">#getSetpoint</tag>
+<tag name="@see">#setSetpoint</tag>
+</property>
+
+<property name="executeTime" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;executeTime&lt;/code&gt; property.&#xa; execution time
+</description>
+<tag name="@see">#getExecuteTime</tag>
+<tag name="@see">#setExecuteTime</tag>
+</property>
+
+<property name="actualTime" flags="ort">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;actualTime&lt;/code&gt; property.&#xa; actual time
+</description>
+<tag name="@see">#getActualTime</tag>
+<tag name="@see">#setActualTime</tag>
+</property>
+
+<property name="loopAction" flags="">
+<type class="com.tridium.kitControl.enums.BLoopAction"/>
+<description>
+Slot for the &lt;code&gt;loopAction&lt;/code&gt; property.&#xa; Selection of loop action as either direct or reverse acting.
+</description>
+<tag name="@see">#getLoopAction</tag>
+<tag name="@see">#setLoopAction</tag>
+</property>
+
+<property name="disableAction" flags="">
+<type class="com.tridium.kitControl.enums.BDisableAction"/>
+<description>
+Slot for the &lt;code&gt;disableAction&lt;/code&gt; property.&#xa; Selection of disable action selects output action when loop is disabled.
+</description>
+<tag name="@see">#getDisableAction</tag>
+<tag name="@see">#setDisableAction</tag>
+</property>
+
+<property name="tuningFacets" flags="">
+<type class="javax.baja.sys.BFacets"/>
+<description>
+Slot for the &lt;code&gt;tuningFacets&lt;/code&gt; property.&#xa; These facets are applied against the proportional, integral, and derivative constant properties.
+</description>
+<tag name="@see">#getTuningFacets</tag>
+<tag name="@see">#setTuningFacets</tag>
+</property>
+
+<property name="proportionalConstant" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;proportionalConstant&lt;/code&gt; property.&#xa; Defines the value of the proportional gain parameter used by the loop algorithm.&#xa; Used to set the overall gain for the loop.&#xa; A starting point for this value is found by: output range / throttling range.
+</description>
+<tag name="@see">#getProportionalConstant</tag>
+<tag name="@see">#setProportionalConstant</tag>
+</property>
+
+<property name="integralConstant" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;integralConstant&lt;/code&gt; property.&#xa; Defines the integral gain parameter, in repeats per minute,&#xa; used by the loop algorithm. Also called reset rate.&#xa; Acts on the magnitude of the setpoint error.&#xa; resets per minute&#xa; FIXX set units
+</description>
+<tag name="@see">#getIntegralConstant</tag>
+<tag name="@see">#setIntegralConstant</tag>
+</property>
+
+<property name="derivativeConstant" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;derivativeConstant&lt;/code&gt; property.&#xa; Defines the derivative gain parameter, in seconds, used by the loop algorithm.&#xa; Acts on the rate of change of the setpoint error.&#xa; FIXX set units
+</description>
+<tag name="@see">#getDerivativeConstant</tag>
+<tag name="@see">#setDerivativeConstant</tag>
+</property>
+
+<property name="bias" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;bias&lt;/code&gt; property.&#xa; Defines the amount of output bias added to the output to correct offset error.&#xa; In other words, the output at setpoint.&#xa; Expressed in the same units of the outputUnits.
+</description>
+<tag name="@see">#getBias</tag>
+<tag name="@see">#setBias</tag>
+</property>
+
+<property name="maximumOutput" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;maximumOutput&lt;/code&gt; property.&#xa; Defines the maximum output value that the loop algorithm can produce.
+</description>
+<tag name="@see">#getMaximumOutput</tag>
+<tag name="@see">#setMaximumOutput</tag>
+</property>
+
+<property name="minimumOutput" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;minimumOutput&lt;/code&gt; property.&#xa; Defines the minimum output value that the loop algorithm can produce.
+</description>
+<tag name="@see">#getMinimumOutput</tag>
+<tag name="@see">#setMinimumOutput</tag>
+</property>
+
+<property name="rampTime" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;rampTime&lt;/code&gt; property.&#xa; ramp time is the max time that the output will be allowed to go from&#xa; minimumOutput to maximumOutput when the loop is enabled.
+</description>
+<tag name="@see">#getRampTime</tag>
+<tag name="@see">#setRampTime</tag>
+</property>
+
+<property name="propagateFlags" flags="">
+<type class="javax.baja.status.BStatus"/>
+<description>
+Slot for the &lt;code&gt;propagateFlags&lt;/code&gt; property.&#xa; Configurable status flags propagated to out from loopEnable,&#xa; controlledVariable. and setpoint.
+</description>
+<tag name="@since">Niagara 4.12</tag>
+<tag name="@see">#getPropagateFlags</tag>
+<tag name="@see">#setPropagateFlags</tag>
+</property>
+
+<action name="resetIntegral" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;resetIntegral&lt;/code&gt; action.&#xa; Any received trigger pulse clears the current integral component of the loop&#x27;s output calculation.&#xa; If needed, this input can be linked to another object to provide a quick purge of the integral effect.&#xa; Examples include the changeOfStateTrigger output of a related BinaryOutput object (say for a supply fan),&#xa; or a perhaps a Command object. Typically, the later would provide more of a &#x22;debug&#x22; utility,&#xa; and should not be necessary if the Loop object&#x27;s configuration properties are correctly defined.&#xa; Also, note that whenever the Loop&#x27;s input &#x22;statusInhibit&#x22; is linked,&#xa; an integral reset occurs automatically each time a false-to-true transition is received.
+</description>
+<tag name="@see">#resetIntegral()</tag>
+</action>
+
+<action name="timerExpired" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;timerExpired&lt;/code&gt; action.&#xa; Internal action that will fire when the execute timer expires.
+</description>
+<tag name="@see">#timerExpired()</tag>
+</action>
+
+</class>
+</bajadoc>

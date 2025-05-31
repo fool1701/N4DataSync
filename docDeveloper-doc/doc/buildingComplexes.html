@@ -1,0 +1,348 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  2 Oct 01
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Building Complexes</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/buildingEnums.html" class="navbar">Prev</a> |  <a href="/doc/registry.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Title Block -->
+<h1 class='title'>Building Complexes</h1> 
+
+<!------------------------------------------------------------->
+<h1 id="bStructsVsBComponents">BStructs vs BComponents</h1>
+<!------------------------------------------------------------->
+
+<p>
+<code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BComplex.bajadoc'>BComplex</a></code>
+ is the base class for both 
+<code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BStruct.bajadoc'>BStruct</a></code>
+and <code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BComponent.bajadoc'>BComponent</a></code>. 
+ Classes never subclass 
+ <code><a href='module://docDeveloper/doc/baja-rt/javax/baja/sys/BComplex.bajadoc'>BComplex</a></code>
+directly (it doesn't support any public or protected constructors).
+Rather developers subclass from <code>BStruct</code> or <code>BComponent</code>
+depending on their needs.  In general structs are used as complex
+data types.  <code>BStructs</code> can be built only using frozen
+properties.  <code>BComponents</code> support much more flexibility and
+are built using frozen and dynamic slots of all types:
+</p>
+
+<p>
+<table border='1' cellspacing='0'>
+<tr><th align='left'>&nbsp;</th><th><code>BStruct</code></th><th><code>BComponent</code></th></tr>
+<tr><th align='left'>Frozen Property</th><td>X</td><td>X</td></tr>
+<tr><th align='left'>Frozen Action</th><td>&nbsp;</td><td>X</td></tr>
+<tr><th align='left'>Frozen Topic</th><td>&nbsp;</td><td>X</td></tr>
+<tr><th align='left'>Dynamic Property</th><td>&nbsp;</td><td>X</td></tr>
+<tr><th align='left'>Dynamic Action</th><td>&nbsp;</td><td>X</td></tr>
+<tr><th align='left'>Dynamic Topic</th><td>&nbsp;</td><td>X</td></tr>
+</table>
+</p>
+
+<p>
+As you will learn, <code>BComponents</code> are also the basis
+for many other features such as <code>BOrds</code>, links, 
+and the event model.  You may wonder why you would use a 
+<code>BStruct</code>?  There are two main reasons.  The first is
+that because of its limited feature set, it is more memory efficient.
+The other reason is that properties containing <code>BComponents</code>
+cannot be linked, but <code>BStructs</code> can be (see 
+<a href='links.html'>Links</a>).
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="buildingBComplexes">Building BComplexes</h1>
+<!------------------------------------------------------------->
+
+<p>
+All concrete subclasses of <code>BComplex</code> must meet the following
+requirements:
+</p>
+
+<ul>
+
+<li>Meet the common rules applicable to all 
+<a href='objectModel.html#buildingObjects'><code>BObjects</code></a>;
+</li>
+
+<li>
+Must declare a public constructor which takes no arguments;
+</li>
+
+<li>
+Declare frozen slots using the introspection patterns defined below.
+</li>
+
+</ul>
+
+<!------------------------------------------------------------->
+<h1 id="introspectionPatterns">Introspection Patterns</h1>
+<!------------------------------------------------------------->
+
+<p>
+We have discussed how frozen slots are defined at compile time.
+Let's take a look at how the framework knows when frozen slots have
+been declared.  Every slot is composed of two or three Java members.  
+A member is the technical term for a Java field, method, or constructor.  
+At runtime the framework uses Java reflection to examine the members 
+of each class, looking for patterns to self-discover slots.  These 
+patterns are based on the patterns used by JavaBeans, with significant 
+extensions.  Remember introspection is used only to define frozen 
+slots, dynamic slots are not specified in the classfile itself.  There is a 
+different pattern for each slot type.
+</p>
+
+<p>
+These introspection patterns require a fair amount of boiler plate
+code.  Although it is not too painful to write this code by hand,
+you may use <a href='slot-o-matic.html'>Slot-o-matic</a> to generate 
+the boiler plate code for you.
+</p>
+
+<!------------------------------------------------------------->
+<h1 id="frozenProperties">Frozen Properties</h1>
+<!------------------------------------------------------------->
+
+<h2>Rules</h2>
+
+<p>
+Every frozen property must follow these rules:
+</p>
+
+<ul>
+<li>Declare a <code>public static final Property</code> field
+where the field name is the property name.</li>
+<li>The property field must be allocated a Property instance
+using the <code>BComplex.newProperty()</code> method.  This
+method takes a set of flags for the property, and a default 
+value.</li>
+<li>Declare a public getter method with JavaBean conventions: 
+<code><i>type</i> get<i>CapitalizedName</i>()</code>.</li>
+<li>Declare a public setter method with JavaBean conventions: 
+<code>void set<i>CapitalizedName</i>(<i>type</i> v)</code>.</li>
+<li>The getter must call <code>BObject.get(Property)</code>.  The method
+must not perform any addition behavior.</li>
+<li>The setter must call <code>BObject.set(Property, BObject)</code>.
+The method must not perform any additional behavior.</li>
+<li>The only types which may be used in a property are:  subclasses of <code>BValue,
+boolean, int, long, float, double,</code> and <code>String</code>.  The six non-<code>BValue</code>
+types have special accessors which should be used in the getter and
+setter implementations.
+</ul>
+
+<h2>Semantics</h2>
+
+<p>The introspection rules map Property meta-data as follows:
+
+<ul>
+<li><b>Name</b>: The Property name is the same as the field name.</li>
+<li><b>Type</b>: The Property type is the one declared in the getter and setter methods.</li>
+<li><b>Flags</b>: The Property flags are the ones passed to <code>newProperty()</code>.</li>
+<li><b>Default Value</b>: The Property's default value is the instance passed to <code>newProperty()</code>.</li>
+</ul>
+
+<h2>Example</h2>
+
+<p>
+The following illustrates an example for different property types:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+  // boolean property: fooBar
+  public static final Property fooBar = newProperty(0, true);
+  public boolean getFooBar() { return getBoolean(fooBar); }
+  public void setFooBar(boolean v) { setBoolean(fooBar, v); }
+  
+  // int property: cool
+  public static final Property cool = newProperty(0, 100);
+  public int getCool() { return getInt(cool); }
+  public void setCool(int v) { setInt(cool, v); }
+
+  // double property: analog
+  public static final Property analog = newProperty(0, 75.0);
+  public double getAnalog() { return getDouble(analog); }
+  public void setAnalog(double v) { setDouble(analog, v); }
+
+  // float property: description
+  public static final Property description = newProperty(0, "describe me");
+  public String getDescription() { return getString(description); }
+  public void setDescription(String x) { setString(description, v); }
+
+  // BObject property: timestamp
+  public static final Property timestamp = newProperty(0, BAbsTime.DEFAULT);
+  public BAbsTime getTimestamp() { return (BAbsTime)get(timestamp); }
+  public void setTimestamp(BAbsTime v) { set(timestamp, v); }
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="frozenActions">Frozen Actions</h1>
+<!------------------------------------------------------------->
+
+<h2>Rules</h2>
+
+<p>
+Every frozen action must follow these rules:
+</p>
+
+<ul>
+<li>Declare a <code>public static final Action</code> field
+where the field name is the action name.</li>
+<li>The action must be allocated an Action instance
+using the <code>BComponent.newAction()</code> method.  This
+method takes a set of flags for the action and an optional
+default argument.</li>
+<li>Declare a public <i>invocation</i> method with the action name.  
+This method must return <code>void</code> or a <code>BObject</code> 
+type.  This method must take zero or one parameters.  If it takes
+a parameter, it should be a <code>BObject</code> type.</li>
+<li>Declare a public <i>implementation</i> method, which is named
+do<i>CapitalizedName</i>.  This method must have the same return type 
+as the invocation method.  This method must have the same parameter 
+list as the invocation method.</li>
+<li>The implementation of the invocation method must call
+<code>BComponent.invoke()</code>.  No other behavior is permitted
+in the method.
+</ul>
+
+<h2>Semantics</h2>
+
+<p>The introspection rules map Action meta-data as follows:
+
+<ul>
+<li><b>Name</b>: The Action name is the same as the field name.</li>
+<li><b>Return Type</b>: The Action return type is the one declared in 
+the invocation method.</li>
+<li><b>Parameter Type</b>: The Action parameter type is the one declared 
+in the invocation method.</li>
+<li><b>Flags</b>: The Action flags are the ones passed to 
+<code>newAction()</code>.</li>
+</ul>
+
+<h2>Example</h2>
+
+<p>
+The following illustrates two examples.  The first action contains
+neither a return value nor an argument value.  The second declares
+both a return and argument value:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+  // action: makeMyDay
+  public static final Action makeMyDay = newAction(0);
+  public void makeMyDay() { invoke(makeMyDay, null, null); }
+  public void doMakeMyDay() {  System.out.println("Make my day!"); }
+
+  // action: increment
+  public static final Action increment = newAction(0, new BInteger(1));
+  public BInteger increment(BInteger v) 
+    { return (BInteger)invoke(increment, v, null); }
+  public BInteger doIncrement(BInteger i) 
+    { return new BInteger(i.getInt()+1); }
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="frozenTopics">Frozen Topics</h1>
+<!------------------------------------------------------------->
+
+<h2>Rules</h2>
+
+<p>
+Every frozen topic must follow these rules:
+</p>
+
+<ul>
+<li>Declare a <code>public static final Topic</code> field
+where the field name is the topic name.</li>
+<li>Declare a fire method of the signature: 
+<code>void fire<i>CapitalizedName</i>(<i>EventType</i>)</code>.</li>
+<li>The implementation of the fire method is to call
+<code>BComponent.fire()</code>.  No other behavior is permitted
+in the method.</li>
+</ul>
+
+<h2>Semantics</h2>
+
+<p>The introspection rules map Topic meta-data as follows:
+
+<ul>
+<li><b>Name</b>: The Topic name is the same as the field name.</li>
+<li><b>Event Type</b>: The Topic event type is the one declared in 
+the fire method.</li>
+<li><b>Flags</b>: The Topic flags are the ones passed to 
+<code>newTopic()</code>.</li>
+</ul>
+
+<h2>Example</h2>
+
+<p>
+The following code example illustrates declaring a frozen topic:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+  // topic: exploded
+  public static final Topic exploded = newTopic(0);
+  public void fireExploded(BString event) { fire(exploded, event, null); }
+  </code>
+</pre>
+
+<!------------------------------------------------------------->
+<h1 id="dynamicSlots">Dynamic Slots</h1>
+<!------------------------------------------------------------->
+
+<p>
+Dynamic slots are not declared as members in the classfile, but
+rather are managed at runtime using a set of methods on 
+<code>BComponent</code>.  These methods allow you to add, remove,
+rename, and reorder dynamic slots.  A small sample of these
+methods follows:
+</p>
+
+<pre>
+  <code class="sunlight-highlight-java">
+  Property add(String name, BValue value, int flags);
+  void remove(Property property);
+  void rename(Property property, String newName);
+  void reorder(Property[] properties);
+  </code>
+</pre>
+
+<p class='note'>
+Note:  You will notice that methods dealing with dynamic slots
+take a Property, not a Slot.  This is because all dynamic slots
+including dynamic Actions and Topics are also Properties.  Dynamic
+Actions and Topics are implemented by subclassing <code>BAction</code>
+and <code>BTopic</code> respectively.
+</p>
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/buildingEnums.html" class="navbar">Prev</a> |  <a href="/doc/registry.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devIpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator" name="BDdfUdpCommunicator" packageName="com.tridium.ddfIp.udp.comm" public="true">
+<description>
+Communicates over Udp/Ip.&#xa; &#xa; The default &#x27;transmitter&#x27; holds the Udp IP address and Udp port setting.&#xa; &#xa; The default &#x27;receiver&#x27; uses the same Udp IP address and Udp port as the &#x27;transmitter&#x27;. If necessary,&#xa; the developer can change this by extending BDdfUdpReceiver, adding a BDdfUdpIpAddress property, and overriding&#xa; the getUdpAddress() method on his or her BDdfUdpReceiver to return the value of the new BDddfUdpIpAddress&#xa; property that would be added to the BDdfUdpReceiver.&#xa; &#xa; Note:&#xa; Allows for the local Udp IP address and Udp port to be the same for sending Udp/Ip and&#xa; receiving Udp/Ip. This also allows for the local Udp IP address and Udp port to be&#xa; different for sending Udp/Ip and receiving Udp/Ip.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.ddfIp.comm.BDdfIpCommunicator"/>
+</extends>
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator() -->
+<constructor name="BDdfUdpCommunicator" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.doesSocketNeedReInitialized(com.tridium.ddfIp.comm.BDdfIpAdapter, java.net.DatagramSocket, int, com.tridium.ddfIp.comm.BDdfIpAdapter, int) -->
+<method name="doesSocketNeedReInitialized"  protected="true">
+<description>
+Checks if the given socket needs to be reinitialized.
+</description>
+<parameter name="socketAdapter">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+<description>
+a copy of the adapter in the same state that it was in when the given&#xa; socket was originally constructed
+</description>
+</parameter>
+<parameter name="socket">
+<type class="java.net.DatagramSocket"/>
+<description>
+the socket to check to see if it needs to be reinitialized
+</description>
+</parameter>
+<parameter name="socketPort">
+<type class="int"/>
+</parameter>
+<parameter name="currentAdapter">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+<description>
+the current adapter to use if the socket were to be re-intialized
+</description>
+</parameter>
+<parameter name="currentPort">
+<type class="int"/>
+<description>
+the current port to bing the socket to if it were to be re-initialized
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+Returns true if the socketAdapter is not equivalent to the currentAdapter or if the socket&#x27;s port&#xa; is not equal to the currentPort. Returns false otherwise.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.getUdpTransmitSocket() -->
+<method name="getUdpTransmitSocket"  public="true">
+<description>
+Gets the socket to use for Udp/Ip transmissions.
+</description>
+<return>
+<type class="java.net.DatagramSocket"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.getUdpReceiveSocket() -->
+<method name="getUdpReceiveSocket"  public="true">
+<description>
+Gets the DatagramSocket to receive from, based on the current setting of the &#x22;Receive From&#x22; property of the &#x22;Udp Receiver&#x22;
+</description>
+<return>
+<type class="java.net.DatagramSocket"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.getUdpTransmitPort() -->
+<method name="getUdpTransmitPort"  public="true">
+<description>
+Gets the port to use for Udp/Ip transmissions.&#xa; By default, this calls getUdpTransmitter().getTransmitFromPort();
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.getUdpReceivePort() -->
+<method name="getUdpReceivePort"  public="true">
+<description>
+Gets the port to use for receiving Udp/Ip data.&#xa; By default, this calls getUdpReceiver().getReceivePort()
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.getUdpTransmitter() -->
+<method name="getUdpTransmitter"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddfIp.udp.comm.BDdfUdpTransmitter"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.getUdpReceiver() -->
+<method name="getUdpReceiver"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddfIp.udp.comm.BDdfUdpReceiver"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpCommunicatorStarted() -->
+<method name="udpCommunicatorStarted"  public="true">
+<description>
+This is the override point for a developer to customize the&#xa; shutdown behavior.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpCommunicatorStopped() -->
+<method name="udpCommunicatorStopped"  public="true">
+<description>
+This is the override point for a developer to customize the&#xa; shutdown behavior.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.ipCommunicatorStarted() -->
+<method name="ipCommunicatorStarted"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.ipCommunicatorStopped() -->
+<method name="ipCommunicatorStopped"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.makeLocalHostSocket(int) -->
+<method name="makeLocalHostSocket"  protected="true">
+<description>
+Makes a socket bound locally to the given bind port. The socket will be bound&#xa; to the default localhost.
+</description>
+<parameter name="bindPort">
+<type class="int"/>
+<description/>
+</parameter>
+<return>
+<type class="java.net.DatagramSocket"/>
+<description>
+the requested socket
+</description>
+</return>
+<throws>
+<type class="java.net.SocketException"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.makeFullySpecifiedSocket(com.tridium.ddfIp.comm.BDdfIpAdapter, int) -->
+<method name="makeFullySpecifiedSocket"  protected="true">
+<description/>
+<parameter name="networkInterface">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+</parameter>
+<parameter name="bindPort">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.net.DatagramSocket"/>
+</return>
+<throws>
+<type class="java.net.UnknownHostException"/>
+</throws>
+<throws>
+<type class="java.net.SocketException"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.makeSocket(com.tridium.ddfIp.comm.BDdfIpAdapter, int) -->
+<method name="makeSocket"  protected="true">
+<description>
+Makes a socket for the given &#x27;networkInterface&#x27;. If the port is -1 then any available port is&#xa; used.&#xa; &#xa; If the &#x27;networkInterface&#x27; specifies that the default, local host is to be used, then the JVM&#xa; chooses which Ip address to use.&#xa; &#xa; If the &#x27;networkInterface&#x27; defines what appears to be a valid adapterId and ipAddress then this&#xa; makes a socket bound to the ip address of teh &#x27;networkInterface&#x27; and bound to the given bind&#xa; port
+</description>
+<parameter name="networkInterface">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+<description>
+a BDdfUdpIpAdapter structure that specifies the interface to use. This&#xa; should be a direct reference to the transmit-from adapter or the receive-to adapter, because&#xa; this method will directly update the structure in the event that it attempts to resolve the&#xa; network interface. As mentioned, this method will attempt to resolve the network interface if&#xa; this structure is a &#x27;description-only&#x27; adapter (read above for details about this).
+</description>
+</parameter>
+<parameter name="bindPort">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.net.DatagramSocket"/>
+<description>
+the newly created and bound socket, if all goes well -- an exception is thrown otherwise
+</description>
+</return>
+<throws>
+<type class="java.net.SocketException"/>
+<description>
+if there is a general security violation preventing this method from&#xa; serving its purpose, or if the given networkInterface identifies an adapter that cannot be&#xa; found amoung the adapters that the Niagara AX Platfrom Tcp/Ip service reports.
+</description>
+</throws>
+<throws>
+<type class="java.net.UnknownHostException"/>
+<description>
+if there is a problem with the ipAddress defined by the given&#xa; &#x27;networkInterface&#x27;
+</description>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.makeUdpTransmitSocket() -->
+<method name="makeUdpTransmitSocket"  protected="true">
+<description>
+Constructs a new socket to serve as the DatagramSocket that is used for sending&#xa; DatagramPacket objects. Construction is performed inside a lock on the local&#xa; udpTransmitSocketLock object.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.initUdpTransmitSocket() -->
+<method name="initUdpTransmitSocket"  protected="true">
+<description>
+This is a callback to allow the developer to perform any intialization&#xa; communication as a result of instantiating a new Udp transmit socket.&#xa; &#xa; This is called after processing a change to the udp transmit settings
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.initUdpReceiveSocket() -->
+<method name="initUdpReceiveSocket"  protected="true">
+<description>
+This is a callback to allow the developer to perform any intialization&#xa; communication as a result of instantiating a new Udp receive socket.&#xa; &#xa; This is called after processing a change to the udp receive settings
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.makeUdpReceiveSocket() -->
+<method name="makeUdpReceiveSocket"  protected="true">
+<description>
+Constructs a new socket to serve as the DatagramSocket that is used for receiving&#xa; DatagramPacket objects. Construction is performed inside a lock on the local&#xa; udpReceiveSocketLock object.&#xa; &#xa; Note: This checks if the receiver&#x27;s Udp/Ip port is the same as the&#xa; transmitter&#x27;s Udp/Ip port. If so, then this sets its internal reference&#xa; for the udpReceiveSocket equal to the return value of the &#x27;getUdpTransmitSocket&#x27; method.&#xa; &#xa; Of course, it is assumed that the Udp/Ip transmitter and Udp/Ip receiver use the same&#xa; network interface.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.cleanupUdpTransmitSocket() -->
+<method name="cleanupUdpTransmitSocket"  protected="true">
+<description>
+This method calls &#x27;close&#x27; on the Udp/Ip transmit socket and sets the internal&#xa; reference to the &#x27;udpTransmitSocket&#x27; to null.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.cleanupUdpReceiveSocket() -->
+<method name="cleanupUdpReceiveSocket"  protected="true">
+<description>
+This method calls &#x27;close&#x27; on the Udp/Ip receive socket and sets the internal&#xa; reference to the &#x27;udpReceiveSocket&#x27; to null.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.cleanupSocket(java.net.DatagramSocket, java.lang.Object) -->
+<method name="cleanupSocket"  protected="true" static="true">
+<description>
+Cleans up the given socket by calling &#x22;close()&#x22; on it. This is done within a&#xa; synchronized block on the given socketLock object.
+</description>
+<parameter name="cleanupSocket">
+<type class="java.net.DatagramSocket"/>
+<description/>
+</parameter>
+<parameter name="socketLock">
+<type class="java.lang.Object"/>
+<description/>
+</parameter>
+<return>
+<type class="java.net.DatagramSocket"/>
+<description>
+this method always returns null so that the caller can set its socket &#x22;equal&#x22;&#xa; to the return value of this method, thereby, null&#x27;ing out the reference to the&#xa; socket as soon as the socket is cleaned up.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.transmitter -->
+<field name="transmitter"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;transmitter&lt;/code&gt; property.&#xa; Facilitates transmitting Udp/Ip packets from an IP address and port&#xa; on the platform.
+</description>
+<tag name="@see">#getTransmitter</tag>
+<tag name="@see">#setTransmitter</tag>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.receiver -->
+<field name="receiver"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;receiver&lt;/code&gt; property.&#xa; Facilitates receiving Udp/Ip packets at an IP address and port on&#xa; the platform
+</description>
+<tag name="@see">#getReceiver</tag>
+<tag name="@see">#setReceiver</tag>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpTransmitSocket -->
+<field name="udpTransmitSocket"  protected="true">
+<type class="java.net.DatagramSocket"/>
+<description>
+This is an internal reference to the DatagramSocket that is currently being used&#xa; for Udp/Ip sending.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpReceiveSocket -->
+<field name="udpReceiveSocket"  protected="true">
+<type class="java.net.DatagramSocket"/>
+<description>
+This is an internal reference to the DatagramSocket that is currently being used&#xa; for Udp/Ip receiving.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpNetworkAdapter -->
+<field name="udpNetworkAdapter"  protected="true">
+<type class="com.tridium.ddfIp.comm.BDdfIpAdapter"/>
+<description>
+This is an internal reference to a copy of the BDdfUdpIpAdapter that is currently&#xa; being used for all Udp/Ip communication.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpTransmitPort -->
+<field name="udpTransmitPort"  protected="true">
+<type class="int"/>
+<description>
+This is an internal reference to a the Udp/Ip port that is currently&#xa; being used for Udp/Ip sending.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpReceivePort -->
+<field name="udpReceivePort"  protected="true">
+<type class="int"/>
+<description>
+This is an internal reference to a the Udp/Ip port that is currently&#xa; being used for Udp/Ip receiving.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpTransmitSocketLock -->
+<field name="udpTransmitSocketLock"  protected="true" final="true">
+<type class="java.lang.Object"/>
+<description>
+This is an internal reference to an object that is used as a lock on the Udp/Ip&#xa; transmit socket. This lock object is used to prevent access to the transmit&#xa; socket if the transmit socket is being initialized or re-initialized.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.udpReceiveSocketLock -->
+<field name="udpReceiveSocketLock"  protected="true" final="true">
+<type class="java.lang.Object"/>
+<description>
+This is an internal reference to an object that is used as a lock on the Udp/Ip&#xa; receive socket. This lock object is used to prevent access to the receive&#xa; socket if the receive socket is being initialized or re-initialized.
+</description>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.lexkeyJaceSocketConnectionError -->
+<field name="lexkeyJaceSocketConnectionError"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.lexkeyJaceUnknownHostException -->
+<field name="lexkeyJaceUnknownHostException"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description/>
+</field>
+
+<!-- com.tridium.ddfIp.udp.comm.BDdfUdpCommunicator.LEX -->
+<field name="LEX"  public="true" static="true" final="true">
+<type class="javax.baja.util.Lexicon"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

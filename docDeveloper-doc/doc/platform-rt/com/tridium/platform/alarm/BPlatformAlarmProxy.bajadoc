@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platform" runtimeProfile="rt" qualifiedName="com.tridium.platform.alarm.BPlatformAlarmProxy" name="BPlatformAlarmProxy" packageName="com.tridium.platform.alarm" public="true">
+<description>
+BPlatformAlarmProxy generates alarms on behalf on the power platform&#xa; service.   It is required b/c the AlarmConsole groups alarms by source ord&#xa; and power platform service generates two types of alarms - battery and power.&#xa;&#xa; While it isn&#x27;t really a service, it implements&#xa; BIAlarmablePlatformService in order to receive alarm acks.
+</description>
+<tag name="@author">Dan Giorgis</tag>
+<tag name="@creation">15 Jul 05</tag>
+<tag name="@version">$Revision: 3$ $Date: 6/1/07 11:50:11 AM EDT$</tag>
+<tag name="@since">Niagara 3 Power 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="com.tridium.platform.alarm.BIAlarmablePlatformService"/>
+</implements>
+<action name="ackAlarm" flags="">
+<parameter name="parameter">
+<type class="com.tridium.platform.alarm.BPlatformServiceAlarmRecord"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBoolean"/>
+</return>
+<description>
+Slot for the &lt;code&gt;ackAlarm&lt;/code&gt; action.&#xa; Acknowledge the alarm matching this ack request
+</description>
+<tag name="@see">#ackAlarm(BPlatformServiceAlarmRecord parameter)</tag>
+</action>
+
+</class>
+</bajadoc>

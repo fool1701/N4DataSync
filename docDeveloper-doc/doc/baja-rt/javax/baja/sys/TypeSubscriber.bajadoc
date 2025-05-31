@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.TypeSubscriber" name="TypeSubscriber" packageName="javax.baja.sys" public="true" abstract="true">
+<description/>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">08 March 11</tag>
+<tag name="@version">$Revision: 4$ $Date: 4/11/11 3:56:16 PM EDT$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.sys.TypeSubscriber(javax.baja.space.BComponentSpace) -->
+<constructor name="TypeSubscriber" protected="true">
+<parameter name="space">
+<type class="javax.baja.space.BComponentSpace"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.sys.TypeSubscriber.isSubscribed(javax.baja.sys.Type) -->
+<method name="isSubscribed"  public="true" final="true" synchronized="true">
+<description>
+Return true if the specified type is in &#xa; this instance&#x27;s subscription list.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.isSubscribed(javax.baja.sys.Type[]) -->
+<method name="isSubscribed"  public="true" final="true" synchronized="true">
+<description>
+Return true if all the specified types are in &#xa; this instance&#x27;s subscription list.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type" dimension="1"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.getSubscriptionCount() -->
+<method name="getSubscriptionCount"  public="true" final="true">
+<description>
+Get the number of types currently subscribed.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.getSubscriptions() -->
+<method name="getSubscriptions"  public="true" final="true" synchronized="true">
+<description>
+Get an array of Types that this subscriber is &#xa; currently subscribed to.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.subscribe(javax.baja.sys.Type, javax.baja.sys.Context) -->
+<method name="subscribe"  public="true" final="true" synchronized="true">
+<description>
+Convenience for &lt;code&gt;subsubscribe(new Type[] {t}, cx)&lt;/code&gt;
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.subscribe(javax.baja.sys.Type[], javax.baja.sys.Context) -->
+<method name="subscribe"  public="true" final="true" synchronized="true">
+<description>
+Subscribe to the list of specified types, and all their&#xa; ancestors up to depth.  A depth of zero indicated just&#xa; the component, one its children, two its grandchildren.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type" dimension="1"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.unsubscribe(javax.baja.sys.Type) -->
+<method name="unsubscribe"  public="true" final="true" synchronized="true">
+<description>
+Convenience for &lt;code&gt;unsubscribe(c, null)&lt;/code&gt;.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.unsubscribe(javax.baja.sys.Type, javax.baja.sys.Context) -->
+<method name="unsubscribe"  public="true" final="true" synchronized="true">
+<description>
+Unsubscribe from the specified types.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.unsubscribe(javax.baja.sys.Type[], javax.baja.sys.Context) -->
+<method name="unsubscribe"  public="true" final="true" synchronized="true">
+<description>
+Unsubscribe from the list of specified types.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type" dimension="1"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.unsubscribeAll() -->
+<method name="unsubscribeAll"  public="true" final="true" synchronized="true">
+<description>
+Unsubscribe all the types in the &#xa; &lt;code&gt;getSubscription()&lt;/code&gt; list.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.getMask() -->
+<method name="getMask"  public="true" final="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BComponentEventMask"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.setMask(javax.baja.sys.BComponentEventMask) -->
+<method name="setMask"  public="true" final="true" synchronized="true">
+<description/>
+<parameter name="mask">
+<type class="javax.baja.sys.BComponentEventMask"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.event(javax.baja.sys.BComponentEvent) -->
+<method name="event"  public="true" abstract="true">
+<description>
+Callback when an event is received on subscribed type.
+</description>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.subscribed(javax.baja.sys.Type, javax.baja.sys.Context) -->
+<method name="subscribed"  protected="true">
+<description>
+Callback when a new type is added to subscribers list.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.unsubscribed(javax.baja.sys.Type, javax.baja.sys.Context) -->
+<method name="unsubscribed"  protected="true">
+<description>
+Callback when a type is removed from subscribers list.
+</description>
+<parameter name="t">
+<type class="javax.baja.sys.Type"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.TypeSubscriber.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description>
+Dump debug info.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="hx" runtimeProfile="wb" qualifiedName="javax.baja.hx.px.binding.BHxPxBinding" name="BHxPxBinding" packageName="javax.baja.hx.px.binding" public="true" abstract="true">
+<description>
+BHxPxBinding is responsible for mapping events on a BBinding to a&#xa; BHxPxWidget. Also note that in module-include.xml this type should be&#xa; registered as agent on the BBinding it is supposed to model.
+</description>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">29 Sept 09</tag>
+<tag name="@version">$Revision: 7$ $Date: 6/22/10 1:15:36 PM EDT$</tag>
+<tag name="@since">Niagara 3.5</tag>
+<extends>
+<type class="javax.baja.sys.BSingleton"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<!-- javax.baja.hx.px.binding.BHxPxBinding() -->
+<constructor name="BHxPxBinding" protected="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.makeFor(javax.baja.ui.BBinding) -->
+<method name="makeFor"  public="true" static="true">
+<description>
+Return the HxPxBinding registered on the given object, or throws a&#xa; NoSuchAgentException if no agent can be found. Since no context is passed&#xa; in, the widget that is created will not be appName specific.
+</description>
+<parameter name="obj">
+<type class="javax.baja.ui.BBinding"/>
+</parameter>
+<return>
+<type class="javax.baja.hx.px.binding.BHxPxBinding"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.makeFor(javax.baja.ui.BBinding, javax.baja.sys.Context) -->
+<method name="makeFor"  public="true" static="true">
+<description>
+Return the HxPxBinding registered on the given object, or throws a&#xa; NoSuchAgentException if no agent can be found. If the context can get to&#xa; valid HxProfile, app specific widgets will be retrieved.
+</description>
+<parameter name="obj">
+<type class="javax.baja.ui.BBinding"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.hx.px.binding.BHxPxBinding"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.write(javax.baja.hx.HxOp) -->
+<method name="write"  public="true">
+<description>
+Write any initialization code required by the binding. Calls to op.get() will return the&#xa; BBinding that HxPxBinding models.
+</description>
+<parameter name="op">
+<type class="javax.baja.hx.HxOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.update(int, int, boolean, javax.baja.hx.HxOp) -->
+<method name="update"  public="true">
+<description>
+Update the widget this binding is on. Calls to op.get() will return the&#xa; BBinding that HxPxBinding models.&#xa; The default implementation will help ensure that degrade behavior is observed.
+</description>
+<parameter name="width">
+<type class="int"/>
+</parameter>
+<parameter name="height">
+<type class="int"/>
+</parameter>
+<parameter name="forceUpdate">
+<type class="boolean"/>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.hx.HxOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.handle(javax.baja.ui.event.BInputEvent, javax.baja.hx.HxOp) -->
+<method name="handle"  public="true">
+<description>
+Handle an input event that occurred on the widget this binding is on. Calls&#xa; to op.get() will return the BBinding that HxPxBinding models.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BInputEvent"/>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.hx.HxOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.process(javax.baja.hx.HxOp) -->
+<method name="process"  public="true">
+<description>
+Process post request. Return true if this binding handled the message - if&#xa; not return false. The default implemenation routes event requests to the&#xa; registered event handler if one can be found, otherwise return false.
+</description>
+<parameter name="op">
+<type class="javax.baja.hx.HxOp"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.save(javax.baja.sys.BObject, javax.baja.hx.HxOp) -->
+<method name="save"  public="true">
+<description>
+Save the value of the binding
+</description>
+<parameter name="value">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="op">
+<type class="javax.baja.hx.HxOp"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.validateBinding(javax.baja.ui.BBinding, javax.baja.sys.Context) -->
+<method name="validateBinding"  public="true">
+<description>
+Return a non-null Localized String if something in the bindings&#x27;s configuration is not configured correctly&#xa; to work with the target media. To show multiple warnings separate them with a newline character for best display&#xa; results.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<parameter name="binding">
+<type class="javax.baja.ui.BBinding"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.registerEvent(javax.baja.hx.Event) -->
+<method name="registerEvent"  public="true">
+<description>
+Register this event. Events are registered by the event id - which is used&#xa; to route requests from the browser to the correct event handler.
+</description>
+<parameter name="event">
+<type class="javax.baja.hx.Event"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.hx.px.binding.BHxPxBinding.events -->
+<field name="events"  protected="true">
+<parameterizedType class="java.util.HashMap">
+<args>
+<type class="java.lang.String"/>
+<type class="javax.baja.hx.Event"/>
+</args>
+</parameterizedType>
+<description/>
+</field>
+
+</class>
+</bajadoc>

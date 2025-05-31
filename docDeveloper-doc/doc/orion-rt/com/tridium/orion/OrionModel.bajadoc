@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.OrionModel" name="OrionModel" packageName="com.tridium.orion" public="true" interface="true" abstract="true" category="interface">
+<description>
+OrionModel is the data model for orion applications.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">25 Sep 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- com.tridium.orion.OrionModel.getTypes() -->
+<method name="getTypes"  public="true" abstract="true">
+<description>
+Get the list of all types defined in the model.
+</description>
+<return>
+<type class="com.tridium.orion.OrionType" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionModel.getType(com.tridium.orion.BOrionTypeId) -->
+<method name="getType"  public="true" abstract="true">
+<description>
+Get a type by id.
+</description>
+<parameter name="id">
+<type class="com.tridium.orion.BOrionTypeId"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionType"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionModel.getType(com.tridium.orion.OrionType, boolean) -->
+<method name="getType"  public="true" abstract="true">
+<description>
+Get the equivalent type from this model.  If the&#xa; type is not in the model, it can optionally be&#xa; added.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+The type to get from the model.
+</description>
+</parameter>
+<parameter name="add">
+<type class="boolean"/>
+<description>
+If true, the type will be added if it&#xa;   is not already in the model.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionType"/>
+<description>
+Returns the type from the model.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionModel.getDependentTypes(com.tridium.orion.OrionType) -->
+<method name="getDependentTypes"  public="true" abstract="true">
+<description>
+Get the list of types that are dependent on the specified type.&#xa; Dependent types have a ref property that references the specified&#xa; type.
+</description>
+<parameter name="toType">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.BTypeDependency" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.OrionModel.addType(com.tridium.orion.OrionType) -->
+<method name="addType"  public="true" abstract="true">
+<description>
+Add a type to the model.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.OrionType"/>
+<description>
+Returns the type that was added to the model.&#xa;  The returned type is not necesssarily the same instance&#xa;  that was passed in as a parameter.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

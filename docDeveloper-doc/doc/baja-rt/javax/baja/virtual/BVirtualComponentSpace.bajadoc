@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.virtual.BVirtualComponentSpace" name="BVirtualComponentSpace" packageName="javax.baja.virtual" public="true">
+<description>
+BVirtualComponentSpace is a space which contains a slot tree of &#xa; BVirtualComponents.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">24 Oct 06</tag>
+<tag name="@version">$Revision: 12$ $Date: 6/16/08 2:15:24 PM EDT$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="javax.baja.space.BComponentSpace"/>
+</extends>
+<annotation><type class="javax.baja.space.AuditableSpace"/>
+</annotation>
+<!-- javax.baja.virtual.BVirtualComponentSpace(java.lang.String, javax.baja.util.LexiconText, javax.baja.naming.BOrd, javax.baja.virtual.BVirtualGateway) -->
+<constructor name="BVirtualComponentSpace" public="true">
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexText">
+<type class="javax.baja.util.LexiconText"/>
+</parameter>
+<parameter name="ordInSession">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<parameter name="gateway">
+<type class="javax.baja.virtual.BVirtualGateway"/>
+</parameter>
+<description>
+Constructor.  Creates and sets a new &#xa; VirtualCacheCallbacks instance, and assigns the given virtual gateway.
+</description>
+</constructor>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.start() -->
+<method name="start"  public="true" final="true">
+<description>
+Starts this virtual component space instance by starting the&#xa; root component and virtual cache callbacks instance.&#xa;&#xa; This method is called by the corresponding virtual gateway&#xa; when it is started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.started() -->
+<method name="started"  public="true">
+<description>
+This hook for subclasses is called when this&#xa; virtual component space is started.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.stop() -->
+<method name="stop"  public="true" final="true">
+<description>
+Stops this virtual component space instance by stopping the&#xa; root component and virtual cache callbacks instance.&#xa;&#xa; This method is called by the corresponding virtual gateway&#xa; when it is stopped.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.stopped() -->
+<method name="stopped"  public="true">
+<description>
+This hook for subclasses is called when this&#xa; virtual component space is stopped.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.isRunning() -->
+<method name="isRunning"  public="true" final="true">
+<description>
+Returns true if this virtual component space is running,&#xa; false otherwise.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getVirtualGateway() -->
+<method name="getVirtualGateway"  public="true" final="true">
+<description>
+Get the virtual gateway instance assigned to this virtual space.
+</description>
+<return>
+<type class="javax.baja.virtual.BVirtualGateway"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getVirtualCacheCallbacks() -->
+<method name="getVirtualCacheCallbacks"  public="true" final="true">
+<description>
+Get the virtual cache callbacks for this virtual space.
+</description>
+<return>
+<type class="javax.baja.virtual.VirtualCacheCallbacks"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.setVirtualCacheCallbacks(javax.baja.virtual.VirtualCacheCallbacks) -->
+<method name="setVirtualCacheCallbacks"  public="true" final="true">
+<description>
+Set the virtual cache callbacks for this virtual space.&#xa; If there was an old one
+</description>
+<parameter name="virtualCacheCallbacks">
+<type class="javax.baja.virtual.VirtualCacheCallbacks"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.setRootComponent(javax.baja.sys.BComponent) -->
+<method name="setRootComponent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Set the root BComponent of this space.  By default, this&#xa; method will also start the root if it is not already running.&#xa; It will also stop the old root component, if there was one.
+</description>
+<parameter name="root">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.isSpaceReadonly() -->
+<method name="isSpaceReadonly"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return true if the entire component space is readonly.&#xa; Default implementation returns true.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getHost() -->
+<method name="getHost"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this space is mounted, then return its parent &#xa; host, otherwise return null.
+</description>
+<return>
+<type class="javax.baja.naming.BHost"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getSession() -->
+<method name="getSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+If this space is mounted, then return its parent &#xa; session, otherwise return null.
+</description>
+<return>
+<type class="javax.baja.naming.BISession"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getAbsoluteOrd() -->
+<method name="getAbsoluteOrd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get an host absolute ord which identifies this&#xa; space.  If not mounted return null.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getOrdInHost() -->
+<method name="getOrdInHost"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the ord of this space relative to its host.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getNavOrd() -->
+<method name="getNavOrd"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to return the nav ord of the virtual space&#x27;s root component.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getNavParent() -->
+<method name="getNavParent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to return the virtual gateway as the nav parent.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Overridden to be sure to include virtual spy info.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getCategoryMask() -->
+<method name="getCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return the virtual gateway&#x27;s category mask.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.getAppliedCategoryMask() -->
+<method name="getAppliedCategoryMask"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return the virtual gateway&#x27;s category mask.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+<return>
+<type class="javax.baja.category.BCategoryMask"/>
+</return>
+</method>
+
+<!-- javax.baja.virtual.BVirtualComponentSpace.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

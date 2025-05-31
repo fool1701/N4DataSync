@@ -1,0 +1,136 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/componentModel.html" class="navbar">Prev</a> |  <a href="/doc/buildingSimples.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="entity-model">Entity Model</h1>
+<h2 id="introduction">Introduction</h2>
+<p>What is an Entity?  An Entity is a thing with a distinct and independent existence.  In the Niagara world, this is anything that implements the <a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/Entity.bajadoc">Entity</a> interface.  Right now, all station components are Entities - all instances of <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/BComponent.bajadoc">BComponent</a> and its subclasses.  In the future, we may add other Entity implementations.  Since Entities must be unique within a system, we base this uniqueness off their Entity ORD - or in terms of BComponent, its absolute ord.</p>
+<h2 id="tags-relations">Tags &amp; Relations</h2>
+<p>We can describe Entities by assigning them attributes (aka Tags) and describing their relations with other Entities.</p>
+<p>Tags have an Id and optionally a value.  This value must be a (<a href="module://docDeveloper/doc/baja-rt/javax/baja/data/BIDataValue.bajadoc">BIDataValue</a>).  Niagara 4 introduced a new BIDataValue, (<a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/BMarker.bajadoc">BMarker</a>) that is used when just the presence of the Tag is sufficient to convey it&rsquo;s meaning.</p>
+<p>A Tag <a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/Id.bajadoc">Id</a> is the combination of the Tag&rsquo;s namespace and its name.  A <a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/TagDictionary.bajadoc">TagDictionary</a> to define a namespace of Tags.  Namespaces allow two Tag Dictionaries to define Tags with the same name but different meanings or value types.</p>
+<p>Tags may be placed directly on an Entity (Direct Tags) or Implied by a <a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/SmartTagDictionary.bajadoc">SmartTagDictionary</a> using a set of rules.</p>
+<p>Some examples include the &ldquo;n:vendor&rdquo; Tag from the Niagara Tag Dictionary.  This is used as a Direct Tag and has a BString value.  &ldquo;n:point&rdquo; is a Marker Tag implied on all Niagara BControlPoints by the Niagara Tag Dictionary.  &ldquo;hs:chiller&rdquo;, is a direct Marker Tag from the Haystack Tag Dictionary to mark chiller equipment.</p>
+<p>Relations relate two Entities to each other.  Like Tags, they have a namespaced ID and an Entity ORD to define the Entity at the other end of the Relation.  Relations also have a direction that we call either Inbound or Outbound.  This defines how we view the relationship.  This allows us to say that a Device has an outbound &ldquo;n:childPoint&rdquo; Relation to each of it points.  If we look at the relation from the perspective of the points, each point has an Inbound &ldquo;n:childPoint&rdquo; Relation from the device.  <a href="module://docDeveloper/doc/baja-rt/javax/baja/sys/BLink.bajadoc">BLink</a> is a special type of relation that passes data.  Like tags, in Niagara relations can be direct - living directly on a BComponent - or implied by a SmartTagDictionary.</p>
+<h2 id="api">API</h2>
+<p>The javax.baja.tag package contains the Entity API.  There are a number of classes in it, but these are the basics:</p>
+<p><strong><a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/Entity.bajadoc">javax.baja.tag.Entity</a></strong></p>
+<pre><code class="sunlight-highlight-java">public interface Entity extends Taggable 
+{
+  Tags tags(); 
+  Relations relations();
+  Optional&lt;BOrd&gt; getOrdToEntity(); 
+}
+</code></pre>
+<p><strong><a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/Tag.bajadoc">javax.baja.tag.Tag</a></strong></p>
+<pre><code class="sunlight-highlight-java">public final class Tag 
+{
+  public Tag(Id id, BIDataValue value);
+  public Id getId();
+  public BIDataValue getValue();
+}
+</code></pre>
+<p><strong><a href="module://docDeveloper/doc/baja-rt/javax/baja/tag/Relation.bajadoc">javax.baja.tag.Relation</a></strong></p>
+<pre><code class="sunlight-highlight-java">public interface Relation extends Taggable 
+{
+  Id getId();
+  boolean isInbound();
+  boolean isOutbound();
+  Entity getEndpoint();
+  BOrd getEndpointOrd();
+  Tags tags();
+}
+</code></pre>
+<h2 id="examples">Examples</h2>
+<p><strong>Adding a Tag</strong></p>
+<p>Using the Component Model, this is simply adding a BIDataValue Property with the METADATA Flag set - remember to escape the Tag&rsquo;s Id.</p>
+<pre><code class="sunlight-highlight-java">//Component Model
+myComponent.add(SlotPath.escape(&quot;b:floor&quot;), BInteger.make(1), 
+                Flags.METADATA);
+</code></pre>
+<p>Using the Entity API, it&rsquo;s pretty similar.  We can create a new Tag and set it on the Entity or use an alternate version of the set method that takes an Id and a BIDataValue.</p>
+<pre><code class="sunlight-highlight-java">//Entity API
+Tag floorTag = Tag.newTag(&quot;b:floor&quot;, BInteger.make(1));
+entity.tags().set(floorTag);
+//or
+entity.tags().set(Id.newId(&quot;b:floor&quot;), BInteger.make(1));
+</code></pre>
+<p>The call to set() will add the tag if it does not already exist or overwrite an existing tag with the same Id.</p>
+<p><strong>Adding a Relation</strong></p>
+<p>Using the Component Model, a new method was added to BComponent in Niagara 4 - makeRelation().  This looks a lot like makeLink().  We pass in an Id, a BComponent endpoint and a Context.  This will create an Outbound Relation from our Component to the targetEndpoint.</p>
+<pre><code class="sunlight-highlight-java">//Component Model
+BRelation r = myComponent.makeRelation(Id.newId(&quot;hs:ahuRef&quot;), 
+                                       targetEndpoint, 
+                                       cx);
+</code></pre>
+<p>Using the Entity API, it looks pretty similar to the Tag example above.  We call an add() method and pass in the Relation&rsquo;s Id and the otherEntity that we&rsquo;re creating the relation to.  We can also pass in a direction (defaulting to Outbound if none is supplied).</p>
+<pre><code class="sunlight-highlight-java">//Entity API
+Relation r = entity.relations().add(Id.newId(&quot;hs:ahuRef&quot;), 
+                                    otherEntity);
+</code></pre>
+<p>Why does adding a Relation call add() instead of set()?  It&rsquo;s quite common for an Entity to have multiple relations with the same Id but different endpoints.  A very common case for this is the &ldquo;n:childPoint&rdquo; relation - a BDevice will have multiple &ldquo;n:childPoint&rdquo; relations, one to each of the points under its BPointDeviceExt or subfolders.</p>
+<p><strong>Checking if a Tag Exists</strong></p>
+<p>Using the Component Model, we can simply check if a property with our Tag&rsquo;s Id exists.</p>
+<pre><code class="sunlight-highlight-java">//Component Model (only works for Direct Tags)
+myComponent.get(SlotPath.escape(&quot;n:point&quot;));
+</code></pre>
+<p>But, this only works when our Tag is a property of our component - a Direct Tag.  If we want to check is a component has a Tag implied on it, we have to use the Entity API.  Using this will check for both Direct and Implied tags.</p>
+<pre><code class="sunlight-highlight-java">//Entity API
+entity.tags().get(Id.newId(&quot;n:point&quot;)).isPresent();
+//or
+entity.tags().contains(Id.newId(&quot;n:point&quot;));
+</code></pre>
+<p><strong>Traversing a Relation</strong></p>
+<p>Let&rsquo;s say we have our system setup using the Haystack Tag Dictionary and we want to find the chilled water plant of a chiller.  First, we define our Relation Id - &ldquo;hs:chilledWaterPlantRef&rdquo;.  Then we get the Outbound Relation on our chiller with this Id.  If it&rsquo;s present, we can traverse to its endpoint and we will have found our chilled water plant.</p>
+<pre><code class="sunlight-highlight-java">/* Find the chilledWaterPlant of a chiller */
+Id plantRef = Id.newId(&quot;hs&quot;, &quot;chilledWaterPlantRef&quot;);
+
+chiller.relations().get(plantRef, Relations.OUT).ifPresent(
+  relation -&gt; {
+    Entity chilledWaterPlant = relation.getEndpoint();
+  }
+);
+</code></pre>
+<p>The call to get() will return the first relation with the hs:chilledWaterPlantRef Id, so if we find one, this is our chilled water plant.</p>
+<p><strong>Traversing all Relations</strong></p>
+<p>We can also traverse all the Relations with a given Id.  Let&rsquo;s say we want to find all the chillers in a given device network.  Like the previous example, we&rsquo;ll start by defining an Id.  This time instead of the relation Id, it&rsquo;s the Id defining the equipment that we want to find - &ldquo;hs:chiller.&rdquo;  Starting at the device network, we&rsquo;ll get all of the Relations with the &ldquo;n:childDevice&rdquo; Id, stream them and map the Relations to their endpoints.  From the endpoint entities, we filter and return true for the ones tagged with the Haystack chiller tag, then collect them as a List.</p>
+<pre><code class="sunlight-highlight-java">/* Get all device in network with an hs:chiller tag */
+Id chiller = Id.newId(&quot;hs:chiller&quot;);
+
+List&lt;Entity&gt; chillers = network.relations()
+       .getAll(Id.newId(&quot;n:childDevice&quot;))
+       .stream()
+       .map(Relation::getEndpoint)
+       .filter(entity -&gt; entity.tags().get(chiller).isPresent())
+       .collect(Collectors.toList());
+</code></pre>
+<h2 id="related-topics">Related Topics</h2>
+<ul>
+  <li><a href="module://docTagging/doc/tagdictionary-TagDictionary.html">Tag Dictionaries</a></li>
+  <li><a href="neql.html">NEQL</a></li>
+  <li><a href="search.html">Search</a></li>
+  <li><a href="hierarchy.html">Hierarchy</a></li>
+</ul>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/componentModel.html" class="navbar">Prev</a> |  <a href="/doc/buildingSimples.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

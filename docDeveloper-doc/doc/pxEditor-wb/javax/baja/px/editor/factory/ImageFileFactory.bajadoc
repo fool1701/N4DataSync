@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="pxEditor" runtimeProfile="wb" qualifiedName="javax.baja.px.editor.factory.ImageFileFactory" name="ImageFileFactory" packageName="javax.baja.px.editor.factory" public="true">
+<description>
+ImageFileFactory creates widgets that represent BIImageFiles&#xa; by creating a BImage for each BIImageFile.
+</description>
+<tag name="@author">Mike Jarmy on 16 Aug 07</tag>
+<tag name="@version">$Revision: 2$ $Date: 9/17/07 8:50:34 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.px.editor.factory.WidgetFactory"/>
+</extends>
+<!-- javax.baja.px.editor.factory.ImageFileFactory(javax.baja.px.editor.BPxEditor) -->
+<constructor name="ImageFileFactory" public="true">
+<parameter name="editor">
+<type class="javax.baja.px.editor.BPxEditor"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.px.editor.factory.ImageFileFactory.make(javax.baja.sys.BObject[]) -->
+<method name="make"  public="true">
+<description/>
+<parameter name="objects">
+<type class="javax.baja.sys.BObject" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.px.editor.factory.WidgetInserter"/>
+</return>
+</method>
+
+<!-- javax.baja.px.editor.factory.ImageFileFactory.convertImageOrd(javax.baja.naming.BOrd) -->
+<method name="convertImageOrd"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;ConstantConditions&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+If the image&#x27;s ord is module based, convert it using the following rules:&#xa;  1) If the module exists on the remote station, do nothing&#xa;  2) If the module does not exist on the remote station, copy the image to !px/moduleName/pathToImage&#xa;  3) If the station is local, copy the image as in 2. only if the module size is bigger than &lt;code&gt;niagara.ui.px.maxImageModuleFileSize&lt;/code&gt;
+</description>
+<parameter name="ord">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.px.editor.factory.ImageFileFactory.convertImages(javax.baja.sys.BComplex) -->
+<method name="convertImages"  public="true">
+<description/>
+<tag name="@see">#convertImageOrd(javax.baja.naming.BOrd)</tag>
+<parameter name="c">
+<type class="javax.baja.sys.BComplex"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.px.editor.factory.ImageFileFactory.convertImage(javax.baja.gx.BImage) -->
+<method name="convertImage"  public="true">
+<description/>
+<tag name="@see">#convertImageOrd(javax.baja.naming.BOrd)</tag>
+<parameter name="currentImg">
+<type class="javax.baja.gx.BImage"/>
+</parameter>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.component.table.BComponentTable" name="BComponentTable" packageName="javax.baja.workbench.component.table" public="true">
+<description>
+BComponentTable is an extension to BTable that is designed to &#xa; model a table of BComponents.  BComponentTable is best used&#xa; bound to a BPlugin which is used to keep the table model in&#xa; sync with component events:&#xa; &lt;pre&gt;&#xa; ComponentTableModel.Column[] columns = &#xa;    {&#xa;      new ComponentTableModel.DisplayNameColumn(),&#xa;      new ComponentTableModel.PropertyColumn(x),&#xa;      new ComponentTableModel.PropertyColumn(y)&#xa;    });&#xa; BComponentTable table = new BComponentTable(columns);&#xa; plugin.bind(table);&#xa; table.load(container, cx);&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">21 Mar 02</tag>
+<tag name="@version">$Revision: 22$ $Date: 11/2/07 2:38:41 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.table.BTable"/>
+</extends>
+<implements>
+<type class="javax.baja.workbench.view.BWbComponentView$Attachable"/>
+</implements>
+<!-- javax.baja.workbench.component.table.BComponentTable() -->
+<constructor name="BComponentTable" public="true">
+<description>
+Create a default instance of BComponentTable.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.component.table.BComponentTable(javax.baja.workbench.component.table.ComponentTableModel.Column[]) -->
+<constructor name="BComponentTable" public="true">
+<parameter name="columns">
+<type class="javax.baja.workbench.component.table.ComponentTableModel$Column" dimension="1"/>
+</parameter>
+<description>
+Create with specified columns for model.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.component.table.BComponentTable(javax.baja.workbench.component.table.ComponentTableModel) -->
+<constructor name="BComponentTable" public="true">
+<parameter name="model">
+<type class="javax.baja.workbench.component.table.ComponentTableModel"/>
+</parameter>
+<description>
+Create a BComponentTable with the specified model instance.
+</description>
+</constructor>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.setModel(javax.baja.ui.table.TableModel) -->
+<method name="setModel"  public="true">
+<description>
+Trap model sets.
+</description>
+<parameter name="m">
+<type class="javax.baja.ui.table.TableModel"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getComponentModel() -->
+<method name="getComponentModel"  public="true" final="true">
+<description>
+Get the ComponentTableModel for this table.
+</description>
+<return>
+<type class="javax.baja.workbench.component.table.ComponentTableModel"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.attached(javax.baja.workbench.view.BWbComponentView) -->
+<method name="attached"  public="true">
+<description/>
+<parameter name="view">
+<type class="javax.baja.workbench.view.BWbComponentView"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.detached(javax.baja.workbench.view.BWbComponentView) -->
+<method name="detached"  public="true">
+<description/>
+<parameter name="view">
+<type class="javax.baja.workbench.view.BWbComponentView"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.handleComponentEvent(javax.baja.sys.BComponentEvent) -->
+<method name="handleComponentEvent"  public="true">
+<description/>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getContainer() -->
+<method name="getContainer"  public="true">
+<description>
+Get the container component which is the parent&#xa; of the components displayed in the table&#x27;s rows.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.setContainer(javax.baja.sys.BComponent) -->
+<method name="setContainer"  public="true">
+<description>
+Set the container component.
+</description>
+<parameter name="container">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getCurrentContext() -->
+<method name="getCurrentContext"  public="true">
+<description>
+Get the context passed to the load method.
+</description>
+<return>
+<type class="javax.baja.sys.Context"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.load(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="load"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;load(container, new Class[] { BComponent.class }, 1, cx)&lt;/code&gt;.
+</description>
+<parameter name="container">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.load(javax.baja.sys.BComponent, java.lang.Class&lt;?&gt;, javax.baja.sys.Context) -->
+<method name="load"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;load(container, new Class[] { cls }, 1, cx)&lt;/code&gt;.
+</description>
+<parameter name="container">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.load(javax.baja.sys.BComponent, java.lang.Class&lt;?&gt;[], javax.baja.sys.Context) -->
+<method name="load"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;load(container, classes, 1, cx)&lt;/code&gt;.
+</description>
+<parameter name="container">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="classes">
+<type class="java.lang.Class" dimension="1"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.load(javax.baja.sys.BComponent, java.lang.Class&lt;?&gt;, int, javax.baja.sys.Context) -->
+<method name="load"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;load(container, new Class[] { cls }, depth, cx}&lt;/code&gt;.
+</description>
+<parameter name="container">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.load(javax.baja.sys.BComponent, java.lang.Class&lt;?&gt;[], int, javax.baja.sys.Context) -->
+<method name="load"  public="true">
+<description>
+This automatically populates the model with the components&#xa; under the container which are instances of one of the&#xa; specified classes.  This table must be bound to a BPlugin using &#xa; BPlugin.bind() before calling this method.  This method&#xa; automatically loads and subscribes to each component &#xa; displayed as a row using the bound BPlugin.  Component events&#xa; are automatically processed to keep the model in sync. &#xa; &lt;p&gt;&#xa; If depth is one only the direct children of container are&#xa; loaded.  If depth is 2, then both the children and grandchildren&#xa; of container are loaded and subscribed (only the direct children&#xa; are actually used to update the table though).
+</description>
+<parameter name="container">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="classes">
+<type class="java.lang.Class" dimension="1"/>
+</parameter>
+<parameter name="depth">
+<type class="int"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.reload() -->
+<method name="reload"  public="true">
+<description>
+Reload the table.  This loads the table using the same parameters&#xa; used in the last call to load().  It also clears all subscriptions&#xa; made in any previous calls to load().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getComponentAt(int) -->
+<method name="getComponentAt"  public="true">
+<description>
+Get the component at the specified row index.
+</description>
+<parameter name="row">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getSelectedComponent() -->
+<method name="getSelectedComponent"  public="true">
+<description>
+Get the selected row&#x27;s BComponent or null if &#xa; no selection.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getSelectedComponents() -->
+<method name="getSelectedComponents"  public="true">
+<description>
+Get the selected rows&#x27; BComponents or return an empty &#xa; array if no selection.
+</description>
+<return>
+<type class="javax.baja.sys.BComponent" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getSelectedComponentsAsMark() -->
+<method name="getSelectedComponentsAsMark"  public="true">
+<description>
+Get the selected components are a transfer Mark&#xa; or if nothing is selected return null.
+</description>
+<return>
+<type class="javax.baja.space.Mark"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.selectByName(java.lang.String) -->
+<method name="selectByName"  public="true">
+<description>
+Select a component by it&#x27;s name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.selectByName(java.lang.String[]) -->
+<method name="selectByName"  public="true">
+<description>
+Select multiple components by name.
+</description>
+<parameter name="names">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.getTransferData() -->
+<method name="getTransferData"  public="true">
+<description>
+Return a transfer envelope for currently selected components.
+</description>
+<return>
+<type class="javax.baja.ui.transfer.TransferEnvelope"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.insertTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="insertTransferData"  public="true">
+<description>
+Call insertDynamicProperties using the container&#xa; component from model.  Note that no matter whether&#xa; a row is selected or not the insert always occurs&#xa; into the container component.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.removeTransferData(javax.baja.ui.transfer.TransferContext) -->
+<method name="removeTransferData"  public="true">
+<description>
+Do nothing, developer should forward component events&#xa; to model to keep table in sync.  Return null.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.doDelete() -->
+<method name="doDelete"  public="true">
+<description>
+Delete selected components.
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.doRename() -->
+<method name="doRename"  public="true">
+<description>
+Rename selected components.
+</description>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.mouseDragStarted(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragStarted"  public="true">
+<description>
+If rows are selected, then call startDrag with &#xa; a MarkTransferable.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.dragEnter(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragEnter"  public="true">
+<description>
+The entire table is a a drop into the container.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.dragOver(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragOver"  public="true">
+<description>
+The entire table is a a drop into the container.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.dragExit(javax.baja.ui.transfer.TransferContext) -->
+<method name="dragExit"  public="true">
+<description>
+Drag exit.
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.drop(javax.baja.ui.transfer.TransferContext) -->
+<method name="drop"  public="true">
+<description>
+Handle a drop using insertDynamicProperties().
+</description>
+<parameter name="cx">
+<type class="javax.baja.ui.transfer.TransferContext"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.CommandArtifact"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.include(javax.baja.sys.BComponent) -->
+<method name="include"  protected="true">
+<description>
+Should the specified component be included as a row in&#xa; this table?  By default, the just makes sure that&#xa; the object is an instance of one of the classes specified&#xa; in the most recent call to load().  Subclasses can override&#xa; to provide additional filtering.
+</description>
+<parameter name="c">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.workbench.component.table.BComponentTable.dropActive -->
+<field name="dropActive"  protected="true">
+<type class="boolean"/>
+<description>
+Modifies the table&#x27;s appearance when an item is dragged over.&#xa; Over-riding methods may require the subclasser to change this field.
+</description>
+</field>
+
+</class>
+</bajadoc>

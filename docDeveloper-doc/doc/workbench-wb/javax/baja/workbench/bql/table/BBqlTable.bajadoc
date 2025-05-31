@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.bql.table.BBqlTable" name="BBqlTable" packageName="javax.baja.workbench.bql.table" public="true">
+<description>
+BqlTable is a table that provides special functionality for displaying&#xa; results from a BQL query.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">03 Dec 2004</tag>
+<tag name="@version">$Revision: 5$ $Date: 5/4/05 7:21:40 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.ui.table.BTable"/>
+</extends>
+<property name="updateInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;updateInterval&lt;/code&gt; property.&#xa; The amount of time between queries for the table.  An interval&#xa; of zero disables updates.
+</description>
+<tag name="@see">#getUpdateInterval</tag>
+<tag name="@see">#setUpdateInterval</tag>
+</property>
+
+<action name="intervalElapsed" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;intervalElapsed&lt;/code&gt; action.&#xa; Submit the query and update the table.
+</description>
+<tag name="@see">#intervalElapsed()</tag>
+</action>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable() -->
+<constructor name="BBqlTable" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable(javax.baja.workbench.bql.table.BqlTableColumn[]) -->
+<constructor name="BBqlTable" public="true">
+<parameter name="columns">
+<type class="javax.baja.workbench.bql.table.BqlTableColumn" dimension="1"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.getUpdateInterval() -->
+<method name="getUpdateInterval"  public="true">
+<description>
+Get the &lt;code&gt;updateInterval&lt;/code&gt; property.&#xa; The amount of time between queries for the table.  An interval&#xa; of zero disables updates.
+</description>
+<tag name="@see">#updateInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.setUpdateInterval(javax.baja.sys.BRelTime) -->
+<method name="setUpdateInterval"  public="true">
+<description>
+Set the &lt;code&gt;updateInterval&lt;/code&gt; property.&#xa; The amount of time between queries for the table.  An interval&#xa; of zero disables updates.
+</description>
+<tag name="@see">#updateInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.intervalElapsed() -->
+<method name="intervalElapsed"  public="true">
+<description>
+Invoke the &lt;code&gt;intervalElapsed&lt;/code&gt; action.&#xa; Submit the query and update the table.
+</description>
+<tag name="@see">#intervalElapsed</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.started() -->
+<method name="started"  public="true">
+<description>
+Initialize update on startup.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.stopped() -->
+<method name="stopped"  public="true">
+<description>
+Stop updates when the widget stops.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.setModel(javax.baja.ui.table.TableModel) -->
+<method name="setModel"  public="true">
+<description>
+Set the model for this table.  The specified model&#xa; must be a BqlTableModel.&#xa; &lt;p&gt;&#xa; The BqlTableModel will not be returned from getModel().&#xa; Instead, the BqlTableModel is always wrapped by a&#xa; DynamicTableModel and the wrapper model is returned&#xa; from calls to getModel().&#xa; &lt;p&gt;&#xa; To get the BqlTableModel, user &lt;code&gt;getBqlModel()&lt;/code&gt;.
+</description>
+<parameter name="model">
+<type class="javax.baja.ui.table.TableModel"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.getBqlModel() -->
+<method name="getBqlModel"  public="true">
+<description>
+Get the BqlTableModel.  This is provided as a convenience since&#xa; getModel() will always return a DynamicTableModel.
+</description>
+<return>
+<type class="javax.baja.workbench.bql.table.BqlTableModel"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.makeDynamicModel(javax.baja.workbench.bql.table.BqlTableModel) -->
+<method name="makeDynamicModel"  protected="true">
+<description>
+Make the wrapper model for the bql model.  This enforces the&#xa; column flags.
+</description>
+<parameter name="bqlModel">
+<type class="javax.baja.workbench.bql.table.BqlTableModel"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.table.DynamicTableModel"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.doIntervalElapsed() -->
+<method name="doIntervalElapsed"  public="true">
+<description>
+Submit a new query.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Handle a change to one of the table properties.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.updateInterval -->
+<field name="updateInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;updateInterval&lt;/code&gt; property.&#xa; The amount of time between queries for the table.  An interval&#xa; of zero disables updates.
+</description>
+<tag name="@see">#getUpdateInterval</tag>
+<tag name="@see">#setUpdateInterval</tag>
+</field>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.intervalElapsed -->
+<field name="intervalElapsed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;intervalElapsed&lt;/code&gt; action.&#xa; Submit the query and update the table.
+</description>
+<tag name="@see">#intervalElapsed()</tag>
+</field>
+
+<!-- javax.baja.workbench.bql.table.BBqlTable.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

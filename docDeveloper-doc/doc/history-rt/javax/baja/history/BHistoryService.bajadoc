@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="history" runtimeProfile="rt" qualifiedName="javax.baja.history.BHistoryService" name="BHistoryService" packageName="javax.baja.history" public="true">
+<description>
+The history service enables collection&#xa; and storage of histories for a single station.&#xa; It manages creation of the database and&#xa; coordination of all history point extensions&#xa; in the database.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">02 Apr 02</tag>
+<tag name="@version">$Revision: 159$ $Date: 11/10/10 9:57:49 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<implements>
+<type class="javax.baja.dataRecovery.BIDataRecoverySourceService"/>
+</implements>
+<implements>
+<type class="javax.baja.util.BIRestrictedComponent"/>
+</implements>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;squid:S1448&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<property name="archiveHistoryProviders" flags="">
+<type class="javax.baja.history.db.BArchiveHistoryProviders"/>
+<description>
+Slot for the &lt;code&gt;archiveHistoryProviders&lt;/code&gt; property.&#xa; Contains BArchiveHistoryProvider instances that can be optionally&#xa; installed to supplement the local history database with archived history&#xa; data from another source.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#getArchiveHistoryProviders</tag>
+<tag name="@see">#setArchiveHistoryProviders</tag>
+</property>
+
+<property name="historyGroupings" flags="">
+<type class="javax.baja.history.BHistoryGroupings"/>
+<description>
+Slot for the &lt;code&gt;historyGroupings&lt;/code&gt; property.&#xa; When populated with history groups, the navigation&#xa; of the history space will attempt to organize by properties&#xa; assigned to the history configs.  If no history group&#xa; children are found specifying the properties to&#xa; order by, then the navigation will revert back to default&#xa; behavior, or navigation by history id.
+</description>
+<tag name="@see">#getHistoryGroupings</tag>
+<tag name="@see">#setHistoryGroupings</tag>
+</property>
+
+<action name="saveDb" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;saveDb&lt;/code&gt; action.
+</description>
+<tag name="@see">#saveDb()</tag>
+</action>
+
+<action name="closeUnusedHistories" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;closeUnusedHistories&lt;/code&gt; action.&#xa; Close all histories that have not been accessed within&#xa; the max open time.
+</description>
+<tag name="@see">#closeUnusedHistories()</tag>
+</action>
+
+<action name="enableExtensions" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;enableExtensions&lt;/code&gt; action.&#xa; Set into service all of the extensions referenced&#xa; in the specified list of ords.
+</description>
+<tag name="@see">#enableExtensions(BVector parameter)</tag>
+</action>
+
+<action name="disableExtensions" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+<description>
+Slot for the &lt;code&gt;disableExtensions&lt;/code&gt; action.&#xa; Set disabled all of the extensions referenced&#xa; in the specified list of ords.
+</description>
+<tag name="@see">#disableExtensions(BVector parameter)</tag>
+</action>
+
+<!-- javax.baja.history.BHistoryService() -->
+<constructor name="BHistoryService" public="true">
+<description>
+Constructor.
+</description>
+</constructor>
+
+<!-- javax.baja.history.BHistoryService.getArchiveHistoryProviders() -->
+<method name="getArchiveHistoryProviders"  public="true">
+<description>
+Get the &lt;code&gt;archiveHistoryProviders&lt;/code&gt; property.&#xa; Contains BArchiveHistoryProvider instances that can be optionally&#xa; installed to supplement the local history database with archived history&#xa; data from another source.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#archiveHistoryProviders</tag>
+<return>
+<type class="javax.baja.history.db.BArchiveHistoryProviders"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.setArchiveHistoryProviders(javax.baja.history.db.BArchiveHistoryProviders) -->
+<method name="setArchiveHistoryProviders"  public="true">
+<description>
+Set the &lt;code&gt;archiveHistoryProviders&lt;/code&gt; property.&#xa; Contains BArchiveHistoryProvider instances that can be optionally&#xa; installed to supplement the local history database with archived history&#xa; data from another source.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#archiveHistoryProviders</tag>
+<parameter name="v">
+<type class="javax.baja.history.db.BArchiveHistoryProviders"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getHistoryGroupings() -->
+<method name="getHistoryGroupings"  public="true">
+<description>
+Get the &lt;code&gt;historyGroupings&lt;/code&gt; property.&#xa; When populated with history groups, the navigation&#xa; of the history space will attempt to organize by properties&#xa; assigned to the history configs.  If no history group&#xa; children are found specifying the properties to&#xa; order by, then the navigation will revert back to default&#xa; behavior, or navigation by history id.
+</description>
+<tag name="@see">#historyGroupings</tag>
+<return>
+<type class="javax.baja.history.BHistoryGroupings"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.setHistoryGroupings(javax.baja.history.BHistoryGroupings) -->
+<method name="setHistoryGroupings"  public="true">
+<description>
+Set the &lt;code&gt;historyGroupings&lt;/code&gt; property.&#xa; When populated with history groups, the navigation&#xa; of the history space will attempt to organize by properties&#xa; assigned to the history configs.  If no history group&#xa; children are found specifying the properties to&#xa; order by, then the navigation will revert back to default&#xa; behavior, or navigation by history id.
+</description>
+<tag name="@see">#historyGroupings</tag>
+<parameter name="v">
+<type class="javax.baja.history.BHistoryGroupings"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.saveDb() -->
+<method name="saveDb"  public="true">
+<description>
+Invoke the &lt;code&gt;saveDb&lt;/code&gt; action.
+</description>
+<tag name="@see">#saveDb</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.closeUnusedHistories() -->
+<method name="closeUnusedHistories"  public="true">
+<description>
+Invoke the &lt;code&gt;closeUnusedHistories&lt;/code&gt; action.&#xa; Close all histories that have not been accessed within&#xa; the max open time.
+</description>
+<tag name="@see">#closeUnusedHistories</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.enableExtensions(javax.baja.sys.BVector) -->
+<method name="enableExtensions"  public="true">
+<description>
+Invoke the &lt;code&gt;enableExtensions&lt;/code&gt; action.&#xa; Set into service all of the extensions referenced&#xa; in the specified list of ords.
+</description>
+<tag name="@see">#enableExtensions</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.disableExtensions(javax.baja.sys.BVector) -->
+<method name="disableExtensions"  public="true">
+<description>
+Invoke the &lt;code&gt;disableExtensions&lt;/code&gt; action.&#xa; Set disabled all of the extensions referenced&#xa; in the specified list of ords.
+</description>
+<tag name="@see">#disableExtensions</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getDatabase() -->
+<method name="getDatabase"  public="true" final="true">
+<description>
+Get the history database.
+</description>
+<return>
+<type class="javax.baja.history.db.BHistoryDatabase"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.createDatabase() -->
+<method name="createDatabase"  protected="true">
+<description>
+Create the database instance.
+</description>
+<return>
+<type class="javax.baja.history.db.BHistoryDatabase"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.initDataRecoverySource(javax.baja.dataRecovery.BIDataRecoveryService) -->
+<method name="initDataRecoverySource"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Initialize the local history database so that&#xa; data recovery history events can be restored,&#xa; but don&#x27;t allow any new history events to occur&#xa; until serviceStarted() is called.
+</description>
+<tag name="@since">Niagara 3.6</tag>
+<parameter name="dataRecoveryService">
+<type class="javax.baja.dataRecovery.BIDataRecoveryService"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.serviceStarted() -->
+<method name="serviceStarted"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Start the history service.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.stationStarted() -->
+<method name="stationStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.serviceStopped() -->
+<method name="serviceStopped"  public="true" synchronized="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.stopped() -->
+<method name="stopped"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+The history service is registered under &#x22;history:HistoryService&#x22;.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This is a callback when an async action is invoked.  It is&#xa; overridden here to post a closeUnusedHistories action to a&#xa; separate worker thread for processing.
+</description>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="argument">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+<description>
+always return null
+</description>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.doSaveDb() -->
+<method name="doSaveDb"  public="true">
+<description>
+Save the database.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.doCloseUnusedHistories() -->
+<method name="doCloseUnusedHistories"  public="true">
+<description>
+Close all histories that have not been accessed recently.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getLingerTime() -->
+<method name="getLingerTime"  public="true">
+<description/>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.doEnableExtensions(javax.baja.sys.BVector, javax.baja.sys.Context) -->
+<method name="doEnableExtensions"  public="true">
+<description>
+Enable the specified history extensions.
+</description>
+<parameter name="extOrds">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.doDisableExtensions(javax.baja.sys.BVector, javax.baja.sys.Context) -->
+<method name="doDisableExtensions"  public="true">
+<description>
+Disable the specified history extensions.
+</description>
+<parameter name="extOrds">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.checkParentForRestrictedComponent(javax.baja.sys.BComponent, javax.baja.sys.Context) -->
+<method name="checkParentForRestrictedComponent"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Only one allowed to live under the station&#x27;s BServiceContainer.
+</description>
+<parameter name="parent">
+<type class="javax.baja.sys.BComponent"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.fw(int, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<description>
+Framework use only.
+</description>
+<parameter name="a">
+<type class="int"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getHistoryGroupNames(javax.baja.sys.BObject) -->
+<method name="getHistoryGroupNames"  public="true" static="true">
+<description>
+Convenience method to retrieve the history group category names.&#xa; Can be called on both the client and server sides, given a base&#xa; object that exists in the current VM&#x27;s station space.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.getSortPropertiesForGroup(javax.baja.sys.BObject, java.lang.String) -->
+<method name="getSortPropertiesForGroup"  public="true" static="true">
+<description>
+Convenience method to retrieve the history property names for the given&#xa; history group category name.  Can be called on both the client and server&#xa; sides, given a base object that exists in the current VM&#x27;s station space.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="base">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="historyGroupName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.history.BHistoryService.archiveHistoryProviders -->
+<field name="archiveHistoryProviders"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;archiveHistoryProviders&lt;/code&gt; property.&#xa; Contains BArchiveHistoryProvider instances that can be optionally&#xa; installed to supplement the local history database with archived history&#xa; data from another source.
+</description>
+<tag name="@since">Niagara 4.11</tag>
+<tag name="@see">#getArchiveHistoryProviders</tag>
+<tag name="@see">#setArchiveHistoryProviders</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryService.historyGroupings -->
+<field name="historyGroupings"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;historyGroupings&lt;/code&gt; property.&#xa; When populated with history groups, the navigation&#xa; of the history space will attempt to organize by properties&#xa; assigned to the history configs.  If no history group&#xa; children are found specifying the properties to&#xa; order by, then the navigation will revert back to default&#xa; behavior, or navigation by history id.
+</description>
+<tag name="@see">#getHistoryGroupings</tag>
+<tag name="@see">#setHistoryGroupings</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryService.saveDb -->
+<field name="saveDb"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;saveDb&lt;/code&gt; action.
+</description>
+<tag name="@see">#saveDb()</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryService.closeUnusedHistories -->
+<field name="closeUnusedHistories"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;closeUnusedHistories&lt;/code&gt; action.&#xa; Close all histories that have not been accessed within&#xa; the max open time.
+</description>
+<tag name="@see">#closeUnusedHistories()</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryService.enableExtensions -->
+<field name="enableExtensions"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;enableExtensions&lt;/code&gt; action.&#xa; Set into service all of the extensions referenced&#xa; in the specified list of ords.
+</description>
+<tag name="@see">#enableExtensions(BVector parameter)</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryService.disableExtensions -->
+<field name="disableExtensions"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;disableExtensions&lt;/code&gt; action.&#xa; Set disabled all of the extensions referenced&#xa; in the specified list of ords.
+</description>
+<tag name="@see">#disableExtensions(BVector parameter)</tag>
+</field>
+
+<!-- javax.baja.history.BHistoryService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.history.BHistoryService.logger -->
+<field name="logger"  public="true" static="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

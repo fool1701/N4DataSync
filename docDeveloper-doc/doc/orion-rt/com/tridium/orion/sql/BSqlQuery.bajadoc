@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.sql.BSqlQuery" name="BSqlQuery" packageName="com.tridium.orion.sql" public="true">
+<description>
+BSqlQuery represents a SQL Query.  It extends BQuery&#xa; by creating SQL-specific querying capabilities.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">22 May 08</tag>
+<tag name="@version">$Revision$Date: 6/22/2007 11:17:32 AM$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.query.BQuery"/>
+</extends>
+<!-- com.tridium.orion.sql.BSqlQuery() -->
+<constructor name="BSqlQuery" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.orion.sql.BSqlQuery.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.make(com.tridium.orion.OrionType, java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Creates a BSqlQuery with a BExtentProjection for the projection, and&#xa; sets the BExtent for the query based on the given Type.&#xa; This is a convenience method for&#xa; &lt;pre&gt;&#xa;  return (BSqlQuery) new BSqlQuery()&#xa;    .select(new BExtentProjection())&#xa;    .from(new BSqlExtent(type).alias(extentAlias));&#xa; &lt;/pre&gt;
+</description>
+<tag name="@see">BExtentProjection</tag>
+<tag name="@see">BSqlExtent</tag>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the OrionType to use as the extent type.
+</description>
+</parameter>
+<parameter name="extentAlias">
+<type class="java.lang.String"/>
+<description>
+the extent alias
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlQuery"/>
+<description>
+a BSqlQuery configured as described above.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.make(com.tridium.orion.OrionType) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(type, &#x22;&#x22;)&lt;/code&gt;.
+</description>
+<parameter name="type">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlQuery"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.reset() -->
+<method name="reset"  public="true">
+<description/>
+<return>
+<type class="javax.baja.query.BQuery"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.join(com.tridium.orion.sql.BJoin, com.tridium.orion.OrionType, javax.baja.sys.Property, com.tridium.orion.OrionType, javax.baja.sys.Property) -->
+<method name="join"  public="true">
+<description>
+Creates and adds a BSqlJoin for of the given kind.
+</description>
+<parameter name="joinKind">
+<type class="com.tridium.orion.sql.BJoin"/>
+</parameter>
+<parameter name="fromType">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="fromProp">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="toType">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<parameter name="toProp">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlQuery"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.join(com.tridium.orion.sql.BSqlJoin) -->
+<method name="join"  public="true">
+<description>
+Add a BSqlJoin.
+</description>
+<parameter name="join">
+<type class="com.tridium.orion.sql.BSqlJoin"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlQuery"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.getJoins() -->
+<method name="getJoins"  public="true">
+<description/>
+<return>
+<type class="com.tridium.orion.sql.BSqlJoin" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.page(com.tridium.orion.sql.BPage) -->
+<method name="page"  public="true">
+<description/>
+<parameter name="page">
+<type class="com.tridium.orion.sql.BPage"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlQuery"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.hasPage() -->
+<method name="hasPage"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.getPage() -->
+<method name="getPage"  public="true">
+<description/>
+<return>
+<type class="com.tridium.orion.sql.BPage"/>
+<description>
+the BPage for this BQuery, or null if there is no page.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlQuery.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

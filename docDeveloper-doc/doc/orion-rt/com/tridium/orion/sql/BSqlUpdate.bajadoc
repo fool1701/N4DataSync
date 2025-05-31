@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.sql.BSqlUpdate" name="BSqlUpdate" packageName="com.tridium.orion.sql" public="true">
+<description>
+BSqlUpdate can be used to programatically build up a SQL UPDATE statement.&#xa; &lt;p&gt;&#xa; Here is an example usage:&#xa; &lt;pre&gt;&#xa;  OrionSession session = getOrionSession();&#xa; &#xa;  BSqlUpdate update = new BSqlUpdate(BSalesPerson.ORION_TYPE)&#xa;    .set(BSalesPerson.commission, BDouble.make(0.075))&#xa;    .where(Predicates.gt(BSalesPersion.yearsOfService, BInteger.make(10)));&#xa;  int numUpdated = session.update(update);&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Matthew Giannini</tag>
+<tag name="@creation">Sep 29, 2008</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="updateTable" flags="">
+<type class="javax.baja.util.BTypeSpec"/>
+<description>
+Slot for the &lt;code&gt;updateTable&lt;/code&gt; property.&#xa; The type spec for the table to update.
+</description>
+<tag name="@see">#getUpdateTable</tag>
+<tag name="@see">#setUpdateTable</tag>
+</property>
+
+<property name="updateMap" flags="">
+<type class="javax.baja.sys.BVector"/>
+<description>
+Slot for the &lt;code&gt;updateMap&lt;/code&gt; property.&#xa; Contains the set of properties that should be updated, along with the corresponding values.&#xa; The name of each property in the vector should correspond to a property in the updateTable.&#xa; The value for each property is what will be used to update the objects matching the&#xa; condition.  You should use the &lt;code&gt;set(Property, BSimple)&lt;/code&gt; method of this&#xa; class to add update column/value pairs.&#xa; &lt;p&gt;&#xa; &lt;font color=&#x27;red&#x27;&gt;You should not manipulate this property directly; use the&#xa; set, unset, and unsetAll methods.&lt;/font&gt;&#xa; &lt;p&gt;
+</description>
+<tag name="@see">#getUpdateMap</tag>
+<tag name="@see">#setUpdateMap</tag>
+</property>
+
+<property name="condition" flags="">
+<type class="javax.baja.query.BExpression"/>
+<description>
+Slot for the &lt;code&gt;condition&lt;/code&gt; property.&#xa; The expression for selecting which objects to update.
+</description>
+<tag name="@see">#getCondition</tag>
+<tag name="@see">#setCondition</tag>
+</property>
+
+<!-- com.tridium.orion.sql.BSqlUpdate() -->
+<constructor name="BSqlUpdate" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.orion.sql.BSqlUpdate(com.tridium.orion.OrionType) -->
+<constructor name="BSqlUpdate" public="true">
+<parameter name="updateTable">
+<type class="com.tridium.orion.OrionType"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.getUpdateTable() -->
+<method name="getUpdateTable"  public="true">
+<description>
+Get the &lt;code&gt;updateTable&lt;/code&gt; property.&#xa; The type spec for the table to update.
+</description>
+<tag name="@see">#updateTable</tag>
+<return>
+<type class="javax.baja.util.BTypeSpec"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.setUpdateTable(javax.baja.util.BTypeSpec) -->
+<method name="setUpdateTable"  public="true">
+<description>
+Set the &lt;code&gt;updateTable&lt;/code&gt; property.&#xa; The type spec for the table to update.
+</description>
+<tag name="@see">#updateTable</tag>
+<parameter name="v">
+<type class="javax.baja.util.BTypeSpec"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.getUpdateMap() -->
+<method name="getUpdateMap"  public="true">
+<description>
+Get the &lt;code&gt;updateMap&lt;/code&gt; property.&#xa; Contains the set of properties that should be updated, along with the corresponding values.&#xa; The name of each property in the vector should correspond to a property in the updateTable.&#xa; The value for each property is what will be used to update the objects matching the&#xa; condition.  You should use the &lt;code&gt;set(Property, BSimple)&lt;/code&gt; method of this&#xa; class to add update column/value pairs.&#xa; &lt;p&gt;&#xa; &lt;font color=&#x27;red&#x27;&gt;You should not manipulate this property directly; use the&#xa; set, unset, and unsetAll methods.&lt;/font&gt;&#xa; &lt;p&gt;
+</description>
+<tag name="@see">#updateMap</tag>
+<return>
+<type class="javax.baja.sys.BVector"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.setUpdateMap(javax.baja.sys.BVector) -->
+<method name="setUpdateMap"  public="true">
+<description>
+Set the &lt;code&gt;updateMap&lt;/code&gt; property.&#xa; Contains the set of properties that should be updated, along with the corresponding values.&#xa; The name of each property in the vector should correspond to a property in the updateTable.&#xa; The value for each property is what will be used to update the objects matching the&#xa; condition.  You should use the &lt;code&gt;set(Property, BSimple)&lt;/code&gt; method of this&#xa; class to add update column/value pairs.&#xa; &lt;p&gt;&#xa; &lt;font color=&#x27;red&#x27;&gt;You should not manipulate this property directly; use the&#xa; set, unset, and unsetAll methods.&lt;/font&gt;&#xa; &lt;p&gt;
+</description>
+<tag name="@see">#updateMap</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BVector"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.getCondition() -->
+<method name="getCondition"  public="true">
+<description>
+Get the &lt;code&gt;condition&lt;/code&gt; property.&#xa; The expression for selecting which objects to update.
+</description>
+<tag name="@see">#condition</tag>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.setCondition(javax.baja.query.BExpression) -->
+<method name="setCondition"  public="true">
+<description>
+Set the &lt;code&gt;condition&lt;/code&gt; property.&#xa; The expression for selecting which objects to update.
+</description>
+<tag name="@see">#condition</tag>
+<parameter name="v">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.update(com.tridium.orion.OrionType) -->
+<method name="update"  public="true">
+<description>
+Sets the table to update.
+</description>
+<parameter name="updateTable">
+<type class="com.tridium.orion.OrionType"/>
+<description>
+the OrionType of the table to update.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlUpdate"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.set(javax.baja.sys.Property, javax.baja.sys.BSimple) -->
+<method name="set"  public="true">
+<description>
+Adds a column/value pair to the update map. The property must be a &#xa; column of the update table. The value is what that column will&#xa; be set to when the update executes.
+</description>
+<parameter name="column">
+<type class="javax.baja.sys.Property"/>
+<description>
+the column to update.  This should be a property of&#xa; the update table.
+</description>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+the value to set for the given column.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlUpdate"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.unset(javax.baja.sys.Property) -->
+<method name="unset"  public="true">
+<description>
+Removes the given column and its values from the list of column/value&#xa; pairs to update.
+</description>
+<tag name="@see">#set(Property, BSimple)</tag>
+<parameter name="column">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.unsetAll() -->
+<method name="unsetAll"  public="true">
+<description>
+Removes all column/value pairs from the update map.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.where(javax.baja.query.BExpression) -->
+<method name="where"  public="true">
+<description>
+Set the filter condition for this update statement. Only objects&#xa; that meet the condition will be updated when the update executes.
+</description>
+<parameter name="condition">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="com.tridium.orion.sql.BSqlUpdate"/>
+<description>
+this.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.hasCondition() -->
+<method name="hasCondition"  public="true">
+<description>
+Return true if the update has a condition.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.updateTable -->
+<field name="updateTable"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;updateTable&lt;/code&gt; property.&#xa; The type spec for the table to update.
+</description>
+<tag name="@see">#getUpdateTable</tag>
+<tag name="@see">#setUpdateTable</tag>
+</field>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.updateMap -->
+<field name="updateMap"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;updateMap&lt;/code&gt; property.&#xa; Contains the set of properties that should be updated, along with the corresponding values.&#xa; The name of each property in the vector should correspond to a property in the updateTable.&#xa; The value for each property is what will be used to update the objects matching the&#xa; condition.  You should use the &lt;code&gt;set(Property, BSimple)&lt;/code&gt; method of this&#xa; class to add update column/value pairs.&#xa; &lt;p&gt;&#xa; &lt;font color=&#x27;red&#x27;&gt;You should not manipulate this property directly; use the&#xa; set, unset, and unsetAll methods.&lt;/font&gt;&#xa; &lt;p&gt;
+</description>
+<tag name="@see">#getUpdateMap</tag>
+<tag name="@see">#setUpdateMap</tag>
+</field>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.condition -->
+<field name="condition"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;condition&lt;/code&gt; property.&#xa; The expression for selecting which objects to update.
+</description>
+<tag name="@see">#getCondition</tag>
+<tag name="@see">#setCondition</tag>
+</field>
+
+<!-- com.tridium.orion.sql.BSqlUpdate.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

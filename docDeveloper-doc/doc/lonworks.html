@@ -1,0 +1,315 @@
+<!-- Htmldoc has been run -->
+<!--
+   @author    Brian Frank
+   @creation  15 Jan 05
+   @version   $Revision$ $Date$
+   @since     Niagara 3.0
+ -->
+ 
+<html>
+
+<head>
+<title>Lonworks Driver</title>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/bacnet.html" class="navbar">Prev</a> |  <a href="/doc/lonml.html" class="navbar">Next</a></p>
+
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<!-- Header Navbar -->
+<!-- Title Block -->
+<h1 class='title'>Lonworks Driver</h1> 
+
+<!------------------------------------------------------------->
+<h1>Overview</h1>
+<!------------------------------------------------------------->
+
+<p>The  <a href='module://docDeveloper/doc/lonworks-rt/module-index.bajadoc'>Lonworks API</a>
+provides the means to model lonwork networks and devices for configuration and 
+run time control.  A network is a collection of connected lonworks devices 
+and routers.</p>
+
+
+<p>Basic components</p>
+
+<ul>
+<li>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BLonNetwork.bajadoc'>BLonNetwork</a></code>:
+Is the top level container for <code>BLonDevices</code>. It provides manager views for commissioning, binding and trouble shooting.
+</li>
+<li>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BLonDevice.bajadoc'>BLonDevice</a></code>:
+Provides a database model for lonDevices to facilitate configuration and access to run time data.
+</li>
+<li>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/proxy/BLonProxyExt.bajadoc'>BLonProxyExt</a></code>:
+Customizes proxy points for data elements on lonDevices. Proxy points provide the mechanism to interface
+point data in devices with Niagara control logic and graphics
+</li>
+</ul>
+        
+<p>Misc components</p>
+
+<ul>
+<li>
+<code><a href='module://docDeveloper/doc/lonworks-rt/com/tridium/lonworks/BLonRouter.bajadoc'>BLonRouter</a></code>:
+Contains the database model needed for network management of lonworks router.
+</li>
+
+</ul>        
+<p></p>
+<!------------------------------------------------------------->
+<h1>LonDevice</h1>
+<!------------------------------------------------------------->
+<p>
+A <code>BLonDevice</code> contains <code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/datatypes/BDeviceData.bajadoc'>BDeviceData</a></code>
+and the means to manage a collection of <code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BLonComponent.bajadoc'>BLonComponents</a></code>
+and <code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BMessageTag.bajadoc'>BMessageTags</a></code>.  
+</p>
+<p>
+<code>BLonComponents</code> are database representation of specific components in a device.  They
+contain one or more data elements (see LonDataModel below) and specific config information.
+There are three types:
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BNetworkVariable.bajadoc'>BNetworkVariable</a></code>,
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BNetworkConfig.bajadoc'>BNetworkConfig</a></code>,
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BConfigParameter.bajadoc'>BConfigParameter</a></code>.
+</p>
+
+<p>
+<code>BMessageTags</code> are only for linking.  There is no behavior implemented in massage
+tags in the station.
+</p>
+<p>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BLonDevice.bajadoc'>BLonDevice</a></code>
+is an abstract class and is the root class for all lonworks devices. 
+There are two flavors of <code>BLonDevice</code> implemented in the lonworks drivers:
+<ul>
+<li>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BLocalLonDevice.bajadoc'>BLocalLonDevice</a></code>
+is a final class which provides the means to manage the local neuron. It is a frozen slot on <code>BLonNetwork</code>.
+</li>
+<li>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BDynamicDevice.bajadoc'>BDynamicDevice</a></code>
+provides support for dynamically building the devices data and <code>BLonComponents</code>.  There are 
+two actions to accomplish this: <b>learnNv</b> uses the self documentation in the device, <b>importXLon</b>
+uses an xml file containing a representation of the device.
+</li> 
+</ul>        
+</p>
+
+
+<!------------------------------------------------------------->
+<h1>Lon Data Model</h1>
+<!------------------------------------------------------------->
+<p>
+Each <code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/BLonComponent.bajadoc'>BLonComponent</a></code> contains one or more data elements which mirror the data structure
+of the component in the device. These data elements are managed by 
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonData.bajadoc'>BLonData</a></code>
+which handles conversion between the database representation and the devices binary format.
+<code>BLonData</code> can also contain other <code>BLonData</code> components allowing for nested
+data types.
+</p>
+
+<p>
+NOTE: <code>BLonData</code> has been folded into <code>BLonComponent</code>.
+The effect is to place the data elements at the same tree level as the LonComponent config properties.
+This was done to improve efficiency in the workbench.  The getter setter methods in <code>BLonComponent</code> access
+LonData as though it were contained by the LonComponent.  The <code>getData()</code> method will return
+the <code>BLonComponent</code> as a <code>BLonData</code>.  The <code>setData()</code> method
+will replace the current data elements with the new elements passed in data argument. 
+</p>
+
+<p>
+Each data element is modeled as a <code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonPrimitive.bajadoc'>BLonPrimitive</a>.</code>
+There are <code>BLonPrimitives</code> for each primitive datatype.  
+<ul>
+<li><code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonBoolean.bajadoc'>BLonBoolean</a></code>
+models a boolean element</li>
+<li><code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonEnum.bajadoc'>BLonEnum</a></code>
+models a enumeration element</li>
+<li><code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonFloat.bajadoc'>BLonFloat</a></code>
+models a numeric element</li>
+<li><code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonString.bajadoc'>BLonString</a></code>
+models a string element</li>
+</ul>
+        
+<p>Special element types</p>
+
+<ul>
+<li><code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonInteger.bajadoc'>BLonInteger</a></code>
+models a numeric element when full 32 bits of data is needed</li>
+                                                                                                        
+<li><code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonByteArray.bajadoc'>BLonByteArray</a></code>
+is used in special cases to model data when can not be meaningfully modeled as primitive elements</li>
+<li><code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BLonSimple.bajadoc'>BLonSimple</a></code>
+is used in special cases to model data which has been represented by a simple.  The simple must implement
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/londata/BILonNetworkSimple.bajadoc'>BILonNetworkSimple</a></code> .</li>
+</ul>        
+
+</p>
+
+<!------------------------------------------------------------->
+<h1>Proxy points</h1>
+<!------------------------------------------------------------->
+<p>
+Proxy points are standard Niagara control points used to access data elements in foreign devices.  
+Proxy points have a driver specific ProxyExt that handles addressing data elements in a specific
+device and data conversion needed to present the data in a normalized format.  The inputs and 
+outputs of proxies can be linked to other control logic or graphical points.
+</p>
+<p>
+A <code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/proxy/BLonBooleanProxyExt.bajadoc'>BLonProxyExt</a></code>
+in a Proxy point makes it a lonworks proxy point.  There are different <code>BLonProxyExts</code> for
+each primitive data type. These can be seen in 
+<a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/proxy/package-index.bajadoc'>javax.baja.lonworks.proxy</a>.
+</p>
+<p>
+Lon Proxy Points are managed by LonPointManager which is a view on the points container
+in each <code>BLonDevice</code>. 
+</p>
+
+<!------------------------------------------------------------->
+<h1>Network Management</h1>
+<!------------------------------------------------------------->
+<p>
+Implements a set of standard lonworks network management functions.  The user has access
+to these functions through the following manager view.
+</p>
+
+<ul>
+<li>
+DeviceManager - provides support for discovering and adding lonwork devices to the database,
+for managing device addresses, and downloading standard  applications to devices.
+</li>
+<li>
+RouterManager - provides support for discovering and adding lonwork routers to the database, 
+and for managing device addresses
+</li>
+<li>
+LinkManagar - provides means to manage link types and bind links. 
+</li>
+<li>
+LonUtiliesManager - provides a set of utilities useful for managing a lon network
+</li>
+
+</ul>        
+
+<p>
+</p>
+<!------------------------------------------------------------->
+<h1>LonComm</h1>
+<!------------------------------------------------------------->
+<p>
+The lonworks communication stack can be accessed through a call to BLonNetwork.lonComm().
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/LonComm.bajadoc'>LonComm</a></code>
+is provides APIs which allow the user to send LonMessages with one of the LonTalk
+service types (unacknowledged,  acknowledged, unacknowledged repeat, request response). 
+</p>
+<p>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/LonComm.bajadoc'>LonComm</a></code>
+also provides a means to receive unsolicited messages by registering a 
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/LonListener.bajadoc'>LonListener</a></code> 
+for a specified message type from an optional subnetNode address.
+</p>
+
+<!------------------------------------------------------------->
+<h1>LonMessage</h1>
+<!------------------------------------------------------------->
+<p>
+<code><a href='module://docDeveloper/doc/lonworks-rt/javax/baja/lonworks/LonMessage.bajadoc'>LonMessage</a></code>
+is the base class for all messages passed to/from LonComm APIs.  
+</p>
+<p>
+Users should subclass LonMessage if they wish to create a new explicit message type.  
+</p>
+<p>
+A set of LonTalk defined messages is provide in
+<a href='module://docDeveloper/doc/lonworks-rt/com/tridium/lonworks/netmessages/package-index.bajadoc'>com/tridium/lonworks/netmessages</a>.
+The definition of these message is found in Neuron Chip Data Book Appendix B, Lonworks Router User's Guide,
+and EIA/CEA-709.1-B.
+</p>
+<p></p>
+
+<!------------------------------------------------------------->
+<h1>Mapping ProgramId to Device Representation</h1>
+<!------------------------------------------------------------->
+<p>A mechanism is provided to associate an xml or class file with a particular device type.
+The device type is identified by its ProgramId as described in LonMark Application-Layer Interoperability
+Guidelines.  The association is created by putting "def" entries in a modules module-include.xml file.
+This association is used during the learn process to determine the appropriate database entity for discovered
+devices.
+</p>
+<p>A "def" entry consists of name and value attribute.  The name has the formate "lonworks:programId"
+where programId is the devices ProgramId represented as 8 hex encoded bytes with leading zeros and &lt;space&gt; delimiter.
+Multiple mappings are allowed for the same programId.  Any nibble can be replaced with an '*' to indicate a 
+range of programIds mapped to the same object. The value field can reference a class or xml file.
+</p>
+<p>The formate for a class is cl=module:cname.  The module is the niagara module containing the class and
+the cname is the name as defined in the module-include.xml for that module.  The class must be a sub class
+of <code>BLonDevice</code> or <code>BDynamicDevice</code>.</p>
+<p>
+The formate for an xml file is xml=module/xname. The module is the niagara module containing the xml file
+and the xname is the name of the file containing the device representation. The xml file formate is described
+in <a href='lonml.html'><font class='index'>Lon Markup Language</font></a>. 
+</p>
+<p>
+Examples of def entries in lon device module-include.xml file.
+<pre>
+  <code class="sunlight-highlight-xml">
+&lt;defs&gt;
+  &lt;def name="lonworks.80 00 0c 50 3c 03 04 17"  value="cl=lonHoneywell:Q7300"  /&gt;
+  &lt;def name="lonworks.80 00 16 50 0a 04 04 0a"  value="xml=lonSiebe/Mnlrv3.lnml"/&gt;
+  &lt;def name="lonworks.80 00 8e 10 0a 04 0* **"  value="xml=lonCompany/dev.lnml"/&gt;
+&lt;/defs&gt;
+  </code>
+</pre>
+</p>
+
+<!-- paragraph
+<p></p>
+
+-- bold
+<b></b>
+
+-- link
+  <code><a href='module://lonworks/doc/javax/baja/lonworks/foo.bajadoc'>foo</a></code>:
+    blaa, blaa.
+-- list
+<ul>
+ <li> </li>
+ <li> </li>
+</ul>        
+
+-- numbered list
+<ol><ul>
+ <li> </li>
+ <li> </li>
+</ul></ol>       
+
+-->
+
+
+<p></p>
+<p></p>
+
+<p>
+For further information refer to the <a href='module://docDeveloper/doc/lonworks-rt/module-index.bajadoc'>Lonworks API</a>.
+</p>
+
+
+<script type="text/javascript">
+    window.niagara.docDevUtil.highlightCode();
+</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/bacnet.html" class="navbar">Prev</a> |  <a href="/doc/lonml.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

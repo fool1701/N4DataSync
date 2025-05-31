@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.BIDdfTransactionMgr" name="BIDdfTransactionMgr" packageName="com.tridium.ddf.comm" public="true" interface="true" abstract="true" category="interface">
+<description>
+The BIDdfTransactionMgr matches up received data frames to transmitted&#xa; requests or to the BIDdfUnsolicitedMgr.&#xa; &#xa; &#xa; Instead of implementing this directly, there are a wealth of implementations that can be extends.&#xa; These are in the packages:&#xa; &lt;OL&gt;&#xa;   &lt;LI&gt;com.tridium.ddf.comm.defaultComm&#xa;   &lt;LI&gt;com.tridium.ddf.comm.multipleTransaction&#xa;   &lt;LI&gt;com.tridium.ddf.comm.singleTransaction&#xa; &lt;/OL&gt;&#xa; In additon, there reasonable serial versions of these in the devSerialDriver module.&#xa; &#xa; There are reasonable Tcp/Ip versions of these in the devTcpDriver module.
+</description>
+<tag name="@author">lperkins</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.comm.BIDdfTransactionMgr.processTransaction(com.tridium.ddf.comm.req.BIDdfRequest) -->
+<method name="processTransaction"  public="true" abstract="true">
+<description>
+This method asks the transaction manager to arrange for a resposne&#xa; to be received for the given request.
+</description>
+<parameter name="req">
+<type class="com.tridium.ddf.comm.req.BIDdfRequest"/>
+<description>
+the given request.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransactionMgr.getDdfCommunicator() -->
+<method name="getDdfCommunicator"  public="true" abstract="true">
+<description/>
+<return>
+<type class="com.tridium.ddf.comm.BIDdfCommunicator"/>
+<description>
+the communicator component that owns this transaction mgr.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransactionMgr.startTransactionMgr() -->
+<method name="startTransactionMgr"  public="true" abstract="true">
+<description>
+This method is called to start any threads that process transactions.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransactionMgr.stopTransactionMgr() -->
+<method name="stopTransactionMgr"  public="true" abstract="true">
+<description>
+This method is called to stop any threads that process transactions.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.BIDdfTransactionMgr.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

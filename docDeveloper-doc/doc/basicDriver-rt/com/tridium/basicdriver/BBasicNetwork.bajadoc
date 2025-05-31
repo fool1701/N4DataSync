@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="basicDriver" runtimeProfile="rt" qualifiedName="com.tridium.basicdriver.BBasicNetwork" name="BBasicNetwork" packageName="com.tridium.basicdriver" public="true" abstract="true">
+<description>
+BBasicNetwork is the base container for Basic Devices.&#xa; Manages the basic workers (queues), the basic poll scheduler,&#xa; and the communication handler (Comm).
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">22 Mar 02</tag>
+<tag name="@version">$Revision: 1$ $Date: 03/22/02 12:47:14 PM$</tag>
+<tag name="@since">Niagara 3.0 basicdriver 1.0</tag>
+<extends>
+<type class="javax.baja.driver.loadable.BLoadableNetwork"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIService"/>
+</implements>
+<property name="tuningPolicies" flags="">
+<type class="javax.baja.driver.point.BTuningPolicyMap"/>
+<description>
+Slot for the &lt;code&gt;tuningPolicies&lt;/code&gt; property.&#xa; A container for tuning policies which determines how&#xa; and when proxy points are read and written.
+</description>
+<tag name="@see">#getTuningPolicies</tag>
+<tag name="@see">#setTuningPolicies</tag>
+</property>
+
+<property name="dispatcher" flags="h">
+<type class="com.tridium.basicdriver.util.BBasicWorker"/>
+<description>
+Slot for the &lt;code&gt;dispatcher&lt;/code&gt; property.&#xa; The basic communication dispatch queue worker thread.&#xa; Its intended use is for synchronizing access to the&#xa; communication handler (Comm).
+</description>
+<tag name="@see">#getDispatcher</tag>
+<tag name="@see">#setDispatcher</tag>
+</property>
+
+<property name="worker" flags="h">
+<type class="com.tridium.basicdriver.util.BBasicWorker"/>
+<description>
+Slot for the &lt;code&gt;worker&lt;/code&gt; property.&#xa; The basic asynchronous queue worker thread.&#xa; The default is a BBasicCoalescingWorker.&#xa; Its intended use is for posting asynchronous&#xa; requests (such as learns), that when processed&#xa; may post one or more message requests to the&#xa; dispatcher.
+</description>
+<tag name="@see">#getWorker</tag>
+<tag name="@see">#setWorker</tag>
+</property>
+
+<property name="writeWorker" flags="h">
+<type class="com.tridium.basicdriver.util.BBasicCoalescingWorker"/>
+<description>
+Slot for the &lt;code&gt;writeWorker&lt;/code&gt; property.&#xa; The basic asynchronous write (coalescing) queue&#xa; worker thread.  Its intended use is for posting&#xa; write requests that should be coalesced and then&#xa; handed off to the dispatcher.
+</description>
+<tag name="@see">#getWriteWorker</tag>
+<tag name="@see">#setWriteWorker</tag>
+</property>
+
+<property name="pollScheduler" flags="">
+<type class="javax.baja.driver.util.BPollScheduler"/>
+<description>
+Slot for the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; The basic poll scheduler
+</description>
+<tag name="@see">#getPollScheduler</tag>
+<tag name="@see">#setPollScheduler</tag>
+</property>
+
+<property name="retryCount" flags="">
+<type class="int"/>
+<description>
+Slot for the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; Specifies the default number of retries to perform after a null response&#xa; to a basic message request
+</description>
+<tag name="@see">#getRetryCount</tag>
+<tag name="@see">#setRetryCount</tag>
+</property>
+
+<property name="responseTimeout" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Specifies the default maximum time to wait for a response&#xa; after a basic message request before determining a failure
+</description>
+<tag name="@see">#getResponseTimeout</tag>
+<tag name="@see">#setResponseTimeout</tag>
+</property>
+
+<!-- com.tridium.basicdriver.BBasicNetwork() -->
+<constructor name="BBasicNetwork" public="true">
+<description>
+Default constructor.
+</description>
+</constructor>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getTuningPolicies() -->
+<method name="getTuningPolicies"  public="true">
+<description>
+Get the &lt;code&gt;tuningPolicies&lt;/code&gt; property.&#xa; A container for tuning policies which determines how&#xa; and when proxy points are read and written.
+</description>
+<tag name="@see">#tuningPolicies</tag>
+<return>
+<type class="javax.baja.driver.point.BTuningPolicyMap"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.setTuningPolicies(javax.baja.driver.point.BTuningPolicyMap) -->
+<method name="setTuningPolicies"  public="true">
+<description>
+Set the &lt;code&gt;tuningPolicies&lt;/code&gt; property.&#xa; A container for tuning policies which determines how&#xa; and when proxy points are read and written.
+</description>
+<tag name="@see">#tuningPolicies</tag>
+<parameter name="v">
+<type class="javax.baja.driver.point.BTuningPolicyMap"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getDispatcher() -->
+<method name="getDispatcher"  public="true">
+<description>
+Get the &lt;code&gt;dispatcher&lt;/code&gt; property.&#xa; The basic communication dispatch queue worker thread.&#xa; Its intended use is for synchronizing access to the&#xa; communication handler (Comm).
+</description>
+<tag name="@see">#dispatcher</tag>
+<return>
+<type class="com.tridium.basicdriver.util.BBasicWorker"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.setDispatcher(com.tridium.basicdriver.util.BBasicWorker) -->
+<method name="setDispatcher"  public="true">
+<description>
+Set the &lt;code&gt;dispatcher&lt;/code&gt; property.&#xa; The basic communication dispatch queue worker thread.&#xa; Its intended use is for synchronizing access to the&#xa; communication handler (Comm).
+</description>
+<tag name="@see">#dispatcher</tag>
+<parameter name="v">
+<type class="com.tridium.basicdriver.util.BBasicWorker"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getWorker() -->
+<method name="getWorker"  public="true">
+<description>
+Get the &lt;code&gt;worker&lt;/code&gt; property.&#xa; The basic asynchronous queue worker thread.&#xa; The default is a BBasicCoalescingWorker.&#xa; Its intended use is for posting asynchronous&#xa; requests (such as learns), that when processed&#xa; may post one or more message requests to the&#xa; dispatcher.
+</description>
+<tag name="@see">#worker</tag>
+<return>
+<type class="com.tridium.basicdriver.util.BBasicWorker"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.setWorker(com.tridium.basicdriver.util.BBasicWorker) -->
+<method name="setWorker"  public="true">
+<description>
+Set the &lt;code&gt;worker&lt;/code&gt; property.&#xa; The basic asynchronous queue worker thread.&#xa; The default is a BBasicCoalescingWorker.&#xa; Its intended use is for posting asynchronous&#xa; requests (such as learns), that when processed&#xa; may post one or more message requests to the&#xa; dispatcher.
+</description>
+<tag name="@see">#worker</tag>
+<parameter name="v">
+<type class="com.tridium.basicdriver.util.BBasicWorker"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getWriteWorker() -->
+<method name="getWriteWorker"  public="true">
+<description>
+Get the &lt;code&gt;writeWorker&lt;/code&gt; property.&#xa; The basic asynchronous write (coalescing) queue&#xa; worker thread.  Its intended use is for posting&#xa; write requests that should be coalesced and then&#xa; handed off to the dispatcher.
+</description>
+<tag name="@see">#writeWorker</tag>
+<return>
+<type class="com.tridium.basicdriver.util.BBasicCoalescingWorker"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.setWriteWorker(com.tridium.basicdriver.util.BBasicCoalescingWorker) -->
+<method name="setWriteWorker"  public="true">
+<description>
+Set the &lt;code&gt;writeWorker&lt;/code&gt; property.&#xa; The basic asynchronous write (coalescing) queue&#xa; worker thread.  Its intended use is for posting&#xa; write requests that should be coalesced and then&#xa; handed off to the dispatcher.
+</description>
+<tag name="@see">#writeWorker</tag>
+<parameter name="v">
+<type class="com.tridium.basicdriver.util.BBasicCoalescingWorker"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getPollScheduler() -->
+<method name="getPollScheduler"  public="true">
+<description>
+Get the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; The basic poll scheduler
+</description>
+<tag name="@see">#pollScheduler</tag>
+<return>
+<type class="javax.baja.driver.util.BPollScheduler"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.setPollScheduler(javax.baja.driver.util.BPollScheduler) -->
+<method name="setPollScheduler"  public="true">
+<description>
+Set the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; The basic poll scheduler
+</description>
+<tag name="@see">#pollScheduler</tag>
+<parameter name="v">
+<type class="javax.baja.driver.util.BPollScheduler"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getRetryCount() -->
+<method name="getRetryCount"  public="true">
+<description>
+Get the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; Specifies the default number of retries to perform after a null response&#xa; to a basic message request
+</description>
+<tag name="@see">#retryCount</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.setRetryCount(int) -->
+<method name="setRetryCount"  public="true">
+<description>
+Set the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; Specifies the default number of retries to perform after a null response&#xa; to a basic message request
+</description>
+<tag name="@see">#retryCount</tag>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getResponseTimeout() -->
+<method name="getResponseTimeout"  public="true">
+<description>
+Get the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Specifies the default maximum time to wait for a response&#xa; after a basic message request before determining a failure
+</description>
+<tag name="@see">#responseTimeout</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.setResponseTimeout(javax.baja.sys.BRelTime) -->
+<method name="setResponseTimeout"  public="true">
+<description>
+Set the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Specifies the default maximum time to wait for a response&#xa; after a basic message request before determining a failure
+</description>
+<tag name="@see">#responseTimeout</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<description>
+Register this component under &#x22;BBasicNetwork.class&#x22;.
+</description>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<description>
+Builds the communication handler (Comm).
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.serviceStopped() -->
+<method name="serviceStopped"  public="true">
+<description>
+Service stop.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.initComm(com.tridium.basicdriver.comm.Comm) -->
+<method name="initComm"  protected="true">
+<description>
+This callback should be overridden by subclasses to provide a hook&#xa; for making any initialization to the communication handler (Comm).&#xa; This method should also be where special custom UnsolicitedMessageListeners are&#xa; created (i.e. for handling unsolicited received messages) and registered&#xa; to the Comm.
+</description>
+<parameter name="comm">
+<type class="com.tridium.basicdriver.comm.Comm"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.startComm() -->
+<method name="startComm"  public="true">
+<description>
+This method starts the Communication handler&#xa; (Comm) if the network is not down/fault/out-of-service&#xa; and the current Comm is not null.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.stopComm() -->
+<method name="stopComm"  public="true">
+<description>
+This method stops the Communication handler&#xa; (Comm) if the current Comm is not null.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.started() -->
+<method name="started"  public="true">
+<description>
+Start the basic network.  This starts the Communication handler&#xa; (Comm) if the network is not down/fault/out-of-service.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.stopped() -->
+<method name="stopped"  public="true">
+<description>
+Stop the basic network.  This stops the Communication handler (Comm).
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.isCommActive() -->
+<method name="isCommActive"  public="true">
+<description>
+Returns true if the communication is enabled and ready (the&#xa; Communication handler is started and the network is not down/fault/out-of-service),&#xa; returns false if not.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getComm() -->
+<method name="getComm"  public="true">
+<description>
+Returns the communication handler (Comm)
+</description>
+<return>
+<type class="com.tridium.basicdriver.comm.Comm"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.makeComm() -->
+<method name="makeComm"  protected="true" abstract="true">
+<description>
+Subclasses must override to return the custom communication&#xa; handler (Comm)
+</description>
+<return>
+<type class="com.tridium.basicdriver.comm.Comm"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.changed(javax.baja.sys.Property, javax.baja.sys.Context) -->
+<method name="changed"  public="true">
+<description>
+Network Property Changed.  Check for down/fault/out of service changes,&#xa; and stop/start the network as appropriate.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getLog() -->
+<method name="getLog"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;deprecation&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Returns the log currently used by this&#xa; basic network.  If not overridden by subclasses,&#xa; the default uses the network name to create the log.
+</description>
+<return>
+<type class="javax.baja.log.Log"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.postAsync(java.lang.Runnable) -->
+<method name="postAsync"  public="true" final="true">
+<description>
+Async tasks are pushed onto the asynchronous worker queue by default.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.dispatch(java.lang.Runnable) -->
+<method name="dispatch"  public="true" final="true">
+<description>
+Post the runnable task to the dispatcher comm queue.&#xa; This queue is intended to synchronize access to the&#xa; communication handler (Comm), thus runnable tasks&#xa; posted here should attempt to transmit a message&#xa; via Comm and accept a response if any.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.post(java.lang.Runnable) -->
+<method name="post"  public="true" final="true">
+<description>
+Post the runnable task to the asynchronous worker queue.&#xa; This queue is intended to handle asynchronous operations,&#xa; such as learns, that may also post message requests to&#xa; the dispatcher.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.postWrite(java.lang.Runnable) -->
+<method name="postWrite"  public="true" final="true">
+<description>
+Post the runnable task to the coalescing write worker&#xa; queue (asynchronous).  This queue is intended to handle&#xa; asynchronous operations, such as write requests, that&#xa; should be coalesced.  These operations should post any&#xa; message requests to the dispatcher.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.sendSync(com.tridium.basicdriver.message.Message) -->
+<method name="sendSync"  public="true" final="true">
+<description>
+Send the message (by posting a message request to the&#xa; communication dispatcher queue) and wait for and return&#xa; a response message.  The calling thread will block and&#xa; wait for the response Message to be returned.
+</description>
+<parameter name="msg">
+<type class="com.tridium.basicdriver.message.Message"/>
+<description>
+The Message to send.
+</description>
+</parameter>
+<return>
+<type class="com.tridium.basicdriver.message.Message"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.sendSync(com.tridium.basicdriver.message.Message, javax.baja.sys.BRelTime, int) -->
+<method name="sendSync"  public="true">
+<description>
+Send the message (by posting a message request to the&#xa; communication dispatcher queue) and wait for and return&#xa; a response message.  The calling thread will block and&#xa; wait for the response Message to be returned.
+</description>
+<parameter name="msg">
+<type class="com.tridium.basicdriver.message.Message"/>
+<description>
+The Message to send.
+</description>
+</parameter>
+<parameter name="responseTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+The timeout to wait for a&#xa;    response Message to this request, if one is expected.
+</description>
+</parameter>
+<parameter name="retryCount">
+<type class="int"/>
+<description>
+The number of retries to perform if the&#xa;    Message to send fails to get a response Message (a&#xa;    timeout occurs).
+</description>
+</parameter>
+<return>
+<type class="com.tridium.basicdriver.message.Message"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.sendAsync(com.tridium.basicdriver.message.Message, com.tridium.basicdriver.MessageListener) -->
+<method name="sendAsync"  public="true" final="true">
+<description>
+Send the message (by posting an asynchronous request to the&#xa; asynchronous worker queue) and don&#x27;t wait for any&#xa; response.  Once processed, the MessageListener passed in&#xa; will be routed any response Message.
+</description>
+<parameter name="msg">
+<type class="com.tridium.basicdriver.message.Message"/>
+<description>
+The Message to send.
+</description>
+</parameter>
+<parameter name="listener">
+<type class="com.tridium.basicdriver.MessageListener"/>
+<description>
+The listener (most likely the source of&#xa;    the message request) who will receive any&#xa;    response Message.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.sendAsync(com.tridium.basicdriver.message.Message, com.tridium.basicdriver.MessageListener, javax.baja.sys.BRelTime, int) -->
+<method name="sendAsync"  public="true">
+<description>
+Send the message (by posting an asynchronous request to the&#xa; asynchronous worker queue) and don&#x27;t wait for any&#xa; response.  Once processed, the MessageListener passed in&#xa; will be routed any response Message.
+</description>
+<parameter name="msg">
+<type class="com.tridium.basicdriver.message.Message"/>
+<description>
+The Message to send.
+</description>
+</parameter>
+<parameter name="listener">
+<type class="com.tridium.basicdriver.MessageListener"/>
+<description>
+The listener (most likely the source of&#xa;    the message request) who will receive any&#xa;    response Message.
+</description>
+</parameter>
+<parameter name="responseTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+The timeout to wait for a&#xa;    response Message to this request, if one is expected.
+</description>
+</parameter>
+<parameter name="retryCount">
+<type class="int"/>
+<description>
+The number of retries to perform if the&#xa;    Message to send fails to get a response Message (a&#xa;    timeout occurs).
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.sendAsyncWrite(com.tridium.basicdriver.message.Message, com.tridium.basicdriver.MessageListener) -->
+<method name="sendAsyncWrite"  public="true" final="true">
+<description>
+Send the message, should be a write message, (by posting&#xa; an asynchronous request to the asynchronous write worker&#xa; queue) and don&#x27;t wait for any response.  Once processed,&#xa; the MessageListener passed in will be routed any response&#xa; Message.  Coalescing is determined based on the&#xa; MessageListener parameter.
+</description>
+<parameter name="msg">
+<type class="com.tridium.basicdriver.message.Message"/>
+<description>
+The Message to send.
+</description>
+</parameter>
+<parameter name="listener">
+<type class="com.tridium.basicdriver.MessageListener"/>
+<description>
+The listener (most likely the source of&#xa;    the message request) who will receive any&#xa;    response Message.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.sendAsyncWrite(com.tridium.basicdriver.message.Message, com.tridium.basicdriver.MessageListener, javax.baja.sys.BRelTime, int) -->
+<method name="sendAsyncWrite"  public="true">
+<description>
+Send the message, should be a write message, (by posting&#xa; an asynchronous request to the asynchronous write worker&#xa; queue) and don&#x27;t wait for any response.  Once processed,&#xa; the MessageListener passed in will be routed any response&#xa; Message.  Coalescing is determined based on the&#xa; MessageListener parameter.
+</description>
+<parameter name="msg">
+<type class="com.tridium.basicdriver.message.Message"/>
+<description>
+The Message to send.
+</description>
+</parameter>
+<parameter name="listener">
+<type class="com.tridium.basicdriver.MessageListener"/>
+<description>
+The listener (most likely the source of&#xa;    the message request) who will receive any&#xa;    response Message.
+</description>
+</parameter>
+<parameter name="responseTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+The timeout to wait for a&#xa;    response Message to this request, if one is expected.
+</description>
+</parameter>
+<parameter name="retryCount">
+<type class="int"/>
+<description>
+The number of retries to perform if the&#xa;    Message to send fails to get a response Message (a&#xa;    timeout occurs).
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<description>
+Adds basic communication statistics to the spy page,&#xa; such as total messages sent/received and&#xa; transmission rates.
+</description>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.incrementSent() -->
+<method name="incrementSent"  public="true" final="true">
+<description>
+This method should be called when a Message&#xa; was sent out in order to update the basic statistics.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.incrementReceived() -->
+<method name="incrementReceived"  public="true" final="true">
+<description>
+This method should be called when a Message&#xa; was received in order to update the basic statistics.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.incrementTimeouts() -->
+<method name="incrementTimeouts"  public="true" final="true">
+<description>
+This method should be called when a Message&#xa; failed to get a response (timeout) in order&#xa; to update the basic statistics.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getTotalSentMessages() -->
+<method name="getTotalSentMessages"  public="true" final="true">
+<description/>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getTotalReceivedMessages() -->
+<method name="getTotalReceivedMessages"  public="true" final="true">
+<description/>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.getTotalTimeoutMessages() -->
+<method name="getTotalTimeoutMessages"  public="true" final="true">
+<description/>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.tuningPolicies -->
+<field name="tuningPolicies"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;tuningPolicies&lt;/code&gt; property.&#xa; A container for tuning policies which determines how&#xa; and when proxy points are read and written.
+</description>
+<tag name="@see">#getTuningPolicies</tag>
+<tag name="@see">#setTuningPolicies</tag>
+</field>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.dispatcher -->
+<field name="dispatcher"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;dispatcher&lt;/code&gt; property.&#xa; The basic communication dispatch queue worker thread.&#xa; Its intended use is for synchronizing access to the&#xa; communication handler (Comm).
+</description>
+<tag name="@see">#getDispatcher</tag>
+<tag name="@see">#setDispatcher</tag>
+</field>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.worker -->
+<field name="worker"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;worker&lt;/code&gt; property.&#xa; The basic asynchronous queue worker thread.&#xa; The default is a BBasicCoalescingWorker.&#xa; Its intended use is for posting asynchronous&#xa; requests (such as learns), that when processed&#xa; may post one or more message requests to the&#xa; dispatcher.
+</description>
+<tag name="@see">#getWorker</tag>
+<tag name="@see">#setWorker</tag>
+</field>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.writeWorker -->
+<field name="writeWorker"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;writeWorker&lt;/code&gt; property.&#xa; The basic asynchronous write (coalescing) queue&#xa; worker thread.  Its intended use is for posting&#xa; write requests that should be coalesced and then&#xa; handed off to the dispatcher.
+</description>
+<tag name="@see">#getWriteWorker</tag>
+<tag name="@see">#setWriteWorker</tag>
+</field>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.pollScheduler -->
+<field name="pollScheduler"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;pollScheduler&lt;/code&gt; property.&#xa; The basic poll scheduler
+</description>
+<tag name="@see">#getPollScheduler</tag>
+<tag name="@see">#setPollScheduler</tag>
+</field>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.retryCount -->
+<field name="retryCount"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;retryCount&lt;/code&gt; property.&#xa; Specifies the default number of retries to perform after a null response&#xa; to a basic message request
+</description>
+<tag name="@see">#getRetryCount</tag>
+<tag name="@see">#setRetryCount</tag>
+</field>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.responseTimeout -->
+<field name="responseTimeout"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;responseTimeout&lt;/code&gt; property.&#xa; Specifies the default maximum time to wait for a response&#xa; after a basic message request before determining a failure
+</description>
+<tag name="@see">#getResponseTimeout</tag>
+<tag name="@see">#setResponseTimeout</tag>
+</field>
+
+<!-- com.tridium.basicdriver.BBasicNetwork.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

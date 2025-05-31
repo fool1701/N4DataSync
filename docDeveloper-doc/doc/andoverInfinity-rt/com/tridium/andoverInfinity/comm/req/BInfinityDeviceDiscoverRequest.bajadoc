@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="andoverInfinity" runtimeProfile="rt" qualifiedName="com.tridium.andoverInfinity.comm.req.BInfinityDeviceDiscoverRequest" name="BInfinityDeviceDiscoverRequest" packageName="com.tridium.andoverInfinity.comm.req" public="true">
+<description>
+Device discover request for Infinity.  This request issues the &#x22;View/InfineT controllers&#x22;&#xa; menu command to the Infinity network device panel to retrieve a list of devices.  It&#xa; will perform &#x22;page down&#x22;&#x27;s as necessary to retrieve multi-page lists.&#xa; &#xa; If successful, a BInfinityDeviceDiscoverResponse with and array of BInfinityDeviceDiscoveryObject&#x27;s &#xa; will be created.
+</description>
+<tag name="@author">cturman</tag>
+<tag name="@creation">May 1, 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="com.tridium.ddf.comm.req.BDdfDiscoveryRequest"/>
+</extends>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.Vt100Const"/>
+</implements>
+<implements>
+<type class="com.tridium.andoverInfinity.comm.req.RequiresNetworkAccess"/>
+</implements>
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityDeviceDiscoverRequest() -->
+<constructor name="BInfinityDeviceDiscoverRequest" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityDeviceDiscoverRequest.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityDeviceDiscoverRequest.processReceive(com.tridium.ddf.comm.IDdfDataFrame) -->
+<method name="processReceive"  public="true">
+<description>
+Process the bytes received.  The processing depends on the detected state&#xa; of the screen buffer.
+</description>
+<tag name="@see">com.tridium.devDriver.comm.req.BIDdfRequest#processReceive(com.tridium.devDriver.comm.IDevDataFrame)</tag>
+<parameter name="iDevDataFrame">
+<type class="com.tridium.ddf.comm.IDdfDataFrame"/>
+</parameter>
+<return>
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+<description>
+a BInfinityDeviceDiscoverResponse with discovered BInfinityDeviceDiscoveryObject&#x27;s
+</description>
+</return>
+<throws>
+<type class="com.tridium.ddf.comm.rsp.DdfResponseException"/>
+</throws>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityDeviceDiscoverRequest.toByteArray() -->
+<method name="toByteArray"  public="true">
+<description>
+Return the bytes to transmit to send the View/Infinet Controllers menu&#xa; command to the Infinity network panel.  Bytes will be dependant on the &#xa; current cursor mode of the screen buffer
+</description>
+<tag name="@see">com.tridium.ddf.comm.req.BIDdfRequest#toByteArray()</tag>
+<return>
+<type class="byte" dimension="1"/>
+<description>
+a byte[] to send to the controller
+</description>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityDeviceDiscoverRequest.setNetwork(com.tridium.andoverInfinity.BInfinityNetwork) -->
+<method name="setNetwork"  public="true">
+<description>
+Implementation of RequiresNetworkAccess interface
+</description>
+<tag name="@see">com.tridium.andoverInfinity.comm.req.RequiresNetworkAccess#setNetwork(com.tridium.andoverInfinity.BInfinityNetwork)</tag>
+<parameter name="network">
+<type class="com.tridium.andoverInfinity.BInfinityNetwork"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.andoverInfinity.comm.req.BInfinityDeviceDiscoverRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

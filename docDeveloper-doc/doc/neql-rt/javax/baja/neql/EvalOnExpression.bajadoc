@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="neql" runtimeProfile="rt" qualifiedName="javax.baja.neql.EvalOnExpression" name="EvalOnExpression" packageName="javax.baja.neql" public="true">
+<description>
+AndExpression is a boolean expression with two operands.  The expression must evaluate&#xa; to true if both operands are expressions that evaluate to true.  If the left&#xa; operand evaluates to false, the right operand must not be evaluated.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">01/26/2014</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="javax.baja.neql.Expression"/>
+</extends>
+<!-- javax.baja.neql.EvalOnExpression(javax.baja.neql.Expression, javax.baja.neql.Expression) -->
+<constructor name="EvalOnExpression" public="true">
+<parameter name="expr">
+<type class="javax.baja.neql.Expression"/>
+<description>
+The expression to evaluate.
+</description>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.neql.Expression"/>
+<description>
+An expression that results in an Entity to evaluate the expression on.
+</description>
+</parameter>
+<description>
+Create a new EvalOnExpression.
+</description>
+</constructor>
+
+<!-- javax.baja.neql.EvalOnExpression.getNodeType() -->
+<method name="getNodeType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.EvalOnExpression.getExpression() -->
+<method name="getExpression"  public="true">
+<description/>
+<return>
+<type class="javax.baja.neql.Expression"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.EvalOnExpression.getTarget() -->
+<method name="getTarget"  public="true">
+<description/>
+<return>
+<type class="javax.baja.neql.Expression"/>
+</return>
+</method>
+
+<!-- javax.baja.neql.EvalOnExpression.evaluate(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evaluate"  public="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;unchecked&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Collection">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.neql.EvalOnExpression.evalBoolean(javax.baja.tag.Entity, javax.baja.sys.Context) -->
+<method name="evalBoolean"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true if evalBoolean on the inner expression return true for any related endpoints of&#xa; the entity.
+</description>
+<tag name="@since">Niagara 4.9</tag>
+<parameter name="entity">
+<type class="javax.baja.tag.Entity"/>
+<description>
+root entity from which related endpoints are found
+</description>
+</parameter>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+<description>
+context to use while finding related endpoints and evaluating the inner&#xa;   expression
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if evalBoolean on the inner expression return true for any related endpoints
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>

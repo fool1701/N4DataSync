@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.util.BConverter" name="BConverter" packageName="javax.baja.util" public="true" abstract="true">
+<description>
+BConverter is used to convert from one BObject type&#xa; to another BObject type.  Converters are registered&#xa; in the module manifest and can be queried via the&#xa; Registry API.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">12 May 04</tag>
+<tag name="@version">$Revision: 3$ $Date: 5/27/04 12:16:26 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BStruct"/>
+</extends>
+<!-- javax.baja.util.BConverter() -->
+<constructor name="BConverter" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.util.BConverter.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BConverter.init(javax.baja.sys.BObject, javax.baja.sys.BObject) -->
+<method name="init"  public="true">
+<description>
+This method is used to give the converter a chance&#xa; to intialize its state based on a from and to type.
+</description>
+<parameter name="from">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="to">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BConverter.convert(javax.baja.sys.BObject, javax.baja.sys.BObject) -->
+<method name="convert"  public="true" final="true">
+<description>
+Convenience for &lt;code&gt;convert(from, to, null)&lt;/code&gt;.
+</description>
+<parameter name="from">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="to">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BConverter.convert(javax.baja.sys.BObject, javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="convert"  public="true" abstract="true">
+<description>
+Convert the first object to the second object and return&#xa; the result.  If the to-object is a complex then the conversion&#xa; should be in-place and the to-object should be returned.&#xa; If the to-object is a simple, then the return a new instance &#xa; of the same type.
+</description>
+<parameter name="from">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="to">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.util.BConverter.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

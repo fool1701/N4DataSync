@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="orion" runtimeProfile="rt" qualifiedName="com.tridium.orion.BIOrionObject" name="BIOrionObject" packageName="com.tridium.orion" public="true" interface="true" abstract="true" category="interface">
+<description>
+BIOrionObject is the interface implemented by objects that&#xa; can be stored in the Orion database.
+</description>
+<tag name="@author">John Sublett</tag>
+<tag name="@creation">26 Sep 2007</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<implements>
+<type class="com.tridium.orion.BIOrionDatabaseObject"/>
+</implements>
+<implements>
+<type class="javax.baja.security.BIProtected"/>
+</implements>
+<!-- com.tridium.orion.BIOrionObject.getOrionSpace() -->
+<method name="getOrionSpace"  public="true" abstract="true">
+<description>
+Get the space where this object is mounted.  May return null&#xa; if the object is not currently mounted in an Orion space.
+</description>
+<return>
+<type class="com.tridium.orion.BOrionSpace"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getOrionDatabase() -->
+<method name="getOrionDatabase"  public="true" abstract="true">
+<description>
+Get the database where this object is mounted.  May return null&#xa; if the object is not currently mounted in an Orion database.
+</description>
+<return>
+<type class="com.tridium.orion.BOrionDatabase"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.setOrionDatabase(com.tridium.orion.BOrionDatabase) -->
+<method name="setOrionDatabase"  public="true" abstract="true">
+<description>
+Set the database that this object is mounted in.
+</description>
+<parameter name="db">
+<type class="com.tridium.orion.BOrionDatabase"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getOrionType() -->
+<method name="getOrionType"  public="true" abstract="true">
+<description>
+Get the type for this object.
+</description>
+<return>
+<type class="com.tridium.orion.OrionType"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getHandle() -->
+<method name="getHandle"  public="true" abstract="true">
+<description>
+This method always returns getOrdInSpace().
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getNavOrd() -->
+<method name="getNavOrd"  public="true" abstract="true">
+<description>
+Get the nav ord for this object.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getOrdInSpace() -->
+<method name="getOrdInSpace"  public="true" abstract="true">
+<description>
+Get the ord of this object in its Orion space.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.get(javax.baja.sys.Property) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get the value of the specified property.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.get(java.lang.String) -->
+<method name="get"  public="true" abstract="true">
+<description>
+Get a property value by name.
+</description>
+<parameter name="pname">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.init(javax.baja.sys.Property, javax.baja.sys.BValue) -->
+<method name="init"  public="true" abstract="true">
+<description>
+Initialize the specified property value.  This sets&#xa; the property value without marking it modified.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.set(javax.baja.sys.Property, javax.baja.sys.BValue) -->
+<method name="set"  public="true" abstract="true">
+<description>
+Set the value of the specified property.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getSlotFacets(javax.baja.sys.Slot) -->
+<method name="getSlotFacets"  public="true" abstract="true">
+<description>
+Get the facets for the specified slot.  The default&#xa; implementation is to return slot.getFacets().  You&#xa; should *never* return null, but rather BFacets.DEFAULT.
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getDisplayName(javax.baja.sys.Slot, javax.baja.sys.Context) -->
+<method name="getDisplayName"  public="true" abstract="true">
+<description>
+Get the display name of the specified slot.  The&#xa; default implementation is as follows:&#xa; &lt;ol&gt;&#xa; &lt;li&gt;If there is BNameMap property called &#x22;displayNames&#x22;,&#xa;         then use the map&#x27;s value if found.&lt;/li&gt;&#xa; &lt;li&gt;Return slot.getDefaultDisplayName(cx)&lt;/li&gt;&#xa; &lt;/ol&gt;
+</description>
+<parameter name="slot">
+<type class="javax.baja.sys.Slot"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.copyFrom(com.tridium.orion.BIOrionObject) -->
+<method name="copyFrom"  public="true" abstract="true">
+<description>
+Copy the properties from obj into this object.
+</description>
+<parameter name="obj">
+<type class="com.tridium.orion.BIOrionObject"/>
+<description>
+The object to copy from.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.isModified() -->
+<method name="isModified"  public="true" abstract="true">
+<description>
+Have any of this object&#x27;s properties been modified?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.isModified(javax.baja.sys.Property) -->
+<method name="isModified"  public="true" abstract="true">
+<description>
+Has the specified property been modified since the last sync with&#xa; persistent storage?  A sync occurs on a create, read, or update.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.setModified(javax.baja.sys.Property, boolean) -->
+<method name="setModified"  public="true" abstract="true">
+<description>
+Set the modified state for the specified property.
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="modified">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.clearAllModified() -->
+<method name="clearAllModified"  public="true" abstract="true">
+<description>
+Set modified=false for all properties.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.isNull(javax.baja.sys.Property) -->
+<method name="isNull"  public="true" abstract="true">
+<description>
+Does the field in the underlying database record &#xa; have a SQL NULL value?
+</description>
+<parameter name="p">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.toDisplayString(javax.baja.sys.Context) -->
+<method name="toDisplayString"  public="true" abstract="true">
+<description>
+Get a display string for this object.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.equivalent(java.lang.Object) -->
+<method name="equivalent"  public="true" abstract="true">
+<description>
+Compare this object to the other object for equivalence.&#xa; Two Orion objects are equivalent if they are the same&#xa; type and all of their key values are the same.
+</description>
+<parameter name="other">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.getIndexes() -->
+<method name="getIndexes"  public="true" abstract="true">
+<description>
+Get the indexes associated with this type.
+</description>
+<return>
+<type class="com.tridium.orion.Index" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.isAuditable() -->
+<method name="isAuditable"  public="true" abstract="true">
+<description>
+Is this an auditable object type?
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.beforeInsert(com.tridium.orion.OrionSession) -->
+<method name="beforeInsert"  public="true" abstract="true">
+<description>
+Called just before this object is inserted into the database.&#xa; &lt;p&gt;&#xa; This method should never be explictly invoked.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+false if you wish to veto the insertion.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.afterInsert(com.tridium.orion.OrionSession) -->
+<method name="afterInsert"  public="true" abstract="true">
+<description>
+Called just after this object is inserted into the database.&#xa; This method will not be called if the insertion was vetoed in &#xa; &lt;code&gt;beforeInsert()&lt;/code&gt;.&#xa; &lt;p&gt;&#xa; This method should never be explictly invoked.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.beforeUpdate(com.tridium.orion.OrionSession) -->
+<method name="beforeUpdate"  public="true" abstract="true">
+<description>
+Called just before this object is updated in the database.&#xa; &lt;p&gt;&#xa; This method should never be explictly invoked.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+false if you wish to veto the update.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.afterUpdate(com.tridium.orion.OrionSession) -->
+<method name="afterUpdate"  public="true" abstract="true">
+<description>
+Called just after this object is updated in the database.&#xa; This method will not be called if the update was vetoed in &#xa; &lt;code&gt;beforeUpdate()&lt;/code&gt;.&#xa; &lt;p&gt;&#xa; This method should never be explictly invoked.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.beforeDelete(com.tridium.orion.OrionSession) -->
+<method name="beforeDelete"  public="true" abstract="true">
+<description>
+Called just before this object is deleted from the database.&#xa; &lt;p&gt;&#xa; This method should never be explictly invoked.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+false if you wish to veto the deletion.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.afterDelete(com.tridium.orion.OrionSession) -->
+<method name="afterDelete"  public="true" abstract="true">
+<description>
+Called just after this object is deleted from the database.&#xa; This method will not be called if the deletion was vetoed in &#xa; &lt;code&gt;beforeDelete()&lt;/code&gt;.&#xa; &lt;p&gt;&#xa; This method should never be explictly invoked.
+</description>
+<parameter name="session">
+<type class="com.tridium.orion.OrionSession"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.orion.BIOrionObject.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

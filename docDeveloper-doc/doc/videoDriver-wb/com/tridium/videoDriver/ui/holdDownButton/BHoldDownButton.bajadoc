@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton" name="BHoldDownButton" packageName="com.tridium.videoDriver.ui.holdDownButton" public="true">
+<description>
+This special extension of BButton fires a given bajaui topic when the&#xa; button is clicked. This continues to fire the bajaui topic on a periodic&#xa; interval as the mouse-click is held down. Then, this fires&#xa; the bajaui topic one last time when the mouse-click is released.&#xa; &#xa; The interval during which the topic is periodically fired is defined&#xa; as a property on this button.&#xa; &#xa; This button is used programmatically on the various other user interface&#xa; components in the videoDriver. For a general purpose hold-down-button that&#xa; an integrator can place on a Px Page, see the BVideoHoldDownPxButton.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.ui.BButton"/>
+</extends>
+<property name="keepDownInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#getKeepDownInterval</tag>
+<tag name="@see">#setKeepDownInterval</tag>
+</property>
+
+<action name="checkMouseStillPressed" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This action is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed()</tag>
+</action>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton() -->
+<constructor name="BHoldDownButton" public="true">
+<description>
+This is the default constructor that exists simply to allow for&#xa; Niagara AX introspection.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton(javax.baja.ui.BWidget, javax.baja.sys.Topic, javax.baja.sys.BValue, javax.baja.sys.BValue, java.lang.String, javax.baja.gx.BImage) -->
+<constructor name="BHoldDownButton" public="true">
+<parameter name="mgr">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+the widget that owns this button
+</description>
+</parameter>
+<parameter name="t">
+<type class="javax.baja.sys.Topic"/>
+<description>
+the bajaui topic to fire periodically as this button is held down and ultimately released. This &#xa;        bajaui topic is assumed to be on the mgr widget that is passed as the first &#x27;mgr&#x27; param to this&#xa;        constructor
+</description>
+</parameter>
+<parameter name="mousePressedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument/event is passed to the given bajaui topic as it is invoked periodically while the button&#xa;        is held down. This is also passed for the initial mouse click on the button.
+</description>
+</parameter>
+<parameter name="mouseReleasedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument/event is passed to the given bajaui topic when the button is finally released
+</description>
+</parameter>
+<parameter name="buttonText">
+<type class="java.lang.String"/>
+<description>
+this is the text of the button
+</description>
+</parameter>
+<parameter name="buttonImage">
+<type class="javax.baja.gx.BImage"/>
+<description>
+this is the image of the button
+</description>
+</parameter>
+<description>
+Creates a button that when pressed and held down, the given topic is fired periodically, as indicated in the&#xa; JavaDoc for this class.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton(javax.baja.ui.BWidget, javax.baja.sys.Topic, javax.baja.sys.BValue, javax.baja.sys.BValue, java.lang.String) -->
+<constructor name="BHoldDownButton" public="true">
+<parameter name="mgr">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+the widget that owns this button
+</description>
+</parameter>
+<parameter name="t">
+<type class="javax.baja.sys.Topic"/>
+<description>
+the topic to fire periodically as this button is held down and ultimately released. This topic is assumed&#xa;          to be on the mgr widget that is passed as the first param to this constructor
+</description>
+</parameter>
+<parameter name="mousePressedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument is passed to the given topic as it is invoked periodically while the button&#xa;        is held down.
+</description>
+</parameter>
+<parameter name="mouseReleasedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument is passed to the given topic when the button is finally released
+</description>
+</parameter>
+<parameter name="buttonText">
+<type class="java.lang.String"/>
+<description>
+this is the text of the button
+</description>
+</parameter>
+<description>
+Creates a button that when pressed and held down, the given topic is fired periodically, as indicated in the&#xa; JavaDoc for this class.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton(javax.baja.ui.BWidget, javax.baja.sys.Topic, javax.baja.sys.BValue, javax.baja.sys.BValue, javax.baja.gx.BImage) -->
+<constructor name="BHoldDownButton" public="true">
+<parameter name="mgr">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+the widget that owns this button
+</description>
+</parameter>
+<parameter name="t">
+<type class="javax.baja.sys.Topic"/>
+<description>
+the topic to fire periodically as this button is held down and ultimately released. This topic is assumed&#xa;        to be on the mgr widget that is passed as the first param to this constructor
+</description>
+</parameter>
+<parameter name="mousePressedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument is passed to the given topic as it is invoked periodically while the button&#xa;        is held down.
+</description>
+</parameter>
+<parameter name="mouseReleasedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument is passed to the given topic when the button is finally released
+</description>
+</parameter>
+<parameter name="buttonImage">
+<type class="javax.baja.gx.BImage"/>
+<description>
+this is the image of the button
+</description>
+</parameter>
+<description>
+Creates a button that when pressed and held down, the given topic is fired periodically, as indicated in the&#xa; JavaDoc for this class.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton(javax.baja.ui.BWidget, javax.baja.sys.Topic, javax.baja.sys.BValue, javax.baja.sys.BValue) -->
+<constructor name="BHoldDownButton" public="true">
+<parameter name="mgr">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+the widget that owns this button
+</description>
+</parameter>
+<parameter name="t">
+<type class="javax.baja.sys.Topic"/>
+<description>
+the topic to fire periodically as this button is held down and ultimately released. This topic is assumed&#xa;          to be on the mgr widget that is passed as the first param to this constructor
+</description>
+</parameter>
+<parameter name="mousePressedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument is passed to the given topic as it is invoked periodically while the button&#xa;        is held down.
+</description>
+</parameter>
+<parameter name="mouseReleasedArg">
+<type class="javax.baja.sys.BValue"/>
+<description>
+this argument is passed to the given topic when the button is finally released
+</description>
+</parameter>
+<description>
+Creates a button that when pressed and held down, the given topic is fired periodically, as indicated in the&#xa; JavaDoc for this class.
+</description>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.getKeepDownInterval() -->
+<method name="getKeepDownInterval"  public="true">
+<description>
+Get the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#keepDownInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.setKeepDownInterval(javax.baja.sys.BRelTime) -->
+<method name="setKeepDownInterval"  public="true">
+<description>
+Set the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#keepDownInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.checkMouseStillPressed() -->
+<method name="checkMouseStillPressed"  public="true">
+<description>
+Invoke the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This action is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.initVisual() -->
+<method name="initVisual"  protected="true">
+<description>
+This method is called from the constructor to allow a super-class&#xa; to customize the visual layout of this button. This default method&#xa; has an empty method body. It exists to allow for a subclass to&#xa; customize the visual presentation of this button.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.mousePressed(javax.baja.ui.event.BMouseEvent) -->
+<method name="mousePressed"  public="true" synchronized="true">
+<description>
+BajaUI callback for when the user presses the mousebutton over this button.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.doCheckMouseStillPressed() -->
+<method name="doCheckMouseStillPressed"  public="true">
+<description>
+Implements the &#x27;checkMouseStillPressed&#x27; topic, which is called&#xa; by the client-side Clock Scheduler. This is synchronized because it&#xa; could change the &#x27;checkMouseStillPressedTicket&#x27; and we wouldn&#x27;t&#xa; want that to happen while the &#x27;mousePressed&#x27; or &#x27;mouseReleased&#x27;&#xa; method was being executed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.asyncCheckMouseStillPressed() -->
+<method name="asyncCheckMouseStillPressed"  public="true" synchronized="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.mouseReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseReleased"  public="true" synchronized="true">
+<description>
+BajaUI callback for when the user releases the mousebutton over this button.&#xa; &#xa; Cancels any outstanding &#x27;checkMouseStillPressedTicket&#x27; and invokes&#xa; the topic on the mgrWidget and passes in the mouseReleasedEvt.&#xa; &#xa; Synchronized to ensure that the doCheckMouseStillPressedTicket does&#xa; not reinstantiate the ticket while executing code in this method.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.keepDownInterval -->
+<field name="keepDownInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#getKeepDownInterval</tag>
+<tag name="@see">#setKeepDownInterval</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.checkMouseStillPressed -->
+<field name="checkMouseStillPressed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This action is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed()</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.mgrWidget -->
+<field name="mgrWidget"  public="true" final="true">
+<type class="javax.baja.ui.BWidget"/>
+<description>
+This widget will have a topic fired it when the user pressed down&#xa; the mouse button and when the user releases the mouse button.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.topic -->
+<field name="topic"  public="true" final="true">
+<type class="javax.baja.sys.Slot"/>
+<description>
+This topic will be fired on the &#x27;mgrWidget&#x27; when the mouse is pressed &#xa; or released.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.mousePressedEvt -->
+<field name="mousePressedEvt"  public="true" final="true">
+<type class="javax.baja.sys.BValue"/>
+<description>
+This is passed to the topic on the mgrWidget when the main mouse&#xa; button is pressed.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.mouseReleasedEvt -->
+<field name="mouseReleasedEvt"  public="true" final="true">
+<type class="javax.baja.sys.BValue"/>
+<description>
+This is passed to the topic on the mgrWidget when the main mouse&#xa; button is released.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.checkMouseStillPressedTicket -->
+<field name="checkMouseStillPressedTicket"  public="true">
+<type class="javax.baja.sys.Clock$Ticket"/>
+<description>
+This is a reference to the ticket, if there is one, that ensures that the&#xa; &#x27;checkMouseStillPressed&#x27; action is called periodically after the mouse button&#xa; is pressed but before it is released.&#xa; &#xa; The &#x27;mousePressed&#x27; callback creates this ticket.&#xa; &#xa; The &#x27;mouseReleased&#x27; callback cancels this ticket.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.videoButtonQueue -->
+<field name="videoButtonQueue"  public="true" static="true">
+<type class="javax.baja.util.Queue"/>
+<description>
+This Queue processes work items that ensure that the topics are fired when necessary&#xa; as BVideoButtons are pressed, held-down, and subsequently released (per the JavaDoc&#xa; that is included for the definition of this class)
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.holdDownButton.BHoldDownButton.videoButtonWorker -->
+<field name="videoButtonWorker"  public="true" static="true">
+<type class="javax.baja.util.Worker"/>
+<description>
+This Worker is a thread that loops indefinitely and runs the work items that are in the&#xa; &#x27;videoButtonQueue&#x27; at the appropriate intervals.
+</description>
+</field>
+
+</class>
+</bajadoc>

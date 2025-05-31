@@ -1,0 +1,83 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/servingFromFileSys.html" class="navbar">Prev</a> |  <a href="/doc/jsdoc/bajaScript-ux/index.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h2 id="requirejs-how-to-load-javascript-code-in-niagara-4">RequireJS: how to load JavaScript code in Niagara 4</h2>
+<p>When using <a href="jsdoc/bajaScript-ux/index.html">BajaScript</a> version 1 in Niagara AX, the following script tag was required for BajaScript to work:</p>
+<pre><code class="html">&lt;script type=&quot;text/javascript&quot; src=&quot;module://bajaScript/com/tridium/bajascript/bs.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>The more complex the web application, the more script tags are needed. This can have some negative effects on your web application:</p>
+<ul>
+  <li>If a script tag is in the wrong order, your web app could break.</li>
+  <li>If you forget to include a script tag, your web app could break.</li>
+  <li>The more script tags, the more HTTP requests. The more HTTP requests, the slower your application loads.</li>
+  <li>The more complicated the JavaScript, the bigger the script file. Big JavaScript files are difficult to manage.</li>
+</ul>
+<p>As more developers transition their UI from Java to HTML5, we need a modular way to manage JavaScript. To solve this problem, we use RequireJS from <a href="https://requirejs.org/">https://requirejs.org</a>. RequireJS uses the Asynchronous Module Definition (AMD) method of loading JavaScript code.</p>
+<p>RequireJS has a wide variety of configuration options, but in most cases, Niagara will completely handle the configuration of it for you. The most important thing to learn about using RequireJS in Niagara is the AMD syntax itself.</p>
+<pre><code>// to define an AMD module:
+// myModule-ux/src/rc/MyWidget.js
+define([
+  'baja!',
+  'bajaux/Widget' ], function (
+  baja,
+  Widget) {
+  
+  return class MyWidget extends Widget {
+  };
+});
+
+// to consume an AMD module:
+define([
+  'nmodule/myModule/rc/MyWidget' ], function (
+  MyWidget) {
+  // write code that uses MyWidget here
+});
+</code></pre>
+<h3 id="what-resources-can-i-access-via-requirejs">What resources can I access via RequireJS?</h3>
+<ul>
+  <li>BajaScript: require <code>baja!</code> to obtain a running instance of BajaScript.</li>
+  <li>Any module resource: use the <code>nmodule</code> prefix to retrieve a resource from any module. For instance, if your file is in <code>myModule-ux/src/rc/MyWidget.js</code>, the RequireJS ID to request is <code>nmodule/myModule/rc/MyWidget</code>.</li>
+  <li>CSS: use the <code>css</code> plugin to make your <code>bajaux</code> widget require a CSS file. For instance, if your CSS file is at <code>myModule-ux/src/rc/myModuleStyle.css</code>, the RequireJS ID to request is <code>css!nmodule/myModule/rc/myModuleStyle</code>.</li>
+  <li>Lexicons: use the <code>lex</code> plugin to request lexicon data. See the documentation <a href="jsdoc/js-ux/module-lex.html">here</a>.</li>
+  <li>Logs: use the <code>log</code> plugin to log data to the browser console, or send it up to the station log. See the documentation <a href="jsdoc/js-ux/module-log.html">here</a>.</li>
+</ul>
+<h3 id="how-do-i-build-my-web-module-using-requirejs">How do I build my web module using RequireJS?</h3>
+<p>In addition to loading code in the browser at runtime, RequireJS allows multiple JS modules to be bundled up into single files. This improves caching and load times, and reduces pressure on a station&rsquo;s web server.</p>
+<p>Please see the section on <a href="js/buildingJS.html">Building JavaScript Applications</a> for details.</p>
+<h3 id="how-do-i-include-requirejs-itself-in-my-web-application">How do I include RequireJS itself in my web application?</h3>
+<p>Depending on how you are developing a web application, your use of RequireJS will vary slightly.</p>
+<ul>
+  <li><strong><a href="jsdoc/bajaux-ux/index.html">bajaux</a></strong>: RequireJS will be provided for you automatically.</li>
+  <li><strong><a href="hx.html">Hx</a></strong>: Call <a href="hx-wb/javax/baja/hx/HxOp.bajadoc"><code>HxOp#requireJs()</code></a> from your Hx View.</li>
+  <li><strong><a href="velocity/velocity.html">Velocity Templates</a></strong>: use <a href="axvelocity-rt/javax/baja/velocity/VelocityContextUtil.bajadoc"><code>$util.requirejs()</code></a> to inject the RequireJS script tag and configuration object.</li>
+  <li><strong><a href="servingFromFileSys.html">.htm files (not recommended)</a></strong>: Add the following two script tags:
+    <ul>
+      <li><code>&lt;script src=&quot;/requirejs/config.js&quot;&gt;&lt;/script&gt;</code> (preloads the RequireJS configuration)</li>
+      <li><code>&lt;script src=&quot;/module/js/com/tridium/js/ext/require/require.js&quot;&gt;&lt;/script&gt;</code> (loads RequireJS itself)</li>
+    </ul>
+  </li>
+</ul>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/servingFromFileSys.html" class="navbar">Prev</a> |  <a href="/doc/jsdoc/bajaScript-ux/index.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

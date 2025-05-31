@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="event" runtimeProfile="rt" qualifiedName="javax.baja.event.BIEventRoutable" name="BIEventRoutable" packageName="javax.baja.event" public="true" interface="true" abstract="true" category="interface">
+<description>
+&lt;p&gt;A &lt;code&gt;<see ref="javax.baja.sys.BComponent">BComponent</see>&lt;/code&gt; which can receive and route events.  This interface &#xa; provides a standard mechanism for programmatic assembly of steps in an event &#xa; processing chain. Components implementing this interface provide a way to &#xa; accept incoming &lt;code&gt;<see ref="javax.baja.event.BEvent">BEvent</see>&lt;/code&gt; objects, and establish a transient link &#xa; between an event source (possibly itself) and another &#xa; &lt;code&gt;BIEventRoutable&lt;/code&gt; component.&lt;/p&gt;&#xa; &#xa;  &lt;pre&gt;&#xa;  BEventService service = (BEventService) Sys.getService(BEventService.TYPE);&#xa;  BEventSource source = service.getEventSource(&#x22;CardSwipeSource&#x22;);&#xa;&#xa;  // Create a filter and recipient, routing the source to the chain of both&#xa;  // newly created objects&#xa;  BEventFilter filter = new BCardSwipeUserFilter();&#xa;  BEventRecipient recipient = new BCardReaderLogger();&#xa;  &#xa;  source.routeTo(filter).routeTo(recipient);&#xa; &lt;/pre&gt;&#xa; &#xa; &lt;p&gt;Components added into the component tree via a &#xa; &lt;code&gt;BIEventRoutable&lt;/code&gt; must be flagged as &lt;code&gt;<see ref="javax.baja.sys.Flags#TRANSIENT">Flags#TRANSIENT</see>&lt;/code&gt; and &#xa; should be flagged &lt;code&gt;<see ref="javax.baja.sys.Flags#HIDDEN">Flags#HIDDEN</see>&lt;/code&gt;.&lt;/p&gt;&#xa;  &#xa; Implementors must have a &lt;code&gt;process(event: BEvent)&lt;/code&gt; &lt;code&gt;<see ref="javax.baja.sys.Action">Action</see>&lt;/code&gt;.
+</description>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">07 April 11</tag>
+<tag name="@version">$Revision: 1$ $Date: 4/11/11 3:48:42 PM EDT$</tag>
+<tag name="@since">Niagara 3.7</tag>
+<implements>
+<type class="javax.baja.sys.BInterface"/>
+</implements>
+<!-- javax.baja.event.BIEventRoutable.process(javax.baja.event.BEvent) -->
+<method name="process"  public="true" abstract="true">
+<description>
+&lt;p&gt;Process an incoming event. Implementations should this interface&#xa; method by creating a &lt;code&gt;process(event: BEvent)&lt;/code&gt; Action that&#xa; routes events according to their application logic.
+</description>
+<parameter name="event">
+<type class="javax.baja.event.BEvent"/>
+<description>
+The incoming event for routing
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.event.BIEventRoutable.routeTo(javax.baja.event.BIEventRoutable) -->
+<method name="routeTo"  public="true" abstract="true">
+<description>
+&lt;p&gt;Add a new transient BIEventRoutable into the component tree and create a &#xa; transient link from &lt;code&gt;this&lt;/code&gt; to the &lt;code&gt;process&lt;/code&gt; action of &#xa; the target &lt;code&gt;BIEventRoutable&lt;/code&gt;.&lt;/p&gt;&#xa; &#xa; &lt;p&gt;The component must be flagged as &lt;code&gt;Flags.TRANSIENT&lt;/code&gt; when added&#xa; in order to fulfill transient portion of this contract.  The added &#xa; component should be flagged &lt;code&gt;Flags.HIDDEN&lt;/code&gt; to prevent workbench &#xa; visibility of the transient objects.&lt;/p&gt;&#xa; &#xa; &lt;p&gt;The &lt;code&gt;BIEventRoutable&lt;/code&gt; returned from a call to &#xa; &lt;code&gt;routeTo&lt;/code&gt; should be the same as &lt;code&gt;filter&lt;/code&gt; to support &#xa; easy chaining of route calls.&lt;/p&gt;&#xa; &#xa; &lt;p&gt;The name of the slot used for parenting the &lt;code&gt;BIEventRoutable&lt;/code&gt;&#xa;  will be generated.&lt;/p&gt;
+</description>
+<parameter name="routable">
+<type class="javax.baja.event.BIEventRoutable"/>
+<description>
+New instance of a &lt;code&gt;BIEventRoutable&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.event.BIEventRoutable"/>
+<description>
+The &lt;code&gt;BIEventRoutable&lt;/code&gt; added to the component tree with&#xa;         an active link to &lt;code&gt;filter.process&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.event.BIEventRoutable.routeTo(java.lang.String, javax.baja.event.BIEventRoutable) -->
+<method name="routeTo"  public="true" abstract="true">
+<description>
+&lt;p&gt;Add a new transient BIEventRoutable into the component tree and create a &#xa; transient link from &lt;code&gt;this&lt;/code&gt; to the &lt;code&gt;process&lt;/code&gt; action of &#xa; the target &lt;code&gt;BIEventRoutable&lt;/code&gt;.&lt;/p&gt;&#xa; &#xa; &lt;p&gt;The component must be flagged as &lt;code&gt;Flags.TRANSIENT&lt;/code&gt; when added&#xa; in order to fulfill transient portion of this contract.  The added &#xa; component should be flagged &lt;code&gt;Flags.HIDDEN&lt;/code&gt; to prevent workbench &#xa; visibility of the transient objects.&lt;/p&gt;&#xa; &#xa; &lt;p&gt;The &lt;code&gt;BIEventRoutable&lt;/code&gt; returned from a call to &#xa; &lt;code&gt;routeTo&lt;/code&gt; should be the same as &lt;code&gt;filter&lt;/code&gt; to support &#xa; easy chaining of route calls.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+<description>
+Name to be used when parenting the &#xa;        &lt;code&gt;BIEventRoutable&lt;/code&gt;. This value may be null.
+</description>
+</parameter>
+<parameter name="filter">
+<type class="javax.baja.event.BIEventRoutable"/>
+<description>
+New instance of a &lt;code&gt;BIEventRoutable&lt;/code&gt;.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.event.BIEventRoutable"/>
+<description>
+The &lt;code&gt;BIEventRoutable&lt;/code&gt; added to the component tree with&#xa;         an active link to &lt;code&gt;filter.process&lt;/code&gt;.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.event.BIEventRoutable.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.BModule" name="BModule" packageName="javax.baja.sys" public="true" final="true">
+<description>
+BModule encapsulates a Baja software module which&#xa; is packaged and delivered as a JAR file with a &#xa; &#x22;meta-inf/module.xml&#x22; description.  Modules are the &#xa; unit of software deployment in the Baja architecture.&#xa; Module names must be one to 25 ASCII characters in &#xa; length and globally unique.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">7 Nov 00</tag>
+<tag name="@version">$Revision: 33$ $Date: 7/6/11 2:10:40 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.file.BFileSpace"/>
+</extends>
+<implements>
+<type class="javax.baja.sys.BIComparable"/>
+</implements>
+<!-- javax.baja.sys.BModule() -->
+<constructor name="BModule" public="true">
+<description>
+Framework use only.
+</description>
+</constructor>
+
+<!-- javax.baja.sys.BModule.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getModule(javax.baja.space.BISpace) -->
+<method name="getModule"  public="true" static="true">
+<description/>
+<parameter name="space">
+<type class="javax.baja.space.BISpace"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.Optional">
+<args>
+<type class="javax.baja.sys.BModule"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.isModuleFileSpace(javax.baja.space.BISpace) -->
+<method name="isModuleFileSpace"  public="true" static="true">
+<description/>
+<parameter name="space">
+<type class="javax.baja.space.BISpace"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getRootFilePath() -->
+<method name="getRootFilePath"  public="true">
+<description/>
+<return>
+<type class="javax.baja.file.FilePath"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.hasPalette() -->
+<method name="hasPalette"  public="true" final="true">
+<description>
+Returns true if this module has a palette
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getModuleName() -->
+<method name="getModuleName"  public="true" final="true">
+<description>
+Name uniquely describes the module.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getPreferredSymbol() -->
+<method name="getPreferredSymbol"  public="true" final="true">
+<description>
+The preferred symbol is a very compact&#xa; abbreviation of the name usually between&#xa; one to four letters.  Note that the preferred&#xa; symbol is not guaranteed unique between modules&#xa; like the name, it is merely a suggestion.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getBajaVersion(javax.baja.nre.platform.RuntimeProfile) -->
+<method name="getBajaVersion"  public="true" final="true">
+<description>
+Get the Baja specification version that this&#xa; module implements.  If it does not implement&#xa; any Baja specification currently published&#xa; then return Version.ZERO.
+</description>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="javax.baja.util.Version"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getVendor(javax.baja.nre.platform.RuntimeProfile) -->
+<method name="getVendor"  public="true" final="true">
+<description>
+Get the vendor name for the module.
+</description>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getVendorVersion(javax.baja.nre.platform.RuntimeProfile) -->
+<method name="getVendorVersion"  public="true" final="true">
+<description>
+Get the vendor specific version of this module.
+</description>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="javax.baja.util.Version"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getClassVersion(java.lang.Class&lt;?&gt;) -->
+<method name="getClassVersion"  public="true" static="true">
+<description>
+Return the version for the module part that provides this class,&#xa; or null if the class is not provided by a Niagara module.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="javax.baja.util.Version"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getClassVendor(java.lang.Class&lt;?&gt;) -->
+<method name="getClassVendor"  public="true" static="true">
+<description>
+Return the vendor for the module part that provides this class,&#xa; or null if the class is not provided by a Niagara module.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="cls">
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.checkBajaVersion(javax.baja.util.Version, javax.baja.nre.platform.RuntimeProfile) -->
+<method name="checkBajaVersion"  public="true">
+<description>
+Check that the bajaVersion is equal to or greater&#xa; than the specified version.  If not then throw a&#xa; ModuleIncompatibleException.
+</description>
+<parameter name="bajaVersion">
+<type class="javax.baja.util.Version"/>
+</parameter>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BModule"/>
+<description>
+this.
+</description>
+</return>
+<throws>
+<type class="javax.baja.sys.ModuleIncompatibleException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.checkVendor(java.lang.String, javax.baja.util.Version, javax.baja.nre.platform.RuntimeProfile) -->
+<method name="checkVendor"  public="true">
+<description>
+Check that the module&#x27;s vendor name is equal to the specified&#xa; vendor name (case insensitive) and that the vendorVersion is&#xa; equal to or greater than the specified vendorVersion.  If not&#xa; then throw a ModuleIncompatibleException.
+</description>
+<parameter name="vendor">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="vendorVersion">
+<type class="javax.baja.util.Version"/>
+</parameter>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BModule"/>
+<description>
+this.
+</description>
+</return>
+<throws>
+<type class="javax.baja.sys.ModuleIncompatibleException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.getDescription() -->
+<method name="getDescription"  public="true" final="true">
+<description>
+Get a short description of the module.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getRuntimeProfile(javax.baja.file.FilePath) -->
+<method name="getRuntimeProfile"  public="true">
+<description/>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getModuleInfo(javax.baja.nre.platform.RuntimeProfile) -->
+<method name="getModuleInfo"  public="true">
+<description>
+Get the ModuleInfo for this module which provides access&#xa; for registry interrogation.
+</description>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="javax.baja.registry.ModuleInfo"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getAllModuleInfo() -->
+<method name="getAllModuleInfo"  public="true">
+<description>
+Get the ModuleInfo for this module which provides access&#xa; for registry interrogation.
+</description>
+<return>
+<type class="javax.baja.registry.ModuleInfo" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getType(java.lang.String) -->
+<method name="getType"  public="true" final="true">
+<description>
+Lookup the Type for the specified type name.  This&#xa; mapping is loaded from &amp;lt;type&amp;gt; elements in&#xa; the &#x22;module.xml&#x22; manifest file.
+</description>
+<parameter name="typeName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Type"/>
+<description>
+Type which implements the specified typeName.
+</description>
+</return>
+<throws>
+<type class="javax.baja.sys.TypeException"/>
+<description>
+if there was an error loading&#xa;                               the type from the module.
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.loadClass(java.lang.String) -->
+<method name="loadClass"  public="true" final="true">
+<description>
+Load the specified class from this module.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<parameterizedType class="java.lang.Class">
+<args>
+<wildcardType class="?">
+</wildcardType>
+</args>
+</parameterizedType>
+</return>
+<throws>
+<type class="java.lang.ClassNotFoundException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.getResource(java.lang.String) -->
+<method name="getResource"  public="true" final="true">
+<description>
+Get a resource from the Module&#x27;s class loader.
+</description>
+<parameter name="path">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.net.URL"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.isSynthetic(javax.baja.nre.platform.RuntimeProfile) -->
+<method name="isSynthetic"  public="true">
+<description>
+Is this module synthetic.
+</description>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.isSynthetic() -->
+<method name="isSynthetic"  public="true">
+<description>
+Is this module synthetic.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.isTransient(javax.baja.nre.platform.RuntimeProfile) -->
+<method name="isTransient"  public="true">
+<description>
+Is this module transient.
+</description>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.isTransient() -->
+<method name="isTransient"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getLexicon(java.lang.String) -->
+<method name="getLexicon"  public="true" final="true">
+<description/>
+<parameter name="lang">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.util.Lexicon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getModulePartName(javax.baja.nre.platform.RuntimeProfile) -->
+<method name="getModulePartName"  public="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="profile">
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getRuntimeProfiles() -->
+<method name="getRuntimeProfiles"  public="true">
+<description/>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.nre.platform.RuntimeProfile"/>
+</args>
+</parameterizedType>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.addModulePart(java.lang.Object) -->
+<method name="addModulePart"  public="true">
+<description>
+Framework use only.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="modulePartObj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getHost() -->
+<method name="getHost"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.naming.BHost"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getSession() -->
+<method name="getSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.naming.BISession"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getOrdInSession() -->
+<method name="getOrdInSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get ord passed to constructor.
+</description>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.appendFilePathToOrd(javax.baja.naming.BOrd, javax.baja.file.FilePath) -->
+<method name="appendFilePathToOrd"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="baseOrd">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<parameter name="filePath">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.findStore(javax.baja.file.FilePath) -->
+<method name="findStore"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Map a FilePath to an instanceof of BIFileStore.  If the&#xa; path doesn&#x27;t map to a file in this space, then return null.
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFileStore"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getChild(javax.baja.file.BIFile, java.lang.String) -->
+<method name="getChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the child file of the specified parent or&#xa; return null if not found.
+</description>
+<parameter name="parent">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<parameter name="childName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFile"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getChildren(javax.baja.file.BIFile) -->
+<method name="getChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the children files of the specified parent&#xa; or return an empty array.
+</description>
+<parameter name="parent">
+<type class="javax.baja.file.BIFile"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFile" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.makeDir(javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="makeDir"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This is a read-only file space, throws IOException
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BDirectory"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.makeFile(javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="makeFile"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This is a read-only file space, throws IOException
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.file.BIFile"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.move(javax.baja.file.FilePath, javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="move"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This is a read-only file space, throws IOException
+</description>
+<parameter name="from">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="to">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.delete(javax.baja.file.FilePath, javax.baja.sys.Context) -->
+<method name="delete"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This is a read-only file space, throws IOException
+</description>
+<parameter name="path">
+<type class="javax.baja.file.FilePath"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.compareTo(java.lang.Object) -->
+<method name="compareTo"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Compares this object with the specified object for order.  Returns a&#xa; negative integer, zero, or a positive integer as this object is less&#xa; than, equal to, or greater than the specified object.
+</description>
+<tag name="@since">Niagara 4.13</tag>
+<parameter name="other">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.listFiles() -->
+<method name="listFiles"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the list of containing files.
+</description>
+<return>
+<type class="javax.baja.file.BIFile" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getNavName() -->
+<method name="getNavName"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the nav name.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getNavParent() -->
+<method name="getNavParent"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the nav parent.
+</description>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getNavChild(java.lang.String) -->
+<method name="getNavChild"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get a root by name.
+</description>
+<parameter name="navName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.nav.BINavNode"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getNavChildren() -->
+<method name="getNavChildren"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.nav.BINavNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+To string.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getLexicon() -->
+<method name="getLexicon"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.util.Lexicon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.fw(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object) -->
+<method name="fw"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="x">
+<type class="int"/>
+</parameter>
+<parameter name="a">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="b">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="c">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="d">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.sys.BModule.clearNavChildren() -->
+<method name="clearNavChildren"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.BModule.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

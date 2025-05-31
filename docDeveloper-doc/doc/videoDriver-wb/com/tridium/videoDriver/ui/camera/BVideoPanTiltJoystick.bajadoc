@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="videoDriver" runtimeProfile="wb" qualifiedName="com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick" name="BVideoPanTiltJoystick" packageName="com.tridium.videoDriver.ui.camera" public="true">
+<description>
+This widget is available in the VideoDriver palette. An integrator may drag a&#xa; BIVideoCamera onto a Px page and choose this widget from the pallete. Please&#xa; note that the palette places a BVideoPtzBinding on this widget to tie this&#xa; widget to a particular video camera in the station.&#xa; &#xa; This widget looks like a box with a ball inside. The ball starts out&#xa; in the center. The user can drag the ball within the box. The corresponding&#xa; BVideoPtzBinding will translate the location of the ball within the box&#xa; to a BVideoPanTiltEnum and pass the BVideoPanTiltEnum to the &#x27;move&#x27;&#xa; action of the BIVideoPanTiltControl camera to which the BVideoPtzBinding is&#xa; bound. This will cause the target to receive &#x27;move&#x27; callbacks on the&#xa; station side that corresponds to the position of the ball within the box.&#xa; &#xa; If the ball is moved within the box but remains close to the center, then&#xa; the move call-backs will ask the target camera to move slowly. If the ball is a bit&#xa; further from the center then the move call-backs will ask the target camera to move&#xa; at a medium speed. If the mouse cursor leaves the box while dragging the ball,&#xa; the ball will not leave the box, however, the move call-backs will ask the&#xa; target camera to move at its fastest possible speed.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.ui.BWidget"/>
+</extends>
+<property name="background" flags="">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Slot for the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#getBackground</tag>
+<tag name="@see">#setBackground</tag>
+</property>
+
+<property name="border" flags="">
+<type class="javax.baja.ui.BBorder"/>
+<description>
+Slot for the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#getBorder</tag>
+<tag name="@see">#setBorder</tag>
+</property>
+
+<property name="ballPercent" flags="">
+<type class="double"/>
+<description>
+Slot for the &lt;code&gt;ballPercent&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBallPercent</tag>
+<tag name="@see">#setBallPercent</tag>
+</property>
+
+<property name="fillBallNormal" flags="">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Slot for the &lt;code&gt;fillBallNormal&lt;/code&gt; property.&#xa; Color to fill the ball when it is not being dragged.
+</description>
+<tag name="@see">#getFillBallNormal</tag>
+<tag name="@see">#setFillBallNormal</tag>
+</property>
+
+<property name="fillBallDragging" flags="">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+Slot for the &lt;code&gt;fillBallDragging&lt;/code&gt; property.&#xa; Color to fill the ball when it is being dragged.
+</description>
+<tag name="@see">#getFillBallDragging</tag>
+<tag name="@see">#setFillBallDragging</tag>
+</property>
+
+<property name="keepDownInterval" flags="">
+<type class="javax.baja.sys.BRelTime"/>
+<description>
+Slot for the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#getKeepDownInterval</tag>
+<tag name="@see">#setKeepDownInterval</tag>
+</property>
+
+<action name="checkMouseStillPressed" flags="">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This topic is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed()</tag>
+</action>
+
+<topic name="move" flags="">
+<eventType>
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+</eventType><description>
+Slot for the &lt;code&gt;move&lt;/code&gt; topic.&#xa; This topic is fired from the graphical user interface&#xa; as the user drags this widget&#x27;s ball. If this widget&#xa; has a corresponding BIVideoPtzBinding then the binding&#xa; will detect this action when this action is invoked.&#xa; The binding will forward the action to the target&#xa; component on the station-side, which will control the&#xa; camera to make the camera move accordingly.
+</description>
+<tag name="@see">#fireMove</tag>
+</topic>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick() -->
+<constructor name="BVideoPanTiltJoystick" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getBackground() -->
+<method name="getBackground"  public="true">
+<description>
+Get the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#background</tag>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.setBackground(javax.baja.gx.BBrush) -->
+<method name="setBackground"  public="true">
+<description>
+Set the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#background</tag>
+<parameter name="v">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getBorder() -->
+<method name="getBorder"  public="true">
+<description>
+Get the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#border</tag>
+<return>
+<type class="javax.baja.ui.BBorder"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.setBorder(javax.baja.ui.BBorder) -->
+<method name="setBorder"  public="true">
+<description>
+Set the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#border</tag>
+<parameter name="v">
+<type class="javax.baja.ui.BBorder"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getBallPercent() -->
+<method name="getBallPercent"  public="true">
+<description>
+Get the &lt;code&gt;ballPercent&lt;/code&gt; property.
+</description>
+<tag name="@see">#ballPercent</tag>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.setBallPercent(double) -->
+<method name="setBallPercent"  public="true">
+<description>
+Set the &lt;code&gt;ballPercent&lt;/code&gt; property.
+</description>
+<tag name="@see">#ballPercent</tag>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getFillBallNormal() -->
+<method name="getFillBallNormal"  public="true">
+<description>
+Get the &lt;code&gt;fillBallNormal&lt;/code&gt; property.&#xa; Color to fill the ball when it is not being dragged.
+</description>
+<tag name="@see">#fillBallNormal</tag>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.setFillBallNormal(javax.baja.gx.BBrush) -->
+<method name="setFillBallNormal"  public="true">
+<description>
+Set the &lt;code&gt;fillBallNormal&lt;/code&gt; property.&#xa; Color to fill the ball when it is not being dragged.
+</description>
+<tag name="@see">#fillBallNormal</tag>
+<parameter name="v">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getFillBallDragging() -->
+<method name="getFillBallDragging"  public="true">
+<description>
+Get the &lt;code&gt;fillBallDragging&lt;/code&gt; property.&#xa; Color to fill the ball when it is being dragged.
+</description>
+<tag name="@see">#fillBallDragging</tag>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.setFillBallDragging(javax.baja.gx.BBrush) -->
+<method name="setFillBallDragging"  public="true">
+<description>
+Set the &lt;code&gt;fillBallDragging&lt;/code&gt; property.&#xa; Color to fill the ball when it is being dragged.
+</description>
+<tag name="@see">#fillBallDragging</tag>
+<parameter name="v">
+<type class="javax.baja.gx.BBrush"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getKeepDownInterval() -->
+<method name="getKeepDownInterval"  public="true">
+<description>
+Get the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#keepDownInterval</tag>
+<return>
+<type class="javax.baja.sys.BRelTime"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.setKeepDownInterval(javax.baja.sys.BRelTime) -->
+<method name="setKeepDownInterval"  public="true">
+<description>
+Set the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#keepDownInterval</tag>
+<parameter name="v">
+<type class="javax.baja.sys.BRelTime"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.checkMouseStillPressed() -->
+<method name="checkMouseStillPressed"  public="true">
+<description>
+Invoke the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This topic is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.fireMove(com.tridium.videoDriver.enums.BVideoPanTiltEnum) -->
+<method name="fireMove"  public="true">
+<description>
+Fire an event for the &lt;code&gt;move&lt;/code&gt; topic.&#xa; This topic is fired from the graphical user interface&#xa; as the user drags this widget&#x27;s ball. If this widget&#xa; has a corresponding BIVideoPtzBinding then the binding&#xa; will detect this action when this action is invoked.&#xa; The binding will forward the action to the target&#xa; component on the station-side, which will control the&#xa; camera to make the camera move accordingly.
+</description>
+<tag name="@see">#move</tag>
+<parameter name="event">
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.doCheckMouseStillPressed() -->
+<method name="doCheckMouseStillPressed"  public="true">
+<description>
+Implements the &#x27;checkMouseStillPressed&#x27; action, which is called&#xa; by the client-side Clock Scheduler. This is synchronized because it&#xa; could change the &#x27;checkMouseStillPressedTicket&#x27; and we wouldn&#x27;t&#xa; want that to happen while the &#x27;mouseDragged&#x27; or &#x27;mouseReleased&#x27;&#xa; method was being executed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.asyncCheckMouseStillPressed() -->
+<method name="asyncCheckMouseStillPressed"  public="true" synchronized="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computePreferredSize() -->
+<method name="computePreferredSize"  public="true">
+<description>
+Compute preferred size.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.doLayout(javax.baja.ui.BWidget[]) -->
+<method name="doLayout"  public="true">
+<description>
+Layout component.
+</description>
+<parameter name="kids">
+<type class="javax.baja.ui.BWidget" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.paint(javax.baja.gx.Graphics) -->
+<method name="paint"  public="true">
+<description/>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.paintBall(javax.baja.gx.Graphics) -->
+<method name="paintBall"  protected="true">
+<description/>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeBallCoordinates() -->
+<method name="computeBallCoordinates"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeSpeedBrush() -->
+<method name="computeSpeedBrush"  protected="true">
+<description>
+Computes a BBrush to be used to illustrate the pan/tilt region that maps to&#xa; the current position of the ball. This method is called from the paintCurrentRegion&#xa; method. This method assumes that the speed is SPEED_SLOW, SPEED_MEDIUM, or SPEED_FAST.&#xa; &#xa; This method cannot be called unless it is predetermined that the speed is SPEED_SLOW,&#xa; SPEED_MEDIUM, or SPEED_FAST.
+</description>
+<return>
+<type class="javax.baja.gx.BBrush"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.fillCurrentRegion(javax.baja.gx.Graphics) -->
+<method name="fillCurrentRegion"  protected="true">
+<description>
+Fills the region that the widget&#x27;s ball is currently over top of.&#xa; &#xa; This method is called from the &#x27;paintCurrentRegion&#x27; method. This&#xa; method assumes that the direction is valid (not -1) and that the&#xa; brush for the given Gx graphics object has already been assigned&#xa; to the appropriate shade of lightning blue.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+<description>
+the Gx graphics object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.paintCurrentRegion(javax.baja.gx.Graphics) -->
+<method name="paintCurrentRegion"  protected="true">
+<description>
+Paints the region that the ball is currently&#xa; being dragged over. The color will be&#xa; lightning blue. The color will be solid&#xa; if the speed is fast, somewhat transparent&#xa; if the speed is medium, and very much&#xa; transparent (but still somewhat lightning&#xa; blue) if the speed is slow.
+</description>
+<parameter name="g">
+<type class="javax.baja.gx.Graphics"/>
+<description>
+the Gx graphics object.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeRegionCoordinates() -->
+<method name="computeRegionCoordinates"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeUpperLeftRegion() -->
+<method name="computeUpperLeftRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeUpperRegion() -->
+<method name="computeUpperRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeUpperRightRegion() -->
+<method name="computeUpperRightRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeLeftRegion() -->
+<method name="computeLeftRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeRightRegion() -->
+<method name="computeRightRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeLowerLeftRegion() -->
+<method name="computeLowerLeftRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeLowerRegion() -->
+<method name="computeLowerRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeLowerRightRegion() -->
+<method name="computeLowerRightRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeDeadRegion() -->
+<method name="computeDeadRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeSlowRegion() -->
+<method name="computeSlowRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeMediumRegion() -->
+<method name="computeMediumRegion"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mouseReleased(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseReleased"  public="true" synchronized="true">
+<description>
+This method is called by the UI environment when the mouse button is released.&#xa; &#xa; We consider this the end of the mouse drag. This method is synchronized to&#xa; avoid concurrent modification between the UI environment and our movement&#xa; processing logic that is periodically scheduled in order to keep firing the&#xa; move topic as the user drags the mouse or holds down the mouse button during&#xa; a mouse drag operation.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.handleMouseReleased() -->
+<method name="handleMouseReleased"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mouseEntered(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseEntered"  public="true">
+<description>
+This callback is invoked when the fireMouseEvent() is&#xa; invoked with a BMouseEvent with an id of MOUSE_ENTERED.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mouseExited(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseExited"  public="true">
+<description>
+This callback is invoked when the fireMouseEvent() is&#xa; invoked with a BMouseEvent with an id of MOUSE_EXITED.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mouseDragged(javax.baja.ui.event.BMouseEvent) -->
+<method name="mouseDragged"  public="true">
+<description>
+This method is called by the UI environment when the mouse is dragged across&#xa; this widget. From empirical analysis, this method is called when the mouse&#xa; starts dragging from within this widget&#x27;s boundaries and subsequently thereafter&#xa; as the mouse is being dragged, whether or not the mouse itself is still in&#xa; the widget.&#xa; &#xa; This method is synchronized to&#xa; avoid concurrent modification between the UI environment and our movement&#xa; processing logic that is periodically scheduled in order to keep firing the&#xa; move topic as the user drags the mouse or holds down the mouse button during&#xa; a mouse drag operation.
+</description>
+<parameter name="event">
+<type class="javax.baja.ui.event.BMouseEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeSpeed() -->
+<method name="computeSpeed"  protected="true">
+<description>
+Determines the pan/tilt speed based on the mouse dragged-coordinates.&#xa; &#xa; This method should only be called from the mouseDragged method because&#xa; it assumes that the mouse is currently being dragged.
+</description>
+<return>
+<type class="int"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computeDirection() -->
+<method name="computeDirection"  protected="true">
+<description>
+Computes the pan/tilt direction based on the ball&#x27;s current coordinates. This method is&#xa; called while the mouse is being dragged.
+</description>
+<return>
+<type class="int"/>
+<description>
+a number corresponding to the keypad to represent the pan/tilt direction&#xa; 7-9 = upLeft, up, upRight 4=left, 6=right, 1-3=downLeft,down,downRight
+</description>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computePanTiltActionSlow() -->
+<method name="computePanTiltActionSlow"  protected="true">
+<description>
+This computePanTiltAction method returns this method&#x27;s return value if the speed is currently SPEED_SLOW.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computePanTiltActionMedium() -->
+<method name="computePanTiltActionMedium"  protected="true">
+<description>
+This computePanTiltAction method returns this method&#x27;s return value if the speed is currently SPEED_MEDIUM.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computePanTiltActionFast() -->
+<method name="computePanTiltActionFast"  protected="true">
+<description>
+This computePanTiltAction method returns this method&#x27;s return value if the speed is currently SPEED_FAST.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.computePanTiltAction() -->
+<method name="computePanTiltAction"  protected="true">
+<description>
+Computes the current BVideoPanTiltEnum.
+</description>
+<return>
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+<description/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.getIcon() -->
+<method name="getIcon"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.PWT -->
+<field name="PWT"  public="true" static="true" final="true">
+<type class="com.tridium.ui.theme.palladium.PalladiumWidgetTheme"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.DEFAULT_BALL_BRUSH_IDLE -->
+<field name="DEFAULT_BALL_BRUSH_IDLE"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BBrush"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.DEFAULT_BALL_BRUSH_DRAGGING -->
+<field name="DEFAULT_BALL_BRUSH_DRAGGING"  public="true" static="true" final="true">
+<type class="javax.baja.gx.BBrush"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.background -->
+<field name="background"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;background&lt;/code&gt; property.&#xa; Defines the background
+</description>
+<tag name="@see">#getBackground</tag>
+<tag name="@see">#setBackground</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.border -->
+<field name="border"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;border&lt;/code&gt; property.&#xa; Defines the border to use for the box.
+</description>
+<tag name="@see">#getBorder</tag>
+<tag name="@see">#setBorder</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.ballPercent -->
+<field name="ballPercent"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ballPercent&lt;/code&gt; property.
+</description>
+<tag name="@see">#getBallPercent</tag>
+<tag name="@see">#setBallPercent</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.fillBallNormal -->
+<field name="fillBallNormal"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fillBallNormal&lt;/code&gt; property.&#xa; Color to fill the ball when it is not being dragged.
+</description>
+<tag name="@see">#getFillBallNormal</tag>
+<tag name="@see">#setFillBallNormal</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.fillBallDragging -->
+<field name="fillBallDragging"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;fillBallDragging&lt;/code&gt; property.&#xa; Color to fill the ball when it is being dragged.
+</description>
+<tag name="@see">#getFillBallDragging</tag>
+<tag name="@see">#setFillBallDragging</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.keepDownInterval -->
+<field name="keepDownInterval"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;keepDownInterval&lt;/code&gt; property.&#xa; The number of millis to keep firing the mousePressedEvt
+</description>
+<tag name="@see">#getKeepDownInterval</tag>
+<tag name="@see">#setKeepDownInterval</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.checkMouseStillPressed -->
+<field name="checkMouseStillPressed"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;checkMouseStillPressed&lt;/code&gt; action.&#xa; This topic is invoked periodically after the user presses&#xa; the mouse button on the user interface button before the&#xa; mouse is released.
+</description>
+<tag name="@see">#checkMouseStillPressed()</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.move -->
+<field name="move"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;move&lt;/code&gt; topic.&#xa; This topic is fired from the graphical user interface&#xa; as the user drags this widget&#x27;s ball. If this widget&#xa; has a corresponding BIVideoPtzBinding then the binding&#xa; will detect this action when this action is invoked.&#xa; The binding will forward the action to the target&#xa; component on the station-side, which will control the&#xa; camera to make the camera move accordingly.
+</description>
+<tag name="@see">#fireMove</tag>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.STATE_IDLE -->
+<field name="STATE_IDLE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The joystickState will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.STATE_DRAGGING_BALL -->
+<field name="STATE_DRAGGING_BALL"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The joystickState will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.SPEED_NONE -->
+<field name="SPEED_NONE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.SPEED_SLOW -->
+<field name="SPEED_SLOW"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.SPEED_MEDIUM -->
+<field name="SPEED_MEDIUM"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.SPEED_FAST -->
+<field name="SPEED_FAST"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+The speed will be one of these.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.joystickState -->
+<field name="joystickState"  protected="true">
+<type class="int"/>
+<description>
+Indicates whether the joystick is being dragged or not
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mouseX -->
+<field name="mouseX"  protected="true">
+<type class="double"/>
+<description>
+Indicates the current mouse drag coordinates
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mouseY -->
+<field name="mouseY"  protected="true">
+<type class="double"/>
+<description>
+Indicates the current mouse drag coordinates
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.boxX -->
+<field name="boxX"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.boxY -->
+<field name="boxY"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.boxW -->
+<field name="boxW"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.boxH -->
+<field name="boxH"  protected="true">
+<type class="double"/>
+<description>
+The coordinates of the main widget box (the bounds of this widget).
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.ballX -->
+<field name="ballX"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the ball, the width and height of the ball.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.ballY -->
+<field name="ballY"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the ball, the width and height of the ball.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.ballW -->
+<field name="ballW"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the ball, the width and height of the ball.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.ballH -->
+<field name="ballH"  protected="true">
+<type class="double"/>
+<description>
+The center coordinates of the ball, the width and height of the ball.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.ballBrush -->
+<field name="ballBrush"  protected="true">
+<type class="javax.baja.gx.BBrush"/>
+<description>
+The fill-brush for the ball
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.speed -->
+<field name="speed"  protected="true">
+<type class="int"/>
+<description>
+The current speed to be sent to station component to which this is bound (actually speed and direction are combined into one enum)
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.direction -->
+<field name="direction"  protected="true">
+<type class="int"/>
+<description>
+The current direction to be sent to station component to which this is bound (actually speed and direction are combined into one enum)
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.panTiltAction -->
+<field name="panTiltAction"  protected="true">
+<type class="com.tridium.videoDriver.enums.BVideoPanTiltEnum"/>
+<description>
+The current pan/tilt action. This encapsulates the direction and speed. This serves as the event to the &#x27;move&#x27; topic
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.upperLeft -->
+<field name="upperLeft"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.upper -->
+<field name="upper"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.upperRight -->
+<field name="upperRight"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.left -->
+<field name="left"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.right -->
+<field name="right"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.lowerLeft -->
+<field name="lowerLeft"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.lower -->
+<field name="lower"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.lowerRight -->
+<field name="lowerRight"  protected="true">
+<type class="javax.baja.gx.PolygonGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the direction to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.deadRegion -->
+<field name="deadRegion"  protected="true">
+<type class="javax.baja.gx.RectGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the speed to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.slowRegion -->
+<field name="slowRegion"  protected="true">
+<type class="javax.baja.gx.RectGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the speed to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mediumRegion -->
+<field name="mediumRegion"  protected="true">
+<type class="javax.baja.gx.RectGeom"/>
+<description>
+Stores the computed coordinates for each region of the box that defines the speed to pan-tilt the camera
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.mouseOverWidget -->
+<field name="mouseOverWidget"  protected="true">
+<type class="boolean"/>
+<description/>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.checkMouseStillPressedTicket -->
+<field name="checkMouseStillPressedTicket"  public="true">
+<type class="javax.baja.sys.Clock$Ticket"/>
+<description>
+This is a reference to the ticket, if there is one, that ensures that the&#xa; &#x27;checkMouseStillPressed&#x27; action is called periodically after the mouse button&#xa; is pressed but before it is released.&#xa; &#xa; The &#x27;mousePressed&#x27; callback creates this ticket.&#xa; &#xa; The &#x27;mouseReleased&#x27; callback cancels this ticket.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.movementProcessingQueue -->
+<field name="movementProcessingQueue"  public="true" static="true">
+<type class="javax.baja.util.Queue"/>
+<description>
+This queue stores work items that are used to determine if the mouse is being held down&#xa; over the joytstick control.
+</description>
+</field>
+
+<!-- com.tridium.videoDriver.ui.camera.BVideoPanTiltJoystick.movementProcessingWorker -->
+<field name="movementProcessingWorker"  public="true" static="true">
+<type class="javax.baja.util.Worker"/>
+<description>
+This worker processes items immediately as they are placed in the &#x27;movementProcessingQueue&#x27;
+</description>
+</field>
+
+</class>
+</bajadoc>

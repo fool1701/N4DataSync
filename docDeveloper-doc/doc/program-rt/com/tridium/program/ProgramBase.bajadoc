@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="program" runtimeProfile="rt" qualifiedName="com.tridium.program.ProgramBase" name="ProgramBase" packageName="com.tridium.program" public="true">
+<description>
+ProgramBase is the superclass of all program implementation&#xa; classfiles.  Each BProgram has one ProgramBase that handles&#xa; the implemenation of the BProgram&#x27;s callbacks.&#xa;&#xa; For Niagara 4.0, the depreated getProgram() method was remvoed.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">12 Jun 02</tag>
+<tag name="@version">$Revision: 7$ $Date: 2/26/09 10:47:37 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="java.lang.Runnable"/>
+</implements>
+<!-- com.tridium.program.ProgramBase() -->
+<constructor name="ProgramBase" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.program.ProgramBase.getComponent() -->
+<method name="getComponent"  public="true" final="true">
+<description>
+Get the containing BComponent. There is no guarantee that the containing&#xa; component is a BProgram, so you should not attempt to cast the return&#xa; value to any particular type.&#xa; &lt;p&gt;&#xa; If you need to obtain particular slots (Properties or Actions) of the BProgram, use&#xa; one of the following access methods:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;&lt;code&gt;<see ref="com.tridium.program.ProgramBase#getSlot(java.lang.String)">#getSlot(String)</see>&lt;/code&gt;&#xa; &lt;li&gt;&lt;code&gt;<see ref="com.tridium.program.ProgramBase#getProperty(java.lang.String)">#getProperty(String)</see>&lt;/code&gt;&#xa; &lt;li&gt;&lt;code&gt;<see ref="com.tridium.program.ProgramBase#getAction(java.lang.String)">#getAction(String)</see>&lt;/code&gt;&#xa; &lt;/ul&gt;
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<return>
+<type class="javax.baja.sys.BComponent"/>
+<description>
+the BComponent running the program.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getSlot(java.lang.String) -->
+<method name="getSlot"  public="true" final="true">
+<description>
+Get the specified slot by name, or return null if not found.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Slot"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getProperty(java.lang.String) -->
+<method name="getProperty"  public="true" final="true">
+<description>
+Get the specified property by name, or return null if not found.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Property"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getAction(java.lang.String) -->
+<method name="getAction"  public="true" final="true">
+<description>
+Get the specified action by name, or return null if not found. This&#xa; is the only supported way to get an Action from a BProgram.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.Action"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.get(javax.baja.sys.Property) -->
+<method name="get"  public="true">
+<description>
+Get the specified property from the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getBoolean(javax.baja.sys.Property) -->
+<method name="getBoolean"  public="true">
+<description>
+Get the specified boolean property from the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getInt(javax.baja.sys.Property) -->
+<method name="getInt"  public="true">
+<description>
+Get the specified integer from the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getFloat(javax.baja.sys.Property) -->
+<method name="getFloat"  public="true">
+<description>
+Get the specified float from the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getDouble(javax.baja.sys.Property) -->
+<method name="getDouble"  public="true">
+<description>
+Get the specified float from the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getLong(javax.baja.sys.Property) -->
+<method name="getLong"  public="true">
+<description>
+Get the specified float from the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getString(javax.baja.sys.Property) -->
+<method name="getString"  public="true">
+<description>
+Get the specified string from the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.get(java.lang.String) -->
+<method name="get"  public="true">
+<description>
+Get the specified property from the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getBoolean(java.lang.String) -->
+<method name="getBoolean"  public="true">
+<description>
+Get the specified boolean property from the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getInt(java.lang.String) -->
+<method name="getInt"  public="true">
+<description>
+Get the specified integer from the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getFloat(java.lang.String) -->
+<method name="getFloat"  public="true">
+<description>
+Get the specified float from the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getDouble(java.lang.String) -->
+<method name="getDouble"  public="true">
+<description>
+Get the specified float from the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getLong(java.lang.String) -->
+<method name="getLong"  public="true">
+<description>
+Get the specified float from the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.getString(java.lang.String) -->
+<method name="getString"  public="true">
+<description>
+Get the specified string from the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.set(javax.baja.sys.Property, javax.baja.sys.BValue) -->
+<method name="set"  public="true">
+<description>
+Set the specified property on the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setBoolean(javax.baja.sys.Property, boolean) -->
+<method name="setBoolean"  public="true">
+<description>
+Set the specified boolean property on the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setInt(javax.baja.sys.Property, int) -->
+<method name="setInt"  public="true">
+<description>
+Set the specified integer on the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setFloat(javax.baja.sys.Property, float) -->
+<method name="setFloat"  public="true">
+<description>
+Set the specified float on the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="float"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setDouble(javax.baja.sys.Property, double) -->
+<method name="setDouble"  public="true">
+<description>
+Set the specified float on the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setLong(javax.baja.sys.Property, long) -->
+<method name="setLong"  public="true">
+<description>
+Set the specified float on the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setString(javax.baja.sys.Property, java.lang.String) -->
+<method name="setString"  public="true">
+<description>
+Set the specified string on the component.
+</description>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.set(java.lang.String, javax.baja.sys.BValue) -->
+<method name="set"  public="true">
+<description>
+Set the specified property on the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="v">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setBoolean(java.lang.String, boolean) -->
+<method name="setBoolean"  public="true">
+<description>
+Set the specified boolean property on the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setInt(java.lang.String, int) -->
+<method name="setInt"  public="true">
+<description>
+Set the specified integer on the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="v">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setFloat(java.lang.String, float) -->
+<method name="setFloat"  public="true">
+<description>
+Set the specified float on the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="v">
+<type class="float"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setDouble(java.lang.String, double) -->
+<method name="setDouble"  public="true">
+<description>
+Set the specified float on the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="v">
+<type class="double"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setLong(java.lang.String, long) -->
+<method name="setLong"  public="true">
+<description>
+Set the specified float on the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="v">
+<type class="long"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.setString(java.lang.String, java.lang.String) -->
+<method name="setString"  public="true">
+<description>
+Set the specified string on the component.
+</description>
+<parameter name="prop">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.run() -->
+<method name="run"  public="true">
+<description>
+ProgramBase implements Runnable so that you can spawn&#xa; a thread using this.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.print(java.lang.String) -->
+<method name="print"  public="true">
+<description>
+Print a string to standard out with a trailing newline.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.println(java.lang.String) -->
+<method name="println"  public="true">
+<description>
+Print a string to standard with a trailing newline.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.toString() -->
+<method name="toString"  public="true">
+<description>
+Default toString is &#x22;ProgramImpl for {program}&#x22;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramBase.onStart() -->
+<method name="onStart"  public="true">
+<description>
+Implementation for the started callback.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Throwable"/>
+</throws>
+</method>
+
+<!-- com.tridium.program.ProgramBase.onStop() -->
+<method name="onStop"  public="true">
+<description>
+Implementation for the stopped callback.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Throwable"/>
+</throws>
+</method>
+
+<!-- com.tridium.program.ProgramBase.onExecute() -->
+<method name="onExecute"  public="true">
+<description>
+Implementation for the execute action.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Throwable"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

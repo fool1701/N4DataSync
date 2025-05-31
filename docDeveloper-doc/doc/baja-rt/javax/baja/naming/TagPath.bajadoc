@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.naming.TagPath" name="TagPath" packageName="javax.baja.naming" public="true">
+<description>
+TagPath is a tag scheme for resolving tag values. &#xa; The BNF is:&#xa; &lt;pre&gt;&#xa;   slotpath  := namespace | tag&#xa;   namespace := &#x22;&#x22; | name&#xa;   tag       := name&#xa;   name      := nameStart (namePart)*&#xa;&#xa;   nameStart  := alpha | escape&#xa;   namePart   := alpha | digit | safe | escape&#xa;   safe       := &#x22;_&#x22;&#xa;   alpha      := &#x22;a&#x22;-&#x22;z&#x22; | &#x22;A-Z&#x22;&#xa;   digit      := &#x22;0&#x22;-&#x22;9&#x22;&#xa;   escape     := asciiEsc | unicodeEsc&#xa;   asciiEsc   := &#x22;$&#x22; hex hex&#xa;   unicodeEsc := &#x22;$u&#x22; hex hex hex hex&#xa;   hex        := &#x27;a&#x27;-&#x27;f&#x27; | &#x27;A&#x27;-&#x27;F&#x27; | digit&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Lee Adcock</tag>
+<tag name="@creation">June 2012</tag>
+<tag name="@version">$Revision: 21$ $Date: 11/30/06 6:08:15 PM EST$</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="javax.baja.naming.OrdQuery"/>
+</implements>
+<!-- javax.baja.naming.TagPath(java.lang.String) -->
+<constructor name="TagPath" public="true">
+<parameter name="body">
+<type class="java.lang.String"/>
+</parameter>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+<description>
+if the body isn&#x27;t a valid file path.
+</description>
+</throws>
+<description>
+Construct an SlotPath with the specified scheme and body.
+</description>
+</constructor>
+
+<!-- javax.baja.naming.TagPath(java.lang.String, java.lang.String) -->
+<constructor name="TagPath" public="true">
+<parameter name="namespace">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<throws>
+<type class="javax.baja.naming.SyntaxException"/>
+</throws>
+<description/>
+</constructor>
+
+<!-- javax.baja.naming.TagPath.isValidTagName(java.lang.String) -->
+<method name="isValidTagName"  protected="true">
+<description>
+Does the specified string contain a tag name.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.isValidNamespace(java.lang.String) -->
+<method name="isValidNamespace"  protected="true">
+<description>
+Does the specified string contain a tag name.
+</description>
+<parameter name="namespace">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.escape(java.lang.String) -->
+<method name="escape"  public="true" static="true">
+<description>
+Escape the specified string.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.unescape(java.lang.String) -->
+<method name="unescape"  public="true" static="true">
+<description>
+Unescape the specified string.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.isHost() -->
+<method name="isHost"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.isSession() -->
+<method name="isSession"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.getScheme() -->
+<method name="getScheme"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return the scheme field.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.getBody() -->
+<method name="getBody"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return the body field.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.normalize(javax.baja.naming.OrdQueryList, int) -->
+<method name="normalize"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="list">
+<type class="javax.baja.naming.OrdQueryList"/>
+</parameter>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.toDisplayString() -->
+<method name="toDisplayString"  public="true">
+<description>
+Return the body with path names unescaped.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.toString() -->
+<method name="toString"  public="true">
+<description>
+Return &lt;code&gt;scheme + &amp;#x22;:&amp;#x22; + body&lt;/code&gt;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.getNamespace() -->
+<method name="getNamespace"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.naming.TagPath.getTag() -->
+<method name="getTag"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

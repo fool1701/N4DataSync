@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.job.JobLog" name="JobLog" packageName="javax.baja.job" public="true" final="true">
+<description>
+JobLog is a list of JobLogItems which provide a &#xa; detailed account of a Job&#x27;s execution.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">27 Jul 04</tag>
+<tag name="@version">$Revision: 5$ $Date: 11/3/09 4:49:07 AM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.job.JobLog() -->
+<constructor name="JobLog" public="true">
+<description>
+Default constructor. The sequence numbers of the items added&#xa; will begin from zero.
+</description>
+</constructor>
+
+<!-- javax.baja.job.JobLog(long) -->
+<constructor name="JobLog" public="true">
+<parameter name="sequenceNumber">
+<type class="long"/>
+<description>
+the initial seed for the sequence numbers. The&#xa;                        first item to be added to the log will be at&#xa;                        sequence number + 1.
+</description>
+</parameter>
+<description>
+Create a new JobLog with an initial starting point for the&#xa; sequence numbers.
+</description>
+<tag name="@since">Niagara 4.3</tag>
+</constructor>
+
+<!-- javax.baja.job.JobLog.size() -->
+<method name="size"  public="true">
+<description>
+Get the number of items.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.getItem(int) -->
+<method name="getItem"  public="true">
+<description>
+Get the log item at the specified index between 0 to size()-1.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.job.JobLogItem"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.getItems() -->
+<method name="getItems"  public="true">
+<description>
+Get a copy of the items as an array.
+</description>
+<return>
+<type class="javax.baja.job.JobLogItem" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.setLimit(int) -->
+<method name="setLimit"  public="true">
+<description>
+Set a limit on the number of items that can be added to the Log
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="limit">
+<type class="int"/>
+<description>
+the limit of the number of items that can be added to the Job.&#xa;               If the limit is &#x27;-1&#x27;, the log is unlimited.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.getLimit() -->
+<method name="getLimit"  public="true">
+<description>
+Return the limit on the number of items that can be added to the Job
+</description>
+<tag name="@see">#setLimit</tag>
+<tag name="@since">Niagara 3.5</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.start(java.lang.String) -->
+<method name="start"  public="true">
+<description>
+Add a RUNNING item, typically this method is followed by &#xa; some work, and then a call to endSuccess() or endFailed().
+</description>
+<parameter name="nonLocalizedMessage">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.start(java.lang.String, java.lang.String, java.lang.String[]) -->
+<method name="start"  public="true">
+<description>
+Add a RUNNING item, typically this method is followed by &#xa; some work, and then a call to endSuccess() or endFailed().
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endSuccess(java.lang.String) -->
+<method name="endSuccess"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to SUCCESS.  If append is non-null then append it to &#xa; the original message.
+</description>
+<parameter name="nonLocalizedAppendText">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endSuccess(java.lang.String, java.lang.String, java.lang.String[]) -->
+<method name="endSuccess"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to SUCCESS.  If appendLexModule is non-null then use it, appendLexKey &#xa; and appendLexArgPatterns to append a format string to the original message.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="appendLexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endSuccess() -->
+<method name="endSuccess"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to SUCCESS.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endFailed(java.lang.String, java.lang.Throwable) -->
+<method name="endFailed"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to FAILED.  If append is non-null then append it to &#xa; the original message.  It exception is non-null set it &#xa; as the details.
+</description>
+<parameter name="nonLocalizedAppendText">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endFailed(java.lang.String, java.lang.String, java.lang.String[], java.lang.Throwable) -->
+<method name="endFailed"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to FAILED.  If appendLexModule is non-null then use it, appendLexKey &#xa; and appendLexArgPatterns to append a format string to the original message.&#xa; If exception is non-null set it as the details.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="appendLexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endFailed(java.lang.Throwable) -->
+<method name="endFailed"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to FAILED.  It exception is non-null set it as the details.
+</description>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endFailed(java.lang.String) -->
+<method name="endFailed"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to FAILED.  If appendLexModule is non-null then use it, appendLexKey &#xa; and appendLexArgPatterns to append a format string to the original message.
+</description>
+<parameter name="nonLocalizedAppendText">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.endFailed(java.lang.String, java.lang.String, java.lang.String[]) -->
+<method name="endFailed"  public="true">
+<description>
+Modify the last record added via start() from RUNNING &#xa; to FAILED.  If appendLexModule is non-null then use it, appendLexKey &#xa; and appendLexArgPatterns to append a format string to the original &#xa; message.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="appendLexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.end(int, java.lang.String, java.lang.Throwable) -->
+<method name="end"  public="true">
+<description>
+Modify the last record added via start() by changing &#xa; its id.  If append is non-null then append it to the &#xa; original message.  If exception is non-null then set&#xa; it as the details.
+</description>
+<parameter name="id">
+<type class="int"/>
+</parameter>
+<parameter name="nonLocalizedAppendText">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.end(int, java.lang.String, java.lang.String, java.lang.String[], java.lang.Throwable) -->
+<method name="end"  public="true">
+<description>
+Modify the last record added via start() by changing &#xa; its id.  If appendLexModule is non-null then use it, appendLexKey &#xa; and appendLexArgPatterns to append a format string to the original &#xa; message.  If exception is non-null then set it as the details.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="id">
+<type class="int"/>
+</parameter>
+<parameter name="appendLexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="appendLexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.message(java.lang.String) -->
+<method name="message"  public="true">
+<description>
+Add a MESSAGE item.
+</description>
+<parameter name="nonLocalizedMessage">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.message(java.lang.String, java.lang.String, java.lang.String[]) -->
+<method name="message"  public="true">
+<description>
+Add a MESSAGE item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.message(java.lang.String, java.lang.String, java.lang.String) -->
+<method name="message"  public="true">
+<description>
+Add a MESSAGE item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPattern">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.message(java.lang.String, java.lang.String) -->
+<method name="message"  public="true">
+<description>
+Add a MESSAGE item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.success(java.lang.String) -->
+<method name="success"  public="true">
+<description>
+Add a SUCCESS item.
+</description>
+<parameter name="nonLocalizedMessage">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.success(java.lang.String, java.lang.String, java.lang.String) -->
+<method name="success"  public="true">
+<description>
+Add a SUCCESS item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPattern">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.success(java.lang.String, java.lang.String) -->
+<method name="success"  public="true">
+<description>
+Add a SUCCESS item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.success(java.lang.String, java.lang.String, java.lang.String[]) -->
+<method name="success"  public="true">
+<description>
+Add a SUCCESS item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item.
+</description>
+<parameter name="nonLocalizedMessage">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String, java.lang.String, java.lang.String[]) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String, java.lang.String, java.lang.String) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPattern">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String, java.lang.String) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String, java.lang.Throwable) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item with exception details.
+</description>
+<parameter name="msg">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String, java.lang.String, java.lang.String[], java.lang.Throwable) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item with exception details.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPatterns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String, java.lang.String, java.lang.String, java.lang.Throwable) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item with exception details.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexArgPattern">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.failed(java.lang.String, java.lang.String, java.lang.Throwable) -->
+<method name="failed"  public="true">
+<description>
+Add a FAILED item with exception details.
+</description>
+<tag name="@since">Niagara 3.5</tag>
+<parameter name="lexModule">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="lexKey">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="exception">
+<type class="java.lang.Throwable"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.add(javax.baja.job.JobLogItem) -->
+<method name="add"  public="true">
+<description>
+Add an item to the end of the log.&#xa; &lt;p&gt;&#xa; If a limit has been set on the JobLog and this has been exceeded&#xa; then remove items from the beginning of the list
+</description>
+<parameter name="item">
+<type class="javax.baja.job.JobLogItem"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.encode() -->
+<method name="encode"  public="true">
+<description>
+Encode into a list of JobLogItems separated by &#x22;\n&#x22;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.job.JobLog.decode(java.lang.String) -->
+<method name="decode"  public="true" static="true">
+<description>
+Decode a list of JobLogItems created via encode().
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.job.JobLog"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

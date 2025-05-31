@@ -1,0 +1,145 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/csrfProtection.html" class="navbar">Prev</a> |  Next</p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="code-signing">Code Signing</h1>
+<h1 id="overview">Overview</h1>
+<p>Code signing is the process of applying a digital signature to a piece of code so that it can later be verified that the code was written by a particular author and has not been modified. In Niagara, this allows us to verify that modules that are installed were written by a trusted author and helps to prevent malicious code from getting installed.</p>
+<p>We plan to roll out third party module signing requirements in phases starting in 4.8. See the main <a href="module://docModuleSign/doc/ExampleConcept-41FE0D3F.html">module signing</a> documentation for more information.</p>
+<h1 id="default-signing-profile">Default Signing Profile</h1>
+<p>Code signing is enabled by default in the Niagara build environment starting in 4.6. Any module you build will automatically be signed with a generic, auto-generated, self-signed certificate. After building a module, you will notice some files in <code>USER_HOME/.tridium/security</code>. The <code>niagara.signing.jks</code> file is the default signing profile keystore, and the <code>niagara.signing.xml</code> file stores settings for the signing profile. This is a good starting point and useful for development, but you will probably want to sign your modules with a different key when releasing, and you may want to use a CA signed certificate in development to make testing easier. To make changes to the signing profile, you can either modify the default signing profile, or create a new one.</p>
+<h1 id="creating-a-signing-profile">Creating a Signing Profile</h1>
+<p>Note that you will need a <a href="../build.html">working Niagara 4 development environment</a> to run the Gradle commands in this example. If you do not have one, the best place to start is with the <a href="local:|module://docUser/doc/aNewModuleWizard.html">New Module Wizard in Workbench</a>.</p>
+<p>To create a signing profile, the Gradle task &ldquo;createProfile&rdquo; is used:</p>
+<pre><code class="sunlight-highlight-none">gradlew :createProfile --profile-path path\to\my_signing_profile.xml
+</code></pre>
+<p>The <code>createProfile</code> task will automatically create both a keystore and a settings file. By default, the signing profile will not have any keys in it. Before you create any keys, you need to modify the default profile so it generates keys for your organization:</p>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE properties SYSTEM &quot;http://java.sun.com/dtd/properties.dtd&quot;&gt;
+&lt;properties&gt;
+&lt;comment&gt;Code Signing Properties&lt;/comment&gt;
+&lt;entry key=&quot;niagara.signing.storetype&quot;&gt;JCEKS&lt;/entry&gt;
+&lt;entry key=&quot;niagara.signing.validity&quot;&gt;365&lt;/entry&gt;
+&lt;entry key=&quot;niagara.signing.refresh&quot;&gt;183&lt;/entry&gt;
+&lt;entry key=&quot;niagara.signing.profileType&quot;&gt;
+  com.tridium.gradle.plugins.signing.profile.RestrictedSigningProfile
+&lt;/entry&gt;
+&lt;!--Customize dname to your organization. '${alias}' will inject the alias of any created certificate --&gt;
+&lt;entry key=&quot;niagara.signing.dname&quot;&gt;
+  C=US,ST=Any State,L=Any City,O=Acme\\, Inc,OU=Engineering,CN=${alias}
+&lt;/entry&gt;
+&lt;entry key=&quot;niagara.signing.storepass&quot;&gt;…&lt;/entry&gt;
+&lt;entry key=&quot;niagara.signing.keyalg&quot;&gt;RSA&lt;/entry&gt;
+&lt;entry key=&quot;niagara.signing.keysize&quot;&gt;3072&lt;/entry&gt;
+&lt;/properties&gt;
+</code></pre>
+<p>This should be set to some unique string that identifies your organization. Note that when purchasing commercial certificates, the certificate authority you purchase from may impose additional requirements or restrictions on this field. In addition to changing the default distinguished name, you may also need to change the <code>niagara.signing.keyalg</code> or <code>niagara.signing.keysize</code> fields. The accepted minimum keysize and supported algorithms are subject to change over time.</p>
+<p>Once you&rsquo;ve modified the default profile XML, you can create a self-signed key with the following command:</p>
+<pre><code class="sunlight-highlight-none">gradlew :generateCertificate --profile-path path\to\my_signing_profile.xml --alias MyCertificate 
+</code></pre>
+<p>This command will create a certificate with the alias &ldquo;MyCertificate&rdquo; and store it in your signing profile. You can also import existing certificates to use them with Niagara as outlined below. Note that the keystore password and certificate private key passwords are all managed by the signing profile, but they are stored in plaintext in the profile XML &ndash; take care to securely store this file.</p>
+<p>For this new signing profile to take effect, we need to configure our Gradle build to load it. This is done by configuring the root &lsquo;build.gradle.kts&rsquo; of your build:</p>
+<pre><code class="sunlight-highlight-java">...
+signingServices {
+  // Disable the use of the default profile; this will cause build failures instead 
+  // of silently falling back to the default
+  signingProfileFactory {
+    allowDefaultProfile.set(false)
+  }
+}
+
+niagaraSigning {
+  aliases.set(listOf(&quot;MyCertificate&quot;))
+  signingProfileFile.set(project.layout.projectDirectory.file(&quot;path/to/my_signing_profile.xml&quot;))
+}
+...
+</code></pre>
+<p>Note that we also disable the use of the default profile. This will cause your build to fail instead of silently building with the wrong signing profile.</p>
+<h1 id="specifying-certificate-alias">Specifying Certificate Alias</h1>
+<p>By default, modules will be signed using the certificate in your signing profile with the alias <code>Niagara4Modules</code>. Since we used a different alias for our certificate, we specified a different alias:</p>
+<pre><code class="sunlight-highlight-java">...
+niagaraSigning {
+  aliases.set(listOf(&quot;MyCertificate&quot;))
+  ...
+}
+...
+</code></pre>
+<p>This should be sufficient in most cases, but if you discover you need to sign certain modules with a different certificate, you can specify the alias on a module specific basis by adding the same block to your module&rsquo;s gradle file.</p>
+<pre><code class="sunlight-highlight-java">...
+niagaraSigning {
+  aliases.set(listOf(&quot;MyOtherCertificate&quot;))
+}
+...
+</code></pre>
+<p>If you find you need to sign any modules with multiple certificates, you can add multiple aliases either by adding them as a list.</p>
+<pre><code class="sunlight-highlight-java">aliases.set(listOf(&quot;MyCertificate&quot;, &quot;MyOtherCertificate&quot;))
+</code></pre>
+<h1 id="timestamping">Timestamping</h1>
+<p>Timestamping provides proof that a signature was created at a particular time. This allows us to be sure that a module was signed while the signing certificate was within its validity period. Without timestamping, a signed module cannot be successfully validated after the signing certificate has expired, so we recommend timestamping all modules that will be released for use in production environments.</p>
+<p>To enable timestamping, add the following to your signing profile</p>
+<pre><code class="sunlight-highlight-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;!DOCTYPE properties SYSTEM &quot;http://java.sun.com/dtd/properties.dtd&quot;&gt;
+&lt;properties&gt;
+  &lt;comment&gt;Code Signing Properties&lt;/comment&gt;
+  &lt;entry key=&quot;niagara.signing.keypass.my-cert&quot;&gt;K3yP@ss&lt;/entry&gt;
+  &lt;entry key=&quot;niagara.signing.storepass&quot;&gt;St0reP@ss&lt;/entry&gt;
+  &lt;entry key=&quot;niagara.signing.profileType&quot;&gt;
+    com.tridium.gradle.plugins.signing.profile.RestrictedSigningProfile
+  &lt;/entry&gt;
+  
+  &lt;!--  The lines below will enable timestamping --&gt;
+  &lt;entry key=&quot;niagara.signing.standardtsa&quot;&gt;
+    http://timestamp.digicert.com
+  &lt;/entry&gt;
+&lt;/properties&gt;
+</code></pre>
+<p>The <code>niagara.signing.standardtsa</code> property can be set to any publicly available RFC 3161 compliant SHA-256 time stamp authority server. The DigiCert TSA has worked well for us, so there should be no reason to change this unless the server goes down or there is a connectivity problem from your network.</p>
+<p>Enabling timestamping will require an internet connection when building modules, but the signature and timestamp can be verified in Niagara even when running offline.</p>
+<h1 id="establishing-trust">Establishing Trust</h1>
+<p>When we eventually require code signing for all third party modules, the certificate that a module is signed with must be trusted for it to run in a Niagara installation. There are a few ways this can be accomplished. The first is to purchase a signed certificate from a trusted certificate authority. This is the easiest method because the certificate will automatically be trusted by all Niagara installations, so there is no need to install additional certificates when installing the signed module. This is also the most expensive method since a new certificate must be purchased each time it expires. If this cost is prohibitive, one of the following alternatives can be used.</p>
+<p>The second option is to use a certificate that is signed by an internal certificate authority, then install the CA certificate into the user trust store of all Niagara installations where the module will be installed. Multiple certificates can be signed by the same internal CA, and any Niagara installation with the CA certificate installed will trust any module signed with any certificate issued by the CA. To import the internal CA certificate into your Niagara user trust store, you must first obtain the CA certificate in PEM format. If it is not available in PEM format, it can be converted using OpenSSL or a similar tool. You can then import the certificate using Niagara&rsquo;s Certificate Management.</p>
+<p>The third option is to sign modules with a self-signed certificate and install that certificate into the user trust store of any Niagara installation where the module will be installed. This is the least scalable approach, but can be useful for small scale operations or during development. Self-signed certificates are not allowed when the module verification mode is set to &ldquo;high&rdquo;, which will be the default in a future version, so running modules signed with a self-signed certificate will require the module verification mode to be set back to &ldquo;medium&rdquo; in the future. To import the certificate into your Niagara user trust store, you will have to first export it from your keystore.</p>
+<pre><code class="sunlight-highlight-none">gradlew :exportCertificate --profile-path path\to\my_signing_profile.xml --alias MyCertificate --pem-file my-cert.pem
+</code></pre>
+<p>You can then import the certificate using Niagara&rsquo;s Certificate Management. There is also a provisioning job available to <a href="module://docProvisioning/doc/InstallCertificateProvisioningN4-B880B416.html">install a certificate</a> into the user trust store of multiple hosts at once to make things easier for larger installations.</p>
+<h1 id="using-signed-certificates">Using Signed Certificates</h1>
+<p>The first two approaches described above will require you to get your certificate signed by a CA and import it back into your keystore. To do this, you first need to generate a certificate signing request with the following command</p>
+<pre><code class="sunlight-highlight-none">gradlew :exportCertificate --profile-path path\to\my_signing_profile.xml --alias MyCertificate --csr-only --pem-file my-cert.csr
+</code></pre>
+<p>Note that if you know you will be generating a certificate to be signed by a CA, you can generate a new certificate and export the CSR in one command:</p>
+<pre><code class="sunlight-highlight-none">gradlew :generateCertificate --profile-path path\to\my_signing_profile.xml --alias MyCertificate --csr-file my-cert.csr
+</code></pre>
+<p>Then you should take the <code>my-cert.csr</code> file and send it to your CA to be signed, and they will send you back the signed certificate, which you will import back into your keystore with the command</p>
+<pre><code class="sunlight-highlight-none">gradlew :importCertificate --profile-path path\to\my_signing_profile.xml --alias MyCertificate --pem-file my-cert.pem
+</code></pre>
+<p>You may be prompted that the certificate is not trusted. Enter &ldquo;yes&rdquo; to install the reply anyway.</p>
+<p>Note that the signed certificate file&rsquo;s extension may differ depending on your CA. If you signed the certificate yourself using Workbench, the extension will be .pem. Your CA may send you multiple certificate files; you must use a PEM or PKCS encoded file with the full certificate chain. If your CA does not provide a file with the full certificate chain, you will have to construct one by concatenating the individual PEM files.</p>
+<h1 id="key-management">Key Management</h1>
+<p>It is important to properly manage your code signing keys and protect the keys you use for release because if your keys are exposed, someone could impersonate you by signing code with your signing key, defeating the purpose of code signing.</p>
+<p>We suggest having a separate signing certificate for signing release modules and storing that on a separate machine where all release builds will be done. Access to this machine and the signing certificate should be limited to a few trusted developers, and only modules that are intended to be released to customers or used in a production environment should be signed with this certificate.</p>
+<p>During development and testing, individual developers can use the default generic self-signed certificate and install it in the user trust store of Niagara test installations to establish a chain of trust as described above. Another option for development certificates is to have all developer certificates signed by an internal development CA, then that CA certificate can be installed in the user trust store of Niagara test installations organization wide. This allows developers to share modules for testing without having to install every developers certificate in their test environment.</p>
+<h1 id="permissions-requiring-signing">Permissions Requiring Signing</h1>
+<p>There are currently two <a href="module://docDeveloper/doc/security/requestingPermissions.html">Niagara permission groups</a> Niagara permission groups that require signed modules due to their sensitivity. These are REFLECTION, and HSM_SIGNING. Any module requesting either of these permissions must be validly signed, and must be trusted by the Niagara installation in which it is installed as described in the <code>Establishing Trust</code> section above. Any module requesting either of these permissions that is not signed and trusted will cause the Station or Workbench to halt when the module is loaded.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/csrfProtection.html" class="navbar">Prev</a> |  Next</p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="workbench" runtimeProfile="wb" qualifiedName="javax.baja.workbench.mgr.BMixinMgrAgent" name="BMixinMgrAgent" packageName="javax.baja.workbench.mgr" public="true" abstract="true">
+<description>
+Provides abstract managers with columns that should be displayed for&#xa; a BIMixIn type that&#x27;s &#x22;mixed in&#x22; with its rows.  The BMixinMgrAgent&#xa; type must be registered as an agent on the mixin type.&#xa; &#xa; For example, an abstract manager class manages objects of type &#x22;Foo&#x22;, and&#xa; for &#x22;Foo&#x22; the &#x22;Bar&#x22; mixin is enabled.   A BMixinMgrAgent subtype &#x22;BarColumns&#x22;&#xa; is registered against the &#x22;Bar&#x22; type, and the &#x22;BarColumns&#x22; implementation&#xa; returns the editable/listable columns that are to be displayed and edited with &#xa; the manager.
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">22 May 06</tag>
+<tag name="@version">$Revision: 6$ $Date: 8/16/07 3:41:02 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BObject"/>
+</extends>
+<implements>
+<type class="javax.baja.agent.BIAgent"/>
+</implements>
+<!-- javax.baja.workbench.mgr.BMixinMgrAgent() -->
+<constructor name="BMixinMgrAgent" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.workbench.mgr.BMixinMgrAgent.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BMixinMgrAgent.getColumns() -->
+<method name="getColumns"  public="true" abstract="true">
+<description>
+Returns an array of columns that should be shown for the mixin&#xa; on which this object&#x27;s type is registered as an agent.  If no columns&#xa; should be added, returns an array with zero length.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrColumn" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BMixinMgrAgent.requireExactTypeMatch() -->
+<method name="requireExactTypeMatch"  public="true">
+<description>
+Callback that controls whether this agent requires an exact match&#xa; to the target type.  If true is returned, the agent will only match&#xa; the exact type of the target.  If false, the agent will match&#xa; the target type and all subtypes.  The default implementation returns&#xa; false.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BMixinMgrAgent.addDescendentsToManagerSubscription(javax.baja.sys.BIMixIn, java.util.List&lt;javax.baja.sys.BComponent&gt;) -->
+<method name="addDescendentsToManagerSubscription"  public="true">
+<description>
+For the given mixin instance, add additional descendant components&#xa; to the given subscription list for the manager view in order for it to&#xa; function properly. The default behavior is to add nothing extra to the&#xa; subscription list.
+</description>
+<tag name="@since">Niagara 4.8</tag>
+<parameter name="mixin">
+<type class="javax.baja.sys.BIMixIn"/>
+</parameter>
+<parameter name="subscriptionList">
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.sys.BComponent"/>
+</args>
+</parameterizedType>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.workbench.mgr.BMixinMgrAgent.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

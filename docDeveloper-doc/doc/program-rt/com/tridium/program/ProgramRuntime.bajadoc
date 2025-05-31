@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="program" runtimeProfile="rt" qualifiedName="com.tridium.program.ProgramRuntime" name="ProgramRuntime" packageName="com.tridium.program" public="true" final="true">
+<description>
+ProgramRuntime provides a way for ProgramObjects &amp; Robots to make calls to&#xa;  Runtime.exec(). Calls to exec() are logged and audited. Requires &#xa;  BProgramService.allowProgramRuntimeExec() to set set to true and any callers&#xa;  to have com.tridium.nre.security.NiagaraBasicPermission &#x22;RUNTIME_EXEC&#x22; which &#xa;  the program module has.&#xa; All calls are logged and audited.
+</description>
+<tag name="@author">Blake Puhak</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="com.tridium.nre.util.NreRuntime"/>
+</extends>
+<!-- com.tridium.program.ProgramRuntime.getRuntime() -->
+<method name="getRuntime"  public="true" static="true">
+<description>
+Returns the runtime object associated with the current Nre application.
+</description>
+<return>
+<type class="com.tridium.program.ProgramRuntime"/>
+</return>
+</method>
+
+<!-- com.tridium.program.ProgramRuntime.exec(java.lang.Object, java.lang.String) -->
+<method name="exec"  public="true">
+<description>
+Convenience method for exec(caller, cmd, null, null).
+</description>
+<parameter name="caller">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cmd">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.Process"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.program.ProgramRuntime.exec(java.lang.Object, java.lang.String, java.lang.String[]) -->
+<method name="exec"  public="true">
+<description>
+Convenience method for exec(caller, cmd, envp, null).
+</description>
+<parameter name="caller">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cmd">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="envp">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.Process"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.program.ProgramRuntime.exec(java.lang.Object, java.lang.String, java.lang.String[], java.io.File) -->
+<method name="exec"  public="true">
+<description>
+Convenience method for exec(caller, cmdArray, null, null) where cmdArray is &#xa; an array of the tokens in cmd.
+</description>
+<parameter name="caller">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cmd">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="envp">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="dir">
+<type class="java.io.File"/>
+</parameter>
+<return>
+<type class="java.lang.Process"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.program.ProgramRuntime.exec(java.lang.Object, java.lang.String[]) -->
+<method name="exec"  public="true">
+<description>
+Convenience method for exec(caller, cmdArray, null, null).
+</description>
+<parameter name="caller">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cmdArray">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.Process"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.program.ProgramRuntime.exec(java.lang.Object, java.lang.String[], java.lang.String[]) -->
+<method name="exec"  public="true">
+<description>
+Convenience method for exec(caller, cmdArray, envp, null).
+</description>
+<parameter name="caller">
+<type class="java.lang.Object"/>
+</parameter>
+<parameter name="cmdArray">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="envp">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="java.lang.Process"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- com.tridium.program.ProgramRuntime.exec(java.lang.Object, java.lang.String[], java.lang.String[], java.io.File) -->
+<method name="exec"  public="true">
+<description>
+Executes the specified command and arguments in a separate process with the &#xa;  specified environment and working directory.
+</description>
+<tag name="@see">java.lang.Runtime#exec(String[], String[], File)</tag>
+<parameter name="caller">
+<type class="java.lang.Object"/>
+<description>
+instance of the calling ProgramBase (Program Object) or Robot
+</description>
+</parameter>
+<parameter name="cmdArray">
+<type class="java.lang.String" dimension="1"/>
+<description>
+array containing the command to call and its arguments.
+</description>
+</parameter>
+<parameter name="envp">
+<type class="java.lang.String" dimension="1"/>
+<description>
+array of strings, each element of which has environment variable &#xa;  settings in the format name=value, or null if the subprocess should inherit &#xa;  the environment of the current process.
+</description>
+</parameter>
+<parameter name="dir">
+<type class="java.io.File"/>
+<description>
+the working directory of the subprocess, or null if the &#xa;  subprocess should inherit the working directory of the current process.
+</description>
+</parameter>
+<return>
+<type class="java.lang.Process"/>
+<description>
+A new Process object
+</description>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.units.UnitDatabase" name="UnitDatabase" packageName="javax.baja.units" public="true">
+<description>
+UnitDatabase encapsulates the database of built-in units&#xa; provided framework.  It is organized into groups of Quanities&#xa; to make building user interfaces easier.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">18 Dec 01</tag>
+<tag name="@version">$Revision: 10$ $Date: 6/14/07 1:00:46 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.units.UnitDatabase() -->
+<constructor name="UnitDatabase" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.units.UnitDatabase.getUnit(java.lang.String) -->
+<method name="getUnit"  public="true" static="true">
+<description>
+Get a unit from the default database.  If unit does not&#xa; exist or has not previously been defined using BUnit.make()&#xa; then throw a UnitException.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.units.BUnit"/>
+</return>
+</method>
+
+<!-- javax.baja.units.UnitDatabase.getDefault() -->
+<method name="getDefault"  public="true" static="true">
+<description>
+Load and get the default unit database.  This&#xa; populates the BUnit table of units from the file&#xa; &#x22;{home}/lib/unit.xml&#x22;.  Once the database has&#xa; been loaded the standard units may be accessed by&#xa; BUnit.getUnit(), or by category by the getQuantities()&#xa; method.
+</description>
+<return>
+<type class="javax.baja.units.UnitDatabase"/>
+</return>
+</method>
+
+<!-- javax.baja.units.UnitDatabase.getQuantities() -->
+<method name="getQuantities"  public="true">
+<description>
+Get a copy of the Quantity groups specified&#xa; in the unit database.
+</description>
+<return>
+<type class="javax.baja.units.UnitDatabase$Quantity" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.units.UnitDatabase.getQuantity(javax.baja.units.BUnit) -->
+<method name="getQuantity"  public="true">
+<description>
+Get the Quantity which contains the specified&#xa; unit or return null if the unit is not contained&#xa; by the database.
+</description>
+<parameter name="unit">
+<type class="javax.baja.units.BUnit"/>
+</parameter>
+<return>
+<type class="javax.baja.units.UnitDatabase$Quantity"/>
+</return>
+</method>
+
+<!-- javax.baja.units.UnitDatabase.dump() -->
+<method name="dump"  public="true">
+<description>
+Dump the database to standard output for debugging.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="report" runtimeProfile="rt" qualifiedName="javax.baja.report.BReportSource" name="BReportSource" packageName="javax.baja.report" public="true" abstract="true">
+<description>
+BReportSource is responsible for generating BReports for consumption&#xa; by BReportRecipients.  Reports are generated when the &lt;code&gt;generate&lt;/code&gt;&#xa; action is invoked. ReportSource includes a built-in schedule for&#xa; automatically invoking &lt;code&gt;generate&lt;/code&gt; on a scheduled basis.&#xa; Subclasses should override &lt;code&gt;handleGenerate()&lt;/code&gt; to customize:&#xa;&#xa; &lt;pre&gt;&lt;code&gt;&amp;#xa;   public class BMyReportSource&amp;#xa;     extends BReportSource&amp;#xa;   {&amp;#xa;     public BReport handleGenerate()&amp;#xa;       throws Exception&amp;#xa;     {&amp;#xa;       ...&amp;#xa;       return new BReport(...);&amp;#xa;     }&amp;#xa;   }&amp;#xa; &lt;/code&gt;&lt;/pre&gt;
+</description>
+<tag name="@author">Andy Frank</tag>
+<tag name="@creation">16 Oct 06</tag>
+<tag name="@version">$Revision: 6$ $Date: 11/28/07 3:39:18 PM EST$</tag>
+<tag name="@since">Niagara 3.2</tag>
+<extends>
+<type class="javax.baja.sys.BComponent"/>
+</extends>
+<property name="schedule" flags="">
+<type class="javax.baja.control.trigger.BTimeTrigger"/>
+<description>
+Slot for the &lt;code&gt;schedule&lt;/code&gt; property.&#xa; The schedule used to trigger this report to be generated.
+</description>
+<tag name="@see">#getSchedule</tag>
+<tag name="@see">#setSchedule</tag>
+</property>
+
+<action name="generate" flags="a">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;generate&lt;/code&gt; action.&#xa; Generate this report and fire the out topic.
+</description>
+<tag name="@see">#generate()</tag>
+</action>
+
+<topic name="out" flags="rs">
+<eventType>
+<type class="javax.baja.report.BReport"/>
+</eventType><description>
+Slot for the &lt;code&gt;out&lt;/code&gt; topic.&#xa; Fired when generate() is invoked.
+</description>
+<tag name="@see">#fireOut</tag>
+</topic>
+
+<!-- javax.baja.report.BReportSource() -->
+<constructor name="BReportSource" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.report.BReportSource.getSchedule() -->
+<method name="getSchedule"  public="true">
+<description>
+Get the &lt;code&gt;schedule&lt;/code&gt; property.&#xa; The schedule used to trigger this report to be generated.
+</description>
+<tag name="@see">#schedule</tag>
+<return>
+<type class="javax.baja.control.trigger.BTimeTrigger"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.setSchedule(javax.baja.control.trigger.BTimeTrigger) -->
+<method name="setSchedule"  public="true">
+<description>
+Set the &lt;code&gt;schedule&lt;/code&gt; property.&#xa; The schedule used to trigger this report to be generated.
+</description>
+<tag name="@see">#schedule</tag>
+<parameter name="v">
+<type class="javax.baja.control.trigger.BTimeTrigger"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.generate() -->
+<method name="generate"  public="true">
+<description>
+Invoke the &lt;code&gt;generate&lt;/code&gt; action.&#xa; Generate this report and fire the out topic.
+</description>
+<tag name="@see">#generate</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.fireOut(javax.baja.report.BReport) -->
+<method name="fireOut"  public="true">
+<description>
+Fire an event for the &lt;code&gt;out&lt;/code&gt; topic.&#xa; Fired when generate() is invoked.
+</description>
+<tag name="@see">#out</tag>
+<parameter name="event">
+<type class="javax.baja.report.BReport"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.started() -->
+<method name="started"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.handleGenerate() -->
+<method name="handleGenerate"  public="true" abstract="true">
+<description>
+Generate a new Report.
+</description>
+<return>
+<type class="javax.baja.report.BReport"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.report.BReportSource.doGenerate() -->
+<method name="doGenerate"  public="true" final="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.post(javax.baja.sys.Action, javax.baja.sys.BValue, javax.baja.sys.Context) -->
+<method name="post"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="action">
+<type class="javax.baja.sys.Action"/>
+</parameter>
+<parameter name="arg">
+<type class="javax.baja.sys.BValue"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- javax.baja.report.BReportSource.schedule -->
+<field name="schedule"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;schedule&lt;/code&gt; property.&#xa; The schedule used to trigger this report to be generated.
+</description>
+<tag name="@see">#getSchedule</tag>
+<tag name="@see">#setSchedule</tag>
+</field>
+
+<!-- javax.baja.report.BReportSource.generate -->
+<field name="generate"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;generate&lt;/code&gt; action.&#xa; Generate this report and fire the out topic.
+</description>
+<tag name="@see">#generate()</tag>
+</field>
+
+<!-- javax.baja.report.BReportSource.out -->
+<field name="out"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Topic"/>
+<description>
+Slot for the &lt;code&gt;out&lt;/code&gt; topic.&#xa; Fired when generate() is invoked.
+</description>
+<tag name="@see">#fireOut</tag>
+</field>
+
+<!-- javax.baja.report.BReportSource.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- javax.baja.report.BReportSource.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

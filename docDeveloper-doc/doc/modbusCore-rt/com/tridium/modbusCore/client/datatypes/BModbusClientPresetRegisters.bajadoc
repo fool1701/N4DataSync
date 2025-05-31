@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="modbusCore" runtimeProfile="rt" qualifiedName="com.tridium.modbusCore.client.datatypes.BModbusClientPresetRegisters" name="BModbusClientPresetRegisters" packageName="com.tridium.modbusCore.client.datatypes" public="true">
+<description>
+BModbusClientPresetRegisters is a subclass of BModbusClientPresetComponent used for writing &#xa; preset Modbus holding register data values to a ModbusClientDevice.  Entries &#xa; (BModbusClientPresetRegister objects) can be dynamically added as children of this &#xa; component to specify the preset holding register values to write.  Writing occurs when the &#xa; linkable &#x27;write&#x27; action is fired.  Values specified in the dynamic children are written to &#xa; the device using the specified starting (absolute) address, and the slot order of the &#xa; children determines what address is assigned to their values.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">18 Mar 04</tag>
+<tag name="@version">$Revision: 1$ $Date: 03/18/04 12:47:14 PM$</tag>
+<tag name="@since">Niagara 3.0 modbusCore 1.0</tag>
+<extends>
+<type class="com.tridium.modbusCore.client.datatypes.BModbusClientPresetComponent"/>
+</extends>
+<implements>
+<type class="com.tridium.basicdriver.MessageListener"/>
+</implements>
+<property name="dataType" flags="">
+<type class="com.tridium.modbusCore.enums.BDataTypeEnum"/>
+<description>
+Slot for the &lt;code&gt;dataType&lt;/code&gt; property.&#xa; the data type associated with all&#xa; holding register values written using&#xa; this preset registers component.
+</description>
+<tag name="@see">#getDataType</tag>
+<tag name="@see">#setDataType</tag>
+</property>
+
+<action name="addPresetRegisterValue" flags="">
+<parameter name="parameter">
+<type class="com.tridium.modbusCore.client.datatypes.BModbusClientPresetRegister"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;addPresetRegisterValue&lt;/code&gt; action.&#xa; Allows the user to add a new preset register value&#xa; as a dynamic slot under this component.
+</description>
+<tag name="@see">#addPresetRegisterValue(BModbusClientPresetRegister parameter)</tag>
+</action>
+
+</class>
+</bajadoc>

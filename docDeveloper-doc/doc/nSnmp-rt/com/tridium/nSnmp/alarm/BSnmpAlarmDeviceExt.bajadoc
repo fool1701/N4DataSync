@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="nSnmp" runtimeProfile="rt" qualifiedName="com.tridium.nSnmp.alarm.BSnmpAlarmDeviceExt" name="BSnmpAlarmDeviceExt" packageName="com.tridium.nSnmp.alarm" public="true">
+<description>
+BSnmpAlarmDeviceExt is the class for mapping native alarms (SNMP traps)&#xa; in an SNMP device into the Baja alarm framework.  It also captures&#xa; information about stored trap types within BSnmpDevices.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">28 Mar 05</tag>
+<tag name="@version">$Revision$ $Date: 3/28/2005 8:15:14 AM$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.driver.alarm.BAlarmDeviceExt"/>
+</extends>
+<property name="lastReceivedTrap" flags="orts">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;lastReceivedTrap&lt;/code&gt; property.&#xa; A string indicating the last trap received&#xa; from this SNMP device.
+</description>
+<tag name="@see">#getLastReceivedTrap</tag>
+<tag name="@see">#setLastReceivedTrap</tag>
+</property>
+
+<property name="ignoreUnrecognizedTraps" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;ignoreUnrecognizedTraps&lt;/code&gt; property.&#xa; if true, only recognizable received trap messages&#xa; will be processed and routed as an alarm.
+</description>
+<tag name="@see">#getIgnoreUnrecognizedTraps</tag>
+<tag name="@see">#setIgnoreUnrecognizedTraps</tag>
+</property>
+
+<property name="coldStart" flags="">
+<type class="com.tridium.nSnmp.alarm.BTrapType"/>
+<description>
+Slot for the &lt;code&gt;coldStart&lt;/code&gt; property.&#xa; The generic coldStart trap
+</description>
+<tag name="@see">#getColdStart</tag>
+<tag name="@see">#setColdStart</tag>
+</property>
+
+<property name="warmStart" flags="">
+<type class="com.tridium.nSnmp.alarm.BTrapType"/>
+<description>
+Slot for the &lt;code&gt;warmStart&lt;/code&gt; property.&#xa; The generic warmStart trap
+</description>
+<tag name="@see">#getWarmStart</tag>
+<tag name="@see">#setWarmStart</tag>
+</property>
+
+<property name="linkDown" flags="">
+<type class="com.tridium.nSnmp.alarm.BTrapType"/>
+<description>
+Slot for the &lt;code&gt;linkDown&lt;/code&gt; property.&#xa; The generic linkDown trap
+</description>
+<tag name="@see">#getLinkDown</tag>
+<tag name="@see">#setLinkDown</tag>
+</property>
+
+<property name="linkUp" flags="">
+<type class="com.tridium.nSnmp.alarm.BTrapType"/>
+<description>
+Slot for the &lt;code&gt;linkUp&lt;/code&gt; property.&#xa; The generic linkUp trap
+</description>
+<tag name="@see">#getLinkUp</tag>
+<tag name="@see">#setLinkUp</tag>
+</property>
+
+<property name="authenticationFailure" flags="">
+<type class="com.tridium.nSnmp.alarm.BTrapType"/>
+<description>
+Slot for the &lt;code&gt;authenticationFailure&lt;/code&gt; property.&#xa; The generic authenticationFailure trap
+</description>
+<tag name="@see">#getAuthenticationFailure</tag>
+<tag name="@see">#setAuthenticationFailure</tag>
+</property>
+
+<property name="egpNeighborLoss" flags="">
+<type class="com.tridium.nSnmp.alarm.BTrapType"/>
+<description>
+Slot for the &lt;code&gt;egpNeighborLoss&lt;/code&gt; property.&#xa; The generic egpNeighborLoss trap
+</description>
+<tag name="@see">#getEgpNeighborLoss</tag>
+<tag name="@see">#setEgpNeighborLoss</tag>
+</property>
+
+<action name="clear" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;clear&lt;/code&gt; action.&#xa; Clears all of the existing dynamic (learned/stored) Trap Types
+</description>
+<tag name="@see">#clear()</tag>
+</action>
+
+<topic name="receivedTrap" flags="s">
+<eventType>
+<type class="javax.baja.alarm.BAlarmRecord"/>
+</eventType><description>
+Slot for the &lt;code&gt;receivedTrap&lt;/code&gt; topic.&#xa; Fired whenever a trap is received and processed as a BAlarmRecord for this SnmpDevice.
+</description>
+<tag name="@see">#fireReceivedTrap</tag>
+</topic>
+
+</class>
+</bajadoc>

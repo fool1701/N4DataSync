@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "id": "https://mitsubishielectricaustralia.com/schemas/station/stations.schema.json",
+  "version": "1.0.0",
+  "title": "Niagara Station Schema",
+  "description": "Schema for a Niagara station",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": { "$ref": "https://example.com/schemas/common/ComponentName.schema.json" },
+      "nType": { "const": "NiagaraStation" },
+      "config": {
+        "type": "object",
+        "properties": {
+          "stationId": { "type": "string" },
+          "stationType": { "type": "string" },
+          "stationAddress": { "type": "string" },
+          "port": { "type": "integer" }
+        }
+      },
+      "networks": { "$ref": "https://mitsubishielectricaustralia.com/schemas/networks/networks.schema.json" }
+    },
+    "definitions": {
+      "ModbusTcpNetwork": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "networkConfig": {
+            "type": "object",
+            "properties": {
+              "networkId": { "type": "integer" }
+            }
+          },
+          "ModbusDeviceFolders": { "$ref": "#/definitions/ModbusDeviceFolders" },
+          "ModbusDevices":{ "$ref": "#/definitions/ModbusDevices" }
+        }
+      },
+      "ModbusDevices": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "comms": {
+              "type": "object",
+              "properties": {
+                "MacAddress": { "type": "integer" },
+                "DeviceID": { "type": "integer" }
+              }
+            },
+            "nPoints": { "$ref": "#/definitions/nPoints" }
+          }
+        }
+      },
+      "ModbusAyncNetwork": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "networkConfig": {
+            "type": "object",
+            "properties": {
+              "networkId": { "type": "integer" }
+            }
+          },
+          "ModbusDeviceFolders": { "$ref": "#/definitions/ModbusDeviceFolders" },
+          "ModbusDevices":{ "$ref": "#/definitions/ModbusDevices" }
+        }
+      },
+      "NiagaraNetwork": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "networkConfig": {
+            "type": "object",
+            "properties": {
+              "networkId": { "type": "integer" }
+            }
+          },
+          "ModbusDeviceFolders": { "$ref": "#/definitions/ModbusDeviceFolders" },
+          "ModbusDevices":{ "$ref": "#/definitions/ModbusDevices" }
+        }
+      },
+      "ModbusDeviceFolder": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "ModbusDeviceFolders": { "$ref": "#/definitions/ModbusDeviceFolders" },
+          "devices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "comms": {
+                  "type": "object",
+                  "properties": {
+                    "MacAddress": { "type": "integer" },
+                    "DeviceID": { "type": "integer" }
+                  }
+                },
+                "nPointFolders": { "$ref": "#/definitions/nPointFolders" },
+                "nPoints": { "$ref": "#/definitions/nPoints" }
+              }
+            }
+          }
+        }
+      },
+      "ModbusDeviceFolders": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "ModbusDeviceFolders": { "$ref": "#/definitions/ModbusDeviceFolders" },
+            "devices": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "comms": {
+                    "type": "object",
+                    "properties": {
+                      "MacAddress": { "type": "integer" },
+                      "DeviceID": { "type": "integer" }                  }
+                  },
+                  "nPoints": { "$ref": "#/definitions/nPoints" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nPointFolders": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "nPointFolders": { "$ref": "#/definitions/nPointFolders" },
+            "nPoints": { "$ref": "#/definitions/nPoints" }
+          }
+        }
+      },
+      "nPoints": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "type": { "type": "string", "enum": ["Numeric", "Boolean", "String", "Enum"] },
+            "isWritable": { "type": "boolean" },
+            "NumericInterval": { "$ref": "#/definitions/HistoryExtension/NumericInterval" },
+            "BooleanInterval": { "$ref": "#/definitions/HistoryExtension/BooleanInterval" },
+            "StringInterval": { "$ref": "#/definitions/HistoryExtension/StringInterval" },
+            "EnumInterval": { "$ref": "#/definitions/HistoryExtension/EnumInterval" },
+            "NumericCov": { "$ref": "#/definitions/HistoryExtension/NumericCov" },
+            "BooleanCov": { "$ref": "#/definitions/HistoryExtension/BooleanCov" },
+            "StringCov": { "$ref": "#/definitions/HistoryExtension/StringCov" },
+            "EnumCov": { "$ref": "#/definitions/HistoryExtension/EnumCov" }
+          },
+          "oneOf": [
+            {
+              "properties": {
+                "BacnetPointConfig": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "ModbusPointConfig": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "NiajaPointConfig": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "HistoryExtension": {
+        "definitions": {
+          "NumericInterval": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string", "description": "Name of the numeric interval" },
+                "description": { "type": "string", "description": "Description of the numeric interval" },
+                "type": { "type": "string", "description": "Type of the numeric interval" },
+            "properties": { "type": "object", "description": "Key-value properties for this numeric interval", "additionalProperties": true }
+            }
+          },
+          "BooleanInterval": {
+            "type": "object",
+              "properties": {
+              "name": { "type": "string", "description": "Name of the boolean interval" },
+              "description": { "type": "string", "description": "Description of the boolean interval" },
+              "type": { "type": "string", "description": "Type of the boolean interval" },
+              "properties": { "type": "object", "description": "Key-value properties for this boolean interval", "additionalProperties": true }
+            }
+          },
+          "StringInterval": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Name of the string interval" },
+              "description": { "type": "string", "description": "Description of the string interval" },
+              "type": { "type": "string", "description": "Type of the string interval" },
+              "properties": { "type": "object", "description": "Key-value properties for this string interval", "additionalProperties": true }
+            }
+          },
+          "EnumInterval": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Name of the enum interval" },
+              "description": { "type": "string", "description": "Description of the enum interval" },
+              "type": { "type": "string", "description": "Type of the enum interval" },
+              "properties": { "type": "object", "description": "Key-value properties for this enum interval", "additionalProperties": true }
+            }
+          },
+          "NumericCov": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Name of the numeric cov" },
+              "description": { "type": "string", "description": "Description of the numeric cov" },
+              "type": { "type": "string", "description": "Type of the numeric cov" },
+              "properties": { "type": "object", "description": "Key-value properties for this numeric cov", "additionalProperties": true }
+            }
+          },
+          "BooleanCov": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Name of the boolean cov" },
+              "description": { "type": "string", "description": "Description of the boolean cov" },
+              "type": { "type": "string", "description": "Type of the boolean cov" },
+              "properties": { "type": "object", "description": "Key-value properties for this boolean cov", "additionalProperties": true }
+            }
+          },
+          "StringCov": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Name of the string cov" },
+              "description": { "type": "string", "description": "Description of the string cov" },
+              "type": { "type": "string", "description": "Type of the string cov" },
+              "properties": { "type": "object", "description": "Key-value properties for this string cov", "additionalProperties": true }
+            }
+          },
+          "EnumCov": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Name of the enum cov" },
+              "description": { "type": "string", "description": "Description of the enum cov" },
+              "type": { "type": "string", "description": "Type of the enum cov" },
+              "properties": { "type": "object", "description": "Key-value properties for this enum cov", "additionalProperties": true }
+            }
+          }
+        }
+      }
+    }
+  }
+}

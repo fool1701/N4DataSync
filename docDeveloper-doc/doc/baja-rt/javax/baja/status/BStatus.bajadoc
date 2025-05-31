@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.status.BStatus" name="BStatus" packageName="javax.baja.status" public="true" final="true">
+<description>
+BStatus provides a bit mask for various standardized &#xa; status flags in the Baja control architecture.  Plus&#xa; it provides for arbitrary extensions using BFacets.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">11 Apr 00</tag>
+<tag name="@version">$Revision: 41$ $Date: 1/25/08 4:04:37 PM EST$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.sys.BBitString"/>
+</extends>
+<implements>
+<type class="javax.baja.status.BIStatus"/>
+</implements>
+<annotation><type class="javax.baja.nre.annotations.NoSlotomatic"/>
+</annotation>
+<!-- javax.baja.status.BStatus.make(int) -->
+<method name="make"  public="true" static="true">
+<description>
+Factory method for creating status from bit mask &#xa; with null facets.
+</description>
+<parameter name="bits">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(javax.baja.status.BStatus, int) -->
+<method name="make"  public="true" static="true">
+<description>
+Factory method for creating status from an existing&#xa; status using the specified bit mask.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="bits">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(int, javax.baja.sys.BFacets) -->
+<method name="make"  public="true" static="true">
+<description>
+Factory method for creating status from bit mask &#xa; with null facets.
+</description>
+<parameter name="bits">
+<type class="int"/>
+</parameter>
+<parameter name="facets">
+<type class="javax.baja.sys.BFacets"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(javax.baja.status.BStatus, int, boolean) -->
+<method name="make"  public="true" static="true">
+<description>
+Returns status instance equal to the given status &#xa; with the given bit set or cleared
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="bit">
+<type class="int"/>
+</parameter>
+<parameter name="bitState">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeDisabled(javax.baja.status.BStatus, boolean) -->
+<method name="makeDisabled"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, DISABLED, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeFault(javax.baja.status.BStatus, boolean) -->
+<method name="makeFault"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, FAULT, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeDown(javax.baja.status.BStatus, boolean) -->
+<method name="makeDown"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, DOWN, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeAlarm(javax.baja.status.BStatus, boolean) -->
+<method name="makeAlarm"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, ALARM, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeStale(javax.baja.status.BStatus, boolean) -->
+<method name="makeStale"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, STALE, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeOverridden(javax.baja.status.BStatus, boolean) -->
+<method name="makeOverridden"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, OVERRIDDEN, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeNull(javax.baja.status.BStatus, boolean) -->
+<method name="makeNull"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, NULL, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.makeUnackedAlarm(javax.baja.status.BStatus, boolean) -->
+<method name="makeUnackedAlarm"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, UNACKED_ALARM, state)&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="state">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(javax.baja.status.BStatus, java.lang.String, javax.baja.data.BIDataValue) -->
+<method name="make"  public="true" static="true">
+<description>
+Make a status from the original value, but with &#xa; the specified facet name/value pair.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.data.BIDataValue"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(javax.baja.status.BStatus, java.lang.String, boolean) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, name, BBoolean.make(value))&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(javax.baja.status.BStatus, java.lang.String, int) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, name, BInteger.make(value))&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(javax.baja.status.BStatus, java.lang.String, float) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, name, BFloat.make(value))&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="float"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.make(javax.baja.status.BStatus, java.lang.String, java.lang.String) -->
+<method name="make"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;make(orig, name, BString.make(value))&lt;/code&gt;.
+</description>
+<parameter name="orig">
+<type class="javax.baja.status.BStatus"/>
+</parameter>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getStatus() -->
+<method name="getStatus"  public="true">
+<description>
+Return this.
+</description>
+<return>
+<type class="javax.baja.status.BStatus"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getFacets() -->
+<method name="getFacets"  public="true">
+<description>
+Get additional name-value pairs associated with this&#xa; status.  Or return BFacets.NULL if none are configured.
+</description>
+<return>
+<type class="javax.baja.sys.BFacets"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.get(java.lang.String) -->
+<method name="get"  public="true">
+<description>
+Return &lt;code&gt;getFacets().get(name)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getb(java.lang.String, boolean) -->
+<method name="getb"  public="true">
+<description>
+Return &lt;code&gt;getFacets().getb(name, def)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.geti(java.lang.String, int) -->
+<method name="geti"  public="true">
+<description>
+Return &lt;code&gt;getFacets().geti(name, def)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="int"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getl(java.lang.String, long) -->
+<method name="getl"  public="true">
+<description>
+Return &lt;code&gt;getFacets().getl(name, def)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="long"/>
+</parameter>
+<return>
+<type class="long"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getf(java.lang.String, float) -->
+<method name="getf"  public="true">
+<description>
+Return &lt;code&gt;getFacets().getf(name, def)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="float"/>
+</parameter>
+<return>
+<type class="float"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getd(java.lang.String, double) -->
+<method name="getd"  public="true">
+<description>
+Return &lt;code&gt;getFacets().getd(name, def)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="double"/>
+</parameter>
+<return>
+<type class="double"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.gets(java.lang.String, java.lang.String) -->
+<method name="gets"  public="true">
+<description>
+Return &lt;code&gt;getFacets().gets(name, def)&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="def">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getBits() -->
+<method name="getBits"  public="true">
+<description>
+Get the control status bit mask.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isValid() -->
+<method name="isValid"  public="true">
+<description>
+Returns true if the associated value is not &#xa; disabled, fault, down, stale or null.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isOk() -->
+<method name="isOk"  public="true">
+<description>
+Return true if the bits are equal to 0.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isDisabled() -->
+<method name="isDisabled"  public="true">
+<description>
+Disabled indicates that the user has &#xa; manually set the component out of service.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isFault() -->
+<method name="isFault"  public="true">
+<description>
+Fault indicates a hardware, software or &#xa; configuration problem.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isDown() -->
+<method name="isDown"  public="true">
+<description>
+Down indicates a communications problem.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isAlarm() -->
+<method name="isAlarm"  public="true">
+<description>
+In alarm indicates that point is currently in&#xa; its configured alarm state.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isStale() -->
+<method name="isStale"  public="true">
+<description>
+Stale indicates that a period of time has elapsed which&#xa; renders the current value untrustworthy.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isOverridden() -->
+<method name="isOverridden"  public="true">
+<description>
+Overridden indicates that the user has manually overridden &#xa; the component.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isNull() -->
+<method name="isNull"  public="true">
+<description>
+The null flag indicates that the associated &#xa; value should not be used.  It represents a &#xa; don&#x27;t care condition.  &#xa; &lt;p&gt;&#xa; It is utilized in combination with priority &#xa; arrays so that points may take or release &#xa; control of their level in a priority array &#xa; based on their current state.&#xa; &lt;p&gt;&#xa; It is also utilized in math, logic and other&#xa; application blocks that take a variable number&#xa; of inputs.  Any input with the null flag set&#xa; is ignored.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isUnackedAlarm() -->
+<method name="isUnackedAlarm"  public="true">
+<description>
+The unackedAlarm flag indicates that the &#xa; associated point has an unacked alarm.  This&#xa; is different than then inAlarm bit.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getBit(int) -->
+<method name="getBit"  public="true">
+<description>
+Return if the bit specified by the given ordinal is set.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getBit(java.lang.String) -->
+<method name="getBit"  public="true">
+<description>
+Return if the bit specified by the given tag is set.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getOrdinals() -->
+<method name="getOrdinals"  public="true">
+<description>
+Get an array enumerating the list of all known&#xa; ordinal values of this bitstring instance.
+</description>
+<return>
+<type class="int" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isOrdinal(int) -->
+<method name="isOrdinal"  public="true">
+<description>
+Is the specified ordinal value included in this&#xa; bitstring&#x27;s range of valid ordinals.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getTag(int) -->
+<method name="getTag"  public="true">
+<description>
+Get the tag identifier for an ordinal value.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getDisplayTag(int, javax.baja.sys.Context) -->
+<method name="getDisplayTag"  public="true">
+<description>
+Get the user readable tag for an ordinal value.
+</description>
+<parameter name="ordinal">
+<type class="int"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getInstance(int[]) -->
+<method name="getInstance"  public="true">
+<description>
+Get the BBitString instance which maps to the &#xa; specified set of ordinal values.
+</description>
+<parameter name="ordinals">
+<type class="int" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BBitString"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isTag(java.lang.String) -->
+<method name="isTag"  public="true">
+<description>
+Return true if the specified tag is contained by the range.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.tagToOrdinal(java.lang.String) -->
+<method name="tagToOrdinal"  public="true">
+<description>
+Get the ordinal associated with the specified tag.
+</description>
+<parameter name="tag">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.isEmpty() -->
+<method name="isEmpty"  public="true">
+<description>
+Empty is the same as ok (bits are 0).
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getEmptyTag() -->
+<method name="getEmptyTag"  public="true">
+<description>
+The empty tag is &#x22;ok&#x22;.
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.hashCode() -->
+<method name="hashCode"  public="true">
+<description>
+Generate a hash code based on the bits/facets combination.
+</description>
+<tag name="@since">Niagara 3.4</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.equals(java.lang.Object) -->
+<method name="equals"  public="true">
+<description>
+Equality is based on bitmask and facets equality.
+</description>
+<parameter name="obj">
+<type class="java.lang.Object"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.flagsToString(javax.baja.sys.Context) -->
+<method name="flagsToString"  public="true">
+<description>
+Get a string of just the flags which are set or &#xa; return ok if not set.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.toString(javax.baja.sys.Context) -->
+<method name="toString"  public="true">
+<description>
+To string.
+</description>
+<parameter name="context">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.encode(java.io.DataOutput) -->
+<method name="encode"  public="true">
+<description>
+Binary encoding is writeInt(bits) writeUTF(facets).
+</description>
+<parameter name="out">
+<type class="java.io.DataOutput"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.status.BStatus.decode(java.io.DataInput) -->
+<method name="decode"  public="true">
+<description>
+Binary decoding bits = readInt(); facets = readUTF()
+</description>
+<parameter name="in">
+<type class="java.io.DataInput"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.status.BStatus.encodeToString() -->
+<method name="encodeToString"  public="true">
+<description>
+Text format is &lt;code&gt;&amp;#x22;&amp;lt;bits in hex&amp;gt;[;&amp;lt;facets&amp;gt;]&amp;#x22;&lt;/code&gt;
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.status.BStatus.decodeFromString(java.lang.String) -->
+<method name="decodeFromString"  public="true">
+<description>
+Read from text format.
+</description>
+<parameter name="s">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BObject"/>
+</return>
+<throws>
+<type class="java.io.IOException"/>
+</throws>
+</method>
+
+<!-- javax.baja.status.BStatus.getForegroundColor(javax.baja.sys.BSimple) -->
+<method name="getForegroundColor"  public="true">
+<description>
+If object implements BIStatus then return the appriopate&#xa; foreground color as a gx:Color, otherwise return the default.
+</description>
+<parameter name="defaultColor">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getBackgroundColor(javax.baja.sys.BSimple) -->
+<method name="getBackgroundColor"  public="true">
+<description>
+If object implements BIStatus then return the appriopate&#xa; background color as a gx:Color, otherwise return the default.
+</description>
+<parameter name="defaultColor">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.sys.BSimple"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.getType() -->
+<method name="getType"  public="true">
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.status.BStatus.disabledFg -->
+<field name="disabledFg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Foreground gx:BColor for disabled state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.disabledBg -->
+<field name="disabledBg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Background gx:BColor for disabled state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.faultFg -->
+<field name="faultFg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Foreground gx:BColor for fault state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.faultBg -->
+<field name="faultBg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Background gx:BColor for fault state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.downFg -->
+<field name="downFg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Foreground gx:BColor for down state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.downBg -->
+<field name="downBg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Background gx:BColor for down state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.alarmFg -->
+<field name="alarmFg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Foreground gx:BColor for alarm state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.alarmBg -->
+<field name="alarmBg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Background gx:BColor for alarm state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.staleFg -->
+<field name="staleFg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Foreground gx:BColor for stale state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.staleBg -->
+<field name="staleBg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Background gx:BColor for stale state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.overriddenFg -->
+<field name="overriddenFg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Foreground gx:BColor for overridden state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.overriddenBg -->
+<field name="overriddenBg"  public="true" static="true">
+<type class="javax.baja.sys.BSimple"/>
+<description>
+Background gx:BColor for overridden state
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.DISABLED -->
+<field name="DISABLED"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for disabled 0x0001
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.FAULT -->
+<field name="FAULT"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for fault 0x0002
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.DOWN -->
+<field name="DOWN"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for down 0x0004
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.ALARM -->
+<field name="ALARM"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for alarm 0x0008
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.STALE -->
+<field name="STALE"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for stale 0x0010
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.OVERRIDDEN -->
+<field name="OVERRIDDEN"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for overridden 0x0020
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.NULL -->
+<field name="NULL"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for null 0x0040
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.UNACKED_ALARM -->
+<field name="UNACKED_ALARM"  public="true" static="true" final="true">
+<type class="int"/>
+<description>
+Bit for unackedAlarm 0x0080
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.ok -->
+<field name="ok"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.disabled -->
+<field name="disabled"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.fault -->
+<field name="fault"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.down -->
+<field name="down"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.alarm -->
+<field name="alarm"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.stale -->
+<field name="stale"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.overridden -->
+<field name="overridden"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.nullStatus -->
+<field name="nullStatus"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.unackedAlarm -->
+<field name="unackedAlarm"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.DEFAULT -->
+<field name="DEFAULT"  public="true" static="true" final="true">
+<type class="javax.baja.status.BStatus"/>
+<description/>
+</field>
+
+<!-- javax.baja.status.BStatus.ACTIVE_LEVEL -->
+<field name="ACTIVE_LEVEL"  public="true" static="true" final="true">
+<type class="java.lang.String"/>
+<description>
+Used to indicate the active priority of a 16 level priority array [BEnum of BPriorityLevel]
+</description>
+</field>
+
+<!-- javax.baja.status.BStatus.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

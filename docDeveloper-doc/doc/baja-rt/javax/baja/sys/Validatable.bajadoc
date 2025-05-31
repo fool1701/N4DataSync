@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.sys.Validatable" name="Validatable" packageName="javax.baja.sys" public="true" final="true">
+<description>
+A Validatable is a data structure created during property set validation&#xa; that wraps a BComplex and provides a mechanism for validator implementations&#xa; to interrogate the existing and proposed state of a BComplex.  It provides &#xa; methods to retrieve the existing property values of the BComplex instance as &#xa; well as the proposed property values (future state) that will be committed on &#xa; the BComplex if validation succeeds.
+</description>
+<tag name="@author">Scott Hoye</tag>
+<tag name="@creation">Aug 16, 2013</tag>
+<tag name="@version">$Revision: 1$ $Date: 8/16/13 1:57:55 PM EDT$</tag>
+<tag name="@since">Niagara 4.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.sys.Validatable(javax.baja.sys.BComplex, javax.baja.sys.Property[], javax.baja.sys.BValue[]) -->
+<constructor name="Validatable" public="true">
+<parameter name="existing">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+- The existing BComplex instance that is pending a property&#xa; set operation that requires validation first.
+</description>
+</parameter>
+<parameter name="modifiedProperties">
+<type class="javax.baja.sys.Property" dimension="1"/>
+<description>
+- The properties on the BComplex instance that&#xa; are pending a change of value.
+</description>
+</parameter>
+<parameter name="modifiedValues">
+<type class="javax.baja.sys.BValue" dimension="1"/>
+<description>
+- The pending values of the properties that are pending&#xa; a change on the BComplex instance.
+</description>
+</parameter>
+<description>
+Construct a Validatable instance.
+</description>
+</constructor>
+
+<!-- javax.baja.sys.Validatable.getProposedValue(javax.baja.sys.Property) -->
+<method name="getProposedValue"  public="true">
+<description>
+Retrieve the proposed value for the given property of the &#xa; wrapped BComplex instance IF the pending property changes &#xa; are successful.  This allows you to interrogate the future&#xa; state of the BComplex instance prior to the property changes&#xa; being committed.  Even if the property is not one of the pending&#xa; changes, this method will still return the existing value.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+<description>
+- The property to retrieve the proposed &#xa; (future) value.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+The value of the property on the wrapped BComplex instance&#xa; assuming that the pending property changes are successful.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Validatable.getProposedValue(java.lang.String) -->
+<method name="getProposedValue"  public="true">
+<description>
+Retrieve the proposed value for the given property (by property name)&#xa; of the wrapped BComplex instance IF the pending property changes &#xa; are successful.  This allows you to interrogate the future&#xa; state of the BComplex instance prior to the property changes&#xa; being committed.  Even if the property is not one of the pending&#xa; changes, this method will still return the existing value.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+<description>
+- The name of the property to retrieve the proposed&#xa; (future) value.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+The value of the property on the wrapped BComplex instance&#xa; assuming that the pending property changes are successful.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Validatable.getExistingValue(javax.baja.sys.Property) -->
+<method name="getExistingValue"  public="true">
+<description>
+Retrieve the existing value for the given property of the &#xa; wrapped BComplex instance disregarding the pending property &#xa; changes.  This allows you to interrogate the existing (old)&#xa; state of the BComplex instance prior to the pending property changes&#xa; being committed.
+</description>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+<description>
+- The property to retrieve the existing&#xa; value.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+The existing value of the property on the wrapped &#xa; BComplex instance, disregarding any pending property changes.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Validatable.getExistingValue(java.lang.String) -->
+<method name="getExistingValue"  public="true">
+<description>
+Retrieve the existing value for the given property (by property name)&#xa; of the wrapped BComplex instance disregarding the pending property &#xa; changes.  This allows you to interrogate the existing (old)&#xa; state of the BComplex instance prior to the pending property changes&#xa; being committed.
+</description>
+<parameter name="propertyName">
+<type class="java.lang.String"/>
+<description>
+- The name of the property to retrieve the existing&#xa; value.
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+The existing value of the property on the wrapped &#xa; BComplex instance, disregarding any pending property changes.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.sys.Validatable.getExistingComplex() -->
+<method name="getExistingComplex"  public="true">
+<description>
+Retrieve the wrapped (existing) BComplex instance that is currently&#xa; being validated for pending property value changes.
+</description>
+<return>
+<type class="javax.baja.sys.BComplex"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Validatable.getModifiedProperties() -->
+<method name="getModifiedProperties"  public="true">
+<description>
+Retrieve an array of the properties that are pending modification on&#xa; the wrapped BComplex instance
+</description>
+<return>
+<type class="javax.baja.sys.Property" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Validatable.getModifiedValues() -->
+<method name="getModifiedValues"  public="true">
+<description>
+Retrieve an array of the new property values that are pending modification on&#xa; the wrapped BComplex instance
+</description>
+<return>
+<type class="javax.baja.sys.BValue" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.sys.Validatable.isRunning() -->
+<method name="isRunning"  public="true">
+<description>
+Convenience method to return whether the wrapped (existing) BComplex instance&#xa; is part of a running component in the master ComponentSpace.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

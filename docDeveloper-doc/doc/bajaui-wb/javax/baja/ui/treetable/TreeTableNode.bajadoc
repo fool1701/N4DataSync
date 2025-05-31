@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bajaui" runtimeProfile="wb" qualifiedName="javax.baja.ui.treetable.TreeTableNode" name="TreeTableNode" packageName="javax.baja.ui.treetable" public="true" abstract="true">
+<description>
+TreeTableNode models a single node of a TreeTableModel.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">7 Jan 04</tag>
+<tag name="@version">$Revision: 10$ $Date: 5/4/05 8:11:16 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.ui.treetable.TreeTableNode(javax.baja.ui.treetable.TreeTableModel) -->
+<constructor name="TreeTableNode" public="true">
+<parameter name="model">
+<type class="javax.baja.ui.treetable.TreeTableModel"/>
+</parameter>
+<description>
+Construct a root node within the specified model.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.treetable.TreeTableNode(javax.baja.ui.treetable.TreeTableNode) -->
+<constructor name="TreeTableNode" public="true">
+<parameter name="parent">
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</parameter>
+<description>
+Construct a child node under the parent node.
+</description>
+</constructor>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getTable() -->
+<method name="getTable"  public="true">
+<description>
+Get the parent tree table.
+</description>
+<return>
+<type class="javax.baja.ui.treetable.BTreeTable"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getModel() -->
+<method name="getModel"  public="true">
+<description>
+Get the parent model.
+</description>
+<return>
+<type class="javax.baja.ui.treetable.TreeTableModel"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getShell() -->
+<method name="getShell"  public="true">
+<description>
+Convenience for &lt;code&gt;getTable().getShell()&lt;/code&gt;.
+</description>
+<return>
+<type class="javax.baja.ui.BWidgetShell"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.isGroup() -->
+<method name="isGroup"  public="true">
+<description>
+A group node is used only to group other nodes underneath&#xa; it.  Groups can only return data for column 0.   Groups are&#xa; renderered differently from other nodes.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getValueAt(int) -->
+<method name="getValueAt"  public="true" abstract="true">
+<description>
+Get the node&#x27;s value for the specified column.
+</description>
+<parameter name="col">
+<type class="int"/>
+</parameter>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getSubject() -->
+<method name="getSubject"  public="true">
+<description>
+Get the subject to use when mapping current selection&#xa; to a Subject instance.  Default returns value at column 0,&#xa; but this method should usually be overridden.
+</description>
+<return>
+<type class="java.lang.Object"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getIcon() -->
+<method name="getIcon"  public="true">
+<description>
+Return the icon for the node as a 16x16 image.
+</description>
+<return>
+<type class="javax.baja.gx.BImage"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getParent() -->
+<method name="getParent"  public="true">
+<description>
+Get the parent of this node.  If this is a root node return null.
+</description>
+<return>
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getDepth() -->
+<method name="getDepth"  public="true">
+<description>
+Get the depth from the root of the node.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.hasChildren() -->
+<method name="hasChildren"  public="true">
+<description>
+Does this node have any children node?  Default&#xa; returns &lt;code&gt;getChildCount() != 0&lt;/code&gt;.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getChildCount() -->
+<method name="getChildCount"  public="true">
+<description>
+Get the number of children nodes.  Default returns 0.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getChild(int) -->
+<method name="getChild"  public="true">
+<description>
+Get the child node at the specified index.
+</description>
+<parameter name="index">
+<type class="int"/>
+</parameter>
+<return>
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getChildIndex(javax.baja.ui.treetable.TreeTableNode) -->
+<method name="getChildIndex"  public="true">
+<description>
+Return the index of the specified child node or -1.
+</description>
+<parameter name="child">
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.isDescendantOf(javax.baja.ui.treetable.TreeTableNode) -->
+<method name="isDescendantOf"  public="true">
+<description>
+Is this node a descendant of the specified node?
+</description>
+<parameter name="ancestor">
+<type class="javax.baja.ui.treetable.TreeTableNode"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.getPathFromRoot() -->
+<method name="getPathFromRoot"  public="true">
+<description>
+Get the path of this node starting from the root.
+</description>
+<return>
+<type class="javax.baja.ui.treetable.TreeTableNode" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.setExpanded(boolean) -->
+<method name="setExpanded"  public="true">
+<description>
+Set the expanded state of this node.
+</description>
+<parameter name="expanded">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.isExpanded() -->
+<method name="isExpanded"  public="true" final="true">
+<description>
+Return the expanded state of this node.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.expanded() -->
+<method name="expanded"  public="true">
+<description>
+Callback when the node is expanded.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.ui.treetable.TreeTableNode.collapsed() -->
+<method name="collapsed"  public="true">
+<description>
+Callback when the node is collapsed.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

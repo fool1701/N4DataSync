@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="jsonToolkit" runtimeProfile="rt" qualifiedName="com.tridiumx.jsonToolkit.outbound.schema.subscription.SlotWhiteListFilter" name="SlotWhiteListFilter" packageName="com.tridiumx.jsonToolkit.outbound.schema.subscription" public="true">
+<description>
+A subscription filter for when bound objects which specify a set of list of properties for json output. We filter&#xa; out events for the other slots for efficiency.&#xa;&#xa; passes if:&#xa;&#xa; a) the event slot matches in name one of the bound members selected slots&#xa; b) the subscription depth was 1 (e.g a folder) and the event slot is a child of one of the bound members selected slots
+</description>
+<tag name="@author">Nicholas Dodd</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.subscription.SubscriptionEventFilter"/>
+</implements>
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.SlotWhiteListFilter(com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember, javax.baja.sys.BObject, boolean) -->
+<constructor name="SlotWhiteListFilter" public="true">
+<parameter name="member">
+<type class="com.tridiumx.jsonToolkit.outbound.schema.BJsonSchemaBoundMember"/>
+</parameter>
+<parameter name="target">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="subscribedWithDepth">
+<type class="boolean"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridiumx.jsonToolkit.outbound.schema.subscription.SlotWhiteListFilter.test(javax.baja.sys.BComponentEvent) -->
+<method name="test"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="com.tridiumx.jsonToolkit.outbound.schema.support.FilterResult"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

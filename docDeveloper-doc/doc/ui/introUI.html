@@ -1,0 +1,99 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/virtualComponents.html" class="navbar">Prev</a> |  <a href="/doc/uiFromAxToN4.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="introduction-to-ui-development-in-niagara">Introduction to UI Development in Niagara</h1>
+<p>This guide presumes that you have a bit of experience using Workbench, the Property Sheet, and Px Graphics. It also presumes that you have some exposure to the Niagara Type system and Object Model, which is documented elsewhere in the Developer Guide.</p>
+<h2 id="what-are-the-different-kinds-of-ui-components-i-can-make">What are the different kinds of UI components I can make?</h2>
+<h3 id="widgets">Widgets</h3>
+<p>Widget is the base class that encapsulates some defined bit of UI behavior. A Widget can be as simple or as complex as you like. In Niagara UI, basically everything is a Widget.</p>
+<p>A label that does nothing but draw a string? That&rsquo;s a Widget. A checkbox? Widget. A Property Sheet? Widget. The entire usable view space of Workbench itself? Yep, that&rsquo;s a Widget.</p>
+<h3 id="field-editors">Field Editors</h3>
+<p>A Field Editor is a Widget that displays a data value - a Field - and allows the user to make changes to it.</p>
+<p>Most of the time, Field Editors are used for Simples (like strings and numbers), and sometimes, simple Structs. Field Editors on Components are much less common.</p>
+<p>Edit a Component, such as a User, in the Property Sheet. You&rsquo;ll get small, inline editors allowing you to edit each property - each &ldquo;field&rdquo; - of that User. Those small widgets are Field Editors.</p>
+<p>In more recent HTML5-based UI code, we&rsquo;ve been referring to these simply as Editors. This is because the value being edited doesn&rsquo;t necessarily have to be a &ldquo;field&rdquo; of some parent component - it can be a standalone value.</p>
+<h3 id="views">Views</h3>
+<p>We usually use &ldquo;View&rdquo; to refer to a piece of UI that is &ldquo;fullscreen&rdquo; - it takes up the entire content pane of Workbench while you&rsquo;re looking at it. Some examples are Property Sheet and User Manager.</p>
+<p>In practical terms, the only difference between a View and a Field Editor is the amount of space it takes up - Views are large, Field Editors are small. But because Views often take up the entire UI content pane, they may integrate more tightly with the profile itself. They may provide Commands to the toolbar or menu bar, or support transfer Commands like copy/pasting from the nav tree.</p>
+<h3 id="px-graphics"><code>Px</code> Graphics</h3>
+<p><code>Px</code> allows you to develop your own UI with no programming necessary. It works by identifying the different Widgets you want on your page, drag-and-dropping them on, and binding them to real-time data from your station. It&rsquo;s a bit similar to existing web page builders like Wix or Squarespace - but it&rsquo;s Niagara-specific, the editor is Java-based, and works in Workbench. (You might see the terms &ldquo;<code>Px</code> graphic&rdquo; or &ldquo;<code>Px</code> page&rdquo; - these mean the same thing.)</p>
+<p>Some common operations you might do in <code>Px</code> are:</p>
+<ul>
+  <li>Bind a Point to a Label, so the user sees a text representation of the Point&rsquo;s current value.</li>
+  <li>Bind a Button to the Set Action on a Point, so by clicking it, the user can set the Point&rsquo;s current value.</li>
+  <li>Add a Hyperlink so the user can navigate to a different Px page.</li>
+  <li>Embed a view, like the Property Sheet or Scheduler, into the Px page, so the user can edit data in more detail without having to navigate away.</li>
+</ul>
+<p>You won&rsquo;t have to write code to develop <code>Px</code> pages. But if you want to create a custom Widget to embed in <code>Px</code> pages, because the provided set of Widgets don&rsquo;t cater to your particular use case, then you&rsquo;ll need to code one up.</p>
+<h4 id="pxmedia"><code>PxMedia</code></h4>
+<p>Every <code>Px</code> graphic has an associated Media Type. Here is an <a href="pxMedia.html">overview</a> of what media are available and how they are used.</p>
+<h2 id="what-tools-are-available-to-help-me-create-ui-components">What tools are available to help me create UI components?</h2>
+<p>Niagara provides a rich set of frameworks and tools to assist you in developing your own custom UI. This section will describe what&rsquo;s available, so you can decide on which tools will best serve your own use cases.</p>
+<h3 id="bajaui-from-ax-to-n4"><code>bajaui</code>: from AX to N4</h3>
+<p><code>bajaui</code> is Niagara&rsquo;s Java-based UI component framework that has been in use since the very first release of Niagara AX.</p>
+<p><code>bajaui</code> code is based entirely on the Niagara type system. Every <code>bajaui</code> widget extends <code>bajaui:Widget</code>, which itself extends <code>baja:Component</code>. Therefore, <code>bajaui</code>-based UI uses the Niagara component model to work. Because it is Java-based, <code>bajaui</code> code only works in Workbench or another Java-based application like Web Launcher.</p>
+<p>The requirement that Workbench or Web Launcher be used may mean that new <code>bajaui</code> development may be unattractive; many applications require that the user be able to simply log in via the browser with no downloads or plugins required.</p>
+<p>When starting up AX Workbench, every bit of UI you see is based upon <code>bajaui</code>. In Niagara 4, many views are implemented using our HTML5 framework, <code>bajaux</code>. But many views and field editors are still based upon <code>bajaui</code>. In the cases where a HTML5 version of a view is available, the legacy <code>bajaui</code> version may be prefixed with &ldquo;AX&rdquo;, as in &ldquo;AX User Manager.&rdquo;</p>
+<h3 id="hx-bringing-bajaui-to-the-browser"><code>Hx</code>: bringing <code>bajaui</code> to the browser</h3>
+<p><code>Hx</code> is Niagara&rsquo;s first framework to target native HTML and JavaScript. It was introduced in Niagara AX 3.0, and heavily reworked in 3.5. <code>Hx</code> widgets work by essentially writing HTML5 and JavaScript, in Java: you&rsquo;ll implement an <code>Hx</code> class that&rsquo;s an analog of your original <code>bajaui</code> Widget, and that class will use Java to generate a series of HTML strings and JavaScript calls.</p>
+<p>In other words, even though your <code>Hx</code> UI is used natively in the browser, the actual UI resides inside your Niagara station. Your browser serves almost as a &ldquo;thin client,&rdquo; simply displaying the HTML and JavaScript as dictated by the station itself.</p>
+<p>There are a number of views implemented in <code>Hx</code> such as Property Sheet, User Manager and Scheduler, but most of those views have severely reduced functionality compared to the original <code>bajaui</code> views, and they are largely deprecated or removed.</p>
+<p>However, <code>Hx</code> is still actively supported and in widespread use in the <code>HxPx</code> framework, which displays <code>Px</code> graphics in the browser using HTML5 and JavaScript.</p>
+<h3 id="bajaux-bringing-n4-into-the-age-of-the-web"><code>bajaux</code>: bringing N4 into the age of the Web</h3>
+<p><code>bajaux</code> is Niagara&rsquo;s JavaScript-based UI component framework, natively targeting the browser. It has been in use since Niagara 4.0.</p>
+<p><code>bajaux</code> code itself does not directly use the Niagara type system. Every <code>bajaux</code> widget extends the base class <code>Widget</code>, which is not a Niagara type. However, in practice, <code>bajaux</code> works closely together with the Niagara type system to help draw relationships between Niagara types and the kind of widgets that should be used to work with those types.</p>
+<p>Because <code>bajaux</code> is entirely HTML5- and JavaScript-based, it can be used directly in the browser with no plugins required. While <code>Hx</code> generates the UI on the station, <code>bajaux</code> generates it directly in the browser.</p>
+<p>In addition, the open nature of <code>bajaux</code> means that it is one of the best options for making use of the many open-source JavaScript tools and frameworks available.</p>
+<h4 id="how-bajaux-and-workbench-work-together">How <code>bajaux</code> and Workbench work together</h4>
+<p>Even though <code>bajaux</code> views are implemented purely in JavaScript, they will still work natively within Workbench! This is because Workbench contains a web browser embedded directly within it. When you load a <code>bajaux</code>-based view, an instance of this web browser is displayed - like opening a new browser tab. Workbench itself (using Java), and the <code>bajaux</code> view (using JavaScript), can then communicate with each other using a Java-JavaScript interop layer implemented custom for Workbench.</p>
+<p>This interop allows for features like the following:</p>
+<ul>
+  <li>Navigation: Workbench&rsquo;s Back and Forward buttons will cause the browser to navigate between <code>bajaux</code> views</li>
+  <li>Commands: any <code>Command</code>s provided by the <code>bajaux</code> View will appear in Workbench&rsquo;s toolbar and menu bar</li>
+  <li>Drag and drop: the <code>bajaux</code> view will handle a drag and drop from Workbench&rsquo;s nav tree or palette sidebars</li>
+</ul>
+<h2 id="what-does-the-future-hold-for-these-frameworks">What does the future hold for these frameworks?</h2>
+<p><code>bajaui</code> will continue to be supported for the foreseeable future. Hundreds of different <code>bajaui</code> views are still in widespread use around the globe, and they will not be abandoned. As long as Workbench is supported, so will <code>bajaui</code> be. It is well-established and stable, so major enhancements or API changes will be very infrequent.</p>
+<p>However, the general trend is for users to access the UI directly through the browser, and so the majority of new development is targeting <code>bajaux</code>. Going forward, Tridium will be making many new tools and APIs targeting <code>bajaux</code>, much more than for <code>bajaui</code>.</p>
+<p>Development on <code>Hx</code> views has basically ceased, with two exceptions. The <code>Hx</code> profiles themselves, such as HTML5 Hx Profile, are still fully supported. Also, <code>HxPx</code> will be receiving fixes to high-priority defects for the foreseeable future. New features or enhancements will land rarely, if ever.</p>
+<h2 id="how-do-i-choose-what-toolset-to-use">How do I choose what toolset to use?</h2>
+<p>If any of these statements are true:</p>
+<ul>
+  <li>It&rsquo;s a requirement that you use Java</li>
+  <li>You will not have a need to make your UI directly accessible in the browser</li>
+  <li>You must interface with existing Widgets that are only implemented in <code>bajaui</code></li>
+  <li>You wish to develop your UI using the Java-based Niagara component model</li>
+</ul>
+<p>You should consider using <code>bajaui</code>.</p>
+<p>If any of these statements are true:</p>
+<ul>
+  <li>You wish to develop using HTML5 and JavaScript</li>
+  <li>Your users will need to access the UI directly through the browser, without a standalone application or plugin</li>
+  <li>You are open to interacting with the station using BajaScript, a JavaScript-based implementation of the Niagara component model</li>
+  <li>You wish to stay current with new tools and APIs developed by Tridium and the open-source community</li>
+</ul>
+<p>You should consider using <code>bajaux</code>.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/virtualComponents.html" class="navbar">Prev</a> |  <a href="/doc/uiFromAxToN4.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.BDdfReadRequest" name="BDdfReadRequest" packageName="com.tridium.ddf.comm.req" public="true" abstract="true">
+<description>
+This is a default, base class that implements BIDdfReadRequest.&#xa;&#xa; The &lt;i&gt;toByteArray&lt;/i&gt; method will need implemented in the descendant&#xa; class. During the automatic reading/polling mechanism that is provided by&#xa; BDdfProxyExt, the &lt;i&gt;readParameters&lt;/i&gt; property is automatically&#xa; set to a copy of the &lt;i&gt;readParameters&lt;/i&gt; from the instance of&#xa; the proxy extension. Likewise the &lt;i&gt;deviceId&lt;/i&gt; property is automatically&#xa; set to a copy of the &lt;i&gt;deviceId&lt;/i&gt; property of the device that owns&#xa; the driver&#x27;s BDdfProxyExt.&#xa; &#xa; The same mechanism also provides the &lt;i&gt;readable source array&lt;/i&gt; that&#xa; is available to the &lt;i&gt;toByteArray&lt;/i&gt; method by calling the &lt;i&gt;getReadableSource&lt;/i&gt;&#xa; method.&#xa; &#xa; &lt;b&gt;IMPORTANT:&lt;/b&gt; The &lt;i&gt;readParameters&lt;/i&gt; value is used to group multiple read&#xa; operations into a single protocol request. &lt;i&gt;If&lt;/i&gt; the driver&#x27;s protocol features&#xa; read requests where the response to a single read request can be used to retrieve&#xa; the values for more than one data point. To take advantage of this, the driver&#x27;s&#xa; discovery mechanism (see BDdfPointDiscoveryLeaf, BDdfDiscoveryRequest, and&#xa; BDdfDiscoveryResponse) should be implemented such that it provides multiple discovery&#xa; leaves, each with an equivalent copy of &#x27;readParameters&#x27; but each should define&#xa; a different &#x27;pointId&#x27;. (The &lt;i&gt;readParameters&lt;/i&gt; assigns data points to an instance&#xa; of a protocol request. The &lt;i&gt;pointId&lt;/i&gt; allows the driver to parse the retrieved&#xa; value from the corresponding protocol response)&#xa; &#xa; Therefore, from the &lt;i&gt;toByteArray&lt;/i&gt; method, the developer should only need to&#xa; access the &lt;i&gt;readParameters&lt;/i&gt; and &lt;i&gt;deviceId&lt;/i&gt; values that are readily available &#xa; by calling &lt;i&gt;getReadParameters()&lt;/i&gt; and &lt;i&gt;getDeviceId()&lt;/i&gt; and casting the return&#xa; value to an instance of the driver&#x27;s &lt;i&gt;device id class&lt;/i&gt; and &lt;i&gt;read parameters&#xa; class &lt;/i&gt;.&#xa; &#xa; One might feel the need to ask, &lt;i&gt;how do I access the data point then&lt;/i&gt;. However,&#xa; please keep in mind that as the previous two paragraphs attempt to describe, there&#xa; is not necessarily just one data point for the request. Even in the case where a&#xa; protocol features a simple request whose response returns a single data point value,&#xa; the Niagara AX station database could conceivably contain multiple copies of the same&#xa; data point. (Nothing usually prevents the end-user or integrator from adding a &#xa; discovered point more than once). In this case, each data point that is created from&#xa; the same discovery leaf will have an equivalent copy of the same &lt;i&gt;readParameters&lt;/i&gt;&#xa; structure. Each will all share a copy of the same &lt;i&gt;pointId&lt;/i&gt; (or have no &lt;i&gt;pointId&lt;/i&gt;&#xa; at all -- depending on how simple the protocol is. For these reasons, it would not make&#xa; sense to try to access the data points directly from the &lt;i&gt;toByteArray&lt;/i&gt; method.&#xa; Instead, all data that would be required by the &lt;i&gt;toByteArray&lt;/i&gt; method needs to be&#xa; stored in the &lt;i&gt;readParameters&lt;/i&gt; structure.&#xa; &#xa; The previous paragraph indicates that the driver should not be designed to require &#xa; access to the &lt;i&gt;pointId&lt;/i&gt; structure from the proxy extension(s) in the &#xa; &lt;i&gt;toByteArray&lt;/i&gt; method. Please note, however, in the event where the driver&#x27;s&#xa; response to the protocol request truly can retrieve multiple values, then the &#xa; &lt;i&gt;parseReadValue&lt;/i&gt; method of the corresponding &lt;i&gt;BIDdfReadResponse&lt;/i&gt; has&#xa; readily available access to the &lt;i&gt;pointId&lt;/i&gt; since the &lt;i&gt;parseReadValue&lt;/i&gt;&#xa; is called once for each proxy ext that is grouped together (sharing equivalent copies&#xa; of the same &lt;i&gt;readParameters&lt;/i&gt;). The &lt;i&gt;parseReadValue&lt;/i&gt; method is passed&#xa; a direct reference to the proxy ext (cast as IDdfReadable). In this scenarion, the&#xa; aforementioned proxies will all have an equivalent copy of the same &lt;i&gt;readParameters&lt;/i&gt;.&#xa; However, each proxy&#x27;s &lt;i&gt;pointId&lt;/i&gt; will differ to allow the &lt;i&gt;parseReadValue&lt;/i&gt;&#xa; method of the &lt;i&gt;BIDdfReadResponse&lt;/i&gt; to retrieve the value for the particular&#xa; proxy.
+</description>
+<tag name="@see">BIDdfReadRequest</tag>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="com.tridium.ddf.comm.req.BDdfRequest"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.comm.req.BIDdfReadRequest"/>
+</implements>
+<property name="readParameters" flags="">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description>
+Slot for the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; These are the readParameters that are common to all points that the read&#xa; request needs to retrieve. The ddf instantiates read&#xa; requests automatically. Here is how: Whenever a driver point needs to be&#xa; read, the ddf looks at the point&#x27;s read parameters and&#xa; instantiates an instance of the read request type that is specified by&#xa; the point&#x27;s read parameters. It then sets the read parameters on the new&#xa; read request equal to the read parameters on the point. Then it calls the&#xa; setReadableSource method on the new read request and passes in all other&#xa; driver points under the same point device extension that have the equivalent&#xa; readParameters. This effectively places all driver points under the same&#xa; device that share the same readParameters into a single poll group. This&#xa; allows the values for all of the points under a device that have equivalent&#xa; read parameters to be retrieved in one field-bus request.&#xa;&#xa; The ddf can also use read requests to automatically discover&#xa; Readable data points. The point manager will prompt the user with a copy of the&#xa; Discovery parameters as defined on your driver&#x27;s ddf point device extension.&#xa; Then it will look at the value that the end-user provides for the &#x27;min&#x27; property.&#xa; The value of the &#x27;min&#x27; and &#x27;max&#x27; properties must implement BIDdfReadParameters.&#xa; The ddf will outer loop through each valid read request&#xa; Type then it will inner loop from min to max, each pass through the inner loop&#xa; the auto discovery framework will instantiate an instance of the read request&#xa; type from the outer loop and pass in the read parameters from the inner loop.&#xa; The auto-discovery process will transmit each request. It will then create&#xa; Discovery objects for whatever requests that get valid responses.
+</description>
+<tag name="@see">#getReadParameters</tag>
+<tag name="@see">#setReadParameters</tag>
+</property>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest() -->
+<constructor name="BDdfReadRequest" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest(javax.baja.sys.BRelTime, int, com.tridium.ddf.identify.BDdfIdParams, com.tridium.ddf.identify.BIDdfReadParams) -->
+<constructor name="BDdfReadRequest" public="true">
+<parameter name="responseTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+<description/>
+</parameter>
+<parameter name="maxRetryCount">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="deviceId">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description/>
+</parameter>
+<parameter name="readParams">
+<type class="com.tridium.ddf.identify.BIDdfReadParams"/>
+<description/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest(javax.baja.sys.BRelTime, int, com.tridium.ddf.point.BDdfProxyExt) -->
+<constructor name="BDdfReadRequest" public="true">
+<parameter name="responseTimeout">
+<type class="javax.baja.sys.BRelTime"/>
+<description/>
+</parameter>
+<parameter name="maxRetryCount">
+<type class="int"/>
+<description/>
+</parameter>
+<parameter name="ddfProxyExt">
+<type class="com.tridium.ddf.point.BDdfProxyExt"/>
+<description/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest(com.tridium.ddf.identify.BDdfIdParams, com.tridium.ddf.identify.BIDdfReadParams) -->
+<constructor name="BDdfReadRequest" public="true">
+<parameter name="deviceId">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+<description/>
+</parameter>
+<parameter name="readParams">
+<type class="com.tridium.ddf.identify.BIDdfReadParams"/>
+<description/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest(com.tridium.ddf.point.BDdfProxyExt) -->
+<constructor name="BDdfReadRequest" public="true">
+<parameter name="ddfProxyExt">
+<type class="com.tridium.ddf.point.BDdfProxyExt"/>
+<description/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.getReadParameters() -->
+<method name="getReadParameters"  public="true">
+<description>
+Get the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; These are the readParameters that are common to all points that the read&#xa; request needs to retrieve. The ddf instantiates read&#xa; requests automatically. Here is how: Whenever a driver point needs to be&#xa; read, the ddf looks at the point&#x27;s read parameters and&#xa; instantiates an instance of the read request type that is specified by&#xa; the point&#x27;s read parameters. It then sets the read parameters on the new&#xa; read request equal to the read parameters on the point. Then it calls the&#xa; setReadableSource method on the new read request and passes in all other&#xa; driver points under the same point device extension that have the equivalent&#xa; readParameters. This effectively places all driver points under the same&#xa; device that share the same readParameters into a single poll group. This&#xa; allows the values for all of the points under a device that have equivalent&#xa; read parameters to be retrieved in one field-bus request.&#xa;&#xa; The ddf can also use read requests to automatically discover&#xa; Readable data points. The point manager will prompt the user with a copy of the&#xa; Discovery parameters as defined on your driver&#x27;s ddf point device extension.&#xa; Then it will look at the value that the end-user provides for the &#x27;min&#x27; property.&#xa; The value of the &#x27;min&#x27; and &#x27;max&#x27; properties must implement BIDdfReadParameters.&#xa; The ddf will outer loop through each valid read request&#xa; Type then it will inner loop from min to max, each pass through the inner loop&#xa; the auto discovery framework will instantiate an instance of the read request&#xa; type from the outer loop and pass in the read parameters from the inner loop.&#xa; The auto-discovery process will transmit each request. It will then create&#xa; Discovery objects for whatever requests that get valid responses.
+</description>
+<tag name="@see">#readParameters</tag>
+<return>
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.setReadParameters(com.tridium.ddf.identify.BDdfIdParams) -->
+<method name="setReadParameters"  public="true">
+<description>
+Set the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; These are the readParameters that are common to all points that the read&#xa; request needs to retrieve. The ddf instantiates read&#xa; requests automatically. Here is how: Whenever a driver point needs to be&#xa; read, the ddf looks at the point&#x27;s read parameters and&#xa; instantiates an instance of the read request type that is specified by&#xa; the point&#x27;s read parameters. It then sets the read parameters on the new&#xa; read request equal to the read parameters on the point. Then it calls the&#xa; setReadableSource method on the new read request and passes in all other&#xa; driver points under the same point device extension that have the equivalent&#xa; readParameters. This effectively places all driver points under the same&#xa; device that share the same readParameters into a single poll group. This&#xa; allows the values for all of the points under a device that have equivalent&#xa; read parameters to be retrieved in one field-bus request.&#xa;&#xa; The ddf can also use read requests to automatically discover&#xa; Readable data points. The point manager will prompt the user with a copy of the&#xa; Discovery parameters as defined on your driver&#x27;s ddf point device extension.&#xa; Then it will look at the value that the end-user provides for the &#x27;min&#x27; property.&#xa; The value of the &#x27;min&#x27; and &#x27;max&#x27; properties must implement BIDdfReadParameters.&#xa; The ddf will outer loop through each valid read request&#xa; Type then it will inner loop from min to max, each pass through the inner loop&#xa; the auto discovery framework will instantiate an instance of the read request&#xa; type from the outer loop and pass in the read parameters from the inner loop.&#xa; The auto-discovery process will transmit each request. It will then create&#xa; Discovery objects for whatever requests that get valid responses.
+</description>
+<tag name="@see">#readParameters</tag>
+<parameter name="v">
+<type class="com.tridium.ddf.identify.BDdfIdParams"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.getAutoReadFailOnTimeout() -->
+<method name="getAutoReadFailOnTimeout"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.getAutoReadFailOnError() -->
+<method name="getAutoReadFailOnError"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.getAutoReadOk() -->
+<method name="getAutoReadOk"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.getAutoReadOkLate() -->
+<method name="getAutoReadOkLate"  public="true">
+<description/>
+<return>
+<type class="boolean"/>
+<description>
+true
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.setReadableSource(com.tridium.ddf.comm.req.IDdfReadable[]) -->
+<method name="setReadableSource"  public="true">
+<description/>
+<parameter name="readableSource">
+<type class="com.tridium.ddf.comm.req.IDdfReadable" dimension="1"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.getReadableSource() -->
+<method name="getReadableSource"  public="true">
+<description/>
+<return>
+<type class="com.tridium.ddf.comm.req.IDdfReadable" dimension="1"/>
+<description>
+the IDdfReadable[] that was most recently passed to the&#xa; &lt;i&gt;getReadableSource&lt;/i&gt; method.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.isGroupable() -->
+<method name="isGroupable"  public="true">
+<description>
+By default, multiple IDdfReadable&#x27;s with the&#xa; same readParams, under the same device, should be&#xa; automatically grouped into the same poll group **if&#xa; the readParams structure has any properties**&#xa;&#xa; The philosophy here is that if the developer has&#xa; custom-defined any properties on the read params&#xa; then any two or more proxies (readable) that share&#xa; the equivalent read parameters should be polled in&#xa; one request.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.readParameters -->
+<field name="readParameters"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;readParameters&lt;/code&gt; property.&#xa; These are the readParameters that are common to all points that the read&#xa; request needs to retrieve. The ddf instantiates read&#xa; requests automatically. Here is how: Whenever a driver point needs to be&#xa; read, the ddf looks at the point&#x27;s read parameters and&#xa; instantiates an instance of the read request type that is specified by&#xa; the point&#x27;s read parameters. It then sets the read parameters on the new&#xa; read request equal to the read parameters on the point. Then it calls the&#xa; setReadableSource method on the new read request and passes in all other&#xa; driver points under the same point device extension that have the equivalent&#xa; readParameters. This effectively places all driver points under the same&#xa; device that share the same readParameters into a single poll group. This&#xa; allows the values for all of the points under a device that have equivalent&#xa; read parameters to be retrieved in one field-bus request.&#xa;&#xa; The ddf can also use read requests to automatically discover&#xa; Readable data points. The point manager will prompt the user with a copy of the&#xa; Discovery parameters as defined on your driver&#x27;s ddf point device extension.&#xa; Then it will look at the value that the end-user provides for the &#x27;min&#x27; property.&#xa; The value of the &#x27;min&#x27; and &#x27;max&#x27; properties must implement BIDdfReadParameters.&#xa; The ddf will outer loop through each valid read request&#xa; Type then it will inner loop from min to max, each pass through the inner loop&#xa; the auto discovery framework will instantiate an instance of the read request&#xa; type from the outer loop and pass in the read parameters from the inner loop.&#xa; The auto-discovery process will transmit each request. It will then create&#xa; Discovery objects for whatever requests that get valid responses.
+</description>
+<tag name="@see">#getReadParameters</tag>
+<tag name="@see">#setReadParameters</tag>
+</field>
+
+<!-- com.tridium.ddf.comm.req.BDdfReadRequest.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

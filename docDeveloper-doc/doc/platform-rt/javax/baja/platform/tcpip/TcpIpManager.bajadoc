@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platform" runtimeProfile="rt" qualifiedName="javax.baja.platform.tcpip.TcpIpManager" name="TcpIpManager" packageName="javax.baja.platform.tcpip" public="true" interface="true" abstract="true" category="interface">
+<description>
+TcpIpManager provides an interface for managing a computer&#x27;s TCP/IP settings&#xa; &lt;br&gt;&#xa; Some settings are applied at the host level on some operating systems and&#xa; at the adapter level on other operating systems.   For such settings, an adapter ID&#xa; is always taken as a parameter in the functions that access them.   On the operating&#xa; systems where the setting is managed at the host level, the adapter ID parameter&#xa; will not be used - but consider:&#xa; &lt;ul&gt;&#xa; &lt;li&gt;Your code is more portable if it always provides a valid adapter ID, even if you&#x27;re&#xa; confident that it isn&#x27;t important for the platform you&#x27;re writing for.&lt;/li&gt;&#xa; &lt;li&gt;You shouldn&#x27;t be surprised if you call a setter twice with two different adapter IDs,&#xa; providing two different values, and a getter returns only the most recently set value for&#xa; both adapters afterward.&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; &lt;br&gt;&#xa; A TcpIpManager can be obtained by calling &lt;code&gt;LocalPlatform.getTcpIpManager()&lt;/code&gt;&#xa; &lt;br&gt;&#xa; Each new TcpIpManager will load the current TcpIpService properties.
+</description>
+<tag name="@author">Frank Smith</tag>
+<tag name="@creation">16 Jan 05</tag>
+<tag name="@version">$Revision: 3$ $Date: 9/11/09 1:58:18 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<!-- javax.baja.platform.tcpip.TcpIpManager.getAdapterIds() -->
+<method name="getAdapterIds"  public="true" abstract="true">
+<description>
+Return an array of IDs for this computer&#x27;s network adapters which support TCP/IP
+</description>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getDefaultGateway(java.lang.String) -->
+<method name="getDefaultGateway"  public="true" abstract="true">
+<description>
+If the platform usesAdapterLevelSettings property is true&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return the specified adapter&#x27;s defaultGateway if the adapterId is valid&lt;/li&gt;&#xa; &lt;li&gt;otherwise return the first adapter&#x27;s defaultGateway&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; Else&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return the platform&#x27;s default gateway&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+identifies the target adapter
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.setDefaultGateway(java.lang.String, java.lang.String) -->
+<method name="setDefaultGateway"  public="true" abstract="true">
+<description>
+If the platform usesAdapterLevelSettings property is true&#xa; &lt;ul&gt;&#xa; &lt;li&gt;set the specified adapter&#x27;s defaultGateway if the adapterId is valid&lt;/li&gt;&#xa; &lt;li&gt;otherwise set the first adapter&#x27;s defaultGateway&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; Else&#xa; &lt;ul&gt;&#xa; &lt;li&gt;set the platform&#x27;s default gateway&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+identifies the target adapter
+</description>
+</parameter>
+<parameter name="gateway">
+<type class="java.lang.String"/>
+<description>
+is the new default
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.IllegalStateException"/>
+<description>
+if DHCP is enabled
+</description>
+</throws>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.isDhcpEnabled(java.lang.String) -->
+<method name="isDhcpEnabled"  public="true" abstract="true">
+<description>
+Return the isDhcpEnabled property of the adapter with the specified id&#xa; &lt;br&gt;&#xa; If the adapterId is invalid, return the first adapter&#x27;s isDhcpEnabled property
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+identifies the target adapter
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.enableDhcp(java.lang.String, boolean) -->
+<method name="enableDhcp"  public="true" abstract="true">
+<description>
+Set the isDhcpEnabled property of the adapter with the specified id&#xa; &lt;br&gt;&#xa; If the adapterId is invalid, set the first adapter&#x27;s isDhcpEnabled property
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<parameter name="enable">
+<type class="boolean"/>
+<description>
+is the new setting
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getDnsServerLimit(java.lang.String) -->
+<method name="getDnsServerLimit"  public="true" abstract="true">
+<description>
+If the platform usesAdapterLevelSettings property is true&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return the maximum allowable number of the specified adapter&#x27;s dnsHosts if the adapterId is valid&lt;/li&gt;&#xa; &lt;li&gt;otherwise return the maximum allowable number of the first adapter&#x27;s dnsHosts&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; Else&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return the maximum allowable number of the platform&#x27;s dnsHosts&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getDnsServers(java.lang.String) -->
+<method name="getDnsServers"  public="true" abstract="true">
+<description>
+If the platform usesAdapterLevelSettings property is true&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return an array of the specified adapter&#x27;s dnsHosts if the adapterId is valid&lt;/li&gt;&#xa; &lt;li&gt;otherwise return an array of the first adapter&#x27;s dnsHosts&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; Else&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return the platform&#x27;s dnsHosts&lt;li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.setDnsServers(java.lang.String, java.lang.String[]) -->
+<method name="setDnsServers"  public="true" abstract="true">
+<description>
+If the platform usesAdapterLevelSettings property is true&#xa; &lt;ul&gt;&#xa; &lt;li&gt;set the specified adapter&#x27;s list of DNS servers to the one provided if the adapterId is valid&lt;/li&gt;&#xa; &lt;li&gt;otherwise set the first adapter&#x27;s list of DNS servers to the one provided&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; Else&#xa; &lt;ul&gt;&#xa; &lt;li&gt;set the platform&#x27;s list of DNS servers to the one provided&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<parameter name="servers">
+<type class="java.lang.String" dimension="1"/>
+<description>
+is the new list of DNS servers
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getDomain(java.lang.String) -->
+<method name="getDomain"  public="true" abstract="true">
+<description>
+If the platform usesAdapterLevelSettings property is true&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return the specified adapter&#x27;s domain if the adapterId is valid&lt;/li&gt;&#xa; &lt;li&gt;otherwise return the first adapter&#x27;s domain&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; Else&#xa; &lt;ul&gt;&#xa; &lt;li&gt;return the platform&#x27;s domain&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.setDomain(java.lang.String, java.lang.String) -->
+<method name="setDomain"  public="true" abstract="true">
+<description>
+If the platform usesAdapterLevelSettings property is true&#xa; &lt;ul&gt;&#xa; &lt;li&gt;set the specified adapter&#x27;s domain if the adapterId is valid&lt;/li&gt;&#xa; &lt;li&gt;otherwise set the first adapter&#x27;s domain&lt;/li&gt;&#xa; &lt;/ul&gt;&#xa; Else&#xa; &lt;ul&gt;&#xa; &lt;li&gt;set the platform&#x27;s domain&lt;/li&gt;&#xa; &lt;/ul&gt;
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<parameter name="domain">
+<type class="java.lang.String"/>
+<description>
+is the new domain
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getHostName() -->
+<method name="getHostName"  public="true" abstract="true">
+<description>
+Return the host name
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.setHostName(java.lang.String) -->
+<method name="setHostName"  public="true" abstract="true">
+<description>
+Set the host name&#xa; &lt;br&gt;&#xa; &lt;b&gt;Note:&lt;/b&gt; On Win32 systems, host name is an important part of a computer&#x27;s&#xa; domain/workgroup membership.  Callers should consider all consequences,&#xa; especially with respect to authentication, before changing a Win32 system&#x27;s &#xa; host name.
+</description>
+<parameter name="newName">
+<type class="java.lang.String"/>
+<description>
+is the new host name
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getIpAddress(java.lang.String) -->
+<method name="getIpAddress"  public="true" abstract="true">
+<description>
+Return the ipAddress of the adapter with the specified id&#xa; &lt;br&gt;&#xa; If the adapterId is invalid, return the first adapter&#x27;s ipAddress
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.setIpAddress(java.lang.String, java.lang.String) -->
+<method name="setIpAddress"  public="true" abstract="true">
+<description>
+Set the ipAddress of the adapter with the specified id&#xa; &lt;br&gt;&#xa; If the adapterId is invalid, set the first adapter&#x27;s ipAddress
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<parameter name="ipAddress">
+<type class="java.lang.String"/>
+<description>
+is the new address
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getSubnetMask(java.lang.String) -->
+<method name="getSubnetMask"  public="true" abstract="true">
+<description>
+Return the subnetMask of the adapter with the specified id&#xa; &lt;br&gt;&#xa; If the adapterId is invalid, return the first adapter&#x27;s subnetMask
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.setSubnetMask(java.lang.String, java.lang.String) -->
+<method name="setSubnetMask"  public="true" abstract="true">
+<description>
+Set the subnetMask of the adapter with the specified id&#xa; &lt;br&gt;&#xa; If the adapterId is invalid, set the first adapter&#x27;s subnetMask
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<parameter name="newMask">
+<type class="java.lang.String"/>
+<description>
+is the new subnetMask
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.getMediaAccessControlAddress(java.lang.String) -->
+<method name="getMediaAccessControlAddress"  public="true" abstract="true">
+<description>
+Return the MAC address of the adapter with the specified id&#xa; &lt;br&gt;&#xa; If the adapterId is invalid, return the MAC of the first adapter
+</description>
+<parameter name="adapterId">
+<type class="java.lang.String"/>
+<description>
+contains the target adapterId
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.platform.tcpip.TcpIpManager.saveProperties() -->
+<method name="saveProperties"  public="true" abstract="true">
+<description>
+Save the platform network properties
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

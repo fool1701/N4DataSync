@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="obixDriver" runtimeProfile="rt" qualifiedName="javax.baja.obix.driver.point.BR2PointDeviceExt" name="BR2PointDeviceExt" packageName="javax.baja.obix.driver.point" public="true">
+<description>
+BR2PointDeviceExt provides specialized behavior for interfacing with an R2&#xa; Tridium Obix Server.
+</description>
+<tag name="@author">Craig Gemmill</tag>
+<tag name="@creation">12 April 2007</tag>
+<tag name="@version">$Revision$ $Date$&#xa; *@since    Niagara 3.1</tag>
+<extends>
+<type class="javax.baja.obix.driver.point.BObixPointDeviceExt"/>
+</extends>
+<property name="includeUiNodes" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;includeUiNodes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIncludeUiNodes</tag>
+<tag name="@see">#setIncludeUiNodes</tag>
+</property>
+
+<property name="includeInternalProps" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;includeInternalProps&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIncludeInternalProps</tag>
+<tag name="@see">#setIncludeInternalProps</tag>
+</property>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt() -->
+<constructor name="BR2PointDeviceExt" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.getIncludeUiNodes() -->
+<method name="getIncludeUiNodes"  public="true">
+<description>
+Get the &lt;code&gt;includeUiNodes&lt;/code&gt; property.
+</description>
+<tag name="@see">#includeUiNodes</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.setIncludeUiNodes(boolean) -->
+<method name="setIncludeUiNodes"  public="true">
+<description>
+Set the &lt;code&gt;includeUiNodes&lt;/code&gt; property.
+</description>
+<tag name="@see">#includeUiNodes</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.getIncludeInternalProps() -->
+<method name="getIncludeInternalProps"  public="true">
+<description>
+Get the &lt;code&gt;includeInternalProps&lt;/code&gt; property.
+</description>
+<tag name="@see">#includeInternalProps</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.setIncludeInternalProps(boolean) -->
+<method name="setIncludeInternalProps"  public="true">
+<description>
+Set the &lt;code&gt;includeInternalProps&lt;/code&gt; property.
+</description>
+<tag name="@see">#includeInternalProps</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.doSubmitPointDiscoveryJob(javax.baja.sys.Context) -->
+<method name="doSubmitPointDiscoveryJob"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Used by the point manager view.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.getForceObj(obix.Obj) -->
+<method name="getForceObj"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the Obj to use in the force update mechanism.  Generally this&#xa; should just be the object that was passed in.  The R2 point device&#xa; ext will find the containing Node object to find the Node commands.
+</description>
+<parameter name="obj">
+<type class="obix.Obj"/>
+</parameter>
+<return>
+<type class="obix.Obj"/>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.getFullNormalizedHref(obix.Op, obix.Obj) -->
+<method name="getFullNormalizedHref"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the normalized URI for an Op, to be used in creating a&#xa; BObixProxyAction to map an Obj&#x27;s operation.  The R2 point device&#xa; ext will override this to recover the full URI, as the R2 server&#xa; will return only a relative URI.&#xa; This is used ONLY by force() when a proxy point is forceUpdate()d,&#xa; which occurs at creation, and when the user manually invokes the&#xa; forceUpdate() action.  Versions 2.301.525b through 2.301.527 of the&#xa; R2 server return only relative uris, without the full path, to reduce&#xa; packet size.  This was determined not to be effective and discontinued&#xa; beginning with 2.301.527a.  This method must determine if the full path&#xa; is already present in the Op&#x27;s uri, and only use the full path from the&#xa; parent Obj if it is needed.
+</description>
+<parameter name="op">
+<type class="obix.Op"/>
+<description>
+the operation obj
+</description>
+</parameter>
+<parameter name="obj">
+<type class="obix.Obj"/>
+<description>
+the op&#x27;s parent obj (not used in the default implementation).
+</description>
+</parameter>
+<return>
+<type class="obix.Uri"/>
+<description>
+a normalized href appropriate for invoking the operation.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.includeUiNodes -->
+<field name="includeUiNodes"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;includeUiNodes&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIncludeUiNodes</tag>
+<tag name="@see">#setIncludeUiNodes</tag>
+</field>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.includeInternalProps -->
+<field name="includeInternalProps"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;includeInternalProps&lt;/code&gt; property.
+</description>
+<tag name="@see">#getIncludeInternalProps</tag>
+<tag name="@see">#setIncludeInternalProps</tag>
+</field>
+
+<!-- javax.baja.obix.driver.point.BR2PointDeviceExt.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

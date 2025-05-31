@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devHttpDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddfHttp.comm.DdfAuthenticationHelper" name="DdfAuthenticationHelper" packageName="com.tridium.ddfHttp.comm" public="true">
+<description>
+An instance of this class is used to perform the HTTP logon to each unqiue URL that an instance&#xa; of DdfHttpHelper encounters.&#xa;&#xa; The relationship between this and DdfHttpHelper is many-to-one. One DdfHttpHelper has a reference&#xa; to many DdfAuthenticationHelpers. More specifically, one DdfHttpHelper has as many references to&#xa; DdfAuthenticationHelpers as it has encountered unique URLs that require authentication (user name /&#xa; password logon).&#xa;&#xa; While this is devHttpDriver&#x27;s best attempt at authentication, its creators realize that some&#xa; web servers could implement authentication differently (hopefully just sligtly). For that reason,&#xa; all fields are granted protected access and all methods are split up into many&#xa; smaller methods, all of which are granted protected access. This should allow&#xa; developers to customize any pieces of the authentication that might be necessary on a&#xa; per-driver basis.&#xa;&#xa; To use a custom DdfAuthenticationHelper, please make a custom DdfHttpHelper&#xa; and override DdfHttpHelper.makeAuthenticationHelper to return an instance&#xa; of the driver&#x27;s own customized descendant of this class.&#xa;&#xa; To plug-in the custom DdfHttpHelper (which uses the custom DdfAuthenticationHelper, override&#xa; the &#x27;makeHttpHelper&#x27; method on the driver&#x27;s transmitter class which extends BDdfHttpTransmitter.
+</description>
+<tag name="@see">DdfHttpHelper</tag>
+<tag name="@see">BDdfHttpTransmitter</tag>
+<tag name="@author">Lenard Perkins</tag>
+<tag name="@creation">01 Jan 08</tag>
+<tag name="@version">$Revision$ $Date: 02/19/2009 3:42:00 PM$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper(java.net.URL, javax.baja.security.BUsernameAndPassword, javax.baja.net.UrlConnection) -->
+<constructor name="DdfAuthenticationHelper" public="true">
+<parameter name="javaUrl">
+<type class="java.net.URL"/>
+</parameter>
+<parameter name="webUsernameAndPassword">
+<type class="javax.baja.security.BUsernameAndPassword"/>
+<description>
+the BUsernameAndPassword from the baja&#xa; security module. This specifies the user name and password to use for&#xa; authentication.
+</description>
+</parameter>
+<parameter name="httpReplyRequestingAuth">
+<type class="javax.baja.net.UrlConnection"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.isDigestAuthentication() -->
+<method name="isDigestAuthentication"  public="true">
+<description>
+Checks if the WWW-Authenticate response header of the UrlConnection that&#xa; was passed to the constructor indicates that the web server requires&#xa; authentication based on the HTTP Digest specification.&#xa;&#xa; The HTTP digest authentication is a somewhat secure method of&#xa; authentication over an unsecure connection.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if using digest authentication false for anything else.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.isBasicAuthentication() -->
+<method name="isBasicAuthentication"  public="true">
+<description>
+Checks if the WWW-Authenticate response header of the UrlConnection that&#xa; was passed to the constructor indicates that the web server requires&#xa; authentication based on the HTTP Basic specification.&#xa;&#xa; The HTTP basic is a completely unsecure method of encryption. It simply&#xa; hides the user name and password from anybody that might be reviewing&#xa; the data over a plain network sniffer.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if using basic authentication false for anything else.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.getAuthenticationType(java.lang.String) -->
+<method name="getAuthenticationType"  public="true">
+<description>
+Reviews the WWW-Authenticate response header of the UrlConnection that was passed to the&#xa; constructor and returns the String that identifies the type of authentication that the web&#xa; server requires (for example: basic or digest).&#xa;&#xa; NOTE: Currently, devHttpDriver supports Basic and Digest authentication.
+</description>
+<parameter name="webAuthenticateHeader">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the String that identifies the type of authentication that the web server requires (for&#xa;         example: basic or digest).
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.addRequestAuthorization(javax.baja.net.HttpConnection) -->
+<method name="addRequestAuthorization"  public="true">
+<description>
+Adds the appropriate authorization credentials to the HTTP request&#xa; header of the given HttpConnection.&#xa;&#xa; NOTE: Currently, devHttpDriver supports Basic and Digest authentication.&#xa;&#xa; The authentication type is chosen based on the authentication type&#xa; indicated by the response header in the http connection that was&#xa; passed to the constructor.
+</description>
+<parameter name="httpRequestConn">
+<type class="javax.baja.net.HttpConnection"/>
+<description>
+the given HttpConnection to add request&#xa; credentials to.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if this method really adds a request header to the given&#xa; HttpConnection. False if not.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.addBasicAuthorization(javax.baja.net.HttpConnection) -->
+<method name="addBasicAuthorization"  public="true">
+<description>
+Adds a Base64 (unsecure) basic authentication header to the given HttpConnection.&#xa;&#xa; Uses the user name and password that were passed to the constructor.
+</description>
+<parameter name="httpRequestConn">
+<type class="javax.baja.net.HttpConnection"/>
+<description>
+the HttpConnection to add a basic authentication header to.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if a basic authentication header is really added to the given HttpConnection&#xa; or false if not. At present, this will return false if the user name / password&#xa; that was passed to the constructor was null.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.addDigestAuthorization(javax.baja.net.HttpConnection) -->
+<method name="addDigestAuthorization"  public="true">
+<description>
+Adds a &#x27;digest&#x27; (semi-secure) authentication header to the given HttpConnection.&#xa;&#xa; The digest authentication scheme is that described in RFC 2617.
+</description>
+<parameter name="httpRequestConn">
+<type class="javax.baja.net.HttpConnection"/>
+<description>
+the HttpConnection to add a digest authentication header to.
+</description>
+</parameter>
+<return>
+<type class="boolean"/>
+<description>
+true if a basic authentication header is really added to the given HttpConnection or&#xa;         false if not. At present, this will return false if the user name / password that was&#xa;         passed to the constructor was null. At present, this will also return false if the Http&#xa;         Response Header of the HttpConnection that was passed to the constructor does not&#xa;         contain the necessary key/value pairs (realm, nonce, and qop) to perform the digest&#xa;         authentication.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.getCnonce() -->
+<method name="getCnonce"  protected="true">
+<description>
+Computes the CNONCE. The term CNONCE is universally understood by those that&#xa; are well educated in digest authentication theory. It is essentially an&#xa; encrypted version of the credentials (user name / password) to log into&#xa; a web server.
+</description>
+<return>
+<type class="java.lang.String"/>
+<description>
+the CNONCE
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.hexMD5(java.lang.String) -->
+<method name="hexMD5"  protected="true">
+<description>
+Encrypts the given string using the MD5 encryption algorithm. Delegates&#xa; to java.security.MessageDigest to perform the computation
+</description>
+<parameter name="in">
+<type class="java.lang.String"/>
+<description>
+the given string to encrypt
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the MD5 encrypted version of the given string
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.getValue(java.lang.String, java.lang.String) -->
+<method name="getValue"  protected="true">
+<description>
+Extracts a property value by the given key from the givenTextToSearch. This scans&#xa; for the property value if it is enclosed inside quotation marks or even if not.
+</description>
+<tag name="@see">#getInQuotes(String, String)</tag>
+<tag name="@see">#getNotInQuotes(String, String)</tag>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+the name of value to extract from the given textToSearch
+</description>
+</parameter>
+<parameter name="textToSearch">
+<type class="java.lang.String"/>
+<description>
+the text from which to extract the property value. This&#xa; is intended to be the WWW-Authenticate header of a UrlConnection.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the value on the right side of the equals sign, after the key within&#xa; the given textToSearch or null if not found (any quotation marks surrounding&#xa; the value are not returned).
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.getInQuotes(java.lang.String, java.lang.String) -->
+<method name="getInQuotes"  protected="true">
+<description>
+Extracts a property value by the given key from the givenTextToSearch. This scans&#xa; for the property value if it is enclosed inside quotation marks.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+the name of value to extract from the given textToSearch
+</description>
+</parameter>
+<parameter name="textToSearch">
+<type class="java.lang.String"/>
+<description>
+the text from which to extract the property value. This&#xa; is intended to be the WWW-Authenticate header of a UrlConnection.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the value on the right side of the equals sign, within quotation marks,&#xa; after the key within the given textToSearch or null if not found (the surrounding&#xa; quotation marks are not returned).
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.getNotInQuotes(java.lang.String, java.lang.String) -->
+<method name="getNotInQuotes"  protected="true">
+<description>
+Extracts a property value by the given key from the given textToSearch. This scans&#xa; for the property value if it is _not_ enclosed inside quotation marks.
+</description>
+<parameter name="key">
+<type class="java.lang.String"/>
+<description>
+the name of value to extract from the given textToSearch
+</description>
+</parameter>
+<parameter name="textToSearch">
+<type class="java.lang.String"/>
+<description>
+the text from which to extract the property value. This&#xa; is intended to be the WWW-Authenticate header of a UrlConnection.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the value on the right side of the equals sign after the key&#xa; within the given textToSearch or null if not found.
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+<description/>
+</throws>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.quote(java.lang.String) -->
+<method name="quote"  protected="true" static="true">
+<description>
+Adds quotation marks around the given string if necessary.
+</description>
+<parameter name="in">
+<type class="java.lang.String"/>
+<description>
+the given string to add quotation marks around.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the given string with surrounding quotation marks.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.unquote(java.lang.String) -->
+<method name="unquote"  protected="true" static="true">
+<description>
+Removes any quotation marks from around the given string.
+</description>
+<parameter name="in">
+<type class="java.lang.String"/>
+<description>
+the given string from which to remove surrounding quotation marks.
+</description>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+<description>
+the given string without any surrounding quotation marks that.
+</description>
+</return>
+</method>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.clientRandom -->
+<field name="clientRandom"  protected="true" static="true">
+<type class="java.security.SecureRandom"/>
+<description>
+This is used to generate random numbers for authentication.
+</description>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.nc -->
+<field name="nc"  protected="true">
+<type class="int"/>
+<description>
+This keeps track of the number of authentication attempts during the life-cycle.&#xa; This is a universally understood portion of the &#x27;digest&#x27; authentication mechanism.
+</description>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.webHost -->
+<field name="webHost"  protected="true">
+<type class="javax.baja.naming.BIpHost"/>
+<description>
+This encapsulates the IP address of the web server that this instance will&#xa; authenticate.
+</description>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.webPort -->
+<field name="webPort"  protected="true">
+<type class="int"/>
+<description>
+This is the port on the web server that this instance will authenticate.
+</description>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.webUsernameAndPassword -->
+<field name="webUsernameAndPassword"  protected="true">
+<type class="javax.baja.security.BUsernameAndPassword"/>
+<description>
+This is the user name and password that this instance will use to authenticate&#xa; to the web server.
+</description>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.webAuthenticateHeader -->
+<field name="webAuthenticateHeader"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the WWW-Authenticate header that is provided by the web server when&#xa; it asks for a log-in over digest authentication.
+</description>
+</field>
+
+<!-- com.tridium.ddfHttp.comm.DdfAuthenticationHelper.webUri -->
+<field name="webUri"  protected="true">
+<type class="java.lang.String"/>
+<description>
+This is the file portion of the URL to ask the web server for authentication&#xa; to. This is used for &#x27;digest&#x27; authentication.
+</description>
+</field>
+
+</class>
+</bajadoc>

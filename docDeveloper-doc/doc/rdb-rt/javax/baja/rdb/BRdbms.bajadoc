@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="rdb" runtimeProfile="rt" qualifiedName="javax.baja.rdb.BRdbms" name="BRdbms" packageName="javax.baja.rdb" public="true" abstract="true">
+<description>
+BRdbms models a relational database.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">24 Jul 03</tag>
+<tag name="@version">$Revision: 26$ $Date: 6/22/11 3:10:45 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.driver.BDevice"/>
+</extends>
+<implements>
+<type class="javax.baja.license.BILicensed"/>
+</implements>
+<property name="hostAddress" flags="">
+<type class="javax.baja.naming.BOrd"/>
+<description>
+Slot for the &lt;code&gt;hostAddress&lt;/code&gt; property.&#xa; The address of the computer that hosts the database.
+</description>
+<tag name="@see">#getHostAddress</tag>
+<tag name="@see">#setHostAddress</tag>
+</property>
+
+<property name="ownerName" flags="h">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;ownerName&lt;/code&gt; property.&#xa; deprecated
+</description>
+<tag name="@see">#getOwnerName</tag>
+<tag name="@see">#setOwnerName</tag>
+</property>
+
+<property name="useEncryptedConnection" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useEncryptedConnection&lt;/code&gt; property.&#xa; indicate whether the connection should use SSL/TLS
+</description>
+<tag name="@see">#getUseEncryptedConnection</tag>
+<tag name="@see">#setUseEncryptedConnection</tag>
+</property>
+
+<property name="userName" flags="">
+<type class="java.lang.String"/>
+<description>
+Slot for the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.
+</description>
+<tag name="@see">#getUserName</tag>
+<tag name="@see">#setUserName</tag>
+</property>
+
+<property name="password" flags="">
+<type class="javax.baja.security.BPassword"/>
+<description>
+Slot for the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.
+</description>
+<tag name="@see">#getPassword</tag>
+<tag name="@see">#setPassword</tag>
+</property>
+
+<property name="worker" flags="">
+<type class="javax.baja.rdb.BRdbmsWorker"/>
+<description>
+Slot for the &lt;code&gt;worker&lt;/code&gt; property.
+</description>
+<tag name="@see">#getWorker</tag>
+<tag name="@see">#setWorker</tag>
+</property>
+
+<property name="exportMode" flags="">
+<type class="javax.baja.rdb.history.BRdbmsHistoryExportMode"/>
+<description>
+Slot for the &lt;code&gt;exportMode&lt;/code&gt; property.&#xa; Whether histories will be exported into this database as&#xa; one table per History Id, or one table per BHistoryRecord type.&#xa; The default is &#x27;byHistoryId&#x27;, but choosing &#x27;byHistoryType&#x27; will&#xa; make the data much easier to query once it has been exported.
+</description>
+<tag name="@see">#getExportMode</tag>
+<tag name="@see">#setExportMode</tag>
+</property>
+
+<property name="useUnicodeEncodingScheme" flags="1">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;useUnicodeEncodingScheme&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUseUnicodeEncodingScheme</tag>
+<tag name="@see">#setUseUnicodeEncodingScheme</tag>
+</property>
+
+<property name="timestampStorage" flags="1">
+<type class="javax.baja.rdb.BRdbmsTimestampStorage"/>
+<description>
+Slot for the &lt;code&gt;timestampStorage&lt;/code&gt; property.&#xa; How to store the BAbsTimes:&#xa; dialectDefault is the default assignment prefered by the dialect&#xa; LocalTimestamp is convenient for Time that never changes TimeZones as long as it has millis precision&#xa; UtcTimestamp   is convenient for TimeZone if it changes as long as it has millis precision&#xa; utcMillis  is the most convenient for orion and other Rdbms that require import and export, but dates are hard to read within sql
+</description>
+<tag name="@see">#getTimestampStorage</tag>
+<tag name="@see">#setTimestampStorage</tag>
+</property>
+
+<property name="points" flags="">
+<type class="javax.baja.rdb.point.BRdbmsPointDeviceExt"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Proxy point mappings
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</property>
+
+<property name="sqlSchemeEnabled" flags="">
+<type class="boolean"/>
+<description>
+Slot for the &lt;code&gt;sqlSchemeEnabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSqlSchemeEnabled</tag>
+<tag name="@see">#setSqlSchemeEnabled</tag>
+</property>
+
+<property name="rdbSecuritySettings" flags="">
+<type class="com.tridium.rdb.aes.BRdbSecuritySettings"/>
+<description>
+Slot for the &lt;code&gt;rdbSecuritySettings&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRdbSecuritySettings</tag>
+<tag name="@see">#setRdbSecuritySettings</tag>
+</property>
+
+<action name="allowDialectModifications" flags="c">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;allowDialectModifications&lt;/code&gt; action.
+</description>
+<tag name="@see">#allowDialectModifications()</tag>
+</action>
+
+<!-- javax.baja.rdb.BRdbms() -->
+<constructor name="BRdbms" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.rdb.BRdbms.getHostAddress() -->
+<method name="getHostAddress"  public="true">
+<description>
+Get the &lt;code&gt;hostAddress&lt;/code&gt; property.&#xa; The address of the computer that hosts the database.
+</description>
+<tag name="@see">#hostAddress</tag>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setHostAddress(javax.baja.naming.BOrd) -->
+<method name="setHostAddress"  public="true">
+<description>
+Set the &lt;code&gt;hostAddress&lt;/code&gt; property.&#xa; The address of the computer that hosts the database.
+</description>
+<tag name="@see">#hostAddress</tag>
+<parameter name="v">
+<type class="javax.baja.naming.BOrd"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getOwnerName() -->
+<method name="getOwnerName"  public="true">
+<description>
+Get the &lt;code&gt;ownerName&lt;/code&gt; property.&#xa; deprecated
+</description>
+<tag name="@see">#ownerName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setOwnerName(java.lang.String) -->
+<method name="setOwnerName"  public="true">
+<description>
+Set the &lt;code&gt;ownerName&lt;/code&gt; property.&#xa; deprecated
+</description>
+<tag name="@see">#ownerName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getUseEncryptedConnection() -->
+<method name="getUseEncryptedConnection"  public="true">
+<description>
+Get the &lt;code&gt;useEncryptedConnection&lt;/code&gt; property.&#xa; indicate whether the connection should use SSL/TLS
+</description>
+<tag name="@see">#useEncryptedConnection</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setUseEncryptedConnection(boolean) -->
+<method name="setUseEncryptedConnection"  public="true">
+<description>
+Set the &lt;code&gt;useEncryptedConnection&lt;/code&gt; property.&#xa; indicate whether the connection should use SSL/TLS
+</description>
+<tag name="@see">#useEncryptedConnection</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getUserName() -->
+<method name="getUserName"  public="true">
+<description>
+Get the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.
+</description>
+<tag name="@see">#userName</tag>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setUserName(java.lang.String) -->
+<method name="setUserName"  public="true">
+<description>
+Set the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.
+</description>
+<tag name="@see">#userName</tag>
+<parameter name="v">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getPassword() -->
+<method name="getPassword"  public="true">
+<description>
+Get the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.
+</description>
+<tag name="@see">#password</tag>
+<return>
+<type class="javax.baja.security.BPassword"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setPassword(javax.baja.security.BPassword) -->
+<method name="setPassword"  public="true">
+<description>
+Set the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.
+</description>
+<tag name="@see">#password</tag>
+<parameter name="v">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getWorker() -->
+<method name="getWorker"  public="true">
+<description>
+Get the &lt;code&gt;worker&lt;/code&gt; property.
+</description>
+<tag name="@see">#worker</tag>
+<return>
+<type class="javax.baja.rdb.BRdbmsWorker"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setWorker(javax.baja.rdb.BRdbmsWorker) -->
+<method name="setWorker"  public="true">
+<description>
+Set the &lt;code&gt;worker&lt;/code&gt; property.
+</description>
+<tag name="@see">#worker</tag>
+<parameter name="v">
+<type class="javax.baja.rdb.BRdbmsWorker"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getExportMode() -->
+<method name="getExportMode"  public="true">
+<description>
+Get the &lt;code&gt;exportMode&lt;/code&gt; property.&#xa; Whether histories will be exported into this database as&#xa; one table per History Id, or one table per BHistoryRecord type.&#xa; The default is &#x27;byHistoryId&#x27;, but choosing &#x27;byHistoryType&#x27; will&#xa; make the data much easier to query once it has been exported.
+</description>
+<tag name="@see">#exportMode</tag>
+<return>
+<type class="javax.baja.rdb.history.BRdbmsHistoryExportMode"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setExportMode(javax.baja.rdb.history.BRdbmsHistoryExportMode) -->
+<method name="setExportMode"  public="true">
+<description>
+Set the &lt;code&gt;exportMode&lt;/code&gt; property.&#xa; Whether histories will be exported into this database as&#xa; one table per History Id, or one table per BHistoryRecord type.&#xa; The default is &#x27;byHistoryId&#x27;, but choosing &#x27;byHistoryType&#x27; will&#xa; make the data much easier to query once it has been exported.
+</description>
+<tag name="@see">#exportMode</tag>
+<parameter name="v">
+<type class="javax.baja.rdb.history.BRdbmsHistoryExportMode"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getUseUnicodeEncodingScheme() -->
+<method name="getUseUnicodeEncodingScheme"  public="true">
+<description>
+Get the &lt;code&gt;useUnicodeEncodingScheme&lt;/code&gt; property.
+</description>
+<tag name="@see">#useUnicodeEncodingScheme</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setUseUnicodeEncodingScheme(boolean) -->
+<method name="setUseUnicodeEncodingScheme"  public="true">
+<description>
+Set the &lt;code&gt;useUnicodeEncodingScheme&lt;/code&gt; property.
+</description>
+<tag name="@see">#useUnicodeEncodingScheme</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getTimestampStorage() -->
+<method name="getTimestampStorage"  public="true">
+<description>
+Get the &lt;code&gt;timestampStorage&lt;/code&gt; property.&#xa; How to store the BAbsTimes:&#xa; dialectDefault is the default assignment prefered by the dialect&#xa; LocalTimestamp is convenient for Time that never changes TimeZones as long as it has millis precision&#xa; UtcTimestamp   is convenient for TimeZone if it changes as long as it has millis precision&#xa; utcMillis  is the most convenient for orion and other Rdbms that require import and export, but dates are hard to read within sql
+</description>
+<tag name="@see">#timestampStorage</tag>
+<return>
+<type class="javax.baja.rdb.BRdbmsTimestampStorage"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setTimestampStorage(javax.baja.rdb.BRdbmsTimestampStorage) -->
+<method name="setTimestampStorage"  public="true">
+<description>
+Set the &lt;code&gt;timestampStorage&lt;/code&gt; property.&#xa; How to store the BAbsTimes:&#xa; dialectDefault is the default assignment prefered by the dialect&#xa; LocalTimestamp is convenient for Time that never changes TimeZones as long as it has millis precision&#xa; UtcTimestamp   is convenient for TimeZone if it changes as long as it has millis precision&#xa; utcMillis  is the most convenient for orion and other Rdbms that require import and export, but dates are hard to read within sql
+</description>
+<tag name="@see">#timestampStorage</tag>
+<parameter name="v">
+<type class="javax.baja.rdb.BRdbmsTimestampStorage"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getPoints() -->
+<method name="getPoints"  public="true">
+<description>
+Get the &lt;code&gt;points&lt;/code&gt; property.&#xa; Proxy point mappings
+</description>
+<tag name="@see">#points</tag>
+<return>
+<type class="javax.baja.rdb.point.BRdbmsPointDeviceExt"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setPoints(javax.baja.rdb.point.BRdbmsPointDeviceExt) -->
+<method name="setPoints"  public="true">
+<description>
+Set the &lt;code&gt;points&lt;/code&gt; property.&#xa; Proxy point mappings
+</description>
+<tag name="@see">#points</tag>
+<parameter name="v">
+<type class="javax.baja.rdb.point.BRdbmsPointDeviceExt"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getSqlSchemeEnabled() -->
+<method name="getSqlSchemeEnabled"  public="true">
+<description>
+Get the &lt;code&gt;sqlSchemeEnabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#sqlSchemeEnabled</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setSqlSchemeEnabled(boolean) -->
+<method name="setSqlSchemeEnabled"  public="true">
+<description>
+Set the &lt;code&gt;sqlSchemeEnabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#sqlSchemeEnabled</tag>
+<parameter name="v">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getRdbSecuritySettings() -->
+<method name="getRdbSecuritySettings"  public="true">
+<description>
+Get the &lt;code&gt;rdbSecuritySettings&lt;/code&gt; property.
+</description>
+<tag name="@see">#rdbSecuritySettings</tag>
+<return>
+<type class="com.tridium.rdb.aes.BRdbSecuritySettings"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.setRdbSecuritySettings(com.tridium.rdb.aes.BRdbSecuritySettings) -->
+<method name="setRdbSecuritySettings"  public="true">
+<description>
+Set the &lt;code&gt;rdbSecuritySettings&lt;/code&gt; property.
+</description>
+<tag name="@see">#rdbSecuritySettings</tag>
+<parameter name="v">
+<type class="com.tridium.rdb.aes.BRdbSecuritySettings"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.allowDialectModifications() -->
+<method name="allowDialectModifications"  public="true">
+<description>
+Invoke the &lt;code&gt;allowDialectModifications&lt;/code&gt; action.
+</description>
+<tag name="@see">#allowDialectModifications</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getNetworkType() -->
+<method name="getNetworkType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.postPing() -->
+<method name="postPing"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.util.IFuture"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.doPing() -->
+<method name="doPing"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.started() -->
+<method name="started"  public="true" final="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Descendant classes are not allowed to override this method directly.&#xa; However, this method calls &lt;code&gt;<see ref="javax.baja.rdb.BRdbms#rdbmsStarted()">#rdbmsStarted()</see>&lt;/code&gt;, which may&#xa; be overridden.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.rdbmsStarted() -->
+<method name="rdbmsStarted"  public="true">
+<description>
+a method for initialization code that needs to be run on child rdbms devices
+</description>
+<tag name="@since">4.4_u4, 4.7_u2, 4.8_u1, 4.9</tag>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.pingOk() -->
+<method name="pingOk"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.preventDialectModifications() -->
+<method name="preventDialectModifications"  public="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.doAllowDialectModifications(javax.baja.sys.Context) -->
+<method name="doAllowDialectModifications"  public="true">
+<description>
+Confirm Allowance for Dialect Modification.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getLicenseFeature() -->
+<method name="getLicenseFeature"  public="true" abstract="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+get the feature code used to license this database type.
+</description>
+<return>
+<type class="javax.baja.license.Feature"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getConnection() -->
+<method name="getConnection"  public="true">
+<description>
+Get a database connection using the default user name and&#xa; password configured on this instance.
+</description>
+<return>
+<type class="java.sql.Connection"/>
+</return>
+<throws>
+<type class="java.sql.SQLException"/>
+</throws>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getConnection(java.lang.String, javax.baja.security.BPassword) -->
+<method name="getConnection"  public="true" abstract="true">
+<description>
+get a SQL connection instance to communicate with the database
+</description>
+<parameter name="userName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="password">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="java.sql.Connection"/>
+</return>
+<throws>
+<type class="java.sql.SQLException"/>
+</throws>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.initSSLContext() -->
+<method name="initSSLContext"  public="true">
+<annotation><type class="java.lang.Deprecated"/>
+</annotation>
+<description>
+This method is deprecated as of Niagara 4.5. RDBMS now uses the default SSLContext and&#xa; calling this method is no longer necessary. This method is a no-op.
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getHostname() -->
+<method name="getHostname"  public="true" final="true">
+<description>
+get the hostname from the hostAddress
+</description>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getRdbmsContext() -->
+<method name="getRdbmsContext"  public="true" abstract="true">
+<description>
+get the RdbmsContext for the database.
+</description>
+<return>
+<type class="javax.baja.rdb.RdbmsContext"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getEncoder() -->
+<method name="getEncoder"  public="true">
+<description>
+Abstract method to implement aes sys key encoder.
+</description>
+<return>
+<type class="com.tridium.rdb.aes.AesSysKeyEncoder"/>
+<description/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.getResultSetFetchSize() -->
+<method name="getResultSetFetchSize"  public="true">
+<description>
+Returns the fetch size to use on ResultSets from queries made to this&#xa; Rdbms.  The default value returned is zero, which means the JDBC driver&#xa; ignores the value and is free to make its own best guess as to what&#xa; the fetch size should be. Subclasses can optionally override this method&#xa; to return a non-negative fetch size value to optimize query performance.&#xa; Subclass implementations of this method should never throw a runtime&#xa; exception for any reason, and they should avoid any expensive operations&#xa; to lookup the result.
+</description>
+<tag name="@see">java.sql.ResultSet#setFetchSize(int)</tag>
+<tag name="@since">Niagara 4.11</tag>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.BRdbms.hostAddress -->
+<field name="hostAddress"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;hostAddress&lt;/code&gt; property.&#xa; The address of the computer that hosts the database.
+</description>
+<tag name="@see">#getHostAddress</tag>
+<tag name="@see">#setHostAddress</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.ownerName -->
+<field name="ownerName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;ownerName&lt;/code&gt; property.&#xa; deprecated
+</description>
+<tag name="@see">#getOwnerName</tag>
+<tag name="@see">#setOwnerName</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.useEncryptedConnection -->
+<field name="useEncryptedConnection"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;useEncryptedConnection&lt;/code&gt; property.&#xa; indicate whether the connection should use SSL/TLS
+</description>
+<tag name="@see">#getUseEncryptedConnection</tag>
+<tag name="@see">#setUseEncryptedConnection</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.userName -->
+<field name="userName"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;userName&lt;/code&gt; property.&#xa; The user name that is used to login to the database.
+</description>
+<tag name="@see">#getUserName</tag>
+<tag name="@see">#setUserName</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.password -->
+<field name="password"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;password&lt;/code&gt; property.&#xa; The password that is used to login to the database.
+</description>
+<tag name="@see">#getPassword</tag>
+<tag name="@see">#setPassword</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.worker -->
+<field name="worker"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;worker&lt;/code&gt; property.
+</description>
+<tag name="@see">#getWorker</tag>
+<tag name="@see">#setWorker</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.exportMode -->
+<field name="exportMode"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;exportMode&lt;/code&gt; property.&#xa; Whether histories will be exported into this database as&#xa; one table per History Id, or one table per BHistoryRecord type.&#xa; The default is &#x27;byHistoryId&#x27;, but choosing &#x27;byHistoryType&#x27; will&#xa; make the data much easier to query once it has been exported.
+</description>
+<tag name="@see">#getExportMode</tag>
+<tag name="@see">#setExportMode</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.useUnicodeEncodingScheme -->
+<field name="useUnicodeEncodingScheme"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;useUnicodeEncodingScheme&lt;/code&gt; property.
+</description>
+<tag name="@see">#getUseUnicodeEncodingScheme</tag>
+<tag name="@see">#setUseUnicodeEncodingScheme</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.timestampStorage -->
+<field name="timestampStorage"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;timestampStorage&lt;/code&gt; property.&#xa; How to store the BAbsTimes:&#xa; dialectDefault is the default assignment prefered by the dialect&#xa; LocalTimestamp is convenient for Time that never changes TimeZones as long as it has millis precision&#xa; UtcTimestamp   is convenient for TimeZone if it changes as long as it has millis precision&#xa; utcMillis  is the most convenient for orion and other Rdbms that require import and export, but dates are hard to read within sql
+</description>
+<tag name="@see">#getTimestampStorage</tag>
+<tag name="@see">#setTimestampStorage</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.points -->
+<field name="points"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;points&lt;/code&gt; property.&#xa; Proxy point mappings
+</description>
+<tag name="@see">#getPoints</tag>
+<tag name="@see">#setPoints</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.sqlSchemeEnabled -->
+<field name="sqlSchemeEnabled"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;sqlSchemeEnabled&lt;/code&gt; property.
+</description>
+<tag name="@see">#getSqlSchemeEnabled</tag>
+<tag name="@see">#setSqlSchemeEnabled</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.rdbSecuritySettings -->
+<field name="rdbSecuritySettings"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;rdbSecuritySettings&lt;/code&gt; property.
+</description>
+<tag name="@see">#getRdbSecuritySettings</tag>
+<tag name="@see">#setRdbSecuritySettings</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.allowDialectModifications -->
+<field name="allowDialectModifications"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;allowDialectModifications&lt;/code&gt; action.
+</description>
+<tag name="@see">#allowDialectModifications()</tag>
+</field>
+
+<!-- javax.baja.rdb.BRdbms.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

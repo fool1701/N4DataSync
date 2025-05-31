@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="query" runtimeProfile="rt" qualifiedName="javax.baja.query.util.Predicates" name="Predicates" packageName="javax.baja.query.util" public="true">
+<description>
+Predicate factory, and boolean expression factory.&#xa; All the expressions returned by this factory will be compatible with a &#xa; BQL and SQL query.
+</description>
+<tag name="@author">Matthew Giannini</tag>
+<tag name="@creation">Apr 18, 2008</tag>
+<tag name="@version">$Revision: 12$ $Date: 7/11/08 12:17:50 PM EDT$</tag>
+<tag name="@since">Baja 3.4</tag>
+<extends>
+<type class="javax.baja.query.util.Exprs"/>
+</extends>
+<!-- javax.baja.query.util.Predicates() -->
+<constructor name="Predicates" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.query.util.Predicates.and(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="and"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(lhs, &#x22;AND&#x22;, rhs)&lt;/code&gt;.
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="lhs">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="rhs">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.eq(java.lang.String, javax.baja.sys.BSimple) -->
+<method name="eq"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &#x22;=&#x22;, value)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, BSimple) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a test for equality between&#xa; the given field and value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.eq(javax.baja.sys.Property, javax.baja.sys.BSimple) -->
+<method name="eq"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;eq(property.getName(), value)&lt;/code&gt;
+</description>
+<tag name="@see">#eq(String, BSimple)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.eq(javax.baja.query.BExpression, javax.baja.sys.BSimple) -->
+<method name="eq"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr, &#x22;=&#x22;, simple(value))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.eq(java.lang.String, java.lang.String) -->
+<method name="eq"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &#x22;=&#x22;, otherField)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, String) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="otherField">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a test for equality between&#xa; the given fields.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.eq(javax.baja.sys.Property, javax.baja.sys.Property) -->
+<method name="eq"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;eq(p1.getName(), p2.getName())&lt;/code&gt;
+</description>
+<tag name="@see">#eq(String, String)</tag>
+<parameter name="p1">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="p2">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.eq(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="eq"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;=&#x22;, expr2)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr1">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="expr2">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ge(java.lang.String, javax.baja.sys.BSimple) -->
+<method name="ge"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &#x22;&amp;gt;=&#x22;, value)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, BSimple) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a greater-than-or-equal test between&#xa; the given field and value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ge(javax.baja.sys.Property, javax.baja.sys.BSimple) -->
+<method name="ge"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;ge(property.getName(), value)&lt;/code&gt;
+</description>
+<tag name="@see">#ge(String, BSimple)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ge(javax.baja.query.BExpression, javax.baja.sys.BSimple) -->
+<method name="ge"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr, &#x22;&amp;gt;=&#x22;, simple(value))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ge(java.lang.String, java.lang.String) -->
+<method name="ge"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &#x22;&amp;gt;=&#x22;, otherField)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, String) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="otherField">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a greater-than-or-equal test between&#xa; the given fields.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ge(javax.baja.sys.Property, javax.baja.sys.Property) -->
+<method name="ge"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;ge(p1.getName(), p2.getName())&lt;/code&gt;
+</description>
+<tag name="@see">#ge(String, String)</tag>
+<parameter name="p1">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="p2">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ge(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="ge"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;&amp;gt;=&#x22;, expr2)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr1">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="expr2">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.gt(java.lang.String, javax.baja.sys.BSimple) -->
+<method name="gt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &amp;#x22;&amp;gt;&amp;#x22;, value)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, BSimple) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a greater-than test between the&#xa; given field and value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.gt(javax.baja.sys.Property, javax.baja.sys.BSimple) -->
+<method name="gt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;gt(property.getName(), value)&lt;/code&gt;
+</description>
+<tag name="@see">#gt(String, BSimple)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.gt(javax.baja.query.BExpression, javax.baja.sys.BSimple) -->
+<method name="gt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr, &#x22;&amp;gt;&#x22;, simple(value))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.gt(java.lang.String, java.lang.String) -->
+<method name="gt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &amp;#x22;&amp;gt;&amp;#x22;, otherField)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, String) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="otherField">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a greater-than test between the&#xa; given fields.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.gt(javax.baja.sys.Property, javax.baja.sys.Property) -->
+<method name="gt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;gt(p1.getName(), p2.getName())&lt;/code&gt;
+</description>
+<tag name="@see">#gt(String, String)</tag>
+<parameter name="p1">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="p2">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.gt(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="gt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;&amp;gt;&#x22;, expr2)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr1">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="expr2">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.in(java.lang.String, javax.baja.sys.BSimple[]) -->
+<method name="in"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field(field), &#x22;IN&#x22;, list(values))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<tag name="@see">Exprs#field(String) field</tag>
+<tag name="@see">Exprs#list(BSimple[]) list</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="values">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression representing a test to see if the given field&#xa; is in the given list of values.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.in(javax.baja.sys.Property, javax.baja.sys.BSimple[]) -->
+<method name="in"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;in(property.getName(), values))&lt;/code&gt;
+</description>
+<tag name="@see">#in(String, BSimple[])</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="values">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.in(javax.baja.query.BExpression, javax.baja.sys.BSimple[]) -->
+<method name="in"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;IN&#x22;, list(values))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="values">
+<type class="javax.baja.sys.BSimple" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.le(java.lang.String, javax.baja.sys.BSimple) -->
+<method name="le"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &amp;#x22;&amp;lt;=&amp;#x22;, value)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, BSimple) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a less-than-or-equal test between the&#xa; given field and value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.le(javax.baja.sys.Property, javax.baja.sys.BSimple) -->
+<method name="le"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;le(property.getName(), value)&lt;/code&gt;
+</description>
+<tag name="@see">#le(String, BSimple)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.le(javax.baja.query.BExpression, javax.baja.sys.BSimple) -->
+<method name="le"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr, &amp;#x22;&amp;lt;=&amp;#x22;, simple(value))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.le(java.lang.String, java.lang.String) -->
+<method name="le"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &amp;#x22;&amp;lt;=&amp;#x22;, otherField)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, String) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="otherField">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a less-than-or-equal test between the&#xa; given fields.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.le(javax.baja.sys.Property, javax.baja.sys.Property) -->
+<method name="le"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;le(p1.getName(), p2.getName())&lt;/code&gt;
+</description>
+<tag name="@see">#le(String, String)</tag>
+<parameter name="p1">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="p2">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.le(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="le"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;&amp;lt;=&#x22;, expr2)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr1">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="expr2">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.like(java.lang.String, javax.baja.sys.BString) -->
+<method name="like"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &#x22;LIKE&#x22;, pattern)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, BSimple) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="pattern">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a LIKE pattern test for the &#xa; given field and pattern string.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.like(javax.baja.sys.Property, javax.baja.sys.BString) -->
+<method name="like"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;like(property.getName(), pattern)&lt;/code&gt;
+</description>
+<tag name="@see">#like(String, BString)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="pattern">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.like(javax.baja.query.BExpression, javax.baja.sys.BString) -->
+<method name="like"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;LIKE&#x22;, simple(pattern))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="pattern">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.lt(java.lang.String, javax.baja.sys.BSimple) -->
+<method name="lt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &amp;#x22;&amp;lt;&amp;#x22;, value)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, BSimple) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a less-than test between the&#xa; given field and value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.lt(javax.baja.query.BExpression, javax.baja.sys.BSimple) -->
+<method name="lt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr, &#x22;&amp;lt;&#x22;, simple(value))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.lt(javax.baja.sys.Property, javax.baja.sys.BSimple) -->
+<method name="lt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;lt(property.getName(), value)&lt;/code&gt;
+</description>
+<tag name="@see">#lt(String, BSimple)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.lt(java.lang.String, java.lang.String) -->
+<method name="lt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &amp;#x22;&amp;lt;&amp;#x22;, otherField)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, String) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="otherField">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a less-than test between the&#xa; given fields.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.lt(javax.baja.sys.Property, javax.baja.sys.Property) -->
+<method name="lt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;lt(p1.getName(), p2.getName())&lt;/code&gt;
+</description>
+<tag name="@see">#lt(String, String)</tag>
+<parameter name="p1">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="p2">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.lt(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="lt"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;&amp;lt;&#x22;, expr2)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr1">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="expr2">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ne(java.lang.String, javax.baja.sys.BSimple) -->
+<method name="ne"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &#x22;!=&#x22;, value)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, BSimple) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a not-equal test between the given&#xa; field and value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ne(javax.baja.query.BExpression, javax.baja.sys.BSimple) -->
+<method name="ne"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr, &#x22;!=&#x22;, simple(value))&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ne(javax.baja.sys.Property, javax.baja.sys.BSimple) -->
+<method name="ne"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;ne(property.getName(), value)&lt;/code&gt;
+</description>
+<tag name="@see">#ne(String, BSimple)</tag>
+<parameter name="property">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.sys.BSimple"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ne(java.lang.String, java.lang.String) -->
+<method name="ne"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(field, &#x22;!=&#x22;, otherField)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(String, String, String) binary</tag>
+<parameter name="field">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="otherField">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents a not-equal test between the given&#xa; fields.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ne(javax.baja.sys.Property, javax.baja.sys.Property) -->
+<method name="ne"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;ne(p1.getName(), p2.getName())&lt;/code&gt;
+</description>
+<tag name="@see">#ne(String, String)</tag>
+<parameter name="p1">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<parameter name="p2">
+<type class="javax.baja.sys.Property"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.ne(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="ne"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(expr1, &#x22;!=&#x22;, expr2)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="expr1">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="expr2">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.not(javax.baja.query.BExpression) -->
+<method name="not"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;unary(&#x22;NOT&#x22;, exprToNegate)&lt;/code&gt;
+</description>
+<tag name="@see">Exprs#unary(String, BExpression) unary</tag>
+<parameter name="exprToNegate">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that represents the negation of an entire expression.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.not(javax.baja.query.BPredicate) -->
+<method name="not"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;not((BExpression) predicate.getPredicate().newCopy()&lt;/code&gt;
+</description>
+<tag name="@see">#not(BExpression)</tag>
+<parameter name="predicate">
+<type class="javax.baja.query.BPredicate"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.or(javax.baja.query.BExpression, javax.baja.query.BExpression) -->
+<method name="or"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;binary(lhs, &#x22;OR&#x22;, rhs)&lt;/code&gt;.
+</description>
+<tag name="@see">Exprs#binary(BExpression, String, BExpression) binary</tag>
+<parameter name="lhs">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<parameter name="rhs">
+<type class="javax.baja.query.BExpression"/>
+</parameter>
+<return>
+<type class="javax.baja.query.BExpression"/>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.TRUE() -->
+<method name="TRUE"  public="true" static="true">
+<description/>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that always evaluates to a boolean true value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.FALSE() -->
+<method name="FALSE"  public="true" static="true">
+<description/>
+<return>
+<type class="javax.baja.query.BExpression"/>
+<description>
+a BExpression that always evaluates to a boolean false value.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.query.util.Predicates.TRUE -->
+<field name="TRUE"  protected="true" static="true" final="true">
+<type class="javax.baja.query.BExpression"/>
+<description/>
+</field>
+
+<!-- javax.baja.query.util.Predicates.FALSE -->
+<field name="FALSE"  protected="true" static="true" final="true">
+<type class="javax.baja.query.BExpression"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

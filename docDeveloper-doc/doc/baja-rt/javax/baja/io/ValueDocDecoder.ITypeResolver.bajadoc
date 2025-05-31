@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="baja" runtimeProfile="rt" qualifiedName="javax.baja.io.ValueDocDecoder$ITypeResolver" name="ValueDocDecoder.ITypeResolver" packageName="javax.baja.io" public="true" interface="true" abstract="true" static="true" innerClass="true" category="interface">
+<description>
+The ITypeResolver interface is used to take String attribute&#xa; elements parsed from the document and determine how to&#xa; resolve a module/type/instance.
+</description>
+<!-- javax.baja.io.ValueDocDecoder.ITypeResolver.loadModule(javax.baja.io.ValueDocDecoder, javax.baja.sys.BComplex, java.lang.String, java.lang.String, java.lang.String) -->
+<method name="loadModule"  public="true" abstract="true">
+<description>
+Load a module into memory for the type of a property being&#xa; decoded
+</description>
+<parameter name="decoder">
+<type class="javax.baja.io.ValueDocDecoder"/>
+<description>
+The ValueDocDecoder instance for which to load the module
+</description>
+</parameter>
+<parameter name="parent">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+The parent for the property about to be added.
+</description>
+</parameter>
+<parameter name="propName">
+<type class="java.lang.String"/>
+<description>
+The name of the property
+</description>
+</parameter>
+<parameter name="moduleStr">
+<type class="java.lang.String"/>
+<description>
+The Module String
+</description>
+</parameter>
+<parameter name="typeStr">
+<type class="java.lang.String"/>
+<description>
+The Type String
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BModule"/>
+<description>
+BModule, or null if unable to load.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.ITypeResolver.newInstance(javax.baja.io.ValueDocDecoder, javax.baja.sys.BComplex, java.lang.String, javax.baja.sys.Property, java.lang.String) -->
+<method name="newInstance"  public="true" abstract="true">
+<description>
+Given a frozen property and/or a type attribute,&#xa; create a BValue new instance.  If there is a fatal error&#xa; then throw an exception.  If there is a recoverable&#xa; error then log a warning and return null.
+</description>
+<parameter name="decoder">
+<type class="javax.baja.io.ValueDocDecoder"/>
+<description>
+The ValueDocDecoder instance for which the property is being decoded
+</description>
+</parameter>
+<parameter name="parent">
+<type class="javax.baja.sys.BComplex"/>
+<description>
+The parent for the property about to be added.
+</description>
+</parameter>
+<parameter name="propName">
+<type class="java.lang.String"/>
+<description>
+The name of the property
+</description>
+</parameter>
+<parameter name="prop">
+<type class="javax.baja.sys.Property"/>
+<description>
+The frozen property
+</description>
+</parameter>
+<parameter name="typeStr">
+<type class="java.lang.String"/>
+<description>
+The Type String to load
+</description>
+</parameter>
+<return>
+<type class="javax.baja.sys.BValue"/>
+<description>
+BValue is a new instance of the property for the proper type.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.ITypeResolver.setSkipLegacyEncodings(boolean) -->
+<method name="setSkipLegacyEncodings"  public="true" default="true">
+<description>
+In order to support legacy connections, there are special cases when the decoder&#xa; encounters types that have unsupported legacy encodings (ie. legacy BPasswords) that&#xa; need to be skipped during decode instead of failing fast. This method is used to set&#xa; the decoder in and out of such a mode (if the ITypeResolver implementation supports it).&#xa; The default mode should always be to fail fast when a type with an invalid legacy&#xa; encoding is encountered during decode, but if this method is called with a true&#xa; argument, then the mode will change to skip over types with an invalid legacy encoding.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="skipLegacyEncodings">
+<type class="boolean"/>
+<description>
+If true, indicates that the decoding process should skip over any&#xa;             (invalid) legacy encoded type.  If false, the decoding process&#xa;             should fail fast on any (invalid) legacy type encountered.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.io.ValueDocDecoder.ITypeResolver.getSkipLegacyEncodings() -->
+<method name="getSkipLegacyEncodings"  public="true" default="true">
+<description>
+Returns true when this type resolver is in a mode where it will skip decoding any&#xa; types with an unsupported legacy encoding (ie. legacy BPasswords).  Returns false&#xa; when this type resolver is in a mode to fail fast when decoding any&#xa; legacy encoded types.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

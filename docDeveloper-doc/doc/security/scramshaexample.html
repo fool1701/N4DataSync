@@ -1,0 +1,54 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/headerAuthentication.html" class="navbar">Prev</a> |  <a href="/doc/security/csrfProtection.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="scram-sha-client-authentication-example">Scram Sha Client Authentication Example</h1>
+<p>This example provide a simple java based ScramSha256 HTTP client for authenticating with a Niagara 4.0 station. HTTP digest requires that the server store passwords in a reversible form. This goes against security best practices for storing credentials and is not supported by the standard Niagara station digest authentication scheme.</p>
+<p>The ScramSha256Client provided is a condensed form and is missing a few optimization that the may prove to be beneficial.</p>
+<ul>
+  <li>
+    <p>Since java works on a garbage collection mechanism, immutable objects, like strings, can linger in memory for a while. A preferable approach would be to use byte or char arrays for storing sensitive info and zeroing them out when done, even before garbage collection has occurred. While this is still not perfect (memory reallocation by the vm since arrays may not be pinned), this is a much better approach.</p>
+  </li>
+  <li>
+    <p>The standard array and string comparison functions in java are designed as a fail fast comparison. This means that as soon as the comparison discovers that the objects are of different length or when the come across the first mismatched character, they will fail. For string and array comparisons, use a constant time comparison algorithm instead of the standard ones in java.</p>
+  </li>
+  <li>
+    <p>On slow platforms, calculating some of the values (like the salted password) can take quite a bit of time. Creating a cache for the salted password so that repeated recalculations aren&rsquo;t necessary can be beneficial. This needs to be balanced with storing sensitive data in memory.</p>
+  </li>
+</ul>
+<p>In the AuthClientExample class is a reference to an inner class called the TrustModifier class. This class is for demonstration purposes only and SHOULD NOT be used in production under any circumstance. It may be tempting to say &ldquo;It&rsquo;s not that big of a deal!&rdquo; That would be completely incorrect and use of the class completely invalidates the use of TLS since identity can no longer be trusted (non-repudiation).</p>
+<p>The main argument for the example is of the form <i>http[s]://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;[:&lt;port&gt;] [&lt;client_type&gt;]</i>. If the username or password uses any reserved html characters, make sure they are url encoded.</p>
+<p><i>client_type</i> can be <i>ax</i>, <i>n4</i>, or <i>n4header</i>. Default is <i>n4header</i>. <i>n4header</i> refers to the header authentication mechanism added in Niagara 4.4. This mechanism is not supported in N4 stations prior to 4.4. <i>n4</i> client_type should be used for pre-4.4 stations.</p>
+<h1 id="references">References</h1>
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc5802">Salted Challenge Response Authentication Mechanism</a></li>
+</ul>
+<h1 id="sample-code">Sample Code</h1>
+<ul>
+  <li><a href="module://docDeveloper/rc/com/tridium/example/auth/client/AuthClientExample.java">AuthClientExample.java</a></li>
+  <li><a href="module://docDeveloper/rc/com/tridium/example/auth/client/ScramSha256Client.java">ScramSha256Client.java</a></li>
+</ul>
+<p><i>The example code with supporting gradle scripts can be found in the dev/authClientExample folder of the downloaded image.</i></p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/headerAuthentication.html" class="navbar">Prev</a> |  <a href="/doc/security/csrfProtection.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

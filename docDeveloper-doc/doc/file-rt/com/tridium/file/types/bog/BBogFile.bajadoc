@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="file" runtimeProfile="rt" qualifiedName="com.tridium.file.types.bog.BBogFile" name="BBogFile" packageName="com.tridium.file.types.bog" public="true">
+<description>
+BBogFile stores a component space.
+</description>
+<tag name="@author">Brian Frank</tag>
+<tag name="@creation">14 Apr 03</tag>
+<tag name="@version">$Revision: 18$ $Date: 7/8/11 7:32:57 AM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="javax.baja.file.BSubSpaceFile"/>
+</extends>
+<implements>
+<type class="javax.baja.file.BIComponentFile"/>
+</implements>
+<implements>
+<type class="javax.baja.file.types.text.BIXmlFile"/>
+</implements>
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;ALL&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<!-- com.tridium.file.types.bog.BBogFile(javax.baja.file.BIFileStore) -->
+<constructor name="BBogFile" public="true">
+<parameter name="store">
+<type class="javax.baja.file.BIFileStore"/>
+</parameter>
+<description>
+Construct a file with the specified store.
+</description>
+</constructor>
+
+<!-- com.tridium.file.types.bog.BBogFile() -->
+<constructor name="BBogFile" public="true">
+<description>
+Construct (must call setStore()).
+</description>
+</constructor>
+
+<!-- com.tridium.file.types.bog.BBogFile.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.forceChangeReversibleEncryptionPassPhrase(javax.baja.security.BPassword) -->
+<method name="forceChangeReversibleEncryptionPassPhrase"  public="true">
+<description>
+Change the file&#x27;s key source to &lt;code&gt;<see ref="com.tridium.nre.security.EncryptionKeySource#external">EncryptionKeySource#external</see>&lt;/code&gt; and&#xa; set its pass phrase to the given value. Any reversibly-encrypted values already&#xa; in the file are set to &lt;code&gt;<see ref="javax.baja.security.BPassword#DEFAULT">BPassword#DEFAULT</see>&lt;/code&gt;
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="value">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.naming.SlotPath"/>
+</args>
+</parameterizedType>
+<description>
+a list of SlotPath for password values changed to &lt;code&gt;<see ref="javax.baja.security.BPassword#DEFAULT">BPassword#DEFAULT</see>&lt;/code&gt;
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.forceClearReversibleEncryptionPassPhrase() -->
+<method name="forceClearReversibleEncryptionPassPhrase"  public="true">
+<description>
+Change the file&#x27;s key source to &lt;code&gt;<see ref="com.tridium.nre.security.EncryptionKeySource#none">EncryptionKeySource#none</see>&lt;/code&gt;. Any reversibly-encrypted&#xa; values already in the file are set to &lt;code&gt;<see ref="javax.baja.security.BPassword#DEFAULT">BPassword#DEFAULT</see>&lt;/code&gt;
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<parameterizedType class="java.util.List">
+<args>
+<type class="javax.baja.naming.SlotPath"/>
+</args>
+</parameterizedType>
+<description>
+a list of SlotPath for password values changed to &lt;code&gt;<see ref="javax.baja.security.BPassword#DEFAULT">BPassword#DEFAULT</see>&lt;/code&gt;
+</description>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.setReversibleEncryptionPassPhrase(javax.baja.security.BPassword) -->
+<method name="setReversibleEncryptionPassPhrase"  public="true">
+<description>
+Supply a pass phrase to be used for decoding and encoding sensitive data.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="value">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.updateReversibleEncryptionPassPhrase(javax.baja.security.BPassword) -->
+<method name="updateReversibleEncryptionPassPhrase"  public="true">
+<description>
+Change the pass phrase to be used for decoding and encoding sensitive data. If the file currently&#xa; uses a pass phrase but it has not yet been supplied using &lt;code&gt;<see ref="com.tridium.file.types.bog.BBogFile#setReversibleEncryptionPassPhrase(javax.baja.security.BPassword)">#setReversibleEncryptionPassPhrase(BPassword)</see>&lt;/code&gt;,&#xa; an exception will be thrown.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="newValue">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.validateReversibleEncryptionPassPhrase(javax.baja.security.BPassword) -->
+<method name="validateReversibleEncryptionPassPhrase"  public="true">
+<description>
+Return true if the BOG file already uses the given pass phrase to encode&#xa; sensitive data w/reversible encryption, or if it doesn&#x27;t currently use pass&#xa; phrase at all.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="value">
+<type class="javax.baja.security.BPassword"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.canUseReversibleEncryptionPassPhrase() -->
+<method name="canUseReversibleEncryptionPassPhrase"  public="true">
+<description>
+Return true if the bog file can use a pass phrase when using a reversible&#xa; scheme to encode sensitive data, otherwise the file uses a key from a station&#xa; key ring.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.usesKeyRingEncryption() -->
+<method name="usesKeyRingEncryption"  public="true">
+<description>
+Return true if the bog file encrypts passwords using a key from the staiton&#xa; key ring.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.usesReversibleEncryptionPassPhrase() -->
+<method name="usesReversibleEncryptionPassPhrase"  public="true">
+<description>
+Return true if the bog file uses a pass phrase when using a reversible&#xa; scheme to encode sensitive data.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.isReversibleEncryptionPassPhraseAvailable() -->
+<method name="isReversibleEncryptionPassPhraseAvailable"  public="true">
+<description>
+Return true if a pass phrase for encoding sensitive data has been provided for this file.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.getPBEEncodingInfo() -->
+<method name="getPBEEncodingInfo"  public="true">
+<description>
+Return the password based encryption (PBE) encoding information used by this file, if any
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="com.tridium.nre.security.PBEEncodingInfo"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.getBogVersion() -->
+<method name="getBogVersion"  public="true">
+<description>
+Returns the BOG schema version for this file
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="javax.baja.util.Version"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.getBogSpace() -->
+<method name="getBogSpace"  public="true">
+<description>
+Convenience for &lt;code&gt;(BBogSpace)getSubSpace()&lt;/code&gt;.
+</description>
+<return>
+<type class="com.tridium.file.types.bog.BBogSpace"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.isModified() -->
+<method name="isModified"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return if the associated space is modified.
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.doOpen() -->
+<method name="doOpen"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Open the associated space.
+</description>
+<return>
+<type class="javax.baja.space.BSpace"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.doSave() -->
+<method name="doSave"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Save the associated space.  Subclasses that override this method should call super.doSave() or&#xa; {@link #updateHeaderVariablesFromSpace())
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.doClose() -->
+<method name="doClose"  protected="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Close the associated space.  Subclasses that override this method should call super.doClose().
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.readComponents() -->
+<method name="readComponents"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.space.Mark"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.getNavOrd() -->
+<method name="getNavOrd"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.naming.BOrd"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.getDecoder() -->
+<method name="getDecoder"  protected="true">
+<description>
+Returns an initialized ValueDocDecoder that can decode the file using this object&#x27;s&#xa; reversible encryption pass phrase.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="javax.baja.io.ValueDocDecoder"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.processHeaderInformation(javax.baja.io.ValueDocDecoder, com.tridium.file.types.bog.BBogSpace) -->
+<method name="processHeaderInformation"  protected="true">
+<annotation><type class="java.lang.SuppressWarnings"/>
+<elementValue name="value">
+<annotationValue kind="array">
+<elementArray>
+<annotationValue kind="expr">
+<expression>&#x22;UnnecessaryFullyQualifiedName&#x22;</expression>
+</annotationValue>
+</elementArray>
+</annotationValue>
+</elementValue>
+</annotation>
+<description>
+Update the state of this object and the given space with password encoding-related&#xa; information in the given decoder object.   This method should be invoked only&#xa; after &lt;code&gt;<see ref="javax.baja.io.ValueDocDecoder#decodeDocument()">javax.baja.io.ValueDocDecoder#decodeDocument()</see>&lt;/code&gt; has been called.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<parameter name="decoder">
+<type class="javax.baja.io.ValueDocDecoder"/>
+</parameter>
+<parameter name="space">
+<type class="com.tridium.file.types.bog.BBogSpace"/>
+</parameter>
+<return>
+<type class="boolean"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.updateHeaderVariablesFromSpace() -->
+<method name="updateHeaderVariablesFromSpace"  protected="true">
+<description>
+Updates BOG header related variables from the BOG space.&#xa;&#xa; Subclasses should call this method after invoking &lt;code&gt;<see ref="com.tridium.file.types.bog.BBogSpace#save()">com.tridium.file.types.bog.BBogSpace#save()</see>&lt;/code&gt;&#xa; because the space may have changed some of the header variables.
+</description>
+<tag name="@since">Niagara 4.0</tag>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.spy(javax.baja.spy.SpyWriter) -->
+<method name="spy"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<parameter name="out">
+<type class="javax.baja.spy.SpyWriter"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.file.types.bog.BBogFile.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

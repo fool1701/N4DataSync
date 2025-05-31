@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="rt" qualifiedName="com.tridium.ddf.comm.req.util.DdfPingRequestUtil" name="DdfPingRequestUtil" packageName="com.tridium.ddf.comm.req.util" public="true">
+<description>
+Processes ping transactions on behalf of the transaction&#xa; manager.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.comm.req.util.DdfPingRequestUtil() -->
+<constructor name="DdfPingRequestUtil" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.comm.req.util.DdfPingRequestUtil.processResponse(com.tridium.ddf.comm.req.BIDdfPingRequest, com.tridium.ddf.comm.rsp.BIDdfResponse) -->
+<method name="processResponse"  public="true" static="true">
+<description>
+This is a callback method that the BDdfCommunicator calls when it pairs up a ping response&#xa; with this ping message. If the getAutoPingOk method of the pingReq returns true then this&#xa; method loops through all of the pingable source objects on the pingReq and calls pingOk&#xa; for each.
+</description>
+<parameter name="pingReq">
+<type class="com.tridium.ddf.comm.req.BIDdfPingRequest"/>
+<description>
+is a ping request that just received a matching response
+</description>
+</parameter>
+<parameter name="ddfRsp">
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+<description>
+is the response that matches the pingReq.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfPingRequestUtil.processTimeout(com.tridium.ddf.comm.req.BIDdfPingRequest) -->
+<method name="processTimeout"  public="true" static="true">
+<description>
+This is a callback method that the BDdfCommunicator calls when it decides to give up on receiving&#xa; a response message for a ping message.
+</description>
+<parameter name="pingReq">
+<type class="com.tridium.ddf.comm.req.BIDdfPingRequest"/>
+<description>
+is the ping request that just timed out
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfPingRequestUtil.processLateResponse(com.tridium.ddf.comm.req.BIDdfPingRequest, com.tridium.ddf.comm.rsp.BIDdfResponse) -->
+<method name="processLateResponse"  public="true" static="true">
+<description>
+This is a callback method that the BDdfCommunicator calls if it recieves a response to a ping&#xa; request after the ping request has timed out.
+</description>
+<parameter name="pingReq">
+<type class="com.tridium.ddf.comm.req.BIDdfPingRequest"/>
+<description>
+is a ping request that just received a matching response, although the ping request&#xa; has already timed-out.
+</description>
+</parameter>
+<parameter name="ddfRsp">
+<type class="com.tridium.ddf.comm.rsp.BIDdfResponse"/>
+<description>
+is the response that matches the pingReq, albeit, late.
+</description>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.comm.req.util.DdfPingRequestUtil.processErrorResponse(com.tridium.ddf.comm.req.BIDdfPingRequest, com.tridium.ddf.comm.rsp.DdfResponseException) -->
+<method name="processErrorResponse"  public="true" static="true">
+<description>
+This is a callback method that DdfRequestUtil calls when it pairs up the received&#xa; frame(s) with a request message but the frames indicate that an error condition exists&#xa; in the device preventing it from responding successfully.
+</description>
+<parameter name="pingReq">
+<type class="com.tridium.ddf.comm.req.BIDdfPingRequest"/>
+</parameter>
+<parameter name="errorRsp">
+<type class="com.tridium.ddf.comm.rsp.DdfResponseException"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+</class>
+</bajadoc>

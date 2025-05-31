@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="platHwScan" runtimeProfile="rt" qualifiedName="com.tridium.platHwScan.BHardwareScanService" name="BHardwareScanService" packageName="com.tridium.platHwScan" public="true">
+<description>
+BHardwareScanService provides the following information (when applicable)&#xa; &lt;pre&gt;&#xa; - type of hardware platform&#xa; - names and types of inherent communications ports&#xa; - option slot contents&#xa; - name, type and status of each option card port&#xa; - PCI card contents&#xa; &lt;/pre&gt;
+</description>
+<tag name="@author">Frank Smith</tag>
+<tag name="@creation">04 Aug 10</tag>
+<tag name="@version">$Revision: 1$ $Date: 7/22/11 5:35:16 PM EDT$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="com.tridium.platform.BPlatformService"/>
+</extends>
+<property name="baseBoardType" flags="tr">
+<type class="com.tridium.platHwScan.BBaseBoard"/>
+<description>
+Slot for the &lt;code&gt;baseBoardType&lt;/code&gt; property.&#xa; Identifies the type of base board electronics
+</description>
+<tag name="@see">#getBaseBoardType</tag>
+<tag name="@see">#setBaseBoardType</tag>
+</property>
+
+<action name="scan" flags="h">
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;scan&lt;/code&gt; action.&#xa; Causes a new hardware configuration scan to occur
+</description>
+<tag name="@see">#scan()</tag>
+</action>
+
+<action name="simulateQnxCodes" flags="h">
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+<description>
+Slot for the &lt;code&gt;simulateQnxCodes&lt;/code&gt; action.&#xa; Allows user to simulate the dev/shmem/optcardcodes file in a Qnx platform
+</description>
+<tag name="@see">#simulateQnxCodes(BString parameter)</tag>
+</action>
+
+<!-- com.tridium.platHwScan.BHardwareScanService() -->
+<constructor name="BHardwareScanService" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.getBaseBoardType() -->
+<method name="getBaseBoardType"  public="true">
+<description>
+Get the &lt;code&gt;baseBoardType&lt;/code&gt; property.&#xa; Identifies the type of base board electronics
+</description>
+<tag name="@see">#baseBoardType</tag>
+<return>
+<type class="com.tridium.platHwScan.BBaseBoard"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.setBaseBoardType(com.tridium.platHwScan.BBaseBoard) -->
+<method name="setBaseBoardType"  public="true">
+<description>
+Set the &lt;code&gt;baseBoardType&lt;/code&gt; property.&#xa; Identifies the type of base board electronics
+</description>
+<tag name="@see">#baseBoardType</tag>
+<parameter name="v">
+<type class="com.tridium.platHwScan.BBaseBoard"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.scan() -->
+<method name="scan"  public="true">
+<description>
+Invoke the &lt;code&gt;scan&lt;/code&gt; action.&#xa; Causes a new hardware configuration scan to occur
+</description>
+<tag name="@see">#scan</tag>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.simulateQnxCodes(javax.baja.sys.BString) -->
+<method name="simulateQnxCodes"  public="true">
+<description>
+Invoke the &lt;code&gt;simulateQnxCodes&lt;/code&gt; action.&#xa; Allows user to simulate the dev/shmem/optcardcodes file in a Qnx platform
+</description>
+<tag name="@see">#simulateQnxCodes</tag>
+<parameter name="parameter">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.serviceStarted() -->
+<method name="serviceStarted"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+This initiates the hardware scan on startup and&#xa; initializes listeners for dynamically added services,&#xa; port ownership changes and port ownership name changes.
+</description>
+<return>
+<type class="void"/>
+</return>
+<throws>
+<type class="java.lang.Exception"/>
+</throws>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.getServiceTypes() -->
+<method name="getServiceTypes"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.doPoll(javax.baja.sys.Context) -->
+<method name="doPoll"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Refresh any properties that are managed outside of the Baja framework&#xa; (native libraries or files).&#xa;&#xa; This action causes a Hashtable of optionCodes and BOptionCard instances&#xa; to be built based on the merger of the module&#x27;s platHwScanOptionCards.xml&#xa; and the same file in the lib directory, if it exists.&#xa;&#xa; A similar process is done for PCI cards.
+</description>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.getSlotFlags() -->
+<method name="getSlotFlags"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Return slot flags that should be used when this service is added&#xa; to the database PlatformService container.  By default, platform&#xa; services are hidden (Flags.HIDDEN).&#xa; Returning &#x27;0&#x27; makes it visible to an administrator.
+</description>
+<return>
+<type class="int"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.isValidPlatform() -->
+<method name="isValidPlatform"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Returns true for the following platforms:&#xa;    - All QNX platforms
+</description>
+<return>
+<type class="boolean"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.scanHardware(boolean) -->
+<method name="scanHardware"  public="true">
+<description>
+This determines the proper scan to perform based on the platform&#x27;s operating system
+</description>
+<parameter name="simulation">
+<type class="boolean"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.doScan() -->
+<method name="doScan"  public="true">
+<description>
+This action removes any previously discovered hardware items&#xa; and adds those discovered during a rescan
+</description>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.doSimulateQnxCodes(javax.baja.sys.BString) -->
+<method name="doSimulateQnxCodes"  public="true">
+<description>
+Call doSimulation with the contents of the dev/shmem/optcardcodes file.
+</description>
+<parameter name="codes">
+<type class="javax.baja.sys.BString"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.filterPortsByName(com.tridium.platHwScan.ports.BPort[], java.lang.String) -->
+<method name="filterPortsByName"  protected="true">
+<description>
+This returns the port from the array whose name matches the mask&#xa; and whose status is NOT &#x22;unavailable&#x22;.  This avoids the potential&#xa; conflict between two ports being named the same where a port on an&#xa; option card has taken control over another port.  An example is a&#xa; 56k modem module in option slot 1 is assigned to COM1 because it&#xa; takes over COM1 on the base board.&#xa;&#xa; Return &#x22;null&#x22; if no name match found
+</description>
+<parameter name="ports">
+<type class="com.tridium.platHwScan.ports.BPort" dimension="1"/>
+</parameter>
+<parameter name="mask">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="com.tridium.platHwScan.ports.BPort"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.getAllPorts() -->
+<method name="getAllPorts"  public="true">
+<description>
+Return an array of all ports
+</description>
+<return>
+<type class="com.tridium.platHwScan.ports.BPort" dimension="1"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.getPort(java.lang.String) -->
+<method name="getPort"  public="true">
+<description>
+Return a port by name
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="com.tridium.platHwScan.ports.BPort"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.getIcon() -->
+<method name="getIcon"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description>
+Get the icon.
+</description>
+<return>
+<type class="javax.baja.sys.BIcon"/>
+</return>
+</method>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.baseBoardType -->
+<field name="baseBoardType"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Property"/>
+<description>
+Slot for the &lt;code&gt;baseBoardType&lt;/code&gt; property.&#xa; Identifies the type of base board electronics
+</description>
+<tag name="@see">#getBaseBoardType</tag>
+<tag name="@see">#setBaseBoardType</tag>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.scan -->
+<field name="scan"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;scan&lt;/code&gt; action.&#xa; Causes a new hardware configuration scan to occur
+</description>
+<tag name="@see">#scan()</tag>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.simulateQnxCodes -->
+<field name="simulateQnxCodes"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Action"/>
+<description>
+Slot for the &lt;code&gt;simulateQnxCodes&lt;/code&gt; action.&#xa; Allows user to simulate the dev/shmem/optcardcodes file in a Qnx platform
+</description>
+<tag name="@see">#simulateQnxCodes(BString parameter)</tag>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.lex -->
+<field name="lex"  public="true" static="true" final="true">
+<type class="javax.baja.util.Lexicon"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.log -->
+<field name="log"  public="true" static="true" final="true">
+<type class="java.util.logging.Logger"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.lonTypeSpec -->
+<field name="lonTypeSpec"  public="true" static="true" final="true">
+<type class="javax.baja.util.BTypeSpec"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.serialPortSvcTypeSpec -->
+<field name="serialPortSvcTypeSpec"  public="true" static="true" final="true">
+<type class="javax.baja.util.BTypeSpec"/>
+<description/>
+</field>
+
+<!-- com.tridium.platHwScan.BHardwareScanService.tcpPlatformSvcTypeSpec -->
+<field name="tcpPlatformSvcTypeSpec"  public="true" static="true" final="true">
+<type class="javax.baja.util.BTypeSpec"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

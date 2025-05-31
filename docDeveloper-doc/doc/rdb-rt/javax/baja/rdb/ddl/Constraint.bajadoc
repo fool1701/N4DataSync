@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="rdb" runtimeProfile="rt" qualifiedName="javax.baja.rdb.ddl.Constraint" name="Constraint" packageName="javax.baja.rdb.ddl" public="true">
+<description>
+A Constraint in a database table.
+</description>
+<tag name="@author">Mike Jarmy</tag>
+<tag name="@creation">06 Feb 08</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Baja 1.0</tag>
+<extends>
+<type class="java.lang.Object"/>
+</extends>
+<!-- javax.baja.rdb.ddl.Constraint.makeUnique(java.lang.String, java.lang.String[]) -->
+<method name="makeUnique"  public="true" static="true">
+<description>
+Make a UNIQUE constraint.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="columns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.makeUnique(java.lang.String, java.lang.String[], javax.baja.rdb.ddl.BClustered) -->
+<method name="makeUnique"  public="true" static="true">
+<description>
+Make a UNIQUE constraint.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="columns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="clustered">
+<type class="javax.baja.rdb.ddl.BClustered"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.makePrimaryKey(java.lang.String, java.lang.String[]) -->
+<method name="makePrimaryKey"  public="true" static="true">
+<description>
+Make a PRIMARY KEY constraint.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="columns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.makePrimaryKey(java.lang.String, java.lang.String[], javax.baja.rdb.ddl.BClustered) -->
+<method name="makePrimaryKey"  public="true" static="true">
+<description>
+Make a PRIMARY KEY constraint.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="columns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="clustered">
+<type class="javax.baja.rdb.ddl.BClustered"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.makeForeignKey(java.lang.String, java.lang.String[], java.lang.String, java.lang.String[], javax.baja.rdb.ddl.BOnDelete) -->
+<method name="makeForeignKey"  public="true" static="true">
+<description>
+Make a FOREIGN KEY constraint.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="columns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="refTable">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="refColumns">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<parameter name="refOnDelete">
+<type class="javax.baja.rdb.ddl.BOnDelete"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.makeUnique(java.lang.String, java.lang.String) -->
+<method name="makeUnique"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;makeUnique(name, new String[] { column })&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="column">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.makePrimaryKey(java.lang.String, java.lang.String) -->
+<method name="makePrimaryKey"  public="true" static="true">
+<description>
+Convenience for &lt;code&gt;makePrimaryKey(name, new String[] { column })&lt;/code&gt;.
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="column">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.makeForeignKey(java.lang.String, java.lang.String, java.lang.String, java.lang.String, javax.baja.rdb.ddl.BOnDelete) -->
+<method name="makeForeignKey"  public="true" static="true">
+<description>
+Convenience for&#xa; &lt;pre&gt;&#xa;   makeForeignKey(&#xa;       name, &#xa;       new String[] { column }, &#xa;       refTable, &#xa;       new String[] { refColumn }, &#xa;       refOnDelete);&#xa; &lt;/pre&gt;
+</description>
+<parameter name="name">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="column">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="refTable">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="refColumn">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="refOnDelete">
+<type class="javax.baja.rdb.ddl.BOnDelete"/>
+</parameter>
+<return>
+<type class="javax.baja.rdb.ddl.Constraint"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.getDdl(javax.baja.rdb.RdbmsContext, java.lang.String) -->
+<method name="getDdl"  public="true">
+<description>
+asDdl
+</description>
+<parameter name="context">
+<type class="javax.baja.rdb.RdbmsContext"/>
+</parameter>
+<parameter name="tableName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.getName() -->
+<method name="getName"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.getColumns() -->
+<method name="getColumns"  public="true">
+<description/>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.getConstraintType() -->
+<method name="getConstraintType"  public="true">
+<description/>
+<return>
+<type class="int"/>
+<description>
+one of UNIQUE, PRIMARY_KEY, or FOREIGN_KEY
+</description>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.isClustered() -->
+<method name="isClustered"  public="true">
+<description/>
+<return>
+<type class="javax.baja.rdb.ddl.BClustered"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.getRefTable() -->
+<method name="getRefTable"  public="true">
+<description/>
+<return>
+<type class="java.lang.String"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.getRefColumns() -->
+<method name="getRefColumns"  public="true">
+<description/>
+<return>
+<type class="java.lang.String" dimension="1"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.getRefOnDelete() -->
+<method name="getRefOnDelete"  public="true">
+<description/>
+<return>
+<type class="javax.baja.rdb.ddl.BOnDelete"/>
+</return>
+</method>
+
+<!-- javax.baja.rdb.ddl.Constraint.UNIQUE -->
+<field name="UNIQUE"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.rdb.ddl.Constraint.PRIMARY_KEY -->
+<field name="PRIMARY_KEY"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+<!-- javax.baja.rdb.ddl.Constraint.FOREIGN_KEY -->
+<field name="FOREIGN_KEY"  public="true" static="true" final="true">
+<type class="int"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

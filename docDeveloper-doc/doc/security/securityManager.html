@@ -1,0 +1,107 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/security.html" class="navbar">Prev</a> |  <a href="/doc/security/requestingPermissions.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="security-manager">Security Manager</h1>
+<h1 id="overview">Overview</h1>
+<p>One of the changes implemented in Niagara 4 is the activation of the Java Security Manager. The Security Manager allows us to restrict who can call what code using permissions. By default, <em>no one has any permissions</em>. Any code that requires a permission check will fail, with an <code>AccessControllerException</code>. Each permission must be granted explicitly, using a policy file.</p>
+<p>This allows us to ensure that certain sensitive calls can only be made by trusted code or individuals – for example, we can limit who can read, write, delete or execute specific files or folders, using a <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FilePermission.html"><code>java.io.FilePermission</code></a>. This way, we can protect sensitive files like the contents of the security folder, ensuring that only modules that absolutely need to access those files have permissions to do so.</p>
+<p>As a developer, this means that you may encounter access control issues and defects, caused by the new Security Manager. In this document, we will show how to deal with these issues by:</p>
+<ul>
+  <li><a href="#identify">Identifying Access Control Issues</a></li>
+  <li><a href="#disable">Disabling the Security Manager</a></li>
+  <li><a href="#fix">Fixing Access Control Issues</a></li>
+  <li><a href="#report">Reporting Security Manager Issues</a></li>
+</ul>
+<h1 id="identifying-access-control-issues">Identifying Access Control Issues<a name="identify"/></h1>
+<p>When using Niagara 4 with the Security Manager enabled, you may come across issues where certain features are no longer functioning as expected. These problems may or may not be related to the Security Manager. To identify whether it truly is an access control issue, you have a number of options. We will go over each of these options in the sections below.</p>
+<h2 id="inspect-output-and-stack-traces">Inspect Output and Stack Traces</h2>
+<p>If you run across an issue you think may be related to the Security Manager, the first thing to do, as for any other issue, is to inspect the output for either the station or workbench, as appropriate. Typically, issues caused by the Security Manager will include one of the following in the output or stack trace:</p>
+<pre><code>AccessControlException: access denied (&lt;required permission&gt;)   
+
+access denied (&lt;required permission&gt;)
+</code></pre>
+<p>The presence of either of these two lines indicates a Security Manager issue, which should be reported.</p>
+<h2 id="enable-security-manager-debug-output">Enable Security Manager Debug Output</h2>
+<p>Not all issues (Security Manager related or otherwise) generate a stack trace or other output, making it a little trickier to determine if the issue you are seeing is related to the Security Manager or not. In these cases, there are logs that may be turned on to obtain additional debug information.</p>
+<h3 id="niagara-debug-output">Niagara Debug Output</h3>
+<p>For some basic debug output, you can go to the <strong>DebugService</strong> in the station, or to <strong>Tools &gt; Logger Configuration</strong> in workbench, and turn on the &ldquo;security.niagaraPolicy&rdquo; log. Different settings will give different levels of detail:</p>
+<ul>
+  <li><strong>FINE</strong>. Logs failed permission checks, including the name of the permissions that was checked, the code base that failed the check, and the stack trace that caused the exception.</li>
+  <li><strong>FINER</strong>. On a failed permission check, lists the permissions that a code base should have, and who supplied those permissions.</li>
+  <li><strong>FINEST</strong>. Logs successful permission checks for all permissions.</li>
+</ul>
+<p>This output should contain the information required to figure out what is causing an AccessControlException in most situations. If this isn&rsquo;t sufficient, the built-in Java debug output can be used.</p>
+<h3 id="built-in-java-debug-output">Built-in Java Debug Output</h3>
+<p>If you can start your station or workbench from the command line, Java offers a command line property to enable debugging on the Security Manager, allowing you to precisely identify access control issues. To enable Security Manager debug output, add the following (shown in green) to the command line:</p>
+<p><code>station &lt;stationname&gt; -</code><font color='green'><code>@Djava.security.debug=access,failure</code></font></p>
+<p>Note that this will produce a LOT of output, which may be difficult to view from the console. If you would like to stream this output to a file, use the following (show in green):</p>
+<p><code>station &lt;stationname&gt; -</code><font color='green'><code>@Djava.security.debug=access,failure &gt; D:\tmp\debug.txt 2&gt;&amp;1</code></font></p>
+<p>where <code>D:\tmp\debug.txt</code> is the file you want to stream your output to. The path and file can be changed, and the path <em>must</em> exist.</p>
+<h4 id="note">Note</h4>
+<p>The full debug output may only completely stream to the file once the application stops. The best way to test Security Manager issues, if possible is to start your application, attempt to reproduce the issue as soon as possible, then close the program and inspect the debug output.</p>
+<h4 id="note">Note</h4>
+<p>The Security Manager debug feature produces a lot of output, a lot of which you don&rsquo;t need to worry about if you&rsquo;re looking for access denied issues. You can filter out a lot of output if you use a text editor which allows a search and replace based on regular expressions, such as Notepad++. Simply use find and replace with:<br />
+Find: <code>&quot;.*access allowed.*\r\n&quot;</code><br />
+Replace with: <code>&quot;&quot;</code></p>
+<h2 id="disable-the-security-manager-and-try-again">Disable the Security Manager and Try Again</h2>
+<p>If you have an issue and don&rsquo;t see any debug output, and cannot start your station or workbench from the command line, you do have another option available. If you know you can reproduce the issue consistently with the Security Manager on, you can stop the application and then disable the Security Manager, then restart the application. If you&rsquo;re still seeing the issue, it&rsquo;s not related to the Security Manager. If you aren&rsquo;t seeing it anymore, it may be Security Manager related.</p>
+<p>See the following section for instructions on how to disable the Security Manager.</p>
+<h1 id="disabling-the-security-manager">Disabling the Security Manager<a name="disable"/></h1>
+<p>Enabling the Security Manager was a change with a massive scope. The Security Manager can potentially affect any and all features. As a result, it was not possible to identify every single potential issue before enabling it. In order to allow work to continue even when issues come up, we have provided the ability to disable the Security Manager when a blocking issue is found.</p>
+<p><strong>The first requirement to disable the security manager is to have the &ldquo;smDeveloperMode&rdquo; license feature</strong>. <em>If you don&rsquo;t have this license feature, you will not be able to disable the Security Manager</em> even if you follow one of the methods described below.</p>
+<p>Once you have the &ldquo;smDeveloperMode&rdquo; license feature, you need to request to your application that it run without the Security Manager. There are three ways to do this, which we will go over in the sections below.</p>
+<h2 id="use-the-command-line-argument">Use the Command Line Argument</h2>
+<p>If you can start your application using the command line, the simplest way to request to disable the Security Manager is using the command line argument. Simply add the following (shown in green) to the command line:</p>
+<p><code>station &lt;stationname&gt; -</code><font color='green'><code>@Dniagara.security.manager.disable</code></font></p>
+<h2 id="set-a-system-property">Set a System Property</h2>
+<p>If you can&rsquo;t start your application from the command line, you can request to disable the Security Manager by setting the <code>niagara.security.manager.disable</code> system property. The system property needs to be present at boot, so you should include it in your <strong>&lt;niagara.user.home&gt;/etc/system.properties</strong> file.</p>
+<h2 id="enable-the-no-security-manager-flag-qnx">Enable the no-security-manager Flag (QNX)</h2>
+<p>In QNX, if you can&rsquo;t start your application from the command line, you can request to disable the Security Manager by opening an SSH connection to the JACE and issuing the following command:</p>
+<pre><code>touch /etc/no-security-manager
+</code></pre>
+<p>This will disable the Security Manager for both niagarad and stations.</p>
+<h2 id="log-files">Log Files</h2>
+<p>Starting in Niagara 4.9, when using the <code>niagara.security.manager.disable</code> property, any <code>AccessControLException</code>s that are encountered are logged to a file while the application is allowed to continue to run.  This log file is written in <code>niagara_user_home</code> and named <code>developerSecurityManagerLog-&lt;STATION|WORKBENCH|DAEMON&gt;-&lt;DATE&gt;-&lt;TIME&gt;.txt</code> (ex. <code>developerSecurityManagerLog-STATION-20200127-085850.txt</code>).  The log file contains a listing of all <code>AccessControLException</code>s that will need to be resolved, and the stacktraces that caused them.</p>
+<h1 id="fixing-access-control-issues">Fixing Access Control Issues<a name="fix"/></h1>
+<p>There are several ways to fix access control issues in Niagara.</p>
+<ul>
+  <li>Starting in Niagara 4.2, the main way for developers to fix access control issues is to add permission requests to the module running into issue. This is described in the <a href="module://docDeveloper/doc/security/requestingPermissions.html">Requesting Addition Permissions documentation</a>.</li>
+  <li>As (<code>read/write/delete/execute</code>) access to files is a restricted action requiring a specific permission for the file in question, third party modules that try to access the file system may run into issues.  To address this, we have added shared directories that all modules have <code>read/write/delete</code> access to in the following locations:
+    <ul>
+      <li>Under the station. This location is now called <code>station_home</code>, and can be obtained via <code>Sys.getStationHome()</code>.</li>
+      <li>Under <code>niagara_user_home</code>. This location can be obtained via <code>Sys.getNiagaraSharedUserHome()</code>.</li>
+    </ul>
+  </li>
+</ul>
+<h1 id="reporting-security-manager-issues">Reporting Security Manager Issues<a name="report"/></h1>
+<p>Security Manager issues should be reported the same way as any other issue you come across. To help get the issue resolved more quickly, however, there are some additional details you can include.</p>
+<ul>
+  <li>When describing how the issue occurs, <strong>precise reproduction steps</strong> are <em>extremely</em> important with Security Manager issues. The order of operations can affect whether the issue occurs at all, as can any change from default settings, or the presence of a new Service, etc…</li>
+  <li>If you used the Security Manager command line debug argument, please include the entire debug output captured (before or after filtering the &ldquo;<code>access allowed</code>&rdquo; lines) in your issue report.</li>
+  <li>If the issue caused a stack trace or other output in the console, please include the entire stack trace in your issue report.</li>
+</ul>
+<p>Having all this information from the start will allow issues to be dealt with much more quickly, and will reduce the need for follow ups.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/security/security.html" class="navbar">Prev</a> |  <a href="/doc/security/requestingPermissions.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

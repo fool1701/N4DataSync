@@ -1,0 +1,121 @@
+<!-- Htmldoc has been run -->
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel='stylesheet' href='module://docDeveloper/rc/sunlight.default.css'>
+<!-- Auto-generated style sheet link --><link rel='StyleSheet' href='module://bajaui/doc/style.css' type='text/css' />
+<!-- Auto-generated js link for Activity Monitoring --><script type='text/javascript' src='module://web/rc/util/activityMonitor.js'></script>
+<script type='text/javascript'>window.addEventListener('load', activityMonitor.start);</script>
+</head>
+<body>
+<!-- Auto-generated Header NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/slot-o-matic.html" class="navbar">Prev</a> |  <a href="/doc/upgradingBuild.html" class="navbar">Next</a></p>
+
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.java-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.javascript-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.xml-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/sunlight.css-min.js'></script>
+<script type='text/javascript' src='module://docDeveloper/rc/niagara-sunlight-support.js'></script>
+
+<h1 id="module-migration-from-niagara-ax-to-niagara-4">Module Migration from Niagara AX to Niagara 4</h1>
+<h2 id="overview">Overview</h2>
+<p>This guide will help you convert an existing Niagara AX module to be compatible with Niagara 4.  There are a number of changes we&rsquo;ll need to make including the directory structure, build files and API changes.</p>
+<h2 id="code-base">Code Base</h2>
+<p>Since we&rsquo;ll need to make some significant changes to both the directory structure of our code as well as the code itself, we&rsquo;ll need to keep our Niagara AX code separate from our Niagara 4 code.</p>
+<p>If you&rsquo;re using a version control system such as Mercurial, Git or CVS, we recommend creating a branch for your Niagara AX code base and working on your Niagara 4 changes on the main or default branch.</p>
+<p>In this guide we&rsquo;ll assume that you have your Niagara AX code and Niagara 4 code checked out to separate folders on your file system.</p>
+<p>To get started we&rsquo;ll need to divide our module into one or more <a href="module://docDeveloper/doc/modules.html">module parts</a> (each with different runtime profiles).  We can do this by hand, creating the new folder structure, converting build.xml files to .gradle files, moving source files and splitting apart module-include.xml, or we can make use of some of the Niagara tools to do a lot of that work for us.</p>
+<h3 id="new-module-wizard">New Module Wizard</h3>
+<p>We can create the proper directory structure and <a href="module://docDeveloper/doc/build.html">gradle</a> files by using the New Module Wizard.</p>
+<h4 id="execute-new-module-wizard">Execute New Module Wizard</h4>
+<p>You&rsquo;ll need to run the New Module Wizard once for each module part that you need to create.  For most Niagara AX modules this you&rsquo;ll run it once for the rt module part and once for the wb module part.</p>
+<p><em>Notes:</em></p>
+<ul>
+  <li>You need to set the NIAGARA_HOME environment variable manually, as this is not done by the tool.  <strong>NOTE:</strong> You&rsquo;ll want to do this through the system properties, not just by using the &ldquo;set&rdquo; command at the console prompt, so that IntelliJ or Eclipse will be able to recognize it in later steps.</li>
+  <li>Make sure to choose the same parent folder both times</li>
+  <li>Use your existing build.xml file to help you select the correct dependencies.</li>
+  <li>rt module parts will only have dependencies on other rt module parts</li>
+  <li>wb module parts will mainly depend on other wb module parts but may also depend on rt module parts.</li>
+</ul>
+<h4 id="copy-gradle-files">Copy gradle files</h4>
+<p>Copy the .gradle files from the &lsquo;dev&rsquo; folder of the Niagara 4 Developer image zip file.  You will need:</p>
+<ul>
+  <li>build.gradle</li>
+  <li>settings.gradle</li>
+  <li>vendor.gradle</li>
+</ul>
+<p>These should be placed in the parent folder that you chose in the New Module Wizard.</p>
+<p>Edit <code>vendor.gradle</code> to set the correct group/vendor and moduleVersion.</p>
+<h4 id="copy-and-fix-module-part-gradle-build-files">Copy and fix module part gradle build files</h4>
+<p>Since we have multiple module parts, we want to setup a multi-module build environment.  The .gradle files from the &lsquo;dev&rsquo; folder set this up but we need to make a few changes to the build.gradle files that the New Module Wizard produces (as it produces single moule build files). Rename <code>&lt;moduleName&gt;-rt/build.gradle</code> to <code>&lt;moduleName&gt;-rt.gradle</code> and <code>&lt;moduleName&gt;-wb/build.gradle</code> to <code>&lt;moduleName&gt;-wb.gradle</code>.  In each of these gradle files, remove the line:</p>
+<p><code>apply from: &quot;${System.getenv(&quot;niagara_home&quot;)}/etc/gradle/niagara.gradle&quot;</code></p>
+<p><em>Note:</em> we do this because the niagara gradle plugin is already applied by the root <code>build.gradle</code> file. Now you can continue with the file copy and IDE import!</p>
+<p>The <code>ext { }</code> section can also be removed from these files since it will override the values in <code>vendor.gradle</code></p>
+<h3 id="copy-source-files">Copy Source Files</h3>
+<p>Now as a starting point we need to copy the files over from the Niagara AX source location to the Niagara 4 source location.</p>
+<ol>
+  <li>Use the install=&ldquo;ui&rdquo; flag in your Niagara AX build.xml file to determine which files to copy to your wb module part</li>
+  <li>Copy rt runtime profile source files to your rt module part</li>
+  <li>Copy module.lexicon and module.palette into your rt module part</li>
+  <li>Copy module-include.xml into <strong>BOTH</strong> the rt <strong>AND</strong> wb module parts</li>
+</ol>
+<h2 id="import-into-ide">Import into IDE</h2>
+<p>You can do this using Eclipse or IntelliJ IDEA.  The following instructions are for importing into IntelliJ IDEA 2016.1.</p>
+<ol>
+  <li>Open IntelliJ IDEA.  Select File &gt; Open&hellip; to open the dialog for opening a project.</li>
+  <li>Navigate to the build.gradle created by the New Module Wizard.  It should be at n4/nolademo/build.gradle. Click OK.</li>
+  <li>Select to &lsquo;Use gradle wrapper task configuration&rsquo;.  Click OK.</li>
+  <li>After a brief pause, you will have a dialog saying &lsquo;Gradle Project Data To Import&rsquo;.  Ensure all three choices are selected and click OK.</li>
+  <li>After this, you should have the IntelliJ workbench open, with the nola-rt, nola-wb, and nolademo parts available in the Project view on the left.</li>
+</ol>
+<p>If you are using Eclipse or older versions of IntelliJ IDEA, you&rsquo;ll want to execute <code>gradlew eclipse</code> or <code>gradlew idea</code> from your project directory to auto-generate project files for your IDE.  You can then open the project file in your IDE.</p>
+<h2 id="migrate-the-code">Migrate the Code</h2>
+<h3 id="migrate-slot-code">Migrate Slot Code</h3>
+<p>Niagara 4.2 introduces a new gradle task for converting Niagara AX style slot definitions to <a href="module://docDeveloper/doc/slot-o-matic.html">Niagara 4 annotation style slot definitions</a>.  While Niagara AX style slot definitions will continue to work in Niagara 4, we recommend moving to Niagara 4 annotation style slot definitions as IDEs provide syntax highlight and auto-completion for this style as well as being able to auto-generate module-include.xml files.</p>
+<p>The slot tool migration serves two purposes in this guide.</p>
+<ol>
+  <li>We need to get the type definitions into the correct module part locations, as they must only be specified in a single module-include.xml.</li>
+  <li>It converts the old-style AX syntax to the new N4 annotation syntax.</li>
+</ol>
+<p>Open the Gradle projects window, and execute the task</p>
+<pre><code>niagara &gt; niagara (root) &gt; niagara &gt; migrateSlotomatic.
+</code></pre>
+<p>This is equivalent to executing the console command</p>
+<pre><code>gradlew slotomatic -Dslotomatic.migrateBeforeRecompile
+</code></pre>
+<p>Then remove module-include.xml from both the rt and wb module parts.  These files will be regenerated with the correct type information during the build process.</p>
+<h2 id="apply-n4-code-changes">Apply N4 Code Changes</h2>
+<p>Finally you need to fix the code to use the new Niagara 4 APIs.  You can identify these by running the Gradle task from the Gradle projects window:</p>
+<pre><code>niagara &gt; niagara (root) &gt; build &gt; build
+</code></pre>
+<p>Or, from the command line:</p>
+<pre><code>gradlew build
+</code></pre>
+<p>Or, you can open the files in your IDE and identify the items highlighted in red.</p>
+<h3 id="common-api-changes">Common API Changes</h3>
+<h4 id="collections-api">Collections API</h4>
+<p>The Collections API are detailed in the <a href="module://docDeveloper/doc/collections.html">Collections</a> section of Doc Developer.  One common change is in BQL Ord resolutions. - Remove the import of the (nonexistent) javax.baja.collection.BICollection - Update BQL Ord resolutions:</p>
+<pre><code class="sunlight-highlight-java">// Niagara AX
+BICollection result = (BICollection)BOrd.make(&quot;bql:select displayName&quot;).get(this);
+BITable table = result.toTable();
+</code></pre>
+<pre><code class="sunlight-highlight-java">// Niagara 4
+BITable&lt;BObject&gt; table = (BITable&lt;BObject&gt;)BOrd.make(&quot;bql:select displayName&quot;).get(this);
+</code></pre>
+<ul>
+  <li>Make sure to add the necessary import for BObject - note, this will be highlighted for you as soon as it is uncommented, and you can use Alt+ENTER (in IntelliJ IDEA) to automatically import it.</li>
+</ul>
+<h4 id="alarm-history-apis">Alarm &amp; History APIs</h4>
+<p>The Alarm and History APIs were updated to be connection oriented APIs in Niagara.  Calls to the Alarm and History Databases will need to be updated.  These changes are details in the <a href="module://docDeveloper/doc/alarm.html">Alarm</a> and <a href="module://docDeveloper/doc/history.html">History</a> sections of Doc Developer.</p>
+<h2 id="build-the-module">Build the module</h2>
+<p>Build the module using the <code>gradlew build</code> task.  Again, you can build it from the IDE or the command line.</p>
+<h2 id="station-migration">Station Migration</h2>
+<p>Remember to <a href="module://docAXtoN4/doc/pRunTheN4_MigratorTool.html">migrate your Niagara AX station</a> as well.  You can use the <code>n4mig</code> executable to do this from the Niagara 4 console.</p>
+
+<script type='text/javascript'>window.niagara.docDevUtil.highlightCode();</script>
+
+<!-- Auto-generated Footer NavBar --><p class="navbar">  <a href="/doc/index.html" class="navbar">Index</a> |  <a href="/doc/slot-o-matic.html" class="navbar">Prev</a> |  <a href="/doc/upgradingBuild.html" class="navbar">Next</a></p>
+<!-- Auto-generated copyright note --><p class='copyright'></p>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="devDriver" runtimeProfile="wb" qualifiedName="com.tridium.ddf.ui.device.BDdfDeviceManager" name="BDdfDeviceManager" packageName="com.tridium.ddf.ui.device" public="true">
+<description>
+The DdfDeviceManager is a registered Niagara AX agent on&#xa; BDdfCommNetwork and BDdfDeviceFolder. It automatically&#xa; appears on them as one of their  Niagara AX &#x27;Views&#x27;.&#xa;&#xa; This provides a fully-functional device manager for drivers&#xa; that are built on the devDriver framework. This uses introspection&#xa; plus the rest of the ddf to make this happen.
+</description>
+<tag name="@author">lperkins</tag>
+<extends>
+<type class="javax.baja.driver.ui.device.BDeviceManager"/>
+</extends>
+<implements>
+<type class="com.tridium.ddf.IDdfFacetConst"/>
+</implements>
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager() -->
+<constructor name="BDdfDeviceManager" public="true">
+<description/>
+</constructor>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.makeModel() -->
+<method name="makeModel"  protected="true">
+<description>
+Plugs an DdfDeviceModel into the standard Niagara AX mgr framework.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrModel"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.makeLearn() -->
+<method name="makeLearn"  protected="true">
+<description>
+Plugs an DdfMgrLearn into the standard Niagara AX mgr framework, if the&#xa; manager&#x27;s discovery host specifies a discovery leaf type and it is customized&#xa; in the end-driver (otherwise, this plugs in no MgrLearn).
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrLearn"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.makeController() -->
+<method name="makeController"  protected="true">
+<description>
+Plugs an DdfDeviceController into the standard Niagara AX mgr framework.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrController"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.makeState() -->
+<method name="makeState"  protected="true">
+<description>
+Plugs an DdfDeviceState into the standard Niagara mgr framework.
+</description>
+<return>
+<type class="javax.baja.workbench.mgr.MgrState"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.doLoadValue(javax.baja.sys.BObject, javax.baja.sys.Context) -->
+<method name="doLoadValue"  public="true">
+<description>
+Customizes the doLoadValue method.&#xa;&#xa; Possibly updates the DdfMgrLearn with a set of cached discovery object&#xa; from the manager&#x27;s ddf discovery host&#x27;s discovery folder.&#xa;&#xa; Calls DdfMgrUtil.doLoadManager
+</description>
+<tag name="@see">DdfMgrUtil.doLoadManager</tag>
+<parameter name="obj">
+<type class="javax.baja.sys.BObject"/>
+</parameter>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.handleComponentEvent(javax.baja.sys.BComponentEvent) -->
+<method name="handleComponentEvent"  public="true">
+<description/>
+<parameter name="event">
+<type class="javax.baja.sys.BComponentEvent"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.getDdfNetwork() -->
+<method name="getDdfNetwork"  public="true">
+<description>
+Gets the corresponding BDDfNetwork for this device manager.
+</description>
+<return>
+<type class="com.tridium.ddf.BDdfNetwork"/>
+</return>
+</method>
+
+<!-- com.tridium.ddf.ui.device.BDdfDeviceManager.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

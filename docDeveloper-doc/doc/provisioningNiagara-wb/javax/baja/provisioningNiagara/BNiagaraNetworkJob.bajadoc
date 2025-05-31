@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="provisioningNiagara" runtimeProfile="wb" qualifiedName="javax.baja.provisioningNiagara.BNiagaraNetworkJob" name="BNiagaraNetworkJob" packageName="javax.baja.provisioningNiagara" public="true">
+<description>
+&lt;p&gt;&#xa; Batch job that operates on stations in a Niagara Network.&#xa; &lt;/p&gt;&#xa; &lt;p&gt;&#xa; The job has of two stages.  The first is the &#x22;initial&#x22; stage, which is&#xa; a BNetworkJobStage whose steps run once for the entire network.   The second is&#xa; the &#x22;for each station&#x22; stage, which iterates the list of stations and runs each&#xa; of the steps for each station.&#xa; &lt;/p&gt;
+</description>
+<tag name="@author">Matt Boon</tag>
+<tag name="@creation">9 Jul 07</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@since">Niagara 3.4</tag>
+<extends>
+<type class="javax.baja.batchJob.driver.BDeviceNetworkJob"/>
+</extends>
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob() -->
+<constructor name="BNiagaraNetworkJob" public="true">
+<description/>
+</constructor>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob(java.lang.String) -->
+<constructor name="BNiagaraNetworkJob" public="true">
+<parameter name="stationName">
+<type class="java.lang.String"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob(java.lang.String[]) -->
+<constructor name="BNiagaraNetworkJob" public="true">
+<parameter name="stationNames">
+<type class="java.lang.String" dimension="1"/>
+</parameter>
+<description/>
+</constructor>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.getType() -->
+<method name="getType"  public="true">
+<annotation><type class="java.lang.Override"/>
+</annotation>
+<description/>
+<return>
+<type class="javax.baja.sys.Type"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.makeOp(javax.baja.sys.Context) -->
+<method name="makeOp"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.batchJob.BatchJobOp"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.addStep(javax.baja.batchJob.driver.BNetworkJobStep) -->
+<method name="addStep"  public="true">
+<description>
+Add a network job step to the initial stage.
+</description>
+<parameter name="step">
+<type class="javax.baja.batchJob.driver.BNetworkJobStep"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.addStep(javax.baja.batchJob.driver.BDeviceJobStep) -->
+<method name="addStep"  public="true">
+<description>
+Add a device job step to the &#x22;for each station&#x22; stage.
+</description>
+<parameter name="step">
+<type class="javax.baja.batchJob.driver.BDeviceJobStep"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.getStationState(java.lang.String) -->
+<method name="getStationState"  public="true">
+<description>
+Return the state for the given station.  If it&#x27;s unknown, the &#xa; station has not yet been processed by the job.  If success, every&#xa; step was successful for the station.  If failed or canceled, a&#xa; step failed or was canceled.
+</description>
+<parameter name="stationName">
+<type class="java.lang.String"/>
+</parameter>
+<return>
+<type class="javax.baja.job.BJobState"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.getInitialStage() -->
+<method name="getInitialStage"  public="true">
+<description/>
+<return>
+<type class="javax.baja.batchJob.driver.BNetworkJobStage"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.getForEachStationStage() -->
+<method name="getForEachStationStage"  public="true">
+<description/>
+<return>
+<type class="javax.baja.provisioningNiagara.BForEachStationStage"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.setStationState(java.lang.String, javax.baja.job.BJobState) -->
+<method name="setStationState"  public="true">
+<description>
+Framework use only
+</description>
+<parameter name="stationName">
+<type class="java.lang.String"/>
+</parameter>
+<parameter name="value">
+<type class="javax.baja.job.BJobState"/>
+</parameter>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.initStages() -->
+<method name="initStages"  protected="true">
+<description/>
+<return>
+<type class="void"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.getAgents(javax.baja.sys.Context) -->
+<method name="getAgents"  public="true">
+<description/>
+<parameter name="cx">
+<type class="javax.baja.sys.Context"/>
+</parameter>
+<return>
+<type class="javax.baja.agent.AgentList"/>
+</return>
+</method>
+
+<!-- javax.baja.provisioningNiagara.BNiagaraNetworkJob.TYPE -->
+<field name="TYPE"  public="true" static="true" final="true">
+<type class="javax.baja.sys.Type"/>
+<description/>
+</field>
+
+</class>
+</bajadoc>

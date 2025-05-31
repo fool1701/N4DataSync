@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bajadoc version="2.0" createdBy="niagara-baja-doclet-1.0.9" createdAt="03-May-2024" createdOn="883e7f7a9875">
+<class module="bacnet" runtimeProfile="rt" qualifiedName="javax.baja.bacnet.util.worker.IWorkerPool" name="IWorkerPool" packageName="javax.baja.bacnet.util.worker" public="true" interface="true" abstract="true" category="interface">
+<description>
+IBacnetWorker provides a mechanism inject a customized&#xa; worker implementation to the BBacnetServerLayer.&#xa; &lt;p&gt;&#xa; The first child IBacnetWorker of the BBacnetServerLayer&#xa; will be used to process Confirmed requests.
+</description>
+<tag name="@author">Joseph Chandler</tag>
+<tag name="@version">$Revision$ $Date$</tag>
+<tag name="@creation">26 Aug 13</tag>
+<tag name="@since">Niagara 3.8 Bacnet 1.0</tag>
+<!-- javax.baja.bacnet.util.worker.IWorkerPool.post(java.lang.Runnable) -->
+<method name="post"  public="true" abstract="true">
+<description>
+The post method is used to dispatch work to the WorkerPool.
+</description>
+<parameter name="r">
+<type class="java.lang.Runnable"/>
+<description>
+Runable work to perform
+</description>
+</parameter>
+<return>
+<type class="javax.baja.util.IFuture"/>
+<description>
+null, the current implementation does not utilize IFuture.
+</description>
+</return>
+</method>
+
+<!-- javax.baja.bacnet.util.worker.IWorkerPool.isRunning() -->
+<method name="isRunning"  public="true" abstract="true">
+<description>
+Check to see if the WorkerPool is still capable of processing messages.&#xa; Typically this interface will be satisfied by the BComponent.&#xa; &lt;p&gt;&#xa; If this message ever returns false, the BBacnetWorker will no longer&#xa; route messages to the worker pool, until the BBacnetWorker is restarted.
+</description>
+<return>
+<type class="boolean"/>
+<description>
+true if capable of processing a message,&#xa; false if incapable of further message processing.
+</description>
+</return>
+</method>
+
+</class>
+</bajadoc>
