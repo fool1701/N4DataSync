@@ -38,6 +38,8 @@ vendor {
 // Dependencies and configurations... configuration
 ////////////////////////////////////////////////////////////////
 
+
+
 subprojects {
   repositories {
     mavenCentral()

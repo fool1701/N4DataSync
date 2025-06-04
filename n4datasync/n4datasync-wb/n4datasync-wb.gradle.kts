@@ -14,7 +14,7 @@ plugins {
   id("com.tridium.niagara-signing")
 
   // The bajadoc plugin configures the generation of Bajadoc for a module.
-  id("com.tridium.bajadoc")
+  // id("com.tridium.bajadoc") // Temporarily disabled due to missing dependency
 
   // Configures JaCoCo for the "niagaraTest" task of this module.
   id("com.tridium.niagara-jacoco")
@@ -39,6 +39,14 @@ moduleManifest {
   runtimeProfile.set(wb)
 }
 
+// Configure signing to use our custom certificate
+niagaraSigning {
+  signingProfileFile.set(rootProject.layout.projectDirectory.file("security/niagara.signing.xml"))
+  aliases.set(listOf("myN4DataSyncCert"))
+}
+
+
+
 // See documentation at module://docDeveloper/doc/build.html#dependencies for the supported
 // dependency types
 dependencies {
@@ -47,6 +55,7 @@ dependencies {
 
   // Niagara module dependencies
   api("Tridium:baja")
+  api("Tridium:workbench-wb")
 
   // Test Niagara module dependencies
   moduleTestImplementation("Tridium:test-wb")
