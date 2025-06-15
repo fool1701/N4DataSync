@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://mitsubishielectricaustralia.com/schemas/networks/BacnetNetwork.json",
+    "version": "1.0.0",
+    "title": "Bacnet Network Schema",
+    "description": "Schema for a Bacnet network",
+    "type": "object",
+    "properties": {
+        "name": { "$ref": "https://example.com/schemas/common/ComponentName.schema.json" },
+        "nType": { "const": "BacnetNetwork" },
+        "templateOrder": { "type": "string" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "networkId": { "type": "string" },
+                "networkType": { "type": "string" },
+                "networkAddress": { "type": "string" },
+                "port": { "type": "integer" }
+            }
+        },
+        "components": { "$ref": "#/definitions/BacnetNetworkComponents" }
+    },
+    "definitions": {
+        "BacnetDeviceFolder": {
+            "type": "object",
+            "properties": {
+                "name": { "$ref": "https://example.com/schemas/common/ComponentName.schema.json" },
+                "type": { "const": "BacnetDeviceFolder" },
+                "components": { "$ref": "#/definitions/BacnetNetworkComponents" }
+            }
+        },
+        "BacnetNetworkComponents": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    { "$ref": "https://example.com/schemas/device/BacnetDeviceAbstract.schema.json" },
+                    { "$ref": "#/definitions/BacnetDeviceFolder" }
+                ]
+            }
+        }
+    }
+}

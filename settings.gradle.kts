@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 mea. All Rights Reserved.
+ * Copyright 2025 MEA. All Rights Reserved.
  */
 
 import com.tridium.gradle.plugins.settings.MultiProjectExtension
