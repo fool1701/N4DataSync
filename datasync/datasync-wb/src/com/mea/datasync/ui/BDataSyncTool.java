@@ -4,23 +4,18 @@ package com.mea.datasync.ui;
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.Sys;
 import javax.baja.sys.Type;
-import javax.baja.workbench.tool.BWbTool;
-import javax.baja.workbench.BWbShell;
-import javax.baja.ui.CommandArtifact;
+import javax.baja.workbench.tool.BWbNavNodeTool;
 
 /**
  * BDataSyncTool serves as the entry point for the N4-DataSync module
- * within Niagara Workbench. It extends BWbTool to appear in the
- * Tools menu.
+ * within Niagara Workbench. It extends BWbNavNodeTool to appear in the
+ * Tools menu and as a navigable node under the 'tool:' scheme.
+ *
+ * When selected from the Tools menu, it automatically opens the default
+ * view associated with this tool, which will be the DataSync Manager view.
  */
 @NiagaraType
-public class BDataSyncTool extends BWbTool {
-
-    /*-
-    class BDataSyncTool
-    {
-    }
-    -*/
+public class BDataSyncTool extends BWbNavNodeTool {
 
 ////////////////////////////////////////////////////////////////
 // Type
@@ -46,24 +41,12 @@ public class BDataSyncTool extends BWbTool {
 
     /**
      * Default constructor.
+     * Tools are typically singletons, so no public constructor is needed for external instantiation.
      */
     public BDataSyncTool() {
     }
 
-////////////////////////////////////////////////////////////////
-// BWbTool
-////////////////////////////////////////////////////////////////
-
-    /**
-     * Override invoke to handle tool activation from Tools menu.
-     * @param shell the workbench shell
-     * @return CommandArtifact for undo support, or null
-     */
-    @Override
-    public CommandArtifact invoke(BWbShell shell) {
-        System.out.println("N4-DataSync Tool invoked!");
-        // TODO: Open your tool's dialog or view here
-        // For now, just print a message to console
-        return null;
-    }
+    // Note: BWbNavNodeTool automatically handles the invoke() method
+    // by hyperlinking to the default view associated with this tool's ORD.
+    // The tool's ORD will be "tool:com.mea.datasync.ui.BDataSyncTool|slot:/"
 }
