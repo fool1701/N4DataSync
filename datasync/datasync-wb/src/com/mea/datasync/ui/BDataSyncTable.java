@@ -166,8 +166,37 @@ public class BDataSyncTable extends BTable {
         @Override
         public void updateTable() {
             super.updateTable();
-            // Update any command states here if needed
+            // Fire selection changed event for view updates
+            fireSelectionChanged();
         }
+    }
+    
+    /**
+     * Add method to refresh table data
+     */
+    public void refreshData() {
+        // Clear current selection
+        getSelection().deselectAll();
+        
+        // Notify the table that data has changed using Niagara's method
+        DynamicTableModel dtm = (DynamicTableModel) getModel();
+        dtm.updateTable(); // This will trigger relayout and fire tableModified event
+    }
+    
+    /**
+     * Add method to update profile data
+     */
+    public void setProfiles(List<ConnectionProfile> profiles) {
+        this.profiles = profiles;
+        refreshData();
+    }
+    
+    /**
+     * Fire selection changed event
+     */
+    private void fireSelectionChanged() {
+        // Notify listeners that selection has changed
+        // This can be used by the view to enable/disable buttons
     }
 
 ////////////////////////////////////////////////////////////////
