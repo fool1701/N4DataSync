@@ -20,8 +20,11 @@ gradlew clean
 REM Run slot-o-matic code generation
 gradlew slotomatic
 
-REM Run tests
+REM **Build test jar (does not run tests)**
 gradlew moduleTestJar
+
+REM **To run tests, use:**
+REM **test <target>**
 
 REM Build specific module
 gradlew :<moduleName>:jar
@@ -59,8 +62,8 @@ public class BClassName extends BSuperClass {
 ### Module Configuration Files
 - **module-include.xml** - Registers types, defs, and resources
 - **module.lexicon** - Localization strings and display names  
-- **module.palette** - UI view associations
-- **niagara-module.xml** - Module metadata and runtime profiles
+- **module.palette** - **Defines a standard collection of public components (similar to a standard .bog file)**
+- **meta-inf/module.xml** - **Module metadata and runtime profiles (the primary module manifest file)**
 
 ### Workbench-Only Architecture
 - Runs entirely in Workbench JVM
@@ -100,7 +103,14 @@ Follow this pattern for new UI components:
 2. Use `@NiagaraType` annotation and TYPE field
 3. Register in `module-include.xml`
 4. Add localization entries to `module.lexicon`
-5. Associate views in `module.palette` if needed
+5. **Associate views with object types via agent registration in `module-include.xml`**
+
+### **View-Object Association**
+**Views are associated with object types through agent registration, not palette files:**
+- **Agent Registration**: Views are declared as agents on specific Types using `<agent><on type="module:TypeName"/></agent>` in `module-include.xml`
+- **Annotations**: For Niagara 4, use `@NiagaraType(agent=@AgentOn(types={"myModule:MyComponent"}))`
+- **Registry**: The Niagara Registry manages these associations and discovers which views are available for each object type
+- **Palette Purpose**: `module.palette` defines collections of components for drag-and-drop in Workbench, not view associations
 
 ### Data Synchronization Flow
 The architecture follows this pattern:

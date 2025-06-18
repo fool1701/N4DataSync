@@ -51,16 +51,34 @@ dependencies {
   // NRE dependencies
   nre("Tridium:nre")
 
-  // Niagara module dependencies
-  api("Tridium:baja")
-  api("Tridium:bajaui-ux")
-  api("Tridium:bajaui-wb")
-  api("Tridium:bajaux-rt")
-  api("Tridium:bajaux-ux")
-  api("Tridium:workbench-wb")
-  api("Tridium:gx-rt")
-  api("Tridium:gx-ux")
-  api("Tridium:gx-wb")
+  // Niagara module dependencies (4.11+ compatible)
+  api("Tridium:baja") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:bajaui-ux") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:bajaui-wb") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:bajaux-rt") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:bajaux-ux") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:workbench-wb") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:gx-rt") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:gx-ux") {
+    version { require("[4.11,)") }
+  }
+  api("Tridium:gx-wb") {
+    version { require("[4.11,)") }
+  }
 
   // Optional dependencies for data sync functionality
   api("Tridium:bacnet-rt")

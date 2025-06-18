@@ -2,6 +2,7 @@
 package com.mea.datasync.ui;
 
 import javax.baja.nre.annotations.NiagaraType;
+import javax.baja.nre.annotations.AgentOn;
 import javax.baja.sys.Sys;
 import javax.baja.sys.Type;
 import javax.baja.ui.BLabel;
@@ -19,7 +20,11 @@ import com.mea.datasync.model.ConnectionProfile;
  * BDataSyncManagerView is a simple view for the N4-DataSync tool.
  * It displays the DataSync table in a basic layout.
  */
-@NiagaraType
+@NiagaraType(
+  agent = @AgentOn(
+    types = { "datasync:DataSyncTool" }
+  )
+)
 public class BDataSyncManagerView extends BWbView {
 
 ////////////////////////////////////////////////////////////////

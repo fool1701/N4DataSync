@@ -1,9 +1,27 @@
 <!-- Module Include File -->
-<!-- Types -->
 <types>
-  <!-- com.mea.datasync.ui -->
+  <!-- Tool Type -->
   <!--com.mea.datasync.ui-->
   <type class="com.mea.datasync.ui.BDataSyncTool" name="DataSyncTool"/>
-  <type class="com.mea.datasync.ui.BDataSyncManagerView" name="DataSyncManagerView"/>
+  <!-- View Types - Register as agents on the tool type -->
+  <type class="com.mea.datasync.ui.BDataSyncSimpleView" name="DataSyncSimpleView">
+    <agent>
+      <on type="DataSyncTool"/>
+    </agent>
+  </type>
+  <type class="com.mea.datasync.ui.BDataSyncManagerView" name="DataSyncManagerView">
+    <agent>
+      <on type="datasync:DataSyncTool"/>
+    </agent>
+  </type>
   <type class="com.mea.datasync.ui.BDataSyncTable" name="DataSyncTable"/>
+  <type class="com.mea.datasync.ui.BDataSyncTestView" name="DataSyncTestView">
+    <agent>
+      <on type="datasync:DataSyncTool"/>
+    </agent>
+  </type>
 </types>
+<!-- Tool Registration for Tools Menu -->
+<tools>
+  <tool name="DataSync Manager" type="DataSyncTool"/>
+</tools>
