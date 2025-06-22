@@ -13,8 +13,8 @@ plugins {
   // that the plugin also be applied to the root project.
   id("com.tridium.niagara-signing")
 
-  // The bajadoc plugin configures the generation of Bajadoc for a module.
-  id("com.tridium.bajadoc")
+  // The bajadoc plugin is disabled as it requires Niagara-specific dependencies
+  // id("com.tridium.bajadoc")
 
   // Configures JaCoCo for the "niagaraTest" task of this module.
   id("com.tridium.niagara-jacoco")
