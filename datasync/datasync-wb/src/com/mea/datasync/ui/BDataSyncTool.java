@@ -11,6 +11,10 @@ import javax.baja.workbench.tool.BWbNavNodeTool;
  * within Niagara Workbench. It extends BWbNavNodeTool to appear in the
  * Tools menu and as a navigable node under the 'tool:' scheme.
  *
+ * CRITICAL: This tool MUST be registered as an agent on "workbench:Workbench"
+ * in module-include.xml to appear in the Tools menu. Views register as agents
+ * on "datasync:DataSyncTool" to appear when the tool is opened.
+ *
  * When selected from the Tools menu, it automatically opens the default
  * view associated with this tool, which will be the DataSync Manager view.
  */

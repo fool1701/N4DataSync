@@ -1,8 +1,10 @@
 <!-- Module Include File -->
+<!-- IMPORTANT: Tool and View Registration Pattern (DO NOT BREAK!) ============================================================= 1. BWbNavNodeTool subclasses MUST be registered as agents on "workbench:Workbench" to appear in Tools menu 2. Views register as agents on the tool type (e.g., "datasync:DataSyncTool") 3. Use @AgentOn annotation in class AND module-include.xml entry 4. Reference: niagaraModulesExample/envCtrlDriver 5. If tool disappears, revert to commit a770078 and add agent registration incrementally -->
 <!-- Types -->
 <types>
   <!-- com.mea.datasync.ui -->
   <!--com.mea.datasync.ui-->
+  <!-- CRITICAL: Tool MUST have workbench:Workbench agent to appear in Tools menu -->
   <type class="com.mea.datasync.ui.BDataSyncTool" name="DataSyncTool"/>
   <type class="com.mea.datasync.ui.BDataSyncManagerView" name="DataSyncManagerView"/>
   <type class="com.mea.datasync.ui.BDataSyncTable" name="DataSyncTable"/>
@@ -12,7 +14,7 @@
       <on type="datasync:DataSyncTool"/>
     </agent>
   </type>
-
   <!-- DataSync Model Components -->
+  <!--com.mea.datasync.model-->
   <type class="com.mea.datasync.model.BConnectionProfile" name="ConnectionProfile"/>
 </types>
