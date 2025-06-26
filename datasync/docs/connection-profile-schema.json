@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "N4-DataSync Connection Profile",
+  "description": "Schema for storing connection profiles for the N4-DataSync Workbench module",
+  "type": "object",
+  "properties": {
+    "profileName": {
+      "type": "string",
+      "description": "Unique, user-friendly name for this connection profile",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "sourceType": {
+      "type": "string",
+      "description": "Type of external data source",
+      "enum": ["Excel", "GoogleSheets", "Grist", "RDBMS", "CSV"],
+      "default": "Excel"
+    },
+    "sourceConfig": {
+      "type": "object",
+      "description": "Configuration details specific to the selected source type",
+      "properties": {
+        "filePath": {
+          "type": "string",
+          "description": "Full path to the local Excel/CSV file (for 'Excel'/'CSV' sourceType)"
+        },
+        "sheetName": {
+          "type": "string",
+          "description": "Name of the sheet within the Excel file (for 'Excel' sourceType)"
+        },
+        "sheetId": {
+          "type": "string",
+          "description": "Google Sheet ID (for 'GoogleSheets' sourceType)"
+        },
+        "apiToken": {
+          "type": "string",
+          "description": "API token for external services (encrypted in practice)"
+        },
+        "jdbcUrl": {
+          "type": "string",
+          "description": "JDBC connection URL (for 'RDBMS' sourceType)"
+        },
+        "dbUser": {
+          "type": "string",
+          "description": "Database username (for 'RDBMS' sourceType)"
+        },
+        "dbPassword": {
+          "type": "string",
+          "description": "Database password (encrypted in practice)"
+        }
+      },
+      "additionalProperties": true
+    },
+    "targetNiagaraStation": {
+      "type": "object",
+      "description": "Details about the target Niagara station for synchronization",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Hostname or IP address of the Niagara station",
+          "pattern": "^[a-zA-Z0-9.-]+$"
+        },
+        "port": {
+          "type": "integer",
+          "description": "FoxS port of the Niagara station",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 4911
+        },
+        "username": {
+          "type": "string",
+          "description": "Niagara user account for authentication",
+          "minLength": 1
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for the Niagara user account (encrypted in practice)"
+        },
+        "basePath": {
+          "type": "string",
+          "description": "Absolute Niagara slot path where components will be created",
+          "pattern": "^station:\\|slot:/.*",
+          "default": "station:|slot:/Drivers"
+        }
+      },
+      "required": ["host", "username", "password", "basePath"]
+    },
+    "syncMetadata": {
+      "type": "object",
+      "description": "Operational metadata about this profile",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this profile was first created"
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this profile was last modified"
+        },
+        "lastReadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last successful data read from external source"
+        },
+        "lastSyncTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last synchronization attempt timestamp"
+        },
+        "lastSyncStatus": {
+          "type": "string",
+          "description": "Result of the last sync operation",
+          "enum": ["Never Synced", "Success", "Warning", "Error", "In Progress"],
+          "default": "Never Synced"
+        },
+        "lastSyncMessage": {
+          "type": "string",
+          "description": "Detailed message from last sync operation"
+        },
+        "componentsCreated": {
+          "type": "integer",
+          "description": "Number of components created in last successful sync",
+          "minimum": 0,
+          "default": 0
+        },
+        "syncHistory": {
+          "type": "array",
+          "description": "History of recent sync operations",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {"type": "string", "format": "date-time"},
+              "status": {"type": "string", "enum": ["Success", "Warning", "Error"]},
+              "message": {"type": "string"},
+              "componentsAffected": {"type": "integer", "minimum": 0}
+            }
+          },
+          "maxItems": 50
+        }
+      }
+    },
+    "mappingConfig": {
+      "type": "object",
+      "description": "Data mapping configuration (future enhancement)",
+      "properties": {
+        "columnMappings": {
+          "type": "array",
+          "description": "Mapping between source columns and Niagara properties",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sourceColumn": {"type": "string"},
+              "targetProperty": {"type": "string"},
+              "dataType": {"type": "string", "enum": ["string", "number", "boolean", "enum"]},
+              "required": {"type": "boolean", "default": false}
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["profileName", "sourceType", "sourceConfig", "targetNiagaraStation"],
+  "additionalProperties": false
+}

@@ -2,6 +2,10 @@
 package com.mea.datasync.ui;
 
 import javax.baja.nre.annotations.NiagaraType;
+import javax.baja.sys.BComponent;
+import javax.baja.sys.BValue;
+import javax.baja.sys.Context;
+import javax.baja.sys.Property;
 import javax.baja.sys.Sys;
 import javax.baja.sys.Type;
 import javax.baja.workbench.tool.BWbNavNodeTool;
@@ -10,6 +14,11 @@ import javax.baja.workbench.tool.BWbNavNodeTool;
  * BDataSyncTool serves as the entry point for the N4-DataSync module
  * within Niagara Workbench. It extends BWbNavNodeTool to appear in the
  * Tools menu and as a navigable node under the 'tool:' scheme.
+ *
+ * This tool acts as a container for connection profiles and provides
+ * persistent storage independent of any station. Profiles are stored
+ * both in the tool's component space (for runtime access) and as JSON
+ * files (for persistence across workbench sessions).
  *
  * CRITICAL: This tool MUST be registered as an agent on "workbench:Workbench"
  * in module-include.xml to appear in the Tools menu. Views register as agents
@@ -36,6 +45,216 @@ public class BDataSyncTool extends BWbNavNodeTool {
 
 //@formatter:on
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+////////////////////////////////////////////////////////////////
+// Lifecycle Methods
+////////////////////////////////////////////////////////////////
+
+  /**
+   * Called when the tool is started. Load profiles from JSON storage.
+   */
+  @Override
+  public void started() throws Exception {
+    super.started();
+    System.out.println("BDataSyncTool: Tool started, initializing profiles");
+    initializeProfiles();
+  }
+
+  /**
+   * Called when the tool is stopped. Cleanup if needed.
+   */
+  @Override
+  public void stopped() throws Exception {
+    System.out.println("BDataSyncTool: Tool stopped");
+    super.stopped();
+  }
+
+////////////////////////////////////////////////////////////////
+// Component Change Listeners
+////////////////////////////////////////////////////////////////
+
+  /**
+   * Called when a child component is parented to this tool.
+   * Save new profiles to JSON storage.
+   */
+  @Override
+  public void childParented(Property property, BValue newChild, Context context) {
+    super.childParented(property, newChild, context);
+
+    if (newChild instanceof com.mea.datasync.model.BConnectionProfile) {
+      System.out.println("BDataSyncTool: Profile added, saving to JSON: " + property.getName());
+      saveProfileToJson((com.mea.datasync.model.BConnectionProfile) newChild, property.getName());
+    }
+  }
+
+  /**
+   * Called when a child component is unparented from this tool.
+   * Delete profile from JSON storage.
+   */
+  @Override
+  public void childUnparented(Property property, BValue oldChild, Context context) {
+    super.childUnparented(property, oldChild, context);
+
+    if (oldChild instanceof com.mea.datasync.model.BConnectionProfile) {
+      System.out.println("BDataSyncTool: Profile removed, deleting from JSON: " + property.getName());
+      deleteProfileFromJson(property.getName());
+    }
+  }
+
+  /**
+   * Called when a property of this tool or its children changes.
+   * Save modified profiles to JSON storage.
+   */
+  @Override
+  public void changed(Property property, Context context) {
+    super.changed(property, context);
+
+    // Check if the change is on a child profile
+    BValue value = get(property);
+    if (value instanceof com.mea.datasync.model.BConnectionProfile) {
+      System.out.println("BDataSyncTool: Profile property changed, saving to JSON: " + property.getName());
+      saveProfileToJson((com.mea.datasync.model.BConnectionProfile) value, property.getName());
+    }
+  }
+
+////////////////////////////////////////////////////////////////
+// Profile Management
+////////////////////////////////////////////////////////////////
+
+  /**
+   * Initialize the tool with connection profiles.
+   * This method loads profiles from JSON files and adds them as children.
+   */
+  public void initializeProfiles() {
+    try {
+      System.out.println("BDataSyncTool: Initializing connection profiles");
+
+      // Check if profiles are already loaded
+      BComponent[] existingProfiles = getChildren(com.mea.datasync.model.BConnectionProfile.class);
+      if (existingProfiles.length > 0) {
+        System.out.println("Profiles already loaded: " + existingProfiles.length);
+        return;
+      }
+
+      // Load profiles from JSON files using ProfileManager
+      com.mea.datasync.persistence.ProfileManager profileManager =
+        new com.mea.datasync.persistence.ProfileManager();
+
+      java.util.List<String> profileNames = profileManager.listProfiles();
+      System.out.println("Found " + profileNames.size() + " profiles in storage");
+
+      if (profileNames.isEmpty()) {
+        // Create initial sample profiles
+        createInitialProfiles(profileManager);
+        profileNames = profileManager.listProfiles();
+      }
+
+      // Load each profile and add as child
+      for (String profileName : profileNames) {
+        com.mea.datasync.model.BConnectionProfile profile = profileManager.loadProfile(profileName);
+        if (profile != null) {
+          String componentName = sanitizeComponentName(profileName);
+          add(componentName, profile);
+          System.out.println("Loaded profile: " + componentName);
+        }
+      }
+
+      System.out.println("Profile initialization complete");
+
+    } catch (Exception e) {
+      System.err.println("Error initializing profiles: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Create initial sample profiles for first-time users.
+   */
+  private void createInitialProfiles(com.mea.datasync.persistence.ProfileManager profileManager) {
+    try {
+      System.out.println("Creating initial sample profiles");
+
+      // Sample Profile 1
+      com.mea.datasync.model.BConnectionProfile profile1 =
+        new com.mea.datasync.model.BConnectionProfile();
+      profile1.setSourceType("Excel");
+      profile1.setSourcePath("C:\\Data\\BuildingA_HVAC.xlsx");
+      profile1.setSheetName("Equipment");
+      profile1.setTargetHost("192.168.1.100");
+      profile1.setTargetPath("station:|slot:/Drivers");
+      profile1.setStatus("Success");
+      profile1.setComponentsCreated(45);
+      profileManager.saveProfile(profile1, "Building A HVAC");
+
+      // Sample Profile 2
+      com.mea.datasync.model.BConnectionProfile profile2 =
+        new com.mea.datasync.model.BConnectionProfile();
+      profile2.setSourceType("Excel");
+      profile2.setSourcePath("C:\\Data\\BuildingB_Lighting.xlsx");
+      profile2.setSheetName("Points");
+      profile2.setTargetHost("192.168.1.101");
+      profile2.setTargetPath("station:|slot:/Drivers/Lighting");
+      profile2.setStatus("Error");
+      profile2.setComponentsCreated(23);
+      profileManager.saveProfile(profile2, "Building B Lighting");
+
+      // Sample Profile 3
+      com.mea.datasync.model.BConnectionProfile profile3 =
+        new com.mea.datasync.model.BConnectionProfile();
+      profile3.setSourceType("Excel");
+      profile3.setSourcePath("C:\\Data\\ChillerPlant.xlsx");
+      profile3.setSheetName("Chillers");
+      profile3.setTargetHost("192.168.1.102");
+      profile3.setTargetPath("station:|slot:/Drivers/HVAC");
+      profile3.setStatus("Never Synced");
+      profile3.setComponentsCreated(0);
+      profileManager.saveProfile(profile3, "Chiller Plant");
+
+      System.out.println("Initial sample profiles created");
+
+    } catch (Exception e) {
+      System.err.println("Error creating initial profiles: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Save a single profile to JSON storage.
+   */
+  private void saveProfileToJson(com.mea.datasync.model.BConnectionProfile profile, String profileName) {
+    try {
+      com.mea.datasync.persistence.ProfileManager profileManager =
+        new com.mea.datasync.persistence.ProfileManager();
+      boolean saved = profileManager.saveProfile(profile, profileName);
+      System.out.println("Profile save result for '" + profileName + "': " + (saved ? "SUCCESS" : "FAILED"));
+    } catch (Exception e) {
+      System.err.println("Error saving profile '" + profileName + "' to JSON: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Delete a profile from JSON storage.
+   */
+  private void deleteProfileFromJson(String profileName) {
+    try {
+      com.mea.datasync.persistence.ProfileManager profileManager =
+        new com.mea.datasync.persistence.ProfileManager();
+      boolean deleted = profileManager.deleteProfile(profileName);
+      System.out.println("Profile delete result for '" + profileName + "': " + (deleted ? "SUCCESS" : "FAILED"));
+    } catch (Exception e) {
+      System.err.println("Error deleting profile '" + profileName + "' from JSON: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Sanitize a profile name for use as a component name.
+   */
+  private String sanitizeComponentName(String name) {
+    if (name == null) return "unnamed";
+    return name.replaceAll("[^a-zA-Z0-9_]", "_");
+  }
 
 ////////////////////////////////////////////////////////////////
 // Constructor

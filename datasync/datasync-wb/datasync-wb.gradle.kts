@@ -70,6 +70,10 @@ dependencies {
   api("Tridium:control-ux")
   api("Tridium:control-wb")
 
+  // External 3rd party library dependencies
+  // Use 'uberjar' configuration for 3rd party libraries as per Niagara documentation
+  uberjar("com.google.code.gson:gson:2.10.1")
+
   // Test Niagara module dependencies
   moduleTestImplementation("Tridium:test-wb")
 }
