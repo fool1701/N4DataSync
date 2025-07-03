@@ -4,19 +4,28 @@ package com.mea.datasync.test;
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.Sys;
 import javax.baja.sys.Type;
+import javax.baja.test.BTestNg;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.mea.datasync.model.BConnectionProfile;
 import com.mea.datasync.persistence.ProfileManager;
-import javax.baja.test.BTestNg;
 
 /**
  * BProfileManagerTest tests the ProfileManager functionality for
  * saving and loading connection profiles to/from JSON files.
+ *
+ * This test follows Niagara TestNG conventions:
+ * - Extends BTestNg
+ * - Uses @Test annotations with groups
+ * - Proper setup/teardown methods
+ * - TestNG Assert methods
  */
 @NiagaraType
+@Test(groups = { "datasync", "unit" })
 public class BProfileManagerTest extends BTestNg {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
@@ -36,111 +45,510 @@ public class BProfileManagerTest extends BTestNg {
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
 
 ////////////////////////////////////////////////////////////////
+// Setup and Teardown
+////////////////////////////////////////////////////////////////
+
+  private ProfileManager profileManager;
+  private java.util.List<String> testProfileNames;
+
+  /**
+   * Setup method called once before all test methods in this class.
+   * Initializes the ProfileManager and prepares test environment.
+   */
+  @BeforeClass(alwaysRun = true)
+  public void setupBeforeClass() throws Exception {
+    System.out.println("=== BProfileManagerTest Setup ===");
+
+    // Initialize ProfileManager
+    profileManager = new ProfileManager();
+    Assert.assertNotNull(profileManager, "ProfileManager should be created successfully");
+
+    // Initialize list to track test profiles for cleanup
+    testProfileNames = new java.util.ArrayList<>();
+
+    // Verify profiles directory exists
+    java.io.File profilesDir = profileManager.getProfilesDirectory();
+    Assert.assertNotNull(profilesDir, "Profiles directory should not be null");
+    Assert.assertTrue(profilesDir.exists(), "Profiles directory should exist");
+
+    System.out.println("ProfileManager initialized successfully");
+    System.out.println("Profiles directory: " + profilesDir.getAbsolutePath());
+  }
+
+  /**
+   * Teardown method called once after all test methods in this class.
+   * Cleans up any test profiles created during testing.
+   */
+  @AfterClass(alwaysRun = true)
+  public void teardownAfterClass() throws Exception {
+    System.out.println("=== BProfileManagerTest Cleanup ===");
+
+    if (profileManager != null && testProfileNames != null) {
+      // Clean up any test profiles that might still exist
+      for (String profileName : testProfileNames) {
+        try {
+          if (profileManager.profileExists(profileName)) {
+            boolean deleted = profileManager.deleteProfile(profileName);
+            System.out.println("Cleanup profile '" + profileName + "': " +
+                             (deleted ? "SUCCESS" : "FAILED"));
+          }
+        } catch (Exception e) {
+          System.err.println("Error cleaning up profile '" + profileName + "': " + e.getMessage());
+        }
+      }
+    }
+
+    System.out.println("BProfileManagerTest cleanup completed");
+  }
+
+////////////////////////////////////////////////////////////////
 // Test Methods
 ////////////////////////////////////////////////////////////////
 
   /**
    * Test basic ProfileManager functionality - creating, saving, and loading profiles.
+   * This test follows the given-when-then pattern for clarity.
    */
-  @Test(description = "Test ProfileManager save and load functionality")
+  @Test(description = "Test ProfileManager save and load functionality",
+        groups = { "datasync", "unit", "crud" })
   public void testProfileManagerSaveLoad() {
-    try {
-      System.out.println("Starting ProfileManager save/load test");
-      
-      // Create ProfileManager instance
-      ProfileManager profileManager = new ProfileManager();
-      Assert.assertNotNull(profileManager, "ProfileManager should be created");
-      
-      // Create a test profile
-      BConnectionProfile testProfile = new BConnectionProfile();
-      testProfile.setSourceType("Excel");
-      testProfile.setSourcePath("C:\\Test\\test.xlsx");
-      testProfile.setSheetName("TestSheet");
-      testProfile.setTargetHost("localhost");
-      testProfile.setTargetPath("station:|slot:/Test");
-      testProfile.setStatus("Test");
-      testProfile.setComponentsCreated(42);
-      
-      // Verify properties are set correctly
-      Assert.assertEquals(testProfile.getSourceType(), "Excel", "Source type should be set");
-      Assert.assertEquals(testProfile.getSourcePath(), "C:\\Test\\test.xlsx", "Source path should be set");
-      Assert.assertEquals(testProfile.getSheetName(), "TestSheet", "Sheet name should be set");
-      Assert.assertEquals(testProfile.getTargetHost(), "localhost", "Target host should be set");
-      Assert.assertEquals(testProfile.getTargetPath(), "station:|slot:/Test", "Target path should be set");
-      Assert.assertEquals(testProfile.getStatus(), "Test", "Status should be set");
-      Assert.assertEquals(testProfile.getComponentsCreated(), 42, "Components created should be set");
-      
-      // Save the profile
-      String profileName = "TestProfile";
-      boolean saveResult = profileManager.saveProfile(testProfile, profileName);
-      Assert.assertTrue(saveResult, "Profile should be saved successfully");
-      
-      // Verify profile exists
-      boolean exists = profileManager.profileExists(profileName);
-      Assert.assertTrue(exists, "Profile should exist after saving");
-      
-      // Load the profile back
-      BConnectionProfile loadedProfile = profileManager.loadProfile(profileName);
-      Assert.assertNotNull(loadedProfile, "Loaded profile should not be null");
-      
-      // Verify loaded profile has correct data
-      Assert.assertEquals(loadedProfile.getSourceType(), "Excel", "Loaded source type should match");
-      Assert.assertEquals(loadedProfile.getSourcePath(), "C:\\Test\\test.xlsx", "Loaded source path should match");
-      Assert.assertEquals(loadedProfile.getSheetName(), "TestSheet", "Loaded sheet name should match");
-      Assert.assertEquals(loadedProfile.getTargetHost(), "localhost", "Loaded target host should match");
-      Assert.assertEquals(loadedProfile.getTargetPath(), "station:|slot:/Test", "Loaded target path should match");
-      Assert.assertEquals(loadedProfile.getStatus(), "Test", "Loaded status should match");
-      Assert.assertEquals(loadedProfile.getComponentsCreated(), 42, "Loaded components created should match");
-      
-      // Clean up - delete the test profile
-      boolean deleteResult = profileManager.deleteProfile(profileName);
-      Assert.assertTrue(deleteResult, "Profile should be deleted successfully");
-      
-      // Verify profile no longer exists
-      boolean existsAfterDelete = profileManager.profileExists(profileName);
-      Assert.assertFalse(existsAfterDelete, "Profile should not exist after deletion");
-      
-      System.out.println("ProfileManager save/load test completed successfully");
-      
-    } catch (Exception e) {
-      System.err.println("Test failed with exception: " + e.getMessage());
-      e.printStackTrace();
-      Assert.fail("Test failed with exception: " + e.getMessage());
-    }
+    System.out.println("Starting ProfileManager save/load test");
+
+    // Given - a test profile with comprehensive data
+    String profileName = "TestProfile_SaveLoad";
+    testProfileNames.add(profileName); // Track for cleanup
+
+    BConnectionProfile testProfile = new BConnectionProfile();
+    testProfile.setSourceType("Excel");
+    testProfile.setSourcePath("C:\\Test\\test.xlsx");
+    testProfile.setSheetName("TestSheet");
+    testProfile.setTargetHost("localhost");
+    testProfile.setTargetPath("station:|slot:/Test");
+    testProfile.setStatus("Test");
+    testProfile.setComponentsCreated(42);
+
+    // Verify properties are set correctly (given state)
+    Assert.assertEquals(testProfile.getSourceType(), "Excel", "Source type should be set");
+    Assert.assertEquals(testProfile.getSourcePath(), "C:\\Test\\test.xlsx", "Source path should be set");
+    Assert.assertEquals(testProfile.getSheetName(), "TestSheet", "Sheet name should be set");
+    Assert.assertEquals(testProfile.getTargetHost(), "localhost", "Target host should be set");
+    Assert.assertEquals(testProfile.getTargetPath(), "station:|slot:/Test", "Target path should be set");
+    Assert.assertEquals(testProfile.getStatus(), "Test", "Status should be set");
+    Assert.assertEquals(testProfile.getComponentsCreated(), 42, "Components created should be set");
+
+    // When - save the profile
+    boolean saveResult = profileManager.saveProfile(testProfile, profileName);
+
+    // Then - verify save was successful
+    Assert.assertTrue(saveResult, "Profile should be saved successfully");
+
+    // And - verify profile exists
+    boolean exists = profileManager.profileExists(profileName);
+    Assert.assertTrue(exists, "Profile should exist after saving");
+
+    // When - load the profile back
+    BConnectionProfile loadedProfile = profileManager.loadProfile(profileName);
+
+    // Then - verify loaded profile is valid and has correct data
+    Assert.assertNotNull(loadedProfile, "Loaded profile should not be null");
+    Assert.assertEquals(loadedProfile.getSourceType(), "Excel", "Loaded source type should match");
+    Assert.assertEquals(loadedProfile.getSourcePath(), "C:\\Test\\test.xlsx", "Loaded source path should match");
+    Assert.assertEquals(loadedProfile.getSheetName(), "TestSheet", "Loaded sheet name should match");
+    Assert.assertEquals(loadedProfile.getTargetHost(), "localhost", "Loaded target host should match");
+    Assert.assertEquals(loadedProfile.getTargetPath(), "station:|slot:/Test", "Loaded target path should match");
+    Assert.assertEquals(loadedProfile.getStatus(), "Test", "Loaded status should match");
+    Assert.assertEquals(loadedProfile.getComponentsCreated(), 42, "Loaded components created should match");
+
+    // When - delete the test profile
+    boolean deleteResult = profileManager.deleteProfile(profileName);
+
+    // Then - verify deletion was successful
+    Assert.assertTrue(deleteResult, "Profile should be deleted successfully");
+
+    // And - verify profile no longer exists
+    boolean existsAfterDelete = profileManager.profileExists(profileName);
+    Assert.assertFalse(existsAfterDelete, "Profile should not exist after deletion");
+
+    System.out.println("ProfileManager save/load test completed successfully");
   }
 
   /**
    * Test ProfileManager directory creation and file listing.
+   * Verifies that the ProfileManager properly manages its file system operations.
    */
-  @Test(description = "Test ProfileManager directory and file operations")
+  @Test(description = "Test ProfileManager directory and file operations",
+        groups = { "datasync", "unit", "filesystem" })
   public void testProfileManagerDirectoryOperations() {
+    System.out.println("Starting ProfileManager directory operations test");
+
+    // Given - ProfileManager is initialized (from setup)
+    // When - get profiles directory
+    java.io.File profilesDir = profileManager.getProfilesDirectory();
+
+    // Then - verify directory properties
+    Assert.assertNotNull(profilesDir, "Profiles directory should not be null");
+    Assert.assertTrue(profilesDir.exists(), "Profiles directory should exist");
+    Assert.assertTrue(profilesDir.isDirectory(), "Profiles directory should be a directory");
+
+    // When - list existing profiles
+    java.util.List<String> profiles = profileManager.listProfiles();
+
+    // Then - verify list is valid
+    Assert.assertNotNull(profiles, "Profile list should not be null");
+
+    System.out.println("Found " + profiles.size() + " existing profiles");
+    for (String profile : profiles) {
+      System.out.println("  - " + profile);
+    }
+
+    System.out.println("ProfileManager directory operations test completed successfully");
+  }
+
+  /**
+   * Test enhanced JSON structure with nested objects.
+   * Verifies that the new nested JSON schema is properly serialized and deserialized.
+   */
+  @Test(description = "Test enhanced JSON structure with nested objects",
+        groups = { "datasync", "unit", "json", "schema" })
+  public void testEnhancedJsonStructure() {
+    System.out.println("Starting enhanced JSON structure test");
+
+    // Given - a comprehensive test profile with all properties
+    String profileName = "EnhancedStructureTest";
+    testProfileNames.add(profileName); // Track for cleanup
+
+    BConnectionProfile testProfile = new BConnectionProfile();
+    testProfile.setSourceType("Excel");
+    testProfile.setSourcePath("C:\\Data\\comprehensive_test.xlsx");
+    testProfile.setSheetName("BACnet_Points");
+    testProfile.setTargetHost("192.168.1.100");
+    testProfile.setTargetUsername("admin");
+    testProfile.setTargetPath("station:|slot:/Drivers/BACnet");
+    testProfile.setStatus("Ready");
+    testProfile.setComponentsCreated(150);
+    testProfile.setLastError("");
+
+    // When - save the profile (should use enhanced JSON structure)
+    boolean saveResult = profileManager.saveProfile(testProfile, profileName);
+
+    // Then - verify save was successful
+    Assert.assertTrue(saveResult, "Enhanced profile should be saved successfully");
+
+    // When - load the profile back
+    BConnectionProfile loadedProfile = profileManager.loadProfile(profileName);
+
+    // Then - verify loaded profile is valid
+    Assert.assertNotNull(loadedProfile, "Loaded enhanced profile should not be null");
+
     try {
-      System.out.println("Starting ProfileManager directory operations test");
-      
-      // Create ProfileManager instance
-      ProfileManager profileManager = new ProfileManager();
-      
-      // Get profiles directory
-      java.io.File profilesDir = profileManager.getProfilesDirectory();
-      Assert.assertNotNull(profilesDir, "Profiles directory should not be null");
-      Assert.assertTrue(profilesDir.exists(), "Profiles directory should exist");
-      Assert.assertTrue(profilesDir.isDirectory(), "Profiles directory should be a directory");
-      
-      // Test listing profiles (should work even if empty)
-      java.util.List<String> profiles = profileManager.listProfiles();
-      Assert.assertNotNull(profiles, "Profile list should not be null");
-      
-      System.out.println("Found " + profiles.size() + " existing profiles");
-      for (String profile : profiles) {
-        System.out.println("  - " + profile);
-      }
-      
-      System.out.println("ProfileManager directory operations test completed successfully");
-      
+      // Verify all data integrity
+      Assert.assertEquals(loadedProfile.getSourceType(), "Excel", "Source type should match");
+      Assert.assertEquals(loadedProfile.getSourcePath(), "C:\\Data\\comprehensive_test.xlsx", "Source path should match");
+      Assert.assertEquals(loadedProfile.getSheetName(), "BACnet_Points", "Sheet name should match");
+      Assert.assertEquals(loadedProfile.getTargetHost(), "192.168.1.100", "Target host should match");
+      Assert.assertEquals(loadedProfile.getTargetUsername(), "admin", "Target username should match");
+      Assert.assertEquals(loadedProfile.getTargetPath(), "station:|slot:/Drivers/BACnet", "Target path should match");
+      Assert.assertEquals(loadedProfile.getStatus(), "Ready", "Status should match");
+      Assert.assertEquals(loadedProfile.getComponentsCreated(), 150, "Components created should match");
+      Assert.assertEquals(loadedProfile.getLastError(), "", "Last error should match");
+
+      // Verify JSON file structure by reading raw file
+      java.io.File profileFile = new java.io.File(profileManager.getProfilesDirectory(),
+                                                  "EnhancedStructureTest.json");
+      Assert.assertTrue(profileFile.exists(), "JSON file should exist");
+
+      // Read and verify JSON contains nested structure
+      String jsonContent = new String(java.nio.file.Files.readAllBytes(profileFile.toPath()));
+      Assert.assertTrue(jsonContent.contains("sourceConfig"), "JSON should contain sourceConfig object");
+      Assert.assertTrue(jsonContent.contains("targetNiagaraStation"), "JSON should contain targetNiagaraStation object");
+      Assert.assertTrue(jsonContent.contains("syncMetadata"), "JSON should contain syncMetadata object");
+      Assert.assertTrue(jsonContent.contains("schemaVersion"), "JSON should contain schemaVersion");
+
+      System.out.println("JSON structure verification:");
+      System.out.println("  Contains sourceConfig: " + jsonContent.contains("sourceConfig"));
+      System.out.println("  Contains targetNiagaraStation: " + jsonContent.contains("targetNiagaraStation"));
+      System.out.println("  Contains syncMetadata: " + jsonContent.contains("syncMetadata"));
+
+      // Clean up
+      boolean deleteResult = profileManager.deleteProfile(profileName);
+      Assert.assertTrue(deleteResult, "Enhanced profile should be deleted successfully");
+
+      System.out.println("Enhanced JSON structure test completed successfully");
+
     } catch (Exception e) {
-      System.err.println("Test failed with exception: " + e.getMessage());
+      System.err.println("Enhanced JSON test failed with exception: " + e.getMessage());
       e.printStackTrace();
-      Assert.fail("Test failed with exception: " + e.getMessage());
+      Assert.fail("Enhanced JSON test failed with exception: " + e.getMessage());
     }
   }
+
+  /**
+   * Test profile validation and error handling.
+   * Verifies that ProfileManager handles edge cases and invalid inputs gracefully.
+   */
+  @Test(description = "Test profile validation and error handling",
+        groups = { "datasync", "unit", "validation", "error-handling" })
+  public void testProfileValidationAndErrorHandling() {
+    System.out.println("Starting profile validation and error handling test");
+
+    // Given - a test profile for validation tests
+    BConnectionProfile testProfile = new BConnectionProfile();
+    testProfile.setSourceType("Excel");
+    testProfile.setSourcePath("C:\\Test\\validation.xlsx");
+    testProfile.setSheetName("ValidationSheet"); // Set a valid sheet name
+
+    // When/Then - test edge cases for profile names
+
+    // Test with empty profile name
+    boolean result1 = profileManager.saveProfile(testProfile, "");
+    System.out.println("Save with empty name result: " + result1);
+
+    // Test with null profile name
+    boolean result2 = profileManager.saveProfile(testProfile, null);
+    System.out.println("Save with null name result: " + result2);
+
+    // Test loading non-existent profile
+    BConnectionProfile nonExistent = profileManager.loadProfile("NonExistentProfile");
+    Assert.assertNull(nonExistent, "Loading non-existent profile should return null");
+
+    // Test profile exists for non-existent profile
+    boolean exists = profileManager.profileExists("NonExistentProfile");
+    Assert.assertFalse(exists, "Non-existent profile should not exist");
+
+    // Test deleting non-existent profile
+    boolean deleteResult = profileManager.deleteProfile("NonExistentProfile");
+    System.out.println("Delete non-existent profile result: " + deleteResult);
+
+    // Test with special characters in profile name
+    String specialName = "Test Profile with Spaces & Special-Chars_123";
+    testProfileNames.add(specialName); // Track for cleanup
+
+    boolean saveSpecial = profileManager.saveProfile(testProfile, specialName);
+    Assert.assertTrue(saveSpecial, "Profile with special characters should save");
+
+    // Verify it can be loaded back
+    BConnectionProfile loadedSpecial = profileManager.loadProfile(specialName);
+    Assert.assertNotNull(loadedSpecial, "Profile with special characters should load");
+
+    // Clean up immediately (also tracked in testProfileNames for safety)
+    boolean cleanupResult = profileManager.deleteProfile(specialName);
+    Assert.assertTrue(cleanupResult, "Special character profile should be deleted");
+
+    System.out.println("Profile validation and error handling test completed successfully");
+  }
+
+  /**
+   * Test ProfileManager directory creation and basic functionality.
+   * This test can run without full Niagara runtime environment.
+   */
+  @Test(description = "Test ProfileManager basic directory operations",
+        groups = { "datasync", "unit", "filesystem", "standalone" })
+  public void testProfileManagerBasicOperations() {
+    System.out.println("Starting ProfileManager basic operations test");
+
+    // Given - ProfileManager is initialized (from setup)
+    // When - get profiles directory
+    java.io.File profilesDir = profileManager.getProfilesDirectory();
+
+    // Then - verify directory properties
+    Assert.assertNotNull(profilesDir, "Profiles directory should not be null");
+    System.out.println("Profiles directory path: " + profilesDir.getAbsolutePath());
+    System.out.println("Profiles directory exists: " + profilesDir.exists());
+    System.out.println("Profiles directory is directory: " + profilesDir.isDirectory());
+    System.out.println("Profiles directory can write: " + profilesDir.canWrite());
+
+    // When - list existing profiles
+    java.util.List<String> profiles = profileManager.listProfiles();
+
+    // Then - verify list is valid
+    Assert.assertNotNull(profiles, "Profile list should not be null");
+    System.out.println("Found " + profiles.size() + " existing profiles");
+    for (String profile : profiles) {
+      System.out.println("  - " + profile);
+    }
+
+    // When - test the testSaveProfile method from ProfileManager
+    boolean testSaveResult = profileManager.testSaveProfile();
+    System.out.println("ProfileManager testSaveProfile result: " + testSaveResult);
+
+    // Test loading the profile that was just created
+    if (testSaveResult) {
+      System.out.println("Testing profile loading...");
+      BConnectionProfile loadedProfile = profileManager.loadProfile("TestProfile");
+      if (loadedProfile != null) {
+        System.out.println("Profile loaded successfully!");
+        System.out.println("  Source Type: " + loadedProfile.getSourceType());
+        System.out.println("  Source Path: " + loadedProfile.getSourcePath());
+        System.out.println("  Sheet Name: " + loadedProfile.getSheetName());
+        System.out.println("  Target Host: " + loadedProfile.getTargetHost());
+        System.out.println("  Status: " + loadedProfile.getStatus());
+        System.out.println("  Components Created: " + loadedProfile.getComponentsCreated());
+
+        // Clean up the test profile
+        boolean deleted = profileManager.deleteProfile("TestProfile");
+        System.out.println("Test profile cleanup: " + deleted);
+      } else {
+        System.err.println("ERROR: Failed to load test profile!");
+      }
+    }
+
+    System.out.println("ProfileManager basic operations test completed successfully");
+  }
+
+  /**
+   * Test the complete profile persistence cycle as it would happen in the UI.
+   * This simulates creating profiles, closing workbench, and reopening.
+   */
+  @Test(description = "Test complete profile persistence cycle",
+        groups = { "datasync", "unit", "persistence", "standalone" })
+  public void testCompletePersistenceCycle() {
+    System.out.println("Starting complete persistence cycle test");
+
+    // Given - record initial profile count and create multiple test profiles
+    java.util.List<String> initialProfiles = profileManager.listProfiles();
+    int initialCount = initialProfiles.size();
+    System.out.println("Initial profile count: " + initialCount);
+
+    String[] profileNames = {"BuildingA_HVAC", "BuildingB_Lighting", "ChillerPlant"};
+    testProfileNames.addAll(java.util.Arrays.asList(profileNames)); // Track for cleanup
+
+    // When - create and save multiple profiles
+    for (int i = 0; i < profileNames.length; i++) {
+      BConnectionProfile profile = new BConnectionProfile();
+      profile.setSourceType("Excel");
+      profile.setSourcePath("C:\\Data\\" + profileNames[i] + ".xlsx");
+      profile.setSheetName("Equipment");
+      profile.setTargetHost("192.168.1.10" + i);
+      profile.setTargetPath("station:|slot:/Drivers/" + profileNames[i]);
+      profile.setStatus("Ready");
+      profile.setComponentsCreated(50 + i * 10);
+
+      boolean saved = profileManager.saveProfile(profile, profileNames[i]);
+      Assert.assertTrue(saved, "Profile " + profileNames[i] + " should be saved successfully");
+    }
+
+    // Then - verify all profiles exist (initial + new ones)
+    java.util.List<String> savedProfiles = profileManager.listProfiles();
+    Assert.assertEquals(savedProfiles.size(), initialCount + profileNames.length, "Should have saved all profiles");
+
+    // When - simulate workbench restart by creating new ProfileManager instance
+    ProfileManager newProfileManager = new ProfileManager();
+    java.util.List<String> reloadedProfiles = newProfileManager.listProfiles();
+
+    // Then - verify all profiles are still available after "restart" (initial + new ones)
+    Assert.assertEquals(reloadedProfiles.size(), initialCount + profileNames.length, "All profiles should persist after restart");
+
+    // When - load each profile and verify data integrity
+    for (String profileName : profileNames) {
+      BConnectionProfile loadedProfile = newProfileManager.loadProfile(profileName);
+      Assert.assertNotNull(loadedProfile, "Profile " + profileName + " should load successfully");
+      Assert.assertEquals(loadedProfile.getSourceType(), "Excel", "Source type should be preserved");
+      Assert.assertTrue(loadedProfile.getSourcePath().contains(profileName), "Source path should contain profile name");
+      Assert.assertEquals(loadedProfile.getSheetName(), "Equipment", "Sheet name should be preserved");
+      Assert.assertEquals(loadedProfile.getStatus(), "Ready", "Status should be preserved");
+    }
+
+    // Clean up
+    for (String profileName : profileNames) {
+      boolean deleted = profileManager.deleteProfile(profileName);
+      Assert.assertTrue(deleted, "Profile " + profileName + " should be deleted successfully");
+    }
+
+    System.out.println("Complete persistence cycle test completed successfully");
+  }
+
+  /**
+   * Test UI integration by simulating what happens when user creates profiles through the UI.
+   * This test creates a BDataSyncTool and tests the event handling.
+   */
+  @Test(description = "Test UI integration and event handling",
+        groups = { "datasync", "unit", "ui", "standalone" })
+  public void testUIIntegration() {
+    System.out.println("Starting UI integration test");
+
+    try {
+      // Given - create a BDataSyncTool instance (simulating UI)
+      com.mea.datasync.ui.BDataSyncTool tool = new com.mea.datasync.ui.BDataSyncTool();
+      System.out.println("BDataSyncTool created: " + tool.getType());
+
+      // When - create a test profile and add it to the tool (simulating user action)
+      BConnectionProfile testProfile = new BConnectionProfile();
+      testProfile.setSourceType("Excel");
+      testProfile.setSourcePath("C:\\UITest\\ui_integration_test.xlsx");
+      testProfile.setSheetName("UITestSheet");
+      testProfile.setTargetHost("ui-test-host");
+      testProfile.setTargetPath("station:|slot:/UITest");
+      testProfile.setStatus("UI Integration Test");
+      testProfile.setComponentsCreated(999);
+
+      String profileName = "UIIntegrationTest";
+      testProfileNames.add(profileName); // Track for cleanup
+
+      System.out.println("Adding profile to tool (should trigger childParented)...");
+      tool.add(profileName, testProfile);
+      System.out.println("Profile added to tool");
+
+      // Give some time for async operations
+      Thread.sleep(1000);
+
+      // Then - verify the profile was saved to JSON
+      boolean exists = profileManager.profileExists(profileName);
+      System.out.println("Profile exists in JSON storage: " + exists);
+
+      if (exists) {
+        System.out.println("✅ SUCCESS: UI integration working - profile saved to JSON!");
+
+        // Verify the content
+        BConnectionProfile loadedProfile = profileManager.loadProfile(profileName);
+        Assert.assertNotNull(loadedProfile, "Profile should be loadable from JSON");
+        Assert.assertEquals(loadedProfile.getSourceType(), "Excel", "Source type should be preserved");
+        Assert.assertEquals(loadedProfile.getSourcePath(), "C:\\UITest\\ui_integration_test.xlsx", "Source path should be preserved");
+        Assert.assertEquals(loadedProfile.getSheetName(), "UITestSheet", "Sheet name should be preserved");
+        Assert.assertEquals(loadedProfile.getTargetHost(), "ui-test-host", "Target host should be preserved");
+        Assert.assertEquals(loadedProfile.getStatus(), "UI Integration Test", "Status should be preserved");
+        Assert.assertEquals(loadedProfile.getComponentsCreated(), 999, "Components created should be preserved");
+
+        System.out.println("✅ All profile data verified correctly!");
+      } else {
+        System.err.println("❌ FAILURE: UI integration not working - profile NOT saved to JSON!");
+        System.err.println("This indicates that childParented() or saveProfileToJson() is not working correctly.");
+      }
+
+      // Test property change (should trigger subscriber)
+      System.out.println("Testing property change...");
+      String originalStatus = testProfile.getStatus();
+      System.out.println("Original status: " + originalStatus);
+
+      testProfile.setStatus("Modified UI Status");
+      System.out.println("Changed status to: Modified UI Status");
+
+      // Give some time for the change event and async operations
+      Thread.sleep(2000);
+
+      if (exists) {
+        BConnectionProfile reloadedProfile = profileManager.loadProfile(profileName);
+        if (reloadedProfile != null) {
+          String reloadedStatus = reloadedProfile.getStatus();
+          System.out.println("Reloaded status: " + reloadedStatus);
+
+          if ("Modified UI Status".equals(reloadedStatus)) {
+            System.out.println("✅ SUCCESS: Property change was persisted!");
+          } else {
+            System.err.println("❌ FAILURE: Property change was NOT persisted!");
+            System.err.println("Expected: 'Modified UI Status', Got: '" + reloadedStatus + "'");
+          }
+        } else {
+          System.err.println("❌ FAILURE: Could not reload profile to check property change!");
+        }
+      }
+
+    } catch (Exception e) {
+      System.err.println("❌ Error in UI integration test: " + e.getMessage());
+      e.printStackTrace();
+      Assert.fail("UI integration test failed with exception: " + e.getMessage());
+    }
+
+    System.out.println("UI integration test completed");
+  }
+
 }

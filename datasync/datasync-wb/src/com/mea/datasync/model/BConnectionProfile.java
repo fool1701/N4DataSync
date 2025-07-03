@@ -40,6 +40,8 @@ import javax.baja.sys.*;
   type = "baja:String",
   defaultValue = "BString.DEFAULT"
 )
+// TODO: TYPE-SAFETY-001 - Replace string status with enum (Issue #4)
+// Should use BConnectionStatus enum for type safety
 @NiagaraProperty(
   name = "status",
   type = "baja:String",
@@ -85,8 +87,31 @@ public class BConnectionProfile extends BComponent {
   /**
    * Set the {@code sourceType} property.
    * @see #sourceType
+   * @throws IllegalArgumentException if the source type is null, empty, or invalid
    */
-  public void setSourceType(String v) { setString(sourceType, v, null); }
+  public void setSourceType(String v) {
+    // Validate source type
+    if (v == null) {
+      throw new IllegalArgumentException("Source type cannot be null");
+    }
+    if (v.trim().isEmpty()) {
+      throw new IllegalArgumentException("Source type cannot be empty");
+    }
+    // Validate against supported source types
+    if (!isValidSourceType(v)) {
+      throw new IllegalArgumentException("Invalid source type: " + v + ". Supported types: Excel, CSV, Database");
+    }
+    setString(sourceType, v, null);
+  }
+
+  /**
+   * Check if the given source type is valid.
+   * @param sourceType the source type to validate
+   * @return true if valid, false otherwise
+   */
+  private boolean isValidSourceType(String sourceType) {
+    return "Excel".equals(sourceType) || "CSV".equals(sourceType) || "Database".equals(sourceType);
+  }
 
   //endregion Property "sourceType"
 
@@ -108,8 +133,18 @@ public class BConnectionProfile extends BComponent {
   /**
    * Set the {@code sourcePath} property.
    * @see #sourcePath
+   * @throws IllegalArgumentException if the source path is null or empty
    */
-  public void setSourcePath(String v) { setString(sourcePath, v, null); }
+  public void setSourcePath(String v) {
+    // Validate source path
+    if (v == null) {
+      throw new IllegalArgumentException("Source path cannot be null");
+    }
+    if (v.trim().isEmpty()) {
+      throw new IllegalArgumentException("Source path cannot be empty");
+    }
+    setString(sourcePath, v, null);
+  }
 
   //endregion Property "sourcePath"
 
@@ -131,8 +166,19 @@ public class BConnectionProfile extends BComponent {
   /**
    * Set the {@code sheetName} property.
    * @see #sheetName
+   * @throws IllegalArgumentException if the sheet name is an empty string (null is allowed for default)
    */
-  public void setSheetName(String v) { setString(sheetName, v, null); }
+  public void setSheetName(String v) {
+    // Validate sheet name - null is allowed (means use default), but explicit empty string is not
+    if (v != null && v.trim().isEmpty()) {
+      throw new IllegalArgumentException("Sheet name cannot be empty (use null for default)");
+    }
+    // For null values, don't set anything (keep default)
+    if (v != null) {
+      setString(sheetName, v, null);
+    }
+    // If v is null, we don't call setString, leaving the default value
+  }
 
   //endregion Property "sheetName"
 
@@ -314,6 +360,8 @@ public class BConnectionProfile extends BComponent {
 // Convenience Methods
 ////////////////////////////////////////////////////////////////
 
+  // TODO: CODE-QUALITY-001 - Remove duplicate wrapper methods (Issue #5)
+  // These methods just duplicate existing functionality
   public void setStatusString(String statusStr) {
     setStatus(statusStr);
   }

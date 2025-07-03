@@ -25,7 +25,7 @@ import javax.baja.workbench.mgr.MgrState;
 import javax.baja.workbench.mgr.MgrTypeInfo;
 
 import com.mea.datasync.model.BConnectionProfile;
-import com.mea.datasync.persistence.ProfileManager;
+// import com.mea.datasync.persistence.ProfileManager; // No longer needed
 
 /**
  * BDataSyncProfileView provides a manager-style view for the DataSync tool
@@ -43,8 +43,8 @@ public class BDataSyncProfileView extends BAbstractManager {
     System.out.println("BDataSyncProfileView class loaded!");
   }
 
-  // ProfileManager for portable JSON storage
-  private ProfileManager profileManager;
+  // Note: ProfileManager removed - now delegating to BDataSyncTool
+  // private ProfileManager profileManager;
 
 ////////////////////////////////////////////////////////////////
 // Component Change Listeners
@@ -52,15 +52,15 @@ public class BDataSyncProfileView extends BAbstractManager {
 
   /**
    * Called when a child component is parented to the target.
-   * Save new profiles to JSON storage.
+   * Note: Profile management now handled by BDataSyncTool via ProfileService.
    */
   @Override
   public void childParented(Property property, BValue newChild, Context context) {
     super.childParented(property, newChild, context);
 
     if (newChild instanceof BConnectionProfile) {
-      System.out.println("DataSyncProfileView: Profile added, saving to JSON: " + property.getName());
-      saveProfileToJson((BConnectionProfile) newChild, property.getName());
+      System.out.println("DataSyncProfileView: Profile added (managed by tool): " + property.getName());
+      // No direct JSON saving - tool handles this via ProfileService
     }
   }
 
@@ -73,14 +73,14 @@ public class BDataSyncProfileView extends BAbstractManager {
     super.childUnparented(property, oldChild, context);
 
     if (oldChild instanceof BConnectionProfile) {
-      System.out.println("DataSyncProfileView: Profile removed, deleting from JSON: " + property.getName());
-      deleteProfileFromJson(property.getName());
+      System.out.println("DataSyncProfileView: Profile removed (managed by tool): " + property.getName());
+      // Profile deletion now handled by BDataSyncTool via ProfileService
     }
   }
 
   /**
    * Called when a property changes on this view or its children.
-   * Save modified profiles to JSON storage.
+   * Note: Profile persistence now handled by BDataSyncTool via ProfileService.
    */
   @Override
   public void changed(Property property, Context context) {
@@ -89,42 +89,12 @@ public class BDataSyncProfileView extends BAbstractManager {
     // Check if the change is on a profile component
     BValue value = get(property);
     if (value instanceof BConnectionProfile) {
-      System.out.println("DataSyncProfileView: Profile property changed, saving to JSON: " + property.getName());
-      saveProfileToJson((BConnectionProfile) value, property.getName());
+      System.out.println("DataSyncProfileView: Profile property changed (managed by tool): " + property.getName());
+      // Tool's ProfileService handles persistence automatically
     }
   }
 
-  /**
-   * Save a single profile to JSON storage.
-   */
-  private void saveProfileToJson(BConnectionProfile profile, String profileName) {
-    try {
-      if (profileManager == null) {
-        profileManager = new ProfileManager();
-      }
-      boolean saved = profileManager.saveProfile(profile, profileName);
-      System.out.println("Profile save result for '" + profileName + "': " + (saved ? "SUCCESS" : "FAILED"));
-    } catch (Exception e) {
-      System.err.println("Error saving profile '" + profileName + "' to JSON: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * Delete a profile from JSON storage.
-   */
-  private void deleteProfileFromJson(String profileName) {
-    try {
-      if (profileManager == null) {
-        profileManager = new ProfileManager();
-      }
-      boolean deleted = profileManager.deleteProfile(profileName);
-      System.out.println("Profile delete result for '" + profileName + "': " + (deleted ? "SUCCESS" : "FAILED"));
-    } catch (Exception e) {
-      System.err.println("Error deleting profile '" + profileName + "' from JSON: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
+  // Note: Profile persistence methods removed - now handled by BDataSyncTool via ProfileService
 
 
 
@@ -284,54 +254,37 @@ public class BDataSyncProfileView extends BAbstractManager {
     }
 
     /**
-     * Load connection profiles using hybrid approach:
-     * 1. Load from portable JSON files (if they exist)
-     * 2. Sync to Niagara component tree for UI display
-     * 3. Fall back to component tree if no JSON files
+     * Load connection profiles from BDataSyncTool.
+     * Profiles are now managed by the tool via ProfileService.
      */
     private void loadProfilesFromTarget(BComponent target) {
       try {
-        System.out.println("DataSyncProfileView: Loading profiles using hybrid approach");
+        System.out.println("DataSyncProfileView: Loading profiles from tool (new architecture)");
         System.out.println("Target component: " + target.getSlotPath());
 
-        // Initialize ProfileManager for portable storage
-        BDataSyncProfileView view = (BDataSyncProfileView) getManager();
-        if (view.profileManager == null) {
-          view.profileManager = new ProfileManager();
-        }
+        // Profiles are managed by BDataSyncTool via ProfileService
+        // The tool handles all initialization, persistence, and synchronization
+        if (target instanceof com.mea.datasync.ui.BDataSyncTool) {
+          com.mea.datasync.ui.BDataSyncTool tool = (com.mea.datasync.ui.BDataSyncTool) target;
 
-        // Try to load from portable JSON files first
-        java.util.List<String> jsonProfiles = view.profileManager.listProfiles();
-        System.out.println("Found " + jsonProfiles.size() + " profiles in JSON storage");
+          // Get profile information from the tool
+          int profileCount = tool.getProfileCount();
+          System.out.println("DataSyncProfileView: Tool reports " + profileCount + " profiles available");
 
-        if (!jsonProfiles.isEmpty()) {
-          // Load from JSON and sync to component tree
-          syncJsonToComponents(target, view.profileManager, jsonProfiles);
-        } else {
-          // Check if we have profiles in component tree
-          BComponent[] existingProfiles = target.getChildren(BConnectionProfile.class);
-          System.out.println("Found " + existingProfiles.length + " existing profiles in component tree");
+          // The tool's ProfileService has already loaded profiles into the component tree
+          // We just need to display them
+          com.mea.datasync.model.BConnectionProfile[] profiles = tool.getAllProfiles();
+          System.out.println("DataSyncProfileView: Retrieved " + profiles.length + " profiles from tool");
 
-          if (existingProfiles.length == 0) {
-            // Create initial samples and save to both locations
-            System.out.println("No profiles found, creating initial sample profiles");
-            createInitialSampleProfiles(target);
-            syncComponentsToJson(target, view.profileManager);
-          } else {
-            // Sync existing components to JSON for portability
-            syncComponentsToJson(target, view.profileManager);
+          for (com.mea.datasync.model.BConnectionProfile profile : profiles) {
+            System.out.println("  Profile: " + profile.getName() + " (" + profile.getStatus() + ")");
           }
-        }
-
-        // List all profiles for debugging
-        BComponent[] allProfiles = target.getChildren(BConnectionProfile.class);
-        System.out.println("Total profiles after hybrid loading: " + allProfiles.length);
-        for (BComponent profile : allProfiles) {
-          System.out.println("  Profile: " + profile.getSlotPath().toString());
+        } else {
+          System.err.println("DataSyncProfileView: Target is not a BDataSyncTool: " + target.getClass().getSimpleName());
         }
 
       } catch (Exception e) {
-        System.err.println("Error loading profiles: " + e.getMessage());
+        System.err.println("Error loading profiles from tool: " + e.getMessage());
         e.printStackTrace();
       }
     }
@@ -339,7 +292,8 @@ public class BDataSyncProfileView extends BAbstractManager {
     /**
      * Sync profiles from JSON storage to component tree.
      */
-    private void syncJsonToComponents(BComponent target, ProfileManager pm, java.util.List<String> profileNames) {
+    // DEPRECATED: Replaced by ProfileService
+    private void syncJsonToComponents_DEPRECATED(BComponent target, Object pm, java.util.List<String> profileNames) {
       System.out.println("Syncing " + profileNames.size() + " profiles from JSON to component tree");
 
       // Clear existing components
@@ -348,21 +302,15 @@ public class BDataSyncProfileView extends BAbstractManager {
         target.remove(comp);
       }
 
-      // Load from JSON and add to component tree
-      for (String profileName : profileNames) {
-        BConnectionProfile profile = pm.loadProfile(profileName);
-        if (profile != null) {
-          String componentName = sanitizeComponentName(profileName);
-          target.add(componentName, profile);
-          System.out.println("  Synced: " + profileName + " -> " + componentName);
-        }
-      }
+      // DEPRECATED: ProfileService handles this
+      System.out.println("  DEPRECATED: syncJsonToComponents - use ProfileService instead");
     }
 
     /**
      * Sync profiles from component tree to JSON storage.
      */
-    private void syncComponentsToJson(BComponent target, ProfileManager pm) {
+    // DEPRECATED: Replaced by ProfileService
+    private void syncComponentsToJson_DEPRECATED(BComponent target, Object pm) {
       BComponent[] profiles = target.getChildren(BConnectionProfile.class);
       System.out.println("Syncing " + profiles.length + " profiles from component tree to JSON");
 
@@ -373,8 +321,8 @@ public class BDataSyncProfileView extends BAbstractManager {
           if (profileName.contains(":")) {
             profileName = profileName.substring(profileName.lastIndexOf(":") + 1);
           }
-          boolean saved = pm.saveProfile(profile, profileName);
-          System.out.println("  Synced: " + profileName + " -> " + (saved ? "SUCCESS" : "FAILED"));
+          // DEPRECATED: ProfileService handles this
+          System.out.println("  DEPRECATED: syncComponentsToJson - use ProfileService instead");
         }
       }
     }
@@ -457,12 +405,8 @@ public class BDataSyncProfileView extends BAbstractManager {
       if (comp != null && shell != null)
         shell.hyperlink(new HyperlinkInfo(comp.getNavOrd(), event));
 
-      // Sync all current profiles to JSON when user interacts with table
-      // This ensures persistence when profiles are modified via UI
-      BComponent target = getManager().getTarget();
-      if (target != null) {
-        syncAllProfilesToJson(target);
-      }
+      // Profile persistence is now handled automatically by BDataSyncTool via ProfileService
+      // No manual syncing needed
     }
 
     /**
@@ -470,22 +414,8 @@ public class BDataSyncProfileView extends BAbstractManager {
      */
     private void syncAllProfilesToJson(BComponent target) {
       try {
-        BDataSyncProfileView view = (BDataSyncProfileView) getManager();
-        if (view.profileManager == null) {
-          view.profileManager = new ProfileManager();
-        }
-
-        BComponent[] profiles = target.getChildren(BConnectionProfile.class);
-        System.out.println("DataSyncProfileView: Syncing " + profiles.length + " profiles to JSON");
-
-        for (BComponent comp : profiles) {
-          if (comp instanceof BConnectionProfile) {
-            BConnectionProfile profile = (BConnectionProfile) comp;
-            String profileName = comp.getName();
-            boolean saved = view.profileManager.saveProfile(profile, profileName);
-            System.out.println("  Profile sync result for '" + profileName + "': " + (saved ? "SUCCESS" : "FAILED"));
-          }
-        }
+        // DEPRECATED: ProfileService now handles all persistence
+        System.out.println("DataSyncProfileView: Sync handled by ProfileService - no action needed");
       } catch (Exception e) {
         System.err.println("Error syncing profiles to JSON: " + e.getMessage());
         e.printStackTrace();

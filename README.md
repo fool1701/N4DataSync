@@ -6,6 +6,12 @@ N4-DataSync is a Niagara 4 Workbench module designed to automate the initial set
 
 It addresses the inefficiency of manually configuring a large number of components (Networks, Devices, Points) by allowing bulk creation directly within Niagara Workbench.
 
+## **Quick Start**
+
+**New to N4-DataSync?** Follow our [5-minute Quick Start Guide](docs/QUICK_START.md) to get up and running immediately.
+
+**Need help?** Check our [Troubleshooting Guide](docs/TROUBLESHOOTING.md) for common issues and solutions.
+
 ## **Key Features (V1 MVP)**
 
 * **External Data Source Connectivity:**  

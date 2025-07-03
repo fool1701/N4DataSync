@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 mea. All Rights Reserved.
+ * Copyright 2025 MEA. All Rights Reserved.
  */
 
 import com.tridium.gradle.plugins.module.util.ModulePart.RuntimeProfile.*
@@ -39,11 +39,8 @@ moduleManifest {
   runtimeProfile.set(wb)
 }
 
-// Configure signing to use our custom certificate
-niagaraSigning {
-  signingProfileFile.set(rootProject.layout.projectDirectory.file("security/niagara.signing.xml"))
-  aliases.set(listOf("myN4DataSyncCert"))
-}
+// Use custom N4-DataSync signing profile configured in root build.gradle.kts
+// This uses the DataSyncModules certificate from datasync.signing.xml
 
 // See documentation at module://docDeveloper/doc/build.html#dependencies for the supported
 // dependency types
@@ -76,5 +73,48 @@ dependencies {
 
   // Test Niagara module dependencies
   moduleTestImplementation("Tridium:test-wb")
+}
+
+// Configure Niagara test reporting
+tasks.named("niagaraTest") {
+  // Use standard Niagara test result locations
+  // Results will be in build/reports/tests/niagara/ and build/test-results/niagara/
+  doFirst {
+    println("Running Niagara tests for datasync-wb module...")
+    println("Test results will be available in:")
+    println("  HTML Report: build/reports/tests/niagara/index.html")
+    println("  XML Results: build/test-results/niagara/")
+    println("Certificate validation: Using custom N4DataSyncDev certificate")
+    println("Certificate file: ${rootProject.projectDir}/N4DataSyncDev.pem")
+    println("To import certificate: Import N4DataSyncDev.pem into Niagara Workbench User Trust Store")
+  }
+
+  doLast {
+    println("Niagara tests completed.")
+    println("View detailed results: ${project.layout.buildDirectory.get()}/reports/tests/niagara/index.html")
+  }
+}
+
+// Task to automatically copy the built module to Niagara modules directory
+tasks.register<Copy>("deployToNiagara") {
+  dependsOn("jar")
+  from(layout.buildDirectory.file("libs/datasync-wb.jar"))
+
+  val niagaraHome = project.findProperty("niagara_home") as String?
+    ?: System.getenv("NIAGARA_HOME")
+    ?: throw GradleException("niagara_home property or NIAGARA_HOME environment variable must be set")
+
+  into("$niagaraHome/modules")
+
+  doLast {
+    println("Module deployed to Niagara: $niagaraHome/modules/datasync-wb.jar")
+  }
+}
+
+// Task to build and deploy in one step
+tasks.register("buildAndDeploy") {
+  dependsOn("deployToNiagara")
+  group = "niagara"
+  description = "Build the module and deploy it to Niagara modules directory"
 }
 

@@ -22,8 +22,8 @@
 # Exclude specific PDF files
 DD2-Niagara\ Development\ with\ Gradle.pdf
 **/DD2-Niagara\ Development\ with\ Gradle.pdf
-docDeveloper.pdf
-**/docDeveloper.pdf
+docs/Niagara/docDeveloper.pdf
+docs/Niagara/docDeveloper.pdf
 
 # docDeveloper documentation folder
 docDeveloper-doc/
@@ -38,6 +38,13 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+# Test Results
+test_results/
+detailed_test_results/
+ui_test_results/
+**/test-results/
+**/test-reports/
 
 # Gradle Wrapper
 !gradle-wrapper.properties
@@ -93,9 +100,6 @@ Desktop.ini
 *.bak
 *.tmp
 *.temp
-
-# Niagara source code (extracted for reference only)
-niagara_source_code/
 
 # Local environment variables
 .env
@@ -175,16 +179,20 @@ node_modules/
 *.keystore
 *.truststore
 security/
+**/security/
 certificates/
 keys/
 *.key
 *.crt
 *.cer
 *.der
+*.csr
 
 # Niagara signing configuration (may contain sensitive paths/info)
 niagara.signing.xml
 **/niagara.signing.xml
+niagara.signing*.xml
+**/niagara.signing*.xml
 
 # Any files containing passwords, tokens, or API keys
 *password*
@@ -195,3 +203,14 @@ niagara.signing.xml
 config.properties
 application-local.properties
 application-dev.properties
+
+# Code quality and security reports
+dependency-check-report.html
+dependency-check-report.xml
+jacoco.exec
+/build/jacoco/
+/build/reports/jacoco/
+spotbugs-report.html
+spotbugs-report.xml
+checkstyle-report.html
+checkstyle-report.xml

@@ -129,8 +129,6 @@ configure<MultiProjectExtension> {
   //    project-rt/build.gradle.kts
   //    project-rt/build.gradle
   findProjects("datasync")
-  findProjects("envCtrlDriver")
-  findProjects("datasync-test")
 }
 
 rootProject.name = "datasync"

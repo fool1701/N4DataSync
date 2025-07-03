@@ -54,13 +54,28 @@ public class ProfileManager {
 
         // Ensure the profiles directory exists
         if (!profilesDirectory.exists()) {
+            System.out.println("Profiles directory doesn't exist, attempting to create: " + profilesDirectory.getAbsolutePath());
+
+            // Try to create parent directories first
+            File parent = profilesDirectory.getParentFile();
+            if (parent != null && !parent.exists()) {
+                System.out.println("Creating parent directories: " + parent.getAbsolutePath());
+                boolean parentCreated = parent.mkdirs();
+                System.out.println("Parent directories created: " + parentCreated);
+            }
+
             boolean created = profilesDirectory.mkdirs();
             System.out.println("Created profiles directory: " + created + " at " + profilesDirectory.getAbsolutePath());
             if (!created) {
-                System.err.println("Failed to create profiles directory!");
+                System.err.println("CRITICAL: Failed to create profiles directory!");
+                System.err.println("  Directory: " + profilesDirectory.getAbsolutePath());
+                System.err.println("  Parent exists: " + (parent != null ? parent.exists() : "N/A"));
+                System.err.println("  Parent writable: " + (parent != null ? parent.canWrite() : "N/A"));
             }
         } else {
             System.out.println("Profiles directory already exists: " + profilesDirectory.getAbsolutePath());
+            System.out.println("  Can read: " + profilesDirectory.canRead());
+            System.out.println("  Can write: " + profilesDirectory.canWrite());
         }
 
         // Configure Gson for pretty printing and date handling
@@ -80,6 +95,31 @@ public class ProfileManager {
         try {
             System.out.println("Attempting to save profile: " + profileName);
 
+            // Validate inputs
+            if (profile == null) {
+                System.err.println("ERROR: Profile is null");
+                return false;
+            }
+            if (profileName == null || profileName.trim().isEmpty()) {
+                System.err.println("ERROR: Profile name is null or empty");
+                return false;
+            }
+
+            // Ensure directory exists and is writable
+            if (!profilesDirectory.exists()) {
+                System.out.println("Profiles directory doesn't exist, creating...");
+                boolean created = profilesDirectory.mkdirs();
+                if (!created) {
+                    System.err.println("ERROR: Failed to create profiles directory: " + profilesDirectory.getAbsolutePath());
+                    return false;
+                }
+            }
+
+            if (!profilesDirectory.canWrite()) {
+                System.err.println("ERROR: Cannot write to profiles directory: " + profilesDirectory.getAbsolutePath());
+                return false;
+            }
+
             // Create filename from profile name (sanitized)
             String filename = sanitizeFilename(profileName) + PROFILE_EXTENSION;
             File profileFile = new File(profilesDirectory, filename);
@@ -96,24 +136,30 @@ public class ProfileManager {
             // Convert to JSON string first to debug
             String jsonString = gson.toJson(profileData);
             System.out.println("JSON string length: " + jsonString.length());
-            System.out.println("JSON content preview: " + jsonString.substring(0, Math.min(100, jsonString.length())));
+            System.out.println("JSON content preview: " + jsonString.substring(0, Math.min(200, jsonString.length())));
 
-            // Write JSON to file
-            try (FileWriter writer = new FileWriter(profileFile)) {
+            // Write JSON to file with better error handling
+            try (FileWriter writer = new FileWriter(profileFile, false)) { // false = overwrite
                 writer.write(jsonString);
                 writer.flush(); // Ensure data is written
+            } catch (IOException writeEx) {
+                System.err.println("ERROR: Failed to write to file: " + writeEx.getMessage());
+                throw writeEx;
             }
 
             // Verify file was written
             if (profileFile.exists() && profileFile.length() > 0) {
                 System.out.println("Profile saved successfully: " + profileFile.getAbsolutePath() + " (" + profileFile.length() + " bytes)");
+                return true;
             } else {
-                System.err.println("Profile file is empty or doesn't exist after save attempt!");
+                System.err.println("ERROR: Profile file is empty or doesn't exist after save attempt!");
+                return false;
             }
-            return true;
 
-        } catch (IOException e) {
-            System.err.println("Error saving profile '" + profileName + "': " + e.getMessage());
+        } catch (Exception e) {
+            // TODO: ERROR-HANDLING-001 - Replace generic exception handling (Issue #3)
+            // Should use specific exceptions and proper logging framework
+            System.err.println("ERROR: Exception saving profile '" + profileName + "': " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -213,6 +259,8 @@ public class ProfileManager {
         File profileFile = new File(profilesDirectory, filename);
         return profileFile.exists();
     }
+
+
     
     /**
      * Get the profiles directory path.
@@ -253,40 +301,41 @@ public class ProfileManager {
 
         ProfileData data = new ProfileData();
         data.profileName = profileName;
-
-        // Debug each property
         data.sourceType = profile.getSourceType();
-        System.out.println("  sourceType: " + data.sourceType);
 
-        data.sourcePath = profile.getSourcePath();
-        System.out.println("  sourcePath: " + data.sourcePath);
+        // Create nested sourceConfig object
+        data.sourceConfig = new ProfileData.SourceConfig();
+        data.sourceConfig.filePath = profile.getSourcePath();
+        data.sourceConfig.sheetName = profile.getSheetName();
+        data.sourceConfig.additionalProperties = new java.util.HashMap<>();
 
-        data.sheetName = profile.getSheetName();
-        System.out.println("  sheetName: " + data.sheetName);
+        // Create nested targetNiagaraStation object
+        data.targetNiagaraStation = new ProfileData.TargetNiagaraStation();
+        data.targetNiagaraStation.host = profile.getTargetHost();
+        data.targetNiagaraStation.username = profile.getTargetUsername();
+        data.targetNiagaraStation.basePath = profile.getTargetPath();
+        data.targetNiagaraStation.port = 4911; // Default Niagara port
+        data.targetNiagaraStation.useSSL = false; // Default
 
-        data.targetHost = profile.getTargetHost();
-        System.out.println("  targetHost: " + data.targetHost);
-
-        data.targetUsername = profile.getTargetUsername();
-        System.out.println("  targetUsername: " + data.targetUsername);
-
-        data.targetPath = profile.getTargetPath();
-        System.out.println("  targetPath: " + data.targetPath);
-
-        data.status = profile.getStatus();
-        System.out.println("  status: " + data.status);
-
-        data.componentsCreated = profile.getComponentsCreated();
-        System.out.println("  componentsCreated: " + data.componentsCreated);
-
-        data.lastError = profile.getLastError();
-        System.out.println("  lastError: " + data.lastError);
+        // Create nested syncMetadata object
+        data.syncMetadata = new ProfileData.SyncMetadata();
+        data.syncMetadata.status = profile.getStatus();
+        data.syncMetadata.componentsCreated = profile.getComponentsCreated();
+        data.syncMetadata.lastError = profile.getLastError();
+        data.syncMetadata.syncHistory = new java.util.ArrayList<>();
+        data.syncMetadata.statistics = new java.util.HashMap<>();
 
         // Convert BAbsTime to ISO string
         if (profile.getLastSync() != null && !profile.getLastSync().isNull()) {
-            data.lastSyncTime = profile.getLastSync().toString();
-            System.out.println("  lastSyncTime: " + data.lastSyncTime);
+            data.syncMetadata.lastSyncTime = profile.getLastSync().toString();
         }
+
+        // Set timestamps
+        String currentTime = new java.util.Date().toString();
+        if (data.syncMetadata.createdTime == null) {
+            data.syncMetadata.createdTime = currentTime;
+        }
+        data.syncMetadata.modifiedTime = currentTime;
 
         System.out.println("Profile data conversion complete");
         return data;
@@ -300,27 +349,129 @@ public class ProfileManager {
 
         // Note: profileName will be set as the slot name when adding to parent
         if (data.sourceType != null) profile.setSourceType(data.sourceType);
-        if (data.sourcePath != null) profile.setSourcePath(data.sourcePath);
-        if (data.sheetName != null) profile.setSheetName(data.sheetName);
-        if (data.targetHost != null) profile.setTargetHost(data.targetHost);
-        if (data.targetUsername != null) profile.setTargetUsername(data.targetUsername);
-        if (data.targetPath != null) profile.setTargetPath(data.targetPath);
-        if (data.status != null) profile.setStatus(data.status);
-        if (data.componentsCreated != null) profile.setComponentsCreated(data.componentsCreated);
-        if (data.lastError != null) profile.setLastError(data.lastError);
 
-        // Convert ISO string back to BAbsTime
-        if (data.lastSyncTime != null && !data.lastSyncTime.isEmpty()) {
-            try {
-                profile.setLastSync(BAbsTime.make(data.lastSyncTime));
-            } catch (Exception e) {
-                System.err.println("Error parsing lastSyncTime: " + e.getMessage());
+        // Extract from nested sourceConfig
+        if (data.sourceConfig != null) {
+            if (data.sourceConfig.filePath != null) profile.setSourcePath(data.sourceConfig.filePath);
+            if (data.sourceConfig.sheetName != null) profile.setSheetName(data.sourceConfig.sheetName);
+        }
+
+        // Extract from nested targetNiagaraStation
+        if (data.targetNiagaraStation != null) {
+            if (data.targetNiagaraStation.host != null) profile.setTargetHost(data.targetNiagaraStation.host);
+            if (data.targetNiagaraStation.username != null) profile.setTargetUsername(data.targetNiagaraStation.username);
+            if (data.targetNiagaraStation.basePath != null) profile.setTargetPath(data.targetNiagaraStation.basePath);
+        }
+
+        // Extract from nested syncMetadata
+        if (data.syncMetadata != null) {
+            if (data.syncMetadata.status != null) profile.setStatus(data.syncMetadata.status);
+            if (data.syncMetadata.componentsCreated != null) profile.setComponentsCreated(data.syncMetadata.componentsCreated);
+            if (data.syncMetadata.lastError != null) profile.setLastError(data.syncMetadata.lastError);
+
+            // Convert ISO string back to BAbsTime
+            if (data.syncMetadata.lastSyncTime != null && !data.syncMetadata.lastSyncTime.isEmpty()) {
+                try {
+                    profile.setLastSync(BAbsTime.make(data.syncMetadata.lastSyncTime));
+                } catch (Exception e) {
+                    System.err.println("Error parsing lastSyncTime: " + e.getMessage());
+                }
             }
         }
 
         return profile;
     }
-    
+
+    /**
+     * Diagnostic method to check ProfileManager setup and permissions.
+     * @return diagnostic information as a string
+     */
+    public String diagnose() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== ProfileManager Diagnostic ===\n");
+
+        // Check directory
+        sb.append("Profiles Directory: ").append(profilesDirectory.getAbsolutePath()).append("\n");
+        sb.append("Directory exists: ").append(profilesDirectory.exists()).append("\n");
+        sb.append("Directory is directory: ").append(profilesDirectory.isDirectory()).append("\n");
+        sb.append("Directory can read: ").append(profilesDirectory.canRead()).append("\n");
+        sb.append("Directory can write: ").append(profilesDirectory.canWrite()).append("\n");
+
+        // Check parent directory
+        File parent = profilesDirectory.getParentFile();
+        if (parent != null) {
+            sb.append("Parent directory: ").append(parent.getAbsolutePath()).append("\n");
+            sb.append("Parent exists: ").append(parent.exists()).append("\n");
+            sb.append("Parent can write: ").append(parent.canWrite()).append("\n");
+        }
+
+        // List existing files
+        File[] files = profilesDirectory.listFiles();
+        if (files != null) {
+            sb.append("Files in directory: ").append(files.length).append("\n");
+            for (File file : files) {
+                sb.append("  - ").append(file.getName()).append(" (").append(file.length()).append(" bytes)\n");
+            }
+        } else {
+            sb.append("Cannot list files in directory\n");
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Simple test method that doesn't require BConnectionProfile.
+     * Tests basic file writing capabilities.
+     * @return true if basic file operations work
+     */
+    public boolean testBasicFileOperations() {
+        try {
+            System.out.println("Testing basic file operations...");
+
+            // Test writing a simple text file
+            File testFile = new File(profilesDirectory, "test_file.txt");
+            String testContent = "Test content: " + new java.util.Date();
+
+            try (FileWriter writer = new FileWriter(testFile)) {
+                writer.write(testContent);
+                writer.flush();
+            }
+
+            // Verify file was written
+            if (testFile.exists() && testFile.length() > 0) {
+                System.out.println("Basic file write successful: " + testFile.getAbsolutePath());
+
+                // Try to read it back
+                try (java.io.FileReader reader = new java.io.FileReader(testFile)) {
+                    char[] buffer = new char[(int) testFile.length()];
+                    int charsRead = reader.read(buffer);
+                    String readContent = new String(buffer, 0, charsRead);
+
+                    if (testContent.equals(readContent)) {
+                        System.out.println("Basic file read successful");
+
+                        // Clean up
+                        boolean deleted = testFile.delete();
+                        System.out.println("Test file cleanup: " + deleted);
+
+                        return true;
+                    } else {
+                        System.err.println("File content mismatch!");
+                        return false;
+                    }
+                }
+            } else {
+                System.err.println("Basic file write failed!");
+                return false;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error in basic file operations test: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * Test method to create a simple profile and save it.
      * This helps debug the JSON writing process.
@@ -369,20 +520,48 @@ public class ProfileManager {
 
     /**
      * Inner class for JSON serialization.
-     * This mirrors the JSON schema structure.
+     * This mirrors the JSON schema structure with full nested objects.
      */
     private static class ProfileData {
         String profileName;
         String sourceType;
-        String sourcePath;
-        String sheetName;
-        String targetHost;
-        String targetUsername;
-        String targetPath;
-        String status;
-        Integer componentsCreated;
-        String lastError;
-        String lastSyncTime;
-        // Future: Add sourceConfig, targetNiagaraStation, syncMetadata objects
+        SourceConfig sourceConfig;
+        TargetNiagaraStation targetNiagaraStation;
+        SyncMetadata syncMetadata;
+        String schemaVersion = "1.0";
+
+        // Nested configuration objects
+        static class SourceConfig {
+            String filePath;
+            String sheetName;
+            String sheetId;
+            String apiToken;
+            String jdbcUrl;
+            String dbUser;
+            String dbPassword;
+            java.util.Map<String, String> additionalProperties;
+        }
+
+        static class TargetNiagaraStation {
+            String host;
+            String username;
+            // TODO: SECURITY-001 - Implement password encryption (Issue #1)
+            // Currently storing passwords in plain text - major security vulnerability
+            String password;
+            String basePath;
+            Integer port;
+            Boolean useSSL;
+        }
+
+        static class SyncMetadata {
+            String status;
+            Integer componentsCreated;
+            String lastError;
+            String lastSyncTime;
+            String createdTime;
+            String modifiedTime;
+            java.util.List<String> syncHistory;
+            java.util.Map<String, Object> statistics;
+        }
     }
 }

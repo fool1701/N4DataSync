@@ -1,0 +1,57 @@
+name: Commit Message Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate-commits:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Validate commit messages
+      uses: wagoid/commitlint-github-action@v5
+      with:
+        configFile: '.commitlintrc.json'
+        
+    - name: Check branch naming
+      run: |
+        BRANCH_NAME="${{ github.head_ref }}"
+        echo "Checking branch name: $BRANCH_NAME"
+        
+        # Allow main, develop, and properly formatted feature/fix branches
+        if [[ "$BRANCH_NAME" =~ ^(main|develop)$ ]] || \
+           [[ "$BRANCH_NAME" =~ ^(feature|fix|hotfix|chore|docs|test|refactor)\/[0-9]+-[a-z0-9-]+$ ]]; then
+          echo "✅ Branch name follows conventions"
+        else
+          echo "❌ Branch name does not follow conventions"
+          echo "Expected format: type/issue-number-description"
+          echo "Examples: feature/123-add-validation, fix/456-resolve-memory-leak"
+          exit 1
+        fi
+        
+    - name: Check for TODO/FIXME without issue references
+      run: |
+        echo "Checking for unreferenced TODOs and FIXMEs..."
+        
+        # Find TODOs and FIXMEs that don't reference issues
+        UNREFERENCED=$(git diff --name-only origin/main...HEAD | \
+          xargs grep -n "TODO\|FIXME" | \
+          grep -v "#[0-9]" || true)
+          
+        if [ -n "$UNREFERENCED" ]; then
+          echo "❌ Found TODOs/FIXMEs without issue references:"
+          echo "$UNREFERENCED"
+          echo ""
+          echo "Please reference GitHub issues in TODOs/FIXMEs:"
+          echo "// TODO: Issue #123 - Add input validation"
+          echo "// FIXME: Issue #456 - Memory leak in ProfileManager"
+          exit 1
+        else
+          echo "✅ All TODOs/FIXMEs properly reference issues"
+        fi

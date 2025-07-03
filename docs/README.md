@@ -1,126 +1,59 @@
-# PDF Text Extraction Comparison
+# N4-DataSync Developer Documentation
 
-This project demonstrates 6 different Python libraries for extracting text from PDF files while maintaining structure and layout. All scripts were tested on the `docDeveloper.pdf` file (243 pages).
+## Getting Started
 
-## Libraries Tested
+* **[Quick Start Guide](QUICK_START.md)** - Get up and running in 5 minutes
+* **[Certificate Setup](CERTIFICATE_SETUP.md)** - How to set up module signing certificates for N4-DataSync development
+* **[Testing Guide](TESTING.md)** - How to run tests and understand test results for N4-DataSync development
+* **[Troubleshooting](TROUBLESHOOTING.md)** - Common issues and solutions
+* **[Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
 
-1. **pdfplumber** - Excellent for layout preservation and table extraction
-2. **pypdf** - Modern PyPDF2 successor with clean extraction
-3. **PyPDF2** - Classic library with good compatibility
-4. **PyPDF4** - PyPDF2 fork (had issues with encrypted PDFs)
-5. **PyMuPDF (Fitz)** - Powerful library with multiple extraction methods
-6. **pdfminer.six** - Most detailed layout analysis
+## Development Patterns
 
-## Results Summary
+* **[Niagara Patterns](NiagaraPatterns.md)** - Essential patterns for Niagara module development
+* **[Patterns by Use Case](PatternsByUseCase.md)** - Quick reference for implementing specific features
+* **[Architecture](ARCHITECTURE.md)** - System design and component relationships
 
-| Library | Status | File Size (KB) | Lines | Text Quality |
-|---------|--------|----------------|-------|--------------|
-| pdfplumber | ✓ SUCCESS | 1,406.2 | 17,114 | 96.04% |
-| pypdf | ✓ SUCCESS | 577.4 | 11,304 | 90.59% |
-| PyPDF2 | ✓ SUCCESS | 566.2 | 8,983 | 90.44% |
-| PyPDF4 | ✗ FAILED | N/A | N/A | N/A |
-| PyMuPDF | ✓ SUCCESS | 1,736.3 | 49,947 | 92.89% |
-| pdfminer.six | ✓ SUCCESS | 2,480.3 | 27,557 | 95.95% |
+## Testing & Quality Assurance
 
-**Success Rate: 5/6 (83%)**
+### 🧪 **Enterprise-Grade Testing Framework**
+* **[TESTING_STRATEGY.md](testing/TESTING_STRATEGY.md)** - Comprehensive testing strategy, standards & quality gates
+* **[TESTING_IMPLEMENTATION_GUIDE.md](testing/TESTING_IMPLEMENTATION_GUIDE.md)** - Step-by-step implementation roadmap
+* **[TEST_AUTOMATION_CONFIG.md](testing/TEST_AUTOMATION_CONFIG.md)** - CI/CD pipeline & automation configuration
+* **[ProfileService Testing Guide](testing/ProfileServiceTesting.md)** - Testing the new profile management architecture
 
-## Key Findings
+### 📊 **Quality Standards**
+* **Minimum 85% code coverage** for all production code
+* **100% coverage** for critical business logic (ProfileService, persistence)
+* **Zero tolerance** for flaky tests
+* **Automated quality gates** at every commit
+* **Performance benchmarks** for critical operations
 
-### Content Extraction
-- **pdfminer.six** extracted the most content (2.5MB, 684k words)
-- **PyMuPDF** provided multiple extraction methods in one script
-- **pdfplumber** had the best text quality ratio (96.04%)
-- **pypdf/PyPDF2** provided clean, compact extraction
+## Technical Reference
 
-### Keyword Detection
-All successful libraries detected key terms from the developer guide:
-- Niagara: 818-2454 occurrences
-- Developer: 309-927 occurrences  
-- API: 198-594 occurrences
-- Java classes: 151-453 detected
-- Method calls: 600-1806 detected
+* **[JSON Schemas](schemas/)** - Active schemas used by N4-DataSync
+* **[Development Schemas](../schemas-dev/)** - Future development and reference schemas
+* **[Utility Scripts](../scripts/)** - Development and deployment automation scripts
 
-### Layout Preservation
-- **pdfplumber**: Best for tables and structured data
-- **pdfminer.six**: Most detailed positional information
-- **PyMuPDF**: Multiple extraction approaches (text, HTML, blocks)
-- **pypdf/PyPDF2**: Basic but reliable text flow
+## Official Niagara Documentation
 
-## Files Created
+* **[Niagara Framework Documentation](Niagara/)** - Complete Niagara framework documentation
+* **[Niagara Developer Guide](Niagara/Niagara%20Developer%20Guide%20Index.md)** - Official Niagara developer guide
 
-### Extraction Scripts
-- `extract_with_pdfplumber.py` - Uses pdfplumber library
-- `extract_with_pypdf.py` - Uses pypdf library
-- `extract_with_pypdf2.py` - Uses PyPDF2 library
-- `extract_with_pypdf4.py` - Uses PyPDF4 library (failed on encrypted PDF)
-- `extract_with_pymupdf.py` - Uses PyMuPDF/Fitz library
-- `extract_with_pdfminer.py` - Uses pdfminer.six library
+## Reference Materials
 
-### Output Files
-- `extracted_text_pdfplumber.txt` - pdfplumber output
-- `extracted_text_pypdf.txt` - pypdf output
-- `extracted_text_pypdf2.txt` - PyPDF2 output
-- `extracted_text_pymupdf.txt` - PyMuPDF output
-- `extracted_text_pdfminer.txt` - pdfminer.six output
+* **[Niagara Source Code](../niagara_source_code/)** - Official Niagara 4.13.3.48 source code for development reference
 
-### Utility Scripts
-- `run_all_extractions.py` - Master script to run all extractions
-- `compare_results.py` - Compare extraction results
-- `test_extractions.py` - Test extraction quality
-- `README.md` - This documentation
+## External Examples and References
 
-## Installation
+For additional Niagara development examples and patterns:
 
-All required packages are automatically installed by the master script:
+* **Official Niagara Examples** - Available in your Niagara installation at `{niagara_home}/examples/`
+* **Tridium Developer Documentation** - See [Niagara Documentation](Niagara/) for comprehensive guides
+* **Community Resources** - Niagara developer community forums and repositories
+* **Authentication Examples** - ScramSha256 HTTP client examples available from Tridium documentation
 
-```bash
-py -m pip install pdfplumber pypdf PyPDF2 PyPDF4 PyMuPDF pdfminer.six PyCryptodome
-```
+## Project Documentation
 
-## Usage
-
-### Run Individual Scripts
-```bash
-py extract_with_pdfplumber.py
-py extract_with_pypdf.py
-py extract_with_pypdf2.py
-py extract_with_pymupdf.py
-py extract_with_pdfminer.py
-```
-
-### Run All Extractions
-```bash
-py run_all_extractions.py
-```
-
-### Compare Results
-```bash
-py compare_results.py
-py test_extractions.py
-```
-
-## Recommendations
-
-**Choose based on your needs:**
-
-- **For tables and layout preservation**: pdfplumber
-- **For maximum content extraction**: pdfminer.six
-- **For multiple extraction methods**: PyMuPDF
-- **For simple, clean text**: pypdf or PyPDF2
-- **For encrypted PDFs**: Avoid PyPDF4, use others with proper decryption
-
-## Notes
-
-- PyPDF4 failed on the encrypted PDF despite decryption attempts
-- All other libraries successfully handled the 243-page document
-- pdfminer.six extracted the most comprehensive content
-- pdfplumber provided the best balance of quality and layout preservation
-- Processing time varied from ~30 seconds (pypdf) to ~2 minutes (pdfminer.six)
-
-## Technical Details
-
-- **PDF**: docDeveloper.pdf (243 pages, encrypted)
-- **Python**: 3.13.3
-- **Platform**: Windows
-- **Total extraction time**: ~10 minutes for all methods
-- **Output formats**: Plain text with preserved structure
+* **[N4-DataSync Specification](../N4-DataSync%20Full%20Feature%20Specification%20&%20Roadmap.md)** - Complete project specification and roadmap
+* **[Project README](../README.md)** - Main project overview and installation guide

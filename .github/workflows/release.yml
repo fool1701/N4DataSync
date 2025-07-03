@@ -1,0 +1,83 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'zulu'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Run tests
+      run: ./gradlew test
+      
+    - name: Build release artifacts
+      run: ./gradlew build
+      
+    - name: Extract version from tag
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: N4-DataSync v${{ steps.version.outputs.VERSION }}
+        body: |
+          ## N4-DataSync v${{ steps.version.outputs.VERSION }}
+          
+          ### Installation
+          1. Download the `datasync-wb-${{ steps.version.outputs.VERSION }}.jar` file
+          2. Install via Niagara Workbench Software Manager
+          3. Restart Workbench to load the module
+          
+          ### Changes
+          See [CHANGELOG.md](CHANGELOG.md) for detailed changes.
+          
+          ### Requirements
+          - Niagara 4.11+ (tested on N4.13.3.48)
+          - Java 8 JDK
+          - Microsoft Excel for data sources
+        draft: false
+        prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
+        
+    - name: Upload Release Assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./datasync/datasync-wb/build/libs/datasync-wb-${{ steps.version.outputs.VERSION }}.jar
+        asset_name: datasync-wb-${{ steps.version.outputs.VERSION }}.jar
+        asset_content_type: application/java-archive
