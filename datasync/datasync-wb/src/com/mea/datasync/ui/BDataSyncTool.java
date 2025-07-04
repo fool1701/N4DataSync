@@ -1,6 +1,7 @@
 // In: com.mea.datasync.ui
 package com.mea.datasync.ui;
 
+import javax.baja.agent.AgentList;
 import javax.baja.nre.annotations.AgentOn;
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.BComponent;
@@ -160,9 +161,35 @@ public class BDataSyncTool extends BWbNavNodeTool {
   @Override
   public void changed(Property property, Context context) {
     super.changed(property, context);
-    
+
     // Enhanced profiles handle their own persistence through subscribers
     System.out.println("🔍 BDataSyncTool.changed() called for property: " + property.getName());
+  }
+
+  /**
+   * Override getAgents to provide all default BComponent views plus our custom views.
+   * This gives the DataSync Tool the same rich set of views that BEnhancedConnectionProfile has.
+   *
+   * By default, BWbNavNodeTool hides all inherited agents to keep tools simple.
+   * We override this to restore the full set of standard Niagara views.
+   */
+  @Override
+  public AgentList getAgents(Context cx) {
+    // Get the registry agents for BComponent to include all default views
+    AgentList agents = Sys.getRegistry().getAgents(BComponent.TYPE.getTypeInfo());
+
+    // Add our custom DataSync views
+    agents.add("datasync:DataSyncProfileView");
+
+    // Set the view order - custom views first, then standard views
+    agents.toTop("datasync:DataSyncProfileView");
+
+    System.out.println("🔍 BDataSyncTool.getAgents() returning " + agents.size() + " views:");
+    for (int i = 0; i < agents.size(); i++) {
+      System.out.println("  " + (i + 1) + ". " + agents.get(i).getAgentId());
+    }
+
+    return agents;
   }
 
 ////////////////////////////////////////////////////////////////
