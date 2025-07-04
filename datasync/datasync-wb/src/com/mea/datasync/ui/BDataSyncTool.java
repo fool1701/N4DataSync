@@ -13,31 +13,21 @@ import javax.baja.sys.Sys;
 import javax.baja.sys.Type;
 import javax.baja.workbench.tool.BWbNavNodeTool;
 
-import com.mea.datasync.service.ProfileService;
-
 /**
  * BDataSyncTool serves as the entry point for the N4-DataSync module
  * within Niagara Workbench. It extends BWbNavNodeTool to appear in the
  * Tools menu and as a navigable node under the 'tool:' scheme.
  *
- * This tool acts as a container for connection profiles and provides
- * persistent storage independent of any station. Profiles are stored
- * both in the tool's component space (for runtime access) and as JSON
- * files (for persistence across workbench sessions).
+ * This tool acts as a container for enhanced connection profiles and provides
+ * a clean, component-based architecture for managing data synchronization.
  *
  * CRITICAL: This tool MUST be registered as an agent on "workbench:Workbench"
  * in module-include.xml to appear in the Tools menu. Views register as agents
  * on "datasync:DataSyncTool" to appear when the tool is opened.
- *
- * When selected from the Tools menu, it automatically opens the default
- * view associated with this tool, which will be the DataSync Manager view.
  */
 @NiagaraType
 @AgentOn(types = "workbench:Workbench")
 public class BDataSyncTool extends BWbNavNodeTool {
-
-  // ProfileService handles all profile management
-  private ProfileService profileService;
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
@@ -56,27 +46,27 @@ public class BDataSyncTool extends BWbNavNodeTool {
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
 
 ////////////////////////////////////////////////////////////////
-// Fields
+// Subscriber for Enhanced Profile Changes
 ////////////////////////////////////////////////////////////////
 
   /**
-   * Subscriber to listen for property changes on child BConnectionProfile objects.
-   * This ensures that when users modify profile properties, the changes are saved to JSON.
+   * Subscriber to listen for property changes on enhanced profile objects.
+   * This ensures that when users modify profile properties, the changes are saved.
    */
   private final Subscriber profileChangeSubscriber = new Subscriber() {
     @Override
     public void event(BComponentEvent event) {
       if (event.getId() == BComponentEvent.PROPERTY_CHANGED) {
         BComponent source = event.getSourceComponent();
-        if (source instanceof com.mea.datasync.model.BConnectionProfile) {
-          System.out.println("🔍 Profile property changed via subscriber:");
+        
+        // Handle enhanced profiles
+        if (source instanceof com.mea.datasync.model.BEnhancedConnectionProfile) {
+          System.out.println("🔍 Enhanced profile property changed via subscriber:");
           System.out.println("  Profile: " + source.getName());
           System.out.println("  Property: " + event.getSlot().getName());
 
-          // Save the modified profile to JSON
           String profileName = source.getName();
           if (profileName == null || profileName.isEmpty()) {
-            // Try to get name from slot path
             String slotPath = source.getSlotPath().toString();
             if (slotPath.contains(":")) {
               profileName = slotPath.substring(slotPath.lastIndexOf(":") + 1);
@@ -84,10 +74,10 @@ public class BDataSyncTool extends BWbNavNodeTool {
           }
 
           if (profileName != null && !profileName.isEmpty()) {
-            System.out.println("💾 Saving modified profile to JSON: " + profileName);
-            saveProfileToJson((com.mea.datasync.model.BConnectionProfile) source, profileName);
+            System.out.println("💾 Saving modified enhanced profile: " + profileName);
+            saveEnhancedProfileToJson((com.mea.datasync.model.BEnhancedConnectionProfile) source, profileName);
           } else {
-            System.err.println("❌ Cannot determine profile name for saving");
+            System.err.println("❌ Cannot determine enhanced profile name for saving");
           }
         }
       }
@@ -99,7 +89,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
 ////////////////////////////////////////////////////////////////
 
   /**
-   * Called when the tool is started. Initialize ProfileService and load profiles.
+   * Called when the tool is started.
    */
   @Override
   public void started() throws Exception {
@@ -108,61 +98,43 @@ public class BDataSyncTool extends BWbNavNodeTool {
     System.out.println("🚀 Tool type: " + getType());
     System.out.println("🚀 Tool name: " + getName());
     System.out.println("🚀 Tool path: " + getSlotPath());
-
-    // Initialize ProfileService
-    profileService = new ProfileService(this);
-    System.out.println("🚀 Initializing profiles via ProfileService...");
-    profileService.initializeProfiles();
-
     System.out.println("🚀 === BDataSyncTool: Initialization complete ===");
   }
 
   /**
-   * Called when the tool is stopped. Cleanup if needed.
-   */
-  @Override
-  public void stopped() throws Exception {
-    System.out.println("BDataSyncTool: Tool stopped");
-    super.stopped();
-  }
-
-////////////////////////////////////////////////////////////////
-// Component Change Listeners
-////////////////////////////////////////////////////////////////
-
-  /**
    * Called when a child component is parented to this tool.
-   * Save new profiles to JSON storage.
+   * Save new enhanced profiles.
    */
   @Override
   public void childParented(Property property, BValue newChild, Context context) {
     System.out.println("🔍 BDataSyncTool.childParented() called:");
     System.out.println("  Property: " + property.getName());
     System.out.println("  Child Type: " + newChild.getClass().getSimpleName());
-    System.out.println("  Is BConnectionProfile: " + (newChild instanceof com.mea.datasync.model.BConnectionProfile));
+    System.out.println("  Is BEnhancedConnectionProfile: " + (newChild instanceof com.mea.datasync.model.BEnhancedConnectionProfile));
 
     super.childParented(property, newChild, context);
 
-    if (newChild instanceof com.mea.datasync.model.BConnectionProfile) {
-      System.out.println("✅ BDataSyncTool: Profile added, saving to JSON: " + property.getName());
+    // Handle enhanced profiles
+    if (newChild instanceof com.mea.datasync.model.BEnhancedConnectionProfile) {
+      System.out.println("✅ BDataSyncTool: Enhanced profile added: " + property.getName());
 
       // Subscribe to property changes on the profile
       if (newChild instanceof BComponent) {
         profileChangeSubscriber.subscribe((BComponent) newChild, 0, null);
-        System.out.println("🔍 Subscribed to property changes on profile: " + property.getName());
+        System.out.println("🔍 Subscribed to property changes on enhanced profile: " + property.getName());
       }
 
-      saveProfileToJson((com.mea.datasync.model.BConnectionProfile) newChild, property.getName());
-    } else {
+      saveEnhancedProfileToJson((com.mea.datasync.model.BEnhancedConnectionProfile) newChild, property.getName());
+    }
+    
+    else {
       System.out.println("ℹ️ BDataSyncTool: Non-profile component added: " + newChild.getClass().getSimpleName());
     }
   }
 
-
-
   /**
    * Called when a child component is unparented from this tool.
-   * Unsubscribe from property changes and optionally delete from JSON.
+   * Unsubscribe from property changes.
    */
   @Override
   public void childUnparented(Property property, BValue oldChild, Context context) {
@@ -172,575 +144,127 @@ public class BDataSyncTool extends BWbNavNodeTool {
 
     super.childUnparented(property, oldChild, context);
 
-    if (oldChild instanceof com.mea.datasync.model.BConnectionProfile) {
-      System.out.println("✅ BDataSyncTool: Profile removed: " + property.getName());
+    if (oldChild instanceof com.mea.datasync.model.BEnhancedConnectionProfile) {
+      System.out.println("✅ BDataSyncTool: Enhanced profile removed: " + property.getName());
 
       // Unsubscribe from property changes on the profile
       if (oldChild instanceof BComponent) {
-        // Note: Subscriber cleanup - exact method depends on Niagara version
-        // profileChangeSubscriber.unsubscribe();
-        System.out.println("🔍 Profile unparented: " + property.getName());
+        System.out.println("🔍 Enhanced profile unparented: " + property.getName());
       }
-
-      // Note: We don't automatically delete from JSON here to preserve user data
-      // Users can manually delete profiles if needed
     }
   }
 
   /**
    * Called when a property of this tool or its children changes.
-   * Save modified profiles to JSON storage.
    */
   @Override
   public void changed(Property property, Context context) {
-    System.out.println("🔍 BDataSyncTool.changed() called:");
-    System.out.println("  Property: " + property.getName());
-
     super.changed(property, context);
-
-    // Check if the change is on a child profile
-    BValue value = get(property);
-    if (value instanceof com.mea.datasync.model.BConnectionProfile) {
-      System.out.println("✅ BDataSyncTool: Profile property changed, saving to JSON: " + property.getName());
-      saveProfileToJson((com.mea.datasync.model.BConnectionProfile) value, property.getName());
-    } else {
-      System.out.println("ℹ️ BDataSyncTool: Non-profile property changed: " + property.getName() + " (type: " + (value != null ? value.getClass().getSimpleName() : "null") + ")");
-    }
+    
+    // Enhanced profiles handle their own persistence through subscribers
+    System.out.println("🔍 BDataSyncTool.changed() called for property: " + property.getName());
   }
 
 ////////////////////////////////////////////////////////////////
-// Profile Management
+// Enhanced Profile Management
 ////////////////////////////////////////////////////////////////
 
   /**
-   * Initialize the tool with connection profiles.
-   * This method loads profiles from JSON files and adds them as children.
-   */
-  public void initializeProfiles() {
-    try {
-      System.out.println("=== BDataSyncTool: Initializing connection profiles ===");
-
-      // Check if profiles are already loaded
-      BComponent[] existingProfiles = getChildren(com.mea.datasync.model.BConnectionProfile.class);
-      System.out.println("Found " + existingProfiles.length + " existing profiles in component tree");
-
-      if (existingProfiles.length > 0) {
-        System.out.println("Profiles already loaded, listing them:");
-        for (int i = 0; i < existingProfiles.length; i++) {
-          System.out.println("  " + (i+1) + ". " + existingProfiles[i].getName() + " (" + existingProfiles[i].getType() + ")");
-        }
-        return;
-      }
-
-      // Load profiles from JSON files using ProfileManager
-      System.out.println("Creating ProfileManager instance...");
-      com.mea.datasync.persistence.ProfileManager profileManager =
-        new com.mea.datasync.persistence.ProfileManager();
-
-      System.out.println("Listing profiles from JSON storage...");
-      java.util.List<String> profileNames = profileManager.listProfiles();
-      System.out.println("Found " + profileNames.size() + " profiles in JSON storage:");
-      for (String name : profileNames) {
-        System.out.println("  - " + name);
-      }
-
-      if (profileNames.isEmpty()) {
-        System.out.println("No profiles found in storage, creating initial sample profiles...");
-        createInitialProfiles(profileManager);
-        profileNames = profileManager.listProfiles();
-        System.out.println("After creating samples, found " + profileNames.size() + " profiles");
-      }
-
-      // Load each profile and add as child
-      System.out.println("Loading profiles into component tree...");
-      for (String profileName : profileNames) {
-        System.out.println("Loading profile: " + profileName);
-        com.mea.datasync.model.BConnectionProfile profile = profileManager.loadProfile(profileName);
-        if (profile != null) {
-          String componentName = sanitizeComponentName(profileName);
-          add(componentName, profile);
-          System.out.println("  SUCCESS: Added profile '" + profileName + "' as component '" + componentName + "'");
-        } else {
-          System.err.println("  ERROR: Failed to load profile '" + profileName + "'");
-        }
-      }
-
-      // Verify what we actually have
-      BComponent[] finalProfiles = getChildren(com.mea.datasync.model.BConnectionProfile.class);
-      System.out.println("Final result: " + finalProfiles.length + " profiles loaded in component tree");
-
-      System.out.println("=== Profile initialization complete ===");
-
-    } catch (Exception e) {
-      System.err.println("Error initializing profiles: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * Create initial sample profiles for first-time users.
-   */
-  private void createInitialProfiles(com.mea.datasync.persistence.ProfileManager profileManager) {
-    try {
-      System.out.println("Creating initial sample profiles");
-
-      // Sample Profile 1
-      com.mea.datasync.model.BConnectionProfile profile1 =
-        new com.mea.datasync.model.BConnectionProfile();
-      profile1.setSourceType("Excel");
-      profile1.setSourcePath("C:\\Data\\BuildingA_HVAC.xlsx");
-      profile1.setSheetName("Equipment");
-      profile1.setTargetHost("192.168.1.100");
-      profile1.setTargetPath("station:|slot:/Drivers");
-      profile1.setStatus("Success");
-      profile1.setComponentsCreated(45);
-      profileManager.saveProfile(profile1, "Building A HVAC");
-
-      // Sample Profile 2
-      com.mea.datasync.model.BConnectionProfile profile2 =
-        new com.mea.datasync.model.BConnectionProfile();
-      profile2.setSourceType("Excel");
-      profile2.setSourcePath("C:\\Data\\BuildingB_Lighting.xlsx");
-      profile2.setSheetName("Points");
-      profile2.setTargetHost("192.168.1.101");
-      profile2.setTargetPath("station:|slot:/Drivers/Lighting");
-      profile2.setStatus("Error");
-      profile2.setComponentsCreated(23);
-      profileManager.saveProfile(profile2, "Building B Lighting");
-
-      // Sample Profile 3
-      com.mea.datasync.model.BConnectionProfile profile3 =
-        new com.mea.datasync.model.BConnectionProfile();
-      profile3.setSourceType("Excel");
-      profile3.setSourcePath("C:\\Data\\ChillerPlant.xlsx");
-      profile3.setSheetName("Chillers");
-      profile3.setTargetHost("192.168.1.102");
-      profile3.setTargetPath("station:|slot:/Drivers/HVAC");
-      profile3.setStatus("Never Synced");
-      profile3.setComponentsCreated(0);
-      profileManager.saveProfile(profile3, "Chiller Plant");
-
-      System.out.println("Initial sample profiles created");
-
-    } catch (Exception e) {
-      System.err.println("Error creating initial profiles: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * Force create a test profile and save it to JSON.
-   * This will help identify if the saving mechanism works.
-   */
-  public void forceCreateTestProfile() {
-    System.out.println("=== FORCE CREATE TEST PROFILE ===");
-    try {
-      // Create ProfileManager
-      com.mea.datasync.persistence.ProfileManager pm = new com.mea.datasync.persistence.ProfileManager();
-      System.out.println("ProfileManager created");
-
-      // Create a simple test profile
-      com.mea.datasync.model.BConnectionProfile testProfile = new com.mea.datasync.model.BConnectionProfile();
-      testProfile.setSourceType("Excel");
-      testProfile.setSourcePath("C:\\Test\\manual_test.xlsx");
-      testProfile.setSheetName("TestSheet");
-      testProfile.setTargetHost("localhost");
-      testProfile.setTargetPath("station:|slot:/ManualTest");
-      testProfile.setStatus("Manual Test");
-      testProfile.setComponentsCreated(999);
-      testProfile.setLastError("No Error");
-
-      // Try to save it
-      String profileName = "ManualTest_" + System.currentTimeMillis();
-      System.out.println("Attempting to save profile: " + profileName);
-      boolean saved = pm.saveProfile(testProfile, profileName);
-      System.out.println("Save result: " + saved);
-
-      if (saved) {
-        // Verify it exists
-        boolean exists = pm.profileExists(profileName);
-        System.out.println("Profile exists after save: " + exists);
-
-        // List all profiles
-        java.util.List<String> profiles = pm.listProfiles();
-        System.out.println("Total profiles now: " + profiles.size());
-        for (String name : profiles) {
-          System.out.println("  - " + name);
-        }
-
-        // Try to load it back
-        com.mea.datasync.model.BConnectionProfile loaded = pm.loadProfile(profileName);
-        if (loaded != null) {
-          System.out.println("Profile loaded successfully!");
-          System.out.println("  Source Type: " + loaded.getSourceType());
-          System.out.println("  Source Path: " + loaded.getSourcePath());
-        } else {
-          System.err.println("ERROR: Failed to load profile back!");
-        }
-      } else {
-        System.err.println("ERROR: Failed to save profile!");
-      }
-
-    } catch (Exception e) {
-      System.err.println("ERROR in forceCreateTestProfile: " + e.getMessage());
-      e.printStackTrace();
-    }
-    System.out.println("=== FORCE CREATE TEST COMPLETE ===");
-  }
-
-  /**
-   * Simple test method to verify the tool is working.
-   * Call this from the workbench console to test functionality.
-   */
-  public void testTool() {
-    System.out.println("=== BDataSyncTool Test ===");
-    System.out.println("Tool is working! Type: " + getType());
-
-    // List current children
-    BComponent[] children = getChildren(BComponent.class);
-    System.out.println("Current children count: " + children.length);
-    System.out.println("Current children:");
-    for (int i = 0; i < children.length; i++) {
-      System.out.println("  " + (i+1) + ". " + children[i].getName() + " (" + children[i].getType() + ")");
-    }
-
-    // Test ProfileManager
-    try {
-      com.mea.datasync.persistence.ProfileManager pm = new com.mea.datasync.persistence.ProfileManager();
-      System.out.println("ProfileManager created successfully");
-      System.out.println(pm.diagnose());
-    } catch (Exception e) {
-      System.err.println("Error creating ProfileManager: " + e.getMessage());
-      e.printStackTrace();
-    }
-
-    System.out.println("=== Test Complete ===");
-  }
-
-  /**
-   * Simple test to verify if the tool is working and accessible.
-   * This is the first test to run to verify basic functionality.
-   */
-  public void testBasicToolAccess() {
-    System.out.println("=== BASIC TOOL ACCESS TEST ===");
-    System.out.println("✅ BDataSyncTool is accessible and this method can be called!");
-    System.out.println("Tool type: " + this.getType());
-    System.out.println("Tool name: " + this.getName());
-    System.out.println("Tool slot path: " + this.getSlotPath());
-
-    // Test ProfileManager access
-    try {
-      com.mea.datasync.persistence.ProfileManager pm =
-        new com.mea.datasync.persistence.ProfileManager();
-      System.out.println("✅ ProfileManager can be created");
-      System.out.println("Profiles directory: " + pm.getProfilesDirectory().getAbsolutePath());
-      System.out.println("Directory exists: " + pm.getProfilesDirectory().exists());
-      System.out.println("Directory writable: " + pm.getProfilesDirectory().canWrite());
-
-      // List current profiles
-      java.util.List<String> profiles = pm.listProfiles();
-      System.out.println("Current profiles: " + profiles.size());
-      for (String profile : profiles) {
-        System.out.println("  - " + profile);
-      }
-
-    } catch (Exception e) {
-      System.err.println("❌ Error accessing ProfileManager: " + e.getMessage());
-      e.printStackTrace();
-    }
-
-    System.out.println("=== BASIC TOOL ACCESS TEST COMPLETE ===");
-  }
-
-  /**
-   * Create sample profiles for testing UI integration.
-   * This can be called from the workbench to create test data.
-   */
-  public void createSampleProfiles() {
-    System.out.println("=== Creating Sample Profiles ===");
-    try {
-      // Create sample profiles that would typically be created through the UI
-      com.mea.datasync.persistence.ProfileManager profileManager =
-        new com.mea.datasync.persistence.ProfileManager();
-      createInitialProfiles(profileManager);
-
-      // Verify they were saved to JSON
-
-      java.util.List<String> profiles = profileManager.listProfiles();
-      System.out.println("Created " + profiles.size() + " sample profiles:");
-      for (String profile : profiles) {
-        System.out.println("  - " + profile);
-      }
-
-    } catch (Exception e) {
-      System.err.println("Error creating sample profiles: " + e.getMessage());
-      e.printStackTrace();
-    }
-    System.out.println("=== Sample Profiles Creation Complete ===");
-  }
-
-  /**
-   * Test method to manually trigger profile creation and verify JSON file creation.
-   * This simulates what should happen when user creates profiles through UI.
-   */
-  public void testManualProfileCreation() {
-    System.out.println("=== TESTING MANUAL PROFILE CREATION ===");
-
-    try {
-      // Step 1: Create a test profile
-      System.out.println("Step 1: Creating test profile...");
-      com.mea.datasync.model.BConnectionProfile testProfile =
-        new com.mea.datasync.model.BConnectionProfile();
-      testProfile.setSourceType("Excel");
-      testProfile.setSourcePath("C:\\Test\\manual_ui_test.xlsx");
-      testProfile.setSheetName("ManualTest");
-      testProfile.setTargetHost("localhost");
-      testProfile.setTargetPath("station:|slot:/ManualUITest");
-      testProfile.setStatus("Manual UI Test");
-      testProfile.setComponentsCreated(123);
-
-      // Step 2: Add it to this tool (should trigger childParented)
-      System.out.println("Step 2: Adding profile to tool (should trigger childParented)...");
-      String profileName = "ManualUITest_" + System.currentTimeMillis();
-      add(profileName, testProfile);
-      System.out.println("Profile added to tool with name: " + profileName);
-
-      // Step 3: Check if JSON file was created
-      System.out.println("Step 3: Checking if JSON file was created...");
-      com.mea.datasync.persistence.ProfileManager pm =
-        new com.mea.datasync.persistence.ProfileManager();
-
-      boolean exists = pm.profileExists(profileName);
-      System.out.println("JSON file exists: " + exists);
-
-      if (exists) {
-        System.out.println("✅ SUCCESS: JSON file was created!");
-
-        // Verify content
-        com.mea.datasync.model.BConnectionProfile loaded = pm.loadProfile(profileName);
-        if (loaded != null) {
-          System.out.println("✅ SUCCESS: Profile can be loaded from JSON!");
-          System.out.println("  Source Path: " + loaded.getSourcePath());
-          System.out.println("  Sheet Name: " + loaded.getSheetName());
-        } else {
-          System.err.println("❌ ERROR: Profile exists but cannot be loaded!");
-        }
-      } else {
-        System.err.println("❌ ERROR: JSON file was NOT created!");
-        System.err.println("This means childParented() or saveProfileToJson() is not working correctly.");
-      }
-
-      // Step 4: Test property change (should trigger changed())
-      System.out.println("Step 4: Testing property change...");
-      testProfile.setStatus("Modified Status");
-      System.out.println("Changed profile status - this should trigger changed() method");
-
-      // Wait a moment and check again
-      Thread.sleep(1000);
-      if (pm.profileExists(profileName)) {
-        com.mea.datasync.model.BConnectionProfile reloaded = pm.loadProfile(profileName);
-        if (reloaded != null && "Modified Status".equals(reloaded.getStatus())) {
-          System.out.println("✅ SUCCESS: Property change was persisted to JSON!");
-        } else {
-          System.err.println("❌ ERROR: Property change was NOT persisted to JSON!");
-        }
-      }
-
-      // Step 5: Clean up
-      System.out.println("Step 5: Cleaning up...");
-      remove(testProfile);
-      boolean deleted = pm.deleteProfile(profileName);
-      System.out.println("Cleanup result: " + deleted);
-
-    } catch (Exception e) {
-      System.err.println("ERROR in manual profile creation test: " + e.getMessage());
-      e.printStackTrace();
-    }
-
-    System.out.println("=== MANUAL PROFILE CREATION TEST COMPLETE ===");
-  }
-
-  /**
-   * Debug method to test ProfileManager functionality.
-   * This can be called from the workbench to diagnose issues.
-   */
-  public void debugProfileManager() {
-    System.out.println("=== DEBUG: ProfileManager Test ===");
-    try {
-      com.mea.datasync.persistence.ProfileManager profileManager =
-        new com.mea.datasync.persistence.ProfileManager();
-
-      // Run diagnostic
-      System.out.println(profileManager.diagnose());
-
-      // Test basic file operations first
-      System.out.println("Testing basic file operations...");
-      boolean basicTest = profileManager.testBasicFileOperations();
-      System.out.println("Basic file operations result: " + basicTest);
-
-      // Test save functionality
-      System.out.println("Testing profile save functionality...");
-      boolean testResult = profileManager.testSaveProfile();
-      System.out.println("Profile save test result: " + testResult);
-
-      // List profiles
-      java.util.List<String> profiles = profileManager.listProfiles();
-      System.out.println("Found " + profiles.size() + " profiles:");
-      for (String profile : profiles) {
-        System.out.println("  - " + profile);
-      }
-
-    } catch (Exception e) {
-      System.err.println("Error in ProfileManager debug: " + e.getMessage());
-      e.printStackTrace();
-    }
-    System.out.println("=== DEBUG: ProfileManager Test Complete ===");
-  }
-
-  /**
-   * Save a single profile to JSON storage.
-   */
-  private void saveProfileToJson(com.mea.datasync.model.BConnectionProfile profile, String profileName) {
-    System.out.println("💾 BDataSyncTool.saveProfileToJson() called for: " + profileName);
-    try {
-      com.mea.datasync.persistence.ProfileManager profileManager =
-        new com.mea.datasync.persistence.ProfileManager();
-      boolean saved = profileManager.saveProfile(profile, profileName);
-      System.out.println("💾 Profile save result for '" + profileName + "': " + (saved ? "✅ SUCCESS" : "❌ FAILED"));
-
-      // Verify the file was actually created
-      if (saved) {
-        boolean exists = profileManager.profileExists(profileName);
-        System.out.println("💾 File verification - exists: " + exists);
-        if (exists) {
-          java.io.File profilesDir = profileManager.getProfilesDirectory();
-          System.out.println("💾 File location: " + profilesDir.getAbsolutePath() + "\\" + profileName + ".json");
-        }
-      }
-    } catch (Exception e) {
-      System.err.println("❌ Error saving profile '" + profileName + "' to JSON: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * Delete a profile from JSON storage.
-   */
-  private void deleteProfileFromJson(String profileName) {
-    try {
-      com.mea.datasync.persistence.ProfileManager profileManager =
-        new com.mea.datasync.persistence.ProfileManager();
-      boolean deleted = profileManager.deleteProfile(profileName);
-      System.out.println("Profile delete result for '" + profileName + "': " + (deleted ? "SUCCESS" : "FAILED"));
-    } catch (Exception e) {
-      System.err.println("Error deleting profile '" + profileName + "' from JSON: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * Sanitize a profile name for use as a component name.
-   */
-  private String sanitizeComponentName(String name) {
-    if (name == null) return "unnamed";
-    return name.replaceAll("[^a-zA-Z0-9_]", "_");
-  }
-
-////////////////////////////////////////////////////////////////
-// Public Profile Management API
-////////////////////////////////////////////////////////////////
-
-  /**
-   * Create a new connection profile.
+   * Create a new enhanced connection profile.
    * @param profileName Unique name for the profile
-   * @param profile The profile to create
    * @return true if successful
    */
-  public boolean createProfile(String profileName, com.mea.datasync.model.BConnectionProfile profile) {
-    if (profileService == null) {
-      System.err.println("ProfileService not initialized");
+  public boolean createEnhancedProfile(String profileName) {
+    try {
+      System.out.println("🚀 Creating enhanced profile: " + profileName);
+      
+      // Create new enhanced profile
+      com.mea.datasync.model.BEnhancedConnectionProfile enhancedProfile = 
+        new com.mea.datasync.model.BEnhancedConnectionProfile();
+      
+      // Set basic properties
+      enhancedProfile.setStatus("Never Synced");
+      enhancedProfile.setComponentsCreated(0);
+      
+      // Add to tool (this will trigger persistence)
+      add(profileName, enhancedProfile);
+      
+      System.out.println("✅ Enhanced profile created successfully: " + profileName);
+      return true;
+      
+    } catch (Exception e) {
+      System.err.println("❌ Error creating enhanced profile: " + e.getMessage());
+      e.printStackTrace();
       return false;
     }
-    return profileService.createProfile(profileName, profile);
   }
 
   /**
-   * Update an existing profile.
-   * @param profileName Name of the profile to update
-   * @param profile Updated profile data
-   * @return true if successful
+   * Save a single enhanced profile to JSON storage.
+   * TODO: Implement proper enhanced profile persistence
    */
-  public boolean updateProfile(String profileName, com.mea.datasync.model.BConnectionProfile profile) {
-    if (profileService == null) {
-      System.err.println("ProfileService not initialized");
-      return false;
+  private void saveEnhancedProfileToJson(com.mea.datasync.model.BEnhancedConnectionProfile profile, String profileName) {
+    System.out.println("💾 BDataSyncTool.saveEnhancedProfileToJson() called for: " + profileName);
+    try {
+      // For now, create a simple JSON representation
+      // TODO: Create proper EnhancedProfileManager
+      System.out.println("📝 Enhanced profile persistence - creating basic JSON:");
+      System.out.println("  Profile Name: " + profileName);
+      System.out.println("  Data Source: " + (profile.getDataSourceConnection() != null ? 
+        profile.getDataSourceConnection().getConnectionSummary() : "null"));
+      System.out.println("  Status: " + profile.getStatus());
+      
+      // Create a marker file to show it's working
+      java.io.File profilesDir = new java.io.File(System.getProperty("user.home"), ".datasync/enhanced_profiles");
+      profilesDir.mkdirs();
+      java.io.File markerFile = new java.io.File(profilesDir, profileName + "_enhanced.json");
+      
+      try (java.io.FileWriter writer = new java.io.FileWriter(markerFile)) {
+        writer.write("{\n");
+        writer.write("  \"profileName\": \"" + profileName + "\",\n");
+        writer.write("  \"type\": \"enhanced\",\n");
+        writer.write("  \"status\": \"" + profile.getStatus() + "\",\n");
+        writer.write("  \"created\": \"" + new java.util.Date() + "\"\n");
+        writer.write("}\n");
+      }
+      
+      System.out.println("✅ Enhanced profile marker saved: " + markerFile.getAbsolutePath());
+      
+    } catch (Exception e) {
+      System.err.println("❌ Error saving enhanced profile to JSON: " + e.getMessage());
+      e.printStackTrace();
     }
-    return profileService.updateProfile(profileName, profile);
   }
 
+////////////////////////////////////////////////////////////////
+// Actions for UI Integration
+////////////////////////////////////////////////////////////////
+
   /**
-   * Delete a profile.
-   * @param profileName Name of the profile to delete
-   * @return true if successful
+   * Action to create a new enhanced profile from the UI.
    */
-  public boolean deleteProfile(String profileName) {
-    if (profileService == null) {
-      System.err.println("ProfileService not initialized");
-      return false;
+  public void doCreateEnhancedProfile() {
+    try {
+      String profileName = "EnhancedProfile_" + System.currentTimeMillis();
+      boolean success = createEnhancedProfile(profileName);
+      
+      if (success) {
+        System.out.println("🎉 Enhanced profile created from UI: " + profileName);
+        System.out.println("📍 Check the nav tree under DataSync Tool for the new profile");
+      } else {
+        System.err.println("❌ Failed to create enhanced profile from UI");
+      }
+    } catch (Exception e) {
+      System.err.println("❌ Error in doCreateEnhancedProfile: " + e.getMessage());
+      e.printStackTrace();
     }
-    return profileService.deleteProfile(profileName);
   }
 
   /**
-   * Get all connection profiles.
-   * @return Array of all profiles
-   */
-  public com.mea.datasync.model.BConnectionProfile[] getAllProfiles() {
-    if (profileService == null) {
-      System.err.println("ProfileService not initialized");
-      return new com.mea.datasync.model.BConnectionProfile[0];
-    }
-    return profileService.getAllProfiles();
-  }
-
-  /**
-   * Get the number of profiles.
+   * Get the number of enhanced profiles.
    * @return Profile count
    */
   public int getProfileCount() {
-    if (profileService == null) {
-      return 0;
-    }
-    return profileService.getProfileCount();
+    return getChildren(com.mea.datasync.model.BEnhancedConnectionProfile.class).length;
   }
-
-  /**
-   * Check if a profile exists.
-   * @param profileName Name of the profile to check
-   * @return true if profile exists
-   */
-  public boolean profileExists(String profileName) {
-    if (profileService == null) {
-      return false;
-    }
-    return profileService.profileExists(profileName);
-  }
-
-  // Note: Test methods moved to proper TestNG class: BProfileServiceTest
-  // Use automated testing instead of manual console testing
-
-////////////////////////////////////////////////////////////////
-// Constructor
-////////////////////////////////////////////////////////////////
-
-    /**
-     * Default constructor.
-     * Tools are typically singletons, so no public constructor is needed for external instantiation.
-     */
-    public BDataSyncTool() {
-    }
-
-    // Note: BWbNavNodeTool automatically handles the invoke() method
-    // by hyperlinking to the default view associated with this tool's ORD.
-    // The tool's ORD will be "tool:com.mea.datasync.ui.BDataSyncTool|slot:/"
 }

@@ -12,11 +12,10 @@ import java.util.List;
  * BEnhancedConnectionProfile demonstrates the Component Relationship Pattern
  * for managing complex component hierarchies in Niagara. This profile uses
  * composition to separate concerns:
- * 
+ *
  * - BDataSourceConnection: Connection information (unremovable child)
- * - BDataExtractionSettings: Data extraction configuration (unremovable child)  
  * - BTargetNiagaraStation[]: Target stations (removable children, multiple allowed)
- * 
+ *
  * This follows Niagara best practices for nav tree integration and component
  * lifecycle management, providing a clean separation of concerns while
  * maintaining proper parent-child relationships.
@@ -28,12 +27,7 @@ import java.util.List;
   defaultValue = "new BDataSourceConnection()",
   flags = Flags.READONLY | Flags.SUMMARY
 )
-@NiagaraProperty(
-  name = "extractionSettings",
-  type = "datasync:DataExtractionSettings", 
-  defaultValue = "new BDataExtractionSettings()",
-  flags = Flags.READONLY | Flags.SUMMARY
-)
+
 @NiagaraProperty(
   name = "status",
   type = "baja:String",
@@ -83,29 +77,6 @@ public class BEnhancedConnectionProfile extends BComponent implements BINavNode 
   public void setDataSourceConnection(BDataSourceConnection v) { set(dataSourceConnection, v, null); }
 
   //endregion Property "dataSourceConnection"
-
-  //region Property "extractionSettings"
-
-  /**
-   * Slot for the {@code extractionSettings} property.
-   * @see #getExtractionSettings
-   * @see #setExtractionSettings
-   */
-  public static final Property extractionSettings = newProperty(0, new BDataExtractionSettings(), null);
-
-  /**
-   * Get the {@code extractionSettings} property.
-   * @see #extractionSettings
-   */
-  public BDataExtractionSettings getExtractionSettings() { return (BDataExtractionSettings)get(extractionSettings); }
-
-  /**
-   * Set the {@code extractionSettings} property.
-   * @see #extractionSettings
-   */
-  public void setExtractionSettings(BDataExtractionSettings v) { set(extractionSettings, v, null); }
-
-  //endregion Property "extractionSettings"
 
   //region Property "status"
 
@@ -227,8 +198,7 @@ public class BEnhancedConnectionProfile extends BComponent implements BINavNode 
     }
     
     // Core components are managed through properties, not dynamic children
-    if (child instanceof BDataSourceConnection || 
-        child instanceof BDataExtractionSettings) {
+    if (child instanceof BDataSourceConnection) {
       return false; // These are managed as properties
     }
     
@@ -241,15 +211,16 @@ public class BEnhancedConnectionProfile extends BComponent implements BINavNode 
   @Override
   public void childParented(Property property, BValue newChild, Context context) {
     super.childParented(property, newChild, context);
-    
+
     if (newChild instanceof BTargetNiagaraStation) {
       System.out.println("Target station added to profile: " + property.getName());
-      
+
       // Notify parent tool of changes for persistence
-      BComponent parent = getParent();
+      BComplex parent = getParent();
       if (parent instanceof com.mea.datasync.ui.BDataSyncTool) {
-        // Trigger profile save
-        ((com.mea.datasync.ui.BDataSyncTool) parent).saveProfileToJson(this, getName());
+        // Trigger profile save - TODO: Need enhanced profile save method
+        // ((com.mea.datasync.ui.BDataSyncTool) parent).saveEnhancedProfileToJson(this, getName());
+        System.out.println("Enhanced profile persistence not yet implemented");
       }
     }
   }
@@ -260,15 +231,16 @@ public class BEnhancedConnectionProfile extends BComponent implements BINavNode 
   @Override
   public void childUnparented(Property property, BValue oldChild, Context context) {
     super.childUnparented(property, oldChild, context);
-    
+
     if (oldChild instanceof BTargetNiagaraStation) {
       System.out.println("Target station removed from profile: " + property.getName());
-      
+
       // Notify parent tool of changes for persistence
-      BComponent parent = getParent();
+      BComplex parent = getParent();
       if (parent instanceof com.mea.datasync.ui.BDataSyncTool) {
-        // Trigger profile save
-        ((com.mea.datasync.ui.BDataSyncTool) parent).saveProfileToJson(this, getName());
+        // Trigger profile save - TODO: Need enhanced profile save method
+        // ((com.mea.datasync.ui.BDataSyncTool) parent).saveEnhancedProfileToJson(this, getName());
+        System.out.println("Enhanced profile persistence not yet implemented");
       }
     }
   }
@@ -354,11 +326,6 @@ public class BEnhancedConnectionProfile extends BComponent implements BINavNode 
       children.add(connection);
     }
     
-    BDataExtractionSettings settings = getExtractionSettings();
-    if (settings != null) {
-      children.add(settings);
-    }
-    
     // Add target stations
     BTargetNiagaraStation[] stations = getTargetStations();
     for (BTargetNiagaraStation station : stations) {
@@ -413,11 +380,6 @@ public class BEnhancedConnectionProfile extends BComponent implements BINavNode 
       summary.append("Source: ").append(connection.getConnectionSummary()).append("\n");
     }
     
-    BDataExtractionSettings settings = getExtractionSettings();
-    if (settings != null) {
-      summary.append("Extraction: ").append(settings.getExtractionSummary()).append("\n");
-    }
-    
     BTargetNiagaraStation[] stations = getTargetStations();
     summary.append("Targets: ").append(stations.length).append(" station(s)\n");
     
@@ -433,11 +395,6 @@ public class BEnhancedConnectionProfile extends BComponent implements BINavNode 
   public boolean validateConfiguration() {
     BDataSourceConnection connection = getDataSourceConnection();
     if (connection == null || !connection.testConnection()) {
-      return false;
-    }
-    
-    BDataExtractionSettings settings = getExtractionSettings();
-    if (settings == null || !settings.validateSettings(connection)) {
       return false;
     }
     
