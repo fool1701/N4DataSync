@@ -88,27 +88,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
       if (event.getId() == BComponentEvent.PROPERTY_CHANGED) {
         BComponent source = event.getSourceComponent();
         
-        // Handle enhanced profiles
-        if (source instanceof com.mea.datasync.model.BEnhancedConnectionProfile) {
-          System.out.println("🔍 Enhanced profile property changed via subscriber:");
-          System.out.println("  Profile: " + source.getName());
-          System.out.println("  Property: " + event.getSlot().getName());
-
-          String profileName = source.getName();
-          if (profileName == null || profileName.isEmpty()) {
-            String slotPath = source.getSlotPath().toString();
-            if (slotPath.contains(":")) {
-              profileName = slotPath.substring(slotPath.lastIndexOf(":") + 1);
-            }
-          }
-
-          if (profileName != null && !profileName.isEmpty()) {
-            System.out.println("💾 Saving modified enhanced profile: " + profileName);
-            saveEnhancedProfileToJson((com.mea.datasync.model.BEnhancedConnectionProfile) source, profileName);
-          } else {
-            System.err.println("❌ Cannot determine enhanced profile name for saving");
-          }
-        }
+        // Note: Profile support removed - now only data source connections
       }
     }
   };
@@ -139,26 +119,9 @@ public class BDataSyncTool extends BWbNavNodeTool {
     System.out.println("🔍 BDataSyncTool.childParented() called:");
     System.out.println("  Property: " + property.getName());
     System.out.println("  Child Type: " + newChild.getClass().getSimpleName());
-    System.out.println("  Is BEnhancedConnectionProfile: " + (newChild instanceof com.mea.datasync.model.BEnhancedConnectionProfile));
-
     super.childParented(property, newChild, context);
 
-    // Handle enhanced profiles
-    if (newChild instanceof com.mea.datasync.model.BEnhancedConnectionProfile) {
-      System.out.println("✅ BDataSyncTool: Enhanced profile added: " + property.getName());
-
-      // Subscribe to property changes on the profile
-      if (newChild instanceof BComponent) {
-        profileChangeSubscriber.subscribe((BComponent) newChild, 0, null);
-        System.out.println("🔍 Subscribed to property changes on enhanced profile: " + property.getName());
-      }
-
-      saveEnhancedProfileToJson((com.mea.datasync.model.BEnhancedConnectionProfile) newChild, property.getName());
-    }
-    
-    else {
-      System.out.println("ℹ️ BDataSyncTool: Non-profile component added: " + newChild.getClass().getSimpleName());
-    }
+    System.out.println("ℹ️ BDataSyncTool: Component added: " + newChild.getClass().getSimpleName());
   }
 
   /**
@@ -173,14 +136,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
 
     super.childUnparented(property, oldChild, context);
 
-    if (oldChild instanceof com.mea.datasync.model.BEnhancedConnectionProfile) {
-      System.out.println("✅ BDataSyncTool: Enhanced profile removed: " + property.getName());
-
-      // Unsubscribe from property changes on the profile
-      if (oldChild instanceof BComponent) {
-        System.out.println("🔍 Enhanced profile unparented: " + property.getName());
-      }
-    }
+    System.out.println("ℹ️ BDataSyncTool: Component removed: " + oldChild.getClass().getSimpleName());
   }
 
   /**
@@ -196,7 +152,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
 
   /**
    * Override getAgents to provide all default BComponent views plus our custom views.
-   * This gives the DataSync Tool the same rich set of views that BEnhancedConnectionProfile has.
+   * This gives the DataSync Tool a rich set of views for managing data source connections.
    *
    * By default, BWbNavNodeTool hides all inherited agents to keep tools simple.
    * We override this to restore the full set of standard Niagara views.
@@ -225,102 +181,72 @@ public class BDataSyncTool extends BWbNavNodeTool {
 ////////////////////////////////////////////////////////////////
 
   /**
-   * Create a new enhanced connection profile.
-   * @param profileName Unique name for the profile
+   * Create a new Excel data source connection.
+   * @param connectionName Unique name for the connection
    * @return true if successful
    */
-  public boolean createEnhancedProfile(String profileName) {
+  public boolean createExcelConnection(String connectionName) {
     try {
-      System.out.println("🚀 Creating enhanced profile: " + profileName);
-      
-      // Create new enhanced profile
-      com.mea.datasync.model.BEnhancedConnectionProfile enhancedProfile = 
-        new com.mea.datasync.model.BEnhancedConnectionProfile();
-      
-      // Set basic properties
-      enhancedProfile.setStatus("Never Synced");
-      enhancedProfile.setComponentsCreated(0);
-      
-      // Add to tool (this will trigger persistence)
-      add(profileName, enhancedProfile);
-      
-      System.out.println("✅ Enhanced profile created successfully: " + profileName);
+      System.out.println("🚀 Creating Excel connection: " + connectionName);
+
+      // Create new Excel connection
+      com.mea.datasync.model.BExcelDataSourceConnection connection =
+        new com.mea.datasync.model.BExcelDataSourceConnection();
+
+      // Configure connection details
+      com.mea.datasync.model.BExcelConnectionDetails details = connection.getConnectionDetails();
+      details.setConnectionName(connectionName);
+      details.setDescription("Excel data source connection");
+      details.setFilePath("C:\\DataSync\\" + connectionName.toLowerCase() + ".xlsx");
+      details.setDefaultWorksheet("Sheet1");
+
+      // Add to data source connections container
+      BDataSourceConnections connections = getDataSourceConnections();
+      connections.add(connectionName, connection);
+
+      System.out.println("✅ Excel connection created successfully: " + connectionName);
       return true;
-      
+
     } catch (Exception e) {
-      System.err.println("❌ Error creating enhanced profile: " + e.getMessage());
+      System.err.println("❌ Error creating Excel connection: " + e.getMessage());
       e.printStackTrace();
       return false;
     }
   }
 
-  /**
-   * Save a single enhanced profile to JSON storage.
-   * TODO: Implement proper enhanced profile persistence
-   */
-  private void saveEnhancedProfileToJson(com.mea.datasync.model.BEnhancedConnectionProfile profile, String profileName) {
-    System.out.println("💾 BDataSyncTool.saveEnhancedProfileToJson() called for: " + profileName);
-    try {
-      // For now, create a simple JSON representation
-      // TODO: Create proper EnhancedProfileManager
-      System.out.println("📝 Enhanced profile persistence - creating basic JSON:");
-      System.out.println("  Profile Name: " + profileName);
-      System.out.println("  Data Source: " + (profile.getDataSourceConnection() != null ? 
-        profile.getDataSourceConnection().getConnectionSummary() : "null"));
-      System.out.println("  Status: " + profile.getStatus());
-      
-      // Create a marker file to show it's working
-      java.io.File profilesDir = new java.io.File(System.getProperty("user.home"), ".datasync/enhanced_profiles");
-      profilesDir.mkdirs();
-      java.io.File markerFile = new java.io.File(profilesDir, profileName + "_enhanced.json");
-      
-      try (java.io.FileWriter writer = new java.io.FileWriter(markerFile)) {
-        writer.write("{\n");
-        writer.write("  \"profileName\": \"" + profileName + "\",\n");
-        writer.write("  \"type\": \"enhanced\",\n");
-        writer.write("  \"status\": \"" + profile.getStatus() + "\",\n");
-        writer.write("  \"created\": \"" + new java.util.Date() + "\"\n");
-        writer.write("}\n");
-      }
-      
-      System.out.println("✅ Enhanced profile marker saved: " + markerFile.getAbsolutePath());
-      
-    } catch (Exception e) {
-      System.err.println("❌ Error saving enhanced profile to JSON: " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
+
 
 ////////////////////////////////////////////////////////////////
 // Actions for UI Integration
 ////////////////////////////////////////////////////////////////
 
   /**
-   * Action to create a new enhanced profile from the UI.
+   * Action to create a new Excel connection from the UI.
    */
-  public void doCreateEnhancedProfile() {
+  public void doCreateExcelConnection() {
     try {
-      String profileName = "EnhancedProfile_" + System.currentTimeMillis();
-      boolean success = createEnhancedProfile(profileName);
-      
+      String connectionName = "ExcelConnection_" + System.currentTimeMillis();
+      boolean success = createExcelConnection(connectionName);
+
       if (success) {
-        System.out.println("🎉 Enhanced profile created from UI: " + profileName);
-        System.out.println("📍 Check the nav tree under DataSync Tool for the new profile");
+        System.out.println("🎉 Excel connection created from UI: " + connectionName);
+        System.out.println("📍 Check the nav tree under DataSync Tool for the new connection");
       } else {
-        System.err.println("❌ Failed to create enhanced profile from UI");
+        System.err.println("❌ Failed to create Excel connection from UI");
       }
     } catch (Exception e) {
-      System.err.println("❌ Error in doCreateEnhancedProfile: " + e.getMessage());
+      System.err.println("❌ Error in doCreateExcelConnection: " + e.getMessage());
       e.printStackTrace();
     }
   }
 
   /**
-   * Get the number of enhanced profiles.
-   * @return Profile count
+   * Get the number of data source connections.
+   * @return Connection count
    */
-  public int getProfileCount() {
-    return getChildren(com.mea.datasync.model.BEnhancedConnectionProfile.class).length;
+  public int getConnectionCount() {
+    BDataSourceConnections connections = getDataSourceConnections();
+    return connections != null ? connections.getAllDataSourceConnections().length : 0;
   }
 
 ////////////////////////////////////////////////////////////////
@@ -340,13 +266,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
       children.add(connections);
     }
 
-    // Add existing enhanced profiles (maintain backward compatibility)
-    BComponent[] components = getChildComponents();
-    for (BComponent component : components) {
-      if (component instanceof com.mea.datasync.model.BEnhancedConnectionProfile) {
-        children.add((BINavNode) component);
-      }
-    }
+    // Note: Removed profile support - now only data source connections
 
     return children.toArray(new BINavNode[0]);
   }
