@@ -26,7 +26,7 @@ import com.mea.datasync.model.BDataSourceConnectionsFolder;
  */
 @NiagaraType(
   agent = @AgentOn(
-    types = { "datasync:DataSourceConnections" }
+    types = { "datasync:DataSyncTool", "datasync:DataSourceConnections" }
   )
 )
 public class BDataSourceConnectionManager extends BAbstractManager {
@@ -131,6 +131,21 @@ public class BDataSourceConnectionManager extends BAbstractManager {
     @Override
     public int getSubscribeDepth() {
       return 2; // Monitor connections and their details
+    }
+
+    /**
+     * Override load to handle both DataSyncTool and DataSourceConnections as target.
+     */
+    @Override
+    public void load(BComponent target) {
+      // If target is DataSyncTool, load its DataSourceConnections instead
+      if (target instanceof com.mea.datasync.ui.BDataSyncTool) {
+        com.mea.datasync.ui.BDataSyncTool tool = (com.mea.datasync.ui.BDataSyncTool) target;
+        super.load(tool.getDataSourceConnections());
+      } else {
+        // If target is already DataSourceConnections, use it directly
+        super.load(target);
+      }
     }
   }
 }

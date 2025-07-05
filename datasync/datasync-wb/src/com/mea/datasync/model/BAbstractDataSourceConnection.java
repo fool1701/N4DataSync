@@ -27,7 +27,7 @@ import javax.baja.status.BStatus;
 @NiagaraProperty(
   name = "connectionDetails",
   type = "datasync:ConnectionDetails",
-  defaultValue = "new BConnectionDetails()",
+  defaultValue = "null",
   flags = Flags.READONLY | Flags.SUMMARY
 )
 // Health Properties
