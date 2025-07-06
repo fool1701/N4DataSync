@@ -8,15 +8,16 @@ import javax.baja.nav.BINavNode;
 /**
  * BDataSourceConnections serves as a container/folder component for organizing
  * data source connections within the DataSync Tool. This component acts as a
- * frozen property slot that only accepts BAbstractDataSourceConnection
- * subclasses or BDataSourceConnectionsFolder components.
- * 
+ * frozen property slot that accepts both BAbstractDataSourceConnection
+ * subclasses (new architecture) and BDataSourceConnection (legacy) components,
+ * as well as BDataSourceConnectionsFolder components for organization.
+ *
  * This follows Niagara's folder organization pattern and provides:
  * - Navigation tree integration
- * - Type-safe child component validation
+ * - Type-safe child component validation with backward compatibility
  * - Organized display of data source connections
  * - Support for nested folder structures
- * 
+ *
  * The component is designed to be used as a frozen property in BDataSyncTool,
  * providing a dedicated space for managing all data source connections.
  */
@@ -54,20 +55,25 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
 
   /**
    * Control which child components are allowed.
-   * Only accept BAbstractDataSourceConnection subclasses and BDataSourceConnectionsFolder.
+   * Accept BAbstractDataSourceConnection subclasses, BDataSourceConnection (legacy), and BDataSourceConnectionsFolder.
    */
   @Override
   public boolean isChildLegal(BComponent child) {
-    // Allow any data source connection type
+    // Allow any data source connection type (new architecture)
     if (child instanceof BAbstractDataSourceConnection) {
       return true;
     }
-    
+
+    // Allow legacy data source connection type for backward compatibility
+    if (child instanceof BDataSourceConnection) {
+      return true;
+    }
+
     // Allow nested folders for organization
     if (child instanceof BDataSourceConnectionsFolder) {
       return true;
     }
-    
+
     // Reject all other component types
     return false;
   }
@@ -81,9 +87,16 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
 
     if (newChild instanceof BAbstractDataSourceConnection) {
       BAbstractDataSourceConnection connection = (BAbstractDataSourceConnection) newChild;
-      System.out.println("🔌 Data source connection added: " + connection.getDataSourceTypeName() + 
+      System.out.println("🔌 Data source connection added: " + connection.getDataSourceTypeName() +
                         " (" + property.getName() + ")");
-      
+
+      // Notify parent tool of changes for persistence
+      notifyParentOfChanges();
+    } else if (newChild instanceof BDataSourceConnection) {
+      BDataSourceConnection connection = (BDataSourceConnection) newChild;
+      System.out.println("🔌 Legacy data source connection added: " + connection.getSourceType() +
+                        " (" + property.getName() + ")");
+
       // Notify parent tool of changes for persistence
       notifyParentOfChanges();
     } else if (newChild instanceof BDataSourceConnectionsFolder) {

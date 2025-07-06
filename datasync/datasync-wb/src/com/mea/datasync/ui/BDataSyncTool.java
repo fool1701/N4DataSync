@@ -164,9 +164,11 @@ public class BDataSyncTool extends BWbNavNodeTool {
 
     // Add our custom DataSync views
     agents.add("datasync:DataSyncProfileView");
+    agents.add("datasync:DataSourceConnectionManager");
 
     // Set the view order - custom views first, then standard views
     agents.toTop("datasync:DataSyncProfileView");
+    agents.toTop("datasync:DataSourceConnectionManager");
 
     System.out.println("🔍 BDataSyncTool.getAgents() returning " + agents.size() + " views:");
     for (int i = 0; i < agents.size(); i++) {

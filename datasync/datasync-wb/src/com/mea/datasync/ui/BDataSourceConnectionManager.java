@@ -6,8 +6,7 @@ import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 import javax.baja.workbench.mgr.*;
 
-import com.mea.datasync.model.BAbstractDataSourceConnection;
-import com.mea.datasync.model.BExcelDataSourceConnection;
+import com.mea.datasync.model.BDataSourceConnection;
 import com.mea.datasync.model.BDataSourceConnections;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
 
@@ -96,32 +95,36 @@ public class BDataSourceConnectionManager extends BAbstractManager {
     /**
      * Define what types can be created via "New" button and context menu.
      * This is the key method that enables automatic "New" functionality.
+     * Using only BDataSourceConnection to avoid abstract class issues.
      */
     @Override
     public MgrTypeInfo[] getNewTypes() {
       return new MgrTypeInfo[] {
-        MgrTypeInfo.make(BExcelDataSourceConnection.TYPE),
+        MgrTypeInfo.make(BDataSourceConnection.TYPE),
         MgrTypeInfo.make(BDataSourceConnectionsFolder.TYPE)
       };
     }
 
     /**
      * Define what types are included in this manager view.
+     * Using only BDataSourceConnection and folder types to avoid any
+     * abstract class initialization issues.
      */
     @Override
     public Type[] getIncludeTypes() {
-      return new Type[] { 
-        BAbstractDataSourceConnection.TYPE,
+      return new Type[] {
+        BDataSourceConnection.TYPE,
         BDataSourceConnectionsFolder.TYPE
       };
     }
 
     /**
      * Additional filtering for components displayed by this manager.
+     * Accept only BDataSourceConnection and folders to avoid abstract class issues.
      */
     @Override
     public boolean accept(BComponent component) {
-      return component instanceof BAbstractDataSourceConnection ||
+      return component instanceof BDataSourceConnection ||
              component instanceof BDataSourceConnectionsFolder;
     }
 

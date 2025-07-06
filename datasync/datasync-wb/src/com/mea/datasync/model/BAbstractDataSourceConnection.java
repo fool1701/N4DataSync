@@ -9,18 +9,24 @@ import javax.baja.status.BStatus;
 
 /**
  * BAbstractDataSourceConnection serves as the base class for all data source
- * connection types in the N4-DataSync module. This abstract class defines the
- * common interface and behavior for connecting to external data sources.
- * 
+ * connection types in the N4-DataSync module. This concrete base class defines
+ * the common interface and behavior for connecting to external data sources.
+ *
  * Following Niagara patterns from BAbstractFile and BPingMonitor, this class
  * provides:
  * - Common health monitoring properties
  * - Auto-checking mechanism with configurable parameters
  * - Manual connection testing action
- * - Abstract methods for type-specific connection logic
- * 
+ * - Default implementations for type-specific connection logic
+ *
  * Concrete implementations should extend this class for specific data source
- * types (Excel, CSV, Database, Google Sheets, etc.).
+ * types (Excel, CSV, Database, Google Sheets, etc.) and override the default
+ * implementations as needed.
+ *
+ * ARCHITECTURAL NOTE: This class was converted from abstract to concrete to
+ * comply with Niagara Framework requirements. Abstract classes cannot be used
+ * in manager contexts because the framework needs to instantiate types via
+ * Type.getInstance(), which fails for abstract classes.
  */
 @NiagaraType
 // Connection Details Component - Abstract property to be overridden by subclasses
@@ -67,7 +73,7 @@ import javax.baja.status.BStatus;
 @NiagaraAction(
   name = "testConnection"
 )
-public abstract class BAbstractDataSourceConnection extends BComponent {
+public class BAbstractDataSourceConnection extends BComponent {
 
   // Connection Status Constants
   public static final String STATUS_NOT_TESTED = "Not Tested";
@@ -334,33 +340,51 @@ public abstract class BAbstractDataSourceConnection extends BComponent {
   }
 
 ////////////////////////////////////////////////////////////////
-// Abstract Methods - Must be implemented by subclasses
+// Default Implementations - Can be overridden by subclasses
 ////////////////////////////////////////////////////////////////
 
   /**
    * Perform the actual connection test for this specific data source type.
-   * This method should be implemented by each concrete subclass to handle
-   * the specific connection logic for their data source type.
+   * This default implementation provides a generic "not implemented" response.
+   * Concrete subclasses should override this method to handle their specific
+   * connection logic for their data source type.
    *
    * @return ConnectionTestResult containing success status and details
    */
-  protected abstract ConnectionTestResult performConnectionTest();
+  protected ConnectionTestResult performConnectionTest() {
+    return new ConnectionTestResult(false,
+      "Connection test not implemented for " + getDataSourceTypeName() +
+      ". Please use a specific data source connection type (Excel, CSV, etc.)");
+  }
 
   /**
    * Get the display name for this data source type.
+   * This default implementation returns "Generic" for the base class.
+   * Concrete subclasses should override this method to return their specific type name.
    * Used in UI and logging.
    *
    * @return human-readable name for this data source type
    */
-  public abstract String getDataSourceTypeName();
+  public String getDataSourceTypeName() {
+    return "Generic";
+  }
 
   /**
    * Get a summary of the connection configuration.
+   * This default implementation provides basic information.
+   * Concrete subclasses should override this method to provide specific details.
    * Used for navigation tree descriptions and logging.
    *
    * @return human-readable connection summary
    */
-  public abstract String getConnectionSummary();
+  public String getConnectionSummary() {
+    BConnectionDetails details = getConnectionDetails();
+    String detailsSummary = (details != null) ? details.getConnectionSummary() : "No connection details";
+    return String.format("%s Connection - Status: %s - %s",
+                        getDataSourceTypeName(),
+                        getConnectionStatus(),
+                        detailsSummary);
+  }
 
 ////////////////////////////////////////////////////////////////
 // Public API Methods

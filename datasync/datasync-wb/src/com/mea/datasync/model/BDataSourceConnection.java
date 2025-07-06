@@ -11,7 +11,7 @@ import java.net.URL;
  * BDataSourceConnection represents connection information for accessing
  * external data sources. This component handles only connection concerns,
  * separated from data extraction settings.
- * 
+ *
  * Supports multiple source types:
  * - Excel: Local file connections
  * - GoogleSheets: API-based connections (future)
@@ -26,7 +26,7 @@ import java.net.URL;
 )
 @NiagaraProperty(
   name = "sourcePath",
-  type = "baja:String", 
+  type = "baja:String",
   defaultValue = "BString.DEFAULT"
 )
 @NiagaraProperty(
@@ -356,7 +356,7 @@ public class BDataSourceConnection extends BComponent {
     try {
       String currentSourceType = getSourceType();
       String currentPath = getSourcePath();
-      
+
       if (SOURCE_TYPE_EXCEL.equals(currentSourceType) || SOURCE_TYPE_CSV.equals(currentSourceType)) {
         return testFileConnection(currentPath);
       } else if (SOURCE_TYPE_GOOGLE_SHEETS.equals(currentSourceType)) {
@@ -364,7 +364,7 @@ public class BDataSourceConnection extends BComponent {
       } else if (SOURCE_TYPE_RDBMS.equals(currentSourceType)) {
         return testDatabaseConnection(currentPath);
       }
-      
+
       return false;
     } catch (Exception e) {
       setValidationStatus(VALIDATION_STATUS_ERROR);
@@ -414,11 +414,11 @@ public class BDataSourceConnection extends BComponent {
     summary.append("Type: ").append(getSourceType());
     summary.append(", Path: ").append(getSourcePath());
     summary.append(", Status: ").append(getValidationStatus());
-    
+
     if (!getLastValidated().isNull()) {
       summary.append(", Last Validated: ").append(getLastValidated());
     }
-    
+
     return summary.toString();
   }
 }
