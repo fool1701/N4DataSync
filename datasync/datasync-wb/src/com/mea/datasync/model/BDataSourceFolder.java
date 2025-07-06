@@ -14,7 +14,6 @@ import javax.baja.sys.BIcon;
  * This unified folder component:
  * - Can be used as frozen property (root folder) or removable folder (organization)
  * - Accepts BAbstractDataSource subclasses and nested BDataSourceFolder components
- * - Provides backward compatibility with legacy BDataSource components
  * - Has configurable display name (defaults to "Data Sources" for root, customizable for nested)
  * - Supports nested folder structures with full navigation tree integration
  * - Automatically handles parent notification for persistence when used as root folder
@@ -87,17 +86,12 @@ public class BDataSourceFolder extends BComponent {
 
   /**
    * Control which child components are allowed.
-   * Accept BAbstractDataSource subclasses, BDataSource (legacy), and nested BDataSourceFolder.
+   * Accept BAbstractDataSource subclasses and nested BDataSourceFolder.
    */
   @Override
   public boolean isChildLegal(BComponent child) {
-    // Allow any data source type (new architecture)
+    // Allow any data source type
     if (child instanceof BAbstractDataSource) {
-      return true;
-    }
-
-    // Allow legacy data source connection type for backward compatibility
-    if (child instanceof BDataSource) {
       return true;
     }
 
@@ -120,13 +114,6 @@ public class BDataSourceFolder extends BComponent {
     if (newChild instanceof BAbstractDataSource) {
       BAbstractDataSource connection = (BAbstractDataSource) newChild;
       System.out.println("🔌 Data source added: " + connection.getDataSourceTypeName() +
-                        " (" + property.getName() + ")");
-
-      // Notify parent tool of changes for persistence
-      notifyParentOfChanges();
-    } else if (newChild instanceof BDataSource) {
-      BDataSource connection = (BDataSource) newChild;
-      System.out.println("🔌 Legacy data source added: " + connection.getSourceType() +
                         " (" + property.getName() + ")");
 
       // Notify parent tool of changes for persistence

@@ -31,11 +31,6 @@ import com.mea.datasync.test.utils.BaseTestClass;
 @Test(groups = {"datasync", "integration", "runtime", "critical"})
 public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
-  private BDataSyncTool dataSyncTool;
-  private BDataSourceFolder connections;
-
-  @Override
-  protected void performBaseSetup() throws Exception {
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
 /*@ $com.mea.datasync.test.BDataSyncRuntimeIntegrationTest(2979906276)1.0$ @*/
@@ -51,6 +46,12 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
 //@formatter:on
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+  private BDataSyncTool dataSyncTool;
+  private BDataSourceFolder connections;
+
+  @Override
+  protected void performBaseSetup() throws Exception {
     logTestStep("Setting up runtime integration test");
 
     // Create and initialize DataSync Tool
@@ -269,7 +270,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
       // Test type hierarchy
       Assert.assertTrue(excelConnectionType.is(BAbstractDataSource.TYPE));
-      Assert.assertTrue(connectionsType.is(BComponent.TYPE));
+      Assert.assertTrue(folderType.is(BComponent.TYPE));
       Assert.assertTrue(managerType.is(BAbstractManager.TYPE));
 
       logTestStep("✅ All types properly registered and validated");

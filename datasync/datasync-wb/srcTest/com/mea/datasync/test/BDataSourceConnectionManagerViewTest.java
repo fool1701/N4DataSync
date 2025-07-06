@@ -24,12 +24,6 @@ import javax.baja.workbench.mgr.MgrController;
 @Test(groups = {"datasync", "unit", "ui", "manager"})
 public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
 
-  private BDataSyncTool dataSyncTool;
-  private BDataSourceManager manager;
-  private BDataSourceFolder connections;
-
-  @Override
-  protected void performBaseSetup() throws Exception {
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
 /*@ $com.mea.datasync.test.BDataSourceConnectionManagerViewTest(2979906276)1.0$ @*/
@@ -45,6 +39,13 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
 
 //@formatter:on
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+  private BDataSyncTool dataSyncTool;
+  private BDataSourceManager manager;
+  private BDataSourceFolder connections;
+
+  @Override
+  protected void performBaseSetup() throws Exception {
     logTestStep("Setting up Data Source Connection Manager View test");
 
     // Create DataSync Tool

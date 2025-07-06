@@ -8,7 +8,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.mea.datasync.model.BDataSourceFolder;
-import com.mea.datasync.model.BDataSourceConnectionsFolder;
 import com.mea.datasync.model.BExcelDataSource;
 import com.mea.datasync.model.BAbstractDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
@@ -22,13 +21,6 @@ import com.mea.datasync.test.utils.BaseTestClass;
 @Test(groups = {"datasync", "unit", "container", "connections"})
 public class BDataSourceConnectionsTest extends BaseTestClass {
 
-  private BDataSourceFolder container;
-  private BExcelDataSource excelConnection1;
-  private BExcelDataSource excelConnection2;
-  private BDataSourceConnectionsFolder folder;
-
-  @Override
-  protected void performBaseSetup() throws Exception {
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
 /*@ $com.mea.datasync.test.BDataSourceConnectionsTest(2979906276)1.0$ @*/
@@ -44,6 +36,14 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
 
 //@formatter:on
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+  private BDataSourceFolder container;
+  private BExcelDataSource excelConnection1;
+  private BExcelDataSource excelConnection2;
+  private BDataSourceFolder folder;
+
+  @Override
+  protected void performBaseSetup() throws Exception {
     logTestStep("Setting up data source connections container test");
 
     // Create container
@@ -57,7 +57,7 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
     excelConnection2.getConnectionDetails().setConnectionName("Excel Connection 2");
 
     // Create test folder
-    folder = new BDataSourceConnectionsFolder();
+    folder = new BDataSourceFolder();
     folder.setDisplayName("Test Folder");
 
     logTestStep("Container test setup completed");
@@ -283,7 +283,7 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
     logTestStep("Testing nested folder structure");
 
     // Create nested structure
-    BDataSourceConnectionsFolder subFolder = new BDataSourceConnectionsFolder();
+    BDataSourceFolder subFolder = new BDataSourceFolder();
     subFolder.setDisplayName("Sub Folder");
 
     // Add connections at different levels

@@ -24,12 +24,6 @@ import java.io.IOException;
 @Test(groups = {"datasync", "unit", "excel", "connection"})
 public class BExcelDataSourceConnectionTest extends BaseTestClass {
 
-  private BExcelDataSource excelConnection;
-  private BExcelConnectionDetails connectionDetails;
-  private File tempTestFile;
-
-  @Override
-  protected void performBaseSetup() throws Exception {
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
 /*@ $com.mea.datasync.test.BExcelDataSourceConnectionTest(2979906276)1.0$ @*/
@@ -45,6 +39,13 @@ public class BExcelDataSourceConnectionTest extends BaseTestClass {
 
 //@formatter:on
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+  private BExcelDataSource excelConnection;
+  private BExcelConnectionDetails connectionDetails;
+  private File tempTestFile;
+
+  @Override
+  protected void performBaseSetup() throws Exception {
     logTestStep("Setting up Excel data source connection test");
     
     // Create Excel connection

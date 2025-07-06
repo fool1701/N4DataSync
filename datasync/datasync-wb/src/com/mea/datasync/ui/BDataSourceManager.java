@@ -6,8 +6,9 @@ import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 import javax.baja.workbench.mgr.*;
 
-import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.model.BDataSourceFolder;
+import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BExcelDataSource;
 
 /**
  * BDataSourceManager provides a standard Niagara manager view
@@ -94,36 +95,32 @@ public class BDataSourceManager extends BAbstractManager {
     /**
      * Define what types can be created via "New" button and context menu.
      * This is the key method that enables automatic "New" functionality.
-     * Using only BDataSource to avoid abstract class issues.
      */
     @Override
     public MgrTypeInfo[] getNewTypes() {
       return new MgrTypeInfo[] {
-        MgrTypeInfo.make(BDataSource.TYPE),
+        MgrTypeInfo.make(BExcelDataSource.TYPE),
         MgrTypeInfo.make(BDataSourceFolder.TYPE)
       };
     }
 
     /**
      * Define what types are included in this manager view.
-     * Using only BDataSource and folder types to avoid any
-     * abstract class initialization issues.
      */
     @Override
     public Type[] getIncludeTypes() {
       return new Type[] {
-        BDataSource.TYPE,
+        BAbstractDataSource.TYPE,
         BDataSourceFolder.TYPE
       };
     }
 
     /**
      * Additional filtering for components displayed by this manager.
-     * Accept only BDataSource and folders to avoid abstract class issues.
      */
     @Override
     public boolean accept(BComponent component) {
-      return component instanceof BDataSource ||
+      return component instanceof BAbstractDataSource ||
              component instanceof BDataSourceFolder;
     }
 

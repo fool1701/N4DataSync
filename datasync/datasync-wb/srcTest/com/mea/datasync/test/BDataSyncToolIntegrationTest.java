@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import com.mea.datasync.ui.BDataSyncTool;
 import com.mea.datasync.model.BDataSourceFolder;
-import com.mea.datasync.model.BDataSourceConnectionsFolder;
+
 import com.mea.datasync.model.BExcelDataSource;
 import com.mea.datasync.model.BExcelConnectionDetails;
 import com.mea.datasync.model.BAbstractDataSource;
@@ -28,12 +28,6 @@ import java.io.IOException;
 @Test(groups = {"datasync", "integration", "tool", "connections"})
 public class BDataSyncToolIntegrationTest extends BaseTestClass {
 
-  private BDataSyncTool dataSyncTool;
-  private BDataSourceFolder connections;
-  private File tempExcelFile;
-
-  @Override
-  protected void performBaseSetup() throws Exception {
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
 /*@ $com.mea.datasync.test.BDataSyncToolIntegrationTest(2979906276)1.0$ @*/
@@ -49,6 +43,13 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
 
 //@formatter:on
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+  private BDataSyncTool dataSyncTool;
+  private BDataSourceFolder connections;
+  private File tempExcelFile;
+
+  @Override
+  protected void performBaseSetup() throws Exception {
     logTestStep("Setting up DataSync Tool integration test");
 
     // Create DataSync Tool
@@ -112,7 +113,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     // First child should be the data source connections container
     boolean foundConnectionsContainer = false;
     for (BINavNode child : navChildren) {
-      if (child instanceof BDataSourceConnectionsFolder) {
+      if (child instanceof BDataSourceFolder) {
         foundConnectionsContainer = true;
         break;
       }
@@ -169,9 +170,8 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     logTestStep("Testing organized connection structure in tool");
 
     // Create folder structure
-    BDataSourceConnectionsFolder bmsFolder = new BDataSourceConnectionsFolder();
+    BDataSourceFolder bmsFolder = new BDataSourceFolder();
     bmsFolder.setDisplayName("BMS Data Sources");
-    bmsFolder.setDescription("All BMS-related data connections");
 
     // Add folder to tool
     connections.add("bmsFolder", bmsFolder);
@@ -194,8 +194,8 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     BINavNode[] navChildren = dataSyncTool.getNavChildren();
     boolean foundConnectionsContainer = false;
     for (BINavNode child : navChildren) {
-      if (child instanceof BDataSourceConnectionsFolder) {
-        BDataSourceConnectionsFolder container = (BDataSourceConnectionsFolder) child;
+      if (child instanceof BDataSourceFolder) {
+        BDataSourceFolder container = (BDataSourceFolder) child;
         Assert.assertTrue(container.hasNavChildren());
         foundConnectionsContainer = true;
         break;
@@ -299,10 +299,10 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     logTestStep("Testing complete data source management scenario");
 
     // Create organized structure
-    BDataSourceConnectionsFolder bmsFolder = new BDataSourceConnectionsFolder();
+    BDataSourceFolder bmsFolder = new BDataSourceFolder();
     bmsFolder.setDisplayName("BMS Systems");
 
-    BDataSourceConnectionsFolder hvacFolder = new BDataSourceConnectionsFolder();
+    BDataSourceFolder hvacFolder = new BDataSourceFolder();
     hvacFolder.setDisplayName("HVAC Systems");
 
     // Add folders to tool
@@ -324,10 +324,10 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
 
     // Test navigation tree depth
     BINavNode[] toolChildren = dataSyncTool.getNavChildren();
-    BDataSourceConnectionsFolder connectionsContainer = null;
+    BDataSourceFolder connectionsContainer = null;
     for (BINavNode child : toolChildren) {
-      if (child instanceof BDataSourceConnectionsFolder) {
-        connectionsContainer = (BDataSourceConnectionsFolder) child;
+      if (child instanceof BDataSourceFolder) {
+        connectionsContainer = (BDataSourceFolder) child;
         break;
       }
     }

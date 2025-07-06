@@ -3,7 +3,7 @@
 
 import com.mea.datasync.model.BAbstractDataSource;
 import com.mea.datasync.model.BExcelDataSource;
-import com.mea.datasync.model.BDataSourceConnectionsFolder;
+import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.ui.BDataSourceManager;
 
 public class SimpleConnectionTest {
