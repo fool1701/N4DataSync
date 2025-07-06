@@ -4,14 +4,13 @@ package com.mea.datasync.model;
 import javax.baja.nre.annotations.NiagaraProperty;
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
-import javax.baja.nav.BINavNode;
 
 /**
  * BDataSourceConnectionsFolder provides a removable folder component for
  * organizing data source connections within the DataSync Tool. This component
  * can be added and removed dynamically, allowing users to create custom
  * organizational structures for their data source connections.
- * 
+ *
  * This folder component:
  * - Can be added/removed dynamically (unlike the main BDataSourceConnections)
  * - Accepts the same child types as BDataSourceConnections
@@ -30,7 +29,7 @@ import javax.baja.nav.BINavNode;
   type = "baja:String",
   defaultValue = "BString.DEFAULT"
 )
-public class BDataSourceConnectionsFolder extends BComponent implements BINavNode {
+public class BDataSourceConnectionsFolder extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
@@ -117,12 +116,12 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
     if (child instanceof BAbstractDataSourceConnection) {
       return true;
     }
-    
+
     // Allow nested folders for organization
     if (child instanceof BDataSourceConnectionsFolder) {
       return true;
     }
-    
+
     // Reject all other component types
     return false;
   }
@@ -136,7 +135,7 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
 
     if (newChild instanceof BAbstractDataSourceConnection) {
       BAbstractDataSourceConnection connection = (BAbstractDataSourceConnection) newChild;
-      System.out.println("🔌 Data source connection added to folder '" + getDisplayName() + "': " + 
+      System.out.println("🔌 Data source connection added to folder '" + getDisplayName() + "': " +
                         connection.getDataSourceTypeName() + " (" + property.getName() + ")");
     } else if (newChild instanceof BDataSourceConnectionsFolder) {
       System.out.println("📁 Subfolder added to folder '" + getDisplayName() + "': " + property.getName());
@@ -152,7 +151,7 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
 
     if (oldChild instanceof BAbstractDataSourceConnection) {
       BAbstractDataSourceConnection connection = (BAbstractDataSourceConnection) oldChild;
-      System.out.println("🔌 Data source connection removed from folder '" + getDisplayName() + "': " + 
+      System.out.println("🔌 Data source connection removed from folder '" + getDisplayName() + "': " +
                         connection.getDataSourceTypeName() + " (" + property.getName() + ")");
     } else if (oldChild instanceof BDataSourceConnectionsFolder) {
       System.out.println("📁 Subfolder removed from folder '" + getDisplayName() + "': " + property.getName());
@@ -182,7 +181,7 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
   @Override
   public String getNavDescription(Context cx) {
     StringBuilder desc = new StringBuilder();
-    
+
     // Start with custom description if provided
     String customDesc = getDescription();
     if (customDesc != null && !customDesc.trim().isEmpty()) {
@@ -190,11 +189,11 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
     } else {
       desc.append("Data Source Connections Folder");
     }
-    
+
     // Add content summary
     int connectionCount = getDataSourceConnectionCount();
     int folderCount = getFolderCount();
-    
+
     if (connectionCount > 0 || folderCount > 0) {
       desc.append(" (");
       if (connectionCount > 0) {
@@ -208,34 +207,20 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
       }
       desc.append(")");
     }
-    
+
     return desc.toString();
   }
 
   @Override
-  public BINavNode[] getNavChildren() {
-    // Return all child components that implement BINavNode
-    BComponent[] children = getChildComponents();
-    java.util.List<BINavNode> navChildren = new java.util.ArrayList<>();
-
-    for (BComponent child : children) {
-      if (child instanceof BINavNode) {
-        navChildren.add((BINavNode) child);
-      }
-    }
-
-    return navChildren.toArray(new BINavNode[0]);
+  public BComponent[] getNavChildren() {
+    // Return all child components (BComponent already implements BINavNode)
+    return getChildComponents();
   }
 
   @Override
   public boolean hasNavChildren() {
-    BComponent[] children = getChildComponents();
-    for (BComponent child : children) {
-      if (child instanceof BINavNode) {
-        return true;
-      }
-    }
-    return false;
+    // Return true if we have any child components (all BComponents implement BINavNode)
+    return getChildComponents().length > 0;
   }
 
 ////////////////////////////////////////////////////////////////
@@ -244,7 +229,7 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
 
   /**
    * Get the count of data source connections in this folder (not including subfolders).
-   * 
+   *
    * @return number of direct data source connections
    */
   public int getDataSourceConnectionCount() {
@@ -280,7 +265,7 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
 
   /**
    * Get all data source connections in this folder (recursively including subfolders).
-   * 
+   *
    * @return array of all data source connections
    */
   public BAbstractDataSourceConnection[] getAllDataSourceConnections() {
@@ -307,24 +292,24 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
 
   /**
    * Check if this folder or any subfolder contains healthy connections.
-   * 
+   *
    * @return true if at least one connection is healthy
    */
   public boolean hasHealthyConnections() {
     BAbstractDataSourceConnection[] connections = getAllDataSourceConnections();
-    
+
     for (BAbstractDataSourceConnection connection : connections) {
       if (connection.isConnectionHealthy()) {
         return true;
       }
     }
-    
+
     return false;
   }
 
   /**
    * Get a summary of the folder's health status.
-   * 
+   *
    * @return health summary string
    */
   public String getHealthSummary() {
@@ -332,11 +317,11 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
     if (connections.length == 0) {
       return "No connections";
     }
-    
+
     int healthy = 0;
     int failed = 0;
     int untested = 0;
-    
+
     for (BAbstractDataSourceConnection connection : connections) {
       String status = connection.getConnectionStatus();
       if (BAbstractDataSourceConnection.STATUS_CONNECTED.equals(status)) {
@@ -347,11 +332,11 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
         untested++;
       }
     }
-    
+
     StringBuilder summary = new StringBuilder();
     summary.append(connections.length).append(" connection");
     if (connections.length != 1) summary.append("s");
-    
+
     if (healthy > 0) {
       summary.append(", ").append(healthy).append(" healthy");
     }
@@ -361,7 +346,7 @@ public class BDataSourceConnectionsFolder extends BComponent implements BINavNod
     if (untested > 0) {
       summary.append(", ").append(untested).append(" untested");
     }
-    
+
     return summary.toString();
   }
 }

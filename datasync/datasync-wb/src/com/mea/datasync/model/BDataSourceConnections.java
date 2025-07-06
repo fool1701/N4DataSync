@@ -3,7 +3,6 @@ package com.mea.datasync.model;
 
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
-import javax.baja.nav.BINavNode;
 
 /**
  * BDataSourceConnections serves as a container/folder component for organizing
@@ -22,7 +21,7 @@ import javax.baja.nav.BINavNode;
  * providing a dedicated space for managing all data source connections.
  */
 @NiagaraType
-public class BDataSourceConnections extends BComponent implements BINavNode {
+public class BDataSourceConnections extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
@@ -114,7 +113,7 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
 
     if (oldChild instanceof BAbstractDataSourceConnection) {
       BAbstractDataSourceConnection connection = (BAbstractDataSourceConnection) oldChild;
-      System.out.println("🔌 Data source connection removed: " + connection.getDataSourceTypeName() + 
+      System.out.println("🔌 Data source connection removed: " + connection.getDataSourceTypeName() +
                         " (" + property.getName() + ")");
       notifyParentOfChanges();
     } else if (oldChild instanceof BDataSourceConnectionsFolder) {
@@ -141,10 +140,10 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
   public String getNavDescription(Context cx) {
     int connectionCount = getDataSourceConnectionCount();
     int folderCount = getFolderCount();
-    
+
     StringBuilder desc = new StringBuilder();
     desc.append("Data Source Connections");
-    
+
     if (connectionCount > 0 || folderCount > 0) {
       desc.append(" (");
       if (connectionCount > 0) {
@@ -158,34 +157,20 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
       }
       desc.append(")");
     }
-    
+
     return desc.toString();
   }
 
   @Override
-  public BINavNode[] getNavChildren() {
-    // Return all child components that implement BINavNode
-    BComponent[] children = getChildComponents();
-    java.util.List<BINavNode> navChildren = new java.util.ArrayList<>();
-
-    for (BComponent child : children) {
-      if (child instanceof BINavNode) {
-        navChildren.add((BINavNode) child);
-      }
-    }
-
-    return navChildren.toArray(new BINavNode[0]);
+  public BComponent[] getNavChildren() {
+    // Return all child components (BComponent already implements BINavNode)
+    return getChildComponents();
   }
 
   @Override
   public boolean hasNavChildren() {
-    BComponent[] children = getChildComponents();
-    for (BComponent child : children) {
-      if (child instanceof BINavNode) {
-        return true;
-      }
-    }
-    return false;
+    // Return true if we have any child components (all BComponents implement BINavNode)
+    return getChildComponents().length > 0;
   }
 
 ////////////////////////////////////////////////////////////////
@@ -194,7 +179,7 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
 
   /**
    * Get the count of data source connections (not including folders).
-   * 
+   *
    * @return number of data source connections
    */
   public int getDataSourceConnectionCount() {
@@ -230,7 +215,7 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
 
   /**
    * Get all data source connections (recursively including those in folders).
-   * 
+   *
    * @return array of all data source connections
    */
   public BAbstractDataSourceConnection[] getAllDataSourceConnections() {
@@ -257,7 +242,7 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
 
   /**
    * Get data source connections by type.
-   * 
+   *
    * @param connectionType the class type to filter by
    * @return array of connections of the specified type
    */
@@ -265,30 +250,30 @@ public class BDataSourceConnections extends BComponent implements BINavNode {
   public <T extends BAbstractDataSourceConnection> T[] getDataSourceConnectionsByType(Class<T> connectionType) {
     java.util.List<T> connections = new java.util.ArrayList<>();
     BAbstractDataSourceConnection[] allConnections = getAllDataSourceConnections();
-    
+
     for (BAbstractDataSourceConnection connection : allConnections) {
       if (connectionType.isInstance(connection)) {
         connections.add((T) connection);
       }
     }
-    
+
     return connections.toArray((T[]) java.lang.reflect.Array.newInstance(connectionType, 0));
   }
 
   /**
    * Check if there are any healthy (connected) data source connections.
-   * 
+   *
    * @return true if at least one connection is healthy
    */
   public boolean hasHealthyConnections() {
     BAbstractDataSourceConnection[] connections = getAllDataSourceConnections();
-    
+
     for (BAbstractDataSourceConnection connection : connections) {
       if (connection.isConnectionHealthy()) {
         return true;
       }
     }
-    
+
     return false;
   }
 
