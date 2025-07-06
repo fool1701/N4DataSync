@@ -117,7 +117,7 @@ public class BDataSourceFolder extends BComponent {
                         " (" + property.getName() + ")");
       notifyParentOfChanges();
     } else if (oldChild instanceof BDataSourceConnectionsFolder) {
-      System.out.println("📁 Data source connections folder removed: " + property.getName());
+      System.out.println("📁 Data source folder removed: " + property.getName());
       notifyParentOfChanges();
     }
   }

@@ -10,8 +10,6 @@ import javax.baja.nav.BINavNode;
 import javax.baja.workbench.tool.BWbNavNodeTool;
 import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BAbstractDataSourceConnection;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * BDataSyncTool serves as the main entry point for the N4-DataSync module within
@@ -264,7 +262,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
    * @return Connection count
    */
   public int getConnectionCount() {
-    BDataSourceConnections connections = getDataSources();
+    BDataSourceFolder connections = getDataSources();
     return connections != null ? connections.getAllDataSourceConnections().length : 0;
   }
 
@@ -299,7 +297,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
     desc.append("N4-DataSync Tool");
 
     // Add data source summary
-    BDataSourceConnections connections = getDataSources();
+    BDataSourceFolder connections = getDataSources();
     if (connections != null) {
       int connectionCount = connections.getDataSourceConnectionCount();
       int healthyCount = 0;

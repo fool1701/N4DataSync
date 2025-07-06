@@ -12,8 +12,8 @@ import javax.baja.sys.*;
  * organizational structures for their data source connections.
  *
  * This folder component:
- * - Can be added/removed dynamically (unlike the main BDataSourceConnections)
- * - Accepts the same child types as BDataSourceConnections
+ * - Can be added/removed dynamically (unlike the main BDataSourceFolder)
+ * - Accepts the same child types as BDataSourceFolder
  * - Provides navigation tree integration
  * - Supports nested folder structures
  * - Has a configurable display name and description
