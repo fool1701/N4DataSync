@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.mea.datasync.ui.BDataSyncTool;
 import com.mea.datasync.ui.BDataSourceConnectionManager;
-import com.mea.datasync.model.BDataSourceConnections;
+import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
 import com.mea.datasync.model.BExcelDataSourceConnection;
 import com.mea.datasync.model.BAbstractDataSourceConnection;
@@ -27,36 +27,36 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
 
   private BDataSyncTool dataSyncTool;
   private BDataSourceConnectionManager manager;
-  private BDataSourceConnections connections;
+  private BDataSourceFolder connections;
 
   @Override
   protected void performBaseSetup() throws Exception {
     logTestStep("Setting up Data Source Connection Manager View test");
-    
+
     // Create DataSync Tool
     dataSyncTool = new BDataSyncTool();
-    connections = dataSyncTool.getDataSourceConnections();
-    
+    connections = dataSyncTool.getDataSources();
+
     // Create manager
     manager = new BDataSourceConnectionManager();
-    
+
     logTestStep("Manager view test setup completed");
   }
 
   @Override
   protected void performBaseTeardown() throws Exception {
     logTestStep("Cleaning up manager view test resources");
-    
+
     if (dataSyncTool != null) {
       if (dataSyncTool.isRunning()) {
         dataSyncTool.stop();
       }
       dataSyncTool = null;
     }
-    
+
     manager = null;
     connections = null;
-    
+
     logTestStep("Manager view test teardown completed");
   }
 

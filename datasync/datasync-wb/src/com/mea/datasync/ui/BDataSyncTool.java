@@ -8,7 +8,7 @@ import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 import javax.baja.nav.BINavNode;
 import javax.baja.workbench.tool.BWbNavNodeTool;
-import com.mea.datasync.model.BDataSourceConnections;
+import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BAbstractDataSourceConnection;
 import java.util.List;
 import java.util.ArrayList;
@@ -46,8 +46,8 @@ import java.util.ArrayList;
 @AgentOn(types = "workbench:Workbench")
 @NiagaraProperty(
   name = "dataSources",
-  type = "datasync:DataSourceConnections",
-  defaultValue = "new BDataSourceConnections()",
+  type = "datasync:DataSourceFolder",
+  defaultValue = "new BDataSourceFolder()",
   flags = Flags.READONLY | Flags.SUMMARY
 )
 public class BDataSyncTool extends BWbNavNodeTool {
@@ -64,19 +64,19 @@ public class BDataSyncTool extends BWbNavNodeTool {
    * @see #getDataSources
    * @see #setDataSources
    */
-  public static final Property dataSources = newProperty(0, new BDataSourceConnections(), null);
+  public static final Property dataSources = newProperty(0, new BDataSourceFolder(), null);
 
   /**
    * Get the {@code dataSources} property.
    * @see #dataSources
    */
-  public BDataSourceConnections getDataSources() { return (BDataSourceConnections)get(dataSources); }
+  public BDataSourceFolder getDataSources() { return (BDataSourceFolder)get(dataSources); }
 
   /**
    * Set the {@code dataSources} property.
    * @see #dataSources
    */
-  public void setDataSources(BDataSourceConnections v) { set(dataSources, v, null); }
+  public void setDataSources(BDataSourceFolder v) { set(dataSources, v, null); }
 
   //endregion Property "dataSources"
 
@@ -104,7 +104,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
     public void event(BComponentEvent event) {
       if (event.getId() == BComponentEvent.PROPERTY_CHANGED) {
         BComponent source = event.getSourceComponent();
-        
+
         // Note: Profile support removed - now only data source connections
       }
     }
@@ -220,7 +220,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
       details.setDefaultWorksheet("Sheet1");
 
       // Add to data sources container
-      BDataSourceConnections connections = getDataSources();
+      BDataSourceFolder connections = getDataSources();
       connections.add(connectionName, connection);
 
       System.out.println("✅ Excel connection created successfully: " + connectionName);
@@ -280,7 +280,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
     java.util.List<BINavNode> children = new java.util.ArrayList<>();
 
     // Add data sources container
-    BDataSourceConnections connections = getDataSources();
+    BDataSourceFolder connections = getDataSources();
     if (connections != null) {
       children.add(connections);
     }

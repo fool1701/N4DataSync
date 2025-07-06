@@ -7,14 +7,14 @@ import javax.baja.sys.*;
 import javax.baja.workbench.mgr.*;
 
 import com.mea.datasync.model.BDataSourceConnection;
-import com.mea.datasync.model.BDataSourceConnections;
+import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
 
 /**
  * BDataSourceConnectionManager provides a standard Niagara manager view
  * for data source connections. This follows the same pattern as BDeviceManager,
  * BDriverManager, and BPointManager.
- * 
+ *
  * Features automatically provided by BAbstractManager:
  * - Table view of all data source connections
  * - Add button for creating new connections (via getNewTypes())
@@ -25,7 +25,7 @@ import com.mea.datasync.model.BDataSourceConnectionsFolder;
  */
 @NiagaraType(
   agent = @AgentOn(
-    types = { "datasync:DataSyncTool", "datasync:DataSourceConnections" }
+    types = { "datasync:DataSyncTool", "datasync:DataSourceFolder" }
   )
 )
 public class BDataSourceConnectionManager extends BAbstractManager {
@@ -51,13 +51,13 @@ public class BDataSourceConnectionManager extends BAbstractManager {
 ////////////////////////////////////////////////////////////////
 
   @Override
-  protected MgrModel makeModel() { 
-    return new DataSourceConnectionModel(this); 
+  protected MgrModel makeModel() {
+    return new DataSourceConnectionModel(this);
   }
 
   @Override
-  protected MgrController makeController() { 
-    return new MgrController(this); 
+  protected MgrController makeController() {
+    return new MgrController(this);
   }
 
 ////////////////////////////////////////////////////////////////

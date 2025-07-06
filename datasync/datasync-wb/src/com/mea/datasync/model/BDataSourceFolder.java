@@ -5,7 +5,7 @@ import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 
 /**
- * BDataSourceConnections serves as a container/folder component for organizing
+ * BDataSourceFolder serves as a container/folder component for organizing
  * data source connections within the DataSync Tool. This component acts as a
  * frozen property slot that accepts both BAbstractDataSourceConnection
  * subclasses (new architecture) and BDataSourceConnection (legacy) components,
@@ -21,18 +21,18 @@ import javax.baja.sys.*;
  * providing a dedicated space for managing all data source connections.
  */
 @NiagaraType
-public class BDataSourceConnections extends BComponent {
+public class BDataSourceFolder extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BDataSourceConnections(2047217648)1.0$ @*/
+/*@ $com.mea.datasync.model.BDataSourceFolder(2047217648)1.0$ @*/
 /* Generated Wed Jul 05 11:30:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Type
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BDataSourceConnections.class);
+  public static final Type TYPE = Sys.loadType(BDataSourceFolder.class);
 
   //endregion Type
 
@@ -43,9 +43,9 @@ public class BDataSourceConnections extends BComponent {
 // Constructor
 ////////////////////////////////////////////////////////////////
 
-  public BDataSourceConnections() {
+  public BDataSourceFolder() {
     super();
-    System.out.println("🗂️ Data Source Connections container created");
+    System.out.println("🗂️ Data Source Folder container created");
   }
 
 ////////////////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ public class BDataSourceConnections extends BComponent {
 
   @Override
   public String getNavDisplayName(Context cx) {
-    return "Data Source Connections";
+    return "Data Sources";
   }
 
   @Override
@@ -142,7 +142,7 @@ public class BDataSourceConnections extends BComponent {
     int folderCount = getFolderCount();
 
     StringBuilder desc = new StringBuilder();
-    desc.append("Data Source Connections");
+    desc.append("Data Sources");
 
     if (connectionCount > 0 || folderCount > 0) {
       desc.append(" (");

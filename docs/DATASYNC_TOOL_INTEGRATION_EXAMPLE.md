@@ -32,15 +32,15 @@ import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 import javax.baja.ui.BIcon;
 import javax.baja.workbench.tool.BWbNavNodeTool;
-import com.mea.datasync.model.BDataSourceConnections;
+import com.mea.datasync.model.BDataSourceFolder;
 
 @NiagaraType
 @AgentOn(types = "workbench:Workbench")
-// Add the DataSourceConnections property
+// Add the DataSourceFolder property
 @NiagaraProperty(
   name = "dataSourceConnections",
-  type = "datasync:DataSourceConnections",
-  defaultValue = "new BDataSourceConnections()",
+  type = "datasync:DataSourceFolder",
+  defaultValue = "new BDataSourceFolder()",
   flags = Flags.READONLY | Flags.SUMMARY
 )
 public class BDataSyncTool extends BWbNavNodeTool {
@@ -50,15 +50,15 @@ public class BDataSyncTool extends BWbNavNodeTool {
   /**
    * Get the dataSourceConnections property.
    */
-  public BDataSourceConnections getDataSourceConnections() { 
-    return (BDataSourceConnections)get(dataSourceConnections); 
+  public BDataSourceConnections getDataSourceConnections() {
+    return (BDataSourceConnections)get(dataSourceConnections);
   }
 
   /**
    * Set the dataSourceConnections property.
    */
-  public void setDataSourceConnections(BDataSourceConnections v) { 
-    set(dataSourceConnections, v, null); 
+  public void setDataSourceConnections(BDataSourceConnections v) {
+    set(dataSourceConnections, v, null);
   }
 
   // ... existing methods ...
@@ -69,19 +69,19 @@ public class BDataSyncTool extends BWbNavNodeTool {
   @Override
   public BINavNode[] getNavChildren() {
     List<BINavNode> children = new ArrayList<>();
-    
+
     // Add data source connections container
     BDataSourceConnections connections = getDataSourceConnections();
     if (connections != null) {
       children.add(connections);
     }
-    
+
     // Add existing enhanced profiles (maintain backward compatibility)
     BEnhancedConnectionProfile[] profiles = getEnhancedProfiles();
     for (BEnhancedConnectionProfile profile : profiles) {
       children.add(profile);
     }
-    
+
     return children.toArray(new BINavNode[0]);
   }
 
@@ -92,13 +92,13 @@ public class BDataSyncTool extends BWbNavNodeTool {
   public String getNavDescription(Context cx) {
     StringBuilder desc = new StringBuilder();
     desc.append("N4-DataSync Tool");
-    
+
     // Add data source connection summary
     BDataSourceConnections connections = getDataSourceConnections();
     if (connections != null) {
       int connectionCount = connections.getDataSourceConnectionCount();
       int healthyCount = 0;
-      
+
       // Count healthy connections
       BAbstractDataSourceConnection[] allConnections = connections.getAllDataSourceConnections();
       for (BAbstractDataSourceConnection conn : allConnections) {
@@ -106,14 +106,14 @@ public class BDataSyncTool extends BWbNavNodeTool {
           healthyCount++;
         }
       }
-      
+
       if (connectionCount > 0) {
         desc.append(" - ").append(connectionCount).append(" data source");
         if (connectionCount != 1) desc.append("s");
         desc.append(" (").append(healthyCount).append(" healthy)");
       }
     }
-    
+
     return desc.toString();
   }
 }
@@ -200,12 +200,12 @@ System.out.println("Has healthy connections: " + hasHealthyConnections);
 // Get all connections and their status
 BAbstractDataSourceConnection[] allConnections = connections.getAllDataSourceConnections();
 for (BAbstractDataSourceConnection connection : allConnections) {
-  System.out.println(connection.getDataSourceTypeName() + " - " + 
+  System.out.println(connection.getDataSourceTypeName() + " - " +
                     connection.getConnectionStatus());
 }
 
 // Get Excel connections specifically
-BExcelDataSourceConnection[] excelConnections = 
+BExcelDataSourceConnection[] excelConnections =
   connections.getDataSourceConnectionsByType(BExcelDataSourceConnection.class);
 System.out.println("Found " + excelConnections.length + " Excel connections");
 ```
@@ -273,29 +273,29 @@ With this integration, the navigation tree will show:
 ### Unit Tests
 ```java
 public class BDataSourceConnectionsTest extends BTestNg {
-  
+
   @Test
   public void testExcelConnectionCreation() {
     BExcelDataSourceConnection connection = new BExcelDataSourceConnection();
     BExcelConnectionDetails details = connection.getConnectionDetails();
-    
+
     details.setFilePath("test.xlsx");
     details.setConnectionName("Test Connection");
-    
+
     // Test connection validation
     BConnectionDetails.ValidationResult result = details.validateConfiguration();
     assertTrue(result.isValid());
   }
-  
+
   @Test
   public void testConnectionContainerValidation() {
     BDataSourceConnections container = new BDataSourceConnections();
     BExcelDataSourceConnection excelConn = new BExcelDataSourceConnection();
     BComponent invalidConn = new BComponent();
-    
+
     // Should accept valid connection types
     assertTrue(container.isChildLegal(excelConn));
-    
+
     // Should reject invalid types
     assertFalse(container.isChildLegal(invalidConn));
   }
