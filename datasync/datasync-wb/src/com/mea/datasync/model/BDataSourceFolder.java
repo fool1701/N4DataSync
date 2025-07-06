@@ -8,7 +8,7 @@ import javax.baja.sys.*;
  * BDataSourceFolder serves as a container/folder component for organizing
  * data source connections within the DataSync Tool. This component acts as a
  * frozen property slot that accepts both BAbstractDataSourceConnection
- * subclasses (new architecture) and BDataSourceConnection (legacy) components,
+ * subclasses (new architecture) and BDataSource (legacy) components,
  * as well as BDataSourceConnectionsFolder components for organization.
  *
  * This follows Niagara's folder organization pattern and provides:
@@ -54,7 +54,7 @@ public class BDataSourceFolder extends BComponent {
 
   /**
    * Control which child components are allowed.
-   * Accept BAbstractDataSourceConnection subclasses, BDataSourceConnection (legacy), and BDataSourceConnectionsFolder.
+   * Accept BAbstractDataSourceConnection subclasses, BDataSource (legacy), and BDataSourceConnectionsFolder.
    */
   @Override
   public boolean isChildLegal(BComponent child) {
@@ -64,7 +64,7 @@ public class BDataSourceFolder extends BComponent {
     }
 
     // Allow legacy data source connection type for backward compatibility
-    if (child instanceof BDataSourceConnection) {
+    if (child instanceof BDataSource) {
       return true;
     }
 
@@ -91,8 +91,8 @@ public class BDataSourceFolder extends BComponent {
 
       // Notify parent tool of changes for persistence
       notifyParentOfChanges();
-    } else if (newChild instanceof BDataSourceConnection) {
-      BDataSourceConnection connection = (BDataSourceConnection) newChild;
+    } else if (newChild instanceof BDataSource) {
+      BDataSource connection = (BDataSource) newChild;
       System.out.println("🔌 Legacy data source connection added: " + connection.getSourceType() +
                         " (" + property.getName() + ")");
 

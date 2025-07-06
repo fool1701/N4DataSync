@@ -8,7 +8,7 @@ import java.io.File;
 import java.net.URL;
 
 /**
- * BDataSourceConnection represents connection information for accessing
+ * BDataSource represents connection information for accessing
  * external data sources. This component handles only connection concerns,
  * separated from data extraction settings.
  *
@@ -49,11 +49,11 @@ import java.net.URL;
   type = "baja:String",
   defaultValue = "BString.make(\"Not Validated\")"
 )
-public class BDataSourceConnection extends BComponent {
+public class BDataSource extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BDataSourceConnection(2047217648)1.0$ @*/
+/*@ $com.mea.datasync.model.BDataSource(2047217648)1.0$ @*/
 /* Generated Wed Jul 02 21:15:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "sourceType"
@@ -75,9 +75,9 @@ public class BDataSourceConnection extends BComponent {
    * Set the {@code sourceType} property.
    * @see #sourceType
    */
-  public void setSourceType(String v) { 
+  public void setSourceType(String v) {
     validateSourceType(v);
-    setString(sourceType, v, null); 
+    setString(sourceType, v, null);
   }
 
   //endregion Property "sourceType"
@@ -101,9 +101,9 @@ public class BDataSourceConnection extends BComponent {
    * Set the {@code sourcePath} property.
    * @see #sourcePath
    */
-  public void setSourcePath(String v) { 
+  public void setSourcePath(String v) {
     validateSourcePath(v);
-    setString(sourcePath, v, null); 
+    setString(sourcePath, v, null);
   }
 
   //endregion Property "sourcePath"
@@ -127,9 +127,9 @@ public class BDataSourceConnection extends BComponent {
    * Set the {@code connectionName} property.
    * @see #connectionName
    */
-  public void setConnectionName(String v) { 
+  public void setConnectionName(String v) {
     validateConnectionName(v);
-    setString(connectionName, v, null); 
+    setString(connectionName, v, null);
   }
 
   //endregion Property "connectionName"
@@ -207,7 +207,7 @@ public class BDataSourceConnection extends BComponent {
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BDataSourceConnection.class);
+  public static final Type TYPE = Sys.loadType(BDataSource.class);
 
   //endregion Type
 
@@ -222,7 +222,7 @@ public class BDataSourceConnection extends BComponent {
   public static final String SOURCE_TYPE_GOOGLE_SHEETS = "GoogleSheets";
   public static final String SOURCE_TYPE_CSV = "CSV";
   public static final String SOURCE_TYPE_RDBMS = "RDBMS";
-  
+
   public static final String VALIDATION_STATUS_NOT_VALIDATED = "Not Validated";
   public static final String VALIDATION_STATUS_VALID = "Valid";
   public static final String VALIDATION_STATUS_INVALID = "Invalid";
@@ -241,9 +241,9 @@ public class BDataSourceConnection extends BComponent {
     if (sourceType == null || sourceType.trim().isEmpty()) {
       throw new IllegalArgumentException("Source type cannot be null or empty");
     }
-    
+
     // TODO: Issue #6 - Add support for additional source types
-    if (!SOURCE_TYPE_EXCEL.equals(sourceType) && 
+    if (!SOURCE_TYPE_EXCEL.equals(sourceType) &&
         !SOURCE_TYPE_GOOGLE_SHEETS.equals(sourceType) &&
         !SOURCE_TYPE_CSV.equals(sourceType) &&
         !SOURCE_TYPE_RDBMS.equals(sourceType)) {
@@ -260,7 +260,7 @@ public class BDataSourceConnection extends BComponent {
     if (path == null || path.trim().isEmpty()) {
       throw new IllegalArgumentException("Source path cannot be null or empty");
     }
-    
+
     String currentSourceType = getSourceType();
     if (SOURCE_TYPE_EXCEL.equals(currentSourceType) || SOURCE_TYPE_CSV.equals(currentSourceType)) {
       validateFilePath(path);
@@ -280,11 +280,11 @@ public class BDataSourceConnection extends BComponent {
     if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException("Connection name cannot be null or empty");
     }
-    
+
     if (name.length() > 100) {
       throw new IllegalArgumentException("Connection name cannot exceed 100 characters");
     }
-    
+
     // Check for invalid characters
     if (!name.matches("^[a-zA-Z0-9\\s\\-_\\.]+$")) {
       throw new IllegalArgumentException("Connection name contains invalid characters");
@@ -298,7 +298,7 @@ public class BDataSourceConnection extends BComponent {
     try {
       File file = new File(path);
       String extension = getFileExtension(path);
-      
+
       if (SOURCE_TYPE_EXCEL.equals(getSourceType())) {
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
           throw new IllegalArgumentException("Excel files must have .xlsx or .xls extension");
@@ -378,10 +378,10 @@ public class BDataSourceConnection extends BComponent {
   private boolean testFileConnection(String path) {
     File file = new File(path);
     boolean exists = file.exists() && file.canRead();
-    
+
     setValidationStatus(exists ? VALIDATION_STATUS_VALID : VALIDATION_STATUS_INVALID);
     setLastValidated(BAbsTime.now());
-    
+
     return exists;
   }
 

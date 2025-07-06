@@ -1,7 +1,7 @@
 // In: com.mea.datasync.test
 package com.mea.datasync.test;
 
-import com.mea.datasync.model.BDataSourceConnection;
+import com.mea.datasync.model.BDataSource;
 import javax.baja.test.BTestNg;
 import javax.baja.nre.annotations.NiagaraType;
 import org.testng.Assert;
@@ -10,19 +10,19 @@ import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
 
 /**
- * Unit tests for BDataSourceConnection component.
+ * Unit tests for BDataSource component.
  * Tests connection validation, source type handling, and path validation.
  */
 @NiagaraType
 @Test(groups = {"datasync", "unit", "connection", "validation"})
 public class BDataSourceConnectionTest extends BTestNg {
 
-  private BDataSourceConnection connection;
+  private BDataSource connection;
 
   @BeforeClass(alwaysRun = true)
   public void setUp() {
     // Given: A new data source connection instance
-    connection = new BDataSourceConnection();
+    connection = new BDataSource();
   }
 
   @AfterClass(alwaysRun = true)
@@ -54,7 +54,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     }
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testInvalidSourceType() {
     // Given: An invalid source type
@@ -65,7 +65,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     connection.setSourceType(invalidType);
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testNullSourceType() {
     // Given: A null source type
@@ -74,7 +74,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     connection.setSourceType(null);
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testEmptySourceType() {
     // Given: An empty source type
@@ -113,7 +113,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     Assert.assertEquals(connection.getSourcePath(), validPath);
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testInvalidExcelExtension() {
     // Given: Excel source type and invalid file extension
@@ -124,7 +124,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     connection.setSourcePath("C:\\Data\\test.txt");
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testNullSourcePath() {
     // Given: Valid source type
@@ -135,7 +135,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     connection.setSourcePath(null);
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testEmptySourcePath() {
     // Given: Valid source type
@@ -182,7 +182,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     connection.setConnectionName(longName);
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testConnectionNameInvalidCharacters() {
     // Given: A connection name with invalid characters
@@ -202,13 +202,13 @@ public class BDataSourceConnectionTest extends BTestNg {
     // Given: Excel connection with path to this test file (which exists)
     connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_EXCEL);
     connection.setConnectionName("Test Connection");
-    
+
     // Use a file that should exist - the current test file
     String testFilePath = getClass().getProtectionDomain()
                                    .getCodeSource()
                                    .getLocation()
                                    .getPath() + "BDataSourceConnectionTest.class";
-    
+
     // Create a mock Excel file path for testing
     String mockExcelPath = "test.xlsx";
     connection.setSourcePath(mockExcelPath);
@@ -218,7 +218,7 @@ public class BDataSourceConnectionTest extends BTestNg {
 
     // Then: Should return false for non-existent file
     Assert.assertFalse(result);
-    Assert.assertEquals(connection.getValidationStatus(), 
+    Assert.assertEquals(connection.getValidationStatus(),
                        BDataSourceConnection.VALIDATION_STATUS_INVALID);
   }
 
@@ -271,7 +271,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     Assert.assertEquals(connection.getSourcePath(), validUrl);
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testInvalidGoogleSheetsUrl() {
     // Given: Google Sheets source type and invalid URL
@@ -299,7 +299,7 @@ public class BDataSourceConnectionTest extends BTestNg {
     Assert.assertEquals(connection.getSourcePath(), validJdbcUrl);
   }
 
-  @Test(groups = {"validation", "error-handling"}, 
+  @Test(groups = {"validation", "error-handling"},
         expectedExceptions = IllegalArgumentException.class)
   public void testInvalidJdbcUrl() {
     // Given: RDBMS source type and invalid JDBC URL

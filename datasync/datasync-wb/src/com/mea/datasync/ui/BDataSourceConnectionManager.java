@@ -6,7 +6,7 @@ import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 import javax.baja.workbench.mgr.*;
 
-import com.mea.datasync.model.BDataSourceConnection;
+import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
 
@@ -95,36 +95,36 @@ public class BDataSourceConnectionManager extends BAbstractManager {
     /**
      * Define what types can be created via "New" button and context menu.
      * This is the key method that enables automatic "New" functionality.
-     * Using only BDataSourceConnection to avoid abstract class issues.
+     * Using only BDataSource to avoid abstract class issues.
      */
     @Override
     public MgrTypeInfo[] getNewTypes() {
       return new MgrTypeInfo[] {
-        MgrTypeInfo.make(BDataSourceConnection.TYPE),
+        MgrTypeInfo.make(BDataSource.TYPE),
         MgrTypeInfo.make(BDataSourceConnectionsFolder.TYPE)
       };
     }
 
     /**
      * Define what types are included in this manager view.
-     * Using only BDataSourceConnection and folder types to avoid any
+     * Using only BDataSource and folder types to avoid any
      * abstract class initialization issues.
      */
     @Override
     public Type[] getIncludeTypes() {
       return new Type[] {
-        BDataSourceConnection.TYPE,
+        BDataSource.TYPE,
         BDataSourceConnectionsFolder.TYPE
       };
     }
 
     /**
      * Additional filtering for components displayed by this manager.
-     * Accept only BDataSourceConnection and folders to avoid abstract class issues.
+     * Accept only BDataSource and folders to avoid abstract class issues.
      */
     @Override
     public boolean accept(BComponent component) {
-      return component instanceof BDataSourceConnection ||
+      return component instanceof BDataSource ||
              component instanceof BDataSourceConnectionsFolder;
     }
 
@@ -137,16 +137,16 @@ public class BDataSourceConnectionManager extends BAbstractManager {
     }
 
     /**
-     * Override load to handle both DataSyncTool and DataSourceConnections as target.
+     * Override load to handle both DataSyncTool and DataSourceFolder as target.
      */
     @Override
     public void load(BComponent target) {
-      // If target is DataSyncTool, load its DataSourceConnections instead
+      // If target is DataSyncTool, load its DataSources instead
       if (target instanceof com.mea.datasync.ui.BDataSyncTool) {
         com.mea.datasync.ui.BDataSyncTool tool = (com.mea.datasync.ui.BDataSyncTool) target;
-        super.load(tool.getDataSourceConnections());
+        super.load(tool.getDataSources());
       } else {
-        // If target is already DataSourceConnections, use it directly
+        // If target is already DataSourceFolder, use it directly
         super.load(target);
       }
     }
