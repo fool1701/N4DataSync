@@ -107,7 +107,7 @@ Successfully implemented a comprehensive Data Source Connection architecture for
 3. `BAutoCheckConfig.java` - Health monitoring configuration
 4. `BExcelDataSourceConnection.java` - Excel implementation
 5. `BExcelConnectionDetails.java` - Excel configuration
-6. `BDataSourceConnections.java` - Main container
+6. `BDataSourceFolder.java` - Main container
 7. `BDataSourceConnectionsFolder.java` - Removable folder
 8. `BDataSyncTool.java` - Enhanced tool integration
 

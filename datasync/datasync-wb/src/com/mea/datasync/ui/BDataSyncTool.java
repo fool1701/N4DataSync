@@ -9,7 +9,7 @@ import javax.baja.sys.*;
 import javax.baja.nav.BINavNode;
 import javax.baja.workbench.tool.BWbNavNodeTool;
 import com.mea.datasync.model.BDataSourceFolder;
-import com.mea.datasync.model.BAbstractDataSourceConnection;
+import com.mea.datasync.model.BAbstractDataSource;
 
 /**
  * BDataSyncTool serves as the main entry point for the N4-DataSync module within
@@ -207,8 +207,8 @@ public class BDataSyncTool extends BWbNavNodeTool {
       System.out.println("🚀 Creating Excel connection: " + connectionName);
 
       // Create new Excel connection
-      com.mea.datasync.model.BExcelDataSourceConnection connection =
-        new com.mea.datasync.model.BExcelDataSourceConnection();
+      com.mea.datasync.model.BExcelDataSource connection =
+        new com.mea.datasync.model.BExcelDataSource();
 
       // Configure connection details
       com.mea.datasync.model.BExcelConnectionDetails details = connection.getConnectionDetails();
@@ -303,8 +303,8 @@ public class BDataSyncTool extends BWbNavNodeTool {
       int healthyCount = 0;
 
       // Count healthy connections
-      BAbstractDataSourceConnection[] allConnections = connections.getAllDataSourceConnections();
-      for (BAbstractDataSourceConnection conn : allConnections) {
+      BAbstractDataSource[] allConnections = connections.getAllDataSourceConnections();
+      for (BAbstractDataSource conn : allConnections) {
         if (conn.isConnectionHealthy()) {
           healthyCount++;
         }

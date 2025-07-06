@@ -10,9 +10,9 @@ import org.testng.annotations.Test;
 import com.mea.datasync.ui.BDataSyncTool;
 import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
-import com.mea.datasync.model.BExcelDataSourceConnection;
+import com.mea.datasync.model.BExcelDataSource;
 import com.mea.datasync.model.BExcelConnectionDetails;
-import com.mea.datasync.model.BAbstractDataSourceConnection;
+import com.mea.datasync.model.BAbstractDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 import java.io.File;
@@ -97,7 +97,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     // First child should be the data source connections container
     boolean foundConnectionsContainer = false;
     for (BINavNode child : navChildren) {
-      if (child instanceof BDataSourceConnections) {
+      if (child instanceof BDataSourceConnectionsFolder) {
         foundConnectionsContainer = true;
         break;
       }
@@ -114,7 +114,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     Assert.assertTrue(desc.contains("N4-DataSync Tool"));
 
     // Add a connection
-    BExcelDataSourceConnection excelConnection = createTestExcelConnection();
+    BExcelDataSource excelConnection = createTestExcelConnection();
     connections.add("testExcel", excelConnection);
 
     // Description should include connection count
@@ -123,7 +123,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     Assert.assertTrue(desc.contains("0 healthy")); // Not tested yet
 
     // Make connection healthy
-    excelConnection.setConnectionStatus(BAbstractDataSourceConnection.STATUS_CONNECTED);
+    excelConnection.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
     desc = dataSyncTool.getNavDescription(null);
     Assert.assertTrue(desc.contains("1 healthy"));
   }
@@ -137,14 +137,14 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     logTestStep("Testing adding Excel connection to tool");
 
     // Create and configure Excel connection
-    BExcelDataSourceConnection excelConnection = createTestExcelConnection();
+    BExcelDataSource excelConnection = createTestExcelConnection();
 
     // Add to tool's connections container
     connections.add("bmsData", excelConnection);
 
     // Verify integration
     Assert.assertEquals(connections.getDataSourceConnectionCount(), 1);
-    BAbstractDataSourceConnection[] allConnections = connections.getAllDataSourceConnections();
+    BAbstractDataSource[] allConnections = connections.getAllDataSourceConnections();
     Assert.assertEquals(allConnections.length, 1);
     Assert.assertEquals(allConnections[0], excelConnection);
   }
@@ -162,11 +162,11 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     connections.add("bmsFolder", bmsFolder);
 
     // Add connections to folder
-    BExcelDataSourceConnection pointsConnection = createTestExcelConnection();
+    BExcelDataSource pointsConnection = createTestExcelConnection();
     pointsConnection.getConnectionDetails().setConnectionName("BMS Points");
     bmsFolder.add("points", pointsConnection);
 
-    BExcelDataSourceConnection devicesConnection = createTestExcelConnection();
+    BExcelDataSource devicesConnection = createTestExcelConnection();
     devicesConnection.getConnectionDetails().setConnectionName("BMS Devices");
     bmsFolder.add("devices", devicesConnection);
 
@@ -179,8 +179,8 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     BINavNode[] navChildren = dataSyncTool.getNavChildren();
     boolean foundConnectionsContainer = false;
     for (BINavNode child : navChildren) {
-      if (child instanceof BDataSourceConnections) {
-        BDataSourceConnections container = (BDataSourceConnections) child;
+      if (child instanceof BDataSourceConnectionsFolder) {
+        BDataSourceConnectionsFolder container = (BDataSourceConnectionsFolder) child;
         Assert.assertTrue(container.hasNavChildren());
         foundConnectionsContainer = true;
         break;
@@ -198,7 +198,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     logTestStep("Testing connection testing integration");
 
     // Create Excel connection with valid file
-    BExcelDataSourceConnection excelConnection = new BExcelDataSourceConnection();
+    BExcelDataSource excelConnection = new BExcelDataSource();
     BExcelConnectionDetails details = excelConnection.getConnectionDetails();
     details.setConnectionName("Test Integration Connection");
     details.setFilePath(tempExcelFile.getAbsolutePath());
@@ -224,12 +224,12 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     logTestStep("Testing mixed connection health integration");
 
     // Create healthy connection
-    BExcelDataSourceConnection healthyConnection = new BExcelDataSourceConnection();
+    BExcelDataSource healthyConnection = new BExcelDataSource();
     healthyConnection.getConnectionDetails().setFilePath(tempExcelFile.getAbsolutePath());
     healthyConnection.doTestConnection(); // Should succeed
 
     // Create unhealthy connection
-    BExcelDataSourceConnection unhealthyConnection = new BExcelDataSourceConnection();
+    BExcelDataSource unhealthyConnection = new BExcelDataSource();
     unhealthyConnection.getConnectionDetails().setFilePath("C:\\NonExistent\\file.xlsx");
     unhealthyConnection.doTestConnection(); // Should fail
 
@@ -254,8 +254,8 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     logTestStep("Testing tool lifecycle with connections");
 
     // Add connections before starting
-    BExcelDataSourceConnection connection1 = createTestExcelConnection();
-    BExcelDataSourceConnection connection2 = createTestExcelConnection();
+    BExcelDataSource connection1 = createTestExcelConnection();
+    BExcelDataSource connection2 = createTestExcelConnection();
 
     connections.add("conn1", connection1);
     connections.add("conn2", connection2);
@@ -295,11 +295,11 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     connections.add("hvac", hvacFolder);
 
     // Add connections to folders
-    BExcelDataSourceConnection bmsPoints = createTestExcelConnection();
+    BExcelDataSource bmsPoints = createTestExcelConnection();
     bmsPoints.getConnectionDetails().setConnectionName("BMS Points Data");
     bmsFolder.add("points", bmsPoints);
 
-    BExcelDataSourceConnection hvacSchedules = createTestExcelConnection();
+    BExcelDataSource hvacSchedules = createTestExcelConnection();
     hvacSchedules.getConnectionDetails().setConnectionName("HVAC Schedules");
     hvacFolder.add("schedules", hvacSchedules);
 
@@ -309,10 +309,10 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
 
     // Test navigation tree depth
     BINavNode[] toolChildren = dataSyncTool.getNavChildren();
-    BDataSourceConnections connectionsContainer = null;
+    BDataSourceConnectionsFolder connectionsContainer = null;
     for (BINavNode child : toolChildren) {
-      if (child instanceof BDataSourceConnections) {
-        connectionsContainer = (BDataSourceConnections) child;
+      if (child instanceof BDataSourceConnectionsFolder) {
+        connectionsContainer = (BDataSourceConnectionsFolder) child;
         break;
       }
     }
@@ -331,8 +331,8 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
   /**
    * Create a test Excel connection with basic configuration.
    */
-  private BExcelDataSourceConnection createTestExcelConnection() {
-    BExcelDataSourceConnection connection = new BExcelDataSourceConnection();
+  private BExcelDataSource createTestExcelConnection() {
+    BExcelDataSource connection = new BExcelDataSource();
     BExcelConnectionDetails details = connection.getConnectionDetails();
     details.setConnectionName("Test Excel Connection");
     details.setFilePath(tempExcelFile.getAbsolutePath());

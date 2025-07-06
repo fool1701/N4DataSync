@@ -7,26 +7,26 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.mea.datasync.ui.BDataSyncTool;
-import com.mea.datasync.ui.BDataSourceConnectionManager;
+import com.mea.datasync.ui.BDataSourceManager;
 import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
-import com.mea.datasync.model.BExcelDataSourceConnection;
-import com.mea.datasync.model.BAbstractDataSourceConnection;
+import com.mea.datasync.model.BExcelDataSource;
+import com.mea.datasync.model.BAbstractDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
 import javax.baja.workbench.mgr.MgrModel;
 import javax.baja.workbench.mgr.MgrController;
 
 /**
- * Unit tests for BDataSourceConnectionManager.
+ * Unit tests for BDataSourceManager.
  * Tests the manager functionality including model, new types,
- * and UI interactions for data source connections.
+ * and UI interactions for data sources.
  */
 @NiagaraType
 @Test(groups = {"datasync", "unit", "ui", "manager"})
 public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
 
   private BDataSyncTool dataSyncTool;
-  private BDataSourceConnectionManager manager;
+  private BDataSourceManager manager;
   private BDataSourceFolder connections;
 
   @Override
@@ -38,7 +38,7 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
     connections = dataSyncTool.getDataSources();
 
     // Create manager
-    manager = new BDataSourceConnectionManager();
+    manager = new BDataSourceManager();
 
     logTestStep("Manager view test setup completed");
   }
@@ -72,7 +72,7 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
     Assert.assertNotNull(manager);
 
     // Should have proper type
-    Assert.assertEquals(manager.getType(), BDataSourceConnectionManager.TYPE);
+    Assert.assertEquals(manager.getType(), BDataSourceManager.TYPE);
   }
 
   @Test(groups = {"ui", "manager", "functionality"})
@@ -81,12 +81,12 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
 
     // Test that the manager can be created and has proper type
     Assert.assertNotNull(manager);
-    Assert.assertEquals(manager.getType(), BDataSourceConnectionManager.TYPE);
+    Assert.assertEquals(manager.getType(), BDataSourceManager.TYPE);
 
     // Test basic functionality without accessing protected methods
     try {
       // Just verify the manager exists and has the right type
-      Assert.assertTrue(manager instanceof BDataSourceConnectionManager);
+      Assert.assertTrue(manager instanceof BDataSourceManager);
 
     } catch (Exception e) {
       Assert.fail("Manager should be functional: " + e.getMessage());
@@ -104,11 +104,11 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
     logTestStep("Testing manager integration with DataSync Tool");
 
     // Add some test connections to the tool
-    BExcelDataSourceConnection connection1 = new BExcelDataSourceConnection();
+    BExcelDataSource connection1 = new BExcelDataSource();
     connection1.getConnectionDetails().setConnectionName("Test Connection 1");
     connections.add("testConn1", connection1);
 
-    BExcelDataSourceConnection connection2 = new BExcelDataSourceConnection();
+    BExcelDataSource connection2 = new BExcelDataSource();
     connection2.getConnectionDetails().setConnectionName("Test Connection 2");
     connections.add("testConn2", connection2);
 
@@ -116,7 +116,7 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
     Assert.assertEquals(connections.getDataSourceConnectionCount(), 2);
 
     // Test that connections can be accessed
-    BAbstractDataSourceConnection[] allConnections = connections.getAllDataSourceConnections();
+    BAbstractDataSource[] allConnections = connections.getAllDataSourceConnections();
     Assert.assertEquals(allConnections.length, 2);
   }
 

@@ -1,10 +1,10 @@
-// Simple test to verify BAbstractDataSourceConnection can be loaded
+// Simple test to verify BAbstractDataSource can be loaded
 // This test doesn't require Niagara type registration
 
-import com.mea.datasync.model.BAbstractDataSourceConnection;
-import com.mea.datasync.model.BExcelDataSourceConnection;
+import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BExcelDataSource;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
-import com.mea.datasync.ui.BDataSourceConnectionManager;
+import com.mea.datasync.ui.BDataSourceManager;
 
 public class SimpleConnectionTest {
     
@@ -12,46 +12,46 @@ public class SimpleConnectionTest {
         System.out.println("=== Simple Connection Test ===");
         
         try {
-            // Test 1: Can we load BAbstractDataSourceConnection class?
-            System.out.println("Test 1: Loading BAbstractDataSourceConnection class...");
-            Class<?> abstractClass = BAbstractDataSourceConnection.class;
-            System.out.println("✅ BAbstractDataSourceConnection class loaded successfully");
+            // Test 1: Can we load BAbstractDataSource class?
+            System.out.println("Test 1: Loading BAbstractDataSource class...");
+            Class<?> abstractClass = BAbstractDataSource.class;
+            System.out.println("✅ BAbstractDataSource class loaded successfully");
             System.out.println("   Class: " + abstractClass.getName());
             
             // Test 2: Can we access the TYPE field?
-            System.out.println("\nTest 2: Accessing BAbstractDataSourceConnection.TYPE...");
+            System.out.println("\nTest 2: Accessing BAbstractDataSource.TYPE...");
             try {
-                Object type = BAbstractDataSourceConnection.TYPE;
-                System.out.println("✅ BAbstractDataSourceConnection.TYPE accessed successfully");
+                Object type = BAbstractDataSource.TYPE;
+                System.out.println("✅ BAbstractDataSource.TYPE accessed successfully");
                 System.out.println("   TYPE: " + type);
             } catch (Exception e) {
-                System.out.println("FAILED: Failed to access BAbstractDataSourceConnection.TYPE: " + e.getMessage());
+                System.out.println("FAILED: Failed to access BAbstractDataSource.TYPE: " + e.getMessage());
                 e.printStackTrace();
             }
             
             // Test 3: Can we create concrete implementations?
-            System.out.println("\nTest 3: Creating BExcelDataSourceConnection...");
-            BExcelDataSourceConnection excelConnection = new BExcelDataSourceConnection();
-            System.out.println("✅ BExcelDataSourceConnection created successfully");
+            System.out.println("\nTest 3: Creating BExcelDataSource...");
+            BExcelDataSource excelConnection = new BExcelDataSource();
+            System.out.println("✅ BExcelDataSource created successfully");
             System.out.println("   Type: " + excelConnection.getClass().getName());
             System.out.println("   Data Source Type: " + excelConnection.getDataSourceTypeName());
             
             // Test 4: Can we access concrete TYPE field?
-            System.out.println("\nTest 4: Accessing BExcelDataSourceConnection.TYPE...");
-            Object excelType = BExcelDataSourceConnection.TYPE;
-            System.out.println("✅ BExcelDataSourceConnection.TYPE accessed successfully");
+            System.out.println("\nTest 4: Accessing BExcelDataSource.TYPE...");
+            Object excelType = BExcelDataSource.TYPE;
+            System.out.println("✅ BExcelDataSource.TYPE accessed successfully");
             System.out.println("   TYPE: " + excelType);
             
             // Test 5: Can we create the manager?
-            System.out.println("\nTest 5: Creating BDataSourceConnectionManager...");
-            BDataSourceConnectionManager manager = new BDataSourceConnectionManager();
-            System.out.println("✅ BDataSourceConnectionManager created successfully");
+            System.out.println("\nTest 5: Creating BDataSourceManager...");
+            BDataSourceManager manager = new BDataSourceManager();
+            System.out.println("✅ BDataSourceManager created successfully");
             
             // Test 6: Can we create the manager without initialization errors?
             System.out.println("\nTest 6: Testing manager initialization...");
             try {
                 // The key test is that the manager can be created without NoClassDefFoundError
-                // This would have failed before our fix when it tried to access BAbstractDataSourceConnection.TYPE
+                // This would have failed before our fix when it tried to access BAbstractDataSource.TYPE
                 System.out.println("✅ Manager created and initialized successfully");
                 System.out.println("   Manager class: " + manager.getClass().getName());
                 System.out.println("   Manager type: " + manager.getType());

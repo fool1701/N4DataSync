@@ -7,7 +7,7 @@ import javax.baja.sys.*;
 /**
  * BDataSourceFolder serves as a container/folder component for organizing
  * data source connections within the DataSync Tool. This component acts as a
- * frozen property slot that accepts both BAbstractDataSourceConnection
+ * frozen property slot that accepts both BAbstractDataSource
  * subclasses (new architecture) and BDataSource (legacy) components,
  * as well as BDataSourceConnectionsFolder components for organization.
  *
@@ -58,8 +58,8 @@ public class BDataSourceFolder extends BComponent {
    */
   @Override
   public boolean isChildLegal(BComponent child) {
-    // Allow any data source connection type (new architecture)
-    if (child instanceof BAbstractDataSourceConnection) {
+    // Allow any data source type (new architecture)
+    if (child instanceof BAbstractDataSource) {
       return true;
     }
 
@@ -84,16 +84,16 @@ public class BDataSourceFolder extends BComponent {
   public void childParented(Property property, BValue newChild, Context context) {
     super.childParented(property, newChild, context);
 
-    if (newChild instanceof BAbstractDataSourceConnection) {
-      BAbstractDataSourceConnection connection = (BAbstractDataSourceConnection) newChild;
-      System.out.println("🔌 Data source connection added: " + connection.getDataSourceTypeName() +
+    if (newChild instanceof BAbstractDataSource) {
+      BAbstractDataSource connection = (BAbstractDataSource) newChild;
+      System.out.println("🔌 Data source added: " + connection.getDataSourceTypeName() +
                         " (" + property.getName() + ")");
 
       // Notify parent tool of changes for persistence
       notifyParentOfChanges();
     } else if (newChild instanceof BDataSource) {
       BDataSource connection = (BDataSource) newChild;
-      System.out.println("🔌 Legacy data source connection added: " + connection.getSourceType() +
+      System.out.println("🔌 Legacy data source added: " + connection.getSourceType() +
                         " (" + property.getName() + ")");
 
       // Notify parent tool of changes for persistence
@@ -111,9 +111,9 @@ public class BDataSourceFolder extends BComponent {
   public void childUnparented(Property property, BValue oldChild, Context context) {
     super.childUnparented(property, oldChild, context);
 
-    if (oldChild instanceof BAbstractDataSourceConnection) {
-      BAbstractDataSourceConnection connection = (BAbstractDataSourceConnection) oldChild;
-      System.out.println("🔌 Data source connection removed: " + connection.getDataSourceTypeName() +
+    if (oldChild instanceof BAbstractDataSource) {
+      BAbstractDataSource connection = (BAbstractDataSource) oldChild;
+      System.out.println("🔌 Data source removed: " + connection.getDataSourceTypeName() +
                         " (" + property.getName() + ")");
       notifyParentOfChanges();
     } else if (oldChild instanceof BDataSourceConnectionsFolder) {
@@ -187,7 +187,7 @@ public class BDataSourceFolder extends BComponent {
     BComponent[] children = getChildComponents();
 
     for (BComponent child : children) {
-      if (child instanceof BAbstractDataSourceConnection) {
+      if (child instanceof BAbstractDataSource) {
         count++;
       }
     }
@@ -218,21 +218,21 @@ public class BDataSourceFolder extends BComponent {
    *
    * @return array of all data source connections
    */
-  public BAbstractDataSourceConnection[] getAllDataSourceConnections() {
-    java.util.List<BAbstractDataSourceConnection> connections = new java.util.ArrayList<>();
+  public BAbstractDataSource[] getAllDataSourceConnections() {
+    java.util.List<BAbstractDataSource> connections = new java.util.ArrayList<>();
     collectDataSourceConnections(this, connections);
-    return connections.toArray(new BAbstractDataSourceConnection[0]);
+    return connections.toArray(new BAbstractDataSource[0]);
   }
 
   /**
    * Recursively collect data source connections from this container and any subfolders.
    */
-  private void collectDataSourceConnections(BComponent container, java.util.List<BAbstractDataSourceConnection> connections) {
+  private void collectDataSourceConnections(BComponent container, java.util.List<BAbstractDataSource> connections) {
     BComponent[] children = container.getChildComponents();
 
     for (BComponent child : children) {
-      if (child instanceof BAbstractDataSourceConnection) {
-        connections.add((BAbstractDataSourceConnection) child);
+      if (child instanceof BAbstractDataSource) {
+        connections.add((BAbstractDataSource) child);
       } else if (child instanceof BDataSourceConnectionsFolder) {
         // Recursively collect from subfolders
         collectDataSourceConnections(child, connections);
@@ -247,11 +247,11 @@ public class BDataSourceFolder extends BComponent {
    * @return array of connections of the specified type
    */
   @SuppressWarnings("unchecked")
-  public <T extends BAbstractDataSourceConnection> T[] getDataSourceConnectionsByType(Class<T> connectionType) {
+  public <T extends BAbstractDataSource> T[] getDataSourceConnectionsByType(Class<T> connectionType) {
     java.util.List<T> connections = new java.util.ArrayList<>();
-    BAbstractDataSourceConnection[] allConnections = getAllDataSourceConnections();
+    BAbstractDataSource[] allConnections = getAllDataSourceConnections();
 
-    for (BAbstractDataSourceConnection connection : allConnections) {
+    for (BAbstractDataSource connection : allConnections) {
       if (connectionType.isInstance(connection)) {
         connections.add((T) connection);
       }
@@ -266,9 +266,9 @@ public class BDataSourceFolder extends BComponent {
    * @return true if at least one connection is healthy
    */
   public boolean hasHealthyConnections() {
-    BAbstractDataSourceConnection[] connections = getAllDataSourceConnections();
+    BAbstractDataSource[] connections = getAllDataSourceConnections();
 
-    for (BAbstractDataSourceConnection connection : connections) {
+    for (BAbstractDataSource connection : connections) {
       if (connection.isConnectionHealthy()) {
         return true;
       }

@@ -6,15 +6,15 @@ This document shows how to integrate the new Data Source Connection architecture
 
 ## Integration Steps
 
-### 1. Add DataSourceConnections Property to BDataSyncTool
+### 1. Add DataSourceFolder Property to BDataSyncTool
 
 Add this property annotation to `BDataSyncTool.java`:
 
 ```java
 @NiagaraProperty(
   name = "dataSourceConnections",
-  type = "datasync:DataSourceConnections",
-  defaultValue = "new BDataSourceConnections()",
+  type = "datasync:DataSourceFolder",
+  defaultValue = "new BDataSourceFolder()",
   flags = Flags.READONLY | Flags.SUMMARY
 )
 ```
@@ -168,7 +168,7 @@ excelConnection.doTestConnection();
 ### Creating Organized Folder Structure
 
 ```java
-BDataSourceConnections connections = tool.getDataSourceConnections();
+BDataSourceFolder connections = tool.getDataSources();
 
 // Create a folder for BMS data sources
 BDataSourceConnectionsFolder bmsFolder = new BDataSourceConnectionsFolder();

@@ -7,11 +7,11 @@ import javax.baja.sys.*;
 import java.io.File;
 
 /**
- * BExcelDataSourceConnection provides connection functionality specifically
+ * BExcelDataSource provides connection functionality specifically
  * for Excel (.xlsx, .xls) data sources. This concrete implementation of
- * BAbstractDataSourceConnection handles Excel-specific connection details
+ * BAbstractDataSource handles Excel-specific connection details
  * and testing logic.
- * 
+ *
  * Features:
  * - File path validation and existence checking
  * - Excel format validation
@@ -27,11 +27,11 @@ import java.io.File;
   flags = Flags.READONLY | Flags.SUMMARY,
   override = true
 )
-public class BExcelDataSourceConnection extends BAbstractDataSourceConnection {
+public class BExcelDataSource extends BAbstractDataSource {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BExcelDataSourceConnection(2047217648)1.0$ @*/
+/*@ $com.mea.datasync.model.BExcelDataSource(2047217648)1.0$ @*/
 /* Generated Wed Jul 05 11:00:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "connectionDetails"
@@ -61,7 +61,7 @@ public class BExcelDataSourceConnection extends BAbstractDataSourceConnection {
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BExcelDataSourceConnection.class);
+  public static final Type TYPE = Sys.loadType(BExcelDataSource.class);
 
   //endregion Type
 
@@ -72,7 +72,7 @@ public class BExcelDataSourceConnection extends BAbstractDataSourceConnection {
 // Constructor
 ////////////////////////////////////////////////////////////////
 
-  public BExcelDataSourceConnection() {
+  public BExcelDataSource() {
     super();
     
     // Set Excel-optimized auto-check configuration

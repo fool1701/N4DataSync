@@ -8,11 +8,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.mea.datasync.ui.BDataSyncTool;
-import com.mea.datasync.ui.BDataSourceConnectionManager;
+import com.mea.datasync.ui.BDataSourceManager;
 import com.mea.datasync.model.BDataSourceFolder;
-import com.mea.datasync.model.BExcelDataSourceConnection;
+import com.mea.datasync.model.BExcelDataSource;
 import com.mea.datasync.model.BDataSourceConnectionsFolder;
-import com.mea.datasync.model.BAbstractDataSourceConnection;
+import com.mea.datasync.model.BAbstractDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 /**
@@ -67,21 +67,21 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
   @Test(groups = {"runtime", "initialization", "critical"})
   public void testAbstractDataSourceConnectionClassInitialization() {
-    logTestStep("Testing BAbstractDataSourceConnection class initialization");
+    logTestStep("Testing BAbstractDataSource class initialization");
 
     try {
       // This should not throw NoClassDefFoundError
-      Type type = BAbstractDataSourceConnection.TYPE;
+      Type type = BAbstractDataSource.TYPE;
       Assert.assertNotNull(type);
 
       // Test that we can access static constants
-      String status = BAbstractDataSourceConnection.STATUS_NOT_TESTED;
+      String status = BAbstractDataSource.STATUS_NOT_TESTED;
       Assert.assertEquals(status, "Not Tested");
 
-      logTestStep("✅ BAbstractDataSourceConnection class initialized successfully");
+      logTestStep("✅ BAbstractDataSource class initialized successfully");
 
     } catch (NoClassDefFoundError e) {
-      Assert.fail("NoClassDefFoundError during BAbstractDataSourceConnection initialization: " + e.getMessage());
+      Assert.fail("NoClassDefFoundError during BAbstractDataSource initialization: " + e.getMessage());
     } catch (Exception e) {
       Assert.fail("Unexpected error during class initialization: " + e.getMessage());
     }
@@ -89,24 +89,24 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
   @Test(groups = {"runtime", "initialization", "critical"})
   public void testExcelConnectionClassInitialization() {
-    logTestStep("Testing BExcelDataSourceConnection class initialization");
+    logTestStep("Testing BExcelDataSource class initialization");
 
     try {
       // Test class loading and type access
-      Type type = BExcelDataSourceConnection.TYPE;
+      Type type = BExcelDataSource.TYPE;
       Assert.assertNotNull(type);
 
       // Test instance creation
-      BExcelDataSourceConnection connection = new BExcelDataSourceConnection();
+      BExcelDataSource connection = new BExcelDataSource();
       Assert.assertNotNull(connection);
 
       // Test that connection details are properly initialized
       Assert.assertNotNull(connection.getConnectionDetails());
 
-      logTestStep("✅ BExcelDataSourceConnection class initialized successfully");
+      logTestStep("✅ BExcelDataSource class initialized successfully");
 
     } catch (Exception e) {
-      Assert.fail("Error during BExcelDataSourceConnection initialization: " + e.getMessage());
+      Assert.fail("Error during BExcelDataSource initialization: " + e.getMessage());
     }
   }
 
@@ -120,13 +120,13 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
     try {
       // Test manager creation (this would fail with NoClassDefFoundError if there are issues)
-      BDataSourceConnectionManager manager = new BDataSourceConnectionManager();
+      BDataSourceManager manager = new BDataSourceManager();
       Assert.assertNotNull(manager);
 
       // Test that manager can access its type
       Type managerType = manager.getType();
       Assert.assertNotNull(managerType);
-      Assert.assertEquals(managerType, BDataSourceConnectionManager.TYPE);
+      Assert.assertEquals(managerType, BDataSourceManager.TYPE);
 
       logTestStep("✅ DataSourceConnectionManager initialized successfully");
 
@@ -143,13 +143,13 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
     try {
       // Create manager and set DataSyncTool as root
-      BDataSourceConnectionManager manager = new BDataSourceConnectionManager();
+      BDataSourceManager manager = new BDataSourceManager();
 
       // Simulate what happens when manager is used as agent on DataSyncTool
       // This tests the getRoot() override logic
 
       // Add some test connections to verify the model works
-      BExcelDataSourceConnection connection1 = new BExcelDataSourceConnection();
+      BExcelDataSource connection1 = new BExcelDataSource();
       connection1.getConnectionDetails().setConnectionName("Test Connection 1");
       connections.add("testConn1", connection1);
 
@@ -178,7 +178,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
     try {
       // Add connections before starting
-      BExcelDataSourceConnection connection = new BExcelDataSourceConnection();
+      BExcelDataSource connection = new BExcelDataSource();
       connection.getConnectionDetails().setConnectionName("Lifecycle Test Connection");
       connections.add("lifecycleTest", connection);
 
@@ -206,7 +206,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
     try {
       // Create and configure connection
-      BExcelDataSourceConnection connection = new BExcelDataSourceConnection();
+      BExcelDataSource connection = new BExcelDataSource();
       connection.getConnectionDetails().setConnectionName("Connection Lifecycle Test");
 
       // Add to container
@@ -242,10 +242,10 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
     try {
       // Test that all our types are properly registered
       Type dataSyncToolType = BDataSyncTool.TYPE;
-      Type connectionsType = BDataSourceConnections.TYPE;
-      Type excelConnectionType = BExcelDataSourceConnection.TYPE;
+      Type connectionsType = BDataSourceConnectionsFolder.TYPE;
+      Type excelConnectionType = BExcelDataSource.TYPE;
       Type folderType = BDataSourceConnectionsFolder.TYPE;
-      Type managerType = BDataSourceConnectionManager.TYPE;
+      Type managerType = BDataSourceManager.TYPE;
 
       Assert.assertNotNull(dataSyncToolType);
       Assert.assertNotNull(connectionsType);
@@ -254,7 +254,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
       Assert.assertNotNull(managerType);
 
       // Test type hierarchy
-      Assert.assertTrue(excelConnectionType.is(BAbstractDataSourceConnection.TYPE));
+      Assert.assertTrue(excelConnectionType.is(BAbstractDataSource.TYPE));
       Assert.assertTrue(connectionsType.is(BComponent.TYPE));
       Assert.assertTrue(managerType.is(BAbstractManager.TYPE));
 
@@ -274,7 +274,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
     logTestStep("Testing manager behavior with invalid root scenarios");
 
     try {
-      BDataSourceConnectionManager manager = new BDataSourceConnectionManager();
+      BDataSourceManager manager = new BDataSourceManager();
 
       // Test that manager handles null gracefully
       // This simulates what might happen in edge cases
@@ -282,7 +282,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
       // Manager should not crash even if used incorrectly
       Type managerType = manager.getType();
-      Assert.assertEquals(managerType, BDataSourceConnectionManager.TYPE);
+      Assert.assertEquals(managerType, BDataSourceManager.TYPE);
 
       logTestStep("✅ Manager handles edge cases gracefully");
 
@@ -307,7 +307,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
       Assert.assertNotNull(connections);
 
       // 2. Create various connection types
-      BExcelDataSourceConnection excelConn = new BExcelDataSourceConnection();
+      BExcelDataSource excelConn = new BExcelDataSource();
       excelConn.getConnectionDetails().setConnectionName("Excel Integration Test");
 
       BDataSourceConnectionsFolder folder = new BDataSourceConnectionsFolder();
@@ -318,7 +318,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
       connections.add("folderIntegration", folder);
 
       // 4. Add connection to folder
-      BExcelDataSourceConnection nestedConn = new BExcelDataSourceConnection();
+      BExcelDataSource nestedConn = new BExcelDataSource();
       nestedConn.getConnectionDetails().setConnectionName("Nested Connection");
       folder.add("nestedConn", nestedConn);
 
@@ -328,7 +328,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
       Assert.assertEquals(connections.getAllDataSourceConnections().length, 2); // Recursive
 
       // 6. Test manager creation
-      BDataSourceConnectionManager manager = new BDataSourceConnectionManager();
+      BDataSourceManager manager = new BDataSourceManager();
       Assert.assertNotNull(manager);
 
       logTestStep("✅ Complete integration scenario successful");

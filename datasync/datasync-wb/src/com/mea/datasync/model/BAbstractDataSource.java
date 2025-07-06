@@ -8,8 +8,8 @@ import javax.baja.sys.*;
 import javax.baja.status.BStatus;
 
 /**
- * BAbstractDataSourceConnection serves as the base class for all data source
- * connection types in the N4-DataSync module. This concrete base class defines
+ * BAbstractDataSource serves as the base class for all data source
+ * types in the N4-DataSync module. This concrete base class defines
  * the common interface and behavior for connecting to external data sources.
  *
  * Following Niagara patterns from BAbstractFile and BPingMonitor, this class
@@ -73,7 +73,7 @@ import javax.baja.status.BStatus;
 @NiagaraAction(
   name = "testConnection"
 )
-public class BAbstractDataSourceConnection extends BComponent {
+public class BAbstractDataSource extends BComponent {
 
   // Connection Status Constants
   public static final String STATUS_NOT_TESTED = "Not Tested";
@@ -84,7 +84,7 @@ public class BAbstractDataSourceConnection extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BAbstractDataSourceConnection(2047217648)1.0$ @*/
+/*@ $com.mea.datasync.model.BAbstractDataSource(2047217648)1.0$ @*/
 /* Generated Wed Jul 05 10:00:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "connectionDetails"
@@ -268,7 +268,7 @@ public class BAbstractDataSourceConnection extends BComponent {
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BAbstractDataSourceConnection.class);
+  public static final Type TYPE = Sys.loadType(BAbstractDataSource.class);
 
   //endregion Type
 
@@ -279,7 +279,7 @@ public class BAbstractDataSourceConnection extends BComponent {
 // Constructor
 ////////////////////////////////////////////////////////////////
 
-  public BAbstractDataSourceConnection() {
+  public BAbstractDataSource() {
     // Initialize with default auto-check configuration
     // Subclasses can override these defaults in their constructors
   }

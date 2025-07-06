@@ -74,7 +74,7 @@ Configures automatic connection health checking:
 
 ### 4. Container Components
 
-#### `BDataSourceConnections` (Frozen Property)
+#### `BDataSourceFolder` (Frozen Property)
 Main container for organizing data source connections:
 - Type-safe child validation (only accepts `BAbstractDataSourceConnection` subclasses)
 - Navigation tree integration
@@ -119,8 +119,8 @@ Add to `BDataSyncTool`:
 ```java
 @NiagaraProperty(
   name = "dataSourceConnections",
-  type = "datasync:DataSourceConnections",
-  defaultValue = "new BDataSourceConnections()",
+  type = "datasync:DataSourceFolder",
+  defaultValue = "new BDataSourceFolder()",
   flags = Flags.READONLY | Flags.SUMMARY
 )
 ```

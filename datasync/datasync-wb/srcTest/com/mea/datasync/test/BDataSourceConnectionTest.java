@@ -41,10 +41,10 @@ public class BDataSourceConnectionTest extends BTestNg {
   public void testValidSourceTypes() {
     // Given: Valid source types
     String[] validTypes = {
-      BDataSourceConnection.SOURCE_TYPE_EXCEL,
-      BDataSourceConnection.SOURCE_TYPE_GOOGLE_SHEETS,
-      BDataSourceConnection.SOURCE_TYPE_CSV,
-      BDataSourceConnection.SOURCE_TYPE_RDBMS
+      BDataSource.SOURCE_TYPE_EXCEL,
+      BDataSource.SOURCE_TYPE_GOOGLE_SHEETS,
+      BDataSource.SOURCE_TYPE_CSV,
+      BDataSource.SOURCE_TYPE_RDBMS
     };
 
     // When & Then: All valid types should be accepted
@@ -90,7 +90,7 @@ public class BDataSourceConnectionTest extends BTestNg {
   @Test(groups = {"validation"})
   public void testValidExcelPath() {
     // Given: Excel source type and valid Excel file path
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_EXCEL);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_EXCEL);
     String validPath = "C:\\Data\\test.xlsx";
 
     // When: Setting valid Excel path
@@ -103,7 +103,7 @@ public class BDataSourceConnectionTest extends BTestNg {
   @Test(groups = {"validation"})
   public void testValidCsvPath() {
     // Given: CSV source type and valid CSV file path
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_CSV);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_CSV);
     String validPath = "C:\\Data\\test.csv";
 
     // When: Setting valid CSV path
@@ -117,7 +117,7 @@ public class BDataSourceConnectionTest extends BTestNg {
         expectedExceptions = IllegalArgumentException.class)
   public void testInvalidExcelExtension() {
     // Given: Excel source type and invalid file extension
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_EXCEL);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_EXCEL);
 
     // When: Setting path with wrong extension
     // Then: Should throw IllegalArgumentException
@@ -128,7 +128,7 @@ public class BDataSourceConnectionTest extends BTestNg {
         expectedExceptions = IllegalArgumentException.class)
   public void testNullSourcePath() {
     // Given: Valid source type
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_EXCEL);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_EXCEL);
 
     // When: Setting null source path
     // Then: Should throw IllegalArgumentException
@@ -139,7 +139,7 @@ public class BDataSourceConnectionTest extends BTestNg {
         expectedExceptions = IllegalArgumentException.class)
   public void testEmptySourcePath() {
     // Given: Valid source type
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_EXCEL);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_EXCEL);
 
     // When: Setting empty source path
     // Then: Should throw IllegalArgumentException
@@ -200,7 +200,7 @@ public class BDataSourceConnectionTest extends BTestNg {
   @Test(groups = {"connection"})
   public void testConnectionTestWithValidFile() {
     // Given: Excel connection with path to this test file (which exists)
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_EXCEL);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_EXCEL);
     connection.setConnectionName("Test Connection");
 
     // Use a file that should exist - the current test file
@@ -219,13 +219,13 @@ public class BDataSourceConnectionTest extends BTestNg {
     // Then: Should return false for non-existent file
     Assert.assertFalse(result);
     Assert.assertEquals(connection.getValidationStatus(),
-                       BDataSourceConnection.VALIDATION_STATUS_INVALID);
+                       BDataSource.VALIDATION_STATUS_INVALID);
   }
 
   @Test(groups = {"connection"})
   public void testConnectionSummary() {
     // Given: Configured connection
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_EXCEL);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_EXCEL);
     connection.setSourcePath("C:\\Data\\test.xlsx");
     connection.setConnectionName("Test Connection");
 
@@ -245,7 +245,7 @@ public class BDataSourceConnectionTest extends BTestNg {
   @Test(groups = {"defaults"})
   public void testDefaultValues() {
     // Given: New connection instance
-    BDataSourceConnection newConnection = new BDataSourceConnection();
+    BDataSource newConnection = new BDataSource();
 
     // When: Checking default values
     // Then: Should have expected defaults
@@ -261,7 +261,7 @@ public class BDataSourceConnectionTest extends BTestNg {
   @Test(groups = {"validation"})
   public void testValidGoogleSheetsUrl() {
     // Given: Google Sheets source type and valid URL
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_GOOGLE_SHEETS);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_GOOGLE_SHEETS);
     String validUrl = "https://docs.google.com/spreadsheets/d/1234567890/edit";
 
     // When: Setting valid Google Sheets URL
@@ -275,7 +275,7 @@ public class BDataSourceConnectionTest extends BTestNg {
         expectedExceptions = IllegalArgumentException.class)
   public void testInvalidGoogleSheetsUrl() {
     // Given: Google Sheets source type and invalid URL
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_GOOGLE_SHEETS);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_GOOGLE_SHEETS);
 
     // When: Setting invalid Google Sheets URL
     // Then: Should throw IllegalArgumentException
@@ -289,7 +289,7 @@ public class BDataSourceConnectionTest extends BTestNg {
   @Test(groups = {"validation"})
   public void testValidJdbcUrl() {
     // Given: RDBMS source type and valid JDBC URL
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_RDBMS);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_RDBMS);
     String validJdbcUrl = "jdbc:postgresql://localhost:5432/testdb";
 
     // When: Setting valid JDBC URL
@@ -303,7 +303,7 @@ public class BDataSourceConnectionTest extends BTestNg {
         expectedExceptions = IllegalArgumentException.class)
   public void testInvalidJdbcUrl() {
     // Given: RDBMS source type and invalid JDBC URL
-    connection.setSourceType(BDataSourceConnection.SOURCE_TYPE_RDBMS);
+    connection.setSourceType(BDataSource.SOURCE_TYPE_RDBMS);
 
     // When: Setting invalid JDBC URL (missing jdbc: prefix)
     // Then: Should throw IllegalArgumentException

@@ -9,13 +9,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.mea.datasync.model.BAbstractDataSourceConnection;
+import com.mea.datasync.model.BAbstractDataSource;
 import com.mea.datasync.model.BAutoCheckConfig;
 import com.mea.datasync.model.BConnectionDetails;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 /**
- * Comprehensive unit tests for BAbstractDataSourceConnection.
+ * Comprehensive unit tests for BAbstractDataSource.
  * Tests the base functionality including health monitoring, auto-checking,
  * and abstract method contracts.
  */
@@ -66,7 +66,7 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     // When: Checking default values
     // Then: Should have expected defaults
     Assert.assertEquals(testConnection.getConnectionStatus(), 
-                       BAbstractDataSourceConnection.STATUS_NOT_TESTED);
+                       BAbstractDataSource.STATUS_NOT_TESTED);
     Assert.assertTrue(testConnection.getLastConnectionTest().isNull());
     Assert.assertTrue(testConnection.getLastSuccessfulConnection().isNull());
     Assert.assertEquals(testConnection.getLastConnectionError(), "");
@@ -78,16 +78,16 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     logTestStep("Testing health status mapping to BStatus");
     
     // Test different connection statuses
-    testConnection.setConnectionStatus(BAbstractDataSourceConnection.STATUS_CONNECTED);
+    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.ok);
-    
-    testConnection.setConnectionStatus(BAbstractDataSourceConnection.STATUS_FAILED);
+
+    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_FAILED);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.fault);
-    
-    testConnection.setConnectionStatus(BAbstractDataSourceConnection.STATUS_TESTING);
+
+    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_TESTING);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.stale);
-    
-    testConnection.setConnectionStatus(BAbstractDataSourceConnection.STATUS_NOT_TESTED);
+
+    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_NOT_TESTED);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.nullStatus);
   }
 
@@ -99,11 +99,11 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     Assert.assertFalse(testConnection.isConnectionHealthy());
     
     // Set to connected
-    testConnection.setConnectionStatus(BAbstractDataSourceConnection.STATUS_CONNECTED);
+    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
     Assert.assertTrue(testConnection.isConnectionHealthy());
-    
+
     // Set to failed
-    testConnection.setConnectionStatus(BAbstractDataSourceConnection.STATUS_FAILED);
+    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_FAILED);
     Assert.assertFalse(testConnection.isConnectionHealthy());
   }
 
@@ -122,8 +122,8 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     testConnection.doTestConnection();
     
     // Then: Should be marked as connected
-    Assert.assertEquals(testConnection.getConnectionStatus(), 
-                       BAbstractDataSourceConnection.STATUS_CONNECTED);
+    Assert.assertEquals(testConnection.getConnectionStatus(),
+                       BAbstractDataSource.STATUS_CONNECTED);
     Assert.assertFalse(testConnection.getLastConnectionTest().isNull());
     Assert.assertFalse(testConnection.getLastSuccessfulConnection().isNull());
     Assert.assertEquals(testConnection.getLastConnectionError(), "");
@@ -143,8 +143,8 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     testConnection.doTestConnection();
     
     // Then: Should be marked as failed
-    Assert.assertEquals(testConnection.getConnectionStatus(), 
-                       BAbstractDataSourceConnection.STATUS_FAILED);
+    Assert.assertEquals(testConnection.getConnectionStatus(),
+                       BAbstractDataSource.STATUS_FAILED);
     Assert.assertFalse(testConnection.getLastConnectionTest().isNull());
     Assert.assertEquals(testConnection.getLastConnectionError(), "Test connection failure");
     Assert.assertEquals(testConnection.getConsecutiveFailures(), 1);
@@ -243,10 +243,10 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
 ////////////////////////////////////////////////////////////////
 
   /**
-   * Concrete test implementation of BAbstractDataSourceConnection
+   * Concrete test implementation of BAbstractDataSource
    * for testing purposes.
    */
-  public static class TestDataSourceConnection extends BAbstractDataSourceConnection {
+  public static class TestDataSourceConnection extends BAbstractDataSource {
     
     private boolean shouldSucceed = true;
     private String errorMessage = "Test error";
@@ -264,11 +264,11 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     }
     
     @Override
-    protected ConnectionTestResult performConnectionTest() {
+    protected BAbstractDataSource.ConnectionTestResult performConnectionTest() {
       if (shouldSucceed) {
-        return new ConnectionTestResult(true, "Test connection successful");
+        return new BAbstractDataSource.ConnectionTestResult(true, "Test connection successful");
       } else {
-        return new ConnectionTestResult(false, errorMessage);
+        return new BAbstractDataSource.ConnectionTestResult(false, errorMessage);
       }
     }
     

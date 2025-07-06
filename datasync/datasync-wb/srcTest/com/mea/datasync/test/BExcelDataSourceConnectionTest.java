@@ -6,7 +6,7 @@ import javax.baja.sys.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.mea.datasync.model.BExcelDataSourceConnection;
+import com.mea.datasync.model.BExcelDataSource;
 import com.mea.datasync.model.BExcelConnectionDetails;
 import com.mea.datasync.model.BConnectionDetails;
 import com.mea.datasync.test.utils.BaseTestClass;
@@ -16,7 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Comprehensive unit tests for BExcelDataSourceConnection.
+ * Comprehensive unit tests for BExcelDataSource.
  * Tests Excel-specific connection functionality, file validation,
  * and connection testing logic.
  */
@@ -24,7 +24,7 @@ import java.io.IOException;
 @Test(groups = {"datasync", "unit", "excel", "connection"})
 public class BExcelDataSourceConnectionTest extends BaseTestClass {
 
-  private BExcelDataSourceConnection excelConnection;
+  private BExcelDataSource excelConnection;
   private BExcelConnectionDetails connectionDetails;
   private File tempTestFile;
 
@@ -33,7 +33,7 @@ public class BExcelDataSourceConnectionTest extends BaseTestClass {
     logTestStep("Setting up Excel data source connection test");
     
     // Create Excel connection
-    excelConnection = new BExcelDataSourceConnection();
+    excelConnection = new BExcelDataSource();
     connectionDetails = excelConnection.getConnectionDetails();
     
     // Create temporary test file
