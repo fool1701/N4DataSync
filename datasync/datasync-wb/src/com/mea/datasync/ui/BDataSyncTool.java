@@ -171,6 +171,8 @@ public class BDataSyncTool extends BWbNavNodeTool {
    *
    * By default, BWbNavNodeTool hides all inherited agents to keep tools simple.
    * We override this to restore the full set of standard Niagara views.
+   *
+   * IMPORTANT: AX Property Sheet must be first for proper property editing.
    */
   @Override
   public AgentList getAgents(Context cx) {
@@ -179,11 +181,15 @@ public class BDataSyncTool extends BWbNavNodeTool {
 
     // Add our custom DataSync views
     agents.add("datasync:DataSyncProfileView");
-    agents.add("datasync:DataSourceConnectionManager");
+    agents.add("datasync:DataSourceManager");
 
-    // Set the view order - custom views first, then standard views
+    // Set the view order - AX Property Sheet MUST be first, then custom views
+    agents.toTop("baja:PropertySheet");  // Ensure AX Property Sheet is at the top
     agents.toTop("datasync:DataSyncProfileView");
-    agents.toTop("datasync:DataSourceConnectionManager");
+    agents.toTop("datasync:DataSourceManager");
+
+    // Move AX Property Sheet to absolute top position
+    agents.toTop("baja:PropertySheet");
 
     System.out.println("🔍 BDataSyncTool.getAgents() returning " + agents.size() + " views:");
     for (int i = 0; i < agents.size(); i++) {
