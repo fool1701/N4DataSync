@@ -31,8 +31,8 @@ public class BExcelDataSource extends BAbstractDataSource {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BExcelDataSource(2047217648)1.0$ @*/
-/* Generated Wed Jul 05 11:00:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BExcelDataSource(3170473770)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "connectionDetails"
 
@@ -41,7 +41,7 @@ public class BExcelDataSource extends BAbstractDataSource {
    * @see #getConnectionDetails
    * @see #setConnectionDetails
    */
-  public static final Property connectionDetails = newProperty(0, new BExcelConnectionDetails(), null);
+  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, new BExcelConnectionDetails(), null);
 
   /**
    * Get the {@code connectionDetails} property.

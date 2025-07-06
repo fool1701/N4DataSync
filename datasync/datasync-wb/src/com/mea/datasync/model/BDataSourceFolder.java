@@ -2,31 +2,64 @@
 package com.mea.datasync.model;
 
 import javax.baja.nre.annotations.NiagaraType;
+import javax.baja.nre.annotations.NiagaraProperty;
 import javax.baja.sys.*;
+import javax.baja.sys.BIcon;
 
 /**
- * BDataSourceFolder serves as a container/folder component for organizing
- * data source connections within the DataSync Tool. This component acts as a
- * frozen property slot that accepts both BAbstractDataSource
- * subclasses (new architecture) and BDataSource (legacy) components,
- * as well as BDataSourceConnectionsFolder components for organization.
+ * BDataSourceFolder serves as a universal container/folder component for organizing
+ * data source connections within the DataSync Tool. This component can be used both
+ * as a frozen property slot in BDataSyncTool and as removable folders for organization.
+ *
+ * This unified folder component:
+ * - Can be used as frozen property (root folder) or removable folder (organization)
+ * - Accepts BAbstractDataSource subclasses and nested BDataSourceFolder components
+ * - Provides backward compatibility with legacy BDataSource components
+ * - Has configurable display name (defaults to "Data Sources" for root, customizable for nested)
+ * - Supports nested folder structures with full navigation tree integration
+ * - Automatically handles parent notification for persistence when used as root folder
  *
  * This follows Niagara's folder organization pattern and provides:
- * - Navigation tree integration
+ * - Navigation tree integration with dynamic icons and descriptions
  * - Type-safe child component validation with backward compatibility
- * - Organized display of data source connections
- * - Support for nested folder structures
- *
- * The component is designed to be used as a frozen property in BDataSyncTool,
- * providing a dedicated space for managing all data source connections.
+ * - Organized display of data source connections with health summaries
+ * - Support for unlimited nested folder structures
  */
 @NiagaraType
+@NiagaraProperty(
+  name = "displayName",
+  type = "baja:String",
+  defaultValue = "BString.make(\"Data Sources\")"
+)
 public class BDataSourceFolder extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BDataSourceFolder(2047217648)1.0$ @*/
-/* Generated Wed Jul 05 11:30:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BDataSourceFolder(1760409707)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+
+  //region Property "displayName"
+
+  /**
+   * Slot for the {@code displayName} property.
+   * @see #getDisplayName
+   * @see #setDisplayName
+   */
+  public static final Property displayName = newProperty(0, BString.make("Data Sources"), null);
+
+  /**
+   * Get the {@code displayName} property.
+   * @see #displayName
+   */
+  public String getDisplayName() { return getString(displayName); }
+
+  /**
+   * Set the {@code displayName} property.
+   * @see #displayName
+   */
+  public void setDisplayName(String v) { setString(displayName, v, null); }
+
+  //endregion Property "displayName"
 
   //region Type
 
@@ -54,7 +87,7 @@ public class BDataSourceFolder extends BComponent {
 
   /**
    * Control which child components are allowed.
-   * Accept BAbstractDataSourceConnection subclasses, BDataSource (legacy), and BDataSourceConnectionsFolder.
+   * Accept BAbstractDataSource subclasses, BDataSource (legacy), and nested BDataSourceFolder.
    */
   @Override
   public boolean isChildLegal(BComponent child) {
@@ -68,8 +101,8 @@ public class BDataSourceFolder extends BComponent {
       return true;
     }
 
-    // Allow nested folders for organization
-    if (child instanceof BDataSourceConnectionsFolder) {
+    // Allow nested folders for organization (same class, different usage)
+    if (child instanceof BDataSourceFolder) {
       return true;
     }
 
@@ -98,8 +131,10 @@ public class BDataSourceFolder extends BComponent {
 
       // Notify parent tool of changes for persistence
       notifyParentOfChanges();
-    } else if (newChild instanceof BDataSourceConnectionsFolder) {
-      System.out.println("📁 Data source connections folder added: " + property.getName());
+    } else if (newChild instanceof BDataSourceFolder) {
+      BDataSourceFolder folder = (BDataSourceFolder) newChild;
+      String displayName = folder.getDisplayName();
+      System.out.println("📁 Data source folder added: " + displayName + " (" + property.getName() + ")");
       notifyParentOfChanges();
     }
   }
@@ -116,8 +151,10 @@ public class BDataSourceFolder extends BComponent {
       System.out.println("🔌 Data source removed: " + connection.getDataSourceTypeName() +
                         " (" + property.getName() + ")");
       notifyParentOfChanges();
-    } else if (oldChild instanceof BDataSourceConnectionsFolder) {
-      System.out.println("📁 Data source folder removed: " + property.getName());
+    } else if (oldChild instanceof BDataSourceFolder) {
+      BDataSourceFolder folder = (BDataSourceFolder) oldChild;
+      String displayName = folder.getDisplayName();
+      System.out.println("📁 Data source folder removed: " + displayName + " (" + property.getName() + ")");
       notifyParentOfChanges();
     }
   }
@@ -128,12 +165,18 @@ public class BDataSourceFolder extends BComponent {
 
   @Override
   public String getNavDisplayName(Context cx) {
-    return "Data Sources";
+    String name = getDisplayName();
+    return (name != null && !name.trim().isEmpty()) ? name : "Data Source Folder";
   }
 
   @Override
   public BIcon getNavIcon() {
-    return BIcon.std("folder.png");
+    // Use different icon based on whether folder has contents
+    if (hasNavChildren()) {
+      return BIcon.std("folderOpen.png");
+    } else {
+      return BIcon.std("folder.png");
+    }
   }
 
   @Override
@@ -142,8 +185,9 @@ public class BDataSourceFolder extends BComponent {
     int folderCount = getFolderCount();
 
     StringBuilder desc = new StringBuilder();
-    desc.append("Data Sources");
+    desc.append(getDisplayName());
 
+    // Add content summary
     if (connectionCount > 0 || folderCount > 0) {
       desc.append(" (");
       if (connectionCount > 0) {
@@ -205,7 +249,7 @@ public class BDataSourceFolder extends BComponent {
     BComponent[] children = getChildComponents();
 
     for (BComponent child : children) {
-      if (child instanceof BDataSourceConnectionsFolder) {
+      if (child instanceof BDataSourceFolder) {
         count++;
       }
     }
@@ -233,7 +277,7 @@ public class BDataSourceFolder extends BComponent {
     for (BComponent child : children) {
       if (child instanceof BAbstractDataSource) {
         connections.add((BAbstractDataSource) child);
-      } else if (child instanceof BDataSourceConnectionsFolder) {
+      } else if (child instanceof BDataSourceFolder) {
         // Recursively collect from subfolders
         collectDataSourceConnections(child, connections);
       }

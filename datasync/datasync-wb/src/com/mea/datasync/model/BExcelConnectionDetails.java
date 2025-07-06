@@ -42,8 +42,8 @@ public class BExcelConnectionDetails extends BConnectionDetails {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BExcelConnectionDetails(2047217648)1.0$ @*/
-/* Generated Wed Jul 05 11:15:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BExcelConnectionDetails(437176641)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "filePath"
 
@@ -64,10 +64,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
    * Set the {@code filePath} property.
    * @see #filePath
    */
-  public void setFilePath(String v) { 
-    validateFilePath(v);
-    setString(filePath, v, null); 
-  }
+  public void setFilePath(String v) { setString(filePath, v, null); }
 
   //endregion Property "filePath"
 
@@ -78,7 +75,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
    * @see #getDefaultWorksheet
    * @see #setDefaultWorksheet
    */
-  public static final Property defaultWorksheet = newProperty(1, BString.make("Sheet1"), null);
+  public static final Property defaultWorksheet = newProperty(0, BString.make("Sheet1"), null);
 
   /**
    * Get the {@code defaultWorksheet} property.
@@ -101,7 +98,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
    * @see #getReadOnlyMode
    * @see #setReadOnlyMode
    */
-  public static final Property readOnlyMode = newProperty(2, BBoolean.TRUE, null);
+  public static final Property readOnlyMode = newProperty(0, BBoolean.TRUE.as(BBoolean.class).getBoolean(), null);
 
   /**
    * Get the {@code readOnlyMode} property.
@@ -124,7 +121,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
    * @see #getAllowedFormats
    * @see #setAllowedFormats
    */
-  public static final Property allowedFormats = newProperty(3, BString.make("XLSX,XLS"), null);
+  public static final Property allowedFormats = newProperty(0, BString.make("XLSX,XLS"), null);
 
   /**
    * Get the {@code allowedFormats} property.

@@ -54,8 +54,8 @@ public class BAutoCheckConfig extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BAutoCheckConfig(2047217648)1.0$ @*/
-/* Generated Wed Jul 05 10:45:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BAutoCheckConfig(2362368597)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "enabled"
 
@@ -64,7 +64,7 @@ public class BAutoCheckConfig extends BComponent {
    * @see #getEnabled
    * @see #setEnabled
    */
-  public static final Property enabled = newProperty(0, BBoolean.TRUE, null);
+  public static final Property enabled = newProperty(0, BBoolean.TRUE.as(BBoolean.class).getBoolean(), null);
 
   /**
    * Get the {@code enabled} property.
@@ -87,7 +87,7 @@ public class BAutoCheckConfig extends BComponent {
    * @see #getCheckInterval
    * @see #setCheckInterval
    */
-  public static final Property checkInterval = newProperty(1, BRelTime.make(5L*60L*1000L), null);
+  public static final Property checkInterval = newProperty(0, BRelTime.make(5L*60L*1000L), null);
 
   /**
    * Get the {@code checkInterval} property.
@@ -110,7 +110,7 @@ public class BAutoCheckConfig extends BComponent {
    * @see #getRetryCount
    * @see #setRetryCount
    */
-  public static final Property retryCount = newProperty(2, BInteger.make(3), null);
+  public static final Property retryCount = newProperty(0, BInteger.make(3).as(BInteger.class).getInt(), null);
 
   /**
    * Get the {@code retryCount} property.
@@ -133,7 +133,7 @@ public class BAutoCheckConfig extends BComponent {
    * @see #getRetryDelay
    * @see #setRetryDelay
    */
-  public static final Property retryDelay = newProperty(3, BRelTime.make(30L*1000L), null);
+  public static final Property retryDelay = newProperty(0, BRelTime.make(30L*1000L), null);
 
   /**
    * Get the {@code retryDelay} property.
@@ -156,7 +156,7 @@ public class BAutoCheckConfig extends BComponent {
    * @see #getFailureThreshold
    * @see #setFailureThreshold
    */
-  public static final Property failureThreshold = newProperty(4, BInteger.make(3), null);
+  public static final Property failureThreshold = newProperty(0, BInteger.make(3).as(BInteger.class).getInt(), null);
 
   /**
    * Get the {@code failureThreshold} property.
@@ -179,7 +179,7 @@ public class BAutoCheckConfig extends BComponent {
    * @see #getStartupDelay
    * @see #setStartupDelay
    */
-  public static final Property startupDelay = newProperty(5, BRelTime.make(60L*1000L), null);
+  public static final Property startupDelay = newProperty(0, BRelTime.make(60L*1000L), null);
 
   /**
    * Get the {@code startupDelay} property.

@@ -8,6 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
+import javax.baja.sys.Sys;
+import javax.baja.sys.Type;
 
 /**
  * Unit tests for BDataSource component.
@@ -21,6 +23,21 @@ public class BDataSourceConnectionTest extends BTestNg {
 
   @BeforeClass(alwaysRun = true)
   public void setUp() {
+//region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
+//@formatter:off
+/*@ $com.mea.datasync.test.BDataSourceConnectionTest(2979906276)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+
+  //region Type
+
+  @Override
+  public Type getType() { return TYPE; }
+  public static final Type TYPE = Sys.loadType(BDataSourceConnectionTest.class);
+
+  //endregion Type
+
+//@formatter:on
+//endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
     // Given: A new data source connection instance
     connection = new BDataSource();
   }

@@ -66,8 +66,8 @@ public class BTargetNiagaraStation extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BTargetNiagaraStation(2047217648)1.0$ @*/
-/* Generated Wed Jul 02 21:25:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BTargetNiagaraStation(2720540168)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "stationName"
 
@@ -88,10 +88,7 @@ public class BTargetNiagaraStation extends BComponent {
    * Set the {@code stationName} property.
    * @see #stationName
    */
-  public void setStationName(String v) { 
-    validateStationName(v);
-    setString(stationName, v, null); 
-  }
+  public void setStationName(String v) { setString(stationName, v, null); }
 
   //endregion Property "stationName"
 
@@ -114,10 +111,7 @@ public class BTargetNiagaraStation extends BComponent {
    * Set the {@code hostAddress} property.
    * @see #hostAddress
    */
-  public void setHostAddress(String v) {
-    validateHost(v);
-    setString(hostAddress, v, null);
-  }
+  public void setHostAddress(String v) { setString(hostAddress, v, null); }
 
   //endregion Property "hostAddress"
 
@@ -140,10 +134,7 @@ public class BTargetNiagaraStation extends BComponent {
    * Set the {@code port} property.
    * @see #port
    */
-  public void setPort(int v) { 
-    validatePort(v);
-    setInt(port, v, null); 
-  }
+  public void setPort(int v) { setInt(port, v, null); }
 
   //endregion Property "port"
 
@@ -166,10 +157,7 @@ public class BTargetNiagaraStation extends BComponent {
    * Set the {@code username} property.
    * @see #username
    */
-  public void setUsername(String v) { 
-    validateUsername(v);
-    setString(username, v, null); 
-  }
+  public void setUsername(String v) { setString(username, v, null); }
 
   //endregion Property "username"
 
@@ -192,10 +180,7 @@ public class BTargetNiagaraStation extends BComponent {
    * Set the {@code basePath} property.
    * @see #basePath
    */
-  public void setBasePath(String v) { 
-    validateBasePath(v);
-    setString(basePath, v, null); 
-  }
+  public void setBasePath(String v) { setString(basePath, v, null); }
 
   //endregion Property "basePath"
 
@@ -206,7 +191,7 @@ public class BTargetNiagaraStation extends BComponent {
    * @see #getUseSSL
    * @see #setUseSSL
    */
-  public static final Property useSSL = newProperty(0, BBoolean.FALSE, null);
+  public static final Property useSSL = newProperty(0, BBoolean.FALSE.as(BBoolean.class).getBoolean(), null);
 
   /**
    * Get the {@code useSSL} property.
@@ -241,10 +226,7 @@ public class BTargetNiagaraStation extends BComponent {
    * Set the {@code connectionTimeout} property.
    * @see #connectionTimeout
    */
-  public void setConnectionTimeout(int v) { 
-    validateConnectionTimeout(v);
-    setInt(connectionTimeout, v, null); 
-  }
+  public void setConnectionTimeout(int v) { setInt(connectionTimeout, v, null); }
 
   //endregion Property "connectionTimeout"
 

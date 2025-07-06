@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import com.mea.datasync.ui.BDataSyncTool;
 import com.mea.datasync.ui.BDataSourceManager;
 import com.mea.datasync.model.BDataSourceFolder;
-import com.mea.datasync.model.BDataSourceConnectionsFolder;
 import com.mea.datasync.model.BExcelDataSource;
 import com.mea.datasync.model.BAbstractDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
@@ -31,6 +30,21 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
 
   @Override
   protected void performBaseSetup() throws Exception {
+//region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
+//@formatter:off
+/*@ $com.mea.datasync.test.BDataSourceConnectionManagerViewTest(2979906276)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+
+  //region Type
+
+  @Override
+  public Type getType() { return TYPE; }
+  public static final Type TYPE = Sys.loadType(BDataSourceConnectionManagerViewTest.class);
+
+  //endregion Type
+
+//@formatter:on
+//endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
     logTestStep("Setting up Data Source Connection Manager View test");
 
     // Create DataSync Tool

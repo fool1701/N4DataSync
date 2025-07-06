@@ -29,6 +29,21 @@ public abstract class BPerformanceTestBase extends BaseTestClass {
 
     public static final Type TYPE = Sys.loadType(BPerformanceTestBase.class);
     @Override public Type getType() { return TYPE; }
+//region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
+//@formatter:off
+/*@ $com.mea.datasync.test.utils.BPerformanceTestBase(2979906276)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+
+  //region Type
+
+  @Override
+  public Type getType() { return TYPE; }
+  public static final Type TYPE = Sys.loadType(BPerformanceTestBase.class);
+
+  //endregion Type
+
+//@formatter:on
+//endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
     
     // Performance testing constants
     protected static final long PROFILE_CREATION_MAX_MS = 100;

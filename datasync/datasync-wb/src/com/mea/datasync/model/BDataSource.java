@@ -53,8 +53,8 @@ public class BDataSource extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BDataSource(2047217648)1.0$ @*/
-/* Generated Wed Jul 02 21:15:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BDataSource(1372646434)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "sourceType"
 
@@ -75,10 +75,7 @@ public class BDataSource extends BComponent {
    * Set the {@code sourceType} property.
    * @see #sourceType
    */
-  public void setSourceType(String v) {
-    validateSourceType(v);
-    setString(sourceType, v, null);
-  }
+  public void setSourceType(String v) { setString(sourceType, v, null); }
 
   //endregion Property "sourceType"
 
@@ -101,10 +98,7 @@ public class BDataSource extends BComponent {
    * Set the {@code sourcePath} property.
    * @see #sourcePath
    */
-  public void setSourcePath(String v) {
-    validateSourcePath(v);
-    setString(sourcePath, v, null);
-  }
+  public void setSourcePath(String v) { setString(sourcePath, v, null); }
 
   //endregion Property "sourcePath"
 
@@ -127,10 +121,7 @@ public class BDataSource extends BComponent {
    * Set the {@code connectionName} property.
    * @see #connectionName
    */
-  public void setConnectionName(String v) {
-    validateConnectionName(v);
-    setString(connectionName, v, null);
-  }
+  public void setConnectionName(String v) { setString(connectionName, v, null); }
 
   //endregion Property "connectionName"
 

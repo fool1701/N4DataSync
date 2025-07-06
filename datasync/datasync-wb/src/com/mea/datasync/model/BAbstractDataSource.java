@@ -84,26 +84,29 @@ public class BAbstractDataSource extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BAbstractDataSource(2047217648)1.0$ @*/
-/* Generated Wed Jul 05 10:00:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BAbstractDataSource(2018014743)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "connectionDetails"
 
   /**
    * Slot for the {@code connectionDetails} property.
+   *  Connection Details Component - Abstract property to be overridden by subclasses
    * @see #getConnectionDetails
    * @see #setConnectionDetails
    */
-  public static final Property connectionDetails = newProperty(0, (BValue)null, null);
+  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, (BValue)null, null);
 
   /**
    * Get the {@code connectionDetails} property.
+   *  Connection Details Component - Abstract property to be overridden by subclasses
    * @see #connectionDetails
    */
   public BConnectionDetails getConnectionDetails() { return (BConnectionDetails)get(connectionDetails); }
 
   /**
    * Set the {@code connectionDetails} property.
+   *  Connection Details Component - Abstract property to be overridden by subclasses
    * @see #connectionDetails
    */
   public void setConnectionDetails(BConnectionDetails v) { set(connectionDetails, v, null); }
@@ -114,19 +117,22 @@ public class BAbstractDataSource extends BComponent {
 
   /**
    * Slot for the {@code connectionStatus} property.
+   *  Health Properties
    * @see #getConnectionStatus
    * @see #setConnectionStatus
    */
-  public static final Property connectionStatus = newProperty(1, BString.make("Not Tested"), null);
+  public static final Property connectionStatus = newProperty(0, BString.make("Not Tested"), null);
 
   /**
    * Get the {@code connectionStatus} property.
+   *  Health Properties
    * @see #connectionStatus
    */
   public String getConnectionStatus() { return getString(connectionStatus); }
 
   /**
    * Set the {@code connectionStatus} property.
+   *  Health Properties
    * @see #connectionStatus
    */
   public void setConnectionStatus(String v) { setString(connectionStatus, v, null); }
@@ -140,7 +146,7 @@ public class BAbstractDataSource extends BComponent {
    * @see #getLastConnectionTest
    * @see #setLastConnectionTest
    */
-  public static final Property lastConnectionTest = newProperty(2, BAbsTime.NULL, null);
+  public static final Property lastConnectionTest = newProperty(0, BAbsTime.NULL, null);
 
   /**
    * Get the {@code lastConnectionTest} property.
@@ -163,7 +169,7 @@ public class BAbstractDataSource extends BComponent {
    * @see #getLastSuccessfulConnection
    * @see #setLastSuccessfulConnection
    */
-  public static final Property lastSuccessfulConnection = newProperty(3, BAbsTime.NULL, null);
+  public static final Property lastSuccessfulConnection = newProperty(0, BAbsTime.NULL, null);
 
   /**
    * Get the {@code lastSuccessfulConnection} property.
@@ -186,7 +192,7 @@ public class BAbstractDataSource extends BComponent {
    * @see #getLastConnectionError
    * @see #setLastConnectionError
    */
-  public static final Property lastConnectionError = newProperty(4, BString.DEFAULT, null);
+  public static final Property lastConnectionError = newProperty(0, BString.DEFAULT, null);
 
   /**
    * Get the {@code lastConnectionError} property.
@@ -209,7 +215,7 @@ public class BAbstractDataSource extends BComponent {
    * @see #getConsecutiveFailures
    * @see #setConsecutiveFailures
    */
-  public static final Property consecutiveFailures = newProperty(5, BInteger.DEFAULT, null);
+  public static final Property consecutiveFailures = newProperty(0, BInteger.DEFAULT.as(BInteger.class).getInt(), null);
 
   /**
    * Get the {@code consecutiveFailures} property.
@@ -229,19 +235,22 @@ public class BAbstractDataSource extends BComponent {
 
   /**
    * Slot for the {@code autoCheckConfig} property.
+   *  Auto-Check Configuration Component
    * @see #getAutoCheckConfig
    * @see #setAutoCheckConfig
    */
-  public static final Property autoCheckConfig = newProperty(6, new BAutoCheckConfig(), null);
+  public static final Property autoCheckConfig = newProperty(Flags.READONLY | Flags.SUMMARY, new BAutoCheckConfig(), null);
 
   /**
    * Get the {@code autoCheckConfig} property.
+   *  Auto-Check Configuration Component
    * @see #autoCheckConfig
    */
   public BAutoCheckConfig getAutoCheckConfig() { return (BAutoCheckConfig)get(autoCheckConfig); }
 
   /**
    * Set the {@code autoCheckConfig} property.
+   *  Auto-Check Configuration Component
    * @see #autoCheckConfig
    */
   public void setAutoCheckConfig(BAutoCheckConfig v) { set(autoCheckConfig, v, null); }
@@ -252,12 +261,14 @@ public class BAbstractDataSource extends BComponent {
 
   /**
    * Slot for the {@code testConnection} action.
+   *  Manual Connection Test Action
    * @see #testConnection()
    */
   public static final Action testConnection = newAction(0, null);
 
   /**
    * Invoke the {@code testConnection} action.
+   *  Manual Connection Test Action
    * @see #testConnection
    */
   public void testConnection() { invoke(testConnection, null, null); }

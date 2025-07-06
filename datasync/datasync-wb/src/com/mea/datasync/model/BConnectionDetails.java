@@ -40,8 +40,8 @@ public abstract class BConnectionDetails extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BConnectionDetails(2047217648)1.0$ @*/
-/* Generated Wed Jul 05 10:30:00 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
+/*@ $com.mea.datasync.model.BConnectionDetails(786065583)1.0$ @*/
+/* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "connectionName"
 
@@ -73,7 +73,7 @@ public abstract class BConnectionDetails extends BComponent {
    * @see #getDescription
    * @see #setDescription
    */
-  public static final Property description = newProperty(1, BString.DEFAULT, null);
+  public static final Property description = newProperty(0, BString.DEFAULT, null);
 
   /**
    * Get the {@code description} property.
@@ -96,7 +96,7 @@ public abstract class BConnectionDetails extends BComponent {
    * @see #getConnectionTimeout
    * @see #setConnectionTimeout
    */
-  public static final Property connectionTimeout = newProperty(2, BInteger.make(30000), null);
+  public static final Property connectionTimeout = newProperty(0, BInteger.make(30000).as(BInteger.class).getInt(), null);
 
   /**
    * Get the {@code connectionTimeout} property.
