@@ -2,120 +2,135 @@
 
 ## Overview
 
-The N4-DataSync module provides two types of folder components for organizing data sources. Understanding their differences is crucial for proper usage.
+The N4-DataSync module uses a **single, unified folder component** for organizing data sources. This simplified architecture eliminates complexity while providing maximum flexibility.
 
-## Folder Component Types
+## Unified Folder Architecture
 
-### 1. BDataSourceFolder (Main Container)
+### BDataSourceFolder (Universal Container)
 
-**Purpose**: Primary container for data sources in the DataSync Tool
-**Usage**: Used as frozen property in BDataSyncTool
+**Purpose**: Universal container for data sources - works as both root container and organizational folders
+**Usage**: Used as frozen property in BDataSyncTool AND as removable organizational folders
 **Characteristics**:
-- Cannot be removed once created (frozen property)
-- Accepts BAbstractDataSource subclasses and BDataSourceConnectionsFolder
-- Provides backward compatibility with legacy BDataSource components
-- Appears as "Data Sources" in navigation tree
-- Main organizational root for all data source connections
+- **Configurable display name**: Defaults to "Data Sources" for root, customizable for nested folders
+- **Universal usage**: Same class for both root (frozen) and nested (removable) scenarios
+- **Accepts**: BAbstractDataSource subclasses, legacy BDataSource, and nested BDataSourceFolder
+- **Dynamic icons**: Shows open/closed folder icons based on content
+- **Automatic persistence**: Uses built-in Niagara BOG persistence (no custom JSON)
+- **Backward compatibility**: Supports legacy BDataSource components
 
 **When to use**:
-- As the primary container in DataSync Tool (automatic)
-- When you need a permanent, non-removable data source container
-
-### 2. BDataSourceConnectionsFolder (Organization Folder)
-
-**Purpose**: Removable folder for organizing data sources into logical groups
-**Usage**: Can be added/removed dynamically for organization
-**Characteristics**:
-- Can be added and removed as needed
-- Accepts same child types as BDataSourceFolder
-- Configurable display name and description
-- Supports nested folder structures
-- Provides health status summaries
-
-**When to use**:
-- To organize data sources by project, building, system type, etc.
-- When you need removable organizational structure
-- For creating nested folder hierarchies
+- **Automatically**: As the primary container in DataSync Tool (frozen property)
+- **Manually**: For organizing data sources by project, building, system type, etc.
+- **Nested structures**: For creating unlimited organizational hierarchies
 
 ## Palette Configuration
 
 ### Available in Palette:
 1. **ExcelDataSource** - Primary data source for Excel files
-2. **DataSourceFolder** - Main container (rarely needed as it's auto-created)
-3. **OrganizationFolder** - For creating organizational subfolders
+2. **DataSourceFolder** - Universal folder for organization (same class as root folder)
 
 ### Usage Examples:
 
 #### Creating Organization Structure:
 ```
 DataSync Tool
-└── Data Sources (BDataSourceFolder - auto-created)
-    ├── Building A (BDataSourceConnectionsFolder)
+└── Data Sources (BDataSourceFolder - auto-created, displayName="Data Sources")
+    ├── Building A (BDataSourceFolder - removable, displayName="Building A")
     │   ├── HVAC Points (ExcelDataSource)
     │   └── Lighting Points (ExcelDataSource)
-    ├── Building B (BDataSourceConnectionsFolder)
+    ├── Building B (BDataSourceFolder - removable, displayName="Building B")
     │   └── BMS Points (ExcelDataSource)
-    └── Shared Resources (BDataSourceConnectionsFolder)
+    └── Shared Resources (BDataSourceFolder - removable, displayName="Shared Resources")
         └── Equipment Library (ExcelDataSource)
 ```
 
 ## Best Practices
 
 ### 1. Organization Strategy
-- Use BDataSourceConnectionsFolder to group related data sources
-- Create logical hierarchies (by building, system, project, etc.)
-- Keep folder names descriptive and consistent
+- Use BDataSourceFolder to group related data sources by logical categories
+- Create hierarchies by building, system, project, or functional area
+- Keep folder names descriptive and consistent using the displayName property
 
 ### 2. Naming Conventions
-- Use clear, descriptive names for organization folders
+- Set meaningful displayName values for organizational folders
+- Use clear, descriptive names that indicate purpose or scope
 - Follow consistent naming patterns across projects
-- Include purpose or scope in folder names
+- Root folder typically keeps default "Data Sources" name
 
 ### 3. Hierarchy Design
-- Don't create unnecessarily deep hierarchies (max 3-4 levels)
+- Don't create unnecessarily deep hierarchies (max 3-4 levels recommended)
 - Group by most logical organizational unit first
 - Consider future expansion when designing structure
+- Use the same BDataSourceFolder class for all organizational levels
 
 ## Technical Details
 
 ### Child Component Validation
-Both folder types use the same validation logic:
+Universal validation logic for all folder scenarios:
 ```java
 public boolean isChildLegal(BComponent child) {
     // Accept new architecture data sources
     if (child instanceof BAbstractDataSource) return true;
-    
+
     // Accept legacy data sources (backward compatibility)
     if (child instanceof BDataSource) return true;
-    
-    // Accept organization folders
-    if (child instanceof BDataSourceConnectionsFolder) return true;
-    
+
+    // Accept nested folders (same class, different usage)
+    if (child instanceof BDataSourceFolder) return true;
+
     return false;
 }
 ```
 
 ### Navigation Tree Integration
-- Both implement BINavNode for navigation tree display
-- Provide custom icons based on content state
-- Show content summaries in descriptions
-- Support drag-and-drop operations
+- Implements BINavNode for navigation tree display
+- Dynamic icons: open/closed folder based on content state
+- Configurable display names via displayName property
+- Content summaries in descriptions (connection count, folder count)
+- Support for drag-and-drop operations
+
+### Persistence
+- **Automatic BOG persistence**: No custom code needed
+- **Built-in Niagara Framework**: Uses standard component persistence
+- **Station integration**: Saved with station configuration
+- **Backup/restore**: Included in station backups automatically
 
 ## Common Issues and Solutions
 
-### Issue: "Palette shows only BDataSourceConnectionsFolder"
-**Solution**: Updated palette configuration to show both folder types with clear names
+### Issue: "Palette shows confusing folder options"
+**Solution**: Simplified to single BDataSourceFolder class for all scenarios
 
 ### Issue: "DataSync Tool missing AX Property Sheet"
 **Solution**: Modified getAgents() to ensure PropertySheet appears first in view list
 
-### Issue: "Confusion between folder types"
-**Solution**: Use this guide to understand when to use each type
+### Issue: "Code duplication between folder classes"
+**Solution**: Consolidated to single BDataSourceFolder class with configurable behavior
+
+### Issue: "Complex JSON persistence management"
+**Solution**: Removed custom JSON code, using built-in Niagara BOG persistence
+
+## Architectural Benefits
+
+### Simplified Design
+- **Single class**: One folder class for all scenarios (YAGNI principle)
+- **No duplication**: Eliminates duplicate code between folder types (DRY principle)
+- **Standard patterns**: Uses built-in Niagara persistence and navigation
+
+### Enhanced Flexibility
+- **Configurable names**: displayName property for custom folder names
+- **Universal usage**: Same class works as root container or organizational folder
+- **Unlimited nesting**: Support for complex organizational hierarchies
+
+### Maintenance Benefits
+- **Less code**: Fewer classes to maintain and test
+- **Standard persistence**: No custom JSON serialization to maintain
+- **Framework integration**: Leverages built-in Niagara capabilities
 
 ## Migration Notes
 
 When upgrading from older versions:
-1. Existing BDataSourceFolder instances continue to work
-2. Legacy BDataSource components remain supported
-3. New BAbstractDataSource architecture is preferred for new implementations
-4. Organization folders can be added to existing structures without disruption
+1. **BDataSourceConnectionsFolder removed**: Use BDataSourceFolder instead
+2. **Existing structures preserved**: Current BDataSourceFolder instances continue to work
+3. **Legacy support maintained**: BDataSource components remain supported
+4. **Automatic persistence**: No migration needed for persistence (BOG handles everything)
+5. **Palette simplified**: Only shows relevant, non-confusing options
