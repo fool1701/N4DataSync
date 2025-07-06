@@ -66,14 +66,11 @@ DataSync Tool
 ## Technical Details
 
 ### Child Component Validation
-Universal validation logic for all folder scenarios:
+Clean, modern validation logic:
 ```java
 public boolean isChildLegal(BComponent child) {
-    // Accept new architecture data sources
+    // Accept modern data source architecture
     if (child instanceof BAbstractDataSource) return true;
-
-    // Accept legacy data sources (backward compatibility)
-    if (child instanceof BDataSource) return true;
 
     // Accept nested folders (same class, different usage)
     if (child instanceof BDataSourceFolder) return true;
@@ -130,7 +127,8 @@ public boolean isChildLegal(BComponent child) {
 
 When upgrading from older versions:
 1. **BDataSourceConnectionsFolder removed**: Use BDataSourceFolder instead
-2. **Existing structures preserved**: Current BDataSourceFolder instances continue to work
-3. **Legacy support maintained**: BDataSource components remain supported
+2. **BDataSource (legacy) removed**: Use BAbstractDataSource subclasses (e.g., BExcelDataSource)
+3. **Existing structures preserved**: Current BDataSourceFolder instances continue to work
 4. **Automatic persistence**: No migration needed for persistence (BOG handles everything)
-5. **Palette simplified**: Only shows relevant, non-confusing options
+5. **Palette simplified**: Only shows relevant, modern components
+6. **Clean architecture**: No legacy code maintenance burden for active development projects
