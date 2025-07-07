@@ -20,23 +20,23 @@ import java.io.File;
 @NiagaraType
 @NiagaraProperty(
   name = "filePath",
-  type = "baja:String",
-  defaultValue = "BString.DEFAULT"
+  type = "String",
+  defaultValue = ""
 )
 @NiagaraProperty(
   name = "defaultWorksheet",
-  type = "baja:String",
-  defaultValue = "BString.make(\"Sheet1\")"
+  type = "String",
+  defaultValue = "Sheet1"
 )
 @NiagaraProperty(
   name = "readOnlyMode",
-  type = "baja:Boolean",
-  defaultValue = "BBoolean.TRUE"
+  type = "boolean",
+  defaultValue = "true"
 )
 @NiagaraProperty(
   name = "allowedFormats",
-  type = "baja:String",
-  defaultValue = "BString.make(\"XLSX,XLS\")"
+  type = "String",
+  defaultValue = "XLSX,XLS"
 )
 public class BExcelConnectionDetails extends BConnectionDetails {
 

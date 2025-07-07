@@ -39,34 +39,34 @@ import javax.baja.status.BStatus;
 // Health Properties
 @NiagaraProperty(
   name = "connectionStatus",
-  type = "baja:String",
-  defaultValue = "BString.make(\"Not Tested\")"
+  type = "String",
+  defaultValue = "Not Tested"
 )
 @NiagaraProperty(
   name = "lastConnectionTest",
   type = "baja:AbsTime",
-  defaultValue = "BAbsTime.NULL"
+  defaultValue = "null"
 )
 @NiagaraProperty(
   name = "lastSuccessfulConnection",
   type = "baja:AbsTime",
-  defaultValue = "BAbsTime.NULL"
+  defaultValue = "null"
 )
 @NiagaraProperty(
   name = "lastConnectionError",
-  type = "baja:String",
-  defaultValue = "BString.DEFAULT"
+  type = "String",
+  defaultValue = ""
 )
 @NiagaraProperty(
   name = "consecutiveFailures",
-  type = "baja:Integer",
-  defaultValue = "BInteger.DEFAULT"
+  type = "int",
+  defaultValue = "0"
 )
 // Auto-Check Configuration Component
 @NiagaraProperty(
   name = "autoCheckConfig",
   type = "datasync:AutoCheckConfig",
-  defaultValue = "new BAutoCheckConfig()",
+  defaultValue = "null",
   flags = Flags.READONLY | Flags.SUMMARY
 )
 // Manual Connection Test Action
@@ -95,7 +95,7 @@ public class BAbstractDataSource extends BComponent {
    * @see #getConnectionDetails
    * @see #setConnectionDetails
    */
-  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, (BValue)null, null);
+  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, new BConnectionDetails(), null);
 
   /**
    * Get the {@code connectionDetails} property.

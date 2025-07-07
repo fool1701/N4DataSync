@@ -23,7 +23,7 @@ import java.io.File;
 @NiagaraProperty(
   name = "connectionDetails",
   type = "datasync:ExcelConnectionDetails",
-  defaultValue = "new BExcelConnectionDetails()",
+  defaultValue = "null",
   flags = Flags.READONLY | Flags.SUMMARY,
   override = true
 )
@@ -74,10 +74,12 @@ public class BExcelDataSource extends BAbstractDataSource {
 
   public BExcelDataSource() {
     super();
-    
-    // Set Excel-optimized auto-check configuration
-    setAutoCheckConfig(BAutoCheckConfig.createExcelDefault());
-    
+
+    // Initialize connection details
+    setConnectionDetails(new BExcelConnectionDetails());
+
+    // Simplified constructor for palette compatibility
+    // Note: Auto-check configuration will be set when component is actually used
     System.out.println("📊 Excel Data Source Connection created");
   }
 
