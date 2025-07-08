@@ -11,8 +11,8 @@ import com.mea.datasync.ui.BDataSyncTool;
 import com.mea.datasync.model.BDataSourceFolder;
 
 import com.mea.datasync.model.BExcelDataSource;
-import com.mea.datasync.model.BExcelConnectionDetails;
-import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BExcelConnection;
+import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 import java.io.File;
@@ -139,7 +139,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
     Assert.assertTrue(desc.contains("0 healthy")); // Not tested yet
 
     // Make connection healthy
-    excelConnection.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
+    excelConnection.setConnectionStatus(BDataSource.STATUS_CONNECTED);
     desc = dataSyncTool.getNavDescription(null);
     Assert.assertTrue(desc.contains("1 healthy"));
   }
@@ -160,7 +160,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
 
     // Verify integration
     Assert.assertEquals(connections.getDataSourceConnectionCount(), 1);
-    BAbstractDataSource[] allConnections = connections.getAllDataSourceConnections();
+    BDataSource[] allConnections = connections.getAllDataSourceConnections();
     Assert.assertEquals(allConnections.length, 1);
     Assert.assertEquals(allConnections[0], excelConnection);
   }
@@ -214,7 +214,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
 
     // Create Excel connection with valid file
     BExcelDataSource excelConnection = new BExcelDataSource();
-    BExcelConnectionDetails details = excelConnection.getConnectionDetails();
+    BExcelConnection details = excelConnection.getConnectionDetails();
     details.setConnectionName("Test Integration Connection");
     details.setFilePath(tempExcelFile.getAbsolutePath());
 
@@ -348,7 +348,7 @@ public class BDataSyncToolIntegrationTest extends BaseTestClass {
    */
   private BExcelDataSource createTestExcelConnection() {
     BExcelDataSource connection = new BExcelDataSource();
-    BExcelConnectionDetails details = connection.getConnectionDetails();
+    BExcelConnection details = connection.getConnectionDetails();
     details.setConnectionName("Test Excel Connection");
     details.setFilePath(tempExcelFile.getAbsolutePath());
     details.setDefaultWorksheet("Sheet1");

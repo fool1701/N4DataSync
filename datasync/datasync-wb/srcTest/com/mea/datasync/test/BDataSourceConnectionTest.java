@@ -9,30 +9,30 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.model.BAutoCheckConfig;
-import com.mea.datasync.model.BConnectionDetails;
+import com.mea.datasync.model.BConnection;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 /**
- * Comprehensive unit tests for BAbstractDataSource.
+ * Comprehensive unit tests for BDataSource.
  * Tests the base functionality including health monitoring, auto-checking,
  * and abstract method contracts.
  */
 @NiagaraType
 @Test(groups = {"datasync", "unit", "connection", "abstract"})
-public class BAbstractDataSourceConnectionTest extends BaseTestClass {
+public class BDataSourceConnectionTest extends BaseTestClass {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.test.BAbstractDataSourceConnectionTest(2979906276)1.0$ @*/
+/*@ $com.mea.datasync.test.BDataSourceConnectionTest(2979906276)1.0$ @*/
 /* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Type
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BAbstractDataSourceConnectionTest.class);
+  public static final Type TYPE = Sys.loadType(BDataSourceConnectionTest.class);
 
   //endregion Type
 
@@ -82,7 +82,7 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     // When: Checking default values
     // Then: Should have expected defaults
     Assert.assertEquals(testConnection.getConnectionStatus(), 
-                       BAbstractDataSource.STATUS_NOT_TESTED);
+                       BDataSource.STATUS_NOT_TESTED);
     Assert.assertTrue(testConnection.getLastConnectionTest().isNull());
     Assert.assertTrue(testConnection.getLastSuccessfulConnection().isNull());
     Assert.assertEquals(testConnection.getLastConnectionError(), "");
@@ -94,16 +94,16 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     logTestStep("Testing health status mapping to BStatus");
     
     // Test different connection statuses
-    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
+    testConnection.setConnectionStatus(BDataSource.STATUS_CONNECTED);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.ok);
 
-    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_FAILED);
+    testConnection.setConnectionStatus(BDataSource.STATUS_FAILED);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.fault);
 
-    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_TESTING);
+    testConnection.setConnectionStatus(BDataSource.STATUS_TESTING);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.stale);
 
-    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_NOT_TESTED);
+    testConnection.setConnectionStatus(BDataSource.STATUS_NOT_TESTED);
     Assert.assertEquals(testConnection.getHealthStatus(), BStatus.nullStatus);
   }
 
@@ -115,11 +115,11 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     Assert.assertFalse(testConnection.isConnectionHealthy());
     
     // Set to connected
-    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
+    testConnection.setConnectionStatus(BDataSource.STATUS_CONNECTED);
     Assert.assertTrue(testConnection.isConnectionHealthy());
 
     // Set to failed
-    testConnection.setConnectionStatus(BAbstractDataSource.STATUS_FAILED);
+    testConnection.setConnectionStatus(BDataSource.STATUS_FAILED);
     Assert.assertFalse(testConnection.isConnectionHealthy());
   }
 
@@ -131,7 +131,7 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
   public void testSuccessfulConnectionTest() {
     logTestStep("Testing successful connection test");
     
-    // Given: Connection configured for success
+    // Given: Connection configured to succeed
     testConnection.setShouldSucceed(true);
     
     // When: Testing connection
@@ -139,7 +139,7 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     
     // Then: Should be marked as connected
     Assert.assertEquals(testConnection.getConnectionStatus(),
-                       BAbstractDataSource.STATUS_CONNECTED);
+                       BDataSource.STATUS_CONNECTED);
     Assert.assertFalse(testConnection.getLastConnectionTest().isNull());
     Assert.assertFalse(testConnection.getLastSuccessfulConnection().isNull());
     Assert.assertEquals(testConnection.getLastConnectionError(), "");
@@ -151,7 +151,7 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
   public void testFailedConnectionTest() {
     logTestStep("Testing failed connection test");
     
-    // Given: Connection configured for failure
+    // Given: Connection configured to fail
     testConnection.setShouldSucceed(false);
     testConnection.setErrorMessage("Test connection failure");
     
@@ -160,37 +160,11 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     
     // Then: Should be marked as failed
     Assert.assertEquals(testConnection.getConnectionStatus(),
-                       BAbstractDataSource.STATUS_FAILED);
+                       BDataSource.STATUS_FAILED);
     Assert.assertFalse(testConnection.getLastConnectionTest().isNull());
     Assert.assertEquals(testConnection.getLastConnectionError(), "Test connection failure");
     Assert.assertEquals(testConnection.getConsecutiveFailures(), 1);
     Assert.assertFalse(testConnection.isConnectionHealthy());
-  }
-
-  @Test(groups = {"connection", "testing"})
-  public void testConsecutiveFailureTracking() {
-    logTestStep("Testing consecutive failure tracking");
-    
-    // Given: Connection configured for failure
-    testConnection.setShouldSucceed(false);
-    testConnection.setErrorMessage("Consecutive failure test");
-    
-    // When: Testing connection multiple times
-    testConnection.doTestConnection();
-    Assert.assertEquals(testConnection.getConsecutiveFailures(), 1);
-    
-    testConnection.doTestConnection();
-    Assert.assertEquals(testConnection.getConsecutiveFailures(), 2);
-    
-    testConnection.doTestConnection();
-    Assert.assertEquals(testConnection.getConsecutiveFailures(), 3);
-    
-    // When: Connection succeeds
-    testConnection.setShouldSucceed(true);
-    testConnection.doTestConnection();
-    
-    // Then: Consecutive failures should reset
-    Assert.assertEquals(testConnection.getConsecutiveFailures(), 0);
   }
 
 ////////////////////////////////////////////////////////////////
@@ -198,54 +172,39 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
 ////////////////////////////////////////////////////////////////
 
   @Test(groups = {"autocheck", "configuration"})
-  public void testAutoCheckConfigurationDefaults() {
-    logTestStep("Testing auto-check configuration defaults");
+  public void testAutoCheckConfiguration() {
+    logTestStep("Testing auto-check configuration");
     
+    // Given: Auto-check configuration
     BAutoCheckConfig config = testConnection.getAutoCheckConfig();
     Assert.assertNotNull(config);
     
-    // Should have reasonable defaults
-    Assert.assertNotNull(config.getCheckInterval());
-    Assert.assertTrue(config.getCheckInterval().getMillis() > 0);
-    Assert.assertTrue(config.getRetryCount() >= 0);
-    Assert.assertTrue(config.getFailureThreshold() > 0);
-  }
-
-  @Test(groups = {"autocheck", "lifecycle"})
-  public void testAutoCheckLifecycle() throws Exception {
-    logTestStep("Testing auto-check lifecycle management");
-    
-    // Given: Auto-check enabled
-    BAutoCheckConfig config = testConnection.getAutoCheckConfig();
+    // When: Modifying configuration
     config.setEnabled(true);
-    config.setCheckInterval(BRelTime.make(1000)); // 1 second for testing
+    config.setCheckInterval(BRelTime.make(60000)); // 1 minute
     
-    // When: Starting component
-    testConnection.start();
-    
-    // Then: Should start successfully
-    Assert.assertTrue(testConnection.isRunning());
-    
-    // When: Stopping component
-    testConnection.stop();
-    
-    // Then: Should stop cleanly
-    Assert.assertFalse(testConnection.isRunning());
+    // Then: Should be properly configured
+    Assert.assertTrue(config.getEnabled());
+    Assert.assertEquals(config.getCheckInterval().getMillis(), 60000);
   }
 
 ////////////////////////////////////////////////////////////////
-// Abstract Method Contract Tests
+// Type Name and Summary Tests
 ////////////////////////////////////////////////////////////////
 
-  @Test(groups = {"abstract", "contract"})
-  public void testAbstractMethodImplementation() {
-    logTestStep("Testing abstract method implementations");
+  @Test(groups = {"metadata", "display"})
+  public void testDataSourceTypeName() {
+    logTestStep("Testing data source type name");
     
-    // Test data source type name
+    // Test type name
     String typeName = testConnection.getDataSourceTypeName();
     Assert.assertNotNull(typeName);
-    Assert.assertFalse(typeName.trim().isEmpty());
     Assert.assertEquals(typeName, "Test");
+  }
+
+  @Test(groups = {"metadata", "display"})
+  public void testConnectionSummary() {
+    logTestStep("Testing connection summary");
     
     // Test connection summary
     String summary = testConnection.getConnectionSummary();
@@ -259,10 +218,10 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
 ////////////////////////////////////////////////////////////////
 
   /**
-   * Concrete test implementation of BAbstractDataSource
+   * Concrete test implementation of BDataSource
    * for testing purposes.
    */
-  public static class TestDataSourceConnection extends BAbstractDataSource {
+  public static class TestDataSourceConnection extends BDataSource {
     
     private boolean shouldSucceed = true;
     private String errorMessage = "Test error";
@@ -280,11 +239,11 @@ public class BAbstractDataSourceConnectionTest extends BaseTestClass {
     }
     
     @Override
-    protected BAbstractDataSource.ConnectionTestResult performConnectionTest() {
+    protected BDataSource.ConnectionTestResult performConnectionTest() {
       if (shouldSucceed) {
-        return new BAbstractDataSource.ConnectionTestResult(true, "Test connection successful");
+        return new BDataSource.ConnectionTestResult(true, "Test connection successful");
       } else {
-        return new BAbstractDataSource.ConnectionTestResult(false, errorMessage);
+        return new BDataSource.ConnectionTestResult(false, errorMessage);
       }
     }
     

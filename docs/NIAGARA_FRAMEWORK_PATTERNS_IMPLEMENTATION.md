@@ -51,8 +51,8 @@ public class BDataSourceConnectionManager extends BAbstractManager {
 <bajaObjectGraph version="1.0">
 <p m="b=baja" t="b:Folder">
   <!-- Data Source Connections -->
-  <p m="datasync=datasync" n="Excel Connection" t="datasync:ExcelDataSourceConnection" />
-  <p n="Connections Folder" t="datasync:DataSourceConnectionsFolder" />
+  <p m="datasync=datasync" n="Excel Connection" t="datasync:ExcelDataSource" />
+  <p n="Connections Folder" t="datasync:DataSourceFolder" />
 </p>
 </bajaObjectGraph>
 ```

@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BExcelDataSource;
-import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 /**
@@ -128,7 +128,7 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
     Assert.assertEquals(container.getDataSourceConnectionCount(), 2);
 
     // Verify connections are retrievable
-    BAbstractDataSource[] connections = container.getAllDataSourceConnections();
+    BDataSource[] connections = container.getAllDataSourceConnections();
     Assert.assertEquals(connections.length, 2);
   }
 
@@ -232,7 +232,7 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
     Assert.assertFalse(container.hasHealthyConnections());
 
     // Make connection healthy
-    excelConnection1.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
+    excelConnection1.setConnectionStatus(BDataSource.STATUS_CONNECTED);
     Assert.assertTrue(container.hasHealthyConnections());
   }
 
@@ -250,8 +250,8 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
     Assert.assertEquals(excelConnections.length, 2);
 
     // Get abstract connections (should include all)
-    BAbstractDataSource[] allConnections =
-      container.getDataSourceConnectionsByType(BAbstractDataSource.class);
+    BDataSource[] allConnections =
+      container.getDataSourceConnectionsByType(BDataSource.class);
     Assert.assertEquals(allConnections.length, 2);
   }
 
@@ -270,7 +270,7 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
     Assert.assertEquals(container.getDataSourceConnectionCount(), 1);
 
     // Recursive count should be 2
-    BAbstractDataSource[] allConnections = container.getAllDataSourceConnections();
+    BDataSource[] allConnections = container.getAllDataSourceConnections();
     Assert.assertEquals(allConnections.length, 2);
   }
 
@@ -310,14 +310,14 @@ public class BDataSourceConnectionsTest extends BaseTestClass {
     container.add("excel2", excelConnection2);
 
     // Set different statuses
-    excelConnection1.setConnectionStatus(BAbstractDataSource.STATUS_CONNECTED);
-    excelConnection2.setConnectionStatus(BAbstractDataSource.STATUS_FAILED);
+    excelConnection1.setConnectionStatus(BDataSource.STATUS_CONNECTED);
+    excelConnection2.setConnectionStatus(BDataSource.STATUS_FAILED);
 
     // Should have healthy connections (at least one is healthy)
     Assert.assertTrue(container.hasHealthyConnections());
 
     // Make all unhealthy
-    excelConnection1.setConnectionStatus(BAbstractDataSource.STATUS_FAILED);
+    excelConnection1.setConnectionStatus(BDataSource.STATUS_FAILED);
     Assert.assertFalse(container.hasHealthyConnections());
   }
 

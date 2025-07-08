@@ -125,13 +125,13 @@ Add the new component types to your module registration:
 
 ```xml
 <!-- Data Source Connection Architecture -->
-<type class="com.mea.datasync.model.BAbstractDataSourceConnection" name="AbstractDataSourceConnection"/>
-<type class="com.mea.datasync.model.BConnectionDetails" name="ConnectionDetails"/>
+<type class="com.mea.datasync.model.BDataSource" name="DataSource"/>
+<type class="com.mea.datasync.model.BConnection" name="Connection"/>
 <type class="com.mea.datasync.model.BAutoCheckConfig" name="AutoCheckConfig"/>
 
 <!-- Excel Data Source Implementation -->
-<type class="com.mea.datasync.model.BExcelDataSourceConnection" name="ExcelDataSourceConnection"/>
-<type class="com.mea.datasync.model.BExcelConnectionDetails" name="ExcelConnectionDetails"/>
+<type class="com.mea.datasync.model.BExcelDataSource" name="ExcelDataSource"/>
+<type class="com.mea.datasync.model.BExcelConnection" name="ExcelConnection"/>
 
 <!-- Container Components -->
 <type class="com.mea.datasync.model.BDataSourceConnections" name="DataSourceConnections"/>
@@ -148,14 +148,14 @@ BDataSyncTool tool = getDataSyncTool();
 BDataSourceConnections connections = tool.getDataSourceConnections();
 
 // Create Excel connection details
-BExcelConnectionDetails excelDetails = new BExcelConnectionDetails();
+BExcelConnection excelDetails = new BExcelConnection();
 excelDetails.setConnectionName("BMS Points Data");
 excelDetails.setDescription("Main BMS points configuration file");
 excelDetails.setFilePath("C:/DataSync/bms_points.xlsx");
 excelDetails.setDefaultWorksheet("Points");
 
 // Create Excel data source connection
-BExcelDataSourceConnection excelConnection = new BExcelDataSourceConnection();
+BExcelDataSource excelConnection = new BExcelDataSource();
 excelConnection.setConnectionDetails(excelDetails);
 
 // Add to the connections container
@@ -198,8 +198,8 @@ boolean hasHealthyConnections = connections.hasHealthyConnections();
 System.out.println("Has healthy connections: " + hasHealthyConnections);
 
 // Get all connections and their status
-BAbstractDataSourceConnection[] allConnections = connections.getAllDataSourceConnections();
-for (BAbstractDataSourceConnection connection : allConnections) {
+BDataSource[] allConnections = connections.getAllDataSources();
+for (BDataSource connection : allConnections) {
   System.out.println(connection.getDataSourceTypeName() + " - " +
                     connection.getConnectionStatus());
 }
@@ -276,14 +276,14 @@ public class BDataSourceConnectionsTest extends BTestNg {
 
   @Test
   public void testExcelConnectionCreation() {
-    BExcelDataSourceConnection connection = new BExcelDataSourceConnection();
-    BExcelConnectionDetails details = connection.getConnectionDetails();
+    BExcelDataSource connection = new BExcelDataSource();
+    BExcelConnection details = connection.getConnectionDetails();
 
     details.setFilePath("test.xlsx");
     details.setConnectionName("Test Connection");
 
     // Test connection validation
-    BConnectionDetails.ValidationResult result = details.validateConfiguration();
+    BConnection.ValidationResult result = details.validateConfiguration();
     assertTrue(result.isValid());
   }
 

@@ -13,7 +13,7 @@ The N4-DataSync module uses a **single, unified folder component** for organizin
 **Characteristics**:
 - **Configurable display name**: Defaults to "Data Sources" for root, customizable for nested folders
 - **Universal usage**: Same class for both root (frozen) and nested (removable) scenarios
-- **Accepts**: BAbstractDataSource subclasses, legacy BDataSource, and nested BDataSourceFolder
+- **Accepts**: BDataSource subclasses and nested BDataSourceFolder
 - **Dynamic icons**: Shows open/closed folder icons based on content
 - **Automatic persistence**: Uses built-in Niagara BOG persistence (no custom JSON)
 - **Backward compatibility**: Supports legacy BDataSource components
@@ -127,7 +127,7 @@ public boolean isChildLegal(BComponent child) {
 
 When upgrading from older versions:
 1. **BDataSourceConnectionsFolder removed**: Use BDataSourceFolder instead
-2. **BDataSource (legacy) removed**: Use BAbstractDataSource subclasses (e.g., BExcelDataSource)
+2. **Legacy components updated**: Use BDataSource subclasses (e.g., BExcelDataSource)
 3. **Existing structures preserved**: Current BDataSourceFolder instances continue to work
 4. **Automatic persistence**: No migration needed for persistence (BOG handles everything)
 5. **Palette simplified**: Only shows relevant, modern components

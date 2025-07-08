@@ -6,7 +6,7 @@ This document describes the comprehensive Data Source Connection architecture fo
 
 ## Architecture Components
 
-### 1. Base Abstract Class: `BAbstractDataSourceConnection`
+### 1. Base Class: `BDataSource`
 
 The foundation class that all data source connections extend.
 
@@ -42,13 +42,13 @@ The foundation class that all data source connections extend.
 
 ### 2. Connection Details Components
 
-#### `BConnectionDetails` (Abstract Base)
+#### `BConnection` (Base)
 Common properties for all connection types:
 - `connectionName`: Display name for the connection
 - `description`: Optional description
 - `connectionTimeout`: Connection timeout in milliseconds
 
-#### `BExcelConnectionDetails` (Concrete Implementation)
+#### `BExcelConnection` (Concrete Implementation)
 Excel-specific connection configuration:
 - `filePath`: Path to the Excel file
 - `defaultWorksheet`: Default worksheet name
@@ -76,7 +76,7 @@ Configures automatic connection health checking:
 
 #### `BDataSourceFolder` (Frozen Property)
 Main container for organizing data source connections:
-- Type-safe child validation (only accepts `BAbstractDataSourceConnection` subclasses)
+- Type-safe child validation (only accepts `BDataSource` subclasses)
 - Navigation tree integration
 - Utility methods for connection management
 - Designed as frozen property in `BDataSyncTool`
@@ -94,13 +94,13 @@ Removable folder for organizing connections:
 
 ```java
 // Create Excel connection details
-BExcelConnectionDetails excelDetails = new BExcelConnectionDetails();
+BExcelConnection excelDetails = new BExcelConnection();
 excelDetails.setConnectionName("BMS Points Data");
 excelDetails.setFilePath("C:/Data/bms_points.xlsx");
 excelDetails.setDefaultWorksheet("Points");
 
 // Create Excel data source connection
-BExcelDataSourceConnection excelConnection = new BExcelDataSourceConnection();
+BExcelDataSource excelConnection = new BExcelDataSource();
 excelConnection.setConnectionDetails(excelDetails);
 
 // Configure auto-checking (optional - defaults are provided)
@@ -131,14 +131,14 @@ Add to `BDataSyncTool`:
 
 1. **Create Connection Details Class**:
    ```java
-   public class BDatabaseConnectionDetails extends BConnectionDetails {
+   public class BDatabaseConnection extends BConnection {
      // Database-specific properties: jdbcUrl, username, password, schema, etc.
    }
    ```
 
 2. **Create Data Source Connection Class**:
    ```java
-   public class BDatabaseDataSourceConnection extends BAbstractDataSourceConnection {
+   public class BDatabaseDataSource extends BDataSource {
      // Override connectionDetails property type
      // Implement abstract methods with database-specific logic
    }
@@ -146,8 +146,8 @@ Add to `BDataSyncTool`:
 
 3. **Register in module-include.xml**:
    ```xml
-   <type class="com.mea.datasync.model.BDatabaseConnectionDetails" name="DatabaseConnectionDetails"/>
-   <type class="com.mea.datasync.model.BDatabaseDataSourceConnection" name="DatabaseDataSourceConnection"/>
+   <type class="com.mea.datasync.model.BDatabaseConnection" name="DatabaseConnection"/>
+   <type class="com.mea.datasync.model.BDatabaseDataSource" name="DatabaseDataSource"/>
    ```
 
 ## Benefits

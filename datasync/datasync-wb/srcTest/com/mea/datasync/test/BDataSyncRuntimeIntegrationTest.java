@@ -12,7 +12,7 @@ import com.mea.datasync.ui.BDataSourceManager;
 import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BExcelDataSource;
 
-import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 /**
@@ -83,21 +83,21 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
 
   @Test(groups = {"runtime", "initialization", "critical"})
   public void testAbstractDataSourceConnectionClassInitialization() {
-    logTestStep("Testing BAbstractDataSource class initialization");
+    logTestStep("Testing BDataSource class initialization");
 
     try {
       // This should not throw NoClassDefFoundError
-      Type type = BAbstractDataSource.TYPE;
+      Type type = BDataSource.TYPE;
       Assert.assertNotNull(type);
 
       // Test that we can access static constants
-      String status = BAbstractDataSource.STATUS_NOT_TESTED;
+      String status = BDataSource.STATUS_NOT_TESTED;
       Assert.assertEquals(status, "Not Tested");
 
-      logTestStep("✅ BAbstractDataSource class initialized successfully");
+      logTestStep("✅ BDataSource class initialized successfully");
 
     } catch (NoClassDefFoundError e) {
-      Assert.fail("NoClassDefFoundError during BAbstractDataSource initialization: " + e.getMessage());
+      Assert.fail("NoClassDefFoundError during BDataSource initialization: " + e.getMessage());
     } catch (Exception e) {
       Assert.fail("Unexpected error during class initialization: " + e.getMessage());
     }
@@ -269,7 +269,7 @@ public class BDataSyncRuntimeIntegrationTest extends BaseTestClass {
       Assert.assertNotNull(managerType);
 
       // Test type hierarchy
-      Assert.assertTrue(excelConnectionType.is(BAbstractDataSource.TYPE));
+      Assert.assertTrue(excelConnectionType.is(BDataSource.TYPE));
       Assert.assertTrue(folderType.is(BComponent.TYPE));
       Assert.assertTrue(managerType.is(BAbstractManager.TYPE));
 

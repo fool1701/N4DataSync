@@ -7,8 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.mea.datasync.model.BExcelDataSource;
-import com.mea.datasync.model.BExcelConnectionDetails;
-import com.mea.datasync.model.BConnectionDetails;
+import com.mea.datasync.model.BExcelConnection;
+import com.mea.datasync.model.BConnection;
 import com.mea.datasync.test.utils.BaseTestClass;
 
 import java.io.File;
@@ -41,7 +41,7 @@ public class BExcelDataSourceConnectionTest extends BaseTestClass {
 //endregion /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
 
   private BExcelDataSource excelConnection;
-  private BExcelConnectionDetails connectionDetails;
+  private BExcelConnection connectionDetails;
   private File tempTestFile;
 
   @Override
@@ -139,7 +139,7 @@ public class BExcelDataSourceConnectionTest extends BaseTestClass {
     logTestStep("Testing Excel connection details validation");
     
     // Test invalid configuration (no file path)
-    BConnectionDetails.ValidationResult result = connectionDetails.validateConfiguration();
+    BConnection.ValidationResult result = connectionDetails.validateConfiguration();
     Assert.assertFalse(result.isValid());
     Assert.assertTrue(result.getErrorMessage().contains("File path is required"));
     

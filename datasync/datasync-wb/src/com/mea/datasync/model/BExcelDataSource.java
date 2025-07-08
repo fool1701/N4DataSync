@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * BExcelDataSource provides connection functionality specifically
  * for Excel (.xlsx, .xls) data sources. This concrete implementation of
- * BAbstractDataSource handles Excel-specific connection details
+ * BDataSource handles Excel-specific connection details
  * and testing logic.
  *
  * Features:
@@ -22,12 +22,12 @@ import java.io.File;
 @NiagaraType
 @NiagaraProperty(
   name = "connectionDetails",
-  type = "datasync:ExcelConnectionDetails",
+  type = "datasync:ExcelConnection",
   defaultValue = "null",
   flags = Flags.READONLY | Flags.SUMMARY,
   override = true
 )
-public class BExcelDataSource extends BAbstractDataSource {
+public class BExcelDataSource extends BDataSource {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
@@ -41,19 +41,19 @@ public class BExcelDataSource extends BAbstractDataSource {
    * @see #getConnectionDetails
    * @see #setConnectionDetails
    */
-  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, new BExcelConnectionDetails(), null);
+  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, new BExcelConnection(), null);
 
   /**
    * Get the {@code connectionDetails} property.
    * @see #connectionDetails
    */
-  public BExcelConnectionDetails getConnectionDetails() { return (BExcelConnectionDetails)get(connectionDetails); }
+  public BExcelConnection getConnectionDetails() { return (BExcelConnection)get(connectionDetails); }
 
   /**
    * Set the {@code connectionDetails} property.
    * @see #connectionDetails
    */
-  public void setConnectionDetails(BExcelConnectionDetails v) { set(connectionDetails, v, null); }
+  public void setConnectionDetails(BExcelConnection v) { set(connectionDetails, v, null); }
 
   //endregion Property "connectionDetails"
 
@@ -76,7 +76,7 @@ public class BExcelDataSource extends BAbstractDataSource {
     super();
 
     // Initialize connection details
-    setConnectionDetails(new BExcelConnectionDetails());
+    setConnectionDetails(new BExcelConnection());
 
     // Simplified constructor for palette compatibility
     // Note: Auto-check configuration will be set when component is actually used
@@ -89,11 +89,11 @@ public class BExcelDataSource extends BAbstractDataSource {
 
   @Override
   protected ConnectionTestResult performConnectionTest() {
-    BExcelConnectionDetails details = getConnectionDetails();
+    BExcelConnection details = getConnectionDetails();
     
     try {
       // Validate configuration first
-      BConnectionDetails.ValidationResult validation = details.validateConfiguration();
+      BConnection.ValidationResult validation = details.validateConfiguration();
       if (!validation.isValid()) {
         return new ConnectionTestResult(false, "Configuration invalid: " + validation.getErrorMessage());
       }
@@ -149,7 +149,7 @@ public class BExcelDataSource extends BAbstractDataSource {
 
   @Override
   public String getConnectionSummary() {
-    BExcelConnectionDetails details = getConnectionDetails();
+    BExcelConnection details = getConnectionDetails();
     StringBuilder summary = new StringBuilder();
     
     summary.append("Excel Connection: ");
@@ -192,7 +192,7 @@ public class BExcelDataSource extends BAbstractDataSource {
    * @return "XLSX" or "XLS" based on file extension, or "Unknown" if invalid
    */
   public String getExcelFormat() {
-    BExcelConnectionDetails details = getConnectionDetails();
+    BExcelConnection details = getConnectionDetails();
     String filePath = details.getFilePath();
     
     if (filePath == null) return "Unknown";
@@ -213,7 +213,7 @@ public class BExcelDataSource extends BAbstractDataSource {
    * @return file information string or error message
    */
   public String getFileInfo() {
-    BExcelConnectionDetails details = getConnectionDetails();
+    BExcelConnection details = getConnectionDetails();
     String filePath = details.getFilePath();
     
     if (filePath == null || filePath.trim().isEmpty()) {

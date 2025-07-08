@@ -6,19 +6,19 @@ import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.sys.*;
 
 /**
- * BConnectionDetails serves as the base class for storing connection-specific
+ * BConnection serves as the base class for storing connection-specific
  * configuration details for different data source types. This concrete class
  * provides common properties and default implementations while allowing
  * subclasses to override behavior for their specific connection parameters.
- * 
+ *
  * This follows the composition pattern where each data source connection type
  * has its own specific connection details component.
- * 
+ *
  * Subclasses should extend this for specific data source types:
- * - BExcelConnectionDetails: File path, sheet selection
- * - BDatabaseConnectionDetails: JDBC URL, credentials, schema
- * - BGoogleSheetsConnectionDetails: API credentials, sheet ID
- * - BCSVConnectionDetails: File path, delimiter, encoding
+ * - BExcelConnection: File path, sheet selection
+ * - BDatabaseConnection: JDBC URL, credentials, schema
+ * - BGoogleSheetsConnection: API credentials, sheet ID
+ * - BCSVConnection: File path, delimiter, encoding
  */
 @NiagaraType
 @NiagaraProperty(
@@ -36,11 +36,11 @@ import javax.baja.sys.*;
   type = "baja:Integer",
   defaultValue = "BInteger.make(30000)"
 )
-public class BConnectionDetails extends BComponent {
+public class BConnection extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BConnectionDetails(786065583)1.0$ @*/
+/*@ $com.mea.datasync.model.BConnection(786065583)1.0$ @*/
 /* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "connectionName"
@@ -116,7 +116,7 @@ public class BConnectionDetails extends BComponent {
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BConnectionDetails.class);
+  public static final Type TYPE = Sys.loadType(BConnection.class);
 
   //endregion Type
 
@@ -127,7 +127,7 @@ public class BConnectionDetails extends BComponent {
 // Constructor
 ////////////////////////////////////////////////////////////////
 
-  public BConnectionDetails() {
+  public BConnection() {
     // Base constructor
   }
 

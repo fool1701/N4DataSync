@@ -10,7 +10,7 @@ import com.mea.datasync.ui.BDataSyncTool;
 import com.mea.datasync.ui.BDataSourceManager;
 import com.mea.datasync.model.BDataSourceFolder;
 import com.mea.datasync.model.BExcelDataSource;
-import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.test.utils.BaseTestClass;
 import javax.baja.workbench.mgr.MgrModel;
 import javax.baja.workbench.mgr.MgrController;
@@ -131,7 +131,7 @@ public class BDataSourceConnectionManagerViewTest extends BaseTestClass {
     Assert.assertEquals(connections.getDataSourceConnectionCount(), 2);
 
     // Test that connections can be accessed
-    BAbstractDataSource[] allConnections = connections.getAllDataSourceConnections();
+    BDataSource[] allConnections = connections.getAllDataSourceConnections();
     Assert.assertEquals(allConnections.length, 2);
   }
 

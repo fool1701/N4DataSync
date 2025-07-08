@@ -8,14 +8,14 @@ Successfully implemented a comprehensive Data Source Connection architecture for
 
 ### 1. Core Architecture Components
 
-#### **BAbstractDataSourceConnection** (Base Class)
+#### **BDataSource** (Base Class)
 - ✅ **Health Properties**: Complete status tracking with timestamps and error details
 - ✅ **Auto-Check Configuration**: Configurable automatic connection testing
 - ✅ **Manual Test Action**: `testConnection` action for on-demand testing
 - ✅ **Abstract Methods**: Type-specific implementation contracts
 - ✅ **Lifecycle Management**: Proper start/stop with auto-check coordination
 
-#### **BConnectionDetails** (Abstract Configuration Base)
+#### **BConnection** (Configuration Base)
 - ✅ **Common Properties**: `connectionName`, `description`, `connectionTimeout`
 - ✅ **Validation Framework**: Abstract validation with result reporting
 - ✅ **Display Methods**: Human-readable summaries and display names
@@ -34,7 +34,7 @@ Successfully implemented a comprehensive Data Source Connection architecture for
 - ✅ **Error Handling**: Detailed error messages for common issues
 - ✅ **File Information**: Size, format, modification time reporting
 
-#### **BExcelConnectionDetails**
+#### **BExcelConnection**
 - ✅ **Excel Properties**: File path, worksheet, read-only mode, allowed formats
 - ✅ **Path Validation**: Real-time validation with meaningful error messages
 - ✅ **Format Detection**: Automatic Excel format identification
@@ -65,7 +65,7 @@ Successfully implemented a comprehensive Data Source Connection architecture for
 ## 🧪 Comprehensive Testing
 
 ### Test Coverage Implemented
-- ✅ **BAbstractDataSourceConnectionTest**: Base functionality, health monitoring, auto-checking
+- ✅ **BDataSourceConnectionTest**: Base functionality, health monitoring, auto-checking
 - ✅ **BExcelDataSourceConnectionTest**: Excel-specific validation and connection testing
 - ✅ **BAutoCheckConfigTest**: Configuration validation and factory methods
 - ✅ **BDataSourceConnectionsTest**: Container validation and utility methods
@@ -102,17 +102,17 @@ Successfully implemented a comprehensive Data Source Connection architecture for
 ## 📁 Files Created/Modified
 
 ### New Source Files (8)
-1. `BAbstractDataSourceConnection.java` - Base connection class
-2. `BConnectionDetails.java` - Abstract configuration base
+1. `BDataSource.java` - Base connection class
+2. `BConnection.java` - Configuration base
 3. `BAutoCheckConfig.java` - Health monitoring configuration
-4. `BExcelDataSourceConnection.java` - Excel implementation
-5. `BExcelConnectionDetails.java` - Excel configuration
+4. `BExcelDataSource.java` - Excel implementation
+5. `BExcelConnection.java` - Excel configuration
 6. `BDataSourceFolder.java` - Main container
 7. `BDataSourceConnectionsFolder.java` - Removable folder
 8. `BDataSyncTool.java` - Enhanced tool integration
 
 ### New Test Files (5)
-1. `BAbstractDataSourceConnectionTest.java` - Base class tests
+1. `BDataSourceConnectionTest.java` - Base class tests
 2. `BExcelDataSourceConnectionTest.java` - Excel implementation tests
 3. `BAutoCheckConfigTest.java` - Configuration tests
 4. `BDataSourceConnectionsTest.java` - Container tests

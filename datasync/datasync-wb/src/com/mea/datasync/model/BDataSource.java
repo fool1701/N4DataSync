@@ -8,7 +8,7 @@ import javax.baja.sys.*;
 import javax.baja.status.BStatus;
 
 /**
- * BAbstractDataSource serves as the base class for all data source
+ * BDataSource serves as the base class for all data source
  * types in the N4-DataSync module. This concrete base class defines
  * the common interface and behavior for connecting to external data sources.
  *
@@ -32,7 +32,7 @@ import javax.baja.status.BStatus;
 // Connection Details Component - Abstract property to be overridden by subclasses
 @NiagaraProperty(
   name = "connectionDetails",
-  type = "datasync:ConnectionDetails",
+  type = "datasync:Connection",
   defaultValue = "null",
   flags = Flags.READONLY | Flags.SUMMARY
 )
@@ -73,7 +73,7 @@ import javax.baja.status.BStatus;
 @NiagaraAction(
   name = "testConnection"
 )
-public class BAbstractDataSource extends BComponent {
+public class BDataSource extends BComponent {
 
   // Connection Status Constants
   public static final String STATUS_NOT_TESTED = "Not Tested";
@@ -84,7 +84,7 @@ public class BAbstractDataSource extends BComponent {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BAbstractDataSource(2018014743)1.0$ @*/
+/*@ $com.mea.datasync.model.BDataSource(2018014743)1.0$ @*/
 /* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "connectionDetails"
@@ -95,21 +95,21 @@ public class BAbstractDataSource extends BComponent {
    * @see #getConnectionDetails
    * @see #setConnectionDetails
    */
-  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, new BConnectionDetails(), null);
+  public static final Property connectionDetails = newProperty(Flags.READONLY | Flags.SUMMARY, new BConnection(), null);
 
   /**
    * Get the {@code connectionDetails} property.
    *  Connection Details Component - Abstract property to be overridden by subclasses
    * @see #connectionDetails
    */
-  public BConnectionDetails getConnectionDetails() { return (BConnectionDetails)get(connectionDetails); }
+  public BConnection getConnectionDetails() { return (BConnection)get(connectionDetails); }
 
   /**
    * Set the {@code connectionDetails} property.
    *  Connection Details Component - Abstract property to be overridden by subclasses
    * @see #connectionDetails
    */
-  public void setConnectionDetails(BConnectionDetails v) { set(connectionDetails, v, null); }
+  public void setConnectionDetails(BConnection v) { set(connectionDetails, v, null); }
 
   //endregion Property "connectionDetails"
 
@@ -279,7 +279,7 @@ public class BAbstractDataSource extends BComponent {
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BAbstractDataSource.class);
+  public static final Type TYPE = Sys.loadType(BDataSource.class);
 
   //endregion Type
 
@@ -290,7 +290,7 @@ public class BAbstractDataSource extends BComponent {
 // Constructor
 ////////////////////////////////////////////////////////////////
 
-  public BAbstractDataSource() {
+  public BDataSource() {
     // Initialize with default auto-check configuration
     // Subclasses can override these defaults in their constructors
   }
@@ -389,7 +389,7 @@ public class BAbstractDataSource extends BComponent {
    * @return human-readable connection summary
    */
   public String getConnectionSummary() {
-    BConnectionDetails details = getConnectionDetails();
+    BConnection details = getConnectionDetails();
     String detailsSummary = (details != null) ? details.getConnectionSummary() : "No connection details";
     return String.format("%s Connection - Status: %s - %s",
                         getDataSourceTypeName(),

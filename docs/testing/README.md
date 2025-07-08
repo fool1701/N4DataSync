@@ -25,11 +25,6 @@ This directory contains the **enterprise-grade testing framework** for N4-DataSy
    - Quality gates and enforcement
    - Performance monitoring
 
-4. **[ProfileServiceTesting.md](ProfileServiceTesting.md)** - Specific component testing
-   - ProfileService test examples
-   - Manual testing procedures
-   - Troubleshooting guide
-
 ## 🏆 **Quality Standards**
 
 ### **Coverage Requirements**

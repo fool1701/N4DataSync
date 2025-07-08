@@ -13,7 +13,7 @@ import javax.baja.sys.BIcon;
  *
  * This unified folder component:
  * - Can be used as frozen property (root folder) or removable folder (organization)
- * - Accepts BAbstractDataSource subclasses and nested BDataSourceFolder components
+ * - Accepts BDataSource subclasses and nested BDataSourceFolder components
  * - Has configurable display name (defaults to "Data Sources" for root, customizable for nested)
  * - Supports nested folder structures with full navigation tree integration
  * - Automatically handles parent notification for persistence when used as root folder
@@ -86,12 +86,12 @@ public class BDataSourceFolder extends BComponent {
 
   /**
    * Control which child components are allowed.
-   * Accept BAbstractDataSource subclasses and nested BDataSourceFolder.
+   * Accept BDataSource subclasses and nested BDataSourceFolder.
    */
   @Override
   public boolean isChildLegal(BComponent child) {
     // Allow any data source type
-    if (child instanceof BAbstractDataSource) {
+    if (child instanceof BDataSource) {
       return true;
     }
 
@@ -111,8 +111,8 @@ public class BDataSourceFolder extends BComponent {
   public void childParented(Property property, BValue newChild, Context context) {
     super.childParented(property, newChild, context);
 
-    if (newChild instanceof BAbstractDataSource) {
-      BAbstractDataSource connection = (BAbstractDataSource) newChild;
+    if (newChild instanceof BDataSource) {
+      BDataSource connection = (BDataSource) newChild;
       System.out.println("🔌 Data source added: " + connection.getDataSourceTypeName() +
                         " (" + property.getName() + ")");
 
@@ -133,8 +133,8 @@ public class BDataSourceFolder extends BComponent {
   public void childUnparented(Property property, BValue oldChild, Context context) {
     super.childUnparented(property, oldChild, context);
 
-    if (oldChild instanceof BAbstractDataSource) {
-      BAbstractDataSource connection = (BAbstractDataSource) oldChild;
+    if (oldChild instanceof BDataSource) {
+      BDataSource connection = (BDataSource) oldChild;
       System.out.println("🔌 Data source removed: " + connection.getDataSourceTypeName() +
                         " (" + property.getName() + ")");
       notifyParentOfChanges();
@@ -218,7 +218,7 @@ public class BDataSourceFolder extends BComponent {
     BComponent[] children = getChildComponents();
 
     for (BComponent child : children) {
-      if (child instanceof BAbstractDataSource) {
+      if (child instanceof BDataSource) {
         count++;
       }
     }
@@ -249,21 +249,21 @@ public class BDataSourceFolder extends BComponent {
    *
    * @return array of all data source connections
    */
-  public BAbstractDataSource[] getAllDataSourceConnections() {
-    java.util.List<BAbstractDataSource> connections = new java.util.ArrayList<>();
+  public BDataSource[] getAllDataSourceConnections() {
+    java.util.List<BDataSource> connections = new java.util.ArrayList<>();
     collectDataSourceConnections(this, connections);
-    return connections.toArray(new BAbstractDataSource[0]);
+    return connections.toArray(new BDataSource[0]);
   }
 
   /**
    * Recursively collect data source connections from this container and any subfolders.
    */
-  private void collectDataSourceConnections(BComponent container, java.util.List<BAbstractDataSource> connections) {
+  private void collectDataSourceConnections(BComponent container, java.util.List<BDataSource> connections) {
     BComponent[] children = container.getChildComponents();
 
     for (BComponent child : children) {
-      if (child instanceof BAbstractDataSource) {
-        connections.add((BAbstractDataSource) child);
+      if (child instanceof BDataSource) {
+        connections.add((BDataSource) child);
       } else if (child instanceof BDataSourceFolder) {
         // Recursively collect from subfolders
         collectDataSourceConnections(child, connections);
@@ -278,11 +278,11 @@ public class BDataSourceFolder extends BComponent {
    * @return array of connections of the specified type
    */
   @SuppressWarnings("unchecked")
-  public <T extends BAbstractDataSource> T[] getDataSourceConnectionsByType(Class<T> connectionType) {
+  public <T extends BDataSource> T[] getDataSourceConnectionsByType(Class<T> connectionType) {
     java.util.List<T> connections = new java.util.ArrayList<>();
-    BAbstractDataSource[] allConnections = getAllDataSourceConnections();
+    BDataSource[] allConnections = getAllDataSourceConnections();
 
-    for (BAbstractDataSource connection : allConnections) {
+    for (BDataSource connection : allConnections) {
       if (connectionType.isInstance(connection)) {
         connections.add((T) connection);
       }
@@ -297,9 +297,9 @@ public class BDataSourceFolder extends BComponent {
    * @return true if at least one connection is healthy
    */
   public boolean hasHealthyConnections() {
-    BAbstractDataSource[] connections = getAllDataSourceConnections();
+    BDataSource[] connections = getAllDataSourceConnections();
 
-    for (BAbstractDataSource connection : connections) {
+    for (BDataSource connection : connections) {
       if (connection.isConnectionHealthy()) {
         return true;
       }

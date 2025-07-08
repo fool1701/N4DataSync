@@ -97,7 +97,7 @@ classDiagram
         +Target station management
     }
     
-    class BDataSourceConnection {
+    class BDataSource {
         <<our class>>
         +testConnection()
         +Connection validation
@@ -123,12 +123,12 @@ classDiagram
     BAbstractManager <|-- BDataSyncProfileView
     
     BComponent <|-- BEnhancedConnectionProfile
-    BComponent <|-- BDataSourceConnection
+    BComponent <|-- BDataSource
     BComponent <|-- BTargetNiagaraStation
-    
+
     %% Interface implementations
     BINavNode <|.. BEnhancedConnectionProfile
-    BINavNode <|.. BDataSourceConnection
+    BINavNode <|.. BDataSource
     BINavNode <|.. BTargetNiagaraStation
 ```
 

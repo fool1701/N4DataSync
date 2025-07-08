@@ -7,10 +7,10 @@ import javax.baja.sys.*;
 import java.io.File;
 
 /**
- * BExcelConnectionDetails stores Excel-specific connection configuration.
- * This component extends BConnectionDetails to provide Excel file-specific
+ * BExcelConnection stores Excel-specific connection configuration.
+ * This component extends BConnection to provide Excel file-specific
  * properties and validation logic.
- * 
+ *
  * Properties specific to Excel connections:
  * - File path to the Excel file
  * - Default worksheet selection
@@ -38,11 +38,11 @@ import java.io.File;
   type = "String",
   defaultValue = "XLSX,XLS"
 )
-public class BExcelConnectionDetails extends BConnectionDetails {
+public class BExcelConnection extends BConnection {
 
 //region /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
 //@formatter:off
-/*@ $com.mea.datasync.model.BExcelConnectionDetails(437176641)1.0$ @*/
+/*@ $com.mea.datasync.model.BExcelConnection(437176641)1.0$ @*/
 /* Generated Mon Jul 07 05:25:51 AEST 2025 by Slot-o-Matic (c) Tridium, Inc. 2012-2025 */
 
   //region Property "filePath"
@@ -141,7 +141,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
 
   @Override
   public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BExcelConnectionDetails.class);
+  public static final Type TYPE = Sys.loadType(BExcelConnection.class);
 
   //endregion Type
 
@@ -152,9 +152,9 @@ public class BExcelConnectionDetails extends BConnectionDetails {
 // Constructor
 ////////////////////////////////////////////////////////////////
 
-  public BExcelConnectionDetails() {
+  public BExcelConnection() {
     super();
-    System.out.println("📊 Excel Connection Details created");
+    System.out.println("📊 Excel Connection created");
   }
 
 ////////////////////////////////////////////////////////////////
@@ -291,7 +291,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
     if (path == null || path.trim().isEmpty()) {
       return "";
     }
-    
+
     File file = new File(path);
     String parent = file.getParent();
     return parent != null ? parent : "";
@@ -303,7 +303,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
 
   /**
    * Validate file path when it's being set.
-   * 
+   *
    * @param path the file path to validate
    * @throws IllegalArgumentException if path is invalid
    */
@@ -321,7 +321,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
   /**
    * Check if a string looks like a valid file path.
    * Basic validation to catch obvious errors.
-   * 
+   *
    * @param path the path to validate
    * @return true if path looks valid
    */
@@ -329,7 +329,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
     if (path == null || path.trim().isEmpty()) {
       return false;
     }
-    
+
     // Check for invalid characters (basic check)
     String invalidChars = "<>:\"|?*";
     for (char c : invalidChars.toCharArray()) {
@@ -337,7 +337,7 @@ public class BExcelConnectionDetails extends BConnectionDetails {
         return false;
       }
     }
-    
+
     // Must contain at least one path separator or be a simple filename
     return path.contains("/") || path.contains("\\") || !path.contains(" ") || path.contains(".");
   }

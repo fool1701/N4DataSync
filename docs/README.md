@@ -20,7 +20,6 @@
 * **[TESTING_STRATEGY.md](testing/TESTING_STRATEGY.md)** - Comprehensive testing strategy, standards & quality gates
 * **[TESTING_IMPLEMENTATION_GUIDE.md](testing/TESTING_IMPLEMENTATION_GUIDE.md)** - Step-by-step implementation roadmap
 * **[TEST_AUTOMATION_CONFIG.md](testing/TEST_AUTOMATION_CONFIG.md)** - CI/CD pipeline & automation configuration
-* **[ProfileService Testing Guide](testing/ProfileServiceTesting.md)** - Testing the new profile management architecture
 
 ### 📊 **Quality Standards**
 * **Minimum 85% code coverage** for all production code
@@ -55,5 +54,5 @@ For additional Niagara development examples and patterns:
 
 ## Project Documentation
 
-* **[N4-DataSync Specification](../N4-DataSync%20Full%20Feature%20Specification%20&%20Roadmap.md)** - Complete project specification and roadmap
-* **[Project README](../README.md)** - Main project overview and installation guide
+* **[Project README](../README.md)** - Main project overview, features, and installation guide
+* **[Technical Specification](../N4-DataSync%20Full%20Feature%20Specification%20&%20Roadmap.md)** - Complete technical roadmap and architectural details

@@ -77,4 +77,4 @@ BACnet-1     | AHU-01      | Fan-01     | BO         | -     | false
 
 - **Common issues**: See [Troubleshooting Guide](TROUBLESHOOTING.md)
 - **Development**: See [Developer Documentation](README.md)
-- **Full features**: See [Complete Specification](../N4-DataSync%20Full%20Feature%20Specification%20&%20Roadmap.md)
+- **Technical details**: See [Technical Specification](../N4-DataSync%20Full%20Feature%20Specification%20&%20Roadmap.md)

@@ -7,7 +7,7 @@ import javax.baja.sys.*;
 import javax.baja.workbench.mgr.*;
 
 import com.mea.datasync.model.BDataSourceFolder;
-import com.mea.datasync.model.BAbstractDataSource;
+import com.mea.datasync.model.BDataSource;
 import com.mea.datasync.model.BExcelDataSource;
 
 /**
@@ -110,7 +110,7 @@ public class BDataSourceManager extends BAbstractManager {
     @Override
     public Type[] getIncludeTypes() {
       return new Type[] {
-        BAbstractDataSource.TYPE,
+        BDataSource.TYPE,
         BDataSourceFolder.TYPE
       };
     }
@@ -120,7 +120,7 @@ public class BDataSourceManager extends BAbstractManager {
      */
     @Override
     public boolean accept(BComponent component) {
-      return component instanceof BAbstractDataSource ||
+      return component instanceof BDataSource ||
              component instanceof BDataSourceFolder;
     }
 

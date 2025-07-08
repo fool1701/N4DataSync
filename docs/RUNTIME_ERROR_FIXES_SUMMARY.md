@@ -2,19 +2,19 @@
 
 ## 🚨 **Critical Runtime Errors Fixed**
 
-### 1. **NoClassDefFoundError in BAbstractDataSourceConnection**
+### 1. **NoClassDefFoundError in BDataSource**
 
 #### **Error**
 ```
-java.lang.NoClassDefFoundError: Could not initialize class com.mea.datasync.model.BAbstractDataSourceConnection
-   at com.mea.datasync.ui.BDataSourceConnectionManager$DataSourceConnectionModel.getIncludeTypes
+java.lang.NoClassDefFoundError: Could not initialize class com.mea.datasync.model.BDataSource
+   at com.mea.datasync.ui.BDataSourceManager$DataSourceModel.getIncludeTypes
 ```
 
 #### **Root Cause**
-The `@NiagaraProperty` annotation in `BAbstractDataSourceConnection` was trying to instantiate an abstract class:
+The `@NiagaraProperty` annotation in `BDataSource` was trying to instantiate an abstract class:
 ```java
 @NiagaraProperty(
-  defaultValue = "new BConnectionDetails()", // ❌ BConnectionDetails is abstract!
+  defaultValue = "new BConnection()", // ❌ BConnection is abstract!
 )
 ```
 
@@ -67,7 +67,7 @@ DataSync Tool should have the exact same manager view as DataSourceConnections.
     types = { "datasync:DataSyncTool", "datasync:DataSourceConnections" } // ✅ Both targets
   )
 )
-public class BDataSourceConnectionManager extends BAbstractManager {
+public class BDataSourceManager extends BAbstractManager {
   
   // Handle both DataSyncTool and DataSourceConnections as targets
   @Override
