@@ -143,7 +143,7 @@ public class BConnection extends BComponent {
    * @return connection summary string
    */
   public String getConnectionSummary() {
-    return "Generic connection: " + getConnectionName();
+    return "Connection: " + getConnectionName();
   }
 
   /**

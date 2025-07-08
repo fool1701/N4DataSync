@@ -164,7 +164,7 @@ public class BExcelConnection extends BConnection {
   @Override
   public String getConnectionSummary() {
     StringBuilder summary = new StringBuilder();
-    summary.append("Excel File: ");
+    summary.append("ExcelConnection: ");
     
     String path = getFilePath();
     if (path != null && !path.trim().isEmpty()) {

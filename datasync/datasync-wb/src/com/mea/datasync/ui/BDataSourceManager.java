@@ -76,7 +76,7 @@ public class BDataSourceManager extends BAbstractManager {
 
     @Override
     protected String makeTableTitle() {
-      return "Data Sources";
+      return "DataSourceManager";
     }
 
     @Override

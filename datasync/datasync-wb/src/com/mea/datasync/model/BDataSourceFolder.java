@@ -28,7 +28,7 @@ import javax.baja.sys.BIcon;
 @NiagaraProperty(
   name = "displayName",
   type = "baja:String",
-  defaultValue = "BString.make(\"Data Sources\")"
+  defaultValue = "BString.make(\"DataSourceFolder\")"
 )
 public class BDataSourceFolder extends BComponent {
 
@@ -44,7 +44,7 @@ public class BDataSourceFolder extends BComponent {
    * @see #getDisplayName
    * @see #setDisplayName
    */
-  public static final Property displayName = newProperty(0, BString.make("Data Sources"), null);
+  public static final Property displayName = newProperty(0, BString.make("DataSourceFolder"), null);
 
   /**
    * Get the {@code displayName} property.
@@ -153,7 +153,7 @@ public class BDataSourceFolder extends BComponent {
   @Override
   public String getNavDisplayName(Context cx) {
     String name = getDisplayName();
-    return (name != null && !name.trim().isEmpty()) ? name : "Data Source Folder";
+    return (name != null && !name.trim().isEmpty()) ? name : "DataSourceFolder";
   }
 
   @Override

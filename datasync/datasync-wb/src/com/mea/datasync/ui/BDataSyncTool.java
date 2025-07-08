@@ -219,7 +219,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
       // Configure connection details
       com.mea.datasync.model.BExcelConnection details = connection.getConnectionDetails();
       details.setConnectionName(connectionName);
-      details.setDescription("Excel data source connection");
+      details.setDescription("ExcelDataSource connection");
       details.setFilePath("C:\\DataSync\\" + connectionName.toLowerCase() + ".xlsx");
       details.setDefaultWorksheet("Sheet1");
 
@@ -317,7 +317,7 @@ public class BDataSyncTool extends BWbNavNodeTool {
       }
 
       if (connectionCount > 0) {
-        desc.append(" - ").append(connectionCount).append(" data source");
+        desc.append(" - ").append(connectionCount).append(" DataSource");
         if (connectionCount != 1) desc.append("s");
         desc.append(" (").append(healthyCount).append(" healthy)");
       }

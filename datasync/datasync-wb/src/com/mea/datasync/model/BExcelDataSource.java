@@ -144,7 +144,7 @@ public class BExcelDataSource extends BDataSource {
 
   @Override
   public String getDataSourceTypeName() {
-    return "Excel";
+    return "ExcelDataSource";
   }
 
   @Override

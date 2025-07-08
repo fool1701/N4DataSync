@@ -370,14 +370,14 @@ public class BDataSource extends BComponent {
 
   /**
    * Get the display name for this data source type.
-   * This default implementation returns "Generic" for the base class.
+   * This default implementation returns "DataSource" for the base class.
    * Concrete subclasses should override this method to return their specific type name.
    * Used in UI and logging.
    *
    * @return human-readable name for this data source type
    */
   public String getDataSourceTypeName() {
-    return "Generic";
+    return "DataSource";
   }
 
   /**
